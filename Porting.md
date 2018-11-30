@@ -233,6 +233,14 @@ To use a keyboard:
 Visit [Touchpad-less navigation](https://github.com/littlevgl/lvgl/wiki/Input-devices#touchpad-less-navigation) to learn more.
 
 #### Encoder 
+With an encoder you can do 4 things:
+1. press its button
+2. long press its button
+3. turn left
+4. turn right
+
+By turning the encoder you can focus on the next/previous object. When you press the encoder on a simple object (like a button), it will be clicked. If you press the encoder on a complex object (like a list, message box etc.) the object will go to edit mode where by turning the encoder you can navigate inside the object. To leave edit mode press long the button.
+
 ```c
 indev_drv.type = LV_INDEV_TYPE_ENCODER;
 indev_drv.read = my_input_read;
@@ -277,7 +285,7 @@ bool button_read(lv_indev_data_t*data){
 }
 ```
 
-- The buttons need to be assigned to pixels on the screen using `lv_indev_set_button_points(indev, points_array)`. Where _points_array_ look like `const lv_point_t points_array[] = { {12,30},{60,90}, ...}`   
+- The buttons need to be assigned to pixels on the screen using `lv_indev_set_button_points(indev, points_array)`. Where _points_array_ look like `const lv_point_t points_array[] =  { {12,30},{60,90}, ...}`   
 
 ### Tick interface
 

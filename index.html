@@ -932,6 +932,14 @@ indev_drv.read = my_input_read;</pre><p>The read function should look like this:
 </ul>
 <p>Visit <a href="https://github.com/littlevgl/lvgl/wiki/Input-devices#touchpad-less-navigation">Touchpad-less navigation</a> to learn more.</p>
 <h4 id="encoder">Encoder</h4>
+<p>With an encoder you can do 4 things:</p>
+<ol>
+<li>press its button</li>
+<li>long press its button</li>
+<li>turn left</li>
+<li>turn right</li>
+</ol>
+<p>By turning the encoder you can focus on the next/previous object. When you press the encoder on a simple object (like a button), it will be clicked. If you press the encoder on a complex object (like a list, message box etc.) the object will go to edit mode where by turning the encoder you can navigate inside the object. To leave edit mode press long the button.</p>
 <pre class="hljs">indev_drv.type = LV_INDEV_TYPE_ENCODER;
 indev_drv.read = my_input_read;</pre><p>The read function should look like this:</p>
 <pre class="hljs"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">encoder_read</span><span class="hljs-params">(<span class="hljs-keyword">lv_indev_data_t</span>*data)</span></span>{
@@ -964,7 +972,7 @@ indev_drv.read = my_input_read;</pre><p>The read function should look like this:
 
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;                    <span class="hljs-comment">/*No buffering so no more data read*/</span>
 }</pre><ul>
-<li>The buttons need to be assigned to pixels on the screen using <code>lv_indev_set_button_points(indev, points_array)</code>. Where _points_array_ look like <code>const lv_point_t points_array[] = { {12,30},{60,90}, ...}</code>   </li>
+<li>The buttons need to be assigned to pixels on the screen using <code>lv_indev_set_button_points(indev, points_array)</code>. Where _points_array_ look like <code>const lv_point_t points_array[] =  { {12,30},{60,90}, ...}</code>   </li>
 </ul>
 <h3 id="tick-interface">Tick interface</h3>
 <p>The LittlevGL uses a system tick. Call the <code>lv_tick_inc(tick_period)</code> function periodically and tell the call period in milliseconds. For example if called in every milliseconds: <code>lv_tick_inc(1)</code>.</p>
