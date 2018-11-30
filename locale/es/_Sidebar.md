@@ -1,4 +1,4 @@
-* [Inicio](Home_es)
+* [Inicio](Welcome_es)
 * [[Porting]]
 * [[PC simulator]]
 * [[Objects]]
