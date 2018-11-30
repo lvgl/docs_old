@@ -18,7 +18,7 @@ Basically the _y == 0_ point is in the top of the object but you can **invert th
 
 ```c
 /*Create an array for the points of the line*/
-static lv_point_t line_points[] = {{5, 5}, {70, 70}, {120, 10}, {180, 60}, {240, 10}};
+static lv_point_t line_points[] = { {5, 5}, {70, 70}, {120, 10}, {180, 60}, {240, 10} };
 
 /*Create line with default style*/
 lv_obj_t * line1;
