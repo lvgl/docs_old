@@ -277,7 +277,7 @@ bool button_read(lv_indev_data_t*data){
 }
 ```
 
-- The buttons need to be assigned to pixels on the screen using `lv_indev_set_button_points(indev, points_array)`. Where _points_array_ look like `const lv_point_t points_array[] = {{12,30},{60,90}, ...}`   
+- The buttons need to be assigned to pixels on the screen using `lv_indev_set_button_points(indev, points_array)`. Where _points_array_ look like `const lv_point_t points_array[] = { {12,30},{60,90}, ...}`   
 
 ### Tick interface
 
