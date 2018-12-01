@@ -2,7 +2,7 @@ _Written for v5.1_ (rev.4)
 
 ## Genel Bakış
 
-Pencereler, **en karmaşık** konteyner benzeri nesnelerden biridir. İki ana bölümden oluşur: Üstte bir **başlık** [Konteyner](./Container_tr) ve başlığın altındaki **içerik** için bir [Sayfa](../wiki/Page_tr).
+Pencereler, **en karmaşık** konteyner benzeri nesnelerden biridir. İki ana bölümden oluşur: Üstte bir **başlık** [Konteyner](/Container) ve başlığın altındaki **içerik** için bir [Sayfa](/Page).
 
 Üstbilgi **başlığı** değiştirilebilir: `lv_win_set_title(win, "Yeni Başlık")`. Başlık, üstbilginin biçimini her zaman miraslanır.
 
@@ -29,7 +29,7 @@ Pencerenin öğesine yeni bir stil ayarlamak için `lv_win_set_style(win, LV_WIN
 ## Notlar
 
 ## Örnek
-![Window image](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/window-lv_win.png)
+![Window image](http://doc.littlevgl.com/img/window-lv_win.png)
 ```c
 /*Yeni bir kaydırma çubuğu biçimi oluştur*/
 static lv_style_t style_sb;

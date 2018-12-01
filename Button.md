@@ -23,7 +23,7 @@ You can set the button's state manually by: `lv_btn_set_state(btn, LV_BTN_STATE_
 
 A button can go to **Inactive state** only manually (by _lv_btn_set_state()_). In an Inactive state, none of the action will be called.  
 
-Similarly to [Containers](https://github.com/littlevgl/lvgl/wiki/Container) buttons also have **layout** and **auto fit**:
+Similarly to [Containers](/Container) buttons also have **layout** and **auto fit**:
 
 - `lv_btn_set_layout(btn, LV_LAYOUT_...) `set a layout. The default is LV_LAYOUT_CENTER. So if you add a label then it will be automatically aligned to the middle.
 - `lv_btn_set_fit(btn, hor_en, ver_en)` enables to set the button width and/or height automatically according to the children.
@@ -44,7 +44,7 @@ A button can have 5 independent styles for the 5 state. You can set them via: `l
 - If a button was long pressed and its long press action was set then its click action will not be called
 
 ## Example
-![Button image](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/button-lv_btn.png)
+![Button image](http://doc.littlevgl.com/img/button-lv_btn.png)
 ```c
 static lv_res_t btn_click_action(lv_obj_t * btn)
 {

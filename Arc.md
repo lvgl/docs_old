@@ -19,7 +19,7 @@ To **set the style** of an Arc object use `lv_arc_set_style(arc, LV_ARC_STYLE_MA
 
 ## Example
 
-![Arc image](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/arc-lv_arc.png)
+![Arc image](http://doc.littlevgl.com/img/arc-lv_arc.png)
 
 ```c
 /*Create style for the Arcs*/

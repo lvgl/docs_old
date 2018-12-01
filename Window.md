@@ -2,7 +2,7 @@ _Written for v5.1_
 
 ## Overview
 
-The windows are one of the **most complex** container-like objects. They are built from two main parts: a **header** [Container](https://github.com/littlevgl/lvgl/wiki/Container) on the top and a [Page](https://github.com/littlevgl/lvgl/wiki/Page) for the **content** below the header. 
+The windows are one of the **most complex** container-like objects. They are built from two main parts: a **header** [Container](Container) on the top and a [Page](/Page) for the **content** below the header. 
 
 On the header there is **title** which can be modified by: `lv_win_set_title(win, "New title")`. The title always inherits the style of the header.
 
@@ -29,7 +29,7 @@ Use `lv_win_set_style(win, LV_WIN_STYLE_...,  &style)` to set a new style for an
 ## Notes
 
 ## Example
-![Window image](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/window-lv_win.png)
+![Window image](http://doc.littlevgl.com/img/window-lv_win.png)
 ```c
 /*Create a scroll bar style*/
 static lv_style_t style_sb;

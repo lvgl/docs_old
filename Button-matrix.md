@@ -38,7 +38,7 @@ The Button matrix works with 6 styles: a background and 5 button styles for each
 - The Button matrix object is **very light weighted**. It creates only the Background Base object and draws the buttons on it instead of creating a lot of real button.
 
 ## Example
-![Button matrix image](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/button-matrix-lv_btnm.png)
+![Button matrix image](http://doc.littlevgl.com/img/button-matrix-lv_btnm.png)
 ```c
 /*Called when a button is released ot long pressed*/
 static lv_res_t btnm_action(lv_obj_t * btnm, const char *txt)

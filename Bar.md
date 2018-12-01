@@ -21,7 +21,7 @@ The setting of a new value can happen with an **animation** from the current val
 
 ## Example
 
-![Bar image](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/bar-lv_bar.png)
+![Bar image](http://doc.littlevgl.com/img/bar-lv_bar.png)
 
 ```c
 /*Create a default bar*/

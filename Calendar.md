@@ -35,7 +35,7 @@ A**action to select a date** will be supported in `v5.3` and now available in th
 
 ## Example
 
-![Calendar image](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/calendar-lv_calendar.png)
+![Calendar image](http://doc.littlevgl.com/img/calendar-lv_calendar.png)
 
 ```c
 /*Create a Calendar object*/

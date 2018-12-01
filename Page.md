@@ -48,7 +48,7 @@ Use `lv_page_set_style(page, LV_PAGE_STYLE_...,  &style)` to set a new style for
 - The background draws its border when the scrollable is drawn. It ensures that the page always will have closed shape even if the scrollable has the same color as the page's parent.
 
 ## Example
-![Page image](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/page-lv_page.png)
+![Page image](https://github.com/littlevgl/lvgl/wiki/img/page-lv_page.png)
 ```c
 /*Create a scroll bar style*/
 static lv_style_t style_sb;

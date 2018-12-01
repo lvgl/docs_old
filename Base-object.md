@@ -15,7 +15,7 @@ You can set the **x and y coordinates** relative to the parent with `lv_obj_set_
 The **object size** can be modified with `lv_obj_set_width(obj, new_width)` and `lv_obj_set_height(obj, new_height)` or in one function with `lv_obj_set_size(obj, new_width, new_height)`. 
 
 You can **align**  the object to an other with `lv_obj_align(obj1, obj2, LV_ALIGN_TYPE, x_shift, y_shift)`. The last two argument means an x and y shift after the alignment. The second argument is another object on which to align the first (`NULL` means: align to the parent). The third argument is the type of alignment:
-![Alignment types](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/align.png)
+![Alignment types](http://doc.littlevgl.com/img/align.png)
 
 The alignment types build like: `LV_ALIGN_OUT_TOP_MID`. For example to align a text below an image: `lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)`. Or to align a text in the middle of its parent: `lv_obj_align(text, NULL, LV_ALIGN_CENTER, 0, 0)`. 
 
@@ -46,8 +46,8 @@ There are some attributes which can be enabled/disabled by `lv_obj_set_...(obj, 
 There are some specific actions which happen automatically in the library. To prevent one or more that kind of actions you can **protect the object** against them. The following protections exists:
 
 - **LV_PROTECT_NONE** No protection
-- **LV_PROTECT_POS**  Prevent automatic positioning (e.g.  Layout in [lv_cont](https://github.com/littlevgl/lvgl/wiki/Container))
-- **LV_PROTECT_FOLLOW** Prevent the object be followed in automatic ordering (e.g. Layout in [lv_cont](https://github.com/littlevgl/lvgl/wiki/Container))
+- **LV_PROTECT_POS**  Prevent automatic positioning (e.g.  Layout in [lv_cont](/Container))
+- **LV_PROTECT_FOLLOW** Prevent the object be followed in automatic ordering (e.g. Layout in [lv_cont](/Container))
 - **LV_PROTECT_PARENT** Prevent automatic parent change
 - **LV_PROTECT_CHILD_CHG** Disable the child change signal. Used by the library
 
@@ -62,14 +62,14 @@ There are **built-in animations** for the objects. The following animation types
 - **LV_ANIM_GROW_H** Grow/shrink  horizontally
 - **LV_ANIM_GROW_V** Grow/shrink  vertically
 
-The `lv_obj_animate(obj, anim_type, time, delay, callback)` applies an animation on _obj_. To determinate the direction of the animation _OR_ _ANIM_IN_ or _ANIM_OUT_ with the animation type. The default is _ANIM_IN_ if not specified. You can learn more about the [animations](https://github.com/littlevgl/lvgl/wiki/Animations).
+The `lv_obj_animate(obj, anim_type, time, delay, callback)` applies an animation on _obj_. To determinate the direction of the animation _OR_ _ANIM_IN_ or _ANIM_OUT_ with the animation type. The default is _ANIM_IN_ if not specified. You can learn more about the [animations](/Animations).
 
 ## Style usage
 
 All _style.body_ properties are used. Default for screens  _lv_style_plain_  and _lv_style_plain_color_ for normal objects
 
 ## Example
-![Base object image](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/base-obj-lv_obj.png)
+![Base object image](http://doc.littlevgl.com/img/base-obj-lv_obj.png)
 ```c
 /*Create a simple base object*/
 lv_obj_t * obj1;

@@ -24,7 +24,7 @@ Manuel olarak buton durumunu `lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)` fonks
 
 Bir buton **Pasif duruma** sadece manuel olarak (_lv_btn_set_state()_) fonksiyonu ile geçebilir. Pasif durumda hiçbir aksiyon çağırılamaz.
 
-[Konteyner](https://github.com/littlevgl/lvgl/wiki/Container)'a benzer olarak butonlarda **katman** ve **otomatik sığdır** özellikeri vardır:
+[Konteyner](/Container)'a benzer olarak butonlarda **katman** ve **otomatik sığdır** özellikeri vardır:
 
 - `lv_btn_set_layout(btn, LV_LAYOUT_...) `fonksiyonu ile katman ayarlanır. Varsayılan katman LV_LAYOUT_CENTER'dır. Bu sebepten eğer etiket(label) eklenirse, etiket otomatik olarak ortaya yerleşir.
 - `lv_btn_set_fit(btn, hor_en, ver_en)` fonksiyonu butonun genişlik ve yüksekliğini alt birimlere bağlı olarak otomatik aktifleştirir.
@@ -45,7 +45,7 @@ Buton 5 durum için 5 bağımsız biçime sahiptir. `lv_btn_set_style(btn, LV_BT
 - Eğer buton uzun basıldığında ve butonun uzun basılma aksiyonu ayarlanmış ise butonun tıklama aksiyonu çağırılamaz
 
 ## Örneğin
-![Buton resmi](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/button-lv_btn.png)
+![Buton resmi](http://doc.littlevgl.com/img/button-lv_btn.png)
 ```c
 static lv_res_t btn_click_action(lv_obj_t * btn)
 {

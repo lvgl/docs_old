@@ -29,7 +29,7 @@ You can enable an **auto fit** feature which automatically set the container siz
 
 ## Example
 
-![Container image](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/container-lv_cont.png)
+![Container image](http://doc.littlevgl.com/img/container-lv_cont.png)
 ```c
 lv_obj_t * box1;
 box1 = lv_cont_create(lv_scr_act(), NULL);

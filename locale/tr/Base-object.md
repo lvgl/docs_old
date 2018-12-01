@@ -15,7 +15,7 @@ Kapsayıcı(parent)'a bağlı olarak **x ve y koordinatları** `lv_obj_set_x(nes
 **Nesne boyutu**  `lv_obj_set_width(nesne, yeni_genislik)` ve `lv_obj_set_height(nesne, yeni_yukseklik)` fonksiyonları veya  `lv_obj_set_size(nesne, yeni_genislik, yeni_yukseklik)` fonksiyonu ile modifiye edilebilir. 
 
 Nesneyi `lv_obj_align(nesne1, nesne2, LV_ALIGN_TYPE, x_kaydir, y_kaydir)` fonksiyonu ile başka bir nesneye göre **hizalama**. Son iki argüman (x ve y kaydir) değerleri hizalama yapıldıktan sonra kaydırma değerleridir. İkinci argüman(nesne2) ise ilk argüman(nesne1)'ı hizalamada referans olarak kullanılır ve bu argümana(nesne2)'ye göre hizalama yapar, eğer `NULL` olarak tanımlanmış ise hizalama ekrana göre veya ayarlanmış kapsayıcıya göre uygulanır. Üçüncü eleman ise hizalama türürüdür:
-![Hizalama türleri](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/align.png)
+![Hizalama türleri](http://doc.littlevgl.com/img/align.png)
 
 Hizalama türleri `LV_ALIGN_OUT_TOP_MID` bu şekilde oluşturulur. Örneğin bir yazıyı resim dosyasının altına 10 pixel sağa kaydırarak yazdırmak için `lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)` şeklinde kullanılır veya yazıy(text)'ı kapsayıcının merkezinde yazdırmak için `lv_obj_align(text, NULL, LV_ALIGN_CENTER, 0, 0)` şeklinde kullanılır.
 
@@ -46,8 +46,8 @@ Nesne için `lv_obj_set_style(obj, &yeni_biçim)` fonksiyonu ile **yeni biçim**
 Kütüphanede otomatik oluşan bazı özel aksiyonlar vardır, bu bir veya birden çok aksiyondan korunmak için **nesneyi koru** yapılmalı. Mevcut koruma seçenekleri:
 
 - **LV_PROTECT_NONE** Koruma yok
-- **LV_PROTECT_POS**  Otomatik pozisyon koruma (örneğin. [lv_cont](https://github.com/littlevgl/lvgl/wiki/Container))
-- **LV_PROTECT_FOLLOW** Takip eden nesnelerin otomatik düzenleme koruma (örneğin. [lv_cont](https://github.com/littlevgl/lvgl/wiki/Container))
+- **LV_PROTECT_POS**  Otomatik pozisyon koruma (örneğin. [lv_cont](/Container))
+- **LV_PROTECT_FOLLOW** Takip eden nesnelerin otomatik düzenleme koruma (örneğin. [lv_cont](/Container))
 - **LV_PROTECT_PARENT** Otomatik kapsayıcı değişim koruma
 - **LV_PROTECT_CHILD_CHG** Alt değişim sinyal pasifleştirme. Kütüphane tarafından kullanılır.
 
@@ -62,14 +62,14 @@ Nesneler için **gömülü animasyonlar** vardır. Mevcut animasyon türleri:
 - **LV_ANIM_GROW_H** Yatay Büyült/Küçült 
 - **LV_ANIM_GROW_V** Dikey Büyült/Küçült 
 
-`lv_obj_animate(obj, anim_type, time, delay, callback)` fonsiyonu nesneye animasyon uygular. Animasyon yönünü belirlemek için _ANIM_IN_ veya _ANIM_OUT_ animasyon türü seçilir, eğer tür belirtilmemişse varsayılan _ANIM_IN_ dir. Daha fazla bilgi için [animations](https://github.com/littlevgl/lvgl/wiki/Animations).
+`lv_obj_animate(obj, anim_type, time, delay, callback)` fonsiyonu nesneye animasyon uygular. Animasyon yönünü belirlemek için _ANIM_IN_ veya _ANIM_OUT_ animasyon türü seçilir, eğer tür belirtilmemişse varsayılan _ANIM_IN_ dir. Daha fazla bilgi için [animations](/Animations).
 
 ## Biçim Kullanımı
 
 Tüm _style.body_ özellirleri kullanır. Normal bir nesne için varsayılan ekranlar _lv_style_plain_  and _lv_style_plain_color_.
 
 ## Örnek
-![Temel Resim nesnesi](https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/base-obj-lv_obj.png)
+![Temel Resim nesnesi](http://doc.littlevgl.com/img/base-obj-lv_obj.png)
 ```c
 /*Basit temel nesne oluştur*/
 lv_obj_t * obj1;
