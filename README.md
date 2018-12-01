@@ -1,14 +1,13 @@
-# Welcome
-
-Welcome to the documentation page of LittlevGL.
+# Welcome to the documentation page of LittlevGL
 
 LittlevGL is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
 
 Website: https://littlevgl.com/   
 Main repository: https://github.com/littlevgl/lvgl  
 
-The documentation is available in HTML format: http://doc.littlevgl.com/
-
+The documentation is available in:
+- **HTML** format: http://doc.littlevgl.com/
+- **PDF** format: https://github.com/littlevgl/doc/tree/master/pdf
 
 # How to use this documentation
 
