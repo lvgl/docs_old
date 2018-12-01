@@ -13,7 +13,7 @@ The documentation is available in:
 
 The documentation is written in [Markdown](https://en.wikipedia.org/wiki/Markdown). There are lot of converter tools to get HTML or PDF from Markdown files. 
 
-To generate the HTML page we used [gwtc](https://github.com/yakivmospan/github-wikito-converter) and `./build.sh` in the root folder.
+To generate the HTML and PDF files we used [gwtc](https://github.com/yakivmospan/github-wikito-converter) and `./build.sh` in the root folder.
 
 # Contributing 
 
