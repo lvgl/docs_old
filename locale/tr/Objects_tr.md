@@ -2,14 +2,14 @@ _Written for v5.1_
 
 In the Littlev Graphics Library the **basic building blocks** of a user interface are the objects. For example:
 
-- [[Button]]
-- [[Label]]
-- [[Image]]
-- [[List]]
-- [[Chart]]
-- [[Text area]]
+- [Button](/Button_tr)
+- [Label](/Label_tr)
+- [Image](/Image_tr)
+- [List](/List_tr)
+- [Chart](/Chart_tr)
+- [Text area](/Text-area_tr)
 
-Click to check all the existing [[Object types]]
+Click to check all the existing [Object types](Object-types_tr)
 
 #### Object attributes
 
@@ -31,7 +31,7 @@ lv_obj_set_size(btn1, 100, 50);						/*Button size*/
 lv_obj_set_pos(btn1, 20,30);						/*Button position*/
 ```
 
-To see all the available functions visit the Base object's [documentation](/Base-object).
+To see all the available functions visit the Base object's [documentation](/Base-object_tr).
 
 ##### Specific attributes
 

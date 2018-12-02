@@ -20,7 +20,7 @@ The **animation time** of up/down/focus movements can be set via: `lv_list_set_a
 
 ## Style usage
 
-The `lv_list_set_style(list, LV_LIST_STYLE_..., &style)` function sets the style of a list. For details explanation of _BG_, _SCRL_ and _SB_ see [Page](/Page)
+The `lv_list_set_style(list, LV_LIST_STYLE_..., &style)` function sets the style of a list. For details explanation of _BG_, _SCRL_ and _SB_ see [Page](/Page_tr)
 
 - **LV_LIST_STYLE_BG** list background style. Default: _lv_style_transp_fit_
 - **LV_LIST_STYLE_SCRL** scrollable parts's style. Default:_ lv_style_pretty_

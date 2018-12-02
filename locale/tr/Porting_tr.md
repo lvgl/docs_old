@@ -99,7 +99,7 @@ disp_drv. ...=...; /*Initialize the fields here. See below.*/
 disp_drv_register(&disp_drv); /*Register the driver in LittlevGL*/
 ```
 
-You can configure the driver for different operation modes. To learn more about the drawing modes visit [Drawing and rendering](/Drawing).
+You can configure the driver for different operation modes. To learn more about the drawing modes visit [Drawing and rendering](/Drawing_tr).
 
 #### Internal buffering (VDB)
 
@@ -182,7 +182,7 @@ lv_indev_drv_register(&indev_drv);  /*Register the driver in LittlevGL*/
   
 **read** is a function pointer which will be called periodically to report the current state of an input device. It can also buffer data and return _false_ when no more data to be read or _true_ when the buffer is not empty.
 
-To learn more about input devices visit [Input devices](https://littlevgl.com/basics#input-devices).
+To learn more about input devices visit [Input devices](Input-devices_tr).
 
 ####  Touchpad, mouse or any pointer
 
@@ -230,7 +230,7 @@ To use a keyboard:
 -  The created group has to be assigned to an input device: _lv_indev_set_group(my_indev, group1);_
 -  Use _LV_GROUP_KEY_..._ to navigate among the objects in the group
 
-Visit [Touchpad-less navigation](Input-devices) to learn more.
+Visit [Touchpad-less navigation](Input-devices_tr) to learn more.
 
 #### Encoder 
 With an encoder you can do 4 things:

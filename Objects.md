@@ -2,14 +2,14 @@ _Written for v5.1_
 
 In the Littlev Graphics Library the **basic building blocks** of a user interface are the objects. For example:
 
-- [[Button]]
-- [[Label]]
-- [[Image]]
-- [[List]]
-- [[Chart]]
-- [[Text area]]
+- [Button](/Button)
+- [Label](/Label)
+- [Image](/Image)
+- [List](/List)
+- [Chart](/Chart)
+- [Text area](/Text-area)
 
-Click to check all the existing [[Object types]]
+Click to check all the existing  [Object types](Object-types)
 
 #### Object attributes
 

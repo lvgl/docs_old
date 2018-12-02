@@ -25,7 +25,7 @@ You can enable to **draw a background** for the label with `lv_label_set_body_dr
 
 In the text, you can use commands to **re-color parts of the text**. For example: `"Write a #ff0000 red# word"`. This feature can be enabled individually for each label by `lv_label_set_recolor()` function.
 
-The labels can display symbols besides letters. Learn more about symbols [here](/Fonts).
+The labels can display symbols besides letters. Learn more about symbols [here](/Fonts_tr).
 
 The labels' **default style** is `NULL` so they inherit the parent's style.
 

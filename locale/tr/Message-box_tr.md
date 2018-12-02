@@ -2,7 +2,7 @@ _Written for v5.1_
 
 ## Overview
 
-The message boxes act as **pop-ups**. They are built from a **background**, a **text** and **buttons**. The background is a [Container](/Container) object with enabled vertical fit to ensure that the text and the buttons are always visible.  
+The message boxes act as **pop-ups**. They are built from a **background**, a **text** and **buttons**. The background is a [Container](/Container_tr) object with enabled vertical fit to ensure that the text and the buttons are always visible.  
 
 To **set the text** use the `lv_mbox_set_text(mbox, "My text")` function.
 

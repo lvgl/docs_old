@@ -182,7 +182,7 @@ lv_indev_drv_register(&indev_drv);  /*Register the driver in LittlevGL*/
   
 **read** is a function pointer which will be called periodically to report the current state of an input device. It can also buffer data and return _false_ when no more data to be read or _true_ when the buffer is not empty.
 
-To learn more about input devices visit [Input devices](https://littlevgl.com/basics#input-devices).
+To learn more about input devices visit [Input devices](Input-devices).
 
 ####  Touchpad, mouse or any pointer
 

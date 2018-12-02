@@ -2,7 +2,7 @@ _Written for v5.1_
 
 ## Overview
 
-As it names shows the **Keyboard** object provides a keyboard to **write text**. You can assign a [Text area](/Text-area) to the Keyboard to put the clicked characters there. To assign the Text area use `lv_kb_set_ta(kb, ta)`.
+As it names shows the **Keyboard** object provides a keyboard to **write text**. You can assign a [Text area](/Text-area_tr) to the Keyboard to put the clicked characters there. To assign the Text area use `lv_kb_set_ta(kb, ta)`.
 
 The keyboard contains an _Ok_ and a _Hide_ button. An ok and a hide action can be specified by `lv_kb_set_ok_action(kb, action)` and `lv_kb_set_hide_action(kb, action)` to add callbacks to Ok/Hide clicks. If no action is specified then the buttons will delete the Keyboard. 
 
@@ -15,7 +15,7 @@ The Keyboards have two **modes**:
 
 To set the mode use `lv_kb_set_mode(kb, mode)`. The default is  _LV_KB_MODE_TEXT_
 
-You can specify a **new map** (layout) for the keyboard with `lv_kb_set_map(kb, map)`. It works like a the [Button matrix](/Button-matrix) so control character can be added to the layout the set button width and other attributes. Keep in mind using following keywords will have the same effect as with the original map:  _SYMBOL_OK_, _SYMBOL_CLOSE_, _SYMBOL_LEFT_, _SYMBOL_RIGHT_, _ABC_, _abc_, _Enter_, _Del_, _#1_, _+/-_ .
+You can specify a **new map** (layout) for the keyboard with `lv_kb_set_map(kb, map)`. It works like a the [Button matrix](/Button-matrix_tr) so control character can be added to the layout the set button width and other attributes. Keep in mind using following keywords will have the same effect as with the original map:  _SYMBOL_OK_, _SYMBOL_CLOSE_, _SYMBOL_LEFT_, _SYMBOL_RIGHT_, _ABC_, _abc_, _Enter_, _Del_, _#1_, _+/-_ .
 
 ## Style usage
 

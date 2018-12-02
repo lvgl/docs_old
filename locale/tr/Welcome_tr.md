@@ -28,7 +28,7 @@
 #### Read the documentation
 Reading the documentation first is always a good idea. Don't be afraid it takes only a little time to learn the basics.
 
-You can start here with [Porting](/Porting) or with an [Introduction](/Objects) to the library.
+You can start here with [Porting](/Porting_tr) or with an [Introduction](/Objects_tr) to the library.
 
 #### Tutorial
 There is a tutorial to show you the most important parts step-by-step.
@@ -40,7 +40,7 @@ If you don't have an embedded hardware with a display yet you can try the librar
 
 The simulator is works with Windows, Linux, and OSX as well.
 
-Here you can learn how to set-up the simulator: [PC simulator](/PC-simulator)
+Here you can learn how to set-up the simulator: [PC simulator](/PC-simulator_tr)
 
 #### Contribute
 Use GitHub's issue tracker to:

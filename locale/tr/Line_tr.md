@@ -16,6 +16,8 @@ Basically the _y == 0_ point is in the top of the object but you can **invert th
 
 ## Example
 
+![Example of Line in LittlevGL Graphics Library ](http://doc.littlevgl.com/img/line-lv_line.png)
+
 ```c
 /*Create an array for the points of the line*/
 static lv_point_t line_points[] = { {5, 5}, {70, 70}, {120, 10}, {180, 60}, {240, 10} };

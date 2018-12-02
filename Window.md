@@ -2,7 +2,7 @@ _Written for v5.1_
 
 ## Overview
 
-The windows are one of the **most complex** container-like objects. They are built from two main parts: a **header** [Container](Container) on the top and a [Page](/Page) for the **content** below the header. 
+The windows are one of the **most complex** container-like objects. They are built from two main parts: a **header** [Container](/Container) on the top and a [Page](/Page) for the **content** below the header. 
 
 On the header there is **title** which can be modified by: `lv_win_set_title(win, "New title")`. The title always inherits the style of the header.
 

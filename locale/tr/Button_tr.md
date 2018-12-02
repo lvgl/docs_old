@@ -24,7 +24,7 @@ Manuel olarak buton durumunu `lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)` fonks
 
 Bir buton **Pasif duruma** sadece manuel olarak (_lv_btn_set_state()_) fonksiyonu ile geçebilir. Pasif durumda hiçbir aksiyon çağırılamaz.
 
-[Konteyner](/Container)'a benzer olarak butonlarda **katman** ve **otomatik sığdır** özellikeri vardır:
+[Konteyner](/Container_tr)'a benzer olarak butonlarda **katman** ve **otomatik sığdır** özellikeri vardır:
 
 - `lv_btn_set_layout(btn, LV_LAYOUT_...) `fonksiyonu ile katman ayarlanır. Varsayılan katman LV_LAYOUT_CENTER'dır. Bu sebepten eğer etiket(label) eklenirse, etiket otomatik olarak ortaya yerleşir.
 - `lv_btn_set_fit(btn, hor_en, ver_en)` fonksiyonu butonun genişlik ve yüksekliğini alt birimlere bağlı olarak otomatik aktifleştirir.

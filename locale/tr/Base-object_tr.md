@@ -46,8 +46,8 @@ Nesne için `lv_obj_set_style(obj, &yeni_biçim)` fonksiyonu ile **yeni biçim**
 Kütüphanede otomatik oluşan bazı özel aksiyonlar vardır, bu bir veya birden çok aksiyondan korunmak için **nesneyi koru** yapılmalı. Mevcut koruma seçenekleri:
 
 - **LV_PROTECT_NONE** Koruma yok
-- **LV_PROTECT_POS**  Otomatik pozisyon koruma (örneğin. [lv_cont](/Container))
-- **LV_PROTECT_FOLLOW** Takip eden nesnelerin otomatik düzenleme koruma (örneğin. [lv_cont](/Container))
+- **LV_PROTECT_POS**  Otomatik pozisyon koruma (örneğin. [lv_cont](/Container_tr))
+- **LV_PROTECT_FOLLOW** Takip eden nesnelerin otomatik düzenleme koruma (örneğin. [lv_cont](/Container_tr))
 - **LV_PROTECT_PARENT** Otomatik kapsayıcı değişim koruma
 - **LV_PROTECT_CHILD_CHG** Alt değişim sinyal pasifleştirme. Kütüphane tarafından kullanılır.
 
@@ -62,7 +62,7 @@ Nesneler için **gömülü animasyonlar** vardır. Mevcut animasyon türleri:
 - **LV_ANIM_GROW_H** Yatay Büyült/Küçült 
 - **LV_ANIM_GROW_V** Dikey Büyült/Küçült 
 
-`lv_obj_animate(obj, anim_type, time, delay, callback)` fonsiyonu nesneye animasyon uygular. Animasyon yönünü belirlemek için _ANIM_IN_ veya _ANIM_OUT_ animasyon türü seçilir, eğer tür belirtilmemişse varsayılan _ANIM_IN_ dir. Daha fazla bilgi için [animations](/Animations).
+`lv_obj_animate(obj, anim_type, time, delay, callback)` fonsiyonu nesneye animasyon uygular. Animasyon yönünü belirlemek için _ANIM_IN_ veya _ANIM_OUT_ animasyon türü seçilir, eğer tür belirtilmemişse varsayılan _ANIM_IN_ dir. Daha fazla bilgi için [animations](/Animations_tr).
 
 ## Biçim Kullanımı
 

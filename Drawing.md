@@ -40,4 +40,4 @@ In lv_conf.h you can enable the anti-aliasing with _LV_ANTIALIAS 1_. The anti-al
 
 The anti-aliasing algorithm puts some translucent pixels (pixels with opacity) to make lines and curves (including corners with radius) smooth and even. Because it only puts some extra pixels anti-aliasing requires only a few extra computational power(~1,1x extra time compared to not anti-aliased configuration)
 
-As described in [Font section](https://littlevgl.com/basics#fonts) the fonts can be anti-aliased by using a different font with higher bpp (Bit-Per-Pixel). This way the pixels of a font can be not only 0 or 1 but can be translucent. The supported bpp-s are 1, 2, 4 and 8. Keep in mind a font with higher bpp requires more ROM.
+As described in [Font section](/Fonts) the fonts can be anti-aliased by using a different font with higher bpp (Bit-Per-Pixel). This way the pixels of a font can be not only 0 or 1 but can be translucent. The supported bpp-s are 1, 2, 4 and 8. Keep in mind a font with higher bpp requires more ROM.

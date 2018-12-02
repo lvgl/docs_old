@@ -2,7 +2,7 @@ _Written for v5.1_ (rev.4)
 
 ## Genel Bakış
 
-Pencereler, **en karmaşık** konteyner benzeri nesnelerden biridir. İki ana bölümden oluşur: Üstte bir **başlık** [Konteyner](/Container) ve başlığın altındaki **içerik** için bir [Sayfa](/Page).
+Pencereler, **en karmaşık** konteyner benzeri nesnelerden biridir. İki ana bölümden oluşur: Üstte bir **başlık** [Konteyner](/Container_tr) ve başlığın altındaki **içerik** için bir [Sayfa](/Page_tr).
 
 Üstbilgi **başlığı** değiştirilebilir: `lv_win_set_title(win, "Yeni Başlık")`. Başlık, üstbilginin biçimini her zaman miraslanır.
 

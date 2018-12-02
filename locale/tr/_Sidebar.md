@@ -6,7 +6,7 @@
 * [Giriş Aygıtları](Input-devices_tr)
 * [Renkler](Colors_tr)
 * [Fontlar](Fonts_tr)
-* [Çizimler](Drawing)_tr
+* [Çizimler](Drawing_tr)
 * [Animasyon](Animations_tr)
 * [Kodlama Kılavuzu](Coding-Style-Guide_tr)
 * [Nesne Türleri](Object-types_tr)

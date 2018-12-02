@@ -12,7 +12,7 @@ Güncel değerden istenilen değere geçiş **animasyon** lu biçinde olur. Bu d
 
 ## Biçim Kullanımı
 
-- [Nesnenin temeli](https://littlevgl.com/object-types/base-obj-lv_obj) **arkaplan** bu nedenle biçim elementleri kullanılır. Varsayılan biçin `LV_STYLE_PRETTY` dir.  
+- [Nesnenin temeli](Base-object_tr) **arkaplan** bu nedenle biçim elementleri kullanılır. Varsayılan biçin `LV_STYLE_PRETTY` dir.  
 - **işaretleyici(gösterge)** arkaplanın benzeridir. Işaretleyici(gösterge) biçimleri `lv_bar_set_style_indic(bar,&style_indic)` fonksiyonu ile ayarlanır ve arkaplan ile arasında mesafe bırakmak için _hpad_ and _vpad_ biçim elementleri kullanılır. Varsayılan biçim olarak `LV_STYLE_PRETTY_COLOR` kullanılır.
 
 ## Notlar

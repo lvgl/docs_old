@@ -2,7 +2,7 @@ _Written for v5.1_
 
 ## Overview
 
-The Tab view object can be used to **organize content in tabs**. You can **add a new tab** with `lv_tabview_add_tab(tabview, "Tab name")`. It will return with a pointer to a [Page](/Page) object where you can add the tab's content.
+The Tab view object can be used to **organize content in tabs**. You can **add a new tab** with `lv_tabview_add_tab(tabview, "Tab name")`. It will return with a pointer to a [Page](/Page_tr) object where you can add the tab's content.
 
 To **select a tab** you can:
 

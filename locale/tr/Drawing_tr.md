@@ -8,7 +8,7 @@ In _LittlevGL_ you can think in graphical objects and don't care about how the d
 
 The unbuffered drawing puts the pixels directly to the display (frame buffer). Therefore during the drawing process, some flickering might be visible because firstly the background has to be drawn and then the objects on it. For this reason, this type is not suitable when scrolling, dragging and animations are used. On the other hand, it has the smallest memory footprint because no extra graphics buffer is required.   
 
-To use unbuffered drawing set _LV_VDB_SIZE_ to 0 in _lv_conf.h_ and register the _disp_map_ and _disp_fill_functions. Here you can learn more about [Porting](/Porting).
+To use unbuffered drawing set _LV_VDB_SIZE_ to 0 in _lv_conf.h_ and register the _disp_map_ and _disp_fill_functions. Here you can learn more about [Porting](/Porting_tr).
 
 #### Buffered drawing
 
@@ -40,4 +40,4 @@ In lv_conf.h you can enable the anti-aliasing with _LV_ANTIALIAS 1_. The anti-al
 
 The anti-aliasing algorithm puts some translucent pixels (pixels with opacity) to make lines and curves (including corners with radius) smooth and even. Because it only puts some extra pixels anti-aliasing requires only a few extra computational power(~1,1x extra time compared to not anti-aliased configuration)
 
-As described in [Font section](https://littlevgl.com/basics#fonts) the fonts can be anti-aliased by using a different font with higher bpp (Bit-Per-Pixel). This way the pixels of a font can be not only 0 or 1 but can be translucent. The supported bpp-s are 1, 2, 4 and 8. Keep in mind a font with higher bpp requires more ROM.
+As described in [Font section](/Fonts_tr) the fonts can be anti-aliased by using a different font with higher bpp (Bit-Per-Pixel). This way the pixels of a font can be not only 0 or 1 but can be translucent. The supported bpp-s are 1, 2, 4 and 8. Keep in mind a font with higher bpp requires more ROM.

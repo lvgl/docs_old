@@ -1,6 +1,6 @@
 _Written for v5.1_
 
-To interact with the created object _Input devices_ are required. For example Touchpad, Mouse, Keyboard or even an Encoder. To learn how to add an input device, read the [Porting guide](/Porting). 
+To interact with the created object _Input devices_ are required. For example Touchpad, Mouse, Keyboard or even an Encoder. To learn how to add an input device, read the [Porting guide](/Porting_tr). 
 
 When you register an input device driver the library adds some extra information to it to describe the state of the input device in more detail. When a user action (e.g. a button press) happens and an action (callback) function is triggered always there is an input device which triggered that action. You can get this input device with 
 
@@ -55,7 +55,7 @@ to navigate among objects.
 
 Firstly you have to **create an object group** with `lv_group_t *group = lv_group_create()` and add objects to it with `lv_group_add_obj(group, obj)`. In a group always there is a _focused_ object. All the button press will be "sent" to the currently focused object. 
 
-To navigate among the objects in a group (change the focused object) and interact with them an _LV_INDEV_TYPE_KEYPAD_ typed input device is required. In its _read_ function you can tell the library which key is pressed or released. To learn how to add an input device, read the [Porting guide](/Porting). 
+To navigate among the objects in a group (change the focused object) and interact with them an _LV_INDEV_TYPE_KEYPAD_ typed input device is required. In its _read_ function you can tell the library which key is pressed or released. To learn how to add an input device, read the [Porting guide](/Porting_tr). 
 
 Besides you have to **assign the group to the input device** with  
 

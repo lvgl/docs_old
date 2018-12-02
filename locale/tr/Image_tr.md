@@ -6,7 +6,7 @@ The Images are the basic object to **display images**. To provide maximum flexib
 
 - a variable in the code (a C array with the pixels)
 - a file stored externally (like on an SD card)
-- a text with [Symbols](https://littlevgl.com/basics#symbol-fonts)
+- a text with [Symbols](/Fonts_tr)
 
 To set the source of an image the `lv_img_set_src` function can be used. 
 

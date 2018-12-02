@@ -2,7 +2,7 @@ _Written for v5.1_
 Updated to v5.2
 ## Overview
 
-Roller allow you to simply **select one option from more** with scrolling. Its functionalities are similar to [Drop down list](https://github.com/littlevgl/lvgl/wiki/Drop-down-list).
+Roller allow you to simply **select one option from more** with scrolling. Its functionalities are similar to [Drop down list](/Drop-down-list).
 
 The **options** are passed to the Roller as a **string** with `lv_roller_set_options(roller, options)`. The options should be separated by `\n`. For example: `"First\nSecond\nThird"`.
 

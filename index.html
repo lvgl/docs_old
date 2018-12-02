@@ -897,7 +897,7 @@ lv_indev_drv_register(&amp;indev_drv);  <span class="hljs-comment">/*Register th
 <li>LV_INDEV_TYPE_BUTTON: external buttons pressing the screen</li>
 </ul>
 <p><strong>read</strong> is a function pointer which will be called periodically to report the current state of an input device. It can also buffer data and return <em>false</em> when no more data to be read or <em>true</em> when the buffer is not empty.</p>
-<p>To learn more about input devices visit <a href="https://littlevgl.com/basics#input-devices">Input devices</a>.</p>
+<p>To learn more about input devices visit <a href="#Input-devices">Input devices</a>.</p>
 <h4 id="touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</h4>
 <pre class="hljs">indev_drv.type = LV_INDEV_TYPE_POINTER;
 indev_drv.read = my_input_read;</pre><p>The read function should look like this:</p>
@@ -1081,7 +1081,7 @@ lv_task_handler();</pre><p>In addition to <code>lv_indev_get_inactive_time()</co
 <li><a href="#Chart">Chart</a></li>
 <li><a href="#Text-area">Text area</a></li>
 </ul>
-<p>Click to check all the existing <a href="#Object-types">Object types</a></p>
+<p>Click to check all the existing  <a href="#Object-types">Object types</a></p>
 <h4 id="object-attributes">Object attributes</h4>
 <h5 id="basic-attributes">Basic attributes</h5>
 <p>The objects have basic attributes which are common independently from their type:</p>
@@ -1536,7 +1536,7 @@ lv_label_set_text(label, <span class="hljs-string">"Right "</span>SYMBOL_RIGHT);
 <h3 id="anti-aliasing">Anti-aliasing</h3>
 <p>In lv_conf.h you can enable the anti-aliasing with _LV_ANTIALIAS 1_. The anti-aliasing is supported only in buffered mode (LV_VDB_SIZE &gt; LV_HOR_RES). </p>
 <p>The anti-aliasing algorithm puts some translucent pixels (pixels with opacity) to make lines and curves (including corners with radius) smooth and even. Because it only puts some extra pixels anti-aliasing requires only a few extra computational power(~1,1x extra time compared to not anti-aliased configuration)</p>
-<p>As described in <a href="https://littlevgl.com/basics#fonts">Font section</a> the fonts can be anti-aliased by using a different font with higher bpp (Bit-Per-Pixel). This way the pixels of a font can be not only 0 or 1 but can be translucent. The supported bpp-s are 1, 2, 4 and 8. Keep in mind a font with higher bpp requires more ROM.</p>
+<p>As described in <a href="#Fonts">Font section</a> the fonts can be anti-aliased by using a different font with higher bpp (Bit-Per-Pixel). This way the pixels of a font can be not only 0 or 1 but can be translucent. The supported bpp-s are 1, 2, 4 and 8. Keep in mind a font with higher bpp requires more ROM.</p>
 <p class="page" id="Animations"></p><h1>Animations</h1>
 <p><em>Written for v5.1</em></p>
 <p>You can automatically change the value (animate) of a variable between a start and an end value using an <strong>animator function</strong> with <code>void func(void* var,int32_t value)</code> prototype. The animation will happen by the periodical calling of the animator function with the corresponding value parameter.</p>
@@ -1959,44 +1959,44 @@ lv_obj_set_free_num(btn3, <span class="hljs-number">3</span>);               <sp
 <span class="hljs-comment">/*Add a label to the inactive button*/</span>
 label = lv_label_create(btn3, <span class="hljs-literal">NULL</span>);
 lv_label_set_text(label, <span class="hljs-string">"Inactive"</span>);</pre><p class="page" id="Button-matrix"></p><h1>Button matrix (lv_btnm)</h1>
-<p><em>Written for v5.1</em> (rev.1)</p>
-<h2 id="genel-bak-">Genel Bakış</h2>
-<p>Buton matris nesneleri metin sıralamasına bağlı tanımlanarak <strong>çoklu butonlar</strong> olarak gösterilir ve <em>map</em>(haritalama) şeklinde çağırılır. <code>lv_btnm_set_map(btnm, my_map)</code> fonksiyonu ile map belirtilebilir.</p>
-<p><strong>Haritalamanın(map) tanımlanması</strong> <code>const char * map[] = {&quot;btn1&quot;, &quot;btn2&quot;, &quot;btn3&quot;, &quot;&quot;}</code> şeklindedir. NOT <strong>Son eleman mutlaka boş bir metin olası gerekir</strong>!</p>
-<p>Metin&#39;in ilk karakteri bazı özellikleri belirtmek için <strong>kontrol karakter</strong> olabilir:utes:</p>
+<p><em>Written for v5.1</em></p>
+<h2 id="overview">Overview</h2>
+<p>The Button Matrix objects can display <strong>multiple buttons</strong> according to a descriptor string array, called <em>map</em>. You can specify the map with <code>lv_btnm_set_map(btnm, my_map)</code>. </p>
+<p>The <strong>declaration of a map</strong> looks like <code>const char * map[] = {&quot;btn1&quot;, &quot;btn2&quot;, &quot;btn3&quot;, &quot;&quot;}</code>. Note that <strong>the last element has to be an empty string</strong>!  </p>
+<p>The first character of a string can be a <strong>control character</strong> to specify some attributes:</p>
 <ul>
-<li><strong>bit 7..6</strong> Metinsel karakterlerden kontrol byte&#39;ına ayrım yapmak için daima <em>0b10</em></li>
-<li><strong>bit 5</strong> Pasif buton</li>
-<li><strong>bit 4</strong> Gizli buton</li>
-<li><strong>bit 3</strong> Buton için uzun basma yok</li>
-<li><strong>bit 2..0</strong> Aynı satırdaki butonlar için genişlik ilişki karşılaştırması. [1..7]</li>
+<li><strong>bit 7..6</strong> Always <em>0b10</em> to differentiate the control byte from the textual characters</li>
+<li><strong>bit 5</strong> Inactive button</li>
+<li><strong>bit 4</strong> Hidden button</li>
+<li><strong>bit 3</strong> No long press for the button</li>
+<li><strong>bit 2..0</strong> Relative width compared to the buttons in the same row. [1..7]</li>
 </ul>
-<p><strong>Kontrol byte olarak sekizli sayı</strong> özelliği tavsiye edilir. Örneğin <code>&quot;\213buton&quot;</code>. Sekizli sayı daima _2_ (bit 7..6) ile başlar orta bölüm özellikleri (bit 5..3) ve son bölüm genişliği (bit 2..0). Önek 3 birim genişliğinde gizli butonu tanımlıyor.</p>
-<p>Haritalamada <strong>satır sonu</strong> yapmak için &quot;\n&quot; kullanmak: <code>{&quot;btn1&quot;, &quot;btn2&quot;, &quot;\n&quot;, &quot;btn3&quot;, &quot;&quot;}</code>. Butonun genişliği her satırda tekrar hesaplanır.</p>
-<p><code>lv_btnm_set_action(btnm, btnm_action)</code> fonksiyonu buton bırakıldığında çağırma aksiyonunu belirtir.</p>
-<p><strong>Butonların değişimi(geçişi)</strong> tıklandığında aktifleşir. Tek seferde sadece bir buton değişimi olur. <code>lv_btnm_set_toggle(btnm, true, id)</code> fonksiyonu değişimi aktifleştirir ve id&#39;si verilmiş butonun değişim durumunu ayarlar.</p>
-<h2 id="bi-im-kullan-m-">Biçim Kullanımı</h2>
-<p>Buton matris 6 biçim ile çalışır: Bir arkaplan ve 5 herbir durum için buton biçimi. <code>lv_btnm_set_style(btn, LV_BTNM_STYLE_..., &amp;style)</code> fonksiyonu ile biçim ayarlanabilir. Arkaplan ve butonlar <em>style.body</em> özelliğini kullanır. Etiketler buton biçim özelliklerinden_style.text_&#39;i kullanır.</p>
+<p>It is recommended to specify the <strong>control byte as an octal number</strong>. For example <code>&quot;\213button&quot;</code>. The octal number always starts with _2_ (bit 7..6) the middle part is the attributes (bit 5..3) and the last part is the width (bit 2..0). So the example describes a 3 unit wide, hidden button.</p>
+<p>Use &quot;\n&quot; in the map  to make <strong>line break</strong>: <code>{&quot;btn1&quot;, &quot;btn2&quot;, &quot;\n&quot;, &quot;btn3&quot;, &quot;&quot;}</code>. The button&#39;s width is recalculated in every line.</p>
+<p>The <code>lv_btnm_set_action(btnm, btnm_action)</code> specifies an action to call when a button is released. </p>
+<p>You can enable the <strong>buttons to toggle</strong> when they are clicked. There can only be one toggled button at a time. The <code>lv_btnm_set_toggle(btnm, true, id)</code> enables the toggling and sets the _id_th button to the toggled state.</p>
+<h2 id="style-usage">Style usage</h2>
+<p>The Button matrix works with 6 styles: a background and 5 button styles for each states. You can set the styles with <code>lv_btnm_set_style(btn, LV_BTNM_STYLE_..., &amp;style)</code>. The background and the buttons use the <em>style.body</em> properties. The labels use the <em>style.text</em> properties of the button styles.</p>
 <ul>
-<li><strong>LV_BTNM_STYLE_BG</strong> Arkaplan biçimi. <em>padding</em> ile beraber tüm <em>style.body</em> özelliklerini kullanır. Varsayılan: _lv_style_pretty_</li>
-<li><strong>LV_BTNM_STYLE_BTN_REL</strong> Bırakma butonların biçimi. Varsayılan: _lv_style_btn_rel_</li>
-<li><strong>LV_BTNM_STYLE_BTN_PR</strong> Basma butonların biçimi. Varsayılan: _lv_style_btn_pr_</li>
-<li><strong>LV_BTNM_STYLE_BTN_TGL_REL</strong> Değişim bırakma butonların biçimi. Varsayılan: _lv_style_btn_tgl_rel_</li>
-<li><strong>LV_BTNM_STYLE_BTN_TGL_PR</strong> Değişim basma butonların biçimi. Varsayılan: _lv_style_btn_tgl_pr_</li>
-<li><strong>LV_BTNM_STYLE_BTN_INA</strong> Pasif butonların biçimi. Varsayılan: _lv_style_btn_ina_</li>
+<li><strong>LV_BTNM_STYLE_BG</strong> Background style. Uses all <em>style.body</em> properties including <em>padding</em> Default: _lv_style_pretty_</li>
+<li><strong>LV_BTNM_STYLE_BTN_REL</strong> style of the released  buttons. Default: _lv_style_btn_rel_</li>
+<li><strong>LV_BTNM_STYLE_BTN_PR</strong> style of the pressed buttons. Default: _lv_style_btn_pr_</li>
+<li><strong>LV_BTNM_STYLE_BTN_TGL_REL</strong> style of the toggled released  buttons. Default: _lv_style_btn_tgl_rel_</li>
+<li><strong>LV_BTNM_STYLE_BTN_TGL_PR</strong> style of the toggled pressed  buttons. Default: _lv_style_btn_tgl_pr_</li>
+<li><strong>LV_BTNM_STYLE_BTN_INA</strong> style of the inactive  buttons. Default: _lv_style_btn_ina_</li>
 </ul>
-<h2 id="notlar">Notlar</h2>
+<h2 id="notes">Notes</h2>
 <ul>
-<li>Buton matris nesnesi <strong>çok basittir</strong>. Temel nesne arkaplanı oluşturur ve gerçek buton oluşturmak yerine butonları çizer.</li>
+<li>The Button matrix object is <strong>very light weighted</strong>. It creates only the Background Base object and draws the buttons on it instead of creating a lot of real button.</li>
 </ul>
-<h2 id="-rnek">Örnek</h2>
+<h2 id="example">Example</h2>
 <p><img src="http://doc.littlevgl.com/img/button-matrix-lv_btnm.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Uzun süre basılıp çekildiğinde çağrılır*/</span>
+<pre class="hljs"><span class="hljs-comment">/*Called when a button is released ot long pressed*/</span>
 <span class="hljs-function"><span class="hljs-keyword">static</span> lv_res_t <span class="hljs-title">btnm_action</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span> * btnm, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *txt)</span>
 </span>{
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Button: %s released\n"</span>, txt);
 
-    <span class="hljs-keyword">return</span> LV_RES_OK; <span class="hljs-comment">/*Return OK, çünkü buton matris silinmedi*/</span>
+    <span class="hljs-keyword">return</span> LV_RES_OK; <span class="hljs-comment">/*Return OK because the button matrix is not deleted*/</span>
 }
 
 
@@ -2004,7 +2004,7 @@ lv_label_set_text(label, <span class="hljs-string">"Inactive"</span>);</pre><p c
 .
 .
 
-<span class="hljs-comment">/*Buton tanımlama metin dizisini oluştur*/</span>
+<span class="hljs-comment">/*Create a button descriptor string array*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * btnm_map[] = {<span class="hljs-string">"1"</span>, <span class="hljs-string">"2"</span>, <span class="hljs-string">"3"</span>, <span class="hljs-string">"4"</span>, <span class="hljs-string">"5"</span>, <span class="hljs-string">"\n"</span>,
                            <span class="hljs-string">"6"</span>, <span class="hljs-string">"7"</span>, <span class="hljs-string">"8"</span>, <span class="hljs-string">"9"</span>, <span class="hljs-string">"0"</span>, <span class="hljs-string">"\n"</span>,
                            <span class="hljs-string">"\202Action1"</span>, <span class="hljs-string">"Action2"</span>, <span class="hljs-string">""</span>};
@@ -2012,13 +2012,13 @@ lv_label_set_text(label, <span class="hljs-string">"Inactive"</span>);</pre><p c
 
 
 
-<span class="hljs-comment">/*Varsayılan buton matris'i oluştur*/</span>
+<span class="hljs-comment">/*Create a default button matrix*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * btnm1 = lv_btnm_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_btnm_set_map(btnm1, btnm_map);
 lv_btnm_set_action(btnm1, btnm_action);
 lv_obj_set_size(btnm1, LV_HOR_RES, LV_VER_RES / <span class="hljs-number">2</span>);
 
-<span class="hljs-comment">/*Buton matris arkaplan için yeni biçim oluştur*/</span>
+<span class="hljs-comment">/*Create a new style for the button matrix back ground*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_bg;
 lv_style_copy(&amp;style_bg, &amp;lv_style_plain);
 style_bg.body.main_color = LV_COLOR_SILVER;
@@ -2027,7 +2027,7 @@ style_bg.body.padding.hor = <span class="hljs-number">0</span>;
 style_bg.body.padding.ver = <span class="hljs-number">0</span>;
 style_bg.body.padding.inner = <span class="hljs-number">0</span>;
 
-<span class="hljs-comment">/*2 buton biçimleri oluştur*/</span>
+<span class="hljs-comment">/*Create 2 button styles*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_btn_rel;
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_btn_pr;
 lv_style_copy(&amp;style_btn_rel, &amp;lv_style_btn_rel);
@@ -2043,7 +2043,7 @@ style_btn_pr.body.main_color = LV_COLOR_MAKE(<span class="hljs-number">0x55</spa
 style_btn_pr.body.grad_color = LV_COLOR_MAKE(<span class="hljs-number">0x37</span>, <span class="hljs-number">0x62</span>, <span class="hljs-number">0x90</span>);
 style_btn_pr.text.color = LV_COLOR_MAKE(<span class="hljs-number">0xbb</span>, <span class="hljs-number">0xd5</span>, <span class="hljs-number">0xf1</span>);
 
-<span class="hljs-comment">/*Yeni biçim ile ikinci buton matris'i oluştur*/</span>
+<span class="hljs-comment">/*Create a second button matrix with the new styles*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * btnm2 = lv_btnm_create(lv_scr_act(), btnm1);
 lv_btnm_set_style(btnm2, LV_BTNM_STYLE_BG, &amp;style_bg);
 lv_btnm_set_style(btnm2, LV_BTNM_STYLE_BTN_REL, &amp;style_btn_rel);
@@ -2459,7 +2459,7 @@ lv_gauge_set_value(gauge1, <span class="hljs-number">2</span>, <span class="hljs
 <ul>
 <li>a variable in the code (a C array with the pixels)</li>
 <li>a file stored externally (like on an SD card)</li>
-<li>a text with <a href="https://littlevgl.com/basics#symbol-fonts">Symbols</a></li>
+<li>a text with <a href="#Fonts">Symbols</a></li>
 </ul>
 <p>To set the source of an image the <code>lv_img_set_src</code> function can be used. </p>
 <p>To generate a pixel array <strong>from a PNG, JPG or BMP</strong> image use the <a href="https://littlevgl.com/image-to-c-array">Online image converter tool</a> and set the converted image with its pointer: </p>
@@ -2829,6 +2829,7 @@ lv_obj_align(label, led3, LV_ALIGN_OUT_LEFT_MID, <span class="hljs-number">-40</
 </ul>
 <h2 id="notes">Notes</h2>
 <h2 id="example">Example</h2>
+<p><img src="http://doc.littlevgl.com/img/line-lv_line.png" /></p>
 <pre class="hljs"><span class="hljs-comment">/*Create an array for the points of the line*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_point_t</span> line_points[] = { {<span class="hljs-number">5</span>, <span class="hljs-number">5</span>}, {<span class="hljs-number">70</span>, <span class="hljs-number">70</span>}, {<span class="hljs-number">120</span>, <span class="hljs-number">10</span>}, {<span class="hljs-number">180</span>, <span class="hljs-number">60</span>}, {<span class="hljs-number">240</span>, <span class="hljs-number">10</span>} };
 
@@ -3103,46 +3104,46 @@ lv_mbox_set_style(mbox2, LV_MBOX_STYLE_BG, &amp;style_bg);
 lv_mbox_set_style(mbox2, LV_MBOX_STYLE_BTN_REL, &amp;style_btn_rel);
 lv_mbox_set_style(mbox2, LV_MBOX_STYLE_BTN_PR, &amp;style_btn_pr);
 lv_obj_align(mbox2, mbox1, LV_ALIGN_OUT_BOTTOM_LEFT, <span class="hljs-number">50</span>, <span class="hljs-number">-20</span>);   <span class="hljs-comment">/*Align according to the previous message box */</span></pre><p class="page" id="Page"></p><h1>Page (lv_page)</h1>
-<p><em>Written for v5.1</em> rev(5)</p>
-<h2 id="genel-bak-">Genel Bakış</h2>
-<p>Tabandaki <strong>arka plan</strong> (veya temel) ve üstte <strong>kaydırılabilir</strong> olmak üzere sayfa iki konteyner dan oluşur. Eğer sayfada bir alt birim oluşuturulursa o otomatik olarak kaydırılabilir konteyner&#39;a taşınır. Eğer kaydırılabilir konteyner arka plan dan büyük ise <strong>sürükleyerek kaydırılabilir</strong> (akıllı telefonlardaki listeler gibi).</p>
-<p>Varsayılan olarak kaydırılabilir sayfanın <em>auto fit</em> özelliği dikey olarak aktif tir bu yüzden tüm alt birimleri dahil ettiği için yükseklik artar. Kaydırılabilir sayfanın genişliği otomatik olarak arka plan sayfanın genişliğine ayarlanır (eksi(-) arkaplan yatay padding).</p>
-<p>Arka plan nesnesi sayfanın kendisi gibi referans edilebilir: <code>lv_obj_set_width(sayfa, 100)</code>.</p>
-<p>Kaydırma çubuk nesnesine şunlar alınabilir: <code>lv_page_get_scrl (sayfa)</code>.</p>
-<p><strong>kaydırma çubukları</strong> dört ilkeye bağlı olarak gösterilir:</p>
+<p><em>Written for v5.1</em></p>
+<h2 id="overview">Overview</h2>
+<p>The Page consist of two containers on each other: the bottom is the <strong>background</strong> (or base) and the top is the <strong>scrollable</strong>. If you create a child on the page it will be automatically moved to the scrollable container. If the scrollable container become greater then the background it <strong>can be scrolled by dragging</strong> (like the lists on smart phones).</p>
+<p>By default the scrollable&#39;s <em>auto fit</em> attribute is enabled vertically so its height will increased to include all its children. The width of the scrollable is automatically adjusted to the background width (minus the background&#39;s horizontal padding).</p>
+<p>The background object can be referenced as the page itself like: <code>lv_obj_set_width(page, 100)</code>.</p>
+<p>The scrollbar object can be retrieved with: <code>lv_page_get_scrl(page)</code>.</p>
+<p><strong>Scrollbars</strong> can be shown according to four policies:</p>
 <ul>
-<li>LV_SB_MODE_OFF: Kaydırma çubuklarını asla gösterme</li>
-<li>LV_SB_MODE_ON: Kaydırma çubuklarını daima göster</li>
-<li>LV_SB_MODE_DRAG: Sayfa sürüklendiğinde kaydırma çubuklarını göster</li>
-<li>LV_SB_MODE_AUTO: Kaydırılabilir konteyner kaydırılabilecek kadar büyük olduğunda kaydırma çubuklarını göster</li>
+<li>LV_SB_MODE_OFF: Never show scrollbars</li>
+<li>LV_SB_MODE_ON: Always show scrollbars</li>
+<li>LV_SB_MODE_DRAG: Show scrollbars when page is being dragged</li>
+<li>LV_SB_MODE_AUTO: Show scrollbars when the scrollable container is large enough to be scrolled</li>
 </ul>
-<p>Kaydırma çubuğu gösterisi ilkesini şu şekilde ayarlayabilirsiniz: <code>lv_page_set_sb_mode (sayfa, SB_MODE)</code>. Varsayılan değer _LV_PAGE_SB_MODE_ON_;</p>
-<p><strong>Alt birimlere sayfa</strong> yapıştırabilirsiniz. Bu durumda, alt nesneyi sürükleyerek sayfayı kaydırabilirsiniz. <code>lv_page_glue_obj(child, true)</code> fonksiyonu ile etkinleştirilebilir.</p>
-<p>Sayfada <strong>neneye odaklanma</strong> <code>lv_page_focus(page, child, anim_time)</code> ile yapılır.</p>
-<p>Bir alt birimi göstermek için kaydırılabilir konteyneri hareket ettiririz. Son parametre sıfır değilse, sayfa bir animasyon ile hareket eder.</p>
-<p><strong>Bırakma ve basma aksiyonu</strong> sayfaya <code>lv_page_set_rel_action(page, my_rel_action)</code> ve <code>lv_page_set_pr_action(page, my_pr_action)</code> fonksiyonları ile atanabilir. Aksiyonlar arkaplan ve kaydırılabilir nesne ile de tetiklenebilir. </p>
-<p>Doğrudan <strong>Kaydırılabilir sayfanın ayarla/al özellik</strong> fonksiyonları:  </p>
+<p>You can set scroll bar show policy by: <code>lv_page_set_sb_mode(page, SB_MODE)</code>. The default value is _LV_PAGE_SB_MODE_ON_;</p>
+<p>You can <strong>glue a children</strong> to the page. In this case you can scroll the page with dragging the child object. It can be enabled by the <code>lv_page_glue_obj(child, true)</code>.</p>
+<p>You can <strong>focus to an object</strong> on a page with: <code>lv_page_focus(page, child, anim_time)</code>.</p>
+<p>It will moves the scrollable container to show a child. If the last parameter is not zero then the page will move with an animation.</p>
+<p><strong>A release and a press action</strong> can be assigned to the Page with <code>lv_page_set_rel_action(page, my_rel_action)</code> and <code>lv_page_set_pr_action(page, my_pr_action)</code>. The action can be triggered from the Background and the Scrollable object too.</p>
+<p>There are functions to directly <strong>set/get the scrollable&#39;s attributes</strong>: </p>
 <ul>
 <li><code>lv_page_set_scrl_fit()</code></li>
 <li><code>lv_page_set_scrl_width()</code></li>
 <li><code>lv_page_set_scrl_height()</code></li>
 <li><code>lv_page_set_scrl_layout()</code></li>
 </ul>
-<h2 id="bi-im-kullan-m-">Biçim Kullanımı</h2>
-<p>Sayfa elemanları için <code>lv_page_set_style(page, LV_PAGE_STYLE_...,  &amp;style)</code> fonksiyonu kullanarak yeni biçim ayarlama:</p>
+<h2 id="style-usage">Style usage</h2>
+<p>Use <code>lv_page_set_style(page, LV_PAGE_STYLE_...,  &amp;style)</code> to set a new style for an element of the page:</p>
 <ul>
-<li><strong>LV_PAGE_STYLE_BG</strong> Arkaplan sayfa biçimi tüm <em>style.body</em> özelliklerini kullanır (varsayılan: lv_style_pretty_color)</li>
-<li><strong>LV_PAGE_STYLE_SCRL</strong> kaydırılabilir sayfa biçimi tüm <em>style.body</em> özelliklerini kullanır (varsayılan: lv_style_pretty)</li>
-<li><strong>LV_PAGE_STYLE_SB</strong> Kaydırma çubuk biçimi tüm <em>style.body</em> özelliklerini kullanır. Kaydırma sayfasının dolgusu sırayla yatay/dikey dolgu olarak ayarlanır ve iç dolgu kaydırma sayfasının genişliğidir. (varsayılan: lv_style_pretty_color)</li>
+<li><strong>LV_PAGE_STYLE_BG</strong> background&#39;s style which uses all <em>style.body</em> properties (default: lv_style_pretty_color)</li>
+<li><strong>LV_PAGE_STYLE_SCRL</strong> scrollable&#39;s style which uses all <em>style.body</em> properties (default: lv_style_pretty)</li>
+<li><strong>LV_PAGE_STYLE_SB</strong> scroll bar&#39;s style which uses all <em>style.body</em> properties. hor/ver* padding sets the scrollbars&#39; padding respectively and the inner padding sets the scrollbar&#39;s width.  (default: lv_style_pretty_color)</li>
 </ul>
-<h2 id="notlar">Notlar</h2>
+<h2 id="notes">Notes</h2>
 <ul>
-<li>Eğer x ve y yönüne karşılık gelen <em>hor</em> veya <em>ver</em> sığdır aktif ise <strong>Alt birimlerin posisyon ayarları</strong> münkün değildir. Çünkü, eğer _y_ koodinatı <em>ver</em> sığdır ile değiştirilirse kaydırılabilir nesne alt nesnenin altında ve üstünde olacak şekilde yeniden boyutlandırılacaktır. Fakar kaydırılabilir parça ortada olamadığı için tekrar geri üst&#39;e taşınır. Bunu önlemek için <code>lv_obj_align ()</code> nesnesini birbirine göre yerleştirmek için (biri üst / solda olmak zorundadır) veya <code>lv_page_set_scrl_fit(sayfa, false, false);</code> ile sığdırmayı devre dışı bırakın ve boyutunu ayarla <code>lv_page_set_scrl_width/height(page,  100)</code></li>
-<li>Arka plan, kaydırılabilir çizildiğinde sınırını çizer. Kaydırılabilir sayfanın ebeveyni ile aynı renge sahip olsa bile sayfanın her zaman kapalı şekli olmasını sağlar. </li>
+<li><strong>Setting the position of children</strong> is not possible in x or y direction if the corresponding <em>hor</em> or <em>ver</em> fit is enabled.  It&#39;s because if  the _y_ coordinate is modified  (with <em>ver fit</em> enabled)  the scrollable object will resized to be directly above and below the child. But a scrollable part can&#39;t be in the middle so it will be moved back to the top.  To avoid this use <code>lv_obj_align()</code> to place object relative to each other (one has to be in to top/left) or disable fit with <code>lv_page_set_scrl_fit(page, false, false);</code> and set it&#39;s size <code>lv_page_set_scrl_width/height(page,  100)</code>.</li>
+<li>The background draws its border when the scrollable is drawn. It ensures that the page always will have closed shape even if the scrollable has the same color as the page&#39;s parent.</li>
 </ul>
-<h2 id="-rnek">Örnek</h2>
-<p><img src="https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/page-lv_page.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Kaydırma çubuk biçimi oluştur*/</span>
+<h2 id="example">Example</h2>
+<p><img src="https://github.com/littlevgl/lvgl/wiki/img/page-lv_page.png" /></p>
+<pre class="hljs"><span class="hljs-comment">/*Create a scroll bar style*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_sb;
 lv_style_copy(&amp;style_sb, &amp;lv_style_plain);
 style_sb.body.main_color = LV_COLOR_BLACK;
@@ -3152,20 +3153,20 @@ style_sb.body.border.width = <span class="hljs-number">1</span>;
 style_sb.body.border.opa = LV_OPA_70;
 style_sb.body.radius = LV_RADIUS_CIRCLE;
 style_sb.body.opa = LV_OPA_60;
-style_sb.body.padding.hor = <span class="hljs-number">3</span>;          <span class="hljs-comment">/*Sağda yatay dolgu*/</span>
-style_sb.body.padding.inner = <span class="hljs-number">8</span>;        <span class="hljs-comment">/*Kaydırma çubuk genişliği*/</span>
+style_sb.body.padding.hor = <span class="hljs-number">3</span>;          <span class="hljs-comment">/*Horizontal padding on the right*/</span>
+style_sb.body.padding.inner = <span class="hljs-number">8</span>;        <span class="hljs-comment">/*Scrollbar width*/</span>
 
-<span class="hljs-comment">/*Sayfa oluştur*/</span>
+<span class="hljs-comment">/*Create a page*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * page = lv_page_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_obj_set_size(page, <span class="hljs-number">150</span>, <span class="hljs-number">200</span>);
 lv_obj_align(page, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
-lv_page_set_style(page, LV_PAGE_STYLE_SB, &amp;style_sb);           <span class="hljs-comment">/*Kaydırma çubuk biçimi ayarla*/</span>
-lv_page_set_sb_mode(page, LV_SB_MODE_AUTO);                     <span class="hljs-comment">/*Kaydırma mümkün ise kaydırma çubuklarını göster*/</span>
+lv_page_set_style(page, LV_PAGE_STYLE_SB, &amp;style_sb);           <span class="hljs-comment">/*Set the scrollbar style*/</span>
+lv_page_set_sb_mode(page, LV_SB_MODE_AUTO);                     <span class="hljs-comment">/*Show scroll bars is scrolling is possible*/</span>
 
-<span class="hljs-comment">/*Sayfada bir etiket oluştur*/</span>
+<span class="hljs-comment">/*Create a label on the page*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * label = lv_label_create(page, <span class="hljs-literal">NULL</span>);
-lv_label_set_long_mode(label, LV_LABEL_LONG_BREAK);             <span class="hljs-comment">/*Uzun satırları otomatik olarak böl*/</span>
-lv_obj_set_width(label, lv_page_get_scrl_width(page));          <span class="hljs-comment">/*Genişlik ayarla, Satırlar bu genişlikten sonra bölünecek*/</span>
+lv_label_set_long_mode(label, LV_LABEL_LONG_BREAK);             <span class="hljs-comment">/*Automatically break long lines*/</span>
+lv_obj_set_width(label, lv_page_get_scrl_width(page));          <span class="hljs-comment">/*Set the width. Lines will break here*/</span>
 lv_label_set_text(label, <span class="hljs-string">"Lorem ipsum dolor sit amet, consectetur adipiscing elit,\n"</span>
                          <span class="hljs-string">"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"</span>
                          <span class="hljs-string">"Ut enim ad minim veniam, quis nostrud exercitation ullamco\n"</span>
@@ -3205,7 +3206,7 @@ lv_preload_set_style(preload, LV_PRELOAD_STYLE_MAIN, &amp;style);</pre><p class=
 <p><em>Written for v5.1</em>
 Updated to v5.2</p>
 <h2 id="overview">Overview</h2>
-<p>Roller allow you to simply <strong>select one option from more</strong> with scrolling. Its functionalities are similar to <a href="https://github.com/littlevgl/lvgl/wiki/Drop-down-list">Drop down list</a>.</p>
+<p>Roller allow you to simply <strong>select one option from more</strong> with scrolling. Its functionalities are similar to <a href="#Drop-down-list">Drop down list</a>.</p>
 <p>The <strong>options</strong> are passed to the Roller as a <strong>string</strong> with <code>lv_roller_set_options(roller, options)</code>. The options should be separated by <code>\n</code>. For example: <code>&quot;First\nSecond\nThird&quot;</code>.</p>
 <p>You can <strong>select an option  manually</strong> with <code>lv_roller_set_selected(roller, id)</code>, where _id_ is the index of an option.</p>
 <p>A <strong>callback function</strong> can be specified with <code>lv_roller_set_action(roller, my_action)</code> to call when a new option is selected.</p>

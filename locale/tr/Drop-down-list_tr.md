@@ -14,7 +14,7 @@ By default the list's **height** is adjusted automatically to show all options. 
 
 The **width** is also adjusted automatically. To prevent this apply `lv_ddlist_set_hor_fit(ddlist, false)` and set the width manually by `lv_obj_set_width(ddlist, width)`.
 
-Similarly to [Page](/Page) with fix height the Drop Down List supports various **scrollbar display modes**. It can be set by `lv_ddlist_set_sb_mode(ddlist, LV_SB_MODE_...)`.
+Similarly to [Page](/Page_tr) with fix height the Drop Down List supports various **scrollbar display modes**. It can be set by `lv_ddlist_set_sb_mode(ddlist, LV_SB_MODE_...)`.
 
 The Drop Down List open/close animation time is adjusted by `lv_ddlist_set_anim_time(ddlist, anim_time)`. Zero animation time means no animation.
 
