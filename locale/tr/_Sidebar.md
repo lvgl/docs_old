@@ -2,7 +2,7 @@
 * [Porting](Porting_tr)
 * [PC Simulator](PC-simulator_tr)
 * [Nesneler](Objects_tr)
-* [Biçimler](Styles)
+* [Biçimler](Styles_tr)
 * [Giriş Aygıtları](Input-devices_tr)
 * [Renkler](Colors_tr)
 * [Fontlar](Fonts_tr)
