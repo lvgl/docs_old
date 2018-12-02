@@ -1688,76 +1688,76 @@ To format the source files:
 </ul>
 <p class="page" id="Arc"></p><h1>Arc (lv_arc)</h1>
 <p><em>Written for v5.2</em></p>
-<h2 id="genel-bak-">Genel Bakış</h2>
-<p>Belirlenen <strong>kalınlık</strong> ile <strong>başlangıç ve bitiş</strong> açıları verilmiş bir <strong>Yay nesnesi</strong> çizilmesi.</p>
-<p>Açıların ayarlanması için <code>lv_arc_set_angles(arc(yay), baslangic_acisi, bitis_acisi)</code> fonksiyonu kullanılır. Sıfır derece nesnenin altından başlar ve saat tersi yönünde devam eder, açı değerleri [0;360] arasındadır.</p>
-<p>Yay nesnesinin biçim(style) ayarlaması için <code>lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &amp;style)</code> fonksiyonu kullanılır.</p>
-<h2 id="bi-im-kullan-m-">Biçim kullanımı</h2>
+<h2 id="overview">Overview</h2>
+<p>The Arc object <strong>draws an arc</strong> within <strong>start and end angles</strong> and with a given <strong>thickness</strong>.</p>
+<p>To set the angles use the <code>lv_arc_set_angles(arc, start_angle, end_angle)</code> function. The zero degree is at the bottom of the object and the degrees are increasing in a counter-clockwise direction. The angles should be in [0;360] range.</p>
+<p>To <strong>set the style</strong> of an Arc object use <code>lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &amp;style)</code></p>
+<h2 id="style-usage">Style usage</h2>
 <ul>
-<li><strong>line.rounded</strong> bitiş noktasını yuvarlaştırmak için kullanılır (Şeffaflık(opacity) 1 yapılırsa bu özellik çalışmaz)</li>
-<li><strong>line.width</strong> Yay kalınlığı.</li>
-<li><strong>line.color</strong> Yay rengi.</li>
+<li><strong>line.rounded</strong> make the endpoints rounded (opacity won&#39;t work properly if set to 1)</li>
+<li><strong>line.width</strong> the thickness of the arc</li>
+<li><strong>line.color</strong> the color of the arc.</li>
 </ul>
-<h2 id="notlar">Notlar</h2>
+<h2 id="notes">Notes</h2>
 <ul>
-<li>Yay için <strong>genişlik ve boy</strong> aynı olmalı.</li>
-<li>Yay <strong>anti-aliasing</strong> i şuan <strong>desteklememektedir</strong>.</li>
+<li>The <strong>width and height</strong> of the Arc should be the <strong>same</strong></li>
+<li>Currently the Arc object <strong>does not support anti-aliasing</strong>.</li>
 </ul>
-<h2 id="-rnek">Örnek</h2>
+<h2 id="example">Example</h2>
 <p><img src="http://doc.littlevgl.com/img/arc-lv_arc.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Yay için biçim oluştur*/</span>
+<pre class="hljs"><span class="hljs-comment">/*Create style for the Arcs*/</span>
 <span class="hljs-keyword">lv_style_t</span> style;
 lv_style_copy(&amp;style, &amp;lv_style_plain);
-style.line.color = LV_COLOR_BLUE;           <span class="hljs-comment">/*Yay rengi*/</span>
-style.line.width = <span class="hljs-number">8</span>;                       <span class="hljs-comment">/*Yay kalınlığı*/</span>
+style.line.color = LV_COLOR_BLUE;           <span class="hljs-comment">/*Arc color*/</span>
+style.line.width = <span class="hljs-number">8</span>;                       <span class="hljs-comment">/*Arc width*/</span>
 
-<span class="hljs-comment">/*Yay oluştur*/</span>
+<span class="hljs-comment">/*Create an Arc*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * arc = lv_arc_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
-lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &amp;style);          <span class="hljs-comment">/*Yeni biçim kullanımı*/</span>
+lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &amp;style);          <span class="hljs-comment">/*Use the new style*/</span>
 lv_arc_set_angles(arc, <span class="hljs-number">90</span>, <span class="hljs-number">60</span>);
 lv_obj_set_size(arc, <span class="hljs-number">150</span>, <span class="hljs-number">150</span>);
 lv_obj_align(arc, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
 
-<span class="hljs-comment">/*Bir önceki yay'ı kopyalayıp farklı açılarda ve boyutta yay oluştur*/</span>
+<span class="hljs-comment">/*Copy the previous Arc and set different angles and size*/</span>
 arc = lv_arc_create(lv_scr_act(), arc);
 lv_arc_set_angles(arc, <span class="hljs-number">90</span>, <span class="hljs-number">20</span>);
 lv_obj_set_size(arc, <span class="hljs-number">125</span>, <span class="hljs-number">125</span>);
 lv_obj_align(arc, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
 
-<span class="hljs-comment">/*Bir önceki yay'ı kopyalayıp farklı açılarda ve boyutta yay oluştur*/</span>
+<span class="hljs-comment">/*Copy the previous Arc and set different angles and size*/</span>
 arc = lv_arc_create(lv_scr_act(), arc);
 lv_arc_set_angles(arc, <span class="hljs-number">90</span>, <span class="hljs-number">310</span>);
 lv_obj_set_size(arc, <span class="hljs-number">100</span>, <span class="hljs-number">100</span>);
 lv_obj_align(arc, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);</pre><p class="page" id="Bar"></p><h1>Bar (lv_bar)</h1>
 <p><em>Written for v5.1</em></p>
-<h2 id="genel-bak-">Genel Bakış</h2>
-<p>Bar nesnesi <strong>arkaplan</strong> ve <strong>işaretleyici(gösterge)</strong> olmak üzere iki parçadan oluşur. Nesnenin temeli <strong>arkaplan</strong>dır, <strong>işaretleyici(gösterge)</strong> arkaplan ile şekil olarak benzerdir fakat genişlik ve yüksekliği ayarlanabilir. </p>
-<p>Bar&#39;ın yönü genişlik/yükseklik oranına bağlı olarak <strong>dikey veya yatay</strong> olabilir. Mantıksal olarak yatay barlar genişlik, dikey barlar yükseklik değerleri değiştirilerek oluşturulur.</p>
-<p><code>lv_bar_set_value(bar, new_value)</code> fonksiyonu ile <strong>yeni değer</strong> atanır. Bu değer <code>lv_bar_set_range(bar, min, max)</code> fonksiyonu ile belirlenmiş <strong>aralık</strong> (minimum ve maximum değerler) arasında bir değerdir. Varsayılan aralık değerleri 1..100 arasındadır.</p>
-<p>Güncel değerden istenilen değere geçiş <strong>animasyon</strong> lu biçinde olur. Bu durumda <code>lv_bar_set_value_anim(bar, yeni_deger, animasyon_zamani)</code> fonksiyonu kullanılır.</p>
-<h2 id="bi-im-kullan-m-">Biçim Kullanımı</h2>
+<h2 id="overview">Overview</h2>
+<p>The Bar objects have got two main parts: a <strong>background</strong> which is the object itself and an <strong>indicator</strong> which shape is similar to the background but its width/height can be adjusted. </p>
+<p>The orientation of the bar can be <strong>vertical or horizontal</strong> according to the width/height ratio. Logically on horizontal bars the indicator width, on vertical bars the indicator height can be changed. </p>
+<p>A <strong>new value</strong> can be set by: <code>lv_bar_set_value(bar, new_value)</code>. The value is interpreted in <strong>range</strong> (minimum and maximum values) which can be modified with: <code>lv_bar_set_range(bar, min, max)</code>. The default range is: 1..100.</p>
+<p>The setting of a new value can happen with an <strong>animation</strong> from the current value to the desired. In this case use <code>lv_bar_set_value_anim(bar, new_value, anim_time)</code>.</p>
+<h2 id="style-usage">Style usage</h2>
 <ul>
-<li><a href="https://littlevgl.com/object-types/base-obj-lv_obj">Nesnenin temeli</a> <strong>arkaplan</strong> bu nedenle biçim elementleri kullanılır. Varsayılan biçin <code>LV_STYLE_PRETTY</code> dir.  </li>
-<li><strong>işaretleyici(gösterge)</strong> arkaplanın benzeridir. Işaretleyici(gösterge) biçimleri <code>lv_bar_set_style_indic(bar,&amp;style_indic)</code> fonksiyonu ile ayarlanır ve arkaplan ile arasında mesafe bırakmak için <em>hpad</em> and <em>vpad</em> biçim elementleri kullanılır. Varsayılan biçim olarak <code>LV_STYLE_PRETTY_COLOR</code> kullanılır.</li>
+<li><strong>background</strong> is a <a href="#Base-object">Base object</a>therefore it uses its style elements. Its default style is: <code>LV_STYLE_PRETTY</code>.  </li>
+<li><strong>indicator</strong> is similar to the background. Its styles can be set by: <code>lv_bar_set_style_indic(bar,&amp;style_indic)</code>. It uses the <em>hpad</em> and <em>vpad</em> style elements to keep space from the background. Its default style is: <code>LV_STYLE_PRETTY_COLOR</code>.</li>
 </ul>
-<h2 id="notlar">Notlar</h2>
+<h2 id="notes">Notes</h2>
 <ul>
-<li>İşaretleyici gerçek bir nesne değildir; sadece bar tarafından çizilmiştir.</li>
+<li>The indicator is not a real object; it is only drawn by the bar.</li>
 </ul>
-<h2 id="-rnek">Örnek</h2>
+<h2 id="example">Example</h2>
 <p><img src="http://doc.littlevgl.com/img/bar-lv_bar.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Varsayılan Bar oluştur*/</span>
+<pre class="hljs"><span class="hljs-comment">/*Create a default bar*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * bar1 = lv_bar_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_obj_set_size(bar1, <span class="hljs-number">200</span>, <span class="hljs-number">30</span>);
 lv_obj_align(bar1, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_TOP_RIGHT, <span class="hljs-number">-20</span>, <span class="hljs-number">30</span>);
 lv_bar_set_value(bar1, <span class="hljs-number">70</span>);
 
-<span class="hljs-comment">/*Bar'ın sağında etiket oluştur*/</span>
+<span class="hljs-comment">/*Create a label right to the bar*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * bar1_label = lv_label_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_label_set_text(bar1_label, <span class="hljs-string">"Default"</span>);
 lv_obj_align(bar1_label, bar1, LV_ALIGN_OUT_LEFT_MID, <span class="hljs-number">-10</span>, <span class="hljs-number">0</span>);
 
-<span class="hljs-comment">/*Bar ve işaretleyici(gösterge) için biçim oluştur*/</span>
+<span class="hljs-comment">/*Create a bar and an indicator style*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_bar;
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_indic;
 
@@ -1773,84 +1773,84 @@ style_indic.body.main_color=  LV_COLOR_LIME;
 style_indic.body.radius = LV_RADIUS_CIRCLE;
 style_indic.body.shadow.width = <span class="hljs-number">10</span>;
 style_indic.body.shadow.color = LV_COLOR_LIME;
-style_indic.body.padding.hor = <span class="hljs-number">3</span>;           <span class="hljs-comment">/*İşaretleyici(gösterge)'yi biraz küçüklt*/</span>
+style_indic.body.padding.hor = <span class="hljs-number">3</span>;           <span class="hljs-comment">/*Make the indicator a little bit smaller*/</span>
 style_indic.body.padding.ver = <span class="hljs-number">3</span>;
 
-<span class="hljs-comment">/*İkinci bar oluştur*/</span>
+<span class="hljs-comment">/*Create a second bar*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * bar2 = lv_bar_create(lv_scr_act(), bar1);
 lv_bar_set_style(bar2, LV_BAR_STYLE_BG, &amp;style_bar);
 lv_bar_set_style(bar2, LV_BAR_STYLE_INDIC, &amp;style_indic);
-lv_obj_align(bar2, bar1, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">30</span>); <span class="hljs-comment">/*'Bar1''in altında hizala*/</span>
+lv_obj_align(bar2, bar1, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">30</span>); <span class="hljs-comment">/*Align below 'bar1'*/</span>
 
-<span class="hljs-comment">/*Bar'ın sağında ikinci bir etiket oluştur*/</span>
+<span class="hljs-comment">/*Create a second label*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * bar2_label = lv_label_create(lv_scr_act(), bar1_label);
 lv_label_set_text(bar2_label, <span class="hljs-string">"Modified"</span>);
 lv_obj_align(bar2_label, bar2, LV_ALIGN_OUT_LEFT_MID, <span class="hljs-number">-10</span>, <span class="hljs-number">0</span>);</pre><p class="page" id="Base-object"></p><h1>Base object (lv_obj)</h1>
-<p><em>Written for v5.1</em>(rev.4)</p>
-<h2 id="genel-bak-">Genel Bakış</h2>
-<p>Temel Nesne nesnelerin <strong>en temel özelliklerini</strong> içerir.</p>
+<p><em>Written for v5.1</em></p>
+<h2 id="overview">Overview</h2>
+<p>The Base Object contains the <strong>most basic attributes</strong> of the objects:</p>
 <ul>
-<li>Koordinatlar</li>
-<li>Kapsayıcı(Parent) Nesne</li>
-<li>Alt(Children)</li>
-<li>Biçim</li>
-<li>Klikleme aktif, taşıma aktif gibi özellikler.</li>
+<li>Coordinates</li>
+<li>Parent object</li>
+<li>Children</li>
+<li>Style</li>
+<li>Attributes like Click enable, Drag enable etc.</li>
 </ul>
-<p>Kapsayıcı(parent)&#39;a bağlı olarak <strong>x ve y koordinatları</strong> <code>lv_obj_set_x(nesne, yeni_x)</code> ve <code>lv_obj_set_y(nesne, yeni_y)</code> fonksiyonları ile veya <code>lv_obj_set_pos(nesne, yeni_x, yeni_y)</code> bir fonksiyonu ile ayarlanabilir.</p>
-<p><strong>Nesne boyutu</strong>  <code>lv_obj_set_width(nesne, yeni_genislik)</code> ve <code>lv_obj_set_height(nesne, yeni_yukseklik)</code> fonksiyonları veya  <code>lv_obj_set_size(nesne, yeni_genislik, yeni_yukseklik)</code> fonksiyonu ile modifiye edilebilir. </p>
-<p>Nesneyi <code>lv_obj_align(nesne1, nesne2, LV_ALIGN_TYPE, x_kaydir, y_kaydir)</code> fonksiyonu ile başka bir nesneye göre <strong>hizalama</strong>. Son iki argüman (x ve y kaydir) değerleri hizalama yapıldıktan sonra kaydırma değerleridir. İkinci argüman(nesne2) ise ilk argüman(nesne1)&#39;ı hizalamada referans olarak kullanılır ve bu argümana(nesne2)&#39;ye göre hizalama yapar, eğer <code>NULL</code> olarak tanımlanmış ise hizalama ekrana göre veya ayarlanmış kapsayıcıya göre uygulanır. Üçüncü eleman ise hizalama türürüdür:
+<p>You can set the <strong>x and y coordinates</strong> relative to the parent with <code>lv_obj_set_x(obj, new_x)</code> and <code>lv_obj_set_y(obj, new_y)</code> or in one function with <code>lv_obj_set_pos(obj, new_x, new_y)</code>. </p>
+<p>The <strong>object size</strong> can be modified with <code>lv_obj_set_width(obj, new_width)</code> and <code>lv_obj_set_height(obj, new_height)</code> or in one function with <code>lv_obj_set_size(obj, new_width, new_height)</code>. </p>
+<p>You can <strong>align</strong>  the object to an other with <code>lv_obj_align(obj1, obj2, LV_ALIGN_TYPE, x_shift, y_shift)</code>. The last two argument means an x and y shift after the alignment. The second argument is another object on which to align the first (<code>NULL</code> means: align to the parent). The third argument is the type of alignment:
 <img src="http://doc.littlevgl.com/img/align.png" /></p>
-<p>Hizalama türleri <code>LV_ALIGN_OUT_TOP_MID</code> bu şekilde oluşturulur. Örneğin bir yazıyı resim dosyasının altına 10 pixel sağa kaydırarak yazdırmak için <code>lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)</code> şeklinde kullanılır veya yazıy(text)&#39;ı kapsayıcının merkezinde yazdırmak için <code>lv_obj_align(text, NULL, LV_ALIGN_CENTER, 0, 0)</code> şeklinde kullanılır.</p>
-<p>Nesne için <code>lv_obj_set_parent(nesne, yeni_kapsayıcı)</code> fonksiyonu ile <strong>yeni kapsayıcı</strong> ayarlayabilirsiniz.</p>
-<p>Bir nesnenin altlarına sondan başa doğru gitmek için <code>lv_obj_get_child(nesne, alt_onceki)</code> fonksiyonu ile, baştan sona doğru gitmek için <code>lv_obj_get_child_back(obj, child_prev)</code> fonksiyonu kullanılır. İlk alt birimi geçip bir önceki dönüş değeri için ikinci parametre <em>NULL</em> seçilir. Fonksiyon <em>NULL</em> ile dönüyorsa başka bir alt birim yoktur.</p>
-<p><code>lv_obj_create(NULL, NULL)</code> komutu ile <strong>ekran</strong> oluşturduğumuzda, <code>lv_scr_load(ekran1)</code> fonksiyonu ile <strong>yükleme</strong> yapabiliriz. <code>lv_scr_act()</code> fonksiyonu <strong>geçerli ekran</strong>&#39;na bir işaretçi tanımlar.</p>
-<p>Otomatik olarak oluşturulan <strong>iki katman</strong> vardır:</p>
+<p>The alignment types build like: <code>LV_ALIGN_OUT_TOP_MID</code>. For example to align a text below an image: <code>lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)</code>. Or to align a text in the middle of its parent: <code>lv_obj_align(text, NULL, LV_ALIGN_CENTER, 0, 0)</code>. </p>
+<p>You can set a <strong>new parent</strong> for an object with <code>lv_obj_set_parent(obj, new_parent)</code>.</p>
+<p>To get the children of an object use <code>lv_obj_get_child(obj, child_prev)</code> (from last to first) or <code>lv_obj_get_child_back(obj, child_prev)</code> (from first to last). To get the first child pass <em>NULL</em> as the second parameter and then the previous child (return value). The function will return with <em>NULL</em> when there are no more children.</p>
+<p>When you have created a <strong>screen</strong> like <code>lv_obj_create(NULL, NULL)</code> you can <strong>load</strong> it with <code>lv_scr_load(screen1)</code>. The <code>lv_scr_act()</code> function gives you a pointer to the <strong>current screen</strong>.</p>
+<p>There are <strong>two layers</strong> automatically generated layers:</p>
 <ul>
-<li>üst katman</li>
-<li>system katman</li>
+<li>top layer</li>
+<li>system layer</li>
 </ul>
-<p>Ekranlardan bağımsız olarak oluşturulan nesneler herbir ekranda gösterilecektir. Üst katman(<em>top layer</em>) ekrandaki herbir nesnenin üzerindedir ve sistem katmanı(<em>system layer</em>) da üst katmanın üzerindedir. Üst katmana pop-up penceresi serbestçe eklenebilir fakat sistem katmanı sistem seviye işleri için sınırlandırılmıştır (örneğin fare imleci buraya taşınmıştır). <code>lv_layer_top()</code> ve <code>lv_layer_sys()</code> fonksiyonları üst veya sistem katman için bir işaretçi tanımlar.</p>
-<p>Nesne için <code>lv_obj_set_style(obj, &amp;yeni_biçim)</code> fonksiyonu ile <strong>yeni biçim</strong> tanımlanabilir, eğer biçim <code>NULL</code> seçildiyse nesne kapsayıcısının biçim mirasını alır. Eğer nesne için <strong>modifiye bir biçim</strong> kullanılacak ise kesinlikle bunu <strong>nesneye bildirim</strong> yapmamız gerekir. <code>lv_obj_refresh_style(nesne)</code> fonksiyonu ile nesnenin biçimini yenileyebilir veya tüm nesnelere <code>lv_obj_report_style_mod(&amp;biçim)</code> fonksiyonu ile bildirim yapılabilir. _lv_obj_report_style_mod_&#39;s parametresini <code>NULL</code> olarak ayarlayıp tüm nesnelere bildirim yap.</p>
-<p><code>lv_obj_set_...(obj, true/false)</code> fonksiyonu ile Aktif/Pasif yapılabilen bazı özellikler:</p>
+<p>They are independent of the screens so objects created an that layers will be shown on every screen. The <em>top layer</em> is above every object on the screen and  <em>system layer</em> is above top layer too. You can add any pop-up windows <em>top layer</em> freely. But the <em>system layer</em> restricted to system level things (e.g. mouse cursor will be moved here). The <code>lv_layer_top()</code> and <code>lv_layer_sys()</code> functions gives a pointer to the top or system layer.</p>
+<p>You can set a <strong>new style</strong> for an object with the <code>lv_obj_set_style(obj, &amp;new_style)</code> function. If <code>NULL</code> is set as style then the object will inherit its parent&#39;s style. If you <strong>modify a style</strong> you have to <strong>notify the objects</strong> who are using the modified styled. You can use either <code>lv_obj_refresh_style(obj)</code> or to notify all object with a given style <code>lv_obj_report_style_mod(&amp;style)</code>. Set _lv_obj_report_style_mod_&#39;s parameter to <code>NULL</code> to notify all objects. </p>
+<p>There are some attributes which can be enabled/disabled by <code>lv_obj_set_...(obj, true/false)</code>:</p>
 <ul>
-<li><strong>hidden</strong> Nesneyi gizle. Çizilmeyecek ve herhangi bir yer kaplamayacak. Alt elemanlerı da gizlenecek.</li>
-<li><strong>click</strong> Nesnenin tıklama özelliğini bir girdi cihazı ile aktifleştir (örneğin dokunmatik). Eğer pasif ise, nesne arkasındaki giriş aygıtı tıklama işlemi sırasında kontrol edilir.</li>
-<li><strong>top</strong> Eger aktifleştirilirse bu nesne veya nesnenin herhangi birine tıklandığında nesne ön tarafa doğru gelir.</li>
-<li><strong>drag</strong> Sürüklemeyi aktifleştir (bir giriş aracı ile haraket ettirilir)</li>
-<li><strong>drag_throw</strong> Sürükleme ile bırakmayı aftifleştirildiğinde nesne süskleme ile hızlanma kazanır.</li>
-<li><strong>drag_parent</strong> Eğer aktifleştirilir ise nesnenin kapsayıcısıda sürüklenir.</li>
+<li><strong>hidden</strong> Hide the object. It will not be drawn and won&#39;t occupy space, Its children will be hidden too.</li>
+<li><strong>click</strong> Enabled to click the object via an input device (e.g. touch pad). If disabled then object behind this one will be checked during the input device click handling (useful with typically not clickable objects like Labels)</li>
+<li><strong>top</strong> If enabled then when this object or any of its children is clicked then this object comes to the foreground.</li>
+<li><strong>drag</strong> Enable dragging (moving by an input device)</li>
+<li><strong>drag_throw</strong> Enable &quot;throwing&quot; with dragging like the object would have momentum</li>
+<li><strong>drag_parent</strong> If enabled then the object&#39;s parent will be moved during dragging. </li>
 </ul>
-<p>Kütüphanede otomatik oluşan bazı özel aksiyonlar vardır, bu bir veya birden çok aksiyondan korunmak için <strong>nesneyi koru</strong> yapılmalı. Mevcut koruma seçenekleri:</p>
+<p>There are some specific actions which happen automatically in the library. To prevent one or more that kind of actions you can <strong>protect the object</strong> against them. The following protections exists:</p>
 <ul>
-<li><strong>LV_PROTECT_NONE</strong> Koruma yok</li>
-<li><strong>LV_PROTECT_POS</strong>  Otomatik pozisyon koruma (örneğin. <a href="#Container">lv_cont</a>)</li>
-<li><strong>LV_PROTECT_FOLLOW</strong> Takip eden nesnelerin otomatik düzenleme koruma (örneğin. <a href="#Container">lv_cont</a>)</li>
-<li><strong>LV_PROTECT_PARENT</strong> Otomatik kapsayıcı değişim koruma</li>
-<li><strong>LV_PROTECT_CHILD_CHG</strong> Alt değişim sinyal pasifleştirme. Kütüphane tarafından kullanılır.</li>
+<li><strong>LV_PROTECT_NONE</strong> No protection</li>
+<li><strong>LV_PROTECT_POS</strong>  Prevent automatic positioning (e.g.  Layout in <a href="#Container">lv_cont</a>)</li>
+<li><strong>LV_PROTECT_FOLLOW</strong> Prevent the object be followed in automatic ordering (e.g. Layout in <a href="#Container">lv_cont</a>)</li>
+<li><strong>LV_PROTECT_PARENT</strong> Prevent automatic parent change</li>
+<li><strong>LV_PROTECT_CHILD_CHG</strong> Disable the child change signal. Used by the library</li>
 </ul>
-<p><code>lv_obj_set/clr_protect(obj, LV_PROTECT_...)</code> fonksiyonları ile koruma ayarla/temizle yapılır. &#39;OR&#39; kullanılarak koruma tip değerleri de kullanılabilir.</p>
-<p>Nesneler için <strong>gömülü animasyonlar</strong> vardır. Mevcut animasyon türleri:</p>
+<p>The <code>lv_obj_set/clr_protect(obj, LV_PROTECT_...)</code> sets/clears the protection. You can use <em>&#39;OR&#39;ed</em> values of protection types too.</p>
+<p>There are <strong>built-in animations</strong> for the objects. The following animation types exist:</p>
 <ul>
-<li><strong>LV_ANIM_FLOAT_TOP</strong> .. dan üst&#39;e kaydır.</li>
-<li><strong>LV_ANIM_FLOAT_LEFT</strong> .. dan sol&#39;a kaydır.</li>
-<li><strong>LV_ANIM_FLOAT_BOTTOM</strong> .. dan taban&#39;a kaydır.</li>
-<li><strong>LV_ANIM_FLOAT_RIGHT</strong> .. dan sağ&#39;a kaydır.</li>
-<li><strong>LV_ANIM_GROW_H</strong> Yatay Büyült/Küçült </li>
-<li><strong>LV_ANIM_GROW_V</strong> Dikey Büyült/Küçült </li>
+<li><strong>LV_ANIM_FLOAT_TOP</strong> Float from/to the top</li>
+<li><strong>LV_ANIM_FLOAT_LEFT</strong> Float from/to the left</li>
+<li><strong>LV_ANIM_FLOAT_BOTTOM</strong> Float from/to the bottom</li>
+<li><strong>LV_ANIM_FLOAT_RIGHT</strong> Float from/to the right</li>
+<li><strong>LV_ANIM_GROW_H</strong> Grow/shrink  horizontally</li>
+<li><strong>LV_ANIM_GROW_V</strong> Grow/shrink  vertically</li>
 </ul>
-<p><code>lv_obj_animate(obj, anim_type, time, delay, callback)</code> fonsiyonu nesneye animasyon uygular. Animasyon yönünü belirlemek için _ANIM_IN_ veya _ANIM_OUT_ animasyon türü seçilir, eğer tür belirtilmemişse varsayılan _ANIM_IN_ dir. Daha fazla bilgi için <a href="#Animations">animations</a>.</p>
-<h2 id="bi-im-kullan-m-">Biçim Kullanımı</h2>
-<p>Tüm <em>style.body</em> özellirleri kullanır. Normal bir nesne için varsayılan ekranlar _lv_style_plain_  and _lv_style_plain_color_.</p>
-<h2 id="-rnek">Örnek</h2>
+<p>The <code>lv_obj_animate(obj, anim_type, time, delay, callback)</code> applies an animation on <em>obj</em>. To determinate the direction of the animation _OR_ _ANIM_IN_ or _ANIM_OUT_ with the animation type. The default is _ANIM_IN_ if not specified. You can learn more about the <a href="#Animations">animations</a>.</p>
+<h2 id="style-usage">Style usage</h2>
+<p>All <em>style.body</em> properties are used. Default for screens  _lv_style_plain_  and _lv_style_plain_color_ for normal objects</p>
+<h2 id="example">Example</h2>
 <p><img src="http://doc.littlevgl.com/img/base-obj-lv_obj.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Basit temel nesne oluştur*/</span>
+<pre class="hljs"><span class="hljs-comment">/*Create a simple base object*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * obj1;
 obj1 = lv_obj_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_obj_set_size(obj1, <span class="hljs-number">150</span>, <span class="hljs-number">40</span>);
 lv_obj_set_style(obj1, &amp;lv_style_plain_color);
 lv_obj_align(obj1, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_TOP_MID, <span class="hljs-number">0</span>, <span class="hljs-number">40</span>);
 
-<span class="hljs-comment">/*Bir önceki nesneyi kopyala ve sürüklemeyi aktifleştir.*/</span>
+<span class="hljs-comment">/*Copy the previous object and enable drag*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * obj2;
 obj2 = lv_obj_create(lv_scr_act(), obj1);
 lv_obj_set_style(obj2, &amp;lv_style_pretty_color);
@@ -1862,52 +1862,51 @@ lv_style_copy(&amp;style_shadow, &amp;lv_style_pretty);
 style_shadow.body.shadow.width = <span class="hljs-number">6</span>;
 style_shadow.body.radius = LV_RADIUS_CIRCLE;
 
-<span class="hljs-comment">/*Bir önceki nesneyi kopyala (sürükeleme önceden  aktif edilmiş)*/</span>
+<span class="hljs-comment">/*Copy the previous object (drag is already enabled)*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * obj3;
 obj3 = lv_obj_create(lv_scr_act(), obj2);
 lv_obj_set_style(obj3, &amp;style_shadow);
 lv_obj_align(obj3, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">-40</span>);</pre><p class="page" id="Button"></p><h1>Button (lv_btn)</h1>
-<p><em>Written for v5.1</em>(rev.2)</p>
-<h2 id="genel-bak-">Genel Bakış</h2>
-<p>Butonlar kullanıcının <strong>basmak</strong>, <strong>bırakmak</strong> veya <strong>uzun basmak</strong> eylemlerine bildiri fonksiyoları (<code>lv_action_t</code> fonksiyon işaretçileri) ile reaksiyon gösterir. Bildiri fonksiyonu <code>lv_btn_set_action(btn, ACTION_TYPE, bildiri_fonk)</code> ile ayarlanır. Olası aksiyon türleri:</p>
+<p><em>Written for v5.1, revision 2</em></p>
+<h2 id="overview">Overview</h2>
+<p>Buttons can react on user <strong>press</strong>, <strong>release</strong> or <strong>long press</strong> via callback functions (<code>lv_action_t</code> function pointers). You can set the callback functions with: <code>lv_btn_set_action(btn, ACTION_TYPE, callback_func)</code>. The possible action types are:</p>
 <ul>
-<li>LV_BTN_ACTION_CLICK: Buton basıldıktan sonra bırakıldı. (tıklandı)</li>
-<li>LV_BTN_ACTION_PR: Buton&#39;a basıldı </li>
-<li>LV_BTN_ACTION_LONG_PR: Buton&#39;a uzun basıldı</li>
-<li>LV_BTN_ACTION_LONG_PR_REPEAT: Buton&#39;a uzun süre basıldı ve bu aksiyon belirli aralıklarla tetiklendi</li>
+<li>LV_BTN_ACTION_CLICK: the button is released after pressing (clicked) or, when using keypad, after the key <code>LV_GROUP_KEY_ENTER</code> is released</li>
+<li>LV_BTN_ACTION_PR: the button is pressed</li>
+<li>LV_BTN_ACTION_LONG_PR: the button is long pressed</li>
+<li>LV_BTN_ACTION_LONG_PR_REPEAT: the button is long pressed and this action is triggered periodically</li>
 </ul>
-<p>Buttons can be in one of the <strong>five possible states</strong>:
-Butonlar <strong>beş olası durumlar</strong> dan birinde bulunabilir:</p>
+<p>Buttons can be in one of the <strong>five possible states</strong>:</p>
 <ul>
-<li>LV_BTN_STATE_REL Bırakma durumu </li>
-<li>LV_BTN_STATE_PR Basma durumu </li>
-<li>LV_BTN_STATE_TGL_REL Bırakma surumuna geç (Dorum açık)</li>
-<li>LV_BTN_STATE_TGL_PR Basma durumuna geç (Basma durumu açık)</li>
-<li>LV_BTN_STATE_INA Pasif durum</li>
+<li>LV_BTN_STATE_REL Released state</li>
+<li>LV_BTN_STATE_PR Pressed state</li>
+<li>LV_BTN_STATE_TGL_REL Toggled released state (On state)</li>
+<li>LV_BTN_STATE_TGL_PR Toggled pressed state (On pressed state)</li>
+<li>LV_BTN_STATE_INA Inactive state</li>
 </ul>
-<p>Butonlar <code>lv_btn_set_toggle(btn, true)</code> fonksiyonu ile <strong>durum butonu</strong> olarak ayarlanabilir. Bu durumda bırakma, buton bırakma durumuna geçer. </p>
-<p>Manuel olarak buton durumunu <code>lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)</code> fonksiyonu ile ayarlanabilir.</p>
-<p>Bir buton <strong>Pasif duruma</strong> sadece manuel olarak (_lv_btn_set_state()_) fonksiyonu ile geçebilir. Pasif durumda hiçbir aksiyon çağırılamaz.</p>
-<p><a href="#Container">Konteyner</a>&#39;a benzer olarak butonlarda <strong>katman</strong> ve <strong>otomatik sığdır</strong> özellikeri vardır:</p>
+<p>The buttons can be configured as <strong>toggle button</strong> with <code>lv_btn_set_toggle(btn, true)</code>. In this case on release, the button goes to toggled released state.</p>
+<p>You can set the button&#39;s state manually by: <code>lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)</code>.</p>
+<p>A button can go to <strong>Inactive state</strong> only manually (by _lv_btn_set_state()_). In an Inactive state, none of the action will be called.  </p>
+<p>Similarly to <a href="#Container">Containers</a> buttons also have <strong>layout</strong> and <strong>auto fit</strong>:</p>
 <ul>
-<li><code>lv_btn_set_layout(btn, LV_LAYOUT_...)</code>fonksiyonu ile katman ayarlanır. Varsayılan katman LV_LAYOUT_CENTER&#39;dır. Bu sebepten eğer etiket(label) eklenirse, etiket otomatik olarak ortaya yerleşir.</li>
-<li><code>lv_btn_set_fit(btn, hor_en, ver_en)</code> fonksiyonu butonun genişlik ve yüksekliğini alt birimlere bağlı olarak otomatik aktifleştirir.</li>
+<li><code>lv_btn_set_layout(btn, LV_LAYOUT_...)</code>set a layout. The default is LV_LAYOUT_CENTER. So if you add a label then it will be automatically aligned to the middle.</li>
+<li><code>lv_btn_set_fit(btn, hor_en, ver_en)</code> enables to set the button width and/or height automatically according to the children.</li>
 </ul>
-<h2 id="bi-im-kullan-m-">Biçim kullanımı</h2>
-<p>Buton 5 durum için 5 bağımsız biçime sahiptir. <code>lv_btn_set_style(btn, LV_BTN_STYLE_..., &amp;style)</code> fonksiyonu ile ayarlanır. Biçimler <em>style.body</em> özellirlerini kullanır.</p>
+<h2 id="style-usage">Style usage</h2>
+<p>A button can have 5 independent styles for the 5 state. You can set them via: <code>lv_btn_set_style(btn, LV_BTN_STYLE_..., &amp;style)</code>. The styles use the <em>style.body</em> properties.</p>
 <ul>
-<li><strong>LV_BTN_STYLE_REL</strong> Bırakma durum biçimi. Varsayılan: _lv_style_btn_rel_</li>
-<li><strong>LV_BTN_STYLE_PR</strong> Basma durum biçimi. Varsayılan: _lv_style_btn_pr_</li>
-<li><strong>LV_BTN_STYLE_TGL_REL</strong> Bırak geç durum biçimi. Varsayılan: _lv_style_btn_tgl_rel_</li>
-<li><strong>LV_BTN_STYLE_TGL_PR</strong> Bas geç durum biçimi. Varsayılan: _lv_style_btn_tgl_pr_</li>
-<li><strong>LV_BTN_STYLE_INA</strong> Pasif durum biçimi. Varsayılan: _lv_style_btn_ina_</li>
+<li><strong>LV_BTN_STYLE_REL</strong> style of the released state. Default: _lv_style_btn_rel_</li>
+<li><strong>LV_BTN_STYLE_PR</strong> style of the pressed state. Default: _lv_style_btn_pr_</li>
+<li><strong>LV_BTN_STYLE_TGL_REL</strong> style of the toggled released state. Default: _lv_style_btn_tgl_rel_</li>
+<li><strong>LV_BTN_STYLE_TGL_PR</strong> style of the toggled pressed state. Default: _lv_style_btn_tgl_pr_</li>
+<li><strong>LV_BTN_STYLE_INA</strong> style of the inactive state. Default: _lv_style_btn_ina_</li>
 </ul>
-<h2 id="notlar">Notlar</h2>
+<h2 id="notes">Notes</h2>
 <ul>
-<li>Eğer buton sürüklenirse, butonun tıklama ve uzun basma aksiyonları çağırılamaz</li>
-<li>Eğer buton uzun basıldığında ve butonun uzun basılma aksiyonu ayarlanmış ise butonun tıklama aksiyonu çağırılamaz</li>
+<li>If a button is dragged its click and long press action will not be called</li>
+<li>If a button was long pressed and its long press action was set then its click action will not be called</li>
 </ul>
-<h2 id="-rne-in">Örneğin</h2>
+<h2 id="example">Example</h2>
 <p><img src="http://doc.littlevgl.com/img/button-lv_btn.png" /></p>
 <pre class="hljs"><span class="hljs-function"><span class="hljs-keyword">static</span> lv_res_t <span class="hljs-title">btn_click_action</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span> * btn)</span>
 </span>{
@@ -1915,49 +1914,49 @@ Butonlar <strong>beş olası durumlar</strong> dan birinde bulunabilir:</p>
 
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Button %d is released\n"</span>, id);
 
-    <span class="hljs-comment">/* Buton bırakıldı.
-     * Birşeyleri burada yap */</span>
+    <span class="hljs-comment">/* The button is released.
+     * Make something here */</span>
 
-    <span class="hljs-keyword">return</span> LV_RES_OK; <span class="hljs-comment">/*Return OK Eğer buton silinmediyse*/</span>
+    <span class="hljs-keyword">return</span> LV_RES_OK; <span class="hljs-comment">/*Return OK if the button is not deleted*/</span>
 }
 
 .
 .
 .
 
-<span class="hljs-comment">/*Etiket başlığı oluştur*/</span>
+<span class="hljs-comment">/*Create a title label*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * label = lv_label_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_label_set_text(label, <span class="hljs-string">"Default buttons"</span>);
 lv_obj_align(label, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_TOP_MID, <span class="hljs-number">0</span>, <span class="hljs-number">5</span>);
 
-<span class="hljs-comment">/*Normal buton oluştur*/</span>
+<span class="hljs-comment">/*Create a normal button*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * btn1 = lv_btn_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_cont_set_fit(btn1, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>); <span class="hljs-comment">/*Enable resizing horizontally and vertically*/</span>
 lv_obj_align(btn1, label, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
 lv_obj_set_free_num(btn1, <span class="hljs-number">1</span>);   <span class="hljs-comment">/*Set a unique number for the button*/</span>
 lv_btn_set_action(btn1, LV_BTN_ACTION_CLICK, btn_click_action);
 
-<span class="hljs-comment">/*Buton'a etiket ekle*/</span>
+<span class="hljs-comment">/*Add a label to the button*/</span>
 label = lv_label_create(btn1, <span class="hljs-literal">NULL</span>);
 lv_label_set_text(label, <span class="hljs-string">"Normal"</span>);
 
-<span class="hljs-comment">/*Butonu kopyala ve değiştir(toggle) durumuna ayarla. (Bırakma aksiyonuda kopyalandı)*/</span>
+<span class="hljs-comment">/*Copy the button and set toggled state. (The release action is copied too)*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * btn2 = lv_btn_create(lv_scr_act(), btn1);
 lv_obj_align(btn2, btn1, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
-lv_btn_set_state(btn2, LV_BTN_STATE_TGL_REL);  <span class="hljs-comment">/*Değiştir durumunu ayarla*/</span>
-lv_obj_set_free_num(btn2, <span class="hljs-number">2</span>);               <span class="hljs-comment">/*Buton için tek-eşsiz sayı ayarla*/</span>
+lv_btn_set_state(btn2, LV_BTN_STATE_TGL_REL);  <span class="hljs-comment">/*Set toggled state*/</span>
+lv_obj_set_free_num(btn2, <span class="hljs-number">2</span>);               <span class="hljs-comment">/*Set a unique number for the button*/</span>
 
-<span class="hljs-comment">/*Değiştir(toggle) butonuna etiket ekle*/</span>
+<span class="hljs-comment">/*Add a label to the toggled button*/</span>
 label = lv_label_create(btn2, <span class="hljs-literal">NULL</span>);
 lv_label_set_text(label, <span class="hljs-string">"Toggled"</span>);
 
-<span class="hljs-comment">/*Butonu kopyala ve pasif durumu aktifleştir.*/</span>
+<span class="hljs-comment">/*Copy the button and set inactive state.*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * btn3 = lv_btn_create(lv_scr_act(), btn1);
 lv_obj_align(btn3, btn2, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
-lv_btn_set_state(btn3, LV_BTN_STATE_INA);   <span class="hljs-comment">/*Pasif durumu ayarla*/</span>
-lv_obj_set_free_num(btn3, <span class="hljs-number">3</span>);               <span class="hljs-comment">/*Buton için tek-eşsiz sayı ayarla*/</span>
+lv_btn_set_state(btn3, LV_BTN_STATE_INA);   <span class="hljs-comment">/*Set inactive state*/</span>
+lv_obj_set_free_num(btn3, <span class="hljs-number">3</span>);               <span class="hljs-comment">/*Set a unique number for the button*/</span>
 
-<span class="hljs-comment">/*Pasif butona etiket ekle*/</span>
+<span class="hljs-comment">/*Add a label to the inactive button*/</span>
 label = lv_label_create(btn3, <span class="hljs-literal">NULL</span>);
 lv_label_set_text(label, <span class="hljs-string">"Inactive"</span>);</pre><p class="page" id="Button-matrix"></p><h1>Button matrix (lv_btnm)</h1>
 <p><em>Written for v5.1</em> (rev.1)</p>
@@ -2050,42 +2049,40 @@ lv_btnm_set_style(btnm2, LV_BTNM_STYLE_BG, &amp;style_bg);
 lv_btnm_set_style(btnm2, LV_BTNM_STYLE_BTN_REL, &amp;style_btn_rel);
 lv_btnm_set_style(btnm2, LV_BTNM_STYLE_BTN_PR, &amp;style_btn_pr);
 lv_obj_align(btnm2, btnm1, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);</pre><p class="page" id="Calendar"></p><h1>Calendar (lv_calendar)</h1>
-<p><em>Written for v5.2</em> (rev.4)</p>
-<h2 id="genel-bak-">Genel Bakış</h2>
-<p>The Calendar object is a classic calendar which can:
-Takvim nesnesi klasik takvimdir: </p>
+<p><em>Written for v5.2</em></p>
+<h2 id="overview">Overview</h2>
+<p>The Calendar object is a classic calendar which can:</p>
 <ul>
-<li>Şuanki gün ve haftayı vurgular</li>
-<li>Herhangi kullanıcı tanımlı tarihleri vurgular</li>
-<li>Günün ismini gösterir</li>
-<li>Buton tıklaması ile önceki/sonraki aylara geçiş sağlar</li>
+<li>highlight the current day and week</li>
+<li>highlight any user-defined dates</li>
+<li>display the name of the days</li>
+<li>go the next/previous month by button click</li>
 </ul>
-<p>Takvimde tarihleri almak ve ayarlamak, <code>yıl</code>, <code>ay</code> and <code>gün</code> alanlarına sahip bir yapı olan <code>lv_calendar_date_t</code> tür kullanılır.</p>
-<p><strong>Mevcut tarihi</strong> ayarlamak için <code>lv_calendar_set_today_date(calendar, &amp;today_date)</code> fonksiyonu kullanılır.</p>
-<p>Gösterilen <strong>tarihi ayarlamak için</strong> <code>lv_calendar_set_shown_date(calendar, &amp;shown_date)</code> kullanın;</p>
-<p><strong>Vurgulanan tarihlerin listesi</strong> bir <code>lv_calendar_date_t</code>  dizisinde dizilmelidir ve bu diziyi geçerek <code>lv_calendar_set_hoghlighted_dates(calendar, &amp;highlighted_dates)</code>&#39;e geçilebilir.</p>
-<p>Dizinin yalnızca statik veya global bir değişken olması için yalnızca diziler işaretçisi kaydedilir.</p>
-<p><strong>Günlerin</strong> adları, <code>lv_calendar_set_day_names(calendar, gun_isismleri)</code> ile ayarlanabilinir; burada <code>gun_isismleri</code>, <code>const char * gun_isismleri[7] = {&quot;Pazar&quot;, &quot;Pazartesi&quot;, ...};</code></p>
-<p><strong>Bir tarih seçmek için</strong> eylem <code>v5.3</code>&#39;te desteklenecek ve deneysel kullanım için şimdi <code>dev-5.3</code> dalında mevcut olacaktır.</p>
-<h2 id="bi-im-kullan-m-">Biçim Kullanımı</h2>
+<p>The set and get dates in the calendar the <code>lv_calendar_date_t</code> type is used which is a structure with <code>year</code>, <code>month</code> and <code>day</code> fields.</p>
+<p>To set the <strong>current date</strong> use the <code>lv_calendar_set_today_date(calendar, &amp;today_date)</code> function.</p>
+<p>To set the <strong>shown date</strong> use <code>lv_calendar_set_shown_date(calendar, &amp;shown_date)</code>;</p>
+<p>The list of <strong>highlighted dates</strong> should be stired in a <code>lv_calendar_date_t</code> array and passed this array can be passed to <code>lv_calendar_set_hoghlighted_dates(calendar, &amp;highlighted_dates)</code>.<br>Only the arrays pointer will be saved so the array should be a static or global variable. </p>
+<p>The <strong>name of the days</strong> can be adjusted with <code>lv_calendar_set_day_names(calendar, day_names)</code> where <code>day_names</code> looks like <code>const char * day_names[7] = {&quot;Su&quot;, &quot;Mo&quot;, ...};</code></p>
+<p>A<strong>action to select a date</strong> will be supported in <code>v5.3</code> and now available in the <code>dev-5.3</code> branch for experimental usage.</p>
+<h2 id="style-usage">Style usage</h2>
 <ul>
-<li><strong>LV_CALENDAR_STYLE_BG</strong> <code>body</code> özelliklerini kullanarak arka planın biçimi ve <code>metin</code> özelliklerini kullanarak veri numaralarının biçimi.</li>
-<li><strong>LV_CALENDAR_STYLE_HEADER</strong> Geçerli yıl ve ayın görüntülendiği başlığın biçimi. <code>body</code> ve <code>metin</code> özellikleri kullanılır.</li>
-<li><strong>LV_CALENDAR_STYLE_HEADER_PR</strong> Preslenmiş başlık biçimi, sonraki / önceki ay düğmesine basılıyor. <code>metin</code> özellikleri oklar tarafından kullanılır.</li>
-<li><strong>LV_CALENDAR_STYLE_DAY_NAMES</strong> Gün isimlerinin biçimi. <code>metin</code> özellikleri gün metinleri tarafından kullanılır ve <code>body.padding.ver</code> gün isimlerinin üzerindeki alanı belirler.</li>
-<li><strong>LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS</strong> <code>text</code> özellikleri, öne çıkan günlerin biçimini ayarlamak için kullanılır</li>
-<li><strong>LV_CALENDAR_STYLE_INACTIVE_DAYS</strong> <code>text</code> özellikleri önceki / sonraki ayın görünen günlerinin biçimini ayarlamak için kullanılır.</li>
-<li><strong>LV_CALENDAR_STYLE_WEEK_BOX</strong> <code>body</code> özellikleri, hafta kutusunun biçimini ayarlamak için kullanılır</li>
-<li><strong>LV_CALENDAR_STYLE_TODAY_BOX</strong> Bugün kutusunun biçimini ayarlamak için <code>body</code> ve<code>text</code> özellikleri kullanılır</li>
+<li><strong>LV_CALENDAR_STYLE_BG</strong> Style of the background using the <code>body</code> properties and the style of the data numbers using the <code>text</code> properties. </li>
+<li><strong>LV_CALENDAR_STYLE_HEADER</strong> Style of the header where the current year and month is displayed. <code>body</code> and <code>text</code> properties are used.</li>
+<li><strong>LV_CALENDAR_STYLE_HEADER_PR</strong> Pressed header style, used when the next/prev. month button is being pressed. <code>text</code> properties are used by the arrows.</li>
+<li><strong>LV_CALENDAR_STYLE_DAY_NAMES</strong> Style of the day names. <code>text</code> properties are used by the day texts and <code>body.padding.ver</code> determines the space above the day names.</li>
+<li><strong>LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS</strong> <code>text</code> properties are used to adjust the style of the highlights days</li>
+<li><strong>LV_CALENDAR_STYLE_INACTIVE_DAYS</strong> <code>text</code> properties are used to adjust the style of the visible days of previous/next month.</li>
+<li><strong>LV_CALENDAR_STYLE_WEEK_BOX</strong> <code>body</code> properties are used to set the style of the week box</li>
+<li><strong>LV_CALENDAR_STYLE_TODAY_BOX</strong> <code>body</code> and <code>text</code> properties are used to set the style of the today box</li>
 </ul>
-<h2 id="-rnek">Örnek</h2>
+<h2 id="example">Example</h2>
 <p><img src="http://doc.littlevgl.com/img/calendar-lv_calendar.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Takvim nesnesi oluştur*/</span>
+<pre class="hljs"><span class="hljs-comment">/*Create a Calendar object*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * calendar = lv_calendar_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_obj_set_size(calendar, <span class="hljs-number">240</span>, <span class="hljs-number">220</span>);
 lv_obj_align(calendar, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
 
-<span class="hljs-comment">/*Geçerli hafta için biçim oluştur*/</span>
+<span class="hljs-comment">/*Create a style for the current week*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_week_box;
 lv_style_copy(&amp;style_week_box, &amp;lv_style_plain);
 style_week_box.body.border.width = <span class="hljs-number">1</span>;
@@ -2095,7 +2092,7 @@ style_week_box.body.radius = LV_RADIUS_CIRCLE;
 style_week_box.body.padding.ver = <span class="hljs-number">3</span>;
 style_week_box.body.padding.hor = <span class="hljs-number">3</span>;
 
-<span class="hljs-comment">/*Bugün için biçim oluştur*/</span>
+<span class="hljs-comment">/*Create a style for today*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_today_box;
 lv_style_copy(&amp;style_today_box, &amp;lv_style_plain);
 style_today_box.body.border.width = <span class="hljs-number">2</span>;
@@ -2106,7 +2103,7 @@ style_today_box.body.padding.ver = <span class="hljs-number">3</span>;
 style_today_box.body.padding.hor = <span class="hljs-number">3</span>;
 style_today_box.text.color= LV_COLOR_BLUE;
 
-<span class="hljs-comment">/*Vurgulanan günler için biçim oluştur*/</span>
+<span class="hljs-comment">/*Create a style for the highlighted days*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_highlighted_day;
 lv_style_copy(&amp;style_highlighted_day, &amp;lv_style_plain);
 style_highlighted_day.body.border.width = <span class="hljs-number">2</span>;
@@ -2117,13 +2114,13 @@ style_highlighted_day.body.padding.ver = <span class="hljs-number">3</span>;
 style_highlighted_day.body.padding.hor = <span class="hljs-number">3</span>;
 style_highlighted_day.text.color= LV_COLOR_BLUE;
 
-<span class="hljs-comment">/*Biçimleri uygula*/</span>
+<span class="hljs-comment">/*Apply the styles*/</span>
 lv_calendar_set_style(calendar, LV_CALENDAR_STYLE_WEEK_BOX, &amp;style_week_box);
 lv_calendar_set_style(calendar, LV_CALENDAR_STYLE_TODAY_BOX, &amp;style_today_box);
 lv_calendar_set_style(calendar, LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS, &amp;style_highlighted_day);
 
 
-<span class="hljs-comment">/*Bugün'ü ayarla*/</span>
+<span class="hljs-comment">/*Set the today*/</span>
 <span class="hljs-keyword">lv_calendar_date_t</span> today;
 today.year = <span class="hljs-number">2018</span>;
 today.month = <span class="hljs-number">10</span>;
@@ -2132,8 +2129,8 @@ today.day = <span class="hljs-number">23</span>;
 lv_calendar_set_today_date(calendar, &amp;today);
 lv_calendar_set_showed_date(calendar, &amp;today);
 
-<span class="hljs-comment">/*Vurgulanan bazı günler*/</span>
-<span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_calendar_date_t</span> highlihted_days[<span class="hljs-number">3</span>];       <span class="hljs-comment">/*Sadece işaretçi kaydedilecek, bu yüzden statik olmalı*/</span>
+<span class="hljs-comment">/*Highlight some days*/</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_calendar_date_t</span> highlihted_days[<span class="hljs-number">3</span>];       <span class="hljs-comment">/*Only it's pointer will be saved so should be static*/</span>
 highlihted_days[<span class="hljs-number">0</span>].year = <span class="hljs-number">2018</span>;
 highlihted_days[<span class="hljs-number">0</span>].month = <span class="hljs-number">10</span>;
 highlihted_days[<span class="hljs-number">0</span>].day = <span class="hljs-number">6</span>;
@@ -2286,39 +2283,39 @@ lv_cb_set_text(cb, <span class="hljs-string">"Salad"</span>);
 
 <span class="hljs-comment">/*Align the container to the middle*/</span>
 lv_obj_align(cont, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);</pre><p class="page" id="Container"></p><h1>Container (lv_cont)</h1>
-<p><em>Written for v5.1</em> (rev.3)</p>
-<h2 id="genel-bak-">Genel Bakış</h2>
-<p>Konteynerler bazı özel özellirleri ile <strong>dikdörtgen&#39;e benzer nesneler</strong> dir. </p>
-<p>Konteynerlara <strong>katman</strong> uygulandığında alt birimlerede uygulanmış olur. Katman aralığı(mesafe) style.body.padding.hor/ver/inner özelliği ile yapılır. Olası katman seçenekleri:</p>
+<p><em>Written for v5.1</em></p>
+<h2 id="overview">Overview</h2>
+<p>The containers are <strong>rectangle-like object</strong> with some special features. </p>
+<p>You can apply a <strong>layout</strong> on the containers to automatically order their children. The layout spacing comes from style.body.padding.hor/ver/inner properties. The possible layout options:</p>
 <ul>
-<li>LV_LAYOUT_OFF: Alt birimleri hizalama(olumsuz)</li>
-<li>LV_LAYOUT_CENTER: Alt birimleri merkezde sutun şeklinde hizala ve aralarında <em>pad.inner</em> boşluk bırak</li>
-<li>LV_LAYOUT_COL_L: Alt birimleri soldaki bir sütunda hizalayın. Solda <em>pad.hor</em> alanı, üstte <em>pad.ver</em> alanı ve alt birimler arasında <em>pad.inner</em> alanı olsun.</li>
-<li>LV_LAYOUT_COL_M: Alt birimleri ortalanmış sütunla hizalayın. En üstte <em>pad.ver</em> alanını ve alt birimler arasında <em>pad.inner</em> alanını tutun.</li>
-<li>LV_LAYOUT_COL_R: Alt birimleri sağa dayalı bir sütunda hizalayın. Sağ tarafta <em>pad.hor</em> alanı, üstte <em>pad.ver</em> alanı ve alt birimler arasında <em>pad.inner</em> alanı olsun.</li>
-<li>LV_LAYOUT_ROW_T: Alt birimleri en üst sıradaki bir satırda hizalayın. Solda <em>pad.hor</em> alanı, üstte <em>pad.ver</em> alanı ve alt birimler arasında <em>pad.inner</em> alanı olsun.</li>
-<li>LV_LAYOUT_ROW_M: Orta sıradaki alt birimleri hizalayın. Sol tarafta <em>pad.hor</em> alanı ve alt birimler arasında <em>pad.inner</em> boşluk bulundurun.</li>
-<li>LV_LAYOUT_ROW_B: Alttaki bir satırdaki alt birimleri hizalayın. Soldaki <em>pad.hor</em> alanını, alt kısımdaki <em>pad.ver</em> alanını ve alt birirmler arasında <em>pad.inner</em> alanı tutun.</li>
-<li>LV_LAYOUT_PRETTY: Bir satırda olabildiğince çok nesne koyun (en azından <em>pad.inner</em> boşluk ve yanlarda <em>pad.hor</em> boşluk ile) ve yeni bir sıraya başlayın. Her bir çizgideki alanı, alt birimler arasında eşit olarak bölün. Üst kısımda <em>pad.ver</em> alanını ve satırların arasındaki <em>pad.inner</em> alanını tutun.</li>
-<li>LV_LAYOUT_GRID: PRETTY LAYOUT&#39;a benzer, ancak yatay alanı eşit olarak bölmesin, sadece <em>pad.hor</em> boşluğa izin verin.</li>
+<li>LV_LAYOUT_OFF: Do not align the children</li>
+<li>LV_LAYOUT_CENTER: Align children to the center in column and keep <em>pad.inner</em> space between them </li>
+<li>LV_LAYOUT_COL_L: Align children in a left justified column. Keep <em>pad.hor</em> space on the left, <em>pad.ver</em> space on the top and <em>pad.inner</em> space between the children.</li>
+<li>LV_LAYOUT_COL_M: Align children in centered column. Keep <em>pad.ver</em> space on the top and <em>pad.inner</em> space between the children.</li>
+<li>LV_LAYOUT_COL_R: Align children in a right justified column. Keep <em>pad.hor</em> space on the right, <em>pad.ver</em> space on the top and <em>pad.inner</em> space between the children.</li>
+<li>LV_LAYOUT_ROW_T: Align children in a top justified row. Keep <em>pad.hor</em> space on the left, <em>pad.ver</em> space on the top and <em>pad.inner</em> space between the children.</li>
+<li>LV_LAYOUT_ROW_M: Align children in centered row. Keep <em>pad.hor</em> space on the left and <em>pad.inner</em> space between the children.</li>
+<li>LV_LAYOUT_ROW_B: Align children in a bottom justified row. Keep <em>pad.hor</em> space on the left, <em>pad.ver</em> space on the bottom and <em>pad.inner</em> space between the children.</li>
+<li>LV_LAYOUT_PRETTY: Put as may objects as possible in a row (with at least <em>pad.inner</em> space and <em>pad.hor</em> space on the sides) and begin a new row. Divide the space in each line equally between the children. Keep <em>pad.ver</em> space on the top and <em>pad.inner</em> space between the lines.</li>
+<li>LV_LAYOUT_GRID: Similar to PRETTY LAYOUT but not divide horizontal space equally just let <em>pad.hor</em> space</li>
 </ul>
-<p>Tüm alt birimleri dahil etmek için kapsayıcı boyutunu otomatik olarak ayarlayan bir <strong>otomatik sığdır(uyum)</strong> özelliğini etkinleştirebilirsiniz. Solda ve sağda <em>pad.hor</em> alanı ve altta <em>pad.ver</em> alanı olacak. Otomatik yerleştirme, <code>lv_cont_set_fit(cont, true, true)</code> işleviyle yatay, dikey veya her iki yönde de etkinleştirilebilir. İkinci parametre yataydır, üçüncü parametre dikey sığdırma etkinliğidir.</p>
-<h2 id="bi-im-kullan-m-">Biçim Kullanımı</h2>
+<p>You can enable an <strong>auto fit</strong> feature which automatically set the container size to include all children. It will keep <em>pad.hor</em> space on the left and right and <em>pad.ver</em> space on the top an bottom. The auto fit can be enable horizontally, vertically or in both direction with <code>lv_cont_set_fit(cont, true, true)</code> function. The second parameter is the horizontal, the third parameter is the vertical fit enable.</p>
+<h2 id="style-usage">Style usage</h2>
 <ul>
-<li><strong>style.body</strong> özellikleri kullanılır.</li>
+<li><strong>style.body</strong> properties are used.</li>
 </ul>
-<h2 id="notlar">Notlar</h2>
+<h2 id="notes">Notes</h2>
 <ul>
-<li><strong>Alt birim pozisyonunu hor / ver fit etkin iken ayarlayamazsınız</strong>. Ne olduğunu hayal edelim. Uyum sağlandığında tek alt birimin pozisyonunu değiştirirseniz, konteyner yeni pozisyonu &quot;etrafında&quot; hareket ettirir / yerleştirir. Bir konteynerda daha fazla nesneniz varsa, bunları birbirine göre hizalayabilirsiniz. Bir geçici çözüm olarak konteyner üzerinde küçük saydam bir nesne oluşturabilirsiniz. Alt birimleri &quot;takip etmemek&quot; için konteyner&#39;ı düzeltecektir.</li>
+<li>You <strong>can&#39;t set the child position with hor/ver fit enabled</strong>. Let&#39;s imagine what happens. If you change the position of the only child when fit is enabled the the container will move/fit &quot;around&quot; the new position. If you have more objects on a container then you can align them relative to each other.  As a workaround you can create a small transparent object on the container. It will fix the container to not &quot;follow&quot; the children.</li>
 </ul>
-<h2 id="-rnek">Örnek</h2>
-<p><img src="https://raw.githubusercontent.com/wiki/littlevgl/lvgl/img/container-lv_cont.png" /></p>
+<h2 id="example">Example</h2>
+<p><img src="http://doc.littlevgl.com/img/container-lv_cont.png" /></p>
 <pre class="hljs"><span class="hljs-keyword">lv_obj_t</span> * box1;
 box1 = lv_cont_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_obj_set_style(box1, &amp;lv_style_pretty);
 lv_cont_set_fit(box1, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>);
 
-<span class="hljs-comment">/*Konteyner'a metin ekle*/</span>
+<span class="hljs-comment">/*Add a text to the container*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * txt = lv_label_create(box1, <span class="hljs-literal">NULL</span>);
 lv_label_set_text(txt, <span class="hljs-string">"Lorem ipsum dolor\n"</span>
                        <span class="hljs-string">"sit amet, consectetur\n"</span>
@@ -2327,29 +2324,29 @@ lv_label_set_text(txt, <span class="hljs-string">"Lorem ipsum dolor\n"</span>
                        <span class="hljs-string">"ut labore et dolore\n"</span>
                        <span class="hljs-string">"magna aliqua."</span>);
 
-lv_obj_align(box1, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_TOP_LEFT, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>);      <span class="hljs-comment">/*Konteyner'ı hizala*/</span>
+lv_obj_align(box1, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_TOP_LEFT, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>);      <span class="hljs-comment">/*Align the container*/</span>
 
-<span class="hljs-comment">/*Biçim oluştur*/</span>
+<span class="hljs-comment">/*Create a style*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style;
 lv_style_copy(&amp;style, &amp;lv_style_pretty_color);
 style.body.shadow.width = <span class="hljs-number">6</span>;
-style.body.padding.hor = <span class="hljs-number">5</span>;                                 <span class="hljs-comment">/*Büyük bir yatay boşluk oluştur*/</span>
+style.body.padding.hor = <span class="hljs-number">5</span>;                                 <span class="hljs-comment">/*Set a great horizontal padding*/</span>
 
-<span class="hljs-comment">/*Başka bir konteyner oluştur*/</span>
+<span class="hljs-comment">/*Create an other container*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * box2;
 box2 = lv_cont_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
-lv_obj_set_style(box2, &amp;style);     <span class="hljs-comment">/*Yeni biçim ayarla*/</span>
-lv_cont_set_fit(box2, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>); <span class="hljs-comment">/*Dikey sığdırmayı aktif etme*/</span>
-lv_obj_set_height(box2, <span class="hljs-number">55</span>);        <span class="hljs-comment">/*Sabit yükseklik ayarla*/</span>
+lv_obj_set_style(box2, &amp;style);     <span class="hljs-comment">/*Set the new style*/</span>
+lv_cont_set_fit(box2, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>); <span class="hljs-comment">/*Do not enable the vertical fit */</span>
+lv_obj_set_height(box2, <span class="hljs-number">55</span>);        <span class="hljs-comment">/*Set a fix height*/</span>
 
-<span class="hljs-comment">/*Yeni konteyner'a metin ekle*/</span>
+<span class="hljs-comment">/*Add a text to the new container*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * txt2 = lv_label_create(box2, <span class="hljs-literal">NULL</span>);
 lv_label_set_text(txt2, <span class="hljs-string">"No vertical fit 1...\n"</span>
                         <span class="hljs-string">"No vertical fit 2...\n"</span>
                         <span class="hljs-string">"No vertical fit 3...\n"</span>
                         <span class="hljs-string">"No vertical fit 4..."</span>);
 
-<span class="hljs-comment">/*Konteyner'ı öncekinin altına hizala*/</span>
+<span class="hljs-comment">/*Align the container to the bottom of the previous*/</span>
 lv_obj_align(box2, box1, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">30</span>, <span class="hljs-number">-30</span>);</pre><p class="page" id="Drop-down-list"></p><h1>Drop down list (lv_ddlist)</h1>
 <p><em>Written for v5.3, revision 2</em></p>
 <h2 id="overview">Overview</h2>
@@ -3021,7 +3018,7 @@ lv_obj_align(txt, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <span
 <h2 id="overview">Overview</h2>
 <p>The message boxes act as <strong>pop-ups</strong>. They are built from a <strong>background</strong>, a <strong>text</strong> and <strong>buttons</strong>. The background is a <a href="#Container">Container</a> object with enabled vertical fit to ensure that the text and the buttons are always visible.  </p>
 <p>To <strong>set the text</strong> use the <code>lv_mbox_set_text(mbox, &quot;My text&quot;)</code> function.</p>
-<p>The buttons are a Button matrix. To <strong>add buttons</strong> use the <code>lv_mbox_add_btns(mbox, btn_str, action)</code> function. In this you can specify the button text e.g (<code>const char * btn_str[] = {&quot;btn1&quot;, &quot;btn2&quot;, &quot;&quot;}</code>) and add a callback which is called when a button is released. For more information visit the <a href="#Button-matrix">Button matrix</a>&#39;s documentation.</p>
+<p>The buttons are a Button matrix. To <strong>add buttons</strong> use the <code>lv_mbox_add_btns(mbox, btn_str, action)</code> function. In this you can specify the button text e.g (<code>const char * btn_str[] = {&quot;btn1&quot;, &quot;btn2&quot;, &quot;&quot;}</code>) and add a callback which is called when a button is released. For more information visit the <a href="https://github.com/littlevgl/lvgl/wiki/Button-matrix">Button matrix</a>&#39;s documentation.</p>
 <p>With <code>lv_mbox_start_auto_close(mbox, delay)</code> the message box can be <strong>closed automatically</strong> after <em>delay</em> milliseconds with a long animation. The <code>lv_mbox_stop_auto_close(mbox)</code> function will stop a started auto close .</p>
 <p>The close animation time can be adjusted by <code>lv_mbox_set_anim_time(mbox, anim_time)</code>.</p>
 <h2 id="style-usage">Style usage</h2>
@@ -3208,7 +3205,7 @@ lv_preload_set_style(preload, LV_PRELOAD_STYLE_MAIN, &amp;style);</pre><p class=
 <p><em>Written for v5.1</em>
 Updated to v5.2</p>
 <h2 id="overview">Overview</h2>
-<p>Roller allow you to simply <strong>select one option from more</strong> with scrolling. Its functionalities are similar to <a href="#Drop-down-list">Drop down list</a>.</p>
+<p>Roller allow you to simply <strong>select one option from more</strong> with scrolling. Its functionalities are similar to <a href="https://github.com/littlevgl/lvgl/wiki/Drop-down-list">Drop down list</a>.</p>
 <p>The <strong>options</strong> are passed to the Roller as a <strong>string</strong> with <code>lv_roller_set_options(roller, options)</code>. The options should be separated by <code>\n</code>. For example: <code>&quot;First\nSecond\nThird&quot;</code>.</p>
 <p>You can <strong>select an option  manually</strong> with <code>lv_roller_set_selected(roller, id)</code>, where _id_ is the index of an option.</p>
 <p>A <strong>callback function</strong> can be specified with <code>lv_roller_set_action(roller, my_action)</code> to call when a new option is selected.</p>
@@ -3573,29 +3570,29 @@ lv_ta_set_one_line(ta2, <span class="hljs-literal">true</span>);
 lv_ta_set_cursor_type(ta2, LV_CURSOR_LINE);
 lv_ta_set_pwd_mode(ta2, <span class="hljs-literal">true</span>);
 lv_ta_set_text(ta2, <span class="hljs-string">"Password"</span>);</pre><p class="page" id="Window"></p><h1>Window (lv_window)</h1>
-<p><em>Written for v5.1</em> (rev.4)</p>
-<h2 id="genel-bak-">Genel Bakış</h2>
-<p>Pencereler, <strong>en karmaşık</strong> konteyner benzeri nesnelerden biridir. İki ana bölümden oluşur: Üstte bir <strong>başlık</strong> <a href="#Container">Konteyner</a> ve başlığın altındaki <strong>içerik</strong> için bir <a href="#Page">Sayfa</a>.</p>
-<p>Üstbilgi <strong>başlığı</strong> değiştirilebilir: <code>lv_win_set_title(win, &quot;Yeni Başlık&quot;)</code>. Başlık, üstbilginin biçimini her zaman miraslanır.</p>
-<p>Üst bilginin sağına <strong>kontrol butonları</strong> <code>lv_win_add_btn(win, &quot;U:/close&quot;, my_close_action)</code> fonksiyonu ile eklenebilir. İkinci parametre bir resim dosyası yoludur, üçüncü parametre buton bırakıldığı zaman çağrılan bir fonksiyondur. <strong>Semboller</strong> resim gibi kullanabilir: <code>lv_win_add_btn(win, SYMBOL_CLOSE, my_close_action)</code>.  </p>
-<p><strong>Kontrol butonlarının boyutu</strong> <code>lv_win_set_btn_size(win, yeni_boyut)</code> fonksiyonuyla değiştirebilir. </p>
-<p>Kaydırma çubuğunun davranışı <code>lv_win_set_sb_mode(win, LV_SB_MODE_...)</code> fonksiyonuyla ayarlanabilir. </p>
-<p>İçerik düzenini ayarlamak için <code>lv_win_set_layout(win, LV_LAYOUT_...)</code> fonksiyonu kullanılır.</p>
-<h2 id="bi-im-kullan-m-">Biçim kullanımı</h2>
-<p>Pencerenin öğesine yeni bir stil ayarlamak için <code>lv_win_set_style(win, LV_WIN_STYLE_...,  &amp;style)</code> fonksiyonu kullanılır.</p>
+<p><em>Written for v5.1</em></p>
+<h2 id="overview">Overview</h2>
+<p>The windows are one of the <strong>most complex</strong> container-like objects. They are built from two main parts: a <strong>header</strong> <a href="#Container">Container</a> on the top and a <a href="#Page">Page</a> for the <strong>content</strong> below the header. </p>
+<p>On the header there is <strong>title</strong> which can be modified by: <code>lv_win_set_title(win, &quot;New title&quot;)</code>. The title always inherits the style of the header.</p>
+<p>You can add <strong>control buttons</strong> to the right side of the header with: <code>lv_win_add_btn(win, &quot;U:/close&quot;, my_close_action)</code>. The second parameter is an image file path, the third parameter is a function to call when the button is released. You can use <strong>symbols</strong> as images as well like: <code>lv_win_add_btn(win, SYMBOL_CLOSE, my_close_action)</code>. </p>
+<p>You can modify the <strong>size of the control buttons</strong> with the <code>lv_win_set_btn_size(win, new_size)</code> function.</p>
+<p>The scrollbar behavior can be set by <code>lv_win_set_sb_mode(win, LV_SB_MODE_...)</code>.</p>
+<p>To set a layout for the content use <code>lv_win_set_layout(win, LV_LAYOUT_...)</code>. </p>
+<h2 id="style-usage">Style usage</h2>
+<p>Use <code>lv_win_set_style(win, LV_WIN_STYLE_...,  &amp;style)</code> to set a new style for an element of the window:</p>
 <ul>
-<li><strong>LV_WIN_STYE_BG</strong> tüm <em>style.body</em> özelliklerini kullanan ana arka plan(üstbilgi ve içerik yer alır) (varsayılan: lv_style_plain)</li>
-<li><strong>LV_WIN_STYLE_CONTENT_BG</strong> tüm <em>style.body</em> özelliklerini kullanan içerik sayfasının arka planı (varsayılan: lv_style_transp)</li>
-<li><strong>LV_WIN_STYLE_CONTENT_SCRL</strong> tüm <em>style.body</em> özelliklerini kullanan içerik sayfasının kaydırma çubuğu (varsayılan: lv_style_transp)</li>
-<li><strong>LV_WIN_STYLE_SB</strong> tüm <em>style.body</em> özelliklerini kullanan kaydırma çubuğunun biçimi. Kaydırma çubuğunun dolgusu sırasıyla yatay/dikey* dolgularıyla ayarlanır ve kaydırma çubuğunun genişliği de iç dolguyla ayarlanır. (varsayılan: lv_style_pretty_color)</li>
-<li><strong>LV_WIN_STYLE_HEADER</strong> tüm <em>style.body</em> özelliklerini kullanan üstbilgi biçimi (varsayılan: lv_style_plain_color)</li>
-<li><strong>LV_WIN_STYLE_BTN_REL</strong> tüm <em>style.body</em> özelliklerini kullanan butonu bırakman(üstbilgi) biçimi (varsayılan: lv_style_btn_rel)</li>
-<li><strong>LV_WIN_STYLE_BTN_PR</strong> tüm <em>style.body</em> özelliklerini kullanan butona basma(üstbilgi) biçimi (default: lv_style_btn_pr)</li>
+<li><strong>LV_WIN_STYE_BG</strong> main background which uses all <em>style.body</em> properties (header and content page are placed on it) (default: lv_style_plain)</li>
+<li><strong>LV_WIN_STYLE_CONTENT_BG</strong> content page&#39;s background which uses all <em>style.body</em> properties (default: lv_style_transp)</li>
+<li><strong>LV_WIN_STYLE_CONTENT_SCRL</strong> content page&#39;s scrollable part which uses all <em>style.body</em> properties (default: lv_style_transp)</li>
+<li><strong>LV_WIN_STYLE_SB</strong> scroll bar&#39;s style which uses all <em>style.body</em> properties. hor/ver* padding sets the scrollbars&#39; padding respectively and the inner padding sets the scrollbar&#39;s width.  (default: lv_style_pretty_color)</li>
+<li><strong>LV_WIN_STYLE_HEADER</strong> header&#39;s style which uses all <em>style.body</em> properties (default: lv_style_plain_color)</li>
+<li><strong>LV_WIN_STYLE_BTN_REL</strong> released button&#39;s style (on header) which uses all <em>style.body</em> properties (default: lv_style_btn_rel)</li>
+<li><strong>LV_WIN_STYLE_BTN_PR</strong> released button&#39;s style (on header) which uses all <em>style.body</em> properties (default: lv_style_btn_pr)</li>
 </ul>
-<h2 id="notlar">Notlar</h2>
-<h2 id="-rnek">Örnek</h2>
+<h2 id="notes">Notes</h2>
+<h2 id="example">Example</h2>
 <p><img src="http://doc.littlevgl.com/img/window-lv_win.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Yeni bir kaydırma çubuğu biçimi oluştur*/</span>
+<pre class="hljs"><span class="hljs-comment">/*Create a scroll bar style*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_sb;
 lv_style_copy(&amp;style_sb, &amp;lv_style_plain);
 style_sb.body.main_color = LV_COLOR_BLACK;
@@ -3606,18 +3603,18 @@ style_sb.body.border.opa = LV_OPA_70;
 style_sb.body.radius = LV_RADIUS_CIRCLE;
 style_sb.body.opa = LV_OPA_60;
 
-<span class="hljs-comment">/*Yeni bir pencere oluştur*/</span>
+<span class="hljs-comment">/*Create a window*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * win = lv_win_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
-lv_win_set_title(win, <span class="hljs-string">"Example window"</span>);                        <span class="hljs-comment">/*Başlığı ayarla*/</span>
-lv_win_set_style(win, LV_WIN_STYLE_SB, &amp;style_sb);              <span class="hljs-comment">/*Kaydırma çubuğunun biçimini ayarla*/</span>
+lv_win_set_title(win, <span class="hljs-string">"Example window"</span>);                        <span class="hljs-comment">/*Set the title*/</span>
+lv_win_set_style(win, LV_WIN_STYLE_SB, &amp;style_sb);              <span class="hljs-comment">/*Set the scroll bar style*/</span>
 
 
-<span class="hljs-comment">/*Üstbilgiye kontrol butonu ekle*/</span>
-lv_win_add_btn(win, SYMBOL_SETTINGS, my_setup_action);            <span class="hljs-comment">/*Ayar butonu ekle*/</span>
-lv_win_add_btn(win, SYMBOL_CLOSE, lv_win_close_action);           <span class="hljs-comment">/*Kapatma butonu ekle ve kapatma aksiyonunun kullanılması*/</span>
+<span class="hljs-comment">/*Add control button to the header*/</span>
+lv_win_add_btn(win, SYMBOL_SETTINGS, my_setup_action);            <span class="hljs-comment">/*Add a setup button*/</span>
+lv_win_add_btn(win, SYMBOL_CLOSE, lv_win_close_action);           <span class="hljs-comment">/*Add close button and use built-in close action*/</span>
 
 
-<span class="hljs-comment">/*İçerik örneği ekle*/</span>
+<span class="hljs-comment">/*Add some dummy content*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * txt = lv_label_create(win, <span class="hljs-literal">NULL</span>);
 lv_label_set_text(txt, <span class="hljs-string">"This is the content of the window\n\n"</span>
                        <span class="hljs-string">"You can add control buttons to\nthe window header\n\n"</span>
