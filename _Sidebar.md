@@ -1,16 +1,16 @@
-* [[Welcome]]
-* [[Porting]]
-* [[PC simulator]]
-* [[Objects]]
-* [[Styles]]
-* [[Input devices]]
-* [[Colors]]
-* [[Fonts]]
-* [[Drawing]]
-* [[Animations]] 
-* [[Coding Style Guide]]
-* [[Object types]]
-  * [Arc (lv_arc)](https://github.com/littlevgl/lvgl/wiki/Arc)
+* [Welcome](Welcome)
+* [Porting](Porting)
+* [PC simulator](PC-simulator)
+* [Objects](Objects)
+* [Styles](Styles)
+* [Input devices](Input-devices)
+* [Colors](Colors)
+* [Fonts](Fonts)
+* [Drawing](Drawing)
+* [Animations](Animations) 
+* [Coding Style Guide](Coding-Style-Guide)
+* [Object types](Object-types)
+  * [Arc (lv_arc)](https://http://doc.littlevgl.com/Arc.md)
   * [Bar (lv_bar)](https://github.com/littlevgl/lvgl/wiki/Bar)
   * [Base object (lv_obj)](https://github.com/littlevgl/lvgl/wiki/Base-object)
   * [Button (lv_btn)](https://github.com/littlevgl/lvgl/wiki/Button)
