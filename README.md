@@ -6,7 +6,7 @@ Website: https://littlevgl.com/
 Main repository: https://github.com/littlevgl/lvgl  
 
 The documentation is available in:
-- **HTML** format: http://doc.littlevgl.com/
+- **HTML** format: http://docs.littlevgl.com/
 - **PDF** format: https://github.com/littlevgl/doc/tree/master/pdf
 
 # How to use this documentation
