@@ -21,7 +21,7 @@ Güncel değerden istenilen değere geçiş **animasyon** lu biçinde olur. Bu d
 
 ## Örnek
 
-![Bar image](http://doc.littlevgl.com/img/bar-lv_bar.png)
+![Bar image](http://docs.littlevgl.com/img/bar-lv_bar.png)
 
 ```c
 /*Varsayılan Bar oluştur*/

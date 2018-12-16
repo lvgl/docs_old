@@ -30,7 +30,7 @@ Use `lv_mbox_set_style(mbox, LV_MBOX_STYLE_...,  &style)` to set a new style for
 
 ## Example
 
-![Message box image](http://doc.littlevgl.com/img/message-box-lv_mbox.png)
+![Message box image](http://docs.littlevgl.com/img/message-box-lv_mbox.png)
 ```c
 /*Called when a button is clicked*/
 static lv_res_t mbox_apply_action(lv_obj_t * mbox, const char * txt)

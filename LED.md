@@ -15,7 +15,7 @@ The LED uses one style which can be set by `lv_led_set_style(led, &style)`. To d
 - Typically the default style is not suitable therefore you have to create you own style. See the Examples.
 
 ## Example
-![LED image](http://doc.littlevgl.com/img/led-lv_led.png)
+![LED image](http://docs.littlevgl.com/img/led-lv_led.png)
 ```c
 /*Create a style for the LED*/
 static lv_style_t style_led;

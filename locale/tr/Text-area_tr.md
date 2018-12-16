@@ -50,7 +50,7 @@ Use `lv_ta_set_style(page, LV_TA_STYLE_...,  &style)` to set a new style for an 
 - In password mode `lv_ta_get_text(ta)` gives the real text and not the asterisk characters
 
 ## Example
-![Text area image](http://doc.littlevgl.com/img/text-area-lv_ta.png)
+![Text area image](http://docs.littlevgl.com/img/text-area-lv_ta.png)
 ```c
 /*Create a scroll bar style*/
 static lv_style_t style_sb;

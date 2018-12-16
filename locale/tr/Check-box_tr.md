@@ -17,7 +17,7 @@ The Check box styles can be modified with `lv_cb_set_style(cb, LV_CB_STYLE_..., 
 - **LV_CB_STYLE_BOX_TGL_PR** Style of the checked released box. Uses the _style.body_ properties. Default: _lv_style_btn_tgl_pr_
 
 ## Example
-![Checkbox image](http://doc.littlevgl.com/img/check-box-lv_cb.png)
+![Checkbox image](http://docs.littlevgl.com/img/check-box-lv_cb.png)
 ```c
 static lv_res_t cb_release_action(lv_obj_t * cb)
 {

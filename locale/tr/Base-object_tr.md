@@ -15,7 +15,7 @@ Kapsayıcı(parent)'a bağlı olarak **x ve y koordinatları** `lv_obj_set_x(nes
 **Nesne boyutu**  `lv_obj_set_width(nesne, yeni_genislik)` ve `lv_obj_set_height(nesne, yeni_yukseklik)` fonksiyonları veya  `lv_obj_set_size(nesne, yeni_genislik, yeni_yukseklik)` fonksiyonu ile modifiye edilebilir. 
 
 Nesneyi `lv_obj_align(nesne1, nesne2, LV_ALIGN_TYPE, x_kaydir, y_kaydir)` fonksiyonu ile başka bir nesneye göre **hizalama**. Son iki argüman (x ve y kaydir) değerleri hizalama yapıldıktan sonra kaydırma değerleridir. İkinci argüman(nesne2) ise ilk argüman(nesne1)'ı hizalamada referans olarak kullanılır ve bu argümana(nesne2)'ye göre hizalama yapar, eğer `NULL` olarak tanımlanmış ise hizalama ekrana göre veya ayarlanmış kapsayıcıya göre uygulanır. Üçüncü eleman ise hizalama türürüdür:
-![Hizalama türleri](http://doc.littlevgl.com/img/align.png)
+![Hizalama türleri](http://docs.littlevgl.com/img/align.png)
 
 Hizalama türleri `LV_ALIGN_OUT_TOP_MID` bu şekilde oluşturulur. Örneğin bir yazıyı resim dosyasının altına 10 pixel sağa kaydırarak yazdırmak için `lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)` şeklinde kullanılır veya yazıy(text)'ı kapsayıcının merkezinde yazdırmak için `lv_obj_align(text, NULL, LV_ALIGN_CENTER, 0, 0)` şeklinde kullanılır.
 
@@ -69,7 +69,7 @@ Nesneler için **gömülü animasyonlar** vardır. Mevcut animasyon türleri:
 Tüm _style.body_ özellirleri kullanır. Normal bir nesne için varsayılan ekranlar _lv_style_plain_  and _lv_style_plain_color_.
 
 ## Örnek
-![Temel Resim nesnesi](http://doc.littlevgl.com/img/base-obj-lv_obj.png)
+![Temel Resim nesnesi](http://docs.littlevgl.com/img/base-obj-lv_obj.png)
 ```c
 /*Basit temel nesne oluştur*/
 lv_obj_t * obj1;

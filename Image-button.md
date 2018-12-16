@@ -22,7 +22,7 @@ The Image buttons can have unique styles for each state. All the `style.image` p
 
 
 ## Example
-![Image button image](http://doc.littlevgl.com/img/image-button-lv_imgbtn.png)
+![Image button image](http://docs.littlevgl.com/img/image-button-lv_imgbtn.png)
 ```c
 /*Create style to make the button darker when pressed*/
 lv_style_t style_pr;

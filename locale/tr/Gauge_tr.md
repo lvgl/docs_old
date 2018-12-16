@@ -25,7 +25,7 @@ The gauge uses one style which can be set by `lv_gauge_set_style(gauge, &style)`
 
 ## Example
 
-![Gauge image](http://doc.littlevgl.com/img/gauge-lv_gauge.png)
+![Gauge image](http://docs.littlevgl.com/img/gauge-lv_gauge.png)
 ```c
 /*Create a style*/
 static lv_style_t style;

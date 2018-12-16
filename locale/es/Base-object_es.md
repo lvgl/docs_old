@@ -15,7 +15,7 @@ You can set the **x and y coordinates** relative to the parent with `lv_obj_set_
 The **object size** can be modified with `lv_obj_set_width(obj, new_width)` and `lv_obj_set_height(obj, new_height)` or in one function with `lv_obj_set_size(obj, new_width, new_height)`. 
 
 You can **align**  the object to an other with `lv_obj_align(obj1, obj2, LV_ALIGN_TYPE, x_shift, y_shift)`. The last two argument means an x and y shift after the alignment. The second argument is another object on which to align the first (`NULL` means: align to the parent). The third argument is the type of alignment:
-![Alignment types](http://doc.littlevgl.com/img/align.png)
+![Alignment types](http://docs.littlevgl.com/img/align.png)
 
 The alignment types build like: `LV_ALIGN_OUT_TOP_MID`. For example to align a text below an image: `lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)`. Or to align a text in the middle of its parent: `lv_obj_align(text, NULL, LV_ALIGN_CENTER, 0, 0)`. 
 
@@ -69,7 +69,7 @@ The `lv_obj_animate(obj, anim_type, time, delay, callback)` applies an animation
 All _style.body_ properties are used. Default for screens  _lv_style_plain_  and _lv_style_plain_color_ for normal objects
 
 ## Example
-![Base object image](http://doc.littlevgl.com/img/base-obj-lv_obj.png)
+![Base object image](http://docs.littlevgl.com/img/base-obj-lv_obj.png)
 ```c
 /*Create a simple base object*/
 lv_obj_t * obj1;

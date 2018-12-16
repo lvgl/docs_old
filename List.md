@@ -38,7 +38,7 @@ The `lv_list_set_style(list, LV_LIST_STYLE_..., &style)` function sets the style
 - To **modify the height of the buttons** adjust the _body.padding.ver_ field of the corresponding style (LV_LIST_STYLE_BTN_REL , LV_LIST_STYLE_BTN_PR etc.)
 
 ## Example
-![List image](http://doc.littlevgl.com/img/list-lv_list.png)
+![List image](http://docs.littlevgl.com/img/list-lv_list.png)
 ```c
 /*Will be called on click of a button of a list*/
 static lv_res_t list_release_action(lv_obj_t * list_btn)

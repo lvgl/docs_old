@@ -41,7 +41,7 @@ The series related parameters can be set directly for each chart with `lv_chart_
 
 ## Example
 
-![Chart image](http://doc.littlevgl.com/img/chart-lv_chart.png)
+![Chart image](http://docs.littlevgl.com/img/chart-lv_chart.png)
 
 ```c
 /*Create a style for the chart*/

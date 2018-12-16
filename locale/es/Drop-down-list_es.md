@@ -29,7 +29,7 @@ The `lv_ddlist_set_style(ddlist, LV_DDLIST_STYLE_..., &style)` set the styles of
 - **LV_DDLIST_STYLE_SB** Style of the scrollbar. The _style.body_ properties are used. Default: _lv_style_plain_color_
 
 ## Example
-![Drop down list image](http://doc.littlevgl.com/img/drop-down-list-lv_ddlist.png)
+![Drop down list image](http://docs.littlevgl.com/img/drop-down-list-lv_ddlist.png)
 ```c
 static lv_res_t ddlist_action(lv_obj_t * ddlist)
 {

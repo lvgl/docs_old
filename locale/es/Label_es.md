@@ -37,7 +37,7 @@ The labels' **default style** is `NULL` so they inherit the parent's style.
 The label's **click enable attribute is disabled** by default. You can enable clicking with `lv_obj_set_click(label, true)`
 
 ## Example
-![Example of Label in LittlevGL Graphics Library ](http://doc.littlevgl.com/img/label-lv_label.png)
+![Example of Label in LittlevGL Graphics Library ](http://docs.littlevgl.com/img/label-lv_label.png)
 
 ```c
 /*Create label on the screen. By default it will inherit the style of the screen*/

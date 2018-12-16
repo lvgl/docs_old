@@ -24,7 +24,7 @@ The `lv_roller_set_style(roller, LV_ROLLER_STYLE_..., &style)` set the styles of
 - **LV_DDLIST_STYLE_SEL** Style of the selected option.  The _style.body_ properties are used. The selected option will be recolored with _text.color_. Default: _lv_style_plain_color_
 
 ## Example
-![Roller image](http://doc.littlevgl.com/img/roller-lv_roller.png)
+![Roller image](http://docs.littlevgl.com/img/roller-lv_roller.png)
 ```c
 /*Create a default roller*/
 lv_obj_t *roller1 = lv_roller_create(lv_scr_act(), NULL);

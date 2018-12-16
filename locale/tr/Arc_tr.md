@@ -19,7 +19,7 @@ Yay nesnesinin biçim(style) ayarlaması için `lv_arc_set_style(arc, LV_ARC_STY
 
 ## Örnek
 
-![Arc image](http://doc.littlevgl.com/img/arc-lv_arc.png)
+![Arc image](http://docs.littlevgl.com/img/arc-lv_arc.png)
 
 ```c
 /*Yay için biçim oluştur*/

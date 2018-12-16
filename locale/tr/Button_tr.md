@@ -45,7 +45,7 @@ Buton 5 durum için 5 bağımsız biçime sahiptir. `lv_btn_set_style(btn, LV_BT
 - Eğer buton uzun basıldığında ve butonun uzun basılma aksiyonu ayarlanmış ise butonun tıklama aksiyonu çağırılamaz
 
 ## Örneğin
-![Buton resmi](http://doc.littlevgl.com/img/button-lv_btn.png)
+![Buton resmi](http://docs.littlevgl.com/img/button-lv_btn.png)
 ```c
 static lv_res_t btn_click_action(lv_obj_t * btn)
 {

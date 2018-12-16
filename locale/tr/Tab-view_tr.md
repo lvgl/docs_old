@@ -37,7 +37,7 @@ Use `lv_tabview_set_style(tabview, LV_TABVIEW_STYLE_...,  &style)` to set a new 
 ## Notes
 
 ## Example
-![Tabview image](http://doc.littlevgl.com/img/tab-view-lv_tabview.png)
+![Tabview image](http://docs.littlevgl.com/img/tab-view-lv_tabview.png)
 ```c
 /*Create a Tab view object*/
 lv_obj_t *tabview;

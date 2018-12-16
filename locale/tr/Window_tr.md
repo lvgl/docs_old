@@ -29,7 +29,7 @@ Pencerenin öğesine yeni bir stil ayarlamak için `lv_win_set_style(win, LV_WIN
 ## Notlar
 
 ## Örnek
-![Window image](http://doc.littlevgl.com/img/window-lv_win.png)
+![Window image](http://docs.littlevgl.com/img/window-lv_win.png)
 ```c
 /*Yeni bir kaydırma çubuğu biçimi oluştur*/
 static lv_style_t style_sb;

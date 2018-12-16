@@ -29,7 +29,7 @@ The Keyboard works with 6 styles: a background and 5 button styles for each stat
 - **LV_KB_STYLE_BTN_INA** style of the inactive  buttons. Default: _lv_style_btn_ina_
 
 ## Example
-![Keyboard image](http://doc.littlevgl.com/img/keyboard-lv_kb.png)
+![Keyboard image](http://docs.littlevgl.com/img/keyboard-lv_kb.png)
 ```c
 /*Create styles for the keyboard*/
 static lv_style_t rel_style, pr_style;

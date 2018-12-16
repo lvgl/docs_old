@@ -51,7 +51,7 @@ The images' default style is NULL so they **inherit the parent's style**.
 ## Example
 
 
-![Example of Image in LittlevGL Graphics Library ](http://doc.littlevgl.com/img/image-lv_img.png)
+![Example of Image in LittlevGL Graphics Library ](http://docs.littlevgl.com/img/image-lv_img.png)
 
 ```c
 /*Declare a cogwheel image variable*/

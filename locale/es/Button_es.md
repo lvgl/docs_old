@@ -44,7 +44,7 @@ A button can have 5 independent styles for the 5 state. You can set them via: `l
 - If a button was long pressed and its long press action was set then its click action will not be called
 
 ## Example
-![Button image](http://doc.littlevgl.com/img/button-lv_btn.png)
+![Button image](http://docs.littlevgl.com/img/button-lv_btn.png)
 ```c
 static lv_res_t btn_click_action(lv_obj_t * btn)
 {

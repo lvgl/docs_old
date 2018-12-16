@@ -26,7 +26,7 @@ You can modify the Switch's styles with `lv_sw_set_style(sw, LV_SW_STYLE_..., &s
 - The Knob is not a real object it is only drawn above the Bar
 
 ## Example
-![Switch image](http://doc.littlevgl.com/img/switch-lv_sw.png)
+![Switch image](http://docs.littlevgl.com/img/switch-lv_sw.png)
 ```c
 /*Create styles for the switch*/
 static lv_style_t bg_style;

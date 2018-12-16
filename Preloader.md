@@ -15,7 +15,7 @@ The `LV_PRELOAD_STYLE_MAIN` style describes both the arc and the border style:
 
 ## Example
 
-![Preloader image](http://doc.littlevgl.com/img/preloader-lv_preload.png)
+![Preloader image](http://docs.littlevgl.com/img/preloader-lv_preload.png)
 
 ```c
 /*Create a style for the Preloader*/

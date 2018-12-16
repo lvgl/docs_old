@@ -38,7 +38,7 @@ Buton matris 6 biçim ile çalışır: Bir arkaplan ve 5 herbir durum için buto
 - Buton matris nesnesi **çok basittir**. Temel nesne arkaplanı oluşturur ve gerçek buton oluşturmak yerine butonları çizer.
 
 ## Örnek
-![Button matris resmi](http://doc.littlevgl.com/img/button-matrix-lv_btnm.png)
+![Button matris resmi](http://docs.littlevgl.com/img/button-matrix-lv_btnm.png)
 ```c
 /*Uzun süre basılıp çekildiğinde çağrılır*/
 static lv_res_t btnm_action(lv_obj_t * btnm, const char *txt)

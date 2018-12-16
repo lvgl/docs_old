@@ -2,7 +2,7 @@ _Written for v5.2_
 
 ## System architecture
 
-![System architecture of Littlev Graphics Library](http://doc.littlevgl.com/img/sys.png)  
+![System architecture of Littlev Graphics Library](http://docs.littlevgl.com/img/sys.png)  
 
 **Application**  
 

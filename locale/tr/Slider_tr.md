@@ -30,7 +30,7 @@ You can modify the slider's styles with `lv_slider_set_style(slider, LV_SLIDER_S
 - The Knob is not a real object it is only drawn above the Bar
 
 ## Example
-![Slider image](http://doc.littlevgl.com/img/slider-lv_slider.png)
+![Slider image](http://docs.littlevgl.com/img/slider-lv_slider.png)
 ```c
 /*Called when a new value id set on the slider*/
 static lv_res_t slider_action(lv_obj_t * slider)

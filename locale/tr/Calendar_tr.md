@@ -37,7 +37,7 @@ Dizinin yalnızca statik veya global bir değişken olması için yalnızca dizi
 
 ## Örnek
 
-![Takvim resimi](http://doc.littlevgl.com/img/calendar-lv_calendar.png)
+![Takvim resimi](http://docs.littlevgl.com/img/calendar-lv_calendar.png)
 
 ```c
 /*Takvim nesnesi oluştur*/

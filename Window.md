@@ -29,7 +29,7 @@ Use `lv_win_set_style(win, LV_WIN_STYLE_...,  &style)` to set a new style for an
 ## Notes
 
 ## Example
-![Window image](http://doc.littlevgl.com/img/window-lv_win.png)
+![Window image](http://docs.littlevgl.com/img/window-lv_win.png)
 ```c
 /*Create a scroll bar style*/
 static lv_style_t style_sb;

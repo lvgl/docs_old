@@ -29,7 +29,7 @@ The default style is _lv_style_pretty_color_.
 
 ## Example
 
-![Line meter image](http://doc.littlevgl.com/img/line-meter-lv_lmeter.png)
+![Line meter image](http://docs.littlevgl.com/img/line-meter-lv_lmeter.png)
 ```c
 /*******************************
  * Create 3 similar line meter

@@ -79,7 +79,7 @@ Setting the //glass style property will prevent inheriting that style//. You sho
 ## Built-in styles
 There are several built-in styles in the library:
 
-![Built in styles in LittlevGL Embedded Graphics Library](http://doc.littlevgl.com/img/style-built-in.png)
+![Built in styles in LittlevGL Embedded Graphics Library](http://docs.littlevgl.com/img/style-built-in.png)
 
 As you can see there is a style for screens, for buttons, plain and pretty styles and transparent styles as well. The `lv_style_transp`, `lv_style_transp_fit` and `lv_style_transp_tight` differ only in paddings: for `lv_style_transp_tight` all padings are zero, for `lv_style_transp_fit` only hor and ver paddings are zero.
 
@@ -107,7 +107,7 @@ a.end_cb = NULL;                    /*Call this function when the animation read
 ## Style example
 The example below demonstrates the above-described style usage
 
-![Styles usage example in LittlevGL Embedded Graphics Library](http://doc.littlevgl.com/img/style-example.png)
+![Styles usage example in LittlevGL Embedded Graphics Library](http://docs.littlevgl.com/img/style-example.png)
 ```c
 /*Create a style*/
 static lv_style_t style1;
@@ -156,7 +156,7 @@ A theme can initialized by: `lv_theme_xxx_init(hue, font)`. Where xxx is the nam
 
 When a theme is initialized its styles can be used like this:
 
-![Theme usage example in Littlev Embedded Graphics Library](http://doc.littlevgl.com/img/theme-example.png)
+![Theme usage example in Littlev Embedded Graphics Library](http://docs.littlevgl.com/img/theme-example.png)
 ```c
 /*Create a default slider*/
 lv_obj_t *slider = lv_slider_create(lv_scr_act(), NULL);
