@@ -27,6 +27,8 @@ Use `lv_win_set_style(win, LV_WIN_STYLE_...,  &style)` to set a new style for an
 - **LV_WIN_STYLE_BTN_PR** released button's style (on header) which uses all _style.body_ properties (default: lv_style_btn_pr)
 
 ## Notes
+_Written for dev-v5.3_
+lv_win_set_title() must not be called before lv_obj_align().
 
 ## Example
 ![Window image](http://docs.littlevgl.com/img/window-lv_win.png)
