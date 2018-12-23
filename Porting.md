@@ -96,7 +96,7 @@ To set up a display an **lv_disp_drv_t** variable has to be initialized:
 lv_disp_drv_t disp_drv;
 lv_disp_drv_init(&disp_drv); /*Basic initialization*/
 disp_drv. ...=...; /*Initialize the fields here. See below.*/
-disp_drv_register(&disp_drv); /*Register the driver in LittlevGL*/
+lv_disp_drv_register(&disp_drv); /*Register the driver in LittlevGL*/
 ```
 
 You can configure the driver for different operation modes. To learn more about the drawing modes visit [Drawing and rendering](/Drawing).
@@ -153,7 +153,7 @@ void my_disp_map(int32_t x1,int32_t y1,int32_t x2,int32_t y2,constlv_color_t* co
   /*TODO Copy 'color_p' to the specified area*/
 }
 
-voidmy_disp_fill(int32_t x1,int32_t y1,int32_t x2,int32_t y2,lv_color_t color)
+void my_disp_fill(int32_t x1,int32_t y1,int32_t x2,int32_t y2,lv_color_t color)
 {
   /*TODO Fill the specified area with 'color'*/
 }
