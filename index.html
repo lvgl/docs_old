@@ -857,7 +857,7 @@ this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+th
 <pre class="hljs"><span class="hljs-keyword">lv_disp_drv_t</span> disp_drv;
 lv_disp_drv_init(&amp;disp_drv); <span class="hljs-comment">/*Basic initialization*/</span>
 disp_drv. ...=...; <span class="hljs-comment">/*Initialize the fields here. See below.*/</span>
-disp_drv_register(&amp;disp_drv); <span class="hljs-comment">/*Register the driver in LittlevGL*/</span></pre><p>You can configure the driver for different operation modes. To learn more about the drawing modes visit <a href="#Drawing">Drawing and rendering</a>.</p>
+lv_disp_drv_register(&amp;disp_drv); <span class="hljs-comment">/*Register the driver in LittlevGL*/</span></pre><p>You can configure the driver for different operation modes. To learn more about the drawing modes visit <a href="#Drawing">Drawing and rendering</a>.</p>
 <h4 id="internal-buffering-vdb-">Internal buffering (VDB)</h4>
 <p>The graphics library works with an internal buffering mechanism to create advances graphics features with only one frame buffer. The internal buffer is called VDB (Virtual Display Buffer) and its size can be adjusted in lv_conf.h with _LV_VDB_SIZE_. When _LV_VDB_SIZE_ &gt; 0 then the internal buffering is used and you have to provide a function which flushes the buffer&#39;s content to your display:</p>
 <pre class="hljs">disp_drv.disp_flush = my_disp_flush;
@@ -892,8 +892,8 @@ disp_drv.disp_map = my_disp_map;<span class="hljs-comment">/*Copy a color_map (e
   <span class="hljs-comment">/*TODO Copy 'color_p' to the specified area*/</span>
 }
 
-voidmy_disp_fill(<span class="hljs-keyword">int32_t</span> x1,<span class="hljs-keyword">int32_t</span> y1,<span class="hljs-keyword">int32_t</span> x2,<span class="hljs-keyword">int32_t</span> y2,<span class="hljs-keyword">lv_color_t</span> color)
-{
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">my_disp_fill</span><span class="hljs-params">(<span class="hljs-keyword">int32_t</span> x1,<span class="hljs-keyword">int32_t</span> y1,<span class="hljs-keyword">int32_t</span> x2,<span class="hljs-keyword">int32_t</span> y2,<span class="hljs-keyword">lv_color_t</span> color)</span>
+</span>{
   <span class="hljs-comment">/*TODO Fill the specified area with 'color'*/</span>
 }</pre><p>Keep in mind this way during refresh some artifacts can be visible because the layers are drawn after each other. And some high-level graphics features like anti-aliasing, opacity or shadows aren&#39;t available in this configuration. </p>
 <p>If you use an external display controller which supports accelerated filling (e.g. RA8876) then you can use this feature in _disp_fill()_</p>
