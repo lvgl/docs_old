@@ -72,7 +72,7 @@ Copy _lvgl/lv_conf_templ.h_ next to the _lvgl_ directory and rename it to _lv_co
 
 1. **LV_HOR_RES** Your display's horizontal resolution
 2. **LV_VER_RES** Your display's vertical resolution
-3. **LV_COLOR_PETH** 8 for (RG332), 16 for (RGB565) or 32 for (RGB888 and ARGB8888). 
+3. **LV_COLOR_DEPTH** 8 for (RG332), 16 for (RGB565) or 32 for (RGB888 and ARGB8888). 
 
 ### Initialization
 
