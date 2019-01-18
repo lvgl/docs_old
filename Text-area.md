@@ -9,7 +9,7 @@ The Text Area is **a page**  with a **label** and a **cursor** on it. You can **
 
 The `lv_ta_set_text(ta, "New text")` **changes the whole text**.
 
-To **delete a character** from the left of the current cursor position use `lv_ta_del()`.
+To **delete a character** from the left of the current cursor position use `lv_ta_del_char(ta)`.
 
 The cursor position can be modified directly like `lv_ta_set_cursor_pos(ta, 10)` or by stepping it:
 
