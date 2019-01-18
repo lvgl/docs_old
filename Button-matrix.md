@@ -10,8 +10,8 @@ The first character of a string can be a **control character** to specify some a
 
 - **bit 7..6** Always _0b10_ to differentiate the control byte from the textual characters
 - **bit 5** Inactive button
-- **bit 4** Hidden button
-- **bit 3** No long press for the button
+- **bit 4** No long press for the button
+- **bit 3** Hidden button
 - **bit 2..0** Relative width compared to the buttons in the same row. [1..7]
 
 It is recommended to specify the **control byte as an octal number**. For example `"\213button"`. The octal number always starts with _2_ (bit 7..6) the middle part is the attributes (bit 5..3) and the last part is the width (bit 2..0). So the example describes a 3 unit wide, hidden button.
