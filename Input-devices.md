@@ -76,7 +76,7 @@ There are some special **control characters** which can be used in the _read_ fu
 
 In some cases (e.g. when a pop-up window appears) it is useful to freeze the focus on an object. It means the _LV_GROUP_KEY_NEXT/PREV_ will be ignored. You can do it with `lv_group_focus_freeze(group,true)`.
 
-The **style of the object in focus** is modified by a function. By default, it makes the object's colors orangish but you can also specify your own style updater function in each group with 
+The **style of the focused object** is modified by a function. By default, this function is provided by current theme but you can also specify your own style updater function in each group with 
 
 ```c
 void lv_group_set_style_mod_cb(group, style_mod_cb). 
