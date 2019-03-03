@@ -111,7 +111,7 @@ disp_drv.disp_flush = my_disp_flush;
 void my_disp_flush(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const lv_color_t* color_p)
 {
     /*TODO Copy 'color_p' to the specified area*/
-    /*Call 'lv_fluh_ready()' when ready*/lv_flush_ready();
+    /*Call 'lv_flush_ready()' when ready*/lv_flush_ready();
 }
 ```
 
