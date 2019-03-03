@@ -2981,13 +2981,15 @@ lv_obj_align(label, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <sp
 <p>You can use <code>\n</code> to make line break. For example: <code>&quot;line1\nline2\n\nline4&quot;</code></p>
 <p>The size of the label object can be automatically expanded to the text size or the text can be manipulated according to several <strong>long mode policies</strong>:</p>
 <ul>
-<li>LV_LABEL_LONG_EXPAND: Expand the object size to the text size</li>
+<li>LV_LABEL_LONG_EXPAND: Expand the object size to the text size (Default)</li>
 <li>LV_LABEL_LONG_BREAK: Keep the object width, break (wrap) the too long lines and expand the object height</li>
 <li>LV_LABEL_LONG_DOTS: Keep the object size, break the text and write dots in the last line</li>
 <li>LV_LABEL_LONG_SCROLL: Expand the object size and scroll the text on the parent (move the label object)</li>
 <li>LV_LABEL_LONG_ROLL: Keep the size and roll just the text (not the object)</li>
 </ul>
 <p>You can specify the long mode with: <code>lv_label_set_long_mode(label, long_mode)</code></p>
+<p>It&#39;s important to note that if you change the <code>LONG_MODE</code> the size of the label obejct is already expanded to the text&#39;s size. 
+So you need to set the label&#39;s size with <code>lv_obj_set_size()</code> or <code>lv_obj_set_width()</code> after changing long mode.</p>
 <p>Labels are able to show text from a <strong>static array</strong>. Use: <code>lv_label_set_static_text(label, char_array)</code>. In this case, the text is not stored in the dynamic memory but the given array is used instead. Keep in my the array can&#39;t be a local variable which destroys when the function exits.</p>
 <p>You can also use a <strong>raw character array</strong> as label text. The array doesn&#39;t have to be <code>\0</code> terminated. In this case, the text will be saved to the dynamic memory. To set a raw character array use the <code>lv_label_set_array_text(label, char_array)</code> function.</p>
 <p>The label&#39;s <strong>text can be aligned</strong> to the left, right or middle with <code>lv_label_set_align(label, LV_LABEL_ALIGN_LEFT/RIGHT/CENTER)</code></p>
