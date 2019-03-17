@@ -1,0 +1,33 @@
+_Escrito para V5.1_
+
+As seguintes páginas contém documentações detalhadas para cada objeto dentro do Littlev Graphics Library.
+
+  * [Objeto base (lv_obj)](/Base-object)
+  * [Rótulo (lv_label)](/Label)
+  * [Imagem (lv_img)](/Image)
+  * [Linha (lv_line)](/Line)
+  * [Arco (lv_arc)](/Arc)
+  * [Container (lv_cont)](/Container)
+  * [Página (lv_page)](/Page)
+  * [Janela (lv_window)](/Window)
+  * [Vista de tabulação (lv_tabview)](/Tab-view)
+  * [Barra (lv_bar)](/Bar)
+  * [Medidor de linha (lv_lmeter)](/Line-meter)
+  * [Indicador de medida (lv_gauge)](/Gauge)
+  * [Gráfico (lv_chart)](/Chart)
+  * [LED (lv_led)](/LED)
+  * [Pré-carregador (lv_preload)](/Preloader)
+  * [Caixa de mensagem (lv_mbox)](/Message-box)
+  * [Área de texto (lv_ta)](/Text-area)
+  * [Calendário (lv_calendar)](/Calendar)
+  * [Botão (lv_btn)](/Button)
+  * [Imagem de botão (lv_imgbtn)](/Image-button)
+  * [Matriz de botão (lv_btnm)](/Button-matrix )
+  * [Teclado (lv_kb)](/Keyboard)
+  * [Lista (lv_list)](/List)
+  * [Lista drop down (lv_ddlist)](/Drop-down-list)
+  * [Rolo (lv_roller)](/Roller)
+  * [Caixa de checagem (lv_cb)](/Check-box)
+  * [Interruptor (lv_sw)](/Switch)
+  * [Controle deslizandte (lv_slider)](/Slider)
+  
