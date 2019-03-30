@@ -1,47 +1,47 @@
-_Written for v5.2_
+_Escrito para v5.2_
 
-## Overview
+## Visión general
 
-The Arc object **draws an arc** within **start and end angles** and with a given **thickness**.
+El objeto Arco **dibuja un arco** dentro de **los ángulos de inicio y fin** y con un **grosor** dado.
 
-To set the angles use the `lv_arc_set_angles(arc, start_angle, end_angle)` function. The zero degree is at the bottom of the object and the degrees are increasing in a counter-clockwise direction. The angles should be in [0;360] range.
+Para establecer los ángulos usa la función `lv_arc_set_angles(arc, start_angle, end_angle)`. El grado cero esta en la parte inferior del objeto y los ángulos incrementan en el sentido contrario de las manecillas del reloj. Los ángulos deben estar en el rango [0;360].
 
-To **set the style** of an Arc object use `lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &style)`
+Para **configurar e estilo** de un objeto Arco usa `lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &style)`
 
-## Style usage
-- **line.rounded** make the endpoints rounded (opacity won't work properly if set to 1)
-- **line.width** the thickness of the arc
-- **line.color** the color of the arc.
+## Uso de estilos
+- **line.rounded** redondea los puntos finales (la opacidad no funciona correctamente se se configura a 1).
+- **line.width** el espesor del arco.
+- **line.color** el color del arco.
 
-## Notes
-- The **width and height** of the Arc should be the **same**
-- Currently the Arc object **does not support anti-aliasing**.
+## Notas
+- El **ancho y alto** del arco deben ser el **mismo**.
+- Actualmente, el objeto arco **no soporta anti-aliasing (suavizado)**.
 
-## Example
+## Ejample
 
 ![Arc image](http://docs.littlevgl.com/img/arc-lv_arc.png)
 
 ```c
-/*Create style for the Arcs*/
+/*Crea un estilo para el arco*/
 lv_style_t style;
 lv_style_copy(&style, &lv_style_plain);
-style.line.color = LV_COLOR_BLUE;           /*Arc color*/
-style.line.width = 8;                       /*Arc width*/
+style.line.color = LV_COLOR_BLUE;           /*Color del arco*/
+style.line.width = 8;                       /*Ancho del arco*/
 
-/*Create an Arc*/
+/*Crea un arco*/
 lv_obj_t * arc = lv_arc_create(lv_scr_act(), NULL);
-lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &style);          /*Use the new style*/
+lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &style);          /*Usa el nuevo estilo*/
 lv_arc_set_angles(arc, 90, 60);
 lv_obj_set_size(arc, 150, 150);
 lv_obj_align(arc, NULL, LV_ALIGN_CENTER, 0, 0);
 
-/*Copy the previous Arc and set different angles and size*/
+/*Copia el arco previo y estabece un ángulos y tamaño diferentes*/
 arc = lv_arc_create(lv_scr_act(), arc);
 lv_arc_set_angles(arc, 90, 20);
 lv_obj_set_size(arc, 125, 125);
 lv_obj_align(arc, NULL, LV_ALIGN_CENTER, 0, 0);
 
-/*Copy the previous Arc and set different angles and size*/
+/*Copia el arco previo y estabece un ángulos y tamaño diferentes*/
 arc = lv_arc_create(lv_scr_act(), arc);
 lv_arc_set_angles(arc, 90, 310);
 lv_obj_set_size(arc, 100, 100);
