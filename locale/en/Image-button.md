@@ -2,7 +2,7 @@ _Written for v5.2_
 
 ## Overview
 
-The Image button is very similar to the simple Button object. The only difference is it displays user-defined images in each state instead of drawing a button. Before reading this please [learn how the Buttons work in LittelvGL](https://docs.littlevgl.com/#Button).
+The Image button is very similar to the simple Button object. The only difference is it displays user-defined images in each state instead of drawing a button. Before reading this please [learn how the Buttons work in LittlevGL](https://docs.littlevgl.com/#Button).
 
 To set the image in a state the `lv_imgbtn_set_src(imgbtn, LV_BTN_STATE_..., &img_src)` The image sources works the same as described in the [Image object](https://docs.littlevgl.com/#Image).
 
