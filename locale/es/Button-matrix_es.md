@@ -1,51 +1,52 @@
-_Written for v5.1_
+_Escrito para v5.1_
 
-## Overview
+## Visión general
 
-The Button Matrix objects can display **multiple buttons** according to a descriptor string array, called _map_. You can specify the map with `lv_btnm_set_map(btnm, my_map)`. 
+Los objetos Matriz de botones pueden mostrar **múltiples botones** acorde a un arreglo de cadenas descriptor, llamado _map_. Puedes especificar el map con `lv_btnm_set_map(btnm, my_map)`.
 
-The **declaration of a map** looks like `const char * map[] = {"btn1", "btn2", "btn3", ""}`. Note that **the last element has to be an empty string**!  
+La **declaración de un map** se ve como `const char * map[] = {"btn1", "btn2", "btn3", ""}`. Notar que **el último elemento tiene que ser una cadena vacía**!.
 
-The first character of a string can be a **control character** to specify some attributes:
+El primer carácter de una cadena puede ser un **carácter de control** para especificar algunos atributos:
 
-- **bit 7..6** Always _0b10_ to differentiate the control byte from the textual characters
-- **bit 5** Inactive button
-- **bit 4** Hidden button
-- **bit 3** No long press for the button
-- **bit 2..0** Relative width compared to the buttons in the same row. [1..7]
+- **bit 7..6** Siempre _0b10_ para diferenciar el byte de control de los carácteres de texto.
+- **bit 5** Botón inactivo.
+- **bit 4** Botón oculto.
+- **bit 3** Botón sin presion larga.
+- **bit 2..0** Anchura relativa comparada con los botones de la misma fila. [1..7]
 
-It is recommended to specify the **control byte as an octal number**. For example `"\213button"`. The octal number always starts with _2_ (bit 7..6) the middle part is the attributes (bit 5..3) and the last part is the width (bit 2..0). So the example describes a 3 unit wide, hidden button.
+Es recomendado especificar el **byte de control como un numero octal**. Por ejemplo `"\213button"`. El número octal siempre inicia con _2_ (bit 7..6) la parte de en medio son los atributos (bit 5..3) y la última parte es el ancho (bit 2..0). Por lo tanto el ejemplo describe un botón de 3 unidades de ancho y oculto.
 
-Use "\n" in the map  to make **line break**: `{"btn1", "btn2", "\n", "btn3", ""}`. The button's width is recalculated in every line.
+Usa "\n" en el mapa para hacer un **salto de línea**: `{"btn1", "btn2", "\n", "btn3", ""}`. El ancho de los botones es re calculado en cada línea.
 
-The `lv_btnm_set_action(btnm, btnm_action)` specifies an action to call when a button is released. 
+La función `lv_btnm_set_action(btnm, btnm_action)` especifica una acción a llamar cuando se deja de presionar un botón.
 
-You can enable the **buttons to toggle** when they are clicked. There can only be one toggled button at a time. The `lv_btnm_set_toggle(btnm, true, id)` enables the toggling and sets the _id_th button to the toggled state.
+Puedes habilitar el **botón para que togglee** cuando son presionados. Solo puede haber un boton toggleado al mismo tiempo. La función `lv_btnm_set_toggle(btnm, true, id)` habilita el toggleo y especifica el _id_ th botón al estado toggleado.
 
-## Style usage
+## Uso de estilos
 
-The Button matrix works with 6 styles: a background and 5 button styles for each states. You can set the styles with `lv_btnm_set_style(btn, LV_BTNM_STYLE_..., &style)`. The background and the buttons use the _style.body_ properties. The labels use the _style.text_ properties of the button styles.
+La matriz de botones trabaja con 6 estilos: un fondo y 5 estilos de botones para cada uno de sus estados.
+Puedes establecer los estilos con `lv_btnm_set_style(btn, LV_BTNM_STYLE_..., &style)`. El fondo y los botones usan las propiedades _style.body_. Las etiquetas usan las propiedades _style.text_ de los estilos de los botones.
 
-- **LV_BTNM_STYLE_BG** Background style. Uses all _style.body_ properties including _padding_ Default: _lv_style_pretty_
-- **LV_BTNM_STYLE_BTN_REL** style of the released  buttons. Default: _lv_style_btn_rel_
-- **LV_BTNM_STYLE_BTN_PR** style of the pressed buttons. Default: _lv_style_btn_pr_
-- **LV_BTNM_STYLE_BTN_TGL_REL** style of the toggled released  buttons. Default: _lv_style_btn_tgl_rel_
-- **LV_BTNM_STYLE_BTN_TGL_PR** style of the toggled pressed  buttons. Default: _lv_style_btn_tgl_pr_
-- **LV_BTNM_STYLE_BTN_INA** style of the inactive  buttons. Default: _lv_style_btn_ina_
+- **LV_BTNM_STYLE_BG** Estilo del fondo. Usa todas las propiedades de _style.body_ incluyendo _padding_ Default: _lv_style_pretty_
+- **LV_BTNM_STYLE_BTN_REL** Estilo de los botones sin presionar. Default: _lv_style_btn_rel_
+- **LV_BTNM_STYLE_BTN_PR** Estilo de los botones presionados. Default: _lv_style_btn_pr_
+- **LV_BTNM_STYLE_BTN_TGL_REL** Estilo de los botones toggleados sin presionar. Default: _lv_style_btn_tgl_rel_
+- **LV_BTNM_STYLE_BTN_TGL_PR** Estilo de los botones toggleados presionados. Default: _lv_style_btn_tgl_pr_
+- **LV_BTNM_STYLE_BTN_INA** Estilo de los botones inactivos. Default: _lv_style_btn_ina_
 
-## Notes
+## Notas
 
-- The Button matrix object is **very light weighted**. It creates only the Background Base object and draws the buttons on it instead of creating a lot of real button.
+- La matriz de botones en **muy ligero**. Crea solo un objeto base de fondo y dibuja los botones en el en lugar de crear muchos botones reales.
 
-## Example
+## Ejemplo
 ![Button matrix image](http://docs.littlevgl.com/img/button-matrix-lv_btnm.png)
 ```c
-/*Called when a button is released ot long pressed*/
+/*Llamada cuando se deja de presionar un botón o cuando tiene una presion larga*/
 static lv_res_t btnm_action(lv_obj_t * btnm, const char *txt)
 {
     printf("Button: %s released\n", txt);
 
-    return LV_RES_OK; /*Return OK because the button matrix is not deleted*/
+    return LV_RES_OK; /*Retorna OK porque la matriz de botones no se borro*/
 }
 
 
@@ -53,7 +54,7 @@ static lv_res_t btnm_action(lv_obj_t * btnm, const char *txt)
 .
 .
 
-/*Create a button descriptor string array*/
+/*Crea un arreglo de cadenas que describen la matriz*/
 static const char * btnm_map[] = {"1", "2", "3", "4", "5", "\n",
                            "6", "7", "8", "9", "0", "\n",
                            "\202Action1", "Action2", ""};
@@ -61,13 +62,13 @@ static const char * btnm_map[] = {"1", "2", "3", "4", "5", "\n",
 
 
 
-/*Create a default button matrix*/
+/*Crea una matriz de botones por default*/
 lv_obj_t * btnm1 = lv_btnm_create(lv_scr_act(), NULL);
 lv_btnm_set_map(btnm1, btnm_map);
 lv_btnm_set_action(btnm1, btnm_action);
 lv_obj_set_size(btnm1, LV_HOR_RES, LV_VER_RES / 2);
 
-/*Create a new style for the button matrix back ground*/
+/*Crea un nuevo estilo para el fondo de la matriz de botones*/
 static lv_style_t style_bg;
 lv_style_copy(&style_bg, &lv_style_plain);
 style_bg.body.main_color = LV_COLOR_SILVER;
@@ -76,7 +77,7 @@ style_bg.body.padding.hor = 0;
 style_bg.body.padding.ver = 0;
 style_bg.body.padding.inner = 0;
 
-/*Create 2 button styles*/
+/*Crea 2 estilos de botones*/
 static lv_style_t style_btn_rel;
 static lv_style_t style_btn_pr;
 lv_style_copy(&style_btn_rel, &lv_style_btn_rel);
@@ -92,7 +93,7 @@ style_btn_pr.body.main_color = LV_COLOR_MAKE(0x55, 0x96, 0xd8);
 style_btn_pr.body.grad_color = LV_COLOR_MAKE(0x37, 0x62, 0x90);
 style_btn_pr.text.color = LV_COLOR_MAKE(0xbb, 0xd5, 0xf1);
 
-/*Create a second button matrix with the new styles*/
+/*Crea una segunda matriz de botones con los nuevos estilos*/
 lv_obj_t * btnm2 = lv_btnm_create(lv_scr_act(), btnm1);
 lv_btnm_set_style(btnm2, LV_BTNM_STYLE_BG, &style_bg);
 lv_btnm_set_style(btnm2, LV_BTNM_STYLE_BTN_REL, &style_btn_rel);
