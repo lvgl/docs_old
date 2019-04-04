@@ -1,55 +1,56 @@
-_Written for v5.1_
-## Overview
+_Escrito para v5.1_
 
-The gauge is a meter with **scale labels** and **needles**. You can use the `lv_gauge_set_scale(gauge, angle, line_num, label_cnt)` function to adjust the scale angle and the number of the scale lines and labels. The default settings are:  220 degrees, 6 scale labels and 21 lines.
+## Visión general
 
-The gauge can show **more then one needles** . Use the `lv_gauge_set_needle_count(gauge, needle_num, color_array)` function to set the number of needles and an array with colors for each needle. (The array must be static or global variable).
+El indicador es un metro con **etiquetas de escala** y **agujas**. Puedes usar la funcion `lv_gauge_set_scale(gauge, angle, line_num, label_cnt)` Para ajustar el ángulo de la escala y el número de líneas de escala y etiquetas. Los ajustes por defecto son: 220 grados, 6 etiquetas de escala y 21 líneas.
 
-You can use `lv_gauge_set_value(gauge, needle_id, value)` to **set the value of a needle**.
+El indicador puede mostrar **mas de una aguja**. Usa la funcion `lv_gauge_set_needle_count(gauge, needle_num, color_array)` para establecer el número de agujas y un arreglo con los colores de cada aguja (El arreglo debe de ser una variable estática o global).
 
-To set a **critical value** use `lv_gauge_set_critical_value(gauge, value)`. The scale color ill be changed to _line.color_ after this value. (default: 80)
+Puedes usar `lv_gauge_set_value(gauge, needle_id, value)` para **establecer el valor de una aguja**.
 
-The **range** of the gauge can be specified by `lv_gauge_set_range(gauge, min, max)`.
+Para establecer un **valor critico** usa `lv_gauge_set_critical_value(gauge, value)`. El color de la escala será cambiado a _line.color_ después de este valor. (default: 80)
 
-## Style usage
+El **rango** de un indicador puede ser especificado con `lv_gauge_set_range(gauge, min, max)`.
 
-The gauge uses one style which can be set by `lv_gauge_set_style(gauge, &style)`. The gauge's properties are derived from the following style attributes:
+## Uso de estilos
 
-- **body.main_color** line's color at the beginning of the scale
-- **body.grad_color** line's color at the end of the scale (gradient with main color)
-- **body.padding.hor** line length
-- **body.padding.inner** label distance from the scale lines 
-- **line.width** line width
-- **line.color** line's color after the critical value
-- **text.font/color/letter_space** label attributes
+El indicador usa un estilo el cual puede ser establecido con `lv_gauge_set_style(gauge, &style)`. Las propiedades del indicador son derivadas de los siguientes atributos de estilo:
 
-## Example
+- **body.main_color** Color de la línea al inicio de la escala.
+- **body.grad_color** Color de la línea al final de la escala (gradiente con el color principal).
+- **body.padding.hor** Longitud de la línea.
+- **body.padding.inner** Distancia de la etiqueta con las líneas de escala.
+- **line.width** Grosor de la línea.
+- **line.color** Color de la línea despues del valor critico.
+- **text.font/color/letter_space** Atributos de la etiqueta.
+
+## Ejemplo
 
 ![Gauge image](http://docs.littlevgl.com/img/gauge-lv_gauge.png)
 ```c
-/*Create a style*/
+/*Crea un estilo*/
 static lv_style_t style;
 lv_style_copy(&style, &lv_style_pretty_color);
-style.body.main_color = LV_COLOR_HEX3(0x666);     /*Line color at the beginning*/
-style.body.grad_color =  LV_COLOR_HEX3(0x666);    /*Line color at the end*/
-style.body.padding.hor = 10;                      /*Scale line length*/
-style.body.padding.inner = 8 ;                    /*Scale label padding*/
-style.body.border.color = LV_COLOR_HEX3(0x333);   /*Needle middle circle color*/
+style.body.main_color = LV_COLOR_HEX3(0x666);     /*Color de la linea al inicio*/
+style.body.grad_color =  LV_COLOR_HEX3(0x666);    /*Color de la linea al final*/
+style.body.padding.hor = 10;                      /*Escala la longitud de la linea*/
+style.body.padding.inner = 8 ;                    /*Padding de la escala*/
+style.body.border.color = LV_COLOR_HEX3(0x333);   /*Color del circulo central de la aguja*/
 style.line.width = 3;
 style.text.color = LV_COLOR_HEX3(0x333);
-style.line.color = LV_COLOR_RED;                  /*Line color after the critical value*/
+style.line.color = LV_COLOR_RED;                  /*Color de la linea despues del valor critico*/
 
 
-/*Describe the color for the needles*/
+/*Describe el color de las agujas*/
 static lv_color_t needle_colors[] = {LV_COLOR_BLUE, LV_COLOR_ORANGE, LV_COLOR_PURPLE};
 
-/*Create a gauge*/
+/*Crea un indicador (gauge)*/
 lv_obj_t * gauge1 = lv_gauge_create(lv_scr_act(), NULL);
 lv_gauge_set_style(gauge1, &style);
 lv_gauge_set_needle_count(gauge1, 3, needle_colors);
 lv_obj_align(gauge1, NULL, LV_ALIGN_CENTER, 0, 20);
 
-/*Set the values*/
+/*Establece los valores*/
 lv_gauge_set_value(gauge1, 0, 10);
 lv_gauge_set_value(gauge1, 1, 20);
 lv_gauge_set_value(gauge1, 2, 30);
