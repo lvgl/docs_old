@@ -1513,32 +1513,32 @@ lv_label_set_text(label, <span class="hljs-string">"Right "</span>SYMBOL_RIGHT);
 <p>The anti-aliasing algorithm puts some translucent pixels (pixels with opacity) to make lines and curves (including corners with radius) smooth and even. Because it only puts some extra pixels anti-aliasing requires only a few extra computational power(~1,1x extra time compared to not anti-aliased configuration)</p>
 <p>As described in <a href="#Fonts">Font section</a> the fonts can be anti-aliased by using a different font with higher bpp (Bit-Per-Pixel). This way the pixels of a font can be not only 0 or 1 but can be translucent. The supported bpp-s are 1, 2, 4 and 8. Keep in mind a font with higher bpp requires more ROM.</p>
 <p class="page" id="Animations_es"></p><h1>Animaciones</h1>
-<p><em>Written for v5.1</em></p>
-<p>You can automatically change the value (animate) of a variable between a start and an end value using an <strong>animator function</strong> with <code>void func(void* var,int32_t value)</code> prototype. The animation will happen by the periodical calling of the animator function with the corresponding value parameter.</p>
-<p>To <strong>create an animation</strong> you have to initializes an _lv_anim_t_ variable (there is a template in <a href="https://github.com/littlevgl/lvgl/blob/master/lv_misc/lv_anim.h">lv_anim.h</a>):</p>
+<p><em>Escrito para v5.1</em></p>
+<p>Puedes cambiar automaticamente el valor (animate) de una variable entre el inicio y el valor final usando una <strong>funcion de animacion</strong> con prototipo <code>void func(void* var,int32_t value)</code>. La animacion sucedera llamando periodicamente a la funcion de animacion con el parametro correspondiente.</p>
+<p>Para <strong>crear una animacion</strong> debes de inicializar una variable _lv_anim_t (hay un template en <a href="https://github.com/littlevgl/lvgl/blob/master/lv_misc/lv_anim.h">lv_anim.h</a>):</p>
 <pre class="hljs"><span class="hljs-keyword">lv_anim_t</span> a;                                
-a.var = button1;                             <span class="hljs-comment">/*Variable to animate*/</span>                        
-a.start = <span class="hljs-number">100</span>;                                 <span class="hljs-comment">/*Start value*/</span>
-a.end = <span class="hljs-number">300</span>;                                 <span class="hljs-comment">/*End value*/</span>
-a.fp = (<span class="hljs-keyword">lv_anim_fp_t</span>)lv_obj_set_height;                                 <span class="hljs-comment">/*Function to be used to animate*/</span>
-a.path = lv_anim_path_linear;                                            <span class="hljs-comment">/*Path of animation*/</span>
-a.end_cb = <span class="hljs-literal">NULL</span>;                               <span class="hljs-comment">/*Callback when the animation is ready*/</span>
-a.act_time = <span class="hljs-number">0</span>;                                 <span class="hljs-comment">/*Set &lt; 0 to make a delay [ms]*/</span>
-a.time = <span class="hljs-number">200</span>;                                 <span class="hljs-comment">/*Animation length [ms]*/</span>
-a.playback = <span class="hljs-number">0</span>;                                 <span class="hljs-comment">/*1: animate in reverse direction too when the normal is ready*/</span>
-a.playback_pause = <span class="hljs-number">0</span>;                                 <span class="hljs-comment">/*Wait before playback [ms]*/</span>
-a.repeat = <span class="hljs-number">0</span>;                                 <span class="hljs-comment">/*1: Repeat the animation (with or without playback)*/</span>
-a.repeat_pause = <span class="hljs-number">0</span>;                             <span class="hljs-comment">/*Wait before repeat [ms]*/</span>
+a.var = button1;                             <span class="hljs-comment">/*Variable a animar*/</span>                        
+a.start = <span class="hljs-number">100</span>;                                 <span class="hljs-comment">/*Valor inicial*/</span>
+a.end = <span class="hljs-number">300</span>;                                 <span class="hljs-comment">/*Valor final*/</span>
+a.fp = (<span class="hljs-keyword">lv_anim_fp_t</span>)lv_obj_set_height;                                 <span class="hljs-comment">/*Funcion utilizada para la animacion*/</span>
+a.path = lv_anim_path_linear;                                            <span class="hljs-comment">/*Path a la animacion*/</span>
+a.end_cb = <span class="hljs-literal">NULL</span>;                               <span class="hljs-comment">/*Callback cuando la animacion esta lista*/</span>
+a.act_time = <span class="hljs-number">0</span>;                                 <span class="hljs-comment">/*Asigna &lt; 0 para hacer un delay [ms]*/</span>
+a.time = <span class="hljs-number">200</span>;                                 <span class="hljs-comment">/*Longitud de la animacion [ms]*/</span>
+a.playback = <span class="hljs-number">0</span>;                                 <span class="hljs-comment">/*1: tambien anima en direccion inversa cuando la normal esta lista*/</span>
+a.playback_pause = <span class="hljs-number">0</span>;                                 <span class="hljs-comment">/*Espera antes del playback [ms]*/</span>
+a.repeat = <span class="hljs-number">0</span>;                                 <span class="hljs-comment">/*1: Repite la animacion (con o sin playback)*/</span>
+a.repeat_pause = <span class="hljs-number">0</span>;                             <span class="hljs-comment">/*Espera antes de repetir [ms]*/</span>
 
-lv_anim_create(&amp;a);                          <span class="hljs-comment">/*Start the animation*/</span></pre><p>The <code>anim_create(&amp;a)</code> will register the animation and immediately <strong>applies the <em>start</em></strong> value regardless to the set delay.</p>
-<p>You can determinate the <strong>path of animation</strong>. In most simple case it is linear which means the current value between <em>start</em> and <em>end</em>  is changed linearly. A path is a function which calculates the next value to set based on the current state of the animation. Currently, there are two built-in paths: </p>
+lv_anim_create(&amp;a);                          <span class="hljs-comment">/*Inicia la animacion*/</span></pre><p><code>anim_create(&amp;a)</code> registrara la animacion e inmediatamente <strong>aplica el valor <em>start</em></strong> independientemente del delay configurado.</p>
+<p>Puedes determinar el <strong>path of animation</strong>. En el caso ma simple es lineal, lo cual significa que el valor actual entre <em>start</em> y <em>end</em> cambia linealmente. Un path es una funcion la cual calcula el siguiente valor a establecer basado en el estado actual de la animacion. Actualmente estan disponibles dos paths:</p>
 <ul>
-<li><strong>lv_anim_path_linear</strong> linear animation</li>
-<li><strong>lv_anim_path_step</strong> change in one step at the end</li>
+<li><strong>lv_anim_path_linear</strong> animacion lineal</li>
+<li><strong>lv_anim_path_step</strong> cambia en un paso al final</li>
 </ul>
-<p>By default, you can set the animation time. But in some cases, the <strong>animation speed</strong> is more practical. The <code>lv_anim_speed_to_time(speed, start, end)</code> function calculates the required time in milliseconds to reach the end value from a start value with the given speed. The speed is interpreted in <em>unit/sec</em> dimension. For example <code>lv_anim_speed_to_time(20,0,100)</code> will give 5000 milliseconds.</p>
-<p>You can apply <strong>multiple different animations</strong> on the same variable at the same time. (For example animate the x and y coordinates with _lv_obj_set_x_ end _lv_obj_set_y_). But only one animation can exist with a given variable and function pair. Therefore the _lv_anim_create()_ function will delete the already existing variable-function animations. </p>
-<p>You can <strong>delete an animation</strong> by <code>lv_anim_del(var, func)</code> with providing the animated variable and its animator function.</p>
+<p>Por defecto puedes establecer el tiempo de animacion. Pero en algunos casos, la <strong>animation speed</strong> es mas practico. La funcion <code>lv_anim_speed_to_time(speed, start, end)</code> calcula el tiempo requerido en misisegundos para alcanzar el valor final desde el valor inicial con la velocidad especificada. La velocidad es interpretada en <em>unit/sec</em>. Por ejemplo <code>lv_anim_speed_to_time(20,0,100)</code> da como resultado 5000 milisegundos.</p>
+<p>Puedes aplicar <strong>multiples animaciones diferentes</strong> en la misma variable al mismo tiempo .(Por ejemplo animar las coordenadas x y y con _lv_obj_set_x_ y _lv_obj_set_y_). Pero solamente una animacion puede existir con una variable y una funcion dados. Por lo tanto, la funcion _lv_anim_create()_ borrará las animaciones variable-funcion ya existentes.</p>
+<p>Puedes <strong>borrar una animacion</strong> con <code>lv_anim_del(var, func)</code> proporcionando la variable animada y su funcion de animacion.</p>
 <p class="page" id="Coding-Style-Guide_es"></p><h1>Guia de estilo de codigo</h1>
 <p><em>Revision 2</em></p>
 <h2 id="file-format">File format</h2>
