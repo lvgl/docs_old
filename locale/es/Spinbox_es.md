@@ -1,18 +1,18 @@
-_Written for v5.3_
+_Escrito para v5.3_
 
-- This is a work in progress
+- Esto es un trabajo en progreso
 
-## Overview
+## Visión general
 
 
 
-## Style usage
+## Uso de estilos
 
-## Notes
+## Notas
 
-- note
+- nota
 
-## Example
+## Ejemplo
 ![spinbox example](https://user-images.githubusercontent.com/13847288/47869506-6676d000-de07-11e8-807b-1dbaa238e2c8.gif)
 ```c
 static void spinbox_value_changed(lv_obj_t * spinbox)
