@@ -4,7 +4,7 @@ _Written for v5.1_
 
 The Lists are built from a background **Page** and **Buttons** on it. The Buttons contain an optional icon-like Image (which can be a symbol too) and a Label. When the list become long enough it can be scrolled. The **width of the buttons** is set to maximum according to the object width. The **height** of the buttons are adjusted automatically according to the content (content height + style.body.padding.ver).
 
-You can **add new list element** with `lv_list_add(list, "U:/img", "Text", rel_action)` or with symbol icon `lv_list_add(list, SYMBOL_EDIT, "Edit text")`. If you do no want to add image use `""` as file name. The function returns with a pointer to the created button to allow further configurations.  
+You can **add new list element** with `lv_list_add(list, "U:/img", "Text", rel_action)` or with symbol icon `lv_list_add(list, SYMBOL_EDIT, "Edit text")`. If you do no want to add image use `NULL` as file name. The function returns with a pointer to the created button to allow further configurations.  
 
 You can use `lv_list_get_btn_label(list_btn)` and `lv_list_get_btn_img(list_btn)` to **get the label and the image** of a list button.
 

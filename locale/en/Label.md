@@ -7,13 +7,16 @@ You can use `\n` to make line break. For example: `"line1\nline2\n\nline4"`
 
 The size of the label object can be automatically expanded to the text size or the text can be manipulated according to several **long mode policies**:
 
-* LV_LABEL_LONG_EXPAND: Expand the object size to the text size
+* LV_LABEL_LONG_EXPAND: Expand the object size to the text size (Default)
 * LV_LABEL_LONG_BREAK: Keep the object width, break (wrap) the too long lines and expand the object height
 * LV_LABEL_LONG_DOTS: Keep the object size, break the text and write dots in the last line
 * LV_LABEL_LONG_SCROLL: Expand the object size and scroll the text on the parent (move the label object)
 * LV_LABEL_LONG_ROLL: Keep the size and roll just the text (not the object)
 
 You can specify the long mode with: `lv_label_set_long_mode(label, long_mode)`
+
+It's important to note that if you change the `LONG_MODE` the size of the label obejct is already expanded to the text's size. 
+So you need to set the label's size with `lv_obj_set_size()` or `lv_obj_set_width()` after changing long mode.
 
 Labels are able to show text from a **static array**. Use: `lv_label_set_static_text(label, char_array)`. In this case, the text is not stored in the dynamic memory but the given array is used instead. Keep in my the array can't be a local variable which destroys when the function exits.
 

@@ -1,5 +1,6 @@
 #HTML
-gwtc --format html --title "LittlevGL documentation" --output . --file-name index .
+gwtc --format html --title "LittlevGL documentation" --output . --file-name index ./locale/en
+gwtc --format html --title "LittlevGL documentation" --output ./locale/pt_BR --file-name index ./locale/pt_BR
 gwtc --format html --title "LittlevGL documentation" --output ./locale/tr --file-name index ./locale/tr
 gwtc --format html --title "LittlevGL documentation" --output ./locale/es --file-name index ./locale/es 
 
@@ -12,8 +13,14 @@ ga='<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78811084-3
 sed -i  "/<head>/a  $desc\n$kw\n$og\n$favicon\n$ga" index.html
 sed -i  "/<head>/a  $desc\n$kw\n$og\n$favicon\n$ga" ./locale/tr/index.html
 sed -i  "/<head>/a  $desc\n$kw\n$og\n$favicon\n$ga" ./locale/es/index.html
+sed -i  "/<head>/a  $desc\n$kw\n$og\n$favicon\n$ga" ./locale/pt_BR/index.html
 
 #PDF
-gwtc --format pdf --pdf-page-count --title "LittlevGL documentation (English)"  --output ./pdf --file-name LittlevGL_documentation_English ./
+gwtc --format pdf --pdf-page-count --title "LittlevGL documentation (English)"  --output ./pdf --file-name LittlevGL_documentation_English ./locale/en
+gwtc --format pdf --pdf-page-count --title "LittlevGL documentation (Brazilian Portuguese)"  --output ./pdf --file-name LittlevGL_documentation_Brazilian_Portuguese ./locale/pt_BR
 gwtc --format pdf --pdf-page-count --title "LittlevGL documentation (Turkish)"  --output ./pdf --file-name LittlevGL_documentation_Turkish ./locale/tr
 gwtc --format pdf --pdf-page-count --title "LittlevGL documentation (Espanol)"  --output ./pdf --file-name LittlevGL_documentation_Espanol ./locale/es
+
+
+
+
