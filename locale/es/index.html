@@ -1662,77 +1662,77 @@ To format the source files:
 <li><a href="#Slider">Slider (lv_slider)</a></li>
 </ul>
 <p class="page" id="Arc_es"></p><h1>Arco (lv_arc)</h1>
-<p><em>Written for v5.2</em></p>
-<h2 id="overview">Overview</h2>
-<p>The Arc object <strong>draws an arc</strong> within <strong>start and end angles</strong> and with a given <strong>thickness</strong>.</p>
-<p>To set the angles use the <code>lv_arc_set_angles(arc, start_angle, end_angle)</code> function. The zero degree is at the bottom of the object and the degrees are increasing in a counter-clockwise direction. The angles should be in [0;360] range.</p>
-<p>To <strong>set the style</strong> of an Arc object use <code>lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &amp;style)</code></p>
-<h2 id="style-usage">Style usage</h2>
+<p><em>Escrito para v5.2</em></p>
+<h2 id="visi-n-general">Visión general</h2>
+<p>El objeto Arco <strong>dibuja un arco</strong> dentro de <strong>los ángulos de inicio y fin</strong> y con un <strong>grosor</strong> dado.</p>
+<p>Para establecer los ángulos usa la función <code>lv_arc_set_angles(arc, start_angle, end_angle)</code>. El grado cero esta en la parte inferior del objeto y los ángulos incrementan en el sentido contrario de las manecillas del reloj. Los ángulos deben estar en el rango [0;360].</p>
+<p>Para <strong>configurar e estilo</strong> de un objeto Arco usa <code>lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &amp;style)</code></p>
+<h2 id="uso-de-estilos">Uso de estilos</h2>
 <ul>
-<li><strong>line.rounded</strong> make the endpoints rounded (opacity won&#39;t work properly if set to 1)</li>
-<li><strong>line.width</strong> the thickness of the arc</li>
-<li><strong>line.color</strong> the color of the arc.</li>
+<li><strong>line.rounded</strong> redondea los puntos finales (la opacidad no funciona correctamente se se configura a 1).</li>
+<li><strong>line.width</strong> el espesor del arco.</li>
+<li><strong>line.color</strong> el color del arco.</li>
 </ul>
-<h2 id="notes">Notes</h2>
+<h2 id="notas">Notas</h2>
 <ul>
-<li>The <strong>width and height</strong> of the Arc should be the <strong>same</strong></li>
-<li>Currently the Arc object <strong>does not support anti-aliasing</strong>.</li>
+<li>El <strong>ancho y alto</strong> del arco deben ser el <strong>mismo</strong>.</li>
+<li>Actualmente, el objeto arco <strong>no soporta anti-aliasing (suavizado)</strong>.</li>
 </ul>
-<h2 id="example">Example</h2>
+<h2 id="ejample">Ejample</h2>
 <p><img src="http://docs.littlevgl.com/img/arc-lv_arc.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Create style for the Arcs*/</span>
+<pre class="hljs"><span class="hljs-comment">/*Crea un estilo para el arco*/</span>
 <span class="hljs-keyword">lv_style_t</span> style;
 lv_style_copy(&amp;style, &amp;lv_style_plain);
-style.line.color = LV_COLOR_BLUE;           <span class="hljs-comment">/*Arc color*/</span>
-style.line.width = <span class="hljs-number">8</span>;                       <span class="hljs-comment">/*Arc width*/</span>
+style.line.color = LV_COLOR_BLUE;           <span class="hljs-comment">/*Color del arco*/</span>
+style.line.width = <span class="hljs-number">8</span>;                       <span class="hljs-comment">/*Ancho del arco*/</span>
 
-<span class="hljs-comment">/*Create an Arc*/</span>
+<span class="hljs-comment">/*Crea un arco*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * arc = lv_arc_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
-lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &amp;style);          <span class="hljs-comment">/*Use the new style*/</span>
+lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &amp;style);          <span class="hljs-comment">/*Usa el nuevo estilo*/</span>
 lv_arc_set_angles(arc, <span class="hljs-number">90</span>, <span class="hljs-number">60</span>);
 lv_obj_set_size(arc, <span class="hljs-number">150</span>, <span class="hljs-number">150</span>);
 lv_obj_align(arc, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
 
-<span class="hljs-comment">/*Copy the previous Arc and set different angles and size*/</span>
+<span class="hljs-comment">/*Copia el arco previo y estabece un ángulos y tamaño diferentes*/</span>
 arc = lv_arc_create(lv_scr_act(), arc);
 lv_arc_set_angles(arc, <span class="hljs-number">90</span>, <span class="hljs-number">20</span>);
 lv_obj_set_size(arc, <span class="hljs-number">125</span>, <span class="hljs-number">125</span>);
 lv_obj_align(arc, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
 
-<span class="hljs-comment">/*Copy the previous Arc and set different angles and size*/</span>
+<span class="hljs-comment">/*Copia el arco previo y estabece un ángulos y tamaño diferentes*/</span>
 arc = lv_arc_create(lv_scr_act(), arc);
 lv_arc_set_angles(arc, <span class="hljs-number">90</span>, <span class="hljs-number">310</span>);
 lv_obj_set_size(arc, <span class="hljs-number">100</span>, <span class="hljs-number">100</span>);
 lv_obj_align(arc, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);</pre><p class="page" id="Bar_es"></p><h1>Barra (lv_bar)</h1>
-<p><em>Written for v5.1</em></p>
-<h2 id="overview">Overview</h2>
-<p>The Bar objects have got two main parts: a <strong>background</strong> which is the object itself and an <strong>indicator</strong> which shape is similar to the background but its width/height can be adjusted. </p>
-<p>The orientation of the bar can be <strong>vertical or horizontal</strong> according to the width/height ratio. Logically on horizontal bars the indicator width, on vertical bars the indicator height can be changed. </p>
-<p>A <strong>new value</strong> can be set by: <code>lv_bar_set_value(bar, new_value)</code>. The value is interpreted in <strong>range</strong> (minimum and maximum values) which can be modified with: <code>lv_bar_set_range(bar, min, max)</code>. The default range is: 1..100.</p>
-<p>The setting of a new value can happen with an <strong>animation</strong> from the current value to the desired. In this case use <code>lv_bar_set_value_anim(bar, new_value, anim_time)</code>.</p>
-<h2 id="style-usage">Style usage</h2>
+<p><em>Escrito para v5.1</em></p>
+<h2 id="visi-n-general">Visión general</h2>
+<p>Los objetos barra tienen dos partes principales: un <strong>fondo</strong> que es el objeto en sí mismo y un <strong>indicador</strong> cuya forma es similar a la del fondo pero su anchura/altura puede ser ajustada.</p>
+<p>La orientacion de la barra puede ser <strong>vertical u horizontal</strong> de acuerdo con la relación ancho/alto. Logicamente en barras horizontales el ancho del indicador y en barras verticales el alto del indicador pueden ser cambiados.</p>
+<p>Un <strong>nuevo valor</strong> se puede ajustar con: <code>lv_bar_set_value(bar, new_value)</code>. El valor es interpretado en <strong>rango</strong> (valores minimo y maximo) que pueden ser modificados con: <code>lv_bar_set_range(bar, min, max)</code>. El rango por defecto es: 1..100.</p>
+<p>La configuración de un nuevo valor puede ocurrie con una <strong>animación</strong> desde el valor actual hasta el valor deseado. En este caso usa <code>lv_bar_set_value_anim(bar, new_value, anim_time)</code>.</p>
+<h2 id="uso-de-estilos">Uso de estilos</h2>
 <ul>
-<li><strong>background</strong> is a <a href="#Base-object">Base object</a>therefore it uses its style elements. Its default style is: <code>LV_STYLE_PRETTY</code>.  </li>
-<li><strong>indicator</strong> is similar to the background. Its styles can be set by: <code>lv_bar_set_style_indic(bar,&amp;style_indic)</code>. It uses the <em>hpad</em> and <em>vpad</em> style elements to keep space from the background. Its default style is: <code>LV_STYLE_PRETTY_COLOR</code>.</li>
+<li><strong>fondo</strong> es un <a href="#Base-object">Base object</a>por lo tanto utiliza los elementos de su estilo. Su estilo por defecto es: <code>LV_STYLE_PRETTY</code>.</li>
+<li><strong>indicador</strong> es similar al fondo. Su estilo puede ser configurado con: <code>lv_bar_set_style_indic(bar,&amp;style_indic)</code>. Etiliza los elementos de estilo <em>hpad</em> y <em>vpad</em> para mantener el espacio con el fondo. Su estilo por defecto es: <code>LV_STYLE_PRETTY_COLOR</code>.</li>
 </ul>
-<h2 id="notes">Notes</h2>
+<h2 id="notas">Notas</h2>
 <ul>
-<li>The indicator is not a real object; it is only drawn by the bar.</li>
+<li>El indicador no es un objeto real, solo es dibujado por la barra.</li>
 </ul>
-<h2 id="example">Example</h2>
+<h2 id="ejemplo">Ejemplo</h2>
 <p><img src="http://docs.littlevgl.com/img/bar-lv_bar.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Create a default bar*/</span>
+<pre class="hljs"><span class="hljs-comment">/*Crea una barra por defecto*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * bar1 = lv_bar_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_obj_set_size(bar1, <span class="hljs-number">200</span>, <span class="hljs-number">30</span>);
 lv_obj_align(bar1, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_TOP_RIGHT, <span class="hljs-number">-20</span>, <span class="hljs-number">30</span>);
 lv_bar_set_value(bar1, <span class="hljs-number">70</span>);
 
-<span class="hljs-comment">/*Create a label right to the bar*/</span>
+<span class="hljs-comment">/*Crea una etiqueta a la derecha de la barra*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * bar1_label = lv_label_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_label_set_text(bar1_label, <span class="hljs-string">"Default"</span>);
 lv_obj_align(bar1_label, bar1, LV_ALIGN_OUT_LEFT_MID, <span class="hljs-number">-10</span>, <span class="hljs-number">0</span>);
 
-<span class="hljs-comment">/*Create a bar and an indicator style*/</span>
+<span class="hljs-comment">/*Crea estilos para la barra y para el indicador*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_bar;
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_indic;
 
@@ -1748,16 +1748,16 @@ style_indic.body.main_color=  LV_COLOR_LIME;
 style_indic.body.radius = LV_RADIUS_CIRCLE;
 style_indic.body.shadow.width = <span class="hljs-number">10</span>;
 style_indic.body.shadow.color = LV_COLOR_LIME;
-style_indic.body.padding.hor = <span class="hljs-number">3</span>;           <span class="hljs-comment">/*Make the indicator a little bit smaller*/</span>
+style_indic.body.padding.hor = <span class="hljs-number">3</span>;           <span class="hljs-comment">/*Hace al indicador un poco mas chico*/</span>
 style_indic.body.padding.ver = <span class="hljs-number">3</span>;
 
 <span class="hljs-comment">/*Create a second bar*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * bar2 = lv_bar_create(lv_scr_act(), bar1);
 lv_bar_set_style(bar2, LV_BAR_STYLE_BG, &amp;style_bar);
 lv_bar_set_style(bar2, LV_BAR_STYLE_INDIC, &amp;style_indic);
-lv_obj_align(bar2, bar1, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">30</span>); <span class="hljs-comment">/*Align below 'bar1'*/</span>
+lv_obj_align(bar2, bar1, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">30</span>); <span class="hljs-comment">/*Alinea abajo de 'bar1'*/</span>
 
-<span class="hljs-comment">/*Create a second label*/</span>
+<span class="hljs-comment">/*Crea una segunda etiqueta*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * bar2_label = lv_label_create(lv_scr_act(), bar1_label);
 lv_label_set_text(bar2_label, <span class="hljs-string">"Modified"</span>);
 lv_obj_align(bar2_label, bar2, LV_ALIGN_OUT_LEFT_MID, <span class="hljs-number">-10</span>, <span class="hljs-number">0</span>);</pre><p class="page" id="Base-object_es"></p><h1>Objeto base (lv_obj)</h1>
@@ -1842,46 +1842,46 @@ style_shadow.body.radius = LV_RADIUS_CIRCLE;
 obj3 = lv_obj_create(lv_scr_act(), obj2);
 lv_obj_set_style(obj3, &amp;style_shadow);
 lv_obj_align(obj3, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">-40</span>);</pre><p class="page" id="Button_es"></p><h1>Boton (lv_btn)</h1>
-<p><em>Written for v5.1, revision 2</em></p>
-<h2 id="overview">Overview</h2>
-<p>Buttons can react on user <strong>press</strong>, <strong>release</strong> or <strong>long press</strong> via callback functions (<code>lv_action_t</code> function pointers). You can set the callback functions with: <code>lv_btn_set_action(btn, ACTION_TYPE, callback_func)</code>. The possible action types are:</p>
+<p><em>Escrito para v5.1, revision 2</em></p>
+<h2 id="visi-n-general">Visión general</h2>
+<p>Los botones pueden reaccionar a <strong>presion</strong>, <strong>liberación</strong> o <strong>presiones largas</strong> del usuario via funciones de callback (<code>lv_action_t</code> punteros a funciones). Puedes establecer las funciones de callback con: <code>lv_btn_set_action(btn, ACTION_TYPE, callback_func)</code>. Los tipos de acciones posibles son:</p>
 <ul>
-<li>LV_BTN_ACTION_CLICK: the button is released after pressing (clicked) or, when using keypad, after the key <code>LV_GROUP_KEY_ENTER</code> is released</li>
-<li>LV_BTN_ACTION_PR: the button is pressed</li>
-<li>LV_BTN_ACTION_LONG_PR: the button is long pressed</li>
-<li>LV_BTN_ACTION_LONG_PR_REPEAT: the button is long pressed and this action is triggered periodically</li>
+<li>LV_BTN_ACTION_CLICK: El botón es liberado después de ser presionado (click) o, cuando usando keypad, después de que la tecla <code>LV_GROUP_KEY_ENTER</code> es liberada.</li>
+<li>LV_BTN_ACTION_PR: El botón es presionado.</li>
+<li>LV_BTN_ACTION_LONG_PR: El botón tiene una presion larga.</li>
+<li>LV_BTN_ACTION_LONG_PR_REPEAT: El botón tuvo una presión larga y esta acción es llamada periodicamente.</li>
 </ul>
-<p>Buttons can be in one of the <strong>five possible states</strong>:</p>
+<p>Los botones pueden tener uno de los <strong>cinco posibles estados</strong>:</p>
 <ul>
-<li>LV_BTN_STATE_REL Released state</li>
-<li>LV_BTN_STATE_PR Pressed state</li>
-<li>LV_BTN_STATE_TGL_REL Toggled released state (On state)</li>
-<li>LV_BTN_STATE_TGL_PR Toggled pressed state (On pressed state)</li>
-<li>LV_BTN_STATE_INA Inactive state</li>
+<li>LV_BTN_STATE_REL Estado sin presionar</li>
+<li>LV_BTN_STATE_PR Estado presionado</li>
+<li>LV_BTN_STATE_TGL_REL Estado toggleado sin presionar (Estado On)</li>
+<li>LV_BTN_STATE_TGL_PR Estado toggleado presionado (Estado presionado On)</li>
+<li>LV_BTN_STATE_INA Estado inactivo</li>
 </ul>
-<p>The buttons can be configured as <strong>toggle button</strong> with <code>lv_btn_set_toggle(btn, true)</code>. In this case on release, the button goes to toggled released state.</p>
-<p>You can set the button&#39;s state manually by: <code>lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)</code>.</p>
-<p>A button can go to <strong>Inactive state</strong> only manually (by _lv_btn_set_state()_). In an Inactive state, none of the action will be called.  </p>
-<p>Similarly to <a href="#Container">Containers</a> buttons also have <strong>layout</strong> and <strong>auto fit</strong>:</p>
+<p>Los botones pueden ser configurados como <strong>botón toggleado</strong> con <code>lv_btn_set_toggle(btn, true)</code>. En este caso cuando se libera, el botón va al estado toggleado sin presionar.</p>
+<p>Puedes establecer el estado del botón manualmente con: <code>lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)</code>.</p>
+<p>El botón puede ir a <strong>estado inactivo</strong> solo manualmente (con _lv_btn_set_state()_). En el estado inactivo, nunguna de las acciones sera llamada.</p>
+<p>Similar a <a href="#Container">Contenedores</a> los botones también pueden tener <strong>layout</strong> y <strong>auto fit</strong>:</p>
 <ul>
-<li><code>lv_btn_set_layout(btn, LV_LAYOUT_...)</code>set a layout. The default is LV_LAYOUT_CENTER. So if you add a label then it will be automatically aligned to the middle.</li>
-<li><code>lv_btn_set_fit(btn, hor_en, ver_en)</code> enables to set the button width and/or height automatically according to the children.</li>
+<li><code>lv_btn_set_layout(btn, LV_LAYOUT_...)</code> establece un layout. El layout por defecto es LV_LAYOUT_CENTER. Por lo tanto si agregas una etiqueta sera automaticamente alineada a la mitad.</li>
+<li><code>lv_btn_set_fit(btn, hor_en, ver_en)</code> habilita el poder establecer el ancho y/o el alto automaticamente de acuerdo al hijo.</li>
 </ul>
-<h2 id="style-usage">Style usage</h2>
-<p>A button can have 5 independent styles for the 5 state. You can set them via: <code>lv_btn_set_style(btn, LV_BTN_STYLE_..., &amp;style)</code>. The styles use the <em>style.body</em> properties.</p>
+<h2 id="uso-de-estilos">Uso de estilos</h2>
+<p>Un botón puede tener 5 estilos independiente para sus 5 estados. Puedes establecerlos via: <code>lv_btn_set_style(btn, LV_BTN_STYLE_..., &amp;style)</code>. Los estilos usan las propiedades <em>style.body</em>.</p>
 <ul>
-<li><strong>LV_BTN_STYLE_REL</strong> style of the released state. Default: _lv_style_btn_rel_</li>
-<li><strong>LV_BTN_STYLE_PR</strong> style of the pressed state. Default: _lv_style_btn_pr_</li>
-<li><strong>LV_BTN_STYLE_TGL_REL</strong> style of the toggled released state. Default: _lv_style_btn_tgl_rel_</li>
-<li><strong>LV_BTN_STYLE_TGL_PR</strong> style of the toggled pressed state. Default: _lv_style_btn_tgl_pr_</li>
-<li><strong>LV_BTN_STYLE_INA</strong> style of the inactive state. Default: _lv_style_btn_ina_</li>
+<li><strong>LV_BTN_STYLE_REL</strong> Estilo del estado sin presionar. Default: _lv_style_btn_rel_</li>
+<li><strong>LV_BTN_STYLE_PR</strong> Estilo del estado presionado. Default: _lv_style_btn_pr_</li>
+<li><strong>LV_BTN_STYLE_TGL_REL</strong> Estilo del estado toggleado sin presionar. Default: _lv_style_btn_tgl_rel_</li>
+<li><strong>LV_BTN_STYLE_TGL_PR</strong> Estilo del estado toggleado presionado. Default: _lv_style_btn_tgl_pr_</li>
+<li><strong>LV_BTN_STYLE_INA</strong> Estilo del estado inactivo. Default: _lv_style_btn_ina_</li>
 </ul>
-<h2 id="notes">Notes</h2>
+<h2 id="notas">Notas</h2>
 <ul>
-<li>If a button is dragged its click and long press action will not be called</li>
-<li>If a button was long pressed and its long press action was set then its click action will not be called</li>
+<li>Si un botón se arrastra, sus acciones de click y presion larga no serán llamadas.</li>
+<li>Si un botón fue presionado por largo tiempo y su acción de presion larga fue establecida entonces su acción de click no será llamada.</li>
 </ul>
-<h2 id="example">Example</h2>
+<h2 id="ejemplo">Ejemplo</h2>
 <p><img src="http://docs.littlevgl.com/img/button-lv_btn.png" /></p>
 <pre class="hljs"><span class="hljs-function"><span class="hljs-keyword">static</span> lv_res_t <span class="hljs-title">btn_click_action</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span> * btn)</span>
 </span>{
@@ -1889,89 +1889,87 @@ lv_obj_align(obj3, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_BOTTOM_MI
 
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Button %d is released\n"</span>, id);
 
-    <span class="hljs-comment">/* The button is released.
-     * Make something here */</span>
+    <span class="hljs-comment">/* Se soltó el botón.
+     * Haz algo aqui */</span>
 
-    <span class="hljs-keyword">return</span> LV_RES_OK; <span class="hljs-comment">/*Return OK if the button is not deleted*/</span>
+    <span class="hljs-keyword">return</span> LV_RES_OK; <span class="hljs-comment">/*Retorna OK si el botón no se borro*/</span>
 }
 
-.
-.
-.
 
-<span class="hljs-comment">/*Create a title label*/</span>
+<span class="hljs-comment">/*Crea una etiqueta de título*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * label = lv_label_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_label_set_text(label, <span class="hljs-string">"Default buttons"</span>);
 lv_obj_align(label, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_TOP_MID, <span class="hljs-number">0</span>, <span class="hljs-number">5</span>);
 
-<span class="hljs-comment">/*Create a normal button*/</span>
+<span class="hljs-comment">/*Crea un botón normal*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * btn1 = lv_btn_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
-lv_cont_set_fit(btn1, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>); <span class="hljs-comment">/*Enable resizing horizontally and vertically*/</span>
+lv_cont_set_fit(btn1, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>); <span class="hljs-comment">/*Habilita el redimensionamiento horizontal y vertical*/</span>
 lv_obj_align(btn1, label, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
-lv_obj_set_free_num(btn1, <span class="hljs-number">1</span>);   <span class="hljs-comment">/*Set a unique number for the button*/</span>
+lv_obj_set_free_num(btn1, <span class="hljs-number">1</span>);   <span class="hljs-comment">/*Establece un número unico para el botón*/</span>
 lv_btn_set_action(btn1, LV_BTN_ACTION_CLICK, btn_click_action);
 
-<span class="hljs-comment">/*Add a label to the button*/</span>
+<span class="hljs-comment">/*Agrega una etiqueta al botón*/</span>
 label = lv_label_create(btn1, <span class="hljs-literal">NULL</span>);
 lv_label_set_text(label, <span class="hljs-string">"Normal"</span>);
 
-<span class="hljs-comment">/*Copy the button and set toggled state. (The release action is copied too)*/</span>
+<span class="hljs-comment">/*Copia el botón y establece el estado toggle. (La acción de release también es copiada)*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * btn2 = lv_btn_create(lv_scr_act(), btn1);
 lv_obj_align(btn2, btn1, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
-lv_btn_set_state(btn2, LV_BTN_STATE_TGL_REL);  <span class="hljs-comment">/*Set toggled state*/</span>
-lv_obj_set_free_num(btn2, <span class="hljs-number">2</span>);               <span class="hljs-comment">/*Set a unique number for the button*/</span>
+lv_btn_set_state(btn2, LV_BTN_STATE_TGL_REL);  <span class="hljs-comment">/*Establece el estado toggleado*/</span>
+lv_obj_set_free_num(btn2, <span class="hljs-number">2</span>); <span class="hljs-comment">/*Establece un número unico para el botón*/</span>
 
-<span class="hljs-comment">/*Add a label to the toggled button*/</span>
+<span class="hljs-comment">/*Agrega una etiqueta al botón toggleado*/</span>
 label = lv_label_create(btn2, <span class="hljs-literal">NULL</span>);
 lv_label_set_text(label, <span class="hljs-string">"Toggled"</span>);
 
-<span class="hljs-comment">/*Copy the button and set inactive state.*/</span>
+<span class="hljs-comment">/*Copia el botón y establece el estado inactivo.*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * btn3 = lv_btn_create(lv_scr_act(), btn1);
 lv_obj_align(btn3, btn2, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
-lv_btn_set_state(btn3, LV_BTN_STATE_INA);   <span class="hljs-comment">/*Set inactive state*/</span>
-lv_obj_set_free_num(btn3, <span class="hljs-number">3</span>);               <span class="hljs-comment">/*Set a unique number for the button*/</span>
+lv_btn_set_state(btn3, LV_BTN_STATE_INA);   <span class="hljs-comment">/*Establece el estado inactivo*/</span>
+lv_obj_set_free_num(btn3, <span class="hljs-number">3</span>); <span class="hljs-comment">/*Establece un número unico para el botón*/</span>
 
-<span class="hljs-comment">/*Add a label to the inactive button*/</span>
+<span class="hljs-comment">/*Agrega una etiqueta al botón inactivo*/</span>
 label = lv_label_create(btn3, <span class="hljs-literal">NULL</span>);
 lv_label_set_text(label, <span class="hljs-string">"Inactive"</span>);</pre><p class="page" id="Button-matrix_es"></p><h1>Matriz de botones (lv_btnm)</h1>
-<p><em>Written for v5.1</em></p>
-<h2 id="overview">Overview</h2>
-<p>The Button Matrix objects can display <strong>multiple buttons</strong> according to a descriptor string array, called <em>map</em>. You can specify the map with <code>lv_btnm_set_map(btnm, my_map)</code>. </p>
-<p>The <strong>declaration of a map</strong> looks like <code>const char * map[] = {&quot;btn1&quot;, &quot;btn2&quot;, &quot;btn3&quot;, &quot;&quot;}</code>. Note that <strong>the last element has to be an empty string</strong>!  </p>
-<p>The first character of a string can be a <strong>control character</strong> to specify some attributes:</p>
+<p><em>Escrito para v5.1</em></p>
+<h2 id="visi-n-general">Visión general</h2>
+<p>Los objetos Matriz de botones pueden mostrar <strong>múltiples botones</strong> acorde a un arreglo de cadenas descriptor, llamado <em>map</em>. Puedes especificar el map con <code>lv_btnm_set_map(btnm, my_map)</code>.</p>
+<p>La <strong>declaración de un map</strong> se ve como <code>const char * map[] = {&quot;btn1&quot;, &quot;btn2&quot;, &quot;btn3&quot;, &quot;&quot;}</code>. Notar que <strong>el último elemento tiene que ser una cadena vacía</strong>!.</p>
+<p>El primer carácter de una cadena puede ser un <strong>carácter de control</strong> para especificar algunos atributos:</p>
 <ul>
-<li><strong>bit 7..6</strong> Always <em>0b10</em> to differentiate the control byte from the textual characters</li>
-<li><strong>bit 5</strong> Inactive button</li>
-<li><strong>bit 4</strong> Hidden button</li>
-<li><strong>bit 3</strong> No long press for the button</li>
-<li><strong>bit 2..0</strong> Relative width compared to the buttons in the same row. [1..7]</li>
+<li><strong>bit 7..6</strong> Siempre <em>0b10</em> para diferenciar el byte de control de los carácteres de texto.</li>
+<li><strong>bit 5</strong> Botón inactivo.</li>
+<li><strong>bit 4</strong> Botón oculto.</li>
+<li><strong>bit 3</strong> Botón sin presion larga.</li>
+<li><strong>bit 2..0</strong> Anchura relativa comparada con los botones de la misma fila. [1..7]</li>
 </ul>
-<p>It is recommended to specify the <strong>control byte as an octal number</strong>. For example <code>&quot;\213button&quot;</code>. The octal number always starts with _2_ (bit 7..6) the middle part is the attributes (bit 5..3) and the last part is the width (bit 2..0). So the example describes a 3 unit wide, hidden button.</p>
-<p>Use &quot;\n&quot; in the map  to make <strong>line break</strong>: <code>{&quot;btn1&quot;, &quot;btn2&quot;, &quot;\n&quot;, &quot;btn3&quot;, &quot;&quot;}</code>. The button&#39;s width is recalculated in every line.</p>
-<p>The <code>lv_btnm_set_action(btnm, btnm_action)</code> specifies an action to call when a button is released. </p>
-<p>You can enable the <strong>buttons to toggle</strong> when they are clicked. There can only be one toggled button at a time. The <code>lv_btnm_set_toggle(btnm, true, id)</code> enables the toggling and sets the _id_th button to the toggled state.</p>
-<h2 id="style-usage">Style usage</h2>
-<p>The Button matrix works with 6 styles: a background and 5 button styles for each states. You can set the styles with <code>lv_btnm_set_style(btn, LV_BTNM_STYLE_..., &amp;style)</code>. The background and the buttons use the <em>style.body</em> properties. The labels use the <em>style.text</em> properties of the button styles.</p>
+<p>Es recomendado especificar el <strong>byte de control como un numero octal</strong>. Por ejemplo <code>&quot;\213button&quot;</code>. El número octal siempre inicia con _2_ (bit 7..6) la parte de en medio son los atributos (bit 5..3) y la última parte es el ancho (bit 2..0). Por lo tanto el ejemplo describe un botón de 3 unidades de ancho y oculto.</p>
+<p>Usa &quot;\n&quot; en el mapa para hacer un <strong>salto de línea</strong>: <code>{&quot;btn1&quot;, &quot;btn2&quot;, &quot;\n&quot;, &quot;btn3&quot;, &quot;&quot;}</code>. El ancho de los botones es re calculado en cada línea.</p>
+<p>La función <code>lv_btnm_set_action(btnm, btnm_action)</code> especifica una acción a llamar cuando se deja de presionar un botón.</p>
+<p>Puedes habilitar el <strong>botón para que togglee</strong> cuando son presionados. Solo puede haber un boton toggleado al mismo tiempo. La función <code>lv_btnm_set_toggle(btnm, true, id)</code> habilita el toggleo y especifica el _id_ th botón al estado toggleado.</p>
+<h2 id="uso-de-estilos">Uso de estilos</h2>
+<p>La matriz de botones trabaja con 6 estilos: un fondo y 5 estilos de botones para cada uno de sus estados.
+Puedes establecer los estilos con <code>lv_btnm_set_style(btn, LV_BTNM_STYLE_..., &amp;style)</code>. El fondo y los botones usan las propiedades <em>style.body</em>. Las etiquetas usan las propiedades <em>style.text</em> de los estilos de los botones.</p>
 <ul>
-<li><strong>LV_BTNM_STYLE_BG</strong> Background style. Uses all <em>style.body</em> properties including <em>padding</em> Default: _lv_style_pretty_</li>
-<li><strong>LV_BTNM_STYLE_BTN_REL</strong> style of the released  buttons. Default: _lv_style_btn_rel_</li>
-<li><strong>LV_BTNM_STYLE_BTN_PR</strong> style of the pressed buttons. Default: _lv_style_btn_pr_</li>
-<li><strong>LV_BTNM_STYLE_BTN_TGL_REL</strong> style of the toggled released  buttons. Default: _lv_style_btn_tgl_rel_</li>
-<li><strong>LV_BTNM_STYLE_BTN_TGL_PR</strong> style of the toggled pressed  buttons. Default: _lv_style_btn_tgl_pr_</li>
-<li><strong>LV_BTNM_STYLE_BTN_INA</strong> style of the inactive  buttons. Default: _lv_style_btn_ina_</li>
+<li><strong>LV_BTNM_STYLE_BG</strong> Estilo del fondo. Usa todas las propiedades de <em>style.body</em> incluyendo <em>padding</em> Default: _lv_style_pretty_</li>
+<li><strong>LV_BTNM_STYLE_BTN_REL</strong> Estilo de los botones sin presionar. Default: _lv_style_btn_rel_</li>
+<li><strong>LV_BTNM_STYLE_BTN_PR</strong> Estilo de los botones presionados. Default: _lv_style_btn_pr_</li>
+<li><strong>LV_BTNM_STYLE_BTN_TGL_REL</strong> Estilo de los botones toggleados sin presionar. Default: _lv_style_btn_tgl_rel_</li>
+<li><strong>LV_BTNM_STYLE_BTN_TGL_PR</strong> Estilo de los botones toggleados presionados. Default: _lv_style_btn_tgl_pr_</li>
+<li><strong>LV_BTNM_STYLE_BTN_INA</strong> Estilo de los botones inactivos. Default: _lv_style_btn_ina_</li>
 </ul>
-<h2 id="notes">Notes</h2>
+<h2 id="notas">Notas</h2>
 <ul>
-<li>The Button matrix object is <strong>very light weighted</strong>. It creates only the Background Base object and draws the buttons on it instead of creating a lot of real button.</li>
+<li>La matriz de botones en <strong>muy ligero</strong>. Crea solo un objeto base de fondo y dibuja los botones en el en lugar de crear muchos botones reales.</li>
 </ul>
-<h2 id="example">Example</h2>
+<h2 id="ejemplo">Ejemplo</h2>
 <p><img src="http://docs.littlevgl.com/img/button-matrix-lv_btnm.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Called when a button is released ot long pressed*/</span>
+<pre class="hljs"><span class="hljs-comment">/*Llamada cuando se deja de presionar un botón o cuando tiene una presion larga*/</span>
 <span class="hljs-function"><span class="hljs-keyword">static</span> lv_res_t <span class="hljs-title">btnm_action</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span> * btnm, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *txt)</span>
 </span>{
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Button: %s released\n"</span>, txt);
 
-    <span class="hljs-keyword">return</span> LV_RES_OK; <span class="hljs-comment">/*Return OK because the button matrix is not deleted*/</span>
+    <span class="hljs-keyword">return</span> LV_RES_OK; <span class="hljs-comment">/*Retorna OK porque la matriz de botones no se borro*/</span>
 }
 
 
@@ -1979,7 +1977,7 @@ lv_label_set_text(label, <span class="hljs-string">"Inactive"</span>);</pre><p c
 .
 .
 
-<span class="hljs-comment">/*Create a button descriptor string array*/</span>
+<span class="hljs-comment">/*Crea un arreglo de cadenas que describen la matriz*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * btnm_map[] = {<span class="hljs-string">"1"</span>, <span class="hljs-string">"2"</span>, <span class="hljs-string">"3"</span>, <span class="hljs-string">"4"</span>, <span class="hljs-string">"5"</span>, <span class="hljs-string">"\n"</span>,
                            <span class="hljs-string">"6"</span>, <span class="hljs-string">"7"</span>, <span class="hljs-string">"8"</span>, <span class="hljs-string">"9"</span>, <span class="hljs-string">"0"</span>, <span class="hljs-string">"\n"</span>,
                            <span class="hljs-string">"\202Action1"</span>, <span class="hljs-string">"Action2"</span>, <span class="hljs-string">""</span>};
@@ -1987,13 +1985,13 @@ lv_label_set_text(label, <span class="hljs-string">"Inactive"</span>);</pre><p c
 
 
 
-<span class="hljs-comment">/*Create a default button matrix*/</span>
+<span class="hljs-comment">/*Crea una matriz de botones por default*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * btnm1 = lv_btnm_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_btnm_set_map(btnm1, btnm_map);
 lv_btnm_set_action(btnm1, btnm_action);
 lv_obj_set_size(btnm1, LV_HOR_RES, LV_VER_RES / <span class="hljs-number">2</span>);
 
-<span class="hljs-comment">/*Create a new style for the button matrix back ground*/</span>
+<span class="hljs-comment">/*Crea un nuevo estilo para el fondo de la matriz de botones*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_bg;
 lv_style_copy(&amp;style_bg, &amp;lv_style_plain);
 style_bg.body.main_color = LV_COLOR_SILVER;
@@ -2002,7 +2000,7 @@ style_bg.body.padding.hor = <span class="hljs-number">0</span>;
 style_bg.body.padding.ver = <span class="hljs-number">0</span>;
 style_bg.body.padding.inner = <span class="hljs-number">0</span>;
 
-<span class="hljs-comment">/*Create 2 button styles*/</span>
+<span class="hljs-comment">/*Crea 2 estilos de botones*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_btn_rel;
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_btn_pr;
 lv_style_copy(&amp;style_btn_rel, &amp;lv_style_btn_rel);
@@ -2018,7 +2016,7 @@ style_btn_pr.body.main_color = LV_COLOR_MAKE(<span class="hljs-number">0x55</spa
 style_btn_pr.body.grad_color = LV_COLOR_MAKE(<span class="hljs-number">0x37</span>, <span class="hljs-number">0x62</span>, <span class="hljs-number">0x90</span>);
 style_btn_pr.text.color = LV_COLOR_MAKE(<span class="hljs-number">0xbb</span>, <span class="hljs-number">0xd5</span>, <span class="hljs-number">0xf1</span>);
 
-<span class="hljs-comment">/*Create a second button matrix with the new styles*/</span>
+<span class="hljs-comment">/*Crea una segunda matriz de botones con los nuevos estilos*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * btnm2 = lv_btnm_create(lv_scr_act(), btnm1);
 lv_btnm_set_style(btnm2, LV_BTNM_STYLE_BG, &amp;style_bg);
 lv_btnm_set_style(btnm2, LV_BTNM_STYLE_BTN_REL, &amp;style_btn_rel);
@@ -2382,49 +2380,49 @@ style_bg.text.color = LV_COLOR_MAKE(<span class="hljs-number">0x10</span>, <span
 lv_obj_align(ddl2, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_TOP_RIGHT, <span class="hljs-number">-30</span>, <span class="hljs-number">10</span>);
 lv_obj_set_free_num(ddl2, <span class="hljs-number">2</span>);       <span class="hljs-comment">/*Set a unique ID*/</span>
 lv_obj_set_style(ddl2, &amp;style_bg);</pre><p class="page" id="Gauge_es"></p><h1>Gauge (lv_gauge)</h1>
-<p><em>Written for v5.1</em></p>
-<h2 id="overview">Overview</h2>
-<p>The gauge is a meter with <strong>scale labels</strong> and <strong>needles</strong>. You can use the <code>lv_gauge_set_scale(gauge, angle, line_num, label_cnt)</code> function to adjust the scale angle and the number of the scale lines and labels. The default settings are:  220 degrees, 6 scale labels and 21 lines.</p>
-<p>The gauge can show <strong>more then one needles</strong> . Use the <code>lv_gauge_set_needle_count(gauge, needle_num, color_array)</code> function to set the number of needles and an array with colors for each needle. (The array must be static or global variable).</p>
-<p>You can use <code>lv_gauge_set_value(gauge, needle_id, value)</code> to <strong>set the value of a needle</strong>.</p>
-<p>To set a <strong>critical value</strong> use <code>lv_gauge_set_critical_value(gauge, value)</code>. The scale color ill be changed to <em>line.color</em> after this value. (default: 80)</p>
-<p>The <strong>range</strong> of the gauge can be specified by <code>lv_gauge_set_range(gauge, min, max)</code>.</p>
-<h2 id="style-usage">Style usage</h2>
-<p>The gauge uses one style which can be set by <code>lv_gauge_set_style(gauge, &amp;style)</code>. The gauge&#39;s properties are derived from the following style attributes:</p>
+<p><em>Escrito para v5.1</em></p>
+<h2 id="visi-n-general">Visión general</h2>
+<p>El indicador es un metro con <strong>etiquetas de escala</strong> y <strong>agujas</strong>. Puedes usar la funcion <code>lv_gauge_set_scale(gauge, angle, line_num, label_cnt)</code> Para ajustar el ángulo de la escala y el número de líneas de escala y etiquetas. Los ajustes por defecto son: 220 grados, 6 etiquetas de escala y 21 líneas.</p>
+<p>El indicador puede mostrar <strong>mas de una aguja</strong>. Usa la funcion <code>lv_gauge_set_needle_count(gauge, needle_num, color_array)</code> para establecer el número de agujas y un arreglo con los colores de cada aguja (El arreglo debe de ser una variable estática o global).</p>
+<p>Puedes usar <code>lv_gauge_set_value(gauge, needle_id, value)</code> para <strong>establecer el valor de una aguja</strong>.</p>
+<p>Para establecer un <strong>valor critico</strong> usa <code>lv_gauge_set_critical_value(gauge, value)</code>. El color de la escala será cambiado a <em>line.color</em> después de este valor. (default: 80)</p>
+<p>El <strong>rango</strong> de un indicador puede ser especificado con <code>lv_gauge_set_range(gauge, min, max)</code>.</p>
+<h2 id="uso-de-estilos">Uso de estilos</h2>
+<p>El indicador usa un estilo el cual puede ser establecido con <code>lv_gauge_set_style(gauge, &amp;style)</code>. Las propiedades del indicador son derivadas de los siguientes atributos de estilo:</p>
 <ul>
-<li><strong>body.main_color</strong> line&#39;s color at the beginning of the scale</li>
-<li><strong>body.grad_color</strong> line&#39;s color at the end of the scale (gradient with main color)</li>
-<li><strong>body.padding.hor</strong> line length</li>
-<li><strong>body.padding.inner</strong> label distance from the scale lines </li>
-<li><strong>line.width</strong> line width</li>
-<li><strong>line.color</strong> line&#39;s color after the critical value</li>
-<li><strong>text.font/color/letter_space</strong> label attributes</li>
+<li><strong>body.main_color</strong> Color de la línea al inicio de la escala.</li>
+<li><strong>body.grad_color</strong> Color de la línea al final de la escala (gradiente con el color principal).</li>
+<li><strong>body.padding.hor</strong> Longitud de la línea.</li>
+<li><strong>body.padding.inner</strong> Distancia de la etiqueta con las líneas de escala.</li>
+<li><strong>line.width</strong> Grosor de la línea.</li>
+<li><strong>line.color</strong> Color de la línea despues del valor critico.</li>
+<li><strong>text.font/color/letter_space</strong> Atributos de la etiqueta.</li>
 </ul>
-<h2 id="example">Example</h2>
+<h2 id="ejemplo">Ejemplo</h2>
 <p><img src="http://docs.littlevgl.com/img/gauge-lv_gauge.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Create a style*/</span>
+<pre class="hljs"><span class="hljs-comment">/*Crea un estilo*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style;
 lv_style_copy(&amp;style, &amp;lv_style_pretty_color);
-style.body.main_color = LV_COLOR_HEX3(<span class="hljs-number">0x666</span>);     <span class="hljs-comment">/*Line color at the beginning*/</span>
-style.body.grad_color =  LV_COLOR_HEX3(<span class="hljs-number">0x666</span>);    <span class="hljs-comment">/*Line color at the end*/</span>
-style.body.padding.hor = <span class="hljs-number">10</span>;                      <span class="hljs-comment">/*Scale line length*/</span>
-style.body.padding.inner = <span class="hljs-number">8</span> ;                    <span class="hljs-comment">/*Scale label padding*/</span>
-style.body.border.color = LV_COLOR_HEX3(<span class="hljs-number">0x333</span>);   <span class="hljs-comment">/*Needle middle circle color*/</span>
+style.body.main_color = LV_COLOR_HEX3(<span class="hljs-number">0x666</span>);     <span class="hljs-comment">/*Color de la linea al inicio*/</span>
+style.body.grad_color =  LV_COLOR_HEX3(<span class="hljs-number">0x666</span>);    <span class="hljs-comment">/*Color de la linea al final*/</span>
+style.body.padding.hor = <span class="hljs-number">10</span>;                      <span class="hljs-comment">/*Escala la longitud de la linea*/</span>
+style.body.padding.inner = <span class="hljs-number">8</span> ;                    <span class="hljs-comment">/*Padding de la escala*/</span>
+style.body.border.color = LV_COLOR_HEX3(<span class="hljs-number">0x333</span>);   <span class="hljs-comment">/*Color del circulo central de la aguja*/</span>
 style.line.width = <span class="hljs-number">3</span>;
 style.text.color = LV_COLOR_HEX3(<span class="hljs-number">0x333</span>);
-style.line.color = LV_COLOR_RED;                  <span class="hljs-comment">/*Line color after the critical value*/</span>
+style.line.color = LV_COLOR_RED;                  <span class="hljs-comment">/*Color de la linea despues del valor critico*/</span>
 
 
-<span class="hljs-comment">/*Describe the color for the needles*/</span>
+<span class="hljs-comment">/*Describe el color de las agujas*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_color_t</span> needle_colors[] = {LV_COLOR_BLUE, LV_COLOR_ORANGE, LV_COLOR_PURPLE};
 
-<span class="hljs-comment">/*Create a gauge*/</span>
+<span class="hljs-comment">/*Crea un indicador (gauge)*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * gauge1 = lv_gauge_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_gauge_set_style(gauge1, &amp;style);
 lv_gauge_set_needle_count(gauge1, <span class="hljs-number">3</span>, needle_colors);
 lv_obj_align(gauge1, <span class="hljs-literal">NULL</span>, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">20</span>);
 
-<span class="hljs-comment">/*Set the values*/</span>
+<span class="hljs-comment">/*Establece los valores*/</span>
 lv_gauge_set_value(gauge1, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
 lv_gauge_set_value(gauge1, <span class="hljs-number">1</span>, <span class="hljs-number">20</span>);
 lv_gauge_set_value(gauge1, <span class="hljs-number">2</span>, <span class="hljs-number">30</span>);</pre><p class="page" id="Image_es"></p><h1>Imagen (lv_img)</h1>
@@ -2740,19 +2738,19 @@ lv_list_set_style(list2, LV_LIST_STYLE_BTN_PR, &amp;style_btn_pr);
 label = lv_label_create(lv_scr_act(), label);       <span class="hljs-comment">/*Copy the previous label*/</span>
 lv_label_set_text(label, <span class="hljs-string">"Modified"</span>);
 lv_obj_align(label, list2, LV_ALIGN_OUT_TOP_MID, <span class="hljs-number">0</span>, <span class="hljs-number">-10</span>);</pre><p class="page" id="LED_es"></p><h1>LED (lv_led)</h1>
-<p><em>Written for v5.1</em></p>
-<h2 id="overview">Overview</h2>
-<p>The LEDs are rectangle-like (or circle) object. You can set their <strong>brightness</strong> with <code>lv_led_set_bright(led, bright)</code>. The brightness should be between 0 (darkest) and 255 (lightest).</p>
-<p>Use <code>lv_led_on(led)</code> and <code>lv_led_off(led)</code> to set the brightness to a predefined  ON or OFF value.  The <code>lv_led_toggle(led)</code> toggles between the ON and OFF state.</p>
-<h2 id="style-usage">Style usage</h2>
-<p>The LED uses one style which can be set by <code>lv_led_set_style(led, &amp;style)</code>. To determine the appearance the <strong>style.body</strong> properties are used. The colors are darkened and shadow width is reduced at a lower brightness and gains its original value at brightness 255 to show a lighting effect.  The default style is: <code>lv_style_pretty_color</code>.</p>
-<h2 id="notes">Notes</h2>
+<p><em>Escrito para v5.1</em></p>
+<h2 id="visi-n-general">Visión general</h2>
+<p>Los LEDs son objetos rectangulares (o circulares). Puedes establecer su <strong>brillo</strong> con <code>lv_led_set_bright(led, bright)</code>. El brillo debe de estar entre 0 (el más oscuro) y 255 (el más brillante).</p>
+<p>Usa <code>lv_led_on(led)</code> y <code>lv_led_off(led)</code> para establecer el brillo a un valor ON o OFF predefinido. La función <code>lv_led_toggle(led)</code> togglea entre los estados ON y OFF.</p>
+<h2 id="uso-de-estilos">Uso de estilos</h2>
+<p>El LED usa un estilo que se puede establecer con <code>lv_led_set_style(led, &amp;style)</code>. Para determinadar la apariencia las propiedades <strong>style.body</strong> son usadas. Los colores se oscurecen y el ancho de la sombra se reduce al brillo más bajo y gana su valor original en el brillo 255 para mostrar un efecto de iluminación. El estilo por defecto es: <code>lv_style_pretty_color</code>.</p>
+<h2 id="notas">Notas</h2>
 <ul>
-<li>Typically the default style is not suitable therefore you have to create you own style. See the Examples.</li>
+<li>Normalmente, el estilo predeterminado no es adecuado, por lo que debes de crear tu propio estilo. Ve los ejemplos.</li>
 </ul>
-<h2 id="example">Example</h2>
+<h2 id="ejemplo">Ejemplo</h2>
 <p><img src="http://docs.littlevgl.com/img/led-lv_led.png" /></p>
-<pre class="hljs"><span class="hljs-comment">/*Create a style for the LED*/</span>
+<pre class="hljs"><span class="hljs-comment">/*Crea un estilo para el LED*/</span>
 <span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_led;
 lv_style_copy(&amp;style_led, &amp;lv_style_pretty_color);
 style_led.body.radius = LV_RADIUS_CIRCLE;
@@ -2764,24 +2762,23 @@ style_led.body.border.opa = LV_OPA_30;
 style_led.body.shadow.color = LV_COLOR_MAKE(<span class="hljs-number">0xb5</span>, <span class="hljs-number">0x0f</span>, <span class="hljs-number">0x04</span>);
 style_led.body.shadow.width = <span class="hljs-number">10</span>;
 
-
-<span class="hljs-comment">/*Create a LED and switch it ON*/</span>
+<span class="hljs-comment">/*Crea un LED y enciéndelo*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * led1  = lv_led_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_obj_set_style(led1, &amp;style_led);
 lv_obj_align(led1, <span class="hljs-literal">NULL</span>, LV_ALIGN_IN_TOP_MID, <span class="hljs-number">40</span>, <span class="hljs-number">40</span>);
 lv_led_on(led1);
 
-<span class="hljs-comment">/*Copy the previous LED and set a brightness*/</span>
+<span class="hljs-comment">/*Copia el LED previo y establece un brillo*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * led2  = lv_led_create(lv_scr_act(), led1);
 lv_obj_align(led2, led1, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">40</span>);
 lv_led_set_bright(led2, <span class="hljs-number">190</span>);
 
-<span class="hljs-comment">/*Copy the previous LED and switch it OFF*/</span>
+<span class="hljs-comment">/*Copia el LED previo y apágalo*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * led3  = lv_led_create(lv_scr_act(), led1);
 lv_obj_align(led3, led2, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number">0</span>, <span class="hljs-number">40</span>);
 lv_led_off(led3);
 
-<span class="hljs-comment">/*Create 3 labels next to the LEDs*/</span>
+<span class="hljs-comment">/*Crea 3 etiquetas junto a los LEDs*/</span>
 <span class="hljs-keyword">lv_obj_t</span> * label = lv_label_create(lv_scr_act(), <span class="hljs-literal">NULL</span>);
 lv_label_set_text(label, <span class="hljs-string">"LED On"</span>);
 lv_obj_align(label, led1, LV_ALIGN_OUT_LEFT_MID, <span class="hljs-number">-40</span>, <span class="hljs-number">0</span>);
@@ -3328,17 +3325,17 @@ lv_obj_align(slider2, slider1, LV_ALIGN_OUT_BOTTOM_MID, <span class="hljs-number
 <span class="hljs-keyword">lv_obj_t</span> * slider2_label = lv_label_create(lv_scr_act(), slider1_label);
 lv_label_set_text(slider2_label, <span class="hljs-string">"Modified"</span>);
 lv_obj_align(slider2_label, slider2, LV_ALIGN_OUT_LEFT_MID, <span class="hljs-number">-30</span>, <span class="hljs-number">0</span>);</pre><p class="page" id="Spinbox_es"></p><h1>Spinbox (lv_spinbox)</h1>
-<p><em>Written for v5.3</em></p>
+<p><em>Escrito para v5.3</em></p>
 <ul>
-<li>This is a work in progress</li>
+<li>Esto es un trabajo en progreso</li>
 </ul>
-<h2 id="overview">Overview</h2>
-<h2 id="style-usage">Style usage</h2>
-<h2 id="notes">Notes</h2>
+<h2 id="visi-n-general">Visión general</h2>
+<h2 id="uso-de-estilos">Uso de estilos</h2>
+<h2 id="notas">Notas</h2>
 <ul>
-<li>note</li>
+<li>nota</li>
 </ul>
-<h2 id="example">Example</h2>
+<h2 id="ejemplo">Ejemplo</h2>
 <p><img src="https://user-images.githubusercontent.com/13847288/47869506-6676d000-de07-11e8-807b-1dbaa238e2c8.gif" /></p>
 <pre class="hljs"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">spinbox_value_changed</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span> * spinbox)</span>
 </span>{
