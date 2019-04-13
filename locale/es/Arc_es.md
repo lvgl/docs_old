@@ -17,7 +17,7 @@ Para **configurar e estilo** de un objeto Arco usa `lv_arc_set_style(arc, LV_ARC
 - El **ancho y alto** del arco deben ser el **mismo**.
 - Actualmente, el objeto arco **no soporta anti-aliasing (suavizado)**.
 
-## Ejample
+## Ejemplo
 
 ![Arc image](http://docs.littlevgl.com/img/arc-lv_arc.png)
 
