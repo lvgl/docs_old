@@ -1,34 +1,33 @@
-_Written for v5.1, revision 2_
+_Escrito para v5.1, revision 2_
 
-## Overview
+## Visión general
 
-The Switch can be used to **turn on/off**  something. The look like a little slider. The state of the switch can be changed by:
+El Switch puede ser usado para **encender/apagar** algo. Se ven como un slider pequeño. El estado del switch puede ser cambiado con:
+- Click en el.
+- Sliding en el.
+- Usando las funciones `lv_sw_on(sw)` y `lv_sw_off(sw)`.
 
-- Clicking on it
-- Sliding it
-- Using `lv_sw_on(sw)` and `lv_sw_off(sw)` functions
+Puedes asignar una **función de callback** para que sea llamada cuando el usuario usa el switch: `lv_sw_set_action(sw, my_action)`.
 
-A **callback function** can be assigned to call when the user uses the switch: `lv_sw_set_action(sw, my_action)`.
+**Nuevo en v5.3**: Los Switched pueden ser animados llamando `lv_sw_set_anim_time(sw, anim_ms)`.
 
-**New in v5.3**: Switches can be animated by calling `lv_sw_set_anim_time(sw, anim_ms)`.
+## Uso de estilos
 
-## Style usage
+Puedes modificar el estilo del Switch con `lv_sw_set_style(sw, LV_SW_STYLE_..., &style)`.
 
-You can modify the Switch's styles with `lv_sw_set_style(sw, LV_SW_STYLE_..., &style)`.
+- **LV_SW_STYLE_BG** Estilo del fondo. All _style.body_ properties are used. Los valores _padding_ hacen al Switch más pequeño que la perilla (los valores negativos lo hacen más grande).
+- **LV_SW_STYLE_INDIC** Estilo del indicador. Todas las propiedades _style.body_ son usadas. Los valores _padding_ hacen al indicador más pequeño que el fondo.
+- **LV_SW_STYLE_KNOB_OFF** Estilo de la perilla cuando el switch esta apagado. Las propiedades _style.body_ son usadas excepto padding.
+- **LV_SW_STYLE_KNOB_ON** Estilo de la perilla cuando el switch esta encendido.  Las propiedades _style.body_ son usadas excepto padding.
 
-- **LV_SW_STYLE_BG** Style of the background. All _style.body_ properties are used. The _padding_ values make the Switch smaller then the knob. (negative value makes is larger)
-- **LV_SW_STYLE_INDIC** Style of the indicator. All _style.body_ properties are used. The _padding_ values make the indicator smaller then the background. 
-- **LV_SW_STYLE_KNOB_OFF** Style of the knob when the switch is off.  The _style.body_ properties are used except padding.
-- **LV_SW_STYLE_KNOB_ON** Style of the knob when the switch is on.  The _style.body_ properties are used except padding.
+## Notas
 
-## Notes
+- La perilla no es un objeto real, solo es dibujado sobre la barra.
 
-- The Knob is not a real object it is only drawn above the Bar
-
-## Example
+## Ejemplo
 ![Switch image](http://docs.littlevgl.com/img/switch-lv_sw.png)
 ```c
-/*Create styles for the switch*/
+/*Crea estilos para el switch*/
 static lv_style_t bg_style;
 static lv_style_t indic_style;
 static lv_style_t knob_on_style;
@@ -53,7 +52,7 @@ knob_on_style.body.radius = LV_RADIUS_CIRCLE;
 knob_on_style.body.shadow.width = 4;
 knob_on_style.body.shadow.type = LV_SHADOW_BOTTOM;
 
-/*Create a switch and apply the styles*/
+/*Crea un switch y aplica los estilos*/
 lv_obj_t *sw1 = lv_sw_create(lv_scr_act(), NULL);
 lv_sw_set_style(sw1, LV_SW_STYLE_BG, &bg_style);
 lv_sw_set_style(sw1, LV_SW_STYLE_INDIC, &indic_style);
@@ -61,7 +60,7 @@ lv_sw_set_style(sw1, LV_SW_STYLE_KNOB_ON, &knob_on_style);
 lv_sw_set_style(sw1, LV_SW_STYLE_KNOB_OFF, &knob_off_style);
 lv_obj_align(sw1, NULL, LV_ALIGN_CENTER, 0, -50);
 
-/*Copy the first switch and turn it ON*/
+/*Copia el primer switch y lo enciende*/
 lv_obj_t *sw2 = lv_sw_create(lv_scr_act(), sw1);
 lv_sw_set_on(sw2);
 lv_obj_align(sw2, NULL, LV_ALIGN_CENTER, 0, 50);
