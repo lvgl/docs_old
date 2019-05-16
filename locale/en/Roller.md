@@ -21,7 +21,7 @@ The Roller's open/close **animation** time is adjusted by `lv_roller_set_anim_ti
 The `lv_roller_set_style(roller, LV_ROLLER_STYLE_..., &style)` set the styles of a roller.
 
 - **LV_ROLLER_STYLE_BG** Style of the background. All _style.body_ properties are used. It is used for the label's style from _style.text_. Gradient is applied on the top and bottom as well. Default: _lv_style_pretty_
-- **LV_DDLIST_STYLE_SEL** Style of the selected option.  The _style.body_ properties are used. The selected option will be recolored with _text.color_. Default: _lv_style_plain_color_
+- **LV_ROLLER_STYLE_SEL** Style of the selected option.  The _style.body_ properties are used. The selected option will be recolored with _text.color_. Default: _lv_style_plain_color_
 
 ## Example
 ![Roller image](http://docs.littlevgl.com/img/roller-lv_roller.png)
