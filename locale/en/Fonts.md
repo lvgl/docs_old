@@ -49,7 +49,7 @@ lv_label_set_text(label1,"Right "SYMBOL_RIGHT);
 
 The symbols can be used without UTF-8 support as well. (_LV_TXT_UTF8 0_)
 
-The list above shows the existing symbols:
+The list below shows the existing symbols:
 
 ![Basic symbols](https://littlevgl.com/docs/symbols.png)
 
