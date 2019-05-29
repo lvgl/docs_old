@@ -63,6 +63,6 @@ lv_obj_align(sw1, NULL, LV_ALIGN_CENTER, 0, -50);
 
 /*Copy the first switch and turn it ON*/
 lv_obj_t *sw2 = lv_sw_create(lv_scr_act(), sw1);
-lv_sw_set_on(sw2);
+lv_sw_on(sw2);
 lv_obj_align(sw2, NULL, LV_ALIGN_CENTER, 0, 50);
 ```
