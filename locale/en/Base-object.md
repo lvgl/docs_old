@@ -14,6 +14,8 @@ You can set the **x and y coordinates** relative to the parent with `lv_obj_set_
 
 The **object size** can be modified with `lv_obj_set_width(obj, new_width)` and `lv_obj_set_height(obj, new_height)` or in one function with `lv_obj_set_size(obj, new_width, new_height)`. 
 
+Note that these functions only work for objects with a parent. Screens do not have a parent, and attempting to use these functions will result in undefined behavior.
+
 You can **align**  the object to an other with `lv_obj_align(obj1, obj2, LV_ALIGN_TYPE, x_shift, y_shift)`. The last two argument means an x and y shift after the alignment. The second argument is another object on which to align the first (`NULL` means: align to the parent). The third argument is the type of alignment:
 ![Alignment types](http://docs.littlevgl.com/img/align.png)
 
