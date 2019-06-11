@@ -1,41 +1,41 @@
-_Written for v5.1_
+_Escrito para v5.1_
 
-## Overview
+## Visión general
 
-The Bar objects have got two main parts: a **background** which is the object itself and an **indicator** which shape is similar to the background but its width/height can be adjusted. 
+Los objetos barra tienen dos partes principales: un **fondo** que es el objeto en sí mismo y un **indicador** cuya forma es similar a la del fondo pero su anchura/altura puede ser ajustada.
 
-The orientation of the bar can be **vertical or horizontal** according to the width/height ratio. Logically on horizontal bars the indicator width, on vertical bars the indicator height can be changed. 
+La orientacion de la barra puede ser **vertical u horizontal** de acuerdo con la relación ancho/alto. Logicamente en barras horizontales el ancho del indicador y en barras verticales el alto del indicador pueden ser cambiados.
 
-A **new value** can be set by: `lv_bar_set_value(bar, new_value)`. The value is interpreted in **range** (minimum and maximum values) which can be modified with: `lv_bar_set_range(bar, min, max)`. The default range is: 1..100.
+Un **nuevo valor** se puede ajustar con: `lv_bar_set_value(bar, new_value)`. El valor es interpretado en **rango** (valores minimo y maximo) que pueden ser modificados con: `lv_bar_set_range(bar, min, max)`. El rango por defecto es: 1..100.
 
-The setting of a new value can happen with an **animation** from the current value to the desired. In this case use `lv_bar_set_value_anim(bar, new_value, anim_time)`.
+La configuración de un nuevo valor puede ocurrie con una **animación** desde el valor actual hasta el valor deseado. En este caso usa `lv_bar_set_value_anim(bar, new_value, anim_time)`.
 
-## Style usage
+## Uso de estilos
 
-- **background** is a [[Base object]]therefore it uses its style elements. Its default style is: `LV_STYLE_PRETTY`.  
-- **indicator** is similar to the background. Its styles can be set by: `lv_bar_set_style_indic(bar,&style_indic)`. It uses the _hpad_ and _vpad_ style elements to keep space from the background. Its default style is: `LV_STYLE_PRETTY_COLOR`.
+- **fondo** es un [[Base object]]por lo tanto utiliza los elementos de su estilo. Su estilo por defecto es: `LV_STYLE_PRETTY`.
+- **indicador** es similar al fondo. Su estilo puede ser configurado con: `lv_bar_set_style_indic(bar,&style_indic)`. Etiliza los elementos de estilo _hpad_ y _vpad_ para mantener el espacio con el fondo. Su estilo por defecto es: `LV_STYLE_PRETTY_COLOR`.
 
-## Notes
+## Notas
 
-- The indicator is not a real object; it is only drawn by the bar.
+- El indicador no es un objeto real, solo es dibujado por la barra.
 
-## Example
+## Ejemplo
 
 ![Bar image](http://docs.littlevgl.com/img/bar-lv_bar.png)
 
 ```c
-/*Create a default bar*/
+/*Crea una barra por defecto*/
 lv_obj_t * bar1 = lv_bar_create(lv_scr_act(), NULL);
 lv_obj_set_size(bar1, 200, 30);
 lv_obj_align(bar1, NULL, LV_ALIGN_IN_TOP_RIGHT, -20, 30);
 lv_bar_set_value(bar1, 70);
 
-/*Create a label right to the bar*/
+/*Crea una etiqueta a la derecha de la barra*/
 lv_obj_t * bar1_label = lv_label_create(lv_scr_act(), NULL);
 lv_label_set_text(bar1_label, "Default");
 lv_obj_align(bar1_label, bar1, LV_ALIGN_OUT_LEFT_MID, -10, 0);
 
-/*Create a bar and an indicator style*/
+/*Crea estilos para la barra y para el indicador*/
 static lv_style_t style_bar;
 static lv_style_t style_indic;
 
@@ -51,16 +51,16 @@ style_indic.body.main_color=  LV_COLOR_LIME;
 style_indic.body.radius = LV_RADIUS_CIRCLE;
 style_indic.body.shadow.width = 10;
 style_indic.body.shadow.color = LV_COLOR_LIME;
-style_indic.body.padding.hor = 3;           /*Make the indicator a little bit smaller*/
+style_indic.body.padding.hor = 3;           /*Hace al indicador un poco mas chico*/
 style_indic.body.padding.ver = 3;
 
 /*Create a second bar*/
 lv_obj_t * bar2 = lv_bar_create(lv_scr_act(), bar1);
 lv_bar_set_style(bar2, LV_BAR_STYLE_BG, &style_bar);
 lv_bar_set_style(bar2, LV_BAR_STYLE_INDIC, &style_indic);
-lv_obj_align(bar2, bar1, LV_ALIGN_OUT_BOTTOM_MID, 0, 30); /*Align below 'bar1'*/
+lv_obj_align(bar2, bar1, LV_ALIGN_OUT_BOTTOM_MID, 0, 30); /*Alinea abajo de 'bar1'*/
 
-/*Create a second label*/
+/*Crea una segunda etiqueta*/
 lv_obj_t * bar2_label = lv_label_create(lv_scr_act(), bar1_label);
 lv_label_set_text(bar2_label, "Modified");
 lv_obj_align(bar2_label, bar2, LV_ALIGN_OUT_LEFT_MID, -10, 0);

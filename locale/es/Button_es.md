@@ -1,49 +1,49 @@
-_Written for v5.1, revision 2_
+_Escrito para v5.1, revision 2_
 
-## Overview
+## Visión general
 
-Buttons can react on user **press**, **release** or **long press** via callback functions (`lv_action_t` function pointers). You can set the callback functions with: `lv_btn_set_action(btn, ACTION_TYPE, callback_func)`. The possible action types are:
+Los botones pueden reaccionar a **presion**, **liberación** o **presiones largas** del usuario via funciones de callback (`lv_action_t` punteros a funciones). Puedes establecer las funciones de callback con: `lv_btn_set_action(btn, ACTION_TYPE, callback_func)`. Los tipos de acciones posibles son:
 
-- LV_BTN_ACTION_CLICK: the button is released after pressing (clicked) or, when using keypad, after the key `LV_GROUP_KEY_ENTER` is released
-- LV_BTN_ACTION_PR: the button is pressed
-- LV_BTN_ACTION_LONG_PR: the button is long pressed
-- LV_BTN_ACTION_LONG_PR_REPEAT: the button is long pressed and this action is triggered periodically
+- LV_BTN_ACTION_CLICK: El botón es liberado después de ser presionado (click) o, cuando usando keypad, después de que la tecla `LV_GROUP_KEY_ENTER` es liberada.
+- LV_BTN_ACTION_PR: El botón es presionado.
+- LV_BTN_ACTION_LONG_PR: El botón tiene una presion larga.
+- LV_BTN_ACTION_LONG_PR_REPEAT: El botón tuvo una presión larga y esta acción es llamada periodicamente.
 
-Buttons can be in one of the **five possible states**:
+Los botones pueden tener uno de los **cinco posibles estados**:
 
-- LV_BTN_STATE_REL Released state
-- LV_BTN_STATE_PR Pressed state
-- LV_BTN_STATE_TGL_REL Toggled released state (On state)
-- LV_BTN_STATE_TGL_PR Toggled pressed state (On pressed state)
-- LV_BTN_STATE_INA Inactive state
+- LV_BTN_STATE_REL Estado sin presionar
+- LV_BTN_STATE_PR Estado presionado
+- LV_BTN_STATE_TGL_REL Estado toggleado sin presionar (Estado On)
+- LV_BTN_STATE_TGL_PR Estado toggleado presionado (Estado presionado On)
+- LV_BTN_STATE_INA Estado inactivo
 
-The buttons can be configured as **toggle button** with `lv_btn_set_toggle(btn, true)`. In this case on release, the button goes to toggled released state.
+Los botones pueden ser configurados como **botón toggleado** con `lv_btn_set_toggle(btn, true)`. En este caso cuando se libera, el botón va al estado toggleado sin presionar.
 
-You can set the button's state manually by: `lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)`.
+Puedes establecer el estado del botón manualmente con: `lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)`.
 
-A button can go to **Inactive state** only manually (by _lv_btn_set_state()_). In an Inactive state, none of the action will be called.  
+El botón puede ir a **estado inactivo** solo manualmente (con _lv_btn_set_state()_). En el estado inactivo, nunguna de las acciones sera llamada.
 
-Similarly to [Containers](/Container) buttons also have **layout** and **auto fit**:
+Similar a [Contenedores](/Container) los botones también pueden tener **layout** y **auto fit**:
 
-- `lv_btn_set_layout(btn, LV_LAYOUT_...) `set a layout. The default is LV_LAYOUT_CENTER. So if you add a label then it will be automatically aligned to the middle.
-- `lv_btn_set_fit(btn, hor_en, ver_en)` enables to set the button width and/or height automatically according to the children.
+- `lv_btn_set_layout(btn, LV_LAYOUT_...)` establece un layout. El layout por defecto es LV_LAYOUT_CENTER. Por lo tanto si agregas una etiqueta sera automaticamente alineada a la mitad.
+- `lv_btn_set_fit(btn, hor_en, ver_en)` habilita el poder establecer el ancho y/o el alto automaticamente de acuerdo al hijo.
 
-## Style usage
+## Uso de estilos
 
-A button can have 5 independent styles for the 5 state. You can set them via: `lv_btn_set_style(btn, LV_BTN_STYLE_..., &style)`. The styles use the _style.body_ properties.
+Un botón puede tener 5 estilos independiente para sus 5 estados. Puedes establecerlos via: `lv_btn_set_style(btn, LV_BTN_STYLE_..., &style)`. Los estilos usan las propiedades _style.body_.
 
-- **LV_BTN_STYLE_REL** style of the released state. Default: _lv_style_btn_rel_
-- **LV_BTN_STYLE_PR** style of the pressed state. Default: _lv_style_btn_pr_
-- **LV_BTN_STYLE_TGL_REL** style of the toggled released state. Default: _lv_style_btn_tgl_rel_
-- **LV_BTN_STYLE_TGL_PR** style of the toggled pressed state. Default: _lv_style_btn_tgl_pr_
-- **LV_BTN_STYLE_INA** style of the inactive state. Default: _lv_style_btn_ina_
+- **LV_BTN_STYLE_REL** Estilo del estado sin presionar. Default: _lv_style_btn_rel_
+- **LV_BTN_STYLE_PR** Estilo del estado presionado. Default: _lv_style_btn_pr_
+- **LV_BTN_STYLE_TGL_REL** Estilo del estado toggleado sin presionar. Default: _lv_style_btn_tgl_rel_
+- **LV_BTN_STYLE_TGL_PR** Estilo del estado toggleado presionado. Default: _lv_style_btn_tgl_pr_
+- **LV_BTN_STYLE_INA** Estilo del estado inactivo. Default: _lv_style_btn_ina_
 
-## Notes
+## Notas
 
-- If a button is dragged its click and long press action will not be called
-- If a button was long pressed and its long press action was set then its click action will not be called
+- Si un botón se arrastra, sus acciones de click y presion larga no serán llamadas.
+- Si un botón fue presionado por largo tiempo y su acción de presion larga fue establecida entonces su acción de click no será llamada.
 
-## Example
+## Ejemplo
 ![Button image](http://docs.littlevgl.com/img/button-lv_btn.png)
 ```c
 static lv_res_t btn_click_action(lv_obj_t * btn)
@@ -52,49 +52,46 @@ static lv_res_t btn_click_action(lv_obj_t * btn)
 
     printf("Button %d is released\n", id);
 
-    /* The button is released.
-     * Make something here */
+    /* Se soltó el botón.
+     * Haz algo aqui */
 
-    return LV_RES_OK; /*Return OK if the button is not deleted*/
+    return LV_RES_OK; /*Retorna OK si el botón no se borro*/
 }
 
-.
-.
-.
 
-/*Create a title label*/
+/*Crea una etiqueta de título*/
 lv_obj_t * label = lv_label_create(lv_scr_act(), NULL);
 lv_label_set_text(label, "Default buttons");
 lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_MID, 0, 5);
 
-/*Create a normal button*/
+/*Crea un botón normal*/
 lv_obj_t * btn1 = lv_btn_create(lv_scr_act(), NULL);
-lv_cont_set_fit(btn1, true, true); /*Enable resizing horizontally and vertically*/
+lv_cont_set_fit(btn1, true, true); /*Habilita el redimensionamiento horizontal y vertical*/
 lv_obj_align(btn1, label, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);
-lv_obj_set_free_num(btn1, 1);   /*Set a unique number for the button*/
+lv_obj_set_free_num(btn1, 1);   /*Establece un número unico para el botón*/
 lv_btn_set_action(btn1, LV_BTN_ACTION_CLICK, btn_click_action);
 
-/*Add a label to the button*/
+/*Agrega una etiqueta al botón*/
 label = lv_label_create(btn1, NULL);
 lv_label_set_text(label, "Normal");
 
-/*Copy the button and set toggled state. (The release action is copied too)*/
+/*Copia el botón y establece el estado toggle. (La acción de release también es copiada)*/
 lv_obj_t * btn2 = lv_btn_create(lv_scr_act(), btn1);
 lv_obj_align(btn2, btn1, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);
-lv_btn_set_state(btn2, LV_BTN_STATE_TGL_REL);  /*Set toggled state*/
-lv_obj_set_free_num(btn2, 2);               /*Set a unique number for the button*/
+lv_btn_set_state(btn2, LV_BTN_STATE_TGL_REL);  /*Establece el estado toggleado*/
+lv_obj_set_free_num(btn2, 2); /*Establece un número unico para el botón*/
 
-/*Add a label to the toggled button*/
+/*Agrega una etiqueta al botón toggleado*/
 label = lv_label_create(btn2, NULL);
 lv_label_set_text(label, "Toggled");
 
-/*Copy the button and set inactive state.*/
+/*Copia el botón y establece el estado inactivo.*/
 lv_obj_t * btn3 = lv_btn_create(lv_scr_act(), btn1);
 lv_obj_align(btn3, btn2, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);
-lv_btn_set_state(btn3, LV_BTN_STATE_INA);   /*Set inactive state*/
-lv_obj_set_free_num(btn3, 3);               /*Set a unique number for the button*/
+lv_btn_set_state(btn3, LV_BTN_STATE_INA);   /*Establece el estado inactivo*/
+lv_obj_set_free_num(btn3, 3); /*Establece un número unico para el botón*/
 
-/*Add a label to the inactive button*/
+/*Agrega una etiqueta al botón inactivo*/
 label = lv_label_create(btn3, NULL);
 lv_label_set_text(label, "Inactive");
 ```
