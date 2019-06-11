@@ -17,7 +17,7 @@ The **knob can be placed** two ways:
 
 Use the `lv_slider_set_knob_in(slider, true/false)` to choose between the modes. (*knob_in* == _false_ is the default)
 
-## Style usage
+## Styles
 You can modify the slider's styles with `lv_slider_set_style(slider, LV_SLIDER_STYLE_..., &style)`.
 
 - **LV_SLIDER_STYLE_BG** Style of the background. All _style.body_ properties are used. The _padding_ values make the slider smaller then the knob. (negative value makes is larger)
