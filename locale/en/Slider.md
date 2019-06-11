@@ -1,4 +1,4 @@
-_Written for v5.1_
+_Written for v6.0_
 
 ## Overview
 
@@ -18,16 +18,18 @@ The **knob can be placed** two ways:
 Use the `lv_slider_set_knob_in(slider, true/false)` to choose between the modes. (*knob_in* == _false_ is the default)
 
 ## Style usage
-
 You can modify the slider's styles with `lv_slider_set_style(slider, LV_SLIDER_STYLE_..., &style)`.
 
 - **LV_SLIDER_STYLE_BG** Style of the background. All _style.body_ properties are used. The _padding_ values make the slider smaller then the knob. (negative value makes is larger)
 - **LV_SLIDER_STYLE_INDIC** Style of the indicator. All _style.body_ properties are used. The _padding_ values make the indicator smaller then the background. 
 - **LV_SLIDER_STYLE_KNOB** Style of the knob.  The _style.body_ properties are used except padding
 
-## Notes
+## Events
+- **LV_EVENT_VALUE_CHANGED** Sent while slider is being dragged or changed with keys
 
-- The Knob is not a real object it is only drawn above the Bar
+## Keys
+- **LV_KEY_UP**, **LV_KEY_RIGHT** Increment the slider's value by 1
+- **LV_KEY_DOWN**, **LV_KEY_LEFT** Decrement the slider's value by 1
 
 ## Example
 ![Slider image](http://docs.littlevgl.com/img/slider-lv_slider.png)
