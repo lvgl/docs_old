@@ -10,11 +10,37 @@ The simulator is also very useful to report bugs because it means common platfor
 
 The simulator is ported to valrious IDEs. Choose your favourite IDE, read its README on GitHub, download the project, and load it to the IDE.
 
+```eval_rst
+.. raw:: html
 
-|   Eclipse   |  CodeBlocks | Visual Studio | PlatformIO | Qt Creator |
-|-------------|-------------|---------------|-----------|------------|
-|  [![Eclipse](https://littlevgl.com/logo/ide/eclipse.jpg)](https://github.com/littlevgl/pc_simulator_sdl_eclipse) | [![CodeBlocks](https://littlevgl.com/logo/ide/codeblocks.jpg)](https://github.com/littlevgl/pc_simulator_win_codeblocks) | [![VisualStudio](https://littlevgl.com/logo/ide/visualstudio.jpg)](https://github.com/littlevgl/visual_studio_2017_sdl_x64)   |   [![PlatformIO](https://littlevgl.com/logo/ide/platformio.jpg)](https://github.com/littlevgl/pc_simulator_sdl_platformio) | [![QtCreator](https://littlevgl.com/logo/ide/qtcreator.jpg)](https://blog.littlevgl.com/2019-01-03/qt-creator) |
-| Cross-platform<br>with SDL | Native Windows | Cross-platform<br>with SDL | Cross-platform<br>with SDL | Cross-platform<br>with SDL |
+  <table style="width:100%">
+  <thead>
+  <tr>
+  <th>Eclipse</th>
+  <th>CodeBlocks</th>
+  <th>Visual Studio</th>
+  <th>PlatformIO</th>
+  <th>Qt Creator</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><a href="https://github.com/littlevgl/pc_simulator_sdl_eclipse"><img src="https://littlevgl.com/logo/ide/eclipse.jpg"></a> </td>
+  <td><a href="https://github.com/littlevgl/pc_simulator_win_codeblocks"><img src="https://littlevgl.com/logo/ide/codeblocks.jpg"></a></td>
+  <td><a href="https://github.com/littlevgl/visual_studio_2017_sdl_x64"><img src="https://littlevgl.com/logo/ide/visualstudio.jpg"></a></td>
+  <td><a href="https://github.com/littlevgl/pc_simulator_sdl_platformio"><img src="https://littlevgl.com/logo/ide/platformio.jpg"></a></td>
+  <td><a href="https://blog.littlevgl.com/2019-01-03/qt-creator"><img src="https://littlevgl.com/logo/ide/qtcreator.jpg"> </a></td>
+  </tr>
+
+  <tr>
+  <td>Cross-platform<br>with SDL 
+  </td><td>Native Windows  </td>
+  <td>Cross-platform<br>with SDL  </td>
+  <td>Cross-platform<br>with SDL </td>
+  <td>Cross-platform<br>with SDL  </td>
+  </tr>
+  </tbody></table>
+```
 
 In followings the set-up guide of Eclipse CDT is described in more details.
 

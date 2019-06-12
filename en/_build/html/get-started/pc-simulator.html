@@ -13,6 +13,8 @@
 
   
   
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
   
   
 
@@ -42,8 +44,10 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Porting" href="../porting/index.html" />
     <link rel="prev" title="Micropython" href="micropython.html" /> 
 </head>
 
@@ -58,9 +62,12 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> LittlevGL
+            <a href="../index.html">
           
 
+          
+            
+            <img src="../_static/white_white_lvgl_full_logo.svg" class="logo" alt="Logo"/>
           
           </a>
 
@@ -92,7 +99,26 @@
               
             
             
-              <ul>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Get started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="live-demo.html">Live demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="micropython.html">Micropython</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Simulator on PC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#select-an-ide">Select an IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-eclipse-cdt">Set-up Eclipse CDT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-eclipse-cdt">Install Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-sdl-2">Install SDL 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pre-configured-project">Pre-configured project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-the-pre-configured-project-to-eclipse-cdt">Add the pre-configured project to Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compile-and-run">Compile and Run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../porting/index.html">Porting</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Set-up a project</a><ul>
@@ -118,25 +144,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/task-handler.html">Task handler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/sleep.html">Sleep management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/os.html">Using with an operating system</a></li>
-</ul>
-</li>
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Get started</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="live-demo.html">Live demos</a></li>
-<li class="toctree-l2"><a class="reference internal" href="micropython.html">Micropython</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Simulator on PC</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#select-an-ide">Select an IDE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#set-up-eclipse-cdt">Set-up Eclipse CDT</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#install-eclipse-cdt">Install Eclipse CDT</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#install-sdl-2">Install SDL 2</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pre-configured-project">Pre-configured project</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#add-the-pre-configured-project-to-eclipse-cdt">Add the pre-configured project to Eclipse CDT</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#compile-and-run">Compile and Run</a></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -212,11 +219,33 @@
 <div class="section" id="select-an-ide">
 <h2>Select an IDE<a class="headerlink" href="#select-an-ide" title="Permalink to this headline">¶</a></h2>
 <p>The simulator is ported to valrious IDEs. Choose your favourite IDE, read its README on GitHub, download the project, and load it to the IDE.</p>
-<p>|   Eclipse   |  CodeBlocks | Visual Studio | PlatformIO | Qt Creator |
-|————-|————-|—————|———–|————|
-|  <a class="reference external" href="https://github.com/littlevgl/pc_simulator_sdl_eclipse"><img alt="https://littlevgl.com/logo/ide/eclipse.jpg" src="https://littlevgl.com/logo/ide/eclipse.jpg" />Eclipse</a> | <a class="reference external" href="https://github.com/littlevgl/pc_simulator_win_codeblocks"><img alt="https://littlevgl.com/logo/ide/codeblocks.jpg" src="https://littlevgl.com/logo/ide/codeblocks.jpg" />CodeBlocks</a> | <a class="reference external" href="https://github.com/littlevgl/visual_studio_2017_sdl_x64"><img alt="https://littlevgl.com/logo/ide/visualstudio.jpg" src="https://littlevgl.com/logo/ide/visualstudio.jpg" />VisualStudio</a>   |   <a class="reference external" href="https://github.com/littlevgl/pc_simulator_sdl_platformio"><img alt="https://littlevgl.com/logo/ide/platformio.jpg" src="https://littlevgl.com/logo/ide/platformio.jpg" />PlatformIO</a> | <a class="reference external" href="https://blog.littlevgl.com/2019-01-03/qt-creator"><img alt="https://littlevgl.com/logo/ide/qtcreator.jpg" src="https://littlevgl.com/logo/ide/qtcreator.jpg" />QtCreator</a> |
-| Cross-platform<br>with SDL | Native Windows | Cross-platform<br>with SDL | Cross-platform<br>with SDL | Cross-platform<br>with SDL |</p>
-<p>In followings the set-up guide of Eclipse CDT is described in more details.</p>
+<table style="width:100%">
+<thead>
+<tr>
+<th>Eclipse</th>
+<th>CodeBlocks</th>
+<th>Visual Studio</th>
+<th>PlatformIO</th>
+<th>Qt Creator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/littlevgl/pc_simulator_sdl_eclipse"><img src="https://littlevgl.com/logo/ide/eclipse.jpg"></a> </td>
+<td><a href="https://github.com/littlevgl/pc_simulator_win_codeblocks"><img src="https://littlevgl.com/logo/ide/codeblocks.jpg"></a></td>
+<td><a href="https://github.com/littlevgl/visual_studio_2017_sdl_x64"><img src="https://littlevgl.com/logo/ide/visualstudio.jpg"></a></td>
+<td><a href="https://github.com/littlevgl/pc_simulator_sdl_platformio"><img src="https://littlevgl.com/logo/ide/platformio.jpg"></a></td>
+<td><a href="https://blog.littlevgl.com/2019-01-03/qt-creator"><img src="https://littlevgl.com/logo/ide/qtcreator.jpg"> </a></td>
+</tr>
+
+<tr>
+<td>Cross-platform<br>with SDL 
+</td><td>Native Windows  </td>
+<td>Cross-platform<br>with SDL  </td>
+<td>Cross-platform<br>with SDL </td>
+<td>Cross-platform<br>with SDL  </td>
+</tr>
+</tbody></table><p>In followings the set-up guide of Eclipse CDT is described in more details.</p>
 </div>
 <div class="section" id="set-up-eclipse-cdt">
 <h2>Set-up Eclipse CDT<a class="headerlink" href="#set-up-eclipse-cdt" title="Permalink to this headline">¶</a></h2>
@@ -290,6 +319,8 @@ You can find it on <a class="reference external" href="https://github.com/little
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../porting/index.html" class="btn btn-neutral float-right" title="Porting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="micropython.html" class="btn btn-neutral float-left" title="Micropython" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

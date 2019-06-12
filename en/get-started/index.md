@@ -1,6 +1,6 @@
-Get started
-===========
+# Get started
 
+```eval_rst
 - lvgl on GihHub
 - example projects
 
@@ -10,3 +10,4 @@ Get started
    live-demo
    micropython
    pc-simulator
+```

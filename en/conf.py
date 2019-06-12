@@ -21,6 +21,8 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import recommonmark
+from recommonmark.transform import AutoStructify
 
 # -- General configuration ------------------------------------------------
 
@@ -94,7 +96,8 @@ html_theme = 'sphinx_rtd_theme'
 # documentation.
 #
 html_theme_options = {
-    "collapse_navigation" : False
+    "collapse_navigation" : False,
+    'logo_only': True,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -114,12 +117,13 @@ html_sidebars = {
     ]
 }
 
+html_favicon = 'favicon.ico'
+html_logo = 'white_white_lvgl_full_logo.svg'
 
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'LittlevGLdoc'
-
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -175,4 +179,13 @@ texinfo_documents = [
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+
+def setup(app):
+    app.add_config_value('recommonmark_config', {
+            'enable_eval_rst': True,
+            'enable_auto_toc_tree': 'True',
+            }, True)
+    app.add_transform(AutoStructify)
+    app.add_stylesheet('css/custom.css')
+
+
