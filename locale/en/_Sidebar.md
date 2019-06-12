@@ -1,6 +1,7 @@
 * [Welcome](Welcome)
+* [Get started](Get-started)
 * [Porting](Porting)
-* [PC simulator](PC-simulator)
+  * [Multi-display support](#multi-display-support)
 * [Objects](Objects)
 * [Styles](Styles)
 * [Input devices](Input-devices)

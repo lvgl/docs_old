@@ -1,5 +1,8 @@
 #HTML
-gwtc --format html --title "LittlevGL documentation" --output . --file-name index ./locale/en
+gwtc --format html --title "LittlevGL documentation"  --css external.css --output . --file-name index ./locale/en
+google-chrome index.html
+exit 0
+
 gwtc --format html --title "LittlevGL documentation" --output ./locale/pt_BR --file-name index ./locale/pt_BR
 gwtc --format html --title "LittlevGL documentation" --output ./locale/tr --file-name index ./locale/tr
 gwtc --format html --title "LittlevGL documentation" --output ./locale/es --file-name index ./locale/es 
