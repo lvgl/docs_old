@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Set-up a project &mdash; LittlevGL 6.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'6.0',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Display interface" href="display.html" />
+    <link rel="prev" title="System overview" href="sys.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> LittlevGL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Porting</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sys.html">System overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Set-up a project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-the-library">Get the library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="display.html">Display interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display.html#multi-display-support">Multi-display support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="indev.html">Input device interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="indev.html#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="indev.html#encoder">Encoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="indev.html#button">Button</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tick.html">Tick interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task-handler.html">Task handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sleep.html">Sleep management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html">Using with an operating system</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/live-demo.html">Live demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#select-an-ide">Select an IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#set-up-eclipse-cdt">Set-up Eclipse CDT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-eclipse-cdt">Install Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-sdl-2">Install SDL 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#pre-configured-project">Pre-configured project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#add-the-pre-configured-project-to-eclipse-cdt">Add the pre-configured project to Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#compile-and-run">Compile and Run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LittlevGL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Porting</a> &raquo;</li>
+        
+      <li>Set-up a project</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/porting/project.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="set-up-a-project">
+<h1>Set-up a project<a class="headerlink" href="#set-up-a-project" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="get-the-library">
+<h2>Get the library<a class="headerlink" href="#get-the-library" title="Permalink to this headline">¶</a></h2>
+<p>The Littlev Graphics Library is available on GitHub: <a class="reference external" href="https://github.com/littlevgl/lvgl">https://github.com/littlevgl/lvgl</a>.
+You can clone or download the latest version of the library from here or you can use the <a class="reference external" href="https://littlevgl.com/download">Download</a> page as well.</p>
+<p>The graphics library is the <strong>lvgl</strong> directory which should be copied into your project.</p>
+</div>
+<div class="section" id="config-file">
+<h2>Config file<a class="headerlink" href="#config-file" title="Permalink to this headline">¶</a></h2>
+<p>There is a configuration header file for LittlevGL called <strong>lv_conf.h</strong>. It sets the library’s basic behavior, disable unused modules and features, adjust the size of memory buffers in compile time.</p>
+<p>Copy <strong>lvgl/lv_conf_template.h</strong> next to the <em>lvgl</em> directory and rename it to <em>lv_conf.h</em>. Open the file and change the <code class="docutils literal"><span class="pre">#if</span> <span class="pre">0</span></code> at the beginning to <code class="docutils literal"><span class="pre">#if</span> <span class="pre">1</span></code> to enable its content.</p>
+<p>In the config file comments explain the meaning of the options. Check at least these three config options and modify them according to your hardware:</p>
+<ol class="simple">
+<li><strong>LV_HOR_RES_MAX</strong> Your display’s horizontal resolution</li>
+<li><strong>LV_VER_RES_MAX</strong> Your display’s vertical resolution</li>
+<li><strong>LV_COLOR_DEPTH</strong> 8 for (RG332), 16 for (RGB565) or 32 for (RGB888 and ARGB8888).</li>
+</ol>
+</div>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>In order to use the graphics library you have to initialize it and the other components too. To order of the initialization is:</p>
+<ol class="simple">
+<li>Call <em>lv_init()</em></li>
+<li>Initialize your drivers</li>
+<li>Register the display and input devices drivers in LittlevGL. (see below)</li>
+<li>Call <code class="docutils literal"><span class="pre">lv_tick_inc(x)</span></code> in every <code class="docutils literal"><span class="pre">x</span></code> milliseconds in an interrupt to tell the elapsed time. (see below)</li>
+<li>Call <code class="docutils literal"><span class="pre">lv_task_handler()</span></code> periodically in every few milliseconds to handle LittlevGL realted tasks. (see below)</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="display.html" class="btn btn-neutral float-right" title="Display interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sys.html" class="btn btn-neutral float-left" title="System overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Gabor Kiss-Vamosi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

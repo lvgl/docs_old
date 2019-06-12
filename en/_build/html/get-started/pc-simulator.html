@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Simulator on PC &mdash; LittlevGL 6.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'6.0',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Micropython" href="micropython.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> LittlevGL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../porting/index.html">Porting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">System overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Set-up a project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#get-the-library">Get the library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#initialization">Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#multi-display-support">Multi-display support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Input device interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/tick.html">Tick interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/task-handler.html">Task handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sleep.html">Sleep management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/os.html">Using with an operating system</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Get started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="live-demo.html">Live demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="micropython.html">Micropython</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Simulator on PC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#select-an-ide">Select an IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-eclipse-cdt">Set-up Eclipse CDT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-eclipse-cdt">Install Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-sdl-2">Install SDL 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pre-configured-project">Pre-configured project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-the-pre-configured-project-to-eclipse-cdt">Add the pre-configured project to Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compile-and-run">Compile and Run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LittlevGL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Get started</a> &raquo;</li>
+        
+      <li>Simulator on PC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/get-started/pc-simulator.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="simulator-on-pc">
+<h1>Simulator on PC<a class="headerlink" href="#simulator-on-pc" title="Permalink to this headline">¶</a></h1>
+<p>You can try out the LittlevGL <strong>using only your PC</strong> without any development boards. Write a code, run it on the PC and see the result on the monitor. It is cross-platform: Windows, Linux and OSX are supported.The written code is portable, you can simply copy it when using an embedded hardware.</p>
+<p>The simulator is also very useful to report bugs because it means common platform for every user. So it’s a good idea the reproduce a bug in simualtor and use the code snippen in the <a class="reference external" href="https://forum.littelvgl.com">Forum</a>.</p>
+<div class="section" id="select-an-ide">
+<h2>Select an IDE<a class="headerlink" href="#select-an-ide" title="Permalink to this headline">¶</a></h2>
+<p>The simulator is ported to valrious IDEs. Choose your favourite IDE, read its README on GitHub, download the project, and load it to the IDE.</p>
+<p>|   Eclipse   |  CodeBlocks | Visual Studio | PlatformIO | Qt Creator |
+|————-|————-|—————|———–|————|
+|  <a class="reference external" href="https://github.com/littlevgl/pc_simulator_sdl_eclipse"><img alt="https://littlevgl.com/logo/ide/eclipse.jpg" src="https://littlevgl.com/logo/ide/eclipse.jpg" />Eclipse</a> | <a class="reference external" href="https://github.com/littlevgl/pc_simulator_win_codeblocks"><img alt="https://littlevgl.com/logo/ide/codeblocks.jpg" src="https://littlevgl.com/logo/ide/codeblocks.jpg" />CodeBlocks</a> | <a class="reference external" href="https://github.com/littlevgl/visual_studio_2017_sdl_x64"><img alt="https://littlevgl.com/logo/ide/visualstudio.jpg" src="https://littlevgl.com/logo/ide/visualstudio.jpg" />VisualStudio</a>   |   <a class="reference external" href="https://github.com/littlevgl/pc_simulator_sdl_platformio"><img alt="https://littlevgl.com/logo/ide/platformio.jpg" src="https://littlevgl.com/logo/ide/platformio.jpg" />PlatformIO</a> | <a class="reference external" href="https://blog.littlevgl.com/2019-01-03/qt-creator"><img alt="https://littlevgl.com/logo/ide/qtcreator.jpg" src="https://littlevgl.com/logo/ide/qtcreator.jpg" />QtCreator</a> |
+| Cross-platform<br>with SDL | Native Windows | Cross-platform<br>with SDL | Cross-platform<br>with SDL | Cross-platform<br>with SDL |</p>
+<p>In followings the set-up guide of Eclipse CDT is described in more details.</p>
+</div>
+<div class="section" id="set-up-eclipse-cdt">
+<h2>Set-up Eclipse CDT<a class="headerlink" href="#set-up-eclipse-cdt" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-eclipse-cdt">
+<h3>Install Eclipse CDT<a class="headerlink" href="#install-eclipse-cdt" title="Permalink to this headline">¶</a></h3>
+<p>Eclipse CDT is C/C++ IDE. You can use other IDEs as well but in this tutorial the configuration for Eclipse CDT is shown.</p>
+<p>Eclipse is a Java based software therefore be sure <strong>Java Runtime Environment</strong> is installed on your system.</p>
+<p>On Debian-based distros (e.g. Ubuntu): <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">default-jre</span></code></p>
+<p>You can download Eclipse’s CDT from: <a class="reference external" href="http://www.eclipse.org/downloads/">https://eclipse.org/cdt/</a>. Start the installer and choose <em>Eclipse CDT</em> from the list.</p>
+</div>
+<div class="section" id="install-sdl-2">
+<h3>Install SDL 2<a class="headerlink" href="#install-sdl-2" title="Permalink to this headline">¶</a></h3>
+<p>The PC simulator uses the <a class="reference external" href="https://www.libsdl.org/download-2.0.php">SDL 2</a> cross platform library to simulate a TFT display and a touch pad.</p>
+<div class="section" id="linux">
+<h4>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
+<p>On <strong>Linux</strong> you can easily install SDL2 using a terminal:</p>
+<ol class="simple">
+<li>Find the current version of SDL2: <code class="docutils literal"><span class="pre">apt-cache</span> <span class="pre">search</span> <span class="pre">libsdl2</span> <span class="pre">(e.g.</span> <span class="pre">libsdl2-2.0-0)</span></code></li>
+<li>Install SDL2: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">libsdl2-2.0-0</span></code> (replace with the found version)</li>
+<li>Install SDL2 development package: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">libsdl2-dev</span></code></li>
+<li>If build essentials are not installed yet: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">build-essential</span></code></li>
+</ol>
+</div>
+<div class="section" id="windows">
+<h4>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h4>
+<p>If you are using <strong>Windows</strong> firstly you need to install MinGW (<a class="reference external" href="http://mingw-w64.org/doku.php/download">64 bit version</a>). After it do the following steps to add SDL2:</p>
+<ol class="simple">
+<li>Download the development libraries of SDL.Go to <a class="reference external" href="https://www.libsdl.org/download-2.0.php">https://www.libsdl.org/download-2.0.php</a> and download <em>Development Libraries: SDL2-devel-2.0.5-mingw.tar.gz</em></li>
+<li>Uncompress the file and go to <em>x86_64-w64-mingw32</em> directory (for 64 bit MinGW) or to <em>i686-w64-mingw32</em> (for 32 bit MinGW)</li>
+<li>Copy _…<em>mingw32/include/SDL2</em> folder to <em>C:/MinGW/…/x86_64-w64-mingw32/include</em></li>
+<li>Copy _…<em>mingw32/lib/</em> content to <em>C:/MinGW/…/x86_64-w64-mingw32/lib</em></li>
+<li>Copy _…<em>mingw32/bin/SDL2.dll</em> to <em>{eclipse_worksapce}/pc_simulator/Debug/</em>.  Do it later when Eclipse is installed.</li>
+</ol>
+<p>Note: If you will use <strong>Microsoft Visual Studio</strong> instead of Eclipse then you don’t have to install MinGW.</p>
+</div>
+<div class="section" id="osx">
+<h4>OSX<a class="headerlink" href="#osx" title="Permalink to this headline">¶</a></h4>
+<p>On <strong>OSX</strong> you can easily install SDL2 with brew: <code class="docutils literal"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">sdl2</span></code></p>
+<p>If something is not working I suggest <a class="reference external" href="http://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php">this tutorial</a> to get started with SDL.</p>
+</div>
+</div>
+<div class="section" id="pre-configured-project">
+<h3>Pre-configured project<a class="headerlink" href="#pre-configured-project" title="Permalink to this headline">¶</a></h3>
+<p>A pre-configured graphics library project (based on the latest release) is always available.
+You can find it on <a class="reference external" href="https://github.com/littlevgl/proj_pc">GitHub</a> or on the <a class="reference external" href="https://littlevgl.com/download">Download</a> page.
+(The project is configured for Eclipse CDT.)</p>
+</div>
+<div class="section" id="add-the-pre-configured-project-to-eclipse-cdt">
+<h3>Add the pre-configured project to Eclipse CDT<a class="headerlink" href="#add-the-pre-configured-project-to-eclipse-cdt" title="Permalink to this headline">¶</a></h3>
+<p>Run Eclipse CDT. It will show a dialogue about the <strong>workspace path</strong>. Before accepting it check that path and copy (and unzip) the downloaded pre-configured project there. Now you can accept the workspace path. Of course you can modify this path but in that case copy the project to that location.</p>
+<p>Close the start up window and go to <strong>File-&gt;Import</strong> and choose <strong>General-&gt;Existing project into Workspace</strong>. <strong>Browse the root directory</strong> of the project and click <strong>Finish</strong></p>
+<p>On <strong>Windows</strong> you have to do two additional things:</p>
+<ul class="simple">
+<li>Copy the <strong>SDL2.dll</strong> into the project’s Debug folder</li>
+<li>Righ click on the project -&gt; Project properties -&gt; C/C++ Build -&gt; Settings -&gt; Libraries -&gt; Add … and add <em>mingw32</em> above SDLmain and SDL. (The order is important: mingw32, SDLmain, SDL)</li>
+</ul>
+</div>
+<div class="section" id="compile-and-run">
+<h3>Compile and Run<a class="headerlink" href="#compile-and-run" title="Permalink to this headline">¶</a></h3>
+<p>Now you are ready to run the Littlev Graphics Library on your PC. Click on the Hammer Icon on the top menu bar to Build the project. If you have done everything right you will not get any errors. Note that on some systems additional steps might be required to “see” SDL 2 from Eclipse but in most of cases the configurtions in the downloaded project is enough.</p>
+<p>After a success build click on the Play button on the top menu bar to run the project. Now a window should appear in the middle of your screen.</p>
+<p>Now everything is ready to use the Littlev Graphics Library in the practice or begin the development on your PC.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="micropython.html" class="btn btn-neutral float-left" title="Micropython" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Gabor Kiss-Vamosi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

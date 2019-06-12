@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Input device interface &mdash; LittlevGL 6.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'6.0',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tick interface" href="tick.html" />
+    <link rel="prev" title="Display interface" href="display.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> LittlevGL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Porting</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sys.html">System overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project.html">Set-up a project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project.html#get-the-library">Get the library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#initialization">Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="display.html">Display interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display.html#multi-display-support">Multi-display support</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Input device interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#encoder">Encoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#button">Button</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tick.html">Tick interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task-handler.html">Task handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sleep.html">Sleep management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html">Using with an operating system</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/live-demo.html">Live demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#select-an-ide">Select an IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#set-up-eclipse-cdt">Set-up Eclipse CDT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-eclipse-cdt">Install Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-sdl-2">Install SDL 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#pre-configured-project">Pre-configured project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#add-the-pre-configured-project-to-eclipse-cdt">Add the pre-configured project to Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#compile-and-run">Compile and Run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LittlevGL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Porting</a> &raquo;</li>
+        
+      <li>Input device interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/porting/indev.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="input-device-interface">
+<h1>Input device interface<a class="headerlink" href="#input-device-interface" title="Permalink to this headline">¶</a></h1>
+<p>To set up an input device an <strong>lv_indev_drv_t</strong> variable has to be initialized:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">lv_indev_drv_t</span> <span class="n">indev_drv</span><span class="p">;</span><span class="n">lv_indev_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indev_drv</span><span class="p">);</span>  <span class="cm">/*Basic initialization*/</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span><span class="p">...</span><span class="cm">/*See below.*/</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read</span> <span class="o">=</span><span class="p">...</span><span class="cm">/*See below.*/</span>
+<span class="n">lv_indev_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indev_drv</span><span class="p">);</span>  <span class="cm">/*Register the driver in LittlevGL*/</span>
+</pre></div>
+</div>
+<p><strong>type</strong> can be</p>
+<ul class="simple">
+<li>LV_INDEV_TYPE_POINTER: touchpad or mouse</li>
+<li>LV_INDEV_TYPE_KEYPAD: keyboard</li>
+<li>LV_INDEV_TYPE_ENCODER: left, right, push</li>
+<li>LV_INDEV_TYPE_BUTTON: external buttons pressing the screen</li>
+</ul>
+<p><strong>read</strong> is a function pointer which will be called periodically to report the current state of an input device. It can also buffer data and return <em>false</em> when no more data to be read or <em>true</em> when the buffer is not empty.</p>
+<p>To learn more about input devices visit <a class="reference external" href="Input-devices">Input devices</a>.</p>
+<div class="section" id="touchpad-mouse-or-any-pointer">
+<h2>Touchpad, mouse or any pointer<a class="headerlink" href="#touchpad-mouse-or-any-pointer" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_POINTER</span><span class="p">;</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The read function should look like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="nf">my_input_read</span><span class="p">(</span><span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">touchpad_x</span><span class="p">;</span>   
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">touchpad_y</span><span class="p">;</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span> <span class="n">or</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering so no more data read*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<blockquote>
+<div><strong>IMPORTANT NOTE:</strong> Touchpad drivers must return the last X/Y coordinates even when the state is <code class="docutils literal"><span class="pre">LV_INDEV_STATE_REL</span></code>.</div></blockquote>
+</div>
+<div class="section" id="keypad-or-keyboard">
+<h2>Keypad or keyboard<a class="headerlink" href="#keypad-or-keyboard" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_KEYPAD</span><span class="p">;</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The read function should look like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="nf">keyboard_read</span><span class="p">(</span><span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">){</span>
+  <span class="n">data</span><span class="o">-&gt;</span><span class="n">key</span> <span class="o">=</span> <span class="n">last_key</span><span class="p">();</span>            <span class="cm">/*Set the last pressed or released key*/</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">key_pressed</span><span class="p">()){</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span><span class="p">{</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering so no more data read*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To use a keyboard:</p>
+<ul class="simple">
+<li>Register a <em>read</em> function (like above) with <em>LV_INDEV_TYPE_KEYPAD</em> type.</li>
+<li><em>USE_LV_GROUP</em> has to be enabled in <em>lv_conf.h</em></li>
+<li>An object group has to be created: <em>lv_group_create()</em> and objects have to be added: <em>lv_group_add_obj()</em></li>
+<li>The created group has to be assigned to an input device: <em>lv_indev_set_group(my_indev, group1);</em></li>
+<li>Use <em>LV_GROUP_KEY</em>…_ to navigate among the objects in the group</li>
+</ul>
+<p>Visit <a class="reference external" href="Input-devices">Touchpad-less navigation</a> to learn more.</p>
+</div>
+<div class="section" id="encoder">
+<h2>Encoder<a class="headerlink" href="#encoder" title="Permalink to this headline">¶</a></h2>
+<p>With an encoder you can do 4 things:</p>
+<ol class="simple">
+<li>press its button</li>
+<li>long press its button</li>
+<li>turn left</li>
+<li>turn right</li>
+</ol>
+<p>By turning the encoder you can focus on the next/previous object. When you press the encoder on a simple object (like a button), it will be clicked. If you press the encoder on a complex object (like a list, message box etc.) the object will go to edit mode where by turning the encoder you can navigate inside the object. To leave edit mode press long the button.</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_ENCODER</span><span class="p">;</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The read function should look like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="nf">encoder_read</span><span class="p">(</span><span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">){</span>
+  <span class="n">data</span><span class="o">-&gt;</span><span class="n">enc_diff</span> <span class="o">=</span> <span class="n">enc_get_new_moves</span><span class="p">();</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">enc_pressed</span><span class="p">()){</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span><span class="p">{</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering so no more data read*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>To use an <code class="docutils literal"><span class="pre">ENCODER</span></code>, similarly to the <code class="docutils literal"><span class="pre">KEYPAD</span></code>, the objects should be added to groups</li>
+</ul>
+</div>
+<div class="section" id="button">
+<h2>Button<a class="headerlink" href="#button" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_BUTTON</span><span class="p">;</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The read function should look like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="nf">button_read</span><span class="p">(</span><span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">){</span>
+    <span class="k">static</span> <span class="kt">uint32_t</span> <span class="n">last_btn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="cm">/*Store the last pressed button*/</span> 
+    <span class="kt">int</span> <span class="n">btn_pr</span> <span class="o">=</span> <span class="n">my_btn_read</span><span class="p">();</span>     <span class="cm">/*Get the ID (0,1,2...) of the pressed button*/</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">btn_pr</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>               <span class="cm">/*Is there a button press?*/</span>  
+       <span class="n">last_btn</span> <span class="o">=</span> <span class="n">btn_pr</span><span class="p">;</span>           <span class="cm">/*Save the ID of the pressed button*/</span>
+       <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>  <span class="cm">/*Set the pressed state*/</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span> <span class="cm">/*Set the released state*/</span>
+    <span class="p">}</span>
+  
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">btn</span> <span class="o">=</span> <span class="n">last_btn</span><span class="p">;</span>            <span class="cm">/*Set the last button*/</span>         
+   
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>                    <span class="cm">/*No buffering so no more data read*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>The buttons need to be assigned to pixels on the screen using <code class="docutils literal"><span class="pre">lv_indev_set_button_points(indev,</span> <span class="pre">points_array)</span></code>. Where <em>points_array</em> look like <code class="docutils literal"><span class="pre">const</span> <span class="pre">lv_point_t</span> <span class="pre">points_array[]</span> <span class="pre">=</span>&#160; <span class="pre">{</span> <span class="pre">{12,30},{60,90},</span> <span class="pre">...}</span></code></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tick.html" class="btn btn-neutral float-right" title="Tick interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="display.html" class="btn btn-neutral float-left" title="Display interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Gabor Kiss-Vamosi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

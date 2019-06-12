@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Display interface &mdash; LittlevGL 6.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'6.0',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Input device interface" href="indev.html" />
+    <link rel="prev" title="Set-up a project" href="project.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> LittlevGL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Porting</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sys.html">System overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project.html">Set-up a project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project.html#get-the-library">Get the library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#initialization">Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Display interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-display-support">Multi-display support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="indev.html">Input device interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="indev.html#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="indev.html#encoder">Encoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="indev.html#button">Button</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tick.html">Tick interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task-handler.html">Task handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sleep.html">Sleep management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html">Using with an operating system</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/live-demo.html">Live demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#select-an-ide">Select an IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#set-up-eclipse-cdt">Set-up Eclipse CDT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-eclipse-cdt">Install Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-sdl-2">Install SDL 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#pre-configured-project">Pre-configured project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#add-the-pre-configured-project-to-eclipse-cdt">Add the pre-configured project to Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#compile-and-run">Compile and Run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LittlevGL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Porting</a> &raquo;</li>
+        
+      <li>Display interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/porting/display.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="display-interface">
+<h1>Display interface<a class="headerlink" href="#display-interface" title="Permalink to this headline">¶</a></h1>
+<p>To set up a display an <strong>lv_disp_buf_t</strong> and an <strong>lv_disp_drv_t</strong> variable has to be initialized.</p>
+<ul class="simple">
+<li><em>lv_disp_buf_t</em> contains internal graphics buffer(s).</li>
+<li><em>lv_disp_drv_t</em> contains callback functions to iteract with your display and manipulate drawing related things.</li>
+</ul>
+<div class="section" id="display-buffer">
+<h2>Display buffer<a class="headerlink" href="#display-buffer" title="Permalink to this headline">¶</a></h2>
+<p><em>lv_disp_buf_t</em> can bin initalized like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>    <span class="cm">/*A static or global variable to store the buffers*/</span>
+    <span class="k">static</span> <span class="n">lv_disp_buf_t</span> <span class="n">disp_buf</span><span class="p">;</span>                    
+    
+    <span class="cm">/*Static or global buffer(s). The second buffer is optional*/</span>    
+    <span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">buf_1</span><span class="p">[</span><span class="n">MY_DISP_HOR_RES</span> <span class="o">*</span> <span class="mi">10</span><span class="p">];</span>
+    <span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">buf_2</span><span class="p">[</span><span class="n">MY_DISP_HOR_RES</span> <span class="o">*</span> <span class="mi">10</span><span class="p">];</span>
+    
+    <span class="cm">/*Initalize `disp_buf` with the buffer(s) */</span>
+    <span class="n">lv_disp_buf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">,</span> <span class="n">buf_1</span><span class="p">,</span> <span class="n">buf_2</span><span class="p">,</span> <span class="n">MY_DISP_HOR_RES</span><span class="o">*</span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>There are there possible configurations regarding to the buffer size:</p>
+<ol class="simple">
+<li><strong>Only one buffer</strong> this buffer will be used the render the conent of the display. Should enough to hold at least 10 lines.
+LittlevGL will redraw the screen in chucks whcih fit into the buffer. However if only a smaller area is needs to be redrawn (like buttn when pressed) only the that small area will be redrawn.
+It can be screen-sized as well.</li>
+<li><strong>Two non screen-sized buffers</strong> having two buffer LittlevGL can draw into one buffer while the content of the other buffer is sent to display in the background.
+DMA or other hardware should be used to transfer the data to the display to let the CPU draw meanwhile.
+This way the rendering and refreshing of the display become parallel. Similarly to the <em>Only one buffer</em> LittelvGL will drawn the display’s content in chunks which size is at most the size of the buffer.</li>
+<li><strong>Two screen-sized buffers</strong>
+In contast to <em>Two non screen-sized buffers</em> LittelvGL will always provide the whole screen’s content not only chunks. This way the driver can simply change the address of the frame buffer to the buffer received from LittlevGL.
+Therefore this method works the best when the MCU has an LCD/TFT inteface and the frambuffer is just a loaction in the RAM.</li>
+</ol>
+</div>
+<div class="section" id="display-driver">
+<h2>Display driver<a class="headerlink" href="#display-driver" title="Permalink to this headline">¶</a></h2>
+<p>Once the buffer iitialization is ready the display drivers needs to initalized. In the most simple case only the following two fields of <em>lv_disp_drv_t</em> needs to be set:</p>
+<ul class="simple">
+<li><strong>buffer</strong> pointer to an initialized <code class="docutils literal"><span class="pre">lv_disp_buf_t</span></code> variable.</li>
+<li><strong>flush_cb</strong> a callback function to copy a buffer’s content to a specific area of the display.</li>
+</ul>
+<p>And there are some optinal data fields:</p>
+<ul class="simple">
+<li><strong>hor_res</strong> horizontal resolution of teh display. (<em>LV_HOR_RES_MAX</em> by default)</li>
+<li><strong>ver_res</strong> vertical resolution of teh display. (<em>LV_VER_RES_MAX</em> by default)</li>
+<li><strong>color_chroma_key</strong> a color which will be drawn as transparent on CHhrome keyed images. <em>LV_COLOR_TRANSP</em> by deafult (lv_conf.h)</li>
+<li><strong>user_data</strong> custom user data for the driver. Its type acn be modified in lv_conf.h. (Optional)</li>
+<li><strong>antialiasing</strong> use anti-aliasing (edge smoothing). <em>LV_ANTIALIAS</em> by deafult (lv_conf.h)</li>
+<li><strong>rotated</strong> if <code class="docutils literal"><span class="pre">1</span></code> swap <em>hor_res</em> and <em>ver_res</em>. LittelvGL draws in tha same direction in both case (in lines from top to buttom) so the driver also need to be reconfigured to change the display’s fill direction.</li>
+</ul>
+<p>To use a GPU the following callbacks can be used:</p>
+<ul class="simple">
+<li><strong>mem_fill_cb</strong> fill an area with a colors.</li>
+<li><strong>mem_blend_cb</strong> blend two buffers using opacity.</li>
+</ul>
+<p>Some other optional callbacks to make easier and more optimal to work with monochrome, grayscale or other less standard dislays:</p>
+<ul class="simple">
+<li><strong>rounder_cb</strong> round the coordinates of areas to redraw. E.g. a 2x2 px can be converted to 2x8.
+It can be used if the display controller can refresh only areas with specific height or width (usually 8 px height with monochrome displays).</li>
+<li><strong>set_px_cb</strong> a custom function to write the <em>buffer</em>.
+It can be used to store the pixels in more compact way if the display has a special color format. (e.g. 1 bit monochrome, 2  bit grayscale etc.)
+The buffers used in <code class="docutils literal"><span class="pre">lv_disp_buf_t</span></code> can be smaller to hold only the required number of bits for the given area size.</li>
+<li><strong>monitor_cb</strong> a callback function tell how many pixels were refreshed in how much time.</li>
+</ul>
+<p>To set the fields of <em>lv_disp_drv_t</em> variable it needs to be intialized with <code class="docutils literal"><span class="pre">lv_disp_drv_init(&amp;disp_drv)</span></code>.
+And finally to register a display for LittlevGL the <code class="docutils literal"><span class="pre">lv_disp_drv_register(&amp;disp_drv)</span></code> needs to be used.</p>
+<p>All togother it looks like this:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span>    <span class="n">lv_disp_drv_t</span> <span class="n">disp_drv</span><span class="p">;</span>                 <span class="cm">/*A variable to hold the drivers. Can be local varaible*/</span>
+    <span class="n">lv_disp_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span>            <span class="cm">/*Basic initialization*/</span>
+    <span class="n">disp_drv</span><span class="p">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">;</span>            <span class="cm">/*Set an initialized buffer*/</span>
+    <span class="n">disp_drv</span><span class="p">.</span><span class="n">flush_cb</span> <span class="o">=</span> <span class="n">my_flush_cb</span><span class="p">;</span>        <span class="cm">/*Set a flush callback to draw to the display*/</span>
+    <span class="n">lv_disp_t</span> <span class="o">*</span> <span class="n">disp</span><span class="p">;</span>
+    <span class="n">disp</span> <span class="o">=</span> <span class="n">lv_disp_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span> <span class="cm">/*Register the direver and save the created display objects*/</span>
+</pre></div>
+</div>
+<p>Here some simple examples of the callbacks:</p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_flush_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">area</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="o">*</span> <span class="n">color_p</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*The most simple case (but also the slowest) to put all pixels to the screen one-by-one*/</span>
+    <span class="kt">int32_t</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">x1</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">x2</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">put_px</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">color_p</span><span class="p">)</span>
+            <span class="n">color_p</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* IMPORTANT!!!</span>
+<span class="cm">     * Inform the graphics library that you are ready with the flushing*/</span>
+    <span class="n">lv_disp_flush_ready</span><span class="p">(</span><span class="n">disp</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">my_mem_fill_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="o">*</span> <span class="n">dest_buf</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">dest_area</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">fill_area</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="n">color</span><span class="p">);</span>
+<span class="p">{</span>
+    <span class="cm">/*It&#39;s an example code which should be done by your GPU*/</span>
+    <span class="kt">uint32_t</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dest</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">my_mem_blend_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="o">*</span> <span class="n">dest</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_color_t</span> <span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">length</span><span class="p">,</span> <span class="n">lv_opa_t</span> <span class="n">opa</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*It&#39;s an example code which should be done by your GPU*/</span>
+    <span class="kt">uint32_t</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dest</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lv_color_mix</span><span class="p">(</span><span class="n">dest</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">src</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">opa</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">my_rounder_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">area</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="cm">/* Update the areas as needed. Can be only larger.</span>
+<span class="cm">   * For example to always have lines 8 px hegiht:*/</span>
+   <span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span> <span class="o">=</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span> <span class="o">&amp;</span> <span class="mh">0x07</span><span class="p">;</span>
+   <span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span> <span class="o">=</span> <span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span> <span class="o">&amp;</span> <span class="mh">0x07</span><span class="p">)</span> <span class="o">+</span> <span class="mi">8</span><span class="p">;</span> 
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">my_set_px_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">buf_w</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">x</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">y</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="n">color</span><span class="p">,</span> <span class="n">lv_opa_t</span> <span class="n">opa</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* Write to the buffer as required for the display. </span>
+<span class="cm">     * Write only 1 bit for monochrome displays mapped vertically:*/</span>
+	  <span class="n">buf</span> <span class="o">+=</span> <span class="n">buf_w</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
+	  <span class="k">if</span><span class="p">(</span><span class="n">lv_color_brightness</span><span class="p">(</span><span class="n">color</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">128</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="n">buf</span><span class="p">)</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">y</span> <span class="o">%</span> <span class="mi">8</span><span class="p">));</span>
+	  <span class="k">else</span> <span class="p">(</span><span class="o">*</span><span class="n">buf</span><span class="p">)</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">y</span> <span class="o">%</span> <span class="mi">8</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">my_monitor_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">time</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">px</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d px refreshed in %d ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">ms</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multi-display-support">
+<h2>Multi-display support<a class="headerlink" href="#multi-display-support" title="Permalink to this headline">¶</a></h2>
+<p>In LittlevGL multiple displays can be used. Just initlaizes multiple drivers and buffer and register them. Each display have its own screens and objects on the screens.
+To get curently active scrren of a dsplay use <code class="docutils literal"><span class="pre">lv_disp_get_scr_act(disp)</span></code> (where <code class="docutils literal"><span class="pre">disp</span></code> is the return value of <code class="docutils literal"><span class="pre">lv_disp_drv_register</span></code>).  To set a new screen as active on a display use <code class="docutils literal"><span class="pre">lv_disp_set_scr_act(screen1)</span></code>.</p>
+<p>Or in a shorter form set a default display with <code class="docutils literal"><span class="pre">lv_disp_set_default(disp)</span></code> and get/set the active screen with <code class="docutils literal"><span class="pre">lv_scr_act()</span></code> and <code class="docutils literal"><span class="pre">lv_scr_load()</span></code>.</p>
+<p>Learn morea bout screens in the <a class="reference external" href="/#Objects">Objects</a> section.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="indev.html" class="btn btn-neutral float-right" title="Input device interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="project.html" class="btn btn-neutral float-left" title="Set-up a project" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Gabor Kiss-Vamosi
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
