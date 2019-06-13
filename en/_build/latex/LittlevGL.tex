@@ -49,12 +49,12 @@
 
 \addto\extrasenglish{\def\pageautorefname{page}}
 
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 
 
 
 \title{LittlevGL Documentation}
-\date{Jun 12, 2019}
+\date{Jun 13, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -66,13 +66,150 @@
 \maketitle
 \sphinxtableofcontents
 \phantomsection\label{\detokenize{index::doc}}
+\sphinxhref{http://docs.littlevgl.com/locale/en}{English} -
+\sphinxhref{http://docs.littlevgl.com/locale/pt\_BR}{Portuguese} -
+\sphinxhref{http://docs.littlevgl.com/locale/es}{Espanol} -
+\sphinxhref{http://docs.littlevgl.com/locale/tr}{Turkish}
 
 
-Some text and flags to select language.
+\bigskip\hrule\bigskip
 
 
-\chapter{Get started}
-\label{\detokenize{get-started/index::doc}}\label{\detokenize{get-started/index:get-started}}\label{\detokenize{get-started/index:welcome-to-littlevgl-s-documentation}}\begin{itemize}
+
+
+\sphinxincludegraphics{{lv_theme_intro}.png}
+
+LittlevGL is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
+
+
+\chapter{Table of content}
+\label{\detokenize{index:table-of-content}}\label{\detokenize{index:welcome-to-littlevgl-s-documentation}}
+
+\section{Introduction}
+\label{\detokenize{intro::doc}}\label{\detokenize{intro:introduction}}
+LittlevGL is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
+
+
+\subsection{Key features}
+\label{\detokenize{intro:key-features}}\begin{itemize}
+\item {} 
+Powerful building blocks buttons, charts, lists, sliders, images etc
+
+\item {} 
+Advanced graphics with animations, anti-aliasing, opacity, smooth scrolling
+
+\item {} 
+Various input devices touch pad, mouse, keyboard, encoder etc
+
+\item {} 
+Multi language support with UTF-8 encoding
+
+\item {} 
+Fully customizable graphical elements
+
+\item {} 
+Hardware independent to use with any microcontroller or display
+
+\item {} 
+Scalable to operate with little memory (80 kB Flash, 10 kB RAM)
+
+\item {} 
+OS, External memory and GPU supported but not required
+
+\item {} 
+Single frame buffer operation even with advanced graphical effects
+
+\item {} 
+Written in C for maximal compatibility (C++ compatible)
+
+\item {} 
+Simulator to start embedded GUI design on PC without embedded hardware
+
+\item {} 
+Tutorials, examples, themes for rapid GUI design
+
+\item {} 
+Documentation online and offline
+
+\item {} 
+Free and open-source under MIT licence
+
+\end{itemize}
+
+
+\subsection{Requirements}
+\label{\detokenize{intro:requirements}}\begin{itemize}
+\item {} 
+16, 32 or 64 bit microcontroller or processor
+
+\item {} 
+16 MHz clock speed
+
+\item {} 
+8 kB RAM for static data and \textgreater{}2 KB RAM for dynamic data (graphical objects)
+
+\item {} 
+64 kB program memory (flash)
+
+\item {} 
+Optionally \textasciitilde{}1/10 screen sized memory for internal buffering (at 240 × 320, 16 bit colors it means 15 kB)
+
+\item {} 
+C99 or newer compiler
+
+\end{itemize}
+
+
+\bigskip\hrule\bigskip
+
+
+The LittlevGL is designed to be highly portable and to not use any external resources:
+\begin{itemize}
+\item {} 
+No external RAM required (but supported)
+
+\item {} 
+No float numbers are used
+
+\item {} 
+No GPU needed (but supported)
+
+\item {} 
+Only a single frame buffer is required located in:
+\begin{itemize}
+\item {} 
+Internal RAM or
+
+\item {} 
+External RAM or
+
+\item {} 
+External display controller’s memory
+
+\end{itemize}
+
+\end{itemize}
+
+
+\bigskip\hrule\bigskip
+
+
+If you would like to reduce the required hardware resources you can:
+\begin{itemize}
+\item {} 
+Disable the unused object types to save RAM and ROM
+
+\item {} 
+Change the size of the graphical buffer to save RAM (see later)
+
+\item {} 
+Use more simple styles to reduce the rendering time
+
+\end{itemize}
+
+
+\section{Get started}
+\label{\detokenize{get-started/index::doc}}\label{\detokenize{get-started/index:get-started}}\begin{itemize}
 \item {} 
 lvgl on GihHub
 
@@ -82,24 +219,24 @@ example projects
 \end{itemize}
 
 
-\section{Live demos}
-\label{\detokenize{get-started/live-demo::doc}}\label{\detokenize{get-started/live-demo:live-demos}}
+\subsection{Live demos}
+\label{\detokenize{get-started/live-demo:live-demos}}\label{\detokenize{get-started/live-demo::doc}}
 See look and feel
 
 
-\section{Micropython}
+\subsection{Micropython}
 \label{\detokenize{get-started/micropython::doc}}\label{\detokenize{get-started/micropython:micropython}}
 play with it in micropython
 
 
-\section{Simulator on PC}
-\label{\detokenize{get-started/pc-simulator::doc}}\label{\detokenize{get-started/pc-simulator:simulator-on-pc}}
+\subsection{Simulator on PC}
+\label{\detokenize{get-started/pc-simulator:simulator-on-pc}}\label{\detokenize{get-started/pc-simulator::doc}}
 You can try out the LittlevGL \sphinxstylestrong{using only your PC} without any development boards. Write a code, run it on the PC and see the result on the monitor. It is cross-platform: Windows, Linux and OSX are supported.The written code is portable, you can simply copy it when using an embedded hardware.
 
 The simulator is also very useful to report bugs because it means common platform for every user. So it’s a good idea the reproduce a bug in simualtor and use the code snippen in the \sphinxhref{https://forum.littelvgl.com}{Forum}.
 
 
-\subsection{Select an IDE}
+\subsubsection{Select an IDE}
 \label{\detokenize{get-started/pc-simulator:select-an-ide}}
 The simulator is ported to valrious IDEs. Choose your favourite IDE, read its README on GitHub, download the project, and load it to the IDE.
 
@@ -108,10 +245,10 @@ The simulator is ported to valrious IDEs. Choose your favourite IDE, read its RE
 In followings the set-up guide of Eclipse CDT is described in more details.
 
 
-\subsection{Set-up Eclipse CDT}
+\subsubsection{Set-up Eclipse CDT}
 \label{\detokenize{get-started/pc-simulator:set-up-eclipse-cdt}}
 
-\subsubsection{Install Eclipse CDT}
+\paragraph{Install Eclipse CDT}
 \label{\detokenize{get-started/pc-simulator:install-eclipse-cdt}}
 Eclipse CDT is C/C++ IDE. You can use other IDEs as well but in this tutorial the configuration for Eclipse CDT is shown.
 
@@ -122,12 +259,12 @@ On Debian-based distros (e.g. Ubuntu): \sphinxcode{sudo apt-get install default-
 You can download Eclipse’s CDT from: \sphinxhref{http://www.eclipse.org/downloads/}{https://eclipse.org/cdt/}. Start the installer and choose \sphinxstyleemphasis{Eclipse CDT} from the list.
 
 
-\subsubsection{Install SDL 2}
+\paragraph{Install SDL 2}
 \label{\detokenize{get-started/pc-simulator:install-sdl-2}}
 The PC simulator uses the \sphinxhref{https://www.libsdl.org/download-2.0.php}{SDL 2} cross platform library to simulate a TFT display and a touch pad.
 
 
-\paragraph{Linux}
+\subparagraph{Linux}
 \label{\detokenize{get-started/pc-simulator:linux}}
 On \sphinxstylestrong{Linux} you can easily install SDL2 using a terminal:
 \begin{enumerate}
@@ -146,7 +283,7 @@ If build essentials are not installed yet: \sphinxcode{sudo apt-get install buil
 \end{enumerate}
 
 
-\paragraph{Windows}
+\subparagraph{Windows}
 \label{\detokenize{get-started/pc-simulator:windows}}
 If you are using \sphinxstylestrong{Windows} firstly you need to install MinGW (\sphinxhref{http://mingw-w64.org/doku.php/download}{64 bit version}). After it do the following steps to add SDL2:
 \begin{enumerate}
@@ -170,21 +307,21 @@ Copy \_…\sphinxstyleemphasis{mingw32/bin/SDL2.dll} to \sphinxstyleemphasis{\{e
 Note: If you will use \sphinxstylestrong{Microsoft Visual Studio} instead of Eclipse then you don’t have to install MinGW.
 
 
-\paragraph{OSX}
+\subparagraph{OSX}
 \label{\detokenize{get-started/pc-simulator:osx}}
 On \sphinxstylestrong{OSX} you can easily install SDL2 with brew: \sphinxcode{brew install sdl2}
 
 If something is not working I suggest \sphinxhref{http://lazyfoo.net/tutorials/SDL/01\_hello\_SDL/index.php}{this tutorial} to get started with SDL.
 
 
-\subsubsection{Pre-configured project}
+\paragraph{Pre-configured project}
 \label{\detokenize{get-started/pc-simulator:pre-configured-project}}
 A pre-configured graphics library project (based on the latest release) is always available.
 You can find it on \sphinxhref{https://github.com/littlevgl/proj\_pc}{GitHub} or on the \sphinxhref{https://littlevgl.com/download}{Download} page.
 (The project is configured for Eclipse CDT.)
 
 
-\subsubsection{Add the pre-configured project to Eclipse CDT}
+\paragraph{Add the pre-configured project to Eclipse CDT}
 \label{\detokenize{get-started/pc-simulator:add-the-pre-configured-project-to-eclipse-cdt}}
 Run Eclipse CDT. It will show a dialogue about the \sphinxstylestrong{workspace path}. Before accepting it check that path and copy (and unzip) the downloaded pre-configured project there. Now you can accept the workspace path. Of course you can modify this path but in that case copy the project to that location.
 
@@ -201,7 +338,7 @@ Righ click on the project -\textgreater{} Project properties -\textgreater{} C/C
 \end{itemize}
 
 
-\subsubsection{Compile and Run}
+\paragraph{Compile and Run}
 \label{\detokenize{get-started/pc-simulator:compile-and-run}}
 Now you are ready to run the Littlev Graphics Library on your PC. Click on the Hammer Icon on the top menu bar to Build the project. If you have done everything right you will not get any errors. Note that on some systems additional steps might be required to “see” SDL 2 from Eclipse but in most of cases the configurtions in the downloaded project is enough.
 
@@ -210,10 +347,10 @@ After a success build click on the Play button on the top menu bar to run the pr
 Now everything is ready to use the Littlev Graphics Library in the practice or begin the development on your PC.
 
 
-\chapter{Porting}
+\section{Porting}
 \label{\detokenize{porting/index::doc}}\label{\detokenize{porting/index:porting}}
 
-\section{System overview}
+\subsection{System overview}
 \label{\detokenize{porting/sys::doc}}\label{\detokenize{porting/sys:system-overview}}
 \sphinxincludegraphics{{sys}.png}System architecture of Littlev Graphics Library
 
@@ -246,10 +383,10 @@ The frame buffer is usually located in the display controller which saves a lot 
 \end{enumerate}
 
 
-\section{Set-up a project}
-\label{\detokenize{porting/project::doc}}\label{\detokenize{porting/project:set-up-a-project}}
+\subsection{Set-up a project}
+\label{\detokenize{porting/project:set-up-a-project}}\label{\detokenize{porting/project::doc}}
 
-\subsection{Get the library}
+\subsubsection{Get the library}
 \label{\detokenize{porting/project:get-the-library}}
 The Littlev Graphics Library is available on GitHub: \sphinxurl{https://github.com/littlevgl/lvgl}.
 You can clone or download the latest version of the library from here or you can use the \sphinxhref{https://littlevgl.com/download}{Download} page as well.
@@ -257,7 +394,7 @@ You can clone or download the latest version of the library from here or you can
 The graphics library is the \sphinxstylestrong{lvgl} directory which should be copied into your project.
 
 
-\subsection{Config file}
+\subsubsection{Config file}
 \label{\detokenize{porting/project:config-file}}
 There is a configuration header file for LittlevGL called \sphinxstylestrong{lv\_conf.h}. It sets the library’s basic behavior, disable unused modules and features, adjust the size of memory buffers in compile time.
 
@@ -277,7 +414,7 @@ In the config file comments explain the meaning of the options. Check at least t
 \end{enumerate}
 
 
-\subsection{Initialization}
+\subsubsection{Initialization}
 \label{\detokenize{porting/project:initialization}}
 In order to use the graphics library you have to initialize it and the other components too. To order of the initialization is:
 \begin{enumerate}
@@ -299,7 +436,7 @@ Call \sphinxcode{lv\_task\_handler()} periodically in every few milliseconds to 
 \end{enumerate}
 
 
-\section{Display interface}
+\subsection{Display interface}
 \label{\detokenize{porting/display::doc}}\label{\detokenize{porting/display:display-interface}}
 To set up a display an \sphinxstylestrong{lv\_disp\_buf\_t} and an \sphinxstylestrong{lv\_disp\_drv\_t} variable has to be initialized.
 \begin{itemize}
@@ -312,7 +449,7 @@ To set up a display an \sphinxstylestrong{lv\_disp\_buf\_t} and an \sphinxstyles
 \end{itemize}
 
 
-\subsection{Display buffer}
+\subsubsection{Display buffer}
 \label{\detokenize{porting/display:display-buffer}}
 \sphinxstyleemphasis{lv\_disp\_buf\_t} can bin initalized like this:
 
@@ -349,7 +486,7 @@ Therefore this method works the best when the MCU has an LCD/TFT inteface and th
 \end{enumerate}
 
 
-\subsection{Display driver}
+\subsubsection{Display driver}
 \label{\detokenize{porting/display:display-driver}}
 Once the buffer iitialization is ready the display drivers needs to initalized. In the most simple case only the following two fields of \sphinxstyleemphasis{lv\_disp\_drv\_t} needs to be set:
 \begin{itemize}
@@ -486,7 +623,7 @@ Here some simple examples of the callbacks:
 \end{sphinxVerbatim}
 
 
-\subsection{Multi-display support}
+\subsubsection{Multi-display support}
 \label{\detokenize{porting/display:multi-display-support}}
 In LittlevGL multiple displays can be used. Just initlaizes multiple drivers and buffer and register them. Each display have its own screens and objects on the screens.
 To get curently active scrren of a dsplay use \sphinxcode{lv\_disp\_get\_scr\_act(disp)} (where \sphinxcode{disp} is the return value of \sphinxcode{lv\_disp\_drv\_register}).  To set a new screen as active on a display use \sphinxcode{lv\_disp\_set\_scr\_act(screen1)}.
@@ -496,7 +633,7 @@ Or in a shorter form set a default display with \sphinxcode{lv\_disp\_set\_defau
 Learn morea bout screens in the \sphinxhref{/\#Objects}{Objects} section.
 
 
-\section{Input device interface}
+\subsection{Input device interface}
 \label{\detokenize{porting/indev::doc}}\label{\detokenize{porting/indev:input-device-interface}}
 To set up an input device an \sphinxstylestrong{lv\_indev\_drv\_t} variable has to be initialized:
 
@@ -527,7 +664,7 @@ LV\_INDEV\_TYPE\_BUTTON: external buttons pressing the screen
 \sphinxstylestrong{read} is a function pointer which will be called periodically to report the current state of an input device. It can also buffer data and return \sphinxstyleemphasis{false} when no more data to be read or \sphinxstyleemphasis{true} when the buffer is not empty.
 
 
-\subsection{Touchpad, mouse or any pointer}
+\subsubsection{Touchpad, mouse or any pointer}
 \label{\detokenize{porting/indev:touchpad-mouse-or-any-pointer}}
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -553,7 +690,7 @@ The read function should look like this:
 \end{quote}
 
 
-\subsection{Keypad or keyboard}
+\subsubsection{Keypad or keyboard}
 \label{\detokenize{porting/indev:keypad-or-keyboard}}
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -599,7 +736,7 @@ Use \sphinxstyleemphasis{LV\_GROUP\_KEY}…\_ to navigate among the objects in t
 Visit \sphinxhref{Input-devices}{Touchpad-less navigation} to learn more.
 
 
-\subsection{Encoder}
+\subsubsection{Encoder}
 \label{\detokenize{porting/indev:encoder}}
 With an encoder you can do 4 things:
 \begin{enumerate}
@@ -648,7 +785,7 @@ To use an \sphinxcode{ENCODER}, similarly to the \sphinxcode{KEYPAD}, the object
 \end{itemize}
 
 
-\subsection{Button}
+\subsubsection{Button}
 \label{\detokenize{porting/indev:button}}
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -682,13 +819,13 @@ The buttons need to be assigned to pixels on the screen using \sphinxcode{lv\_in
 \end{itemize}
 
 
-\section{Tick interface}
+\subsection{Tick interface}
 \label{\detokenize{porting/tick::doc}}\label{\detokenize{porting/tick:tick-interface}}
 The LittlevGL uses a system tick. Call the \sphinxcode{lv\_tick\_inc(tick\_period)} function periodically and tell the call period in milliseconds. For example if called in every milliseconds: \sphinxcode{lv\_tick\_inc(1)}.
 It is required for LittlevGL to know the elapsed time. Therefore \sphinxcode{lv\_tick\_inc} should be called in a higher priority then \sphinxcode{lv\_task\_handler()}, for example in an interrupt.
 
 
-\section{Task handler}
+\subsection{Task handler}
 \label{\detokenize{porting/task-handler::doc}}\label{\detokenize{porting/task-handler:task-handler}}
 To handle the tasks of LittlevGL you need to call \sphinxcode{lv\_task\_handler()} periodically in one of the followings:
 \begin{itemize}
@@ -716,7 +853,7 @@ Example:
 \end{sphinxVerbatim}
 
 
-\section{Sleep management}
+\subsection{Sleep management}
 \label{\detokenize{porting/sleep::doc}}\label{\detokenize{porting/sleep:sleep-management}}
 The MCU can go to \sphinxstylestrong{sleep} when no user input happens. In this case the main \sphinxcode{while(1)} should look like this:
 
@@ -748,8 +885,8 @@ You should also add these lines to your input device read function if a press ha
 In addition to \sphinxcode{lv\_disp\_get\_inactive\_time()} you can check \sphinxcode{lv\_anim\_count\_running()} to see if every animations are finished.
 
 
-\section{Using with an operating system}
-\label{\detokenize{porting/os::doc}}\label{\detokenize{porting/os:using-with-an-operating-system}}
+\subsection{Using with an operating system}
+\label{\detokenize{porting/os:using-with-an-operating-system}}\label{\detokenize{porting/os::doc}}
 LittlevGL is \sphinxstylestrong{not thread-safe} by deafult. Despite it, it’s quite simple to use LittlevGL inside an operating system.
 
 The \sphinxstylestrong{simple scenario} is to don’t use the operating system’s tasks but use \sphinxcode{lv\_task}s. An \sphinxstyleemphasis{lv\_task} is a function called periodically in \sphinxcode{lv\_task\_handler}.
@@ -759,6 +896,630 @@ To create an \sphinxstyleemphasis{lv\_task} use: \sphinxcode{lv\_task\_create(my
 If you need to \sphinxstylestrong{use other task or threads} you need one mutex which should be taken before calling \sphinxcode{lv\_task\_handler} and released after it.
 In addition, you have to use to that mutex in other tasks and threads around every LittlevGL (\sphinxcode{lv\_...}) related code.
 This way you can use LittlevGL in a real multitasking environment. Just use a mutex to avoid concurrent calling of LittlevGL functions.
+
+
+\section{Overview}
+\label{\detokenize{overview/index::doc}}\label{\detokenize{overview/index:overview}}
+
+\subsection{Objects}
+\label{\detokenize{overview/objects::doc}}\label{\detokenize{overview/objects:objects}}
+In the Littlev Graphics Library the \sphinxstylestrong{basic building blocks} of a user interface are the objects. For example:
+
+Click to check all the existing  \sphinxhref{Object-types}{Object types}
+
+
+\subsubsection{Object attributes}
+\label{\detokenize{overview/objects:object-attributes}}
+
+\paragraph{Basic attributes}
+\label{\detokenize{overview/objects:basic-attributes}}
+The objects have basic attributes which are common independently from their type:
+\begin{itemize}
+\item {} 
+Position
+
+\item {} 
+Size
+
+\item {} 
+Parent
+
+\item {} 
+Drag enable
+
+\item {} 
+Click enable etc.
+
+\end{itemize}
+
+You can set/get this attributes with \sphinxcode{lv\_obj\_set\_...} and \sphinxcode{lv\_obj\_get\_...} functions. For example:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*Set basic object attributes*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{btn1}\PYG{p}{,} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{;}						\PYG{c+cm}{/*Button size*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{btn1}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{,}\PYG{l+m+mi}{30}\PYG{p}{)}\PYG{p}{;}						\PYG{c+cm}{/*Button position*/}
+\end{sphinxVerbatim}
+
+To see all the available functions visit the Base object’s \sphinxhref{/Base-object}{documentation}.
+
+
+\paragraph{Specific attributes}
+\label{\detokenize{overview/objects:specific-attributes}}
+The object types have special attributes. For example a slider have:
+\begin{itemize}
+\item {} 
+Min. max. values
+
+\item {} 
+Current value
+
+\item {} 
+Callback function for new value set
+
+\item {} 
+Styles
+
+\end{itemize}
+
+For these attributes every object type have unique API functions. For example for a slider:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*Set slider specific attributes*/}
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}range}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{100}\PYG{p}{)}\PYG{p}{;}			\PYG{c+cm}{/*Set min. and max. values*/}
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{l+m+mi}{40}\PYG{p}{)}\PYG{p}{;}			\PYG{c+cm}{/*Set the current value (position)*/}
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}action}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{n}{my\PYGZus{}action}\PYG{p}{)}\PYG{p}{;}		\PYG{c+cm}{/*Set a callback function*/}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Object’s working mechanisms}
+\label{\detokenize{overview/objects:object-s-working-mechanisms}}
+
+\paragraph{Parent-child structure}
+\label{\detokenize{overview/objects:parent-child-structure}}
+A parent can be considered as the container of its children. Every object has exactly one parent object (except screens) but a parent can have unlimited number of children. There is no limitation for the type of the parent but there typically parent (e.g. button) and typical child (e.g. label) objects.
+
+
+\paragraph{Screen \textendash{} the most basic parent}
+\label{\detokenize{overview/objects:screen-the-most-basic-parent}}
+The screen is a special object which has no parent object. Always there is an active screen. By default, the library creates and loads one. To get the currently active screen use the \sphinxcode{lv\_scr\_act()} function.
+
+A screen can be created with any object type, for example, a basic object or an image to make a wallpaper.
+
+
+\paragraph{Moving together}
+\label{\detokenize{overview/objects:moving-together}}
+If the position of the parent is changed the children will move with the parent. Therefore all positions are relative to the parent. So the (0;0) coordinates mean the objects will remain in the top left-hand corner of the parent independently from the position of the parent.
+
+Objects are moving together 1
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{par} \PYG{o}{=} \PYG{n}{lv\PYGZus{}obj\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;} 	\PYG{c+cm}{/*Create a parent object on the current screen*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{par}\PYG{p}{,} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{l+m+mi}{80}\PYG{p}{)}\PYG{p}{;}		                \PYG{c+cm}{/*Set the size of the parent*/}
+
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{obj1} \PYG{o}{=} \PYG{n}{lv\PYGZus{}obj\PYGZus{}create}\PYG{p}{(}\PYG{n}{par}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}	        \PYG{c+cm}{/*Create an object on the previously created parent object*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{obj1}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}			        \PYG{c+cm}{/*Set the position of the new object*/}
+\end{sphinxVerbatim}
+
+Modify the position of the parent:
+
+Graphical objects are moving togother 2
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{par}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{;}		\PYG{c+cm}{/*Move the parent. The child will move with it.*/}
+\end{sphinxVerbatim}
+
+
+\paragraph{Visibility only on parent}
+\label{\detokenize{overview/objects:visibility-only-on-parent}}
+If a child partially or totally out of its parent then the parts outside will not be visible.
+
+A graphical object is visible on its parent
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}x}\PYG{p}{(}\PYG{n}{obj1}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{30}\PYG{p}{)}\PYG{p}{;}		\PYG{c+cm}{/*Move the child a little bit of the parent*/}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Create - delete objects}
+\label{\detokenize{overview/objects:create-delete-objects}}
+In the graphics library objects can be created and deleted dynamically in run-time. It means only the currently created objects consume RAM. For example, if you need a chart you can create it only when it is required and delete after it is used.
+
+Every objects type has its own \sphinxstylestrong{create} function with an unified prototype. It needs two parameters: a pointer the parent object and optionally a pointer to an other object with the same type. If the second parameter is not \sphinxstyleemphasis{NULL} then this objects will be copied to the new one. To create a screen give \sphinxstyleemphasis{NULL} as parent. The return value of the create function is a pointer to the created object. Independently from the object type a common variable type \sphinxstylestrong{lv\_obj\_t} is used. This pointer can be used later to set or get the attributes of the object. The create functions look like this:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n+nf}{lv\PYGZus{}type\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{parent}\PYG{p}{,} \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{copy}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+There is a common \sphinxstylestrong{delete} function for all object types. It deletes the object and all of its children.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}obj\PYGZus{}del}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{obj}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+You can delete only the children of an object but leave the object itself “alive”:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}obj\PYGZus{}clean}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{obj}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Layers}
+\label{\detokenize{overview/objects:layers}}
+The earlier created object (and its children) will be drawn earlier (nearer to the background). In other words, the lastly created object will be on the top among its siblings. It is very important, the order is calculated among the objects on the same level (“siblings”).
+
+Layers can be added easily by creating 2 objects (which can be transparent) firstly ‘A’ and secondly ‘B’. ‘A’ and every object on it will be in the background and can be covered by ‘B’ and its children.
+
+Creating graphical objects in Littlev Graphics Library
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*Create a screen*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{scr} \PYG{o}{=} \PYG{n}{lv\PYGZus{}obj\PYGZus{}create}\PYG{p}{(}\PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}scr\PYGZus{}load}\PYG{p}{(}\PYG{n}{scr}\PYG{p}{)}\PYG{p}{;}       						    \PYG{c+cm}{/*Load the screen*/}
+
+\PYG{c+cm}{/*Create 2 buttons*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn1} \PYG{o}{=} \PYG{n}{lv\PYGZus{}btn\PYGZus{}create}\PYG{p}{(}\PYG{n}{scr}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/*Create a button on the screen*/}
+\PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}fit}\PYG{p}{(}\PYG{n}{btn1}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}                   \PYG{c+cm}{/*Enable to automatically set the size according to the content*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{btn1}\PYG{p}{,} \PYG{l+m+mi}{60}\PYG{p}{,} \PYG{l+m+mi}{40}\PYG{p}{)}\PYG{p}{;}              		    \PYG{c+cm}{/*Set the position of the button*/}
+
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn2} \PYG{o}{=} \PYG{n}{lv\PYGZus{}btn\PYGZus{}create}\PYG{p}{(}\PYG{n}{scr}\PYG{p}{,} \PYG{n}{btn1}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/*Copy the first button*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{btn2}\PYG{p}{,} \PYG{l+m+mi}{180}\PYG{p}{,} \PYG{l+m+mi}{80}\PYG{p}{)}\PYG{p}{;}                 	    \PYG{c+cm}{/*Set the position of the button*/}
+
+\PYG{c+cm}{/*Add labels to the buttons*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{label1} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{btn1}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}	\PYG{c+cm}{/*Create a label on the first button*/}
+\PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label1}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Button 1}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}          	\PYG{c+cm}{/*Set the text of the label*/}
+
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{label2} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{btn2}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}  	\PYG{c+cm}{/*Create a label on the second button*/}
+\PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label2}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Button 2}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}            	\PYG{c+cm}{/*Set the text of the label*/}
+
+\PYG{c+cm}{/*Delete the second label*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}del}\PYG{p}{(}\PYG{n}{label2}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+
+\subsection{Styles}
+\label{\detokenize{overview/styles:styles}}\label{\detokenize{overview/styles::doc}}
+To set the appearance of the objects styles can be used. A style is a structure variable with attributes like colors, paddings, visibility, and others. There is common style type: \sphinxstylestrong{lv\_style\_t}.
+
+By setting the fields of an \sphinxcode{lv\_style\_t} structure you can influence the appearance of the objects using that style.
+
+The objects store only a pointer to a style so the style cannot be a local variable which is destroyed after the function exists. \sphinxstylestrong{You should use static, global or dynamically allocated variables.}
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}1}\PYG{p}{;}             \PYG{c+cm}{/*OK! Global variables for styles are fine*/}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}2}\PYG{p}{;}      \PYG{c+cm}{/*OK! Static variables outside the functions are fine*/}
+\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}screen\PYGZus{}create}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)} 
+\PYG{p}{\PYGZob{}}
+  \PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}3}\PYG{p}{;}    \PYG{c+cm}{/*OK! Static variables in the functions are fine*/}
+  \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}1}\PYG{p}{;}           \PYG{c+cm}{/*WRONG! Styles can\PYGZsq{}t be local variables*/}
+
+  \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Style properties}
+\label{\detokenize{overview/styles:style-properties}}
+A style has 5 main parts: common, body, text, image and line. An object will use that fields which are relevant for it. For example, Lines don’t care about the letter\_space. To see which fields are used by an object type see their documentation.
+
+The fields of a style structure are the followings:
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{Common properties}
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{glass} 1: Do not inherit this style (see below)
+
+\end{itemize}
+
+\item {} 
+\sphinxstylestrong{Body style properties} Used by the rectangle-like objects
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{body.empty} Do not fill the rectangle (just draw border and/or shadow)
+
+\item {} 
+\sphinxstylestrong{body.main\_colo}r Main color (top color)
+
+\item {} 
+\sphinxstylestrong{body.grad\_color} Gradient color (bottom color)
+
+\item {} 
+\sphinxstylestrong{body.radius} Corner radius. (set to LV\_RADIUS\_CIRCLE to draw circle)
+
+\item {} 
+\sphinxstylestrong{body.opa} Opacity (0..255 or LV\_OPA\_TRANSP, LV\_OPA\_10, LV\_OPA\_20 … LV\_OPA\_COVER)
+
+\item {} 
+\sphinxstylestrong{body.border.color} Border color
+
+\item {} 
+\sphinxstylestrong{body.border.width} Border width
+
+\item {} 
+\sphinxstylestrong{body.border.part} Border parts (LV\_BORDER\_LEFT/RIGHT/TOP/BOTTOM/FULL or ‘OR’ed values)
+
+\item {} 
+\sphinxstylestrong{body.border.opa} Border opacity
+
+\item {} 
+\sphinxstylestrong{body.shadow.color} Shadow color
+
+\item {} 
+\sphinxstylestrong{body.shadow.width} Shadow width
+
+\item {} 
+\sphinxstylestrong{body.shadow.type} Shadow type (LV\_SHADOW\_BOTTOM or LV\_SHADOW\_FULL)
+
+\item {} 
+\sphinxstylestrong{body.padding.hor} Horizontal padding
+
+\item {} 
+\sphinxstylestrong{body.padding.ver} Vertical padding
+
+\item {} 
+\sphinxstylestrong{body.padding.inner} Inner padding
+
+\end{itemize}
+
+\item {} 
+\sphinxstylestrong{Text style properties} Used by the objects which show texts
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{text.color} Text color
+
+\item {} 
+\sphinxstylestrong{text.font} Pointer to a font
+
+\item {} 
+\sphinxstylestrong{text.opa} Text opacity (0..255 or LV\_OPA\_TRANSP, LV\_OPA\_10, LV\_OPA\_20 … LV\_OPA\_COVER)
+
+\item {} 
+\sphinxstylestrong{text.letter\_space} Letter space
+
+\item {} 
+\sphinxstylestrong{text.line\_space} Line space
+
+\end{itemize}
+
+\item {} 
+\sphinxstylestrong{Image style properties} Used by image-like objects or icons on objects
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{image.color} Color for image re-coloring based on the pixels brightness
+
+\item {} 
+\sphinxstylestrong{image.intense} Re-color intensity (0..255 or LV\_OPA\_TRANSP, LV\_OPA\_10, LV\_OPA\_20 … LV\_OPA\_COVER)
+
+\item {} 
+\sphinxstylestrong{image.opa} Image opacity (0..255 or LV\_OPA\_TRANSP, LV\_OPA\_10, LV\_OPA\_20 … LV\_OPA\_COVER)
+
+\end{itemize}
+
+\item {} 
+\sphinxstylestrong{Line style properties} Used by objects containing lines or line-like elements
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{line.color} Line color
+
+\item {} 
+\sphinxstylestrong{line.width} Line width
+
+\item {} 
+\sphinxstylestrong{line.opa} Line opacity (0..255 or LV\_OPA\_TRANSP, LV\_OPA\_10, LV\_OPA\_20 … LV\_OPA\_COVER)
+
+\end{itemize}
+
+\end{itemize}
+
+
+\subsubsection{Using styles}
+\label{\detokenize{overview/styles:using-styles}}
+Every object type has a unique function to set its style or styles.
+
+If the object has only one style - like a label - the \sphinxcode{lv\_label\_set\_style(label1, \&style) }function can be used to set a new style.
+
+If the object has more styles (like a button have 5 styles for each state) \sphinxcode{lv\_btn\_set\_style(obj, LV\_BTN\_STYLE\_..., \&rel\_style}) function can be used to set a new style.
+
+The styles and the style properties used by an object type are described in their documentation.
+
+If you \sphinxstylestrong{modify a style which is used} by one or more objects then the objects have to be notified about the style is changed. You have two options to do that:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}obj\PYGZus{}refresh\PYGZus{}style}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{obj}\PYG{p}{)}\PYG{p}{;}		\PYG{c+cm}{/*Notify an object about its style is modified*/}
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}obj\PYGZus{}report\PYGZus{}style\PYGZus{}mod}\PYG{p}{(}\PYG{k+kt}{void} \PYG{o}{*} \PYG{n}{style}\PYG{p}{)}\PYG{p}{;}		\PYG{c+cm}{/*Notify all object if a style is modified.(NULL to notify all objects)*/}
+\end{sphinxVerbatim}
+
+If the \sphinxstylestrong{style of an object is NULL then its style will be inherited from its parent’s style}. It makes easier to create a consistent design. Don’t forget a style describes a lot of properties at the same time. So for example, if you set a button’s style and create a label on it with NULL style then the label will be rendered according to the buttons styles. In other words, the button makes sure its children will look well on it.
+
+Setting the //glass style property will prevent inheriting that style//. You should use it if the style is transparent so that its children use colors and others from its parent.
+
+
+\subsubsection{Built-in styles}
+\label{\detokenize{overview/styles:built-in-styles}}
+There are several built-in styles in the library:
+
+\sphinxincludegraphics{{style-built-in}.png}Built in styles in LittlevGL Embedded Graphics Library
+
+As you can see there is a style for screens, for buttons, plain and pretty styles and transparent styles as well. The \sphinxcode{lv\_style\_transp}, \sphinxcode{lv\_style\_transp\_fit} and \sphinxcode{lv\_style\_transp\_tight} differ only in paddings: for \sphinxcode{lv\_style\_transp\_tight} all padings are zero, for \sphinxcode{lv\_style\_transp\_fit} only hor and ver paddings are zero.
+
+The built in styles are global lv\_style\_t variables so you can use them like: lv\_btn\_set\_style(obj, LV\_BTN\_STYLE\_REL, \&lv\_style\_btn\_rel)
+
+You can modify the built-in styles or you can create new styles. When creating new styles it is recommended to first copy a built-in style to be sure all fields are initialized with a proper value. The lv\_style\_copy(\&dest\_style, \&src\_style) can be used to copy styles.
+
+
+\subsubsection{Style animations}
+\label{\detokenize{overview/styles:style-animations}}
+You can animate styles using \sphinxcode{lv\_style\_anim\_create(\&anim)}. Before calling this function you have to initialize an \sphinxcode{lv\_style\_anim\_}t variable. The animation will fade a \sphinxcode{style\_1} to \sphinxcode{style\_2}.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}style\PYGZus{}anim\PYGZus{}t} \PYG{n}{a}\PYG{p}{;}    \PYG{c+cm}{/*Will be copied, can be local variable*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{style\PYGZus{}anim} \PYG{o}{=} \PYG{o}{\PYGZam{}} \PYG{n}{style\PYGZus{}to\PYGZus{}anim}\PYG{p}{;}     \PYG{c+cm}{/*Pointer to style to animate*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{style\PYGZus{}start} \PYG{o}{=} \PYG{o}{\PYGZam{}} \PYG{n}{style\PYGZus{}1}\PYG{p}{;}          \PYG{c+cm}{/*Pointer to the initial style (only pointer saved) */}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{style\PYGZus{}end} \PYG{o}{=} \PYG{o}{\PYGZam{}} \PYG{n}{style\PYGZus{}2}\PYG{p}{;}            \PYG{c+cm}{/*Pointer to the target style (only pointer saved) */}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{act\PYGZus{}time} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}                     \PYG{c+cm}{/*Set negative to make a delay*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{time} \PYG{o}{=} \PYG{l+m+mi}{1000}\PYG{p}{;}                      \PYG{c+cm}{/*Time of animation in milliseconds*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{playback} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}                     \PYG{c+cm}{/*1: play the animation backward too*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{playback\PYGZus{}pause} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}               \PYG{c+cm}{/*Wait before playback [ms]*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{repeat} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}                       \PYG{c+cm}{/*1: repeat the animation*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{repeat\PYGZus{}pause} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}                 \PYG{c+cm}{/*Wait before repeat [ms]*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{end\PYGZus{}cb} \PYG{o}{=} \PYG{n+nb}{NULL}\PYG{p}{;}                    \PYG{c+cm}{/*Call this function when the animation ready*/}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Style example}
+\label{\detokenize{overview/styles:style-example}}
+The example below demonstrates the above-described style usage
+
+\sphinxincludegraphics{{style-example}.png}Styles usage example in LittlevGL Embedded Graphics Library
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*Create a style*/}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style1}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style1}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}    \PYG{c+cm}{/*Copy a built\PYGZhy{}in style to initialize the new style*/}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}WHITE}\PYG{p}{;}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}BLUE}\PYG{p}{;}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{radius} \PYG{o}{=} \PYG{l+m+mi}{10}\PYG{p}{;}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}GRAY}\PYG{p}{;}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{width} \PYG{o}{=} \PYG{l+m+mi}{2}\PYG{p}{;}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{opa} \PYG{o}{=} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}50}\PYG{p}{;}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{padding}\PYG{p}{.}\PYG{n}{hor} \PYG{o}{=} \PYG{l+m+mi}{5}\PYG{p}{;}            \PYG{c+cm}{/*Horizontal padding, used by the bar indicator below*/}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{padding}\PYG{p}{.}\PYG{n}{ver} \PYG{o}{=} \PYG{l+m+mi}{5}\PYG{p}{;}            \PYG{c+cm}{/*Vertical padding, used by the bar indicator below*/}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}RED}\PYG{p}{;}
+
+\PYG{c+cm}{/*Create a simple object*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*}\PYG{n}{obj1} \PYG{o}{=} \PYG{n}{lv\PYGZus{}obj\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{obj1}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style1}\PYG{p}{)}\PYG{p}{;}                        \PYG{c+cm}{/*Apply the created style*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{obj1}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{)}\PYG{p}{;}                           \PYG{c+cm}{/*Set the position*/}
+
+\PYG{c+cm}{/*Create a label on the object. The label\PYGZsq{}s style is NULL by default*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*}\PYG{n}{label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{obj1}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}       \PYG{c+cm}{/*Align the label to the middle*/}
+
+\PYG{c+cm}{/*Create a bar*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*}\PYG{n}{bar1} \PYG{o}{=} \PYG{n}{lv\PYGZus{}bar\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}bar\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{bar1}\PYG{p}{,} \PYG{n}{LV\PYGZus{}BAR\PYGZus{}STYLE\PYGZus{}INDIC}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style1}\PYG{p}{)}\PYG{p}{;}    \PYG{c+cm}{/*Modify the indicator\PYGZsq{}s style*/}
+\PYG{n}{lv\PYGZus{}bar\PYGZus{}set\PYGZus{}value}\PYG{p}{(}\PYG{n}{bar1}\PYG{p}{,} \PYG{l+m+mi}{70}\PYG{p}{)}\PYG{p}{;}                             \PYG{c+cm}{/*Set the bar\PYGZsq{}s value*/}
+\end{sphinxVerbatim}
+
+
+\subsubsection{Themes}
+\label{\detokenize{overview/styles:themes}}
+To create styles for your GUI is challenging because you need a deeper understanding of the library and you need to have some design skills. In addition, it takes a lot of time to create so many styles.
+
+To speed up the design part themes are introduced. A theme is a style collection which contains the required styles for every object type. For example 5 styles for buttons to describe their 5 possible states.
+Check the \sphinxhref{https://littlevgl.com/themes}{Existing themes}.
+
+To be more specific a theme is a structure variable which contains a lot of lv\_style\_t * fields. For buttons:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{rel}       \PYG{c+cm}{/*Released button style*/}
+\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{pr}        \PYG{c+cm}{/*Pressed button style*/}
+\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{tgl\PYGZus{}rel}   \PYG{c+cm}{/*Toggled released button style*/}
+\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{tgl\PYGZus{}pr}    \PYG{c+cm}{/*Toggled pressed button style*/}
+\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{ina}       \PYG{c+cm}{/*Inactive button style*/}
+\end{sphinxVerbatim}
+
+A theme can initialized by: \sphinxcode{lv\_theme\_xxx\_init(hue, font)}. Where xxx is the name of the theme, \sphinxstyleemphasis{hue} is a Hue value from HSV color space (0..360) and \sphinxstyleemphasis{font} is the font applied in the theme (\sphinxcode{NULL} to use the \sphinxcode{LV\_FONT\_DEFAULT} default font)
+
+When a theme is initialized its styles can be used like this:
+
+\sphinxincludegraphics{{theme-example}.png}Theme usage example in Littlev Embedded Graphics Library
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*Create a default slider*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*}\PYG{n}{slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{l+m+mi}{70}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{c+cm}{/*Initialize the alien theme with a redish hue*/}
+\PYG{n}{lv\PYGZus{}theme\PYGZus{}t} \PYG{o}{*}\PYG{n}{th} \PYG{o}{=} \PYG{n}{lv\PYGZus{}theme\PYGZus{}alien\PYGZus{}init}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{c+cm}{/*Create a new slider and apply the themes styles*/}
+\PYG{n}{slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{l+m+mi}{70}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}BG}\PYG{p}{,} \PYG{n}{th}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{slider}\PYG{p}{.}\PYG{n}{bg}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}INDIC}\PYG{p}{,} \PYG{n}{th}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{slider}\PYG{p}{.}\PYG{n}{indic}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}KNOB}\PYG{p}{,} \PYG{n}{th}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{slider}\PYG{p}{.}\PYG{n}{knob}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+You can ask the library to apply the styles from a theme when you create new objects. To do this use \sphinxcode{lv\_theme\_set\_current(th)};
+
+
+\subsection{Fonts}
+\label{\detokenize{overview/fonts::doc}}\label{\detokenize{overview/fonts:fonts}}
+In LittlevGL fonts are bitmaps and other descriptors to store the images of the letters (glyph) and some additional information. A font is stored in a \sphinxstylestrong{lv\_font\_t} variable and can be set it in style’s \sphinxstyleemphasis{text.font} field.
+
+The fonts have a \sphinxstylestrong{bpp (Bit-Per-Pixel)} property. It shows how much bit is used to describe a pixel in the font. The value stored for a pixel determines the pixel’s opacity. This way the image of the letters (especially on the edges) can be smooth and even. The possible bpp values are 1, 2, 4 and 8 (higher value means better quality). The bpp also affects the required memory size to store the font. E.g. bpp = 4 makes the font’s memory size 4 times greater compared to bpp = 1.
+
+
+\subsubsection{Built-in fonts}
+\label{\detokenize{overview/fonts:built-in-fonts}}
+There are several built-in fonts which can be enabled in lv\_conf.h by \sphinxstyleemphasis{USE\_LV\_FONT}…\_ defines. There are built-in fonts in \sphinxstylestrong{different sizes}:
+\begin{itemize}
+\item {} 
+10 px
+
+\item {} 
+20 px
+
+\item {} 
+30 px
+
+\item {} 
+40 px
+
+\end{itemize}
+
+You can enable the fonts with 1, 2, 4 or 8 values to set its bpp (e.g. \sphinxcode{\#define USE\_LV\_FONT\_DEJAVU\_20 4} in \sphinxcode{lv\_conf.h}).
+
+The built-in fonts exist with \sphinxstylestrong{multiply character-sets} in each size:
+\begin{itemize}
+\item {} 
+ASCII (Unicode 32..126)
+
+\item {} 
+Latin supplement (Unicode 160..255)
+
+\item {} 
+Cyrillic (Unicode 1024..1279)
+
+\end{itemize}
+
+The built-in fonts use the \sphinxstyleemphasis{Dejavu} font.
+
+The built-in fonts are \sphinxstylestrong{global variables} with names like:
+\begin{itemize}
+\item {} 
+\sphinxcode{lv\_font\_dejavu\_20} (20 px ASCII font)
+
+\item {} 
+\sphinxcode{lv\_font\_dejavu\_20\_latin\_sup} (20 px Latin supplement font)
+
+\item {} 
+\sphinxcode{lv\_font\_dejavu\_20\_cyrillic} (20 px Cyrillic font)
+
+\end{itemize}
+
+
+\subsubsection{Unicode support}
+\label{\detokenize{overview/fonts:unicode-support}}
+The LittlevGL supports Unicode letter from \sphinxstylestrong{UTF-8} coded characters. You need to configure your editor to save your code/text as UTF-8 (usually this the default) and enable \sphinxstyleemphasis{LV\_TXT\_UTF8} in lv\_conf.h. Without enabled \sphinxstyleemphasis{LV\_TXT\_UTF8} only ASCII fonts and symbols can be used (see the symbols below)
+
+After it the texts will be decoded to determine the Unicode values. To display the letters your font needs to contain the image (glyph) of the characters.
+
+You can assign more fonts to create a \sphinxstylestrong{larger character-set}. To do this choose a base font (typically the ASCII font) and add the extensions to it: \sphinxcode{lv\_font\_add(child, parent)}. Only fonts with the same height can be assigned.
+
+The built-in fonts are already added to the same sized ASCII font. For example if \sphinxstyleemphasis{USE\_LV\_FONT\_DEJAVU\_20} and \sphinxstyleemphasis{USE\_LV\_FONT\_DEJAVU\_20\_LATIN\_SUP} are enabled in \sphinxcode{lv\_conf.h} then the \sphinxstyleemphasis{“abcÁÖÜ”} text can be rendered when using \sphinxstyleemphasis{lv\_font\_dejavu\_20}.
+
+
+\subsubsection{Symbol fonts}
+\label{\detokenize{overview/fonts:symbol-fonts}}
+The symbol fonts are special fonts which contain symbols instead of letters. There are \sphinxstylestrong{built-in symbol fonts} as well and they are also assigned to the ASCII font with the same size. In a text, a symbol can be referenced like \sphinxstyleemphasis{SYMBOL\_LEFT}, \sphinxstyleemphasis{SYMBOL\_RIGHT} etc. You can mix these symbol names with strings:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label1}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Right }\PYG{l+s}{\PYGZdq{}}\PYG{n}{SYMBOL\PYGZus{}RIGHT}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+The symbols can be used without UTF-8 support as well. (LV\_TXT\_UTF8 0)
+
+The list below shows the existing symbols:
+
+Basic symbols
+
+
+\subsubsection{Add new font}
+\label{\detokenize{overview/fonts:add-new-font}}
+If you want to \sphinxstylestrong{add new fonts to the library} you can use the \sphinxhref{https://littlevgl.com/ttf-font-to-c-array}{Online Font Converter Tool}. It can create a C array from a TTF file which can be copied copy to your project. You can specify the height, the range of characters and the bpp. Optionally you can enumerate the characters to include only them into the final font. To use the generated font declare it with \sphinxstyleemphasis{LV\_FONT\_DECLARE(my\_font\_name)}. After that, the font can be used as the built-in fonts.
+
+
+\subsubsection{Font example}
+\label{\detokenize{overview/fonts:font-example}}
+Fonts example
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*Create a new style for the label*/}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{style}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}BLUE}\PYG{p}{;}
+\PYG{n}{style}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{font} \PYG{o}{=} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}font\PYGZus{}dejavu\PYGZus{}40}\PYG{p}{;}   \PYG{c+cm}{/*Unicode and symbol fonts already assigned by the library*/}
+
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*}\PYG{n}{label}\PYG{p}{;}
+
+\PYG{c+cm}{/*Use ASCII and Unicode letters*/}
+\PYG{n}{label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{aeuois}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+                         \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{äéüöíß}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{c+cm}{/*Mix text and symbols*/}
+\PYG{n}{label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{l+m+mi}{100}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Right }\PYG{l+s}{\PYGZdq{}}\PYG{n}{SYMBOL\PYGZus{}RIGHT}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+
+\subsection{Animations}
+\label{\detokenize{overview/animations::doc}}\label{\detokenize{overview/animations:animations}}
+You can automatically change the value (animate) of a variable between a start and an end value using an \sphinxstylestrong{animator function} with \sphinxcode{void func(void* var,int32\_t value)} prototype. The animation will happen by the periodical calling of the animator function with the corresponding value parameter.
+
+To \sphinxstylestrong{create an animation} you have to initializes an \sphinxstyleemphasis{lv\_anim\_t} variable (there is a template in \sphinxhref{https://github.com/littlevgl/lvgl/blob/master/lv\_misc/lv\_anim.h}{lv\_anim.h}):
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}anim\PYGZus{}t} \PYG{n}{a}\PYG{p}{;}								
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{var} \PYG{o}{=} \PYG{n}{button1}\PYG{p}{;}							 \PYG{c+cm}{/*Variable to animate*/}						
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{start} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{;}								 \PYG{c+cm}{/*Start value*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{end} \PYG{o}{=} \PYG{l+m+mi}{300}\PYG{p}{;}								 \PYG{c+cm}{/*End value*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{fp} \PYG{o}{=} \PYG{p}{(}\PYG{n}{lv\PYGZus{}anim\PYGZus{}fp\PYGZus{}t}\PYG{p}{)}\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}height}\PYG{p}{;}		                         \PYG{c+cm}{/*Function to be used to animate*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{path} \PYG{o}{=} \PYG{n}{lv\PYGZus{}anim\PYGZus{}path\PYGZus{}linear}\PYG{p}{;}                                            \PYG{c+cm}{/*Path of animation*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{end\PYGZus{}cb} \PYG{o}{=} \PYG{n+nb}{NULL}\PYG{p}{;} 						 	 \PYG{c+cm}{/*Callback when the animation is ready*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{act\PYGZus{}time} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}								 \PYG{c+cm}{/*Set \PYGZlt{} 0 to make a delay [ms]*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{time} \PYG{o}{=} \PYG{l+m+mi}{200}\PYG{p}{;}								 \PYG{c+cm}{/*Animation length [ms]*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{playback} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}								 \PYG{c+cm}{/*1: animate in reverse direction too when the normal is ready*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{playback\PYGZus{}pause} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}						         \PYG{c+cm}{/*Wait before playback [ms]*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{repeat} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}								 \PYG{c+cm}{/*1: Repeat the animation (with or without playback)*/}
+\PYG{n}{a}\PYG{p}{.}\PYG{n}{repeat\PYGZus{}pause} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}							 \PYG{c+cm}{/*Wait before repeat [ms]*/}
+
+\PYG{n}{lv\PYGZus{}anim\PYGZus{}create}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{a}\PYG{p}{)}\PYG{p}{;}                          \PYG{c+cm}{/*Start the animation*/}
+\end{sphinxVerbatim}
+
+The \sphinxcode{anim\_create(\&a)} will register the animation and immediately \sphinxstylestrong{applies the \sphinxstyleemphasis{start}} value regardless to the set delay.
+
+You can determinate the \sphinxstylestrong{path of animation}. In most simple case it is linear which means the current value between \sphinxstyleemphasis{start} and \sphinxstyleemphasis{end}  is changed linearly. A path is a function which calculates the next value to set based on the current state of the animation. Currently, there are two built-in paths:
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{lv\_anim\_path\_linear} linear animation
+
+\item {} 
+\sphinxstylestrong{lv\_anim\_path\_step} change in one step at the end
+
+\end{itemize}
+
+By default, you can set the animation time. But in some cases, the \sphinxstylestrong{animation speed} is more practical. The \sphinxcode{lv\_anim\_speed\_to\_time(speed, start, end)} function calculates the required time in milliseconds to reach the end value from a start value with the given speed. The speed is interpreted in \sphinxstyleemphasis{unit/sec} dimension. For example \sphinxcode{lv\_anim\_speed\_to\_time(20,0,100)} will give 5000 milliseconds.
+
+You can apply \sphinxstylestrong{multiple different animations} on the same variable at the same time. (For example animate the x and y coordinates with \sphinxstyleemphasis{lv\_obj\_set\_x} end \sphinxstyleemphasis{lv\_obj\_set\_y}). But only one animation can exist with a given variable and function pair. Therefore the \sphinxstyleemphasis{lv\_anim\_create()} function will delete the already existing variable-function animations.
+
+You can \sphinxstylestrong{delete an animation} by \sphinxcode{lv\_anim\_del(var, func)} with providing the animated variable and its animator function.
 
 
 
