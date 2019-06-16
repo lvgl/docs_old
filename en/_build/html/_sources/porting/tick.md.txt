@@ -1,5 +1,20 @@
 # Tick interface
 
-The LittlevGL uses a system tick. Call the `lv_tick_inc(tick_period)` function periodically and tell the call period in milliseconds. For example if called in every milliseconds: `lv_tick_inc(1)`. 
-It is required for LittlevGL to know the elapsed time. Therefore `lv_tick_inc` should be called in a higher priority then `lv_task_handler()`, for example in an interrupt.
+The LittlevGL needs a system tick to know the elapsed time for animation and other task. 
 
+You need to call the `lv_tick_inc(tick_period)` function periodically and tell the call period in milliseconds. For example, if called in every millisecond: `lv_tick_inc(1)`. 
+
+`lv_tick_inc` should be called in a higher priority routin than` lv_task_handler()` (e.g. in an interrupt) to precisely know the elapsed milliseconds even if the execution of `lv_task_handler` takes longer time.
+
+With FreeRTOS `lv_tick_inc` can be called in `vApplicationTickHook`.
+
+On Linux based operation system (e.g. on Raspberry) `lv_tick_inc` can be called in a thread:
+```c
+void * tick_thread (void *args)
+{
+      while(1) {
+        usleep(5*1000);   /*Sleep for 5 millisecond*/
+        lv_tick_inc(5);      /*Tell LittelvGL that 5 milliseconds were elapsed*/
+    } 
+}
+``` 

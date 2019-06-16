@@ -1,8 +1,9 @@
 # Get started
 
-```eval_rst
 - lvgl on GihHub
 - example projects
+
+```eval_rst
 
 .. toctree::
    :maxdepth: 2

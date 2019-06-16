@@ -1,85 +1,122 @@
 # Fonts
 
-In LittlevGL fonts are bitmaps and other descriptors to store the images of the letters (glyph) and some additional information. A font is stored in a **lv_font_t** variable and can be set it in style's _text.font_ field. 
-
-The fonts have a **bpp (Bit-Per-Pixel)** property. It shows how much bit is used to describe a pixel in the font. The value stored for a pixel determines the pixel's opacity. This way the image of the letters (especially on the edges) can be smooth and even. The possible bpp values are 1, 2, 4 and 8 (higher value means better quality). The bpp also affects the required memory size to store the font. E.g. bpp = 4 makes the font's memory size 4 times greater compared to bpp = 1.  
-
-#### Built-in fonts
-
-There are several built-in fonts which can be enabled in lv_conf.h by _USE_LV_FONT_..._ defines. There are built-in fonts in **different sizes**:
-
-- 10 px
-- 20 px
-- 30 px
-- 40 px
-
-You can enable the fonts with 1, 2, 4 or 8 values to set its bpp (e.g. `#define USE_LV_FONT_DEJAVU_20 4` in `lv_conf.h`). 
-
-The built-in fonts exist with **multiply character-sets** in each size:
-
-- ASCII (Unicode 32..126)
-- Latin supplement (Unicode 160..255)
-- Cyrillic (Unicode 1024..1279)
-
-The built-in fonts use the _Dejavu_ font.
-
-The built-in fonts are **global variables** with names like: 
-
-- `lv_font_dejavu_20` (20 px ASCII font)
-- `lv_font_dejavu_20_latin_sup` (20 px Latin supplement font)
-- `lv_font_dejavu_20_cyrillic` (20 px Cyrillic font)
-
-#### Unicode support
-
-The LittlevGL supports Unicode letter from **UTF-8** coded characters. You need to configure your editor to save your code/text as UTF-8 (usually this the default) and enable _LV_TXT_UTF8_ in lv_conf.h. Without enabled _LV_TXT_UTF8_ only ASCII fonts and symbols can be used (see the symbols below)
-
-After it the texts will be decoded to determine the Unicode values. To display the letters your font needs to contain the image (glyph) of the characters. 
-
-You can assign more fonts to create a **larger character-set**. To do this choose a base font (typically the ASCII font) and add the extensions to it: `lv_font_add(child, parent)`. Only fonts with the same height can be assigned.
-
-The built-in fonts are already added to the same sized ASCII font. For example if _USE_LV_FONT_DEJAVU_20_ and _USE_LV_FONT_DEJAVU_20_LATIN_SUP_ are enabled in `lv_conf.h` then the _"abcÁÖÜ"_ text can be rendered when using _lv_font_dejavu_20_.
-
-#### Symbol fonts
-
-The symbol fonts are special fonts which contain symbols instead of letters. There are **built-in symbol fonts** as well and they are also assigned to the ASCII font with the same size. In a text, a symbol can be referenced like _SYMBOL_LEFT_, _SYMBOL_RIGHT_ etc. You can mix these symbol names with strings: 
-
+In LittlevGL fonts are collections of bitmaps and other informations required to render the images of the letters (glyph). A font is stored in a **lv_font_t** variable and can be set it in style's *text.font* field. For example:
 ```c
-lv_label_set_text(label1,"Right "SYMBOL_RIGHT);
+my_style.text.font = &lv_font_roboto_28;  /*Set a larger font*/
 ```
 
-The symbols can be used without UTF-8 support as well. (LV_TXT_UTF8 0)
+The fonts have a **bpp (Bit-Per-Pixel)** property. It shows how many bits are used to describe a pixel in the font. The value stored for a pixel determines the pixel's opacity. 
+This way with higher *bpp* the edges of the letter can be smoother. The possible *bpp* values are 1, 2, 4 and 8 (higher value means better quality). 
 
-The list below shows the existing symbols:
+The *bpp* also affects the required memory size to store the font. E.g. *bpp = 4* makes the font ~4 times greater compared to *bpp = 1*.  
 
-![Basic symbols](https://littlevgl.com/docs/symbols.png)
+## Unicode support
 
-#### Add new font
+LittlevGL supports **UTF-8** encoded Unicode characters. 
+You need to configure your editor to save your code/text as UTF-8 (usually this the default) and be sure `LV_TXT_ENC` is set to `LV_TXT_ENC_UTF8` in *lv_conf.h*. (This is the default value)
 
-If you want to **add new fonts to the library** you can use the [Online Font Converter Tool](https://littlevgl.com/ttf-font-to-c-array). It can create a C array from a TTF file which can be copied copy to your project. You can specify the height, the range of characters and the bpp. Optionally you can enumerate the characters to include only them into the final font. To use the generated font declare it with _LV_FONT_DECLARE(my_font_name)_. After that, the font can be used as the built-in fonts.
-
-#### Font example
-
-![Fonts example](https://littlevgl.com/docs/example-fonts.png)
-
+To test it try
 ```c
-/*Create a new style for the label*/
-static lv_style_t style;
-lv_style_copy(&style, &lv_style_plain);
-style.text.color = LV_COLOR_BLUE;
-style.text.font = &lv_font_dejavu_40;   /*Unicode and symbol fonts already assigned by the library*/
-
-lv_obj_t *label;
-
-/*Use ASCII and Unicode letters*/
-label = lv_label_create(lv_scr_act(), NULL);
-lv_obj_set_pos(label, 20, 20);
-lv_label_set_style(label, &style);
-lv_label_set_text(label, "aeuois\n"
-                         "äéüöíß");
-
-/*Mix text and symbols*/
-label = lv_label_create(lv_scr_act(), NULL);
-lv_obj_set_pos(label, 20, 100);
-lv_label_set_style(label, &style);
-lv_label_set_text(label, "Right "SYMBOL_RIGHT);
+lv_obj_t * label1 = lv_label_create(lv_scr_act(), NULL);
+lv_label_set_text(label1, LV_SYMBOL_OK);
 ```
+
+If all works well a ✓ character should be displayed. 
+
+## Built-in fonts
+
+There are several built-in fonts in different sizes which can be enabled in lv_conf.h by *LV_FONT_...* defines: 
+- `LV_FONT_ROBOTO_12` 12 px
+- `LV_FONT_ROBOTO_16` 16 px
+- `LV_FONT_ROBOTO_22` 22 px
+- `LV_FONT_ROBOTO_28` 28 px
+
+The built-in fonts are **global variables** with names like `lv_font_roboto_16` for 16 px hight font. To use them in a style just add a pointer to a font variable like shown above.
+
+The built-in fonts have *bpp = 4*, contains the ASCII characters and uses the [Roboto](https://fonts.google.com/specimen/Roboto) font.
+
+In addition to the ASCII rangle, the following symbols are also added to the built-in fonts from the [FontAwesome](https://fontawesome.com/) font.
+
+![](https://littlevgl.com/docs/symbols.png "Built-in Symbols in LittlevGL")
+
+The symbols can be used as:
+```c
+lv_label_set_text(my_label, LV_SYMBOL_OK);
+```
+
+Or with together with strings:
+```c
+lv_label_set_text(my_label, LV_SYMBOL_OK "Apply");
+```
+
+Or more symbols together:
+```c
+lv_label_set_text(my_label, LV_SYMBOL_OK LV_SYMBOL_WIFI LV_SYMBOL_PLAY);
+```
+
+## Add new font
+
+There are several ways to add a new font to your project:
+1. The most simple way is to use the [Online font converter](https://littlevgl.com/ttf-font-to-c-array). Just set the parameters, click the *Convert* button, copy the font to your project and use it.
+2. Use the [Offline font converter](https://github.com/littlevgl/lv_font_conv). (Requires Node.js to be installed)
+3. If you want to create something like the built-in fonts (Roboto font and symbols) but in different size and/or ranges you can use the `built_in_font_gen.py` script in `lvgl/scripts/built_in_font` folder. 
+(It requires Python and `lv_font_conv` to be installed) 
+
+To declare the font in a file use `LV_FONT_DECLARE(my_font_name)`.
+
+To make to font globally available add them to `LV_FONT_CUSTOM_DECLARE` in *lv_conf.h*.
+
+## Add a new font engine
+
+LittlevGL's font interface is designed to be very flexible. 
+You don't need to use LittlevGL's internal font engine but you can add your own. For example use [FreeType](https://www.freetype.org/) to real-time render glyphs from TTF fonts.
+
+To do this a custom `lv_font_t` variable needs to be created:
+```c
+/*Describe the properties of a font*/
+lv_font_t my_font;
+my_font.get_glyph_dsc = my_get_glyph_dsc_cb;        /*Set a callback to get info about gylphs*/
+my_font.get_glyph_bitmap = my_get_glyph_bitmap_cb;  /*Set a callback to get bitmap of a glyp*/
+my_font.line_height = height;                       /*The real line height where any text fits*/
+my_font.base_line = base_line;                      /*Base line measured from the top of line_height*/
+my_font.dsc = something_required;                   /*Store any implementation specific data here*/
+my_font.user_data = user_data;                      /*Optionally some extra user data*/
+
+...
+
+/* Get info about glyph of `unicode_letter` in `font` font. 
+ * Store the result in `dsc_out`.
+ * The next letter (`unicode_letter_next`) might be used to calculate the width required by this glyph (kerning)
+ */
+bool my_get_glyph_dsc_cb(const lv_font_t * font, lv_font_glyph_dsc_t * dsc_out, uint32_t unicode_letter, uint32_t unicode_letter_next)
+{
+    /*Your code here*/
+  
+    /* Sotore the result.
+     * For example ... 
+     */
+    dsc_out->adv_w = 12;        /*Horizontal space required by the glyph in [px]*/
+    dsc_out->box_h = 8;         /*Height of the bitmap in [px]*/
+    dsc_out->box_w = 6;         /*Width of the bitmap in [px]*/
+    dsc_out->ofs_x = 0;         /*X offset of the bitmap in [pf]*/
+    dsc_out->ofs_y = 3;         /*Y ofset of the bitmap measored from the as line*/
+    dsc_out->bpp   = 2;         /*Bit per pixel: 1/2/4/8*/
+    
+    return true;                /*true: glyph found; false: glyph was not found*/
+}
+
+
+/* Get the btmap of `unicode_letter` from `font`. */
+const uint8_t * my_get_glyph_bitmap_cb(const lv_font_t * font, uint32_t unicode_letter)
+{
+    /* Your code here */
+    
+    /* The bitmap should be a continuous bitstream where 
+     * each pixel is represented by `bpp` bits */ 
+    
+    return bitmap;    /*Or NULL if not found*/
+}
+```
+ 
+
+

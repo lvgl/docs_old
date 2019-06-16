@@ -1,4 +1,4 @@
-# Task handler
+# Task Handler
 
 To handle the tasks of LittlevGL you need to call `lv_task_handler()` periodically in one of the followings:
 - *while(1)* of *main()* function 

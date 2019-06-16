@@ -20,10 +20,11 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 ```eval_rst
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    
    intro
    get-started/index
    porting/index
    overview/index
+   object-types/index
 ```

@@ -1,6 +1,6 @@
 # System overview
 
-![System architecture of Littlev Graphics Library](http://docs.littlevgl.com/img/sys.png)
+![](http://docs.littlevgl.com/img/sys.png "System architecture with Littlev Graphics Library (LittlevGL)")
 
 **Application**
 Your application which creates the GUI and handles the specific tasks.
@@ -23,4 +23,3 @@ In this case, the frame buffer can be in the internal RAM (if the MCU has enough
 If the MCU doesn't have TFT/LCD driver interface then an external display controller (E.g. SSD1963, SSD1306, ILI9341) has to be used. 
 In this case, the MCU can communicate with the display controller via Parallel port, SPI or sometimes I2C. 
 The frame buffer is usually located in the display controller which saves a lot of RAM for the MCU. 
-

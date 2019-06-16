@@ -1,15 +1,15 @@
 # Sleep management
 
-The MCU can go to **sleep** when no user input happens. In this case the main `while(1)` should look like this:
+The MCU can go to sleep when no user input happens. In this case the main `while(1)` should look like this:
 
 ```c
 while(1) {
-  /*Normal operation in < 1 sec inactivity*/ 
-  if(lv_disp_get_inactive_time(NULL) < 1000) {    
+  /*Normal operation (no sleep) in < 1 sec inactivity*/ 
+  if(lv_disp_get_inactive_time(NULL) < 1000) {
 	  lv_task_handler();
   } 
   /*Sleep after 1 sec inactivity*/
-  else {                                         
+  else {
 	  timer_stop();   /*Stop the timer where lv_tick_inc() is called*/
 	  sleep();		    /*Sleep the MCU*/
   }

@@ -48,7 +48,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Events" href="events.html" />
-    <link rel="prev" title="Objects" href="objects.html" /> 
+    <link rel="prev" title="Text area (lv_ta)" href="../object-types/ta.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -144,13 +144,19 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/tick.html">Tick interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../porting/task-handler.html">Task handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/task-handler.html">Task Handler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/sleep.html">Sleep management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../porting/os.html">Using with an operating system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/os.html">Use with an operating system</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Overview</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html">Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html">Label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html">List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html">Chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html">Text area</a></li>
 <li class="toctree-l3"><a class="reference internal" href="objects.html#object-attributes">Object attributes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="objects.html#basic-attributes">Basic attributes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="objects.html#specific-attributes">Specific attributes</a></li>
@@ -159,15 +165,9 @@
 <li class="toctree-l3"><a class="reference internal" href="objects.html#object-s-working-mechanisms">Object’s working mechanisms</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="objects.html#parent-child-structure">Parent-child structure</a></li>
 <li class="toctree-l4"><a class="reference internal" href="objects.html#moving-together">Moving together</a></li>
-<li class="toctree-l4"><a class="reference internal" href="objects.html#visibility-only-on-parent">Visibility only on parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="objects.html#visibility-only-on-the-parent">Visibility only on the parent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="objects.html#create-delete-objects">Create - delete objects</a></li>
 <li class="toctree-l4"><a class="reference internal" href="objects.html#screen-the-most-basic-parent">Screen – the most basic parent</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="objects.html#layers">Layers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="objects.html#order-of-creation">Order of creation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="objects.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l4"><a class="reference internal" href="objects.html#top-and-sys-layer">Top and sys layer</a></li>
 </ul>
 </li>
 </ul>
@@ -178,25 +178,90 @@
 <li class="toctree-l3"><a class="reference internal" href="#top-and-sys-layer">Top and sys layer</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="events.html">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="events.html#event-types">Event types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="events.html#input-device-related">Input device related</a></li>
+<li class="toctree-l4"><a class="reference internal" href="events.html#pointer-related">Pointer related</a></li>
+<li class="toctree-l4"><a class="reference internal" href="events.html#keypad-and-encoder-related">Keypad and encoder related</a></li>
+<li class="toctree-l4"><a class="reference internal" href="events.html#general-events">General events</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="events.html#custom-data">Custom data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html#manually-send-events">Manually send events</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="styles.html">Styles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="styles.html#style-properties">Style properties</a></li>
-<li class="toctree-l3"><a class="reference internal" href="styles.html#using-styles">Using styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="styles.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="styles.html#inherit-styles">Inherit styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="styles.html#style-properties">Style properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="styles.html#common-properties">Common properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="styles.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="styles.html#text-style-properties">Text style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="styles.html#image-style-properties">Image style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="styles.html#line-style-properties">Line style properties</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="styles.html#built-in-styles">Built-in styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="styles.html#style-animations">Style animations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="styles.html#style-example">Style example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="styles.html#themes">Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="styles.html#themes">Themes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="styles.html#live-update">Live update</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="indev.html">Input devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="display.html">Displays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fonts.html">Fonts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="fonts.html#built-in-fonts">Built-in fonts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fonts.html#unicode-support">Unicode support</a></li>
-<li class="toctree-l3"><a class="reference internal" href="fonts.html#symbol-fonts">Symbol fonts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fonts.html#built-in-fonts">Built-in fonts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="fonts.html#add-new-font">Add new font</a></li>
-<li class="toctree-l3"><a class="reference internal" href="fonts.html#font-example">Font example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fonts.html#add-a-new-font-engine">Add a new font engine</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="images.html">Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file-system.html">File system</a></li>
 <li class="toctree-l2"><a class="reference internal" href="animations.html">Animations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing.html">Drawing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html#buffering-types">Buffering types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drawing.html#mechanism-of-screen-refreshing">Mechanism of screen refreshing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../object-types/index.html">Object types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/obj.html">Base object (lv_obj)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/arc.html">Arc (lv_arc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/bar.html">Bar (lv_bar)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/btn.html">Btn (lv_btn)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/btnm.html">Button matrix (lv_btnm)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/calendar.html">Calendar (lv_calendar)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/canvas.html">Canvas (lv_canvas)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/chart.html">Chart (lv_chart)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cont.html">Container (lv_cont)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/ddlist.html">Drop down list (lv_ddlist)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/gauge.html">Gauge (lv_gauge)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/imgbtn.html">Image button (lv_imgbtn)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/img.html">Image (lv_img)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/kb.html">Keyboard (lv_kb)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/label.html">Label (lv_label)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/led.html">LED (lv_led)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/line.html">Line (lv_line)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/list.html">List (lv_list)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/lmeter.html">Line meter (lv_lmeter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/mbox.html">Message box (lv_mbox)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/page.html">Page (lv_page)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/preload.html">Preload (lv_preload)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/roller.html">Roller (lv_roller)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/slider.html">Slider (lv_slider)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/spinbox.html">Spinbox (lv_spinbox)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/sw.html">Switch (lv_sw)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/table.html">Table (lv_table)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/tabview.html">Tab view (lv_tabview)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/ta.html">Text area (lv_ta)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/tileview.html">Tile view (lv_tileview)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/win.html">Window (lv_win)</a></li>
 </ul>
 </li>
 </ul>
@@ -275,15 +340,15 @@ It is very important, the order is calculated among the objects on the same leve
 <p><img alt="Creating graphical objects in Littlev Graphics Library" src="https://littlevgl.com/docs/par_child4.png" /></p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="cm">/*Create a screen*/</span>
 <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">scr</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_scr_load</span><span class="p">(</span><span class="n">scr</span><span class="p">);</span>       						    <span class="cm">/*Load the screen*/</span>
+<span class="n">lv_scr_load</span><span class="p">(</span><span class="n">scr</span><span class="p">);</span>          <span class="cm">/*Load the screen*/</span>
 
 <span class="cm">/*Create 2 buttons*/</span>
 <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn1</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">scr</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>         <span class="cm">/*Create a button on the screen*/</span>
 <span class="n">lv_btn_set_fit</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>                   <span class="cm">/*Enable to automatically set the size according to the content*/</span>
-<span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>              		    <span class="cm">/*Set the position of the button*/</span>
+<span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>              	   <span class="cm">/*Set the position of the button*/</span>
 
 <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn2</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">scr</span><span class="p">,</span> <span class="n">btn1</span><span class="p">);</span>         <span class="cm">/*Copy the first button*/</span>
-<span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>                 	    <span class="cm">/*Set the position of the button*/</span>
+<span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>                    <span class="cm">/*Set the position of the button*/</span>
 
 <span class="cm">/*Add labels to the buttons*/</span>
 <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label1</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>	<span class="cm">/*Create a label on the first button*/</span>
@@ -299,23 +364,23 @@ It is very important, the order is calculated among the objects on the same leve
 </div>
 <div class="section" id="bring-to-the-foreground">
 <h2>Bring to the foreground<a class="headerlink" href="#bring-to-the-foreground" title="Permalink to this headline">¶</a></h2>
-<p>There are several ways to bring an object to foreground:</p>
+<p>There are several ways to bring an object to the foreground:</p>
 <ul class="simple">
-<li>Use <code class="docutils literal"><span class="pre">lv_obj_set_top(obj,</span> <span class="pre">true)</span></code>. If <code class="docutils literal"><span class="pre">obj</span></code> or any of its children is clicked then LittlevGL will automatically bring it to the foreground.
-It works similarly to the windows on PC. When a window in the background is cicked it will come to the forgorund automatically.</li>
-<li>Use <code class="docutils literal"><span class="pre">lv_obj_move_foreground(obj)</span></code> and <code class="docutils literal"><span class="pre">lv_obj_move_background(obj)</span></code> to explicitly tel lthe library to bring an obejct to the foregorund or move to the background.</li>
+<li>Use <code class="docutils literal"><span class="pre">lv_obj_set_top(obj,</span> <span class="pre">true)</span></code>. If <code class="docutils literal"><span class="pre">obj</span></code> or any of its children is clicked then LittlevGL will automatically bring the object to the foreground.
+It works similarly to the windows on PC. When a window in the background is clicked it will come to the foreground automatically.</li>
+<li>Use <code class="docutils literal"><span class="pre">lv_obj_move_foreground(obj)</span></code> and <code class="docutils literal"><span class="pre">lv_obj_move_background(obj)</span></code> to explicitly tell the library to bring an object to the foreground or move to the background.</li>
 <li>When <code class="docutils literal"><span class="pre">lv_obj_set_parent(obj,</span> <span class="pre">new_parent)</span></code> is used <code class="docutils literal"><span class="pre">obj</span></code> will be on the foreground on the new parent.</li>
 </ul>
 </div>
 <div class="section" id="top-and-sys-layer">
 <h2>Top and sys layer<a class="headerlink" href="#top-and-sys-layer" title="Permalink to this headline">¶</a></h2>
-<p>There are two special layer called <code class="docutils literal"><span class="pre">layer_top</span></code> and <code class="docutils literal"><span class="pre">layer_sys</span></code>.
+<p>There are two special layers called <code class="docutils literal"><span class="pre">layer_top</span></code> and <code class="docutils literal"><span class="pre">layer_sys</span></code>.
 Both of them is visible and the same on all screens of a display. <code class="docutils literal"><span class="pre">layer_top</span></code> is on top of “normal screen” and <code class="docutils literal"><span class="pre">layer_sys</span></code> is on top of <code class="docutils literal"><span class="pre">layer_top</span></code> too.</p>
-<p><code class="docutils literal"><span class="pre">layer_top</span></code> can be used by the user to create some content visible everywhere. If the <code class="docutils literal"><span class="pre">click</span></code> attribute is enabled then <code class="docutils literal"><span class="pre">layer_top</span></code> absorb all user click and acts as a modal.</p>
+<p><code class="docutils literal"><span class="pre">layer_top</span></code> can be used by the user to create some content visible everywhere. For example a menu bar, a pop-up, etc. If the <code class="docutils literal"><span class="pre">click</span></code> attribute is enabled then <code class="docutils literal"><span class="pre">layer_top</span></code> will absorb all user click and acts as a modal.</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">lv_obj_set_click</span><span class="p">(</span><span class="n">lv_layer_top</span><span class="p">(),</span> <span class="nb">true</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">layer_sys</span></code> is used by LittlevGL. For example it places the mouse cursor there to be sure it’s always visible.</p>
+<p><code class="docutils literal"><span class="pre">layer_sys</span></code> is used by LittlevGL. For example, it places the mouse cursor there to be sure it’s always visible.</p>
 </div>
 </div>
 
@@ -330,7 +395,7 @@ Both of them is visible and the same on all screens of a display. <code class="d
         <a href="events.html" class="btn btn-neutral float-right" title="Events" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="objects.html" class="btn btn-neutral float-left" title="Objects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../object-types/ta.html" class="btn btn-neutral float-left" title="Text area (lv_ta)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

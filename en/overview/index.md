@@ -9,6 +9,11 @@
    layers
    events
    styles
+   indev
+   display
    fonts
+   images
+   file-system
    animations
+   drawing
 ```
