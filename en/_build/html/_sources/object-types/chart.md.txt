@@ -76,45 +76,32 @@ Learn more about [Keys](/overview/indev).
 
 ## Example
 
+### C
+
+
 ![Chart image](http://docs.littlevgl.com/img/chart-lv_chart.png)
 
-```c
-/*Create a style for the chart*/
-static lv_style_t style;
-lv_style_copy(&style, &lv_style_pretty);
-style.body.shadow.width = 6;
-style.body.shadow.color = LV_COLOR_GRAY;
-style.line.color = LV_COLOR_GRAY;
 
-/*Create a chart*/
-lv_obj_t * chart;
-chart = lv_chart_create(lv_scr_act(), NULL);
-lv_obj_set_size(chart, 200, 150);
-lv_obj_set_style(chart, &style);
-lv_obj_align(chart, NULL, LV_ALIGN_CENTER, 0, 0);
-lv_chart_set_type(chart, LV_CHART_TYPE_POINT | LV_CHART_TYPE_LINE);   /*Show lines and points too*/
-lv_chart_set_series_opa(chart, LV_OPA_70);                            /*Opacity of the data series*/
-lv_chart_set_series_width(chart, 4);                                  /*Line width and point radious*/
+```eval_rst
+.. container:: toggle
 
-lv_chart_set_range(chart, 0, 100);
+    .. container:: header
+    
+      code
 
-/*Add two data series*/
-lv_chart_series_t * ser1 = lv_chart_add_series(chart, LV_COLOR_RED);
-lv_chart_series_t * ser2 = lv_chart_add_series(chart, LV_COLOR_GREEN);
+    .. literalinclude:: /examples/chart/chart_1.c
+      :language: c
+ 
+```
 
-/*Set the next points on 'dl1'*/
-lv_chart_set_next(chart, ser1, 10);
-lv_chart_set_next(chart, ser1, 50);
-lv_chart_set_next(chart, ser1, 70);
-lv_chart_set_next(chart, ser1, 90);
+### MicroPython
+No examples yet.
 
-/*Directly set points on 'dl2'*/
-ser2->points[0] = 90;
-ser2->points[1] = 70;
-ser2->points[2] = 65;
-ser2->points[3] = 65;
-ser2->points[4] = 65;
-ser2->points[5] = 65;
+## API 
 
-lv_chart_refresh(chart); /*Required after direct set*/
+```eval_rst
+
+.. doxygenfile:: lv_chart.h
+  :project: lvgl
+        
 ```

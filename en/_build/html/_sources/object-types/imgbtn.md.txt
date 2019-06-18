@@ -51,40 +51,32 @@ Learn more about [Keys](/overview/indev).
   
 
 ## Example
+
+### C
+
 ![Image button image](http://docs.littlevgl.com/img/image-button-lv_imgbtn.png)
-```c
-/*Create style to make the button darker when pressed*/
-lv_style_t style_pr;
-lv_style_copy(&style_pr, &lv_style_plain);
-style_pr.image.color = LV_COLOR_BLACK;
-style_pr.image.intense = LV_OPA_50;
-style_pr.text.color = LV_COLOR_HEX3(0xaaa);
 
-LV_IMG_DECLARE(imgbtn_green);
-LV_IMG_DECLARE(imgbtn_blue);
 
-/*Create an Image button*/
-lv_obj_t * imgbtn1 = lv_imgbtn_create(lv_scr_act(), NULL);
-lv_imgbtn_set_src(imgbtn1, LV_BTN_STATE_REL, &imgbtn_green);
-lv_imgbtn_set_src(imgbtn1, LV_BTN_STATE_PR, &imgbtn_green);
-lv_imgbtn_set_src(imgbtn1, LV_BTN_STATE_TGL_REL, &imgbtn_blue);
-lv_imgbtn_set_src(imgbtn1, LV_BTN_STATE_TGL_PR, &imgbtn_blue);
-lv_imgbtn_set_style(imgbtn1, LV_BTN_STATE_PR, &style_pr);        /*Use the darker style in the pressed state*/
-lv_imgbtn_set_style(imgbtn1, LV_BTN_STATE_TGL_PR, &style_pr);
-lv_imgbtn_set_toggle(imgbtn1, true);
-lv_obj_align(imgbtn1, NULL, LV_ALIGN_CENTER, 0, -40);
+```eval_rst
+.. container:: toggle
 
-/*Create a label on the Image button*/
-lv_obj_t * label = lv_label_create(imgbtn1, NULL);
-lv_label_set_text(label, "Button");
+    .. container:: header
+    
+      code
 
-/*Copy the fist image button and set Toggled state*/
-lv_obj_t * imgbtn2 = lv_imgbtn_create(lv_scr_act(), imgbtn1);
-lv_btn_set_state(imgbtn2, LV_BTN_STATE_TGL_REL);
-lv_obj_align(imgbtn2, imgbtn1, LV_ALIGN_OUT_BOTTOM_MID, 0, 20);
+    .. literalinclude:: /examples/imgbtn/imgbtn_1.c
+      :language: c
+ 
+```
 
-/*Create a label on the Image button*/
-label = lv_label_create(imgbtn2, NULL);
-lv_label_set_text(label, "Button");
+### MicroPython
+No examples yet.
 
+## API 
+
+```eval_rst
+
+.. doxygenfile:: lv_imgbtn.h
+  :project: lvgl
+        
 ```
