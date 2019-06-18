@@ -68,7 +68,7 @@ Only the [Genreric events](/overview/events.html#generic-events) are sent by the
 Learn more about [Events](/overview/events).
 
 ## Keys
-No *Keys* are processed by the object type.
+No *Keys* are not processed by the object type.
 
 Learn more about [Keys](/overview/indev).
 

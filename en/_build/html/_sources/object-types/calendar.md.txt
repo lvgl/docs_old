@@ -39,7 +39,7 @@ Besided the [Genreric events](/overview/events.html#generic-events) the followin
 In Input device realted events `lv_calendar_get_pressed_date(caledar)` tells which day is currently being pressed or return `NULL` if no date is pressed.
 
 ## Keys
-No *Keys* are processed by the object type.
+No *Keys* are not processed by the object type.
 
 Learn more about [Keys](/overview/indev).
 

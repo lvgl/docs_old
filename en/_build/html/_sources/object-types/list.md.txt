@@ -2,123 +2,99 @@
 
 ## Overview
 
-The Lists are built from a background **Page** and **Buttons** on it. The Buttons contain an optional icon-like Image (which can be a symbol too) and a Label. When the list become long enough it can be scrolled. The **width of the buttons** is set to maximum according to the object width. The **height** of the buttons are adjusted automatically according to the content (content height + style.body.padding.ver).
+The Lists are built from a background [Page](/object-types/page) and [Buttons](/object-types/btn) on it. 
+The Buttons contain an optional icon-like [Image](/object-types/img) (which can be a symbol too) and a [Label](/object-types/label). 
+When the list become long enough it can be scrolled. 
 
-You can **add new list element** with `lv_list_add(list, "U:/img", "Text", rel_action)` or with symbol icon `lv_list_add(list, SYMBOL_EDIT, "Edit text")`. If you do no want to add image use `NULL` as file name. The function returns with a pointer to the created button to allow further configurations.  
+The **width of the buttons** is set to maximum according to the object width. 
+The **height** of the buttons are adjusted automatically according to the content. (*content height* + *padding.top* + *padding.bottom*).
 
-You can use `lv_list_get_btn_label(list_btn)` and `lv_list_get_btn_img(list_btn)` to **get the label and the image** of a list button.
+You can **add new list element** with `lv_list_add(list, &icon_img, "Text", event_cb)` or with symbol `lv_list_add(list, SYMBOL_EDIT, "Edit text")`. 
+If you do no want to add image use `NULL` as file name. The function returns with a pointer to the created button to allow further configurations.
 
-In the release action of a button you can get the the **button's text** with `lv_list_get_btn_text(button)`. It helps to identify the released list element. 
+The labels are created with `LV_LABEL_LONG_SROLL_CIRC` long mode.
 
-To **delete a list element** just use `lv_obj_del()` on the return value of `lv_list_add()`.
+You can use `lv_list_get_btn_label(list_btn)` and `lv_list_get_btn_img(list_btn)` to **get the label and the image** of a list button. You can get text directly with `lv_list_get_btn_text(list_btn)`.
+
+To **delete a list element** just use `lv_obj_del()` on the return value of `lv_list_add()`. The clean the list (remove all buttons) use `lv_list_clean(list)`
 
 You can **navigate manually** in the list with `lv_list_up(list)` and `lv_list_down(list)`.
 
-You can focus on a button directly using `lv_list_focus(btn, anim_en)`.
+You can focus on a button directly using `lv_list_focus(btn, LV_ANIM_ON/OFF)`.
+
+A **circle-like effect** can be shown if the list **reached the most top or bottom** position. `lv_list_set_edge_flash(list, en)` enables this feature.
+
+If the list is created on an other scrollable element (like a [Page](/object-types/page)) and the list can't be scrolled further the **scrolling can be propagated to the parent**. 
+This way the scroll will be continued on the parent. It can be enebaled with `lv_list_set_scroll_propagation(list, true)`
 
 The **animation time** of up/down/focus movements can be set via: `lv_list_set_anim_time(list, anim_time)`. Zero animation time means not animations. 
 
+If the buttons have `lv_btn_set_toggle` enabled then `lv_list_set_single_mode(list, true)` can be used to ensure that only one button can be in toggleg state at the same time.
+
+If the list is **added to a group** then a button be selected which will receive the *PRESS/CLICK/...* events when `LV_KEY_ENTER` is pressed. 
+To change the seelceted button `LV_KEY_LEFT/RIGHT/UP/DOWN` or the `lv_list_set_btn_selected(list, btn)` can be used. When the list is defocused and focused again it will restore the last selected button.
+
 ## Style usage
 
-The `lv_list_set_style(list, LV_LIST_STYLE_..., &style)` function sets the style of a list. For details explanation of _BG_, _SCRL_ and _SB_ see [Page](/Page)
+The `lv_list_set_style(list, LV_LIST_STYLE_..., &style)` function sets the style of a list. 
+- **LV_LIST_STYLE_BG** list background style. Default: `lv_style_transp_fit`
+- **LV_LIST_STYLE_SCRL** scrollable parts's style. Default: `lv_style_pretty`
+- **LV_LIST_STYLE_SB** scrollbars' style. Default: `lv_style_pretty_color`. For detailes see [Page](/object-types/page) 
+- **LV_LIST_STYLE_BTN_REL** button released style. Default: `lv_style_btn_rel`
+- **LV_LIST_STYLE_BTN_PR** button pressed style. Default: `lv_style_btn_pr`
+- **LV_LIST_STYLE_BTN_TGL_REL** button toggled released style. Default: `lv_style_btn_tgl_rel`
+- **LV_LIST_STYLE_BTN_TGL_PR** button toggled pressed style. Default: `lv_style_btn_tgl_pr`
+- **LV_LIST_STYLE_BTN_INA** button inactive style. Default: `lv_style_btn_ina`
 
-- **LV_LIST_STYLE_BG** list background style. Default: _lv_style_transp_fit_
-- **LV_LIST_STYLE_SCRL** scrollable parts's style. Default:_ lv_style_pretty_
-- **LV_LIST_STYLE_SB** scrollbars' style. Default: _lv_style_pretty_color_
-- **LV_LIST_STYLE_BTN_REL** button released style. Default: _lv_style_btn_rel_
-- **LV_LIST_STYLE_BTN_PR** button pressed style. Default: _lv_style_btn_pr_
-- **LV_LIST_STYLE_BTN_TGL_REL** button toggled released style. Default: _lv_style_btn_tgl_rel_
-- **LV_LIST_STYLE_BTN_TGL_PR** button toggled pressed style. Default: _lv_style_btn_tgl_pr_
-- **LV_LIST_STYLE_BTN_INA** button inactive style. Default: _lv_style_btn_ina_
+Because *BG* has a transparent style by default if there is only a few buttons the list will look shorter but become scrollable when more list elements are added.
 
-## Notes
+To modify the height of the buttons adjust the `body.padding.top/bottom` fields of the corresponding styles (`LV_LIST_STYLE_BTN_REL/PR/...`)
 
-- You can set a transparent background for the list. In this case if you have only a few list buttons the the list will look shorter but become scrollable when more list elements are added.
-- The button labels default long mode is `LV_LABEL_LONG_ROLL`. You can modify it manually. Use `lv_list_get_btn_label()` to get buttons's label.
-- To **modify the height of the buttons** adjust the _body.padding.ver_ field of the corresponding style (LV_LIST_STYLE_BTN_REL , LV_LIST_STYLE_BTN_PR etc.)
+
+## Events
+Only the [Genreric events](/overview/events.html#generic-events) are sent by the object type.
+
+Learn more about [Events](/overview/events).
+
+## Keys
+The following *Keys* are processed by the Lists:
+- **LV_KEY_RIGHT/DOWN** Select he next button
+- **LV_KEY_LEFT/UP** Select the previous button
+
+Note that, as usual, the state of `LV_KEY_ENTER` is translated to `LV_EVENT_PRESSED/PRESSING/RELEASED` etc.
+
+The Selected buttons are in `LV_BTN_STATE_PR/TG_PR` state.
+
+Learn more about [Keys](/overview/indev).
 
 ## Example
-![List image](http://docs.littlevgl.com/img/list-lv_list.png)
-```c
-/*Will be called on click of a button of a list*/
-static lv_res_t list_release_action(lv_obj_t * list_btn)
-{
-    printf("List element click:%s\n", lv_list_get_btn_text(list_btn));
 
-    return LV_RES_OK; /*Return OK because the list is not deleted*/
-}
+### C
 
-.
-.
-.
 
-/************************
- * Create a default list
- ************************/
+![](/examples/list/list_1.png "List object with LittlevGL")
 
-/*Crate the list*/
-lv_obj_t * list1 = lv_list_create(lv_scr_act(), NULL);
-lv_obj_set_size(list1, 130, 170);
-lv_obj_align(list1, NULL, LV_ALIGN_IN_TOP_LEFT, 20, 40);
+```eval_rst
+.. container:: toggle
 
-/*Add list elements*/
-lv_list_add(list1, SYMBOL_FILE, "New", list_release_action);
-lv_list_add(list1, SYMBOL_DIRECTORY, "Open", list_release_action);
-lv_list_add(list1, SYMBOL_CLOSE, "Delete", list_release_action);
-lv_list_add(list1, SYMBOL_EDIT, "Edit", list_release_action);
-lv_list_add(list1, SYMBOL_SAVE, "Save", list_release_action);
+    .. container:: header
+    
+      code
 
-/*Create a label above the list*/
-lv_obj_t * label;
-label = lv_label_create(lv_scr_act(), NULL);
-lv_label_set_text(label, "Default");
-lv_obj_align(label, list1, LV_ALIGN_OUT_TOP_MID, 0, -10);
-
-/*********************
- * Create new styles
- ********************/
-/*Create a scroll bar style*/
-static lv_style_t style_sb;
-lv_style_copy(&style_sb, &lv_style_plain);
-style_sb.body.main_color = LV_COLOR_BLACK;
-style_sb.body.grad_color = LV_COLOR_BLACK;
-style_sb.body.border.color = LV_COLOR_WHITE;
-style_sb.body.border.width = 1;
-style_sb.body.border.opa = LV_OPA_70;
-style_sb.body.radius = LV_RADIUS_CIRCLE;
-style_sb.body.opa = LV_OPA_60;
-
-/*Create styles for the buttons*/
-static lv_style_t style_btn_rel;
-static lv_style_t style_btn_pr;
-lv_style_copy(&style_btn_rel, &lv_style_btn_rel);
-style_btn_rel.body.main_color = LV_COLOR_MAKE(0x30, 0x30, 0x30);
-style_btn_rel.body.grad_color = LV_COLOR_BLACK;
-style_btn_rel.body.border.color = LV_COLOR_SILVER;
-style_btn_rel.body.border.width = 1;
-style_btn_rel.body.border.opa = LV_OPA_50;
-style_btn_rel.body.radius = 0;
-
-lv_style_copy(&style_btn_pr, &style_btn_rel);
-style_btn_pr.body.main_color = LV_COLOR_MAKE(0x55, 0x96, 0xd8);
-style_btn_pr.body.grad_color = LV_COLOR_MAKE(0x37, 0x62, 0x90);
-style_btn_pr.text.color = LV_COLOR_MAKE(0xbb, 0xd5, 0xf1);
-
-/**************************************
- * Create a list with modified styles
- **************************************/
-
-/*Copy the previous list*/
-lv_obj_t * list2 = lv_list_create(lv_scr_act(),list1);
-lv_obj_align(list2, NULL, LV_ALIGN_IN_TOP_RIGHT, -20, 40);
-lv_list_set_sb_mode(list2, LV_SB_MODE_AUTO);
-lv_list_set_style(list2, LV_LIST_STYLE_BG, &lv_style_transp_tight);
-lv_list_set_style(list2, LV_LIST_STYLE_SCRL, &lv_style_transp_tight);
-lv_list_set_style(list2, LV_LIST_STYLE_BTN_REL, &style_btn_rel); /*Set the new button styles*/
-lv_list_set_style(list2, LV_LIST_STYLE_BTN_PR, &style_btn_pr);
-
-/*Create a label above the list*/
-label = lv_label_create(lv_scr_act(), label);       /*Copy the previous label*/
-lv_label_set_text(label, "Modified");
-lv_obj_align(label, list2, LV_ALIGN_OUT_TOP_MID, 0, -10);
+    .. literalinclude:: /examples/list/list_1.c
+      :language: c
+ 
 ```
+
+### MicroPython
+No examples yet.
+
+## API 
+
+```eval_rst
+
+.. doxygenfile:: lv_list.h
+  :project: lvgl
+        
+```
+

@@ -420,30 +420,54 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="label.html">Label (lv_label)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="label.html#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="label.html#style-usage">Style usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="label.html#notes">Notes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="label.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="label.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="led.html">LED (lv_led)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="led.html#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="led.html#style-usage">Style usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="led.html#notes">Notes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="led.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="led.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="led.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="line.html">Line (lv_line)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="line.html#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="line.html#style-usage">Style usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="line.html#notes">Notes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="line.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="line.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">List (lv_list)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#style-usage">Style usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="lmeter.html">Line meter (lv_lmeter)</a><ul>
@@ -551,40 +575,67 @@
 <h1>List (lv_list)<a class="headerlink" href="#list-lv-list" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>The Lists are built from a background <strong>Page</strong> and <strong>Buttons</strong> on it. The Buttons contain an optional icon-like Image (which can be a symbol too) and a Label. When the list become long enough it can be scrolled. The <strong>width of the buttons</strong> is set to maximum according to the object width. The <strong>height</strong> of the buttons are adjusted automatically according to the content (content height + style.body.padding.ver).</p>
-<p>You can <strong>add new list element</strong> with <code class="docutils literal notranslate"><span class="pre">lv_list_add(list,</span> <span class="pre">&quot;U:/img&quot;,</span> <span class="pre">&quot;Text&quot;,</span> <span class="pre">rel_action)</span></code> or with symbol icon <code class="docutils literal notranslate"><span class="pre">lv_list_add(list,</span> <span class="pre">SYMBOL_EDIT,</span> <span class="pre">&quot;Edit</span> <span class="pre">text&quot;)</span></code>. If you do no want to add image use <code class="docutils literal notranslate"><span class="pre">NULL</span></code> as file name. The function returns with a pointer to the created button to allow further configurations.</p>
-<p>You can use <code class="docutils literal notranslate"><span class="pre">lv_list_get_btn_label(list_btn)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_list_get_btn_img(list_btn)</span></code> to <strong>get the label and the image</strong> of a list button.</p>
-<p>In the release action of a button you can get the the <strong>button’s text</strong> with <code class="docutils literal notranslate"><span class="pre">lv_list_get_btn_text(button)</span></code>. It helps to identify the released list element.</p>
-<p>To <strong>delete a list element</strong> just use <code class="docutils literal notranslate"><span class="pre">lv_obj_del()</span></code> on the return value of <code class="docutils literal notranslate"><span class="pre">lv_list_add()</span></code>.</p>
+<p>The Lists are built from a background <a class="reference internal" href="page.html"><span class="doc">Page</span></a> and <a class="reference internal" href="btn.html"><span class="doc">Buttons</span></a> on it.
+The Buttons contain an optional icon-like <a class="reference internal" href="img.html"><span class="doc">Image</span></a> (which can be a symbol too) and a <a class="reference internal" href="label.html"><span class="doc">Label</span></a>.
+When the list become long enough it can be scrolled.</p>
+<p>The <strong>width of the buttons</strong> is set to maximum according to the object width.
+The <strong>height</strong> of the buttons are adjusted automatically according to the content. (<em>content height</em> + <em>padding.top</em> + <em>padding.bottom</em>).</p>
+<p>You can <strong>add new list element</strong> with <code class="docutils literal notranslate"><span class="pre">lv_list_add(list,</span> <span class="pre">&amp;icon_img,</span> <span class="pre">&quot;Text&quot;,</span> <span class="pre">event_cb)</span></code> or with symbol <code class="docutils literal notranslate"><span class="pre">lv_list_add(list,</span> <span class="pre">SYMBOL_EDIT,</span> <span class="pre">&quot;Edit</span> <span class="pre">text&quot;)</span></code>.
+If you do no want to add image use <code class="docutils literal notranslate"><span class="pre">NULL</span></code> as file name. The function returns with a pointer to the created button to allow further configurations.</p>
+<p>The labels are created with <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_SROLL_CIRC</span></code> long mode.</p>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">lv_list_get_btn_label(list_btn)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_list_get_btn_img(list_btn)</span></code> to <strong>get the label and the image</strong> of a list button. You can get text directly with <code class="docutils literal notranslate"><span class="pre">lv_list_get_btn_text(list_btn)</span></code>.</p>
+<p>To <strong>delete a list element</strong> just use <code class="docutils literal notranslate"><span class="pre">lv_obj_del()</span></code> on the return value of <code class="docutils literal notranslate"><span class="pre">lv_list_add()</span></code>. The clean the list (remove all buttons) use <code class="docutils literal notranslate"><span class="pre">lv_list_clean(list)</span></code></p>
 <p>You can <strong>navigate manually</strong> in the list with <code class="docutils literal notranslate"><span class="pre">lv_list_up(list)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_list_down(list)</span></code>.</p>
-<p>You can focus on a button directly using <code class="docutils literal notranslate"><span class="pre">lv_list_focus(btn,</span> <span class="pre">anim_en)</span></code>.</p>
+<p>You can focus on a button directly using <code class="docutils literal notranslate"><span class="pre">lv_list_focus(btn,</span> <span class="pre">LV_ANIM_ON/OFF)</span></code>.</p>
+<p>A <strong>circle-like effect</strong> can be shown if the list <strong>reached the most top or bottom</strong> position. <code class="docutils literal notranslate"><span class="pre">lv_list_set_edge_flash(list,</span> <span class="pre">en)</span></code> enables this feature.</p>
+<p>If the list is created on an other scrollable element (like a <a class="reference internal" href="page.html"><span class="doc">Page</span></a>) and the list can’t be scrolled further the <strong>scrolling can be propagated to the parent</strong>.
+This way the scroll will be continued on the parent. It can be enebaled with <code class="docutils literal notranslate"><span class="pre">lv_list_set_scroll_propagation(list,</span> <span class="pre">true)</span></code></p>
 <p>The <strong>animation time</strong> of up/down/focus movements can be set via: <code class="docutils literal notranslate"><span class="pre">lv_list_set_anim_time(list,</span> <span class="pre">anim_time)</span></code>. Zero animation time means not animations.</p>
+<p>If the buttons have <code class="docutils literal notranslate"><span class="pre">lv_btn_set_toggle</span></code> enabled then <code class="docutils literal notranslate"><span class="pre">lv_list_set_single_mode(list,</span> <span class="pre">true)</span></code> can be used to ensure that only one button can be in toggleg state at the same time.</p>
+<p>If the list is <strong>added to a group</strong> then a button be selected which will receive the <em>PRESS/CLICK/…</em> events when <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code> is pressed.
+To change the seelceted button <code class="docutils literal notranslate"><span class="pre">LV_KEY_LEFT/RIGHT/UP/DOWN</span></code> or the <code class="docutils literal notranslate"><span class="pre">lv_list_set_btn_selected(list,</span> <span class="pre">btn)</span></code> can be used. When the list is defocused and focused again it will restore the last selected button.</p>
 </div>
 <div class="section" id="style-usage">
 <h2>Style usage<a class="headerlink" href="#style-usage" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">lv_list_set_style(list,</span> <span class="pre">LV_LIST_STYLE_...,</span> <span class="pre">&amp;style)</span></code> function sets the style of a list. For details explanation of <em>BG</em>, <em>SCRL</em> and <em>SB</em> see <a class="reference external" href="/Page">Page</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lv_list_set_style(list,</span> <span class="pre">LV_LIST_STYLE_...,</span> <span class="pre">&amp;style)</span></code> function sets the style of a list.</p>
 <ul class="simple">
-<li><p><strong>LV_LIST_STYLE_BG</strong> list background style. Default: <em>lv_style_transp_fit</em></p></li>
-<li><p><strong>LV_LIST_STYLE_SCRL</strong> scrollable parts’s style. Default:_ lv_style_pretty_</p></li>
-<li><p><strong>LV_LIST_STYLE_SB</strong> scrollbars’ style. Default: <em>lv_style_pretty_color</em></p></li>
-<li><p><strong>LV_LIST_STYLE_BTN_REL</strong> button released style. Default: <em>lv_style_btn_rel</em></p></li>
-<li><p><strong>LV_LIST_STYLE_BTN_PR</strong> button pressed style. Default: <em>lv_style_btn_pr</em></p></li>
-<li><p><strong>LV_LIST_STYLE_BTN_TGL_REL</strong> button toggled released style. Default: <em>lv_style_btn_tgl_rel</em></p></li>
-<li><p><strong>LV_LIST_STYLE_BTN_TGL_PR</strong> button toggled pressed style. Default: <em>lv_style_btn_tgl_pr</em></p></li>
-<li><p><strong>LV_LIST_STYLE_BTN_INA</strong> button inactive style. Default: <em>lv_style_btn_ina</em></p></li>
+<li><p><strong>LV_LIST_STYLE_BG</strong> list background style. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_transp_fit</span></code></p></li>
+<li><p><strong>LV_LIST_STYLE_SCRL</strong> scrollable parts’s style. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty</span></code></p></li>
+<li><p><strong>LV_LIST_STYLE_SB</strong> scrollbars’ style. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty_color</span></code>. For detailes see <a class="reference internal" href="page.html"><span class="doc">Page</span></a></p></li>
+<li><p><strong>LV_LIST_STYLE_BTN_REL</strong> button released style. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_rel</span></code></p></li>
+<li><p><strong>LV_LIST_STYLE_BTN_PR</strong> button pressed style. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_pr</span></code></p></li>
+<li><p><strong>LV_LIST_STYLE_BTN_TGL_REL</strong> button toggled released style. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_tgl_rel</span></code></p></li>
+<li><p><strong>LV_LIST_STYLE_BTN_TGL_PR</strong> button toggled pressed style. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_tgl_pr</span></code></p></li>
+<li><p><strong>LV_LIST_STYLE_BTN_INA</strong> button inactive style. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_ina</span></code></p></li>
 </ul>
+<p>Because <em>BG</em> has a transparent style by default if there is only a few buttons the list will look shorter but become scrollable when more list elements are added.</p>
+<p>To modify the height of the buttons adjust the <code class="docutils literal notranslate"><span class="pre">body.padding.top/bottom</span></code> fields of the corresponding styles (<code class="docutils literal notranslate"><span class="pre">LV_LIST_STYLE_BTN_REL/PR/...</span></code>)</p>
 </div>
-<div class="section" id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<p>Only the <a class="reference external" href="/overview/events.html#generic-events">Genreric events</a> are sent by the object type.</p>
+<p>Learn more about <a class="reference internal" href="../overview/events.html"><span class="doc">Events</span></a>.</p>
+</div>
+<div class="section" id="keys">
+<h2>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h2>
+<p>The following <em>Keys</em> are processed by the Lists:</p>
 <ul class="simple">
-<li><p>You can set a transparent background for the list. In this case if you have only a few list buttons the the list will look shorter but become scrollable when more list elements are added.</p></li>
-<li><p>The button labels default long mode is <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_ROLL</span></code>. You can modify it manually. Use <code class="docutils literal notranslate"><span class="pre">lv_list_get_btn_label()</span></code> to get buttons’s label.</p></li>
-<li><p>To <strong>modify the height of the buttons</strong> adjust the <em>body.padding.ver</em> field of the corresponding style (LV_LIST_STYLE_BTN_REL , LV_LIST_STYLE_BTN_PR etc.)</p></li>
+<li><p><strong>LV_KEY_RIGHT/DOWN</strong> Select he next button</p></li>
+<li><p><strong>LV_KEY_LEFT/UP</strong> Select the previous button</p></li>
 </ul>
+<p>Note that, as usual, the state of <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code> is translated to <code class="docutils literal notranslate"><span class="pre">LV_EVENT_PRESSED/PRESSING/RELEASED</span></code> etc.</p>
+<p>The Selected buttons are in <code class="docutils literal notranslate"><span class="pre">LV_BTN_STATE_PR/TG_PR</span></code> state.</p>
+<p>Learn more about <a class="reference internal" href="../overview/indev.html"><span class="doc">Keys</span></a>.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p><img alt="http://docs.littlevgl.com/img/list-lv_list.png" src="http://docs.littlevgl.com/img/list-lv_list.png" />List image</p>
+<div class="section" id="c">
+<h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
+<p><img alt="List object with LittlevGL" src="../_images/list_1.png" /></p>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Will be called on click of a button of a list*/</span>
 <span class="k">static</span> <span class="n">lv_res_t</span> <span class="nf">list_release_action</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">list_btn</span><span class="p">)</span>
 <span class="p">{</span>
@@ -670,6 +721,543 @@
 </div>
 </div>
 </div>
+<div class="section" id="micropython">
+<h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
+<p>No examples yet.</p>
+</div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv415lv_list_style_t">
+<span id="_CPPv315lv_list_style_t"></span><span id="_CPPv215lv_list_style_t"></span><span id="lv_list_style_t"></span><span class="target" id="lv__list_8h_1af9dbef5c3220c49e6b0a155b303128f0"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_list_style_t</code><a class="headerlink" href="#_CPPv415lv_list_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv4Ut7_anon_68">
+<span id="_CPPv3Ut7_anon_68"></span><span class="target" id="lv__list_8h_1aeb8e1c282570d629a6b603a94a4650d6"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_68" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv416LV_LIST_STYLE_BG">
+<span id="_CPPv316LV_LIST_STYLE_BG"></span><span id="_CPPv216LV_LIST_STYLE_BG"></span><span class="target" id="lv__list_8h_1aeb8e1c282570d629a6b603a94a4650d6aa41fa9a55c8e92da43ce164c9710477f"></span><code class="sig-name descname">LV_LIST_STYLE_BG</code><a class="headerlink" href="#_CPPv416LV_LIST_STYLE_BG" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv418LV_LIST_STYLE_SCRL">
+<span id="_CPPv318LV_LIST_STYLE_SCRL"></span><span id="_CPPv218LV_LIST_STYLE_SCRL"></span><span class="target" id="lv__list_8h_1aeb8e1c282570d629a6b603a94a4650d6a1a78a86fcd31788663b1c912285547bd"></span><code class="sig-name descname">LV_LIST_STYLE_SCRL</code><a class="headerlink" href="#_CPPv418LV_LIST_STYLE_SCRL" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv416LV_LIST_STYLE_SB">
+<span id="_CPPv316LV_LIST_STYLE_SB"></span><span id="_CPPv216LV_LIST_STYLE_SB"></span><span class="target" id="lv__list_8h_1aeb8e1c282570d629a6b603a94a4650d6a0fbcc30e1997ff158783fe1c2552749f"></span><code class="sig-name descname">LV_LIST_STYLE_SB</code><a class="headerlink" href="#_CPPv416LV_LIST_STYLE_SB" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv424LV_LIST_STYLE_EDGE_FLASH">
+<span id="_CPPv324LV_LIST_STYLE_EDGE_FLASH"></span><span id="_CPPv224LV_LIST_STYLE_EDGE_FLASH"></span><span class="target" id="lv__list_8h_1aeb8e1c282570d629a6b603a94a4650d6a7b8334e1ff5563b86c9de449e2e9fe65"></span><code class="sig-name descname">LV_LIST_STYLE_EDGE_FLASH</code><a class="headerlink" href="#_CPPv424LV_LIST_STYLE_EDGE_FLASH" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421LV_LIST_STYLE_BTN_REL">
+<span id="_CPPv321LV_LIST_STYLE_BTN_REL"></span><span id="_CPPv221LV_LIST_STYLE_BTN_REL"></span><span class="target" id="lv__list_8h_1aeb8e1c282570d629a6b603a94a4650d6ae07648eaace206fba7dc2d1d704b27c3"></span><code class="sig-name descname">LV_LIST_STYLE_BTN_REL</code><a class="headerlink" href="#_CPPv421LV_LIST_STYLE_BTN_REL" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv420LV_LIST_STYLE_BTN_PR">
+<span id="_CPPv320LV_LIST_STYLE_BTN_PR"></span><span id="_CPPv220LV_LIST_STYLE_BTN_PR"></span><span class="target" id="lv__list_8h_1aeb8e1c282570d629a6b603a94a4650d6a1a05cbb674a24c55fc839cea5739ebfc"></span><code class="sig-name descname">LV_LIST_STYLE_BTN_PR</code><a class="headerlink" href="#_CPPv420LV_LIST_STYLE_BTN_PR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv425LV_LIST_STYLE_BTN_TGL_REL">
+<span id="_CPPv325LV_LIST_STYLE_BTN_TGL_REL"></span><span id="_CPPv225LV_LIST_STYLE_BTN_TGL_REL"></span><span class="target" id="lv__list_8h_1aeb8e1c282570d629a6b603a94a4650d6abbb27dcebd87eaf4d67038bdaedab603"></span><code class="sig-name descname">LV_LIST_STYLE_BTN_TGL_REL</code><a class="headerlink" href="#_CPPv425LV_LIST_STYLE_BTN_TGL_REL" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv424LV_LIST_STYLE_BTN_TGL_PR">
+<span id="_CPPv324LV_LIST_STYLE_BTN_TGL_PR"></span><span id="_CPPv224LV_LIST_STYLE_BTN_TGL_PR"></span><span class="target" id="lv__list_8h_1aeb8e1c282570d629a6b603a94a4650d6ae4713c9f4fc872c4c079a8dcacb72c6b"></span><code class="sig-name descname">LV_LIST_STYLE_BTN_TGL_PR</code><a class="headerlink" href="#_CPPv424LV_LIST_STYLE_BTN_TGL_PR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421LV_LIST_STYLE_BTN_INA">
+<span id="_CPPv321LV_LIST_STYLE_BTN_INA"></span><span id="_CPPv221LV_LIST_STYLE_BTN_INA"></span><span class="target" id="lv__list_8h_1aeb8e1c282570d629a6b603a94a4650d6abef8355b89675ec0460f09b07cac02b5"></span><code class="sig-name descname">LV_LIST_STYLE_BTN_INA</code><a class="headerlink" href="#_CPPv421LV_LIST_STYLE_BTN_INA" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv414lv_list_createP8lv_obj_tPK8lv_obj_t">
+<span id="_CPPv314lv_list_createP8lv_obj_tPK8lv_obj_t"></span><span id="_CPPv214lv_list_createP8lv_obj_tPK8lv_obj_t"></span><span id="lv_list_create__lv_obj_tP.lv_obj_tCP"></span><span class="target" id="lv__list_8h_1ab2d688986b3bfeebfef28c7b25b5d2e9"></span>lv_obj_t *<code class="sig-name descname">lv_list_create</code><span class="sig-paren">(</span>lv_obj_t *<em>par</em>, <em class="property">const</em> lv_obj_t *<em>copy</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_list_createP8lv_obj_tPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a list objects <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the created list </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">par</span></code>: pointer to an object, it will be the parent of the new list </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">copy</span></code>: pointer to a list object, if not NULL then the new object will be copied from it </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv413lv_list_cleanP8lv_obj_t">
+<span id="_CPPv313lv_list_cleanP8lv_obj_t"></span><span id="_CPPv213lv_list_cleanP8lv_obj_t"></span><span id="lv_list_clean__lv_obj_tP"></span><span class="target" id="lv__list_8h_1ac127ac8de759f909cefa97f81b034986"></span>void <code class="sig-name descname">lv_list_clean</code><span class="sig-paren">(</span>lv_obj_t *<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lv_list_cleanP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Delete all children of the scrl object, without deleting scrl child. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">obj</span></code>: pointer to an object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv411lv_list_addP8lv_obj_tPKvPKc13lv_event_cb_t">
+<span id="_CPPv311lv_list_addP8lv_obj_tPKvPKc13lv_event_cb_t"></span><span id="_CPPv211lv_list_addP8lv_obj_tPKvPKc13lv_event_cb_t"></span><span id="lv_list_add__lv_obj_tP.voidCP.cCP.lv_event_cb_t"></span><span class="target" id="lv__list_8h_1a58fa5d3ce0622976866e9691f8521985"></span>lv_obj_t *<code class="sig-name descname">lv_list_add</code><span class="sig-paren">(</span>lv_obj_t *<em>list</em>, <em class="property">const</em> void *<em>img_src</em>, <em class="property">const</em> char *<em>txt</em>, lv_event_cb_t <em>event_cb</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411lv_list_addP8lv_obj_tPKvPKc13lv_event_cb_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Add a list element to the list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the new list element which can be customized (a button) </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">img_fn</span></code>: file name of an image before the text (NULL if unused) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">txt</span></code>: text of the list element (NULL if unused) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">event_cb</span></code>: specify the an event handler function. NULL if unused </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv414lv_list_removePK8lv_obj_t8uint16_t">
+<span id="_CPPv314lv_list_removePK8lv_obj_t8uint16_t"></span><span id="_CPPv214lv_list_removePK8lv_obj_t8uint16_t"></span><span id="lv_list_remove__lv_obj_tCP.uint16_t"></span><span class="target" id="lv__list_8h_1ac7e6b384ed404af5778b5c680bd176a5"></span>bool <code class="sig-name descname">lv_list_remove</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>list</em>, uint16_t <em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_list_removePK8lv_obj_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove the index of the button in the list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: successfully deleted </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index</span></code>: pointer to a the button’s index in the list, index must be 0 &lt;= index &lt; <a class="reference internal" href="#structlv__list__ext__t_1aef3205643425e3d876ca51cd7b20d7f3"><span class="std std-ref">lv_list_ext_t.size</span></a> </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423lv_list_set_single_modeP8lv_obj_tb">
+<span id="_CPPv323lv_list_set_single_modeP8lv_obj_tb"></span><span id="_CPPv223lv_list_set_single_modeP8lv_obj_tb"></span><span id="lv_list_set_single_mode__lv_obj_tP.b"></span><span class="target" id="lv__list_8h_1aab720af4d284607460e32544ea3b9e8c"></span>void <code class="sig-name descname">lv_list_set_single_mode</code><span class="sig-paren">(</span>lv_obj_t *<em>list</em>, bool <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_list_set_single_modeP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set single button selected mode, only one button will be selected if enabled. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to the currently pressed list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mode</span><span class="pre">enable(true)/disable(false)</span></code>: single selected mode. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424lv_list_set_btn_selectedP8lv_obj_tP8lv_obj_t">
+<span id="_CPPv324lv_list_set_btn_selectedP8lv_obj_tP8lv_obj_t"></span><span id="_CPPv224lv_list_set_btn_selectedP8lv_obj_tP8lv_obj_t"></span><span id="lv_list_set_btn_selected__lv_obj_tP.lv_obj_tP"></span><span class="target" id="lv__list_8h_1a2a46e2049fb97a6623249f55dda90b05"></span>void <code class="sig-name descname">lv_list_set_btn_selected</code><span class="sig-paren">(</span>lv_obj_t *<em>list</em>, lv_obj_t *<em>btn</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_list_set_btn_selectedP8lv_obj_tP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Make a button selected <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">btn</span></code>: pointer to a button to select NULL to not select any buttons </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_list_set_anim_timeP8lv_obj_t8uint16_t">
+<span id="_CPPv321lv_list_set_anim_timeP8lv_obj_t8uint16_t"></span><span id="_CPPv221lv_list_set_anim_timeP8lv_obj_t8uint16_t"></span><span id="lv_list_set_anim_time__lv_obj_tP.uint16_t"></span><span class="target" id="lv__list_8h_1aba71d6ca50558d7b0b61e19bb0d57695"></span>void <code class="sig-name descname">lv_list_set_anim_time</code><span class="sig-paren">(</span>lv_obj_t *<em>list</em>, uint16_t <em>anim_time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_list_set_anim_timeP8lv_obj_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set scroll animation duration on ‘list_up()’ ‘list_down()’ ‘list_focus()’ <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anim_time</span></code>: duration of animation [ms] </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_list_set_sb_modeP8lv_obj_t12lv_sb_mode_t">
+<span id="_CPPv319lv_list_set_sb_modeP8lv_obj_t12lv_sb_mode_t"></span><span id="_CPPv219lv_list_set_sb_modeP8lv_obj_t12lv_sb_mode_t"></span><span id="lv_list_set_sb_mode__lv_obj_tP.lv_sb_mode_t"></span><span class="target" id="lv__list_8h_1af5cfc9e42f03e3ec6f09d91134aef97c"></span><em class="property">static</em> void <code class="sig-name descname">lv_list_set_sb_mode</code><span class="sig-paren">(</span>lv_obj_t *<em>list</em>, lv_sb_mode_t <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_list_set_sb_modeP8lv_obj_t12lv_sb_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the scroll bar mode of a list <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sb_mode</span></code>: the new mode from ‘lv_page_sb_mode_t’ enum </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv430lv_list_set_scroll_propagationP8lv_obj_tb">
+<span id="_CPPv330lv_list_set_scroll_propagationP8lv_obj_tb"></span><span id="_CPPv230lv_list_set_scroll_propagationP8lv_obj_tb"></span><span id="lv_list_set_scroll_propagation__lv_obj_tP.b"></span><span class="target" id="lv__list_8h_1a0f81c7960c9d5e330c134c1c217503ad"></span><em class="property">static</em> void <code class="sig-name descname">lv_list_set_scroll_propagation</code><span class="sig-paren">(</span>lv_obj_t *<em>list</em>, bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430lv_list_set_scroll_propagationP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable the scroll propagation feature. If enabled then the List will move its parent if there is no more space to scroll. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a List </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">en</span></code>: true or false to enable/disable scroll propagation </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422lv_list_set_edge_flashP8lv_obj_tb">
+<span id="_CPPv322lv_list_set_edge_flashP8lv_obj_tb"></span><span id="_CPPv222lv_list_set_edge_flashP8lv_obj_tb"></span><span id="lv_list_set_edge_flash__lv_obj_tP.b"></span><span class="target" id="lv__list_8h_1a06b514e65927b4904ede3edcbe3244e9"></span><em class="property">static</em> void <code class="sig-name descname">lv_list_set_edge_flash</code><span class="sig-paren">(</span>lv_obj_t *<em>list</em>, bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lv_list_set_edge_flashP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable the edge flash effect. (Show an arc when the an edge is reached) <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a List </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">en</span></code>: true or false to enable/disable end flash </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417lv_list_set_styleP8lv_obj_t15lv_list_style_tPK10lv_style_t">
+<span id="_CPPv317lv_list_set_styleP8lv_obj_t15lv_list_style_tPK10lv_style_t"></span><span id="_CPPv217lv_list_set_styleP8lv_obj_t15lv_list_style_tPK10lv_style_t"></span><span id="lv_list_set_style__lv_obj_tP.lv_list_style_t.lv_style_tCP"></span><span class="target" id="lv__list_8h_1a34cf17965db702afa41a635d6f9362ee"></span>void <code class="sig-name descname">lv_list_set_style</code><span class="sig-paren">(</span>lv_obj_t *<em>list</em>, <a class="reference internal" href="#_CPPv415lv_list_style_t" title="lv_list_style_t">lv_list_style_t</a> <em>type</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_list_set_styleP8lv_obj_t15lv_list_style_tPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a style of a list <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: which style should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423lv_list_get_single_modeP8lv_obj_t">
+<span id="_CPPv323lv_list_get_single_modeP8lv_obj_t"></span><span id="_CPPv223lv_list_get_single_modeP8lv_obj_t"></span><span id="lv_list_get_single_mode__lv_obj_tP"></span><span class="target" id="lv__list_8h_1a1f8bf7d8355e8555c3fd557131ece9a6"></span>bool <code class="sig-name descname">lv_list_get_single_mode</code><span class="sig-paren">(</span>lv_obj_t *<em>list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_list_get_single_modeP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get single button selected mode. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to the currently pressed list object. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_list_get_btn_textPK8lv_obj_t">
+<span id="_CPPv320lv_list_get_btn_textPK8lv_obj_t"></span><span id="_CPPv220lv_list_get_btn_textPK8lv_obj_t"></span><span id="lv_list_get_btn_text__lv_obj_tCP"></span><span class="target" id="lv__list_8h_1a1332c583e943717c7d2b556f84dd6675"></span><em class="property">const</em> char *<code class="sig-name descname">lv_list_get_btn_text</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>btn</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_list_get_btn_textPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the text of a list element <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the text </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">btn</span></code>: pointer to list element </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_list_get_btn_labelPK8lv_obj_t">
+<span id="_CPPv321lv_list_get_btn_labelPK8lv_obj_t"></span><span id="_CPPv221lv_list_get_btn_labelPK8lv_obj_t"></span><span id="lv_list_get_btn_label__lv_obj_tCP"></span><span class="target" id="lv__list_8h_1acd5fefa0685eaa7fbd22efd0927e35e2"></span>lv_obj_t *<code class="sig-name descname">lv_list_get_btn_label</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>btn</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_list_get_btn_labelPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the label object from a list element <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the label from the list element or NULL if not found </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">btn</span></code>: pointer to a list element (button) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_list_get_btn_imgPK8lv_obj_t">
+<span id="_CPPv319lv_list_get_btn_imgPK8lv_obj_t"></span><span id="_CPPv219lv_list_get_btn_imgPK8lv_obj_t"></span><span id="lv_list_get_btn_img__lv_obj_tCP"></span><span class="target" id="lv__list_8h_1ad9c4e1fe835145385ea6e9c9bac2289d"></span>lv_obj_t *<code class="sig-name descname">lv_list_get_btn_img</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>btn</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_list_get_btn_imgPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the image object from a list element <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the image from the list element or NULL if not found </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">btn</span></code>: pointer to a list element (button) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_list_get_prev_btnPK8lv_obj_tP8lv_obj_t">
+<span id="_CPPv320lv_list_get_prev_btnPK8lv_obj_tP8lv_obj_t"></span><span id="_CPPv220lv_list_get_prev_btnPK8lv_obj_tP8lv_obj_t"></span><span id="lv_list_get_prev_btn__lv_obj_tCP.lv_obj_tP"></span><span class="target" id="lv__list_8h_1a2f30189b0dd1e4b22064935d0f2466f6"></span>lv_obj_t *<code class="sig-name descname">lv_list_get_prev_btn</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>list</em>, lv_obj_t *<em>prev_btn</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_list_get_prev_btnPK8lv_obj_tP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the next button from list. (Starts from the bottom button) <p>Get the previous button from list. (Starts from the top button) </p>
+<dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the next button or NULL when no more buttons</p>
+</dd>
+<dt><strong>Return</strong></dt><dd><p>pointer to the previous button or NULL when no more buttons </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prev_btn</span></code>: pointer to button. Search the next after it. </p></li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prev_btn</span></code>: pointer to button. Search the previous before it. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_list_get_next_btnPK8lv_obj_tP8lv_obj_t">
+<span id="_CPPv320lv_list_get_next_btnPK8lv_obj_tP8lv_obj_t"></span><span id="_CPPv220lv_list_get_next_btnPK8lv_obj_tP8lv_obj_t"></span><span id="lv_list_get_next_btn__lv_obj_tCP.lv_obj_tP"></span><span class="target" id="lv__list_8h_1a91e051fa93bfe17df6deec7c3226aa12"></span>lv_obj_t *<code class="sig-name descname">lv_list_get_next_btn</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>list</em>, lv_obj_t *<em>prev_btn</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_list_get_next_btnPK8lv_obj_tP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the previous button from list. (Starts from the top button) <p>Get the next button from list. (Starts from the bottom button) </p>
+<dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the previous button or NULL when no more buttons</p>
+</dd>
+<dt><strong>Return</strong></dt><dd><p>pointer to the next button or NULL when no more buttons </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prev_btn</span></code>: pointer to button. Search the previous before it. </p></li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prev_btn</span></code>: pointer to button. Search the next after it. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_list_get_btn_indexPK8lv_obj_tPK8lv_obj_t">
+<span id="_CPPv321lv_list_get_btn_indexPK8lv_obj_tPK8lv_obj_t"></span><span id="_CPPv221lv_list_get_btn_indexPK8lv_obj_tPK8lv_obj_t"></span><span id="lv_list_get_btn_index__lv_obj_tCP.lv_obj_tCP"></span><span class="target" id="lv__list_8h_1a8c109a45b7a16cc98c9b66f6625bd565"></span>int32_t <code class="sig-name descname">lv_list_get_btn_index</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>list</em>, <em class="property">const</em> lv_obj_t *<em>btn</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_list_get_btn_indexPK8lv_obj_tPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the index of the button in the list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the index of the button in the list, or -1 of the button not in this list </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object. If NULL, assumes btn is part of a list. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">btn</span></code>: pointer to a list element (button) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416lv_list_get_sizePK8lv_obj_t">
+<span id="_CPPv316lv_list_get_sizePK8lv_obj_t"></span><span id="_CPPv216lv_list_get_sizePK8lv_obj_t"></span><span id="lv_list_get_size__lv_obj_tCP"></span><span class="target" id="lv__list_8h_1a1e77873dac5ff72d75cfb53f513aad61"></span>uint16_t <code class="sig-name descname">lv_list_get_size</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_list_get_sizePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of buttons in the list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the number of buttons in the list </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424lv_list_get_btn_selectedPK8lv_obj_t">
+<span id="_CPPv324lv_list_get_btn_selectedPK8lv_obj_t"></span><span id="_CPPv224lv_list_get_btn_selectedPK8lv_obj_t"></span><span id="lv_list_get_btn_selected__lv_obj_tCP"></span><span class="target" id="lv__list_8h_1a6f8048467c06834e64b557dcea4cc970"></span>lv_obj_t *<code class="sig-name descname">lv_list_get_btn_selected</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_list_get_btn_selectedPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the currently selected button. Can be used while navigating in the list with a keypad. <p>Get the currently selected button </p>
+<dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the selected button</p>
+</dd>
+<dt><strong>Return</strong></dt><dd><p>pointer to the selected button </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_list_get_anim_timePK8lv_obj_t">
+<span id="_CPPv321lv_list_get_anim_timePK8lv_obj_t"></span><span id="_CPPv221lv_list_get_anim_timePK8lv_obj_t"></span><span id="lv_list_get_anim_time__lv_obj_tCP"></span><span class="target" id="lv__list_8h_1a7d55d038d8f6262b853488293228c7e0"></span>uint16_t <code class="sig-name descname">lv_list_get_anim_time</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_list_get_anim_timePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get scroll animation duration <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>duration of animation [ms] </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_list_get_sb_modePK8lv_obj_t">
+<span id="_CPPv319lv_list_get_sb_modePK8lv_obj_t"></span><span id="_CPPv219lv_list_get_sb_modePK8lv_obj_t"></span><span id="lv_list_get_sb_mode__lv_obj_tCP"></span><span class="target" id="lv__list_8h_1ab9ba339c694f836bdd1373be16595c79"></span><em class="property">static</em> lv_sb_mode_t <code class="sig-name descname">lv_list_get_sb_mode</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_list_get_sb_modePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the scroll bar mode of a list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>scrollbar mode from ‘lv_page_sb_mode_t’ enum </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv430lv_list_get_scroll_propagationP8lv_obj_t">
+<span id="_CPPv330lv_list_get_scroll_propagationP8lv_obj_t"></span><span id="_CPPv230lv_list_get_scroll_propagationP8lv_obj_t"></span><span id="lv_list_get_scroll_propagation__lv_obj_tP"></span><span class="target" id="lv__list_8h_1af1afc2a885ad20893a01152929f938f2"></span><em class="property">static</em> bool <code class="sig-name descname">lv_list_get_scroll_propagation</code><span class="sig-paren">(</span>lv_obj_t *<em>list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430lv_list_get_scroll_propagationP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the scroll propagation property <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true or false </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a List </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422lv_list_get_edge_flashP8lv_obj_t">
+<span id="_CPPv322lv_list_get_edge_flashP8lv_obj_t"></span><span id="_CPPv222lv_list_get_edge_flashP8lv_obj_t"></span><span id="lv_list_get_edge_flash__lv_obj_tP"></span><span class="target" id="lv__list_8h_1a1452c46d39dfd8c5ee860ee474b3f4fa"></span><em class="property">static</em> bool <code class="sig-name descname">lv_list_get_edge_flash</code><span class="sig-paren">(</span>lv_obj_t *<em>list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lv_list_get_edge_flashP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the scroll propagation property <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true or false </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a List </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417lv_list_get_stylePK8lv_obj_t15lv_list_style_t">
+<span id="_CPPv317lv_list_get_stylePK8lv_obj_t15lv_list_style_t"></span><span id="_CPPv217lv_list_get_stylePK8lv_obj_t15lv_list_style_t"></span><span id="lv_list_get_style__lv_obj_tCP.lv_list_style_t"></span><span class="target" id="lv__list_8h_1a61ba380bed9a267489dd6df0ba24bb30"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">lv_list_get_style</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>list</em>, <a class="reference internal" href="#_CPPv415lv_list_style_t" title="lv_list_style_t">lv_list_style_t</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_list_get_stylePK8lv_obj_t15lv_list_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a style of a list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>style pointer to a style </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: which style should be get </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv410lv_list_upPK8lv_obj_t">
+<span id="_CPPv310lv_list_upPK8lv_obj_t"></span><span id="_CPPv210lv_list_upPK8lv_obj_t"></span><span id="lv_list_up__lv_obj_tCP"></span><span class="target" id="lv__list_8h_1aba9e59954e468f8060b4db14ef881a35"></span>void <code class="sig-name descname">lv_list_up</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv410lv_list_upPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move the list elements up by one <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer a to list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv412lv_list_downPK8lv_obj_t">
+<span id="_CPPv312lv_list_downPK8lv_obj_t"></span><span id="_CPPv212lv_list_downPK8lv_obj_t"></span><span id="lv_list_down__lv_obj_tCP"></span><span class="target" id="lv__list_8h_1ae71b0318484be706b80f9822ad479a04"></span>void <code class="sig-name descname">lv_list_down</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412lv_list_downPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move the list elements down by one <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv413lv_list_focusPK8lv_obj_t16lv_anim_enable_t">
+<span id="_CPPv313lv_list_focusPK8lv_obj_t16lv_anim_enable_t"></span><span id="_CPPv213lv_list_focusPK8lv_obj_t16lv_anim_enable_t"></span><span id="lv_list_focus__lv_obj_tCP.lv_anim_enable_t"></span><span class="target" id="lv__list_8h_1aeb39e257231b8243814134d52c9e9946"></span>void <code class="sig-name descname">lv_list_focus</code><span class="sig-paren">(</span><em class="property">const</em> lv_obj_t *<em>btn</em>, lv_anim_enable_t <em>anim</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lv_list_focusPK8lv_obj_t16lv_anim_enable_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Focus on a list button. It ensures that the button will be visible on the list. <p>Focus on a list button. It ensures that the button will be visible on the list. </p>
+<dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">btn</span></code>: pointer to a list button to focus </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anim</span></code>: LV_ANOM_ON: scroll with animation, LV_ANIM_OFF: without animation</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">btn</span></code>: pointer to a list button to focus </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anim_en</span></code>: LV_ANIM_ON: scroll with animation, LV_ANOM_OFF: without animation </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv413lv_list_ext_t">
+<span id="_CPPv313lv_list_ext_t"></span><span id="_CPPv213lv_list_ext_t"></span><span id="lv_list_ext_t"></span><span class="target" id="structlv__list__ext__t"></span><em class="property">struct </em><code class="sig-name descname">lv_list_ext_t</code><a class="headerlink" href="#_CPPv413lv_list_ext_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;lv_list.h&gt;</em><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N13lv_list_ext_t4pageE">
+<span id="_CPPv3N13lv_list_ext_t4pageE"></span><span id="_CPPv2N13lv_list_ext_t4pageE"></span><span id="lv_list_ext_t::page__lv_page_ext_t"></span><span class="target" id="structlv__list__ext__t_1a053bef31f9064bffca4bd833e725a845"></span>lv_page_ext_t <code class="sig-name descname">page</code><a class="headerlink" href="#_CPPv4N13lv_list_ext_t4pageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13lv_list_ext_t10styles_btnE">
+<span id="_CPPv3N13lv_list_ext_t10styles_btnE"></span><span id="_CPPv2N13lv_list_ext_t10styles_btnE"></span><span id="lv_list_ext_t::styles_btn__lv_style_tCPA"></span><span class="target" id="structlv__list__ext__t_1a7b22de199b2c01107ba40ca1e604506a"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">styles_btn</code>[<code class="sig-name descname">LV_BTN_STATE_NUM</code>]<a class="headerlink" href="#_CPPv4N13lv_list_ext_t10styles_btnE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13lv_list_ext_t9style_imgE">
+<span id="_CPPv3N13lv_list_ext_t9style_imgE"></span><span id="_CPPv2N13lv_list_ext_t9style_imgE"></span><span id="lv_list_ext_t::style_img__lv_style_tCP"></span><span class="target" id="structlv__list__ext__t_1a94f8a18bb54f38b056b6954c5efa5e21"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">style_img</code><a class="headerlink" href="#_CPPv4N13lv_list_ext_t9style_imgE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13lv_list_ext_t4sizeE">
+<span id="_CPPv3N13lv_list_ext_t4sizeE"></span><span id="_CPPv2N13lv_list_ext_t4sizeE"></span><span id="lv_list_ext_t::size__uint16_t"></span><span class="target" id="structlv__list__ext__t_1aef3205643425e3d876ca51cd7b20d7f3"></span>uint16_t <code class="sig-name descname">size</code><a class="headerlink" href="#_CPPv4N13lv_list_ext_t4sizeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13lv_list_ext_t9anim_timeE">
+<span id="_CPPv3N13lv_list_ext_t9anim_timeE"></span><span id="_CPPv2N13lv_list_ext_t9anim_timeE"></span><span id="lv_list_ext_t::anim_time__uint16_t"></span><span class="target" id="structlv__list__ext__t_1a0393e90b75ca931f006e0947b8e74c50"></span>uint16_t <code class="sig-name descname">anim_time</code><a class="headerlink" href="#_CPPv4N13lv_list_ext_t9anim_timeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13lv_list_ext_t11single_modeE">
+<span id="_CPPv3N13lv_list_ext_t11single_modeE"></span><span id="_CPPv2N13lv_list_ext_t11single_modeE"></span><span id="lv_list_ext_t::single_mode__uint8_t"></span><span class="target" id="structlv__list__ext__t_1ae83f256d92c8b5dcacdcc589d35ad3ed"></span>uint8_t <code class="sig-name descname">single_mode</code><a class="headerlink" href="#_CPPv4N13lv_list_ext_t11single_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13lv_list_ext_t8last_selE">
+<span id="_CPPv3N13lv_list_ext_t8last_selE"></span><span id="_CPPv2N13lv_list_ext_t8last_selE"></span><span id="lv_list_ext_t::last_sel__lv_obj_tP"></span><span class="target" id="structlv__list__ext__t_1ad0917453eac91fd972ab95634d9244ca"></span>lv_obj_t *<code class="sig-name descname">last_sel</code><a class="headerlink" href="#_CPPv4N13lv_list_ext_t8last_selE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N13lv_list_ext_t12selected_btnE">
+<span id="_CPPv3N13lv_list_ext_t12selected_btnE"></span><span id="_CPPv2N13lv_list_ext_t12selected_btnE"></span><span id="lv_list_ext_t::selected_btn__lv_obj_tP"></span><span class="target" id="structlv__list__ext__t_1a22177d92a7448afa5265012edc21f4bf"></span>lv_obj_t *<code class="sig-name descname">selected_btn</code><a class="headerlink" href="#_CPPv4N13lv_list_ext_t12selected_btnE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
 
 
            </div>
@@ -693,7 +1281,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jun 18, 2019.
+        Last updated on Jun 19, 2019.
       </span>
 
     </p>

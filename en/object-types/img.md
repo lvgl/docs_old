@@ -49,6 +49,10 @@ If the object size is greater then the image size in any directions then the ima
 It's a very useful a feature to create a large image from only a very narrow source. 
 For example you can have a *300 x 1* image with a special gradient and set it as a wallpaper using the mosaic feature.
 
+With `lv_img_set_offset_x(img, x_ofs)` and `lv_img_set_offset_y(img, y_ofs)` you can add some offset to the displayed image. 
+It is usefult if the object size is smaller than teh image sourse size. 
+Using the offset paramterer a [Texture atlas](https://en.wikipedia.org/wiki/Texture_atlas) or a "running image" effect can be created by [Animating](/overview/animations) the x or y offset. 
+
 The images' default style is *NULL* so they **inherit the parent's style**.
 
 
@@ -66,7 +70,7 @@ Only the [Genreric events](/overview/events.html#generic-events) are sent by the
 Learn more about [Events](/overview/events).
 
 ## Keys
-No *Keys* are processed by the object type.
+No *Keys* are not processed by the object type.
 
 Learn more about [Keys](/overview/indev).
 
