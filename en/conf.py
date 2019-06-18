@@ -125,6 +125,8 @@ html_logo = 'white_white_lvgl_full_logo.svg'
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'LittlevGLdoc'
 
+html_last_updated_fmt = ''
+
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {

@@ -1,14 +1,9 @@
 # Objects
 
-In the LittlevGL the **basic building blocks** of a user interface are the objects. For example:
-- [Button](/object-types/btn)
-- [Label](/object-types/label)
-- [Image](/object-types/img)
-- [List](//object-types/list)
-- [Chart](//object-types/chart)
-- [Text area](//object-types/ta)
+In the LittlevGL the **basic building blocks** of a user interface are the objects. 
+For example a [Button](/object-types/btn), [Label](/object-types/label), [Image](/object-types/img), [List](/object-types/list), [Chart](/object-types/chart) or [Text area](/object-types/ta).
 
-Click to check all the existing  [Object types](/object-types/index)
+Check all the [Object types](/object-types/index) here.
 
 ## Object attributes
 

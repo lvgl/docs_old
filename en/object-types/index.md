@@ -3,7 +3,8 @@
 ```eval_rst
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
+   :hidden:
 
    obj
    arc
@@ -17,8 +18,8 @@
    cont
    ddlist
    gauge
-   imgbtn
    img
+   imgbtn
    kb
    label
    led

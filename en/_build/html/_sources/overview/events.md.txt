@@ -49,7 +49,10 @@ More objects can use the same *event callback*.
 
 The following event types exist:
 
-### Input device related
+### Generic events
+Any object can receive these events independently from their type. I.e. these events are sent to Buttons, Labels, Sliders, etc.
+
+#### Input device related
 Sent when an object is pressed, released, etc by the user. They are used for *Keypad*, *Encoder* and *Button* input devices as well not only for *Pointers*. Visit the [Overview of input devices](/overview/indev) section to learn more about them.
 - **LV_EVENT_PRESSED** The object has been pressed
 - **LV_EVENT_PRESSING** The object is being pressed (sent continuously while pressing)
@@ -60,25 +63,29 @@ Sent when an object is pressed, released, etc by the user. They are used for *Ke
 - **LV_EVENT_CLICKED** Called on release if not dragged (regardless to long press)
 - **LV_EVENT_RELEASED**  Called in every case when the object has been released even if it was dragged. Not called if slid from the object while pressing and released outside of the object. In this case, `LV_EVENT_PRESS_LOST` is sent. 
 
-### Pointer related
+#### Pointer related
 These events are sent only by pointer-like input devices (E.g. mouse or touchpad)
 - **LV_EVENT_DRAG_BEGIN** Dragging of the object has started
 - **LV_EVENT_DRAG_END** Dragging finished (including drag throw)
 - **LV_EVENT_DRAG_THROW_BEGIN** Drag throw started (released after drag with "momentum")
  
-### Keypad and encoder related
+#### Keypad and encoder related
 These events are sent by keypad and encoder input devices. Learn more about *Groups* in [overview/indev](Input devices) section.
 - **LV_EVENT_KEY** A *Key* is sent to the object. Typically when it was pressed or repeated after a long press 
 - **LV_EVENT_FOCUSED** The object is focused in its group
 - **LV_EVENT_DEFOCUSED** The object is defocused in its group
 
-### General events
+#### General events
+Other general events sent by the library.
+- **LV_EVENT_DELETE** The object is being deleted. Free the related user-allocated data.
+
+### Special events
+These events are specific to a partiual object type. 
 - **LV_EVENT_VALUE_CHANGED** The object value has changed (e.g. for a [Slider](/object-types/slider))
 - **LV_EVENT_INSERT** Something is inserted to the object. (Typically to a [Text area](/object-types/ta))
-- **LV_EVENT_REFRESH** Query to refresh the object. Never sent by the library but can be sent by the user.
 - **LV_EVENT_APPLY**  "Ok", "Apply" or similar specific button has clicked. (Typically from a [Keyboard](/object-types/kb) object)
 - **LV_EVENT_CANCEL** "Close", "Cancel" or similar specific button has clicked. (Typically from a [Keyboard](/object-types/kb) object)
-- **LV_EVENT_DELETE** The object is being deleted. Free the related user-allocated data.
+- **LV_EVENT_REFRESH** Query to refresh the object. Never sent by the library but can be sent by the user.
 
 To see exactly which events are used by an object type see the particular [Object type's documentation](/object-types/index).
 
@@ -87,7 +94,7 @@ Some events might contain custom data. For example `LV_EVENT_VALUE_CHANGED` in s
 The get the custom data in the event callback use `lv_event_get_data()`.
 
 
-## Manually send events
+## Send events manually
 
 To manually send events to an object use `lv_event_send(obj, LV_EVENT_..., &custom_data)`. 
 
@@ -102,4 +109,3 @@ Or to ask refresh in a generic way.
 ```c
 lv_event_send(label, LV_EVENT_REFRESH, NULL);
 ```
-
