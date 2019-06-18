@@ -36,7 +36,8 @@ from recommonmark.transform import AutoStructify
 extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
-    'recommonmark'
+    'recommonmark',
+    "breathe" 
     ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -178,7 +179,9 @@ texinfo_documents = [
 ]
 
 
-
+breathe_projects = {
+  "lvgl":"xml/",
+}
 
 # Example configuration for intersphinx: refer to the Python standard library.
 

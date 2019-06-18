@@ -64,11 +64,11 @@ The following *Keys* are processed by the Buttons:
 
 Learn more about [Keys](/overview/indev).
 
-## Keys
-No *Keys* are processed by the object type.
+```eval_rst
+.. doxygenfile:: lv_kb.h
+   :project: lvgl
 
-Learn more about [Keys](/overview/indev).
-
+```
 
 ## Example
 ![Keyboard image](http://docs.littlevgl.com/img/keyboard-lv_kb.png)
