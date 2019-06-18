@@ -586,10 +586,52 @@ The the of teh animation can be adjusted by <code class="docutils literal notran
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<p><img alt="http://docs.littlevgl.com/img/bar-lv_bar.png" src="http://docs.littlevgl.com/img/bar-lv_bar.png" />Bar image</p>
+<p><img alt="../_images/bar_1.png" src="../_images/bar_1.png" />Bar image</p>
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create a default bar*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">bar1</span> <span class="o">=</span> <span class="n">lv_bar_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">bar1</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">bar1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_RIGHT</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="n">lv_bar_set_value</span><span class="p">(</span><span class="n">bar1</span><span class="p">,</span> <span class="mi">70</span><span class="p">);</span>
+
+<span class="cm">/*Create a label right to the bar*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">bar1_label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">bar1_label</span><span class="p">,</span> <span class="s">&quot;Default&quot;</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">bar1_label</span><span class="p">,</span> <span class="n">bar1</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_LEFT_MID</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="cm">/*Create a bar and an indicator style*/</span>
+<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_bar</span><span class="p">;</span>
+<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_indic</span><span class="p">;</span>
+
+<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_bar</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
+<span class="n">style_bar</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
+<span class="n">style_bar</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_GRAY</span><span class="p">;</span>
+<span class="n">style_bar</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+<span class="n">style_bar</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_WHITE</span><span class="p">;</span>
+
+<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_indic</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
+<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span>  <span class="n">LV_COLOR_GREEN</span><span class="p">;</span>
+<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span><span class="o">=</span>  <span class="n">LV_COLOR_LIME</span><span class="p">;</span>
+<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_LIME</span><span class="p">;</span>
+<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">hor</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>           <span class="cm">/*Make the indicator a little bit smaller*/</span>
+<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">ver</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+
+<span class="cm">/*Create a second bar*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">bar2</span> <span class="o">=</span> <span class="n">lv_bar_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">bar1</span><span class="p">);</span>
+<span class="n">lv_bar_set_style</span><span class="p">(</span><span class="n">bar2</span><span class="p">,</span> <span class="n">LV_BAR_STYLE_BG</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_bar</span><span class="p">);</span>
+<span class="n">lv_bar_set_style</span><span class="p">(</span><span class="n">bar2</span><span class="p">,</span> <span class="n">LV_BAR_STYLE_INDIC</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_indic</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">bar2</span><span class="p">,</span> <span class="n">bar1</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span> <span class="cm">/*Align below &#39;bar1&#39;*/</span>
+
+<span class="cm">/*Create a second label*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">bar2_label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">bar1_label</span><span class="p">);</span>
+<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">bar2_label</span><span class="p">,</span> <span class="s">&quot;Modified&quot;</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">bar2_label</span><span class="p">,</span> <span class="n">bar2</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_LEFT_MID</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
 </div>
 </div>
 </div>

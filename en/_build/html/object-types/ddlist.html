@@ -592,10 +592,51 @@
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<p><img alt="http://docs.littlevgl.com/img/drop-down-list-lv_ddlist.png" src="http://docs.littlevgl.com/img/drop-down-list-lv_ddlist.png" />Drop down list image</p>
+<p><img alt="../_images/ddlist_1.png" src="../_images/ddlist_1.png" />Drop down list image</p>
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_res_t</span> <span class="nf">ddlist_action</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ddlist</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">uint8_t</span> <span class="n">id</span> <span class="o">=</span> <span class="n">lv_obj_get_free_num</span><span class="p">(</span><span class="n">ddlist</span><span class="p">);</span>
+
+    <span class="kt">char</span> <span class="n">sel_str</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+    <span class="n">lv_ddlist_get_selected_str</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="n">sel_str</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Ddlist %d new option: %s </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">sel_str</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">LV_RES_OK</span><span class="p">;</span> <span class="cm">/*Return OK if the drop down list is not deleted*/</span>
+<span class="p">}</span>
+
+
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="p">.</span>
+
+<span class="cm">/*Create a drop down list*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ddl1</span> <span class="o">=</span> <span class="n">lv_ddlist_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_ddlist_set_options</span><span class="p">(</span><span class="n">ddl1</span><span class="p">,</span> <span class="s">&quot;Apple</span><span class="se">\n</span><span class="s">&quot;</span>
+                            <span class="s">&quot;Banana</span><span class="se">\n</span><span class="s">&quot;</span>
+                            <span class="s">&quot;Orange</span><span class="se">\n</span><span class="s">&quot;</span>
+                            <span class="s">&quot;Melon</span><span class="se">\n</span><span class="s">&quot;</span>
+                            <span class="s">&quot;Grape</span><span class="se">\n</span><span class="s">&quot;</span>
+                            <span class="s">&quot;Raspberry&quot;</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">ddl1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_LEFT</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="n">lv_obj_set_free_num</span><span class="p">(</span><span class="n">ddl1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>               <span class="cm">/*Set a unique ID*/</span>
+<span class="n">lv_ddlist_set_action</span><span class="p">(</span><span class="n">ddl1</span><span class="p">,</span> <span class="n">ddlist_action</span><span class="p">);</span>  <span class="cm">/*Set a function to call when anew option is chosen*/</span>
+
+<span class="cm">/*Create a style*/</span>
+<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_bg</span><span class="p">;</span>
+<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_bg</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
+<span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="cm">/*Enable the shadow*/</span>
+<span class="n">style_bg</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0x10</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x50</span><span class="p">);</span>
+
+<span class="cm">/*Copy the drop down list and set the new style_bg*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ddl2</span> <span class="o">=</span> <span class="n">lv_ddlist_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">ddl1</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">ddl2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_RIGHT</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="n">lv_obj_set_free_num</span><span class="p">(</span><span class="n">ddl2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>       <span class="cm">/*Set a unique ID*/</span>
+<span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">ddl2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_bg</span><span class="p">);</span>
+</pre></div>
 </div>
 </div>
 </div>

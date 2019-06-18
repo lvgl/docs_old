@@ -54,7 +54,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Image button image](http://docs.littlevgl.com/img/image-button-lv_imgbtn.png)
+![Image button image](/examples/imgbtn/imgbtn_1.png)
 
 
 ```eval_rst

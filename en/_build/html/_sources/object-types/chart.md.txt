@@ -79,7 +79,7 @@ Learn more about [Keys](/overview/indev).
 ### C
 
 
-![Chart image](http://docs.littlevgl.com/img/chart-lv_chart.png)
+![Chart image](/examples/chart/chart_1.png)
 
 
 ```eval_rst

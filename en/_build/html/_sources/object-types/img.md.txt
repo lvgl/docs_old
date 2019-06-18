@@ -75,7 +75,7 @@ Learn more about [Keys](/overview/indev).
 ### C
 
 
-![Example of Image in LittlevGL Graphics Library ](http://docs.littlevgl.com/img/image-lv_img.png)
+![Example of Image in LittlevGL Graphics Library ](/examples/img/img_1.png)
 
 
 ```eval_rst

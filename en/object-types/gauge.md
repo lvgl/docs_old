@@ -43,7 +43,7 @@ Learn more about [Keys](/overview/indev).
 ### C
 
 
-![Gauge image](http://docs.littlevgl.com/img/gauge-lv_gauge.png)
+![Gauge image](/examples/gauge/gauge_1.png)
 
 ```eval_rst
 .. container:: toggle

@@ -55,8 +55,7 @@ Note that, as usual, the state of `LV_KEY_ENTER` is translated to `LV_EVENT_PRES
 
 ### C
 
-
-![Container image](http://docs.littlevgl.com/img/container-lv_cont.png)
+![Container image](/examples/cont/cont_1.png)
 
 ```eval_rst
 .. container:: toggle

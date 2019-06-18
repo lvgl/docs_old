@@ -606,10 +606,63 @@ Hence you don’t need to craete a new style for the label.</p>
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<p><img alt="http://docs.littlevgl.com/img/button-lv_btn.png" src="http://docs.littlevgl.com/img/button-lv_btn.png" />Button image</p>
+<p><img alt="../_images/btn_1.png" src="../_images/btn_1.png" />Button image</p>
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_res_t</span> <span class="nf">btn_click_action</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">uint8_t</span> <span class="n">id</span> <span class="o">=</span> <span class="n">lv_obj_get_free_num</span><span class="p">(</span><span class="n">btn</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Button %d is released</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span>
+
+    <span class="cm">/* The button is released.</span>
+<span class="cm">     * Make something here */</span>
+
+    <span class="k">return</span> <span class="n">LV_RES_OK</span><span class="p">;</span> <span class="cm">/*Return OK if the button is not deleted*/</span>
+<span class="p">}</span>
+
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="p">.</span>
+
+<span class="cm">/*Create a title label*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Default buttons&quot;</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+<span class="cm">/*Create a normal button*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn1</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_cont_set_fit</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span> <span class="cm">/*Enable resizing horizontally and vertically*/</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="n">lv_obj_set_free_num</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>   <span class="cm">/*Set a unique number for the button*/</span>
+<span class="n">lv_btn_set_action</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="n">LV_BTN_ACTION_CLICK</span><span class="p">,</span> <span class="n">btn_click_action</span><span class="p">);</span>
+
+<span class="cm">/*Add a label to the button*/</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Normal&quot;</span><span class="p">);</span>
+
+<span class="cm">/*Copy the button and set toggled state. (The release action is copied too)*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn2</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">btn1</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">btn1</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="n">lv_btn_set_state</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">LV_BTN_STATE_TGL_REL</span><span class="p">);</span>  <span class="cm">/*Set toggled state*/</span>
+<span class="n">lv_obj_set_free_num</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>               <span class="cm">/*Set a unique number for the button*/</span>
+
+<span class="cm">/*Add a label to the toggled button*/</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Toggled&quot;</span><span class="p">);</span>
+
+<span class="cm">/*Copy the button and set inactive state.*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn3</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">btn1</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btn3</span><span class="p">,</span> <span class="n">btn2</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="n">lv_btn_set_state</span><span class="p">(</span><span class="n">btn3</span><span class="p">,</span> <span class="n">LV_BTN_STATE_INA</span><span class="p">);</span>   <span class="cm">/*Set inactive state*/</span>
+<span class="n">lv_obj_set_free_num</span><span class="p">(</span><span class="n">btn3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>               <span class="cm">/*Set a unique number for the button*/</span>
+
+<span class="cm">/*Add a label to the inactive button*/</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Inactive&quot;</span><span class="p">);</span>
+</pre></div>
 </div>
 </div>
 </div>

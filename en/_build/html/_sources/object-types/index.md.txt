@@ -4,8 +4,7 @@
 
 .. toctree::
    :maxdepth: 1
-   :hidden:
-
+   
    obj
    arc
    bar

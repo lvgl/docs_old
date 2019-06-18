@@ -33,7 +33,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Arc image](http://docs.littlevgl.com/img/arc-lv_arc.png)
+![Arc image](/examples/arc/arc_1.png)
 
 
 ```eval_rst

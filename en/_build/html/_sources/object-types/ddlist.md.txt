@@ -46,7 +46,7 @@ The following *Keys* are processed by the Buttons:
 
 ### C
 
-![Drop down list image](http://docs.littlevgl.com/img/drop-down-list-lv_ddlist.png)
+![Drop down list image](/examples/ddlist/ddlist_1.png)
 
 ```eval_rst
 .. container:: toggle

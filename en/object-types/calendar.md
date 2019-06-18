@@ -48,7 +48,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Calendar image](http://docs.littlevgl.com/img/calendar-lv_calendar.png)
+![Calendar image](/examples/calendar/calendar_1.png)
 
 
 ```eval_rst

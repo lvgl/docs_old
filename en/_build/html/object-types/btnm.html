@@ -607,10 +607,71 @@ The background and the buttons use the <code class="docutils literal notranslate
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<p><img alt="http://docs.littlevgl.com/img/button-matrix-lv_btnm.png" src="http://docs.littlevgl.com/img/button-matrix-lv_btnm.png" />Button matrix image</p>
+<p><img alt="../_images/btnm_1.png" src="../_images/btnm_1.png" />Button matrix image</p>
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
+<span class="cm">/*Called when a button is released ot long pressed*/</span>
+<span class="k">static</span> <span class="n">lv_res_t</span> <span class="nf">btnm_action</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btnm</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">txt</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Button: %s released</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">txt</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">LV_RES_OK</span><span class="p">;</span> <span class="cm">/*Return OK because the button matrix is not deleted*/</span>
+<span class="p">}</span>
+
+
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="p">.</span>
+
+<span class="cm">/*Create a button descriptor string array*/</span>
+<span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">btnm_map</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="s">&quot;2&quot;</span><span class="p">,</span> <span class="s">&quot;3&quot;</span><span class="p">,</span> <span class="s">&quot;4&quot;</span><span class="p">,</span> <span class="s">&quot;5&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+                           <span class="s">&quot;6&quot;</span><span class="p">,</span> <span class="s">&quot;7&quot;</span><span class="p">,</span> <span class="s">&quot;8&quot;</span><span class="p">,</span> <span class="s">&quot;9&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+                           <span class="s">&quot;</span><span class="se">\202</span><span class="s">Action1&quot;</span><span class="p">,</span> <span class="s">&quot;Action2&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">};</span>
+
+
+
+
+<span class="cm">/*Create a default button matrix*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btnm1</span> <span class="o">=</span> <span class="n">lv_btnm_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_btnm_set_map</span><span class="p">(</span><span class="n">btnm1</span><span class="p">,</span> <span class="n">btnm_map</span><span class="p">);</span>
+<span class="n">lv_btnm_set_action</span><span class="p">(</span><span class="n">btnm1</span><span class="p">,</span> <span class="n">btnm_action</span><span class="p">);</span>
+<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">btnm1</span><span class="p">,</span> <span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+
+<span class="cm">/*Create a new style for the button matrix back ground*/</span>
+<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_bg</span><span class="p">;</span>
+<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_bg</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+<span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_SILVER</span><span class="p">;</span>
+<span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_SILVER</span><span class="p">;</span>
+<span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">hor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">ver</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">inner</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="cm">/*Create 2 button styles*/</span>
+<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_btn_rel</span><span class="p">;</span>
+<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_btn_pr</span><span class="p">;</span>
+<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_rel</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_btn_rel</span><span class="p">);</span>
+<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0x30</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">);</span>
+<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
+<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_SILVER</span><span class="p">;</span>
+<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">opa</span> <span class="o">=</span> <span class="n">LV_OPA_50</span><span class="p">;</span>
+<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_pr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn_rel</span><span class="p">);</span>
+<span class="n">style_btn_pr</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0x55</span><span class="p">,</span> <span class="mh">0x96</span><span class="p">,</span> <span class="mh">0xd8</span><span class="p">);</span>
+<span class="n">style_btn_pr</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0x37</span><span class="p">,</span> <span class="mh">0x62</span><span class="p">,</span> <span class="mh">0x90</span><span class="p">);</span>
+<span class="n">style_btn_pr</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0xbb</span><span class="p">,</span> <span class="mh">0xd5</span><span class="p">,</span> <span class="mh">0xf1</span><span class="p">);</span>
+
+<span class="cm">/*Create a second button matrix with the new styles*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btnm2</span> <span class="o">=</span> <span class="n">lv_btnm_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">btnm1</span><span class="p">);</span>
+<span class="n">lv_btnm_set_style</span><span class="p">(</span><span class="n">btnm2</span><span class="p">,</span> <span class="n">LV_BTNM_STYLE_BG</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_bg</span><span class="p">);</span>
+<span class="n">lv_btnm_set_style</span><span class="p">(</span><span class="n">btnm2</span><span class="p">,</span> <span class="n">LV_BTNM_STYLE_BTN_REL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn_rel</span><span class="p">);</span>
+<span class="n">lv_btnm_set_style</span><span class="p">(</span><span class="n">btnm2</span><span class="p">,</span> <span class="n">LV_BTNM_STYLE_BTN_PR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn_pr</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btnm2</span><span class="p">,</span> <span class="n">btnm1</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
 </div>
 </div>
 </div>

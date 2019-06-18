@@ -617,10 +617,35 @@ The labels use the <code class="docutils literal notranslate"><span class="pre">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<p><img alt="http://docs.littlevgl.com/img/keyboard-lv_kb.png" src="http://docs.littlevgl.com/img/keyboard-lv_kb.png" />Keyboard image</p>
+<p><img alt="../_images/kb_1.png" src="../_images/kb_1.png" />Keyboard image</p>
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create styles for the keyboard*/</span>
+<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">rel_style</span><span class="p">,</span> <span class="n">pr_style</span><span class="p">;</span>
+
+<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rel_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_btn_rel</span><span class="p">);</span>
+<span class="n">rel_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pr_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_btn_pr</span><span class="p">);</span>
+<span class="n">pr_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="cm">/*Create a keyboard and apply the styles*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">kb</span> <span class="o">=</span> <span class="n">lv_kb_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_kb_set_cursor_manage</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+<span class="n">lv_kb_set_style</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">LV_KB_STYLE_BG</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_transp_tight</span><span class="p">);</span>
+<span class="n">lv_kb_set_style</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">LV_KB_STYLE_BTN_REL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rel_style</span><span class="p">);</span>
+<span class="n">lv_kb_set_style</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">LV_KB_STYLE_BTN_PR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pr_style</span><span class="p">);</span>
+
+<span class="cm">/*Create a text area. The keyboard will write here*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">ta</span> <span class="o">=</span> <span class="n">lv_ta_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="n">lv_ta_set_text</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+
+<span class="cm">/*Assign the text area to the keyboard*/</span>
+<span class="n">lv_kb_set_ta</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">ta</span><span class="p">);</span>
+</pre></div>
 </div>
 </div>
 </div>

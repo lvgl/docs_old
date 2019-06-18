@@ -607,10 +607,50 @@ To use different auto fit in all 4 directions use <code class="docutils literal 
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<p><img alt="http://docs.littlevgl.com/img/container-lv_cont.png" src="http://docs.littlevgl.com/img/container-lv_cont.png" />Container image</p>
+<p><img alt="../_images/cont_1.png" src="../_images/cont_1.png" />Container image</p>
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">box1</span><span class="p">;</span>
+<span class="n">box1</span> <span class="o">=</span> <span class="n">lv_cont_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">box1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
+<span class="n">lv_cont_set_fit</span><span class="p">(</span><span class="n">box1</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+<span class="cm">/*Add a text to the container*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">txt</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">box1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="s">&quot;Lorem ipsum dolor</span><span class="se">\n</span><span class="s">&quot;</span>
+                       <span class="s">&quot;sit amet, consectetur</span><span class="se">\n</span><span class="s">&quot;</span>
+                       <span class="s">&quot;adipiscing elit, sed do</span><span class="se">\n</span><span class="s">&quot;</span>
+                       <span class="s">&quot;eiusmod tempor incididunt</span><span class="se">\n</span><span class="s">&quot;</span>
+                       <span class="s">&quot;ut labore et dolore</span><span class="se">\n</span><span class="s">&quot;</span>
+                       <span class="s">&quot;magna aliqua.&quot;</span><span class="p">);</span>
+
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">box1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_LEFT</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>      <span class="cm">/*Align the container*/</span>
+
+<span class="cm">/*Create a style*/</span>
+<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style</span><span class="p">;</span>
+<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
+<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">hor</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>                                 <span class="cm">/*Set a great horizontal padding*/</span>
+
+<span class="cm">/*Create an other container*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">box2</span><span class="p">;</span>
+<span class="n">box2</span> <span class="o">=</span> <span class="n">lv_cont_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">box2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>     <span class="cm">/*Set the new style*/</span>
+<span class="n">lv_cont_set_fit</span><span class="p">(</span><span class="n">box2</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="cm">/*Do not enable the vertical fit */</span>
+<span class="n">lv_obj_set_height</span><span class="p">(</span><span class="n">box2</span><span class="p">,</span> <span class="mi">55</span><span class="p">);</span>        <span class="cm">/*Set a fix height*/</span>
+
+<span class="cm">/*Add a text to the new container*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">txt2</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">box2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">txt2</span><span class="p">,</span> <span class="s">&quot;No vertical fit 1...</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;No vertical fit 2...</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;No vertical fit 3...</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;No vertical fit 4...&quot;</span><span class="p">);</span>
+
+<span class="cm">/*Align the container to the bottom of the previous*/</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">box2</span><span class="p">,</span> <span class="n">box1</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_BOTTOM_MID</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">);</span>
+</pre></div>
 </div>
 </div>
 </div>

@@ -58,7 +58,7 @@ Therefore all positions are relative to the parent.
 
 The (0;0) coordinates mean the objects will remain in the top left-hand corner of the parent independently from the position of the parent.
 
-![](https://littlevgl.com/docs/par_child1.png "Objects are moving together 1")
+![](/examples/misc/par_child1.png "Objects are moving together 1")
 
 ```c
 lv_obj_t * par = lv_obj_create(lv_scr_act(), NULL); /*Create a parent object on the current screen*/
@@ -70,7 +70,7 @@ lv_obj_set_pos(obj1, 10, 10);	                   /*Set the position of the new o
 
 Modify the position of the parent:
   
-![](https://littlevgl.com/docs/par_child2.png "Graphical objects are moving togother 2")  
+![](/examples/misc/par_child2.png "Graphical objects are moving togother 2")  
 
 ```c
 lv_obj_set_pos(par, 50, 50);	/*Move the parent. The child will move with it.*/
@@ -82,7 +82,7 @@ lv_obj_set_pos(par, 50, 50);	/*Move the parent. The child will move with it.*/
 
 If a child partially or fully out of its parent then the parts outside will not be visible.
   
-![](https://littlevgl.com/docs/par_child3.png "A graphical object is visible on its parent")  
+![](/examples/misc/par_child3.png "A graphical object is visible on its parent")  
 
 ```c
 lv_obj_set_x(obj1, -30);	/*Move the child a little bit of the parent*/

@@ -592,10 +592,66 @@ To set a static text use <code class="docutils literal notranslate"><span class=
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<p><img alt="http://docs.littlevgl.com/img/check-box-lv_cb.png" src="http://docs.littlevgl.com/img/check-box-lv_cb.png" />Checkbox image</p>
+<p><img alt="../_images/cb_1.png" src="../_images/cb_1.png" />Checkbox image</p>
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_res_t</span> <span class="nf">cb_release_action</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">cb</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*A check box is clicked*/</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s state: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">lv_cb_get_text</span><span class="p">(</span><span class="n">cb</span><span class="p">),</span> <span class="n">lv_cb_is_checked</span><span class="p">(</span><span class="n">cb</span><span class="p">));</span>
+
+    <span class="k">return</span> <span class="n">LV_RES_OK</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="p">.</span>
+
+
+<span class="cm">/********************************************</span>
+<span class="cm"> * Create a container for the check boxes</span>
+<span class="cm"> ********************************************/</span>
+
+<span class="cm">/*Create  border style*/</span>
+<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_border</span><span class="p">;</span>
+<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_border</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
+<span class="n">style_border</span><span class="p">.</span><span class="n">glass</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">style_border</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">empty</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="cm">/*Create a container*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">cont</span><span class="p">;</span>
+<span class="n">cont</span> <span class="o">=</span> <span class="n">lv_cont_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_cont_set_layout</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="n">LV_LAYOUT_COL_L</span><span class="p">);</span>      <span class="cm">/*Arrange the children in a column*/</span>
+<span class="n">lv_cont_set_fit</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>              <span class="cm">/*Fit the size to the content*/</span>
+<span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_border</span><span class="p">);</span>
+
+<span class="cm">/**************************</span>
+<span class="cm"> * Create check boxes</span>
+<span class="cm"> *************************/</span>
+
+<span class="cm">/*Create check box*/</span>
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">cb</span><span class="p">;</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">lv_cb_create</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_cb_set_text</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span> <span class="s">&quot;Potato&quot;</span><span class="p">);</span>
+<span class="n">lv_cb_set_action</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span> <span class="n">cb_release_action</span><span class="p">);</span>
+
+<span class="cm">/*Copy the previous check box*/</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">lv_cb_create</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="n">cb</span><span class="p">);</span>
+<span class="n">lv_cb_set_text</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span> <span class="s">&quot;Onion&quot;</span><span class="p">);</span>
+
+<span class="cm">/*Copy the previous check box*/</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">lv_cb_create</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="n">cb</span><span class="p">);</span>
+<span class="n">lv_cb_set_text</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span> <span class="s">&quot;Carrot&quot;</span><span class="p">);</span>
+
+<span class="cm">/*Copy the previous check box*/</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">lv_cb_create</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="n">cb</span><span class="p">);</span>
+<span class="n">lv_cb_set_text</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span> <span class="s">&quot;Salad&quot;</span><span class="p">);</span>
+
+<span class="cm">/*Align the container to the middle*/</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
 </div>
 </div>
 </div>

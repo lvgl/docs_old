@@ -45,7 +45,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Checkbox image](http://docs.littlevgl.com/img/check-box-lv_cb.png)
+![Checkbox image](/examples/cb/cb_1.png)
 
 ```eval_rst
 .. container:: toggle

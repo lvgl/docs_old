@@ -67,7 +67,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Button matrix image](http://docs.littlevgl.com/img/button-matrix-lv_btnm.png)
+![Button matrix image](/examples/btnm/btnm_1.png)
 
 ```eval_rst
 .. container:: toggle

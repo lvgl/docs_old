@@ -56,7 +56,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Button image](http://docs.littlevgl.com/img/button-lv_btn.png)
+![Button image](/examples/btn/btn_1.png)
 
 ```eval_rst
 .. container:: toggle

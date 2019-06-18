@@ -39,7 +39,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Bar image](http://docs.littlevgl.com/img/bar-lv_bar.png)
+![Bar image](/examples/bar/bar_1.png)
 
 
 ```eval_rst

@@ -69,7 +69,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Keyboard image](http://docs.littlevgl.com/img/keyboard-lv_kb.png)
+![Keyboard image](/examples/kb/kb_1.png)
 
 ```eval_rst
 .. container:: toggle
