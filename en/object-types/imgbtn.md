@@ -5,6 +5,7 @@
 The Image button is very similar to the simple Button object. The only difference is it displays user-defined images in each state instead of drawing a button. 
 Before reading this please read the [Button](/object-types/btn) section too.
 
+### Image sources
 To set the image in a state the `lv_imgbtn_set_src(imgbtn, LV_BTN_STATE_..., &img_src)` The image sources works the same as described in the [Image object](/object-types/img).
 
 If `LV_IMGBTN_TILED` is enabled in *lv_conf.h* three source can be set for state:
@@ -15,9 +16,11 @@ If `LV_IMGBTN_TILED` is enabled in *lv_conf.h* three source can be set for state
 The *center* image will repeated to fill the width of object. Therefore with `LV_IMGBTN_TILED` you can set the width of the Image button while without it the width will be always the same as the image source's width.
 
 
-The **states** also work like with Button object. It can be set with `lv_imgbtn_set_state(imgbtn, LV_BTN_STATE_...)`. 
+### States
+The states also work like with Button object. It can be set with `lv_imgbtn_set_state(imgbtn, LV_BTN_STATE_...)`. 
 
-The **toggle** feature can be enabled with `lv_imgbtn_set_toggle(imgbtn, true)`
+### Toggle
+The toggle feature can be enabled with `lv_imgbtn_set_toggle(imgbtn, true)`
 
 ## Style usage
 
@@ -33,12 +36,12 @@ When labels are created on a button, it's a good practive to set the image butto
 Hence you don't need to craete a new style for the label. 
 
 ## Events
-Besided the [Genreric events](/overview/events.html#generic-events) the following [Special events](/overview/events.html#special-events) are sent by the buttons:
+Besided the [Genreric events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the buttons:
  - **LV_EVENT_VALUE_CHANGED** sent when the button is toggled.
 
 Note that the generic input device related events (like `LV_EVENT_PRESSED`) are sent in inactive state too. You need to check the state with `lv_btn_get_state(btn)` to ignore the events from inactive buttons.
  
-Learn more about [Events](/overview/events).
+Learn more about [Events](/overview/event).
 
 ## Keys
 The following *Keys* are processed by the Buttons:
@@ -54,7 +57,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Image button image](/examples/imgbtn/imgbtn_1.png)
+![](/examples/imgbtn/imgbtn_1.png "Image button in LittlevGL")
 
 
 ```eval_rst

@@ -5,15 +5,15 @@
 .. toctree::
    :maxdepth: 2
 
-   objects
-   layers
-   events
-   styles
+   object
+   layer
+   event
+   style
    indev
    display
-   fonts
-   images
+   font
+   image
    file-system
-   animations
+   animation
    drawing
 ```

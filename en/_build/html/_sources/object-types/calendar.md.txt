@@ -11,14 +11,21 @@ The Calendar object is a classic calendar which can:
 
 The set and get dates in the calendar the `lv_calendar_date_t` type is used which is a structure with `year`, `month` and `day` fields.
 
-To set the **current date** use the `lv_calendar_set_today_date(calendar, &today_date)` function.
+### Current date
+To set the current date (today) use the `lv_calendar_set_today_date(calendar, &today_date)` function.
 
-To set the **shown date** use `lv_calendar_set_shown_date(calendar, &shown_date)`;
+### Shown date
+To set the shown date use `lv_calendar_set_shown_date(calendar, &shown_date)`;
 
-The list of **highlighted dates** should be stored in a `lv_calendar_date_t` array a loaded by `lv_calendar_set_highlighted_dates(calendar, &highlighted_dates)`.  
+### Highlighted days
+The list of highlighted dates should be stored in a `lv_calendar_date_t` array a loaded by `lv_calendar_set_highlighted_dates(calendar, &highlighted_dates)`.  
 Only the arrays pointer will be saved so the array should be a static or global variable. 
 
-The **name of the days** can be adjusted with `lv_calendar_set_day_names(calendar, day_names)` where `day_names` looks like `const char * day_names[7] = {"Su", "Mo", ...};`
+### Name of the days
+The name of the days can be adjusted with `lv_calendar_set_day_names(calendar, day_names)` where `day_names` looks like `const char * day_names[7] = {"Su", "Mo", ...};`
+
+### Name of the months
+Similarly to day names the name of the month can be set with `lv_calendar_set_month_names(calendar, month_names_array)`.
 
 ## Styles
 You can set the styles with `lv_calendar_set_style(btn, LV_CALENDAR_STYLE_..., &style)`. 
@@ -33,13 +40,13 @@ You can set the styles with `lv_calendar_set_style(btn, LV_CALENDAR_STYLE_..., &
 - **LV_CALENDAR_STYLE_TODAY_BOX** `body` and `text` properties are used to set the style of the today box
 
 ## Events
-Besided the [Genreric events](/overview/events.html#generic-events) the following [Special events](/overview/events.html#special-events) are sent by the calendars:
+Besided the [Genreric events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the calendars:
 **LV_EVENT_VALUE_CHANGED** is sent when  the current month has changed.
 
 In Input device realted events `lv_calendar_get_pressed_date(caledar)` tells which day is currently being pressed or return `NULL` if no date is pressed.
 
 ## Keys
-No *Keys* are not processed by the object type.
+No *Keys* are processed by the object type.
 
 Learn more about [Keys](/overview/indev).
 
@@ -48,7 +55,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Calendar image](/examples/calendar/calendar_1.png)
+![](/examples/calendar/calendar_1.png "Calendar in LittlevGL")
 
 
 ```eval_rst

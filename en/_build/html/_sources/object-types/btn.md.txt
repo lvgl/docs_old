@@ -4,18 +4,21 @@
 
 Buttons are simple rectagnle-like objects but they change their style and state when they are pressed or released. 
 
-Buttons can be in one of the **five possible states**:
+### States
+Buttons can be in one of the 5 possible states:
 - **LV_BTN_STATE_REL** Released state
 - **LV_BTN_STATE_PR** Pressed state
 - **LV_BTN_STATE_TGL_REL** Toggled released state 
 - **LV_BTN_STATE_TGL_PR** Toggled pressed state 
 - **LV_BTN_STATE_INA** Inactive state
 
-The buttons can be configured as **toggle button** with `lv_btn_set_toggle(btn, true)`. In this case on release, the button goes to toggled released state.
-
 You can set the button's state manually with `lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)`.
 
-Similarly to [Containers](/object-types/cont) buttons also have **layout** and **fit** attributes.
+### Toggle
+The buttons can be configured as toggle button with `lv_btn_set_toggle(btn, true)`. In this case on release, the button goes to toggled released state.
+
+### Layout and Fit
+Similarly to [Containers](/object-types/cont) buttons also have layout and fit attributes.
 - `lv_btn_set_layout(btn, LV_LAYOUT_...) `set a layout. The default is `LV_LAYOUT_CENTER`. 
 So if you add a label then it will be automatically aligned to the middle and can't be moved with `lv_obj_set_pos()`. 
 You can disable the layout with `lv_btn_set_layout(btn, LV_LAYOUT_OFF)`
@@ -36,12 +39,12 @@ Hence you don't need to craete a new style for the label.
 
 
 ## Events
-Besided the [Genreric events](/overview/events.html#generic-events) the following [Special events](/overview/events.html#special-events) are sent by the buttons:
+Besided the [Genreric events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the buttons:
  - **LV_EVENT_VALUE_CHANGED** sent when the button is toggled.
 
 Note that the generic input device related events (like `LV_EVENT_PRESSED`) are sent in inactive state too. You need to check the state with `lv_btn_get_state(btn)` to ignore the events from inactive buttons.
  
-Learn more about [Events](/overview/events).
+Learn more about [Events](/overview/event).
 
 ## Keys
 The following *Keys* are processed by the Buttons:
@@ -56,7 +59,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Button image](/examples/btn/btn_1.png)
+![](/examples/btn/btn_1.png "Button in LittlevGL")
 
 ```eval_rst
 .. container:: toggle

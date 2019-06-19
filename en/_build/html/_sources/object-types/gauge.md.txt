@@ -2,18 +2,23 @@
 
 ## Overview
 
-The gauge is a meter with **scale labels** and **needles**. 
+The gauge is a meter with scale labels and needles.
+
+### Scale 
 You can use the `lv_gauge_set_scale(gauge, angle, line_num, label_cnt)` function to adjust the scale angle and the number of the scale lines and labels. 
 The default settings are:  220 degrees, 6 scale labels and 21 lines.
 
-The gauge can show **more then one needles**. 
+### Needles
+The gauge can show more then one needles. 
 Use the `lv_gauge_set_needle_count(gauge, needle_num, color_array)` function to set the number of needles and an array with colors for each needle. The array must be static or global variable becasue only its pointer is stored.
 
-You can use `lv_gauge_set_value(gauge, needle_id, value)` to **set the value of a needle**.
+You can use `lv_gauge_set_value(gauge, needle_id, value)` to set the value of a needle.
 
-To set a **critical value** use `lv_gauge_set_critical_value(gauge, value)`. The scale color will be changed to `line.color` after this value. (default: 80)
-
+### Range
 The **range** of the gauge can be specified by `lv_gauge_set_range(gauge, min, max)`. The deafult range is 0..100.
+
+### Critical value
+To set a critical value use `lv_gauge_set_critical_value(gauge, value)`. The scale color will be changed to `line.color` after this value. (default: 80)
 
 ## Styles
 
@@ -29,12 +34,12 @@ The gauge uses one style which can be set by `lv_gauge_set_style(gauge, LV_GAUGE
 - **text.font/color/letter_space** label attributes
 
 ## Events
-Only the [Genreric events](/overview/events.html#generic-events) are sent by the object type.
+Only the [Genreric events](/overview/event.html#generic-events) are sent by the object type.
 
-Learn more about [Events](/overview/events).
+Learn more about [Events](/overview/event).
 
 ## Keys
-No *Keys* are not processed by the object type.
+No *Keys* are processed by the object type.
 
 Learn more about [Keys](/overview/indev).
 
@@ -43,7 +48,7 @@ Learn more about [Keys](/overview/indev).
 ### C
 
 
-![Gauge image](/examples/gauge/gauge_1.png)
+![](/examples/gauge/gauge_1.png "Gauge in LittlevGL")
 
 ```eval_rst
 .. container:: toggle

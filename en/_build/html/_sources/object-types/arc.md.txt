@@ -4,9 +4,12 @@
 
 The *Arc* object **draws an arc** within **start and end angles** and with a given **thickness**.
 
+### Angles
+
 To set the angles use the `lv_arc_set_angles(arc, start_angle, end_angle)` function. The zero degree is at the bottom of the object and the degrees are increasing in a counter-clockwise direction. 
 The angles should be in [0;360] range.
 
+### Notes
 The **width and height** of the *Arc* should be the **same**.
 
 Currently the *Arc* object **does not support anti-aliasing**.
@@ -19,12 +22,12 @@ To set the style of an *Arc* object use `lv_arc_set_style(arc, LV_ARC_STYLE_MAIN
 - **line.color** the color of the arc.
 
 ## Events
-Only the [Genreric events](/overview/events.html#generic-events) are sent by the object type.
+Only the [Genreric events](/overview/event.html#generic-events) are sent by the object type.
 
-Learn more about [Events](/overview/events).
+Learn more about [Events](/overview/event).
 
 ## Keys
-No *Keys* are not processed by the object type.
+No *Keys* are processed by the object type.
 
 Learn more about [Keys](/overview/indev).
   
@@ -33,7 +36,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Arc image](/examples/arc/arc_1.png)
+![](/examples/arc/arc_1.png "Arc in LittlevGL")
 
 
 ```eval_rst

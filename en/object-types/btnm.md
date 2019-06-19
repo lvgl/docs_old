@@ -4,17 +4,18 @@
 
 The Button Matrix objects can display **multiple buttons** in rows and culomns. 
 
-The Button matrix object is very light weighted becasue the buttons are not really created just drawn on the fly.
-This way 1 button uses only 8 extra byte instead of the ~100-150 byte size of a normal [Button](/object-types/btn) object. 
 
-The buttons have texts on them which can be specified a descriptor string array, called *map*. The map can be set with `lv_btnm_set_map(btnm, my_map)`. 
+### Button's text
+There is a text on each button. To specify them a descriptor string array, called *map*, needs to be used. 
+The map can be set with `lv_btnm_set_map(btnm, my_map)`. 
+The declaration of a map should look like `const char * map[] = {"btn1", "btn2", "btn3", ""}`. 
+Note that **the last element has to be an empty string**!  
 
-The **declaration of a map** looks like `const char * map[] = {"btn1", "btn2", "btn3", ""}`. Note that **the last element has to be an empty string**!  
+Use `"\n"` in the map  to make **line break**. E.g. `{"btn1", "btn2", "\n", "btn3", ""}`. The button's width is recalculated in every line to will the whole line.
 
-Use `"\n"` in the map  to make **line break**. E.g. `{"btn1", "btn2", "\n", "btn3", ""}`. The button's width is recalculated in every line.
-
-The buttons width can be set relative to the other button in the same line with `lv_btnm_set_btn_width(btnm, btn_id, width)` 
-E.g. in a line with two buttons: *btn 1 width = 1* and *btn 2 width = 2*, *btn 1* will have 33 % width adnd *btn 2* will have 66 % width.
+### Control buttons
+The **buttons width** can be set relative to the other button in the same line with `lv_btnm_set_btn_width(btnm, btn_id, width)` 
+E.g. in a line with two buttons: *btnA, width = 1* and *btnB, width = 2*, *btnA* will have 33 % width adnd *btnB* will have 66 % width.
 
 In addition to width each button can be customized with following paramters:
 - **LV_BTNM_CTRL_HIDDEN** make a button hidden
@@ -28,13 +29,18 @@ The set or clear a button's control attribute use `lv_btnm_set_btn_ctrl(btnm, bt
 
 The set/clear the same control attribute for all buttons of a button matrix use `lv_btnm_set_btn_ctrl_all(btnm, btn_id, LV_BTNM_CTRL_...)` and `lv_btnm_clear_btn_ctrl_all(btnm, btn_id, LV_BTNM_CTRL_...)`.
 
-The *"One toggle"* feature can be enable with `lv_btnm_set_one_toggle(btnm, true)` to allow only one toggled button at once.
-
 The set a control map for a butto nmatrix (similarly to the map for the text) use `lv_btnm_set_ctrl_map(btnm, ctrl_map)`. 
 An element of `ctrl_map` should look like `ctrl_map[0] = width | LV_BTNM_CTRL_NO_REPEAT |  LV_BTNM_CTRL_TGL_ENABLE`. The number of elemnts should be equal to the number of buttons (excluiding new lines).
 
+### One toggle
+The "One toggle" feature can be enable with `lv_btnm_set_one_toggle(btnm, true)` to allow only one toggled button at once.
+
+### Recolor
 The **texts** on the button can be **recolored** similarly to the recolor feature for [Label](/object-types/label) object. To enabel it use `lv_btnm_set_recolor(btnm, true)`. After that a button with `#FF0000 Red#` text will be red.
 
+### Notes
+The Button matrix object is very light weighted becasue the buttons are not created just virtually drawn on the fly.
+This way 1 button use only 8 extra byte instead of the ~100-150 byte size of a normal [Button](/object-types/btn) object. 
 
 ## Styles
 
@@ -48,12 +54,11 @@ The background and the buttons use the `style.body` properties. The labels use t
 - **LV_BTNM_STYLE_BTN_TGL_PR** style of the toggled pressed  buttons. Default: _lv_style_btn_tgl_pr_
 - **LV_BTNM_STYLE_BTN_INA** style of the inactive  buttons. Default: _lv_style_btn_ina_
 
-
 ## Events
-Besided the [Genreric events](/overview/events.html#generic-events) the following [Special events](/overview/events.html#special-events) are sent by the button matrices:
+Besided the [Genreric events](/overview/events.html#generic-event) the following [Special events](/overview/event.html#special-events) are sent by the button matrices:
  - **LV_EVENT_VALUE_CHANGED** sent when the button is pressed/released or repeated after long press. The event data is set to ID of the pressed/released button.
 
-Learn more about [Events](/overview/events).
+Learn more about [Events](/overview/event).
 
 ##Keys
 
@@ -67,7 +72,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![Button matrix image](/examples/btnm/btnm_1.png)
+![](/examples/btnm/btnm_1.png "Button matrix in LittlevGL")
 
 ```eval_rst
 .. container:: toggle
@@ -83,6 +88,7 @@ Learn more about [Keys](/overview/indev).
 
 ### MicroPython
 No examples yet.
+
 ## API 
 
 ```eval_rst
