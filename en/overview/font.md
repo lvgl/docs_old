@@ -1,6 +1,6 @@
 # Fonts
 
-In LittlevGL fonts are collections of bitmaps and other informations required to render the images of the letters (glyph). A font is stored in a **lv_font_t** variable and can be set it in style's *text.font* field. For example:
+In LittlevGL fonts are collections of bitmaps and other information required to render the images of the letters (glyph). A font is stored in a **lv_font_t** variable and can be set it in style's *text.font* field. For example:
 ```c
 my_style.text.font = &lv_font_roboto_28;  /*Set a larger font*/
 ```
@@ -57,7 +57,7 @@ lv_label_set_text(my_label, LV_SYMBOL_OK LV_SYMBOL_WIFI LV_SYMBOL_PLAY);
 ## Add new font
 
 There are several ways to add a new font to your project:
-1. The most simple way is to use the [Online font converter](hhttps://littlevgl.com/font_conv_new). Just set the parameters, click the *Convert* button, copy the font to your project and use it.
+1. The most simple way is to use the [Online font converter](https://littlevgl.com/font_conv_new). Just set the parameters, click the *Convert* button, copy the font to your project and use it.
 2. Use the [Offline font converter](https://github.com/littlevgl/lv_font_conv). (Requires Node.js to be installed)
 3. If you want to create something like the built-in fonts (Roboto font and symbols) but in different size and/or ranges you can use the `built_in_font_gen.py` script in `lvgl/scripts/built_in_font` folder. 
 (It requires Python and `lv_font_conv` to be installed) 
@@ -110,7 +110,7 @@ bool my_get_glyph_dsc_cb(const lv_font_t * font, lv_font_glyph_dsc_t * dsc_out, 
     dsc_out->box_h = 8;         /*Height of the bitmap in [px]*/
     dsc_out->box_w = 6;         /*Width of the bitmap in [px]*/
     dsc_out->ofs_x = 0;         /*X offset of the bitmap in [pf]*/
-    dsc_out->ofs_y = 3;         /*Y ofset of the bitmap measored from the as line*/
+    dsc_out->ofs_y = 3;         /*Y offset of the bitmap measured from the as line*/
     dsc_out->bpp   = 2;         /*Bit per pixel: 1/2/4/8*/
     
     return true;                /*true: glyph found; false: glyph was not found*/

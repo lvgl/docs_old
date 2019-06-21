@@ -3,7 +3,7 @@
 
 ## Get the library
 
-Littlev Graphics Library is available on GitHub: [https://github.com/littlevgl/lvgl](https://github.com/littlevgl/lvgl). 
+LittlevGL Graphics Library is available on GitHub: [https://github.com/littlevgl/lvgl](https://github.com/littlevgl/lvgl). 
 
 You can clone it or download the latest version of the library from GitHub or you can use the [Download](https://littlevgl.com/download) page as well. 
 
