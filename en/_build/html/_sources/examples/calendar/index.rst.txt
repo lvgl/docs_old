@@ -1,7 +1,7 @@
 C
 ^
 
-.. image:: /examples/calendar/calendar_1.gif
+.. image:: /examples/calendar/calendar_1.*
   :alt: Simple Calendar example in LittlevGL
 
 .. container:: toggle

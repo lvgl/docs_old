@@ -1,7 +1,7 @@
 C
 ^
 
-.. image:: /examples/btnm/btnm_1.gif
+.. image:: /examples/btnm/btnm_1.*
   :alt: Simple Button matrix example in LittlevGL
 
 .. container:: toggle

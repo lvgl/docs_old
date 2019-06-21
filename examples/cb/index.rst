@@ -1,7 +1,7 @@
 C
 ^
 
-.. image:: /examples/cb/cb_1.gif
+.. image:: /examples/cb/cb_1.*
   :alt: Simple Chekbox example in LittlevGL
 
 .. container:: toggle

@@ -23,6 +23,7 @@
 
 import recommonmark
 from recommonmark.transform import AutoStructify
+from sphinx.builders.html import StandaloneHTMLBuilder
 
 # -- General configuration ------------------------------------------------
 
@@ -37,7 +38,7 @@ extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'recommonmark',
-    #'breathe'
+    'breathe'
     ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -182,6 +183,14 @@ texinfo_documents = [
 breathe_projects = {
   "lvgl":"xml/",
 }
+
+StandaloneHTMLBuilder.supported_image_types = [
+    'image/svg+xml',
+    'image/gif',  #prefer gif over png
+    'image/png',
+    'image/jpeg'
+]
+
 
 # Example configuration for intersphinx: refer to the Python standard library.
 

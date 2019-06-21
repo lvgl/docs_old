@@ -1,7 +1,7 @@
 C
 ^
 
-.. image:: /examples/label/label_1.gif
+.. image:: /examples/label/label_1.*
   :alt: Label example in LittlevGL
 
 .. container:: toggle

@@ -1,7 +1,7 @@
 C
 ^
 
-.. image:: /examples/kb/kb_1.gif
+.. image:: /examples/kb/kb_1.*
   :alt: Keyboard example in LittlevGL
 
 .. container:: toggle

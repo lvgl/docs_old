@@ -1,7 +1,7 @@
 C
 ^
 
-.. image:: /examples/imgbtn/imgbtn_1.gif
+.. image:: /examples/imgbtn/imgbtn_1.*
   :alt: Image button example in LittlevGL
 
 .. container:: toggle

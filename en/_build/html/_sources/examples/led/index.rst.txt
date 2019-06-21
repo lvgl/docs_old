@@ -1,7 +1,7 @@
 C
 ^
 
-.. image:: /examples/led/led_1.gif
+.. image:: /examples/led/led_1.png
   :alt: LED example in LittlevGL
 
 .. container:: toggle

@@ -1,7 +1,7 @@
 C
 ^
 
-.. image:: /examples/ddlist/ddlist_1.gif
+.. image:: /examples/ddlist/ddlist_1.*
   :alt: Simple Drop down list example in LittlevGL
 
 .. container:: toggle

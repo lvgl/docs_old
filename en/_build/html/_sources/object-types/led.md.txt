@@ -31,9 +31,6 @@ Learn more about [Keys](/overview/indev).
 
 ## Example
 
-
-## Example
-
 ```eval_rst
 
 .. include:: /examples/led/index.rst

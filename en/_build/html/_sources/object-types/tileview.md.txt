@@ -74,7 +74,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![](/examples/bar/bar_1.png "Slider in LittlevGL")
+![](/examples/arc/arc_1.png "Slider in LittlevGL")
 
 ```eval_rst
 .. container:: toggle
@@ -83,7 +83,7 @@ Learn more about [Keys](/overview/indev).
     
       code
 
-    .. literalinclude:: /examples/slider/slider_1.c
+    .. literalinclude:: /examples/tileview/tileview_1.c
       :language: c
  
 ```

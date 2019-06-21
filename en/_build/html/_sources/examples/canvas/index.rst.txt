@@ -1,7 +1,7 @@
 C
 ^
 
-.. image:: /examples/canvas/canvas_1.gif
+.. image:: /examples/canvas/canvas_1.*
   :alt: Simple Canvas example in LittlevGL
 
 .. container:: toggle

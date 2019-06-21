@@ -1,7 +1,7 @@
 C
 ^
 
-.. image:: /examples/bar/bar_1.gif
+.. image:: /examples/bar/bar_1.*
   :alt: Bar example in LittlevGL
 
 .. container:: toggle
