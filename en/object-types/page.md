@@ -9,7 +9,7 @@ The Page consist of two [Containers](/object-types/page) on each other:
 The background object can be referenced as the page itself like: `lv_obj_set_width(page, 100)`.
 
 If you create a child on the page it will be automatically moved to the scrollable container. 
-If the scrollable container become larger then the background it can be **scrolled by dragging** (like the lists on smart phones).
+If the scrollable container become larger then the background it can be *scrolled by dragging (like the lists on smart phones).
 
 By default the scrollable's has `LV_FIT_FILL`auto fit in all directions. 
 It means the scrollable size will be the same as the background's size (minus the paddings) while the object are in the background. 
@@ -17,7 +17,7 @@ But when an object is positioned out of the backround the scrollable size will b
   
 ### Scrollbars
  
-**Scrollbars** can be shown according to four policies:
+Scrollbars can be shown according to four policies:
 
 - **LV_SB_MODE_OFF** Never show scrollbars
 - **LV_SB_MODE_ON** Always show scrollbars
@@ -27,10 +27,10 @@ But when an object is positioned out of the backround the scrollable size will b
 You can set scroll bar show policy by: `lv_page_set_sb_mode(page, SB_MODE)`. The default value is `LV_SB_MODE_AUTO`.
 
 ### Glue object
-You can **glue a children** to the page. In this case you can scroll the page by dragging the child object. It can be enabled by the `lv_page_glue_obj(child, true)`.
+You can glue a children to the page. In this case you can scroll the page by dragging the child object. It can be enabled by the `lv_page_glue_obj(child, true)`.
 
 ### Focus object
-You can **focus to an object** on a page with: `lv_page_focus(page, child, LV_ANIM_ONO/FF)`.
+You can focus to an object on a page with: `lv_page_focus(page, child, LV_ANIM_ONO/FF)`.
 It will moves the scrollable container to show a child. The time of the anaimtion can be set by `lv_page_set_anim_time(page, anim_time)` in milliseconds.
 
 ### Edge flash
@@ -42,7 +42,7 @@ If the list is created on an other scrollable element (like an other page)) and 
 It can be enebaled with `lv_page_set_scroll_propagation(list, true)`
 
 ### Scrollable API
-There are functions to directly **set/get the scrollable's attributes**: 
+There are functions to directly set/get the scrollable's attributes: 
 - `lv_page_get_scrl()`
 - `lv_page_set_scrl_fit/fint2/fit4()`
 - `lv_page_set_scrl_width()`
@@ -71,9 +71,7 @@ Learn more about [Events](/overview/event).
 ##Keys
 
 The following *Keys* are processed by the Page:
-- **LV_KEY_RIGHT/DOWN/UP/DOWN** Scroll the page
-
-`lv_page_get_arrow_scroll(page, true)` needs to be enabled to scroll with keys.
+- **LV_KEY_RIGHT/LEFT/UP/DOWN** Scroll the page
 
 Learn more about [Keys](/overview/indev).
 

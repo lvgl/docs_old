@@ -143,7 +143,7 @@ lv_style_anim_create(&a);                                               /*Create
 
 To see the whole API of style animations see `lv_core/lv_style.h`.
 
-Here you can learn more about the [Animations](/overview/animations).
+Here you can learn more about the [Animations](/overview/animation).
 
 ## Style example
 The example below demonstrates the usage of styles.

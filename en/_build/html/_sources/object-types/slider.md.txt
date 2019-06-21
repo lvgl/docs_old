@@ -39,7 +39,7 @@ Learn more about [Keys](/overview/indev).
 
 ### C
 
-![](/examples/bar/bar_1.png "Slider in LittlevGL")
+![](/examples/slider/slider_1.png "Slider in LittlevGL")
 
 ```eval_rst
 .. container:: toggle

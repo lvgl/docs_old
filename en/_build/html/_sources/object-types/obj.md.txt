@@ -46,7 +46,7 @@ To get the children of an object use `lv_obj_get_child(obj, child_prev)` (from l
 To get the first child pass `NULL` as the second parameter and then feed the return value to iterate through the clidren. The function will return `NULL` is tehre is no more children. For example:
 
 ```c
-lv_obj_t child;
+lv_obj_t * child;
 child = lv_obj_get_child(parent, NULL);
 while(child) {
     /*Do something with "child" */
