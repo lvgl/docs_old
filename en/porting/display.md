@@ -2,7 +2,7 @@
 
 To set up a display an `lv_disp_buf_t` and an `lv_disp_drv_t` variable has to be initialized. 
 - **lv_disp_buf_t** contains internal graphics buffer(s). 
-- **lv_disp_drv_t** contains callback functions to iteract with the display and manipulate drawing related things. 
+- **lv_disp_drv_t** contains callback functions to interact with the display and manipulate drawing related things. 
 
 
 ## Display buffer 
@@ -16,7 +16,7 @@ To set up a display an `lv_disp_buf_t` and an `lv_disp_drv_t` variable has to be
     static lv_color_t buf_1[MY_DISP_HOR_RES * 10];
     static lv_color_t buf_2[MY_DISP_HOR_RES * 10];
     
-    /*Initalize `disp_buf` with the buffer(s) */
+    /*Initialize `disp_buf` with the buffer(s) */
     lv_disp_buf_init(&disp_buf, buf_1, buf_2, MY_DISP_HOR_RES*10);
 ```
 
@@ -45,32 +45,32 @@ There are some optional data fields:
 - **ver_res** vertical resolution of the display. (`LV_VER_RES_MAX` by default from *lv_conf.h*)
 - **color_chroma_key** a color which will be drawn as transparent on chrome keyed images. `LV_COLOR_TRANSP` by default from *lv_conf.h*)
 - **user_data** custom user data for the driver. Its type can be modified in lv_conf.h.
-- **antialiasing** use anti-aliasing (edge smoothing). `LV_ANTIALIAS` by default  from *lv_conf.h*
+- **anti-aliasing** use anti-aliasing (edge smoothing). `LV_ANTIALIAS` by default  from *lv_conf.h*
 - **rotated** if `1` swap `hor_res` and `ver_res`. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction.
 
 To use a GPU the following callbacks can be used:
 - **mem_fill_cb** fill an area with colors. 
 - **mem_blend_cb** blend two buffers using opacity.
  
-Some other optional callbacks to make easier and more optimal to work with monochrome, grayscale or other non-standard FGB displays: 
+Some other optional callbacks to make easier and more optimal to work with monochrome, gray-scale or other non-standard FGB displays: 
 - **rounder_cb** round the coordinates of areas to redraw. E.g. a 2x2 px can be converted to 2x8. 
 It can be used if the display controller can refresh only areas with specific height or width (usually 8 px height with monochrome displays).
 - **set_px_cb** a custom function to write the *display buffer*. 
-It can be used to store the pixels in a more compact way if the display has a special color format. (e.g. 1 bit monochrome, 2  bit grayscale etc.) 
+It can be used to store the pixels in a more compact way if the display has a special color format. (e.g. 1 bit monochrome, 2  bit gray-scale etc.) 
 This way the buffers used in `lv_disp_buf_t` can be smaller to hold only the required number of bits for the given area size.
 - **monitor_cb** a callback function tell how many pixels were refreshed in how much time.
 
-To set the fields of *lv_disp_drv_t* variable it needs to be intialized with `lv_disp_drv_init(&disp_drv)`.
+To set the fields of *lv_disp_drv_t* variable it needs to be initialized with `lv_disp_drv_init(&disp_drv)`.
 And finally to register a display for LittlevGL `lv_disp_drv_register(&disp_drv)` needs to be called.
 
 All together it looks like this:
 ```c
-    lv_disp_drv_t disp_drv;                 /*A variable to hold the drivers. Can be local varaible*/
+    lv_disp_drv_t disp_drv;                 /*A variable to hold the drivers. Can be local variable*/
     lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
     disp_drv.buffer = &disp_buf;            /*Set an initialized buffer*/
     disp_drv.flush_cb = my_flush_cb;        /*Set a flush callback to draw to the display*/
     lv_disp_t * disp;
-    disp = lv_disp_drv_register(&disp_drv); /*Register the dirver and save the created display objects*/
+    disp = lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
 ```
 
 Here some simple examples of the callbacks:
@@ -112,7 +112,7 @@ void my_mem_blend_cb(lv_disp_drv_t * disp_drv, lv_color_t * dest, const lv_color
 void my_rounder_cb(lv_disp_drv_t * disp_drv, lv_area_t * area)
 {
   /* Update the areas as needed. Can be only larger.
-   * For example to always have lines 8 px hegiht:*/
+   * For example to always have lines 8 px height:*/
    area->y1 = area->y1 & 0x07;
    area->y2 = (area->y2 & 0x07) + 8; 
 }
@@ -135,7 +135,7 @@ void my_monitor_cb(lv_disp_drv_t * disp_drv, uint32_t time, uint32_t px)
 ## Multi-display support 
 
 With LittlevGL multiple displays can be used. Just initialize multiple drivers and buffer and register them. Each display has its own screens and objects on the screens. 
-To get curently active scrren of a dsplay use `lv_disp_get_scr_act(disp)` (where `disp` is the return value of `lv_disp_drv_register`).  To set a new screen as active on a display use `lv_disp_set_scr_act(screen1)`.
+To get currently active screen of a display use `lv_disp_get_scr_act(disp)` (where `disp` is the return value of `lv_disp_drv_register`).  To set a new screen as active on a display use `lv_disp_set_scr_act(screen1)`.
 
 Or in a shorter form set a default display with `lv_disp_set_default(disp)` and get/set the active screen with `lv_scr_act()` and `lv_scr_load()`.
 
