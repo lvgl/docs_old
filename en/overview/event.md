@@ -80,7 +80,7 @@ Other general events sent by the library.
 - **LV_EVENT_DELETE** The object is being deleted. Free the related user-allocated data.
 
 ### Special events
-These events are specific to a partiual object type. 
+These events are specific to a particular object type. 
 - **LV_EVENT_VALUE_CHANGED** The object value has changed (e.g. for a [Slider](/object-types/slider))
 - **LV_EVENT_INSERT** Something is inserted to the object. (Typically to a [Text area](/object-types/ta))
 - **LV_EVENT_APPLY**  "Ok", "Apply" or similar specific button has clicked. (Typically from a [Keyboard](/object-types/kb) object)
@@ -93,7 +93,7 @@ To see exactly which events are used by an object type see the particular [Objec
 Some events might contain custom data. For example `LV_EVENT_VALUE_CHANGED` in some cases tells the new value. For more info see the particular [Object type's documentation](/object-types/index).
 The get the custom data in the event callback use `lv_event_get_data()`.
 
-The type of the custom data depends on the sendig object but if its a 
+The type of the custom data depends on the sending object but if its a 
 - single number then it's `uint32_t *` or `intt32_t *`
 - text then `char * ` or `const char *`
 
@@ -102,7 +102,7 @@ The type of the custom data depends on the sendig object but if its a
 
 To manually send events to an object use `lv_event_send(obj, LV_EVENT_..., &custom_data)`. 
 
-It can be used for example to manually close a message box by simualting a button press:
+It can be used for example to manually close a message box by simulating a button press:
 ```c
 /*Simulate the press of the first button (indexes start from zero)*/
 uint32_t btn_id = 0;
