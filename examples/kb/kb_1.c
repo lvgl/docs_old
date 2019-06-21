@@ -3,9 +3,11 @@ static lv_style_t rel_style, pr_style;
 
 lv_style_copy(&rel_style, &lv_style_btn_rel);
 rel_style.body.radius = 0;
+rel_style.body.border.width = 1;
 
 lv_style_copy(&pr_style, &lv_style_btn_pr);
 pr_style.body.radius = 0;
+pr_style.body.border.width = 1;
 
 /*Create a keyboard and apply the styles*/
 lv_obj_t *kb = lv_kb_create(lv_scr_act(), NULL);

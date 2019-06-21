@@ -12,7 +12,7 @@ The angles should be in [0;360] range.
 ### Notes
 The **width and height** of the *Arc* should be the **same**.
 
-Currently the *Arc* object **does not support anti-aliasing**.
+Currently, the *Arc* object **does not support anti-aliasing**.
 
 ## Styles
 To set the style of an *Arc* object use `lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &style)`
@@ -34,25 +34,11 @@ Learn more about [Keys](/overview/indev).
 
 ## Example
 
-### C
-
-![](/examples/arc/arc_1.png "Arc in LittlevGL")
-
-
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/arc/index.rst
 
-    .. literalinclude:: /examples/arc/arc_1.c
-      :language: c
- 
 ```
-
-### MicroPython
-No examples yet.
 
 ## API 
 
@@ -62,4 +48,3 @@ No examples yet.
   :project: lvgl
         
 ```
-

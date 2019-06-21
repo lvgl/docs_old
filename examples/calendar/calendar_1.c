@@ -1,39 +1,19 @@
-static lv_style_t style_week_box;
-lv_style_copy(&style_week_box, &lv_style_plain);
-style_week_box.body.border.width = 1;
-style_week_box.body.border.color = LV_COLOR_HEX3(0x333);
-style_week_box.body.empty = 1;
-style_week_box.body.radius = LV_RADIUS_CIRCLE;
-style_week_box.body.padding.ver = 3;
-style_week_box.body.padding.hor = 3;
+void event_handler(lv_obj_t * obj, lv_event_t event)
+{
+    if(event == LV_EVENT_CLICKED) {
+        lv_calendar_date_t * date = lv_calendar_get_pressed_date(obj);
+        if(date) {
+            lv_calendar_set_today_date(obj, date);
+        }
+    }
+}
 
-/*Create a style for today*/
-static lv_style_t style_today_box;
-lv_style_copy(&style_today_box, &lv_style_plain);
-style_today_box.body.border.width = 2;
-style_today_box.body.border.color = LV_COLOR_NAVY;
-style_today_box.body.empty = 1;
-style_today_box.body.radius = LV_RADIUS_CIRCLE;
-style_today_box.body.padding.ver = 3;
-style_today_box.body.padding.hor = 3;
-style_today_box.text.color= LV_COLOR_BLUE;
+...
 
-/*Create a style for the highlighted days*/
-static lv_style_t style_highlighted_day;
-lv_style_copy(&style_highlighted_day, &lv_style_plain);
-style_highlighted_day.body.border.width = 2;
-style_highlighted_day.body.border.color = LV_COLOR_NAVY;
-style_highlighted_day.body.empty = 1;
-style_highlighted_day.body.radius = LV_RADIUS_CIRCLE;
-style_highlighted_day.body.padding.ver = 3;
-style_highlighted_day.body.padding.hor = 3;
-style_highlighted_day.text.color= LV_COLOR_BLUE;
-
-/*Apply the styles*/
-lv_calendar_set_style(calendar, LV_CALENDAR_STYLE_WEEK_BOX, &style_week_box);
-lv_calendar_set_style(calendar, LV_CALENDAR_STYLE_TODAY_BOX, &style_today_box);
-lv_calendar_set_style(calendar, LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS, &style_highlighted_day);
-
+lv_obj_t  * calendar = lv_calendar_create(lv_scr_act(), NULL);
+lv_obj_set_size(calendar, 230, 230);
+lv_obj_align(calendar, NULL, LV_ALIGN_CENTER, 0, 0);
+lv_obj_set_event_cb(calendar, event_handler);
 
 /*Set the today*/
 lv_calendar_date_t today;
@@ -59,3 +39,4 @@ highlihted_days[2].month = 11;
 highlihted_days[2].day = 22;
 
 lv_calendar_set_highlighted_dates(calendar, highlihted_days, 3);
+

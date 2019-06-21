@@ -1,9 +1,8 @@
-/*Create style to make the button darker when pressed*/
 lv_style_t style_pr;
 lv_style_copy(&style_pr, &lv_style_plain);
 style_pr.image.color = LV_COLOR_BLACK;
 style_pr.image.intense = LV_OPA_50;
-style_pr.text.color = LV_COLOR_HEX3(0xaaa);
+style_pr.text.color = lv_color_hex3(0xaaa);
 
 LV_IMG_DECLARE(imgbtn_green);
 LV_IMG_DECLARE(imgbtn_blue);
@@ -22,13 +21,3 @@ lv_obj_align(imgbtn1, NULL, LV_ALIGN_CENTER, 0, -40);
 /*Create a label on the Image button*/
 lv_obj_t * label = lv_label_create(imgbtn1, NULL);
 lv_label_set_text(label, "Button");
-
-/*Copy the fist image button and set Toggled state*/
-lv_obj_t * imgbtn2 = lv_imgbtn_create(lv_scr_act(), imgbtn1);
-lv_btn_set_state(imgbtn2, LV_BTN_STATE_TGL_REL);
-lv_obj_align(imgbtn2, imgbtn1, LV_ALIGN_OUT_BOTTOM_MID, 0, 20);
-
-/*Create a label on the Image button*/
-label = lv_label_create(imgbtn2, NULL);
-lv_label_set_text(label, "Button");
-

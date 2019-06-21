@@ -47,23 +47,12 @@ No *Keys* are processed by the object type.
 Learn more about [Keys](/overview/indev).
 
 ## Example
-
-### C
-
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/canvas/index.rst
 
-    .. literalinclude:: /examples/canvas/canvas_1.c
-      :language: c
- 
 ```
 
-### MicroPython
-No examples yet.
 ## API 
 
 ```eval_rst

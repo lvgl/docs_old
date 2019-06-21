@@ -17,10 +17,10 @@ To determine the appearance the `style.body` properties are used.
 
 The colors are darkened and shadow width is reduced at a lower brightness and gains its original value at brightness 255 to show a lighting effect.  
 
-The default style is: `lv_style_pretty_color`. Not that, the LED doesn't really looks like a LED with the default style so you should creat you own style. See the example below.
+The default style is: `lv_style_pretty_color`. Not that, the LED doesn't really look like a LED with the default style so you should create your own style. See the example below.
 
 ## Events
-Only the [Genreric events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 
@@ -31,25 +31,14 @@ Learn more about [Keys](/overview/indev).
 
 ## Example
 
-### C
 
-
-![](/examples/led/led_1.png "LED object with LittlevGL")
+## Example
 
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/led/index.rst
 
-    .. literalinclude:: /examples/led/led_1.c
-      :language: c
- 
 ```
-
-### MicroPython
-No examples yet.
 
 ## API 
 
@@ -59,4 +48,3 @@ No examples yet.
   :project: lvgl
         
 ```
-

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Drop Down Lists allow you to simply select one option from more. The Drop Down List is closed by default an show the currently selected text. If you click on it the this list opens and all the options are shown.
+Drop Down Lists allow you to simply select one option from more. The Drop Down List is closed by default an show the currently selected text. If you click on it the list opens and all the options are shown.
 
 ### Set options
 The options are passed to the Drop Down List as a string with `lv_ddlist_set_options(ddlist, options)`. The options should be separated by `\n`. For example: `"First\nSecond\nThird"`.
@@ -12,13 +12,13 @@ You can select an option manually with `lv_ddlist_set_selected(ddlist, id)`, whe
 ### Get selected option
 The get the currently selected option use `lv_ddlist_get_selected(ddlist)` it will return the *index* of the selected option.
 
-`lv_ddlist_get_selected_str(ddlist, buf, buf_size)` copiy the name of the selected option to `buf`.
+`lv_ddlist_get_selected_str(ddlist, buf, buf_size)` copies the name of the selected option to `buf`.
 
-### Align the opotions
+### Align the options
 To align the label horizontally use `lv_ddlist_set_align(ddlist, LV_LABEL_ALIGN_LEFT/CENTER/RIGHT)`.
 
 ### Height and width
-By default the list's height is adjusted automatically to show all options. The `lv_ddlist_set_fix_height(ddlist, height)` sets a fixed height for the opened list. `0` means to use auto height.
+By default, the list's height is adjusted automatically to show all options. The `lv_ddlist_set_fix_height(ddlist, height)` sets a fixed height for the opened list. `0` means to use auto height.
 
 The width is also adjusted automatically. To prevent this apply `lv_ddlist_set_fix_width(ddlist, width)`. `0` means to use auto width.
 
@@ -29,7 +29,7 @@ Similarly to [Page](/object-types/page) with fix height the Drop Down List suppo
 The Drop Down List open/close animation time is adjusted by `lv_ddlist_set_anim_time(ddlist, anim_time)`. Zero animation time means no animation.
 
 ### Decoration arrow
-A down arrow can be added to the left sid of the drop down list with `lv_ddlist_set_draw_arrow(ddlist, true)`.
+A down arrow can be added to the left side of the Drop down list with `lv_ddlist_set_draw_arrow(ddlist, true)`.
 
 ### Stay open
 You can force the Drop down list to **stay opened** when an option is selected with `lv_ddlist_set_stay_open(ddlist, true)`.
@@ -43,7 +43,7 @@ The `lv_ddlist_set_style(ddlist, LV_DDLIST_STYLE_..., &style)` set the styles of
 - **LV_DDLIST_STYLE_SB** Style of the scrollbar. The `style.body` properties are used. Default: `lv_style_plain_color`
 
 ## Events
-Besided the [Genreric events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Drop down lists:
+Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Drop down lists:
  - **LV_EVENT_VALUE_CHANGED** sent when the a new option is selected
 
 Learn more about [Events](/overview/event).
@@ -56,24 +56,12 @@ The following *Keys* are processed by the Buttons:
 
 ## Example
 
-### C
-
-![](/examples/ddlist/ddlist_1.png "Drop down list in LittlevGL")
-
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/ddlist/index.rst
 
-    .. literalinclude:: /examples/ddlist/ddlist_1.c
-      :language: c
- 
 ```
 
-### MicroPython
-No examples yet.
 ## API 
 
 ```eval_rst

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Buttons are simple rectagnle-like objects but they change their style and state when they are pressed or released. 
+Buttons are simple rectangle-like objects, but they change their style and state when they are pressed or released. 
 
 ### States
 Buttons can be in one of the 5 possible states:
@@ -15,14 +15,14 @@ Buttons can be in one of the 5 possible states:
 You can set the button's state manually with `lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)`.
 
 ### Toggle
-The buttons can be configured as toggle button with `lv_btn_set_toggle(btn, true)`. In this case on release, the button goes to toggled released state.
+You can configure the buttons as *toggle button* with `lv_btn_set_toggle(btn, true)`. In this case on release, the button goes to *toggled released* state.
 
 ### Layout and Fit
 Similarly to [Containers](/object-types/cont) buttons also have layout and fit attributes.
 - `lv_btn_set_layout(btn, LV_LAYOUT_...) `set a layout. The default is `LV_LAYOUT_CENTER`. 
-So if you add a label then it will be automatically aligned to the middle and can't be moved with `lv_obj_set_pos()`. 
+So if you add a label, then it will be automatically aligned to the middle and can't be moved with `lv_obj_set_pos()`. 
 You can disable the layout with `lv_btn_set_layout(btn, LV_LAYOUT_OFF)`
-- `lv_btn_set_fit/fit2/fit4(btn, LV_FIT_..)` enables to set the button width and/or height automatically according to the children, parent and fit type.
+- `lv_btn_set_fit/fit2/fit4(btn, LV_FIT_..)` enables to set the button width and/or height automatically according to the children, parent, and fit type.
 
 ## Styles
 
@@ -34,15 +34,15 @@ A button can have 5 independent styles for the 5 state. You can set them via: `l
 - **LV_BTN_STYLE_TGL_PR** style of the toggled pressed state. Default: `lv_style_btn_tgl_pr`
 - **LV_BTN_STYLE_INA** style of the inactive state. Default: `lv_style_btn_ina`
 
-When labels are created on a button, it's a good practive to set the button's `style.text` properties too. Because labels have `style = NULL` by default they inherit the parent's (button) style. 
-Hence you don't need to craete a new style for the label. 
+When you create a label on a button, it's a good practice to set the button's `style.text` properties too. Because labels have `style = NULL` by default, they inherit the parent's (button) style. 
+Hence you don't need to create a new style for the label. 
 
 
 ## Events
-Besided the [Genreric events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the buttons:
+Besided the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the buttons:
  - **LV_EVENT_VALUE_CHANGED** sent when the button is toggled.
 
-Note that the generic input device related events (like `LV_EVENT_PRESSED`) are sent in inactive state too. You need to check the state with `lv_btn_get_state(btn)` to ignore the events from inactive buttons.
+Note that the generic input device-related events (like `LV_EVENT_PRESSED`) are sent in the inactive state too. You need to check the state with `lv_btn_get_state(btn)` to ignore the events from inactive buttons.
  
 Learn more about [Events](/overview/event).
 
@@ -56,25 +56,11 @@ Note that, as usual, the state of `LV_KEY_ENTER` is translated to `LV_EVENT_PRES
 Learn more about [Keys](/overview/indev).
   
 ## Example
-
-### C
-
-![](/examples/btn/btn_1.png "Button in LittlevGL")
-
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/btn/index.rst
 
-    .. literalinclude:: /examples/btn/btn_1.c
-      :language: c
- 
 ```
-
-### MicroPython
-No examples yet.
 
 ## API 
 

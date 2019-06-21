@@ -6,14 +6,13 @@ The Check Box objects are built from a [Button](/object-types/btn) background wh
 ### Text
 The text can be modified by the `lv_cb_set_text(cb, "New text")` function. It will dynamically allocate the text. 
 
-To set a static text use `lv_cb_set_static_text(cb, txt_buf)`. This way only a pointer will be stored to `txt_buf` so it needs shouldn't deallocated while the checkbox exists. 
-
+To set a static text use `lv_cb_set_static_text(cb, txt)`. This way only a pointer of `txt` will be stored it shouldn't be deallocated while the checkbox exists. 
 
 ### Check/Uncheck
 You can manually check / un-check the Check box  via `lv_cb_set_checked(cb, true/false)`.
 
-### Inavtuve
-To make the chackbox inactive use `lv_cb_set_inactive(cb, true)`.
+### Inactive
+To make the Check box inactive use `lv_cb_set_inactive(cb, true)`.
 
 ## Styles
 
@@ -28,10 +27,10 @@ The Check box styles can be modified with `lv_cb_set_style(cb, LV_CB_STYLE_..., 
 
 
 ## Events
-Besides the [Genreric events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Check boxes:
+Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Check boxes:
  - **LV_EVENT_VALUE_CHANGED** sent when the Check box is toggled.
 
-Note that the generic input device related events (like `LV_EVENT_PRESSED`) are sent in inactive state too. You need to check the state with `lv_cb_is_inactive(cb)` to ignore the events from inactive Chek boxes.
+Note that the generic input device related events (like `LV_EVENT_PRESSED`) are sent in the inactive state too. You need to check the state with `lv_cb_is_inactive(cb)` to ignore the events from inactive Check boxes.
  
 Learn more about [Events](/overview/event).
 
@@ -48,24 +47,11 @@ Learn more about [Keys](/overview/indev).
 
 ## Example
 
-### C
-
-![](/examples/cb/cb_1.png "Checkbox in LittlevGL")
-
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/cb/index.rst
 
-    .. literalinclude:: /examples/cb/cb_1.c
-      :language: c
- 
 ```
-
-### MicroPython
-No examples yet.
 
 ## API 
 

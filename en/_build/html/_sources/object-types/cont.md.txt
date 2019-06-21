@@ -44,34 +44,14 @@ No *Keys* are processed by the object type.
 
 Learn more about [Keys](/overview/indev).
 
-## Keys
-The following *Keys* are processed by the Buttons:
-- **LV_KEY_RIGHT/UP** Go to toggled state if toggling is enabled
-- **LV_KEY_LEFT/DOWN** Go to non-toggled state if toggling is  enabled
-
-Note that, as usual, the state of `LV_KEY_ENTER` is translated to `LV_EVENT_PRESSED/PRESSING/RELEASED` etc.
-
 
 ## Example
 
-### C
-
-![](/examples/cont/cont_1.png "Container in LittlevGL")
-
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/cont/index.rst
 
-    .. literalinclude:: /examples/cont/cont_1.c
-      :language: c
- 
 ```
-
-### MicroPython
-No examples yet.
 
 ## API 
 

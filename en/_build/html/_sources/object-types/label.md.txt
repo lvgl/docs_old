@@ -4,7 +4,7 @@
 The Labels are the basic objects to display text. 
 
 ### Set text
-You can modify the text in runtime at any time with `lv_label_set_text(label, "New text")`. It will allocate the text dymanically.
+You can modify the text in run-time at any time with `lv_label_set_text(label, "New text")`. It will allocate the text dynamically.
 
 Labels are able to show text from a **static array**. Use: `lv_label_set_static_text(label, char_array)`. 
 In this case, the text is not stored in the dynamic memory but the given array is used directly instead. 
@@ -25,12 +25,12 @@ The size of the label object can be automatically expanded to the text size or t
 * **LV_LABEL_LONG_BREAK** Keep the object width, break (wrap) the too long lines and expand the object height
 * **LV_LABEL_LONG_DOTS** Keep the object size, break the text and write dots in the last line
 * **LV_LABEL_LONG_ROLL** Keep the size and scroll the label back and forth
-* **LV_LABEL_LONG_ROLL_CIRC** Keep the size and scroll the label circurally
+* **LV_LABEL_LONG_ROLL_CIRC** Keep the size and scroll the label circularly
 * **LV_LABEL_LONG_CROP** Keep the size and crop the text out of it.
 
 You can specify the long mode with: `lv_label_set_long_mode(label, LV_LABEL_LONG_...)`
 
-It's important to note that when a label is created and its test is set the label's size alraedy expanded to the text size. 
+It's important to note that when a label is created and its test is set the label's size already expanded to the text size. 
 In addition with the default `LV_LABEL_LONG_EXPAND` *long mode* `lv_obj_set_width/height/size()` has no effect.
 So you need to change the *long mode* first and then set the size with  `lv_obj_set_width/height/size()` .
 
@@ -41,21 +41,24 @@ The label's text can be aligned to the left, right or middle with `lv_label_set_
 You can enable to draw a background for the label with `lv_label_set_body_draw(label, draw)`
 
 ### Text recolor
-In the text, you can use commands to **re-color parts of the text**. For example: `"Write a #ff0000 red# word"`. 
+In the text, you can use commands to re-color parts of the text. For example: `"Write a #ff0000 red# word"`. 
 This feature can be enabled individually for each label by `lv_label_set_recolor()` function. 
 
+Not that recoloring work only in one line. I.e. there can't be `\n` in a recolored text or it can be wrapped by `LV_LABEL_LONG_BREAK` else the text in the new line won't be recolored.
+
+
 ### Symbols
-The labels can display symbols besides letters. Read the [Font](/overview/font) section to lear more about the symbols.
+The labels can display symbols besides letters. Read the [Font](/overview/font) section to learn more about the symbols.
 
 ## Styles
 The Label uses one style which can be set by `lv_label_set_style(label, LV_LABEL_STYLE_MAIN, &style)`. Form the style the following properties are used:
 * all properties from `style.text`
-* for background drawing `style.body` properties. `padding` will increase the size only visually, the real object size on't be changed.
+* for background drawing `style.body` properties. `padding` will increase the size only visually, the real object's size won't be changed.
 
-The labels' **default style** is `NULL` so they inherit the parent's style.
+The labels' default style is `NULL` so they inherit the parent's style.
 
 ## Events
-Only the [Genreric events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 
@@ -68,25 +71,15 @@ Learn more about [Keys](/overview/indev).
 
 ## Example
 
-### C
 
-
-![](/examples/label/label_1.png "Label example in LittlevGL")
+## Example
 
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/label/index.rst
 
-    .. literalinclude:: /examples/label/label_1.c
-      :language: c
- 
 ```
 
-### MicroPython
-No examples yet.
 
 ## API 
 
@@ -96,5 +89,4 @@ No examples yet.
   :project: lvgl
         
 ```
-
 

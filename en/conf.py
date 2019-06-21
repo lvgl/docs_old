@@ -37,7 +37,7 @@ extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'recommonmark',
-    'breathe'
+    #'breathe'
     ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -192,5 +192,5 @@ def setup(app):
             }, True)
     app.add_transform(AutoStructify)
     app.add_stylesheet('css/custom.css')
-
-
+    app.add_stylesheet('css/fontawesome.min.css')
+    
