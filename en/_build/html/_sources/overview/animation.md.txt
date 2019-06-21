@@ -19,9 +19,9 @@ lv_anim_set_exec_cb(&a, btn1, lv_obj_set_x);    /*Set the animator function and 
 lv_anim_set_time(&a, duration, delay);
 lv_anim_set_values(&a, start, end);             /*Set start and end values. E.g. 0, 150*/
 lv_anim_set_path_cb(&a, lv_anim_path_linear);   /*Set path from `lv_anim_path_...` functions or a custom one.*/
-lv_anim_set_ready_cb(&a, ready_cb);             /*Set a callback to call then anaimtion is ready. (Optional)*/
+lv_anim_set_ready_cb(&a, ready_cb);             /*Set a callback to call then animation is ready. (Optional)*/
 lv_anim_set_playback(&a, wait_time);            /*Enable playback of teh animation with `wait_time` delay*/
-lv_anim_set_repeat(&a, wait_time);              /*Enable repeate of teh animation with `wait_time` delay. Can be compined with playback*/
+lv_anim_set_repeat(&a, wait_time);              /*Enable repeat of teh animation with `wait_time` delay. Can be compiled with playback*/
 
 lv_anim_create(&a);                             /*Start the animation*/
 ```

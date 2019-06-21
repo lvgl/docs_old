@@ -7,14 +7,14 @@ lv_indev_drv_t indev_drv;
 lv_indev_drv_init(&indev_drv);      /*Basic initialization*/
 indev_drv.type =...                 /*See below.*/
 indev_drv.read_cb =...              /*See below.*/
-/*Register the driver in LittlevGL and save the created input devide object*/
+/*Register the driver in LittlevGL and save the created input device object*/
 lv_indev_t * my_indev = lv_indev_drv_register(&indev_drv);
 ```
 
 **type** can be 
 - **LV_INDEV_TYPE_POINTER** touchpad or mouse
 - **LV_INDEV_TYPE_KEYPAD** keyboard or keypad
-- **LV_INDEV_TYPE_ENCODER** oncoder with left, right, push options
+- **LV_INDEV_TYPE_ENCODER** encoder with left, right, push options
 - **LV_INDEV_TYPE_BUTTON** external buttons pressing the screen
   
 **read_cb** is a function pointer which will be called periodically to report the current state of an input device. 

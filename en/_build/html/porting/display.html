@@ -937,7 +937,7 @@
 <p>To set up a display an <code class="docutils literal notranslate"><span class="pre">lv_disp_buf_t</span></code> and an <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_t</span></code> variable has to be initialized.</p>
 <ul class="simple">
 <li><p><strong>lv_disp_buf_t</strong> contains internal graphics buffer(s).</p></li>
-<li><p><strong>lv_disp_drv_t</strong> contains callback functions to iteract with the display and manipulate drawing related things.</p></li>
+<li><p><strong>lv_disp_drv_t</strong> contains callback functions to interact with the display and manipulate drawing related things.</p></li>
 </ul>
 <div class="section" id="display-buffer">
 <h2>Display buffer<a class="headerlink" href="#display-buffer" title="Permalink to this headline">¶</a></h2>
@@ -949,7 +949,7 @@
     <span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">buf_1</span><span class="p">[</span><span class="n">MY_DISP_HOR_RES</span> <span class="o">*</span> <span class="mi">10</span><span class="p">];</span>
     <span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">buf_2</span><span class="p">[</span><span class="n">MY_DISP_HOR_RES</span> <span class="o">*</span> <span class="mi">10</span><span class="p">];</span>
     
-    <span class="cm">/*Initalize `disp_buf` with the buffer(s) */</span>
+    <span class="cm">/*Initialize `disp_buf` with the buffer(s) */</span>
     <span class="n">lv_disp_buf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">,</span> <span class="n">buf_1</span><span class="p">,</span> <span class="n">buf_2</span><span class="p">,</span> <span class="n">MY_DISP_HOR_RES</span><span class="o">*</span><span class="mi">10</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -981,7 +981,7 @@ Therefore this method works the best when the MCU has an LCD/TFT interface and t
 <li><p><strong>ver_res</strong> vertical resolution of the display. (<code class="docutils literal notranslate"><span class="pre">LV_VER_RES_MAX</span></code> by default from <em>lv_conf.h</em>)</p></li>
 <li><p><strong>color_chroma_key</strong> a color which will be drawn as transparent on chrome keyed images. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code> by default from <em>lv_conf.h</em>)</p></li>
 <li><p><strong>user_data</strong> custom user data for the driver. Its type can be modified in lv_conf.h.</p></li>
-<li><p><strong>antialiasing</strong> use anti-aliasing (edge smoothing). <code class="docutils literal notranslate"><span class="pre">LV_ANTIALIAS</span></code> by default  from <em>lv_conf.h</em></p></li>
+<li><p><strong>anti-aliasing</strong> use anti-aliasing (edge smoothing). <code class="docutils literal notranslate"><span class="pre">LV_ANTIALIAS</span></code> by default  from <em>lv_conf.h</em></p></li>
 <li><p><strong>rotated</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> swap <code class="docutils literal notranslate"><span class="pre">hor_res</span></code> and <code class="docutils literal notranslate"><span class="pre">ver_res</span></code>. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display’s fill direction.</p></li>
 </ul>
 <p>To use a GPU the following callbacks can be used:</p>
@@ -989,24 +989,24 @@ Therefore this method works the best when the MCU has an LCD/TFT interface and t
 <li><p><strong>mem_fill_cb</strong> fill an area with colors.</p></li>
 <li><p><strong>mem_blend_cb</strong> blend two buffers using opacity.</p></li>
 </ul>
-<p>Some other optional callbacks to make easier and more optimal to work with monochrome, grayscale or other non-standard FGB displays:</p>
+<p>Some other optional callbacks to make easier and more optimal to work with monochrome, gray-scale or other non-standard FGB displays:</p>
 <ul class="simple">
 <li><p><strong>rounder_cb</strong> round the coordinates of areas to redraw. E.g. a 2x2 px can be converted to 2x8.
 It can be used if the display controller can refresh only areas with specific height or width (usually 8 px height with monochrome displays).</p></li>
 <li><p><strong>set_px_cb</strong> a custom function to write the <em>display buffer</em>.
-It can be used to store the pixels in a more compact way if the display has a special color format. (e.g. 1 bit monochrome, 2  bit grayscale etc.)
+It can be used to store the pixels in a more compact way if the display has a special color format. (e.g. 1 bit monochrome, 2  bit gray-scale etc.)
 This way the buffers used in <code class="docutils literal notranslate"><span class="pre">lv_disp_buf_t</span></code> can be smaller to hold only the required number of bits for the given area size.</p></li>
 <li><p><strong>monitor_cb</strong> a callback function tell how many pixels were refreshed in how much time.</p></li>
 </ul>
-<p>To set the fields of <em>lv_disp_drv_t</em> variable it needs to be intialized with <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_init(&amp;disp_drv)</span></code>.
+<p>To set the fields of <em>lv_disp_drv_t</em> variable it needs to be initialized with <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_init(&amp;disp_drv)</span></code>.
 And finally to register a display for LittlevGL <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register(&amp;disp_drv)</span></code> needs to be called.</p>
 <p>All together it looks like this:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="n">lv_disp_drv_t</span> <span class="n">disp_drv</span><span class="p">;</span>                 <span class="cm">/*A variable to hold the drivers. Can be local varaible*/</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="n">lv_disp_drv_t</span> <span class="n">disp_drv</span><span class="p">;</span>                 <span class="cm">/*A variable to hold the drivers. Can be local variable*/</span>
     <span class="n">lv_disp_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span>            <span class="cm">/*Basic initialization*/</span>
     <span class="n">disp_drv</span><span class="p">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">;</span>            <span class="cm">/*Set an initialized buffer*/</span>
     <span class="n">disp_drv</span><span class="p">.</span><span class="n">flush_cb</span> <span class="o">=</span> <span class="n">my_flush_cb</span><span class="p">;</span>        <span class="cm">/*Set a flush callback to draw to the display*/</span>
     <span class="n">lv_disp_t</span> <span class="o">*</span> <span class="n">disp</span><span class="p">;</span>
-    <span class="n">disp</span> <span class="o">=</span> <span class="n">lv_disp_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span> <span class="cm">/*Register the dirver and save the created display objects*/</span>
+    <span class="n">disp</span> <span class="o">=</span> <span class="n">lv_disp_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span> <span class="cm">/*Register the driver and save the created display objects*/</span>
 </pre></div>
 </div>
 <p>Here some simple examples of the callbacks:</p>
@@ -1047,7 +1047,7 @@ And finally to register a display for LittlevGL <code class="docutils literal no
 <span class="kt">void</span> <span class="n">my_rounder_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">area</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="cm">/* Update the areas as needed. Can be only larger.</span>
-<span class="cm">   * For example to always have lines 8 px hegiht:*/</span>
+<span class="cm">   * For example to always have lines 8 px height:*/</span>
    <span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span> <span class="o">=</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span> <span class="o">&amp;</span> <span class="mh">0x07</span><span class="p">;</span>
    <span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span> <span class="o">=</span> <span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span> <span class="o">&amp;</span> <span class="mh">0x07</span><span class="p">)</span> <span class="o">+</span> <span class="mi">8</span><span class="p">;</span> 
 <span class="p">}</span>
@@ -1071,7 +1071,7 @@ And finally to register a display for LittlevGL <code class="docutils literal no
 <div class="section" id="multi-display-support">
 <h2>Multi-display support<a class="headerlink" href="#multi-display-support" title="Permalink to this headline">¶</a></h2>
 <p>With LittlevGL multiple displays can be used. Just initialize multiple drivers and buffer and register them. Each display has its own screens and objects on the screens.
-To get curently active scrren of a dsplay use <code class="docutils literal notranslate"><span class="pre">lv_disp_get_scr_act(disp)</span></code> (where <code class="docutils literal notranslate"><span class="pre">disp</span></code> is the return value of <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register</span></code>).  To set a new screen as active on a display use <code class="docutils literal notranslate"><span class="pre">lv_disp_set_scr_act(screen1)</span></code>.</p>
+To get currently active screen of a display use <code class="docutils literal notranslate"><span class="pre">lv_disp_get_scr_act(disp)</span></code> (where <code class="docutils literal notranslate"><span class="pre">disp</span></code> is the return value of <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register</span></code>).  To set a new screen as active on a display use <code class="docutils literal notranslate"><span class="pre">lv_disp_set_scr_act(screen1)</span></code>.</p>
 <p>Or in a shorter form set a default display with <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default(disp)</span></code> and get/set the active screen with <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_scr_load()</span></code>.</p>
 <p>Learn more about screens in the <a class="reference external" href="/overview/objects.html#screen-the-most-basic-parent">Screen - the most basic parent</a> section.</p>
 </div>

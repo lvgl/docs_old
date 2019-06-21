@@ -2,7 +2,7 @@
 
 *Styles* are used to set the appearance of the objects. A style is a structure variable with attributes like colors, paddings, opacity, etc. 
 
-There is common style type called **lv_style_t** for every obejct type.
+There is common style type called **lv_style_t** for every object type.
 
 Styles are assigned to the objects and by setting the fields of the `lv_style_t` variables you can influence the appearance of the objects using that style.
 
@@ -118,7 +118,7 @@ There are several built-in styles in the library:
 
 As you can see there is a style for screens, for buttons, plain and pretty styles and transparent styles as well. 
 
-The `lv_style_transp`, `lv_style_transp_fit` and `lv_style_transp_tight` differ only in paddings: for `lv_style_transp_tight` all padings are zero, for `lv_style_transp_fit` only hor and ver paddings are zero but has inner padding.
+The `lv_style_transp`, `lv_style_transp_fit` and `lv_style_transp_tight` differ only in paddings: for `lv_style_transp_tight` all paddings are zero, for `lv_style_transp_fit` only hor and ver paddings are zero but has inner padding.
 
 ``` important:: Transparent built-in styles have *glass = 1* by default which means these styles (e.g. their colors) won't be inherited by children.
 ```
@@ -207,7 +207,7 @@ lv_obj_t *slider = lv_slider_create(lv_scr_act(), NULL);
 lv_slider_set_value(slider, 70);
 lv_obj_set_pos(slider, 10, 10);
 
-/*Initialize the alien theme with a redish hue*/
+/*Initialize the alien theme with a reddish hue*/
 lv_theme_t *th = lv_theme_alien_init(10, NULL);
 
 /*Create a new slider and apply the themes styles*/
@@ -221,17 +221,17 @@ lv_slider_set_style(slider, LV_SLIDER_STYLE_KNOB, th->slider.knob);
 
 You can ask the library to automatically apply the styles from a theme when you create new objects. To do this use `lv_theme_set_current(th)`;
 ```c
-/*Initialize the alien theme with a redish hue*/
+/*Initialize the alien theme with a reddish hue*/
 lv_theme_t *th = lv_theme_alien_init(10, NULL);
 lv_theme_set_current(th);
 
-/*Craete a slider. It will use the style from teh current theme.*/
+/*Create a slider. It will use the style from teh current theme.*/
 slider = lv_slider_create(lv_scr_act(), NULL);
 ```
 
 Themes can be enabled or disabled one by on in `lv_conf.h`.
 
 ### Live update
-By defult if `lv_theme_set_current(th)` is called again it won't refresh the styles of the exisitin objects. To enable live update of themes enable `LV_THEME_LIVE_UPDATE` in `lv_conf.h`.
+By default if `lv_theme_set_current(th)` is called again it won't refresh the styles of the existing objects. To enable live update of themes enable `LV_THEME_LIVE_UPDATE` in `lv_conf.h`.
 
 Live update will update only those objects whose style are from the theme, i.e. created after the first call of `lv_theme_set_current(th)` or the styles were set manually
