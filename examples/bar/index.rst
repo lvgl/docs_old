@@ -16,4 +16,8 @@ C
 MicroPython
 ^^^^^^^^^^^
 
-No examples yet.
+      code
+
+    .. literalinclude:: /examples/bar/bar_1.py
+      :language: python
+
