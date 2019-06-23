@@ -26,7 +26,7 @@ The line meter uses one style which can be set by `lv_lmeter_set_style(lmeter, L
 The default style is `lv_style_pretty_color`.
 
 ## Events
-Only the [Genreric events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 
@@ -37,24 +37,11 @@ Learn more about [Keys](/overview/indev).
 
 ## Example
 
-### C
-
-![](/examples/lmeter/lmeter_1.png "Line meter obejct with LittlevGL")
-
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/lmeter/index.rst
 
-    .. literalinclude:: /examples/lmeter/lmeter_1.c
-      :language: c
- 
 ```
-
-### MicroPython
-No examples yet.
 
 ## API 
 
