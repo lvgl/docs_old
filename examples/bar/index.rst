@@ -17,7 +17,7 @@ MicroPython
 ^^^^^^^^^^^
 
 .. image:: /examples/bar/bar_1.*
-  :alt: Bar example in LittlevGL
+  :alt: Bar example in LittlevGL with MicroPython
 
 .. container:: toggle
 
