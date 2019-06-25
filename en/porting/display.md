@@ -47,7 +47,7 @@ There are some optional data fields:
 - **user_data** custom user data for the driver. Its type can be modified in lv_conf.h.
 - **anti-aliasing** use anti-aliasing (edge smoothing). `LV_ANTIALIAS` by default  from *lv_conf.h*
 - **rotated** if `1` swap `hor_res` and `ver_res`. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction.
-
+- **scren_transp** if `1` the screen can have transparent or opaque style. `LV_COLOR_SCREEN_TRANSP` needs to enabled in *lv_conf.h*
 To use a GPU the following callbacks can be used:
 - **mem_fill_cb** fill an area with colors. 
 - **mem_blend_cb** blend two buffers using opacity.
@@ -132,12 +132,12 @@ void my_monitor_cb(lv_disp_drv_t * disp_drv, uint32_t time, uint32_t px)
 }
 ```
 
-## Multi-display support 
+## API 
 
-With LittlevGL multiple displays can be used. Just initialize multiple drivers and buffer and register them. Each display has its own screens and objects on the screens. 
-To get currently active screen of a display use `lv_disp_get_scr_act(disp)` (where `disp` is the return value of `lv_disp_drv_register`).  To set a new screen as active on a display use `lv_disp_set_scr_act(screen1)`.
+```eval_rst
 
-Or in a shorter form set a default display with `lv_disp_set_default(disp)` and get/set the active screen with `lv_scr_act()` and `lv_scr_load()`.
+.. doxygenfile:: lv_hal_disp.h
+  :project: lvgl
+        
+```
 
-Learn more about screens in the [Screen - the most basic parent](/overview/objects.html#screen-the-most-basic-parent) section.
- 

@@ -55,3 +55,14 @@ The speed is interpreted in _unit/sec_ dimension. For example `lv_anim_speed_to_
 
 You can **delete an animation** by `lv_anim_del(var, func)` by providing the animated variable and its animator function.
 
+## API
+
+### Input device
+
+```eval_rst
+
+.. doxygenfile:: lv_anim.h
+  :project: lvgl
+        
+```
+

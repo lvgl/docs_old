@@ -12,14 +12,14 @@ The state of the switch can be changed by
 
 ### Animation time
 
-The time of aniamtion when the switch changes state can be adjusted with `lv_sw_set_anim_time(sw, anim_time)`.
+The time of animations, when the switch changes state, can be adjusted with `lv_sw_set_anim_time(sw, anim_time)`.
 
 ## Styles
 
 You can modify the Switch's styles with `lv_sw_set_style(sw, LV_SW_STYLE_..., &style)`.
 
-- **LV_SW_STYLE_BG** Style of the background. All `style.body` properties are used. The `padding` values make the Switch smaller then the knob. (negative value makes is larger)
-- **LV_SW_STYLE_INDIC** Style of the indicator. All `style.body` properties are used. The `padding` values make the indicator smaller then the background. 
+- **LV_SW_STYLE_BG** Style of the background. All `style.body` properties are used. The `padding` values make the Switch smaller than the knob. (negative value makes is larger)
+- **LV_SW_STYLE_INDIC** Style of the indicator. All `style.body` properties are used. The `padding` values make the indicator smaller than the background. 
 - **LV_SW_STYLE_KNOB_OFF** Style of the knob when the switch is off.  The `style.body` properties are used except padding.
 - **LV_SW_STYLE_KNOB_ON** Style of the knob when the switch is on.  The `style.body` properties are used except padding.
 
@@ -27,7 +27,7 @@ You can modify the Switch's styles with `lv_sw_set_style(sw, LV_SW_STYLE_..., &s
 
 
 ## Events
-Besided the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Switch:
+Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Switch:
 - **LV_EVENT_VALUE_CHANGED** Sent when the switch changes state.
 
 ## Keys
@@ -38,24 +38,12 @@ Learn more about [Keys](/overview/indev).
 
 ## Example
 
-### C
-
-![](/examples/sw/sw_1.png "Switc obejct in LittlevGL")
-
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/sw/index.rst
 
-    .. literalinclude:: /examples/sw/sw_1.c
-      :language: c
- 
 ```
 
-### MicroPython
-No examples yet.
 
 ## API 
 
@@ -65,4 +53,3 @@ No examples yet.
   :project: lvgl
         
 ```
-

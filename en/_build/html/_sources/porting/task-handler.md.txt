@@ -14,3 +14,6 @@ while(1) {
   my_delay_ms(5);
 }
 ```
+
+To learn more about task visit the [Tasks](/overview/task) section.
+

@@ -4,11 +4,11 @@
 
 The Lists are built from a background [Page](/object-types/page) and [Buttons](/object-types/btn) on it. 
 The Buttons contain an optional icon-like [Image](/object-types/img) (which can be a symbol too) and a [Label](/object-types/label). 
-When the list become long enough it can be scrolled. 
+When the list becomes long enough it can be scrolled. 
 
 ### Add buttons
-You can add new list element with `lv_list_add(list, &icon_img, "Text", event_cb)` or with symbol `lv_list_add(list, SYMBOL_EDIT, "Edit text")`. 
-If you do no want to add image use `NULL` as file name. The function returns with a pointer to the created button to allow further configurations.
+You can add new list element with `lv_list_add_btn(list, &icon_img, "Text", event_cb)` or with symbol `lv_list_add_btn(list, SYMBOL_EDIT, "Edit text")`. 
+If you do not want to add image use `NULL` as file name. The function returns with a pointer to the created button to allow further configurations.
 
 The width of the buttons is set to maximum according to the object width. 
 The height of the buttons are adjusted automatically according to the content. (*content height* + *padding.top* + *padding.bottom*).
@@ -18,7 +18,7 @@ The labels are created with `LV_LABEL_LONG_SROLL_CIRC` long mode.
 You can use `lv_list_get_btn_label(list_btn)` and `lv_list_get_btn_img(list_btn)` to **get the label and the image** of a list button. You can get text directly with `lv_list_get_btn_text(list_btn)`.
 
 ### Delete buttons
-To delete a list element just use `lv_obj_del(btn)` on the return value of `lv_list_add()`. 
+To delete a list element just use `lv_obj_del(btn)` on the return value of `lv_list_add_btn()`. 
 
 To clean the list (remove all buttons) use `lv_list_clean(list)`
 
@@ -36,9 +36,9 @@ A circle-like effect can be shown if the list reached the most top or bottom pos
 
 ### Scroll propagation
 If the list is created on an other scrollable element (like a [Page](/object-types/page)) and the list can't be scrolled further the **scrolling can be propagated to the parent**. 
-This way the scroll will be continued on the parent. It can be enebaled with `lv_list_set_scroll_propagation(list, true)`
+This way the scroll will be continued on the parent. It can be enabled with `lv_list_set_scroll_propagation(list, true)`
 
-If the buttons have `lv_btn_set_toggle` enabled then `lv_list_set_single_mode(list, true)` can be used to ensure that only one button can be in toggleg state at the same time.
+If the buttons have `lv_btn_set_toggle` enabled then `lv_list_set_single_mode(list, true)` can be used to ensure that only one button can be in toggled state at the same time.
 
 ## Style usage
 
@@ -58,13 +58,13 @@ To modify the height of the buttons adjust the `body.padding.top/bottom` fields 
 
 
 ## Events
-Only the [Genreric events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 
 ## Keys
 The following *Keys* are processed by the Lists:
-- **LV_KEY_RIGHT/DOWN** Select he next button
+- **LV_KEY_RIGHT/DOWN** Select the next button
 - **LV_KEY_LEFT/UP** Select the previous button
 
 Note that, as usual, the state of `LV_KEY_ENTER` is translated to `LV_EVENT_PRESSED/PRESSING/RELEASED` etc.
@@ -75,27 +75,14 @@ To manually select a button use `lv_list_set_btn_selected(list, btn)`. When the 
 
 Learn more about [Keys](/overview/indev).
 
+
 ## Example
 
-### C
-
-
-![](/examples/list/list_1.png "List object with LittlevGL")
-
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/list/index.rst
 
-    .. literalinclude:: /examples/list/list_1.c
-      :language: c
- 
 ```
-
-### MicroPython
-No examples yet.
 
 ## API 
 
@@ -105,4 +92,3 @@ No examples yet.
   :project: lvgl
         
 ```
-

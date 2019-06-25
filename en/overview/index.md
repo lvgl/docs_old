@@ -15,5 +15,6 @@
    image
    file-system
    animation
+   task
    drawing
 ```

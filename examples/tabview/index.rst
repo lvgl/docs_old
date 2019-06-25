@@ -1,7 +1,7 @@
 C
 ^
 
-.. image:: /examples/bar/bar_1.gif
+.. image:: /examples/tabview/tabview_1.*
   :alt: Bar example in LittlevGL
 
 .. container:: toggle
@@ -10,7 +10,7 @@ C
     
       code
 
-    .. literalinclude:: /examples/bar/bar_1.c
+    .. literalinclude:: /examples/tabview/tabview_1.c
       :language: c
 
 MicroPython

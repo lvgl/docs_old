@@ -17,7 +17,7 @@ The manual sliding can be disabled with `lv_tabview_set_sliding(tabview, false)`
 
 ### Tab button's position
 
-By deafult the tab selector buttons are placed on the top of teh Tabview. It can be changed with `lv_tabview_set_btns_pos(tabview, LV_TABVIEW_BTNS_POS_TOP/BOTTOM/LEFT/RIGHT)`
+By default, the tab selector buttons are placed on the top of the Tabview. It can be changed with `lv_tabview_set_btns_pos(tabview, LV_TABVIEW_BTNS_POS_TOP/BOTTOM/LEFT/RIGHT)`
 
 Note that, you can't change the tab position from top or bottom to left or right when tabs are already added.
 
@@ -28,7 +28,7 @@ The tab buttons can be hidden by `lv_tabview_set_btns_hidden(tabview, true)`
 
 ### Animation time
 
-The animation time is adjusted by `lv_tabview_set_anim_time(tabview, anim_time_ms)`. It is used when the a new tab is loaded.
+The animation time is adjusted by `lv_tabview_set_anim_time(tabview, anim_time_ms)`. It is used when the new tab is loaded.
 
 ## Style usage
 
@@ -49,8 +49,8 @@ font height and padding.top and padding.bottom from LV_TABVIEW_STYLE_BTN_REL + p
 ```
 
 ## Events
-Besided the [Genreric events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
-- **LV_EVENT_VALUE_CHANGED** Sent when a new tab is selected by sliding or clicking teh tab button
+Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
+- **LV_EVENT_VALUE_CHANGED** Sent when a new tab is selected by sliding or clicking the tab button
 
 Learn more about [Events](/overview/event).
 
@@ -62,26 +62,14 @@ The following *Keys* are processed by the Tabview:
 
 Learn more about [Keys](/overview/indev).
 
+
 ## Example
 
-### C
-
-![](/examples/tabview/tabview_1.png "Tabview obejct in LittlevGL")
-
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/tabview/index.rst
 
-    .. literalinclude:: /examples/tabview/tabview_1.c
-      :language: c
- 
 ```
-
-### MicroPython
-No examples yet.
 
 ## API 
 

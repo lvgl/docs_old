@@ -1,8 +1,8 @@
 C
 ^
 
-.. image:: /examples/bar/bar_1.gif
-  :alt: Bar example in LittlevGL
+.. image:: /examples/list/list_1.*
+  :alt: List example in LittlevGL
 
 .. container:: toggle
 
@@ -10,7 +10,7 @@ C
     
       code
 
-    .. literalinclude:: /examples/bar/bar_1.c
+    .. literalinclude:: /examples/list/list_1.c
       :language: c
 
 MicroPython

@@ -21,13 +21,13 @@ Use the `lv_slider_set_knob_in(slider, true/false)` to choose between the modes.
 ## Styles
 You can modify the slider's styles with `lv_slider_set_style(slider, LV_SLIDER_STYLE_..., &style)`.
 
-- **LV_SLIDER_STYLE_BG** Style of the background. All `style.body` properties are used. The `padding` values make the knob larger then background. (negative value makes is larger)
-- **LV_SLIDER_STYLE_INDIC** Style of the indicator. All `style.body` properties are used. The `padding` values make the indicator smaller then the background. 
+- **LV_SLIDER_STYLE_BG** Style of the background. All `style.body` properties are used. The `padding` values make the knob larger than the background. (negative value makes is larger)
+- **LV_SLIDER_STYLE_INDIC** Style of the indicator. All `style.body` properties are used. The `padding` values make the indicator smaller than the background. 
 - **LV_SLIDER_STYLE_KNOB** Style of the knob.  All `style.body` properties are used except `padding`. 
 
 ## Events
-Besided the [Genreric events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
-- **LV_EVENT_VALUE_CHANGED** Sent while slider is being dragged or changed with keys.
+Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
+- **LV_EVENT_VALUE_CHANGED** Sent while the slider is being dragged or changed with keys.
 
 ## Keys
 - **LV_KEY_UP**, **LV_KEY_RIGHT** Increment the slider's value by 1
@@ -37,24 +37,12 @@ Learn more about [Keys](/overview/indev).
 
 ## Example
 
-### C
-
-![](/examples/slider/slider_1.png "Slider in LittlevGL")
-
 ```eval_rst
-.. container:: toggle
 
-    .. container:: header
-    
-      code
+.. include:: /examples/slider/index.rst
 
-    .. literalinclude:: /examples/slider/slider_1.c
-      :language: c
- 
 ```
 
-### MicroPython
-No examples yet.
 
 ## API 
 
@@ -64,4 +52,3 @@ No examples yet.
   :project: lvgl
         
 ```
-

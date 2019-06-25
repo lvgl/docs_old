@@ -1,5 +1,7 @@
 # Input device interface
 
+## Types of input devices
+
 To set up an input device an `lv_indev_drv_t` variable has to be initialized:
 
 ```c
@@ -24,7 +26,7 @@ It can also buffer data and return `false` when no more data to be read or `true
 Visit [Input devices](/overview/indev) to learn more about input devices in general.
 
 
-##  Touchpad, mouse or any pointer
+###  Touchpad, mouse or any pointer
 Input devices which are able to click points of the screen belong to this category. 
 
 ```c
@@ -47,7 +49,7 @@ bool my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data)
 
 To set a mouse cursor use `lv_indev_set_cursor(my_indev, &img_cursor)`. (`my_indev` is the return value of `lv_indev_drv_register`) 
 
-## Keypad or keyboard 
+### Keypad or keyboard 
 
 Full keyboards with all the letters or simple keypads with a few navigation buttons belong here.
 
@@ -74,7 +76,7 @@ bool keyboard_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
 }
 ```
 
-## Encoder 
+### Encoder 
 With an encoder you can do 4 things:
 1. Press its button
 2. Long press its button
@@ -107,7 +109,7 @@ bool encoder_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
 }
 ```
 
-## Button 
+### Button 
 *Buttons* mean external "hardware" buttons next to the screen which are assigned to specific coordinates of the screen. 
 If a button is pressed it will simulate the pressing on the assigned coordinate. (Similarly to a touchpad)
 
@@ -134,4 +136,30 @@ bool button_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
    
     return false;                    /*No buffering now so no more data read*/
 }
+```
+
+## Other features
+
+Besides `read_cb` a `feedback_cb` callback can be also specified in `lv_indev_drv_t`. 
+`feedback_cb` is called when any type of event is sent by the input devices. (independently from its type). It gives the opportunity to make feedback for the user e.g. to play a sound on `LV_EVENT_CLICK`.
+
+The default value of the following parameters can be set in *lv_conf.h* but the default value can be overwritten in `lv_indev_drv_t`:
+- **drag_limit** Number of pixels to slide before actually drag the object
+- **drag_throw**  Drag throw slow-down in [%]. Greater value means faster slow-down
+- **long_press_time** Press time to send `LV_EVENT_LONG_PRESSED` (in milliseconds)
+- **long_press_rep_time** Interval of sending `LV_EVENT_LONG_PRESSED_REPEAT` (in milliseconds)
+- **read_task** pointer to the `lv_task` which reads the input device. It parameters can be changed by `lv_task_...()` functions 
+
+
+Every Input device is associated with a display. By default, a new input device is added to the lastly created or the explicitly selected (using `lv_disp_set_default()`) display. 
+The associated display is stored and can be changed in `disp` field of the driver.
+
+
+## API 
+
+```eval_rst
+
+.. doxygenfile:: lv_hal_indev.h
+  :project: lvgl
+        
 ```

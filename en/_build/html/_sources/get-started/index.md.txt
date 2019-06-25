@@ -1,7 +1,5 @@
 # Get started
 
-- lvgl on GihHub
-- example projects
 
 ```eval_rst
 

@@ -8,7 +8,8 @@ style_sb.body.border.width = 1;
 style_sb.body.border.opa = LV_OPA_70;
 style_sb.body.radius = LV_RADIUS_CIRCLE;
 style_sb.body.opa = LV_OPA_60;
-style_sb.body.padding.hor = 3;          /*Horizontal padding on the right*/
+style_sb.body.padding.right = 3;
+style_sb.body.padding.bottom = 3;
 style_sb.body.padding.inner = 8;        /*Scrollbar width*/
 
 /*Create a page*/
@@ -16,12 +17,11 @@ lv_obj_t * page = lv_page_create(lv_scr_act(), NULL);
 lv_obj_set_size(page, 150, 200);
 lv_obj_align(page, NULL, LV_ALIGN_CENTER, 0, 0);
 lv_page_set_style(page, LV_PAGE_STYLE_SB, &style_sb);           /*Set the scrollbar style*/
-lv_page_set_sb_mode(page, LV_SB_MODE_AUTO);                     /*Show scroll bars is scrolling is possible*/
 
 /*Create a label on the page*/
 lv_obj_t * label = lv_label_create(page, NULL);
-lv_label_set_long_mode(label, LV_LABEL_LONG_BREAK);             /*Automatically break long lines*/
-lv_obj_set_width(label, lv_page_get_scrl_width(page));          /*Set the width. Lines will break here*/
+lv_label_set_long_mode(label, LV_LABEL_LONG_BREAK);            /*Automatically break long lines*/
+lv_obj_set_width(label, lv_page_get_fit_width(page));          /*Set the label width to max value to not show hor. scroll bars*/
 lv_label_set_text(label, "Lorem ipsum dolor sit amet, consectetur adipiscing elit,\n"
                          "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
                          "Ut enim ad minim veniam, quis nostrud exercitation ullamco\n"
@@ -30,3 +30,4 @@ lv_label_set_text(label, "Lorem ipsum dolor sit amet, consectetur adipiscing eli
                          "eu fugiat nulla pariatur.\n"
                          "Excepteur sint occaecat cupidatat non proident, sunt in culpa\n"
                          "qui officia deserunt mollit anim id est laborum.");
+
