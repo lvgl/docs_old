@@ -16,4 +16,15 @@ C
 MicroPython
 ^^^^^^^^^^^
 
-No examples yet.
+.. image:: /examples/bar/bar_1.*
+  :alt: Bar example in LittlevGL
+
+.. container:: toggle
+
+    .. container:: header
+    
+      code
+
+    .. literalinclude:: /examples/bar/bar_1.py
+      :language: python
+
