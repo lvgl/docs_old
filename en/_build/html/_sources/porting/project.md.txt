@@ -15,9 +15,9 @@ There is a configuration header file for LittlevGL called **lv_conf.h**. It sets
  
 Copy **lvgl/lv_conf_template.h** next to the *lvgl* directory and rename it to *lv_conf.h*. Open the file and change the `#if 0` at the beginning to `#if 1` to enable its content. 
 
-*lv_conf.h* can be copied other places as well but then you should add `LV_CONF_INCLUDE_SIMPLE` define to ou compilers (e.g. `-DLV_CONF_INCLUDE_SIMPLE` fo gcc) and set the include path manually.
+*lv_conf.h* can be copied other places as well but then you should add `LV_CONF_INCLUDE_SIMPLE` define to your compiler options (e.g. `-DLV_CONF_INCLUDE_SIMPLE` for gcc) and set the include path manually.
 
-In the config file comments explain the meaning of the options. Check at least these three config options and modify them according to your hardware:
+In the config file comments explain the meaning of the options. Check at least these three configuration options and modify them according to your hardware:
 1. **LV_HOR_RES_MAX** Your display's horizontal resolution
 2. **LV_VER_RES_MAX** Your display's vertical resolution
 3. **LV_COLOR_DEPTH** 8 for (RG332), 16 for (RGB565) or 32 for (RGB888 and ARGB8888). 

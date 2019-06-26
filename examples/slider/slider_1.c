@@ -34,7 +34,7 @@ style_knob.body.opa = LV_OPA_70;
 style_knob.body.padding.top = 10 ;
 style_knob.body.padding.bottom = 10 ;
 
-/*Create a second slider*/
+/*Create a slider*/
 lv_obj_t * slider = lv_slider_create(lv_scr_act(), NULL);
 lv_slider_set_style(slider, LV_SLIDER_STYLE_BG, &style_bg);
 lv_slider_set_style(slider, LV_SLIDER_STYLE_INDIC,&style_indic);

@@ -92,11 +92,6 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../intro.html#key-features">Key features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../intro.html#requirements">Requirements</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/live-demo.html">Live demos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a></li>
@@ -251,7 +246,38 @@
 <li class="toctree-l3"><a class="reference internal" href="font.html#add-a-new-font-engine">Add a new font engine</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Images</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#store-images">Store images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#color-formats">Color formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-and-use-images">Add and use images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#online-converter">Online converter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manually-create-an-image">Manually create an image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-images">Use images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#image-decoder">Image decoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#register-an-image-decoder">Register an image decoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manually-use-an-image-decoder">Manually use an image decoder</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#image-caching">Image caching</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cache-size">Cache size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#value-of-images">Value of images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-usage">Memory usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clean-the-cache">Clean the cache</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Image decoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-cache">Image cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="file-system.html">File system</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="file-system.html#add-a-driver">Add a driver</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="file-system.html#use-drivers-for-images">Use drivers for images</a></li>
@@ -272,6 +298,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="task.html">Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="task.html#create-a-task">Create a task</a></li>
 <li class="toctree-l3"><a class="reference internal" href="task.html#ready-and-reset">Ready and Reset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="task.html#set-parameters">Set parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="task.html#one-shot-tasks">One-shot tasks</a></li>
@@ -821,6 +848,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#example">Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#id1">MicroPython</a></li>
@@ -988,6 +1016,862 @@
             
   <div class="section" id="images">
 <h1>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h1>
+<p>An image can be a file or variable which stores the image itself and some metadata.</p>
+<div class="section" id="store-images">
+<h2>Store images<a class="headerlink" href="#store-images" title="Permalink to this headline">¶</a></h2>
+<p>You can store images in two places</p>
+<ul class="simple">
+<li><p>as a variable in the internal memory (RAM or ROM)</p></li>
+<li><p>as a file</p></li>
+</ul>
+<div class="section" id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
+<p>The images stored internally in a variable has <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> type with the following fields:</p>
+<ul class="simple">
+<li><p><strong>header</strong></p>
+<ul>
+<li><p><em>cf</em> Color format. See <a class="reference external" href="#color-format">below</a></p></li>
+<li><p><em>w</em> width in pixels (&lt;= 2048)</p></li>
+<li><p><em>h</em> height in pixels (&lt;= 2048)</p></li>
+<li><p><em>always zero</em> 3 bits which need to be always zero</p></li>
+<li><p><em>reserved</em> reserved for future use</p></li>
+</ul>
+</li>
+<li><p><strong>data</strong> pointer to an array where the image itself is stored</p></li>
+<li><p><strong>data_size</strong> length of <code class="docutils literal notranslate"><span class="pre">data</span></code> in bytes</p></li>
+</ul>
+</div>
+<div class="section" id="files">
+<h3>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h3>
+<p>To deal with files you need to add a <em>Drive</em> to LittlevGL. In short, a Drive a collection of functions (<em>open</em>, <em>read</em>, <em>close</em>, etc) registered in LittlevGL to make file operation.
+You can add an interface to a standard file system (FAT32 on SD card) or you create your own simple file system to read data from an SPI Flash memory.
+In every cases, a Drive is just an abstraction to read and/or write data to a memory.
+See the <a class="reference internal" href="file-system.html"><span class="doc">File system</span></a> section to learn more.</p>
+</div>
+</div>
+<div class="section" id="color-formats">
+<h2>Color formats<a class="headerlink" href="#color-formats" title="Permalink to this headline">¶</a></h2>
+<p>Various built-in color formats are supported:</p>
+<ul class="simple">
+<li><p><strong>LV_IMG_CF_TRUE_COLOR</strong> Simply store the RGB colors</p></li>
+<li><p><strong>LV_IMG_CF_TRUE_COLOR_ALPHA</strong> Store the RGB colors but add an Alpha byte too for every pixel</p></li>
+<li><p><strong>LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</strong> Store the RGB color but if a pixel has <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code> (set in <em>lv_conf.h</em>) color the pixel will be transparent</p></li>
+<li><p><strong>LV_IMG_CF_INDEXED_1/2/4/8BIT</strong> Use palette with 2, 4, 16 or 256 colors and store each pixel on 1, 2, 4 or 8 bit</p></li>
+<li><p><strong>LV_IMG_CF_ALPHA_1/2/4/8BIT</strong> Store only the Alpha value on 1, 2, 4 or 8 bits. Draw the pixels <code class="docutils literal notranslate"><span class="pre">style.image.color</span></code> and the set opacity.</p></li>
+</ul>
+<p>The bytes of the <em>True color</em> 32 bit images are stored in the following order</p>
+<ul class="simple">
+<li><p>Byte 0: Blue</p></li>
+<li><p>Byte 1: Green</p></li>
+<li><p>Byte 2: Red</p></li>
+<li><p>Byte 3: Alpha</p></li>
+</ul>
+<p>For 16 bit color depth</p>
+<ul class="simple">
+<li><p>Byte 0: Green 3 lower bit, Blue 5 bit</p></li>
+<li><p>Byte 1: Red 5 bit, Green 3 higher bit</p></li>
+<li><p>Byte 2: Alpha byte (only with LV_IMG_CF_TRUE_COLOR_ALPHA)</p></li>
+</ul>
+<p>For 8 bit color depth</p>
+<ul class="simple">
+<li><p>Byte 0: Red 3 bit, Green 3 bit, Blue 2 bit</p></li>
+<li><p>Byte 2: Alpha byte (only with LV_IMG_CF_TRUE_COLOR_ALPHA)</p></li>
+</ul>
+<p>You can store images in a <em>Raw</em> format to indicate that it’s not a built-in color format and an <a class="reference external" href="#image-decoder">Image decoder</a> needs to be used to decode the image.</p>
+<ul class="simple">
+<li><p><strong>LV_IMG_CF_RAW</strong> A raw image e.g. a PNG or JPG image</p></li>
+<li><p><strong>LV_IMG_CF_RAW_ALPHA</strong> Indicate that the image has alpha, and an Alpha byte is added for every pixel</p></li>
+<li><p><strong>LV_IMG_CF_RAW_CHROME_KEYED</strong> Indicate that the image is chrome keyed as described in <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</span></code> above.</p></li>
+</ul>
+</div>
+<div class="section" id="add-and-use-images">
+<h2>Add and use images<a class="headerlink" href="#add-and-use-images" title="Permalink to this headline">¶</a></h2>
+<p>You can add images to LittlevGL in two ways:</p>
+<ul class="simple">
+<li><p>using the online converter</p></li>
+<li><p>manually create images</p></li>
+</ul>
+<div class="section" id="online-converter">
+<h3>Online converter<a class="headerlink" href="#online-converter" title="Permalink to this headline">¶</a></h3>
+<p>The Online Image Converter is available here: https://littlevgl.com/image-to-c-array</p>
+<p>You need to select a <em>BMP</em>, <em>PNG</em> or <em>JPG</em> image, give it a name, select the <a class="reference external" href="#color-format">Color format</a>, select the type (file or variable) and hit the <em>Convert</em> button and the result file be download.</p>
+<p>In the converter C arrays (variables) the image for all the Color depths (1, 8, 16 or 32) are included and the used image will be selected in compile time based on <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span></code> in <em>lv_conf.h</em>.</p>
+<p>IN case of files you need to tell which color format you want</p>
+<ul class="simple">
+<li><p>RGB332 for 8 bit color depth</p></li>
+<li><p>RGB565 for 16 bit color depth</p></li>
+<li><p>RGB565 Swap for 16 bit color depth (two bytes are swapped)</p></li>
+<li><p>RGB888 for 32 bit color depth</p></li>
+</ul>
+</div>
+<div class="section" id="manually-create-an-image">
+<h3>Manually create an image<a class="headerlink" href="#manually-create-an-image" title="Permalink to this headline">¶</a></h3>
+<p>If you calculate an image run-time you can craft an image variable to display it. For example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">my_img_data</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">,</span> <span class="p">...};</span>
+
+<span class="k">static</span> <span class="n">lv_img_dsc_t</span> <span class="n">my_img_dsc</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">always_zero</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">h</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">data_size</span> <span class="o">=</span> <span class="mi">80</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="n">LV_COLOR_DEPTH</span> <span class="o">/</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_TRUE_COLOR</span><span class="p">,</span>          <span class="cm">/*Set the color format*/</span>
+    <span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">my_img_data</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>If the color format is <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA</span></code> you can set <code class="docutils literal notranslate"><span class="pre">data_size</span></code> like <code class="docutils literal notranslate"><span class="pre">80</span> <span class="pre">*</span> <span class="pre">60</span> <span class="pre">*</span> <span class="pre">LV_IMG_PX_SIZE_ALPHA_BYTE</span></code>.</p>
+<p>An other option to create image run-time is to use the <a class="reference internal" href="../object-types/canvas.html"><span class="doc">Canvas</span></a> object.</p>
+</div>
+<div class="section" id="use-images">
+<h3>Use images<a class="headerlink" href="#use-images" title="Permalink to this headline">¶</a></h3>
+<p>The most simple way to use an Image in LittlevGL is to display it with an <a class="reference internal" href="../object-types/img.html"><span class="doc">lv_img</span></a> object:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">icon</span> <span class="o">=</span> <span class="n">lv_img_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+
+<span class="cm">/*From varaible*/</span>
+<span class="n">lv_img_set_src</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_icon_dsc</span><span class="p">);</span>
+
+<span class="cm">/*From file*/</span>
+<span class="n">lv_img_set_src</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="s">&quot;S:my_icon.bin&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If the image was converted with the online converter you should use <code class="docutils literal notranslate"><span class="pre">LV_IMG_DECLARE(my_icon_dsc)</span></code> to declare the icon in the file where you want to use it.</p>
+</div>
+</div>
+<div class="section" id="image-decoder">
+<h2>Image decoder<a class="headerlink" href="#image-decoder" title="Permalink to this headline">¶</a></h2>
+<p>As you can see in the <a class="reference external" href="#color-formats">Color formats</a> section LittlevGL supports several built image formats. However, it doesn’t support for example PNG or JPG out of the box.
+To handle non-built-in image formats you need to use external libraries and attach them to LittlevGL via the <em>Image decoder</em> interface.</p>
+<div class="section" id="register-an-image-decoder">
+<h3>Register an image decoder<a class="headerlink" href="#register-an-image-decoder" title="Permalink to this headline">¶</a></h3>
+<p>For example, if you want LittlevGL to “understand” PNG images you need to create a new image decoder a set some function read PNG files. It should looks like this:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">dec</span> <span class="o">=</span> <span class="n">lv_img_decoder_create</span><span class="p">();</span>
+<span class="n">lv_img_decoder_set_info_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_info</span><span class="p">);</span>
+<span class="n">lv_img_decoder_set_open_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_open</span><span class="p">);</span>
+<span class="n">lv_img_decoder_set_close_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_close</span><span class="p">);</span> 
+
+
+<span class="cm">/**</span>
+<span class="cm"> * Get info about a PNG image</span>
+<span class="cm"> * @param decoder pointer to the decoder where this function belongs</span>
+<span class="cm"> * @param src can be file name or pointer to a C array</span>
+<span class="cm"> * @param header store the info here</span>
+<span class="cm"> * @return LV_RES_OK: no error; LV_RES_INV: can&#39;t get the info</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="n">lv_res_t</span> <span class="nf">decoder_info</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="n">lv_img_header_t</span> <span class="o">*</span> <span class="n">header</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="p">...</span>
+  
+  <span class="n">header</span><span class="o">-&gt;</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_RAW</span><span class="o">/</span><span class="n">_ALPHA</span><span class="o">/</span><span class="n">_CHROMA_KEYED</span><span class="p">;</span>
+  <span class="n">header</span><span class="o">-&gt;</span><span class="n">w</span> <span class="o">=</span> <span class="n">width</span><span class="p">;</span>
+  <span class="n">header</span><span class="o">-&gt;</span><span class="n">h</span> <span class="o">=</span> <span class="n">height</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="cm">/**</span>
+<span class="cm"> * Open a PNG image and return the decided image</span>
+<span class="cm"> * @param decoder pointer to the decoder where this function belongs</span>
+<span class="cm"> * @param dsc pointer to a descriptor which describes this decoding session</span>
+<span class="cm"> * @return LV_RES_OK: no error; LV_RES_INV: can&#39;t get the info</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="n">lv_res_t</span> <span class="nf">decoder_open</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">lv_img_decoder_dsc_t</span> <span class="o">*</span> <span class="n">dsc</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Free the allocated resources</span>
+<span class="cm"> * @param decoder pointer to the decoder where this function belongs</span>
+<span class="cm"> * @param dsc pointer to a descriptor which describes this decoding session</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">decoder_close</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">lv_img_decoder_dsc_t</span> <span class="o">*</span> <span class="n">dsc</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">decoder_info</span></code> you should collect some basic information about the image and store it in <code class="docutils literal notranslate"><span class="pre">header</span></code>.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">decoder_open</span></code> you should try to open the image source pointed by <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src</span></code>. It’s type is already in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src_type</span> <span class="pre">==</span> <span class="pre">LV_IMG_SRC_FILE/VARIABLE</span></code>. If it’s not a source you can open (e.g. not PNG) you should return <code class="docutils literal notranslate"><span class="pre">LV_RES_INV</span></code>.
+However, if you can open the image a pointer to the decoded plain RGB image should be set in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code>.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">decoder_close</span></code> you should free all the allocated resources.</p>
+<p>There is a fourth, optional function read the image line-by-line. Decoding the whole image requires extra memory and some computational overhead.
+However, if can decode one line of the image without decoding the whole image you can save memory and time. To indicate that the <em>line read</em> function should be used set <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> in the open function.</p>
+<p>A read line function look like this:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_img_decoder_set_read_line_cb</span><span class="p">(</span><span class="n">decoder</span><span class="p">,</span> <span class="n">decoder_read_line</span><span class="p">);</span>
+
+<span class="p">...</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Read data from a line</span>
+<span class="cm"> * @param decoder pointer to the decoder where this function belongs</span>
+<span class="cm"> * @param dsc pointer to a descriptor which describes this decoding session</span>
+<span class="cm"> * @param x X coordinate of the first pixel to read</span>
+<span class="cm"> * @param y Y coordinate of the first pixel to read</span>
+<span class="cm"> * @param len number of pixels to read</span>
+<span class="cm"> * @param buf a buffer to store the decoded pixels</span>
+<span class="cm"> * @return LV_RES_OK: ok; LV_RES_INV: failed</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="n">lv_res_t</span> <span class="n">lv_img_decoder_built_in_read_line</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">lv_img_decoder_dsc_t</span> <span class="o">*</span> <span class="n">dsc</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">x</span><span class="p">,</span>
+                                                  <span class="n">lv_coord_t</span> <span class="n">y</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">len</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span> <span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="manually-use-an-image-decoder">
+<h3>Manually use an image decoder<a class="headerlink" href="#manually-use-an-image-decoder" title="Permalink to this headline">¶</a></h3>
+<p>LittlevGL will use th registered image decoder automatically but you can use them manually too. Create a <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_dsc_t</span></code> varaible to describe a the decoding session and call <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
+<span class="n">lv_res_t</span> <span class="n">res</span><span class="p">;</span>
+<span class="n">lv_img_decoder_dsc_t</span> <span class="n">dsc</span><span class="p">;</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">lv_img_decoder_open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dsc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_img_dsc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="n">res</span> <span class="o">==</span> <span class="n">LV_RES_OK</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/*Do something with `dsc-&gt;img_data`*/</span>
+  <span class="n">lv_img_decoder_close</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dsc</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="image-caching">
+<h2>Image caching<a class="headerlink" href="#image-caching" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it takes a lot of time to open an image.
+Continuously decoding a PNG image or loading images from a slow external memory would be effective.
+Therefore LittlevGL caches a given number of images. Caching means some images will be left open hence LittlevGl can quickly access them from <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code> instead of decoding the again.</p>
+<div class="section" id="cache-size">
+<h3>Cache size<a class="headerlink" href="#cache-size" title="Permalink to this headline">¶</a></h3>
+<p>The number of cache entries can be defined in <code class="docutils literal notranslate"><span class="pre">LV_IMG_CACHE_DEF_SIZE</span></code> in <em>lv_conf.h</em>. The default value is 1 so only the lastly used image will be left open.
+The size of cache can be changed in tun-time with <code class="docutils literal notranslate"><span class="pre">lv_img_cache_set_size(entry_num)</span></code></p>
+</div>
+<div class="section" id="value-of-images">
+<h3>Value of images<a class="headerlink" href="#value-of-images" title="Permalink to this headline">¶</a></h3>
+<p>If you use more images then the cache size LittlevGL can’t cache all of the images. Instead, if a new image needs to be opened but there is no place in the cache the library will close an image.
+To decide which image to close LittlevGL measured how much did it take to open the image. Images which more time consuming to open are considered more valuable and LittelvGL tries to cache them longer.
+You can manually set the <em>time to open</em> value in the decoder open function in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;time_to_open</span> <span class="pre">=</span> <span class="pre">time_ms</span></code> to give a higher or lower value to the image. (Leave it unchanged to let LittlevGL set it)</p>
+<p>Every cache entry has a <em>“life”</em> value. Every time an image opening happens through the cache the <em>life</em> of all entries are decreased to make them older.
+When a cached image is used its <em>life</em> is increased by the <em>time to open</em> value to make it more alive.</p>
+<p>If there is no more space in the cache always the entry with the smallest life will be closed.</p>
+</div>
+<div class="section" id="memory-usage">
+<h3>Memory usage<a class="headerlink" href="#memory-usage" title="Permalink to this headline">¶</a></h3>
+<p>Note that, the cached image might continuously consume memory. For example, if 3 PNG images are cached, they will consume memory while they are opened.
+Therefore it’s the user responsibility to be sure there is enough RAM to cache even the largest images at the same time.</p>
+</div>
+<div class="section" id="clean-the-cache">
+<h3>Clean the cache<a class="headerlink" href="#clean-the-cache" title="Permalink to this headline">¶</a></h3>
+<p>Let’s say you have loaded a PNG image into a <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span> <span class="pre">my_png</span></code> variable and use it in an <code class="docutils literal notranslate"><span class="pre">lv_img</span></code> object. If the image is already cached and you change <code class="docutils literal notranslate"><span class="pre">my_png-&gt;data</span></code> you need to notify LittlevGL to cache the image again.
+To do this use <code class="docutils literal notranslate"><span class="pre">lv_img_cache_invalidate_src(&amp;my_png)</span></code>. If <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is passed as parameter the whole cache will be cleaned.</p>
+</div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Image decoder<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="macro">
+<dt id="c.LV_IMG_PX_SIZE_ALPHA_BYTE">
+<span class="target" id="lv__img__decoder_8h_1afcd8da034fac14905f604cf04e75c122"></span><code class="sig-name descname">LV_IMG_PX_SIZE_ALPHA_BYTE</code><a class="headerlink" href="#c.LV_IMG_PX_SIZE_ALPHA_BYTE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv412lv_img_src_t">
+<span id="_CPPv312lv_img_src_t"></span><span id="_CPPv212lv_img_src_t"></span><span id="lv_img_src_t"></span><span class="target" id="lv__img__decoder_8h_1a4a47e194ccb92c2d8bc70fa9e3655413"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_img_src_t</code><a class="headerlink" href="#_CPPv412lv_img_src_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv411lv_img_cf_t">
+<span id="_CPPv311lv_img_cf_t"></span><span id="_CPPv211lv_img_cf_t"></span><span id="lv_img_cf_t"></span><span class="target" id="lv__img__decoder_8h_1a3cd0b0d2269a76ecf35c65d5abc8fa2c"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_img_cf_t</code><a class="headerlink" href="#_CPPv411lv_img_cf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv423lv_img_decoder_info_f_t">
+<span id="_CPPv323lv_img_decoder_info_f_t"></span><span id="_CPPv223lv_img_decoder_info_f_t"></span><span id="lv_img_decoder_info_f_t"></span><span class="target" id="lv__img__decoder_8h_1a133228664e2dcb89c32ad769ff1d77eb"></span><em class="property">typedef </em>lv_res_t (*<code class="sig-name descname">lv_img_decoder_info_f_t</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv415_lv_img_decoder" title="_lv_img_decoder">_lv_img_decoder</a> *decoder, <em class="property">const</em> void *src, <a class="reference internal" href="#_CPPv415lv_img_header_t" title="lv_img_header_t">lv_img_header_t</a> *header<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_decoder_info_f_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get info from an image and store in the <code class="docutils literal notranslate"><span class="pre">header</span></code> <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>LV_RES_OK: info written correctly; LV_RES_INV: failed </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: the image source. Can be a pointer to a C array or a file name (Use <code class="docutils literal notranslate"><span class="pre">lv_img_src_get_type</span></code> to determine the type) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">header</span></code>: store the info here </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv423lv_img_decoder_open_f_t">
+<span id="_CPPv323lv_img_decoder_open_f_t"></span><span id="_CPPv223lv_img_decoder_open_f_t"></span><span id="lv_img_decoder_open_f_t"></span><span class="target" id="lv__img__decoder_8h_1a171e7ebd6b47bcee5b41d7c0a2ff4480"></span><em class="property">typedef </em>lv_res_t (*<code class="sig-name descname">lv_img_decoder_open_f_t</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv415_lv_img_decoder" title="_lv_img_decoder">_lv_img_decoder</a> *decoder, <em class="property">struct</em> <a class="reference internal" href="#_CPPv419_lv_img_decoder_dsc" title="_lv_img_decoder_dsc">_lv_img_decoder_dsc</a> *dsc<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_decoder_open_f_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open an image for decoding. Prepare it as it is required to read it later <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to the decoder the function associated with </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to decoder descriptor. <code class="docutils literal notranslate"><span class="pre">src</span></code>, <code class="docutils literal notranslate"><span class="pre">style</span></code> are already initialized in it. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv428lv_img_decoder_read_line_f_t">
+<span id="_CPPv328lv_img_decoder_read_line_f_t"></span><span id="_CPPv228lv_img_decoder_read_line_f_t"></span><span id="lv_img_decoder_read_line_f_t"></span><span class="target" id="lv__img__decoder_8h_1a88489aad5fa8409e5b600a839408ef9d"></span><em class="property">typedef </em>lv_res_t (*<code class="sig-name descname">lv_img_decoder_read_line_f_t</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv415_lv_img_decoder" title="_lv_img_decoder">_lv_img_decoder</a> *decoder, <em class="property">struct</em> <a class="reference internal" href="#_CPPv419_lv_img_decoder_dsc" title="_lv_img_decoder_dsc">_lv_img_decoder_dsc</a> *dsc, lv_coord_t x, lv_coord_t y, lv_coord_t len, uint8_t *buf<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428lv_img_decoder_read_line_f_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Decode <code class="docutils literal notranslate"><span class="pre">len</span></code> pixels starting from the given <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates and store them in <code class="docutils literal notranslate"><span class="pre">buf</span></code>. Required only if the “open” function can’t return with the whole decoded pixel array. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>LV_RES_OK: ok; LV_RES_INV: failed </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to the decoder the function associated with </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to decoder descriptor </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: start x coordinate </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: start y coordinate </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: number of pixels to decode </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: a buffer to store the decoded pixels </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv424lv_img_decoder_close_f_t">
+<span id="_CPPv324lv_img_decoder_close_f_t"></span><span id="_CPPv224lv_img_decoder_close_f_t"></span><span id="lv_img_decoder_close_f_t"></span><span class="target" id="lv__img__decoder_8h_1afc31c2389f7a7a36765199f197528a84"></span><em class="property">typedef </em>void (*<code class="sig-name descname">lv_img_decoder_close_f_t</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv415_lv_img_decoder" title="_lv_img_decoder">_lv_img_decoder</a> *decoder, <em class="property">struct</em> <a class="reference internal" href="#_CPPv419_lv_img_decoder_dsc" title="_lv_img_decoder_dsc">_lv_img_decoder_dsc</a> *dsc<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_img_decoder_close_f_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Close the pending decoding. Free resources etc. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to the decoder the function associated with </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to decoder descriptor </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv416lv_img_decoder_t">
+<span id="_CPPv316lv_img_decoder_t"></span><span id="_CPPv216lv_img_decoder_t"></span><span id="lv_img_decoder_t"></span><span class="target" id="lv__img__decoder_8h_1aec667432b70eb616c99b3c52b9f2374c"></span><em class="property">typedef </em><em class="property">struct</em> <a class="reference internal" href="#_CPPv415_lv_img_decoder" title="_lv_img_decoder">_lv_img_decoder</a> <code class="sig-name descname">lv_img_decoder_t</code><a class="headerlink" href="#_CPPv416lv_img_decoder_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv420lv_img_decoder_dsc_t">
+<span id="_CPPv320lv_img_decoder_dsc_t"></span><span id="_CPPv220lv_img_decoder_dsc_t"></span><span id="lv_img_decoder_dsc_t"></span><span class="target" id="lv__img__decoder_8h_1afc8e6e1704f5563503a57fbf677bb79f"></span><em class="property">typedef </em><em class="property">struct</em> <a class="reference internal" href="#_CPPv419_lv_img_decoder_dsc" title="_lv_img_decoder_dsc">_lv_img_decoder_dsc</a> <code class="sig-name descname">lv_img_decoder_dsc_t</code><a class="headerlink" href="#_CPPv420lv_img_decoder_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Describe an image decoding session. Stores data about the decoding </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv4Ut7_anon_17">
+<span id="_CPPv3Ut7_anon_17"></span><span class="target" id="lv__img__decoder_8h_1a80155586fa275b28773c9b203f52caba"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_17" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv419LV_IMG_SRC_VARIABLE">
+<span id="_CPPv319LV_IMG_SRC_VARIABLE"></span><span id="_CPPv219LV_IMG_SRC_VARIABLE"></span><span class="target" id="lv__img__decoder_8h_1a80155586fa275b28773c9b203f52cabaafa1cf250086dd605e6d62d0ec792d6f5"></span><code class="sig-name descname">LV_IMG_SRC_VARIABLE</code><a class="headerlink" href="#_CPPv419LV_IMG_SRC_VARIABLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv415LV_IMG_SRC_FILE">
+<span id="_CPPv315LV_IMG_SRC_FILE"></span><span id="_CPPv215LV_IMG_SRC_FILE"></span><span class="target" id="lv__img__decoder_8h_1a80155586fa275b28773c9b203f52cabaa18b40180a9208d2b3e8d9bbc6968d3ce"></span><code class="sig-name descname">LV_IMG_SRC_FILE</code><a class="headerlink" href="#_CPPv415LV_IMG_SRC_FILE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv417LV_IMG_SRC_SYMBOL">
+<span id="_CPPv317LV_IMG_SRC_SYMBOL"></span><span id="_CPPv217LV_IMG_SRC_SYMBOL"></span><span class="target" id="lv__img__decoder_8h_1a80155586fa275b28773c9b203f52cabaab9437e398616459e8c7bc579c22962f4"></span><code class="sig-name descname">LV_IMG_SRC_SYMBOL</code><a class="headerlink" href="#_CPPv417LV_IMG_SRC_SYMBOL" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv418LV_IMG_SRC_UNKNOWN">
+<span id="_CPPv318LV_IMG_SRC_UNKNOWN"></span><span id="_CPPv218LV_IMG_SRC_UNKNOWN"></span><span class="target" id="lv__img__decoder_8h_1a80155586fa275b28773c9b203f52cabaaaca460ed70608fe3df9865c7e9e69a99"></span><code class="sig-name descname">LV_IMG_SRC_UNKNOWN</code><a class="headerlink" href="#_CPPv418LV_IMG_SRC_UNKNOWN" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv4Ut7_anon_18">
+<span id="_CPPv3Ut7_anon_18"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1ea"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_18" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv417LV_IMG_CF_UNKNOWN">
+<span id="_CPPv317LV_IMG_CF_UNKNOWN"></span><span id="_CPPv217LV_IMG_CF_UNKNOWN"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaaec9725b572a51d9e6f65e325c9c17f31"></span><code class="sig-name descname">LV_IMG_CF_UNKNOWN</code> = 0<a class="headerlink" href="#_CPPv417LV_IMG_CF_UNKNOWN" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv413LV_IMG_CF_RAW">
+<span id="_CPPv313LV_IMG_CF_RAW"></span><span id="_CPPv213LV_IMG_CF_RAW"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaae79779c0a260d69563dfa30e9b11d265"></span><code class="sig-name descname">LV_IMG_CF_RAW</code><a class="headerlink" href="#_CPPv413LV_IMG_CF_RAW" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv419LV_IMG_CF_RAW_ALPHA">
+<span id="_CPPv319LV_IMG_CF_RAW_ALPHA"></span><span id="_CPPv219LV_IMG_CF_RAW_ALPHA"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaac32f641d0c92f307ce2b93766239bd56"></span><code class="sig-name descname">LV_IMG_CF_RAW_ALPHA</code><a class="headerlink" href="#_CPPv419LV_IMG_CF_RAW_ALPHA" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv426LV_IMG_CF_RAW_CHROMA_KEYED">
+<span id="_CPPv326LV_IMG_CF_RAW_CHROMA_KEYED"></span><span id="_CPPv226LV_IMG_CF_RAW_CHROMA_KEYED"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaa07e2f7713a6d4574d34f9548b5949d13"></span><code class="sig-name descname">LV_IMG_CF_RAW_CHROMA_KEYED</code><a class="headerlink" href="#_CPPv426LV_IMG_CF_RAW_CHROMA_KEYED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv420LV_IMG_CF_TRUE_COLOR">
+<span id="_CPPv320LV_IMG_CF_TRUE_COLOR"></span><span id="_CPPv220LV_IMG_CF_TRUE_COLOR"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaacc00dbb56f9207133c12cca0f94c4f8d"></span><code class="sig-name descname">LV_IMG_CF_TRUE_COLOR</code><a class="headerlink" href="#_CPPv420LV_IMG_CF_TRUE_COLOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv426LV_IMG_CF_TRUE_COLOR_ALPHA">
+<span id="_CPPv326LV_IMG_CF_TRUE_COLOR_ALPHA"></span><span id="_CPPv226LV_IMG_CF_TRUE_COLOR_ALPHA"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaa77b153c97241ea0312b96a3bd5d4f185"></span><code class="sig-name descname">LV_IMG_CF_TRUE_COLOR_ALPHA</code><a class="headerlink" href="#_CPPv426LV_IMG_CF_TRUE_COLOR_ALPHA" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv433LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED">
+<span id="_CPPv333LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED"></span><span id="_CPPv233LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaa4afaa8f28d1b38d91a4579a7fe5cd746"></span><code class="sig-name descname">LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</code><a class="headerlink" href="#_CPPv433LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv422LV_IMG_CF_INDEXED_1BIT">
+<span id="_CPPv322LV_IMG_CF_INDEXED_1BIT"></span><span id="_CPPv222LV_IMG_CF_INDEXED_1BIT"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaace7d7c0dc2a98e0d1989f1c102b5ea3b"></span><code class="sig-name descname">LV_IMG_CF_INDEXED_1BIT</code><a class="headerlink" href="#_CPPv422LV_IMG_CF_INDEXED_1BIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv422LV_IMG_CF_INDEXED_2BIT">
+<span id="_CPPv322LV_IMG_CF_INDEXED_2BIT"></span><span id="_CPPv222LV_IMG_CF_INDEXED_2BIT"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaaa6c3c2fdc1a2c273f50d3638ee62d775"></span><code class="sig-name descname">LV_IMG_CF_INDEXED_2BIT</code><a class="headerlink" href="#_CPPv422LV_IMG_CF_INDEXED_2BIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv422LV_IMG_CF_INDEXED_4BIT">
+<span id="_CPPv322LV_IMG_CF_INDEXED_4BIT"></span><span id="_CPPv222LV_IMG_CF_INDEXED_4BIT"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaac541e5ff700cbab1422972b2124fa857"></span><code class="sig-name descname">LV_IMG_CF_INDEXED_4BIT</code><a class="headerlink" href="#_CPPv422LV_IMG_CF_INDEXED_4BIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv422LV_IMG_CF_INDEXED_8BIT">
+<span id="_CPPv322LV_IMG_CF_INDEXED_8BIT"></span><span id="_CPPv222LV_IMG_CF_INDEXED_8BIT"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaa05da196150be23ccba0bee4d64b0e13f"></span><code class="sig-name descname">LV_IMG_CF_INDEXED_8BIT</code><a class="headerlink" href="#_CPPv422LV_IMG_CF_INDEXED_8BIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv420LV_IMG_CF_ALPHA_1BIT">
+<span id="_CPPv320LV_IMG_CF_ALPHA_1BIT"></span><span id="_CPPv220LV_IMG_CF_ALPHA_1BIT"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaa0704ce366200825b155639eabb098f72"></span><code class="sig-name descname">LV_IMG_CF_ALPHA_1BIT</code><a class="headerlink" href="#_CPPv420LV_IMG_CF_ALPHA_1BIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv420LV_IMG_CF_ALPHA_2BIT">
+<span id="_CPPv320LV_IMG_CF_ALPHA_2BIT"></span><span id="_CPPv220LV_IMG_CF_ALPHA_2BIT"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaa384013e83c460e879851d57bb335c561"></span><code class="sig-name descname">LV_IMG_CF_ALPHA_2BIT</code><a class="headerlink" href="#_CPPv420LV_IMG_CF_ALPHA_2BIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv420LV_IMG_CF_ALPHA_4BIT">
+<span id="_CPPv320LV_IMG_CF_ALPHA_4BIT"></span><span id="_CPPv220LV_IMG_CF_ALPHA_4BIT"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaa87a787a99d25627728738686b0ce3ef6"></span><code class="sig-name descname">LV_IMG_CF_ALPHA_4BIT</code><a class="headerlink" href="#_CPPv420LV_IMG_CF_ALPHA_4BIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv420LV_IMG_CF_ALPHA_8BIT">
+<span id="_CPPv320LV_IMG_CF_ALPHA_8BIT"></span><span id="_CPPv220LV_IMG_CF_ALPHA_8BIT"></span><span class="target" id="lv__img__decoder_8h_1a6b7b47dd702d9e331586d485013fd1eaaa886fdd8e02ff433765a3ac3ee3f3103"></span><code class="sig-name descname">LV_IMG_CF_ALPHA_8BIT</code><a class="headerlink" href="#_CPPv420LV_IMG_CF_ALPHA_8BIT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv419lv_img_decoder_initv">
+<span id="_CPPv319lv_img_decoder_initv"></span><span id="_CPPv219lv_img_decoder_initv"></span><span id="lv_img_decoder_init__void"></span><span class="target" id="lv__img__decoder_8h_1a41f1a44064cb8b8301c5e4e5d456f5e2"></span>void <code class="sig-name descname">lv_img_decoder_init</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_img_decoder_initv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize the image decoder module </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423lv_img_decoder_get_infoPKcP15lv_img_header_t">
+<span id="_CPPv323lv_img_decoder_get_infoPKcP15lv_img_header_t"></span><span id="_CPPv223lv_img_decoder_get_infoPKcP15lv_img_header_t"></span><span id="lv_img_decoder_get_info__cCP.lv_img_header_tP"></span><span class="target" id="lv__img__decoder_8h_1aaea7a28b7f50c88d9edae731c7b17dc2"></span>lv_res_t <code class="sig-name descname">lv_img_decoder_get_info</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>src</em>, <a class="reference internal" href="#_CPPv415lv_img_header_t" title="lv_img_header_t">lv_img_header_t</a> *<em>header</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_decoder_get_infoPKcP15lv_img_header_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get information about an image. Try the created image decoder one by one. Once one is able to get info that info will be used. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>LV_RES_OK: success; LV_RES_INV: wasn’t able to get info about the image </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: the image source. Can be 1) File name: E.g. “S:folder/img1.png” (The drivers needs to registered via <code class="docutils literal notranslate"><span class="pre">lv_fs_add_drv()</span></code>) 2) Variable: Pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable 3) Symbol: E.g. <code class="docutils literal notranslate"><span class="pre">LV_SYMBOL_OK</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">header</span></code>: the image info will be stored here </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_img_decoder_openP20lv_img_decoder_dsc_tPKvPK10lv_style_t">
+<span id="_CPPv319lv_img_decoder_openP20lv_img_decoder_dsc_tPKvPK10lv_style_t"></span><span id="_CPPv219lv_img_decoder_openP20lv_img_decoder_dsc_tPKvPK10lv_style_t"></span><span id="lv_img_decoder_open__lv_img_decoder_dsc_tP.voidCP.lv_style_tCP"></span><span class="target" id="lv__img__decoder_8h_1ade448d7be71bc2f457f487c074980d10"></span>lv_res_t <code class="sig-name descname">lv_img_decoder_open</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420lv_img_decoder_dsc_t" title="lv_img_decoder_dsc_t">lv_img_decoder_dsc_t</a> *<em>dsc</em>, <em class="property">const</em> void *<em>src</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_img_decoder_openP20lv_img_decoder_dsc_tPKvPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open an image. Try the created image decoder one by one. Once one is able to open the image that decoder is save in <code class="docutils literal notranslate"><span class="pre">dsc</span></code> <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>LV_RES_OK: opened the image. <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code> and <code class="docutils literal notranslate"><span class="pre">dsc-&gt;header</span></code> are set. LV_RES_INV: none of the registered image decoders were able to open the image. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: describe a decoding session. Simply a pointer to an <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_dsc_t</span></code> variable. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: the image source. Can be 1) File name: E.g. “S:folder/img1.png” (The drivers needs to registered via <code class="docutils literal notranslate"><span class="pre">lv_fs_add_drv()</span></code>) 2) Variable: Pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable 3) Symbol: E.g. <code class="docutils literal notranslate"><span class="pre">LV_SYMBOL_OK</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: the style of the image </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424lv_img_decoder_read_lineP20lv_img_decoder_dsc_t10lv_coord_t10lv_coord_t10lv_coord_tP7uint8_t">
+<span id="_CPPv324lv_img_decoder_read_lineP20lv_img_decoder_dsc_t10lv_coord_t10lv_coord_t10lv_coord_tP7uint8_t"></span><span id="_CPPv224lv_img_decoder_read_lineP20lv_img_decoder_dsc_t10lv_coord_t10lv_coord_t10lv_coord_tP7uint8_t"></span><span id="lv_img_decoder_read_line__lv_img_decoder_dsc_tP.lv_coord_t.lv_coord_t.lv_coord_t.uint8_tP"></span><span class="target" id="lv__img__decoder_8h_1aa1d1b19e85278c9d5a0f02d0bbdeacc2"></span>lv_res_t <code class="sig-name descname">lv_img_decoder_read_line</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420lv_img_decoder_dsc_t" title="lv_img_decoder_dsc_t">lv_img_decoder_dsc_t</a> *<em>dsc</em>, lv_coord_t <em>x</em>, lv_coord_t <em>y</em>, lv_coord_t <em>len</em>, uint8_t *<em>buf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_img_decoder_read_lineP20lv_img_decoder_dsc_t10lv_coord_t10lv_coord_t10lv_coord_tP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read a line from an opened image <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>LV_RES_OK: success; LV_RES_INV: an error occurred </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_dsc_t</span></code> used in <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: start X coordinate (from left) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: start Y coordinate (from top) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len</span></code>: number of pixels to read </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: store the data here </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_img_decoder_closeP20lv_img_decoder_dsc_t">
+<span id="_CPPv320lv_img_decoder_closeP20lv_img_decoder_dsc_t"></span><span id="_CPPv220lv_img_decoder_closeP20lv_img_decoder_dsc_t"></span><span id="lv_img_decoder_close__lv_img_decoder_dsc_tP"></span><span class="target" id="lv__img__decoder_8h_1a43f69939ef89a85e3f7db25f12994259"></span>void <code class="sig-name descname">lv_img_decoder_close</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420lv_img_decoder_dsc_t" title="lv_img_decoder_dsc_t">lv_img_decoder_dsc_t</a> *<em>dsc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_img_decoder_closeP20lv_img_decoder_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Close a decoding session <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_dsc_t</span></code> used in <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open</span></code> </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_img_decoder_createv">
+<span id="_CPPv321lv_img_decoder_createv"></span><span id="_CPPv221lv_img_decoder_createv"></span><span id="lv_img_decoder_create__void"></span><span class="target" id="lv__img__decoder_8h_1a8df63dfae9b145c89e7ba083f6d799f8"></span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t">lv_img_decoder_t</a> *<code class="sig-name descname">lv_img_decoder_create</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_img_decoder_createv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a new image decoder <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the new image decoder </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_img_decoder_deleteP16lv_img_decoder_t">
+<span id="_CPPv321lv_img_decoder_deleteP16lv_img_decoder_t"></span><span id="_CPPv221lv_img_decoder_deleteP16lv_img_decoder_t"></span><span id="lv_img_decoder_delete__lv_img_decoder_tP"></span><span class="target" id="lv__img__decoder_8h_1a4300a1f473bc2bb4759e73c3dbda8752"></span>void <code class="sig-name descname">lv_img_decoder_delete</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t">lv_img_decoder_t</a> *<em>decoder</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_img_decoder_deleteP16lv_img_decoder_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Delete an image decoder <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to an image decoder </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426lv_img_decoder_set_info_cbP16lv_img_decoder_t23lv_img_decoder_info_f_t">
+<span id="_CPPv326lv_img_decoder_set_info_cbP16lv_img_decoder_t23lv_img_decoder_info_f_t"></span><span id="_CPPv226lv_img_decoder_set_info_cbP16lv_img_decoder_t23lv_img_decoder_info_f_t"></span><span id="lv_img_decoder_set_info_cb__lv_img_decoder_tP.lv_img_decoder_info_f_t"></span><span class="target" id="lv__img__decoder_8h_1a7ad354bc2edc1a65ed93e1e34ca7da1d"></span>void <code class="sig-name descname">lv_img_decoder_set_info_cb</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t">lv_img_decoder_t</a> *<em>decoder</em>, <a class="reference internal" href="#_CPPv423lv_img_decoder_info_f_t" title="lv_img_decoder_info_f_t">lv_img_decoder_info_f_t</a> <em>info_cb</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_img_decoder_set_info_cbP16lv_img_decoder_t23lv_img_decoder_info_f_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a callback to get information about the image <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to an image decoder </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">info_cb</span></code>: a function to collect info about an image (fill an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__header__t"><span class="std std-ref"><span class="pre">lv_img_header_t</span></span></a></code> struct) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426lv_img_decoder_set_open_cbP16lv_img_decoder_t23lv_img_decoder_open_f_t">
+<span id="_CPPv326lv_img_decoder_set_open_cbP16lv_img_decoder_t23lv_img_decoder_open_f_t"></span><span id="_CPPv226lv_img_decoder_set_open_cbP16lv_img_decoder_t23lv_img_decoder_open_f_t"></span><span id="lv_img_decoder_set_open_cb__lv_img_decoder_tP.lv_img_decoder_open_f_t"></span><span class="target" id="lv__img__decoder_8h_1a84de5e7107f70800033055b61c2fa454"></span>void <code class="sig-name descname">lv_img_decoder_set_open_cb</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t">lv_img_decoder_t</a> *<em>decoder</em>, <a class="reference internal" href="#_CPPv423lv_img_decoder_open_f_t" title="lv_img_decoder_open_f_t">lv_img_decoder_open_f_t</a> <em>open_cb</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_img_decoder_set_open_cbP16lv_img_decoder_t23lv_img_decoder_open_f_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a callback to open an image <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to an image decoder </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">open_cb</span></code>: a function to open an image </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv431lv_img_decoder_set_read_line_cbP16lv_img_decoder_t28lv_img_decoder_read_line_f_t">
+<span id="_CPPv331lv_img_decoder_set_read_line_cbP16lv_img_decoder_t28lv_img_decoder_read_line_f_t"></span><span id="_CPPv231lv_img_decoder_set_read_line_cbP16lv_img_decoder_t28lv_img_decoder_read_line_f_t"></span><span id="lv_img_decoder_set_read_line_cb__lv_img_decoder_tP.lv_img_decoder_read_line_f_t"></span><span class="target" id="lv__img__decoder_8h_1a917d7d1c9c59a214edcf844f378c4a33"></span>void <code class="sig-name descname">lv_img_decoder_set_read_line_cb</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t">lv_img_decoder_t</a> *<em>decoder</em>, <a class="reference internal" href="#_CPPv428lv_img_decoder_read_line_f_t" title="lv_img_decoder_read_line_f_t">lv_img_decoder_read_line_f_t</a> <em>read_line_cb</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431lv_img_decoder_set_read_line_cbP16lv_img_decoder_t28lv_img_decoder_read_line_f_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a callback to a decoded line of an image <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to an image decoder </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_line_cb</span></code>: a function to read a line of an image </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427lv_img_decoder_set_close_cbP16lv_img_decoder_t24lv_img_decoder_close_f_t">
+<span id="_CPPv327lv_img_decoder_set_close_cbP16lv_img_decoder_t24lv_img_decoder_close_f_t"></span><span id="_CPPv227lv_img_decoder_set_close_cbP16lv_img_decoder_t24lv_img_decoder_close_f_t"></span><span id="lv_img_decoder_set_close_cb__lv_img_decoder_tP.lv_img_decoder_close_f_t"></span><span class="target" id="lv__img__decoder_8h_1a3be3e7a764fceea05389aeb6d0c30aa6"></span>void <code class="sig-name descname">lv_img_decoder_set_close_cb</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t">lv_img_decoder_t</a> *<em>decoder</em>, <a class="reference internal" href="#_CPPv424lv_img_decoder_close_f_t" title="lv_img_decoder_close_f_t">lv_img_decoder_close_f_t</a> <em>close_cb</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lv_img_decoder_set_close_cbP16lv_img_decoder_t24lv_img_decoder_close_f_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a callback to close a decoding session. E.g. close files and free other resources. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to an image decoder </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close_cb</span></code>: a function to close a decoding session </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv428lv_img_decoder_set_user_dataP16lv_img_decoder_t16lv_img_decoder_t">
+<span id="_CPPv328lv_img_decoder_set_user_dataP16lv_img_decoder_t16lv_img_decoder_t"></span><span id="_CPPv228lv_img_decoder_set_user_dataP16lv_img_decoder_t16lv_img_decoder_t"></span><span id="lv_img_decoder_set_user_data__lv_img_decoder_tP.lv_img_decoder_t"></span><span class="target" id="lv__img__decoder_8h_1a673f9012eb0b76b270874185d36d30e0"></span><em class="property">static</em> void <code class="sig-name descname">lv_img_decoder_set_user_data</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t">lv_img_decoder_t</a> *<em>decoder</em>, <a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t">lv_img_decoder_t</a> <em>user_data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428lv_img_decoder_set_user_dataP16lv_img_decoder_t16lv_img_decoder_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a custom user data in an image decoder. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to an image decoder </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user_data</span></code>: the user data to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv428lv_img_decoder_get_user_dataP16lv_img_decoder_t">
+<span id="_CPPv328lv_img_decoder_get_user_dataP16lv_img_decoder_t"></span><span id="_CPPv228lv_img_decoder_get_user_dataP16lv_img_decoder_t"></span><span id="lv_img_decoder_get_user_data__lv_img_decoder_tP"></span><span class="target" id="lv__img__decoder_8h_1a8883c7a5bfd88e303279ae9de6929789"></span><em class="property">static</em> lv_img_decoder_user_data_t <code class="sig-name descname">lv_img_decoder_get_user_data</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t">lv_img_decoder_t</a> *<em>decoder</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428lv_img_decoder_get_user_dataP16lv_img_decoder_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the user data <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the user data </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to an image decoder </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv432lv_img_decoder_get_user_data_ptrP16lv_img_decoder_t">
+<span id="_CPPv332lv_img_decoder_get_user_data_ptrP16lv_img_decoder_t"></span><span id="_CPPv232lv_img_decoder_get_user_data_ptrP16lv_img_decoder_t"></span><span id="lv_img_decoder_get_user_data_ptr__lv_img_decoder_tP"></span><span class="target" id="lv__img__decoder_8h_1a23c0e942e44da2096cda83b602dd7739"></span><em class="property">static</em> lv_img_decoder_user_data_t *<code class="sig-name descname">lv_img_decoder_get_user_data_ptr</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t">lv_img_decoder_t</a> *<em>decoder</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432lv_img_decoder_get_user_data_ptrP16lv_img_decoder_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a pointer to the user data <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the user data </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to an image decoder </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv415lv_img_header_t">
+<span id="_CPPv315lv_img_header_t"></span><span id="_CPPv215lv_img_header_t"></span><span id="lv_img_header_t"></span><span class="target" id="structlv__img__header__t"></span><em class="property">struct </em><code class="sig-name descname">lv_img_header_t</code><a class="headerlink" href="#_CPPv415lv_img_header_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N15lv_img_header_t2cfE">
+<span id="_CPPv3N15lv_img_header_t2cfE"></span><span id="_CPPv2N15lv_img_header_t2cfE"></span><span id="lv_img_header_t::cf__uint32_t"></span><span class="target" id="structlv__img__header__t_1a28513641737b777e0c546bd098eb58af"></span>uint32_t <code class="sig-name descname">cf</code><a class="headerlink" href="#_CPPv4N15lv_img_header_t2cfE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_img_header_t11always_zeroE">
+<span id="_CPPv3N15lv_img_header_t11always_zeroE"></span><span id="_CPPv2N15lv_img_header_t11always_zeroE"></span><span id="lv_img_header_t::always_zero__uint32_t"></span><span class="target" id="structlv__img__header__t_1a2500e38eea0424cf5639521e4cd36f74"></span>uint32_t <code class="sig-name descname">always_zero</code><a class="headerlink" href="#_CPPv4N15lv_img_header_t11always_zeroE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_img_header_t8reservedE">
+<span id="_CPPv3N15lv_img_header_t8reservedE"></span><span id="_CPPv2N15lv_img_header_t8reservedE"></span><span id="lv_img_header_t::reserved__uint32_t"></span><span class="target" id="structlv__img__header__t_1a7cf6525f2cb39346f5438973c489bf89"></span>uint32_t <code class="sig-name descname">reserved</code><a class="headerlink" href="#_CPPv4N15lv_img_header_t8reservedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_img_header_t1wE">
+<span id="_CPPv3N15lv_img_header_t1wE"></span><span id="_CPPv2N15lv_img_header_t1wE"></span><span id="lv_img_header_t::w__uint32_t"></span><span class="target" id="structlv__img__header__t_1a6553f8a9dc1a0f8c50dc51dda3aab537"></span>uint32_t <code class="sig-name descname">w</code><a class="headerlink" href="#_CPPv4N15lv_img_header_t1wE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_img_header_t1hE">
+<span id="_CPPv3N15lv_img_header_t1hE"></span><span id="_CPPv2N15lv_img_header_t1hE"></span><span id="lv_img_header_t::h__uint32_t"></span><span class="target" id="structlv__img__header__t_1a7e3391cd72119d417766378f18aaae2c"></span>uint32_t <code class="sig-name descname">h</code><a class="headerlink" href="#_CPPv4N15lv_img_header_t1hE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv412lv_img_dsc_t">
+<span id="_CPPv312lv_img_dsc_t"></span><span id="_CPPv212lv_img_dsc_t"></span><span id="lv_img_dsc_t"></span><span class="target" id="structlv__img__dsc__t"></span><em class="property">struct </em><code class="sig-name descname">lv_img_dsc_t</code><a class="headerlink" href="#_CPPv412lv_img_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N12lv_img_dsc_t6headerE">
+<span id="_CPPv3N12lv_img_dsc_t6headerE"></span><span id="_CPPv2N12lv_img_dsc_t6headerE"></span><span id="lv_img_dsc_t::header__lv_img_header_t"></span><span class="target" id="structlv__img__dsc__t_1a552a5487bb4457d4b565dfa00381a846"></span><a class="reference internal" href="#_CPPv415lv_img_header_t" title="lv_img_header_t">lv_img_header_t</a> <code class="sig-name descname">header</code><a class="headerlink" href="#_CPPv4N12lv_img_dsc_t6headerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N12lv_img_dsc_t9data_sizeE">
+<span id="_CPPv3N12lv_img_dsc_t9data_sizeE"></span><span id="_CPPv2N12lv_img_dsc_t9data_sizeE"></span><span id="lv_img_dsc_t::data_size__uint32_t"></span><span class="target" id="structlv__img__dsc__t_1aef7de962a5e45e270151bec6bd4cdc80"></span>uint32_t <code class="sig-name descname">data_size</code><a class="headerlink" href="#_CPPv4N12lv_img_dsc_t9data_sizeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N12lv_img_dsc_t4dataE">
+<span id="_CPPv3N12lv_img_dsc_t4dataE"></span><span id="_CPPv2N12lv_img_dsc_t4dataE"></span><span id="lv_img_dsc_t::data__uint8_tCP"></span><span class="target" id="structlv__img__dsc__t_1a09900b90ae9c9888e341616b611df3a0"></span><em class="property">const</em> uint8_t *<code class="sig-name descname">data</code><a class="headerlink" href="#_CPPv4N12lv_img_dsc_t4dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv415_lv_img_decoder">
+<span id="_CPPv315_lv_img_decoder"></span><span id="_CPPv215_lv_img_decoder"></span><span id="_lv_img_decoder"></span><span class="target" id="struct__lv__img__decoder"></span><em class="property">struct </em><code class="sig-name descname">_lv_img_decoder</code><a class="headerlink" href="#_CPPv415_lv_img_decoder" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N15_lv_img_decoder7info_cbE">
+<span id="_CPPv3N15_lv_img_decoder7info_cbE"></span><span id="_CPPv2N15_lv_img_decoder7info_cbE"></span><span id="_lv_img_decoder::info_cb__lv_img_decoder_info_f_t"></span><span class="target" id="struct__lv__img__decoder_1a18882a4f443af31d32c127cf6dbf9cae"></span><a class="reference internal" href="#_CPPv423lv_img_decoder_info_f_t" title="lv_img_decoder_info_f_t">lv_img_decoder_info_f_t</a> <code class="sig-name descname">info_cb</code><a class="headerlink" href="#_CPPv4N15_lv_img_decoder7info_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_img_decoder7open_cbE">
+<span id="_CPPv3N15_lv_img_decoder7open_cbE"></span><span id="_CPPv2N15_lv_img_decoder7open_cbE"></span><span id="_lv_img_decoder::open_cb__lv_img_decoder_open_f_t"></span><span class="target" id="struct__lv__img__decoder_1af244d8d6941019d8f6612f0f05905f93"></span><a class="reference internal" href="#_CPPv423lv_img_decoder_open_f_t" title="lv_img_decoder_open_f_t">lv_img_decoder_open_f_t</a> <code class="sig-name descname">open_cb</code><a class="headerlink" href="#_CPPv4N15_lv_img_decoder7open_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_img_decoder12read_line_cbE">
+<span id="_CPPv3N15_lv_img_decoder12read_line_cbE"></span><span id="_CPPv2N15_lv_img_decoder12read_line_cbE"></span><span id="_lv_img_decoder::read_line_cb__lv_img_decoder_read_line_f_t"></span><span class="target" id="struct__lv__img__decoder_1ac25eadad12cb1b7b544a559349d7a160"></span><a class="reference internal" href="#_CPPv428lv_img_decoder_read_line_f_t" title="lv_img_decoder_read_line_f_t">lv_img_decoder_read_line_f_t</a> <code class="sig-name descname">read_line_cb</code><a class="headerlink" href="#_CPPv4N15_lv_img_decoder12read_line_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_img_decoder8close_cbE">
+<span id="_CPPv3N15_lv_img_decoder8close_cbE"></span><span id="_CPPv2N15_lv_img_decoder8close_cbE"></span><span id="_lv_img_decoder::close_cb__lv_img_decoder_close_f_t"></span><span class="target" id="struct__lv__img__decoder_1aa845b0010a18ff7b31b8ddffd22bc587"></span><a class="reference internal" href="#_CPPv424lv_img_decoder_close_f_t" title="lv_img_decoder_close_f_t">lv_img_decoder_close_f_t</a> <code class="sig-name descname">close_cb</code><a class="headerlink" href="#_CPPv4N15_lv_img_decoder8close_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_img_decoder9user_dataE">
+<span id="_CPPv3N15_lv_img_decoder9user_dataE"></span><span id="_CPPv2N15_lv_img_decoder9user_dataE"></span><span id="_lv_img_decoder::user_data__lv_img_decoder_user_data_t"></span><span class="target" id="struct__lv__img__decoder_1af9a8645b1c9dc8f0a21533f892b8de3b"></span>lv_img_decoder_user_data_t <code class="sig-name descname">user_data</code><a class="headerlink" href="#_CPPv4N15_lv_img_decoder9user_dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv419_lv_img_decoder_dsc">
+<span id="_CPPv319_lv_img_decoder_dsc"></span><span id="_CPPv219_lv_img_decoder_dsc"></span><span id="_lv_img_decoder_dsc"></span><span class="target" id="struct__lv__img__decoder__dsc"></span><em class="property">struct </em><code class="sig-name descname">_lv_img_decoder_dsc</code><a class="headerlink" href="#_CPPv419_lv_img_decoder_dsc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;lv_img_decoder.h&gt;</em><p>Describe an image decoding session. Stores data about the decoding </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N19_lv_img_decoder_dsc7decoderE">
+<span id="_CPPv3N19_lv_img_decoder_dsc7decoderE"></span><span id="_CPPv2N19_lv_img_decoder_dsc7decoderE"></span><span id="_lv_img_decoder_dsc::decoder__lv_img_decoder_tP"></span><span class="target" id="struct__lv__img__decoder__dsc_1abc38a5384f96fa5108b98b5cd37a3369"></span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t">lv_img_decoder_t</a> *<code class="sig-name descname">decoder</code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc7decoderE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The decoder which was able to open the image source </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19_lv_img_decoder_dsc3srcE">
+<span id="_CPPv3N19_lv_img_decoder_dsc3srcE"></span><span id="_CPPv2N19_lv_img_decoder_dsc3srcE"></span><span id="_lv_img_decoder_dsc::src__voidCP"></span><span class="target" id="struct__lv__img__decoder__dsc_1a94add3cd314fd53df673970fff759ef8"></span><em class="property">const</em> void *<code class="sig-name descname">src</code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc3srcE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The image source. A file path like “S:my_img.png” or pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19_lv_img_decoder_dsc5styleE">
+<span id="_CPPv3N19_lv_img_decoder_dsc5styleE"></span><span id="_CPPv2N19_lv_img_decoder_dsc5styleE"></span><span id="_lv_img_decoder_dsc::style__lv_style_tCP"></span><span class="target" id="struct__lv__img__decoder__dsc_1a3310aed53be4c34b2287f8ec1f883aa6"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">style</code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc5styleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Style to draw the image. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19_lv_img_decoder_dsc8src_typeE">
+<span id="_CPPv3N19_lv_img_decoder_dsc8src_typeE"></span><span id="_CPPv2N19_lv_img_decoder_dsc8src_typeE"></span><span id="_lv_img_decoder_dsc::src_type__lv_img_src_t"></span><span class="target" id="struct__lv__img__decoder__dsc_1acd962897195664512c8ccf7e5c02714a"></span><a class="reference internal" href="#_CPPv412lv_img_src_t" title="lv_img_src_t">lv_img_src_t</a> <code class="sig-name descname">src_type</code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc8src_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Type of the source: file or variable. Can be set in <code class="docutils literal notranslate"><span class="pre">open</span></code> function if required </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19_lv_img_decoder_dsc6headerE">
+<span id="_CPPv3N19_lv_img_decoder_dsc6headerE"></span><span id="_CPPv2N19_lv_img_decoder_dsc6headerE"></span><span id="_lv_img_decoder_dsc::header__lv_img_header_t"></span><span class="target" id="struct__lv__img__decoder__dsc_1a5e07a8990562f89421b50e447a766da2"></span><a class="reference internal" href="#_CPPv415lv_img_header_t" title="lv_img_header_t">lv_img_header_t</a> <code class="sig-name descname">header</code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc6headerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Info about the opened image: color format, size, etc. MUST be set in <code class="docutils literal notranslate"><span class="pre">open</span></code> function </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19_lv_img_decoder_dsc8img_dataE">
+<span id="_CPPv3N19_lv_img_decoder_dsc8img_dataE"></span><span id="_CPPv2N19_lv_img_decoder_dsc8img_dataE"></span><span id="_lv_img_decoder_dsc::img_data__uint8_tCP"></span><span class="target" id="struct__lv__img__decoder__dsc_1ae464ea2d105534964e308a2c14666a05"></span><em class="property">const</em> uint8_t *<code class="sig-name descname">img_data</code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc8img_dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pointer to a buffer where the image’s data (pixels) are stored in a decoded, plain format. MUST be set in <code class="docutils literal notranslate"><span class="pre">open</span></code> function </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19_lv_img_decoder_dsc12time_to_openE">
+<span id="_CPPv3N19_lv_img_decoder_dsc12time_to_openE"></span><span id="_CPPv2N19_lv_img_decoder_dsc12time_to_openE"></span><span id="_lv_img_decoder_dsc::time_to_open__uint32_t"></span><span class="target" id="struct__lv__img__decoder__dsc_1aadc5c0f5ed7fe9366155a3c960fa0154"></span>uint32_t <code class="sig-name descname">time_to_open</code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc12time_to_openE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>How much time did it take to open the image. [ms] If not set <code class="docutils literal notranslate"><span class="pre">lv_img_cache</span></code> will measure and set the time to open </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19_lv_img_decoder_dsc9error_msgE">
+<span id="_CPPv3N19_lv_img_decoder_dsc9error_msgE"></span><span id="_CPPv2N19_lv_img_decoder_dsc9error_msgE"></span><span id="_lv_img_decoder_dsc::error_msg__cCP"></span><span class="target" id="struct__lv__img__decoder__dsc_1ab8c419f90976c81f23f40079564d4a42"></span><em class="property">const</em> char *<code class="sig-name descname">error_msg</code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc9error_msgE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A text to display instead of the image when the image can’t be opened. Can be set in <code class="docutils literal notranslate"><span class="pre">open</span></code> function or set NULL. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N19_lv_img_decoder_dsc9user_dataE">
+<span id="_CPPv3N19_lv_img_decoder_dsc9user_dataE"></span><span id="_CPPv2N19_lv_img_decoder_dsc9user_dataE"></span><span id="_lv_img_decoder_dsc::user_data__voidP"></span><span class="target" id="struct__lv__img__decoder__dsc_1a3c71f68d3e21c2bcb96693d45ca2424e"></span>void *<code class="sig-name descname">user_data</code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc9user_dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Store any custom data here is required </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="image-cache">
+<h3>Image cache<a class="headerlink" href="#image-cache" title="Permalink to this headline">¶</a></h3>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv417lv_img_cache_openPKvPK10lv_style_t">
+<span id="_CPPv317lv_img_cache_openPKvPK10lv_style_t"></span><span id="_CPPv217lv_img_cache_openPKvPK10lv_style_t"></span><span id="lv_img_cache_open__voidCP.lv_style_tCP"></span><span class="target" id="lv__img__cache_8h_1a15a3ebb1811b8d1d416f50a1c59ec117"></span><a class="reference internal" href="#_CPPv420lv_img_cache_entry_t" title="lv_img_cache_entry_t">lv_img_cache_entry_t</a> *<code class="sig-name descname">lv_img_cache_open</code><span class="sig-paren">(</span><em class="property">const</em> void *<em>src</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_img_cache_openPKvPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open an image using the image decoder interface and cache it. The image will be left open meaning if the image decoder open callback allocated memory then it will remain. The image is closed if a new image is opened and the new image takes its place in the cache. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the cache entry or NULL if can open the image </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: source of the image. Path to file or pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: style of the image </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_img_cache_set_size8uint16_t">
+<span id="_CPPv321lv_img_cache_set_size8uint16_t"></span><span id="_CPPv221lv_img_cache_set_size8uint16_t"></span><span id="lv_img_cache_set_size__uint16_t"></span><span class="target" id="lv__img__cache_8h_1a46b15e19e694e1db820b6cdaf9bf2ded"></span>void <code class="sig-name descname">lv_img_cache_set_size</code><span class="sig-paren">(</span>uint16_t <em>new_slot_num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_img_cache_set_size8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the number of images to be cached. More cached images mean more opened image at same time which might mean more memory usage. E.g. if 20 PNG or JPG images are open in the RAM they consume memory while opened in the cache. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">new_slot_num</span></code>: number of image to cache </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427lv_img_cache_invalidate_srcPKv">
+<span id="_CPPv327lv_img_cache_invalidate_srcPKv"></span><span id="_CPPv227lv_img_cache_invalidate_srcPKv"></span><span id="lv_img_cache_invalidate_src__voidCP"></span><span class="target" id="lv__img__cache_8h_1a958506ba24cd5caea94613788c4be8b6"></span>void <code class="sig-name descname">lv_img_cache_invalidate_src</code><span class="sig-paren">(</span><em class="property">const</em> void *<em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lv_img_cache_invalidate_srcPKv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Invalidate an image source in the cache. Useful if the image source is updated therefore it needs to be cached again. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: an image source path to a file or pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv420lv_img_cache_entry_t">
+<span id="_CPPv320lv_img_cache_entry_t"></span><span id="_CPPv220lv_img_cache_entry_t"></span><span id="lv_img_cache_entry_t"></span><span class="target" id="structlv__img__cache__entry__t"></span><em class="property">struct </em><code class="sig-name descname">lv_img_cache_entry_t</code><a class="headerlink" href="#_CPPv420lv_img_cache_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N20lv_img_cache_entry_t7dec_dscE">
+<span id="_CPPv3N20lv_img_cache_entry_t7dec_dscE"></span><span id="_CPPv2N20lv_img_cache_entry_t7dec_dscE"></span><span id="lv_img_cache_entry_t::dec_dsc__lv_img_decoder_dsc_t"></span><span class="target" id="structlv__img__cache__entry__t_1a9b028e61de22cd7736613442bab198bc"></span><a class="reference internal" href="#_CPPv420lv_img_decoder_dsc_t" title="lv_img_decoder_dsc_t">lv_img_decoder_dsc_t</a> <code class="sig-name descname">dec_dsc</code><a class="headerlink" href="#_CPPv4N20lv_img_cache_entry_t7dec_dscE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N20lv_img_cache_entry_t4lifeE">
+<span id="_CPPv3N20lv_img_cache_entry_t4lifeE"></span><span id="_CPPv2N20lv_img_cache_entry_t4lifeE"></span><span id="lv_img_cache_entry_t::life__int32_t"></span><span class="target" id="structlv__img__cache__entry__t_1a17fb9d7d7a352c80701163420d05440b"></span>int32_t <code class="sig-name descname">life</code><a class="headerlink" href="#_CPPv4N20lv_img_cache_entry_t4lifeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
 </div>
 
 
@@ -1012,7 +1896,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jun 25, 2019.
+        Last updated on Jun 26, 2019.
       </span>
 
     </p>
