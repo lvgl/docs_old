@@ -1,18 +1,22 @@
 # Canvas (lv_canvas)
 
 ## Overview
-A Canvas is like an [Image](/object-types/img) with a buffer where the user can draw anything. 
+A Canvas is like an [Image](/object-types/img) where the user can draw anything. 
 
 ### Buffer
-To assign a buffer to a canvas use `lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_TRUE_COLOR_ALPHA)`. `buffer` is a static buffer (not just a local variable) to hold the image of the canvas. For example 
+The Canvas needs a buffer which stores the drawn image. 
+To assign a buffer to a Canvas use `lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_TRUE_COLOR_ALPHA)`. 
+`buffer` is a static buffer (not just a local variable) to hold the image of the canvas. 
+For example 
 `static lv_color_t buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width, height)]`. `LV_CANVAS_BUF_SIZE_...` macros help to determine the size of the buffer with different color formats.
 
 ### Palette
-For `LV_IMG_CF_INDEXED_...` color formats the palette needs to set with  `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)`. It sets pixels with *index=3* to red.
+For `LV_IMG_CF_INDEXED_...` color formats a palette needs to be initialized with  `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)`. It sets pixels with *index=3* to red.
 
 
 ### Drawing
-The set a pixel on the canvas use `lv_canvas_set_px(canvas, x, y, LV_COLOR_RED)`. With `LV_IMG_CF_INDEXED_...` or `LV_IMG_CF_ALPHA_...` the index of the color or the alpha value needs to be passed as color. E.g. `lv_color_t c; c.full = 3;`
+To set a pixel on the canvas use `lv_canvas_set_px(canvas, x, y, LV_COLOR_RED)`. 
+With `LV_IMG_CF_INDEXED_...` or `LV_IMG_CF_ALPHA_...` the index of the color or the alpha value needs to be passed as color. E.g. `lv_color_t c; c.full = 3;`
 
 `lv_canvas_fill_bg(canvas, LV_COLOR_BLUE)` fills the whole canvas to blue.
 
@@ -27,10 +31,11 @@ To draw something to the canvas use
 - `lv_canvas_draw_arc(canvas, x, y, radius, start_angle, end_angle, &style)`
 
 ### Rotate
-An rotated image can be added to canvas with `lv_canvas_rotate(canvas, &imd_dsc, angle, x, y, pivot_x, pivot_y)`. It will rotate the image shown by `img_dsc` around the given pivot and stores it on the `x`, `y` coordinates of `canvas`.
+A rotated image can be added to canvas with `lv_canvas_rotate(canvas, &imd_dsc, angle, x, y, pivot_x, pivot_y)`. 
+It will rotate the image shown by `img_dsc` around the given pivot and stores it on the `x`, `y` coordinates of `canvas`.
 Instead of `img_dsc` and the buffer of an other canvas also can be used by `lv_canvas_get_img(canvas)`.
 
-Note that a canvas can't be rotated on itself but a source and destination (the canvas).
+Note that a canvas can't be rotated on itself.  You need a source and destination canvas or image.
 
 ## Styles
 You can set the styles with `lv_canvas_set_style(btn, LV_CANVAS_STYLE_MAIN, &style)`. 

@@ -44,6 +44,12 @@ extensions = ['sphinx.ext.autodoc',
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
+# The default language to highlight source code in. The default is 'python'. 
+# The value should be a valid Pygments lexer name, see Showing code examples for more details.
+
+
+highlight_language = 'c'
+
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
