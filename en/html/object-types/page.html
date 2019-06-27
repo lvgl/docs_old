@@ -728,6 +728,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#scrollbars">Scrollbars</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#glue-object">Glue object</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#focus-object">Focus object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manual-navigation">Manual navigation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#edge-flash">Edge flash</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#scroll-propagation">Scroll propagation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#scrollable-api">Scrollable API</a></li>
@@ -871,6 +872,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="tabview.html#style-usage">Style usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tabview.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tabview.html#example">Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="tabview.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tabview.html#micropython">MicroPython</a></li>
@@ -1031,7 +1033,7 @@
 If the scrollable container becomes larger then the background it can be *scrolled by dragging (like the lists on smartphones).</p>
 <p>By default, the scrollable’s has <code class="docutils literal notranslate"><span class="pre">LV_FIT_FILL</span></code>auto fit in all directions.
 It means the scrollable size will be the same as the background’s size (minus the paddings) while the children are in the background.
-But when an object is positioned out of the backround the scrollable size will be increased to involve it.</p>
+But when an object is positioned out of the background the scrollable size will be increased to involve it.</p>
 <div class="section" id="scrollbars">
 <h3>Scrollbars<a class="headerlink" href="#scrollbars" title="Permalink to this headline">¶</a></h3>
 <p>Scrollbars can be shown according to four policies:</p>
@@ -1045,12 +1047,17 @@ But when an object is positioned out of the backround the scrollable size will b
 </div>
 <div class="section" id="glue-object">
 <h3>Glue object<a class="headerlink" href="#glue-object" title="Permalink to this headline">¶</a></h3>
-<p>You can glue children to the page. In this case, you can scroll the page by dragging the child object. It can be enabled by the <code class="docutils literal notranslate"><span class="pre">lv_page_glue_obj(child,</span> <span class="pre">true)</span></code>.</p>
+<p>You can glue children to the page. In this case, you can scroll the page by dragging the child object.
+It can be enabled by the <code class="docutils literal notranslate"><span class="pre">lv_page_glue_obj(child,</span> <span class="pre">true)</span></code>.</p>
 </div>
 <div class="section" id="focus-object">
 <h3>Focus object<a class="headerlink" href="#focus-object" title="Permalink to this headline">¶</a></h3>
 <p>You can focus on an object on a page with <code class="docutils literal notranslate"><span class="pre">lv_page_focus(page,</span> <span class="pre">child,</span> <span class="pre">LV_ANIM_ONO/FF)</span></code>.
 It will move the scrollable container to show a child. The time of the animation can be set by <code class="docutils literal notranslate"><span class="pre">lv_page_set_anim_time(page,</span> <span class="pre">anim_time)</span></code> in milliseconds.</p>
+</div>
+<div class="section" id="manual-navigation">
+<h3>Manual navigation<a class="headerlink" href="#manual-navigation" title="Permalink to this headline">¶</a></h3>
+<p>You can move the scrollable object manually using <code class="docutils literal notranslate"><span class="pre">lv_page_scroll_hor(page,</span> <span class="pre">dist)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_page_scroll_ver(page,</span> <span class="pre">dist)</span></code></p>
 </div>
 <div class="section" id="edge-flash">
 <h3>Edge flash<a class="headerlink" href="#edge-flash" title="Permalink to this headline">¶</a></h3>
@@ -1058,8 +1065,8 @@ It will move the scrollable container to show a child. The time of the animation
 </div>
 <div class="section" id="scroll-propagation">
 <h3>Scroll propagation<a class="headerlink" href="#scroll-propagation" title="Permalink to this headline">¶</a></h3>
-<p>If the list is created on an other scrollable element (like an other page)) and the Page can’t be scrolled further the scrolling can be propagated to the parent to continue the scrolling on the parent.
-It can be enebaled with <code class="docutils literal notranslate"><span class="pre">lv_page_set_scroll_propagation(list,</span> <span class="pre">true)</span></code></p>
+<p>If the list is created on an other scrollable element (like an other page) and the Page can’t be scrolled further the scrolling can be propagated to the parent to continue the scrolling on the parent.
+It can be enabled with <code class="docutils literal notranslate"><span class="pre">lv_page_set_scroll_propagation(list,</span> <span class="pre">true)</span></code></p>
 </div>
 <div class="section" id="scrollable-api">
 <h3>Scrollable API<a class="headerlink" href="#scrollable-api" title="Permalink to this headline">¶</a></h3>
@@ -1074,7 +1081,7 @@ It can be enebaled with <code class="docutils literal notranslate"><span class="
 </div>
 <div class="section" id="notes">
 <h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
-<p>The background draws its border when the scrollable is drawn. It ensures that the page always will have a closed shape even if the scrollable has the same color as the page’s parent.</p>
+<p>The background draws its border when the scrollable is drawn. It ensures that the page always will have a closed shape even if the scrollable has the same color as the Page’s parent.</p>
 </div>
 </div>
 <div class="section" id="styles">

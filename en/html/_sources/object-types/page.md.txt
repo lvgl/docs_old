@@ -13,7 +13,7 @@ If the scrollable container becomes larger then the background it can be *scroll
 
 By default, the scrollable's has `LV_FIT_FILL`auto fit in all directions. 
 It means the scrollable size will be the same as the background's size (minus the paddings) while the children are in the background. 
-But when an object is positioned out of the backround the scrollable size will be increased to involve it.
+But when an object is positioned out of the background the scrollable size will be increased to involve it.
   
 ### Scrollbars
  
@@ -27,19 +27,23 @@ Scrollbars can be shown according to four policies:
 You can set scroll bar show policy by: `lv_page_set_sb_mode(page, SB_MODE)`. The default value is `LV_SB_MODE_AUTO`.
 
 ### Glue object
-You can glue children to the page. In this case, you can scroll the page by dragging the child object. It can be enabled by the `lv_page_glue_obj(child, true)`.
+You can glue children to the page. In this case, you can scroll the page by dragging the child object. 
+It can be enabled by the `lv_page_glue_obj(child, true)`.
 
 ### Focus object
 You can focus on an object on a page with `lv_page_focus(page, child, LV_ANIM_ONO/FF)`.
 It will move the scrollable container to show a child. The time of the animation can be set by `lv_page_set_anim_time(page, anim_time)` in milliseconds.
+
+### Manual navigation
+You can move the scrollable object manually using `lv_page_scroll_hor(page, dist)` and `lv_page_scroll_ver(page, dist)`
 
 ### Edge flash
 A circle-like effect can be shown if the list reached the most top/bottom/left/right position. `lv_page_set_edge_flash(list, en)` enables this feature.
 
 ### Scroll propagation
 
-If the list is created on an other scrollable element (like an other page)) and the Page can't be scrolled further the scrolling can be propagated to the parent to continue the scrolling on the parent. 
-It can be enebaled with `lv_page_set_scroll_propagation(list, true)`
+If the list is created on an other scrollable element (like an other page) and the Page can't be scrolled further the scrolling can be propagated to the parent to continue the scrolling on the parent. 
+It can be enabled with `lv_page_set_scroll_propagation(list, true)`
 
 ### Scrollable API
 There are functions to directly set/get the scrollable's attributes: 
@@ -50,7 +54,7 @@ There are functions to directly set/get the scrollable's attributes:
 - `lv_page_set_scrl_layout()`
 
 ### Notes
-The background draws its border when the scrollable is drawn. It ensures that the page always will have a closed shape even if the scrollable has the same color as the page's parent.
+The background draws its border when the scrollable is drawn. It ensures that the page always will have a closed shape even if the scrollable has the same color as the Page's parent.
 
 ## Styles
 

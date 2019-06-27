@@ -12,6 +12,8 @@ Buttons can be in one of the 5 possible states:
 - **LV_BTN_STATE_TGL_PR** Toggled pressed state 
 - **LV_BTN_STATE_INA** Inactive state
 
+The state from `..._REL` to `..._PR` will be changed automatically when the button is pressed and back when released.
+
 You can set the button's state manually with `lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)`.
 
 ### Toggle
@@ -25,8 +27,8 @@ You can disable the layout with `lv_btn_set_layout(btn, LV_LAYOUT_OFF)`
 - `lv_btn_set_fit/fit2/fit4(btn, LV_FIT_..)` enables to set the button width and/or height automatically according to the children, parent, and fit type.
 
 ### Ink effect
-You can enable a special animation on buttons: when a button is pressed a the pressed state will be drawn in a growing circle starting from the point of pressing. It's an ink droplet in the water.
-When the button is released the released state will be reverted by fading. It's like a the ink is fully mixed with a lot of water and already no visible in it. 
+You can enable a special animation on buttons: when a button is pressed, the pressed state will be drawn in a growing circle starting from the point of pressing. It's like an ink droplet in the water.
+When the button is released, the released state will be reverted by fading. It's like the ink is fully mixed with a lot of water and become no visible in it. 
 
 To control this animation use the following functions:
 - `lv_btn_set_ink_in_time(btn, time_ms)` time of circle growing
@@ -51,7 +53,7 @@ Hence you don't need to create a new style for the label.
 
 
 ## Events
-Besided the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the buttons:
+Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the buttons:
  - **LV_EVENT_VALUE_CHANGED** sent when the button is toggled.
 
 Note that the generic input device-related events (like `LV_EVENT_PRESSED`) are sent in the inactive state too. You need to check the state with `lv_btn_get_state(btn)` to ignore the events from inactive buttons.
