@@ -68,6 +68,11 @@ You can set a list of accepted characters with `lv_ta_set_accepted_chars(ta, "01
 ### Max text length
 The maximum number of characters can be limited with `lv_ta_set_max_length(ta, max_char_num)`
 
+### Very long texts
+If there is a  very long text in the Text area  (> 20k characters) its scrolling and drawing might be slow. 
+However, by enabling `LV_LABEL_LONG_TXT_HINT   1` in *lv_conf.h* it can be hugely improved. 
+It will save some info about the label to speed up its drawing. Using `LV_LABEL_LONG_TXT_HINT` the scrolling and drawing will as fast as with "normal" short texts.
+
 ### Select text
 A part of text can be selected if enabled with `lv_ta_set_text_sel(ta, true)`. It works like when you select a text on your PC with your mouse. 
 

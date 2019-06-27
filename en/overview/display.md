@@ -2,8 +2,7 @@
 
 ``` important:: The basic concept of *Display* in LittlevGL is explained in the [Porting](/porting/display) section. So before reading further, please read that section first.
 ```
-
-LittlevGL can handle multiple displays. Every display has unique content.
+In LittlevGL you can have multiple displays each with its own drivers and objects. 
 
 Creating more displays is easy: just initialize display buffers and register the drivers for every display. 
 When you create the UI use `lv_disp_set_deafult(disp)` to tell the library to which display create the object. 
@@ -12,7 +11,7 @@ When you create the UI use `lv_disp_set_deafult(disp)` to tell the library to wh
 But in which cases can you use the multi-display support? Here are some examples:
 - Have a "normal" TFT display with local UI and create "virtual" screens on VNC on demand. (You need to add your own VNC driver)
 - Have a large TFT display and a small monochrome display.
-- Have some smaller and simple displays in large instrument or technology
+- Have some smaller and simple displays in a large instrument or technology
 - Have two large TFT displays: one for a customer and one for the shop assistant
 
 ### Using only one display

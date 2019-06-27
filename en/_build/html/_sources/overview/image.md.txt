@@ -228,7 +228,7 @@ The size of cache can be changed in tun-time with `lv_img_cache_set_size(entry_n
 
 ### Value of images
 If you use more images then the cache size LittlevGL can't cache all of the images. Instead, if a new image needs to be opened but there is no place in the cache the library will close an image. 
-To decide which image to close LittlevGL measured how much did it take to open the image. Images which more time consuming to open are considered more valuable and LittelvGL tries to cache them longer.
+To decide which image to close LittlevGL measured how much did it take to open the image. Images which more time consuming to open are considered more valuable and LittlevGL tries to cache them longer.
 You can manually set the *time to open* value in the decoder open function in `dsc->time_to_open = time_ms` to give a higher or lower value to the image. (Leave it unchanged to let LittlevGL set it)
 
 Every cache entry has a *"life"* value. Every time an image opening happens through the cache the *life* of all entries are decreased to make them older.

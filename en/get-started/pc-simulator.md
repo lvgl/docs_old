@@ -4,7 +4,7 @@
 You can try out the LittlevGL **using only your PC** without any development boards. Write a code, run it on the PC and see the result on the monitor. It is cross-platform: Windows, Linux and OSX are supported.  
 The written code is portable, you can simply copy it when using an embedded hardware.
 
-The simulator is also very useful to report bugs because it means common platform for every user. So it's a good idea the reproduce a bug in simualtor and use the code snippen in the [Forum](https://forum.littelvgl.com).
+The simulator is also very useful to report bugs because it means common platform for every user. So it's a good idea the reproduce a bug in simualtor and use the code snippen in the [Forum](https://forum.littlevgl.com).
 
 ## Select an IDE
 

@@ -14,7 +14,7 @@ void * tick_thread (void *args)
 {
       while(1) {
         usleep(5*1000);   /*Sleep for 5 millisecond*/
-        lv_tick_inc(5);      /*Tell LittelvGL that 5 milliseconds were elapsed*/
+        lv_tick_inc(5);      /*Tell LittlevGL that 5 milliseconds were elapsed*/
     } 
 }
 ``` 

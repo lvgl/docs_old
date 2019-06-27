@@ -313,7 +313,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../object-types/index.html">Object types</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../object-types/index.html">Object types (Widgets)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../object-types/obj.html">Base object (lv_obj)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#overview">Overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#coordinates">Coordinates</a></li>
@@ -379,6 +379,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#states">States</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#toggle">Toggle</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#layout-and-fit">Layout and Fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#ink-effect">Ink effect</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#styles">Styles</a></li>
@@ -618,6 +619,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#text-align">Text align</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#draw-background">Draw background</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#text-recolor">Text recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#very-long-texts">Very long texts</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#symbols">Symbols</a></li>
 </ul>
 </li>
@@ -889,6 +891,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#text-align">Text align</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#accepted-characters">Accepted characters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#max-text-length">Max text length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#very-long-texts">Very long texts</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#select-text">Select text</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#scrollbars">Scrollbars</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#scroll-propagation">Scroll propagation</a></li>
@@ -1065,10 +1068,10 @@ Therefore this method works the best when the MCU has an LCD/TFT interface and t
 <li><p><strong>user_data</strong> custom user data for the driver. Its type can be modified in lv_conf.h.</p></li>
 <li><p><strong>anti-aliasing</strong> use anti-aliasing (edge smoothing). <code class="docutils literal notranslate"><span class="pre">LV_ANTIALIAS</span></code> by default  from <em>lv_conf.h</em></p></li>
 <li><p><strong>rotated</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> swap <code class="docutils literal notranslate"><span class="pre">hor_res</span></code> and <code class="docutils literal notranslate"><span class="pre">ver_res</span></code>. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display’s fill direction.</p></li>
-<li><p><strong>scren_transp</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> the screen can have transparent or opaque style. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> needs to enabled in <em>lv_conf.h</em>
+<li><p><strong>screen_transp</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> the screen can have transparent or opaque style. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> needs to enabled in <em>lv_conf.h</em>
 To use a GPU the following callbacks can be used:</p></li>
-<li><p><strong>mem_fill_cb</strong> fill an area with colors.</p></li>
-<li><p><strong>mem_blend_cb</strong> blend two buffers using opacity.</p></li>
+<li><p><strong>gpu_fill_cb</strong> fill an area with colors.</p></li>
+<li><p><strong>gpu_blend_cb</strong> blend two buffers using opacity.</p></li>
 </ul>
 <p>Some other optional callbacks to make easier and more optimal to work with monochrome, gray-scale or other non-standard FGB displays:</p>
 <ul class="simple">
@@ -1467,13 +1470,13 @@ And finally to register a display for LittlevGL <code class="docutils literal no
 <dd></dd></dl>
 
 <dl class="member">
-<dt id="_CPPv4N11_disp_drv_t12mem_blend_cbE">
-<span id="_CPPv3N11_disp_drv_t12mem_blend_cbE"></span><span id="_CPPv2N11_disp_drv_t12mem_blend_cbE"></span><span class="target" id="struct__disp__drv__t_1a732a8c8650321db570f0f19fff6c007f"></span>void (*<code class="sig-name descname">mem_blend_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> *dest, <em class="property">const</em> <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> *src, uint32_t length, <a class="reference internal" href="../overview/display.html#_CPPv48lv_opa_t" title="lv_opa_t">lv_opa_t</a> opa<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t12mem_blend_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N11_disp_drv_t12gpu_blend_cbE">
+<span id="_CPPv3N11_disp_drv_t12gpu_blend_cbE"></span><span id="_CPPv2N11_disp_drv_t12gpu_blend_cbE"></span><span class="target" id="struct__disp__drv__t_1a3a51d09fd664baa53552c72e8209a39d"></span>void (*<code class="sig-name descname">gpu_blend_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> *dest, <em class="property">const</em> <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> *src, uint32_t length, <a class="reference internal" href="../overview/display.html#_CPPv48lv_opa_t" title="lv_opa_t">lv_opa_t</a> opa<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t12gpu_blend_cbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="member">
-<dt id="_CPPv4N11_disp_drv_t11mem_fill_cbE">
-<span id="_CPPv3N11_disp_drv_t11mem_fill_cbE"></span><span id="_CPPv2N11_disp_drv_t11mem_fill_cbE"></span><span class="target" id="struct__disp__drv__t_1a6a683cded8dc5ce2e3f5c5ecb6385214"></span>void (*<code class="sig-name descname">mem_fill_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> *dest_buf, lv_coord_t dest_width, <em class="property">const</em> lv_area_t *fill_area, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> color<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t11mem_fill_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N11_disp_drv_t11gpu_fill_cbE">
+<span id="_CPPv3N11_disp_drv_t11gpu_fill_cbE"></span><span id="_CPPv2N11_disp_drv_t11gpu_fill_cbE"></span><span class="target" id="struct__disp__drv__t_1a6c5d122ced7061fc1195bb095a2edd2a"></span>void (*<code class="sig-name descname">gpu_fill_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> *dest_buf, lv_coord_t dest_width, <em class="property">const</em> lv_area_t *fill_area, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> color<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t11gpu_fill_cbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="member">
@@ -1572,7 +1575,7 @@ And finally to register a display for LittlevGL <code class="docutils literal no
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jun 26, 2019.
+        Last updated on Jun 27, 2019.
       </span>
 
     </p>

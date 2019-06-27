@@ -1,4 +1,4 @@
-# Object types
+# Object types (Widgets)
 
 ```eval_rst
 

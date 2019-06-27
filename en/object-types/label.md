@@ -44,7 +44,10 @@ You can enable to draw a background for the label with `lv_label_set_body_draw(l
 In the text, you can use commands to re-color parts of the text. For example: `"Write a #ff0000 red# word"`. 
 This feature can be enabled individually for each label by `lv_label_set_recolor()` function. 
 
-Not that recoloring work only in one line. I.e. there can't be `\n` in a recolored text or it can be wrapped by `LV_LABEL_LONG_BREAK` else the text in the new line won't be recolored.
+Note that, recoloring work only in a single line. I.e. there can't be `\n` in a recolored text or it can be wrapped by `LV_LABEL_LONG_BREAK` else the text in the new line won't be recolored.
+
+### Very long texts
+LittlevGL can effectively handle very long (> 40k characters) by saving some extra data (~12 bytes) to speed up drawing. To enable this feature set `LV_LABEL_LONG_TXT_HINT   1` in *lv_conf.h*.
 
 
 ### Symbols

@@ -56,6 +56,7 @@ To ask questions, please use the forum:
 [https://forum.littlevgl.com/](https://forum.littlevgl.com/)
 
 ## Get started
+For a general overview of LittlvGL visit [littlevgl.com](https://littlevgl.com)
 
 To make some experiments with LittlevGL in a simulator on you PC or in even in your browser see the [Get started](/get-started/index) guide.
 
@@ -63,12 +64,7 @@ To see how you can port LittlevGL to your device go to the [Porting](/porting/in
 
 To learn how LittlevGL works start to read the [Overview](/overview/index).
 
-For a general overview of LittlvGL visit [littlevgl.com](https://littlevgl.com)
-
 To read tutorial or shar your own experiences go to the [Blog](https://blog.littlevgl.com)
-
-
-
 
 
 ---
