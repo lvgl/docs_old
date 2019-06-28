@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="lv__img__cache_8h" kind="file" language="C++">
+    <compoundname>lv_img_cache.h</compoundname>
+    <innerclass refid="structlv__img__cache__entry__t" prot="public">lv_img_cache_entry_t</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="lv__img__cache_8h_1a15a3ebb1811b8d1d416f50a1c59ec117" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structlv__img__cache__entry__t" kindref="compound">lv_img_cache_entry_t</ref> *</type>
+        <definition>lv_img_cache_entry_t* lv_img_cache_open</definition>
+        <argsstring>(const void *src, const lv_style_t *style)</argsstring>
+        <name>lv_img_cache_open</name>
+        <param>
+          <type>const void *</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structlv__style__t" kindref="compound">lv_style_t</ref> *</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Open an image using the image decoder interface and cache it. The image will be left open meaning if the image decoder open callback allocated memory then it will remain. The image is closed if a new image is opened and the new image takes its place in the cache. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>source of the image. Path to file or pointer to an <computeroutput><ref refid="structlv__img__dsc__t" kindref="compound">lv_img_dsc_t</ref></computeroutput> variable </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>style of the image </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>pointer to the cache entry or NULL if can open the image </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/work/themba/lvgl/src/lv_draw/lv_img_cache.h" line="53" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="lv__img__cache_8h_1a46b15e19e694e1db820b6cdaf9bf2ded" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lv_img_cache_set_size</definition>
+        <argsstring>(uint16_t new_slot_num)</argsstring>
+        <name>lv_img_cache_set_size</name>
+        <param>
+          <type>uint16_t</type>
+          <declname>new_slot_num</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the number of images to be cached. More cached images mean more opened image at same time which might mean more memory usage. E.g. if 20 PNG or JPG images are open in the RAM they consume memory while opened in the cache. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>new_entry_cnt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of image to cache </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/work/themba/lvgl/src/lv_draw/lv_img_cache.h" line="61" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="lv__img__cache_8h_1a958506ba24cd5caea94613788c4be8b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lv_img_cache_invalidate_src</definition>
+        <argsstring>(const void *src)</argsstring>
+        <name>lv_img_cache_invalidate_src</name>
+        <param>
+          <type>const void *</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Invalidate an image source in the cache. Useful if the image source is updated therefore it needs to be cached again. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>an image source path to a file or pointer to an <computeroutput><ref refid="structlv__img__dsc__t" kindref="compound">lv_img_dsc_t</ref></computeroutput> variable. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/work/themba/lvgl/src/lv_draw/lv_img_cache.h" line="68" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="6"><highlight class="preprocessor">#ifndef<sp/>LV_IMG_CACHE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_IMG_CACHE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">/*********************</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>INCLUDES</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*********************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="lv__img__decoder_8h" kindref="compound">lv_img_decoder.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">/*********************</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>DEFINES</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*********************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">/**********************</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>TYPEDEFS</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>**********************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="structlv__img__cache__entry__t" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="33" refid="structlv__img__cache__entry__t_1a9b028e61de22cd7736613442bab198bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct__lv__img__decoder__dsc" kindref="compound">lv_img_decoder_dsc_t</ref><sp/><ref refid="structlv__img__cache__entry__t_1a9b028e61de22cd7736613442bab198bc" kindref="member">dec_dsc</ref>;<sp/></highlight></codeline>
+<codeline lineno="38" refid="structlv__img__cache__entry__t_1a17fb9d7d7a352c80701163420d05440b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int32_t<sp/><ref refid="structlv__img__cache__entry__t_1a17fb9d7d7a352c80701163420d05440b" kindref="member">life</ref>;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}<sp/><ref refid="structlv__img__cache__entry__t" kindref="compound">lv_img_cache_entry_t</ref>;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment">/**********************</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*<sp/>GLOBAL<sp/>PROTOTYPES</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>**********************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><ref refid="structlv__img__cache__entry__t" kindref="compound">lv_img_cache_entry_t</ref><sp/>*<sp/><ref refid="lv__img__cache_8h_1a15a3ebb1811b8d1d416f50a1c59ec117" kindref="member">lv_img_cache_open</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<sp/>src,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlv__style__t" kindref="compound">lv_style_t</ref><sp/>*<sp/>style);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__img__cache_8h_1a46b15e19e694e1db820b6cdaf9bf2ded" kindref="member">lv_img_cache_set_size</ref>(uint16_t<sp/>new_slot_num);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__img__cache_8h_1a958506ba24cd5caea94613788c4be8b6" kindref="member">lv_img_cache_invalidate_src</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<sp/>src);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="comment">/**********************</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>MACROS</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/>**********************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal">}<sp/></highlight><highlight class="comment">/*<sp/>extern<sp/>&quot;C&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*LV_IMG_CACHE_H*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/work/themba/lvgl/src/lv_draw/lv_img_cache.h"/>
+  </compounddef>
+</doxygen>
