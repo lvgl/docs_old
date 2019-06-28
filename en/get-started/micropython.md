@@ -86,6 +86,6 @@ Drivers can be implemented either in C as Micropython module, or in pure Micropy
 
 - On the [Blog Post](https://blog.littlevgl.com/2019-02-20/micropython-bindings)
 - On `lv_micropython` [README](https://github.com/littlevgl/lv_micropython)
-- On `lv_binding_micropython` [README](`https://github.com/littlevgl/lv_binding_micropython`)
+- On `lv_binding_micropython` [README](https://github.com/littlevgl/lv_binding_micropython)
 - On LittlevGL forum (Feel free to ask anything!)
 - On Micropython [docs](http://docs.micropython.org/en/latest/) and [forum](https://forum.micropython.org/)
