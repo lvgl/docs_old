@@ -13,7 +13,35 @@ The documentation is available in:
 
 The documentation is written in [Markdown](https://en.wikipedia.org/wiki/Markdown). There are many converter tools available to generate HTML or PDF from Markdown files. 
 
-To generate the HTML and PDF files we used [gwtc](https://github.com/yakivmospan/github-wikito-converter) and `./build.sh` in the root folder.
+## Rebuild the documentation
+
+The following directions are given for Ubuntu, but should also be useful as a general guide. They assume that https://github.com/littlevgl/lvgl is cloned in a folder named `lvgl`, and https://github.com/littlevgl/docs is beside it in another folder named `docs`. The paths are not important (both folders can be located anywhere) but you may have to adjust these instructions slightly.
+
+To rebuild the API documentation, you need [Doxygen](http://www.doxygen.nl/).
+
+```sh
+$ ls .
+docs lvgl
+$ sudo apt install doxygen
+$ cd lvgl/scripts
+$ doxygen Doxyfile
+```
+
+The documentation is compiled into HTML or another form using [Sphinx](https://www.sphinx-doc.org). In order to get started Sphinx and some other components need to be installed on your system. 
+
+```sh
+$ ls .
+docs lvgl
+$ pip install -U sphinx recommonmark commonmark breathe sphinx-rtd-theme
+$ cd docs # IMPORTANT: note the two .. paths. The lvgl folder also has a folder inside it named docs.
+$ rm xml/*
+$ cp -a ../lvgl/docs/api_doc/xml/* xml/
+$ cd en
+$ make html
+The HTML pages are in _build/html.
+$
+```
+
 
 # Contributing 
 
