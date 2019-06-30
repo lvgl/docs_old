@@ -92,7 +92,7 @@ lv_obj_set_x(obj1, -30);	/*Move the child a little bit of the parent*/
 
 In LittlevGL objects can be created and deleted dynamically in run-time. 
 It means only the currently created objects consume RAM. 
-For example, if you need a chart you can create it only when it is required and delete when its already not required.
+For example, if you need a chart you can create it when required and delete it after the presentation.
 
 Every objects type has its own **create** function with a unified prototype. 
 It needs two parameters: 
