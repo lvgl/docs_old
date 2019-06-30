@@ -1,12 +1,4 @@
 
-```eval_rst
-
-.. include:: /lang.rst
-
-```
-
- * * *
-
 # Welcome to LittlevGL's documentation!
 
 
@@ -16,6 +8,7 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 
 **[Website](https://littlevgl.com) &nbsp; · &nbsp;** 
 **[GitHub](https://github.com/littlevgl/lvgl) &nbsp; · &nbsp;** 
+**[Forum](https://forum.littlevgl.com) &nbsp; · &nbsp;** 
 **[Live demo](https://littlevgl.com/live-demo) &nbsp; · &nbsp;** 
 **[Simulator](/get-started/pc-simulator) &nbsp; · &nbsp;** 
 **[Blog](https://blog.littlevgl.com/)**
@@ -53,8 +46,12 @@ The source code of LittlevGL is available on GitHub:
 ## Ask questions in the Forum
 We use [GitHub issues](https://github.com/littlevgl/lvgl/issues) for delopment releated discussion.
 To ask questions, please use the forum:
-
 [https://forum.littlevgl.com/](https://forum.littlevgl.com/)
+
+## Documentation in PDF
+You can download the documentation in PDF here:
+[LittlevGL.pdf](file:///home/kisvegabor/projects/littlevgl/docs/en/latex/LittlevGL.pdf)
+
 
 ## Get started
 For a general overview of LittlvGL visit [littlevgl.com](https://littlevgl.com)
