@@ -133,7 +133,7 @@ Screens can be created with any object type. For example, a [Base object](/objec
 
 
 Screens are created on the *default display*. 
-The *deafult screen* is the lastly registered screen with `lv_disp_drv_register` (if there is only screen then that one) or you can explicitly selected display with `lv_disp_set_default(disp)`. 
+The *default screen* is the lastly registered screen with `lv_disp_drv_register` (if there is only screen then that one) or you can explicitly selected display with `lv_disp_set_default(disp)`. 
 `lv_scr_act()` and `lv_scr_load()` operate on the currently default screen. 
 
 Visit [Multi display support](/overview/display) to learn more.
