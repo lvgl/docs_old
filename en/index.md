@@ -18,6 +18,7 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 - Advanced graphics with animations, anti-aliasing, opacity, smooth scrolling
 - Various input devices touch pad, mouse, keyboard, encoder etc
 - Multi language support with UTF-8 encoding
+	Multi-display support, i.e. use more TFT, monochrome displays simultaneously
 - Fully customizable graphical elements
 - Hardware independent to use with any microcontroller or display
 - Scalable to operate with little memory (80 kB Flash, 12 kB RAM)
