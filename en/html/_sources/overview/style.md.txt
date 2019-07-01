@@ -114,7 +114,7 @@ Used by objects containing lines or line-like elements
 ## Built-in styles
 There are several built-in styles in the library:
 
-![](http://docs.littlevgl.com/img/style-built-in.png "Built-in styles in LittlevGL Embedded Graphics Library")
+![](/examples/misc/style-built-in.png "Built-in styles in LittlevGL Embedded Graphics Library")
 
 As you can see there is a style for screens, for buttons, plain and pretty styles and transparent styles as well. 
 
@@ -148,7 +148,7 @@ Here you can learn more about the [Animations](/overview/animation).
 ## Style example
 The example below demonstrates the usage of styles.
 
-![Styles usage example in LittlevGL Embedded Graphics Library](http://docs.littlevgl.com/img/style-example.png)
+![](/examples/misc/style-example.png "Styles usage example in LittlevGL Embedded Graphics Library")
 ```c
 /*Create a style*/
 static lv_style_t style1;
@@ -199,7 +199,7 @@ A theme can initialized by: `lv_theme_<name>_init(hue, font)`. Where `hue` is a 
 
 When a theme is initialized its styles can be used like this:
 
-![](http://docs.littlevgl.com/img/theme-example.png "Theme usage example in Littlev Embedded Graphics Library")
+![](/examples/misc/theme-example.png "Theme usage example in Littlev Embedded Graphics Library")
 
 ```c
 /*Create a default slider*/
