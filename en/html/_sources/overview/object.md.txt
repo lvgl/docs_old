@@ -92,7 +92,7 @@ lv_obj_set_x(obj1, -30);	/*Move the child a little bit of the parent*/
 
 In LittlevGL objects can be created and deleted dynamically in run-time. 
 It means only the currently created objects consume RAM. 
-For example, if you need a chart you can create it only when it is required and delete when its already not required.
+For example, if you need a chart you can create it when required and delete it when it is not visible or necessary.
 
 Every objects type has its own **create** function with a unified prototype. 
 It needs two parameters: 
@@ -133,7 +133,7 @@ Screens can be created with any object type. For example, a [Base object](/objec
 
 
 Screens are created on the *default display*. 
-The *deafult screen* is the lastly registered screen with `lv_disp_drv_register` (if there is only screen then that one) or you can explicitly selected display with `lv_disp_set_default(disp)`. 
+The *default screen* is the lastly registered screen with `lv_disp_drv_register` (if there is only screen then that one) or you can explicitly selected display with `lv_disp_set_default(disp)`. 
 `lv_scr_act()` and `lv_scr_load()` operate on the currently default screen. 
 
 Visit [Multi display support](/overview/display) to learn more.

@@ -35,7 +35,7 @@ In Micropython it's just **`Change code` > `Run`**. You can even run commands in
 - Fast prototyping GUI.  
 - Shorten the cycle of changing and fine-tuning the GUI.
 - Model the GUI in a more absract way by defining reusable composite objects, taking advantage of Python's language features such as Inheritance, Closures, List Comprehension, Generators, Exception Handling, Arbitrary Precision Integers and others.
-- Make LittlevGL accessible to a larger audiance. No need to know C in order to create a nice GUI on an embedded system.  
+- Make LittlevGL accessible to a larger audience. No need to know C in order to create a nice GUI on an embedded system.  
 This goes well with [CircuitPython vision](https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython). CircuitPython was designed with education in mind, to make it easier for new or unexperienced users to get started with embedded development.
 
 ---

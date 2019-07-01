@@ -91,7 +91,7 @@ To see exactly which events are used by an object type see the particular [Objec
 
 ## Custom data
 Some events might contain custom data. For example `LV_EVENT_VALUE_CHANGED` in some cases tells the new value. For more info see the particular [Object type's documentation](/object-types/index).
-The get the custom data in the event callback use `lv_event_get_data()`.
+To get the custom data in the event callback use `lv_event_get_data()`.
 
 The type of the custom data depends on the sending object but if its a 
 - single number then it's `uint32_t *` or `intt32_t *`

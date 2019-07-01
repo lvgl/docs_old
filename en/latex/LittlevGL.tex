@@ -71,7 +71,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Jun 30, 2019}
+\date{Jul 01, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -112,6 +112,7 @@ Various input devices touch pad, mouse, keyboard, encoder etc
 
 \item {} 
 Multi language support with UTF-8 encoding
+Multi-display support, i.e. use more TFT, monochrome displays simultaneously
 
 \item {} 
 Fully customizable graphical elements
@@ -183,8 +184,13 @@ The source code of LittlevGL is available on GitHub:
 \label{\detokenize{index:ask-questions-in-the-forum}}
 We use \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub issues} for delopment releated discussion.
 To ask questions, please use the forum:
-
 \sphinxurl{https://forum.littlevgl.com/}
+
+
+\chapter{Documentation in PDF}
+\label{\detokenize{index:documentation-in-pdf}}
+You can download the documentation in PDF here:
+\sphinxhref{file:///home/kisvegabor/projects/littlevgl/docs/en/latex/LittlevGL.pdf}{LittlevGL.pdf}
 
 
 \chapter{Get started}
@@ -278,7 +284,7 @@ Shorten the cycle of changing and fine-tuning the GUI.
 Model the GUI in a more absract way by defining reusable composite objects, taking advantage of Python’s language features such as Inheritance, Closures, List Comprehension, Generators, Exception Handling, Arbitrary Precision Integers and others.
 
 \item {} 
-Make LittlevGL accessible to a larger audiance. No need to know C in order to create a nice GUI on an embedded system.This goes well with \sphinxhref{https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython}{CircuitPython vision}. CircuitPython was designed with education in mind, to make it easier for new or unexperienced users to get started with embedded development.
+Make LittlevGL accessible to a larger audience. No need to know C in order to create a nice GUI on an embedded system.This goes well with \sphinxhref{https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython}{CircuitPython vision}. CircuitPython was designed with education in mind, to make it easier for new or unexperienced users to get started with embedded development.
 
 \end{itemize}
 
@@ -357,12 +363,12 @@ On Micropython \sphinxhref{http://docs.micropython.org/en/latest/}{docs} and \sp
 \label{\detokenize{get-started/pc-simulator:simulator-on-pc}}\label{\detokenize{get-started/pc-simulator::doc}}
 You can try out the LittlevGL \sphinxstylestrong{using only your PC} without any development boards. Write a code, run it on the PC and see the result on the monitor. It is cross-platform: Windows, Linux and OSX are supported.The written code is portable, you can simply copy it when using an embedded hardware.
 
-The simulator is also very useful to report bugs because it means common platform for every user. So it’s a good idea the reproduce a bug in simualtor and use the code snippen in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
+The simulator is also very useful to report bugs because it means common platform for every user. So it’s a good idea to reproduce a bug in simualtor and use the code snippet in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
 
 
 \subsubsection{Select an IDE}
 \label{\detokenize{get-started/pc-simulator:select-an-ide}}
-The simulator is ported to valrious IDEs. Choose your favourite IDE, read its README on GitHub, download the project, and load it to the IDE.
+The simulator is ported to various IDEs. Choose your favourite IDE, read its README on GitHub, download the project, and load it to the IDE.
 
 
 
@@ -2725,7 +2731,7 @@ If a child partially or fully out of its parent then the parts outside will not 
 \label{\detokenize{overview/object:create-delete-objects}}
 In LittlevGL objects can be created and deleted dynamically in run-time.
 It means only the currently created objects consume RAM.
-For example, if you need a chart you can create it only when it is required and delete when its already not required.
+For example, if you need a chart you can create it when required and delete it when it is not visible or necessary.
 
 Every objects type has its own \sphinxstylestrong{create} function with a unified prototype.
 It needs two parameters:
@@ -2772,7 +2778,7 @@ Always there is an active screen on display. By default, the library creates and
 Screens can be created with any object type. For example, a {\hyperref[\detokenize{object-types/obj::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Base object}}}} or an image to make a wallpaper.
 
 Screens are created on the \sphinxstyleemphasis{default display}.
-The \sphinxstyleemphasis{deafult screen} is the lastly registered screen with \sphinxcode{\sphinxupquote{lv\_disp\_drv\_register}} (if there is only screen then that one) or you can explicitly selected display with \sphinxcode{\sphinxupquote{lv\_disp\_set\_default(disp)}}.
+The \sphinxstyleemphasis{default screen} is the lastly registered screen with \sphinxcode{\sphinxupquote{lv\_disp\_drv\_register}} (if there is only screen then that one) or you can explicitly selected display with \sphinxcode{\sphinxupquote{lv\_disp\_set\_default(disp)}}.
 \sphinxcode{\sphinxupquote{lv\_scr\_act()}} and \sphinxcode{\sphinxupquote{lv\_scr\_load()}} operate on the currently default screen.
 
 Visit {\hyperref[\detokenize{overview/display::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Multi display support}}}} to learn more.
@@ -3013,7 +3019,7 @@ To see exactly which events are used by an object type see the particular {\hype
 \subsubsection{Custom data}
 \label{\detokenize{overview/event:custom-data}}
 Some events might contain custom data. For example \sphinxcode{\sphinxupquote{LV\_EVENT\_VALUE\_CHANGED}} in some cases tells the new value. For more info see the particular {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Object type’s documentation}}}}.
-The get the custom data in the event callback use \sphinxcode{\sphinxupquote{lv\_event\_get\_data()}}.
+To get the custom data in the event callback use \sphinxcode{\sphinxupquote{lv\_event\_get\_data()}}.
 
 The type of the custom data depends on the sending object but if its a
 \begin{itemize}
