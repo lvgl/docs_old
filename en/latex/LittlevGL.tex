@@ -71,7 +71,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Jul 02, 2019}
+\date{Jul 03, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -123,7 +123,7 @@ Fully customizable graphical elements
 Hardware independent to use with any microcontroller or display
 
 \item {} 
-Scalable to operate with little memory (80 kB Flash, 12 kB RAM)
+Scalable to operate with little memory (64 kB Flash, 16 kB RAM)
 
 \item {} 
 OS, External memory and GPU supported but not required
@@ -158,35 +158,48 @@ Free and open-source under MIT licence
 \textgreater{} 16 MHz clock speed is recommended
 
 \item {} 
-8 kB RAM for static data and 2 KB RAM for dynamic data for graphical objects (widgets), 2 kB Stack
+Flash/ROM: \textgreater{} 64 kB for the very essential components (\textgreater{} 180 kB is recommended)
 
 \item {} 
-64 kB program memory (flash)
+RAM:
+\begin{itemize}
+\item {} 
+Static RAM usage: \textasciitilde{}8..16 kB depending on the used features and objects types
 
 \item {} 
-Optionally \textasciitilde{}1/10 screen sized memory for internal buffering (at 240 × 320, 16 bit colors it means 15 kB)
+Stack: \textgreater{} 2kB (\textgreater{} 4 kB is recommended)
+
+\item {} 
+Dynamic data (heap): \textgreater{} 4 KB (\textgreater{} 16 kB is recommended if using several objects).
+Set by \sphinxcode{\sphinxupquote{LV\_MEM\_SIZE}} in \sphinxstyleemphasis{lv\_conf.h}.
+
+\item {} 
+Display buffer:  \textgreater{} \sphinxstyleemphasis{“Horizontal resolution”} pixels (\textgreater{} 10 × \sphinxstyleemphasis{“Horizontal resolution”} is recommended)
+
+\end{itemize}
 
 \item {} 
 C99 or newer compiler
 
 \item {} 
-Basic C (or C++) knowledge: \sphinxhref{https://www.tutorialspoint.com/cprogramming/c\_pointers.htm}{pointers}, \sphinxhref{https://www.tutorialspoint.com/cprogramming/c\_structures.htm}{structs}, \sphinxhref{https://www.geeksforgeeks.org/callbacks-in-c/}{callbacks}
+Basic C (or C++) knowledge: \sphinxhref{https://www.tutorialspoint.com/cprogramming/c\_pointers.htm}{pointers}, \sphinxhref{https://www.tutorialspoint.com/cprogramming/c\_structures.htm}{structs}, \sphinxhref{https://www.geeksforgeeks.org/callbacks-in-c/}{callbacks}.
 
 \end{itemize}
+
+\sphinxstyleemphasis{Note that the memory usage might vary depending on the architecture, compiler and build options.}
 
 
 \chapter{See the source on GitHub}
 \label{\detokenize{index:see-the-source-on-github}}
 The source code of LittlevGL is available on GitHub:
-
-\sphinxurl{https://github.com/littlevgl/lvgl/}
+\sphinxurl{https://github.com/littlevgl/lvgl/}.
 
 
 \chapter{Ask questions in the Forum}
 \label{\detokenize{index:ask-questions-in-the-forum}}
-We use \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub issues} for delopment releated discussion.
+We use \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub issues} for development related discussion.
 To ask questions, please use the forum:
-\sphinxurl{https://forum.littlevgl.com/}
+\sphinxurl{https://forum.littlevgl.com/}.
 
 
 \chapter{Documentation in PDF}
@@ -198,7 +211,7 @@ You can download the documentation in PDF here:
 
 \chapter{Get started}
 \label{\detokenize{index:get-started}}
-For a general overview of LittlvGL visit \sphinxhref{https://littlevgl.com}{littlevgl.com}
+For a general overview of LittlevGL visit \sphinxhref{https://littlevgl.com}{littlevgl.com}
 
 To make some experiments with LittlevGL in a simulator on you PC or in even in your browser see the {\hyperref[\detokenize{get-started/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Get started}}}} guide.
 
@@ -206,7 +219,7 @@ To see how you can port LittlevGL to your device go to the {\hyperref[\detokeniz
 
 To learn how LittlevGL works start to read the {\hyperref[\detokenize{overview/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Overview}}}}.
 
-To read tutorial or shar your own experiences go to the \sphinxhref{https://blog.littlevgl.com}{Blog}
+To read tutorial or share your own experiences go to the \sphinxhref{https://blog.littlevgl.com}{Blog}
 
 
 \bigskip\hrule\bigskip

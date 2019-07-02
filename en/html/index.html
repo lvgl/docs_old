@@ -1069,7 +1069,7 @@
 <li><p>Multi-display support, i.e. use more TFT, monochrome displays simultaneously</p></li>
 <li><p>Fully customizable graphical elements</p></li>
 <li><p>Hardware independent to use with any microcontroller or display</p></li>
-<li><p>Scalable to operate with little memory (80 kB Flash, 12 kB RAM)</p></li>
+<li><p>Scalable to operate with little memory (64 kB Flash, 16 kB RAM)</p></li>
 <li><p>OS, External memory and GPU supported but not required</p></li>
 <li><p>Single frame buffer operation even with advanced graphical effects</p></li>
 <li><p>Written in C for maximal compatibility (C++ compatible)</p></li>
@@ -1084,23 +1084,31 @@
 <ul class="simple">
 <li><p>16, 32 or 64 bit microcontroller or processor</p></li>
 <li><p>&gt; 16 MHz clock speed is recommended</p></li>
-<li><p>8 kB RAM for static data and 2 KB RAM for dynamic data for graphical objects (widgets), 2 kB Stack</p></li>
-<li><p>64 kB program memory (flash)</p></li>
-<li><p>Optionally ~1/10 screen sized memory for internal buffering (at 240 × 320, 16 bit colors it means 15 kB)</p></li>
-<li><p>C99 or newer compiler</p></li>
-<li><p>Basic C (or C++) knowledge: <a class="reference external" href="https://www.tutorialspoint.com/cprogramming/c_pointers.htm">pointers</a>, <a class="reference external" href="https://www.tutorialspoint.com/cprogramming/c_structures.htm">structs</a>, <a class="reference external" href="https://www.geeksforgeeks.org/callbacks-in-c/">callbacks</a></p></li>
+<li><p>Flash/ROM: &gt; 64 kB for the very essential components (&gt; 180 kB is recommended)</p></li>
+<li><p>RAM:</p>
+<ul>
+<li><p>Static RAM usage: ~8..16 kB depending on the used features and objects types</p></li>
+<li><p>Stack: &gt; 2kB (&gt; 4 kB is recommended)</p></li>
+<li><p>Dynamic data (heap): &gt; 4 KB (&gt; 16 kB is recommended if using several objects).
+Set by <code class="docutils literal notranslate"><span class="pre">LV_MEM_SIZE</span></code> in <em>lv_conf.h</em>.</p></li>
+<li><p>Display buffer:  &gt; <em>“Horizontal resolution”</em> pixels (&gt; 10 × <em>“Horizontal resolution”</em> is recommended)</p></li>
 </ul>
+</li>
+<li><p>C99 or newer compiler</p></li>
+<li><p>Basic C (or C++) knowledge: <a class="reference external" href="https://www.tutorialspoint.com/cprogramming/c_pointers.htm">pointers</a>, <a class="reference external" href="https://www.tutorialspoint.com/cprogramming/c_structures.htm">structs</a>, <a class="reference external" href="https://www.geeksforgeeks.org/callbacks-in-c/">callbacks</a>.</p></li>
+</ul>
+<p><em>Note that the memory usage might vary depending on the architecture, compiler and build options.</em></p>
 </div>
 <div class="section" id="see-the-source-on-github">
 <h2>See the source on GitHub<a class="headerlink" href="#see-the-source-on-github" title="Permalink to this headline">¶</a></h2>
-<p>The source code of LittlevGL is available on GitHub:</p>
-<p><a class="reference external" href="https://github.com/littlevgl/lvgl/">https://github.com/littlevgl/lvgl/</a></p>
+<p>The source code of LittlevGL is available on GitHub:
+<a class="reference external" href="https://github.com/littlevgl/lvgl/">https://github.com/littlevgl/lvgl/</a>.</p>
 </div>
 <div class="section" id="ask-questions-in-the-forum">
 <h2>Ask questions in the Forum<a class="headerlink" href="#ask-questions-in-the-forum" title="Permalink to this headline">¶</a></h2>
-<p>We use <a class="reference external" href="https://github.com/littlevgl/lvgl/issues">GitHub issues</a> for delopment releated discussion.
+<p>We use <a class="reference external" href="https://github.com/littlevgl/lvgl/issues">GitHub issues</a> for development related discussion.
 To ask questions, please use the forum:
-<a class="reference external" href="https://forum.littlevgl.com/">https://forum.littlevgl.com/</a></p>
+<a class="reference external" href="https://forum.littlevgl.com/">https://forum.littlevgl.com/</a>.</p>
 </div>
 <div class="section" id="documentation-in-pdf">
 <h2>Documentation in PDF<a class="headerlink" href="#documentation-in-pdf" title="Permalink to this headline">¶</a></h2>
@@ -1109,11 +1117,11 @@ To ask questions, please use the forum:
 </div>
 <div class="section" id="get-started">
 <h2>Get started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
-<p>For a general overview of LittlvGL visit <a class="reference external" href="https://littlevgl.com">littlevgl.com</a></p>
+<p>For a general overview of LittlevGL visit <a class="reference external" href="https://littlevgl.com">littlevgl.com</a></p>
 <p>To make some experiments with LittlevGL in a simulator on you PC or in even in your browser see the <a class="reference internal" href="get-started/index.html"><span class="doc">Get started</span></a> guide.</p>
 <p>To see how you can port LittlevGL to your device go to the <a class="reference internal" href="porting/index.html"><span class="doc">Porting</span></a> section.</p>
 <p>To learn how LittlevGL works start to read the <a class="reference internal" href="overview/index.html"><span class="doc">Overview</span></a>.</p>
-<p>To read tutorial or shar your own experiences go to the <a class="reference external" href="https://blog.littlevgl.com">Blog</a></p>
+<p>To read tutorial or share your own experiences go to the <a class="reference external" href="https://blog.littlevgl.com">Blog</a></p>
 <hr class="docutils" />
 <div class="toctree-wrapper compound">
 <ul>
@@ -1209,7 +1217,7 @@ To ask questions, please use the forum:
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 02, 2019.
+        Last updated on Jul 03, 2019.
       </span>
 
     </p>

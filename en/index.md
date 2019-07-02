@@ -21,7 +21,7 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 - Multi-display support, i.e. use more TFT, monochrome displays simultaneously
 - Fully customizable graphical elements
 - Hardware independent to use with any microcontroller or display
-- Scalable to operate with little memory (80 kB Flash, 12 kB RAM)
+- Scalable to operate with little memory (64 kB Flash, 16 kB RAM)
 - OS, External memory and GPU supported but not required
 - Single frame buffer operation even with advanced graphical effects
 - Written in C for maximal compatibility (C++ compatible)
@@ -33,21 +33,26 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 ## Requirements
 - 16, 32 or 64 bit microcontroller or processor
 - &gt; 16 MHz clock speed is recommended
-- 8 kB RAM for static data and 2 KB RAM for dynamic data for graphical objects (widgets), 2 kB Stack
-- 64 kB program memory (flash)
-- Optionally ~1/10 screen sized memory for internal buffering (at 240 × 320, 16 bit colors it means 15 kB)
-- C99 or newer compiler
-- Basic C (or C++) knowledge: [pointers](https://www.tutorialspoint.com/cprogramming/c_pointers.htm), [structs](https://www.tutorialspoint.com/cprogramming/c_structures.htm), [callbacks](https://www.geeksforgeeks.org/callbacks-in-c/)
+- Flash/ROM: &gt; 64 kB for the very essential components (&gt; 180 kB is recommended)
+- RAM: 
+  - Static RAM usage: ~8..16 kB depending on the used features and objects types
+  - Stack: &gt; 2kB (&gt; 4 kB is recommended)
+  - Dynamic data (heap): &gt; 4 KB (&gt; 16 kB is recommended if using several objects).
+    Set by `LV_MEM_SIZE` in *lv_conf.h*. 
+  - Display buffer:  &gt; *"Horizontal resolution"* pixels (&gt; 10 &times; *"Horizontal resolution"* is recommended) 
+-  C99 or newer compiler
+- Basic C (or C++) knowledge: [pointers](https://www.tutorialspoint.com/cprogramming/c_pointers.htm), [structs](https://www.tutorialspoint.com/cprogramming/c_structures.htm), [callbacks](https://www.geeksforgeeks.org/callbacks-in-c/).
+
+*Note that the memory usage might vary depending on the architecture, compiler and build options.*
 
 ## See the source on GitHub
 The source code of LittlevGL is available on GitHub:
-
-[https://github.com/littlevgl/lvgl/](https://github.com/littlevgl/lvgl/)
+[https://github.com/littlevgl/lvgl/](https://github.com/littlevgl/lvgl/).
 
 ## Ask questions in the Forum
-We use [GitHub issues](https://github.com/littlevgl/lvgl/issues) for delopment releated discussion.
+We use [GitHub issues](https://github.com/littlevgl/lvgl/issues) for development related discussion.
 To ask questions, please use the forum:
-[https://forum.littlevgl.com/](https://forum.littlevgl.com/)
+[https://forum.littlevgl.com/](https://forum.littlevgl.com/).
 
 ## Documentation in PDF
 You can download the documentation in PDF here:
@@ -57,7 +62,7 @@ You can download the documentation in PDF here:
 
 
 ## Get started
-For a general overview of LittlvGL visit [littlevgl.com](https://littlevgl.com)
+For a general overview of LittlevGL visit [littlevgl.com](https://littlevgl.com)
 
 To make some experiments with LittlevGL in a simulator on you PC or in even in your browser see the [Get started](/get-started/index) guide.
 
@@ -65,7 +70,7 @@ To see how you can port LittlevGL to your device go to the [Porting](/porting/in
 
 To learn how LittlevGL works start to read the [Overview](/overview/index).
 
-To read tutorial or shar your own experiences go to the [Blog](https://blog.littlevgl.com)
+To read tutorial or share your own experiences go to the [Blog](https://blog.littlevgl.com)
 
 
 ---
