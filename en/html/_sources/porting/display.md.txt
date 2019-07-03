@@ -52,7 +52,7 @@ To use a GPU the following callbacks can be used:
 - **gpu_fill_cb** fill an area with colors. 
 - **gpu_blend_cb** blend two buffers using opacity.
  
-Some other optional callbacks to make easier and more optimal to work with monochrome, gray-scale or other non-standard FGB displays: 
+Some other optional callbacks to make easier and more optimal to work with monochrome, gray-scale or other non-standard RGB displays: 
 - **rounder_cb** round the coordinates of areas to redraw. E.g. a 2x2 px can be converted to 2x8. 
 It can be used if the display controller can refresh only areas with specific height or width (usually 8 px height with monochrome displays).
 - **set_px_cb** a custom function to write the *display buffer*. 
