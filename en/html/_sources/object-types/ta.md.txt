@@ -11,6 +11,8 @@ You can insert text or characters  to the current cursor's position with:
 - `lv_ta_add_char(ta, 'c')`
 - `lv_ta_add_text(ta, "insert this text")`
 
+To add wide characters like `'á'`, `'ß'` or CJK characters use `lv_ta_add_text(ta, "á")`.
+
 `lv_ta_set_text(ta, "New text")` changes the whole text.
 
 ### Placeholder
