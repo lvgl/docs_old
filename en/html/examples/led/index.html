@@ -1050,38 +1050,43 @@
             
   <div class="section" id="c">
 <h1>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
-<img alt="LED example in LittlevGL" src="../../_images/led_1.png" />
+<img alt="LED example in LittlevGL" src="../../_images/lv_ex_led_1.png" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create a style for the LED*/</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_led</span><span class="p">;</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_led</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
-<span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
-<span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0xb5</span><span class="p">,</span> <span class="mh">0x0f</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">);</span>
-<span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0x50</span><span class="p">,</span> <span class="mh">0x07</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">);</span>
-<span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0xfa</span><span class="p">,</span> <span class="mh">0x0f</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">);</span>
-<span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">opa</span> <span class="o">=</span> <span class="n">LV_OPA_30</span><span class="p">;</span>
-<span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0xb5</span><span class="p">,</span> <span class="mh">0x0f</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">);</span>
-<span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="cm">/*Create a LED and switch it ON*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">led1</span>  <span class="o">=</span> <span class="n">lv_led_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">led1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_led</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">led1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">lv_led_off</span><span class="p">(</span><span class="n">led1</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">lv_ex_led_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*Create a style for the LED*/</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_led</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_led</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
+    <span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+    <span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0xb5</span><span class="p">,</span> <span class="mh">0x0f</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">);</span>
+    <span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0x50</span><span class="p">,</span> <span class="mh">0x07</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">);</span>
+    <span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0xfa</span><span class="p">,</span> <span class="mh">0x0f</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">);</span>
+    <span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">opa</span> <span class="o">=</span> <span class="n">LV_OPA_30</span><span class="p">;</span>
+    <span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAKE</span><span class="p">(</span><span class="mh">0xb5</span><span class="p">,</span> <span class="mh">0x0f</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">);</span>
+    <span class="n">style_led</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 
-<span class="cm">/*Copy the previous LED and set a brightness*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">led2</span>  <span class="o">=</span> <span class="n">lv_led_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">led1</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">led2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">lv_led_set_bright</span><span class="p">(</span><span class="n">led2</span><span class="p">,</span> <span class="mi">190</span><span class="p">);</span>
+    <span class="cm">/*Create a LED and switch it ON*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">led1</span>  <span class="o">=</span> <span class="n">lv_led_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">led1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_led</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">led1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_led_off</span><span class="p">(</span><span class="n">led1</span><span class="p">);</span>
 
-<span class="cm">/*Copy the previous LED and switch it OFF*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">led3</span>  <span class="o">=</span> <span class="n">lv_led_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">led1</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">led3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">lv_led_on</span><span class="p">(</span><span class="n">led3</span><span class="p">);</span>
+    <span class="cm">/*Copy the previous LED and set a brightness*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">led2</span>  <span class="o">=</span> <span class="n">lv_led_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">led1</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">led2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_led_set_bright</span><span class="p">(</span><span class="n">led2</span><span class="p">,</span> <span class="mi">190</span><span class="p">);</span>
+
+    <span class="cm">/*Copy the previous LED and switch it OFF*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">led3</span>  <span class="o">=</span> <span class="n">lv_led_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">led1</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">led3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_led_on</span><span class="p">(</span><span class="n">led3</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1104,7 +1109,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

@@ -1050,61 +1050,66 @@
             
   <div class="section" id="c">
 <h1>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
-<img alt="Tileview example in LittlevGL" src="../../_images/tileview_1.gif" />
+<img alt="Tileview example in LittlevGL" src="../../_images/lv_ex_tileview_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_point_t</span> <span class="n">valid_pos</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">}};</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">tileview</span><span class="p">;</span>
-<span class="n">tileview</span> <span class="o">=</span> <span class="n">lv_tileview_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_tileview_set_valid_positions</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">valid_pos</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
-<span class="n">lv_tileview_set_edge_flash</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">tile1</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">tile1</span><span class="p">,</span> <span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span><span class="p">);</span>
-<span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">tile1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
-<span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">tile1</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">lv_ex_tileview_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="n">lv_point_t</span> <span class="n">valid_pos</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">}};</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">tileview</span><span class="p">;</span>
+    <span class="n">tileview</span> <span class="o">=</span> <span class="n">lv_tileview_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_tileview_set_valid_positions</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">valid_pos</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+    <span class="n">lv_tileview_set_edge_flash</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
 
-<span class="cm">/*Tile1: just a label*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">tile1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Tile 1&quot;</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">tile1</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">tile1</span><span class="p">,</span> <span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span><span class="p">);</span>
+    <span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">tile1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
+    <span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">tile1</span><span class="p">);</span>
 
-<span class="cm">/*Tile2: a list*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">list</span> <span class="o">=</span> <span class="n">lv_list_create</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span><span class="p">);</span>
-<span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">LV_VER_RES</span><span class="p">);</span>
-<span class="n">lv_list_set_scroll_propagation</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
-<span class="n">lv_list_set_sb_mode</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">LV_SB_MODE_OFF</span><span class="p">);</span>
-<span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+    <span class="cm">/*Tile1: just a label*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">tile1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Tile 1&quot;</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">list_btn</span><span class="p">;</span>
-<span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;One&quot;</span><span class="p">);</span>
-<span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">list_btn</span><span class="p">);</span>
+    <span class="cm">/*Tile2: a list*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">list</span> <span class="o">=</span> <span class="n">lv_list_create</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span><span class="p">);</span>
+    <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">LV_VER_RES</span><span class="p">);</span>
+    <span class="n">lv_list_set_scroll_propagation</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_list_set_sb_mode</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">LV_SB_MODE_OFF</span><span class="p">);</span>
+    <span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
 
-<span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;Two&quot;</span><span class="p">);</span>
-<span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">list_btn</span><span class="p">);</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">list_btn</span><span class="p">;</span>
+    <span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;One&quot;</span><span class="p">);</span>
+    <span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">list_btn</span><span class="p">);</span>
 
-<span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;Three&quot;</span><span class="p">);</span>
-<span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">list_btn</span><span class="p">);</span>
+    <span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;Two&quot;</span><span class="p">);</span>
+    <span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">list_btn</span><span class="p">);</span>
 
-<span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;Four&quot;</span><span class="p">);</span>
-<span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">list_btn</span><span class="p">);</span>
+    <span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;Three&quot;</span><span class="p">);</span>
+    <span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">list_btn</span><span class="p">);</span>
 
-<span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;Five&quot;</span><span class="p">);</span>
-<span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">list_btn</span><span class="p">);</span>
+    <span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;Four&quot;</span><span class="p">);</span>
+    <span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">list_btn</span><span class="p">);</span>
 
-<span class="cm">/*Tile3: a button*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">tile3</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">tile1</span><span class="p">);</span>
-<span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">tile3</span><span class="p">,</span> <span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span><span class="p">);</span>
-<span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">tile3</span><span class="p">);</span>
+    <span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;Five&quot;</span><span class="p">);</span>
+    <span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">list_btn</span><span class="p">);</span>
 
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">tile3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="cm">/*Tile3: a button*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">tile3</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">tile1</span><span class="p">);</span>
+    <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">tile3</span><span class="p">,</span> <span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span><span class="p">);</span>
+    <span class="n">lv_tileview_add_element</span><span class="p">(</span><span class="n">tileview</span><span class="p">,</span> <span class="n">tile3</span><span class="p">);</span>
 
-<span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button&quot;</span><span class="p">);</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">tile3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1127,7 +1132,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

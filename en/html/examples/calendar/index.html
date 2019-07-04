@@ -1050,12 +1050,14 @@
             
   <div class="section" id="c">
 <h1>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
-<img alt="Simple Calendar example in LittlevGL" src="../../_images/calendar_1.gif" />
+<img alt="Simple Calendar example in LittlevGL" src="../../_images/lv_ex_calendar_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_CLICKED</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">lv_calendar_date_t</span> <span class="o">*</span> <span class="n">date</span> <span class="o">=</span> <span class="n">lv_calendar_get_pressed_date</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
@@ -1065,38 +1067,38 @@
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="p">...</span>
+<span class="kt">void</span> <span class="nf">lv_ex_calendar_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lv_obj_t</span>  <span class="o">*</span> <span class="n">calendar</span> <span class="o">=</span> <span class="n">lv_calendar_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">230</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
 
-<span class="n">lv_obj_t</span>  <span class="o">*</span> <span class="n">calendar</span> <span class="o">=</span> <span class="n">lv_calendar_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">230</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+    <span class="cm">/*Set the today*/</span>
+    <span class="n">lv_calendar_date_t</span> <span class="n">today</span><span class="p">;</span>
+    <span class="n">today</span><span class="p">.</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
+    <span class="n">today</span><span class="p">.</span><span class="n">month</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">today</span><span class="p">.</span><span class="n">day</span> <span class="o">=</span> <span class="mi">23</span><span class="p">;</span>
 
-<span class="cm">/*Set the today*/</span>
-<span class="n">lv_calendar_date_t</span> <span class="n">today</span><span class="p">;</span>
-<span class="n">today</span><span class="p">.</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
-<span class="n">today</span><span class="p">.</span><span class="n">month</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="n">today</span><span class="p">.</span><span class="n">day</span> <span class="o">=</span> <span class="mi">23</span><span class="p">;</span>
+    <span class="n">lv_calendar_set_today_date</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">today</span><span class="p">);</span>
+    <span class="n">lv_calendar_set_showed_date</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">today</span><span class="p">);</span>
 
-<span class="n">lv_calendar_set_today_date</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">today</span><span class="p">);</span>
-<span class="n">lv_calendar_set_showed_date</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">today</span><span class="p">);</span>
+    <span class="cm">/*Highlight some days*/</span>
+    <span class="k">static</span> <span class="n">lv_calendar_date_t</span> <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>       <span class="cm">/*Only it&#39;s pointer will be saved so should be static*/</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">month</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">day</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
 
-<span class="cm">/*Highlight some days*/</span>
-<span class="k">static</span> <span class="n">lv_calendar_date_t</span> <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>       <span class="cm">/*Only it&#39;s pointer will be saved so should be static*/</span>
-<span class="n">highlihted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
-<span class="n">highlihted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">month</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="n">highlihted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">day</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">month</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">day</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
 
-<span class="n">highlihted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
-<span class="n">highlihted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">month</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="n">highlihted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">day</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">month</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">day</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>
 
-<span class="n">highlihted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
-<span class="n">highlihted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">month</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
-<span class="n">highlihted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">day</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>
-
-<span class="n">lv_calendar_set_highlighted_dates</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="n">highlihted_days</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
-
+    <span class="n">lv_calendar_set_highlighted_dates</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="n">highlihted_days</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1119,7 +1121,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

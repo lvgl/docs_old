@@ -1114,34 +1114,39 @@ Hence you don’t need to create a new style for the label.</p>
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<img alt="Image button example in LittlevGL" src="../_images/imgbtn_1.gif" />
+<img alt="Image button example in LittlevGL" src="../_images/lv_ex_imgbtn_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_style_t</span> <span class="n">style_pr</span><span class="p">;</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_pr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
-<span class="n">style_pr</span><span class="p">.</span><span class="n">image</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
-<span class="n">style_pr</span><span class="p">.</span><span class="n">image</span><span class="p">.</span><span class="n">intense</span> <span class="o">=</span> <span class="n">LV_OPA_50</span><span class="p">;</span>
-<span class="n">style_pr</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0xaaa</span><span class="p">);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="n">LV_IMG_DECLARE</span><span class="p">(</span><span class="n">imgbtn_green</span><span class="p">);</span>
-<span class="n">LV_IMG_DECLARE</span><span class="p">(</span><span class="n">imgbtn_blue</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">lv_ex_imgbtn_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lv_style_t</span> <span class="n">style_pr</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_pr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+    <span class="n">style_pr</span><span class="p">.</span><span class="n">image</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
+    <span class="n">style_pr</span><span class="p">.</span><span class="n">image</span><span class="p">.</span><span class="n">intense</span> <span class="o">=</span> <span class="n">LV_OPA_50</span><span class="p">;</span>
+    <span class="n">style_pr</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0xaaa</span><span class="p">);</span>
 
-<span class="cm">/*Create an Image button*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">imgbtn1</span> <span class="o">=</span> <span class="n">lv_imgbtn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_imgbtn_set_src</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_REL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">imgbtn_green</span><span class="p">);</span>
-<span class="n">lv_imgbtn_set_src</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_PR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">imgbtn_green</span><span class="p">);</span>
-<span class="n">lv_imgbtn_set_src</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_TGL_REL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">imgbtn_blue</span><span class="p">);</span>
-<span class="n">lv_imgbtn_set_src</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_TGL_PR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">imgbtn_blue</span><span class="p">);</span>
-<span class="n">lv_imgbtn_set_style</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_PR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_pr</span><span class="p">);</span>        <span class="cm">/*Use the darker style in the pressed state*/</span>
-<span class="n">lv_imgbtn_set_style</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_TGL_PR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_pr</span><span class="p">);</span>
-<span class="n">lv_imgbtn_set_toggle</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">);</span>
+    <span class="n">LV_IMG_DECLARE</span><span class="p">(</span><span class="n">imgbtn_green</span><span class="p">);</span>
+    <span class="n">LV_IMG_DECLARE</span><span class="p">(</span><span class="n">imgbtn_blue</span><span class="p">);</span>
 
-<span class="cm">/*Create a label on the Image button*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button&quot;</span><span class="p">);</span>
+    <span class="cm">/*Create an Image button*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">imgbtn1</span> <span class="o">=</span> <span class="n">lv_imgbtn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_imgbtn_set_src</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_REL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">imgbtn_green</span><span class="p">);</span>
+    <span class="n">lv_imgbtn_set_src</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_PR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">imgbtn_green</span><span class="p">);</span>
+    <span class="n">lv_imgbtn_set_src</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_TGL_REL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">imgbtn_blue</span><span class="p">);</span>
+    <span class="n">lv_imgbtn_set_src</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_TGL_PR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">imgbtn_blue</span><span class="p">);</span>
+    <span class="n">lv_imgbtn_set_style</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_PR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_pr</span><span class="p">);</span>        <span class="cm">/*Use the darker style in the pressed state*/</span>
+    <span class="n">lv_imgbtn_set_style</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="n">LV_BTN_STATE_TGL_PR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_pr</span><span class="p">);</span>
+    <span class="n">lv_imgbtn_set_toggle</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">);</span>
+
+    <span class="cm">/*Create a label on the Image button*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1462,7 +1467,7 @@ Hence you don’t need to create a new style for the label.</p>
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

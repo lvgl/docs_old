@@ -9,7 +9,7 @@ It is very important, the order is calculated among the objects on the same leve
 Layers can be added easily by creating 2 objects (which can be transparent). Firstly 'A' and secondly 'B'. 'A' and every object on it will be in the background and can be covered by 'B' and its children.
 
   
-![](/examples/misc/layers.png "Creating graphical objects in Littlev Graphics Library")  
+![](/misc/layers.png "Creating graphical objects in Littlev Graphics Library")  
 
 ```c
 /*Create a screen*/

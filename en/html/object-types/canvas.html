@@ -1112,50 +1112,55 @@ Instead of <code class="docutils literal notranslate"><span class="pre">img_dsc<
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<img alt="Simple Canvas example in LittlevGL" src="../_images/canvas_1.gif" />
+<img alt="Simple Canvas example in LittlevGL" src="../_images/lv_ex_canvas_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define CANVAS_WIDTH  200</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#define CANVAS_WIDTH  200</span>
 <span class="cp">#define CANVAS_HEIGHT  150</span>
 
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style</span><span class="p">;</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_RED</span><span class="p">;</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAROON</span><span class="p">;</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_WHITE</span><span class="p">;</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_WHITE</span><span class="p">;</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-<span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
-<span class="n">style</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLUE</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">lv_ex_canvas_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_RED</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAROON</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_WHITE</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_WHITE</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLUE</span><span class="p">;</span>
 
-<span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">cbuf</span><span class="p">[</span><span class="n">LV_CANVAS_BUF_SIZE_TRUE_COLOR</span><span class="p">(</span><span class="n">CANVAS_WIDTH</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span><span class="p">)];</span>
+    <span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">cbuf</span><span class="p">[</span><span class="n">LV_CANVAS_BUF_SIZE_TRUE_COLOR</span><span class="p">(</span><span class="n">CANVAS_WIDTH</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span><span class="p">)];</span>
 
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">canvas</span> <span class="o">=</span> <span class="n">lv_canvas_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_canvas_set_buffer</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">cbuf</span><span class="p">,</span> <span class="n">CANVAS_WIDTH</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span><span class="p">,</span> <span class="n">LV_IMG_CF_TRUE_COLOR</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">lv_canvas_fill_bg</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">LV_COLOR_LIGHT_GRAY</span><span class="p">);</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">canvas</span> <span class="o">=</span> <span class="n">lv_canvas_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_canvas_set_buffer</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">cbuf</span><span class="p">,</span> <span class="n">CANVAS_WIDTH</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span><span class="p">,</span> <span class="n">LV_IMG_CF_TRUE_COLOR</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_canvas_fill_bg</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">LV_COLOR_SILVER</span><span class="p">);</span>
 
-<span class="n">lv_canvas_draw_rect</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
+    <span class="n">lv_canvas_draw_rect</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
 
-<span class="n">lv_canvas_draw_text</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="s">&quot;Some text on text canvas&quot;</span><span class="p">,</span> <span class="n">LV_LABEL_ALIGN_LEFT</span><span class="p">);</span>
+    <span class="n">lv_canvas_draw_text</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="s">&quot;Some text on text canvas&quot;</span><span class="p">,</span> <span class="n">LV_LABEL_ALIGN_LEFT</span><span class="p">);</span>
 
-<span class="cm">/* Test the rotation. It requires an other buffer where the orignal image is stored.</span>
-<span class="cm"> * So copy the current image to buffer and rotate it to the canvas */</span>
-<span class="n">lv_color_t</span> <span class="n">cbuf_tmp</span><span class="p">[</span><span class="n">CANVAS_WIDTH</span> <span class="o">*</span> <span class="n">CANVAS_HEIGHT</span><span class="p">];</span>
-<span class="n">memcpy</span><span class="p">(</span><span class="n">cbuf_tmp</span><span class="p">,</span> <span class="n">cbuf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">cbuf_tmp</span><span class="p">));</span>
-<span class="n">lv_img_dsc_t</span> <span class="n">img</span><span class="p">;</span>
-<span class="n">img</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">cbuf_tmp</span><span class="p">;</span>
-<span class="n">img</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_TRUE_COLOR</span><span class="p">;</span>
-<span class="n">img</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">CANVAS_WIDTH</span><span class="p">;</span>
-<span class="n">img</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">CANVAS_HEIGHT</span><span class="p">;</span>
+    <span class="cm">/* Test the rotation. It requires an other buffer where the orignal image is stored.</span>
+<span class="cm">     * So copy the current image to buffer and rotate it to the canvas */</span>
+    <span class="n">lv_color_t</span> <span class="n">cbuf_tmp</span><span class="p">[</span><span class="n">CANVAS_WIDTH</span> <span class="o">*</span> <span class="n">CANVAS_HEIGHT</span><span class="p">];</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">cbuf_tmp</span><span class="p">,</span> <span class="n">cbuf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">cbuf_tmp</span><span class="p">));</span>
+    <span class="n">lv_img_dsc_t</span> <span class="n">img</span><span class="p">;</span>
+    <span class="n">img</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">cbuf_tmp</span><span class="p">;</span>
+    <span class="n">img</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_TRUE_COLOR</span><span class="p">;</span>
+    <span class="n">img</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">CANVAS_WIDTH</span><span class="p">;</span>
+    <span class="n">img</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">CANVAS_HEIGHT</span><span class="p">;</span>
 
-<span class="n">lv_canvas_fill_bg</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">LV_COLOR_LIGHT_GRAY</span><span class="p">);</span>
-<span class="n">lv_canvas_rotate</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">img</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">CANVAS_WIDTH</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">lv_canvas_fill_bg</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">LV_COLOR_SILVER</span><span class="p">);</span>
+    <span class="n">lv_canvas_rotate</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">img</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">CANVAS_WIDTH</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1505,7 +1510,7 @@ Instead of <code class="docutils literal notranslate"><span class="pre">img_dsc<
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

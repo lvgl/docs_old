@@ -1050,30 +1050,35 @@
             
   <div class="section" id="c">
 <h1>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
-<img alt="Window example in LittlevGL" src="../../_images/win_1.gif" />
+<img alt="Window example in LittlevGL" src="../../_images/lv_ex_win_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create a window*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">win</span> <span class="o">=</span> <span class="n">lv_win_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_win_set_title</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="s">&quot;Window title&quot;</span><span class="p">);</span>                        <span class="cm">/*Set the title*/</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">lv_ex_win_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*Create a window*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">win</span> <span class="o">=</span> <span class="n">lv_win_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_win_set_title</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="s">&quot;Window title&quot;</span><span class="p">);</span>                        <span class="cm">/*Set the title*/</span>
 
 
-<span class="cm">/*Add control button to the header*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">close_btn</span> <span class="o">=</span> <span class="n">lv_win_add_btn</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="n">LV_SYMBOL_CLOSE</span><span class="p">);</span>           <span class="cm">/*Add close button and use built-in close action*/</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">close_btn</span><span class="p">,</span> <span class="n">lv_win_close_event_cb</span><span class="p">);</span>
-<span class="n">lv_win_add_btn</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="n">LV_SYMBOL_SETTINGS</span><span class="p">);</span>        <span class="cm">/*Add a setup button*/</span>
+    <span class="cm">/*Add control button to the header*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">close_btn</span> <span class="o">=</span> <span class="n">lv_win_add_btn</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="n">LV_SYMBOL_CLOSE</span><span class="p">);</span>           <span class="cm">/*Add close button and use built-in close action*/</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">close_btn</span><span class="p">,</span> <span class="n">lv_win_close_event_cb</span><span class="p">);</span>
+    <span class="n">lv_win_add_btn</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="n">LV_SYMBOL_SETTINGS</span><span class="p">);</span>        <span class="cm">/*Add a setup button*/</span>
 
-<span class="cm">/*Add some dummy content*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">txt</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="s">&quot;This is the content of the window</span><span class="se">\n\n</span><span class="s">&quot;</span>
-                       <span class="s">&quot;You can add control buttons to</span><span class="se">\n</span><span class="s">&quot;</span>
-                       <span class="s">&quot;the window header</span><span class="se">\n\n</span><span class="s">&quot;</span>
-                       <span class="s">&quot;The content area becomes automatically</span><span class="se">\n</span><span class="s">&quot;</span>
-                       <span class="s">&quot;scrollable is it&#39;s large enough.</span><span class="se">\n\n</span><span class="s">&quot;</span>
-                       <span class="s">&quot; You can scroll the content</span><span class="se">\n</span><span class="s">&quot;</span>
-                       <span class="s">&quot;See the scroll bar on the right!&quot;</span><span class="p">);</span>
+    <span class="cm">/*Add some dummy content*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">txt</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="s">&quot;This is the content of the window</span><span class="se">\n\n</span><span class="s">&quot;</span>
+                           <span class="s">&quot;You can add control buttons to</span><span class="se">\n</span><span class="s">&quot;</span>
+                           <span class="s">&quot;the window header</span><span class="se">\n\n</span><span class="s">&quot;</span>
+                           <span class="s">&quot;The content area becomes automatically</span><span class="se">\n</span><span class="s">&quot;</span>
+                           <span class="s">&quot;scrollable is it&#39;s large enough.</span><span class="se">\n\n</span><span class="s">&quot;</span>
+                           <span class="s">&quot; You can scroll the content</span><span class="se">\n</span><span class="s">&quot;</span>
+                           <span class="s">&quot;See the scroll bar on the right!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
 </pre></div>
 </div>
@@ -1097,7 +1102,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

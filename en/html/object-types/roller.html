@@ -1112,12 +1112,15 @@ The time of this scroll animation can be changed by <code class="docutils litera
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<img alt="Roller example in LittlevGL" src="../_images/roller_1.gif" />
+<img alt="Roller example in LittlevGL" src="../_images/lv_ex_roller_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">)</span> <span class="p">{</span>
         <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
@@ -1126,28 +1129,29 @@ The time of this scroll animation can be changed by <code class="docutils litera
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="p">...</span>
 
-<span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">roller1</span> <span class="o">=</span> <span class="n">lv_roller_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_roller_set_options</span><span class="p">(</span><span class="n">roller1</span><span class="p">,</span>
-                    <span class="s">&quot;January</span><span class="se">\n</span><span class="s">&quot;</span>
-                    <span class="s">&quot;February</span><span class="se">\n</span><span class="s">&quot;</span>
-                    <span class="s">&quot;March</span><span class="se">\n</span><span class="s">&quot;</span>
-                    <span class="s">&quot;April</span><span class="se">\n</span><span class="s">&quot;</span>
-                    <span class="s">&quot;May</span><span class="se">\n</span><span class="s">&quot;</span>
-                    <span class="s">&quot;June</span><span class="se">\n</span><span class="s">&quot;</span>
-                    <span class="s">&quot;July</span><span class="se">\n</span><span class="s">&quot;</span>
-                    <span class="s">&quot;August</span><span class="se">\n</span><span class="s">&quot;</span>
-                    <span class="s">&quot;September</span><span class="se">\n</span><span class="s">&quot;</span>
-                    <span class="s">&quot;October</span><span class="se">\n</span><span class="s">&quot;</span>
-                    <span class="s">&quot;November</span><span class="se">\n</span><span class="s">&quot;</span>
-                    <span class="s">&quot;December&quot;</span><span class="p">,</span>
-                    <span class="n">LV_ROLLER_MODE_INIFINITE</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">lv_ex_roller_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">roller1</span> <span class="o">=</span> <span class="n">lv_roller_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_roller_set_options</span><span class="p">(</span><span class="n">roller1</span><span class="p">,</span>
+                        <span class="s">&quot;January</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;February</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;March</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;April</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;May</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;June</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;July</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;August</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;September</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;October</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;November</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="s">&quot;December&quot;</span><span class="p">,</span>
+                        <span class="n">LV_ROLLER_MODE_INIFINITE</span><span class="p">);</span>
 
-<span class="n">lv_roller_set_visible_row_count</span><span class="p">(</span><span class="n">roller1</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">roller1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">roller1</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
-
+    <span class="n">lv_roller_set_visible_row_count</span><span class="p">(</span><span class="n">roller1</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">roller1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">roller1</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1466,7 +1470,7 @@ The time of this scroll animation can be changed by <code class="docutils litera
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

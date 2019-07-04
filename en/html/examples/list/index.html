@@ -1050,44 +1050,47 @@
             
   <div class="section" id="c">
 <h1>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
-<img alt="List example in LittlevGL" src="../../_images/list_1.gif" />
+<img alt="List example in LittlevGL" src="../../_images/lv_ex_list_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_CLICKED</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Clicked: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">lv_list_get_btn_text</span><span class="p">(</span><span class="n">obj</span><span class="p">));</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="p">...</span>
+<span class="kt">void</span> <span class="nf">lv_ex_list_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*Create a list*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">list1</span> <span class="o">=</span> <span class="n">lv_list_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
-<span class="cm">/*Create a list*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">list1</span> <span class="o">=</span> <span class="n">lv_list_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="cm">/*Add buttons to the list*/</span>
 
-<span class="cm">/*Add buttons to the list*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">list_btn</span><span class="p">;</span>
 
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">list_btn</span><span class="p">;</span>
+    <span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">LV_SYMBOL_FILE</span><span class="p">,</span> <span class="s">&quot;New&quot;</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">list_btn</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
 
-<span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">LV_SYMBOL_FILE</span><span class="p">,</span> <span class="s">&quot;New&quot;</span><span class="p">);</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">list_btn</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+    <span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">LV_SYMBOL_DIRECTORY</span><span class="p">,</span> <span class="s">&quot;Open&quot;</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">list_btn</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
 
-<span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">LV_SYMBOL_DIRECTORY</span><span class="p">,</span> <span class="s">&quot;Open&quot;</span><span class="p">);</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">list_btn</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+    <span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">LV_SYMBOL_CLOSE</span><span class="p">,</span> <span class="s">&quot;Delete&quot;</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">list_btn</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
 
-<span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">LV_SYMBOL_CLOSE</span><span class="p">,</span> <span class="s">&quot;Delete&quot;</span><span class="p">);</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">list_btn</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+    <span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">LV_SYMBOL_EDIT</span><span class="p">,</span> <span class="s">&quot;Edit&quot;</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">list_btn</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
 
-<span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">LV_SYMBOL_EDIT</span><span class="p">,</span> <span class="s">&quot;Edit&quot;</span><span class="p">);</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">list_btn</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
-
-<span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">LV_SYMBOL_SAVE</span><span class="p">,</span> <span class="s">&quot;Save&quot;</span><span class="p">);</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">list_btn</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
-
+    <span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">LV_SYMBOL_SAVE</span><span class="p">,</span> <span class="s">&quot;Save&quot;</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">list_btn</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1110,7 +1113,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

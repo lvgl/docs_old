@@ -1050,26 +1050,31 @@
             
   <div class="section" id="c">
 <h1>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
-<img alt="Preloader example in LittlevGL" src="../../_images/preload_1.gif" />
+<img alt="Preloader example in LittlevGL" src="../../_images/lv_ex_preload_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create a style for the Preloader*/</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style</span><span class="p">;</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
-<span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>                         <span class="cm">/*10 px thick arc*/</span>
-<span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x258</span><span class="p">);</span>       <span class="cm">/*Blueish arc color*/</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0xBBB</span><span class="p">);</span> <span class="cm">/*Gray background color*/</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">lv_ex_preload_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*Create a style for the Preloader*/</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>                         <span class="cm">/*10 px thick arc*/</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x258</span><span class="p">);</span>       <span class="cm">/*Blueish arc color*/</span>
 
-<span class="cm">/*Create a Preloader object*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">preload</span> <span class="o">=</span> <span class="n">lv_preload_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">preload</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">preload</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">lv_preload_set_style</span><span class="p">(</span><span class="n">preload</span><span class="p">,</span> <span class="n">LV_PRELOAD_STYLE_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0xBBB</span><span class="p">);</span> <span class="cm">/*Gray background color*/</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="cm">/*Create a Preloader object*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">preload</span> <span class="o">=</span> <span class="n">lv_preload_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">preload</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">preload</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_preload_set_style</span><span class="p">(</span><span class="n">preload</span><span class="p">,</span> <span class="n">LV_PRELOAD_STYLE_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1092,7 +1097,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

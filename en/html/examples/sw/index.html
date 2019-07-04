@@ -1050,65 +1050,67 @@
             
   <div class="section" id="c">
 <h1>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
-<img alt="Switch example in LittlevGL" src="../../_images/sw_1.gif" />
+<img alt="Switch example in LittlevGL" src="../../_images/lv_ex_sw_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
-<span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;State: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">lv_sw_get_state</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="o">?</span> <span class="s">&quot;On&quot;</span> <span class="o">:</span> <span class="s">&quot;Off&quot;</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="p">...</span>
+<span class="kt">void</span> <span class="nf">lv_ex_sw_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*Create styles for the switch*/</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">bg_style</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">indic_style</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">knob_on_style</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">knob_off_style</span><span class="p">;</span>
 
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bg_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
+    <span class="n">bg_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+    <span class="n">bg_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+    <span class="n">bg_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
 
-<span class="cm">/*Create styles for the switch*/</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">bg_style</span><span class="p">;</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">indic_style</span><span class="p">;</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">knob_on_style</span><span class="p">;</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">knob_off_style</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indic_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
+    <span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+    <span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0x9fc8ef</span><span class="p">);</span>
+    <span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0x9fc8ef</span><span class="p">);</span>
+    <span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bg_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
-<span class="n">bg_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
-<span class="n">bg_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
-<span class="n">bg_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">knob_off_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
+    <span class="n">knob_off_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+    <span class="n">knob_off_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="n">knob_off_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_SHADOW_BOTTOM</span><span class="p">;</span>
 
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indic_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
-<span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
-<span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0x9fc8ef</span><span class="p">);</span>
-<span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0x9fc8ef</span><span class="p">);</span>
-<span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="n">indic_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">knob_on_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
+    <span class="n">knob_on_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+    <span class="n">knob_on_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="n">knob_on_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_SHADOW_BOTTOM</span><span class="p">;</span>
 
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">knob_off_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
-<span class="n">knob_off_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
-<span class="n">knob_off_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-<span class="n">knob_off_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_SHADOW_BOTTOM</span><span class="p">;</span>
+    <span class="cm">/*Create a switch and apply the styles*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">sw1</span> <span class="o">=</span> <span class="n">lv_sw_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_sw_set_style</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="n">LV_SW_STYLE_BG</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bg_style</span><span class="p">);</span>
+    <span class="n">lv_sw_set_style</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="n">LV_SW_STYLE_INDIC</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">indic_style</span><span class="p">);</span>
+    <span class="n">lv_sw_set_style</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="n">LV_SW_STYLE_KNOB_ON</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">knob_on_style</span><span class="p">);</span>
+    <span class="n">lv_sw_set_style</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="n">LV_SW_STYLE_KNOB_OFF</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">knob_off_style</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
 
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">knob_on_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
-<span class="n">knob_on_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
-<span class="n">knob_on_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-<span class="n">knob_on_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_SHADOW_BOTTOM</span><span class="p">;</span>
-
-<span class="cm">/*Create a switch and apply the styles*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">sw1</span> <span class="o">=</span> <span class="n">lv_sw_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_sw_set_style</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="n">LV_SW_STYLE_BG</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bg_style</span><span class="p">);</span>
-<span class="n">lv_sw_set_style</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="n">LV_SW_STYLE_INDIC</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">indic_style</span><span class="p">);</span>
-<span class="n">lv_sw_set_style</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="n">LV_SW_STYLE_KNOB_ON</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">knob_on_style</span><span class="p">);</span>
-<span class="n">lv_sw_set_style</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="n">LV_SW_STYLE_KNOB_OFF</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">knob_off_style</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">);</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">sw1</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
-
-<span class="cm">/*Copy the first switch and turn it ON*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">sw2</span> <span class="o">=</span> <span class="n">lv_sw_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">sw1</span><span class="p">);</span>
-<span class="n">lv_sw_on</span><span class="p">(</span><span class="n">sw2</span><span class="p">,</span> <span class="n">LV_ANIM_ON</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">sw2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+    <span class="cm">/*Copy the first switch and turn it ON*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">sw2</span> <span class="o">=</span> <span class="n">lv_sw_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">sw1</span><span class="p">);</span>
+    <span class="n">lv_sw_on</span><span class="p">(</span><span class="n">sw2</span><span class="p">,</span> <span class="n">LV_ANIM_ON</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">sw2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1131,7 +1133,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

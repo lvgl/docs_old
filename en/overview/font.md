@@ -37,7 +37,7 @@ The built-in fonts have *bpp = 4*, contains the ASCII characters and uses the [R
 
 In addition to the ASCII rangle, the following symbols are also added to the built-in fonts from the [FontAwesome](https://fontawesome.com/) font.
 
-![](/examples/misc/symbols.png "Built-in Symbols in LittlevGL")
+![](/misc/symbols.png "Built-in Symbols in LittlevGL")
 
 The symbols can be used as:
 ```c

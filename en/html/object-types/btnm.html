@@ -1129,12 +1129,15 @@ The background and the buttons use the <code class="docutils literal notranslate
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<img alt="Simple Button matrix example in LittlevGL" src="../_images/btnm_1.gif" />
+<img alt="Simple Button matrix example in LittlevGL" src="../_images/lv_ex_btnm_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">txt</span> <span class="o">=</span> <span class="n">lv_btnm_get_active_btn_text</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
@@ -1143,18 +1146,19 @@ The background and the buttons use the <code class="docutils literal notranslate
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="p">...</span>
 
 <span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">btnm_map</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;1&quot;</span><span class="p">,</span> <span class="s">&quot;2&quot;</span><span class="p">,</span> <span class="s">&quot;3&quot;</span><span class="p">,</span> <span class="s">&quot;4&quot;</span><span class="p">,</span> <span class="s">&quot;5&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
                                   <span class="s">&quot;6&quot;</span><span class="p">,</span> <span class="s">&quot;7&quot;</span><span class="p">,</span> <span class="s">&quot;8&quot;</span><span class="p">,</span> <span class="s">&quot;9&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
                                   <span class="s">&quot;Action1&quot;</span><span class="p">,</span> <span class="s">&quot;Action2&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">};</span>
 
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btnm1</span> <span class="o">=</span> <span class="n">lv_btnm_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_btnm_set_map</span><span class="p">(</span><span class="n">btnm1</span><span class="p">,</span> <span class="n">btnm_map</span><span class="p">);</span>
-<span class="n">lv_btnm_set_btn_width</span><span class="p">(</span><span class="n">btnm1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>        <span class="cm">/*Make &quot;Action1&quot; twice as wide as &quot;Action2&quot;*/</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btnm1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btnm1</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
-
+<span class="kt">void</span> <span class="nf">lv_ex_btnm_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btnm1</span> <span class="o">=</span> <span class="n">lv_btnm_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_btnm_set_map</span><span class="p">(</span><span class="n">btnm1</span><span class="p">,</span> <span class="n">btnm_map</span><span class="p">);</span>
+    <span class="n">lv_btnm_set_btn_width</span><span class="p">(</span><span class="n">btnm1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>        <span class="cm">/*Make &quot;Action1&quot; twice as wide as &quot;Action2&quot;*/</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btnm1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btnm1</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1635,7 +1639,7 @@ The background and the buttons use the <code class="docutils literal notranslate
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

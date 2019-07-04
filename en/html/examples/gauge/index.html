@@ -1050,37 +1050,42 @@
             
   <div class="section" id="c">
 <h1>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
-<img alt="Simple Gauge example in LittlevGL" src="../../_images/gauge_1.png" />
+<img alt="Simple Gauge example in LittlevGL" src="../../_images/lv_ex_gauge_1.png" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create a style*/</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style</span><span class="p">;</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x666</span><span class="p">);</span>     <span class="cm">/*Line color at the beginning*/</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span>  <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x666</span><span class="p">);</span>    <span class="cm">/*Line color at the end*/</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>                      <span class="cm">/*Scale line length*/</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">inner</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">;</span>                    <span class="cm">/*Scale label padding*/</span>
-<span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x333</span><span class="p">);</span>   <span class="cm">/*Needle middle circle color*/</span>
-<span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="n">style</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x333</span><span class="p">);</span>
-<span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_RED</span><span class="p">;</span>                  <span class="cm">/*Line color after the critical value*/</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="cm">/*Describe the color for the needles*/</span>
-<span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">needle_colors</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">LV_COLOR_BLUE</span><span class="p">,</span> <span class="n">LV_COLOR_ORANGE</span><span class="p">,</span> <span class="n">LV_COLOR_PURPLE</span><span class="p">};</span>
+<span class="kt">void</span> <span class="nf">lv_ex_gauge_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*Create a style*/</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x666</span><span class="p">);</span>     <span class="cm">/*Line color at the beginning*/</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span>  <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x666</span><span class="p">);</span>    <span class="cm">/*Line color at the end*/</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>                      <span class="cm">/*Scale line length*/</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">inner</span> <span class="o">=</span> <span class="mi">8</span> <span class="p">;</span>                    <span class="cm">/*Scale label padding*/</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x333</span><span class="p">);</span>   <span class="cm">/*Needle middle circle color*/</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x333</span><span class="p">);</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_RED</span><span class="p">;</span>                  <span class="cm">/*Line color after the critical value*/</span>
 
-<span class="cm">/*Create a gauge*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">gauge1</span> <span class="o">=</span> <span class="n">lv_gauge_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_gauge_set_style</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="n">LV_GAUGE_STYLE_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
-<span class="n">lv_gauge_set_needle_count</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">needle_colors</span><span class="p">);</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="cm">/*Describe the color for the needles*/</span>
+    <span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">needle_colors</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">LV_COLOR_BLUE</span><span class="p">,</span> <span class="n">LV_COLOR_ORANGE</span><span class="p">,</span> <span class="n">LV_COLOR_PURPLE</span><span class="p">};</span>
 
-<span class="cm">/*Set the values*/</span>
-<span class="n">lv_gauge_set_value</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="n">lv_gauge_set_value</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
-<span class="n">lv_gauge_set_value</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+    <span class="cm">/*Create a gauge*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">gauge1</span> <span class="o">=</span> <span class="n">lv_gauge_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_gauge_set_style</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="n">LV_GAUGE_STYLE_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
+    <span class="n">lv_gauge_set_needle_count</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">needle_colors</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+
+    <span class="cm">/*Set the values*/</span>
+    <span class="n">lv_gauge_set_value</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">lv_gauge_set_value</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="n">lv_gauge_set_value</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1103,7 +1108,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

@@ -2,7 +2,7 @@
 # Welcome to LittlevGL's documentation!
 
 
-![](/examples/misc/lv_theme_intro.png "LittlevGL cover")
+![](/misc/lv_theme_intro.png "LittlevGL cover")
 
 LittlevGL is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
 

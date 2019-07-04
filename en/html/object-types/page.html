@@ -1143,43 +1143,48 @@ It can be enabled with <code class="docutils literal notranslate"><span class="p
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<img alt="Page example in LittlevGL" src="../_images/page_1.gif" />
+<img alt="Page example in LittlevGL" src="../_images/lv_ex_page_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create a scroll bar style*/</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_sb</span><span class="p">;</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_sb</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
-<span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
-<span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
-<span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_WHITE</span><span class="p">;</span>
-<span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">opa</span> <span class="o">=</span> <span class="n">LV_OPA_70</span><span class="p">;</span>
-<span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
-<span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">opa</span> <span class="o">=</span> <span class="n">LV_OPA_60</span><span class="p">;</span>
-<span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">inner</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>        <span class="cm">/*Scrollbar width*/</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="cm">/*Create a page*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">page</span> <span class="o">=</span> <span class="n">lv_page_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">lv_page_set_style</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">LV_PAGE_STYLE_SB</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_sb</span><span class="p">);</span>           <span class="cm">/*Set the scrollbar style*/</span>
+<span class="kt">void</span> <span class="nf">lv_ex_page_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*Create a scroll bar style*/</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_sb</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_sb</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+    <span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
+    <span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
+    <span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_WHITE</span><span class="p">;</span>
+    <span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">opa</span> <span class="o">=</span> <span class="n">LV_OPA_70</span><span class="p">;</span>
+    <span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+    <span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">opa</span> <span class="o">=</span> <span class="n">LV_OPA_60</span><span class="p">;</span>
+    <span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">style_sb</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">inner</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>        <span class="cm">/*Scrollbar width*/</span>
 
-<span class="cm">/*Create a label on the page*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_label_set_long_mode</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">LV_LABEL_LONG_BREAK</span><span class="p">);</span>            <span class="cm">/*Automatically break long lines*/</span>
-<span class="n">lv_obj_set_width</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">lv_page_get_fit_width</span><span class="p">(</span><span class="n">page</span><span class="p">));</span>          <span class="cm">/*Set the label width to max value to not show hor. scroll bars*/</span>
-<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit,</span><span class="se">\n</span><span class="s">&quot;</span>
-                         <span class="s">&quot;sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span><span class="se">\n</span><span class="s">&quot;</span>
-                         <span class="s">&quot;Ut enim ad minim veniam, quis nostrud exercitation ullamco</span><span class="se">\n</span><span class="s">&quot;</span>
-                         <span class="s">&quot;laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</span><span class="se">\n</span><span class="s">&quot;</span>
-                         <span class="s">&quot;dolor in reprehenderit in voluptate velit esse cillum dolore</span><span class="se">\n</span><span class="s">&quot;</span>
-                         <span class="s">&quot;eu fugiat nulla pariatur.</span><span class="se">\n</span><span class="s">&quot;</span>
-                         <span class="s">&quot;Excepteur sint occaecat cupidatat non proident, sunt in culpa</span><span class="se">\n</span><span class="s">&quot;</span>
-                         <span class="s">&quot;qui officia deserunt mollit anim id est laborum.&quot;</span><span class="p">);</span>
+    <span class="cm">/*Create a page*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">page</span> <span class="o">=</span> <span class="n">lv_page_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_page_set_style</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">LV_PAGE_STYLE_SB</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_sb</span><span class="p">);</span>           <span class="cm">/*Set the scrollbar style*/</span>
+
+    <span class="cm">/*Create a label on the page*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_long_mode</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">LV_LABEL_LONG_BREAK</span><span class="p">);</span>            <span class="cm">/*Automatically break long lines*/</span>
+    <span class="n">lv_obj_set_width</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">lv_page_get_fit_width</span><span class="p">(</span><span class="n">page</span><span class="p">));</span>          <span class="cm">/*Set the label width to max value to not show hor. scroll bars*/</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit,</span><span class="se">\n</span><span class="s">&quot;</span>
+                             <span class="s">&quot;sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span><span class="se">\n</span><span class="s">&quot;</span>
+                             <span class="s">&quot;Ut enim ad minim veniam, quis nostrud exercitation ullamco</span><span class="se">\n</span><span class="s">&quot;</span>
+                             <span class="s">&quot;laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</span><span class="se">\n</span><span class="s">&quot;</span>
+                             <span class="s">&quot;dolor in reprehenderit in voluptate velit esse cillum dolore</span><span class="se">\n</span><span class="s">&quot;</span>
+                             <span class="s">&quot;eu fugiat nulla pariatur.</span><span class="se">\n</span><span class="s">&quot;</span>
+                             <span class="s">&quot;Excepteur sint occaecat cupidatat non proident, sunt in culpa</span><span class="se">\n</span><span class="s">&quot;</span>
+                             <span class="s">&quot;qui officia deserunt mollit anim id est laborum.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
 </pre></div>
 </div>
@@ -1904,7 +1909,7 @@ It can be enabled with <code class="docutils literal notranslate"><span class="p
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

@@ -18,7 +18,7 @@ You can set the x and y coordinates relative to the parent with `lv_obj_set_x(ob
 You can align the object to an other with `lv_obj_align(obj, obj_ref, LV_ALIGN_..., x_shift, y_shift)`. 
 The second argument is a reference object, `obj` will be aligned to it. If `obj_ref = NULL` then the parent of `obj` will be used. 
 The third argument is the *type* of alignment. These are the possible options:
-![](/examples/misc/align.png "Alignment types in LittlevGL")
+![](/misc/align.png "Alignment types in LittlevGL")
 
 The alignment types build like `LV_ALIGN_OUT_TOP_MID`. 
 

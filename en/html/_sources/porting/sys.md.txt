@@ -1,6 +1,6 @@
 # System overview
 
-![](/examples/misc/sys.png "System architecture with Littlev Graphics Library (LittlevGL)")
+![](/misc/sys.png "System architecture with Littlev Graphics Library (LittlevGL)")
 
 **Application**
 Your application which creates the GUI and handles the specific tasks.

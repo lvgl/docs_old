@@ -1050,52 +1050,57 @@
             
   <div class="section" id="c">
 <h1>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
-<img alt="Bar example in LittlevGL" src="../../_images/table_1.png" />
+<img alt="Bar example in LittlevGL" src="../../_images/lv_ex_table_1.png" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create a normal cell style*/</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_cell1</span><span class="p">;</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_cell1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
-<span class="n">style_cell1</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="n">style_cell1</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="cm">/*Crealte a header cell style*/</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_cell2</span><span class="p">;</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_cell2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
-<span class="n">style_cell2</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="n">style_cell2</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
-<span class="n">style_cell2</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_SILVER</span><span class="p">;</span>
-<span class="n">style_cell2</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_SILVER</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">lv_ex_table_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*Create a normal cell style*/</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_cell1</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_cell1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+    <span class="n">style_cell1</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">style_cell1</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
 
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">table</span> <span class="o">=</span> <span class="n">lv_table_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_table_set_style</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">LV_TABLE_STYLE_CELL1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_cell1</span><span class="p">);</span>
-<span class="n">lv_table_set_style</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">LV_TABLE_STYLE_CELL2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_cell2</span><span class="p">);</span>
-<span class="n">lv_table_set_style</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">LV_TABLE_STYLE_BG</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_transp_tight</span><span class="p">);</span>
-<span class="n">lv_table_set_col_cnt</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-<span class="n">lv_table_set_row_cnt</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="cm">/*Crealte a header cell style*/</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_cell2</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_cell2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+    <span class="n">style_cell2</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">style_cell2</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
+    <span class="n">style_cell2</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_SILVER</span><span class="p">;</span>
+    <span class="n">style_cell2</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_SILVER</span><span class="p">;</span>
 
-<span class="cm">/*Make the cells of the first row center aligned */</span>
-<span class="n">lv_table_set_cell_align</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">LV_LABEL_ALIGN_CENTER</span><span class="p">);</span>
-<span class="n">lv_table_set_cell_align</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">LV_LABEL_ALIGN_CENTER</span><span class="p">);</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">table</span> <span class="o">=</span> <span class="n">lv_table_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_table_set_style</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">LV_TABLE_STYLE_CELL1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_cell1</span><span class="p">);</span>
+    <span class="n">lv_table_set_style</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">LV_TABLE_STYLE_CELL2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_cell2</span><span class="p">);</span>
+    <span class="n">lv_table_set_style</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">LV_TABLE_STYLE_BG</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_transp_tight</span><span class="p">);</span>
+    <span class="n">lv_table_set_col_cnt</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">lv_table_set_row_cnt</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
-<span class="cm">/*Make the cells of the first row TYPE = 2 (use `style_cell2`) */</span>
-<span class="n">lv_table_set_cell_type</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-<span class="n">lv_table_set_cell_type</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="cm">/*Make the cells of the first row center aligned */</span>
+    <span class="n">lv_table_set_cell_align</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">LV_LABEL_ALIGN_CENTER</span><span class="p">);</span>
+    <span class="n">lv_table_set_cell_align</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">LV_LABEL_ALIGN_CENTER</span><span class="p">);</span>
 
-<span class="cm">/*Fill the first column*/</span>
-<span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Name&quot;</span><span class="p">);</span>
-<span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Apple&quot;</span><span class="p">);</span>
-<span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Banana&quot;</span><span class="p">);</span>
-<span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Citron&quot;</span><span class="p">);</span>
+    <span class="cm">/*Make the cells of the first row TYPE = 2 (use `style_cell2`) */</span>
+    <span class="n">lv_table_set_cell_type</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">lv_table_set_cell_type</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
 
-<span class="cm">/*Fill the second column*/</span>
-<span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Price&quot;</span><span class="p">);</span>
-<span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;$7&quot;</span><span class="p">);</span>
-<span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;$4&quot;</span><span class="p">);</span>
-<span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;$6&quot;</span><span class="p">);</span>
+    <span class="cm">/*Fill the first column*/</span>
+    <span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Name&quot;</span><span class="p">);</span>
+    <span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Apple&quot;</span><span class="p">);</span>
+    <span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Banana&quot;</span><span class="p">);</span>
+    <span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Citron&quot;</span><span class="p">);</span>
+
+    <span class="cm">/*Fill the second column*/</span>
+    <span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Price&quot;</span><span class="p">);</span>
+    <span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;$7&quot;</span><span class="p">);</span>
+    <span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;$4&quot;</span><span class="p">);</span>
+    <span class="n">lv_table_set_cell_value</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;$6&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1118,7 +1123,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

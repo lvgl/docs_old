@@ -1050,33 +1050,38 @@
             
   <div class="section" id="c">
 <h1>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
-<img alt="Simeple Base object example in LittlevGL" src="../../_images/obj_1.png" />
+<img alt="Simeple Base object example in LittlevGL" src="../../_images/lv_ex_obj_1.png" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj1</span><span class="p">;</span>
-<span class="n">obj1</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
-<span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain_color</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="cm">/*Copy the previous object and enable drag*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj2</span><span class="p">;</span>
-<span class="n">obj2</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">obj1</span><span class="p">);</span>
-<span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">obj2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">obj2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">lv_ex_obj_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj1</span><span class="p">;</span>
+    <span class="n">obj1</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+    <span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain_color</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">);</span>
 
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_shadow</span><span class="p">;</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_shadow</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
-<span class="n">style_shadow</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
-<span class="n">style_shadow</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+    <span class="cm">/*Copy the previous object and enable drag*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj2</span><span class="p">;</span>
+    <span class="n">obj2</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">obj1</span><span class="p">);</span>
+    <span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">obj2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">obj2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
-<span class="cm">/*Copy the previous object (drag is already enabled)*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj3</span><span class="p">;</span>
-<span class="n">obj3</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">obj2</span><span class="p">);</span>
-<span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">obj3</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_shadow</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">obj3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_shadow</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_shadow</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
+    <span class="n">style_shadow</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+    <span class="n">style_shadow</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+
+    <span class="cm">/*Copy the previous object (drag is already enabled)*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj3</span><span class="p">;</span>
+    <span class="n">obj3</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">obj2</span><span class="p">);</span>
+    <span class="n">lv_obj_set_style</span><span class="p">(</span><span class="n">obj3</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_shadow</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">obj3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1099,7 +1104,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

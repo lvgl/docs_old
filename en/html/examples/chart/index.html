@@ -1050,51 +1050,56 @@
             
   <div class="section" id="c">
 <h1>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h1>
-<img alt="Simple Chart example in LittlevGL" src="../../_images/chart_1.png" />
+<img alt="Simple Chart example in LittlevGL" src="../../_images/lv_ex_chart_1.png" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create a chart*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">chart</span><span class="p">;</span>
-<span class="n">chart</span> <span class="o">=</span> <span class="n">lv_chart_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">lv_chart_set_type</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">LV_CHART_TYPE_POINT</span> <span class="o">|</span> <span class="n">LV_CHART_TYPE_LINE</span><span class="p">);</span>   <span class="cm">/*Show lines and points too*/</span>
-<span class="n">lv_chart_set_series_opa</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">LV_OPA_70</span><span class="p">);</span>                            <span class="cm">/*Opacity of the data series*/</span>
-<span class="n">lv_chart_set_series_width</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>                                  <span class="cm">/*Line width and point radious*/</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="n">lv_chart_set_range</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">lv_ex_chart_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*Create a chart*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">chart</span><span class="p">;</span>
+    <span class="n">chart</span> <span class="o">=</span> <span class="n">lv_chart_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_chart_set_type</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">LV_CHART_TYPE_POINT</span> <span class="o">|</span> <span class="n">LV_CHART_TYPE_LINE</span><span class="p">);</span>   <span class="cm">/*Show lines and points too*/</span>
+    <span class="n">lv_chart_set_series_opa</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">LV_OPA_70</span><span class="p">);</span>                            <span class="cm">/*Opacity of the data series*/</span>
+    <span class="n">lv_chart_set_series_width</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>                                  <span class="cm">/*Line width and point radious*/</span>
 
-<span class="cm">/*Add two data series*/</span>
-<span class="n">lv_chart_series_t</span> <span class="o">*</span> <span class="n">ser1</span> <span class="o">=</span> <span class="n">lv_chart_add_series</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">LV_COLOR_RED</span><span class="p">);</span>
-<span class="n">lv_chart_series_t</span> <span class="o">*</span> <span class="n">ser2</span> <span class="o">=</span> <span class="n">lv_chart_add_series</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">LV_COLOR_GREEN</span><span class="p">);</span>
+    <span class="n">lv_chart_set_range</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
 
-<span class="cm">/*Set the next points on &#39;dl1&#39;*/</span>
-<span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">70</span><span class="p">);</span>
-<span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">90</span><span class="p">);</span>
+    <span class="cm">/*Add two data series*/</span>
+    <span class="n">lv_chart_series_t</span> <span class="o">*</span> <span class="n">ser1</span> <span class="o">=</span> <span class="n">lv_chart_add_series</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">LV_COLOR_RED</span><span class="p">);</span>
+    <span class="n">lv_chart_series_t</span> <span class="o">*</span> <span class="n">ser2</span> <span class="o">=</span> <span class="n">lv_chart_add_series</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">LV_COLOR_GREEN</span><span class="p">);</span>
 
-<span class="cm">/*Directly set points on &#39;dl2&#39;*/</span>
-<span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">90</span><span class="p">;</span>
-<span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">70</span><span class="p">;</span>
-<span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
-<span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
-<span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
-<span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
-<span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
-<span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
-<span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
-<span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+    <span class="cm">/*Set the next points on &#39;dl1&#39;*/</span>
+    <span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+    <span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">70</span><span class="p">);</span>
+    <span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span> <span class="n">ser1</span><span class="p">,</span> <span class="mi">90</span><span class="p">);</span>
 
-<span class="n">lv_chart_refresh</span><span class="p">(</span><span class="n">chart</span><span class="p">);</span> <span class="cm">/*Required after direct set*/</span>
+    <span class="cm">/*Directly set points on &#39;dl2&#39;*/</span>
+    <span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">90</span><span class="p">;</span>
+    <span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">70</span><span class="p">;</span>
+    <span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+    <span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+    <span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+    <span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+    <span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+    <span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+    <span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+    <span class="n">ser2</span><span class="o">-&gt;</span><span class="n">points</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+
+    <span class="n">lv_chart_refresh</span><span class="p">(</span><span class="n">chart</span><span class="p">);</span> <span class="cm">/*Required after direct set*/</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1117,7 +1122,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>

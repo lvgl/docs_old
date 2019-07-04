@@ -1101,54 +1101,58 @@
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<img alt="Slider example in LittlevGL" src="../_images/slider_1.gif" />
+<img alt="Slider example in LittlevGL" src="../_images/lv_ex_slider_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
-<span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">lv_slider_get_value</span><span class="p">(</span><span class="n">obj</span><span class="p">));</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="p">...</span>
 
-<span class="cm">/*Create styles*/</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_bg</span><span class="p">;</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_indic</span><span class="p">;</span>
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_knob</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">lv_ex_slider_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*Create styles*/</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_bg</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_indic</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_knob</span><span class="p">;</span>
 
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_bg</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
-<span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span>  <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
-<span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span>  <span class="n">LV_COLOR_GRAY</span><span class="p">;</span>
-<span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
-<span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_WHITE</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_bg</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
+    <span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span>  <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
+    <span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span>  <span class="n">LV_COLOR_GRAY</span><span class="p">;</span>
+    <span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+    <span class="n">style_bg</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_WHITE</span><span class="p">;</span>
 
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_indic</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
-<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
-<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
-<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span><span class="p">;</span>
-<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_indic</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty_color</span><span class="p">);</span>
+    <span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+    <span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span><span class="p">;</span>
+    <span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">style_indic</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_knob</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
-<span class="n">style_knob</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
-<span class="n">style_knob</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">opa</span> <span class="o">=</span> <span class="n">LV_OPA_70</span><span class="p">;</span>
-<span class="n">style_knob</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">;</span>
-<span class="n">style_knob</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_knob</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_pretty</span><span class="p">);</span>
+    <span class="n">style_knob</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
+    <span class="n">style_knob</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">opa</span> <span class="o">=</span> <span class="n">LV_OPA_70</span><span class="p">;</span>
+    <span class="n">style_knob</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">;</span>
+    <span class="n">style_knob</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">padding</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">;</span>
 
-<span class="cm">/*Create a slider*/</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">slider</span> <span class="o">=</span> <span class="n">lv_slider_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_slider_set_style</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">LV_SLIDER_STYLE_BG</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_bg</span><span class="p">);</span>
-<span class="n">lv_slider_set_style</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">LV_SLIDER_STYLE_INDIC</span><span class="p">,</span><span class="o">&amp;</span><span class="n">style_indic</span><span class="p">);</span>
-<span class="n">lv_slider_set_style</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">LV_SLIDER_STYLE_KNOB</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_knob</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+    <span class="cm">/*Create a slider*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">slider</span> <span class="o">=</span> <span class="n">lv_slider_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_slider_set_style</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">LV_SLIDER_STYLE_BG</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_bg</span><span class="p">);</span>
+    <span class="n">lv_slider_set_style</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">LV_SLIDER_STYLE_INDIC</span><span class="p">,</span><span class="o">&amp;</span><span class="n">style_indic</span><span class="p">);</span>
+    <span class="n">lv_slider_set_style</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">LV_SLIDER_STYLE_KNOB</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_knob</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1419,7 +1423,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 03, 2019.
+        Last updated on Jul 04, 2019.
       </span>
 
     </p>
