@@ -60,6 +60,12 @@ You can download the documentation in PDF here:
 :download:`LittlevGL.pdf <LittlevGL.pdf>`
 ```
 
+## Documentation of v5.3
+You can download the documentation of the previous version (v5.3) and open it offline:
+```eval_rst
+:download:`Docs-v5-3.zip <docs_v5_3.zip>`
+```
+
 
 ## Get started
 For a general overview of LittlevGL visit [littlevgl.com](https://littlevgl.com)
