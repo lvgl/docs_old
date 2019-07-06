@@ -20,7 +20,7 @@ The get the currently selected option use `lv_roller_get_selected(roller)` it wi
 To align the label horizontally use `lv_roller_set_align(roller, LV_LABEL_ALIGN_LEFT/CENTER/RIGHT)`.
 
 ### Height and width
-So an set he number of visible rows with `lv_roller_set_visible_row_count(roller, num)`
+You can set the number of visible rows with `lv_roller_set_visible_row_count(roller, num)`
 
 The width is adjusted automatically according to the width of the options. To prevent this apply `lv_roller_set_fix_width(roller, width)`. `0` means to use auto width.
 
@@ -37,7 +37,7 @@ The `lv_roller_set_style(roller, LV_ROLLER_STYLE_..., &style)` set the styles of
 
 ## Events
 Besides, the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Drop down lists:
- - **LV_EVENT_VALUE_CHANGED** sent when the a new option is selected
+ - **LV_EVENT_VALUE_CHANGED** sent when a new option is selected
 
 Learn more about [Events](/overview/event).
 
@@ -45,7 +45,7 @@ Learn more about [Events](/overview/event).
 The following *Keys* are processed by the Buttons:
 - **LV_KEY_RIGHT/DOWN** Select the next option
 - **LV_KEY_LEFT/UP** Select the previous option
-- **LY_KEY_ENTER** Apply the selected option (Send `LV_EVENT_VALUE_CHANGED` event and close the Drop down list) 
+- **LY_KEY_ENTER** Apply the selected option (Send `LV_EVENT_VALUE_CHANGED` event) 
 
 ## Example
 
