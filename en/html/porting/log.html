@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tick interface &mdash; LittlevGL 6.0 documentation</title>
+  <title>Logging &mdash; LittlevGL 6.0 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Task Handler" href="task-handler.html" />
-    <link rel="prev" title="Input device interface" href="indev.html" />
+    <link rel="next" title="Overview" href="../overview/index.html" />
+    <link rel="prev" title="Use with an operating system" href="os.html" />
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78811084-3"></script>
@@ -168,18 +168,18 @@
 <li class="toctree-l3"><a class="reference internal" href="indev.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Tick interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tick.html">Tick interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tick.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="task-handler.html">Task Handler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sleep.html">Sleep management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="os.html">Use with an operating system</a></li>
-<li class="toctree-l2"><a class="reference internal" href="log.html">Logging</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="log.html#log-level">Log level</a></li>
-<li class="toctree-l3"><a class="reference internal" href="log.html#logging-with-printf">Logging with printf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="log.html#custom-log-function">Custom log function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="log.html#add-logs">Add logs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#log-level">Log level</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging-with-printf">Logging with printf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-log-function">Custom log function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-logs">Add logs</a></li>
 </ul>
 </li>
 </ul>
@@ -1040,13 +1040,13 @@
         
           <li><a href="index.html">Porting</a> &raquo;</li>
         
-      <li>Tick interface</li>
+      <li>Logging</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/porting/tick.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/porting/log.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -1059,52 +1059,60 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="tick-interface">
-<h1>Tick interface<a class="headerlink" href="#tick-interface" title="Permalink to this headline">¶</a></h1>
-<p>The LittlevGL needs a system tick to know the elapsed time for animation and other task.</p>
-<p>You need to call the <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(tick_period)</span></code> function periodically and tell the call period in milliseconds. For example, if called in every millisecond: <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(1)</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">lv_tick_inc</span></code> should be called in a higher priority routine than<code class="docutils literal notranslate"> <span class="pre">lv_task_handler()</span></code> (e.g. in an interrupt) to precisely know the elapsed milliseconds even if the execution of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> takes longer time.</p>
-<p>With FreeRTOS <code class="docutils literal notranslate"><span class="pre">lv_tick_inc</span></code> can be called in <code class="docutils literal notranslate"><span class="pre">vApplicationTickHook</span></code>.</p>
-<p>On Linux based operation system (e.g. on Raspberry) <code class="docutils literal notranslate"><span class="pre">lv_tick_inc</span></code> can be called in a thread:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="o">*</span> <span class="nf">tick_thread</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+  <div class="section" id="logging">
+<h1>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h1>
+<p>LittlevGL has built-in <em>log</em> module to inform the user about what is happening in the library.</p>
+<div class="section" id="log-level">
+<h2>Log level<a class="headerlink" href="#log-level" title="Permalink to this headline">¶</a></h2>
+<p>To enable logging set <code class="docutils literal notranslate"><span class="pre">LV_USE_LOG</span>&#160; <span class="pre">1</span></code> in <em>lv_conf.h</em> and set <code class="docutils literal notranslate"><span class="pre">LV_LOG_LEVEL</span></code> to one of the following values:</p>
+<ul class="simple">
+<li><p><strong>LV_LOG_LEVEL_TRACE</strong> A lot of logs to give detailed information</p></li>
+<li><p><strong>LV_LOG_LEVEL_INFO</strong>  Log important events</p></li>
+<li><p><strong>LV_LOG_LEVEL_WARN</strong>  Log if something unwanted happened but didn’t cause a problem</p></li>
+<li><p><strong>LV_LOG_LEVEL_ERROR</strong> Only critical issue, when the system may fail</p></li>
+<li><p><strong>LV_LOG_LEVEL_NONE</strong>  Do not log anything</p></li>
+</ul>
+<p>The events which have higher level than the set log level will be logged too. E.g. if you <code class="docutils literal notranslate"><span class="pre">LV_LOG_LEVEL_WARN</span></code>, <em>errors</em> will be also logged.</p>
+</div>
+<div class="section" id="logging-with-printf">
+<h2>Logging with printf<a class="headerlink" href="#logging-with-printf" title="Permalink to this headline">¶</a></h2>
+<p>If your system supports <code class="docutils literal notranslate"><span class="pre">printf</span></code> you just need to enable <code class="docutils literal notranslate"><span class="pre">LV_LOG_PRINTF</span></code> in <em>lv_conf.h</em> to send the logs with <code class="docutils literal notranslate"><span class="pre">printf</span></code>.</p>
+</div>
+<div class="section" id="custom-log-function">
+<h2>Custom log function<a class="headerlink" href="#custom-log-function" title="Permalink to this headline">¶</a></h2>
+<p>If you can’t use <code class="docutils literal notranslate"><span class="pre">printf</span></code> or want to use a custom function to log you can register a “logger” callback with <code class="docutils literal notranslate"><span class="pre">lv_log_register_print()</span></code>.</p>
+<p>For example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_log_cb</span><span class="p">(</span><span class="n">lv_log_level_t</span> <span class="n">level</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">file</span><span class="p">,</span> <span class="kt">int</span> <span class="n">line</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">dsc</span><span class="p">)</span>
 <span class="p">{</span>
-      <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">usleep</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>   <span class="cm">/*Sleep for 5 millisecond*/</span>
-        <span class="n">lv_tick_inc</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>      <span class="cm">/*Tell LittlevGL that 5 milliseconds were elapsed*/</span>
-    <span class="p">}</span> 
+  <span class="cm">/*Send the logs via serial port*/</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">LV_LOG_LEVEL_ERROR</span><span class="p">)</span> <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;ERROR: &quot;</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">LV_LOG_LEVEL_WARN</span><span class="p">)</span>  <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;WARNING: &quot;</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">LV_LOG_LEVEL_INFO</span><span class="p">)</span>  <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;INFO: &quot;</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">LV_LOG_LEVEL_TRACE</span><span class="p">)</span> <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;TRACE: &quot;</span><span class="p">);</span>
+  
+  <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;File: &quot;</span><span class="p">);</span>
+  <span class="n">serial_send</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+  
+  <span class="kt">char</span> <span class="n">line_str</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+  <span class="n">sprintf</span><span class="p">(</span><span class="n">line_str</span><span class="p">,</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+  <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;#&quot;</span><span class="p">);</span>
+  <span class="n">serial_send</span><span class="p">(</span><span class="n">line_str</span><span class="p">);</span>
+  
+  <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">);</span>
+  <span class="n">serial_send</span><span class="p">(</span><span class="n">dsc</span><span class="p">);</span>
+  <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 <span class="p">}</span>
+
+<span class="p">...</span>
+
+
+<span class="n">lv_log_register_print</span><span class="p">(</span><span class="n">my_log_cb</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="section" id="api">
-<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
-<p>Provide access to the system tick with 1 millisecond resolution </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Functions</p>
-<dl class="function">
-<dt id="_CPPv411lv_tick_getv">
-<span id="_CPPv311lv_tick_getv"></span><span id="_CPPv211lv_tick_getv"></span><span id="lv_tick_get__void"></span><span class="target" id="lv__hal__tick_8h_1a051c47bcfb48282a75834d8dd0a8470c"></span>uint32_t <code class="sig-name descname">lv_tick_get</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411lv_tick_getv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the elapsed milliseconds since start up <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>the elapsed milliseconds </p>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv413lv_tick_elaps8uint32_t">
-<span id="_CPPv313lv_tick_elaps8uint32_t"></span><span id="_CPPv213lv_tick_elaps8uint32_t"></span><span id="lv_tick_elaps__uint32_t"></span><span class="target" id="lv__hal__tick_8h_1a632b8bf9b03d3a809d053508c06dc6d9"></span>uint32_t <code class="sig-name descname">lv_tick_elaps</code><span class="sig-paren">(</span>uint32_t <em>prev_tick</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lv_tick_elaps8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the elapsed milliseconds since a previous time stamp <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>the elapsed milliseconds since ‘prev_tick’ </p>
-</dd>
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">prev_tick</span></code>: a previous time stamp (return value of systick_get() ) </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
 </div>
+<div class="section" id="add-logs">
+<h2>Add logs<a class="headerlink" href="#add-logs" title="Permalink to this headline">¶</a></h2>
+<p>You can also use the log module via the <code class="docutils literal notranslate"><span class="pre">LV_LOG_TRACE/INFO/WARN/ERROR(description)</span></code> functions.</p>
 </div>
 </div>
 
@@ -1116,10 +1124,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="task-handler.html" class="btn btn-neutral float-right" title="Task Handler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../overview/index.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="indev.html" class="btn btn-neutral float-left" title="Input device interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="os.html" class="btn btn-neutral float-left" title="Use with an operating system" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

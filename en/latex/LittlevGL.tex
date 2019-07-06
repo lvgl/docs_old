@@ -71,7 +71,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Jul 04, 2019}
+\date{Jul 06, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -221,7 +221,7 @@ To see the source doe of the library go to GitHub: \sphinxurl{https://github.com
 \label{\detokenize{index:where-can-i-ask-questions}}
 To ask questions in the Forum: \sphinxurl{https://forum.littlevgl.com/}.
 
-We use \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub issues} for development related discussion. So you should use them only if your question or issue is tightly related to the development of the library
+We use \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub issues} for development related discussion. So you should use them only if your question or issue is tightly related to the development of the library.
 
 
 \section{Is my MCU/hardware supported?}
@@ -2815,6 +2815,80 @@ To create an \sphinxstyleemphasis{lv\_task} use:
 If you need to \sphinxstylestrong{use real tasks or threads} you need one mutex which should be taken before the call of \sphinxcode{\sphinxupquote{lv\_task\_handler}} and released after it.
 In addition, you have to use to that mutex in other tasks and threads around every LittlevGL (\sphinxcode{\sphinxupquote{lv\_...}}) related function call and code.
 This way you can use LittlevGL in a real multitasking environment. Just use a mutex to avoid the concurrent calling of LittlevGL functions.
+
+
+\subsubsection{Logging}
+\label{\detokenize{porting/log:logging}}\label{\detokenize{porting/log::doc}}
+LittlevGL has built-in \sphinxstyleemphasis{log} module to inform the user about what is happening in the library.
+
+
+\paragraph{Log level}
+\label{\detokenize{porting/log:log-level}}
+To enable logging set \sphinxcode{\sphinxupquote{LV\_USE\_LOG  1}} in \sphinxstyleemphasis{lv\_conf.h} and set \sphinxcode{\sphinxupquote{LV\_LOG\_LEVEL}} to one of the following values:
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{LV\_LOG\_LEVEL\_TRACE} A lot of logs to give detailed information
+
+\item {} 
+\sphinxstylestrong{LV\_LOG\_LEVEL\_INFO}  Log important events
+
+\item {} 
+\sphinxstylestrong{LV\_LOG\_LEVEL\_WARN}  Log if something unwanted happened but didn’t cause a problem
+
+\item {} 
+\sphinxstylestrong{LV\_LOG\_LEVEL\_ERROR} Only critical issue, when the system may fail
+
+\item {} 
+\sphinxstylestrong{LV\_LOG\_LEVEL\_NONE}  Do not log anything
+
+\end{itemize}
+
+The events which have higher level than the set log level will be logged too. E.g. if you \sphinxcode{\sphinxupquote{LV\_LOG\_LEVEL\_WARN}}, \sphinxstyleemphasis{errors} will be also logged.
+
+
+\paragraph{Logging with printf}
+\label{\detokenize{porting/log:logging-with-printf}}
+If your system supports \sphinxcode{\sphinxupquote{printf}} you just need to enable \sphinxcode{\sphinxupquote{LV\_LOG\_PRINTF}} in \sphinxstyleemphasis{lv\_conf.h} to send the logs with \sphinxcode{\sphinxupquote{printf}}.
+
+
+\paragraph{Custom log function}
+\label{\detokenize{porting/log:custom-log-function}}
+If you can’t use \sphinxcode{\sphinxupquote{printf}} or want to use a custom function to log you can register a “logger” callback with \sphinxcode{\sphinxupquote{lv\_log\_register\_print()}}.
+
+For example:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}log\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}log\PYGZus{}level\PYGZus{}t} \PYG{n}{level}\PYG{p}{,} \PYG{k}{const} \PYG{k+kt}{char} \PYG{o}{*} \PYG{n}{file}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{line}\PYG{p}{,} \PYG{k}{const} \PYG{k+kt}{char} \PYG{o}{*} \PYG{n}{dsc}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{c+cm}{/*Send the logs via serial port*/}
+  \PYG{k}{if}\PYG{p}{(}\PYG{n}{level} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}LOG\PYGZus{}LEVEL\PYGZus{}ERROR}\PYG{p}{)} \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{ERROR: }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+  \PYG{k}{if}\PYG{p}{(}\PYG{n}{level} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}LOG\PYGZus{}LEVEL\PYGZus{}WARN}\PYG{p}{)}  \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{WARNING: }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+  \PYG{k}{if}\PYG{p}{(}\PYG{n}{level} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}LOG\PYGZus{}LEVEL\PYGZus{}INFO}\PYG{p}{)}  \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{INFO: }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+  \PYG{k}{if}\PYG{p}{(}\PYG{n}{level} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}LOG\PYGZus{}LEVEL\PYGZus{}TRACE}\PYG{p}{)} \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{TRACE: }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+  
+  \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{File: }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+  \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{n}{file}\PYG{p}{)}\PYG{p}{;}
+  
+  \PYG{k+kt}{char} \PYG{n}{line\PYGZus{}str}\PYG{p}{[}\PYG{l+m+mi}{8}\PYG{p}{]}\PYG{p}{;}
+  \PYG{n}{sprintf}\PYG{p}{(}\PYG{n}{line\PYGZus{}str}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZpc{}d}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{line}\PYG{p}{)}\PYG{p}{;}
+  \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZsh{}}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+  \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{n}{line\PYGZus{}str}\PYG{p}{)}\PYG{p}{;}
+  
+  \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{: }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+  \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{n}{dsc}\PYG{p}{)}\PYG{p}{;}
+  \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+
+
+\PYG{n}{lv\PYGZus{}log\PYGZus{}register\PYGZus{}print}\PYG{p}{(}\PYG{n}{my\PYGZus{}log\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+
+\paragraph{Add logs}
+\label{\detokenize{porting/log:add-logs}}
+You can also use the log module via the \sphinxcode{\sphinxupquote{LV\_LOG\_TRACE/INFO/WARN/ERROR(description)}} functions.
 
 
 \subsection{Overview}
@@ -19715,7 +19789,7 @@ Container have an auto fit features whcih can automaticall change the size of th
 \sphinxstylestrong{LV\_FIT\_FLOOD} Set the size to the parents size by keeping \sphinxcode{\sphinxupquote{padding.top/bottom/left/right}} (from the parent’s style) space.
 
 \item {} 
-\sphinxstylestrong{LV\_FINT\_FILL} Use \sphinxcode{\sphinxupquote{LV\_FIT\_FLOOD}} while smaller then the parent and \sphinxcode{\sphinxupquote{LV\_FIT\_TIGHT}} when larger.
+\sphinxstylestrong{LV\_FIT\_FILL} Use \sphinxcode{\sphinxupquote{LV\_FIT\_FLOOD}} while smaller than the parent and \sphinxcode{\sphinxupquote{LV\_FIT\_TIGHT}} when larger.
 
 \end{itemize}
 

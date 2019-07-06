@@ -24,7 +24,7 @@ Container have an auto fit features whcih can automaticall change the size of th
 - **LV_FIT_NONE** Do not change the size automatically
 - **LV_FIT_TIGHT** Set the size to involve all children by keeping `padding.top/bottom/left/right` space on the edges.
 - **LV_FIT_FLOOD** Set the size to the parents size by keeping `padding.top/bottom/left/right` (from the parent's style) space.
-- **LV_FIT_FILL** Use `LV_FIT_FLOOD` while smaller then the parent and `LV_FIT_TIGHT` when larger.
+- **LV_FIT_FILL** Use `LV_FIT_FLOOD` while smaller than the parent and `LV_FIT_TIGHT` when larger.
 
 To set the auto fit use `lv_cont_set_fit(cont, LV_FIT_...)`. It will set the same auto fit in every directions.
 To use different auto fit horizontally and vertically use `lv_cont_set_fit2(cont, hor_fit_type, ver_fit_type)`.
