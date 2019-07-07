@@ -3,7 +3,7 @@
 LittlevGL is **not thread-safe** by default. 
 
 However, in the following case it's valid to call LittlevGL related functions:
-- In *events*. Learn more in [Events](/overview/events).
+- In *events*. Learn more in [Events](/overview/event).
 - In *lv_tasks*. Learn more in [Tasks](/overview/task).
 
 

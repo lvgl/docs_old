@@ -71,7 +71,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Jul 06, 2019}
+\date{Jul 07, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -2799,22 +2799,32 @@ You should also add these lines to your input device read function if a press ha
 In addition to \sphinxcode{\sphinxupquote{lv\_disp\_get\_inactive\_time()}} you can check \sphinxcode{\sphinxupquote{lv\_anim\_count\_running()}} to see if every animations are finished.
 
 
-\subsubsection{Use with an operating system}
-\label{\detokenize{porting/os:use-with-an-operating-system}}\label{\detokenize{porting/os::doc}}
-LittlevGL is \sphinxstylestrong{not thread-safe} by default. Despite it, it’s quite simple to use LittlevGL inside an operating system.
+\subsubsection{Operating system and interrupts}
+\label{\detokenize{porting/os:operating-system-and-interrupts}}\label{\detokenize{porting/os::doc}}
+LittlevGL is \sphinxstylestrong{not thread-safe} by default.
 
-The \sphinxstylestrong{simple scenario} is to don’t use the operating system’s tasks but use \sphinxcode{\sphinxupquote{lv\_task}}s. An \sphinxstyleemphasis{lv\_task} is a function called periodically in \sphinxcode{\sphinxupquote{lv\_task\_handler}}.
-In the \sphinxstyleemphasis{lv\_task} you can get the state of the sensors, buffers, etc and call LittlevGL functions to refresh the GUI.
+However, in the following case it’s valid to call LittlevGL related functions:
+\begin{itemize}
+\item {} 
+In \sphinxstyleemphasis{events}. Learn more in {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Events}}}}.
 
-To create an \sphinxstyleemphasis{lv\_task} use:
+\item {} 
+In \sphinxstyleemphasis{lv\_tasks}. Learn more in {\hyperref[\detokenize{overview/task::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Tasks}}}}.
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{lv\PYGZus{}task\PYGZus{}create}\PYG{p}{(}\PYG{n}{my\PYGZus{}func}\PYG{p}{,} \PYG{n}{period\PYGZus{}ms}\PYG{p}{,} \PYG{n}{LV\PYGZus{}TASK\PYGZus{}PRIO\PYGZus{}LOWEST}\PYG{o}{/}\PYG{n}{LOW}\PYG{o}{/}\PYG{n}{MID}\PYG{o}{/}\PYG{n}{HIGH}\PYG{o}{/}\PYG{n}{HIGHEST}\PYG{p}{,} \PYG{n}{custom\PYGZus{}ptr}\PYG{p}{)}
-\end{sphinxVerbatim}
+\end{itemize}
 
-If you need to \sphinxstylestrong{use real tasks or threads} you need one mutex which should be taken before the call of \sphinxcode{\sphinxupquote{lv\_task\_handler}} and released after it.
+
+\paragraph{Tasks and threads}
+\label{\detokenize{porting/os:tasks-and-threads}}
+If you need to use real tasks or threads you need a mutex which should be taken before the call of \sphinxcode{\sphinxupquote{lv\_task\_handler}} and released after it.
 In addition, you have to use to that mutex in other tasks and threads around every LittlevGL (\sphinxcode{\sphinxupquote{lv\_...}}) related function call and code.
 This way you can use LittlevGL in a real multitasking environment. Just use a mutex to avoid the concurrent calling of LittlevGL functions.
+
+
+\paragraph{Interrupts}
+\label{\detokenize{porting/os:interrupts}}
+Try to avoid calling LittlevGL function from an interrupts (except \sphinxcode{\sphinxupquote{lv\_tick\_inc()}}). But if you really need to do this you have to disable the interrupt which uses LittlevGL functions while \sphinxcode{\sphinxupquote{lv\_task\_handler}} is running.
+It’s a better approach to set a flag or other value and periodically check it in an \sphinxcode{\sphinxupquote{lv\_task}}.
 
 
 \subsubsection{Logging}
@@ -3042,6 +3052,10 @@ There is a common \sphinxstylestrong{delete} function for all object types. It d
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}obj\PYGZus{}del}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{obj}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
+
+\sphinxcode{\sphinxupquote{lv\_obj\_del}} will delete the the object immediately.
+If for any reason you can’t delete the object immediately you can use \sphinxcode{\sphinxupquote{lv\_obj\_del\_async(obj)}}.
+It is useful e.g. is you want to delete the parent of an object in \sphinxcode{\sphinxupquote{LV\_EVENT\_DELETE}} signal.
 
 You can delete only the children of an object but leave the object itself “alive”:
 
@@ -9644,6 +9658,31 @@ You can make a task to run only once by calling\sphinxcode{\sphinxupquote{lv\_ta
 \label{\detokenize{overview/task:measure-idle-time}}
 You can get the idle percentage time \sphinxcode{\sphinxupquote{lv\_task\_handler}} with \sphinxcode{\sphinxupquote{lv\_task\_get\_idle()}}. Note that, it doesn’t measure the idle time of the overall system, only \sphinxcode{\sphinxupquote{lv\_task\_handler}}.
 It might be misleading if you use an operating system and call \sphinxcode{\sphinxupquote{lv\_task\_handler}} in a task.
+
+
+\paragraph{Asynchronous calls}
+\label{\detokenize{overview/task:asynchronous-calls}}
+In some cases, you can’t do an action immediately. For example, you can delete an object right now because something else still uses it or you don’t want to block the execution now.
+For these cases, you can use the \sphinxcode{\sphinxupquote{lv\_async\_call(my\_function, data\_p)}} to make \sphinxcode{\sphinxupquote{my\_function}} to be called on the next call of \sphinxcode{\sphinxupquote{lv\_task\_handler}}. \sphinxcode{\sphinxupquote{data\_p}} will be passed to function when it’s called.
+Note that, only the pointer of the data is saved so you need to ensure that the variable will be “alive” while the function is called. You can use \sphinxstyleemphasis{static}, global or dynamically allocated data.
+
+For example:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void} \PYG{n+nf}{led\PYGZus{}flash}\PYG{p}{(}\PYG{k+kt}{void} \PYG{o}{*} \PYG{n}{time\PYGZus{}p}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{time} \PYG{o}{=} \PYG{o}{*}\PYG{p}{(}\PYG{p}{(}\PYG{k+kt}{uint32\PYGZus{}t}\PYG{o}{*}\PYG{p}{)} \PYG{n}{time\PYGZus{}p}\PYG{p}{)}\PYG{p}{;}
+  
+  \PYG{n}{led\PYGZus{}on}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+  \PYG{n}{delay}\PYG{p}{(}\PYG{n}{time}\PYG{p}{)}\PYG{p}{;}
+  \PYG{n}{led\PYGZus{}off}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+
+\PYG{k}{static} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{time} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{;} 
+\PYG{n}{lv\PYGZus{}async\PYGZus{}call}\PYG{p}{(}\PYG{n}{led\PYGZus{}flash}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{time}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
 
 
 \paragraph{API}

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Use with an operating system &mdash; LittlevGL 6.0 documentation</title>
+  <title>Operating system and interrupts &mdash; LittlevGL 6.0 documentation</title>
   
 
   
@@ -174,7 +174,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="task-handler.html">Task Handler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sleep.html">Sleep management</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Use with an operating system</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Operating system and interrupts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tasks-and-threads">Tasks and threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interrupts">Interrupts</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="log.html">Logging</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="log.html#log-level">Log level</a></li>
 <li class="toctree-l3"><a class="reference internal" href="log.html#logging-with-printf">Logging with printf</a></li>
@@ -343,6 +347,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/task.html#set-parameters">Set parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/task.html#one-shot-tasks">One-shot tasks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/task.html#measure-idle-time">Measure idle time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#asynchronous-calls">Asynchronous calls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/task.html#api">API</a></li>
 </ul>
 </li>
@@ -1040,7 +1045,7 @@
         
           <li><a href="index.html">Porting</a> &raquo;</li>
         
-      <li>Use with an operating system</li>
+      <li>Operating system and interrupts</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -1059,18 +1064,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="use-with-an-operating-system">
-<h1>Use with an operating system<a class="headerlink" href="#use-with-an-operating-system" title="Permalink to this headline">¶</a></h1>
-<p>LittlevGL is <strong>not thread-safe</strong> by default. Despite it, it’s quite simple to use LittlevGL inside an operating system.</p>
-<p>The <strong>simple scenario</strong> is to don’t use the operating system’s tasks but use <code class="docutils literal notranslate"><span class="pre">lv_task</span></code>s. An <em>lv_task</em> is a function called periodically in <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>.
-In the <em>lv_task</em> you can get the state of the sensors, buffers, etc and call LittlevGL functions to refresh the GUI.</p>
-<p>To create an <em>lv_task</em> use:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_task_create</span><span class="p">(</span><span class="n">my_func</span><span class="p">,</span> <span class="n">period_ms</span><span class="p">,</span> <span class="n">LV_TASK_PRIO_LOWEST</span><span class="o">/</span><span class="n">LOW</span><span class="o">/</span><span class="n">MID</span><span class="o">/</span><span class="n">HIGH</span><span class="o">/</span><span class="n">HIGHEST</span><span class="p">,</span> <span class="n">custom_ptr</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>If you need to <strong>use real tasks or threads</strong> you need one mutex which should be taken before the call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> and released after it.
+  <div class="section" id="operating-system-and-interrupts">
+<h1>Operating system and interrupts<a class="headerlink" href="#operating-system-and-interrupts" title="Permalink to this headline">¶</a></h1>
+<p>LittlevGL is <strong>not thread-safe</strong> by default.</p>
+<p>However, in the following case it’s valid to call LittlevGL related functions:</p>
+<ul class="simple">
+<li><p>In <em>events</em>. Learn more in <a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a>.</p></li>
+<li><p>In <em>lv_tasks</em>. Learn more in <a class="reference internal" href="../overview/task.html"><span class="doc">Tasks</span></a>.</p></li>
+</ul>
+<div class="section" id="tasks-and-threads">
+<h2>Tasks and threads<a class="headerlink" href="#tasks-and-threads" title="Permalink to this headline">¶</a></h2>
+<p>If you need to use real tasks or threads you need a mutex which should be taken before the call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> and released after it.
 In addition, you have to use to that mutex in other tasks and threads around every LittlevGL (<code class="docutils literal notranslate"><span class="pre">lv_...</span></code>) related function call and code.
 This way you can use LittlevGL in a real multitasking environment. Just use a mutex to avoid the concurrent calling of LittlevGL functions.</p>
+</div>
+<div class="section" id="interrupts">
+<h2>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">¶</a></h2>
+<p>Try to avoid calling LittlevGL function from an interrupts (except <code class="docutils literal notranslate"><span class="pre">lv_tick_inc()</span></code>). But if you really need to do this you have to disable the interrupt which uses LittlevGL functions while <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> is running.
+It’s a better approach to set a flag or other value and periodically check it in an <code class="docutils literal notranslate"><span class="pre">lv_task</span></code>.</p>
+</div>
 </div>
 
 
@@ -1095,7 +1107,7 @@ This way you can use LittlevGL in a real multitasking environment. Just use a mu
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 06, 2019.
+        Last updated on Jul 07, 2019.
       </span>
 
     </p>

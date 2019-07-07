@@ -57,6 +57,31 @@ You can make a task to run only once by calling`lv_task_once(task)`. The task wi
 You can get the idle percentage time `lv_task_handler` with `lv_task_get_idle()`. Note that, it doesn't measure the idle time of the overall system, only `lv_task_handler`. 
 It might be misleading if you use an operating system and call `lv_task_handler` in a task.
 
+## Asynchronous calls
+
+In some cases, you can't do an action immediately. For example, you can delete an object right now because something else still uses it or you don't want to block the execution now. 
+For these cases, you can use the `lv_async_call(my_function, data_p)` to make `my_function` to be called on the next call of `lv_task_handler`. `data_p` will be passed to function when it's called. 
+Note that, only the pointer of the data is saved so you need to ensure that the variable will be "alive" while the function is called. You can use *static*, global or dynamically allocated data.
+
+For example:
+```c
+void led_flash(void * time_p)
+{
+  uint32_t time = *((uint32_t*) time_p);
+  
+  led_on();
+  delay(time);
+  led_off();
+}
+
+...
+
+static uint32_t time = 100; 
+lv_async_call(led_flash, &time);
+
+```
+
+
 ## API 
 
 ```eval_rst
@@ -65,4 +90,3 @@ It might be misleading if you use an operating system and call `lv_task_handler`
   :project: lvgl
         
 ```
-
