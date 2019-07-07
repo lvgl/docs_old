@@ -113,6 +113,10 @@ There is a common **delete** function for all object types. It deletes the objec
 void lv_obj_del(lv_obj_t * obj);
 ```
 
+`lv_obj_del` will delete the the object immediately. 
+If for any reason you can't delete the object immediately you can use `lv_obj_del_async(obj)`. 
+It is useful e.g. is you want to delete the parent of an object in `LV_EVENT_DELETE` signal.
+
 You can delete only the children of an object but leave the object itself "alive":
 
 ```c
