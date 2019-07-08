@@ -116,11 +116,36 @@ If the image was converted with the online converter you should use `LV_IMG_DECL
 As you can see in the [Color formats](#color-formats) section LittlevGL supports several built image formats. However, it doesn't support for example PNG or JPG out of the box. 
 To handle non-built-in image formats you need to use external libraries and attach them to LittlevGL via the *Image decoder* interface.
 
+The image decoder consists of 4 images:
+- **info** get some basic info about the image (width, height and color format)
+- **open** open the image: either store the decoded image or set it to `NULL` to indicate the image can be read line-by-line
+- **read** if *open* didn't fully open the image this function should give the some decoded data (max 1 line) from a given position.
+- **close** close the opened image, free the allocated resources.
+
+You can add any number of image decoders. When an image needs to be drawn the library will try all the registered image decoder until find one which is able to open the image, i.e. know that format.
+
+The `LV_IMG_CF_TURE_COLOR_...`, `LV_IMG_INDEXED_...` and `LV_IMG_ALPHA_...` formats are known by the built-in decoder.
+
+### Custom image formats
+
+The easiest was to create a custom image is to use the Online image converter and set `Raw`, `Raw with alpha`, `Raw with chrome keyed` format. It will just take the every bytes of selected image and write them as image data. 
+`heafer.cf` will be `LV_IMG_CF_RAW`, `LV_IMG_CF_RAW_ALPHA` or `LV_IMG_CF_RAW_CHROME_KEYED` accordingly. You should choose the correct format according to you needs: fully covering image, use alpha channel or use chroma keying.
+
+After decoding, the *raw* formats are considered *True color*. In other words the image decoder should decode the *Raw* images to *True color* according to the format described in [#color-formats](Color formats) section.
+
+If you want to create a really custom image you should use `LV_IMG_CF_USER_ENCODED_0..7` color formats. However, the library can draw the images only in *True color* format (or *Raw* but finally it's supposed to be in *True color* format). 
+So the `LV_IMG_CF_USER_ENCODED_...` formats are not known by the library therefore they should be decoded to one of the known formats from [#color-formats](Color formats) section. 
+It's possible to decoded the image to a non-true color format first, for example `LV_IMG_INDEXED_4BITS`, and then call the built-in decoder functions to convert it to *True color*. 
+
+With *User encoded* formats the color format in the open function (`dsc->header.cf`) should be changed according to the new format.
+ 
+
 ### Register an image decoder
 
-For example, if you want LittlevGL to "understand" PNG images you need to create a new image decoder a set some function read PNG files. It should looks like this:
+For example, if you want LittlevGL to "understand" PNG images you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:
 
 ```c
+/*Create a new decoder and register functions */
 lv_img_decoder_t * dec = lv_img_decoder_create();
 lv_img_decoder_set_info_cb(dec, decoder_info);
 lv_img_decoder_set_open_cb(dec, decoder_open);
@@ -136,13 +161,15 @@ lv_img_decoder_set_close_cb(dec, decoder_close);
  */
 static lv_res_t decoder_info(lv_img_decoder_t * decoder, const void * src, lv_img_header_t * header)
 {
+  /*Check whether the type `src` is known by the decoder*/
+  if(is_png(src) == false) return LV_RES_INV; 
+
   ...
   
-  header->cf = LV_IMG_CF_RAW/_ALPHA/_CHROMA_KEYED;
+  header->cf = LV_IMG_CF_RAW_ALPHA;
   header->w = width;
   header->h = height;
 }
-
 
 /**
  * Open a PNG image and return the decided image
@@ -152,7 +179,40 @@ static lv_res_t decoder_info(lv_img_decoder_t * decoder, const void * src, lv_im
  */
 static lv_res_t decoder_open(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * dsc)
 {
-  ...
+
+  /*Check whether the type `src` is known by the decoder*/
+  if(is_png(src) == false) return LV_RES_INV; 
+  
+  /*Decode and store the image. If `dsc->img_data` the `raed_line` function will be called to get the image data liny-by-line*/
+  dsc->img_data = my_png_decoder(src);
+  
+  /*Change the color format if required. For PNG usually 'Raw' is fine*/
+  dsc->header.cf = LV_IMG_CF_...
+  
+  /*Call a built in decoder function if required. It's not required if`my_png_decoder` opened the image in true color format.*/
+  lv_res_t res = lv_img_decoder_built_in_open(decoder, dsc);
+  
+  return res;
+}
+
+/**
+ * Decode `len` pixels starting from the given `x`, `y` coordinates and store them in `buf`.
+ * Required only if the "open" function can't open the whole decoded pixel array. (dsc->img_data == NULL)
+ * @param decoder pointer to the decoder the function associated with
+ * @param dsc pointer to decoder descriptor
+ * @param x start x coordinate
+ * @param y start y coordinate
+ * @param len number of pixels to decode
+ * @param buf a buffer to store the decoded pixels
+ * @return LV_RES_OK: ok; LV_RES_INV: failed
+ */
+lv_res_t decoder_built_in_read_line(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * dsc, lv_coord_t x,
+                                                  lv_coord_t y, lv_coord_t len, uint8_t * buf)
+{
+   /*With PNG it's usually not required*/
+
+   /*Copy `len` pixels from `x` and `y` coordinates in True color format to `buf` */
+  
 }
 
 /**
@@ -162,43 +222,26 @@ static lv_res_t decoder_open(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * 
  */
 static void decoder_close(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * dsc)
 {
-  ...
+  /*Free all allocated data*/
+  
+  /*Call the built-in close function if the built-in open/read_line was used*/
+  lv_img_decoder_built_in_close(decoder, dsc);
+  
 }
 
 ```
 
-In `decoder_info` you should collect some basic information about the image and store it in `header`.
+So in summary:
+- In `decoder_info` you should collect some basic information about the image and store it in `header`.
+- In `decoder_open` you should try to open the image source pointed by `dsc->src`. It's type is already in `dsc->src_type == LV_IMG_SRC_FILE/VARIABLE`. 
+If this format/type is not supported by the decoder return `LV_RES_INV`.
+However, if you can open the image a pointer to the decoded *True color* image should be set in `dsc->img_data`. 
+If the format is known but you don't want decode while image (e.g. no memory for it) set `dsc->img_data = NULL` to call `read_line` to get the pixels.
+- In `decoder_close` you should free all the allocated resources.
+- `decoder_read` is optional. Decoding the whole image requires extra memory and some computational overhead. 
+However, if can decode one line of the image without decoding the whole image you can save memory and time. 
+To indicate that the *line read* function should be used set `dsc->img_data = NULL` in the open function.
 
-In `decoder_open` you should try to open the image source pointed by `dsc->src`. It's type is already in `dsc->src_type == LV_IMG_SRC_FILE/VARIABLE`. If it's not a source you can open (e.g. not PNG) you should return `LV_RES_INV`.
-However, if you can open the image a pointer to the decoded plain RGB image should be set in `dsc->img_data`.
-
-In `decoder_close` you should free all the allocated resources.
-
-There is a fourth, optional function read the image line-by-line. Decoding the whole image requires extra memory and some computational overhead. 
-However, if can decode one line of the image without decoding the whole image you can save memory and time. To indicate that the *line read* function should be used set `dsc->img_data = NULL` in the open function.
-
-A read line function look like this:
-```c
-lv_img_decoder_set_read_line_cb(decoder, decoder_read_line);
-
-...
-
-/**
- * Read data from a line
- * @param decoder pointer to the decoder where this function belongs
- * @param dsc pointer to a descriptor which describes this decoding session
- * @param x X coordinate of the first pixel to read
- * @param y Y coordinate of the first pixel to read
- * @param len number of pixels to read
- * @param buf a buffer to store the decoded pixels
- * @return LV_RES_OK: ok; LV_RES_INV: failed
- */
-static lv_res_t lv_img_decoder_built_in_read_line(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * dsc, lv_coord_t x,
-                                                  lv_coord_t y, lv_coord_t len, uint8_t * buf)
-{
-   ...
-}
-```
 
 ### Manually use an image decoder
 
@@ -216,6 +259,7 @@ if(res == LV_RES_OK) {
 }
 
 ```
+
 
 ## Image caching
 Sometimes it takes a lot of time to open an image. 

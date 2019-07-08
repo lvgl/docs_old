@@ -59,7 +59,7 @@ It might be misleading if you use an operating system and call `lv_task_handler`
 
 ## Asynchronous calls
 
-In some cases, you can't do an action immediately. For example, you can delete an object right now because something else still uses it or you don't want to block the execution now. 
+In some cases, you can't do an action immediately. For example, you can't delete an object right now because something else still uses it or you don't want to block the execution now. 
 For these cases, you can use the `lv_async_call(my_function, data_p)` to make `my_function` to be called on the next call of `lv_task_handler`. `data_p` will be passed to function when it's called. 
 Note that, only the pointer of the data is saved so you need to ensure that the variable will be "alive" while the function is called. You can use *static*, global or dynamically allocated data.
 

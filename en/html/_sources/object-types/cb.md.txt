@@ -49,7 +49,7 @@ Learn more about [Keys](/overview/indev).
 
 ```eval_rst
 
-.. include:: /examples/cb/index.rst
+.. include:: /lv_examples/lv_ex_cb/index.rst
 
 ```
 

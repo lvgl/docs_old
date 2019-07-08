@@ -51,7 +51,7 @@ The following *Keys* are processed by the Buttons:
 
 ```eval_rst
 
-.. include:: /examples/roller/index.rst
+.. include:: /lv_examples/lv_ex_roller/index.rst
 
 ```
 

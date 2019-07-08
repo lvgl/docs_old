@@ -33,7 +33,7 @@ Learn more about [Keys](/overview/indev).
 
 ```eval_rst
 
-.. include:: /examples/led/index.rst
+.. include:: /lv_examples/lv_ex_led/index.rst
 
 ```
 

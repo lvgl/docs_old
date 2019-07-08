@@ -54,7 +54,7 @@ Learn more about [Keys](/overview/indev).
 ## Example
 ```eval_rst
 
-.. include:: /examples/canvas/index.rst
+.. include:: /lv_examples/lv_ex_canvas/index.rst
 
 ```
 

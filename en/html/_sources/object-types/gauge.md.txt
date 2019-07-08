@@ -47,7 +47,7 @@ Learn more about [Keys](/overview/indev).
 
 ```eval_rst
 
-.. include:: /examples/gauge/index.rst
+.. include:: /lv_examples/lv_ex_gauge/index.rst
 
 ```
 ## API 

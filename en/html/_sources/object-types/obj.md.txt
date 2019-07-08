@@ -171,7 +171,7 @@ Learn more about [Keys](/overview/indev).
 
 ```eval_rst
 
-.. include:: /examples/obj/index.rst
+.. include:: /lv_examples/lv_ex_obj/index.rst
 
 ```
 

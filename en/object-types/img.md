@@ -87,7 +87,7 @@ Learn more about [Keys](/overview/indev).
 
 ```eval_rst
 
-.. include:: /examples/img/index.rst
+.. include:: /lv_examples/lv_ex_img/index.rst
 
 ```
 

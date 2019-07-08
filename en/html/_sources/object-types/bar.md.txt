@@ -40,7 +40,7 @@ Learn more about [Keys](/overview/indev).
 
 ```eval_rst
 
-.. include:: /examples/bar/index.rst
+.. include:: /lv_examples/lv_ex_bar/index.rst
 
 ```
 

@@ -304,6 +304,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#image-decoder">Image decoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custom-image-formats">Custom image formats</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#register-an-image-decoder">Register an image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#manually-use-an-image-decoder">Manually use an image decoder</a></li>
 </ul>
@@ -1191,10 +1192,30 @@ See the <a class="reference internal" href="file-system.html"><span class="doc">
 <h2>Image decoder<a class="headerlink" href="#image-decoder" title="Permalink to this headline">¶</a></h2>
 <p>As you can see in the <a class="reference external" href="#color-formats">Color formats</a> section LittlevGL supports several built image formats. However, it doesn’t support for example PNG or JPG out of the box.
 To handle non-built-in image formats you need to use external libraries and attach them to LittlevGL via the <em>Image decoder</em> interface.</p>
+<p>The image decoder consists of 4 images:</p>
+<ul class="simple">
+<li><p><strong>info</strong> get some basic info about the image (width, height and color format)</p></li>
+<li><p><strong>open</strong> open the image: either store the decoded image or set it to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to indicate the image can be read line-by-line</p></li>
+<li><p><strong>read</strong> if <em>open</em> didn’t fully open the image this function should give the some decoded data (max 1 line) from a given position.</p></li>
+<li><p><strong>close</strong> close the opened image, free the allocated resources.</p></li>
+</ul>
+<p>You can add any number of image decoders. When an image needs to be drawn the library will try all the registered image decoder until find one which is able to open the image, i.e. know that format.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TURE_COLOR_...</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_INDEXED_...</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_IMG_ALPHA_...</span></code> formats are known by the built-in decoder.</p>
+<div class="section" id="custom-image-formats">
+<h3>Custom image formats<a class="headerlink" href="#custom-image-formats" title="Permalink to this headline">¶</a></h3>
+<p>The easiest was to create a custom image is to use the Online image converter and set <code class="docutils literal notranslate"><span class="pre">Raw</span></code>, <code class="docutils literal notranslate"><span class="pre">Raw</span> <span class="pre">with</span> <span class="pre">alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">Raw</span> <span class="pre">with</span> <span class="pre">chrome</span> <span class="pre">keyed</span></code> format. It will just take the every bytes of selected image and write them as image data.
+<code class="docutils literal notranslate"><span class="pre">heafer.cf</span></code> will be <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW_ALPHA</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW_CHROME_KEYED</span></code> accordingly. You should choose the correct format according to you needs: fully covering image, use alpha channel or use chroma keying.</p>
+<p>After decoding, the <em>raw</em> formats are considered <em>True color</em>. In other words the image decoder should decode the <em>Raw</em> images to <em>True color</em> according to the format described in [#color-formats](Color formats) section.</p>
+<p>If you want to create a really custom image you should use <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_USER_ENCODED_0..7</span></code> color formats. However, the library can draw the images only in <em>True color</em> format (or <em>Raw</em> but finally it’s supposed to be in <em>True color</em> format).
+So the <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_USER_ENCODED_...</span></code> formats are not known by the library therefore they should be decoded to one of the known formats from [#color-formats](Color formats) section.
+It’s possible to decoded the image to a non-true color format first, for example <code class="docutils literal notranslate"><span class="pre">LV_IMG_INDEXED_4BITS</span></code>, and then call the built-in decoder functions to convert it to <em>True color</em>.</p>
+<p>With <em>User encoded</em> formats the color format in the open function (<code class="docutils literal notranslate"><span class="pre">dsc-&gt;header.cf</span></code>) should be changed according to the new format.</p>
+</div>
 <div class="section" id="register-an-image-decoder">
 <h3>Register an image decoder<a class="headerlink" href="#register-an-image-decoder" title="Permalink to this headline">¶</a></h3>
-<p>For example, if you want LittlevGL to “understand” PNG images you need to create a new image decoder a set some function read PNG files. It should looks like this:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">dec</span> <span class="o">=</span> <span class="n">lv_img_decoder_create</span><span class="p">();</span>
+<p>For example, if you want LittlevGL to “understand” PNG images you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create a new decoder and register functions */</span>
+<span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">dec</span> <span class="o">=</span> <span class="n">lv_img_decoder_create</span><span class="p">();</span>
 <span class="n">lv_img_decoder_set_info_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_info</span><span class="p">);</span>
 <span class="n">lv_img_decoder_set_open_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_open</span><span class="p">);</span>
 <span class="n">lv_img_decoder_set_close_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_close</span><span class="p">);</span> 
@@ -1209,13 +1230,15 @@ To handle non-built-in image formats you need to use external libraries and atta
 <span class="cm"> */</span>
 <span class="k">static</span> <span class="n">lv_res_t</span> <span class="nf">decoder_info</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="n">lv_img_header_t</span> <span class="o">*</span> <span class="n">header</span><span class="p">)</span>
 <span class="p">{</span>
+  <span class="cm">/*Check whether the type `src` is known by the decoder*/</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">is_png</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span> <span class="n">LV_RES_INV</span><span class="p">;</span> 
+
   <span class="p">...</span>
   
-  <span class="n">header</span><span class="o">-&gt;</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_RAW</span><span class="o">/</span><span class="n">_ALPHA</span><span class="o">/</span><span class="n">_CHROMA_KEYED</span><span class="p">;</span>
+  <span class="n">header</span><span class="o">-&gt;</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_RAW_ALPHA</span><span class="p">;</span>
   <span class="n">header</span><span class="o">-&gt;</span><span class="n">w</span> <span class="o">=</span> <span class="n">width</span><span class="p">;</span>
   <span class="n">header</span><span class="o">-&gt;</span><span class="n">h</span> <span class="o">=</span> <span class="n">height</span><span class="p">;</span>
 <span class="p">}</span>
-
 
 <span class="cm">/**</span>
 <span class="cm"> * Open a PNG image and return the decided image</span>
@@ -1225,7 +1248,40 @@ To handle non-built-in image formats you need to use external libraries and atta
 <span class="cm"> */</span>
 <span class="k">static</span> <span class="n">lv_res_t</span> <span class="nf">decoder_open</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">lv_img_decoder_dsc_t</span> <span class="o">*</span> <span class="n">dsc</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="p">...</span>
+
+  <span class="cm">/*Check whether the type `src` is known by the decoder*/</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">is_png</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span> <span class="n">LV_RES_INV</span><span class="p">;</span> 
+  
+  <span class="cm">/*Decode and store the image. If `dsc-&gt;img_data` the `raed_line` function will be called to get the image data liny-by-line*/</span>
+  <span class="n">dsc</span><span class="o">-&gt;</span><span class="n">img_data</span> <span class="o">=</span> <span class="n">my_png_decoder</span><span class="p">(</span><span class="n">src</span><span class="p">);</span>
+  
+  <span class="cm">/*Change the color format if required. For PNG usually &#39;Raw&#39; is fine*/</span>
+  <span class="n">dsc</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">.</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_</span><span class="p">...</span>
+  
+  <span class="cm">/*Call a built in decoder function if required. It&#39;s not required if`my_png_decoder` opened the image in true color format.*/</span>
+  <span class="n">lv_res_t</span> <span class="n">res</span> <span class="o">=</span> <span class="n">lv_img_decoder_built_in_open</span><span class="p">(</span><span class="n">decoder</span><span class="p">,</span> <span class="n">dsc</span><span class="p">);</span>
+  
+  <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Decode `len` pixels starting from the given `x`, `y` coordinates and store them in `buf`.</span>
+<span class="cm"> * Required only if the &quot;open&quot; function can&#39;t open the whole decoded pixel array. (dsc-&gt;img_data == NULL)</span>
+<span class="cm"> * @param decoder pointer to the decoder the function associated with</span>
+<span class="cm"> * @param dsc pointer to decoder descriptor</span>
+<span class="cm"> * @param x start x coordinate</span>
+<span class="cm"> * @param y start y coordinate</span>
+<span class="cm"> * @param len number of pixels to decode</span>
+<span class="cm"> * @param buf a buffer to store the decoded pixels</span>
+<span class="cm"> * @return LV_RES_OK: ok; LV_RES_INV: failed</span>
+<span class="cm"> */</span>
+<span class="n">lv_res_t</span> <span class="nf">decoder_built_in_read_line</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">lv_img_decoder_dsc_t</span> <span class="o">*</span> <span class="n">dsc</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">x</span><span class="p">,</span>
+                                                  <span class="n">lv_coord_t</span> <span class="n">y</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">len</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span> <span class="n">buf</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="cm">/*With PNG it&#39;s usually not required*/</span>
+
+   <span class="cm">/*Copy `len` pixels from `x` and `y` coordinates in True color format to `buf` */</span>
+  
 <span class="p">}</span>
 
 <span class="cm">/**</span>
@@ -1235,38 +1291,26 @@ To handle non-built-in image formats you need to use external libraries and atta
 <span class="cm"> */</span>
 <span class="k">static</span> <span class="kt">void</span> <span class="nf">decoder_close</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">lv_img_decoder_dsc_t</span> <span class="o">*</span> <span class="n">dsc</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="p">...</span>
+  <span class="cm">/*Free all allocated data*/</span>
+  
+  <span class="cm">/*Call the built-in close function if the built-in open/read_line was used*/</span>
+  <span class="n">lv_img_decoder_built_in_close</span><span class="p">(</span><span class="n">decoder</span><span class="p">,</span> <span class="n">dsc</span><span class="p">);</span>
+  
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>In <code class="docutils literal notranslate"><span class="pre">decoder_info</span></code> you should collect some basic information about the image and store it in <code class="docutils literal notranslate"><span class="pre">header</span></code>.</p>
-<p>In <code class="docutils literal notranslate"><span class="pre">decoder_open</span></code> you should try to open the image source pointed by <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src</span></code>. It’s type is already in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src_type</span> <span class="pre">==</span> <span class="pre">LV_IMG_SRC_FILE/VARIABLE</span></code>. If it’s not a source you can open (e.g. not PNG) you should return <code class="docutils literal notranslate"><span class="pre">LV_RES_INV</span></code>.
-However, if you can open the image a pointer to the decoded plain RGB image should be set in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code>.</p>
-<p>In <code class="docutils literal notranslate"><span class="pre">decoder_close</span></code> you should free all the allocated resources.</p>
-<p>There is a fourth, optional function read the image line-by-line. Decoding the whole image requires extra memory and some computational overhead.
-However, if can decode one line of the image without decoding the whole image you can save memory and time. To indicate that the <em>line read</em> function should be used set <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> in the open function.</p>
-<p>A read line function look like this:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_img_decoder_set_read_line_cb</span><span class="p">(</span><span class="n">decoder</span><span class="p">,</span> <span class="n">decoder_read_line</span><span class="p">);</span>
-
-<span class="p">...</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * Read data from a line</span>
-<span class="cm"> * @param decoder pointer to the decoder where this function belongs</span>
-<span class="cm"> * @param dsc pointer to a descriptor which describes this decoding session</span>
-<span class="cm"> * @param x X coordinate of the first pixel to read</span>
-<span class="cm"> * @param y Y coordinate of the first pixel to read</span>
-<span class="cm"> * @param len number of pixels to read</span>
-<span class="cm"> * @param buf a buffer to store the decoded pixels</span>
-<span class="cm"> * @return LV_RES_OK: ok; LV_RES_INV: failed</span>
-<span class="cm"> */</span>
-<span class="k">static</span> <span class="n">lv_res_t</span> <span class="n">lv_img_decoder_built_in_read_line</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">lv_img_decoder_dsc_t</span> <span class="o">*</span> <span class="n">dsc</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">x</span><span class="p">,</span>
-                                                  <span class="n">lv_coord_t</span> <span class="n">y</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">len</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span> <span class="n">buf</span><span class="p">)</span>
-<span class="p">{</span>
-   <span class="p">...</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+<p>So in summary:</p>
+<ul class="simple">
+<li><p>In <code class="docutils literal notranslate"><span class="pre">decoder_info</span></code> you should collect some basic information about the image and store it in <code class="docutils literal notranslate"><span class="pre">header</span></code>.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">decoder_open</span></code> you should try to open the image source pointed by <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src</span></code>. It’s type is already in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src_type</span> <span class="pre">==</span> <span class="pre">LV_IMG_SRC_FILE/VARIABLE</span></code>.
+If this format/type is not supported by the decoder return <code class="docutils literal notranslate"><span class="pre">LV_RES_INV</span></code>.
+However, if you can open the image a pointer to the decoded <em>True color</em> image should be set in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code>.
+If the format is known but you don’t want decode while image (e.g. no memory for it) set <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> to call <code class="docutils literal notranslate"><span class="pre">read_line</span></code> to get the pixels.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">decoder_close</span></code> you should free all the allocated resources.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder_read</span></code> is optional. Decoding the whole image requires extra memory and some computational overhead.
+However, if can decode one line of the image without decoding the whole image you can save memory and time.
+To indicate that the <em>line read</em> function should be used set <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> in the open function.</p></li>
+</ul>
 </div>
 <div class="section" id="manually-use-an-image-decoder">
 <h3>Manually use an image decoder<a class="headerlink" href="#manually-use-an-image-decoder" title="Permalink to this headline">¶</a></h3>
@@ -1921,7 +1965,7 @@ To do this use <code class="docutils literal notranslate"><span class="pre">lv_i
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 07, 2019.
+        Last updated on Jul 08, 2019.
       </span>
 
     </p>
