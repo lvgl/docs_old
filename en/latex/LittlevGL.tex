@@ -71,7 +71,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Jul 07, 2019}
+\date{Jul 08, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -6489,12 +6489,47 @@ If the image was converted with the online converter you should use \sphinxcode{
 As you can see in the {\hyperref[\detokenize{overview/image:color-formats}]{\emph{Color formats}}} section LittlevGL supports several built image formats. However, it doesn’t support for example PNG or JPG out of the box.
 To handle non-built-in image formats you need to use external libraries and attach them to LittlevGL via the \sphinxstyleemphasis{Image decoder} interface.
 
+The image decoder consists of 4 images:
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{info} get some basic info about the image (width, height and color format)
+
+\item {} 
+\sphinxstylestrong{open} open the image: either store the decoded image or set it to \sphinxcode{\sphinxupquote{NULL}} to indicate the image can be read line-by-line
+
+\item {} 
+\sphinxstylestrong{read} if \sphinxstyleemphasis{open} didn’t fully open the image this function should give the some decoded data (max 1 line) from a given position.
+
+\item {} 
+\sphinxstylestrong{close} close the opened image, free the allocated resources.
+
+\end{itemize}
+
+You can add any number of image decoders. When an image needs to be drawn the library will try all the registered image decoder until find one which is able to open the image, i.e. know that format.
+
+The \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TURE\_COLOR\_...}}, \sphinxcode{\sphinxupquote{LV\_IMG\_INDEXED\_...}} and \sphinxcode{\sphinxupquote{LV\_IMG\_ALPHA\_...}} formats are known by the built-in decoder.
+
+
+\subparagraph{Custom image formats}
+\label{\detokenize{overview/image:custom-image-formats}}
+The easiest was to create a custom image is to use the Online image converter and set \sphinxcode{\sphinxupquote{Raw}}, \sphinxcode{\sphinxupquote{Raw with alpha}}, \sphinxcode{\sphinxupquote{Raw with chrome keyed}} format. It will just take the every bytes of selected image and write them as image data.
+\sphinxcode{\sphinxupquote{heafer.cf}} will be \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_RAW}}, \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_RAW\_ALPHA}} or \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_RAW\_CHROME\_KEYED}} accordingly. You should choose the correct format according to you needs: fully covering image, use alpha channel or use chroma keying.
+
+After decoding, the \sphinxstyleemphasis{raw} formats are considered \sphinxstyleemphasis{True color}. In other words the image decoder should decode the \sphinxstyleemphasis{Raw} images to \sphinxstyleemphasis{True color} according to the format described in {[}\#color-formats{]}(Color formats) section.
+
+If you want to create a really custom image you should use \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_USER\_ENCODED\_0..7}} color formats. However, the library can draw the images only in \sphinxstyleemphasis{True color} format (or \sphinxstyleemphasis{Raw} but finally it’s supposed to be in \sphinxstyleemphasis{True color} format).
+So the \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_USER\_ENCODED\_...}} formats are not known by the library therefore they should be decoded to one of the known formats from {[}\#color-formats{]}(Color formats) section.
+It’s possible to decoded the image to a non-true color format first, for example \sphinxcode{\sphinxupquote{LV\_IMG\_INDEXED\_4BITS}}, and then call the built-in decoder functions to convert it to \sphinxstyleemphasis{True color}.
+
+With \sphinxstyleemphasis{User encoded} formats the color format in the open function (\sphinxcode{\sphinxupquote{dsc-\textgreater{}header.cf}}) should be changed according to the new format.
+
 
 \subparagraph{Register an image decoder}
 \label{\detokenize{overview/image:register-an-image-decoder}}
-For example, if you want LittlevGL to “understand” PNG images you need to create a new image decoder a set some function read PNG files. It should looks like this:
+For example, if you want LittlevGL to “understand” PNG images you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*Create a new decoder and register functions */}
 \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}t} \PYG{o}{*} \PYG{n}{dec} \PYG{o}{=} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}create}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}set\PYGZus{}info\PYGZus{}cb}\PYG{p}{(}\PYG{n}{dec}\PYG{p}{,} \PYG{n}{decoder\PYGZus{}info}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}set\PYGZus{}open\PYGZus{}cb}\PYG{p}{(}\PYG{n}{dec}\PYG{p}{,} \PYG{n}{decoder\PYGZus{}open}\PYG{p}{)}\PYG{p}{;}
@@ -6510,13 +6545,15 @@ For example, if you want LittlevGL to “understand” PNG images you need to cr
 \PYG{c+cm}{ */}
 \PYG{k}{static} \PYG{n}{lv\PYGZus{}res\PYGZus{}t} \PYG{n+nf}{decoder\PYGZus{}info}\PYG{p}{(}\PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}t} \PYG{o}{*} \PYG{n}{decoder}\PYG{p}{,} \PYG{k}{const} \PYG{k+kt}{void} \PYG{o}{*} \PYG{n}{src}\PYG{p}{,} \PYG{n}{lv\PYGZus{}img\PYGZus{}header\PYGZus{}t} \PYG{o}{*} \PYG{n}{header}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
+  \PYG{c+cm}{/*Check whether the type {}`src{}` is known by the decoder*/}
+  \PYG{k}{if}\PYG{p}{(}\PYG{n}{is\PYGZus{}png}\PYG{p}{(}\PYG{n}{src}\PYG{p}{)} \PYG{o}{=}\PYG{o}{=} \PYG{n+nb}{false}\PYG{p}{)} \PYG{k}{return} \PYG{n}{LV\PYGZus{}RES\PYGZus{}INV}\PYG{p}{;} 
+
   \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
   
-  \PYG{n}{header}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{cf} \PYG{o}{=} \PYG{n}{LV\PYGZus{}IMG\PYGZus{}CF\PYGZus{}RAW}\PYG{o}{/}\PYG{n}{\PYGZus{}ALPHA}\PYG{o}{/}\PYG{n}{\PYGZus{}CHROMA\PYGZus{}KEYED}\PYG{p}{;}
+  \PYG{n}{header}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{cf} \PYG{o}{=} \PYG{n}{LV\PYGZus{}IMG\PYGZus{}CF\PYGZus{}RAW\PYGZus{}ALPHA}\PYG{p}{;}
   \PYG{n}{header}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{w} \PYG{o}{=} \PYG{n}{width}\PYG{p}{;}
   \PYG{n}{header}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{h} \PYG{o}{=} \PYG{n}{height}\PYG{p}{;}
 \PYG{p}{\PYGZcb{}}
-
 
 \PYG{c+cm}{/**}
 \PYG{c+cm}{ * Open a PNG image and return the decided image}
@@ -6526,7 +6563,40 @@ For example, if you want LittlevGL to “understand” PNG images you need to cr
 \PYG{c+cm}{ */}
 \PYG{k}{static} \PYG{n}{lv\PYGZus{}res\PYGZus{}t} \PYG{n+nf}{decoder\PYGZus{}open}\PYG{p}{(}\PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}t} \PYG{o}{*} \PYG{n}{decoder}\PYG{p}{,} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}dsc\PYGZus{}t} \PYG{o}{*} \PYG{n}{dsc}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-  \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+
+  \PYG{c+cm}{/*Check whether the type {}`src{}` is known by the decoder*/}
+  \PYG{k}{if}\PYG{p}{(}\PYG{n}{is\PYGZus{}png}\PYG{p}{(}\PYG{n}{src}\PYG{p}{)} \PYG{o}{=}\PYG{o}{=} \PYG{n+nb}{false}\PYG{p}{)} \PYG{k}{return} \PYG{n}{LV\PYGZus{}RES\PYGZus{}INV}\PYG{p}{;} 
+  
+  \PYG{c+cm}{/*Decode and store the image. If {}`dsc\PYGZhy{}\PYGZgt{}img\PYGZus{}data{}` the {}`raed\PYGZus{}line{}` function will be called to get the image data liny\PYGZhy{}by\PYGZhy{}line*/}
+  \PYG{n}{dsc}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{img\PYGZus{}data} \PYG{o}{=} \PYG{n}{my\PYGZus{}png\PYGZus{}decoder}\PYG{p}{(}\PYG{n}{src}\PYG{p}{)}\PYG{p}{;}
+  
+  \PYG{c+cm}{/*Change the color format if required. For PNG usually \PYGZsq{}Raw\PYGZsq{} is fine*/}
+  \PYG{n}{dsc}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{header}\PYG{p}{.}\PYG{n}{cf} \PYG{o}{=} \PYG{n}{LV\PYGZus{}IMG\PYGZus{}CF\PYGZus{}}\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+  
+  \PYG{c+cm}{/*Call a built in decoder function if required. It\PYGZsq{}s not required if{}`my\PYGZus{}png\PYGZus{}decoder{}` opened the image in true color format.*/}
+  \PYG{n}{lv\PYGZus{}res\PYGZus{}t} \PYG{n}{res} \PYG{o}{=} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}built\PYGZus{}in\PYGZus{}open}\PYG{p}{(}\PYG{n}{decoder}\PYG{p}{,} \PYG{n}{dsc}\PYG{p}{)}\PYG{p}{;}
+  
+  \PYG{k}{return} \PYG{n}{res}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * Decode {}`len{}` pixels starting from the given {}`x{}`, {}`y{}` coordinates and store them in {}`buf{}`.}
+\PYG{c+cm}{ * Required only if the \PYGZdq{}open\PYGZdq{} function can\PYGZsq{}t open the whole decoded pixel array. (dsc\PYGZhy{}\PYGZgt{}img\PYGZus{}data == NULL)}
+\PYG{c+cm}{ * @param decoder pointer to the decoder the function associated with}
+\PYG{c+cm}{ * @param dsc pointer to decoder descriptor}
+\PYG{c+cm}{ * @param x start x coordinate}
+\PYG{c+cm}{ * @param y start y coordinate}
+\PYG{c+cm}{ * @param len number of pixels to decode}
+\PYG{c+cm}{ * @param buf a buffer to store the decoded pixels}
+\PYG{c+cm}{ * @return LV\PYGZus{}RES\PYGZus{}OK: ok; LV\PYGZus{}RES\PYGZus{}INV: failed}
+\PYG{c+cm}{ */}
+\PYG{n}{lv\PYGZus{}res\PYGZus{}t} \PYG{n+nf}{decoder\PYGZus{}built\PYGZus{}in\PYGZus{}read\PYGZus{}line}\PYG{p}{(}\PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}t} \PYG{o}{*} \PYG{n}{decoder}\PYG{p}{,} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}dsc\PYGZus{}t} \PYG{o}{*} \PYG{n}{dsc}\PYG{p}{,} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{x}\PYG{p}{,}
+                                                  \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{y}\PYG{p}{,} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{len}\PYG{p}{,} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{o}{*} \PYG{n}{buf}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+   \PYG{c+cm}{/*With PNG it\PYGZsq{}s usually not required*/}
+
+   \PYG{c+cm}{/*Copy {}`len{}` pixels from {}`x{}` and {}`y{}` coordinates in True color format to {}`buf{}` */}
+  
 \PYG{p}{\PYGZcb{}}
 
 \PYG{c+cm}{/**}
@@ -6536,43 +6606,34 @@ For example, if you want LittlevGL to “understand” PNG images you need to cr
 \PYG{c+cm}{ */}
 \PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{decoder\PYGZus{}close}\PYG{p}{(}\PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}t} \PYG{o}{*} \PYG{n}{decoder}\PYG{p}{,} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}dsc\PYGZus{}t} \PYG{o}{*} \PYG{n}{dsc}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-  \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+  \PYG{c+cm}{/*Free all allocated data*/}
+  
+  \PYG{c+cm}{/*Call the built\PYGZhy{}in close function if the built\PYGZhy{}in open/read\PYGZus{}line was used*/}
+  \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}built\PYGZus{}in\PYGZus{}close}\PYG{p}{(}\PYG{n}{decoder}\PYG{p}{,} \PYG{n}{dsc}\PYG{p}{)}\PYG{p}{;}
+  
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
+So in summary:
+\begin{itemize}
+\item {} 
 In \sphinxcode{\sphinxupquote{decoder\_info}} you should collect some basic information about the image and store it in \sphinxcode{\sphinxupquote{header}}.
 
-In \sphinxcode{\sphinxupquote{decoder\_open}} you should try to open the image source pointed by \sphinxcode{\sphinxupquote{dsc-\textgreater{}src}}. It’s type is already in \sphinxcode{\sphinxupquote{dsc-\textgreater{}src\_type == LV\_IMG\_SRC\_FILE/VARIABLE}}. If it’s not a source you can open (e.g. not PNG) you should return \sphinxcode{\sphinxupquote{LV\_RES\_INV}}.
-However, if you can open the image a pointer to the decoded plain RGB image should be set in \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data}}.
+\item {} 
+In \sphinxcode{\sphinxupquote{decoder\_open}} you should try to open the image source pointed by \sphinxcode{\sphinxupquote{dsc-\textgreater{}src}}. It’s type is already in \sphinxcode{\sphinxupquote{dsc-\textgreater{}src\_type == LV\_IMG\_SRC\_FILE/VARIABLE}}.
+If this format/type is not supported by the decoder return \sphinxcode{\sphinxupquote{LV\_RES\_INV}}.
+However, if you can open the image a pointer to the decoded \sphinxstyleemphasis{True color} image should be set in \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data}}.
+If the format is known but you don’t want decode while image (e.g. no memory for it) set \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data = NULL}} to call \sphinxcode{\sphinxupquote{read\_line}} to get the pixels.
 
+\item {} 
 In \sphinxcode{\sphinxupquote{decoder\_close}} you should free all the allocated resources.
 
-There is a fourth, optional function read the image line-by-line. Decoding the whole image requires extra memory and some computational overhead.
-However, if can decode one line of the image without decoding the whole image you can save memory and time. To indicate that the \sphinxstyleemphasis{line read} function should be used set \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data = NULL}} in the open function.
+\item {} 
+\sphinxcode{\sphinxupquote{decoder\_read}} is optional. Decoding the whole image requires extra memory and some computational overhead.
+However, if can decode one line of the image without decoding the whole image you can save memory and time.
+To indicate that the \sphinxstyleemphasis{line read} function should be used set \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data = NULL}} in the open function.
 
-A read line function look like this:
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}set\PYGZus{}read\PYGZus{}line\PYGZus{}cb}\PYG{p}{(}\PYG{n}{decoder}\PYG{p}{,} \PYG{n}{decoder\PYGZus{}read\PYGZus{}line}\PYG{p}{)}\PYG{p}{;}
-
-\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
-
-\PYG{c+cm}{/**}
-\PYG{c+cm}{ * Read data from a line}
-\PYG{c+cm}{ * @param decoder pointer to the decoder where this function belongs}
-\PYG{c+cm}{ * @param dsc pointer to a descriptor which describes this decoding session}
-\PYG{c+cm}{ * @param x X coordinate of the first pixel to read}
-\PYG{c+cm}{ * @param y Y coordinate of the first pixel to read}
-\PYG{c+cm}{ * @param len number of pixels to read}
-\PYG{c+cm}{ * @param buf a buffer to store the decoded pixels}
-\PYG{c+cm}{ * @return LV\PYGZus{}RES\PYGZus{}OK: ok; LV\PYGZus{}RES\PYGZus{}INV: failed}
-\PYG{c+cm}{ */}
-\PYG{k}{static} \PYG{n}{lv\PYGZus{}res\PYGZus{}t} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}built\PYGZus{}in\PYGZus{}read\PYGZus{}line}\PYG{p}{(}\PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}t} \PYG{o}{*} \PYG{n}{decoder}\PYG{p}{,} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}dsc\PYGZus{}t} \PYG{o}{*} \PYG{n}{dsc}\PYG{p}{,} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{x}\PYG{p}{,}
-                                                  \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{y}\PYG{p}{,} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{len}\PYG{p}{,} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{o}{*} \PYG{n}{buf}\PYG{p}{)}
-\PYG{p}{\PYGZob{}}
-   \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
-\PYG{p}{\PYGZcb{}}
-\end{sphinxVerbatim}
+\end{itemize}
 
 
 \subparagraph{Manually use an image decoder}
@@ -9662,7 +9723,7 @@ It might be misleading if you use an operating system and call \sphinxcode{\sphi
 
 \paragraph{Asynchronous calls}
 \label{\detokenize{overview/task:asynchronous-calls}}
-In some cases, you can’t do an action immediately. For example, you can delete an object right now because something else still uses it or you don’t want to block the execution now.
+In some cases, you can’t do an action immediately. For example, you can’t delete an object right now because something else still uses it or you don’t want to block the execution now.
 For these cases, you can use the \sphinxcode{\sphinxupquote{lv\_async\_call(my\_function, data\_p)}} to make \sphinxcode{\sphinxupquote{my\_function}} to be called on the next call of \sphinxcode{\sphinxupquote{lv\_task\_handler}}. \sphinxcode{\sphinxupquote{data\_p}} will be passed to function when it’s called.
 Note that, only the pointer of the data is saved so you need to ensure that the variable will be “alive” while the function is called. You can use \sphinxstyleemphasis{static}, global or dynamically allocated data.
 
