@@ -9730,19 +9730,22 @@ Note that, only the pointer of the data is saved so you need to ensure that the 
 For example:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kt}{void} \PYG{n+nf}{led\PYGZus{}flash}\PYG{p}{(}\PYG{k+kt}{void} \PYG{o}{*} \PYG{n}{time\PYGZus{}p}\PYG{p}{)}
+\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}screen\PYGZus{}clean\PYGZus{}up}\PYG{p}{(}\PYG{k+kt}{void} \PYG{o}{*} \PYG{n}{scr}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-  \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{time} \PYG{o}{=} \PYG{o}{*}\PYG{p}{(}\PYG{p}{(}\PYG{k+kt}{uint32\PYGZus{}t}\PYG{o}{*}\PYG{p}{)} \PYG{n}{time\PYGZus{}p}\PYG{p}{)}\PYG{p}{;}
+  \PYG{c+cm}{/*Free some resources related to {}`scr{}`*/}
   
-  \PYG{n}{led\PYGZus{}on}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
-  \PYG{n}{delay}\PYG{p}{(}\PYG{n}{time}\PYG{p}{)}\PYG{p}{;}
-  \PYG{n}{led\PYGZus{}off}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+  \PYG{c+cm}{/*Finally delete the screen*/}
+  \PYG{n}{lv\PYGZus{}obj\PYGZus{}del}\PYG{p}{(}\PYG{n}{scr}\PYG{p}{)}\PYG{p}{;}  
 \PYG{p}{\PYGZcb{}}
 
 \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
 
-\PYG{k}{static} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{time} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{;} 
-\PYG{n}{lv\PYGZus{}async\PYGZus{}call}\PYG{p}{(}\PYG{n}{led\PYGZus{}flash}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{time}\PYG{p}{)}\PYG{p}{;}
+\PYG{c+cm}{/*Do somethings with the object on the current screen*/}
+
+\PYG{c+cm}{/*Delete screen on next call of {}`lv\PYGZus{}task\PYGZus{}handler{}`. So not now.*/}
+\PYG{n}{lv\PYGZus{}async\PYGZus{}call}\PYG{p}{(}\PYG{n}{my\PYGZus{}screen\PYGZus{}clean\PYGZus{}up}\PYG{p}{,} \PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{c+cm}{/*The screen is still valid so you can do other things with it*/}
 \end{sphinxVerbatim}
 
 

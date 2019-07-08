@@ -65,19 +65,22 @@ Note that, only the pointer of the data is saved so you need to ensure that the 
 
 For example:
 ```c
-void led_flash(void * time_p)
+void my_screen_clean_up(void * scr)
 {
-  uint32_t time = *((uint32_t*) time_p);
+  /*Free some resources related to `scr`*/
   
-  led_on();
-  delay(time);
-  led_off();
+  /*Finally delete the screen*/
+  lv_obj_del(scr);  
 }
 
 ...
 
-static uint32_t time = 100; 
-lv_async_call(led_flash, &time);
+/*Do somethings with the object on the current screen*/
+
+/*Delete screen on next call of `lv_task_handler`. So not now.*/
+lv_async_call(my_screen_clean_up, lv_scr_act());
+
+/*The screen is still valid so you can do other things with it*/
 
 ```
 

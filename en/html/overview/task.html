@@ -1125,19 +1125,22 @@ It might be misleading if you use an operating system and call <code class="docu
 For these cases, you can use the <code class="docutils literal notranslate"><span class="pre">lv_async_call(my_function,</span> <span class="pre">data_p)</span></code> to make <code class="docutils literal notranslate"><span class="pre">my_function</span></code> to be called on the next call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>. <code class="docutils literal notranslate"><span class="pre">data_p</span></code> will be passed to function when it’s called.
 Note that, only the pointer of the data is saved so you need to ensure that the variable will be “alive” while the function is called. You can use <em>static</em>, global or dynamically allocated data.</p>
 <p>For example:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">led_flash</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">time_p</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_screen_clean_up</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">scr</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="kt">uint32_t</span> <span class="n">time</span> <span class="o">=</span> <span class="o">*</span><span class="p">((</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span> <span class="n">time_p</span><span class="p">);</span>
+  <span class="cm">/*Free some resources related to `scr`*/</span>
   
-  <span class="n">led_on</span><span class="p">();</span>
-  <span class="n">delay</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
-  <span class="n">led_off</span><span class="p">();</span>
+  <span class="cm">/*Finally delete the screen*/</span>
+  <span class="n">lv_obj_del</span><span class="p">(</span><span class="n">scr</span><span class="p">);</span>  
 <span class="p">}</span>
 
 <span class="p">...</span>
 
-<span class="k">static</span> <span class="kt">uint32_t</span> <span class="n">time</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> 
-<span class="n">lv_async_call</span><span class="p">(</span><span class="n">led_flash</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">time</span><span class="p">);</span>
+<span class="cm">/*Do somethings with the object on the current screen*/</span>
+
+<span class="cm">/*Delete screen on next call of `lv_task_handler`. So not now.*/</span>
+<span class="n">lv_async_call</span><span class="p">(</span><span class="n">my_screen_clean_up</span><span class="p">,</span> <span class="n">lv_scr_act</span><span class="p">());</span>
+
+<span class="cm">/*The screen is still valid so you can do other things with it*/</span>
 </pre></div>
 </div>
 </div>
