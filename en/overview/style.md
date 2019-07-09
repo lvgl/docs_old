@@ -128,7 +128,19 @@ The built in styles are global `lv_style_t` variables. You can use them like:
 lv_btn_set_style(obj, LV_BTN_STYLE_REL, &lv_style_btn_rel)
 ```
 
-You can modify the built-in styles or you can create new styles. When creating new styles it is recommended to first copy a built-in style to be sure all fields are initialized with a proper value. The `lv_style_copy(&dest_style, &src_style)` can be used to copy styles.
+## Create new styles
+You can modify the built-in styles or you can create new styles. 
+
+When creating new styles it's recommended to first copy a built-in style with `lv_style_copy(&dest_style, &src_style)` to be sure all fields are initialized with a proper value. 
+
+Do not forget the created style should be `static` or global. For example:
+```c
+static lv_style_t my_red_style;
+lv_style_copy(&my_red_style, &lv_style_plain);
+my_red_style.body.main_color = LV_COLOR_RED;
+my_red_style.body.grad_color = LV_COLOR_RED;
+```
+
 
 ## Style animations
 You change the styles with animations using `lv_style_anim_...()` function. Two styles are required to represent the *start* and *end* state, and a third style which will be animated. Here is an example to show how it works.
