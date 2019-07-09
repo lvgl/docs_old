@@ -233,6 +233,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#built-in-styles">Built-in styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-new-styles">Create new styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#style-animations">Style animations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#style-example">Style example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#themes">Themes</a><ul>
@@ -1200,7 +1201,18 @@ To see which fields are used by an object type see their <a class="reference int
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_btn_set_style</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">LV_BTN_STYLE_REL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_btn_rel</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>You can modify the built-in styles or you can create new styles. When creating new styles it is recommended to first copy a built-in style to be sure all fields are initialized with a proper value. The <code class="docutils literal notranslate"><span class="pre">lv_style_copy(&amp;dest_style,</span> <span class="pre">&amp;src_style)</span></code> can be used to copy styles.</p>
+</div>
+<div class="section" id="create-new-styles">
+<h2>Create new styles<a class="headerlink" href="#create-new-styles" title="Permalink to this headline">¶</a></h2>
+<p>You can modify the built-in styles or you can create new styles.</p>
+<p>When creating new styles it’s recommended to first copy a built-in style with <code class="docutils literal notranslate"><span class="pre">lv_style_copy(&amp;dest_style,</span> <span class="pre">&amp;src_style)</span></code> to be sure all fields are initialized with a proper value.</p>
+<p>Do not forget the created style should be <code class="docutils literal notranslate"><span class="pre">static</span></code> or global. For example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">my_red_style</span><span class="p">;</span>
+<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_red_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+<span class="n">my_red_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_RED</span><span class="p">;</span>
+<span class="n">my_red_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_RED</span><span class="p">;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="style-animations">
 <h2>Style animations<a class="headerlink" href="#style-animations" title="Permalink to this headline">¶</a></h2>
@@ -1323,7 +1335,7 @@ Check the <a class="reference external" href="https://littlevgl.com/themes">Exis
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 08, 2019.
+        Last updated on Jul 09, 2019.
       </span>
 
     </p>

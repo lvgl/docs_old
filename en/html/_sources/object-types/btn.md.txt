@@ -72,7 +72,7 @@ Learn more about [Keys](/overview/indev).
 ## Example
 ```eval_rst
 
-.. include:: /lv_examples/lv_ex_btn/index.rst
+.. include:: /lv_examples/src/lv_ex_btn/index.rst
 
 ```
 

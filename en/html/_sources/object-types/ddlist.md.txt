@@ -58,7 +58,7 @@ The following *Keys* are processed by the Buttons:
 
 ```eval_rst
 
-.. include:: /lv_examples/lv_ex_ddlist/index.rst
+.. include:: /lv_examples/src/lv_ex_ddlist/index.rst
 
 ```
 
