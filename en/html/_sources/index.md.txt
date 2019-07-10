@@ -1,10 +1,13 @@
 
 ```eval_rst
+
+.. include:: /lang.rst
+
 PDF version: :download:`LittlevGL.pdf <LittlevGL.pdf>`  
+
 ```
 
 # Welcome to LittlevGL's documentation!
-
 
 ![](/misc/lv_theme_intro.png "LittlevGL cover")
 
@@ -173,6 +176,8 @@ You can download it here and open offline:
 ```eval_rst
 :download:`Docs-v5-3.zip <docs_v5_3.zip>`
 ```
+
+
 ---
 
 ```eval_rst
@@ -185,3 +190,6 @@ You can download it here and open offline:
    overview/index
    object-types/index
 ```
+
+```
+

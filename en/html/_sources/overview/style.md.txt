@@ -1,10 +1,10 @@
 # Styles
 
-*Styles* are used to set the appearance of the objects. A style is a structure variable with attributes like colors, paddings, opacity, etc. 
+*Styles* are used to set the appearance of the objects. A style is a structure variable with attributes like colors, paddings, opacity, font etc. 
 
 There is common style type called **lv_style_t** for every object type.
 
-Styles are assigned to the objects and by setting the fields of the `lv_style_t` variables you can influence the appearance of the objects using that style.
+By setting the fields of the `lv_style_t` variables and assigning to to an object you can influence the appearance of the objects.
 
 ``` important:: The objects store only a pointer to a style so the style cannot be a local variable which is destroyed after the function exists. **You should use static, global or dynamically allocated variables.**
 ```
@@ -23,7 +23,7 @@ void my_screen_create(void)
 
 ## Use the styles 
 
-The objects have a *Main style* which determines the appearance of their background or main part. However, object types can have additional styles too. 
+The objects have a *Main style* which determines the appearance of their background or main part. However, some object types have additional styles too. 
 
 Some object has only one style. E.g.
 - Label
@@ -41,7 +41,7 @@ const lv_style_t * btn_style = lv_btn_get_style(btn, LV_BTN_STYLE_REL);
 lv_btn_set_style(btn, LV_BTN_STYLE_REL, &new_style);
 ```
 
-The styles supported by an object type  (*LV_<OBJ_TYPE>_STYLE_<STYLE_TYPE>*) see the documentation of the particular [Object type](/object-types/index).
+To see the styles supported by an object type  (*LV_<OBJ_TYPE>_STYLE_<STYLE_TYPE>*) check the documentation of the particular [Object type](/object-types/index).
 
 If you **modify a style which is already used** by one or more objects then the objects have to be notified about the style is changed. You have two options to do that:
 
@@ -49,7 +49,7 @@ If you **modify a style which is already used** by one or more objects then the 
 /*Notify an object about its style is modified*/
 void lv_obj_refresh_style(lv_obj_t * obj); 
 
- /*Notify all objects with a given style. (NULL to notify all objects)*/
+/*Notify all objects with a given style. (NULL to notify all objects)*/
 void lv_obj_report_style_mod(void * style);
 ```
 
