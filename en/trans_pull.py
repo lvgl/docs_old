@@ -3,8 +3,8 @@
 import sys
 import os
 
-langs = ['tr', 'zh-CN']
-folders = ['overview', 'get-started', 'object-types'];
+langs = ['tr', 'zh-CN', 'hu']
+folders = ['overview', 'get-started', 'object-types', 'porting'];
 files = ['index.md'];
 
 for lang in langs:

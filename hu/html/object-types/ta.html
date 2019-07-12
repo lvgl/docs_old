@@ -1,0 +1,2153 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Text area (lv_ta) &mdash; LittlevGL 6.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tile view (lv_tileview)" href="tileview.html" />
+    <link rel="prev" title="Tabview (lv_tabview)" href="tabview.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78811084-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78811084-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/white_white_lvgl_full_logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/live-demo.html">Élő demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#what-is-micropython">What is Micropython?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-highlights">Micropython highlights</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#so-how-does-it-look-like">So how does it look like?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#a-simple-example">A simple example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#how-can-i-use-it">How can I use it?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#online-simulator">Online Simulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#pc-simulator">PC Simulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#the-real-thing">The real thing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#where-can-i-find-more-information">Where can I find more information?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#select-an-ide">Select an IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#set-up-eclipse-cdt">Set-up Eclipse CDT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-eclipse-cdt">Install Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-sdl-2">Install SDL 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#pre-configured-project">Pre-configured project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#add-the-pre-configured-project-to-eclipse-cdt">Add the pre-configured project to Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#compile-and-run">Compile and Run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../porting/index.html">Porting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">System overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Set-up a project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#get-the-library">Get the library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#initialization">Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Input device interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-of-input-devices">Types of input devices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#other-features">Other features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/tick.html">Tick interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/tick.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/task-handler.html">Task Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sleep.html">Sleep management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/os.html">Operating system and interrupts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/os.html#tasks-and-threads">Tasks and threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/os.html#interrupts">Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/log.html">Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#log-level">Log level</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#logging-with-printf">Logging with printf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#custom-log-function">Custom log function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#add-logs">Add logs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/object.html">Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#object-attributes">Object attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#basic-attributes">Basic attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#specific-attributes">Specific attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#object-s-working-mechanisms">Object’s working mechanisms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#parent-child-structure">Parent-child structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#moving-together">Moving together</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#visibility-only-on-the-parent">Visibility only on the parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#create-delete-objects">Create - delete objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#screen-the-most-basic-parent">Screen – the most basic parent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#order-of-creation">Order of creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layer">Top and sys layer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#event-types">Event types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#generic-events">Generic events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#special-events">Special events</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#custom-data">Custom data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#send-events-manually">Send events manually</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/style.html">Styles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#inherit-styles">Inherit styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-properties">Style properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#common-properties">Common properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#text-style-properties">Text style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#image-style-properties">Image style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#line-style-properties">Line style properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#built-in-styles">Built-in styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#create-new-styles">Create new styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-animations">Style animations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-example">Style example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#themes">Themes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#live-update">Live update</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#pointers">Pointers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#keypad-and-encoder">Keypad and encoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#groups">Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#live-demo">Live demo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#input-device">Input device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#id1">Groups</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/display.html">Displays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#using-only-one-display">Using only one display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#mirror-display">Mirror display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#split-image">Split image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#screens">Screens</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#opaque-screen">Opaque screen</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#features-of-displays">Features of displays</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#inactivity">Inactivity</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#colors">Colors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#convert-color">Convert color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#swap-16-colors">Swap 16 colors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#create-and-mix-colors">Create and mix colors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#opacity">Opacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#built-in-colors">Built-in colors</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#display">Display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#id1">Colors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/font.html">Fonts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#unicode-support">Unicode support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#built-in-fonts">Built-in fonts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-font">Add new font</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-symbols">Add new symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-a-new-font-engine">Add a new font engine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/image.html">Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#store-images">Store images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#color-formats">Color formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#add-and-use-images">Add and use images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#online-converter">Online converter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#manually-create-an-image">Manually create an image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#use-images">Use images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#image-decoder">Image decoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#custom-image-formats">Custom image formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#register-an-image-decoder">Register an image decoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#manually-use-an-image-decoder">Manually use an image decoder</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#image-caching">Image caching</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#cache-size">Cache size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#value-of-images">Value of images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#memory-usage">Memory usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#clean-the-cache">Clean the cache</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/file-system.html">File system</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#add-a-driver">Add a driver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/file-system.html#use-drivers-for-images">Use drivers for images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/animation.html">Animations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#create-an-animation">Create an animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#animation-path">Animation path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#speed-vs-time">Speed vs time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#delete-animations">Delete animations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/animation.html#input-device">Input device</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/task.html">Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#create-a-task">Create a task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#ready-and-reset">Ready and Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#set-parameters">Set parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#one-shot-tasks">One-shot tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#measure-idle-time">Measure idle time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#asynchronous-calls">Asynchronous calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/drawing.html">Drawing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#buffering-types">Buffering types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#mechanism-of-screen-refreshing">Mechanism of screen refreshing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Object types (Widgets)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="obj.html">Base object (lv_obj)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#coordinates">Coordinates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#parents-and-children">Parents and children</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#screens">Screens</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#layers">Layers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#style">Style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#events">Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#attributes">Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#opa-scale">Opa scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#protect">Protect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#groups">Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#extended-click-area">Extended click area</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#id1">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="arc.html">Arc (lv_arc)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#angles">Angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bar.html">Bar (lv_bar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#value-and-range">Value and range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#symmetrical">Symmetrical</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="btn.html">Button (lv_btn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#states">States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#toggle">Toggle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#layout-and-fit">Layout and Fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#ink-effect">Ink effect</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="btnm.html">Button matrix (lv_btnm)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#button-s-text">Button’s text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#control-buttons">Control buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#one-toggle">One toggle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#recolor">Recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="calendar.html">Calendar (lv_calendar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#current-date">Current date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#shown-date">Shown date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#highlighted-days">Highlighted days</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#name-of-the-days">Name of the days</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#name-of-the-months">Name of the months</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="canvas.html">Canvas (lv_canvas)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#buffer">Buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#palette">Palette</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#drawing">Drawing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#rotate">Rotate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Check box (lv_cb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#text">Text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#check-uncheck">Check/Uncheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#inactive">Inactive</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chart.html">Chart (lv_chart)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#data-series">Data series</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#series-type">Series’ type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#modify-the-data">Modify the data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#update-modes">Update modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#number-of-points">Number of points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#vertical-range">Vertical range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#division-lines">Division lines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#series-appearance">Series’ appearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#tick-marks-and-labels">Tick marks and labels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cont.html">Container (lv_cont)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#layout">Layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#auto-fit">Auto fit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ddlist.html">Drop down list (lv_ddlist)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#set-options">Set options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#get-selected-option">Get selected option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#align-the-options">Align the options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#height-and-width">Height and width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#animation-time">Animation time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#decoration-arrow">Decoration arrow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#stay-open">Stay open</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gauge.html">Gauge (lv_gauge)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#scale">Scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#needles">Needles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#range">Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#critical-value">Critical value</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="img.html">Image (lv_img)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="img.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="img.html#image-source">Image source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#label-as-an-image">Label as an image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#transparency">Transparency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#palette-and-alpha-index">Palette and Alpha index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#recolor">Recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#auto-size">Auto-size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#mosaic">Mosaic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#offset">Offset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="img.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imgbtn.html">Image button (lv_imgbtn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#image-sources">Image sources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#states">States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#toggle">Toggle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kb.html">Keyboard (lv_kb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#modes">Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#assign-text-area">Assign Text area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#new-key-map">New key map</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="label.html">Label (lv_label)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="label.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="label.html#set-text">Set text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#line-break">Line break</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#long-modes">Long modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#text-align">Text align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#draw-background">Draw background</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#text-recolor">Text recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#very-long-texts">Very long texts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#symbols">Symbols</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="label.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="led.html">LED (lv_led)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="led.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="led.html#brightness">Brightness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="led.html#toggle">Toggle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="led.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="led.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">Line (lv_line)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="line.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="line.html#set-points">Set points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#auto-size">Auto-size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#invert-y">Invert y</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="line.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list.html">List (lv_list)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="list.html#add-buttons">Add buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#delete-buttons">Delete buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#manual-navigation">Manual navigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#edge-flash">Edge flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#scroll-propagation">Scroll propagation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="list.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lmeter.html">Line meter (lv_lmeter)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#set-value">Set value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#range-and-angles">Range and Angles</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mbox.html">Message box (lv_mbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#set-text">Set text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#add-buttons">Add buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#auto-close">Auto-close</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="page.html">Page (lv_page)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="page.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="page.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#glue-object">Glue object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#focus-object">Focus object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#manual-navigation">Manual navigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#edge-flash">Edge flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#scroll-propagation">Scroll propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#scrollable-api">Scrollable API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="page.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="preload.html">Preloader (lv_preload)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#arc-length">Arc length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#spinning-speed">Spinning speed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#spin-types">Spin types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#spin-direction">Spin direction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="roller.html">Roller (lv_roller)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#set-options">Set options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#get-selected-option">Get selected option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#align-the-options">Align the options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#height-and-width">Height and width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="slider.html">Slider (lv_slider)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#value-and-range">Value and range</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#knob-placement">Knob placement</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="spinbox.html">Spinbox (lv_spinbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#set-format">Set format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#value-and-ranges">Value and ranges</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#id1">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sw.html">Switch (lv_sw)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#change-state">Change state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">Table (lv_table)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="table.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="table.html#rows-and-columns">Rows and Columns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#width-and-height">Width and Height</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#set-cell-value">Set cell value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#align">Align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#cell-type">Cell type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#merge-cells">Merge cells</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#crop-text">Crop text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#scroll">Scroll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="table.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tabview.html">Tabview (lv_tabview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#adding-tab">Adding tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#change-tab">Change tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#tab-button-s-position">Tab button’s position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#hide-the-tabs">Hide the tabs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Text area (lv_ta)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#add-text">Add text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#placeholder">Placeholder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-character">Delete character</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#move-the-cursor">Move the cursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cursor-types">Cursor types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#one-line-mode">One line mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#password-mode">Password mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#text-align">Text align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accepted-characters">Accepted characters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#max-text-length">Max text length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#very-long-texts">Very long texts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#select-text">Select text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scroll-propagation">Scroll propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#edge-flash">Edge flash</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tileview.html">Tile view (lv_tileview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#valid-positions">Valid positions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#add-element">Add element</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#set-tile">Set tile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#animation-time">Animation time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#edge-flash">Edge flash</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="win.html">Window (lv_win)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="win.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="win.html#title">Title</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#control-buttons">Control buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#manual-scroll-and-focus">Manual scroll and focus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#layout">Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="win.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LittlevGL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Object types (Widgets)</a> &raquo;</li>
+        
+      <li>Text area (lv_ta)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/object-types/ta.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="text-area-lv-ta">
+<h1>Text area (lv_ta)<a class="headerlink" href="#text-area-lv-ta" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Text Area is a <a class="reference internal" href="page.html"><span class="doc">Page</span></a> with a <a class="reference internal" href="label.html"><span class="doc">Label</span></a> and a cursor on it. Texts or characters can be added to it. Long lines are wrapped and when the text becomes long enough the Text area can be scrolled-</p>
+<div class="section" id="add-text">
+<h3>Add text<a class="headerlink" href="#add-text" title="Permalink to this headline">¶</a></h3>
+<p>You can insert text or characters  to the current cursor’s position with:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_ta_add_char(ta,</span> <span class="pre">'c')</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_ta_add_text(ta,</span> <span class="pre">&quot;insert</span> <span class="pre">this</span> <span class="pre">text&quot;)</span></code></p></li>
+</ul>
+<p>To add wide characters like <code class="docutils literal notranslate"><span class="pre">'á'</span></code>, <code class="docutils literal notranslate"><span class="pre">'ß'</span></code> or CJK characters use <code class="docutils literal notranslate"><span class="pre">lv_ta_add_text(ta,</span> <span class="pre">&quot;á&quot;)</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_ta_set_text(ta,</span> <span class="pre">&quot;New</span> <span class="pre">text&quot;)</span></code> changes the whole text.</p>
+</div>
+<div class="section" id="placeholder">
+<h3>Placeholder<a class="headerlink" href="#placeholder" title="Permalink to this headline">¶</a></h3>
+<p>A placeholder text can be specified which is displayed when the Text area is empty with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_placeholder_text(ta,</span> <span class="pre">&quot;Placeholder</span> <span class="pre">text&quot;)</span></code></p>
+</div>
+<div class="section" id="delete-character">
+<h3>Delete character<a class="headerlink" href="#delete-character" title="Permalink to this headline">¶</a></h3>
+<p>To delete a character from the left of the current cursor position use <code class="docutils literal notranslate"><span class="pre">lv_ta_del_char(ta)</span></code>. The delete from teh right use <code class="docutils literal notranslate"><span class="pre">lv_ta_del_char_forward(ta)</span></code></p>
+</div>
+<div class="section" id="move-the-cursor">
+<h3>Move the cursor<a class="headerlink" href="#move-the-cursor" title="Permalink to this headline">¶</a></h3>
+<p>The cursor position can be modified directly with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_cursor_pos(ta,</span> <span class="pre">10)</span></code>. The <code class="docutils literal notranslate"><span class="pre">0</span></code> position means “before the first characters”, <code class="docutils literal notranslate"><span class="pre">LV_TA_CURSOR_LAST</span></code> means “after the last character”</p>
+<p>You can step the cursor with</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_ta_cursor_right(ta)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_ta_cursor_left(ta)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_ta_cursor_up(ta)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_ta_cursor_down(ta)</span></code></p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">lv_ta_set_cursor_click_pos(ta,</span> <span class="pre">true)</span></code> is called the cursor will jump to the position where the Text area was clicked.</p>
+</div>
+<div class="section" id="cursor-types">
+<h3>Cursor types<a class="headerlink" href="#cursor-types" title="Permalink to this headline">¶</a></h3>
+<p>There are several cursor types. You can set one of them with: <code class="docutils literal notranslate"><span class="pre">lv_ta_set_cursor_type(ta,</span> <span class="pre">LV_CURSOR_...)</span></code></p>
+<ul class="simple">
+<li><p><strong>LV_CURSOR_NONE</strong> No cursor</p></li>
+<li><p><strong>LV_CURSOR_LINE</strong> A simple vertical line</p></li>
+<li><p><strong>LV_CURSOR_BLOCK</strong> A filled rectangle on the current character</p></li>
+<li><p><strong>LV_CURSOR_OUTLINE</strong> A rectangle border around the current character</p></li>
+<li><p><strong>LV_CURSOR_UNDERLINE</strong> Underline the current character</p></li>
+</ul>
+<p>You can ‘OR’ <code class="docutils literal notranslate"><span class="pre">LV_CURSOR_HIDDEN</span></code> to any type to temporarily hide the cursor.</p>
+<p>The blink time of the cursor can be adjusted with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_cursor_blink_time(ta,</span> <span class="pre">time_ms)</span></code>.</p>
+</div>
+<div class="section" id="one-line-mode">
+<h3>One line mode<a class="headerlink" href="#one-line-mode" title="Permalink to this headline">¶</a></h3>
+<p>The Text area can be configures to be one lined with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_one_line(ta,</span> <span class="pre">true)</span></code>. In this mode the height is set automatically to show only one line, line break character are ignored, and word wrap is disabled.</p>
+</div>
+<div class="section" id="password-mode">
+<h3>Password mode<a class="headerlink" href="#password-mode" title="Permalink to this headline">¶</a></h3>
+<p>The text area supports password mode which can be enabled with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_pwd_mode(ta,</span> <span class="pre">true)</span></code>. In password mode, the enters characters are converted to <code class="docutils literal notranslate"><span class="pre">*</span></code> after some time or when a new character is entered.</p>
+<p>In password mode <code class="docutils literal notranslate"><span class="pre">lv_ta_get_text(ta)</span></code> gives the real text and not the asterisk characters</p>
+<p>The visibility time can be adjusted with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_pwd_show_time(ta,</span> <span class="pre">time_ms)</span></code>.</p>
+</div>
+<div class="section" id="text-align">
+<h3>Text align<a class="headerlink" href="#text-align" title="Permalink to this headline">¶</a></h3>
+<p>The text can be aligned to the left, center or right with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_text_align(ta,</span> <span class="pre">LV_LABEL_ALIGN_LET/CENTER/RIGHT)</span></code>.</p>
+<p>In one line mode, the text can be scrolled horizontally only if the text is left aligned.</p>
+</div>
+<div class="section" id="accepted-characters">
+<h3>Accepted characters<a class="headerlink" href="#accepted-characters" title="Permalink to this headline">¶</a></h3>
+<p>You can set a list of accepted characters with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_accepted_chars(ta,</span> <span class="pre">&quot;0123456789.+-&quot;)</span></code>. Other characters will be ignored.</p>
+</div>
+<div class="section" id="max-text-length">
+<h3>Max text length<a class="headerlink" href="#max-text-length" title="Permalink to this headline">¶</a></h3>
+<p>The maximum number of characters can be limited with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_max_length(ta,</span> <span class="pre">max_char_num)</span></code></p>
+</div>
+<div class="section" id="very-long-texts">
+<h3>Very long texts<a class="headerlink" href="#very-long-texts" title="Permalink to this headline">¶</a></h3>
+<p>If there is a  very long text in the Text area  (&gt; 20k characters) its scrolling and drawing might be slow.
+However, by enabling <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_TXT_HINT</span>&#160;&#160; <span class="pre">1</span></code> in <em>lv_conf.h</em> it can be hugely improved.
+It will save some info about the label to speed up its drawing. Using <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_TXT_HINT</span></code> the scrolling and drawing will as fast as with “normal” short texts.</p>
+</div>
+<div class="section" id="select-text">
+<h3>Select text<a class="headerlink" href="#select-text" title="Permalink to this headline">¶</a></h3>
+<p>A part of text can be selected if enabled with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_text_sel(ta,</span> <span class="pre">true)</span></code>. It works like when you select a text on your PC with your mouse.</p>
+</div>
+<div class="section" id="scrollbars">
+<h3>Scrollbars<a class="headerlink" href="#scrollbars" title="Permalink to this headline">¶</a></h3>
+<p>The scrollbars can shown according to different policies set by <code class="docutils literal notranslate"><span class="pre">lv_ta_set_sb_mode(ta,</span> <span class="pre">LV_SB_MODE_...)</span></code>. Learn more at the <a class="reference internal" href="page.html"><span class="doc">Page</span></a> object.</p>
+</div>
+<div class="section" id="scroll-propagation">
+<h3>Scroll propagation<a class="headerlink" href="#scroll-propagation" title="Permalink to this headline">¶</a></h3>
+<p>When the Text area is scrolled on an other scrollable object (like a Page) and the scrolling has reached the edge of the Text area, the scrolling can be propagated to the parent.
+In other words, when the Text area can be scrolled further, the parent will be scrolled instead.</p>
+<p>It can be enabled with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_scroll_propagation(ta,</span> <span class="pre">true)</span></code>.</p>
+<p>Learn more at the <a class="reference internal" href="page.html"><span class="doc">Page</span></a> object.</p>
+</div>
+<div class="section" id="edge-flash">
+<h3>Edge flash<a class="headerlink" href="#edge-flash" title="Permalink to this headline">¶</a></h3>
+<p>When the Text area is scrolled to edge a circle like flash animation can be shown if it is enabled with <code class="docutils literal notranslate"><span class="pre">lv_ta_set_edge_flash(ta,</span> <span class="pre">true)</span></code></p>
+</div>
+</div>
+<div class="section" id="style-usage">
+<h2>Style usage<a class="headerlink" href="#style-usage" title="Permalink to this headline">¶</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">lv_ta_set_style(page,</span> <span class="pre">LV_TA_STYLE_...,</span>&#160; <span class="pre">&amp;style)</span></code> to set a new style for an element of the text area:</p>
+<ul class="simple">
+<li><p><strong>LV_TA_STYLE_BG</strong> background’s style which uses all <code class="docutils literal notranslate"><span class="pre">style.body</span></code> properties. The label uses <code class="docutils literal notranslate"><span class="pre">style.label</span></code> from this style.  (default: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty</span></code>)</p></li>
+<li><p><strong>LV_TA_STYLE_SB</strong> scrollbar’s style which uses all <code class="docutils literal notranslate"><span class="pre">style.body</span></code> properties (default: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty_color</span></code>)</p></li>
+<li><p><strong>LV_TA_STYLE_CURSOR</strong> cursor style. If <code class="docutils literal notranslate"><span class="pre">NULL</span></code> then the library sets a style automatically according to the label’s color and font</p>
+<ul>
+<li><p><em>LV_CURSOR_LINE</em>: a <code class="docutils literal notranslate"><span class="pre">style.line.width</span></code> wide line but drawn as a rectangle as <code class="docutils literal notranslate"><span class="pre">style.body</span></code>. <code class="docutils literal notranslate"><span class="pre">padding.top/left</span></code> makes an offset on the cursor</p></li>
+<li><p><em>LV_CURSOR_BLOCK</em>: a rectangle as <code class="docutils literal notranslate"><span class="pre">style.body</span></code>  <code class="docutils literal notranslate"><span class="pre">padding</span></code> makes the rectangle larger</p></li>
+<li><p><em>LV_CURSOR_OUTLINE</em>: an empty rectangle (just a border) as <code class="docutils literal notranslate"><span class="pre">style.body</span></code> <code class="docutils literal notranslate"><span class="pre">padding</span></code> makes the rectangle larger</p></li>
+<li><p><em>LV_CURSOR_UNDERLINE</em>: a <code class="docutils literal notranslate"><span class="pre">style.line.width</span></code> wide line but drawn as a rectangle as <code class="docutils literal notranslate"><span class="pre">style.body</span></code>. <code class="docutils literal notranslate"><span class="pre">padding.top/left</span></code> makes an offset on the cursor</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<p>Besides the <a class="reference external" href="/overview/event.html#generic-events">Generic events</a> the following <a class="reference external" href="/overview/event.html#special-events">Special events</a> are sent by the Slider:</p>
+<ul class="simple">
+<li><p><strong>LV_EVENT_INSERT</strong> Sent when a character before a character is inserted.
+The evnet data is the text planned to insert. <code class="docutils literal notranslate"><span class="pre">lv_ta_set_insert_replace(ta,</span> <span class="pre">&quot;New</span> <span class="pre">text&quot;)</span></code> replaces the text to insert.
+The new text can’t be in a local variable which is destroyed when the event callback exists. <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> means do not insert anything.</p></li>
+<li><p><strong>LV_EVENT_VALUE_CHANGED</strong> When the content of the text area has been changed.</p></li>
+</ul>
+</div>
+<div class="section" id="keys">
+<h2>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>LV_KEY_UP/DOWN/LEFT/RIGHT</strong> Move the cursor</p></li>
+<li><p><strong>Any character</strong> Add the character to the current cursor position</p></li>
+</ul>
+<p>Learn more about <a class="reference internal" href="../overview/indev.html"><span class="doc">Keys</span></a>.</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="c">
+<h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
+<img alt="Text area example in LittlevGL" src="../_images/lv_ex_ta_1.gif" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ta1</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Value: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">lv_ta_get_text</span><span class="p">(</span><span class="n">obj</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_LONG_PRESSED_REPEAT</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/*For simple test: Long press the Text are to add the text below*/</span>
+        <span class="k">const</span> <span class="kt">char</span>  <span class="o">*</span> <span class="n">txt</span> <span class="o">=</span> <span class="s">&quot;</span><span class="se">\n\n</span><span class="s">You can scroll it if the text is long enough.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+        <span class="k">static</span> <span class="kt">uint16_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">txt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;\0&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">lv_ta_add_char</span><span class="p">(</span><span class="n">ta1</span><span class="p">,</span> <span class="n">txt</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="nf">lv_ex_ta_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ta1</span> <span class="o">=</span> <span class="n">lv_ta_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">ta1</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">ta1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_ta_set_cursor_type</span><span class="p">(</span><span class="n">ta1</span><span class="p">,</span> <span class="n">LV_CURSOR_BLOCK</span><span class="p">);</span>
+    <span class="n">lv_ta_set_text</span><span class="p">(</span><span class="n">ta1</span><span class="p">,</span> <span class="s">&quot;A text in a Text Area&quot;</span><span class="p">);</span>    <span class="cm">/*Set an initial text*/</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">ta1</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="micropython">
+<h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
+<p>No examples yet.</p>
+</div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv416lv_cursor_type_t">
+<span id="_CPPv316lv_cursor_type_t"></span><span id="_CPPv216lv_cursor_type_t"></span><span id="lv_cursor_type_t"></span><span class="target" id="lv__ta_8h_1a6a99fb197b28710e1d301e26990d0932"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_cursor_type_t</code><a class="headerlink" href="#_CPPv416lv_cursor_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv413lv_ta_style_t">
+<span id="_CPPv313lv_ta_style_t"></span><span id="_CPPv213lv_ta_style_t"></span><span id="lv_ta_style_t"></span><span class="target" id="lv__ta_8h_1a1d3b4eba32c6ff34c480d4038f5dee05"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_ta_style_t</code><a class="headerlink" href="#_CPPv413lv_ta_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv4Ut7_anon_82">
+<span id="_CPPv3Ut7_anon_82"></span><span class="target" id="lv__ta_8h_1a3babbf89cae9b856a12864a41506efbd"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_82" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Style of text area’s cursor. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv414LV_CURSOR_NONE">
+<span id="_CPPv314LV_CURSOR_NONE"></span><span id="_CPPv214LV_CURSOR_NONE"></span><span class="target" id="lv__ta_8h_1a3babbf89cae9b856a12864a41506efbda38cf0714619ab41f4fba78c7551d131c"></span><code class="sig-name descname">LV_CURSOR_NONE</code><a class="headerlink" href="#_CPPv414LV_CURSOR_NONE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>No cursor </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv414LV_CURSOR_LINE">
+<span id="_CPPv314LV_CURSOR_LINE"></span><span id="_CPPv214LV_CURSOR_LINE"></span><span class="target" id="lv__ta_8h_1a3babbf89cae9b856a12864a41506efbda5a73b764f595d3d9e58f3f92b8a204ca"></span><code class="sig-name descname">LV_CURSOR_LINE</code><a class="headerlink" href="#_CPPv414LV_CURSOR_LINE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Vertical line </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv415LV_CURSOR_BLOCK">
+<span id="_CPPv315LV_CURSOR_BLOCK"></span><span id="_CPPv215LV_CURSOR_BLOCK"></span><span class="target" id="lv__ta_8h_1a3babbf89cae9b856a12864a41506efbdac45af5be6dd346e5071e21b582c8e4ae"></span><code class="sig-name descname">LV_CURSOR_BLOCK</code><a class="headerlink" href="#_CPPv415LV_CURSOR_BLOCK" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Rectangle </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv417LV_CURSOR_OUTLINE">
+<span id="_CPPv317LV_CURSOR_OUTLINE"></span><span id="_CPPv217LV_CURSOR_OUTLINE"></span><span class="target" id="lv__ta_8h_1a3babbf89cae9b856a12864a41506efbda91c72c44597ff89ff84794d7f9fe1a31"></span><code class="sig-name descname">LV_CURSOR_OUTLINE</code><a class="headerlink" href="#_CPPv417LV_CURSOR_OUTLINE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Outline around character </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv419LV_CURSOR_UNDERLINE">
+<span id="_CPPv319LV_CURSOR_UNDERLINE"></span><span id="_CPPv219LV_CURSOR_UNDERLINE"></span><span class="target" id="lv__ta_8h_1a3babbf89cae9b856a12864a41506efbda47a13f8ff5353da784153750a06cb15b"></span><code class="sig-name descname">LV_CURSOR_UNDERLINE</code><a class="headerlink" href="#_CPPv419LV_CURSOR_UNDERLINE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Horizontal line under character </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv416LV_CURSOR_HIDDEN">
+<span id="_CPPv316LV_CURSOR_HIDDEN"></span><span id="_CPPv216LV_CURSOR_HIDDEN"></span><span class="target" id="lv__ta_8h_1a3babbf89cae9b856a12864a41506efbdaa97006ac18d16e07c3ef51c598b71d8d"></span><code class="sig-name descname">LV_CURSOR_HIDDEN</code> = 0x08<a class="headerlink" href="#_CPPv416LV_CURSOR_HIDDEN" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This flag can be ORed to any of the other values to temporarily hide the cursor </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv4Ut7_anon_83">
+<span id="_CPPv3Ut7_anon_83"></span><span class="target" id="lv__ta_8h_1aa57e16cd48de3b9a989056ff8df26f84"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_83" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Possible text areas tyles. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv414LV_TA_STYLE_BG">
+<span id="_CPPv314LV_TA_STYLE_BG"></span><span id="_CPPv214LV_TA_STYLE_BG"></span><span class="target" id="lv__ta_8h_1aa57e16cd48de3b9a989056ff8df26f84a43887d57e243e5fd2efe3a46e2dd4692"></span><code class="sig-name descname">LV_TA_STYLE_BG</code><a class="headerlink" href="#_CPPv414LV_TA_STYLE_BG" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Text area background style </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv414LV_TA_STYLE_SB">
+<span id="_CPPv314LV_TA_STYLE_SB"></span><span id="_CPPv214LV_TA_STYLE_SB"></span><span class="target" id="lv__ta_8h_1aa57e16cd48de3b9a989056ff8df26f84a3fa3ba24a67d1ea25888f3ada5fb2c91"></span><code class="sig-name descname">LV_TA_STYLE_SB</code><a class="headerlink" href="#_CPPv414LV_TA_STYLE_SB" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Scrollbar style </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv418LV_TA_STYLE_CURSOR">
+<span id="_CPPv318LV_TA_STYLE_CURSOR"></span><span id="_CPPv218LV_TA_STYLE_CURSOR"></span><span class="target" id="lv__ta_8h_1aa57e16cd48de3b9a989056ff8df26f84a52ee5d7e750508a11525345e99399684"></span><code class="sig-name descname">LV_TA_STYLE_CURSOR</code><a class="headerlink" href="#_CPPv418LV_TA_STYLE_CURSOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Cursor style </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv422LV_TA_STYLE_EDGE_FLASH">
+<span id="_CPPv322LV_TA_STYLE_EDGE_FLASH"></span><span id="_CPPv222LV_TA_STYLE_EDGE_FLASH"></span><span class="target" id="lv__ta_8h_1aa57e16cd48de3b9a989056ff8df26f84ae31a67dca6ed4e3f626de977165e6ef1"></span><code class="sig-name descname">LV_TA_STYLE_EDGE_FLASH</code><a class="headerlink" href="#_CPPv422LV_TA_STYLE_EDGE_FLASH" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Edge flash style </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv423LV_TA_STYLE_PLACEHOLDER">
+<span id="_CPPv323LV_TA_STYLE_PLACEHOLDER"></span><span id="_CPPv223LV_TA_STYLE_PLACEHOLDER"></span><span class="target" id="lv__ta_8h_1aa57e16cd48de3b9a989056ff8df26f84adca21989a9198f97870e964de1afade4"></span><code class="sig-name descname">LV_TA_STYLE_PLACEHOLDER</code><a class="headerlink" href="#_CPPv423LV_TA_STYLE_PLACEHOLDER" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Placeholder style </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv412lv_ta_createP8lv_obj_tPK8lv_obj_t">
+<span id="_CPPv312lv_ta_createP8lv_obj_tPK8lv_obj_t"></span><span id="_CPPv212lv_ta_createP8lv_obj_tPK8lv_obj_t"></span><span id="lv_ta_create__lv_obj_tP.lv_obj_tCP"></span><span class="target" id="lv__ta_8h_1ae641aaf6cc431cddb56e1f1f8b839735"></span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<code class="sig-name descname">lv_ta_create</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>par</em>, <em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>copy</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412lv_ta_createP8lv_obj_tPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a text area objects <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the created text area </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">par</span></code>: pointer to an object, it will be the parent of the new text area </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">copy</span></code>: pointer to a text area object, if not NULL then the new object will be copied from it </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv414lv_ta_add_charP8lv_obj_t8uint32_t">
+<span id="_CPPv314lv_ta_add_charP8lv_obj_t8uint32_t"></span><span id="_CPPv214lv_ta_add_charP8lv_obj_t8uint32_t"></span><span id="lv_ta_add_char__lv_obj_tP.uint32_t"></span><span class="target" id="lv__ta_8h_1a96bb5009e7878329a25791636449ec99"></span>void <code class="sig-name descname">lv_ta_add_char</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, uint32_t <em>c</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_ta_add_charP8lv_obj_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Insert a character to the current cursor position. To add a wide char, e.g. ‘Á’ use `lv_txt_encoded_conv_wc(‘Á’)` <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>: a character (e.g. ‘a’) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv414lv_ta_add_textP8lv_obj_tPKc">
+<span id="_CPPv314lv_ta_add_textP8lv_obj_tPKc"></span><span id="_CPPv214lv_ta_add_textP8lv_obj_tPKc"></span><span id="lv_ta_add_text__lv_obj_tP.cCP"></span><span class="target" id="lv__ta_8h_1aa0427445b5e55fed4ca1e0ec59680762"></span>void <code class="sig-name descname">lv_ta_add_text</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, <em class="property">const</em> char *<em>txt</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_ta_add_textP8lv_obj_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Insert a text to the current cursor position <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">txt</span></code>: a ‘\0’ terminated string to insert </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv414lv_ta_del_charP8lv_obj_t">
+<span id="_CPPv314lv_ta_del_charP8lv_obj_t"></span><span id="_CPPv214lv_ta_del_charP8lv_obj_t"></span><span id="lv_ta_del_char__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1ae0a0ebf3582fdc25deee03a4a478a6ed"></span>void <code class="sig-name descname">lv_ta_del_char</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_ta_del_charP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Delete a the left character from the current cursor position <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422lv_ta_del_char_forwardP8lv_obj_t">
+<span id="_CPPv322lv_ta_del_char_forwardP8lv_obj_t"></span><span id="_CPPv222lv_ta_del_char_forwardP8lv_obj_t"></span><span id="lv_ta_del_char_forward__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1a2acb344c32b4d82005731706679412f0"></span>void <code class="sig-name descname">lv_ta_del_char_forward</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lv_ta_del_char_forwardP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Delete the right character from the current cursor position <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv414lv_ta_set_textP8lv_obj_tPKc">
+<span id="_CPPv314lv_ta_set_textP8lv_obj_tPKc"></span><span id="_CPPv214lv_ta_set_textP8lv_obj_tPKc"></span><span id="lv_ta_set_text__lv_obj_tP.cCP"></span><span class="target" id="lv__ta_8h_1a1f01d772a1e398ba121148667ee1567b"></span>void <code class="sig-name descname">lv_ta_set_text</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, <em class="property">const</em> char *<em>txt</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_ta_set_textP8lv_obj_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the text of a text area <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">txt</span></code>: pointer to the text </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426lv_ta_set_placeholder_textP8lv_obj_tPKc">
+<span id="_CPPv326lv_ta_set_placeholder_textP8lv_obj_tPKc"></span><span id="_CPPv226lv_ta_set_placeholder_textP8lv_obj_tPKc"></span><span id="lv_ta_set_placeholder_text__lv_obj_tP.cCP"></span><span class="target" id="lv__ta_8h_1ae601e72e612ffc872554f4f85f470179"></span>void <code class="sig-name descname">lv_ta_set_placeholder_text</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, <em class="property">const</em> char *<em>txt</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_ta_set_placeholder_textP8lv_obj_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the placeholder text of a text area <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">txt</span></code>: pointer to the text </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_ta_set_cursor_posP8lv_obj_t7int16_t">
+<span id="_CPPv320lv_ta_set_cursor_posP8lv_obj_t7int16_t"></span><span id="_CPPv220lv_ta_set_cursor_posP8lv_obj_t7int16_t"></span><span id="lv_ta_set_cursor_pos__lv_obj_tP.int16_t"></span><span class="target" id="lv__ta_8h_1a1d0d553f01d1f1dedf9486def9299e89"></span>void <code class="sig-name descname">lv_ta_set_cursor_pos</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, int16_t <em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_ta_set_cursor_posP8lv_obj_t7int16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the cursor position <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">obj</span></code>: pointer to a text area object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos</span></code>: the new cursor position in character index &lt; 0 : index from the end of the text LV_TA_CURSOR_LAST: go after the last character </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_ta_set_cursor_typeP8lv_obj_t16lv_cursor_type_t">
+<span id="_CPPv321lv_ta_set_cursor_typeP8lv_obj_t16lv_cursor_type_t"></span><span id="_CPPv221lv_ta_set_cursor_typeP8lv_obj_t16lv_cursor_type_t"></span><span id="lv_ta_set_cursor_type__lv_obj_tP.lv_cursor_type_t"></span><span class="target" id="lv__ta_8h_1a52654ba16955368c74de05367b4db9e7"></span>void <code class="sig-name descname">lv_ta_set_cursor_type</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, <a class="reference internal" href="#_CPPv416lv_cursor_type_t" title="lv_cursor_type_t">lv_cursor_type_t</a> <em>cur_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_ta_set_cursor_typeP8lv_obj_t16lv_cursor_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the cursor type. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cur_type</span></code>: element of ‘lv_cursor_type_t’ </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426lv_ta_set_cursor_click_posP8lv_obj_tb">
+<span id="_CPPv326lv_ta_set_cursor_click_posP8lv_obj_tb"></span><span id="_CPPv226lv_ta_set_cursor_click_posP8lv_obj_tb"></span><span id="lv_ta_set_cursor_click_pos__lv_obj_tP.b"></span><span class="target" id="lv__ta_8h_1a52fa56a6b40c38d25aa79c23a52c6dc6"></span>void <code class="sig-name descname">lv_ta_set_cursor_click_pos</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_ta_set_cursor_click_posP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable/Disable the positioning of the the cursor by clicking the text on the text area. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">en</span></code>: true: enable click positions; false: disable </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418lv_ta_set_pwd_modeP8lv_obj_tb">
+<span id="_CPPv318lv_ta_set_pwd_modeP8lv_obj_tb"></span><span id="_CPPv218lv_ta_set_pwd_modeP8lv_obj_tb"></span><span id="lv_ta_set_pwd_mode__lv_obj_tP.b"></span><span class="target" id="lv__ta_8h_1a85fc59901e8c5c2655e46d3da8b1e1d0"></span>void <code class="sig-name descname">lv_ta_set_pwd_mode</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_ta_set_pwd_modeP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable/Disable password mode <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">en</span></code>: true: enable, false: disable </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418lv_ta_set_one_lineP8lv_obj_tb">
+<span id="_CPPv318lv_ta_set_one_lineP8lv_obj_tb"></span><span id="_CPPv218lv_ta_set_one_lineP8lv_obj_tb"></span><span id="lv_ta_set_one_line__lv_obj_tP.b"></span><span class="target" id="lv__ta_8h_1a2d30e71ae26e143cc7a08e12b6fae214"></span>void <code class="sig-name descname">lv_ta_set_one_line</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_ta_set_one_lineP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure the text area to one line or back to normal <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a Text area object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">en</span></code>: true: one line, false: normal </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_ta_set_text_alignP8lv_obj_t16lv_label_align_t">
+<span id="_CPPv320lv_ta_set_text_alignP8lv_obj_t16lv_label_align_t"></span><span id="_CPPv220lv_ta_set_text_alignP8lv_obj_t16lv_label_align_t"></span><span id="lv_ta_set_text_align__lv_obj_tP.lv_label_align_t"></span><span class="target" id="lv__ta_8h_1a4cb94f3bfae5f73a64c40dbdd7b16d30"></span>void <code class="sig-name descname">lv_ta_set_text_align</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, <a class="reference internal" href="label.html#_CPPv416lv_label_align_t" title="lv_label_align_t">lv_label_align_t</a> <em>align</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_ta_set_text_alignP8lv_obj_t16lv_label_align_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the alignment of the text area. In one line mode the text can be scrolled only with <code class="docutils literal notranslate"><span class="pre">LV_LABEL_ALIGN_LEFT</span></code>. This function should be called if the size of text area changes. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text are object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">align</span></code>: the desired alignment from <code class="docutils literal notranslate"><span class="pre">lv_label_align_t</span></code>. (LV_LABEL_ALIGN_LEFT/CENTER/RIGHT) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424lv_ta_set_accepted_charsP8lv_obj_tPKc">
+<span id="_CPPv324lv_ta_set_accepted_charsP8lv_obj_tPKc"></span><span id="_CPPv224lv_ta_set_accepted_charsP8lv_obj_tPKc"></span><span id="lv_ta_set_accepted_chars__lv_obj_tP.cCP"></span><span class="target" id="lv__ta_8h_1a8e9f5f34ef5bb43533fc95442c55d390"></span>void <code class="sig-name descname">lv_ta_set_accepted_chars</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, <em class="property">const</em> char *<em>list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_ta_set_accepted_charsP8lv_obj_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a list of characters. Only these characters will be accepted by the text area <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to Text Area </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: list of characters. Only the pointer is saved. E.g. “+-.,0123456789” </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_ta_set_max_lengthP8lv_obj_t8uint16_t">
+<span id="_CPPv320lv_ta_set_max_lengthP8lv_obj_t8uint16_t"></span><span id="_CPPv220lv_ta_set_max_lengthP8lv_obj_t8uint16_t"></span><span id="lv_ta_set_max_length__lv_obj_tP.uint16_t"></span><span class="target" id="lv__ta_8h_1a18272ba0083721e202d67c322846f612"></span>void <code class="sig-name descname">lv_ta_set_max_length</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, uint16_t <em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_ta_set_max_lengthP8lv_obj_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set max length of a Text Area. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to Text Area </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num</span></code>: the maximal number of characters can be added (<code class="docutils literal notranslate"><span class="pre">lv_ta_set_text</span></code> ignores it) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424lv_ta_set_insert_replaceP8lv_obj_tPKc">
+<span id="_CPPv324lv_ta_set_insert_replaceP8lv_obj_tPKc"></span><span id="_CPPv224lv_ta_set_insert_replaceP8lv_obj_tPKc"></span><span id="lv_ta_set_insert_replace__lv_obj_tP.cCP"></span><span class="target" id="lv__ta_8h_1a186a689baa3dae9a895cac823b24720a"></span>void <code class="sig-name descname">lv_ta_set_insert_replace</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, <em class="property">const</em> char *<em>txt</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_ta_set_insert_replaceP8lv_obj_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>In <code class="docutils literal notranslate"><span class="pre">LV_EVENT_INSERT</span></code> the text which planned to be inserted can be replaced by an other text. It can be used to add automatic formatting to the text area. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">txt</span></code>: pointer to a new string to insert. If <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> no text will be added. The variable must be live after the <code class="docutils literal notranslate"><span class="pre">event_cb</span></code> exists. (Should be <code class="docutils literal notranslate"><span class="pre">global</span></code> or <code class="docutils literal notranslate"><span class="pre">static</span></code>) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417lv_ta_set_sb_modeP8lv_obj_t12lv_sb_mode_t">
+<span id="_CPPv317lv_ta_set_sb_modeP8lv_obj_t12lv_sb_mode_t"></span><span id="_CPPv217lv_ta_set_sb_modeP8lv_obj_t12lv_sb_mode_t"></span><span id="lv_ta_set_sb_mode__lv_obj_tP.lv_sb_mode_t"></span><span class="target" id="lv__ta_8h_1ad17c1eb247d409313e668292b197d58e"></span><em class="property">static</em> void <code class="sig-name descname">lv_ta_set_sb_mode</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, <a class="reference internal" href="page.html#_CPPv412lv_sb_mode_t" title="lv_sb_mode_t">lv_sb_mode_t</a> <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_ta_set_sb_modeP8lv_obj_t12lv_sb_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the scroll bar mode of a text area <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sb_mode</span></code>: the new mode from ‘lv_page_sb_mode_t’ enum </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv428lv_ta_set_scroll_propagationP8lv_obj_tb">
+<span id="_CPPv328lv_ta_set_scroll_propagationP8lv_obj_tb"></span><span id="_CPPv228lv_ta_set_scroll_propagationP8lv_obj_tb"></span><span id="lv_ta_set_scroll_propagation__lv_obj_tP.b"></span><span class="target" id="lv__ta_8h_1aba61aac9de3d648e8247aa8c38c4ef17"></span><em class="property">static</em> void <code class="sig-name descname">lv_ta_set_scroll_propagation</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428lv_ta_set_scroll_propagationP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable the scroll propagation feature. If enabled then the Text area will move its parent if there is no more space to scroll. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a Text area </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">en</span></code>: true or false to enable/disable scroll propagation </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_ta_set_edge_flashP8lv_obj_tb">
+<span id="_CPPv320lv_ta_set_edge_flashP8lv_obj_tb"></span><span id="_CPPv220lv_ta_set_edge_flashP8lv_obj_tb"></span><span id="lv_ta_set_edge_flash__lv_obj_tP.b"></span><span class="target" id="lv__ta_8h_1a060110afe65e5c5e938c04f3bd331ada"></span><em class="property">static</em> void <code class="sig-name descname">lv_ta_set_edge_flash</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_ta_set_edge_flashP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable the edge flash effect. (Show an arc when the an edge is reached) <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">page</span></code>: pointer to a Text Area </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">en</span></code>: true or false to enable/disable end flash </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415lv_ta_set_styleP8lv_obj_t13lv_ta_style_tPK10lv_style_t">
+<span id="_CPPv315lv_ta_set_styleP8lv_obj_t13lv_ta_style_tPK10lv_style_t"></span><span id="_CPPv215lv_ta_set_styleP8lv_obj_t13lv_ta_style_tPK10lv_style_t"></span><span id="lv_ta_set_style__lv_obj_tP.lv_ta_style_t.lv_style_tCP"></span><span class="target" id="lv__ta_8h_1aeeef1c7ce68fc3e3be896a05061f90c5"></span>void <code class="sig-name descname">lv_ta_set_style</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, <a class="reference internal" href="#_CPPv413lv_ta_style_t" title="lv_ta_style_t">lv_ta_style_t</a> <em>type</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_ta_set_styleP8lv_obj_t13lv_ta_style_tPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a style of a text area <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: which style should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418lv_ta_set_text_selP8lv_obj_tb">
+<span id="_CPPv318lv_ta_set_text_selP8lv_obj_tb"></span><span id="_CPPv218lv_ta_set_text_selP8lv_obj_tb"></span><span id="lv_ta_set_text_sel__lv_obj_tP.b"></span><span class="target" id="lv__ta_8h_1a2bcb7a4ce3305ce73da7115dfc5d926b"></span>void <code class="sig-name descname">lv_ta_set_text_sel</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_ta_set_text_selP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable/disable selection mode. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">en</span></code>: true or false to enable/disable selection mode </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423lv_ta_set_pwd_show_timeP8lv_obj_t8uint16_t">
+<span id="_CPPv323lv_ta_set_pwd_show_timeP8lv_obj_t8uint16_t"></span><span id="_CPPv223lv_ta_set_pwd_show_timeP8lv_obj_t8uint16_t"></span><span id="lv_ta_set_pwd_show_time__lv_obj_tP.uint16_t"></span><span class="target" id="lv__ta_8h_1ad9a14331b508964dd3ddbf0c82e37856"></span>void <code class="sig-name descname">lv_ta_set_pwd_show_time</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, uint16_t <em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_ta_set_pwd_show_timeP8lv_obj_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set how long show the password before changing it to ‘*’ <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to Text area </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code>: show time in milliseconds. 0: hide immediately. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427lv_ta_set_cursor_blink_timeP8lv_obj_t8uint16_t">
+<span id="_CPPv327lv_ta_set_cursor_blink_timeP8lv_obj_t8uint16_t"></span><span id="_CPPv227lv_ta_set_cursor_blink_timeP8lv_obj_t8uint16_t"></span><span id="lv_ta_set_cursor_blink_time__lv_obj_tP.uint16_t"></span><span class="target" id="lv__ta_8h_1a321c64b59a4afe67e17644f79d2abf3e"></span>void <code class="sig-name descname">lv_ta_set_cursor_blink_time</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, uint16_t <em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lv_ta_set_cursor_blink_timeP8lv_obj_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set cursor blink animation time <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to Text area </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code>: blink period. 0: disable blinking </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv414lv_ta_get_textPK8lv_obj_t">
+<span id="_CPPv314lv_ta_get_textPK8lv_obj_t"></span><span id="_CPPv214lv_ta_get_textPK8lv_obj_t"></span><span id="lv_ta_get_text__lv_obj_tCP"></span><span class="target" id="lv__ta_8h_1a8ac1502d61f93a44c77462d133dbcc90"></span><em class="property">const</em> char *<code class="sig-name descname">lv_ta_get_text</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_ta_get_textPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the text of a text area. In password mode it gives the real text (not ‘*’s). <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the text </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426lv_ta_get_placeholder_textP8lv_obj_t">
+<span id="_CPPv326lv_ta_get_placeholder_textP8lv_obj_t"></span><span id="_CPPv226lv_ta_get_placeholder_textP8lv_obj_t"></span><span id="lv_ta_get_placeholder_text__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1ad89b431164c3b641fe0dfc9240283273"></span><em class="property">const</em> char *<code class="sig-name descname">lv_ta_get_placeholder_text</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_ta_get_placeholder_textP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the placeholder text of a text area <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the text </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415lv_ta_get_labelPK8lv_obj_t">
+<span id="_CPPv315lv_ta_get_labelPK8lv_obj_t"></span><span id="_CPPv215lv_ta_get_labelPK8lv_obj_t"></span><span id="lv_ta_get_label__lv_obj_tCP"></span><span class="target" id="lv__ta_8h_1a73c7314b083bf79adaf813fd1159f156"></span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<code class="sig-name descname">lv_ta_get_label</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_ta_get_labelPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the label of a text area <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the label object </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_ta_get_cursor_posPK8lv_obj_t">
+<span id="_CPPv320lv_ta_get_cursor_posPK8lv_obj_t"></span><span id="_CPPv220lv_ta_get_cursor_posPK8lv_obj_t"></span><span id="lv_ta_get_cursor_pos__lv_obj_tCP"></span><span class="target" id="lv__ta_8h_1ad3f41b1fc850f4bdc5eab4832257723d"></span>uint16_t <code class="sig-name descname">lv_ta_get_cursor_pos</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_ta_get_cursor_posPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current cursor position in character index <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the cursor position </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_ta_get_cursor_typePK8lv_obj_t">
+<span id="_CPPv321lv_ta_get_cursor_typePK8lv_obj_t"></span><span id="_CPPv221lv_ta_get_cursor_typePK8lv_obj_t"></span><span id="lv_ta_get_cursor_type__lv_obj_tCP"></span><span class="target" id="lv__ta_8h_1acb66b0495ccd41680ad0640c89c4f6a2"></span><a class="reference internal" href="#_CPPv416lv_cursor_type_t" title="lv_cursor_type_t">lv_cursor_type_t</a> <code class="sig-name descname">lv_ta_get_cursor_type</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_ta_get_cursor_typePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current cursor type. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>element of ‘lv_cursor_type_t’ </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426lv_ta_get_cursor_click_posP8lv_obj_t">
+<span id="_CPPv326lv_ta_get_cursor_click_posP8lv_obj_t"></span><span id="_CPPv226lv_ta_get_cursor_click_posP8lv_obj_t"></span><span id="lv_ta_get_cursor_click_pos__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1aa851f8ebfeab3b4747fa19541e8fba22"></span>bool <code class="sig-name descname">lv_ta_get_cursor_click_pos</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_ta_get_cursor_click_posP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get whether the cursor click positioning is enabled or not. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: enable click positions; false: disable </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418lv_ta_get_pwd_modePK8lv_obj_t">
+<span id="_CPPv318lv_ta_get_pwd_modePK8lv_obj_t"></span><span id="_CPPv218lv_ta_get_pwd_modePK8lv_obj_t"></span><span id="lv_ta_get_pwd_mode__lv_obj_tCP"></span><span class="target" id="lv__ta_8h_1ad0915d1fc7c431e7807b975ceea82114"></span>bool <code class="sig-name descname">lv_ta_get_pwd_mode</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_ta_get_pwd_modePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the password mode attribute <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: password mode is enabled, false: disabled </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418lv_ta_get_one_linePK8lv_obj_t">
+<span id="_CPPv318lv_ta_get_one_linePK8lv_obj_t"></span><span id="_CPPv218lv_ta_get_one_linePK8lv_obj_t"></span><span id="lv_ta_get_one_line__lv_obj_tCP"></span><span class="target" id="lv__ta_8h_1a1158b8340cc10cc2aa4e7ac9e73813dc"></span>bool <code class="sig-name descname">lv_ta_get_one_line</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_ta_get_one_linePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the one line configuration attribute <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: one line configuration is enabled, false: disabled </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424lv_ta_get_accepted_charsP8lv_obj_t">
+<span id="_CPPv324lv_ta_get_accepted_charsP8lv_obj_t"></span><span id="_CPPv224lv_ta_get_accepted_charsP8lv_obj_t"></span><span id="lv_ta_get_accepted_chars__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1ab55a30945134f5f64c3b2e52a6f2f746"></span><em class="property">const</em> char *<code class="sig-name descname">lv_ta_get_accepted_chars</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_ta_get_accepted_charsP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a list of accepted characters. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>list of accented characters. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to Text Area </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_ta_get_max_lengthP8lv_obj_t">
+<span id="_CPPv320lv_ta_get_max_lengthP8lv_obj_t"></span><span id="_CPPv220lv_ta_get_max_lengthP8lv_obj_t"></span><span id="lv_ta_get_max_length__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1a35b8e7f12757af2bba97bfdf39dfd2f0"></span>uint16_t <code class="sig-name descname">lv_ta_get_max_length</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_ta_get_max_lengthP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set max length of a Text Area. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the maximal number of characters to be add </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to Text Area </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417lv_ta_get_sb_modePK8lv_obj_t">
+<span id="_CPPv317lv_ta_get_sb_modePK8lv_obj_t"></span><span id="_CPPv217lv_ta_get_sb_modePK8lv_obj_t"></span><span id="lv_ta_get_sb_mode__lv_obj_tCP"></span><span class="target" id="lv__ta_8h_1a16de629f75d4139bb797c1e356c68b35"></span><em class="property">static</em> <a class="reference internal" href="page.html#_CPPv412lv_sb_mode_t" title="lv_sb_mode_t">lv_sb_mode_t</a> <code class="sig-name descname">lv_ta_get_sb_mode</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_ta_get_sb_modePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the scroll bar mode of a text area <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>scrollbar mode from ‘lv_page_sb_mode_t’ enum </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv428lv_ta_get_scroll_propagationP8lv_obj_t">
+<span id="_CPPv328lv_ta_get_scroll_propagationP8lv_obj_t"></span><span id="_CPPv228lv_ta_get_scroll_propagationP8lv_obj_t"></span><span id="lv_ta_get_scroll_propagation__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1a452b7058f98164d10148cea3aed96249"></span><em class="property">static</em> bool <code class="sig-name descname">lv_ta_get_scroll_propagation</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428lv_ta_get_scroll_propagationP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the scroll propagation property <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true or false </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a Text area </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_ta_get_edge_flashP8lv_obj_t">
+<span id="_CPPv320lv_ta_get_edge_flashP8lv_obj_t"></span><span id="_CPPv220lv_ta_get_edge_flashP8lv_obj_t"></span><span id="lv_ta_get_edge_flash__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1a0eb88454984a3ecf90f0b7ec3864c119"></span><em class="property">static</em> bool <code class="sig-name descname">lv_ta_get_edge_flash</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_ta_get_edge_flashP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the scroll propagation property <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true or false </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a Text area </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415lv_ta_get_stylePK8lv_obj_t13lv_ta_style_t">
+<span id="_CPPv315lv_ta_get_stylePK8lv_obj_t13lv_ta_style_t"></span><span id="_CPPv215lv_ta_get_stylePK8lv_obj_t13lv_ta_style_t"></span><span id="lv_ta_get_style__lv_obj_tCP.lv_ta_style_t"></span><span class="target" id="lv__ta_8h_1a5562e9ec915d85df58f98bc5fce0d533"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">lv_ta_get_style</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em>, <a class="reference internal" href="#_CPPv413lv_ta_style_t" title="lv_ta_style_t">lv_ta_style_t</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_ta_get_stylePK8lv_obj_t13lv_ta_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a style of a text area <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>style pointer to a style </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: which style should be get </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422lv_ta_text_is_selectedPK8lv_obj_t">
+<span id="_CPPv322lv_ta_text_is_selectedPK8lv_obj_t"></span><span id="_CPPv222lv_ta_text_is_selectedPK8lv_obj_t"></span><span id="lv_ta_text_is_selected__lv_obj_tCP"></span><span class="target" id="lv__ta_8h_1aaaa4366221122cb63361bb0abe97d72b"></span>bool <code class="sig-name descname">lv_ta_text_is_selected</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lv_ta_text_is_selectedPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Find whether text is selected or not. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>whether text is selected or not </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: Text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_ta_get_text_sel_enP8lv_obj_t">
+<span id="_CPPv321lv_ta_get_text_sel_enP8lv_obj_t"></span><span id="_CPPv221lv_ta_get_text_sel_enP8lv_obj_t"></span><span id="lv_ta_get_text_sel_en__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1a744be7288e6b0158fb093b152ff0e15b"></span>bool <code class="sig-name descname">lv_ta_get_text_sel_en</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_ta_get_text_sel_enP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Find whether selection mode is enabled. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: selection mode is enabled, false: disabled </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423lv_ta_get_pwd_show_timeP8lv_obj_t">
+<span id="_CPPv323lv_ta_get_pwd_show_timeP8lv_obj_t"></span><span id="_CPPv223lv_ta_get_pwd_show_timeP8lv_obj_t"></span><span id="lv_ta_get_pwd_show_time__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1a42b0eeb1b56c8615e21309d242632a04"></span>uint16_t <code class="sig-name descname">lv_ta_get_pwd_show_time</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_ta_get_pwd_show_timeP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set how long show the password before changing it to ‘*’ <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>show time in milliseconds. 0: hide immediately. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to Text area </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427lv_ta_get_cursor_blink_timeP8lv_obj_t">
+<span id="_CPPv327lv_ta_get_cursor_blink_timeP8lv_obj_t"></span><span id="_CPPv227lv_ta_get_cursor_blink_timeP8lv_obj_t"></span><span id="lv_ta_get_cursor_blink_time__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1a61959065cfb4b095cb0009ef285f1fbe"></span>uint16_t <code class="sig-name descname">lv_ta_get_cursor_blink_time</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lv_ta_get_cursor_blink_timeP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set cursor blink animation time <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>time blink period. 0: disable blinking </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to Text area </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_ta_clear_selectionP8lv_obj_t">
+<span id="_CPPv321lv_ta_clear_selectionP8lv_obj_t"></span><span id="_CPPv221lv_ta_clear_selectionP8lv_obj_t"></span><span id="lv_ta_clear_selection__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1afba95b79b1ee12978c9025c23f8fc4f2"></span>void <code class="sig-name descname">lv_ta_clear_selection</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_ta_clear_selectionP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clear the selection on the text area. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: Text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418lv_ta_cursor_rightP8lv_obj_t">
+<span id="_CPPv318lv_ta_cursor_rightP8lv_obj_t"></span><span id="_CPPv218lv_ta_cursor_rightP8lv_obj_t"></span><span id="lv_ta_cursor_right__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1a6c0826435e515dc92d18fa8538687eaf"></span>void <code class="sig-name descname">lv_ta_cursor_right</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_ta_cursor_rightP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move the cursor one character right <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417lv_ta_cursor_leftP8lv_obj_t">
+<span id="_CPPv317lv_ta_cursor_leftP8lv_obj_t"></span><span id="_CPPv217lv_ta_cursor_leftP8lv_obj_t"></span><span id="lv_ta_cursor_left__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1a7c9c9140c2bf431ea1275a4887843043"></span>void <code class="sig-name descname">lv_ta_cursor_left</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_ta_cursor_leftP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move the cursor one character left <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417lv_ta_cursor_downP8lv_obj_t">
+<span id="_CPPv317lv_ta_cursor_downP8lv_obj_t"></span><span id="_CPPv217lv_ta_cursor_downP8lv_obj_t"></span><span id="lv_ta_cursor_down__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1ab32b16be8fc28545369757282e01fdec"></span>void <code class="sig-name descname">lv_ta_cursor_down</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_ta_cursor_downP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move the cursor one line down <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415lv_ta_cursor_upP8lv_obj_t">
+<span id="_CPPv315lv_ta_cursor_upP8lv_obj_t"></span><span id="_CPPv215lv_ta_cursor_upP8lv_obj_t"></span><span id="lv_ta_cursor_up__lv_obj_tP"></span><span class="target" id="lv__ta_8h_1a8f4072542aeb8e1e4fc5245c954147c6"></span>void <code class="sig-name descname">lv_ta_cursor_up</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ta</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_ta_cursor_upP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Move the cursor one line up <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ta</span></code>: pointer to a text area object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv411lv_ta_ext_t">
+<span id="_CPPv311lv_ta_ext_t"></span><span id="_CPPv211lv_ta_ext_t"></span><span id="lv_ta_ext_t"></span><span class="target" id="structlv__ta__ext__t"></span><em class="property">struct </em><code class="sig-name descname">lv_ta_ext_t</code><a class="headerlink" href="#_CPPv411lv_ta_ext_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t4pageE">
+<span id="_CPPv3N11lv_ta_ext_t4pageE"></span><span id="_CPPv2N11lv_ta_ext_t4pageE"></span><span id="lv_ta_ext_t::page__lv_page_ext_t"></span><span class="target" id="structlv__ta__ext__t_1a887ed709b977168cf10f6edc710251a8"></span><a class="reference internal" href="page.html#_CPPv413lv_page_ext_t" title="lv_page_ext_t">lv_page_ext_t</a> <code class="sig-name descname">page</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t4pageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t5labelE">
+<span id="_CPPv3N11lv_ta_ext_t5labelE"></span><span id="_CPPv2N11lv_ta_ext_t5labelE"></span><span id="lv_ta_ext_t::label__lv_obj_tP"></span><span class="target" id="structlv__ta__ext__t_1a8e3a8f4c6f0fbc4a54987a5956a4170a"></span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<code class="sig-name descname">label</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t5labelE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t11placeholderE">
+<span id="_CPPv3N11lv_ta_ext_t11placeholderE"></span><span id="_CPPv2N11lv_ta_ext_t11placeholderE"></span><span id="lv_ta_ext_t::placeholder__lv_obj_tP"></span><span class="target" id="structlv__ta__ext__t_1a7b10b99a797c1e64fff30bf87da352e5"></span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<code class="sig-name descname">placeholder</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t11placeholderE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t7pwd_tmpE">
+<span id="_CPPv3N11lv_ta_ext_t7pwd_tmpE"></span><span id="_CPPv2N11lv_ta_ext_t7pwd_tmpE"></span><span id="lv_ta_ext_t::pwd_tmp__cP"></span><span class="target" id="structlv__ta__ext__t_1a212aa760460ff97c6125a6f5608fdf6f"></span>char *<code class="sig-name descname">pwd_tmp</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t7pwd_tmpE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t14accapted_charsE">
+<span id="_CPPv3N11lv_ta_ext_t14accapted_charsE"></span><span id="_CPPv2N11lv_ta_ext_t14accapted_charsE"></span><span id="lv_ta_ext_t::accapted_chars__cCP"></span><span class="target" id="structlv__ta__ext__t_1a26c6b2e0a78aac365e073bef7e50b9f1"></span><em class="property">const</em> char *<code class="sig-name descname">accapted_chars</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t14accapted_charsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t10max_lengthE">
+<span id="_CPPv3N11lv_ta_ext_t10max_lengthE"></span><span id="_CPPv2N11lv_ta_ext_t10max_lengthE"></span><span id="lv_ta_ext_t::max_length__uint16_t"></span><span class="target" id="structlv__ta__ext__t_1af765cb865f2b71300ba6ad5f82c4013b"></span>uint16_t <code class="sig-name descname">max_length</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t10max_lengthE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t13pwd_show_timeE">
+<span id="_CPPv3N11lv_ta_ext_t13pwd_show_timeE"></span><span id="_CPPv2N11lv_ta_ext_t13pwd_show_timeE"></span><span id="lv_ta_ext_t::pwd_show_time__uint16_t"></span><span class="target" id="structlv__ta__ext__t_1aee0660f1d5758b8644fdc0bac24220e0"></span>uint16_t <code class="sig-name descname">pwd_show_time</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t13pwd_show_timeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t5styleE">
+<span id="_CPPv3N11lv_ta_ext_t5styleE"></span><span id="_CPPv2N11lv_ta_ext_t5styleE"></span><span id="lv_ta_ext_t::style__lv_style_tCP"></span><span class="target" id="structlv__ta__ext__t_1a95085425921f17997a1aeb0533472343"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">style</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t5styleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t7valid_xE">
+<span id="_CPPv3N11lv_ta_ext_t7valid_xE"></span><span id="_CPPv2N11lv_ta_ext_t7valid_xE"></span><span id="lv_ta_ext_t::valid_x__lv_coord_t"></span><span class="target" id="structlv__ta__ext__t_1a64954ab445698bacb53c1fd993fe97fb"></span>lv_coord_t <code class="sig-name descname">valid_x</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t7valid_xE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t3posE">
+<span id="_CPPv3N11lv_ta_ext_t3posE"></span><span id="_CPPv2N11lv_ta_ext_t3posE"></span><span id="lv_ta_ext_t::pos__uint16_t"></span><span class="target" id="structlv__ta__ext__t_1aed8a78ed3b479243010b411d7fb27983"></span>uint16_t <code class="sig-name descname">pos</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t3posE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t10blink_timeE">
+<span id="_CPPv3N11lv_ta_ext_t10blink_timeE"></span><span id="_CPPv2N11lv_ta_ext_t10blink_timeE"></span><span id="lv_ta_ext_t::blink_time__uint16_t"></span><span class="target" id="structlv__ta__ext__t_1a52e1e39eba2096b0802493a5706b93d7"></span>uint16_t <code class="sig-name descname">blink_time</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t10blink_timeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t4areaE">
+<span id="_CPPv3N11lv_ta_ext_t4areaE"></span><span id="_CPPv2N11lv_ta_ext_t4areaE"></span><span id="lv_ta_ext_t::area__lv_area_t"></span><span class="target" id="structlv__ta__ext__t_1a96854514f789f5565ee77a50c535c261"></span>lv_area_t <code class="sig-name descname">area</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t4areaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t12txt_byte_posE">
+<span id="_CPPv3N11lv_ta_ext_t12txt_byte_posE"></span><span id="_CPPv2N11lv_ta_ext_t12txt_byte_posE"></span><span id="lv_ta_ext_t::txt_byte_pos__uint16_t"></span><span class="target" id="structlv__ta__ext__t_1a414226006f21f66e9ce9198488fcb3b4"></span>uint16_t <code class="sig-name descname">txt_byte_pos</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t12txt_byte_posE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t4typeE">
+<span id="_CPPv3N11lv_ta_ext_t4typeE"></span><span id="_CPPv2N11lv_ta_ext_t4typeE"></span><span id="lv_ta_ext_t::type__lv_cursor_type_t"></span><span class="target" id="structlv__ta__ext__t_1ac602ba2829fbc99a607e5eca9522f644"></span><a class="reference internal" href="#_CPPv416lv_cursor_type_t" title="lv_cursor_type_t">lv_cursor_type_t</a> <code class="sig-name descname">type</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t4typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t5stateE">
+<span id="_CPPv3N11lv_ta_ext_t5stateE"></span><span id="_CPPv2N11lv_ta_ext_t5stateE"></span><span id="lv_ta_ext_t::state__uint8_t"></span><span class="target" id="structlv__ta__ext__t_1a5c68c863d1b39094af2c2de1b3377a78"></span>uint8_t <code class="sig-name descname">state</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t5stateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t9click_posE">
+<span id="_CPPv3N11lv_ta_ext_t9click_posE"></span><span id="_CPPv2N11lv_ta_ext_t9click_posE"></span><span id="lv_ta_ext_t::click_pos__uint8_t"></span><span class="target" id="structlv__ta__ext__t_1a771b3f227815535e4166b78f09759390"></span>uint8_t <code class="sig-name descname">click_pos</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t9click_posE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t6cursorE">
+<span id="_CPPv3N11lv_ta_ext_t6cursorE"></span><span id="_CPPv2N11lv_ta_ext_t6cursorE"></span><span class="target" id="structlv__ta__ext__t_1a9f0fa13d9ef07234fea575b9cea1196c"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411lv_ta_ext_t" title="lv_ta_ext_t">lv_ta_ext_t</a>::<strong>[anonymous]</strong> <code class="sig-name descname">cursor</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t6cursorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t13tmp_sel_startE">
+<span id="_CPPv3N11lv_ta_ext_t13tmp_sel_startE"></span><span id="_CPPv2N11lv_ta_ext_t13tmp_sel_startE"></span><span id="lv_ta_ext_t::tmp_sel_start__uint16_t"></span><span class="target" id="structlv__ta__ext__t_1a394510e5617282790838b74e611b2a56"></span>uint16_t <code class="sig-name descname">tmp_sel_start</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t13tmp_sel_startE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t11tmp_sel_endE">
+<span id="_CPPv3N11lv_ta_ext_t11tmp_sel_endE"></span><span id="_CPPv2N11lv_ta_ext_t11tmp_sel_endE"></span><span id="lv_ta_ext_t::tmp_sel_end__uint16_t"></span><span class="target" id="structlv__ta__ext__t_1af9076376c652cf38c8a99d42960b56f5"></span>uint16_t <code class="sig-name descname">tmp_sel_end</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t11tmp_sel_endE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t16text_sel_in_progE">
+<span id="_CPPv3N11lv_ta_ext_t16text_sel_in_progE"></span><span id="_CPPv2N11lv_ta_ext_t16text_sel_in_progE"></span><span id="lv_ta_ext_t::text_sel_in_prog__uint8_t"></span><span class="target" id="structlv__ta__ext__t_1a7b181134736fa1dffbfe29a391fe5ce4"></span>uint8_t <code class="sig-name descname">text_sel_in_prog</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t16text_sel_in_progE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t11text_sel_enE">
+<span id="_CPPv3N11lv_ta_ext_t11text_sel_enE"></span><span id="_CPPv2N11lv_ta_ext_t11text_sel_enE"></span><span id="lv_ta_ext_t::text_sel_en__uint8_t"></span><span class="target" id="structlv__ta__ext__t_1aed04ed23240ea37ce6e39d3593f8de7d"></span>uint8_t <code class="sig-name descname">text_sel_en</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t11text_sel_enE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t8pwd_modeE">
+<span id="_CPPv3N11lv_ta_ext_t8pwd_modeE"></span><span id="_CPPv2N11lv_ta_ext_t8pwd_modeE"></span><span id="lv_ta_ext_t::pwd_mode__uint8_t"></span><span class="target" id="structlv__ta__ext__t_1a59e355f5fec569f0a64c7f0202e7d014"></span>uint8_t <code class="sig-name descname">pwd_mode</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t8pwd_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11lv_ta_ext_t8one_lineE">
+<span id="_CPPv3N11lv_ta_ext_t8one_lineE"></span><span id="_CPPv2N11lv_ta_ext_t8one_lineE"></span><span id="lv_ta_ext_t::one_line__uint8_t"></span><span class="target" id="structlv__ta__ext__t_1a8165940eedd278eac796930f66a3e076"></span>uint8_t <code class="sig-name descname">one_line</code><a class="headerlink" href="#_CPPv4N11lv_ta_ext_t8one_lineE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tileview.html" class="btn btn-neutral float-right" title="Tile view (lv_tileview)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tabview.html" class="btn btn-neutral float-left" title="Tabview (lv_tabview)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Gabor Kiss-Vamosi
+      <span class="lastupdated">
+        Last updated on Jul 12, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

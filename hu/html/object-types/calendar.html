@@ -1,0 +1,1642 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Calendar (lv_calendar) &mdash; LittlevGL 6.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Canvas (lv_canvas)" href="canvas.html" />
+    <link rel="prev" title="Button matrix (lv_btnm)" href="btnm.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78811084-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78811084-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/white_white_lvgl_full_logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/live-demo.html">Élő demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#what-is-micropython">What is Micropython?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-highlights">Micropython highlights</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#so-how-does-it-look-like">So how does it look like?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#a-simple-example">A simple example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#how-can-i-use-it">How can I use it?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#online-simulator">Online Simulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#pc-simulator">PC Simulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#the-real-thing">The real thing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#where-can-i-find-more-information">Where can I find more information?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#select-an-ide">Select an IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#set-up-eclipse-cdt">Set-up Eclipse CDT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-eclipse-cdt">Install Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-sdl-2">Install SDL 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#pre-configured-project">Pre-configured project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#add-the-pre-configured-project-to-eclipse-cdt">Add the pre-configured project to Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#compile-and-run">Compile and Run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../porting/index.html">Porting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">System overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Set-up a project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#get-the-library">Get the library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#initialization">Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Input device interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-of-input-devices">Types of input devices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#other-features">Other features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/tick.html">Tick interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/tick.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/task-handler.html">Task Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sleep.html">Sleep management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/os.html">Operating system and interrupts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/os.html#tasks-and-threads">Tasks and threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/os.html#interrupts">Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/log.html">Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#log-level">Log level</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#logging-with-printf">Logging with printf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#custom-log-function">Custom log function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#add-logs">Add logs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/object.html">Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#object-attributes">Object attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#basic-attributes">Basic attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#specific-attributes">Specific attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#object-s-working-mechanisms">Object’s working mechanisms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#parent-child-structure">Parent-child structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#moving-together">Moving together</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#visibility-only-on-the-parent">Visibility only on the parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#create-delete-objects">Create - delete objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#screen-the-most-basic-parent">Screen – the most basic parent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#order-of-creation">Order of creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layer">Top and sys layer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#event-types">Event types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#generic-events">Generic events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#special-events">Special events</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#custom-data">Custom data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#send-events-manually">Send events manually</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/style.html">Styles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#inherit-styles">Inherit styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-properties">Style properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#common-properties">Common properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#text-style-properties">Text style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#image-style-properties">Image style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#line-style-properties">Line style properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#built-in-styles">Built-in styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#create-new-styles">Create new styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-animations">Style animations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-example">Style example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#themes">Themes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#live-update">Live update</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#pointers">Pointers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#keypad-and-encoder">Keypad and encoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#groups">Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#live-demo">Live demo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#input-device">Input device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#id1">Groups</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/display.html">Displays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#using-only-one-display">Using only one display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#mirror-display">Mirror display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#split-image">Split image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#screens">Screens</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#opaque-screen">Opaque screen</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#features-of-displays">Features of displays</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#inactivity">Inactivity</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#colors">Colors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#convert-color">Convert color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#swap-16-colors">Swap 16 colors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#create-and-mix-colors">Create and mix colors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#opacity">Opacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#built-in-colors">Built-in colors</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#display">Display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#id1">Colors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/font.html">Fonts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#unicode-support">Unicode support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#built-in-fonts">Built-in fonts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-font">Add new font</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-symbols">Add new symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-a-new-font-engine">Add a new font engine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/image.html">Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#store-images">Store images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#color-formats">Color formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#add-and-use-images">Add and use images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#online-converter">Online converter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#manually-create-an-image">Manually create an image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#use-images">Use images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#image-decoder">Image decoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#custom-image-formats">Custom image formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#register-an-image-decoder">Register an image decoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#manually-use-an-image-decoder">Manually use an image decoder</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#image-caching">Image caching</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#cache-size">Cache size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#value-of-images">Value of images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#memory-usage">Memory usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#clean-the-cache">Clean the cache</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/file-system.html">File system</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#add-a-driver">Add a driver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/file-system.html#use-drivers-for-images">Use drivers for images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/animation.html">Animations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#create-an-animation">Create an animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#animation-path">Animation path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#speed-vs-time">Speed vs time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#delete-animations">Delete animations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/animation.html#input-device">Input device</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/task.html">Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#create-a-task">Create a task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#ready-and-reset">Ready and Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#set-parameters">Set parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#one-shot-tasks">One-shot tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#measure-idle-time">Measure idle time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#asynchronous-calls">Asynchronous calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/drawing.html">Drawing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#buffering-types">Buffering types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#mechanism-of-screen-refreshing">Mechanism of screen refreshing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Object types (Widgets)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="obj.html">Base object (lv_obj)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#coordinates">Coordinates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#parents-and-children">Parents and children</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#screens">Screens</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#layers">Layers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#style">Style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#events">Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#attributes">Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#opa-scale">Opa scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#protect">Protect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#groups">Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#extended-click-area">Extended click area</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#id1">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="arc.html">Arc (lv_arc)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#angles">Angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bar.html">Bar (lv_bar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#value-and-range">Value and range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#symmetrical">Symmetrical</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="btn.html">Button (lv_btn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#states">States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#toggle">Toggle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#layout-and-fit">Layout and Fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#ink-effect">Ink effect</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="btnm.html">Button matrix (lv_btnm)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#button-s-text">Button’s text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#control-buttons">Control buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#one-toggle">One toggle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#recolor">Recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Calendar (lv_calendar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#current-date">Current date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shown-date">Shown date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#highlighted-days">Highlighted days</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#name-of-the-days">Name of the days</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#name-of-the-months">Name of the months</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="canvas.html">Canvas (lv_canvas)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#buffer">Buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#palette">Palette</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#drawing">Drawing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#rotate">Rotate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Check box (lv_cb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#text">Text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#check-uncheck">Check/Uncheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#inactive">Inactive</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chart.html">Chart (lv_chart)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#data-series">Data series</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#series-type">Series’ type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#modify-the-data">Modify the data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#update-modes">Update modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#number-of-points">Number of points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#vertical-range">Vertical range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#division-lines">Division lines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#series-appearance">Series’ appearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#tick-marks-and-labels">Tick marks and labels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cont.html">Container (lv_cont)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#layout">Layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#auto-fit">Auto fit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ddlist.html">Drop down list (lv_ddlist)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#set-options">Set options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#get-selected-option">Get selected option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#align-the-options">Align the options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#height-and-width">Height and width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#animation-time">Animation time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#decoration-arrow">Decoration arrow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#stay-open">Stay open</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gauge.html">Gauge (lv_gauge)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#scale">Scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#needles">Needles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#range">Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#critical-value">Critical value</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="img.html">Image (lv_img)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="img.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="img.html#image-source">Image source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#label-as-an-image">Label as an image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#transparency">Transparency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#palette-and-alpha-index">Palette and Alpha index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#recolor">Recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#auto-size">Auto-size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#mosaic">Mosaic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#offset">Offset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="img.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imgbtn.html">Image button (lv_imgbtn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#image-sources">Image sources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#states">States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#toggle">Toggle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kb.html">Keyboard (lv_kb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#modes">Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#assign-text-area">Assign Text area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#new-key-map">New key map</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="label.html">Label (lv_label)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="label.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="label.html#set-text">Set text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#line-break">Line break</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#long-modes">Long modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#text-align">Text align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#draw-background">Draw background</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#text-recolor">Text recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#very-long-texts">Very long texts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#symbols">Symbols</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="label.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="led.html">LED (lv_led)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="led.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="led.html#brightness">Brightness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="led.html#toggle">Toggle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="led.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="led.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">Line (lv_line)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="line.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="line.html#set-points">Set points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#auto-size">Auto-size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#invert-y">Invert y</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="line.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list.html">List (lv_list)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="list.html#add-buttons">Add buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#delete-buttons">Delete buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#manual-navigation">Manual navigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#edge-flash">Edge flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#scroll-propagation">Scroll propagation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="list.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lmeter.html">Line meter (lv_lmeter)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#set-value">Set value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#range-and-angles">Range and Angles</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mbox.html">Message box (lv_mbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#set-text">Set text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#add-buttons">Add buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#auto-close">Auto-close</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="page.html">Page (lv_page)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="page.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="page.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#glue-object">Glue object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#focus-object">Focus object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#manual-navigation">Manual navigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#edge-flash">Edge flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#scroll-propagation">Scroll propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#scrollable-api">Scrollable API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="page.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="preload.html">Preloader (lv_preload)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#arc-length">Arc length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#spinning-speed">Spinning speed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#spin-types">Spin types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#spin-direction">Spin direction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="roller.html">Roller (lv_roller)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#set-options">Set options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#get-selected-option">Get selected option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#align-the-options">Align the options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#height-and-width">Height and width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="slider.html">Slider (lv_slider)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#value-and-range">Value and range</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#knob-placement">Knob placement</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="spinbox.html">Spinbox (lv_spinbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#set-format">Set format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#value-and-ranges">Value and ranges</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#id1">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sw.html">Switch (lv_sw)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#change-state">Change state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">Table (lv_table)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="table.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="table.html#rows-and-columns">Rows and Columns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#width-and-height">Width and Height</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#set-cell-value">Set cell value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#align">Align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#cell-type">Cell type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#merge-cells">Merge cells</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#crop-text">Crop text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#scroll">Scroll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="table.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tabview.html">Tabview (lv_tabview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#adding-tab">Adding tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#change-tab">Change tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#tab-button-s-position">Tab button’s position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#hide-the-tabs">Hide the tabs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ta.html">Text area (lv_ta)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#add-text">Add text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#placeholder">Placeholder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#delete-character">Delete character</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#move-the-cursor">Move the cursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#cursor-types">Cursor types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#one-line-mode">One line mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#password-mode">Password mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#text-align">Text align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#accepted-characters">Accepted characters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#max-text-length">Max text length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#very-long-texts">Very long texts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#select-text">Select text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#scroll-propagation">Scroll propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#edge-flash">Edge flash</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tileview.html">Tile view (lv_tileview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#valid-positions">Valid positions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#add-element">Add element</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#set-tile">Set tile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#animation-time">Animation time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#edge-flash">Edge flash</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="win.html">Window (lv_win)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="win.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="win.html#title">Title</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#control-buttons">Control buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#manual-scroll-and-focus">Manual scroll and focus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#layout">Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="win.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LittlevGL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Object types (Widgets)</a> &raquo;</li>
+        
+      <li>Calendar (lv_calendar)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/object-types/calendar.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="calendar-lv-calendar">
+<h1>Calendar (lv_calendar)<a class="headerlink" href="#calendar-lv-calendar" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Calendar object is a classic calendar which can:</p>
+<ul class="simple">
+<li><p>highlight the current day and week</p></li>
+<li><p>highlight any user-defined dates</p></li>
+<li><p>display the name of the days</p></li>
+<li><p>go the next/previous month by button click</p></li>
+<li><p>highlight the clicked day</p></li>
+</ul>
+<p>The set and get dates in the calendar the <code class="docutils literal notranslate"><span class="pre">lv_calendar_date_t</span></code> type is used which is a structure with <code class="docutils literal notranslate"><span class="pre">year</span></code>, <code class="docutils literal notranslate"><span class="pre">month</span></code> and <code class="docutils literal notranslate"><span class="pre">day</span></code> fields.</p>
+<div class="section" id="current-date">
+<h3>Current date<a class="headerlink" href="#current-date" title="Permalink to this headline">¶</a></h3>
+<p>To set the current date (today) use the <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_today_date(calendar,</span> <span class="pre">&amp;today_date)</span></code> function.</p>
+</div>
+<div class="section" id="shown-date">
+<h3>Shown date<a class="headerlink" href="#shown-date" title="Permalink to this headline">¶</a></h3>
+<p>To set the shown date use <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_shown_date(calendar,</span> <span class="pre">&amp;shown_date)</span></code>;</p>
+</div>
+<div class="section" id="highlighted-days">
+<h3>Highlighted days<a class="headerlink" href="#highlighted-days" title="Permalink to this headline">¶</a></h3>
+<p>The list of highlighted dates should be stored in a <code class="docutils literal notranslate"><span class="pre">lv_calendar_date_t</span></code> array a loaded by <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_highlighted_dates(calendar,</span> <span class="pre">&amp;highlighted_dates)</span></code>.Only the arrays pointer will be saved so the array should be a static or global variable.</p>
+</div>
+<div class="section" id="name-of-the-days">
+<h3>Name of the days<a class="headerlink" href="#name-of-the-days" title="Permalink to this headline">¶</a></h3>
+<p>The name of the days can be adjusted with <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_day_names(calendar,</span> <span class="pre">day_names)</span></code> where <code class="docutils literal notranslate"><span class="pre">day_names</span></code> looks like <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*</span> <span class="pre">day_names[7]</span> <span class="pre">=</span> <span class="pre">{&quot;Su&quot;,</span> <span class="pre">&quot;Mo&quot;,</span> <span class="pre">...};</span></code></p>
+</div>
+<div class="section" id="name-of-the-months">
+<h3>Name of the months<a class="headerlink" href="#name-of-the-months" title="Permalink to this headline">¶</a></h3>
+<p>Similarly to day names the name of the month can be set with <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_month_names(calendar,</span> <span class="pre">month_names_array)</span></code>.</p>
+</div>
+</div>
+<div class="section" id="styles">
+<h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
+<p>You can set the styles with <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_style(btn,</span> <span class="pre">LV_CALENDAR_STYLE_...,</span> <span class="pre">&amp;style)</span></code>.</p>
+<ul class="simple">
+<li><p><strong>LV_CALENDAR_STYLE_BG</strong> Style of the background using the <code class="docutils literal notranslate"><span class="pre">body</span></code> properties and the style of the date numbers using the <code class="docutils literal notranslate"><span class="pre">text</span></code> properties. <code class="docutils literal notranslate"><span class="pre">body.padding.left/rigth/bottom</span></code> padding will be added on the edges. around the date numbers.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_HEADER</strong> Style of the header where the current year and month is displayed. <code class="docutils literal notranslate"><span class="pre">body</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_HEADER_PR</strong> Pressed header style, used when the next/prev. month button is being pressed. <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used by the arrows.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_DAY_NAMES</strong> Style of the day names. <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used by the day texts and <code class="docutils literal notranslate"><span class="pre">body.padding.top</span></code> determines the space above the day names.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS</strong> <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used to adjust the style of the highlights days</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_INACTIVE_DAYS</strong> <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used to adjust the style of the visible days of previous/next month.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_WEEK_BOX</strong> <code class="docutils literal notranslate"><span class="pre">body</span></code> properties are used to set the style of the week box</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_TODAY_BOX</strong> <code class="docutils literal notranslate"><span class="pre">body</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used to set the style of the today box</p></li>
+</ul>
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<p>Besides the <a class="reference external" href="/overview/event.html#generic-events">Generic events</a> the following <a class="reference external" href="/overview/event.html#special-events">Special events</a> are sent by the calendars:
+<strong>LV_EVENT_VALUE_CHANGED</strong> is sent when the current month has changed.</p>
+<p>In <em>Input device related</em> events <code class="docutils literal notranslate"><span class="pre">lv_calendar_get_pressed_date(calendar)</span></code> tells which day is currently being pressed or return <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if no date is pressed.</p>
+</div>
+<div class="section" id="keys">
+<h2>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h2>
+<p>No <em>Keys</em> are processed by the object type.</p>
+<p>Learn more about <a class="reference internal" href="../overview/indev.html"><span class="doc">Keys</span></a>.</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="c">
+<h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
+<img alt="Simple Calendar example in LittlevGL" src="../_images/lv_ex_calendar_1.gif" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_CLICKED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lv_calendar_date_t</span> <span class="o">*</span> <span class="n">date</span> <span class="o">=</span> <span class="n">lv_calendar_get_pressed_date</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">lv_calendar_set_today_date</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">date</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">lv_ex_calendar_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lv_obj_t</span>  <span class="o">*</span> <span class="n">calendar</span> <span class="o">=</span> <span class="n">lv_calendar_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">230</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+
+    <span class="cm">/*Set the today*/</span>
+    <span class="n">lv_calendar_date_t</span> <span class="n">today</span><span class="p">;</span>
+    <span class="n">today</span><span class="p">.</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
+    <span class="n">today</span><span class="p">.</span><span class="n">month</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">today</span><span class="p">.</span><span class="n">day</span> <span class="o">=</span> <span class="mi">23</span><span class="p">;</span>
+
+    <span class="n">lv_calendar_set_today_date</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">today</span><span class="p">);</span>
+    <span class="n">lv_calendar_set_showed_date</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">today</span><span class="p">);</span>
+
+    <span class="cm">/*Highlight some days*/</span>
+    <span class="k">static</span> <span class="n">lv_calendar_date_t</span> <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>       <span class="cm">/*Only it&#39;s pointer will be saved so should be static*/</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">month</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">day</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">month</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">day</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">month</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+    <span class="n">highlihted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">day</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>
+
+    <span class="n">lv_calendar_set_highlighted_dates</span><span class="p">(</span><span class="n">calendar</span><span class="p">,</span> <span class="n">highlihted_days</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="micropython">
+<h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
+<p>No examples yet.</p>
+</div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv419lv_calendar_style_t">
+<span id="_CPPv319lv_calendar_style_t"></span><span id="_CPPv219lv_calendar_style_t"></span><span id="lv_calendar_style_t"></span><span class="target" id="lv__calendar_8h_1a672b44c2b0e681920307d433bc9d6a35"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_calendar_style_t</code><a class="headerlink" href="#_CPPv419lv_calendar_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv4Ut7_anon_42">
+<span id="_CPPv3Ut7_anon_42"></span><span class="target" id="lv__calendar_8h_1a394b3903fbf00ba2b6243f60689a5a5f"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_42" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Calendar styles </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv420LV_CALENDAR_STYLE_BG">
+<span id="_CPPv320LV_CALENDAR_STYLE_BG"></span><span id="_CPPv220LV_CALENDAR_STYLE_BG"></span><span class="target" id="lv__calendar_8h_1a394b3903fbf00ba2b6243f60689a5a5fa076be275acfb22954b6d01e2572bbef6"></span><code class="sig-name descname">LV_CALENDAR_STYLE_BG</code><a class="headerlink" href="#_CPPv420LV_CALENDAR_STYLE_BG" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Background and “normal” date numbers style </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv424LV_CALENDAR_STYLE_HEADER">
+<span id="_CPPv324LV_CALENDAR_STYLE_HEADER"></span><span id="_CPPv224LV_CALENDAR_STYLE_HEADER"></span><span class="target" id="lv__calendar_8h_1a394b3903fbf00ba2b6243f60689a5a5fa6665ada89be70cc66965e422526c55d2"></span><code class="sig-name descname">LV_CALENDAR_STYLE_HEADER</code><a class="headerlink" href="#_CPPv424LV_CALENDAR_STYLE_HEADER" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv427LV_CALENDAR_STYLE_HEADER_PR">
+<span id="_CPPv327LV_CALENDAR_STYLE_HEADER_PR"></span><span id="_CPPv227LV_CALENDAR_STYLE_HEADER_PR"></span><span class="target" id="lv__calendar_8h_1a394b3903fbf00ba2b6243f60689a5a5facce40d8dda85524af9ce95f1176a6b82"></span><code class="sig-name descname">LV_CALENDAR_STYLE_HEADER_PR</code><a class="headerlink" href="#_CPPv427LV_CALENDAR_STYLE_HEADER_PR" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Calendar header style </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv427LV_CALENDAR_STYLE_DAY_NAMES">
+<span id="_CPPv327LV_CALENDAR_STYLE_DAY_NAMES"></span><span id="_CPPv227LV_CALENDAR_STYLE_DAY_NAMES"></span><span class="target" id="lv__calendar_8h_1a394b3903fbf00ba2b6243f60689a5a5fa0a2d90258936d790969bb26791f32b90"></span><code class="sig-name descname">LV_CALENDAR_STYLE_DAY_NAMES</code><a class="headerlink" href="#_CPPv427LV_CALENDAR_STYLE_DAY_NAMES" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Calendar header style (when pressed) </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv434LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS">
+<span id="_CPPv334LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS"></span><span id="_CPPv234LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS"></span><span class="target" id="lv__calendar_8h_1a394b3903fbf00ba2b6243f60689a5a5fa8f6bb2d89b0c7634c9a1d2870477c810"></span><code class="sig-name descname">LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS</code><a class="headerlink" href="#_CPPv434LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Day name style </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv431LV_CALENDAR_STYLE_INACTIVE_DAYS">
+<span id="_CPPv331LV_CALENDAR_STYLE_INACTIVE_DAYS"></span><span id="_CPPv231LV_CALENDAR_STYLE_INACTIVE_DAYS"></span><span class="target" id="lv__calendar_8h_1a394b3903fbf00ba2b6243f60689a5a5fac2cd24b423b99e8b8b60769d74e7caec"></span><code class="sig-name descname">LV_CALENDAR_STYLE_INACTIVE_DAYS</code><a class="headerlink" href="#_CPPv431LV_CALENDAR_STYLE_INACTIVE_DAYS" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Highlighted day style </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv426LV_CALENDAR_STYLE_WEEK_BOX">
+<span id="_CPPv326LV_CALENDAR_STYLE_WEEK_BOX"></span><span id="_CPPv226LV_CALENDAR_STYLE_WEEK_BOX"></span><span class="target" id="lv__calendar_8h_1a394b3903fbf00ba2b6243f60689a5a5fa942672b3c485210ab62eeeabcd58f805"></span><code class="sig-name descname">LV_CALENDAR_STYLE_WEEK_BOX</code><a class="headerlink" href="#_CPPv426LV_CALENDAR_STYLE_WEEK_BOX" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inactive day style </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv427LV_CALENDAR_STYLE_TODAY_BOX">
+<span id="_CPPv327LV_CALENDAR_STYLE_TODAY_BOX"></span><span id="_CPPv227LV_CALENDAR_STYLE_TODAY_BOX"></span><span class="target" id="lv__calendar_8h_1a394b3903fbf00ba2b6243f60689a5a5fa0bfaede2114842ce4c2ecaf9de05dae7"></span><code class="sig-name descname">LV_CALENDAR_STYLE_TODAY_BOX</code><a class="headerlink" href="#_CPPv427LV_CALENDAR_STYLE_TODAY_BOX" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Week highlight style </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv418lv_calendar_createP8lv_obj_tPK8lv_obj_t">
+<span id="_CPPv318lv_calendar_createP8lv_obj_tPK8lv_obj_t"></span><span id="_CPPv218lv_calendar_createP8lv_obj_tPK8lv_obj_t"></span><span id="lv_calendar_create__lv_obj_tP.lv_obj_tCP"></span><span class="target" id="lv__calendar_8h_1a08e8a22a0c711a6555d4cd02fe5b684f"></span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<code class="sig-name descname">lv_calendar_create</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>par</em>, <em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>copy</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_calendar_createP8lv_obj_tPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a calendar objects <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the created calendar </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">par</span></code>: pointer to an object, it will be the parent of the new calendar </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">copy</span></code>: pointer to a calendar object, if not NULL then the new object will be copied from it </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426lv_calendar_set_today_dateP8lv_obj_tP18lv_calendar_date_t">
+<span id="_CPPv326lv_calendar_set_today_dateP8lv_obj_tP18lv_calendar_date_t"></span><span id="_CPPv226lv_calendar_set_today_dateP8lv_obj_tP18lv_calendar_date_t"></span><span id="lv_calendar_set_today_date__lv_obj_tP.lv_calendar_date_tP"></span><span class="target" id="lv__calendar_8h_1ae898cf7e19a9ced5b34f5e862b07034e"></span>void <code class="sig-name descname">lv_calendar_set_today_date</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em>, <a class="reference internal" href="#_CPPv418lv_calendar_date_t" title="lv_calendar_date_t">lv_calendar_date_t</a> *<em>today</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_calendar_set_today_dateP8lv_obj_tP18lv_calendar_date_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the today’s date <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">today</span></code>: pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__calendar__date__t"><span class="std std-ref"><span class="pre">lv_calendar_date_t</span></span></a></code> variable containing the date of today. The value will be saved it can be local variable too. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427lv_calendar_set_showed_dateP8lv_obj_tP18lv_calendar_date_t">
+<span id="_CPPv327lv_calendar_set_showed_dateP8lv_obj_tP18lv_calendar_date_t"></span><span id="_CPPv227lv_calendar_set_showed_dateP8lv_obj_tP18lv_calendar_date_t"></span><span id="lv_calendar_set_showed_date__lv_obj_tP.lv_calendar_date_tP"></span><span class="target" id="lv__calendar_8h_1a5f4bb22101f8bde3ae457c88563b9f9c"></span>void <code class="sig-name descname">lv_calendar_set_showed_date</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em>, <a class="reference internal" href="#_CPPv418lv_calendar_date_t" title="lv_calendar_date_t">lv_calendar_date_t</a> *<em>showed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lv_calendar_set_showed_dateP8lv_obj_tP18lv_calendar_date_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the currently showed <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">showed</span></code>: pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__calendar__date__t"><span class="std std-ref"><span class="pre">lv_calendar_date_t</span></span></a></code> variable containing the date to show. The value will be saved it can be local variable too. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv433lv_calendar_set_highlighted_datesP8lv_obj_tP18lv_calendar_date_t8uint16_t">
+<span id="_CPPv333lv_calendar_set_highlighted_datesP8lv_obj_tP18lv_calendar_date_t8uint16_t"></span><span id="_CPPv233lv_calendar_set_highlighted_datesP8lv_obj_tP18lv_calendar_date_t8uint16_t"></span><span id="lv_calendar_set_highlighted_dates__lv_obj_tP.lv_calendar_date_tP.uint16_t"></span><span class="target" id="lv__calendar_8h_1a7ffd1db1246b3b86367b12c48cc6f77d"></span>void <code class="sig-name descname">lv_calendar_set_highlighted_dates</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em>, <a class="reference internal" href="#_CPPv418lv_calendar_date_t" title="lv_calendar_date_t">lv_calendar_date_t</a> *<em>highlighted</em>, uint16_t <em>date_num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv433lv_calendar_set_highlighted_datesP8lv_obj_tP18lv_calendar_date_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the the highlighted dates <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">highlighted</span></code>: pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__calendar__date__t"><span class="std std-ref"><span class="pre">lv_calendar_date_t</span></span></a></code> array containing the dates. ONLY A POINTER WILL BE SAVED! CAN’T BE LOCAL ARRAY. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_num</span></code>: number of dates in the array </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv425lv_calendar_set_day_namesP8lv_obj_tPPKc">
+<span id="_CPPv325lv_calendar_set_day_namesP8lv_obj_tPPKc"></span><span id="_CPPv225lv_calendar_set_day_namesP8lv_obj_tPPKc"></span><span id="lv_calendar_set_day_names__lv_obj_tP.cCPP"></span><span class="target" id="lv__calendar_8h_1a7ff5dee42910375c53b7e74cb08ab14c"></span>void <code class="sig-name descname">lv_calendar_set_day_names</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em>, <em class="property">const</em> char **<em>day_names</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lv_calendar_set_day_namesP8lv_obj_tPPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the name of the days <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">day_names</span></code>: pointer to an array with the names. E.g. <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*</span> <span class="pre">days[7]</span> <span class="pre">=</span> <span class="pre">{&quot;Sun&quot;,</span> <span class="pre">&quot;Mon&quot;,</span> <span class="pre">...}</span></code> Only the pointer will be saved so this variable can’t be local which will be destroyed later. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427lv_calendar_set_month_namesP8lv_obj_tPPKc">
+<span id="_CPPv327lv_calendar_set_month_namesP8lv_obj_tPPKc"></span><span id="_CPPv227lv_calendar_set_month_namesP8lv_obj_tPPKc"></span><span id="lv_calendar_set_month_names__lv_obj_tP.cCPP"></span><span class="target" id="lv__calendar_8h_1a7fc39906e3e9cb174c1f6317a8921073"></span>void <code class="sig-name descname">lv_calendar_set_month_names</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em>, <em class="property">const</em> char **<em>day_names</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lv_calendar_set_month_namesP8lv_obj_tPPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the name of the month <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">day_names</span></code>: pointer to an array with the names. E.g. <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*</span> <span class="pre">days[12]</span> <span class="pre">=</span> <span class="pre">{&quot;Jan&quot;,</span> <span class="pre">&quot;Feb&quot;,</span> <span class="pre">...}</span></code> Only the pointer will be saved so this variable can’t be local which will be destroyed later. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_calendar_set_styleP8lv_obj_t19lv_calendar_style_tPK10lv_style_t">
+<span id="_CPPv321lv_calendar_set_styleP8lv_obj_t19lv_calendar_style_tPK10lv_style_t"></span><span id="_CPPv221lv_calendar_set_styleP8lv_obj_t19lv_calendar_style_tPK10lv_style_t"></span><span id="lv_calendar_set_style__lv_obj_tP.lv_calendar_style_t.lv_style_tCP"></span><span class="target" id="lv__calendar_8h_1a5c4cb105dc246e3119bfea9928a44414"></span>void <code class="sig-name descname">lv_calendar_set_style</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em>, <a class="reference internal" href="#_CPPv419lv_calendar_style_t" title="lv_calendar_style_t">lv_calendar_style_t</a> <em>type</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_calendar_set_styleP8lv_obj_t19lv_calendar_style_tPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a style of a calendar. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to calendar object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: which style should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426lv_calendar_get_today_datePK8lv_obj_t">
+<span id="_CPPv326lv_calendar_get_today_datePK8lv_obj_t"></span><span id="_CPPv226lv_calendar_get_today_datePK8lv_obj_t"></span><span id="lv_calendar_get_today_date__lv_obj_tCP"></span><span class="target" id="lv__calendar_8h_1ae90bbfc3f98bca9b7b03c1f2a00d96b2"></span><a class="reference internal" href="#_CPPv418lv_calendar_date_t" title="lv_calendar_date_t">lv_calendar_date_t</a> *<code class="sig-name descname">lv_calendar_get_today_date</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_calendar_get_today_datePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the today’s date <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>return pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__calendar__date__t"><span class="std std-ref"><span class="pre">lv_calendar_date_t</span></span></a></code> variable containing the date of today. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427lv_calendar_get_showed_datePK8lv_obj_t">
+<span id="_CPPv327lv_calendar_get_showed_datePK8lv_obj_t"></span><span id="_CPPv227lv_calendar_get_showed_datePK8lv_obj_t"></span><span id="lv_calendar_get_showed_date__lv_obj_tCP"></span><span class="target" id="lv__calendar_8h_1a443317c7ebb23581212876e5d1aec6ec"></span><a class="reference internal" href="#_CPPv418lv_calendar_date_t" title="lv_calendar_date_t">lv_calendar_date_t</a> *<code class="sig-name descname">lv_calendar_get_showed_date</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lv_calendar_get_showed_datePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the currently showed <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__calendar__date__t"><span class="std std-ref"><span class="pre">lv_calendar_date_t</span></span></a></code> variable containing the date is being shown. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv428lv_calendar_get_pressed_datePK8lv_obj_t">
+<span id="_CPPv328lv_calendar_get_pressed_datePK8lv_obj_t"></span><span id="_CPPv228lv_calendar_get_pressed_datePK8lv_obj_t"></span><span id="lv_calendar_get_pressed_date__lv_obj_tCP"></span><span class="target" id="lv__calendar_8h_1afd1827441953cd980eb5be93b509bf3b"></span><a class="reference internal" href="#_CPPv418lv_calendar_date_t" title="lv_calendar_date_t">lv_calendar_date_t</a> *<code class="sig-name descname">lv_calendar_get_pressed_date</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428lv_calendar_get_pressed_datePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the the pressed date. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__calendar__date__t"><span class="std std-ref"><span class="pre">lv_calendar_date_t</span></span></a></code> variable containing the pressed date. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv433lv_calendar_get_highlighted_datesPK8lv_obj_t">
+<span id="_CPPv333lv_calendar_get_highlighted_datesPK8lv_obj_t"></span><span id="_CPPv233lv_calendar_get_highlighted_datesPK8lv_obj_t"></span><span id="lv_calendar_get_highlighted_dates__lv_obj_tCP"></span><span class="target" id="lv__calendar_8h_1a65a647bbde2ea36ec38471ef88833757"></span><a class="reference internal" href="#_CPPv418lv_calendar_date_t" title="lv_calendar_date_t">lv_calendar_date_t</a> *<code class="sig-name descname">lv_calendar_get_highlighted_dates</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv433lv_calendar_get_highlighted_datesPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the the highlighted dates <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__calendar__date__t"><span class="std std-ref"><span class="pre">lv_calendar_date_t</span></span></a></code> array containing the dates. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv437lv_calendar_get_highlighted_dates_numPK8lv_obj_t">
+<span id="_CPPv337lv_calendar_get_highlighted_dates_numPK8lv_obj_t"></span><span id="_CPPv237lv_calendar_get_highlighted_dates_numPK8lv_obj_t"></span><span id="lv_calendar_get_highlighted_dates_num__lv_obj_tCP"></span><span class="target" id="lv__calendar_8h_1a3fd04291b6c1cf6015d26c00f0de2721"></span>uint16_t <code class="sig-name descname">lv_calendar_get_highlighted_dates_num</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437lv_calendar_get_highlighted_dates_numPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the number of the highlighted dates <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>number of highlighted days </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv425lv_calendar_get_day_namesPK8lv_obj_t">
+<span id="_CPPv325lv_calendar_get_day_namesPK8lv_obj_t"></span><span id="_CPPv225lv_calendar_get_day_namesPK8lv_obj_t"></span><span id="lv_calendar_get_day_names__lv_obj_tCP"></span><span class="target" id="lv__calendar_8h_1ac6d921f6a7e76cf34eb8ba698a9afe38"></span><em class="property">const</em> char **<code class="sig-name descname">lv_calendar_get_day_names</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lv_calendar_get_day_namesPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the name of the days <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the array of day names </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv427lv_calendar_get_month_namesPK8lv_obj_t">
+<span id="_CPPv327lv_calendar_get_month_namesPK8lv_obj_t"></span><span id="_CPPv227lv_calendar_get_month_namesPK8lv_obj_t"></span><span id="lv_calendar_get_month_names__lv_obj_tCP"></span><span class="target" id="lv__calendar_8h_1ae10bb41a5ed00f8ac0f71350a53655dd"></span><em class="property">const</em> char **<code class="sig-name descname">lv_calendar_get_month_names</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lv_calendar_get_month_namesPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the name of the month <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the array of month names </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to a calendar object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_calendar_get_stylePK8lv_obj_t19lv_calendar_style_t">
+<span id="_CPPv321lv_calendar_get_stylePK8lv_obj_t19lv_calendar_style_t"></span><span id="_CPPv221lv_calendar_get_stylePK8lv_obj_t19lv_calendar_style_t"></span><span id="lv_calendar_get_style__lv_obj_tCP.lv_calendar_style_t"></span><span class="target" id="lv__calendar_8h_1acb2d341c02b7d608192da3fbf71cc84a"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">lv_calendar_get_style</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>calendar</em>, <a class="reference internal" href="#_CPPv419lv_calendar_style_t" title="lv_calendar_style_t">lv_calendar_style_t</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_calendar_get_stylePK8lv_obj_t19lv_calendar_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get style of a calendar. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>style pointer to the style </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">calendar</span></code>: pointer to calendar object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: which style should be get </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv418lv_calendar_date_t">
+<span id="_CPPv318lv_calendar_date_t"></span><span id="_CPPv218lv_calendar_date_t"></span><span id="lv_calendar_date_t"></span><span class="target" id="structlv__calendar__date__t"></span><em class="property">struct </em><code class="sig-name descname">lv_calendar_date_t</code><a class="headerlink" href="#_CPPv418lv_calendar_date_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;lv_calendar.h&gt;</em><p>Represents a date on the calendar object (platform-agnostic). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N18lv_calendar_date_t4yearE">
+<span id="_CPPv3N18lv_calendar_date_t4yearE"></span><span id="_CPPv2N18lv_calendar_date_t4yearE"></span><span id="lv_calendar_date_t::year__uint16_t"></span><span class="target" id="structlv__calendar__date__t_1a0b137706ff796020a1964e992ba16cfa"></span>uint16_t <code class="sig-name descname">year</code><a class="headerlink" href="#_CPPv4N18lv_calendar_date_t4yearE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18lv_calendar_date_t5monthE">
+<span id="_CPPv3N18lv_calendar_date_t5monthE"></span><span id="_CPPv2N18lv_calendar_date_t5monthE"></span><span id="lv_calendar_date_t::month__int8_t"></span><span class="target" id="structlv__calendar__date__t_1ae68253cbbafedd37d6845a4f0b21cdc7"></span>int8_t <code class="sig-name descname">month</code><a class="headerlink" href="#_CPPv4N18lv_calendar_date_t5monthE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N18lv_calendar_date_t3dayE">
+<span id="_CPPv3N18lv_calendar_date_t3dayE"></span><span id="_CPPv2N18lv_calendar_date_t3dayE"></span><span id="lv_calendar_date_t::day__int8_t"></span><span class="target" id="structlv__calendar__date__t_1aeae1ffad6ab67d62fe52724d243db62c"></span>int8_t <code class="sig-name descname">day</code><a class="headerlink" href="#_CPPv4N18lv_calendar_date_t3dayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv417lv_calendar_ext_t">
+<span id="_CPPv317lv_calendar_ext_t"></span><span id="_CPPv217lv_calendar_ext_t"></span><span id="lv_calendar_ext_t"></span><span class="target" id="structlv__calendar__ext__t"></span><em class="property">struct </em><code class="sig-name descname">lv_calendar_ext_t</code><a class="headerlink" href="#_CPPv417lv_calendar_ext_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t5todayE">
+<span id="_CPPv3N17lv_calendar_ext_t5todayE"></span><span id="_CPPv2N17lv_calendar_ext_t5todayE"></span><span id="lv_calendar_ext_t::today__lv_calendar_date_t"></span><span class="target" id="structlv__calendar__ext__t_1ab0f56a667b1fe144db56be801a348391"></span><a class="reference internal" href="#_CPPv418lv_calendar_date_t" title="lv_calendar_date_t">lv_calendar_date_t</a> <code class="sig-name descname">today</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t5todayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t11showed_dateE">
+<span id="_CPPv3N17lv_calendar_ext_t11showed_dateE"></span><span id="_CPPv2N17lv_calendar_ext_t11showed_dateE"></span><span id="lv_calendar_ext_t::showed_date__lv_calendar_date_t"></span><span class="target" id="structlv__calendar__ext__t_1abb4b557552f2791c2281c878c7000f52"></span><a class="reference internal" href="#_CPPv418lv_calendar_date_t" title="lv_calendar_date_t">lv_calendar_date_t</a> <code class="sig-name descname">showed_date</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t11showed_dateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t17highlighted_datesE">
+<span id="_CPPv3N17lv_calendar_ext_t17highlighted_datesE"></span><span id="_CPPv2N17lv_calendar_ext_t17highlighted_datesE"></span><span id="lv_calendar_ext_t::highlighted_dates__lv_calendar_date_tP"></span><span class="target" id="structlv__calendar__ext__t_1a16be426a8c0bd5ac78a6154fa22b1ce6"></span><a class="reference internal" href="#_CPPv418lv_calendar_date_t" title="lv_calendar_date_t">lv_calendar_date_t</a> *<code class="sig-name descname">highlighted_dates</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t17highlighted_datesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t21highlighted_dates_numE">
+<span id="_CPPv3N17lv_calendar_ext_t21highlighted_dates_numE"></span><span id="_CPPv2N17lv_calendar_ext_t21highlighted_dates_numE"></span><span id="lv_calendar_ext_t::highlighted_dates_num__uint8_t"></span><span class="target" id="structlv__calendar__ext__t_1a20b4eb2ee6b579f310286439ab22ef7c"></span>uint8_t <code class="sig-name descname">highlighted_dates_num</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t21highlighted_dates_numE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t12btn_pressingE">
+<span id="_CPPv3N17lv_calendar_ext_t12btn_pressingE"></span><span id="_CPPv2N17lv_calendar_ext_t12btn_pressingE"></span><span id="lv_calendar_ext_t::btn_pressing__int8_t"></span><span class="target" id="structlv__calendar__ext__t_1aa29abda1f17848dfb3e542cb654a3d11"></span>int8_t <code class="sig-name descname">btn_pressing</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t12btn_pressingE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t12pressed_dateE">
+<span id="_CPPv3N17lv_calendar_ext_t12pressed_dateE"></span><span id="_CPPv2N17lv_calendar_ext_t12pressed_dateE"></span><span id="lv_calendar_ext_t::pressed_date__lv_calendar_date_t"></span><span class="target" id="structlv__calendar__ext__t_1a0f23363ae3849a90cc06226857055ff3"></span><a class="reference internal" href="#_CPPv418lv_calendar_date_t" title="lv_calendar_date_t">lv_calendar_date_t</a> <code class="sig-name descname">pressed_date</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t12pressed_dateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t9day_namesE">
+<span id="_CPPv3N17lv_calendar_ext_t9day_namesE"></span><span id="_CPPv2N17lv_calendar_ext_t9day_namesE"></span><span id="lv_calendar_ext_t::day_names__cCPP"></span><span class="target" id="structlv__calendar__ext__t_1add070ba4ee06bb92fb12aff67d45b3f5"></span><em class="property">const</em> char **<code class="sig-name descname">day_names</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t9day_namesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t11month_namesE">
+<span id="_CPPv3N17lv_calendar_ext_t11month_namesE"></span><span id="_CPPv2N17lv_calendar_ext_t11month_namesE"></span><span id="lv_calendar_ext_t::month_names__cCPP"></span><span class="target" id="structlv__calendar__ext__t_1af511629bda8b798de0957c6023e507a9"></span><em class="property">const</em> char **<code class="sig-name descname">month_names</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t11month_namesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t12style_headerE">
+<span id="_CPPv3N17lv_calendar_ext_t12style_headerE"></span><span id="_CPPv2N17lv_calendar_ext_t12style_headerE"></span><span id="lv_calendar_ext_t::style_header__lv_style_tCP"></span><span class="target" id="structlv__calendar__ext__t_1a436c0a000a332816e446ee3689977886"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">style_header</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t12style_headerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t15style_header_prE">
+<span id="_CPPv3N17lv_calendar_ext_t15style_header_prE"></span><span id="_CPPv2N17lv_calendar_ext_t15style_header_prE"></span><span id="lv_calendar_ext_t::style_header_pr__lv_style_tCP"></span><span class="target" id="structlv__calendar__ext__t_1a0733f8bea2525d6d741c9900724177f8"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">style_header_pr</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t15style_header_prE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t15style_day_namesE">
+<span id="_CPPv3N17lv_calendar_ext_t15style_day_namesE"></span><span id="_CPPv2N17lv_calendar_ext_t15style_day_namesE"></span><span id="lv_calendar_ext_t::style_day_names__lv_style_tCP"></span><span class="target" id="structlv__calendar__ext__t_1a4d67bf774200eda68f4a0640cc5c0840"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">style_day_names</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t15style_day_namesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t22style_highlighted_daysE">
+<span id="_CPPv3N17lv_calendar_ext_t22style_highlighted_daysE"></span><span id="_CPPv2N17lv_calendar_ext_t22style_highlighted_daysE"></span><span id="lv_calendar_ext_t::style_highlighted_days__lv_style_tCP"></span><span class="target" id="structlv__calendar__ext__t_1a1ae0e3e0038469e968c31920e0c526d1"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">style_highlighted_days</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t22style_highlighted_daysE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t19style_inactive_daysE">
+<span id="_CPPv3N17lv_calendar_ext_t19style_inactive_daysE"></span><span id="_CPPv2N17lv_calendar_ext_t19style_inactive_daysE"></span><span id="lv_calendar_ext_t::style_inactive_days__lv_style_tCP"></span><span class="target" id="structlv__calendar__ext__t_1adf81059aa93ef7822d8efba5efd891d3"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">style_inactive_days</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t19style_inactive_daysE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t14style_week_boxE">
+<span id="_CPPv3N17lv_calendar_ext_t14style_week_boxE"></span><span id="_CPPv2N17lv_calendar_ext_t14style_week_boxE"></span><span id="lv_calendar_ext_t::style_week_box__lv_style_tCP"></span><span class="target" id="structlv__calendar__ext__t_1a8d1f1c67b37a8203c5a34434b69adf17"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">style_week_box</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t14style_week_boxE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N17lv_calendar_ext_t15style_today_boxE">
+<span id="_CPPv3N17lv_calendar_ext_t15style_today_boxE"></span><span id="_CPPv2N17lv_calendar_ext_t15style_today_boxE"></span><span id="lv_calendar_ext_t::style_today_box__lv_style_tCP"></span><span class="target" id="structlv__calendar__ext__t_1a52e8410221ce97b76be94117563b932b"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">style_today_box</code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t15style_today_boxE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="canvas.html" class="btn btn-neutral float-right" title="Canvas (lv_canvas)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="btnm.html" class="btn btn-neutral float-left" title="Button matrix (lv_btnm)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Gabor Kiss-Vamosi
+      <span class="lastupdated">
+        Last updated on Jul 12, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

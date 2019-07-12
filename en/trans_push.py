@@ -4,7 +4,7 @@ import sys
 import os
 
 src_dir = 'trans_txt'
-folders = ['overview', 'get-started', 'object-types'];
+folders = ['overview', 'get-started', 'object-types', 'porting'];
 files = ['index.md'];
 
 os.system("rm -r " + src_dir);

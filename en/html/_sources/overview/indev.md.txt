@@ -58,7 +58,7 @@ There are some predefined keys which have special meaning:
 - **LV_KEY_END** Go to the end (E.g. in a [Text area](/object-types/ta)))
 
 The most important special keys are: `LV_KEY_NEXT/PREV`, `LV_KEY_ENTER` and `LV_KEY_UP/DOWN/LEFT/RIGHT`. 
-In your `raed_cb` function you should translate some of your keys to these special keys to navigate in the group and interact with the selected object.
+In your `read_cb` function you should translate some of your keys to these special keys to navigate in the group and interact with the selected object.
 
 Usually, it's enough to use only `LV_KEY_LEFT/RIGHT` because most of the objects can be fully controlled with them. 
 

@@ -70,7 +70,7 @@ lv_obj_set_pos(obj1, 10, 10);	                   /*Set the position of the new o
 
 Modify the position of the parent:
   
-![](/misc/par_child2.png "Graphical objects are moving togother 2")  
+![](/misc/par_child2.png "Graphical objects are moving together 2")  
 
 ```c
 lv_obj_set_pos(par, 50, 50);	/*Move the parent. The child will move with it.*/

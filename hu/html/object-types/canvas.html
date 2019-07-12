@@ -1,0 +1,1569 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Canvas (lv_canvas) &mdash; LittlevGL 6.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Check box (lv_cb)" href="cb.html" />
+    <link rel="prev" title="Calendar (lv_calendar)" href="calendar.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78811084-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78811084-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/white_white_lvgl_full_logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/live-demo.html">Élő demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#what-is-micropython">What is Micropython?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-highlights">Micropython highlights</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#so-how-does-it-look-like">So how does it look like?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#a-simple-example">A simple example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#how-can-i-use-it">How can I use it?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#online-simulator">Online Simulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#pc-simulator">PC Simulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#the-real-thing">The real thing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#where-can-i-find-more-information">Where can I find more information?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#select-an-ide">Select an IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#set-up-eclipse-cdt">Set-up Eclipse CDT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-eclipse-cdt">Install Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-sdl-2">Install SDL 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#pre-configured-project">Pre-configured project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#add-the-pre-configured-project-to-eclipse-cdt">Add the pre-configured project to Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#compile-and-run">Compile and Run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../porting/index.html">Porting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">System overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Set-up a project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#get-the-library">Get the library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#initialization">Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Input device interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-of-input-devices">Types of input devices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#other-features">Other features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/tick.html">Tick interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/tick.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/task-handler.html">Task Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sleep.html">Sleep management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/os.html">Operating system and interrupts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/os.html#tasks-and-threads">Tasks and threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/os.html#interrupts">Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/log.html">Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#log-level">Log level</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#logging-with-printf">Logging with printf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#custom-log-function">Custom log function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#add-logs">Add logs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/object.html">Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#object-attributes">Object attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#basic-attributes">Basic attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#specific-attributes">Specific attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#object-s-working-mechanisms">Object’s working mechanisms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#parent-child-structure">Parent-child structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#moving-together">Moving together</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#visibility-only-on-the-parent">Visibility only on the parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#create-delete-objects">Create - delete objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#screen-the-most-basic-parent">Screen – the most basic parent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#order-of-creation">Order of creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layer">Top and sys layer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#event-types">Event types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#generic-events">Generic events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#special-events">Special events</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#custom-data">Custom data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#send-events-manually">Send events manually</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/style.html">Styles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#inherit-styles">Inherit styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-properties">Style properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#common-properties">Common properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#text-style-properties">Text style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#image-style-properties">Image style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#line-style-properties">Line style properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#built-in-styles">Built-in styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#create-new-styles">Create new styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-animations">Style animations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-example">Style example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#themes">Themes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#live-update">Live update</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#pointers">Pointers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#keypad-and-encoder">Keypad and encoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#groups">Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#live-demo">Live demo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#input-device">Input device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#id1">Groups</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/display.html">Displays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#using-only-one-display">Using only one display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#mirror-display">Mirror display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#split-image">Split image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#screens">Screens</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#opaque-screen">Opaque screen</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#features-of-displays">Features of displays</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#inactivity">Inactivity</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#colors">Colors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#convert-color">Convert color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#swap-16-colors">Swap 16 colors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#create-and-mix-colors">Create and mix colors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#opacity">Opacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#built-in-colors">Built-in colors</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#display">Display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#id1">Colors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/font.html">Fonts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#unicode-support">Unicode support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#built-in-fonts">Built-in fonts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-font">Add new font</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-symbols">Add new symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-a-new-font-engine">Add a new font engine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/image.html">Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#store-images">Store images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#color-formats">Color formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#add-and-use-images">Add and use images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#online-converter">Online converter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#manually-create-an-image">Manually create an image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#use-images">Use images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#image-decoder">Image decoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#custom-image-formats">Custom image formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#register-an-image-decoder">Register an image decoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#manually-use-an-image-decoder">Manually use an image decoder</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#image-caching">Image caching</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#cache-size">Cache size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#value-of-images">Value of images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#memory-usage">Memory usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#clean-the-cache">Clean the cache</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/file-system.html">File system</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#add-a-driver">Add a driver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/file-system.html#use-drivers-for-images">Use drivers for images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/animation.html">Animations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#create-an-animation">Create an animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#animation-path">Animation path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#speed-vs-time">Speed vs time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#delete-animations">Delete animations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/animation.html#input-device">Input device</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/task.html">Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#create-a-task">Create a task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#ready-and-reset">Ready and Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#set-parameters">Set parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#one-shot-tasks">One-shot tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#measure-idle-time">Measure idle time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#asynchronous-calls">Asynchronous calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/drawing.html">Drawing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#buffering-types">Buffering types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#mechanism-of-screen-refreshing">Mechanism of screen refreshing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Object types (Widgets)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="obj.html">Base object (lv_obj)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#coordinates">Coordinates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#parents-and-children">Parents and children</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#screens">Screens</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#layers">Layers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#style">Style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#events">Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#attributes">Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#opa-scale">Opa scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#protect">Protect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#groups">Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#extended-click-area">Extended click area</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#id1">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="arc.html">Arc (lv_arc)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#angles">Angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bar.html">Bar (lv_bar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#value-and-range">Value and range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#symmetrical">Symmetrical</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="btn.html">Button (lv_btn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#states">States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#toggle">Toggle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#layout-and-fit">Layout and Fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#ink-effect">Ink effect</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="btnm.html">Button matrix (lv_btnm)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#button-s-text">Button’s text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#control-buttons">Control buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#one-toggle">One toggle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#recolor">Recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="calendar.html">Calendar (lv_calendar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#current-date">Current date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#shown-date">Shown date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#highlighted-days">Highlighted days</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#name-of-the-days">Name of the days</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#name-of-the-months">Name of the months</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Canvas (lv_canvas)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#buffer">Buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#palette">Palette</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#drawing">Drawing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rotate">Rotate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Check box (lv_cb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#text">Text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#check-uncheck">Check/Uncheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#inactive">Inactive</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chart.html">Chart (lv_chart)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#data-series">Data series</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#series-type">Series’ type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#modify-the-data">Modify the data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#update-modes">Update modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#number-of-points">Number of points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#vertical-range">Vertical range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#division-lines">Division lines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#series-appearance">Series’ appearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#tick-marks-and-labels">Tick marks and labels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cont.html">Container (lv_cont)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#layout">Layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#auto-fit">Auto fit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ddlist.html">Drop down list (lv_ddlist)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#set-options">Set options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#get-selected-option">Get selected option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#align-the-options">Align the options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#height-and-width">Height and width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#animation-time">Animation time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#decoration-arrow">Decoration arrow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#stay-open">Stay open</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ddlist.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ddlist.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gauge.html">Gauge (lv_gauge)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#scale">Scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#needles">Needles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#range">Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#critical-value">Critical value</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="img.html">Image (lv_img)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="img.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="img.html#image-source">Image source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#label-as-an-image">Label as an image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#transparency">Transparency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#palette-and-alpha-index">Palette and Alpha index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#recolor">Recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#auto-size">Auto-size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#mosaic">Mosaic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#offset">Offset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="img.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imgbtn.html">Image button (lv_imgbtn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#image-sources">Image sources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#states">States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#toggle">Toggle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kb.html">Keyboard (lv_kb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#modes">Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#assign-text-area">Assign Text area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#new-key-map">New key map</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="label.html">Label (lv_label)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="label.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="label.html#set-text">Set text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#line-break">Line break</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#long-modes">Long modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#text-align">Text align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#draw-background">Draw background</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#text-recolor">Text recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#very-long-texts">Very long texts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#symbols">Symbols</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="label.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="led.html">LED (lv_led)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="led.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="led.html#brightness">Brightness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="led.html#toggle">Toggle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="led.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="led.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">Line (lv_line)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="line.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="line.html#set-points">Set points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#auto-size">Auto-size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#invert-y">Invert y</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="line.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list.html">List (lv_list)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="list.html#add-buttons">Add buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#delete-buttons">Delete buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#manual-navigation">Manual navigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#edge-flash">Edge flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#scroll-propagation">Scroll propagation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="list.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lmeter.html">Line meter (lv_lmeter)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#set-value">Set value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#range-and-angles">Range and Angles</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mbox.html">Message box (lv_mbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#set-text">Set text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#add-buttons">Add buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#auto-close">Auto-close</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="page.html">Page (lv_page)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="page.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="page.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#glue-object">Glue object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#focus-object">Focus object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#manual-navigation">Manual navigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#edge-flash">Edge flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#scroll-propagation">Scroll propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#scrollable-api">Scrollable API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="page.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="preload.html">Preloader (lv_preload)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#arc-length">Arc length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#spinning-speed">Spinning speed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#spin-types">Spin types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#spin-direction">Spin direction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="roller.html">Roller (lv_roller)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#set-options">Set options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#get-selected-option">Get selected option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#align-the-options">Align the options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#height-and-width">Height and width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="slider.html">Slider (lv_slider)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#value-and-range">Value and range</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#knob-placement">Knob placement</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="spinbox.html">Spinbox (lv_spinbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#set-format">Set format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#value-and-ranges">Value and ranges</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#id1">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sw.html">Switch (lv_sw)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#change-state">Change state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">Table (lv_table)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="table.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="table.html#rows-and-columns">Rows and Columns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#width-and-height">Width and Height</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#set-cell-value">Set cell value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#align">Align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#cell-type">Cell type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#merge-cells">Merge cells</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#crop-text">Crop text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#scroll">Scroll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="table.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tabview.html">Tabview (lv_tabview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#adding-tab">Adding tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#change-tab">Change tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#tab-button-s-position">Tab button’s position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#hide-the-tabs">Hide the tabs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ta.html">Text area (lv_ta)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#add-text">Add text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#placeholder">Placeholder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#delete-character">Delete character</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#move-the-cursor">Move the cursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#cursor-types">Cursor types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#one-line-mode">One line mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#password-mode">Password mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#text-align">Text align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#accepted-characters">Accepted characters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#max-text-length">Max text length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#very-long-texts">Very long texts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#select-text">Select text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#scroll-propagation">Scroll propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#edge-flash">Edge flash</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tileview.html">Tile view (lv_tileview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#valid-positions">Valid positions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#add-element">Add element</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#set-tile">Set tile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#animation-time">Animation time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#edge-flash">Edge flash</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="win.html">Window (lv_win)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="win.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="win.html#title">Title</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#control-buttons">Control buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#manual-scroll-and-focus">Manual scroll and focus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#layout">Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="win.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LittlevGL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Object types (Widgets)</a> &raquo;</li>
+        
+      <li>Canvas (lv_canvas)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/object-types/canvas.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="canvas-lv-canvas">
+<h1>Canvas (lv_canvas)<a class="headerlink" href="#canvas-lv-canvas" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>A Canvas is like an <a class="reference internal" href="img.html"><span class="doc">Image</span></a> where the user can draw anything.</p>
+<div class="section" id="buffer">
+<h3>Buffer<a class="headerlink" href="#buffer" title="Permalink to this headline">¶</a></h3>
+<p>The Canvas needs a buffer which stores the drawn image.
+To assign a buffer to a Canvas use <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_buffer(canvas,</span> <span class="pre">buffer,</span> <span class="pre">width,</span> <span class="pre">height,</span> <span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA)</span></code>.
+<code class="docutils literal notranslate"><span class="pre">buffer</span></code> is a static buffer (not just a local variable) to hold the image of the canvas.
+For example
+<code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">lv_color_t</span> <span class="pre">buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width,</span> <span class="pre">height)]</span></code>. <code class="docutils literal notranslate"><span class="pre">LV_CANVAS_BUF_SIZE_...</span></code> macros help to determine the size of the buffer with different color formats.</p>
+</div>
+<div class="section" id="palette">
+<h3>Palette<a class="headerlink" href="#palette" title="Permalink to this headline">¶</a></h3>
+<p>For <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> color formats a palette needs to be initialized with  <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_palette(canvas,</span> <span class="pre">3,</span> <span class="pre">LV_COLOR_RED)</span></code>. It sets pixels with <em>index=3</em> to red.</p>
+</div>
+<div class="section" id="drawing">
+<h3>Drawing<a class="headerlink" href="#drawing" title="Permalink to this headline">¶</a></h3>
+<p>To set a pixel on the canvas use <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_px(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">LV_COLOR_RED)</span></code>.
+With <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code> the index of the color or the alpha value needs to be passed as color. E.g. <code class="docutils literal notranslate"><span class="pre">lv_color_t</span> <span class="pre">c;</span> <span class="pre">c.full</span> <span class="pre">=</span> <span class="pre">3;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_canvas_fill_bg(canvas,</span> <span class="pre">LV_COLOR_BLUE)</span></code> fills the whole canvas to blue.</p>
+<p>An array of pixels can be copied to the canvas with <code class="docutils literal notranslate"><span class="pre">lv_canvas_copy_buf(canvas,</span> <span class="pre">buffer_to_copy,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height)</span></code>. The color format of the buffer and the canvas need to match.</p>
+<p>To draw something to the canvas use</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_rect(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">heigth,</span> <span class="pre">&amp;style)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_text(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">max_width,</span> <span class="pre">&amp;style,</span> <span class="pre">txt,</span> <span class="pre">LV_LABEL_ALIGN_LEFT/CENTER/RIGTH)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_img(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">&amp;img_src,</span> <span class="pre">&amp;style)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_line(canvas,</span> <span class="pre">point_array,</span> <span class="pre">point_cnt,</span> <span class="pre">&amp;style)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_polygon(canvas,</span> <span class="pre">points_array,</span> <span class="pre">point_cnt,</span> <span class="pre">&amp;style)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_arc(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">radius,</span> <span class="pre">start_angle,</span> <span class="pre">end_angle,</span> <span class="pre">&amp;style)</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="rotate">
+<h3>Rotate<a class="headerlink" href="#rotate" title="Permalink to this headline">¶</a></h3>
+<p>A rotated image can be added to canvas with <code class="docutils literal notranslate"><span class="pre">lv_canvas_rotate(canvas,</span> <span class="pre">&amp;imd_dsc,</span> <span class="pre">angle,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">pivot_x,</span> <span class="pre">pivot_y)</span></code>.
+It will rotate the image shown by <code class="docutils literal notranslate"><span class="pre">img_dsc</span></code> around the given pivot and stores it on the <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates of <code class="docutils literal notranslate"><span class="pre">canvas</span></code>.
+Instead of <code class="docutils literal notranslate"><span class="pre">img_dsc</span></code> and the buffer of an other canvas also can be used by <code class="docutils literal notranslate"><span class="pre">lv_canvas_get_img(canvas)</span></code>.</p>
+<p>Note that a canvas can’t be rotated on itself.  You need a source and destination canvas or image.</p>
+</div>
+</div>
+<div class="section" id="styles">
+<h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
+<p>You can set the styles with <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_style(btn,</span> <span class="pre">LV_CANVAS_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code>.
+<code class="docutils literal notranslate"><span class="pre">style.image.color</span></code> is used to tell the base color with <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code> color format.</p>
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<p>Only the <a class="reference external" href="/overview/event.html#generic-events">Generic events</a> are sent by the object type.</p>
+<p>Learn more about <a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a>.</p>
+</div>
+<div class="section" id="keys">
+<h2>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h2>
+<p>No <em>Keys</em> are processed by the object type.</p>
+<p>Learn more about <a class="reference internal" href="../overview/indev.html"><span class="doc">Keys</span></a>.</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="c">
+<h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
+<img alt="Simple Canvas example in LittlevGL" src="../_images/lv_ex_canvas_1.gif" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#define CANVAS_WIDTH  200</span>
+<span class="cp">#define CANVAS_HEIGHT  150</span>
+
+<span class="kt">void</span> <span class="nf">lv_ex_canvas_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_RED</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">LV_COLOR_MAROON</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_WHITE</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_WHITE</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLACK</span><span class="p">;</span>
+    <span class="n">style</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_BLUE</span><span class="p">;</span>
+
+    <span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">cbuf</span><span class="p">[</span><span class="n">LV_CANVAS_BUF_SIZE_TRUE_COLOR</span><span class="p">(</span><span class="n">CANVAS_WIDTH</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span><span class="p">)];</span>
+
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">canvas</span> <span class="o">=</span> <span class="n">lv_canvas_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_canvas_set_buffer</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">cbuf</span><span class="p">,</span> <span class="n">CANVAS_WIDTH</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span><span class="p">,</span> <span class="n">LV_IMG_CF_TRUE_COLOR</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_canvas_fill_bg</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">LV_COLOR_SILVER</span><span class="p">);</span>
+
+    <span class="n">lv_canvas_draw_rect</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
+
+    <span class="n">lv_canvas_draw_text</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="s">&quot;Some text on text canvas&quot;</span><span class="p">,</span> <span class="n">LV_LABEL_ALIGN_LEFT</span><span class="p">);</span>
+
+    <span class="cm">/* Test the rotation. It requires an other buffer where the orignal image is stored.</span>
+<span class="cm">     * So copy the current image to buffer and rotate it to the canvas */</span>
+    <span class="n">lv_color_t</span> <span class="n">cbuf_tmp</span><span class="p">[</span><span class="n">CANVAS_WIDTH</span> <span class="o">*</span> <span class="n">CANVAS_HEIGHT</span><span class="p">];</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">cbuf_tmp</span><span class="p">,</span> <span class="n">cbuf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">cbuf_tmp</span><span class="p">));</span>
+    <span class="n">lv_img_dsc_t</span> <span class="n">img</span><span class="p">;</span>
+    <span class="n">img</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">cbuf_tmp</span><span class="p">;</span>
+    <span class="n">img</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_TRUE_COLOR</span><span class="p">;</span>
+    <span class="n">img</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">CANVAS_WIDTH</span><span class="p">;</span>
+    <span class="n">img</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">CANVAS_HEIGHT</span><span class="p">;</span>
+
+    <span class="n">lv_canvas_fill_bg</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">LV_COLOR_SILVER</span><span class="p">);</span>
+    <span class="n">lv_canvas_rotate</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">img</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">CANVAS_WIDTH</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="micropython">
+<h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
+<p>No examples yet.</p>
+</div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv417lv_canvas_style_t">
+<span id="_CPPv317lv_canvas_style_t"></span><span id="_CPPv217lv_canvas_style_t"></span><span id="lv_canvas_style_t"></span><span class="target" id="lv__canvas_8h_1a71c746ebc6a2b9b481eaa56b85212fa0"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_canvas_style_t</code><a class="headerlink" href="#_CPPv417lv_canvas_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv4Ut7_anon_43">
+<span id="_CPPv3Ut7_anon_43"></span><span class="target" id="lv__canvas_8h_1ac205be2172292384dd687b5471a87edd"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_43" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv420LV_CANVAS_STYLE_MAIN">
+<span id="_CPPv320LV_CANVAS_STYLE_MAIN"></span><span id="_CPPv220LV_CANVAS_STYLE_MAIN"></span><span class="target" id="lv__canvas_8h_1ac205be2172292384dd687b5471a87edda7cf5bb897c30a2020f0aebf878ffa1f9"></span><code class="sig-name descname">LV_CANVAS_STYLE_MAIN</code><a class="headerlink" href="#_CPPv420LV_CANVAS_STYLE_MAIN" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv416lv_canvas_createP8lv_obj_tPK8lv_obj_t">
+<span id="_CPPv316lv_canvas_createP8lv_obj_tPK8lv_obj_t"></span><span id="_CPPv216lv_canvas_createP8lv_obj_tPK8lv_obj_t"></span><span id="lv_canvas_create__lv_obj_tP.lv_obj_tCP"></span><span class="target" id="lv__canvas_8h_1ac89798c0aadacdba97226c0679a7ed8c"></span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<code class="sig-name descname">lv_canvas_create</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>par</em>, <em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>copy</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_canvas_createP8lv_obj_tPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a canvas object <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the created canvas </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">par</span></code>: pointer to an object, it will be the parent of the new canvas </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">copy</span></code>: pointer to a canvas object, if not NULL then the new object will be copied from it </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv420lv_canvas_set_bufferP8lv_obj_tPv10lv_coord_t10lv_coord_t11lv_img_cf_t">
+<span id="_CPPv320lv_canvas_set_bufferP8lv_obj_tPv10lv_coord_t10lv_coord_t11lv_img_cf_t"></span><span id="_CPPv220lv_canvas_set_bufferP8lv_obj_tPv10lv_coord_t10lv_coord_t11lv_img_cf_t"></span><span id="lv_canvas_set_buffer__lv_obj_tP.voidP.lv_coord_t.lv_coord_t.lv_img_cf_t"></span><span class="target" id="lv__canvas_8h_1a65cfb1d41e6908f15f7463dfb3980cec"></span>void <code class="sig-name descname">lv_canvas_set_buffer</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, void *<em>buf</em>, lv_coord_t <em>w</em>, lv_coord_t <em>h</em>, <a class="reference internal" href="../overview/image.html#_CPPv411lv_img_cf_t" title="lv_img_cf_t">lv_img_cf_t</a> <em>cf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_canvas_set_bufferP8lv_obj_tPv10lv_coord_t10lv_coord_t11lv_img_cf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a buffer for the canvas. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: a buffer where the content of the canvas will be. The required size is (lv_img_color_format_get_px_size(cf) * w * h) / 8) It can be allocated with <code class="docutils literal notranslate"><span class="pre">lv_mem_alloc()</span></code> or it can be statically allocated array (e.g. static lv_color_t buf[100*50]) or it can be an address in RAM or external SRAM </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">w</span></code>: width of the canvas </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span></code>: height of the canvas </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cf</span></code>: color format. <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_...</span></code> </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416lv_canvas_set_pxP8lv_obj_t10lv_coord_t10lv_coord_t10lv_color_t">
+<span id="_CPPv316lv_canvas_set_pxP8lv_obj_t10lv_coord_t10lv_coord_t10lv_color_t"></span><span id="_CPPv216lv_canvas_set_pxP8lv_obj_t10lv_coord_t10lv_coord_t10lv_color_t"></span><span id="lv_canvas_set_px__lv_obj_tP.lv_coord_t.lv_coord_t.lv_color_t"></span><span class="target" id="lv__canvas_8h_1abb258299eb77016c16d852c0100352ff"></span>void <code class="sig-name descname">lv_canvas_set_px</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, lv_coord_t <em>x</em>, lv_coord_t <em>y</em>, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> <em>c</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_canvas_set_pxP8lv_obj_t10lv_coord_t10lv_coord_t10lv_color_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the color of a pixel on the canvas <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: x coordinate of the point to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: x coordinate of the point to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>: color of the point </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_canvas_set_paletteP8lv_obj_t7uint8_t10lv_color_t">
+<span id="_CPPv321lv_canvas_set_paletteP8lv_obj_t7uint8_t10lv_color_t"></span><span id="_CPPv221lv_canvas_set_paletteP8lv_obj_t7uint8_t10lv_color_t"></span><span id="lv_canvas_set_palette__lv_obj_tP.uint8_t.lv_color_t"></span><span class="target" id="lv__canvas_8h_1a3a4b96429bd0b14aa00cee3dacb45a02"></span>void <code class="sig-name descname">lv_canvas_set_palette</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, uint8_t <em>id</em>, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> <em>c</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_canvas_set_paletteP8lv_obj_t7uint8_t10lv_color_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the palette color of a canvas with index format. Valid only for <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED1/2/4/8</span></code> <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: the palette color to set:<ul>
+<li><p>for <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED1</span></code>: 0..1</p></li>
+<li><p>for <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED2</span></code>: 0..3</p></li>
+<li><p>for <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED4</span></code>: 0..15</p></li>
+<li><p>for <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED8</span></code>: 0..255 </p></li>
+</ul>
+</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>: the color to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_canvas_set_styleP8lv_obj_t17lv_canvas_style_tPK10lv_style_t">
+<span id="_CPPv319lv_canvas_set_styleP8lv_obj_t17lv_canvas_style_tPK10lv_style_t"></span><span id="_CPPv219lv_canvas_set_styleP8lv_obj_t17lv_canvas_style_tPK10lv_style_t"></span><span id="lv_canvas_set_style__lv_obj_tP.lv_canvas_style_t.lv_style_tCP"></span><span class="target" id="lv__canvas_8h_1aebf212d63086e1dd8c86d04144113e6f"></span>void <code class="sig-name descname">lv_canvas_set_style</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, <a class="reference internal" href="#_CPPv417lv_canvas_style_t" title="lv_canvas_style_t">lv_canvas_style_t</a> <em>type</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_canvas_set_styleP8lv_obj_t17lv_canvas_style_tPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a style of a canvas. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: which style should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416lv_canvas_get_pxP8lv_obj_t10lv_coord_t10lv_coord_t">
+<span id="_CPPv316lv_canvas_get_pxP8lv_obj_t10lv_coord_t10lv_coord_t"></span><span id="_CPPv216lv_canvas_get_pxP8lv_obj_t10lv_coord_t10lv_coord_t"></span><span id="lv_canvas_get_px__lv_obj_tP.lv_coord_t.lv_coord_t"></span><span class="target" id="lv__canvas_8h_1a239cd4f0a242aff85570021edf6e40e8"></span><a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> <code class="sig-name descname">lv_canvas_get_px</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, lv_coord_t <em>x</em>, lv_coord_t <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_canvas_get_pxP8lv_obj_t10lv_coord_t10lv_coord_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the color of a pixel on the canvas <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>color of the point </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: x coordinate of the point to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: x coordinate of the point to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417lv_canvas_get_imgP8lv_obj_t">
+<span id="_CPPv317lv_canvas_get_imgP8lv_obj_t"></span><span id="_CPPv217lv_canvas_get_imgP8lv_obj_t"></span><span id="lv_canvas_get_img__lv_obj_tP"></span><span class="target" id="lv__canvas_8h_1ab88808b96446336d7c25436d4e7c8d75"></span><a class="reference internal" href="../overview/image.html#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t">lv_img_dsc_t</a> *<code class="sig-name descname">lv_canvas_get_img</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_canvas_get_imgP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the image of the canvas as a pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="../overview/image.html#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the image descriptor. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_canvas_get_stylePK8lv_obj_t17lv_canvas_style_t">
+<span id="_CPPv319lv_canvas_get_stylePK8lv_obj_t17lv_canvas_style_t"></span><span id="_CPPv219lv_canvas_get_stylePK8lv_obj_t17lv_canvas_style_t"></span><span id="lv_canvas_get_style__lv_obj_tCP.lv_canvas_style_t"></span><span class="target" id="lv__canvas_8h_1aaf5084c1b3dfe2450bd762a12ca8a527"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">lv_canvas_get_style</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, <a class="reference internal" href="#_CPPv417lv_canvas_style_t" title="lv_canvas_style_t">lv_canvas_style_t</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_canvas_get_stylePK8lv_obj_t17lv_canvas_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get style of a canvas. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>style pointer to the style </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: which style should be get </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418lv_canvas_copy_bufP8lv_obj_tPKv10lv_coord_t10lv_coord_t10lv_coord_t10lv_coord_t">
+<span id="_CPPv318lv_canvas_copy_bufP8lv_obj_tPKv10lv_coord_t10lv_coord_t10lv_coord_t10lv_coord_t"></span><span id="_CPPv218lv_canvas_copy_bufP8lv_obj_tPKv10lv_coord_t10lv_coord_t10lv_coord_t10lv_coord_t"></span><span id="lv_canvas_copy_buf__lv_obj_tP.voidCP.lv_coord_t.lv_coord_t.lv_coord_t.lv_coord_t"></span><span class="target" id="lv__canvas_8h_1a5b23403e36dffc964c9a6225467106af"></span>void <code class="sig-name descname">lv_canvas_copy_buf</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, <em class="property">const</em> void *<em>to_copy</em>, lv_coord_t <em>x</em>, lv_coord_t <em>y</em>, lv_coord_t <em>w</em>, lv_coord_t <em>h</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_canvas_copy_bufP8lv_obj_tPKv10lv_coord_t10lv_coord_t10lv_coord_t10lv_coord_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Copy a buffer to the canvas <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_copy</span></code>: buffer to copy. The color format has to match with the canvas’s buffer color format </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: left side of the destination position </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: top side of the destination position </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">w</span></code>: width of the buffer to copy </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span></code>: height of the buffer to copy </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv416lv_canvas_rotateP8lv_obj_tP12lv_img_dsc_t7int16_t10lv_coord_t10lv_coord_t7int32_t7int32_t">
+<span id="_CPPv316lv_canvas_rotateP8lv_obj_tP12lv_img_dsc_t7int16_t10lv_coord_t10lv_coord_t7int32_t7int32_t"></span><span id="_CPPv216lv_canvas_rotateP8lv_obj_tP12lv_img_dsc_t7int16_t10lv_coord_t10lv_coord_t7int32_t7int32_t"></span><span id="lv_canvas_rotate__lv_obj_tP.lv_img_dsc_tP.int16_t.lv_coord_t.lv_coord_t.int32_t.int32_t"></span><span class="target" id="lv__canvas_8h_1ac213babd9e74db8e5649b5a2466c3601"></span>void <code class="sig-name descname">lv_canvas_rotate</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, <a class="reference internal" href="../overview/image.html#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t">lv_img_dsc_t</a> *<em>img</em>, int16_t <em>angle</em>, lv_coord_t <em>offset_x</em>, lv_coord_t <em>offset_y</em>, int32_t <em>pivot_x</em>, int32_t <em>pivot_y</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_canvas_rotateP8lv_obj_tP12lv_img_dsc_t7int16_t10lv_coord_t10lv_coord_t7int32_t7int32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Rotate and image and store the result on a canvas. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">img</span></code>: pointer to an image descriptor. Can be the image descriptor of an other canvas too (<code class="docutils literal notranslate"><a class="reference internal" href="#lv__canvas_8h_1ab88808b96446336d7c25436d4e7c8d75"><span class="std std-ref"><span class="pre">lv_canvas_get_img()</span></span></a></code>). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">angle</span></code>: the angle of rotation (0..360); </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">offset_x</span></code>: offset X to tell where to put the result data on destination canvas </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">offset_y</span></code>: offset X to tell where to put the result data on destination canvas </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pivot_x</span></code>: pivot X of rotation. Relative to the source canvas Set to <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">width</span> <span class="pre">/</span> <span class="pre">2</span></code> to rotate around the center </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pivot_y</span></code>: pivot Y of rotation. Relative to the source canvas Set to <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">height</span> <span class="pre">/</span> <span class="pre">2</span></code> to rotate around the center </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417lv_canvas_fill_bgP8lv_obj_t10lv_color_t">
+<span id="_CPPv317lv_canvas_fill_bgP8lv_obj_t10lv_color_t"></span><span id="_CPPv217lv_canvas_fill_bgP8lv_obj_t10lv_color_t"></span><span id="lv_canvas_fill_bg__lv_obj_tP.lv_color_t"></span><span class="target" id="lv__canvas_8h_1a72f7e8add285e2ddaf2d9eea770225b3"></span>void <code class="sig-name descname">lv_canvas_fill_bg</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> <em>color</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_canvas_fill_bgP8lv_obj_t10lv_color_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fill the canvas with color <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">color</span></code>: the background color </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_canvas_draw_rectP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_t10lv_coord_tPK10lv_style_t">
+<span id="_CPPv319lv_canvas_draw_rectP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_t10lv_coord_tPK10lv_style_t"></span><span id="_CPPv219lv_canvas_draw_rectP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_t10lv_coord_tPK10lv_style_t"></span><span id="lv_canvas_draw_rect__lv_obj_tP.lv_coord_t.lv_coord_t.lv_coord_t.lv_coord_t.lv_style_tCP"></span><span class="target" id="lv__canvas_8h_1aeb22e0a2d51e4ae7b61f8655a80d64d7"></span>void <code class="sig-name descname">lv_canvas_draw_rect</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, lv_coord_t <em>x</em>, lv_coord_t <em>y</em>, lv_coord_t <em>w</em>, lv_coord_t <em>h</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_canvas_draw_rectP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_t10lv_coord_tPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Draw a rectangle on the canvas <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: left coordinate of the rectangle </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: top coordinate of the rectangle </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">w</span></code>: width of the rectangle </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span></code>: height of the rectangle </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: style of the rectangle (<code class="docutils literal notranslate"><span class="pre">body</span></code> properties are used except <code class="docutils literal notranslate"><span class="pre">padding</span></code>) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_canvas_draw_textP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_tPK10lv_style_tPKc16lv_label_align_t">
+<span id="_CPPv319lv_canvas_draw_textP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_tPK10lv_style_tPKc16lv_label_align_t"></span><span id="_CPPv219lv_canvas_draw_textP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_tPK10lv_style_tPKc16lv_label_align_t"></span><span id="lv_canvas_draw_text__lv_obj_tP.lv_coord_t.lv_coord_t.lv_coord_t.lv_style_tCP.cCP.lv_label_align_t"></span><span class="target" id="lv__canvas_8h_1a46846d683d523e533953526c85cf333e"></span>void <code class="sig-name descname">lv_canvas_draw_text</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, lv_coord_t <em>x</em>, lv_coord_t <em>y</em>, lv_coord_t <em>max_w</em>, <em class="property">const</em> lv_style_t *<em>style</em>, <em class="property">const</em> char *<em>txt</em>, <a class="reference internal" href="label.html#_CPPv416lv_label_align_t" title="lv_label_align_t">lv_label_align_t</a> <em>align</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_canvas_draw_textP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_tPK10lv_style_tPKc16lv_label_align_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Draw a text on the canvas. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: left coordinate of the text </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: top coordinate of the text </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_w</span></code>: max width of the text. The text will be wrapped to fit into this size </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: style of the text (<code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">txt</span></code>: text to display </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">align</span></code>: align of the text (<code class="docutils literal notranslate"><span class="pre">LV_LABEL_ALIGN_LEFT/RIGHT/CENTER</span></code>) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418lv_canvas_draw_imgP8lv_obj_t10lv_coord_t10lv_coord_tPKvPK10lv_style_t">
+<span id="_CPPv318lv_canvas_draw_imgP8lv_obj_t10lv_coord_t10lv_coord_tPKvPK10lv_style_t"></span><span id="_CPPv218lv_canvas_draw_imgP8lv_obj_t10lv_coord_t10lv_coord_tPKvPK10lv_style_t"></span><span id="lv_canvas_draw_img__lv_obj_tP.lv_coord_t.lv_coord_t.voidCP.lv_style_tCP"></span><span class="target" id="lv__canvas_8h_1a009c25239c6fa30d630be6d005ee64a7"></span>void <code class="sig-name descname">lv_canvas_draw_img</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, lv_coord_t <em>x</em>, lv_coord_t <em>y</em>, <em class="property">const</em> void *<em>src</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_canvas_draw_imgP8lv_obj_t10lv_coord_t10lv_coord_tPKvPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Draw an image on the canvas <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: image source. Can be a pointer an <code class="docutils literal notranslate"><a class="reference internal" href="../overview/image.html#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable or a path an image. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: style of the image (<code class="docutils literal notranslate"><span class="pre">image</span></code> properties are used) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_canvas_draw_lineP8lv_obj_tPK10lv_point_t8uint32_tPK10lv_style_t">
+<span id="_CPPv319lv_canvas_draw_lineP8lv_obj_tPK10lv_point_t8uint32_tPK10lv_style_t"></span><span id="_CPPv219lv_canvas_draw_lineP8lv_obj_tPK10lv_point_t8uint32_tPK10lv_style_t"></span><span id="lv_canvas_draw_line__lv_obj_tP.lv_point_tCP.uint32_t.lv_style_tCP"></span><span class="target" id="lv__canvas_8h_1aa835bb326d24daa91a273f2197e150ce"></span>void <code class="sig-name descname">lv_canvas_draw_line</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, <em class="property">const</em> lv_point_t *<em>points</em>, uint32_t <em>point_cnt</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_canvas_draw_lineP8lv_obj_tPK10lv_point_t8uint32_tPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Draw a line on the canvas <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">points</span></code>: point of the line </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">point_cnt</span></code>: number of points </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: style of the line (<code class="docutils literal notranslate"><span class="pre">line</span></code> properties are used) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422lv_canvas_draw_polygonP8lv_obj_tPK10lv_point_t8uint32_tPK10lv_style_t">
+<span id="_CPPv322lv_canvas_draw_polygonP8lv_obj_tPK10lv_point_t8uint32_tPK10lv_style_t"></span><span id="_CPPv222lv_canvas_draw_polygonP8lv_obj_tPK10lv_point_t8uint32_tPK10lv_style_t"></span><span id="lv_canvas_draw_polygon__lv_obj_tP.lv_point_tCP.uint32_t.lv_style_tCP"></span><span class="target" id="lv__canvas_8h_1a003d4b28d49437635958af6a7084c5e8"></span>void <code class="sig-name descname">lv_canvas_draw_polygon</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, <em class="property">const</em> lv_point_t *<em>points</em>, uint32_t <em>point_cnt</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lv_canvas_draw_polygonP8lv_obj_tPK10lv_point_t8uint32_tPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Draw a polygon on the canvas <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">points</span></code>: point of the polygon </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">point_cnt</span></code>: number of points </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: style of the polygon (<code class="docutils literal notranslate"><span class="pre">body.main_color</span></code> and <code class="docutils literal notranslate"><span class="pre">body.opa</span></code> is used) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv418lv_canvas_draw_arcP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_t7int32_t7int32_tPK10lv_style_t">
+<span id="_CPPv318lv_canvas_draw_arcP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_t7int32_t7int32_tPK10lv_style_t"></span><span id="_CPPv218lv_canvas_draw_arcP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_t7int32_t7int32_tPK10lv_style_t"></span><span id="lv_canvas_draw_arc__lv_obj_tP.lv_coord_t.lv_coord_t.lv_coord_t.int32_t.int32_t.lv_style_tCP"></span><span class="target" id="lv__canvas_8h_1a33ba18b127c96c4c82d3d976be7200e9"></span>void <code class="sig-name descname">lv_canvas_draw_arc</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, lv_coord_t <em>x</em>, lv_coord_t <em>y</em>, lv_coord_t <em>r</em>, int32_t <em>start_angle</em>, int32_t <em>end_angle</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_canvas_draw_arcP8lv_obj_t10lv_coord_t10lv_coord_t10lv_coord_t7int32_t7int32_tPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Draw an arc on the canvas <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: origo x of the arc </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: origo y of the arc </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r</span></code>: radius of the arc </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start_angle</span></code>: start angle in degrees </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end_angle</span></code>: end angle in degrees </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: style of the polygon (<code class="docutils literal notranslate"><span class="pre">body.main_color</span></code> and <code class="docutils literal notranslate"><span class="pre">body.opa</span></code> is used) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv415lv_canvas_ext_t">
+<span id="_CPPv315lv_canvas_ext_t"></span><span id="_CPPv215lv_canvas_ext_t"></span><span id="lv_canvas_ext_t"></span><span class="target" id="structlv__canvas__ext__t"></span><em class="property">struct </em><code class="sig-name descname">lv_canvas_ext_t</code><a class="headerlink" href="#_CPPv415lv_canvas_ext_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N15lv_canvas_ext_t3imgE">
+<span id="_CPPv3N15lv_canvas_ext_t3imgE"></span><span id="_CPPv2N15lv_canvas_ext_t3imgE"></span><span id="lv_canvas_ext_t::img__lv_img_ext_t"></span><span class="target" id="structlv__canvas__ext__t_1a011af07257267e1c3c53beba9eb4f5fa"></span><a class="reference internal" href="img.html#_CPPv412lv_img_ext_t" title="lv_img_ext_t">lv_img_ext_t</a> <code class="sig-name descname">img</code><a class="headerlink" href="#_CPPv4N15lv_canvas_ext_t3imgE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_canvas_ext_t3dscE">
+<span id="_CPPv3N15lv_canvas_ext_t3dscE"></span><span id="_CPPv2N15lv_canvas_ext_t3dscE"></span><span id="lv_canvas_ext_t::dsc__lv_img_dsc_t"></span><span class="target" id="structlv__canvas__ext__t_1a1322c6ead8267bfa24957751ce86c271"></span><a class="reference internal" href="../overview/image.html#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t">lv_img_dsc_t</a> <code class="sig-name descname">dsc</code><a class="headerlink" href="#_CPPv4N15lv_canvas_ext_t3dscE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cb.html" class="btn btn-neutral float-right" title="Check box (lv_cb)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="calendar.html" class="btn btn-neutral float-left" title="Calendar (lv_calendar)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Gabor Kiss-Vamosi
+      <span class="lastupdated">
+        Last updated on Jul 12, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

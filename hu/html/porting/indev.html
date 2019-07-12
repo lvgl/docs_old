@@ -1,0 +1,1714 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Input device interface &mdash; LittlevGL 6.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tick interface" href="tick.html" />
+    <link rel="prev" title="Display interface" href="display.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78811084-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78811084-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/white_white_lvgl_full_logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/live-demo.html">Élő demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#what-is-micropython">What is Micropython?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-highlights">Micropython highlights</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#so-how-does-it-look-like">So how does it look like?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#a-simple-example">A simple example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#how-can-i-use-it">How can I use it?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#online-simulator">Online Simulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#pc-simulator">PC Simulator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#the-real-thing">The real thing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#where-can-i-find-more-information">Where can I find more information?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#select-an-ide">Select an IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#set-up-eclipse-cdt">Set-up Eclipse CDT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-eclipse-cdt">Install Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#install-sdl-2">Install SDL 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#pre-configured-project">Pre-configured project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#add-the-pre-configured-project-to-eclipse-cdt">Add the pre-configured project to Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#compile-and-run">Compile and Run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Porting</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sys.html">System overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project.html">Set-up a project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project.html#get-the-library">Get the library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#initialization">Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="display.html">Display interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Input device interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#types-of-input-devices">Types of input devices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encoder">Encoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#button">Button</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#other-features">Other features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tick.html">Tick interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tick.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="task-handler.html">Task Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sleep.html">Sleep management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html">Operating system and interrupts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="os.html#tasks-and-threads">Tasks and threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="os.html#interrupts">Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="log.html">Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="log.html#log-level">Log level</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html#logging-with-printf">Logging with printf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html#custom-log-function">Custom log function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html#add-logs">Add logs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/object.html">Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#object-attributes">Object attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#basic-attributes">Basic attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#specific-attributes">Specific attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#object-s-working-mechanisms">Object’s working mechanisms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#parent-child-structure">Parent-child structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#moving-together">Moving together</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#visibility-only-on-the-parent">Visibility only on the parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#create-delete-objects">Create - delete objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#screen-the-most-basic-parent">Screen – the most basic parent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#order-of-creation">Order of creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layer">Top and sys layer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#event-types">Event types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#generic-events">Generic events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#special-events">Special events</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#custom-data">Custom data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#send-events-manually">Send events manually</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/style.html">Styles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#inherit-styles">Inherit styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-properties">Style properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#common-properties">Common properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#text-style-properties">Text style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#image-style-properties">Image style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#line-style-properties">Line style properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#built-in-styles">Built-in styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#create-new-styles">Create new styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-animations">Style animations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#style-example">Style example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#themes">Themes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#live-update">Live update</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#pointers">Pointers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#keypad-and-encoder">Keypad and encoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#groups">Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#live-demo">Live demo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#input-device">Input device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#id1">Groups</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/display.html">Displays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#using-only-one-display">Using only one display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#mirror-display">Mirror display</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#split-image">Split image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#screens">Screens</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#opaque-screen">Opaque screen</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#features-of-displays">Features of displays</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#inactivity">Inactivity</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#colors">Colors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#convert-color">Convert color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#swap-16-colors">Swap 16 colors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#create-and-mix-colors">Create and mix colors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#opacity">Opacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#built-in-colors">Built-in colors</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#display">Display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#id1">Colors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/font.html">Fonts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#unicode-support">Unicode support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#built-in-fonts">Built-in fonts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-font">Add new font</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-symbols">Add new symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-a-new-font-engine">Add a new font engine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/image.html">Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#store-images">Store images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#color-formats">Color formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#add-and-use-images">Add and use images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#online-converter">Online converter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#manually-create-an-image">Manually create an image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#use-images">Use images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#image-decoder">Image decoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#custom-image-formats">Custom image formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#register-an-image-decoder">Register an image decoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#manually-use-an-image-decoder">Manually use an image decoder</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#image-caching">Image caching</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#cache-size">Cache size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#value-of-images">Value of images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#memory-usage">Memory usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#clean-the-cache">Clean the cache</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/file-system.html">File system</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#add-a-driver">Add a driver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/file-system.html#use-drivers-for-images">Use drivers for images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/animation.html">Animations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#create-an-animation">Create an animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#animation-path">Animation path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#speed-vs-time">Speed vs time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#delete-animations">Delete animations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/animation.html#input-device">Input device</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/task.html">Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#create-a-task">Create a task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#ready-and-reset">Ready and Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#set-parameters">Set parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#one-shot-tasks">One-shot tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#measure-idle-time">Measure idle time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#asynchronous-calls">Asynchronous calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/drawing.html">Drawing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#buffering-types">Buffering types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#mechanism-of-screen-refreshing">Mechanism of screen refreshing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../object-types/index.html">Object types (Widgets)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/obj.html">Base object (lv_obj)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#coordinates">Coordinates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#parents-and-children">Parents and children</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#screens">Screens</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#layers">Layers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#style">Style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#events">Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#attributes">Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#opa-scale">Opa scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#protect">Protect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#groups">Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#extended-click-area">Extended click area</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#id1">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/arc.html">Arc (lv_arc)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/arc.html#angles">Angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/arc.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/arc.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/arc.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/bar.html">Bar (lv_bar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/bar.html#value-and-range">Value and range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/bar.html#symmetrical">Symmetrical</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/bar.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/bar.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/btn.html">Button (lv_btn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#states">States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#toggle">Toggle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#layout-and-fit">Layout and Fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#ink-effect">Ink effect</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/btnm.html">Button matrix (lv_btnm)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#button-s-text">Button’s text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#control-buttons">Control buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#one-toggle">One toggle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#recolor">Recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/calendar.html">Calendar (lv_calendar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#current-date">Current date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#shown-date">Shown date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#highlighted-days">Highlighted days</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#name-of-the-days">Name of the days</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#name-of-the-months">Name of the months</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/canvas.html">Canvas (lv_canvas)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#buffer">Buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#palette">Palette</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#drawing">Drawing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#rotate">Rotate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Check box (lv_cb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#text">Text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#check-uncheck">Check/Uncheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#inactive">Inactive</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/chart.html">Chart (lv_chart)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#data-series">Data series</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#series-type">Series’ type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#modify-the-data">Modify the data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#update-modes">Update modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#number-of-points">Number of points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#vertical-range">Vertical range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#division-lines">Division lines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#series-appearance">Series’ appearance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#tick-marks-and-labels">Tick marks and labels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cont.html">Container (lv_cont)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cont.html#layout">Layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cont.html#auto-fit">Auto fit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cont.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cont.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/ddlist.html">Drop down list (lv_ddlist)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#set-options">Set options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#get-selected-option">Get selected option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#align-the-options">Align the options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#height-and-width">Height and width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#animation-time">Animation time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#decoration-arrow">Decoration arrow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#stay-open">Stay open</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/gauge.html">Gauge (lv_gauge)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#scale">Scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#needles">Needles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#range">Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#critical-value">Critical value</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/img.html">Image (lv_img)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#image-source">Image source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#label-as-an-image">Label as an image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#transparency">Transparency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#palette-and-alpha-index">Palette and Alpha index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#recolor">Recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#auto-size">Auto-size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#mosaic">Mosaic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#offset">Offset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/imgbtn.html">Image button (lv_imgbtn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/imgbtn.html#image-sources">Image sources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/imgbtn.html#states">States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/imgbtn.html#toggle">Toggle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/imgbtn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/imgbtn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/kb.html">Keyboard (lv_kb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#modes">Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#assign-text-area">Assign Text area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#new-key-map">New key map</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/label.html">Label (lv_label)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#set-text">Set text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#line-break">Line break</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#long-modes">Long modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#text-align">Text align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#draw-background">Draw background</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#text-recolor">Text recolor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#very-long-texts">Very long texts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#symbols">Symbols</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/led.html">LED (lv_led)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/led.html#brightness">Brightness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/led.html#toggle">Toggle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/led.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/led.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/line.html">Line (lv_line)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/line.html#set-points">Set points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/line.html#auto-size">Auto-size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/line.html#invert-y">Invert y</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/line.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/line.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/list.html">List (lv_list)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#add-buttons">Add buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#delete-buttons">Delete buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#manual-navigation">Manual navigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#edge-flash">Edge flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#scroll-propagation">Scroll propagation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/lmeter.html">Line meter (lv_lmeter)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#set-value">Set value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#range-and-angles">Range and Angles</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/mbox.html">Message box (lv_mbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/mbox.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/mbox.html#set-text">Set text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/mbox.html#add-buttons">Add buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/mbox.html#auto-close">Auto-close</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/mbox.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/mbox.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/mbox.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/mbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/mbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/mbox.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/page.html">Page (lv_page)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/page.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#glue-object">Glue object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#focus-object">Focus object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#manual-navigation">Manual navigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#edge-flash">Edge flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#scroll-propagation">Scroll propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#scrollable-api">Scrollable API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/page.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/page.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/page.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/page.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/preload.html">Preloader (lv_preload)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#arc-length">Arc length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#spinning-speed">Spinning speed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#spin-types">Spin types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#spin-direction">Spin direction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/roller.html">Roller (lv_roller)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#set-options">Set options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#get-selected-option">Get selected option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#align-the-options">Align the options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#height-and-width">Height and width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/slider.html">Slider (lv_slider)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#value-and-range">Value and range</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#knob-placement">Knob placement</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/spinbox.html">Spinbox (lv_spinbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/spinbox.html#set-format">Set format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/spinbox.html#value-and-ranges">Value and ranges</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/spinbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/spinbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#id1">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/sw.html">Switch (lv_sw)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/sw.html#change-state">Change state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/sw.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/sw.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/sw.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/table.html">Table (lv_table)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#rows-and-columns">Rows and Columns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#width-and-height">Width and Height</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#set-cell-value">Set cell value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#align">Align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#cell-type">Cell type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#merge-cells">Merge cells</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#crop-text">Crop text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#scroll">Scroll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/tabview.html">Tabview (lv_tabview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#adding-tab">Adding tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#change-tab">Change tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#tab-button-s-position">Tab button’s position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#hide-the-tabs">Hide the tabs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/ta.html">Text area (lv_ta)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#add-text">Add text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#placeholder">Placeholder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#delete-character">Delete character</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#move-the-cursor">Move the cursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#cursor-types">Cursor types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#one-line-mode">One line mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#password-mode">Password mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#text-align">Text align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#accepted-characters">Accepted characters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#max-text-length">Max text length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#very-long-texts">Very long texts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#select-text">Select text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#scroll-propagation">Scroll propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#edge-flash">Edge flash</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/tileview.html">Tile view (lv_tileview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#valid-positions">Valid positions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#add-element">Add element</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#set-tile">Set tile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#animation-time">Animation time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#edge-flash">Edge flash</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/win.html">Window (lv_win)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#title">Title</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#control-buttons">Control buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#scrollbars">Scrollbars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#manual-scroll-and-focus">Manual scroll and focus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#layout">Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LittlevGL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Porting</a> &raquo;</li>
+        
+      <li>Input device interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/porting/indev.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="input-device-interface">
+<h1>Input device interface<a class="headerlink" href="#input-device-interface" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="types-of-input-devices">
+<h2>Types of input devices<a class="headerlink" href="#types-of-input-devices" title="Permalink to this headline">¶</a></h2>
+<p>To set up an input device an <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_t</span></code> variable has to be initialized:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_indev_drv_t</span> <span class="n">indev_drv</span><span class="p">;</span>
+<span class="n">lv_indev_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indev_drv</span><span class="p">);</span>      <span class="cm">/*Basic initialization*/</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span><span class="p">...</span>                 <span class="cm">/*See below.*/</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span><span class="p">...</span>              <span class="cm">/*See below.*/</span>
+<span class="cm">/*Register the driver in LittlevGL and save the created input device object*/</span>
+<span class="n">lv_indev_t</span> <span class="o">*</span> <span class="n">my_indev</span> <span class="o">=</span> <span class="n">lv_indev_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indev_drv</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>type</strong> can be</p>
+<ul class="simple">
+<li><p><strong>LV_INDEV_TYPE_POINTER</strong> touchpad or mouse</p></li>
+<li><p><strong>LV_INDEV_TYPE_KEYPAD</strong> keyboard or keypad</p></li>
+<li><p><strong>LV_INDEV_TYPE_ENCODER</strong> encoder with left, right, push options</p></li>
+<li><p><strong>LV_INDEV_TYPE_BUTTON</strong> external buttons pressing the screen</p></li>
+</ul>
+<p><strong>read_cb</strong> is a function pointer which will be called periodically to report the current state of an input device.
+It can also buffer data and return <code class="docutils literal notranslate"><span class="pre">false</span></code> when no more data to be read or <code class="docutils literal notranslate"><span class="pre">true</span></code> when the buffer is not empty.</p>
+<p>Visit <a class="reference internal" href="../overview/indev.html"><span class="doc">Input devices</span></a> to learn more about input devices in general.</p>
+<div class="section" id="touchpad-mouse-or-any-pointer">
+<h3>Touchpad, mouse or any pointer<a class="headerlink" href="#touchpad-mouse-or-any-pointer" title="Permalink to this headline">¶</a></h3>
+<p>Input devices which are able to click points of the screen belong to this category.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_POINTER</span><span class="p">;</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="kt">bool</span> <span class="n">my_input_read</span><span class="p">(</span><span class="n">lv_indev_drv_t</span> <span class="o">*</span> <span class="n">drv</span><span class="p">,</span> <span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">touchpad_x</span><span class="p">;</span> 
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">touchpad_y</span><span class="p">;</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span> <span class="n">or</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering now so no more data read*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Touchpad drivers must return the last X/Y coordinates even when the state is <em>LV_INDEV_STATE_REL</em>.</p>
+</div>
+<p>To set a mouse cursor use <code class="docutils literal notranslate"><span class="pre">lv_indev_set_cursor(my_indev,</span> <span class="pre">&amp;img_cursor)</span></code>. (<code class="docutils literal notranslate"><span class="pre">my_indev</span></code> is the return value of <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_register</span></code>)</p>
+</div>
+<div class="section" id="keypad-or-keyboard">
+<h3>Keypad or keyboard<a class="headerlink" href="#keypad-or-keyboard" title="Permalink to this headline">¶</a></h3>
+<p>Full keyboards with all the letters or simple keypads with a few navigation buttons belong here.</p>
+<p>To use a keyboard/keypad:</p>
+<ul class="simple">
+<li><p>Register a <code class="docutils literal notranslate"><span class="pre">read_cb</span></code> function with <code class="docutils literal notranslate"><span class="pre">LV_INDEV_TYPE_KEYPAD</span></code> type.</p></li>
+<li><p>Enable <code class="docutils literal notranslate"><span class="pre">LV_USE_GROUP</span></code> in <em>lv_conf.h</em></p></li>
+<li><p>An object group has to be created: <code class="docutils literal notranslate"><span class="pre">lv_group_t</span> <span class="pre">*</span> <span class="pre">g</span> <span class="pre">=</span> <span class="pre">lv_group_create()</span></code>  and objects have to be added to it with <code class="docutils literal notranslate"><span class="pre">lv_group_add_obj(g,</span> <span class="pre">obj)</span></code></p></li>
+<li><p>The created group has to be assigned to an input device: <code class="docutils literal notranslate"><span class="pre">lv_indev_set_group(my_indev,</span> <span class="pre">g)</span></code> (<code class="docutils literal notranslate"><span class="pre">my_indev</span></code> is the return value of <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_register</span></code>)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">LV_KEY_...</span></code> to navigate among the objects in the group. See <code class="docutils literal notranslate"><span class="pre">lv_core/lv_group.h</span></code> for the available keys.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_KEYPAD</span><span class="p">;</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="kt">bool</span> <span class="n">keyboard_read</span><span class="p">(</span><span class="n">lv_indev_drv_t</span> <span class="o">*</span> <span class="n">drv</span><span class="p">,</span> <span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">){</span>
+  <span class="n">data</span><span class="o">-&gt;</span><span class="n">key</span> <span class="o">=</span> <span class="n">last_key</span><span class="p">();</span>            <span class="cm">/*Get the last pressed or released key*/</span>
+  
+  <span class="k">if</span><span class="p">(</span><span class="n">key_pressed</span><span class="p">())</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>
+  <span class="k">else</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
+  
+  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering now so no more data read*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="encoder">
+<h3>Encoder<a class="headerlink" href="#encoder" title="Permalink to this headline">¶</a></h3>
+<p>With an encoder you can do 4 things:</p>
+<ol class="simple">
+<li><p>Press its button</p></li>
+<li><p>Long press its button</p></li>
+<li><p>Turn left</p></li>
+<li><p>Turn right</p></li>
+</ol>
+<p>In short, the Encoder input devices work like this:</p>
+<ul class="simple">
+<li><p>By turning the encoder you can focus on the next/previous object.</p></li>
+<li><p>When you press the encoder on a simple object (like a button), it will be clicked.</p></li>
+<li><p>If you press the encoder on a complex object (like a list, message box, etc.) the object will go to edit mode where by turning the encoder you can navigate inside the object.</p></li>
+<li><p>To leave edit mode press long the button.</p></li>
+</ul>
+<p>To use an <em>Encoder</em> (similarly to the <em>Keypads</em>) the objects should be added to groups.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_ENCODER</span><span class="p">;</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
+
+<span class="p">...</span> 
+ 
+<span class="kt">bool</span> <span class="n">encoder_read</span><span class="p">(</span><span class="n">lv_indev_drv_t</span> <span class="o">*</span> <span class="n">drv</span><span class="p">,</span> <span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">){</span>
+  <span class="n">data</span><span class="o">-&gt;</span><span class="n">enc_diff</span> <span class="o">=</span> <span class="n">enc_get_new_moves</span><span class="p">();</span>
+  
+  <span class="k">if</span><span class="p">(</span><span class="n">enc_pressed</span><span class="p">())</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>
+  <span class="k">else</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
+  
+  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering now so no more data read*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="button">
+<h3>Button<a class="headerlink" href="#button" title="Permalink to this headline">¶</a></h3>
+<p><em>Buttons</em> mean external “hardware” buttons next to the screen which are assigned to specific coordinates of the screen.
+If a button is pressed it will simulate the pressing on the assigned coordinate. (Similarly to a touchpad)</p>
+<p>To assign buttons to coordinates use <code class="docutils literal notranslate"><span class="pre">lv_indev_set_button_points(my_indev,</span> <span class="pre">points_array)</span></code>.<code class="docutils literal notranslate"><span class="pre">points_array</span></code> should look like <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">lv_point_t</span> <span class="pre">points_array[]</span> <span class="pre">=</span>&#160; <span class="pre">{</span> <span class="pre">{12,30},{60,90},</span> <span class="pre">...}</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_BUTTON</span><span class="p">;</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
+
+<span class="p">...</span>
+
+<span class="kt">bool</span> <span class="n">button_read</span><span class="p">(</span><span class="n">lv_indev_drv_t</span> <span class="o">*</span> <span class="n">drv</span><span class="p">,</span> <span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">){</span>
+    <span class="k">static</span> <span class="kt">uint32_t</span> <span class="n">last_btn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="cm">/*Store the last pressed button*/</span> 
+    <span class="kt">int</span> <span class="n">btn_pr</span> <span class="o">=</span> <span class="n">my_btn_read</span><span class="p">();</span>     <span class="cm">/*Get the ID (0,1,2...) of the pressed button*/</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">btn_pr</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>               <span class="cm">/*Is there a button press? (E.g. -1 indicated no button was pressed)*/</span>
+       <span class="n">last_btn</span> <span class="o">=</span> <span class="n">btn_pr</span><span class="p">;</span>           <span class="cm">/*Save the ID of the pressed button*/</span>
+       <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>  <span class="cm">/*Set the pressed state*/</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span> <span class="cm">/*Set the released state*/</span>
+    <span class="p">}</span>
+  
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">btn</span> <span class="o">=</span> <span class="n">last_btn</span><span class="p">;</span>            <span class="cm">/*Save the last button*/</span>
+   
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>                    <span class="cm">/*No buffering now so no more data read*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="other-features">
+<h2>Other features<a class="headerlink" href="#other-features" title="Permalink to this headline">¶</a></h2>
+<p>Besides <code class="docutils literal notranslate"><span class="pre">read_cb</span></code> a <code class="docutils literal notranslate"><span class="pre">feedback_cb</span></code> callback can be also specified in <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_t</span></code>.
+<code class="docutils literal notranslate"><span class="pre">feedback_cb</span></code> is called when any type of event is sent by the input devices. (independently from its type). It gives the opportunity to make feedback for the user e.g. to play a sound on <code class="docutils literal notranslate"><span class="pre">LV_EVENT_CLICK</span></code>.</p>
+<p>The default value of the following parameters can be set in <em>lv_conf.h</em> but the default value can be overwritten in <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_t</span></code>:</p>
+<ul class="simple">
+<li><p><strong>drag_limit</strong> Number of pixels to slide before actually drag the object</p></li>
+<li><p><strong>drag_throw</strong>  Drag throw slow-down in [%]. Greater value means faster slow-down</p></li>
+<li><p><strong>long_press_time</strong> Press time to send <code class="docutils literal notranslate"><span class="pre">LV_EVENT_LONG_PRESSED</span></code> (in milliseconds)</p></li>
+<li><p><strong>long_press_rep_time</strong> Interval of sending <code class="docutils literal notranslate"><span class="pre">LV_EVENT_LONG_PRESSED_REPEAT</span></code> (in milliseconds)</p></li>
+<li><p><strong>read_task</strong> pointer to the <code class="docutils literal notranslate"><span class="pre">lv_task</span></code> which reads the input device. It parameters can be changed by <code class="docutils literal notranslate"><span class="pre">lv_task_...()</span></code> functions</p></li>
+</ul>
+<p>Every Input device is associated with a display. By default, a new input device is added to the lastly created or the explicitly selected (using <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default()</span></code>) display.
+The associated display is stored and can be changed in <code class="docutils literal notranslate"><span class="pre">disp</span></code> field of the driver.</p>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<p>Input Device HAL interface layer header file </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv415lv_indev_type_t">
+<span id="_CPPv315lv_indev_type_t"></span><span id="_CPPv215lv_indev_type_t"></span><span id="lv_indev_type_t"></span><span class="target" id="lv__hal__indev_8h_1a80fb23fd688f28d72a096f9ef6f93ea3"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_indev_type_t</code><a class="headerlink" href="#_CPPv415lv_indev_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv416lv_indev_state_t">
+<span id="_CPPv316lv_indev_state_t"></span><span id="_CPPv216lv_indev_state_t"></span><span id="lv_indev_state_t"></span><span class="target" id="lv__hal__indev_8h_1a76797253c336c4f2efbd10012b34a70a"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_indev_state_t</code><a class="headerlink" href="#_CPPv416lv_indev_state_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv414lv_indev_drv_t">
+<span id="_CPPv314lv_indev_drv_t"></span><span id="_CPPv214lv_indev_drv_t"></span><span id="lv_indev_drv_t"></span><span class="target" id="lv__hal__indev_8h_1ae9d2b7f6e8f7858eadacb20d110ce74a"></span><em class="property">typedef </em><em class="property">struct</em> <a class="reference internal" href="#_CPPv415_lv_indev_drv_t" title="_lv_indev_drv_t">_lv_indev_drv_t</a> <code class="sig-name descname">lv_indev_drv_t</code><a class="headerlink" href="#_CPPv414lv_indev_drv_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialized by the user and registered by ‘lv_indev_add()’ </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv415lv_indev_proc_t">
+<span id="_CPPv315lv_indev_proc_t"></span><span id="_CPPv215lv_indev_proc_t"></span><span id="lv_indev_proc_t"></span><span class="target" id="lv__hal__indev_8h_1a879d56a3b2755d01640a0404c9382a2d"></span><em class="property">typedef </em><em class="property">struct</em> <a class="reference internal" href="#_CPPv416_lv_indev_proc_t" title="_lv_indev_proc_t">_lv_indev_proc_t</a> <code class="sig-name descname">lv_indev_proc_t</code><a class="headerlink" href="#_CPPv415lv_indev_proc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Run time data of input devices Internally used by the library, you should not need to touch it. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv410lv_indev_t">
+<span id="_CPPv310lv_indev_t"></span><span id="_CPPv210lv_indev_t"></span><span id="lv_indev_t"></span><span class="target" id="lv__hal__indev_8h_1a21cbd71ad2a47405c19d01ac641e7155"></span><em class="property">typedef </em><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_lv_indev_t" title="_lv_indev_t">_lv_indev_t</a> <code class="sig-name descname">lv_indev_t</code><a class="headerlink" href="#_CPPv410lv_indev_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The main input device descriptor with driver, runtime data (‘proc’) and some additional information </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv4Ut7_anon_20">
+<span id="_CPPv3Ut7_anon_20"></span><span class="target" id="lv__hal__indev_8h_1adb49720dc49f7d4e4cf9adbf2948e409"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_20" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Possible input device types </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv418LV_INDEV_TYPE_NONE">
+<span id="_CPPv318LV_INDEV_TYPE_NONE"></span><span id="_CPPv218LV_INDEV_TYPE_NONE"></span><span class="target" id="lv__hal__indev_8h_1adb49720dc49f7d4e4cf9adbf2948e409a5c2a83039d7a8073d24569b85b6048f4"></span><code class="sig-name descname">LV_INDEV_TYPE_NONE</code><a class="headerlink" href="#_CPPv418LV_INDEV_TYPE_NONE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Uninitialized state </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421LV_INDEV_TYPE_POINTER">
+<span id="_CPPv321LV_INDEV_TYPE_POINTER"></span><span id="_CPPv221LV_INDEV_TYPE_POINTER"></span><span class="target" id="lv__hal__indev_8h_1adb49720dc49f7d4e4cf9adbf2948e409a266ddfccb1f31d538489eea5667ebebf"></span><code class="sig-name descname">LV_INDEV_TYPE_POINTER</code><a class="headerlink" href="#_CPPv421LV_INDEV_TYPE_POINTER" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Touch pad, mouse, external button </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv420LV_INDEV_TYPE_KEYPAD">
+<span id="_CPPv320LV_INDEV_TYPE_KEYPAD"></span><span id="_CPPv220LV_INDEV_TYPE_KEYPAD"></span><span class="target" id="lv__hal__indev_8h_1adb49720dc49f7d4e4cf9adbf2948e409a9f8299c12ea91ab8e7a6e783b9b0664d"></span><code class="sig-name descname">LV_INDEV_TYPE_KEYPAD</code><a class="headerlink" href="#_CPPv420LV_INDEV_TYPE_KEYPAD" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Keypad or keyboard </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv420LV_INDEV_TYPE_BUTTON">
+<span id="_CPPv320LV_INDEV_TYPE_BUTTON"></span><span id="_CPPv220LV_INDEV_TYPE_BUTTON"></span><span class="target" id="lv__hal__indev_8h_1adb49720dc49f7d4e4cf9adbf2948e409aa9b43a6f629907e83436dd9cf7973f84"></span><code class="sig-name descname">LV_INDEV_TYPE_BUTTON</code><a class="headerlink" href="#_CPPv420LV_INDEV_TYPE_BUTTON" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>External (hardware button) which is assigned to a specific point of the screen </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421LV_INDEV_TYPE_ENCODER">
+<span id="_CPPv321LV_INDEV_TYPE_ENCODER"></span><span id="_CPPv221LV_INDEV_TYPE_ENCODER"></span><span class="target" id="lv__hal__indev_8h_1adb49720dc49f7d4e4cf9adbf2948e409ac14b17fb683f428c1bb935748ce0d5aa"></span><code class="sig-name descname">LV_INDEV_TYPE_ENCODER</code><a class="headerlink" href="#_CPPv421LV_INDEV_TYPE_ENCODER" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Encoder with only Left, Right turn and a Button </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv4Ut7_anon_21">
+<span id="_CPPv3Ut7_anon_21"></span><span class="target" id="lv__hal__indev_8h_1aae05225933a42f81e7c4a9fb286596f9"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_21" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>States for input devices </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv418LV_INDEV_STATE_REL">
+<span id="_CPPv318LV_INDEV_STATE_REL"></span><span id="_CPPv218LV_INDEV_STATE_REL"></span><span class="target" id="lv__hal__indev_8h_1aae05225933a42f81e7c4a9fb286596f9aa3277563162cfcf2c1762e5a98d1401e"></span><code class="sig-name descname">LV_INDEV_STATE_REL</code> = 0<a class="headerlink" href="#_CPPv418LV_INDEV_STATE_REL" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv417LV_INDEV_STATE_PR">
+<span id="_CPPv317LV_INDEV_STATE_PR"></span><span id="_CPPv217LV_INDEV_STATE_PR"></span><span class="target" id="lv__hal__indev_8h_1aae05225933a42f81e7c4a9fb286596f9a58a27b5353714d94ab9376dddbacc2c3"></span><code class="sig-name descname">LV_INDEV_STATE_PR</code><a class="headerlink" href="#_CPPv417LV_INDEV_STATE_PR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv417lv_indev_drv_initP14lv_indev_drv_t">
+<span id="_CPPv317lv_indev_drv_initP14lv_indev_drv_t"></span><span id="_CPPv217lv_indev_drv_initP14lv_indev_drv_t"></span><span id="lv_indev_drv_init__lv_indev_drv_tP"></span><span class="target" id="lv__hal__indev_8h_1ab2cd745b1165c504273709aa9ec75a2d"></span>void <code class="sig-name descname">lv_indev_drv_init</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv414lv_indev_drv_t" title="lv_indev_drv_t">lv_indev_drv_t</a> *<em>driver</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_indev_drv_initP14lv_indev_drv_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize an input device driver with default values. It is used to surly have known values in the fields ant not memory junk. After it you can set the fields. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">driver</span></code>: pointer to driver variable to initialize </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_indev_drv_registerP14lv_indev_drv_t">
+<span id="_CPPv321lv_indev_drv_registerP14lv_indev_drv_t"></span><span id="_CPPv221lv_indev_drv_registerP14lv_indev_drv_t"></span><span id="lv_indev_drv_register__lv_indev_drv_tP"></span><span class="target" id="lv__hal__indev_8h_1af7a17041ab8c72ffe78b0951581bd9b9"></span><a class="reference internal" href="#_CPPv410lv_indev_t" title="lv_indev_t">lv_indev_t</a> *<code class="sig-name descname">lv_indev_drv_register</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv414lv_indev_drv_t" title="lv_indev_drv_t">lv_indev_drv_t</a> *<em>driver</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_indev_drv_registerP14lv_indev_drv_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register an initialized input device driver. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the new input device or NULL on error </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">driver</span></code>: pointer to an initialized ‘lv_indev_drv_t’ variable (can be local variable) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_indev_drv_updateP10lv_indev_tP14lv_indev_drv_t">
+<span id="_CPPv319lv_indev_drv_updateP10lv_indev_tP14lv_indev_drv_t"></span><span id="_CPPv219lv_indev_drv_updateP10lv_indev_tP14lv_indev_drv_t"></span><span id="lv_indev_drv_update__lv_indev_tP.lv_indev_drv_tP"></span><span class="target" id="lv__hal__indev_8h_1a1992517f711f45c67de966d82c5cbcc4"></span>void <code class="sig-name descname">lv_indev_drv_update</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_indev_t" title="lv_indev_t">lv_indev_t</a> *<em>indev</em>, <a class="reference internal" href="#_CPPv414lv_indev_drv_t" title="lv_indev_drv_t">lv_indev_drv_t</a> *<em>new_drv</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_indev_drv_updateP10lv_indev_tP14lv_indev_drv_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Update the driver in run time. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">indev</span></code>: pointer to a input device. (return value of <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_register</span></code>) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">new_drv</span></code>: pointer to the new driver </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv417lv_indev_get_nextP10lv_indev_t">
+<span id="_CPPv317lv_indev_get_nextP10lv_indev_t"></span><span id="_CPPv217lv_indev_get_nextP10lv_indev_t"></span><span id="lv_indev_get_next__lv_indev_tP"></span><span class="target" id="lv__hal__indev_8h_1adb9ab2d384afe15273206e6565ca6442"></span><a class="reference internal" href="#_CPPv410lv_indev_t" title="lv_indev_t">lv_indev_t</a> *<code class="sig-name descname">lv_indev_get_next</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_indev_t" title="lv_indev_t">lv_indev_t</a> *<em>indev</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_indev_get_nextP10lv_indev_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the next input device. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the next input devise or NULL if no more. Give the first input device when the parameter is NULL </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">indev</span></code>: pointer to the current input device. NULL to initialize. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv413lv_indev_readP10lv_indev_tP15lv_indev_data_t">
+<span id="_CPPv313lv_indev_readP10lv_indev_tP15lv_indev_data_t"></span><span id="_CPPv213lv_indev_readP10lv_indev_tP15lv_indev_data_t"></span><span id="lv_indev_read__lv_indev_tP.lv_indev_data_tP"></span><span class="target" id="lv__hal__indev_8h_1a1a8793a4f405e6cdb6e9a8e948b408ad"></span>bool <code class="sig-name descname">lv_indev_read</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_indev_t" title="lv_indev_t">lv_indev_t</a> *<em>indev</em>, <a class="reference internal" href="#_CPPv415lv_indev_data_t" title="lv_indev_data_t">lv_indev_data_t</a> *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lv_indev_readP10lv_indev_tP15lv_indev_data_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Read data from an input device. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>false: no more data; true: there more data to read (buffered) </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">indev</span></code>: pointer to an input device </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: input device will write its data here </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv415lv_indev_data_t">
+<span id="_CPPv315lv_indev_data_t"></span><span id="_CPPv215lv_indev_data_t"></span><span id="lv_indev_data_t"></span><span class="target" id="structlv__indev__data__t"></span><em class="property">struct </em><code class="sig-name descname">lv_indev_data_t</code><a class="headerlink" href="#_CPPv415lv_indev_data_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;lv_hal_indev.h&gt;</em><p>Data structure passed to an input driver to fill </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N15lv_indev_data_t5pointE">
+<span id="_CPPv3N15lv_indev_data_t5pointE"></span><span id="_CPPv2N15lv_indev_data_t5pointE"></span><span id="lv_indev_data_t::point__lv_point_t"></span><span class="target" id="structlv__indev__data__t_1afaecb3fba20bd3d6f798dea8b207f257"></span>lv_point_t <code class="sig-name descname">point</code><a class="headerlink" href="#_CPPv4N15lv_indev_data_t5pointE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>For LV_INDEV_TYPE_POINTER the currently pressed point </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_indev_data_t3keyE">
+<span id="_CPPv3N15lv_indev_data_t3keyE"></span><span id="_CPPv2N15lv_indev_data_t3keyE"></span><span id="lv_indev_data_t::key__uint32_t"></span><span class="target" id="structlv__indev__data__t_1a5f93f90c6ffe0f7db54a0fc43a1cef9c"></span>uint32_t <code class="sig-name descname">key</code><a class="headerlink" href="#_CPPv4N15lv_indev_data_t3keyE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>For LV_INDEV_TYPE_KEYPAD the currently pressed key </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_indev_data_t6btn_idE">
+<span id="_CPPv3N15lv_indev_data_t6btn_idE"></span><span id="_CPPv2N15lv_indev_data_t6btn_idE"></span><span id="lv_indev_data_t::btn_id__uint32_t"></span><span class="target" id="structlv__indev__data__t_1a5c9452fed20a2e6f91bfff86d0bcc6d6"></span>uint32_t <code class="sig-name descname">btn_id</code><a class="headerlink" href="#_CPPv4N15lv_indev_data_t6btn_idE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>For LV_INDEV_TYPE_BUTTON the currently pressed button </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_indev_data_t8enc_diffE">
+<span id="_CPPv3N15lv_indev_data_t8enc_diffE"></span><span id="_CPPv2N15lv_indev_data_t8enc_diffE"></span><span id="lv_indev_data_t::enc_diff__int16_t"></span><span class="target" id="structlv__indev__data__t_1a13b86f5548c334dc240f85a74c96195e"></span>int16_t <code class="sig-name descname">enc_diff</code><a class="headerlink" href="#_CPPv4N15lv_indev_data_t8enc_diffE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>For LV_INDEV_TYPE_ENCODER number of steps since the previous read </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_indev_data_t5stateE">
+<span id="_CPPv3N15lv_indev_data_t5stateE"></span><span id="_CPPv2N15lv_indev_data_t5stateE"></span><span id="lv_indev_data_t::state__lv_indev_state_t"></span><span class="target" id="structlv__indev__data__t_1aed0de26ed88301e92bc3d95020a9893b"></span><a class="reference internal" href="#_CPPv416lv_indev_state_t" title="lv_indev_state_t">lv_indev_state_t</a> <code class="sig-name descname">state</code><a class="headerlink" href="#_CPPv4N15lv_indev_data_t5stateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>LV_INDEV_STATE_REL or LV_INDEV_STATE_PR </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv415_lv_indev_drv_t">
+<span id="_CPPv315_lv_indev_drv_t"></span><span id="_CPPv215_lv_indev_drv_t"></span><span id="_lv_indev_drv_t"></span><span class="target" id="struct__lv__indev__drv__t"></span><em class="property">struct </em><code class="sig-name descname">_lv_indev_drv_t</code><a class="headerlink" href="#_CPPv415_lv_indev_drv_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;lv_hal_indev.h&gt;</em><p>Initialized by the user and registered by ‘lv_indev_add()’ </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N15_lv_indev_drv_t4typeE">
+<span id="_CPPv3N15_lv_indev_drv_t4typeE"></span><span id="_CPPv2N15_lv_indev_drv_t4typeE"></span><span id="_lv_indev_drv_t::type__lv_indev_type_t"></span><span class="target" id="struct__lv__indev__drv__t_1afcf65997bfa34ba6277814d214b5ef55"></span><a class="reference internal" href="#_CPPv415lv_indev_type_t" title="lv_indev_type_t">lv_indev_type_t</a> <code class="sig-name descname">type</code><a class="headerlink" href="#_CPPv4N15_lv_indev_drv_t4typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>&lt; Input device type Function pointer to read input device data. Return ‘true’ if there is more data to be read (buffered). Most drivers can safely return ‘false’ </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_indev_drv_t7read_cbE">
+<span id="_CPPv3N15_lv_indev_drv_t7read_cbE"></span><span id="_CPPv2N15_lv_indev_drv_t7read_cbE"></span><span class="target" id="struct__lv__indev__drv__t_1a374b71d88ad8e82113d9dd6b3caa41cd"></span>bool (*<code class="sig-name descname">read_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv415_lv_indev_drv_t" title="_lv_indev_drv_t">_lv_indev_drv_t</a> *indev_drv, <a class="reference internal" href="#_CPPv415lv_indev_data_t" title="lv_indev_data_t">lv_indev_data_t</a> *data<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15_lv_indev_drv_t7read_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_indev_drv_t11feedback_cbE">
+<span id="_CPPv3N15_lv_indev_drv_t11feedback_cbE"></span><span id="_CPPv2N15_lv_indev_drv_t11feedback_cbE"></span><span class="target" id="struct__lv__indev__drv__t_1a2761f98ff5415e7522b7a389f3b89e70"></span>void (*<code class="sig-name descname">feedback_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv415_lv_indev_drv_t" title="_lv_indev_drv_t">_lv_indev_drv_t</a> *, uint8_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N15_lv_indev_drv_t11feedback_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called when an action happened on the input device. The second parameter is the event from <code class="docutils literal notranslate"><span class="pre">lv_event_t</span></code> </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_indev_drv_t9user_dataE">
+<span id="_CPPv3N15_lv_indev_drv_t9user_dataE"></span><span id="_CPPv2N15_lv_indev_drv_t9user_dataE"></span><span id="_lv_indev_drv_t::user_data__lv_indev_drv_user_data_t"></span><span class="target" id="struct__lv__indev__drv__t_1ab3da790f03dd274dd2ed7343cd608fd7"></span>lv_indev_drv_user_data_t <code class="sig-name descname">user_data</code><a class="headerlink" href="#_CPPv4N15_lv_indev_drv_t9user_dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_indev_drv_t4dispE">
+<span id="_CPPv3N15_lv_indev_drv_t4dispE"></span><span id="_CPPv2N15_lv_indev_drv_t4dispE"></span><span id="_lv_indev_drv_t::disp___disp_tP"></span><span class="target" id="struct__lv__indev__drv__t_1aafc5cea1246f7b4b4c5dfd3619c4e597"></span><em class="property">struct</em> <a class="reference internal" href="display.html#_CPPv47_disp_t" title="_disp_t">_disp_t</a> *<code class="sig-name descname">disp</code><a class="headerlink" href="#_CPPv4N15_lv_indev_drv_t4dispE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>&lt; Pointer to the assigned display Task to read the periodically read the input device </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_indev_drv_t9read_taskE">
+<span id="_CPPv3N15_lv_indev_drv_t9read_taskE"></span><span id="_CPPv2N15_lv_indev_drv_t9read_taskE"></span><span id="_lv_indev_drv_t::read_task__lv_task_tP"></span><span class="target" id="struct__lv__indev__drv__t_1a53b69f2e630f9cef35f27506d19ebf25"></span><a class="reference internal" href="../overview/task.html#_CPPv49lv_task_t" title="lv_task_t">lv_task_t</a> *<code class="sig-name descname">read_task</code><a class="headerlink" href="#_CPPv4N15_lv_indev_drv_t9read_taskE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Number of pixels to slide before actually drag the object </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_indev_drv_t10drag_limitE">
+<span id="_CPPv3N15_lv_indev_drv_t10drag_limitE"></span><span id="_CPPv2N15_lv_indev_drv_t10drag_limitE"></span><span id="_lv_indev_drv_t::drag_limit__uint8_t"></span><span class="target" id="struct__lv__indev__drv__t_1acfed4c51676d5c47b225ef9332d67dab"></span>uint8_t <code class="sig-name descname">drag_limit</code><a class="headerlink" href="#_CPPv4N15_lv_indev_drv_t10drag_limitE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Drag throw slow-down in [%]. Greater value means faster slow-down </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_indev_drv_t10drag_throwE">
+<span id="_CPPv3N15_lv_indev_drv_t10drag_throwE"></span><span id="_CPPv2N15_lv_indev_drv_t10drag_throwE"></span><span id="_lv_indev_drv_t::drag_throw__uint8_t"></span><span class="target" id="struct__lv__indev__drv__t_1a2e049a5dca47e2d231e291f7b6ba656b"></span>uint8_t <code class="sig-name descname">drag_throw</code><a class="headerlink" href="#_CPPv4N15_lv_indev_drv_t10drag_throwE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Long press time in milliseconds </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_indev_drv_t15long_press_timeE">
+<span id="_CPPv3N15_lv_indev_drv_t15long_press_timeE"></span><span id="_CPPv2N15_lv_indev_drv_t15long_press_timeE"></span><span id="_lv_indev_drv_t::long_press_time__uint16_t"></span><span class="target" id="struct__lv__indev__drv__t_1aed13a62b3f85ab444db64e8f6e9fa215"></span>uint16_t <code class="sig-name descname">long_press_time</code><a class="headerlink" href="#_CPPv4N15_lv_indev_drv_t15long_press_timeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Repeated trigger period in long press [ms] </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15_lv_indev_drv_t19long_press_rep_timeE">
+<span id="_CPPv3N15_lv_indev_drv_t19long_press_rep_timeE"></span><span id="_CPPv2N15_lv_indev_drv_t19long_press_rep_timeE"></span><span id="_lv_indev_drv_t::long_press_rep_time__uint16_t"></span><span class="target" id="struct__lv__indev__drv__t_1a5c1900adea1fc49c0d8a7e4108131264"></span>uint16_t <code class="sig-name descname">long_press_rep_time</code><a class="headerlink" href="#_CPPv4N15_lv_indev_drv_t19long_press_rep_timeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv416_lv_indev_proc_t">
+<span id="_CPPv316_lv_indev_proc_t"></span><span id="_CPPv216_lv_indev_proc_t"></span><span id="_lv_indev_proc_t"></span><span class="target" id="struct__lv__indev__proc__t"></span><em class="property">struct </em><code class="sig-name descname">_lv_indev_proc_t</code><a class="headerlink" href="#_CPPv416_lv_indev_proc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;lv_hal_indev.h&gt;</em><p>Run time data of input devices Internally used by the library, you should not need to touch it. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t5stateE">
+<span id="_CPPv3N16_lv_indev_proc_t5stateE"></span><span id="_CPPv2N16_lv_indev_proc_t5stateE"></span><span id="_lv_indev_proc_t::state__lv_indev_state_t"></span><span class="target" id="struct__lv__indev__proc__t_1a993ced14d531f55381346cebf8a978d8"></span><a class="reference internal" href="#_CPPv416lv_indev_state_t" title="lv_indev_state_t">lv_indev_state_t</a> <code class="sig-name descname">state</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t5stateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Current state of the input device. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t9act_pointE">
+<span id="_CPPv3N16_lv_indev_proc_t9act_pointE"></span><span id="_CPPv2N16_lv_indev_proc_t9act_pointE"></span><span id="_lv_indev_proc_t::act_point__lv_point_t"></span><span class="target" id="struct__lv__indev__proc__t_1a07c31da6ce2d8bf13495979a4cfde167"></span>lv_point_t <code class="sig-name descname">act_point</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t9act_pointE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Current point of input device. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t10last_pointE">
+<span id="_CPPv3N16_lv_indev_proc_t10last_pointE"></span><span id="_CPPv2N16_lv_indev_proc_t10last_pointE"></span><span id="_lv_indev_proc_t::last_point__lv_point_t"></span><span class="target" id="struct__lv__indev__proc__t_1a1cdaaba80366c5e69643ce39e9ccfe54"></span>lv_point_t <code class="sig-name descname">last_point</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t10last_pointE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Last point of input device. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t4vectE">
+<span id="_CPPv3N16_lv_indev_proc_t4vectE"></span><span id="_CPPv2N16_lv_indev_proc_t4vectE"></span><span id="_lv_indev_proc_t::vect__lv_point_t"></span><span class="target" id="struct__lv__indev__proc__t_1a311ca773c25e7719b27ec09a36bf17e1"></span>lv_point_t <code class="sig-name descname">vect</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t4vectE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Difference between <code class="docutils literal notranslate"><span class="pre">act_point</span></code> and <code class="docutils literal notranslate"><span class="pre">last_point</span></code>. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t8drag_sumE">
+<span id="_CPPv3N16_lv_indev_proc_t8drag_sumE"></span><span id="_CPPv2N16_lv_indev_proc_t8drag_sumE"></span><span id="_lv_indev_proc_t::drag_sum__lv_point_t"></span><span class="target" id="struct__lv__indev__proc__t_1a1e747cc08454e61d9dfb2a6b71ed4b90"></span>lv_point_t <code class="sig-name descname">drag_sum</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t8drag_sumE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t15drag_throw_vectE">
+<span id="_CPPv3N16_lv_indev_proc_t15drag_throw_vectE"></span><span id="_CPPv2N16_lv_indev_proc_t15drag_throw_vectE"></span><span id="_lv_indev_proc_t::drag_throw_vect__lv_point_t"></span><span class="target" id="struct__lv__indev__proc__t_1aadf844a002504447f6803cac5fa73528"></span>lv_point_t <code class="sig-name descname">drag_throw_vect</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t15drag_throw_vectE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t7act_objE">
+<span id="_CPPv3N16_lv_indev_proc_t7act_objE"></span><span id="_CPPv2N16_lv_indev_proc_t7act_objE"></span><span id="_lv_indev_proc_t::act_obj___lv_obj_tP"></span><span class="target" id="struct__lv__indev__proc__t_1a418af1d0a3452e6c97d22f6a690c2927"></span><em class="property">struct</em> <a class="reference internal" href="../object-types/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<code class="sig-name descname">act_obj</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t7act_objE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t8last_objE">
+<span id="_CPPv3N16_lv_indev_proc_t8last_objE"></span><span id="_CPPv2N16_lv_indev_proc_t8last_objE"></span><span id="_lv_indev_proc_t::last_obj___lv_obj_tP"></span><span class="target" id="struct__lv__indev__proc__t_1a31f25629da14f973a050f3723b47bb53"></span><em class="property">struct</em> <a class="reference internal" href="../object-types/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<code class="sig-name descname">last_obj</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t8last_objE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t12last_pressedE">
+<span id="_CPPv3N16_lv_indev_proc_t12last_pressedE"></span><span id="_CPPv2N16_lv_indev_proc_t12last_pressedE"></span><span id="_lv_indev_proc_t::last_pressed___lv_obj_tP"></span><span class="target" id="struct__lv__indev__proc__t_1a989c1d45df566aef0219fbc90f2ab628"></span><em class="property">struct</em> <a class="reference internal" href="../object-types/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<code class="sig-name descname">last_pressed</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t12last_pressedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t14drag_limit_outE">
+<span id="_CPPv3N16_lv_indev_proc_t14drag_limit_outE"></span><span id="_CPPv2N16_lv_indev_proc_t14drag_limit_outE"></span><span id="_lv_indev_proc_t::drag_limit_out__uint8_t"></span><span class="target" id="struct__lv__indev__proc__t_1adf24568c9e0a79d95e828eb5a894b9e9"></span>uint8_t <code class="sig-name descname">drag_limit_out</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t14drag_limit_outE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t12drag_in_progE">
+<span id="_CPPv3N16_lv_indev_proc_t12drag_in_progE"></span><span id="_CPPv2N16_lv_indev_proc_t12drag_in_progE"></span><span id="_lv_indev_proc_t::drag_in_prog__uint8_t"></span><span class="target" id="struct__lv__indev__proc__t_1a4be20f577cc3ee6f283d25da9037b444"></span>uint8_t <code class="sig-name descname">drag_in_prog</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t12drag_in_progE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t7pointerE">
+<span id="_CPPv3N16_lv_indev_proc_t7pointerE"></span><span id="_CPPv2N16_lv_indev_proc_t7pointerE"></span><span class="target" id="struct__lv__indev__proc__t_1a8c9fed93c2c60ffab3b67178a672d91c"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv416_lv_indev_proc_t" title="_lv_indev_proc_t">_lv_indev_proc_t</a>::<strong>[anonymous]</strong>::<strong>[anonymous]</strong> <code class="sig-name descname">pointer</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t7pointerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t10last_stateE">
+<span id="_CPPv3N16_lv_indev_proc_t10last_stateE"></span><span id="_CPPv2N16_lv_indev_proc_t10last_stateE"></span><span id="_lv_indev_proc_t::last_state__lv_indev_state_t"></span><span class="target" id="struct__lv__indev__proc__t_1a85c684f0eccad01a4f7cfe4ab4ebab89"></span><a class="reference internal" href="#_CPPv416lv_indev_state_t" title="lv_indev_state_t">lv_indev_state_t</a> <code class="sig-name descname">last_state</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t10last_stateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t8last_keyE">
+<span id="_CPPv3N16_lv_indev_proc_t8last_keyE"></span><span id="_CPPv2N16_lv_indev_proc_t8last_keyE"></span><span id="_lv_indev_proc_t::last_key__uint32_t"></span><span class="target" id="struct__lv__indev__proc__t_1af5b18f4a595a9a1b74a7665b5e55f42b"></span>uint32_t <code class="sig-name descname">last_key</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t8last_keyE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t6keypadE">
+<span id="_CPPv3N16_lv_indev_proc_t6keypadE"></span><span id="_CPPv2N16_lv_indev_proc_t6keypadE"></span><span class="target" id="struct__lv__indev__proc__t_1ade519567f961eabc76ee15e740f2c998"></span><em class="property">struct</em> <a class="reference internal" href="#_CPPv416_lv_indev_proc_t" title="_lv_indev_proc_t">_lv_indev_proc_t</a>::<strong>[anonymous]</strong>::<strong>[anonymous]</strong> <code class="sig-name descname">keypad</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t6keypadE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t5typesE">
+<span id="_CPPv3N16_lv_indev_proc_t5typesE"></span><span id="_CPPv2N16_lv_indev_proc_t5typesE"></span><span class="target" id="struct__lv__indev__proc__t_1a996be076c58d698306dfc8713f246071"></span><em class="property">union</em> <a class="reference internal" href="#_CPPv416_lv_indev_proc_t" title="_lv_indev_proc_t">_lv_indev_proc_t</a>::<strong>[anonymous]</strong> <code class="sig-name descname">types</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t5typesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t12pr_timestampE">
+<span id="_CPPv3N16_lv_indev_proc_t12pr_timestampE"></span><span id="_CPPv2N16_lv_indev_proc_t12pr_timestampE"></span><span id="_lv_indev_proc_t::pr_timestamp__uint32_t"></span><span class="target" id="struct__lv__indev__proc__t_1a610fbc71cd450b55c0ad5fdf38dfaf5a"></span>uint32_t <code class="sig-name descname">pr_timestamp</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t12pr_timestampE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Pressed time stamp </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t20longpr_rep_timestampE">
+<span id="_CPPv3N16_lv_indev_proc_t20longpr_rep_timestampE"></span><span id="_CPPv2N16_lv_indev_proc_t20longpr_rep_timestampE"></span><span id="_lv_indev_proc_t::longpr_rep_timestamp__uint32_t"></span><span class="target" id="struct__lv__indev__proc__t_1a943cbd9cf549902dc4cfae4fbcea181f"></span>uint32_t <code class="sig-name descname">longpr_rep_timestamp</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t20longpr_rep_timestampE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Long press repeat time stamp </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t12long_pr_sentE">
+<span id="_CPPv3N16_lv_indev_proc_t12long_pr_sentE"></span><span id="_CPPv2N16_lv_indev_proc_t12long_pr_sentE"></span><span id="_lv_indev_proc_t::long_pr_sent__uint8_t"></span><span class="target" id="struct__lv__indev__proc__t_1a69c492deb716c6f9e9ce7bd1e691c19d"></span>uint8_t <code class="sig-name descname">long_pr_sent</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t12long_pr_sentE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t11reset_queryE">
+<span id="_CPPv3N16_lv_indev_proc_t11reset_queryE"></span><span id="_CPPv2N16_lv_indev_proc_t11reset_queryE"></span><span id="_lv_indev_proc_t::reset_query__uint8_t"></span><span class="target" id="struct__lv__indev__proc__t_1ab7a4b61acd0befd72fd772d2e51704f5"></span>uint8_t <code class="sig-name descname">reset_query</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t11reset_queryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t8disabledE">
+<span id="_CPPv3N16_lv_indev_proc_t8disabledE"></span><span id="_CPPv2N16_lv_indev_proc_t8disabledE"></span><span id="_lv_indev_proc_t::disabled__uint8_t"></span><span class="target" id="struct__lv__indev__proc__t_1af72a80aed5ad581416e5c33dfe3e93f8"></span>uint8_t <code class="sig-name descname">disabled</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t8disabledE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N16_lv_indev_proc_t18wait_until_releaseE">
+<span id="_CPPv3N16_lv_indev_proc_t18wait_until_releaseE"></span><span id="_CPPv2N16_lv_indev_proc_t18wait_until_releaseE"></span><span id="_lv_indev_proc_t::wait_until_release__uint8_t"></span><span class="target" id="struct__lv__indev__proc__t_1affc96e7c25e11f103573f7d9e5fd102f"></span>uint8_t <code class="sig-name descname">wait_until_release</code><a class="headerlink" href="#_CPPv4N16_lv_indev_proc_t18wait_until_releaseE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv411_lv_indev_t">
+<span id="_CPPv311_lv_indev_t"></span><span id="_CPPv211_lv_indev_t"></span><span id="_lv_indev_t"></span><span class="target" id="struct__lv__indev__t"></span><em class="property">struct </em><code class="sig-name descname">_lv_indev_t</code><a class="headerlink" href="#_CPPv411_lv_indev_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;lv_hal_indev.h&gt;</em><p>The main input device descriptor with driver, runtime data (‘proc’) and some additional information </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N11_lv_indev_t6driverE">
+<span id="_CPPv3N11_lv_indev_t6driverE"></span><span id="_CPPv2N11_lv_indev_t6driverE"></span><span id="_lv_indev_t::driver__lv_indev_drv_t"></span><span class="target" id="struct__lv__indev__t_1a2c63dfa5487ece6410c8a72c8651ff9f"></span><a class="reference internal" href="#_CPPv414lv_indev_drv_t" title="lv_indev_drv_t">lv_indev_drv_t</a> <code class="sig-name descname">driver</code><a class="headerlink" href="#_CPPv4N11_lv_indev_t6driverE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11_lv_indev_t4procE">
+<span id="_CPPv3N11_lv_indev_t4procE"></span><span id="_CPPv2N11_lv_indev_t4procE"></span><span id="_lv_indev_t::proc__lv_indev_proc_t"></span><span class="target" id="struct__lv__indev__t_1a3223b37d15de61de4d0be84d22b7900e"></span><a class="reference internal" href="#_CPPv415lv_indev_proc_t" title="lv_indev_proc_t">lv_indev_proc_t</a> <code class="sig-name descname">proc</code><a class="headerlink" href="#_CPPv4N11_lv_indev_t4procE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11_lv_indev_t6cursorE">
+<span id="_CPPv3N11_lv_indev_t6cursorE"></span><span id="_CPPv2N11_lv_indev_t6cursorE"></span><span id="_lv_indev_t::cursor___lv_obj_tP"></span><span class="target" id="struct__lv__indev__t_1afca94f9275c3ca669979477d56fd884d"></span><em class="property">struct</em> <a class="reference internal" href="../object-types/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<code class="sig-name descname">cursor</code><a class="headerlink" href="#_CPPv4N11_lv_indev_t6cursorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Cursor for LV_INPUT_TYPE_POINTER </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11_lv_indev_t5groupE">
+<span id="_CPPv3N11_lv_indev_t5groupE"></span><span id="_CPPv2N11_lv_indev_t5groupE"></span><span id="_lv_indev_t::group___lv_group_tP"></span><span class="target" id="struct__lv__indev__t_1abe81eefe10ba7f66ff9ffe3a48db3a31"></span><em class="property">struct</em> <a class="reference internal" href="../overview/indev.html#_CPPv411_lv_group_t" title="_lv_group_t">_lv_group_t</a> *<code class="sig-name descname">group</code><a class="headerlink" href="#_CPPv4N11_lv_indev_t5groupE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Keypad destination group </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N11_lv_indev_t10btn_pointsE">
+<span id="_CPPv3N11_lv_indev_t10btn_pointsE"></span><span id="_CPPv2N11_lv_indev_t10btn_pointsE"></span><span id="_lv_indev_t::btn_points__lv_point_tCP"></span><span class="target" id="struct__lv__indev__t_1aa7c40dc6d671c802427db39a7181237b"></span><em class="property">const</em> lv_point_t *<code class="sig-name descname">btn_points</code><a class="headerlink" href="#_CPPv4N11_lv_indev_t10btn_pointsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Array points assigned to the button ()screen will be pressed here by the buttons </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tick.html" class="btn btn-neutral float-right" title="Tick interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="display.html" class="btn btn-neutral float-left" title="Display interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Gabor Kiss-Vamosi
+      <span class="lastupdated">
+        Last updated on Jul 12, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

@@ -13,5 +13,5 @@ In addition, you have to use to that mutex in other tasks and threads around eve
 This way you can use LittlevGL in a real multitasking environment. Just use a mutex to avoid the concurrent calling of LittlevGL functions.
 
 ## Interrupts
-Try to avoid calling LittlevGL function from an interrupts (except `lv_tick_inc()`). But if you really need to do this you have to disable the interrupt which uses LittlevGL functions while `lv_task_handler` is running. 
+Try to avoid calling LittlevGL function from an interrupts (except `lv_tick_inc()` and `lv_disp_flush_ready()`). But if you really need to do this you have to disable the interrupt which uses LittlevGL functions while `lv_task_handler` is running. 
 It's a better approach to set a flag or other value and periodically check it in an `lv_task`.
