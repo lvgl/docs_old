@@ -2,11 +2,11 @@
 
 LittlevGL has File system abstraction module which enables to attache any type of file system.
 The file system are identified by a letter. 
-For example if the SD card is assiciated with  letter`'S'` a file can be reached like `""S:path/to/file.txt`.
+For example if the SD card is associated with  letter`'S'` a file can be reached like `""S:path/to/file.txt`.
 
 ## Add a driver
 
-To add a driver an `lv_fs_drv_t` needs to be inaitilezed like this:
+To add a driver an `lv_fs_drv_t` needs to be initialized like this:
 ```c
 lv_fs_drv_t drv; 
 lv_fs_drv_init(&drv);                     /*Basic initialization*/

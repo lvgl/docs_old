@@ -47,7 +47,7 @@ $
 Contributing is very welcome in this repository! 
 
 ## Translate existing pages
-You can translate the existing documentation. Just copy the `md` files from the root folder to `locale/code/` where `code` is the abbreviation code of the language. For example `de` for German ans `fr` for Franch. See the full list [here](https://www.loc.gov/standards/iso639-2/php/code_list.php). 
+You can translate the existing documentation. Just copy the `md` files from the root folder to `locale/code/` where `code` is the abbreviation code of the language. For example `de` for German ans `fr` for French. See the full list [here](https://www.loc.gov/standards/iso639-2/php/code_list.php). 
 
 You don't need to translate all the pages. Even one or two pages are welcome!
 

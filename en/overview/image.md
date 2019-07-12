@@ -102,7 +102,7 @@ The most simple way to use an Image in LittlevGL is to display it with an [lv_im
 ```c
 lv_obj_t * icon = lv_img_create(lv_scr_act(), NULL);
 
-/*From varaible*/
+/*From variable*/
 lv_img_set_src(icon, &my_icon_dsc);
 
 /*From file*/
@@ -183,7 +183,7 @@ static lv_res_t decoder_open(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * 
   /*Check whether the type `src` is known by the decoder*/
   if(is_png(src) == false) return LV_RES_INV; 
   
-  /*Decode and store the image. If `dsc->img_data` the `raed_line` function will be called to get the image data liny-by-line*/
+  /*Decode and store the image. If `dsc->img_data` the `read_line` function will be called to get the image data liny-by-line*/
   dsc->img_data = my_png_decoder(src);
   
   /*Change the color format if required. For PNG usually 'Raw' is fine*/
@@ -245,7 +245,7 @@ To indicate that the *line read* function should be used set `dsc->img_data = NU
 
 ### Manually use an image decoder
 
-LittlevGL will use th registered image decoder automatically but you can use them manually too. Create a `lv_img_decoder_dsc_t` varaible to describe a the decoding session and call `lv_img_decoder_open()`, `lv_img_decoder_open()`. 
+LittlevGL will use th registered image decoder automatically but you can use them manually too. Create a `lv_img_decoder_dsc_t` variable to describe a the decoding session and call `lv_img_decoder_open()`, `lv_img_decoder_open()`. 
 
 ```c
 

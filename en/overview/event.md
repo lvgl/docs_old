@@ -38,6 +38,7 @@ static void my_event_cb(lv_obj_t * obj, lv_event_t event)
         case LV_EVENT_RELEASED:
             printf("Released\n");
             break;
+    }
 
        /*Etc.*/
 }
@@ -94,7 +95,7 @@ Some events might contain custom data. For example `LV_EVENT_VALUE_CHANGED` in s
 To get the custom data in the event callback use `lv_event_get_data()`.
 
 The type of the custom data depends on the sending object but if its a 
-- single number then it's `uint32_t *` or `intt32_t *`
+- single number then it's `uint32_t *` or `int32_t *`
 - text then `char * ` or `const char *`
 
 

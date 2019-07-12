@@ -13,7 +13,7 @@ With Micropython you can write Python3 code and run it on bare metal architectur
 - **Interactive** - No need for the compile-flash-boot cycle. With the REPL (interactive prompt) you can type commands and execute them immediately, run scripts etc.
 - **Popular** - Many platforms are supported. User base is growing bigger.  
 Notable forks: [MicroPython](https://github.com/micropython/micropython), [CircuitPython](https://github.com/adafruit/circuitpython), [MicroPython_ESP32_psRAM_LoBo](https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo)
-- **Embedded Oriented** - Comes with modules specifically for embedded systsems, such as the [machine module](https://docs.micropython.org/en/latest/library/machine.html#classes) for accessing low-level hardware (I/O pins, ADC, UART, SPI, I2C, RTC, Timers etc.)
+- **Embedded Oriented** - Comes with modules specifically for embedded systems, such as the [machine module](https://docs.micropython.org/en/latest/library/machine.html#classes) for accessing low-level hardware (I/O pins, ADC, UART, SPI, I2C, RTC, Timers etc.)
 
 ---
 
@@ -21,7 +21,7 @@ Notable forks: [MicroPython](https://github.com/micropython/micropython), [Circu
 
 Micropython today [does not have a good high-level GUI library](https://forum.micropython.org/viewtopic.php?f=18&t=5543).  
 LittlevGL is a good high-level GUI library, it's implemented in C and its API is in C.  
-LittlevGL is an [Object Oriented Compenent Based](https://blog.littlevgl.com/2018-12-13/extend-lvgl-objects) library, which seems a natural candidate to map into a higher level language, such as Python.
+LittlevGL is an [Object Oriented Component Based](https://blog.littlevgl.com/2018-12-13/extend-lvgl-objects) library, which seems a natural candidate to map into a higher level language, such as Python.
 
 ### Here are some advantages of using LittlevGL in Micropython:
 
@@ -34,7 +34,7 @@ In Micropython it's just **`Change code` > `Run`**. You can even run commands in
 
 - Fast prototyping GUI.  
 - Shorten the cycle of changing and fine-tuning the GUI.
-- Model the GUI in a more absract way by defining reusable composite objects, taking advantage of Python's language features such as Inheritance, Closures, List Comprehension, Generators, Exception Handling, Arbitrary Precision Integers and others.
+- Model the GUI in a more abstract way by defining reusable composite objects, taking advantage of Python's language features such as Inheritance, Closures, List Comprehension, Generators, Exception Handling, Arbitrary Precision Integers and others.
 - Make LittlevGL accessible to a larger audience. No need to know C in order to create a nice GUI on an embedded system.  
 This goes well with [CircuitPython vision](https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython). CircuitPython was designed with education in mind, to make it easier for new or unexperienced users to get started with embedded development.
 
@@ -43,7 +43,7 @@ This goes well with [CircuitPython vision](https://learn.adafruit.com/welcome-to
 ## So how does it look like?
 
 > TL;DR:
-> It's very much like the C API, but Object Oriented for LittlevGL componets.
+> It's very much like the C API, but Object Oriented for LittlevGL components.
 
 Let's dive right into an example!  
 
