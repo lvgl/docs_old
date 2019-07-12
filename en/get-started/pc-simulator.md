@@ -4,11 +4,11 @@
 You can try out the LittlevGL **using only your PC** without any development boards. Write a code, run it on the PC and see the result on the monitor. It is cross-platform: Windows, Linux and OSX are supported.  
 The written code is portable, you can simply copy it when using an embedded hardware.
 
-The simulator is also very useful to report bugs because it means common platform for every user. So it's a good idea to reproduce a bug in simualtor and use the code snippet in the [Forum](https://forum.littlevgl.com).
+The simulator is also very useful to report bugs because it means common platform for every user. So it's a good idea to reproduce a bug in simulator and use the code snippet in the [Forum](https://forum.littlevgl.com).
 
 ## Select an IDE
 
-The simulator is ported to various IDEs. Choose your favourite IDE, read its README on GitHub, download the project, and load it to the IDE.
+The simulator is ported to various IDEs. Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
 
 ```eval_rst
 .. raw:: html
@@ -73,7 +73,7 @@ If you are using **Windows** firstly you need to install MinGW ([64 bit version]
 
 1. Download the development libraries of SDL.   
 Go to [https://www.libsdl.org/download-2.0.php](https://www.libsdl.org/download-2.0.php) and download _Development Libraries: SDL2-devel-2.0.5-mingw.tar.gz_
-2. Uncompress the file and go to _x86_64-w64-mingw32_ directory (for 64 bit MinGW) or to _i686-w64-mingw32_ (for 32 bit MinGW)
+2. Decompress the file and go to _x86_64-w64-mingw32_ directory (for 64 bit MinGW) or to _i686-w64-mingw32_ (for 32 bit MinGW)
 3. Copy _..._mingw32/include/SDL2_ folder to _C:/MinGW/.../x86_64-w64-mingw32/include_
 4. Copy _..._mingw32/lib/_ content to _C:/MinGW/.../x86_64-w64-mingw32/lib_
 5. Copy _..._mingw32/bin/SDL2.dll_ to _{eclipse_worksapce}/pc_simulator/Debug/_.  Do it later when Eclipse is installed. 
@@ -100,12 +100,12 @@ Close the start up window and go to **File-&gt;Import** and choose **General-&gt
 On **Windows** you have to do two additional things:
 
 - Copy the **SDL2.dll** into the project's Debug folder 
-- Righ click on the project -&gt; Project properties -&gt; C/C++ Build -&gt; Settings -&gt; Libraries -&gt; Add ... and add _mingw32_ above SDLmain and SDL. (The order is important: mingw32, SDLmain, SDL)
+- Right click on the project -&gt; Project properties -&gt; C/C++ Build -&gt; Settings -&gt; Libraries -&gt; Add ... and add _mingw32_ above SDLmain and SDL. (The order is important: mingw32, SDLmain, SDL)
 
 ### Compile and Run
 
-Now you are ready to run the Littlev Graphics Library on your PC. Click on the Hammer Icon on the top menu bar to Build the project. If you have done everything right you will not get any errors. Note that on some systems additional steps might be required to "see" SDL 2 from Eclipse but in most of cases the configurtions in the downloaded project is enough.
+Now you are ready to run the LittlevGL Graphics Library on your PC. Click on the Hammer Icon on the top menu bar to Build the project. If you have done everything right you will not get any errors. Note that on some systems additional steps might be required to "see" SDL 2 from Eclipse but in most of cases the configurations in the downloaded project is enough.
 
 After a success build click on the Play button on the top menu bar to run the project. Now a window should appear in the middle of your screen.
 
-Now everything is ready to use the Littlev Graphics Library in the practice or begin the development on your PC.
+Now everything is ready to use the LittlevGL Graphics Library in the practice or begin the development on your PC.

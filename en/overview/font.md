@@ -103,7 +103,7 @@ bool my_get_glyph_dsc_cb(const lv_font_t * font, lv_font_glyph_dsc_t * dsc_out, 
 {
     /*Your code here*/
   
-    /* Sotore the result.
+    /* Store the result.
      * For example ... 
      */
     dsc_out->adv_w = 12;        /*Horizontal space required by the glyph in [px]*/
@@ -117,7 +117,7 @@ bool my_get_glyph_dsc_cb(const lv_font_t * font, lv_font_glyph_dsc_t * dsc_out, 
 }
 
 
-/* Get the btmap of `unicode_letter` from `font`. */
+/* Get the bitmap of `unicode_letter` from `font`. */
 const uint8_t * my_get_glyph_bitmap_cb(const lv_font_t * font, uint32_t unicode_letter)
 {
     /* Your code here */
