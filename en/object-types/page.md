@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Page consist of two [Containers](/object-types/page) on each other: 
+The Page consist of two [Containers](/object-types/cont) on each other: 
 - a **background** (or base)
 - a top which is **scrollable**. 
 
