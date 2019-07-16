@@ -104,7 +104,7 @@ html_theme = 'sphinx_rtd_theme'
 # documentation.
 #
 html_theme_options = {
-    "collapse_navigation" : False,
+    'collapse_navigation' : False,
     'logo_only': True,
 }
 
@@ -161,6 +161,8 @@ latex_elements = {
 
 \usepackage{fontspec}
 \setmonofont{DejaVu Sans Mono}
+\usepackage{silence}
+\WarningsOff*
 ''',
 }
 

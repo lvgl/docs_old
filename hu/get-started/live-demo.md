@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/hu/get-started/live-demo.md
+```
 # Élő demo
 
 You can see how LittlevGL looks like without installing and downloading anything. 

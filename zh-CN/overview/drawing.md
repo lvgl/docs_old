@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/zh-CN/overview/drawing.md
+```
 # Drawing
 
 With LittlevGL you don't need to draw anything manually. Just create objects (like buttons and labels), move and change them and LittlevGL will refresh and redraw what is required.

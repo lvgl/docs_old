@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/en/object-types/slider.md
+```
 # Slider (lv_slider)
 
 ## Overview

@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/hu/overview/display.md
+```
 # Displays
 
 ``` important:: The basic concept of *Display* in LittlevGL is explained in the [Porting](/porting/display) section. So before reading further, please read that section first.

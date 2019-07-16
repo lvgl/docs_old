@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/tr/porting/tick.md
+```
 # Tick interface
 
 The LittlevGL needs a system tick to know the elapsed time for animation and other task. 

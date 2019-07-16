@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/zh-CN/overview/image.md
+```
 # Images
 
 An image can be a file or variable which stores the image itself and some metadata. 

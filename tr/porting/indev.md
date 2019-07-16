@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/tr/porting/indev.md
+```
 # Input device interface
 
 ## Types of input devices

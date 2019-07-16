@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/hu/object-types/cont.md
+```
 # Container (lv_cont)
 
 ## Overview

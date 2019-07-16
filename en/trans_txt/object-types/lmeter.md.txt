@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/en/object-types/lmeter.md
+```
 # Line meter (lv_lmeter)
 
 ## Overview

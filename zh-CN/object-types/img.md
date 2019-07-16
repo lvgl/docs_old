@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/zh-CN/object-types/img.md
+```
 # Image (lv_img)
 
 ## Overview

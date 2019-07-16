@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/zh-CN/overview/object.md
+```
 # Objects
 
 In the LittlevGL the **basic building blocks** of a user interface are the objects, also called *Widgets*. 

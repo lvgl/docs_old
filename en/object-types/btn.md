@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/en/object-types/btn.md
+```
 # Button (lv_btn)
 
 ## Overview

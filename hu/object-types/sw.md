@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/hu/object-types/sw.md
+```
 # Switch (lv_sw)
 
 ## Overview

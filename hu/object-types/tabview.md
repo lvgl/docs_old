@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/hu/object-types/tabview.md
+```
 # Tabview (lv_tabview)
 
 ## Overview

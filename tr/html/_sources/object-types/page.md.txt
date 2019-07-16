@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/tr/object-types/page.md
+```
 # Page (lv_page)
 
 ## Overview

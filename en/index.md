@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/en/index.md
+```
 
 ```eval_rst
 .. include:: /lang.rst

@@ -161,6 +161,8 @@ latex_elements = {
 
 \usepackage{fontspec}
 \setmonofont{DejaVu Sans Mono}
+\usepackage{silence}
+\WarningsOff*
 ''',
 }
 

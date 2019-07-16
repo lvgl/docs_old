@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/en/object-types/bar.md
+```
 # Bar (lv_bar)
 
 ## Overview

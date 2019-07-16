@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/zh-CN/porting/os.md
+```
 # Operating system and interrupts
 
 LittlevGL is **not thread-safe** by default. 

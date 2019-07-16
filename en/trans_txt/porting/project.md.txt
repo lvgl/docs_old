@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/en/porting/project.md
+```
 
 # Set-up a project
 

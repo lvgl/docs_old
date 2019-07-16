@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/hu/porting/log.md
+```
 # Logging
 
 LittlevGL has built-in *log* module to inform the user about what is happening in the library.

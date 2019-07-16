@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/hu/get-started/pc-simulator.md
+```
 # Simulator on PC
 
 

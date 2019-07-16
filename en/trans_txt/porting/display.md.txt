@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/en/porting/display.md
+```
 # Display interface
 
 To set up a display an `lv_disp_buf_t` and an `lv_disp_drv_t` variable has to be initialized. 

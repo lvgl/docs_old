@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/en/overview/style.md
+```
 # Styles
 
 *Styles* are used to set the appearance of the objects. A style is a structure variable with attributes like colors, paddings, opacity, font etc. 

@@ -1,3 +1,6 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/en/overview/animation.md
+```
 # Animations
 
 You can automatically change the value of a variable between a start and an end value using animations. 
