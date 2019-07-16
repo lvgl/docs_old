@@ -13,7 +13,7 @@ The documentation is being translated into several languages. You can select bet
 
 ## Contributing
 
-If you would like to contribute to LittlevGL the documentation it's the best place to start.
+If you would like to contribute to LittlevGL the documentation is the best place to start.
 
 ### Fix typos, add missing parts
 
