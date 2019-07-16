@@ -3,30 +3,30 @@
 
 .. include:: /lang.rst
 
-PDF version: :download:`LittlevGL.pdf <LittlevGL.pdf>`  
+PDF 版本: :download:`LittlevGL.pdf <LittlevGL.pdf>`  
 
 ```
 
-# Welcome to LittlevGL's documentation!
+# 欢迎来到LittlevGL的文档
 
 ![](/misc/lv_theme_intro.png "LittlevGL cover")
 
-LittlevGL is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
+LittlevGL是一个免费的开源图形库，提供了创建嵌入式GUI所需的一切，具有易于使用的组件，美观的视觉效果和低内存占用等特点。
 
-**[Website](https://littlevgl.com) &nbsp; · &nbsp;** 
+**[官网](https://littlevgl.com) &nbsp; · &nbsp;** 
 **[GitHub](https://github.com/littlevgl/lvgl) &nbsp; · &nbsp;** 
-**[Forum](https://forum.littlevgl.com) &nbsp; · &nbsp;** 
-**[Live demo](https://littlevgl.com/live-demo) &nbsp; · &nbsp;** 
-**[Simulator](/get-started/pc-simulator) &nbsp; · &nbsp;** 
-**[Blog](https://blog.littlevgl.com/)**
+**[论坛](https://forum.littlevgl.com) &nbsp; · &nbsp;** 
+**[在线演示](https://littlevgl.com/live-demo) &nbsp; · &nbsp;** 
+**[模拟器](/get-started/pc-simulator) &nbsp; · &nbsp;** 
+**[博客](https://blog.littlevgl.com/)**
 
-## Key features
-- Powerful building blocks buttons, charts, lists, sliders, images etc
-- Advanced graphics with animations, anti-aliasing, opacity, smooth scrolling
-- Various input devices touchpad, mouse, keyboard, encoder etc
-- Multi-language support with UTF-8 encoding
+## 主要特点
+- 强大的块构建能力：按钮，图表，列表，滑动条，图片等
+- 高级图形效果：动画，反锯齿，透明度，平滑滚动
+- 多种输入设备支持： 触摸板，鼠标，键盘，encoder 等
+- 支持多语言的UTF-8编码
 - Multi-display support, i.e. use more TFT, monochrome displays simultaneously
-- Fully customizable graphical elements
+- 完全的自定义图形组件功能
 - Hardware independent to use with any microcontroller or display
 - Scalable to operate with little memory (64 kB Flash, 16 kB RAM)
 - OS, External memory and GPU supported but not required

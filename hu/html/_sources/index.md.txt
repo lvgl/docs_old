@@ -7,7 +7,7 @@ PDF version: :download:`LittlevGL.pdf <LittlevGL.pdf>`
 
 ```
 
-# Köszöntelek A LittlevGL dokumentációs oldalán
+# Köszöntelek a LittlevGL dokumentációs oldalán
 
 ![](/misc/lv_theme_intro.png "LittlevGL cover")
 

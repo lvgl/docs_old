@@ -1,9 +1,8 @@
 
 ```eval_rst
-
 .. include:: /lang.rst
 
-PDF version: :download:`LittlevGL.pdf <LittlevGL.pdf>`  
+PDF version: :download:`LittlevGL.pdf <LittlevGL.pdf>`
 
 ```
 
@@ -189,7 +188,5 @@ You can download it here and open offline:
    porting/index
    overview/index
    object-types/index
-```
-
 ```
 
