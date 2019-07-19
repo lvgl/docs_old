@@ -7,7 +7,7 @@ import os
 langs = ['en', 'tr', 'zh-CN', 'hu']
 
 
-cmd_clean = " echo 'Clean up...\n'; rm -r html xetex; "
+cmd_clean =  " " #" echo 'Clean up...\n'; rm -r html xetex; "
 cmd_html =  " echo '------------\nBuild HTML...\n------------'; sphinx-build -b html . html; "
 cmd_pdf =   " echo '------------\nBuild PDF...\n------------'; sphinx-build -b latex . xetex && cd xetex; xelatex *.tex; cp -f LittlevGL.pdf ../LittlevGL.pdf; cd ..; "
 

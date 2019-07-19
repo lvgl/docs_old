@@ -45,7 +45,7 @@ lv_slider_set_value(slider1, 40, LV_ANIM_ON);	/*Set the current value (position)
 lv_slider_set_action(slider1, my_action);     /*Set a callback function*/
 ```
 
-The API of the of the object types are described in their [Documentation](/object-types/index) but you can also check the respective header files (e.g. *lv_objx/lv_slider.h*)
+The API of the object types are described in their [Documentation](/object-types/index) but you can also check the respective header files (e.g. *lv_objx/lv_slider.h*)
 
 ## Object's working mechanisms
 

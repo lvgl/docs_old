@@ -23,7 +23,7 @@ Buton'un durumu el ile `lv_btn_set_state(btn, LV_BTN_STATE_TGL_REL)` fonksiyonu 
 Butonları  *toggle button* (değiştir butonu) olarak `lv_btn_set_toggle(btn, true) fonksiyonu ile ayarlanabilir, böyle bir durumda buton *toggled released* (değştir bırakılması) durumuna geçer.
 
 ### Yerleşim planı ve Uyum
-Butonlar [Taşıyıcı çerçeve](/nesne-tipleri/çerçeve)'lerde olduğu gibi benzer yerleşim planı ve uyum özelliklerine sahiptir.
+Butonlar [Taşıyıcı çerçeve](/object-types/cont)'lerde olduğu gibi benzer yerleşim planı ve uyum özelliklerine sahiptir.
 - `lv_btn_set_layout(btn, LV_LAYOUT_...) ` fonksiyonu ile yerleşim planı ayarlanır. Varsayılarn yerleşim planı `LV_LAYOUT_CENTER` şeklindedir. 
 Bu yüzden eğer butona bir etiket eklendiğinde, etiket otomatik olarak ortaya hizalanır ve `lv_obj_set_pos()` fonksiyonu ile haraket ettirilemez.
 `lv_btn_set_layout(btn, LV_LAYOUT_OFF)` fonksiyonu ile yerleşim planı etkisiz hale getirilir.
