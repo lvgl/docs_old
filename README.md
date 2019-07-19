@@ -6,11 +6,33 @@ Website: https://littlevgl.com/
 Main repository: https://github.com/littlevgl/lvgl  
 
 The documentation is available in:
-- **HTML** format: http://docs.littlevgl.com/
+- **HTML** http://docs.littlevgl.com/  
+- **PDF** [LittlevGL English.pdf](https://docs.littlevgl.com/en/html/_downloads/6c5a7f415f5012e697cd0b80e864c8a6/LittlevGL.pdf)
 
-# How to use this documentation
+The documentation is being translated into several languages. You can select between them in the top of the Welcome page.
 
-The documentation is written in [Markdown](https://en.wikipedia.org/wiki/Markdown). There are many converter tools available to generate HTML or PDF from Markdown files. 
+## Contributing
+
+If you would like to contribute to LittlevGL the documentation is the best place to start.
+
+### Fix typos, add missing parts
+
+If you find a typo, an obscure sentence or something which is not explained well enough in the **English** documentation click the *"Edit on GitHub"* button in the top right corner and fix the issue by sending a Pull Request.
+
+### Translate the documentation
+
+If you have time and intereset you can translate the documentation to your native language or any language you speak. 
+You can join others to work on an already existing language or you can start a new one.  
+
+To translate the documentation we use [Zanata](https://zanata.org) which is an online translation platform. 
+You will find the LittlevGL project here: [LittlevGL on Zanata](https://translate.zanata.org/iteration/view/littlevgl-docs/v6.0-doc1?dswid=3430) 
+
+To get started you need to:
+- register at [Zanata](https://zanata.org) which is an online translation platform.  
+- comment to [this post](https://forum.littlevgl.com/t/translate-the-documentation/238?u=kisvegabor)
+- tell your username at *Zanata* and your selected language(s) to get permission the edit the translations
+
+Note that a translation will be added to the documentation only if at least the [Porting section](https://docs.littlevgl.com/en/html/porting/index.html) is translated.
 
 ## Rebuild the documentation
 
@@ -40,18 +62,3 @@ $ make html
 The HTML pages are in _build/html.
 $
 ```
-
-
-# Contributing 
-
-Contributing is very welcome in this repository! 
-
-## Translate existing pages
-You can translate the existing documentation. Just copy the `md` files from the root folder to `locale/code/` where `code` is the abbreviation code of the language. For example `de` for German ans `fr` for French. See the full list [here](https://www.loc.gov/standards/iso639-2/php/code_list.php). 
-
-You don't need to translate all the pages. Even one or two pages are welcome!
-
-To push back your updates please create Pull request.
-
-## Improve the documentation
-If you find some missing information, typo or unclear parts, please add you fixes in a Pull request.
