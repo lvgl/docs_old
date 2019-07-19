@@ -1,7 +1,7 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/hu/porting/index.md
 ```
-# Porting
+# Portolás
 
 ```eval_rst
 

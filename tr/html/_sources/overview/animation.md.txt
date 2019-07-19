@@ -1,12 +1,12 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/tr/overview/animation.md
 ```
-# Animations
+# Animasyon
 
-You can automatically change the value of a variable between a start and an end value using animations. 
+Animasyon yardımıyla bir değişkenin değerini başlangıç ve bitiş değerleri arasında otomatik değiştirebilirsiniz.
 The animation will happen by the periodical call of an "animator" function with the corresponding value parameter.
 
-The *animator* functions has the following prototype:
+*animator* fonksiyonları aşağıdaki prototipe sahiptir:
 ```c
 void func(void * var, lv_anim_var_t value);
 ```

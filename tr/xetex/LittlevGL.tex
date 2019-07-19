@@ -64,7 +64,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Jul 16, 2019}
+\date{Jul 19, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -430,6 +430,519 @@ There some ready made user interfaces which you can easily try in your browser.
 Go to the \sphinxhref{https://littlevgl.com/live-demo}{Live demo} page and choose a demo you are interested in.
 
 
+\subsubsection{Simulator on PC}
+\label{\detokenize{get-started/pc-simulator:simulator-on-pc}}\label{\detokenize{get-started/pc-simulator::doc}}
+You can try out the LittlevGL \sphinxstylestrong{using only your PC} without any development boards. Write a code, run it on the PC and see the result on the monitor. It is cross-platform: Windows, Linux and OSX are supported.The written code is portable, you can simply copy it when using an embedded hardware.
+
+The simulator is also very useful to report bugs because it means common platform for every user. So it’s a good idea to reproduce a bug in simulator and use the code snippet in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
+
+
+\paragraph{Select an IDE}
+\label{\detokenize{get-started/pc-simulator:select-an-ide}}
+The simulator is ported to various IDEs. Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
+
+
+
+In followings the set-up guide of Eclipse CDT is described in more details.
+
+
+\paragraph{Set-up Eclipse CDT}
+\label{\detokenize{get-started/pc-simulator:set-up-eclipse-cdt}}
+
+\subparagraph{Install Eclipse CDT}
+\label{\detokenize{get-started/pc-simulator:install-eclipse-cdt}}
+Eclipse CDT is C/C++ IDE. You can use other IDEs as well but in this tutorial the configuration for Eclipse CDT is shown.
+
+Eclipse is a Java based software therefore be sure \sphinxstylestrong{Java Runtime Environment} is installed on your system.
+
+On Debian-based distros (e.g. Ubuntu): \sphinxcode{\sphinxupquote{sudo apt-get install default-jre}}
+
+You can download Eclipse’s CDT from: \sphinxhref{http://www.eclipse.org/downloads/}{https://eclipse.org/cdt/}. Start the installer and choose \sphinxstyleemphasis{Eclipse CDT} from the list.
+
+
+\subparagraph{Install SDL 2}
+\label{\detokenize{get-started/pc-simulator:install-sdl-2}}
+The PC simulator uses the \sphinxhref{https://www.libsdl.org/download-2.0.php}{SDL 2} cross platform library to simulate a TFT display and a touch pad.
+
+
+\subparagraph{Linux}
+\label{\detokenize{get-started/pc-simulator:linux}}
+On \sphinxstylestrong{Linux} you can easily install SDL2 using a terminal:
+\begin{enumerate}
+\def\theenumi{\arabic{enumi}}
+\def\labelenumi{\theenumi .}
+\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
+\item {} 
+Find the current version of SDL2: \sphinxcode{\sphinxupquote{apt-cache search libsdl2 (e.g. libsdl2-2.0-0)}}
+
+\item {} 
+Install SDL2: \sphinxcode{\sphinxupquote{sudo apt-get install libsdl2-2.0-0}} (replace with the found version)
+
+\item {} 
+Install SDL2 development package: \sphinxcode{\sphinxupquote{sudo apt-get install libsdl2-dev}}
+
+\item {} 
+If build essentials are not installed yet: \sphinxcode{\sphinxupquote{sudo apt-get install build-essential}}
+
+\end{enumerate}
+
+
+\subparagraph{Windows}
+\label{\detokenize{get-started/pc-simulator:windows}}
+If you are using \sphinxstylestrong{Windows} firstly you need to install MinGW (\sphinxhref{http://mingw-w64.org/doku.php/download}{64 bit version}). After it do the following steps to add SDL2:
+\begin{enumerate}
+\def\theenumi{\arabic{enumi}}
+\def\labelenumi{\theenumi .}
+\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
+\item {} 
+Download the development libraries of SDL.Go to \sphinxurl{https://www.libsdl.org/download-2.0.php} and download \sphinxstyleemphasis{Development Libraries: SDL2-devel-2.0.5-mingw.tar.gz}
+
+\item {} 
+Decompress the file and go to \sphinxstyleemphasis{x86\_64-w64-mingw32} directory (for 64 bit MinGW) or to \sphinxstyleemphasis{i686-w64-mingw32} (for 32 bit MinGW)
+
+\item {} 
+Copy \_…\sphinxstyleemphasis{mingw32/include/SDL2} folder to \sphinxstyleemphasis{C:/MinGW/…/x86\_64-w64-mingw32/include}
+
+\item {} 
+Copy \_…\sphinxstyleemphasis{mingw32/lib/} content to \sphinxstyleemphasis{C:/MinGW/…/x86\_64-w64-mingw32/lib}
+
+\item {} 
+Copy \_…\sphinxstyleemphasis{mingw32/bin/SDL2.dll} to \sphinxstyleemphasis{\{eclipse\_worksapce\}/pc\_simulator/Debug/}.  Do it later when Eclipse is installed.
+
+\end{enumerate}
+
+Note: If you will use \sphinxstylestrong{Microsoft Visual Studio} instead of Eclipse then you don’t have to install MinGW.
+
+
+\subparagraph{OSX}
+\label{\detokenize{get-started/pc-simulator:osx}}
+On \sphinxstylestrong{OSX} you can easily install SDL2 with brew: \sphinxcode{\sphinxupquote{brew install sdl2}}
+
+If something is not working I suggest \sphinxhref{http://lazyfoo.net/tutorials/SDL/01\_hello\_SDL/index.php}{this tutorial} to get started with SDL.
+
+
+\subparagraph{Pre-configured project}
+\label{\detokenize{get-started/pc-simulator:pre-configured-project}}
+A pre-configured graphics library project (based on the latest release) is always available.
+You can find it on \sphinxhref{https://github.com/littlevgl/proj\_pc}{GitHub} or on the \sphinxhref{https://littlevgl.com/download}{Download} page.
+(The project is configured for Eclipse CDT.)
+
+
+\subparagraph{Add the pre-configured project to Eclipse CDT}
+\label{\detokenize{get-started/pc-simulator:add-the-pre-configured-project-to-eclipse-cdt}}
+Run Eclipse CDT. It will show a dialogue about the \sphinxstylestrong{workspace path}. Before accepting it check that path and copy (and unzip) the downloaded pre-configured project there. Now you can accept the workspace path. Of course you can modify this path but in that case copy the project to that location.
+
+Close the start up window and go to \sphinxstylestrong{File-\textgreater{}Import} and choose \sphinxstylestrong{General-\textgreater{}Existing project into Workspace}. \sphinxstylestrong{Browse the root directory} of the project and click \sphinxstylestrong{Finish}
+
+On \sphinxstylestrong{Windows} you have to do two additional things:
+\begin{itemize}
+\item {} 
+Copy the \sphinxstylestrong{SDL2.dll} into the project’s Debug folder
+
+\item {} 
+Right click on the project -\textgreater{} Project properties -\textgreater{} C/C++ Build -\textgreater{} Settings -\textgreater{} Libraries -\textgreater{} Add … and add \sphinxstyleemphasis{mingw32} above SDLmain and SDL. (The order is important: mingw32, SDLmain, SDL)
+
+\end{itemize}
+
+
+\subparagraph{Compile and Run}
+\label{\detokenize{get-started/pc-simulator:compile-and-run}}
+Now you are ready to run the LittlevGL Graphics Library on your PC. Click on the Hammer Icon on the top menu bar to Build the project. If you have done everything right you will not get any errors. Note that on some systems additional steps might be required to “see” SDL 2 from Eclipse but in most of cases the configurations in the downloaded project is enough.
+
+After a success build click on the Play button on the top menu bar to run the project. Now a window should appear in the middle of your screen.
+
+Now everything is ready to use the LittlevGL Graphics Library in the practice or begin the development on your PC.
+
+
+\subsubsection{Quick overview}
+\label{\detokenize{get-started/quick-overview:quick-overview}}\label{\detokenize{get-started/quick-overview::doc}}
+Here you can learn the most important things about LittlevGL.
+You should read it first to get a general impression and read the detailed {\hyperref[\detokenize{porting/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Porting}}}} and {\hyperref[\detokenize{overview/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Overview}}}} sections after that.
+
+
+\paragraph{Add LittlevGL into your project}
+\label{\detokenize{get-started/quick-overview:add-littlevgl-into-your-project}}
+The steps below show how to setup LittlevGL on an embedded system with a display and a touchpad.
+You can use the {\hyperref[\detokenize{get-started/pc-simulator::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Simulators}}}} to get ready to use projects which can be run on your PC.
+\begin{itemize}
+\item {} 
+\sphinxhref{https://littlevgl.com/download}{Download} or \sphinxhref{https://github.com/littlevgl/lvgl}{Clone} the library
+
+\item {} 
+Copy the \sphinxcode{\sphinxupquote{lvgl}} folder into your project
+
+\item {} 
+Copy \sphinxcode{\sphinxupquote{lvgl/lv\_conf\_templ.h}} as \sphinxcode{\sphinxupquote{lv\_conf.h}} next to the \sphinxcode{\sphinxupquote{lvgl}} folder and set at least \sphinxcode{\sphinxupquote{LV\_HOR\_RES\_MAX}}, \sphinxcode{\sphinxupquote{LV\_VER\_RES\_MAX}} and \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}}.
+
+\item {} 
+Include \sphinxcode{\sphinxupquote{lvgl/lvgl.h}} where you need to use LittlevGL related functions.
+
+\item {} 
+Call \sphinxcode{\sphinxupquote{lv\_tick\_inc(x)}} every \sphinxcode{\sphinxupquote{x}} milliseconds \sphinxstylestrong{in a Timer or Task} (\sphinxcode{\sphinxupquote{x}} should be between 1 and 10). It is required for the internal timing of LittlevGL.
+
+\item {} 
+Call \sphinxcode{\sphinxupquote{lv\_init()}}
+
+\item {} 
+Create a display buffer for LittlevGL
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}disp\PYGZus{}buf\PYGZus{}t} \PYG{n}{disp\PYGZus{}buf}\PYG{p}{;}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{buf}\PYG{p}{[}\PYG{n}{LV\PYGZus{}HOR\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{*} \PYG{l+m+mi}{10}\PYG{p}{]}\PYG{p}{;}                     \PYG{c+cm}{/*Declare a buffer for 10 lines*/}
+\PYG{n}{lv\PYGZus{}disp\PYGZus{}buf\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}buf}\PYG{p}{,} \PYG{n}{buf}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}HOR\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{*} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}    \PYG{c+cm}{/*Initialize the display buffer*/}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+Implement and register a function which can \sphinxstylestrong{copy a pixel array} to an area of your display:
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}t} \PYG{n}{disp\PYGZus{}drv}\PYG{p}{;}               \PYG{c+cm}{/*Descriptor of a display driver*/}
+\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}          \PYG{c+cm}{/*Basic initialization*/}
+\PYG{n}{disp\PYGZus{}drv}\PYG{p}{.}\PYG{n}{flush\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}disp\PYGZus{}flush}\PYG{p}{;}    \PYG{c+cm}{/*Set your driver function*/}
+\PYG{n}{disp\PYGZus{}drv}\PYG{p}{.}\PYG{n}{buffer} \PYG{o}{=} \PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}buf}\PYG{p}{;}          \PYG{c+cm}{/*Assign the buffer to the display*/}
+\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Finally register the driver*/}
+    
+\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}disp\PYGZus{}flush}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{area}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{color\PYGZus{}p}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{int32\PYGZus{}t} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{;}
+    \PYG{k}{for}\PYG{p}{(}\PYG{n}{y} \PYG{o}{=} \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y1}\PYG{p}{;} \PYG{n}{y} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y2}\PYG{p}{;} \PYG{n}{y}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{k}{for}\PYG{p}{(}\PYG{n}{x} \PYG{o}{=} \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{x1}\PYG{p}{;} \PYG{n}{x} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{x2}\PYG{p}{;} \PYG{n}{x}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{set\PYGZus{}pixel}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{o}{*}\PYG{n}{color\PYGZus{}p}\PYG{p}{)}\PYG{p}{;}  \PYG{c+cm}{/* Put a pixel to the display.*/}
+            \PYG{n}{color\PYGZus{}p}\PYG{o}{+}\PYG{o}{+}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{n}{lv\PYGZus{}disp\PYGZus{}flush\PYGZus{}ready}\PYG{p}{(}\PYG{n}{disp}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/* Indicate you are ready with the flushing*/}
+\PYG{p}{\PYGZcb{}}
+    
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+Implement and register a function which can \sphinxstylestrong{read an input device}. E.g. for a touch pad:
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}             \PYG{c+cm}{/*Descriptor of a input device driver*/}
+\PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{type} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}TYPE\PYGZus{}POINTER}\PYG{p}{;}    \PYG{c+cm}{/*Touch pad is a pointer\PYGZhy{}like device*/}
+\PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}touchpad\PYGZus{}read}\PYG{p}{;}      \PYG{c+cm}{/*Set your driver function*/}
+\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/*Finally register the driver*/}
+
+\PYG{k+kt}{bool} \PYG{n+nf}{my\PYGZus{}touchpad\PYGZus{}read}\PYG{p}{(}\PYG{n}{lv\PYGZus{}indev\PYGZus{}t} \PYG{o}{*} \PYG{n}{indev}\PYG{p}{,} \PYG{n}{lv\PYGZus{}indev\PYGZus{}data\PYGZus{}t} \PYG{o}{*} \PYG{n}{data}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{static} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{last\PYGZus{}x} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{static} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{last\PYGZus{}y} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+    \PYG{c+cm}{/*Save the state and save the pressed coordinate*/}
+    \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=} \PYG{n}{touchpad\PYGZus{}is\PYGZus{}pressed}\PYG{p}{(}\PYG{p}{)} \PYG{o}{?} \PYG{n+nl}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR} \PYG{p}{:} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}REL}\PYG{p}{;} 
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR}\PYG{p}{)} \PYG{n}{touchpad\PYGZus{}get\PYGZus{}xy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{last\PYGZus{}x}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{last\PYGZus{}y}\PYG{p}{)}\PYG{p}{;}
+   
+    \PYG{c+cm}{/*Set the coordinates (if released use the last pressed coordinates)*/}
+    \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{x} \PYG{o}{=} \PYG{n}{last\PYGZus{}x}\PYG{p}{;}
+    \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{y} \PYG{o}{=} \PYG{n}{last\PYGZus{}y}\PYG{p}{;}
+
+    \PYG{k}{return} \PYG{n+nb}{false}\PYG{p}{;} \PYG{c+cm}{/*Return {}`false{}` because we are not buffering and no more data to read*/}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+\begin{itemize}
+\item {} 
+Call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically every few milliseconds in the main \sphinxcode{\sphinxupquote{while(1)}} loop, in Timer interrupt or in an Operation system task.
+It will redraw the screen if required, handle input devices etc.
+
+\end{itemize}
+
+
+\paragraph{Learn the basics}
+\label{\detokenize{get-started/quick-overview:learn-the-basics}}
+
+\subparagraph{Objects (Widgets)}
+\label{\detokenize{get-started/quick-overview:objects-widgets}}
+The graphical elements like Buttons, Labels, Sliders, Charts etc are called objects in LittelvGL. Go to {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Object types}}}} to see the full list of available types.
+
+Every object has a parent object. The child object moves with the parent and if you delete the parent the children will be deleted too. Children can be visible only on their parent.
+
+The \sphinxstyleemphasis{screen} are the “root” parents. To get the current screen call \sphinxcode{\sphinxupquote{lv\_scr\_act()}}.
+
+You can create a new object with \sphinxcode{\sphinxupquote{lv\_\textless{}type\textgreater{}\_create(parent, obj\_to\_copy)}}. It will return an \sphinxcode{\sphinxupquote{lv\_obj\_t *}} variable which should be used as a reference to the object to set its parameters.
+The first parameter is the desired \sphinxstyleemphasis{parent}, te second parameters can be an object to copy (\sphinxcode{\sphinxupquote{NULL}} is unused).
+For example:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{slider1} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+To set some basic attribute \sphinxcode{\sphinxupquote{lv\_obj\_set\_\textless{}paramters\_name\textgreater{}(obj, \textless{}value\textgreater{})}} function can be used. For example:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}x}\PYG{p}{(}\PYG{n}{btn1}\PYG{p}{,} \PYG{l+m+mi}{30}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}y}\PYG{p}{(}\PYG{n}{btn1}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{btn1}\PYG{p}{,} \PYG{l+m+mi}{200}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+The objects has type specific parameters too which can be set by \sphinxcode{\sphinxupquote{lv\_\textless{}type\textgreater{}\_set\_\textless{}paramters\_name\textgreater{}(obj, \textless{}value\textgreater{})}} functions. For example:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{l+m+mi}{70}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ANIM\PYGZus{}ON}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+To see the full API visit the documentation of the object types or the related header file (e.g. \sphinxcode{\sphinxupquote{lvgl/src/lv\_objx/lv\_slider.h}}).
+
+
+\subparagraph{Styles}
+\label{\detokenize{get-started/quick-overview:styles}}
+Styles can be assigned to the objects to changed their appearance. A style describes the appearance of rectangle-like objects (like a button or slider), texts, images and lines at once.
+
+You can create a new style like this:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style1}\PYG{p}{;}                 \PYG{c+cm}{/*Declare a new style. Should be {}`static{}`*/}
+\PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style1}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}  \PYG{c+cm}{/*Copy a buil\PYGZhy{}in style*/}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}RED}\PYG{p}{;}          \PYG{c+cm}{/*Main color*/}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex}\PYG{p}{(}\PYG{l+m+mh}{0xffd83c}\PYG{p}{)} \PYG{c+cm}{/*Gradient color (orange)*/}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{radius} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{p}{;}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x0F0}\PYG{p}{)}        \PYG{c+cm}{/*Label color (green)*/}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{font} \PYG{o}{=} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}font\PYGZus{}dejavu\PYGZus{}22}\PYG{p}{;}          \PYG{c+cm}{/*Change font*/}
+\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+\end{sphinxVerbatim}
+
+To set a new style for an object use the \sphinxcode{\sphinxupquote{lv\_\textless{}type\textgreater{}set\_style(obj, LV\_\textless{}TYPE\textgreater{}\_STYLE\_\textless{}NAME\textgreater{}, \&my\_style)}} functions. For example:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}BG}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}bg\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}INDIC}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}indic\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}KNOB}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}knob\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+If an object’s style is \sphinxcode{\sphinxupquote{NULL}} then it will inherit its parent’s style. For example, the labels’ style are \sphinxcode{\sphinxupquote{NULL}} by default. If you place them on a button then they will use the \sphinxcode{\sphinxupquote{style.text}} properties from the button’s style.
+
+Learn more in {\hyperref[\detokenize{overview/style::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Style overview}}}} section.
+
+
+\subparagraph{Events}
+\label{\detokenize{get-started/quick-overview:events}}
+Events are used to inform the user if something has happened with an object. You can assign a callback to an object which will be called if the object is clicked, released, dragged, being deleted etc. It should look like this:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{btn\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}                 \PYG{c+cm}{/*Assign a callback to the button*/}
+
+\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+
+\PYG{k+kt}{void} \PYG{n}{btn\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{event} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}CLICKED}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Clicked}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+Learn more about the events in the {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Event overview}}}} section.
+
+
+\paragraph{Examples}
+\label{\detokenize{get-started/quick-overview:examples}}
+
+\subparagraph{Button with label}
+\label{\detokenize{get-started/quick-overview:button-with-label}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn} \PYG{o}{=} \PYG{n}{lv\PYGZus{}btn\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}     \PYG{c+cm}{/*Add a button the current screen*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}                            \PYG{c+cm}{/*Set its position*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{;}                          \PYG{c+cm}{/*Set its size*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{btn\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}                 \PYG{c+cm}{/*Assign a callback to the button*/}
+
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}          \PYG{c+cm}{/*Add a label to the button*/}
+\PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Button}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}                     \PYG{c+cm}{/*Set the labels text*/}
+
+\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+
+\PYG{k+kt}{void} \PYG{n}{btn\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{event} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}CLICKED}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Clicked}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\sphinxincludegraphics{{simple_button_example}.png}
+
+
+\subparagraph{Button with styles}
+\label{\detokenize{get-started/quick-overview:button-with-styles}}
+Add styles to the previously button from the previous example
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{;}                        \PYG{c+cm}{/*A variable to store the released style*/}
+\PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/*Initialize from a built\PYGZhy{}in style*/}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x269}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{width} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0xADF}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x46B}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{shadow}\PYG{p}{.}\PYG{n}{width} \PYG{o}{=} \PYG{l+m+mi}{4}\PYG{p}{;}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{shadow}\PYG{p}{.}\PYG{n}{type} \PYG{o}{=} \PYG{n}{LV\PYGZus{}SHADOW\PYGZus{}BOTTOM}\PYG{p}{;}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{radius} \PYG{o}{=} \PYG{n}{LV\PYGZus{}RADIUS\PYGZus{}CIRCLE}\PYG{p}{;}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0xDEF}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{;}                         \PYG{c+cm}{/*A variable to store the pressed style*/}
+\PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{)}\PYG{p}{;}           \PYG{c+cm}{/*Initialize from the released style*/}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x46B}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x8BD}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x24A}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{shadow}\PYG{p}{.}\PYG{n}{width} \PYG{o}{=} \PYG{l+m+mi}{2}\PYG{p}{;}
+\PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0xBCD}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{LV\PYGZus{}BTN\PYGZus{}STYLE\PYGZus{}REL}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{)}\PYG{p}{;}    \PYG{c+cm}{/*Set the button\PYGZsq{}s released style*/}
+\PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{LV\PYGZus{}BTN\PYGZus{}STYLE\PYGZus{}PR}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Set the button\PYGZsq{}s pressed style*/}
+\end{sphinxVerbatim}
+
+\sphinxincludegraphics{{button_style_example}.png}
+
+
+\subparagraph{Slider and object alignment}
+\label{\detokenize{get-started/quick-overview:slider-and-object-alignment}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{label}\PYG{p}{;}
+
+\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+
+\PYG{c+cm}{/* Create a slider in the center of the display */}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}width}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{l+m+mi}{200}\PYG{p}{)}\PYG{p}{;}                        \PYG{c+cm}{/*Set the width*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}    \PYG{c+cm}{/*Align to the center of the parent (screen)*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n}{slider\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/*Assign an event function*/}
+
+\PYG{c+cm}{/* Create a label below the slider */}
+\PYG{n}{label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{0}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}auto\PYGZus{}realign}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{n}{slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}OUT\PYGZus{}BOTTOM\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+
+\PYG{k+kt}{void} \PYG{n}{slider\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{slider}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{event} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}VALUE\PYGZus{}CHANGED}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{k}{static} \PYG{k+kt}{char} \PYG{n}{buf}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{;}                                 \PYG{c+cm}{/* max 3 bytes  for number plus 1 null terminating byte */}
+        \PYG{n}{snprintf}\PYG{p}{(}\PYG{n}{buf}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZpc{}u}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{lv\PYGZus{}slider\PYGZus{}get\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
+        \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{slider\PYGZus{}label}\PYG{p}{,} \PYG{n}{buf}\PYG{p}{)}\PYG{p}{;}               \PYG{c+cm}{/*Refresh the text*/}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\sphinxincludegraphics{{slider_example}.png}
+
+
+\subparagraph{List and themes}
+\label{\detokenize{get-started/quick-overview:list-and-themes}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*Texts of the list elements*/}
+\PYG{k}{const} \PYG{k+kt}{char} \PYG{o}{*} \PYG{n}{txts}\PYG{p}{[}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{First}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Second}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Third}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Forth}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Fifth}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Sixth}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{\PYGZcb{}}\PYG{p}{;}
+
+\PYG{c+cm}{/* Initialize and set a theme. {}`LV\PYGZus{}THEME\PYGZus{}NIGHT{}` needs to enabled in lv\PYGZus{}conf.h. */}
+\PYG{n}{lv\PYGZus{}theme\PYGZus{}t} \PYG{o}{*} \PYG{n}{th} \PYG{o}{=} \PYG{n}{lv\PYGZus{}theme\PYGZus{}night\PYGZus{}init}\PYG{p}{(}\PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}theme\PYGZus{}set\PYGZus{}current}\PYG{p}{(}\PYG{n}{th}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{c+cm}{/*Create a list*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t}\PYG{o}{*} \PYG{n}{list} \PYG{o}{=} \PYG{n}{lv\PYGZus{}list\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{l+m+mi}{120}\PYG{p}{,} \PYG{l+m+mi}{180}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{c+cm}{/*Add buttons*/}
+\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{i}\PYG{p}{;}
+\PYG{k}{for}\PYG{p}{(}\PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{txts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{;} \PYG{n}{i}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn} \PYG{o}{=} \PYG{n}{lv\PYGZus{}list\PYGZus{}add\PYGZus{}btn}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SYMBOL\PYGZus{}FILE}\PYG{p}{,} \PYG{n}{txts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{list\PYGZus{}event}\PYG{p}{)}\PYG{p}{;}       \PYG{c+cm}{/*Assign event function*/}
+    \PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}toggle}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}               \PYG{c+cm}{/*Enable on/off states*/}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/* Initialize and set an other theme. {}`LV\PYGZus{}THEME\PYGZus{}MATERIAL{}` needs to enabled in lv\PYGZus{}conf.h.}
+\PYG{c+cm}{ * If {}`LV\PYGZus{}TEHE\PYGZus{}LIVE\PYGZus{}UPDATE  1{}` then the previous list\PYGZsq{}s style will be updated too.*/}
+\PYG{n}{th} \PYG{o}{=} \PYG{n}{lv\PYGZus{}theme\PYGZus{}material\PYGZus{}init}\PYG{p}{(}\PYG{l+m+mi}{210}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}theme\PYGZus{}set\PYGZus{}current}\PYG{p}{(}\PYG{n}{th}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{c+cm}{/*Create an other list*/}
+\PYG{n}{list} \PYG{o}{=} \PYG{n}{lv\PYGZus{}list\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{l+m+mi}{120}\PYG{p}{,} \PYG{l+m+mi}{180}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{l+m+mi}{150}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{c+cm}{/*Add buttons with the same texts*/}
+\PYG{k}{for}\PYG{p}{(}\PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{txts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{;} \PYG{n}{i}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn} \PYG{o}{=} \PYG{n}{lv\PYGZus{}list\PYGZus{}add\PYGZus{}btn}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SYMBOL\PYGZus{}FILE}\PYG{p}{,} \PYG{n}{txts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{list\PYGZus{}event}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}toggle}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n}{list\PYGZus{}event}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{e}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{e} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}CLICKED}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{lv\PYGZus{}list\PYGZus{}get\PYGZus{}btn\PYGZus{}text}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\sphinxincludegraphics{{list_theme_example}.png}
+
+
+\subparagraph{Use LittlevGL from Micropython}
+\label{\detokenize{get-started/quick-overview:use-littlevgl-from-micropython}}
+Learn more about {\hyperref[\detokenize{get-started/micropython::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Micropython}}}}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Create a Button and a Label}
+\PYG{n}{scr} \PYG{o}{=} \PYG{n}{lv}\PYG{o}{.}\PYG{n}{obj}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{btn} \PYG{o}{=} \PYG{n}{lv}\PYG{o}{.}\PYG{n}{btn}\PYG{p}{(}\PYG{n}{scr}\PYG{p}{)}
+\PYG{n}{btn}\PYG{o}{.}\PYG{n}{align}\PYG{p}{(}\PYG{n}{lv}\PYG{o}{.}\PYG{n}{scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{lv}\PYG{o}{.}\PYG{n}{ALIGN}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{n}{label} \PYG{o}{=} \PYG{n}{lv}\PYG{o}{.}\PYG{n}{label}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{)}
+\PYG{n}{label}\PYG{o}{.}\PYG{n}{set\PYGZus{}text}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Button}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Load the screen}
+\PYG{n}{lv}\PYG{o}{.}\PYG{n}{scr\PYGZus{}load}\PYG{p}{(}\PYG{n}{scr}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\paragraph{Contributing}
+\label{\detokenize{get-started/quick-overview:contributing}}
+To ask questions please use the \sphinxhref{https://forum.littlevgl.com}{Forum}.
+For development-related things (bug reports, feature suggestions) use \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub’s Issue tracker}.
+
+If you are interested in contributing to LittlevGL you can
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{Help others} in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
+
+\item {} 
+\sphinxstylestrong{Inspire people} by speaking about your project in \sphinxhref{https://forum.littlevgl.com/c/my-projects}{My project} category in the Forum or add it to the \sphinxhref{https://blog.littlevgl.com/2018-12-26/references}{References} post
+
+\item {} 
+\sphinxstylestrong{Improve and/or translate the documentation.} Go to the \sphinxhref{https://github.com/littlevgl/docs}{Documentation} repository to learn more
+
+\item {} 
+\sphinxstylestrong{Write a blog post} about your experiences. See how to do it in the \sphinxhref{https://github.com/littlevgl/blog}{Blog} repository
+
+\item {} 
+\sphinxstylestrong{Report and/or fix bugs} in \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub’s issue tracker}
+
+\item {} 
+\sphinxstylestrong{Help in the developement}. Check the \sphinxhref{https://github.com/littlevgl/lvgl/issues}{Open issues} especially the ones with \sphinxhref{https://github.com/littlevgl/lvgl/issues?q=is\%3Aissue+is\%3Aopen+label\%3A\%22help+wanted\%22}{Help wanted} label and tell your ideas about a topic or implement a feature.
+
+\end{itemize}
+
+It should be useful to read the
+\begin{itemize}
+\item {} 
+whole \sphinxhref{https://blog.littlevgl.com/2018-12-06/contributing}{Contributing guide}
+
+\item {} 
+\sphinxhref{https://github.com/littlevgl/lvgl/blob/master/docs/CODING\_STYLE}{Coding style guide}
+
+\end{itemize}
+
+
 \subsubsection{Micropython}
 \label{\detokenize{get-started/micropython:micropython}}\label{\detokenize{get-started/micropython::doc}}
 
@@ -566,130 +1079,6 @@ On LittlevGL forum (Feel free to ask anything!)
 On Micropython \sphinxhref{http://docs.micropython.org/en/latest/}{docs} and \sphinxhref{https://forum.micropython.org/}{forum}
 
 \end{itemize}
-
-
-\subsubsection{Simulator on PC}
-\label{\detokenize{get-started/pc-simulator:simulator-on-pc}}\label{\detokenize{get-started/pc-simulator::doc}}
-You can try out the LittlevGL \sphinxstylestrong{using only your PC} without any development boards. Write a code, run it on the PC and see the result on the monitor. It is cross-platform: Windows, Linux and OSX are supported.The written code is portable, you can simply copy it when using an embedded hardware.
-
-The simulator is also very useful to report bugs because it means common platform for every user. So it’s a good idea to reproduce a bug in simulator and use the code snippet in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
-
-
-\paragraph{Select an IDE}
-\label{\detokenize{get-started/pc-simulator:select-an-ide}}
-The simulator is ported to various IDEs. Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
-
-
-
-In followings the set-up guide of Eclipse CDT is described in more details.
-
-
-\paragraph{Set-up Eclipse CDT}
-\label{\detokenize{get-started/pc-simulator:set-up-eclipse-cdt}}
-
-\subparagraph{Install Eclipse CDT}
-\label{\detokenize{get-started/pc-simulator:install-eclipse-cdt}}
-Eclipse CDT is C/C++ IDE. You can use other IDEs as well but in this tutorial the configuration for Eclipse CDT is shown.
-
-Eclipse is a Java based software therefore be sure \sphinxstylestrong{Java Runtime Environment} is installed on your system.
-
-On Debian-based distros (e.g. Ubuntu): \sphinxcode{\sphinxupquote{sudo apt-get install default-jre}}
-
-You can download Eclipse’s CDT from: \sphinxhref{http://www.eclipse.org/downloads/}{https://eclipse.org/cdt/}. Start the installer and choose \sphinxstyleemphasis{Eclipse CDT} from the list.
-
-
-\subparagraph{Install SDL 2}
-\label{\detokenize{get-started/pc-simulator:install-sdl-2}}
-The PC simulator uses the \sphinxhref{https://www.libsdl.org/download-2.0.php}{SDL 2} cross platform library to simulate a TFT display and a touch pad.
-
-
-\subparagraph{Linux}
-\label{\detokenize{get-started/pc-simulator:linux}}
-On \sphinxstylestrong{Linux} you can easily install SDL2 using a terminal:
-\begin{enumerate}
-\def\theenumi{\arabic{enumi}}
-\def\labelenumi{\theenumi .}
-\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
-\item {} 
-Find the current version of SDL2: \sphinxcode{\sphinxupquote{apt-cache search libsdl2 (e.g. libsdl2-2.0-0)}}
-
-\item {} 
-Install SDL2: \sphinxcode{\sphinxupquote{sudo apt-get install libsdl2-2.0-0}} (replace with the found version)
-
-\item {} 
-Install SDL2 development package: \sphinxcode{\sphinxupquote{sudo apt-get install libsdl2-dev}}
-
-\item {} 
-If build essentials are not installed yet: \sphinxcode{\sphinxupquote{sudo apt-get install build-essential}}
-
-\end{enumerate}
-
-
-\subparagraph{Windows}
-\label{\detokenize{get-started/pc-simulator:windows}}
-If you are using \sphinxstylestrong{Windows} firstly you need to install MinGW (\sphinxhref{http://mingw-w64.org/doku.php/download}{64 bit version}). After it do the following steps to add SDL2:
-\begin{enumerate}
-\def\theenumi{\arabic{enumi}}
-\def\labelenumi{\theenumi .}
-\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
-\item {} 
-Download the development libraries of SDL.Go to \sphinxurl{https://www.libsdl.org/download-2.0.php} and download \sphinxstyleemphasis{Development Libraries: SDL2-devel-2.0.5-mingw.tar.gz}
-
-\item {} 
-Decompress the file and go to \sphinxstyleemphasis{x86\_64-w64-mingw32} directory (for 64 bit MinGW) or to \sphinxstyleemphasis{i686-w64-mingw32} (for 32 bit MinGW)
-
-\item {} 
-Copy \_…\sphinxstyleemphasis{mingw32/include/SDL2} folder to \sphinxstyleemphasis{C:/MinGW/…/x86\_64-w64-mingw32/include}
-
-\item {} 
-Copy \_…\sphinxstyleemphasis{mingw32/lib/} content to \sphinxstyleemphasis{C:/MinGW/…/x86\_64-w64-mingw32/lib}
-
-\item {} 
-Copy \_…\sphinxstyleemphasis{mingw32/bin/SDL2.dll} to \sphinxstyleemphasis{\{eclipse\_worksapce\}/pc\_simulator/Debug/}.  Do it later when Eclipse is installed.
-
-\end{enumerate}
-
-Note: If you will use \sphinxstylestrong{Microsoft Visual Studio} instead of Eclipse then you don’t have to install MinGW.
-
-
-\subparagraph{OSX}
-\label{\detokenize{get-started/pc-simulator:osx}}
-On \sphinxstylestrong{OSX} you can easily install SDL2 with brew: \sphinxcode{\sphinxupquote{brew install sdl2}}
-
-If something is not working I suggest \sphinxhref{http://lazyfoo.net/tutorials/SDL/01\_hello\_SDL/index.php}{this tutorial} to get started with SDL.
-
-
-\subparagraph{Pre-configured project}
-\label{\detokenize{get-started/pc-simulator:pre-configured-project}}
-A pre-configured graphics library project (based on the latest release) is always available.
-You can find it on \sphinxhref{https://github.com/littlevgl/proj\_pc}{GitHub} or on the \sphinxhref{https://littlevgl.com/download}{Download} page.
-(The project is configured for Eclipse CDT.)
-
-
-\subparagraph{Add the pre-configured project to Eclipse CDT}
-\label{\detokenize{get-started/pc-simulator:add-the-pre-configured-project-to-eclipse-cdt}}
-Run Eclipse CDT. It will show a dialogue about the \sphinxstylestrong{workspace path}. Before accepting it check that path and copy (and unzip) the downloaded pre-configured project there. Now you can accept the workspace path. Of course you can modify this path but in that case copy the project to that location.
-
-Close the start up window and go to \sphinxstylestrong{File-\textgreater{}Import} and choose \sphinxstylestrong{General-\textgreater{}Existing project into Workspace}. \sphinxstylestrong{Browse the root directory} of the project and click \sphinxstylestrong{Finish}
-
-On \sphinxstylestrong{Windows} you have to do two additional things:
-\begin{itemize}
-\item {} 
-Copy the \sphinxstylestrong{SDL2.dll} into the project’s Debug folder
-
-\item {} 
-Right click on the project -\textgreater{} Project properties -\textgreater{} C/C++ Build -\textgreater{} Settings -\textgreater{} Libraries -\textgreater{} Add … and add \sphinxstyleemphasis{mingw32} above SDLmain and SDL. (The order is important: mingw32, SDLmain, SDL)
-
-\end{itemize}
-
-
-\subparagraph{Compile and Run}
-\label{\detokenize{get-started/pc-simulator:compile-and-run}}
-Now you are ready to run the LittlevGL Graphics Library on your PC. Click on the Hammer Icon on the top menu bar to Build the project. If you have done everything right you will not get any errors. Note that on some systems additional steps might be required to “see” SDL 2 from Eclipse but in most of cases the configurations in the downloaded project is enough.
-
-After a success build click on the Play button on the top menu bar to run the project. Now a window should appear in the middle of your screen.
-
-Now everything is ready to use the LittlevGL Graphics Library in the practice or begin the development on your PC.
 
 
 \subsection{Porting}
@@ -940,7 +1329,7 @@ Here some simple examples of the callbacks:
     \PYG{n}{lv\PYGZus{}disp\PYGZus{}flush\PYGZus{}ready}\PYG{p}{(}\PYG{n}{disp}\PYG{p}{)}\PYG{p}{;}
 \PYG{p}{\PYGZcb{}}
 
-\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}mem\PYGZus{}fill\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp\PYGZus{}drv}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{dest\PYGZus{}buf}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{dest\PYGZus{}area}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{fill\PYGZus{}area}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{color}\PYG{p}{)}\PYG{p}{;}
+\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}gpu\PYGZus{}fill\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp\PYGZus{}drv}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{dest\PYGZus{}buf}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{dest\PYGZus{}area}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{fill\PYGZus{}area}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{color}\PYG{p}{)}\PYG{p}{;}
 \PYG{p}{\PYGZob{}}
     \PYG{c+cm}{/*It\PYGZsq{}s an example code which should be done by your GPU*/}
     \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{;}
@@ -949,7 +1338,7 @@ Here some simple examples of the callbacks:
     \PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZcb{}}
 
-\PYG{k+kt}{void} \PYG{n}{my\PYGZus{}mem\PYGZus{}blend\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp\PYGZus{}drv}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{dest}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{src}\PYG{p}{,} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{length}\PYG{p}{,} \PYG{n}{lv\PYGZus{}opa\PYGZus{}t} \PYG{n}{opa}\PYG{p}{)}
+\PYG{k+kt}{void} \PYG{n}{my\PYGZus{}gpu\PYGZus{}blend\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp\PYGZus{}drv}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{dest}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{src}\PYG{p}{,} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{length}\PYG{p}{,} \PYG{n}{lv\PYGZus{}opa\PYGZus{}t} \PYG{n}{opa}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
     \PYG{c+cm}{/*It\PYGZsq{}s an example code which should be done by your GPU*/}
     \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{i}\PYG{p}{;}
@@ -3752,6 +4141,9 @@ Pointer input devices can have a cursor. (typically for mouses)
 \PYG{n}{lv\PYGZus{}img\PYGZus{}set\PYGZus{}src}\PYG{p}{(}\PYG{n}{cursor\PYGZus{}obj}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{mouse\PYGZus{}cursor\PYGZus{}icon}\PYG{p}{)}\PYG{p}{;}             \PYG{c+cm}{/*Set the image source*/}
 \PYG{n}{lv\PYGZus{}indev\PYGZus{}set\PYGZus{}cursor}\PYG{p}{(}\PYG{n}{mouse\PYGZus{}indev}\PYG{p}{,} \PYG{n}{cursor\PYGZus{}obj}\PYG{p}{)}\PYG{p}{;}               \PYG{c+cm}{/*Connect the image  object to the driver*/}
 \end{sphinxVerbatim}
+
+Note that the cursor object should have \sphinxcode{\sphinxupquote{lv\_obj\_set\_click(cursor\_obj, false)}}.
+For images \sphinxstyleemphasis{clicking} is disabled by default.
 
 
 \paragraph{Keypad and encoder}
@@ -8706,12 +9098,12 @@ Custom file user data
 
 
 
-\subsubsection{Animations}
-\label{\detokenize{overview/animation:animations}}\label{\detokenize{overview/animation::doc}}
-You can automatically change the value of a variable between a start and an end value using animations.
+\subsubsection{Animasyon}
+\label{\detokenize{overview/animation:animasyon}}\label{\detokenize{overview/animation::doc}}
+Animasyon yardımıyla bir değişkenin değerini başlangıç ve bitiş değerleri arasında otomatik değiştirebilirsiniz.
 The animation will happen by the periodical call of an “animator” function with the corresponding value parameter.
 
-The \sphinxstyleemphasis{animator} functions has the following prototype:
+\sphinxstyleemphasis{animator} fonksiyonları aşağıdaki prototipe sahiptir:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kt}{void} \PYG{n+nf}{func}\PYG{p}{(}\PYG{k+kt}{void} \PYG{o}{*} \PYG{n}{var}\PYG{p}{,} \PYG{n}{lv\PYGZus{}anim\PYGZus{}var\PYGZus{}t} \PYG{n}{value}\PYG{p}{)}\PYG{p}{;}
@@ -14648,66 +15040,66 @@ Data of bar
 
 
 
-\subsubsection{Button (lv\_btn)}
-\label{\detokenize{object-types/btn:button-lv-btn}}\label{\detokenize{object-types/btn::doc}}
+\subsubsection{Buton (lv\_btn)}
+\label{\detokenize{object-types/btn:buton-lv-btn}}\label{\detokenize{object-types/btn::doc}}
 
-\paragraph{Overview}
-\label{\detokenize{object-types/btn:overview}}
-Buttons are simple rectangle-like objects, but they change their style and state when they are pressed or released.
+\paragraph{Giriş}
+\label{\detokenize{object-types/btn:giris}}
+Butonlar, baskı uygulandığında veya bırakıldığında biçimleri ve durumları değişen basit dikdörtgenimsi nesnelerdir.
 
 
-\subparagraph{States}
-\label{\detokenize{object-types/btn:states}}
-Buttons can be in one of the 5 possible states:
+\subparagraph{Durumlar}
+\label{\detokenize{object-types/btn:durumlar}}
+Butonlar 5 olası durumdan birinde olabilir
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_BTN\_STATE\_REL} Released state
+\sphinxstylestrong{LV\_BTN\_STATE\_REL} Bası uygulanmama durumu
 
 \item {} 
-\sphinxstylestrong{LV\_BTN\_STATE\_PR} Pressed state
+\sphinxstylestrong{LV\_BTN\_STATE\_PR} Bası uygulanma durumu
 
 \item {} 
-\sphinxstylestrong{LV\_BTN\_STATE\_TGL\_REL} Toggled released state
+\sphinxstylestrong{LV\_BTN\_STATE\_TGL\_REL} Değiştir basılma uygulanmama durumu
 
 \item {} 
-\sphinxstylestrong{LV\_BTN\_STATE\_TGL\_PR} Toggled pressed state
+\sphinxstylestrong{LV\_BTN\_STATE\_TGL\_PR} Değiştir basılma uygulanma durumu
 
 \item {} 
-\sphinxstylestrong{LV\_BTN\_STATE\_INA} Inactive state
+\sphinxstylestrong{LV\_BTN\_STATE\_INA} Pasif durumu
 
 \end{itemize}
 
-The state from \sphinxcode{\sphinxupquote{...\_REL}} to \sphinxcode{\sphinxupquote{...\_PR}} will be changed automatically when the button is pressed and back when released.
+Buton’a basıldığında veya bırakıldığında, buton \sphinxcode{\sphinxupquote{...\_REL}} to \sphinxcode{\sphinxupquote{...\_PR}} durumları arasındaki değişim otomatik olur.
 
-You can set the button’s state manually with \sphinxcode{\sphinxupquote{lv\_btn\_set\_state(btn, LV\_BTN\_STATE\_TGL\_REL)}}.
-
-
-\subparagraph{Toggle}
-\label{\detokenize{object-types/btn:toggle}}
-You can configure the buttons as \sphinxstyleemphasis{toggle button} with \sphinxcode{\sphinxupquote{lv\_btn\_set\_toggle(btn, true)}}. In this case on release, the button goes to \sphinxstyleemphasis{toggled released} state.
+Buton’un durumu el ile \sphinxcode{\sphinxupquote{lv\_btn\_set\_state(btn, LV\_BTN\_STATE\_TGL\_REL)}} fonksiyonu ile değiştirilebilir.
 
 
-\subparagraph{Layout and Fit}
-\label{\detokenize{object-types/btn:layout-and-fit}}
-Similarly to {\hyperref[\detokenize{object-types/cont::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Containers}}}} buttons also have layout and fit attributes.
+\subparagraph{Değiştir}
+\label{\detokenize{object-types/btn:degistir}}
+Butonları  \sphinxstyleemphasis{toggle button} (değiştir butonu) olarak {}`lv\_btn\_set\_toggle(btn, true) fonksiyonu ile ayarlanabilir, böyle bir durumda buton \sphinxstyleemphasis{toggled released} (değştir bırakılması) durumuna geçer.
+
+
+\subparagraph{Yerleşim planı ve Uyum}
+\label{\detokenize{object-types/btn:yerlesim-plani-ve-uyum}}
+Butonlar \sphinxhref{/nesne-tipleri/\%C3\%A7er\%C3\%A7eve}{Taşıyıcı çerçeve}’lerde olduğu gibi benzer yerleşim planı ve uyum özelliklerine sahiptir.
 \begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{lv\_btn\_set\_layout(btn, LV\_LAYOUT\_...) }}set a layout. The default is \sphinxcode{\sphinxupquote{LV\_LAYOUT\_CENTER}}.
-So if you add a label, then it will be automatically aligned to the middle and can’t be moved with \sphinxcode{\sphinxupquote{lv\_obj\_set\_pos()}}.
-You can disable the layout with \sphinxcode{\sphinxupquote{lv\_btn\_set\_layout(btn, LV\_LAYOUT\_OFF)}}
+\sphinxcode{\sphinxupquote{lv\_btn\_set\_layout(btn, LV\_LAYOUT\_...) }} fonksiyonu ile yerleşim planı ayarlanır. Varsayılarn yerleşim planı \sphinxcode{\sphinxupquote{LV\_LAYOUT\_CENTER}} şeklindedir.
+Bu yüzden eğer butona bir etiket eklendiğinde, etiket otomatik olarak ortaya hizalanır ve \sphinxcode{\sphinxupquote{lv\_obj\_set\_pos()}} fonksiyonu ile haraket ettirilemez.
+\sphinxcode{\sphinxupquote{lv\_btn\_set\_layout(btn, LV\_LAYOUT\_OFF)}} fonksiyonu ile yerleşim planı etkisiz hale getirilir.
 
 \item {} 
-\sphinxcode{\sphinxupquote{lv\_btn\_set\_fit/fit2/fit4(btn, LV\_FIT\_..)}} enables to set the button width and/or height automatically according to the children, parent, and fit type.
+\sphinxcode{\sphinxupquote{lv\_btn\_set\_fit/fit2/fit4(btn, LV\_FIT\_..)}} fonksiyonu butonun genişlik veya yüksekliğini otomatik olarak bağlı bulunduğu üst birimi veya kendi alt birimleri için aktifleştirir ve şekil uyumunu sağlar.
 
 \end{itemize}
 
 
-\subparagraph{Ink effect}
-\label{\detokenize{object-types/btn:ink-effect}}
-You can enable a special animation on buttons: when a button is pressed, the pressed state will be drawn in a growing circle starting from the point of pressing. It’s like an ink droplet in the water.
-When the button is released, the released state will be reverted by fading. It’s like the ink is fully mixed with a lot of water and become no visible in it.
+\subparagraph{Mürekkep Etkisi}
+\label{\detokenize{object-types/btn:murekkep-etkisi}}
+Butonlarda özel animasyonu aktifleştirebilirsiniz. Butona bası uygulandığında basıl uygulandığı noktadan büyüyen bir daire şeklinde bası durumu oluşur. Bu durum mürekkebin suya damlaması gibi bir etki oluşturur.
+Buton bırakıldğında, bırakılma durumu renk değişimi ile tamamlanır. Bu durum mürekkebin çok fazla su ile tam olarak karşması ve hiçbirşeyin görünmemesi gibidir.
 
-To control this animation use the following functions:
+Animasyonu kontrol etmek için aşağıdaki fonksiyonlar kullanılır:
 \begin{itemize}
 \item {} 
 \sphinxcode{\sphinxupquote{lv\_btn\_set\_ink\_in\_time(btn, time\_ms)}} time of circle growing
@@ -14723,8 +15115,8 @@ To control this animation use the following functions:
 This feature needs to be enabled with \sphinxcode{\sphinxupquote{LV\_BTN\_INK\_EFFECT  1}} in \sphinxstyleemphasis{lv\_conf.h}.
 
 
-\paragraph{Styles}
-\label{\detokenize{object-types/btn:styles}}
+\paragraph{Biçimler}
+\label{\detokenize{object-types/btn:bicimler}}
 A button can have 5 independent styles for the 5 state. You can set them via: \sphinxcode{\sphinxupquote{lv\_btn\_set\_style(btn, LV\_BTN\_STYLE\_..., \&style)}}. The styles use the \sphinxcode{\sphinxupquote{style.body}} properties.
 \begin{itemize}
 \item {} 
@@ -14748,8 +15140,8 @@ When you create a label on a button, it’s a good practice to set the button’
 Hence you don’t need to create a new style for the label.
 
 
-\paragraph{Events}
-\label{\detokenize{object-types/btn:events}}
+\paragraph{Aksiyonlar}
+\label{\detokenize{object-types/btn:aksiyonlar}}
 Besides the \sphinxhref{/overview/event.html\#generic-events}{Generic events} the following \sphinxhref{/overview/event.html\#special-events}{Special events} are sent by the buttons:
 \begin{itemize}
 \item {} 
@@ -14762,8 +15154,8 @@ Note that the generic input device-related events (like \sphinxcode{\sphinxupquo
 Learn more about {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Events}}}}.
 
 
-\paragraph{Keys}
-\label{\detokenize{object-types/btn:keys}}
+\paragraph{Anahtarlar}
+\label{\detokenize{object-types/btn:anahtarlar}}
 The following \sphinxstyleemphasis{Keys} are processed by the Buttons:
 \begin{itemize}
 \item {} 
@@ -14779,8 +15171,8 @@ Note that, as usual, the state of \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} is
 Learn more about {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Keys}}}}.
 
 
-\paragraph{Example}
-\label{\detokenize{object-types/btn:example}}
+\paragraph{Örnek}
+\label{\detokenize{object-types/btn:ornek}}
 
 \subparagraph{C}
 \label{\detokenize{object-types/btn:c}}
@@ -17328,38 +17720,38 @@ Represents a date on the calendar object (platform-agnostic).
 
 
 
-\subsubsection{Canvas (lv\_canvas)}
-\label{\detokenize{object-types/canvas:canvas-lv-canvas}}\label{\detokenize{object-types/canvas::doc}}
+\subsubsection{Tuval (lv\_canvas)}
+\label{\detokenize{object-types/canvas:tuval-lv-canvas}}\label{\detokenize{object-types/canvas::doc}}
 
-\paragraph{Overview}
-\label{\detokenize{object-types/canvas:overview}}
-A Canvas is like an {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} where the user can draw anything.
+\paragraph{Genel Taslak}
+\label{\detokenize{object-types/canvas:genel-taslak}}
+{\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} gibi bir tuval ile kullanıcı herşeyi çizebilir.
 
 
-\subparagraph{Buffer}
-\label{\detokenize{object-types/canvas:buffer}}
-The Canvas needs a buffer which stores the drawn image.
-To assign a buffer to a Canvas use \sphinxcode{\sphinxupquote{lv\_canvas\_set\_buffer(canvas, buffer, width, height, LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA)}}.
-\sphinxcode{\sphinxupquote{buffer}} is a static buffer (not just a local variable) to hold the image of the canvas.
-For example
+\subparagraph{Önbellek}
+\label{\detokenize{object-types/canvas:onbellek}}
+Tuvalin çizilmiş imajı hafızada tutabilmesi için  bir önbelleğe ihtiyacı vardır.
+Bir tuvale bir önbellek atamak için \sphinxcode{\sphinxupquote{lv\_canvas\_set\_buffer(canvas, buffer, width, height, LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA)}}kullanılır.
+\sphinxcode{\sphinxupquote{buffer}} tuvalin görüntüsünü tutan bir statik önbellektir(sadece yerel bir değişken değil).
+Örneğin
 \sphinxcode{\sphinxupquote{static lv\_color\_t buffer{[}LV\_CANVAS\_BUF\_SIZE\_TRUE\_COLOR(width, height){]}}}. \sphinxcode{\sphinxupquote{LV\_CANVAS\_BUF\_SIZE\_...}} macros help to determine the size of the buffer with different color formats.
 
 
-\subparagraph{Palette}
-\label{\detokenize{object-types/canvas:palette}}
-For \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_INDEXED\_...}} color formats a palette needs to be initialized with  \sphinxcode{\sphinxupquote{lv\_canvas\_set\_palette(canvas, 3, LV\_COLOR\_RED)}}. It sets pixels with \sphinxstyleemphasis{index=3} to red.
+\subparagraph{Palet}
+\label{\detokenize{object-types/canvas:palet}}
+\sphinxcode{\sphinxupquote{LV\_IMG\_CF\_INDEXED\_...}} için renk format paleti  \sphinxcode{\sphinxupquote{lv\_canvas\_set\_palette(canvas, 3, LV\_COLOR\_RED)}} ile başlatılması gerekir. Pikseli \sphinxstyleemphasis{index=3} ile kırmızı ayarlanır.
 
 
-\subparagraph{Drawing}
-\label{\detokenize{object-types/canvas:drawing}}
-To set a pixel on the canvas use \sphinxcode{\sphinxupquote{lv\_canvas\_set\_px(canvas, x, y, LV\_COLOR\_RED)}}.
-With \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_INDEXED\_...}} or \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_ALPHA\_...}} the index of the color or the alpha value needs to be passed as color. E.g. \sphinxcode{\sphinxupquote{lv\_color\_t c; c.full = 3;}}
+\subparagraph{Çizim}
+\label{\detokenize{object-types/canvas:cizim}}
+Bir pikseli ayarlamak için \sphinxcode{\sphinxupquote{lv\_canvas\_set\_px(canvas, x, y, LV\_COLOR\_RED)}} kullanılır.
+\sphinxcode{\sphinxupquote{LV\_IMG\_CF\_INDEXED\_...}} veya \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_ALPHA\_...}} ile rengin veya alfa değerinin indisi renk olarak geçmesi gerekir. Örneğin  \sphinxcode{\sphinxupquote{lv\_color\_t c; c.full = 3;}}
 
-\sphinxcode{\sphinxupquote{lv\_canvas\_fill\_bg(canvas, LV\_COLOR\_BLUE)}} fills the whole canvas to blue.
+\sphinxcode{\sphinxupquote{lv\_canvas\_fill\_bg(canvas, LV\_COLOR\_BLUE)}} tüm tuvali mavi doldurur
 
-An array of pixels can be copied to the canvas with \sphinxcode{\sphinxupquote{lv\_canvas\_copy\_buf(canvas, buffer\_to\_copy, x, y, width, height)}}. The color format of the buffer and the canvas need to match.
+\sphinxcode{\sphinxupquote{lv\_canvas\_copy\_buf(canvas, buffer\_to\_copy, x, y, width, height)}} ile piksel dizisi tuvale kopyalanabilir . Ön belleğin ve tuvalin renk formatı eşleşmesi gerekir.
 
-To draw something to the canvas use
+Bir şey çizmek için tuval kullanılır
 \begin{itemize}
 \item {} 
 \sphinxcode{\sphinxupquote{lv\_canvas\_draw\_rect(canvas, x, y, width, heigth, \&style)}}
@@ -30225,8 +30617,8 @@ style pointer to a style
 \subsubsection{Slider (lv\_slider)}
 \label{\detokenize{object-types/slider:slider-lv-slider}}\label{\detokenize{object-types/slider::doc}}
 
-\paragraph{Overview}
-\label{\detokenize{object-types/slider:overview}}
+\paragraph{Genel bakış}
+\label{\detokenize{object-types/slider:genel-bakis}}
 The Slider object looks like a {\hyperref[\detokenize{object-types/bar::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Bar}}}} supplemented with a knob. The knob can be dragged to set a value. The Slider also can be vertical or horizontal.
 
 

@@ -28,6 +28,9 @@ lv_indev_set_cursor(mouse_indev, cursor_obj);               /*Connect the image 
 
 ``` 
 
+Note that the cursor object should have `lv_obj_set_click(cursor_obj, false)`. 
+For images *clicking* is disabled by default.
+
 ## Keypad and encoder
 
 You can fully control the user interface without touchpad or mouse using a keypad or encoder(s). it works similarly when you press the *TAB* key on PC to select the element in an application or a web page. 

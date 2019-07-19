@@ -3,7 +3,7 @@
 ```
 # Slider (lv_slider)
 
-## Overview
+## Genel bakış
 
 The Slider object looks like a [Bar](/object-types/bar) supplemented with a knob. The knob can be dragged to set a value. The Slider also can be vertical or horizontal.
 

@@ -1,43 +1,43 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/hu/porting/display.md
 ```
-# Display interface
+# Kijelző interface
 
-To set up a display an `lv_disp_buf_t` and an `lv_disp_drv_t` variable has to be initialized. 
-- **lv_disp_buf_t** contains internal graphics buffer(s). 
-- **lv_disp_drv_t** contains callback functions to interact with the display and manipulate drawing related things. 
+Ahhoz használhass egy kijelzőt egy `lv_disp_buf_t` és egy `lv_disp_drv_t` typusú változót kell inicializálnod.
+- **lv_disp_buf_t** egy belső grafikus buffert tartalmaz 
+- **lv_disp_drv_t** a kijelzőhöz kapcsolódó callback függvényeket és egyén beállításokat tartalmaz
 
 
-## Display buffer 
+## Kijelző buffer 
 
-`lv_disp_buf_t` can be initialized like this:
+`lv_disp_buf_t` így inicializálható:
 ```c
-    /*A static or global variable to store the buffers*/
+    /*Egy static vagy global változó a buffers tárolásához*/
     static lv_disp_buf_t disp_buf;
     
-    /*Static or global buffer(s). The second buffer is optional*/
+    /*Static vagy global buffer(ek). (A második buffer opcionális*/
     static lv_color_t buf_1[MY_DISP_HOR_RES * 10];
     static lv_color_t buf_2[MY_DISP_HOR_RES * 10];
     
-    /*Initialize `disp_buf` with the buffer(s) */
+    /*`disp_buf` inicializálása a buffer(ekkel) */
     lv_disp_buf_init(&disp_buf, buf_1, buf_2, MY_DISP_HOR_RES*10);
 ```
 
-There are there possible configurations regarding the buffer size:
-1. **One buffer** LittlevGL draws the content of the screen into a buffer and sends it to the display. 
-The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts. 
-If only small areas changes (e.g. button press) then only those areas will be refreshed.
-2. **Two non-screen-sized buffers** having two buffers LittlevGL can draw into one buffer while the content of the other buffer is sent to display in the background.
-DMA or other hardware should be used to transfer the data to the display to let the CPU draw meanwhile.
-This way the rendering and refreshing of the display become parallel. 
-Similarly to the *One buffer* LittlevGL will draw the display's content in chunks if the buffer is smaller than the area to refresh.
-3. **Two screen-sized buffers**.
-In contrast to *Two non-screen-sized buffers* LittlevGL will always provide the whole screen's content not only chunks. 
-This way the driver can simply change the address of the frame buffer to the buffer received from LittlevGL.
-Therefore this method works the best when the MCU has an LCD/TFT interface and the frame buffer is just a location in the RAM.
+Három beállítási lehetőség van a bufferek méretének és számának megfelelően 
+1. **Egy buffer** LittlevGL a bufferbe rajzolja a képernyő tartalmát és elküldi a  kijelzőre.
+A buffer kisebb is lehet, mint kijelző. Ebben az esetben a nagyobb területek kisebb darabokban kerülnek kirajzolásra.
+Ha csak egy kis terület változik (pl. egy gomb megnyomásánál), akkor csak az a kis terület kerül firssítésre.
+2. **Kettő nem képernyőméretű buffer** két bufferrel  LittlevGL képes az egyik bufferbe rajzolni, míg a másik buffer tartalmát el tudja küldeni a kijelzőnek a háttérben.
+DMA vagy egyéb hardware használata ajánlott, hogy az adatokat háttérben küldd el a kijelzőnek és hagyd a CPU-t rajzolni a másik bufferbe időközben.
+Íly' módon a rajzolás és a kijelző frissítése párhozamosan történhet.
+Az *Egy buffer* módhoz hasonlóan LittlevGL kisebb darabokban fogja rajzolni a buffernél nagyobb területeket.
+3. **Két képernyőméretű buffer**.
+Ellentétben a *Két nem képernyőméretű buffer* móddal LittlevGL mindig teljes képenyő képét szolgáltatja, nem csak egy kis darabot.
+Ennek köszönhetően a driver egyszerűen kicserélheti a frame buffer címét a kapott bufferre.
+Ezért ez a mód olyan MCU-kkal működik a legjobban, amiknek van LCD/TFT perifériája és a frame buffer  csak egy terület a RAM-ban.
 
 
-## Display driver
+## Kijelző driver
 
 Once the buffer initialization is ready the display drivers need to be initialized. In the most simple case only the following two fields of `lv_disp_drv_t` needs to be set:
 - **buffer** pointer to an initialized `lv_disp_buf_t` variable.
@@ -80,7 +80,7 @@ Here some simple examples of the callbacks:
 ```c
 void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {
-    /*The most simple case (but also the slowest) to put all pixels to the screen one-by-one*/
+    /*A legegyszerűbb (és egyben leglassabb) megoldás, hogy minden pixelt kiteszel a kijelzőre.*/
     int32_t x, y;
     for(y = area->y1; y <= area->y2; y++) {
         for(x = area->x1; x <= area->x2; x++) {
@@ -89,23 +89,23 @@ void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * 
         }
     }
 
-    /* IMPORTANT!!!
-     * Inform the graphics library that you are ready with the flushing*/
+    /* FONTOS!!!
+     * Szólj a library-nak, hogy kész vagy kijelző firssítéssel*/
     lv_disp_flush_ready(disp);
 }
 
-void my_mem_fill_cb(lv_disp_drv_t * disp_drv, lv_color_t * dest_buf, const lv_area_t * dest_area, const lv_area_t * fill_area, lv_color_t color);
+void my_gpu_fill_cb(lv_disp_drv_t * disp_drv, lv_color_t * dest_buf, const lv_area_t * dest_area, const lv_area_t * fill_area, lv_color_t color);
 {
-    /*It's an example code which should be done by your GPU*/
+    /*Ez egy példa, amit a GPU-nak kellene csinálni*/
     uint32_t x,y;
     for(y = 0; i < length; i++) {
         dest[i] = color;
     }
 }
 
-void my_mem_blend_cb(lv_disp_drv_t * disp_drv, lv_color_t * dest, const lv_color_t * src, uint32_t length, lv_opa_t opa)
+void my_gpu_blend_cb(lv_disp_drv_t * disp_drv, lv_color_t * dest, const lv_color_t * src, uint32_t length, lv_opa_t opa)
 {
-    /*It's an example code which should be done by your GPU*/
+    /*Ez egy példa, amit a GPU-nak kellene csinálni*/
     uint32_t i;
     for(i = 0; i < length; i++) {
         dest[i] = lv_color_mix(dest[i], src[i], opa);
@@ -114,16 +114,16 @@ void my_mem_blend_cb(lv_disp_drv_t * disp_drv, lv_color_t * dest, const lv_color
 
 void my_rounder_cb(lv_disp_drv_t * disp_drv, lv_area_t * area)
 {
-  /* Update the areas as needed. Can be only larger.
-   * For example to always have lines 8 px height:*/
+  /* Frissítsd az `area`-t ahogy szükséges. Csak nagyobb lehet. 
+   * Például legyen mindig N x 8 px magas*/
    area->y1 = area->y1 & 0x07;
    area->y2 = (area->y2 & 0x07) + 8; 
 }
 
 void my_set_px_cb(lv_disp_drv_t * disp_drv, uint8_t * buf, lv_coord_t buf_w, lv_coord_t x, lv_coord_t y, lv_color_t color, lv_opa_t opa)
 {
-    /* Write to the buffer as required for the display. 
-     * Write only 1 bit for monochrome displays mapped vertically:*/
+    /* Írd a buffert ahogy szükséges
+     * 1 bit írása egy monochrome kijelzőre, ahol bitek függőlegesen vannak bájtokhoz mappolva:*/
  buf += buf_w * (y >> 3) + x;
  if(lv_color_brightness(color) > 128) (*buf) |= (1 << (y % 8));
  else (*buf) &= ~(1 << (y % 8));
@@ -131,7 +131,7 @@ void my_set_px_cb(lv_disp_drv_t * disp_drv, uint8_t * buf, lv_coord_t buf_w, lv_
 
 void my_monitor_cb(lv_disp_drv_t * disp_drv, uint32_t time, uint32_t px)
 {
-  printf("%d px refreshed in %d ms\n", time, ms);
+  printf("%d px frissítve %d ms alatt\n", time, ms);
 }
 ```
 

@@ -10,6 +10,7 @@
    :maxdepth: 2
 
    live-demo
-   micropython
    pc-simulator
+   quick-overview
+   micropython
 ```
