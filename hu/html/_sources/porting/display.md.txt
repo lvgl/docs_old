@@ -39,44 +39,44 @@ Ezért ez a mód olyan MCU-kkal működik a legjobban, amiknek van LCD/TFT perif
 
 ## Kijelző driver
 
-Once the buffer initialization is ready the display drivers need to be initialized. In the most simple case only the following two fields of `lv_disp_drv_t` needs to be set:
-- **buffer** pointer to an initialized `lv_disp_buf_t` variable.
-- **flush_cb** a callback function to copy a buffer's content to a specific area of the display.
+Ha buffer inicializálása kész a kijlező dirver-t kell inicializálni. Legegyszerűbb esetben a következő mezőit kell inicializálni egy `lv_disp_drv_t` változónak:
+- **buffer** pointer rgy inicializált `lv_disp_buf_t` változóra.
+- **flush_cb** egy callback függvény, hogy a buffer tartalmát e kijelző egy megadott területére másolja
 
-There are some optional data fields:
-- **hor_res** horizontal resolution of the display. (`LV_HOR_RES_MAX` by default from *lv_conf.h*)
-- **ver_res** vertical resolution of the display. (`LV_VER_RES_MAX` by default from *lv_conf.h*)
-- **color_chroma_key** a color which will be drawn as transparent on chrome keyed images. `LV_COLOR_TRANSP` by default from *lv_conf.h*)
-- **user_data** custom user data for the driver. Its type can be modified in lv_conf.h.
-- **anti-aliasing** use anti-aliasing (edge smoothing). `LV_ANTIALIAS` by default  from *lv_conf.h*
-- **rotated** if `1` swap `hor_res` and `ver_res`. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction.
-- **screen_transp** if `1` the screen can have transparent or opaque style. `LV_COLOR_SCREEN_TRANSP` needs to enabled in *lv_conf.h*
-To use a GPU the following callbacks can be used:
-- **gpu_fill_cb** fill an area with colors. 
-- **gpu_blend_cb** blend two buffers using opacity.
+Van néhány opcionális adata mező is:
+- **hor_res** a kijelző vízszintes felbontása. (`LV_HOR_RES_MAX` alapértelmezetten az *lv_conf.h*-ból)
+- **ver_res** a kijelző függőleges felbontása. (`LV_VER_RES_MAX`  alapértelmezetten az *lv_conf.h*-ból)
+- **color_chroma_key** egy szín ami átlátszóként lesz megjelenítve chrome keyed képeken. `LV_COLOR_TRANSP`  alapértelmezetten az *lv_conf.h*-ból)
+- **user_data** egyedi tetszőleges felhasználói adat. A típusa módosítható *lv_conf.h*-ban.
+- **anti-aliasing** anti-aliasing (élsimítás) engedélyezése. `LV_ANTIALIAS`  alapértelmezetten az *lv_conf.h*-ból
+- **rotated** ha `1` megcseréli `hor_res` and `ver_res` értékét. LittlevGL mindkét esetben ugyanabba az iránya rajzol (fentről le soronként) ezért a kitöltés/scan-nelés irányát a driver-ben is át kell konfigurálni.
+- **screen_transp** ha`1` a képernyőknek lehetnek átlátszó vagy áttetsző pixeleik. `LV_COLOR_SCREEN_TRANSP` engedélyezve kell legyen az *lv_conf.h*-ben.
+A GPU használatához az alábbi callback-ek használhatók:
+- **gpu_fill_cb** tölts ki egy területet egy adott színnel. 
+- **gpu_blend_cb** keverj össze két buffert valamilyen átlátszóság (opacity) szerint.
  
-Some other optional callbacks to make easier and more optimal to work with monochrome, gray-scale or other non-standard RGB displays: 
-- **rounder_cb** round the coordinates of areas to redraw. E.g. a 2x2 px can be converted to 2x8. 
-It can be used if the display controller can refresh only areas with specific height or width (usually 8 px height with monochrome displays).
-- **set_px_cb** a custom function to write the *display buffer*. 
-It can be used to store the pixels in a more compact way if the display has a special color format. (e.g. 1 bit monochrome, 2  bit gray-scale etc.) 
-This way the buffers used in `lv_disp_buf_t` can be smaller to hold only the required number of bits for the given area size.
-- **monitor_cb** a callback function tell how many pixels were refreshed in how much time.
+Néhány opcionális callback, melyek megkönnyítik és optimálisabbá teszik monochrome, szürkeárnyalatos vagy nem szabványos RGB kijelzők használatát.
+- **rounder_cb** kerekíti az újrarajzolandó területek koordinátáit. Pl. egy 2x2 px terület 2x8re konvertálható.. 
+Ez akkor használható, ha kijelző vezérlő csak bizony magasságú vagy szélességű területeket tud frissíteni. (Általában 8px magasság monochrome kijelzőknél)
+- **set_px_cb** egyedi függvény  *kijelző buffer* írásához. 
+Használatával a pixeleket egy tömörebb formában tárolhatók a kijelzőnek speciális színformátuma van (pl. 1 bit monochrome, 2  bit szürkeárnyalat etc.) 
+Ennek köszönhetően a `lv_disp_buf_t`-ben használt buffer-ek kisebbek lehetnek, hogy szükséges mennyiségű bitet tartalmazzák.
+- **monitor_cb** egy callback, mely megmutatja, hogy mennyi pixel került frissítésre adott idő alatt.
 
-To set the fields of *lv_disp_drv_t* variable it needs to be initialized with `lv_disp_drv_init(&disp_drv)`.
-And finally to register a display for LittlevGL `lv_disp_drv_register(&disp_drv)` needs to be called.
+Egy *lv_disp_drv_t* változó mezőinek beállítása előtt azt inicializálni kell a `lv_disp_drv_init(&disp_drv)` függvénnyel.
+És végül a kijelző regisztrálásához a `lv_disp_drv_register(&disp_drv)` függvényt kell meghívni.
 
-All together it looks like this:
+Minden együtt így néz ki:
 ```c
-    lv_disp_drv_t disp_drv;                 /*A variable to hold the drivers. Can be local variable*/
-    lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
-    disp_drv.buffer = &disp_buf;            /*Set an initialized buffer*/
-    disp_drv.flush_cb = my_flush_cb;        /*Set a flush callback to draw to the display*/
+    lv_disp_drv_t disp_drv;                 /*Egy változó a driver-nek. Lehet lokális is.*/
+    lv_disp_drv_init(&disp_drv);            /*Alap inicializálás*/
+    disp_drv.buffer = &disp_buf;            /*Az incializált buffer használata*/
+    disp_drv.flush_cb = my_flush_cb;        /*Egy flush callback beállítása a képernyőre rajzoláshoz*/
     lv_disp_t * disp;
-    disp = lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
+    disp = lv_disp_drv_register(&disp_drv); /*A driver regisztrálása és létrehozott kijelző elmentése */
 ```
 
-Here some simple examples of the callbacks:
+Alább egy-egy példa látható a fent leírt callback-ekre:
 ```c
 void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {

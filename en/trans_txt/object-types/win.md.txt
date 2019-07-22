@@ -45,6 +45,8 @@ Use `lv_win_set_style(win, LV_WIN_STYLE_...,  &style)` to set a new style for an
 - **LV_WIN_STYLE_BTN_REL** released button's style (on header) which uses all `style.body` properties (default: `lv_style_btn_rel`)
 - **LV_WIN_STYLE_BTN_PR** released button's style (on header) which uses all `style.body` properties (default: `lv_style_btn_pr`)
 
+The height of the header is set to the greater value from *buttons' height* (set by `lv_win_set_btn_size`) and *title height* (comes from `header_style.text.font`) plus the `body.padding.top` and `body.padding.bottom` of the header style.
+
 ## Events
 Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
 

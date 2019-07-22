@@ -3,7 +3,6 @@
 ```
 # Get started
 
-
 ```eval_rst
 
 .. toctree::
@@ -14,3 +13,4 @@
    quick-overview
    micropython
 ```
+

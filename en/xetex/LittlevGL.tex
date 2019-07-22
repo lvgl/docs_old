@@ -61,10 +61,11 @@
 \setmonofont{DejaVu Sans Mono}
 \usepackage{silence}
 \WarningsOff*
+\setcounter{tocdepth}{0}
 
 
 \title{LittlevGL Documentation}
-\date{Jul 19, 2019}
+\date{Jul 22, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -79,7 +80,7 @@
 \pagestyle{normal}
 \phantomsection\label{\detokenize{index::doc}}
 \sphinxhref{http://docs.littlevgl.com/en/html/index.html}{English (en)} -
-\sphinxhref{http://docs.littlevgl.com/zh-CN/html/index.html}{中文 (zh-CN)}
+\sphinxhref{http://docs.littlevgl.com/zh-CN/html/index.html}{中文 (zh-CN)}  -
 \sphinxhref{http://docs.littlevgl.com/hu/html/index.html}{Magyar (hu)} -
 \sphinxhref{http://docs.littlevgl.com/tr/html/index.html}{Türk (tr)}
 
@@ -198,19 +199,19 @@ Basic C (or C++) knowledge: \sphinxhref{https://www.tutorialspoint.com/cprogramm
 For a general overview of LittlevGL visit \sphinxhref{https://littlevgl.com}{littlevgl.com}
 
 \item {} 
-To make some experiments with LittlevGL in a simulator on your PC or in even in your browser see the {\hyperref[\detokenize{get-started/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Get started}}}} guide.
+Go to the {\hyperref[\detokenize{get-started/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Get started}}}} section to try Live demos in you browser, learn about the Simulator(s) and learn the basics of LittlevGL.
 
 \item {} 
-To see how you can port LittlevGL to your device go to the {\hyperref[\detokenize{porting/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Porting}}}} section.
+A detailed porting guide can be found in the {\hyperref[\detokenize{porting/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Porting}}}} section.
 
 \item {} 
-To learn how LittlevGL works start to read the {\hyperref[\detokenize{overview/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Overview}}}}.
+To learn how LittlevGL works go to the {\hyperref[\detokenize{overview/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Overview}}}}.
 
 \item {} 
 To read tutorials or share your own experiences go to the \sphinxhref{https://blog.littlevgl.com}{Blog}
 
 \item {} 
-To see the source doe of the library go to GitHub: \sphinxurl{https://github.com/littlevgl/lvgl/}.
+To see the source code of the library check it on GitHub: \sphinxurl{https://github.com/littlevgl/lvgl/}.
 
 \end{itemize}
 
@@ -244,7 +245,7 @@ and anything else with a strong enough MCU and a periphery to drive a display
 
 \section{Is my display supported?}
 \label{\detokenize{index:is-my-display-supported}}
-LittlevGL needs just one simple driver to copy an array of pixels to a given area of the display. If you can do this your display then you use that display with LittlevGL.
+LittlevGL needs just one simple driver to copy an array of pixels to a given area of the display. If you can do this with your display then you can use that display with LittlevGL.
 It includes
 \begin{itemize}
 \item {} 
@@ -413,10 +414,6 @@ To learn more see \sphinxhref{https://blog.littlevgl.com/2018-12-06/contributing
 You can download it here and open offline:
 
 \sphinxcode{\sphinxupquote{Docs-v5-3.zip}}
-
-
-\bigskip\hrule\bigskip
-
 
 
 \subsection{Get started}
@@ -8076,9 +8073,9 @@ Count the cache entries’s life. Add \sphinxcode{\sphinxupquote{time\_tio\_open
 
 \subsubsection{File system}
 \label{\detokenize{overview/file-system:file-system}}\label{\detokenize{overview/file-system::doc}}
-LittlevGL has File system abstraction module which enables to attache any type of file system.
+LittlevGL has File system abstraction module which enables to attache any type of file systems.
 The file system are identified by a letter.
-For example if the SD card is associated with  letter\sphinxcode{\sphinxupquote{'S'}} a file can be reached like \sphinxcode{\sphinxupquote{""S:path/to/file.txt}}.
+For example if the SD card is associated with letter\sphinxcode{\sphinxupquote{'S'}} a file can be reached like \sphinxcode{\sphinxupquote{""S:path/to/file.txt}}.
 
 
 \paragraph{Add a driver}
@@ -8089,7 +8086,7 @@ To add a driver an \sphinxcode{\sphinxupquote{lv\_fs\_drv\_t}} needs to be initi
 \PYG{n}{lv\PYGZus{}fs\PYGZus{}drv\PYGZus{}t} \PYG{n}{drv}\PYG{p}{;} 
 \PYG{n}{lv\PYGZus{}fs\PYGZus{}drv\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{drv}\PYG{p}{)}\PYG{p}{;}                     \PYG{c+cm}{/*Basic initialization*/}
 
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{letter} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}}\PYG{l+s+sc}{S}\PYG{l+s+sc}{\PYGZsq{}}\PYG{p}{;}                         \PYG{c+cm}{/*An uppercased letter to identify teh drive */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{letter} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}}\PYG{l+s+sc}{S}\PYG{l+s+sc}{\PYGZsq{}}\PYG{p}{;}                         \PYG{c+cm}{/*An uppercase letter to identify the drive */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{file\PYGZus{}size} \PYG{o}{=} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{my\PYGZus{}file\PYGZus{}object}\PYG{p}{)}\PYG{p}{;}   \PYG{c+cm}{/*Size required to store a file object*/}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{rddir\PYGZus{}size} \PYG{o}{=} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{my\PYGZus{}dir\PYGZus{}object}\PYG{p}{)}\PYG{p}{;}   \PYG{c+cm}{/*Size required to store a directory object (used by dir\PYGZus{}open/close/read)*/} 
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{ready\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}ready\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to tell if the drive is ready to use */}
@@ -8117,10 +8114,74 @@ To add a driver an \sphinxcode{\sphinxupquote{lv\_fs\_drv\_t}} needs to be initi
 
 Any of the callbacks can be \sphinxcode{\sphinxupquote{NULL}} to indicate that operation is not supported.
 
+If you use \sphinxcode{\sphinxupquote{lv\_fs\_open(\&file, "S:/folder/file.txt", LV\_FS\_MODE\_WR)}} LittlevGL checks
+\begin{enumerate}
+\def\theenumi{\arabic{enumi}}
+\def\labelenumi{\theenumi .}
+\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
+\item {} 
+if there is drive with letter \sphinxcode{\sphinxupquote{'S'}}
 
-\subparagraph{Use drivers for images}
+\item {} 
+checks if it’s \sphinxcode{\sphinxupquote{open\_cb}} is implemented (not \sphinxcode{\sphinxupquote{NULL}})
+
+\item {} 
+calls the set \sphinxcode{\sphinxupquote{open\_cb}} with \sphinxcode{\sphinxupquote{"folder/file.txt"}} path.
+
+\end{enumerate}
+
+
+\paragraph{Usage example}
+\label{\detokenize{overview/file-system:usage-example}}
+The example below shows how to read from a file:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}fs\PYGZus{}file\PYGZus{}t} \PYG{n}{f}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}fs\PYGZus{}res\PYGZus{}t} \PYG{n}{res}\PYG{p}{;}
+\PYG{n}{res} \PYG{o}{=} \PYG{n}{lv\PYGZus{}fs\PYGZus{}open}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{f}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{S:folder/file.txt}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{LV\PYGZus{}FS\PYGZus{}MODE\PYGZus{}RD}\PYG{p}{)}\PYG{p}{;}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{res} \PYG{o}{!}\PYG{o}{=} \PYG{n}{LV\PYGZus{}FS\PYGZus{}RES\PYGZus{}OK}\PYG{p}{)} \PYG{n}{my\PYGZus{}error\PYGZus{}handling}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{read\PYGZus{}num}\PYG{p}{;}
+\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{buf}\PYG{p}{[}\PYG{l+m+mi}{8}\PYG{p}{]}\PYG{p}{;}
+\PYG{n}{res} \PYG{o}{=} \PYG{n}{lv\PYGZus{}fs\PYGZus{}read}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{f}\PYG{p}{,} \PYG{n}{buf}\PYG{p}{,} \PYG{l+m+mi}{8}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{read\PYGZus{}num}\PYG{p}{)}\PYG{p}{;}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{res} \PYG{o}{!}\PYG{o}{=} \PYG{n}{LV\PYGZus{}FS\PYGZus{}RES\PYGZus{}OK} \PYG{o}{\textbar{}}\PYG{o}{\textbar{}} \PYG{n}{read\PYGZus{}num} \PYG{o}{!}\PYG{o}{=} \PYG{l+m+mi}{8}\PYG{p}{)} \PYG{n}{my\PYGZus{}error\PYGZus{}handling}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{n}{lv\PYGZus{}fs\PYGZus{}close}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{f}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+\sphinxstyleemphasis{The mode in \sphinxcode{\sphinxupquote{lv\_fs\_open}} can be \sphinxcode{\sphinxupquote{LV\_FS\_MODE\_WR}} to open for write or \sphinxcode{\sphinxupquote{LV\_FS\_MODE\_RD \textbar{} LV\_FS\_MODE\_WR}} for both}
+
+This example shows how to read a directory’s content. It’s up to the driver how to mark the directories but in can be a good practice to insert a \sphinxcode{\sphinxupquote{'/'}} in front of the directory name.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{lv\PYGZus{}fs\PYGZus{}dir\PYGZus{}t} \PYG{n}{dir}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}fs\PYGZus{}res\PYGZus{}t} \PYG{n}{res}\PYG{p}{;}
+\PYG{n}{res} \PYG{o}{=} \PYG{n}{lv\PYGZus{}fs\PYGZus{}dir\PYGZus{}open}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{dir}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{S:/folder}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{res} \PYG{o}{!}\PYG{o}{=} \PYG{n}{LV\PYGZus{}FS\PYGZus{}RES\PYGZus{}OK}\PYG{p}{)} \PYG{n}{my\PYGZus{}error\PYGZus{}handling}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{k+kt}{char} \PYG{n}{fn}\PYG{p}{[}\PYG{l+m+mi}{256}\PYG{p}{]}\PYG{p}{;}
+\PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{res} \PYG{o}{=} \PYG{n}{lv\PYGZus{}fs\PYGZus{}dir\PYGZus{}read}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{dir}\PYG{p}{,} \PYG{n}{fn}\PYG{p}{)}\PYG{p}{;}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{res} \PYG{o}{!}\PYG{o}{=} \PYG{n}{LV\PYGZus{}FS\PYGZus{}RES\PYGZus{}OK}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{my\PYGZus{}error\PYGZus{}handling}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+        \PYG{k}{break}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+cm}{/*fn is empty if not more files to read*/}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{strlen}\PYG{p}{(}\PYG{n}{fn}\PYG{p}{)} \PYG{o}{=}\PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{k}{break}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{fn}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{lv\PYGZus{}fs\PYGZus{}dir\PYGZus{}close}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{dir}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+
+\paragraph{Use drivers for images}
 \label{\detokenize{overview/file-system:use-drivers-for-images}}
-{\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} objects can be open from files too (besides variables stored i nteh flash)
+{\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} objects can be open from files too (besides variables stored in the flash)
 
 To initialize the for images the following callbacks are required:
 \begin{itemize}
@@ -24211,10 +24272,10 @@ The size of the label object can be automatically expanded to the text size or t
 \sphinxstylestrong{LV\_LABEL\_LONG\_DOTS} Keep the object size, break the text and write dots in the last line
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_ROLL} Keep the size and scroll the label back and forth
+\sphinxstylestrong{LV\_LABEL\_LONG\_SROLL} Keep the size and scroll the label back and forth
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_ROLL\_CIRC} Keep the size and scroll the label circularly
+\sphinxstylestrong{LV\_LABEL\_LONG\_SROLL\_CIRC} Keep the size and scroll the label circularly
 
 \item {} 
 \sphinxstylestrong{LV\_LABEL\_LONG\_CROP} Keep the size and crop the text out of it.
@@ -36221,6 +36282,8 @@ Use \sphinxcode{\sphinxupquote{lv\_win\_set\_style(win, LV\_WIN\_STYLE\_...,  \&
 \sphinxstylestrong{LV\_WIN\_STYLE\_BTN\_PR} released button’s style (on header) which uses all \sphinxcode{\sphinxupquote{style.body}} properties (default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}})
 
 \end{itemize}
+
+The height of the header is set to the greater value from \sphinxstyleemphasis{buttons’ height} (set by \sphinxcode{\sphinxupquote{lv\_win\_set\_btn\_size}}) and \sphinxstyleemphasis{title height} (comes from \sphinxcode{\sphinxupquote{header\_style.text.font}}) plus the \sphinxcode{\sphinxupquote{body.padding.top}} and \sphinxcode{\sphinxupquote{body.padding.bottom}} of the header style.
 
 
 \paragraph{Events}

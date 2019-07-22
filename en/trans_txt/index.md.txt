@@ -6,7 +6,6 @@
 .. include:: /lang.rst
 
 PDF version: :download:`LittlevGL.pdf <LittlevGL.pdf>`
-
 ```
 
 # Welcome to LittlevGL's documentation!
@@ -59,16 +58,15 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 
 ### Where to get started?
 - For a general overview of LittlevGL visit [littlevgl.com](https://littlevgl.com)
-- To make some experiments with LittlevGL in a simulator on your PC or in even in your browser see the [Get started](/get-started/index) guide.
-- To see how you can port LittlevGL to your device go to the [Porting](/porting/index) section.
-- To learn how LittlevGL works start to read the [Overview](/overview/index).
+- Go to the [Get started](/get-started/index) section to try Live demos in you browser, learn about the Simulator(s) and learn the basics of LittlevGL.
+- A detailed porting guide can be found in the [Porting](/porting/index) section.
+- To learn how LittlevGL works go to the [Overview](/overview/index).
 - To read tutorials or share your own experiences go to the [Blog](https://blog.littlevgl.com)
-- To see the source doe of the library go to GitHub: [https://github.com/littlevgl/lvgl/](https://github.com/littlevgl/lvgl/).
+- To see the source code of the library check it on GitHub: [https://github.com/littlevgl/lvgl/](https://github.com/littlevgl/lvgl/).
 
 
 ### Where can I ask questions?
 To ask questions in the Forum: [https://forum.littlevgl.com/](https://forum.littlevgl.com/).
-
 
 We use [GitHub issues](https://github.com/littlevgl/lvgl/issues) for development related discussion. So you should use them only if your question or issue is tightly related to the development of the library. 
 
@@ -82,7 +80,7 @@ It includes
 - and anything else with a strong enough MCU and a periphery to drive a display
 
 ### Is my display supported?
-LittlevGL needs just one simple driver to copy an array of pixels to a given area of the display. If you can do this your display then you use that display with LittlevGL. 
+LittlevGL needs just one simple driver to copy an array of pixels to a given area of the display. If you can do this with your display then you can use that display with LittlevGL. 
 It includes
 - TFTs with 16 or 24 bit color depth 
 - Monitors with HDMI port
@@ -179,11 +177,7 @@ You can download it here and open offline:
 :download:`Docs-v5-3.zip <docs_v5_3.zip>`
 ```
 
-
----
-
 ```eval_rst
-
 .. toctree::
    :maxdepth: 2
    
@@ -191,5 +185,5 @@ You can download it here and open offline:
    porting/index
    overview/index
    object-types/index
-```
 
+```

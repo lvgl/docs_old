@@ -5,40 +5,40 @@
 
 ## Genel bakış
 
-The Slider object looks like a [Bar](/object-types/bar) supplemented with a knob. The knob can be dragged to set a value. The Slider also can be vertical or horizontal.
+Kayar buton nesnesi düğme ile desteklenmiş [Bar](/object-types/bar) gibidir. Bir değer ayarlamak için düğme sürüklenebilir. Ayrıca kayar buton dikey veya yatay olabilir. 
 
-## Value and range
-To set an initial value use `lv_slider_set_value(slider, new_value, LV_ANIM_ON/OFF)`. 
-`lv_slider_set_anim_time(slider, anim_time)` sets the animation time in milliseconds.
+## Değer ve aralık
+Başlangıç değeri ayarlamak içim `lv_slider_set_value(slider, new_value, LV_ANIM_ON/OFF)` kullanılır. 
+`lv_slider_set_anim_time(slider, anim_time)` Animasyon süresini milisaniye cinsinden ayarlar.
 
-To specify the **range** (min, max values) the `lv_slider_set_range(slider, min , max)` can be used.
+**range**  belirtmek için (min, max değerler) `lv_slider_set_range(slider, min , max)` kullanılabilir.
 
-### Knob placement
-The knob can be placed in two ways:
-- inside the background
-- on the edges on min/max values
+### Düğme yerleştirme
+Düğme iki şekilde yerleştirilir:
+- arka plan içinde
+- kenarlarda min/max değerleri
 
-Use the `lv_slider_set_knob_in(slider, true/false)` to choose between the modes. (*knob_in = false* is the default)
+Modlar(*knob_in = false* is the default) arası seçim yapmak için    `lv_slider_set_knob_in(slider, true/false)` kullanın.
 
 
-## Styles
-You can modify the slider's styles with `lv_slider_set_style(slider, LV_SLIDER_STYLE_..., &style)`.
+## Biçim
+Kayar butonun biçimi `lv_slider_set_style(slider, LV_SLIDER_STYLE_..., &style)` ile ayarlanabilir.
 
-- **LV_SLIDER_STYLE_BG** Style of the background. All `style.body` properties are used. The `padding` values make the knob larger than the background. (negative value makes is larger)
-- **LV_SLIDER_STYLE_INDIC** Style of the indicator. All `style.body` properties are used. The `padding` values make the indicator smaller than the background. 
-- **LV_SLIDER_STYLE_KNOB** Style of the knob.  All `style.body` properties are used except `padding`. 
+- **LV_SLIDER_STYLE_BG** Arka planın biçimi. Tüm `style.body` özellikleri kullanılır. `padding` değerleri düğmeyi arka plandan daha büyük yapar. (negatif değerler daha büyük yapar)
+- **LV_SLIDER_STYLE_INDIC** Gösterge biçimi. Tüm `style.body` özellikleri kullanılır. `padding` değerleri göstergeyi arka plandan daha küçük yapar.
+- **LV_SLIDER_STYLE_KNOB** Düğme biçimi.  Tüm `style.body` özellikleri `padding` hariç kullanılır. 
 
-## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
-- **LV_EVENT_VALUE_CHANGED** Sent while the slider is being dragged or changed with keys.
+## Olaylar
+[Generic events](/overview/event.html#generic-events) yanında devamında [Special events](/overview/event.html#special-events) kayar buton tarafından gönderilir:
+- **LV_EVENT_VALUE_CHANGED** Kayar buton sürüklenirken veya düğme ile değiştirilirken gönderir.
 
-## Keys
-- **LV_KEY_UP**, **LV_KEY_RIGHT** Increment the slider's value by 1
-- **LV_KEY_DOWN**, **LV_KEY_LEFT** Decrement the slider's value by 1
+## Tuşlar/Anahtarlar
+- **LV_KEY_UP**, **LV_KEY_RIGHT** Kayar buton değeri1 arttırılır
+- **LV_KEY_DOWN**, **LV_KEY_LEFT** Kayar butonun değerini 1 azaltır.
 
-Learn more about [Keys](/overview/indev).
+Daha fazlasını öğrenin [Keys](/overview/indev).
 
-## Example
+## Örnek
 
 ```eval_rst
 

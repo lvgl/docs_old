@@ -3,9 +3,9 @@
 ```
 # File system
 
-LittlevGL has File system abstraction module which enables to attache any type of file system.
+LittlevGL has File system abstraction module which enables to attache any type of file systems.
 The file system are identified by a letter. 
-For example if the SD card is associated with  letter`'S'` a file can be reached like `""S:path/to/file.txt`.
+For example if the SD card is associated with letter`'S'` a file can be reached like `""S:path/to/file.txt`.
 
 ## Add a driver
 
@@ -14,7 +14,7 @@ To add a driver an `lv_fs_drv_t` needs to be initialized like this:
 lv_fs_drv_t drv; 
 lv_fs_drv_init(&drv);                     /*Basic initialization*/
 
-drv.letter = 'S';                         /*An uppercased letter to identify teh drive */
+drv.letter = 'S';                         /*An uppercase letter to identify the drive */
 drv.file_size = sizeof(my_file_object);   /*Size required to store a file object*/
 drv.rddir_size = sizeof(my_dir_object);   /*Size required to store a directory object (used by dir_open/close/read)*/ 
 drv.ready_cb = my_ready_cb;               /*Callback to tell if the drive is ready to use */
@@ -43,9 +43,58 @@ lv_fs_drv_register(&drv);                 /*Finally register the drive*/
 
 Any of the callbacks can be `NULL` to indicate that operation is not supported.
 
-### Use drivers for images
+If you use `lv_fs_open(&file, "S:/folder/file.txt", LV_FS_MODE_WR)` LittlevGL checks 
+1. if there is drive with letter `'S'`
+2. checks if it's `open_cb` is implemented (not `NULL`)
+3. calls the set `open_cb` with `"folder/file.txt"` path.
 
-[Image](/object-types/img) objects can be open from files too (besides variables stored i nteh flash)
+## Usage example
+
+The example below shows how to read from a file:
+```c
+lv_fs_file_t f;
+lv_fs_res_t res;
+res = lv_fs_open(&f, "S:folder/file.txt", LV_FS_MODE_RD);
+if(res != LV_FS_RES_OK) my_error_handling();
+
+uint32_t read_num;
+uint8_t buf[8];
+res = lv_fs_read(&f, buf, 8, &read_num);
+if(res != LV_FS_RES_OK || read_num != 8) my_error_handling();
+
+lv_fs_close(&f);
+```
+*The mode in `lv_fs_open` can be `LV_FS_MODE_WR` to open for write or `LV_FS_MODE_RD | LV_FS_MODE_WR` for both*
+
+This example shows how to read a directory's content. It's up to the driver how to mark the directories but in can be a good practice to insert a `'/'` in front of the directory name.
+```c
+lv_fs_dir_t dir;
+lv_fs_res_t res;
+res = lv_fs_dir_open(&dir, "S:/folder");
+if(res != LV_FS_RES_OK) my_error_handling();
+
+char fn[256];
+while(1) {
+    res = lv_fs_dir_read(&dir, fn);
+    if(res != LV_FS_RES_OK) {
+        my_error_handling();
+        break;
+    }
+
+    /*fn is empty if not more files to read*/
+    if(strlen(fn) == 0) {
+        break;
+    }
+
+    printf("%s\n", fn);
+}
+
+lv_fs_dir_close(&dir);
+```
+
+## Use drivers for images
+
+[Image](/object-types/img) objects can be open from files too (besides variables stored in the flash)
 
 To initialize the for images the following callbacks are required:
 - open

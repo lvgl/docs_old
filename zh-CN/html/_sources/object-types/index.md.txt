@@ -1,7 +1,7 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/zh-CN/object-types/index.md
 ```
-# Object types (Widgets)
+# 对象类型(小部件)
 
 ```eval_rst
 
@@ -41,3 +41,5 @@
    tileview
    win
 ```
+
+

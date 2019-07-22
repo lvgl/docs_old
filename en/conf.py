@@ -163,6 +163,7 @@ latex_elements = {
 \setmonofont{DejaVu Sans Mono}
 \usepackage{silence}
 \WarningsOff*
+\setcounter{tocdepth}{0}
 ''',
 }
 

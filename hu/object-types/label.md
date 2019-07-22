@@ -27,8 +27,8 @@ The size of the label object can be automatically expanded to the text size or t
 * **LV_LABEL_LONG_EXPAND** Expand the object size to the text size (Default)
 * **LV_LABEL_LONG_BREAK** Keep the object width, break (wrap) the too long lines and expand the object height
 * **LV_LABEL_LONG_DOTS** Keep the object size, break the text and write dots in the last line
-* **LV_LABEL_LONG_ROLL** Keep the size and scroll the label back and forth
-* **LV_LABEL_LONG_ROLL_CIRC** Keep the size and scroll the label circularly
+* **LV_LABEL_LONG_SROLL** Keep the size and scroll the label back and forth
+* **LV_LABEL_LONG_SROLL_CIRC** Keep the size and scroll the label circularly
 * **LV_LABEL_LONG_CROP** Keep the size and crop the text out of it.
 
 You can specify the long mode with: `lv_label_set_long_mode(label, LV_LABEL_LONG_...)`

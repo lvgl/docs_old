@@ -5,8 +5,7 @@
 ```eval_rst
 .. include:: /lang.rst
 
-PDF version: :download:`LittlevGL.pdf <LittlevGL.pdf>`
-
+PDF változat: :download:`LittlevGL.pdf <LittlevGL.pdf>`
 ```
 
 # Köszöntelek a LittlevGL dokumentációs oldalán
@@ -15,60 +14,59 @@ PDF version: :download:`LittlevGL.pdf <LittlevGL.pdf>`
 
 LittlevGL egy ingyenes, nyílt forráskódú grafikus könyvtár, ami mindent biztosít számodra,  hogy beágyazott GUI-t készíts könnyen használható grafikus elemekkel, gyönyörű effektekkel és alacsony memória használattal.
 
-**[Website](https://littlevgl.com) &nbsp; · &nbsp;** 
+**[Weboldal](https://little﻿﻿vgl.com) &nbsp; · &nbsp;** 
 **[GitHub](https://github.com/littlevgl/lvgl) &nbsp; · &nbsp;** 
-**[Forum](https://forum.littlevgl.com) &nbsp; · &nbsp;** 
-**[Live demo](https://littlevgl.com/live-demo) &nbsp; · &nbsp;** 
-**[Simulator](/get-started/pc-simulator) &nbsp; · &nbsp;** 
+**[Fórum](https://forum.littlevgl.com) &nbsp; · &nbsp;** 
+**[Élő demo](https://littlevgl.com/live-demo) &nbsp; · &nbsp;** 
+**[Szimulátor](/get-started/pc-simulator) &nbsp; · &nbsp;** 
 **[Blog](https://blog.littlevgl.com/)**
 
 ## Fontos funkciók
-- Powerful building blocks buttons, charts, lists, sliders, images etc
-- Advanced graphics with animations, anti-aliasing, opacity, smooth scrolling
-- Various input devices touchpad, mouse, keyboard, encoder etc
-- Multi-language support with UTF-8 encoding
-- Multi-display support, i.e. use more TFT, monochrome displays simultaneously
-- Fully customizable graphical elements
-- Hardware independent to use with any microcontroller or display
-- Scalable to operate with little memory (64 kB Flash, 16 kB RAM)
-- OS, External memory and GPU supported but not required
-- Single frame buffer operation even with advanced graphical effects
-- Written in C for maximal compatibility (C++ compatible)
-- Simulator to start embedded GUI design on PC without embedded hardware
-- Tutorials, examples, themes for rapid GUI design
-- Documentation online and offline
-- Free and open-source under MIT license
+- Jól használható építőelemek: gombok, grafikonok, listák, csúszkák stb.
+- Animációk, élsimítás, áttetszőség, görgetés hatékony támogatása  
+- Többféle bemeneti eszköz: touchpad, egér, billentyűzet, enkóder
+- Többnyelvűség támogatás UTF-8 dekodolással 
+- Több képernyő támogatása: monochrome és TFT képernyők egyidejűleg
+- Teljesen testre szabható grafikus elemek
+- Hardver független, így miden mikrokontrollerrel és kijelzővel kompatibilis
+- Skálázható, hogy kevés memóriával működjön (64 kB flash. 16 kB RAM)
+- Operációs rendszer, külső RAM, GPU támogatott, de nem szükséges
+- Egy frame buffer-es működés összetett grafikus effektekkel is
+- C-ben íródott a maximális kompatibilitás érdekében (C++ kompatibilis)
+- Szimulátor, hogy kipróbálhasd PC-n beágyazott rendszer nélkül is
+- Oktató anyagok, példák, témák a gyors fejlesztés érdekében
+- Online és offline dokumentáció
+- Ingyenes és nyílt forráskódú
 
-## Requirements
-- 16, 32 or 64 bit microcontroller or processor
-- &gt; 16 MHz clock speed is recommended
-- Flash/ROM: &gt; 64 kB for the very essential components (&gt; 180 kB is recommended)
+## Követelmények
+- 16, 32 or 64 bit mikrokontroller vagy processzor
+- &gt; 16 MHz órajel ajánlott
+- Flash/ROM: &gt; 64 kB az alapvető komponensekhez (&gt; 180 kB ajánlott)
 - RAM: 
-  - Static RAM usage: ~8..16 kB depending on the used features and objects types
-  - Stack: &gt; 2kB (&gt; 4 kB is recommended)
-  - Dynamic data (heap): &gt; 4 KB (&gt; 16 kB is recommended if using several objects).
-    Set by `LV_MEM_SIZE` in *lv_conf.h*. 
-  - Display buffer:  &gt; *"Horizontal resolution"* pixels (&gt; 10 &times; *"Horizontal resolution"* is recommended) 
--  C99 or newer compiler
-- Basic C (or C++) knowledge: [pointers](https://www.tutorialspoint.com/cprogramming/c_pointers.htm), [structs](https://www.tutorialspoint.com/cprogramming/c_structures.htm), [callbacks](https://www.geeksforgeeks.org/callbacks-in-c/).
+  - Statikus RAM usage: ~8..16 kB a használt funkciók és objektum típusok függvényében
+  - Stack: &gt; 2kB (&gt; 4 kB ajánlott)
+  - Dinamikus adatok (heap): &gt; 4 KB (&gt; 16 kB ajánlott sok objektum esetén).
+    `LV_MEM_SIZE`-zal állítható in *lv_conf.h*-ban. 
+  - Kijelző buffer:  &gt; *"Horizontális felbontás"* pixel (&gt; 10 &times; *"Horizontális felontás"* ajánlott) 
+-  C99 vagy újabb fordító
+- Alap C (or C++) ismeretek: [pointer-ek](https://www.tutorialspoint.com/cprogramming/c_pointers.htm), [struktúrák](https://www.tutorialspoint.com/cprogramming/c_structures.htm), [callback-ek](https://www.geeksforgeeks.org/callbacks-in-c/).
 
-*Note that the memory usage might vary depending on the architecture, compiler and build options.*
+*A memória használat változhat az architektúra és a fordítási beállítások függvényében*
 
 
-## FAQ
+## GYIK
 
 ### Where to get started?
 - For a general overview of LittlevGL visit [littlevgl.com](https://littlevgl.com)
-- To make some experiments with LittlevGL in a simulator on your PC or in even in your browser see the [Get started](/get-started/index) guide.
-- To see how you can port LittlevGL to your device go to the [Porting](/porting/index) section.
-- To learn how LittlevGL works start to read the [Overview](/overview/index).
+- Go to the [Get started](/get-started/index) section to try Live demos in you browser, learn about the Simulator(s) and learn the basics of LittlevGL.
+- A detailed porting guide can be found in the [Porting](/porting/index) section.
+- To learn how LittlevGL works go to the [Overview](/overview/index).
 - To read tutorials or share your own experiences go to the [Blog](https://blog.littlevgl.com)
-- To see the source doe of the library go to GitHub: [https://github.com/littlevgl/lvgl/](https://github.com/littlevgl/lvgl/).
+- To see the source code of the library check it on GitHub: [https://github.com/littlevgl/lvgl/](https://github.com/littlevgl/lvgl/).
 
 
 ### Where can I ask questions?
 To ask questions in the Forum: [https://forum.littlevgl.com/](https://forum.littlevgl.com/).
-
 
 We use [GitHub issues](https://github.com/littlevgl/lvgl/issues) for development related discussion. So you should use them only if your question or issue is tightly related to the development of the library. 
 
@@ -82,7 +80,7 @@ It includes
 - and anything else with a strong enough MCU and a periphery to drive a display
 
 ### Is my display supported?
-LittlevGL needs just one simple driver to copy an array of pixels to a given area of the display. If you can do this your display then you use that display with LittlevGL. 
+LittlevGL needs just one simple driver to copy an array of pixels to a given area of the display. If you can do this with your display then you can use that display with LittlevGL. 
 It includes
 - TFTs with 16 or 24 bit color depth 
 - Monitors with HDMI port
@@ -179,11 +177,7 @@ You can download it here and open offline:
 :download:`Docs-v5-3.zip <docs_v5_3.zip>`
 ```
 
-
----
-
 ```eval_rst
-
 .. toctree::
    :maxdepth: 2
    
@@ -191,5 +185,5 @@ You can download it here and open offline:
    porting/index
    overview/index
    object-types/index
-```
 
+```

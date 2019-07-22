@@ -1,8 +1,7 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/zh-CN/get-started/index.md
 ```
-# Get started
-
+# 开始使用
 
 ```eval_rst
 
@@ -14,3 +13,4 @@
    quick-overview
    micropython
 ```
+

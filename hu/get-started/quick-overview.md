@@ -1,44 +1,44 @@
-# Quick overview
+# Gyors áttekintés
 
-Here you can learn the most important things about LittlevGL. 
-You should read it first to get a general impression and read the detailed [Porting](/porting/index) and [Overview](/overview/index) sections after that.
+Ebben a fejezetben megtanulhatod a legfontosabb dolgokat a LittlevGL-ről.
+Ajánlott először ezt a fejezetet elolvasni, hogy egy átfogó képet kapj, majd a részletes [Portolás](/porting/index) és [Áttekintés](/overview/index) fejezetekkel folytatni.
 
-## Add LittlevGL into your project
+## LittlevGL hozzáadása egy projekthez
 
-The steps below show how to setup LittlevGL on an embedded system with a display and a touchpad. 
-You can use the [Simulators](/get-started/pc-simulator) to get ready to use projects which can be run on your PC. 
+Az alábbi lépések mutatják, hogy hogyan kell beállítani a LittlevGL-t egy kijelzővel és egy touchpaddal rendelkező beágyazott rendszer esetében.
+A [Szimulátorok](/get-started/pc-simulator) is használhatók, hogy egy használatra kész projekttel tudd kipróbálni a LittlevGL-t a PC-den.
 
-- [Download](https://littlevgl.com/download) or [Clone](https://github.com/littlevgl/lvgl) the library
-- Copy the `lvgl` folder into your project
-- Copy `lvgl/lv_conf_templ.h` as `lv_conf.h` next to the `lvgl` folder and set at least `LV_HOR_RES_MAX`, `LV_VER_RES_MAX` and `LV_COLOR_DEPTH`. 
-- Include `lvgl/lvgl.h` where you need to use LittlevGL related functions.
-- Call `lv_tick_inc(x)` every `x` milliseconds **in a Timer or Task** (`x` should be between 1 and 10). It is required for the internal timing of LittlevGL.
-- Call `lv_init()`
-- Create a display buffer for LittlevGL
+- [Töltsd le](https://littlevgl.com/download) vagy [Klónozd](https://github.com/littlevgl/lvgl) a könyvtárat!
+- Másold az `lvgl` mappát a projektedbe!
+- Másold az `lvgl/lv_conf_templ.h` fájlt  `lv_conf.h`-ként  az `lvgl` mappa mellé és állíts be legalább a  `LV_HOR_RES_MAX`, `LV_VER_RES_MAX` és `LV_COLOR_DEPTH` paramétereket! 
+- Include-old `lvgl/lvgl.h`-t, ahol LittlevGL függvénykeet akarsz használni!
+- Hívd meg  `lv_tick_inc(x)`-t minden `x` milliszekundumban **egy Timer-ben vagy Task-ban** (`x` 1..10 között legyen)! Ez a LittlevGL belső időzítéseihez szükséges..
+- Hívd meg az `lv_init()`-et!
+- Hozz létre agy kijelző buffert!
 ```c
 static lv_disp_buf_t disp_buf;
-static lv_color_t buf[LV_HOR_RES_MAX * 10];                     /*Declare a buffer for 10 lines*/
-lv_disp_buf_init(&disp_buf, buf, NULL, LV_HOR_RES_MAX * 10);    /*Initialize the display buffer*/
+static lv_color_t buf[LV_HOR_RES_MAX * 10];                     /*Egy buffer 10 sor számára*/
+lv_disp_buf_init(&disp_buf, buf, NULL, LV_HOR_RES_MAX * 10);    /*A kijelző buffer inicializálása*/
 ```
-- Implement and register a function which can **copy a pixel array** to an area of your display:
+- Implementálj és regisztrálj egy függvényt, ami képes **pixeleket másolni** a kijelző egy adott területére:
 ```c
-lv_disp_drv_t disp_drv;               /*Descriptor of a display driver*/
-lv_disp_drv_init(&disp_drv);          /*Basic initialization*/
-disp_drv.flush_cb = my_disp_flush;    /*Set your driver function*/
-disp_drv.buffer = &disp_buf;          /*Assign the buffer to the display*/
-lv_disp_drv_register(&disp_drv);      /*Finally register the driver*/
+lv_disp_drv_t disp_drv;               /*A kijelző driver leírója*/
+lv_disp_drv_init(&disp_drv);          /*Alap inicializálás*/
+disp_drv.flush_cb = my_disp_flush;    /*A driver függvény hozzárendelése*/
+disp_drv.buffer = &disp_buf;          /*A kijelző buffer hozzárendelése*/
+lv_disp_drv_register(&disp_drv);      /*Végül a driver regisztrálása*/
     
 void my_disp_flush(lv_disp_t * disp, const lv_area_t * area, lv_color_t * color_p)
 {
     int32_t x, y;
     for(y = area->y1; y <= area->y2; y++) {
         for(x = area->x1; x <= area->x2; x++) {
-            set_pixel(x, y, *color_p);  /* Put a pixel to the display.*/
+            set_pixel(x, y, *color_p);  /* Egy pixel kirakása kijelzőre.*/
             color_p++;
         }
     }
 
-    lv_disp_flush_ready(disp);         /* Indicate you are ready with the flushing*/
+    lv_disp_flush_ready(disp);         /*Jelezd, hogy kész vagy a a pixelek kiírásával*/
 }
     
 ```
@@ -242,12 +242,12 @@ lv_obj_t* list = lv_list_create(lv_scr_act(), NULL);
 lv_obj_set_size(list, 120, 180);
 lv_obj_set_pos(list, 10, 10);
 
-/*Add buttons*/
+/*Gombok hozzáadása*/
 uint8_t i;
 for(i = 0; txts[i]; i++) {
     lv_obj_t * btn = lv_list_add_btn(list, LV_SYMBOL_FILE, txts[i]);
-    lv_obj_set_event_cb(btn, list_event);       /*Assign event function*/
-    lv_btn_set_toggle(btn, true);               /*Enable on/off states*/
+    lv_obj_set_event_cb(btn, list_event);       /* Event függvény hozzárendelése*/
+    lv_btn_set_toggle(btn, true);               /* Ki/be állalpotok engedélyezése*/
 }
 
 /* Initialize and set an other theme. `LV_THEME_MATERIAL` needs to enabled in lv_conf.h.
@@ -289,13 +289,13 @@ btn.align(lv.scr_act(), lv.ALIGN.CENTER, 0, 0)
 label = lv.label(btn)
 label.set_text("Button")
 
-# Load the screen
+# Képernyő betöltése
 lv.scr_load(scr)
 ```
 
 
 
-## Contributing
+## Közreműködés
 To ask questions please use the [Forum](https://forum.littlevgl.com).
 For development-related things (bug reports, feature suggestions) use [GitHub's Issue tracker](https://github.com/littlevgl/lvgl/issues). 
 
@@ -308,6 +308,6 @@ If you are interested in contributing to LittlevGL you can
 - **Help in the developement**. Check the [Open issues](https://github.com/littlevgl/lvgl/issues) especially the ones with [Help wanted](https://github.com/littlevgl/lvgl/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) label and tell your ideas about a topic or implement a feature.
 
 It should be useful to read the
-- whole [Contributing guide](https://blog.littlevgl.com/2018-12-06/contributing)
+- [Contributing guide](https://blog.littlevgl.com/2018-12-06/contributing)
 - [Coding style guide](https://github.com/littlevgl/lvgl/blob/master/docs/CODING_STYLE.md)
 

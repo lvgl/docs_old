@@ -1,26 +1,26 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/tr/object-types/calendar.md
 ```
-# Calendar (lv_calendar)
+# Takvim (lv_calendar)
 
-## Overview
+## Genel Bakış
 
-The Calendar object is a classic calendar which can:
-- highlight the current day and week
-- highlight any user-defined dates
-- display the name of the days
-- go the next/previous month by button click
-- highlight the clicked day
+Takvim nesnesi, bir klasik takvimdir:
+- Şuan ki gün ve haftayı vurgula
+- Kullanıcı tanımlı tarihleri vurgula
+Günlerin ismi göster
+- Buton tıklaması yardımıyla sonraki/önceki aya git
+Tıklanan günü vurgula
 
-The set and get dates in the calendar the `lv_calendar_date_t` type is used which is a structure with `year`, `month` and `day` fields.
+Takvimde tarihleri ayarlama ve alma `year`, `month` ve`day` alanlarını içeren yapı olan `lv_calendar_date_t` türü kullanılır.
 
-### Current date
-To set the current date (today) use the `lv_calendar_set_today_date(calendar, &today_date)` function.
+### Şuan ki tarih
+Şuan ki tarihi(bugün) ayarlamak için  `lv_calendar_set_today_date(calendar, &today_date)` fonksiyonunu kullan.
 
-### Shown date
-To set the shown date use `lv_calendar_set_shown_date(calendar, &shown_date)`;
+### Gösterilen tarih
+Gösterilen tarihi ayarlamak için `lv_calendar_set_shown_date(calendar, &shown_date)` kullan;
 
-### Highlighted days
+### Vurgulanan günler
 The list of highlighted dates should be stored in a `lv_calendar_date_t` array a loaded by `lv_calendar_set_highlighted_dates(calendar, &highlighted_dates)`.  
 Only the arrays pointer will be saved so the array should be a static or global variable. 
 
