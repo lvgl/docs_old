@@ -8,10 +8,13 @@ A Canvas is like an [Image](/object-types/img) where the user can draw anything.
 
 ### Buffer
 The Canvas needs a buffer which stores the drawn image. 
-To assign a buffer to a Canvas use `lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_TRUE_COLOR_ALPHA)`. 
+To assign a buffer to a Canvas use `lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_...)`. 
 `buffer` is a static buffer (not just a local variable) to hold the image of the canvas. 
 For example 
 `static lv_color_t buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width, height)]`. `LV_CANVAS_BUF_SIZE_...` macros help to determine the size of the buffer with different color formats.
+
+
+The canvas supports all the built in color formats like `LV_IMG_CF_TURE_COLOR` or `LV_IMG_CF_INDEXED_2BIT`. See the full list in the [Color formats](/overview/image.html#color-formats) section.
 
 ### Palette
 For `LV_IMG_CF_INDEXED_...` color formats a palette needs to be initialized with  `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)`. It sets pixels with *index=3* to red.
@@ -32,6 +35,8 @@ To draw something to the canvas use
 - `lv_canvas_draw_line(canvas, point_array, point_cnt, &style)`
 - `lv_canvas_draw_polygon(canvas, points_array, point_cnt, &style)`
 - `lv_canvas_draw_arc(canvas, x, y, radius, start_angle, end_angle, &style)`
+
+The draw function can draw only to `LV_IMG_CF_TURE_COLOR`, `LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED` and `LV_IMG_CF_TRUE_COLOR_ALPHA` buffers. `LV_IMG_CF_TRUE_COLOR_ALPHA` is working only with `LV_COLOR_DEPTH 32`.
 
 ### Rotate
 A rotated image can be added to canvas with `lv_canvas_rotate(canvas, &imd_dsc, angle, x, y, pivot_x, pivot_y)`. 

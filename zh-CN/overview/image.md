@@ -1,16 +1,16 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/zh-CN/overview/image.md
 ```
-# Images
+# 图像
 
-An image can be a file or variable which stores the image itself and some metadata. 
+图像可以是存储图像本身与一些元数据的文件或变量
 
-## Store images
-You can store images in two places
-- as a variable in the internal memory (RAM or ROM)
-- as a file 
+## 存储图像
+你可以将存储图像存储在两个地方
+- 内存中的一个变量 (RAM 或 ROM)
+- 一个文件
 
-### Variables
+### 变量
 The images stored internally in a variable has `lv_img_dsc_t` type with the following fields:
 - **header**
   - *cf* Color format. See [below](#color-format)

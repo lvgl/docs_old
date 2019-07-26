@@ -1,41 +1,41 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/tr/object-types/arc.md
 ```
-# Arc (lv_arc)
+# Yay (lv_arc)
 
-## Overview
+## Giriş
 
-The *Arc* object **draws an arc** within **start and end angles** and with a given **thickness**.
+*Yay*nesnesi  verilen kalınlıkla ve **başlangıç ve bitiş açıları** dahilinde   **bir yay çizer** .
 
-### Angles
+### Açılar
 
-To set the angles use the `lv_arc_set_angles(arc, start_angle, end_angle)` function. The zero degree is at the bottom of the object and the degrees are increasing in a counter-clockwise direction. 
-The angles should be in [0;360] range.
+Açıları ayarlamak için `lv_arc_set_angles(arc, start_angle, end_angle)` fonksiyonu kullanılır. Sıfır derece nesnenin alt tarafıdır ve bu derece saat yönünün tersi yönünde artmaktadır. 
+Açılar  [0;360] aralığında olmalıdır.
 
-### Notes
-The **width and height** of the *Arc* should be the **same**.
+### Notlar
+*Yayın* **genişliği ve yükseliği ** **aynı** olmalıdır.
 
-Currently, the *Arc* object **does not support anti-aliasing**.
+Şu anda , *Yay* nesnesi **antialiasing modu desteklemez**.
 
-## Styles
-To set the style of an *Arc* object use `lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &style)`
+## Biçim
+*Yay* nesnesinin biçimini ayarlamak için `lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &style)`
 
-- **line.rounded** make the endpoints rounded (opacity won't work properly if set to 1)
-- **line.width** the thickness of the arc
-- **line.color** the color of the arc.
+- **line.rounded** uç noktaları yuvarlar.(Eğer 1'e set edilir ise opaklık düzgün çalışmaz)
+- **line.width** yayın kalınlığı
+- **line.color** Yayın rengi.
 
-## Events
-Only the [Genreric events](/overview/event.html#generic-events) are sent by the object type.
+## Olaylar
+Sadece [Genreric events](/overview/event.html#generic-events) nesne türü tarafından gönderilir .
 
-Learn more about [Events](/overview/event).
+[Events](/overview/event) hakkında daha fazlasını öğrenin.
 
 ## Keys
-No *Keys* are processed by the object type.
+Nesne türü tarafından işlenilen *Keys* yok.
 
-Learn more about [Keys](/overview/indev).
+[Keys](/overview/indev) hakkında daha fazlasını öğrenin.
   
 
-## Example
+## Örnek
 
 ```eval_rst
 
@@ -49,5 +49,5 @@ Learn more about [Keys](/overview/indev).
 
 .. doxygenfile:: lv_arc.h
   :project: lvgl
-        
+        .
 ```

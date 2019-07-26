@@ -58,7 +58,7 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 
 ### 从哪来开始？
 - 总体概览LittlevGL请访问[littlevgl.com](https://littlevgl.com)
-- Go to the [Get started](/get-started/index) section to try Live demos in you browser, learn about the Simulator(s) and learn the basics of LittlevGL.
+- 前往 [开始使用](/get-started/index)章节尝试在你的浏览器使用在线演示
 - A detailed porting guide can be found in the [Porting](/porting/index) section.
 - To learn how LittlevGL works go to the [Overview](/overview/index).
 - 阅读教程或者分享你的见解请前往 [博客](https://blog.littlevgl.com)
@@ -74,7 +74,7 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 ### 是否支持我的单片机或硬件?
 每个可以通过并口、SPI、RGB接口或者其他设备驱动一个屏幕并且能够满足 [需求](#Requirements)的单片机都支持LittlevGL。
 它包含
-- "普通"单片机如 STM32F, STM32H, NXP Kinetis, LPC, iMX, dsPIC33, PIC32 等等. 
+- "一般的"单片机如 STM32F, STM32H, NXP Kinetis, LPC, iMX, dsPIC33, PIC32 等等. 
 - 蓝牙, GSM, WiFi 模块如 Nordic NRF 和 Espressif ESP32
 - 包含在一些单片机的Linux帧缓冲设备，如树莓派上的的/dev/fb0
 - and anything else with a strong enough MCU and a periphery to drive a display
