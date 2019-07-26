@@ -409,16 +409,16 @@
 <li class="toctree-l3"><a class="reference internal" href="obj.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="arc.html">Arc (lv_arc)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="arc.html#overview">Overview</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="arc.html#angles">Angles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="arc.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arc.html">Yay (lv_arc)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#giris">Giriş</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#acilar">Açılar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#notlar">Notlar</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="arc.html#styles">Styles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="arc.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#bicim">Biçim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#olaylar">Olaylar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="arc.html#keys">Keys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="arc.html#example">Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#ornek">Örnek</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="arc.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="arc.html#micropython">MicroPython</a></li>
 </ul>
@@ -502,17 +502,17 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Tuval (lv_canvas)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#genel-taslak">Genel Taslak</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#onbellek">Önbellek</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#giris">Giriş</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#on-bellek">Ön Bellek</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#palet">Palet</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cizim">Çizim</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#rotate">Rotate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dondurme">Döndürme</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#styles">Styles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bicim">Biçim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#olaylar">Olaylar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#keys">Keys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ornek">Örnek</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#micropython">MicroPython</a></li>
 </ul>
@@ -1095,28 +1095,29 @@
             
   <div class="section" id="tuval-lv-canvas">
 <h1>Tuval (lv_canvas)<a class="headerlink" href="#tuval-lv-canvas" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="genel-taslak">
-<h2>Genel Taslak<a class="headerlink" href="#genel-taslak" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="img.html"><span class="doc">Image</span></a> gibi bir tuval ile kullanıcı herşeyi çizebilir.</p>
-<div class="section" id="onbellek">
-<h3>Önbellek<a class="headerlink" href="#onbellek" title="Permalink to this headline">¶</a></h3>
-<p>Tuvalin çizilmiş imajı hafızada tutabilmesi için  bir önbelleğe ihtiyacı vardır.
-Bir tuvale bir önbellek atamak için <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_buffer(canvas,</span> <span class="pre">buffer,</span> <span class="pre">width,</span> <span class="pre">height,</span> <span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA)</span></code>kullanılır.
-<code class="docutils literal notranslate"><span class="pre">buffer</span></code> tuvalin görüntüsünü tutan bir statik önbellektir(sadece yerel bir değişken değil).
+<div class="section" id="giris">
+<h2>Giriş<a class="headerlink" href="#giris" title="Permalink to this headline">¶</a></h2>
+<p>Bir tuval kullanıcın her şeyi çizebileceği  <a class="reference internal" href="img.html"><span class="doc">Image</span></a> gibidir.</p>
+<div class="section" id="on-bellek">
+<h3>Ön Bellek<a class="headerlink" href="#on-bellek" title="Permalink to this headline">¶</a></h3>
+<p>Tuvalin çizilmiş imajı saklayan bir ön belleğe ihtiyacı vardır.
+To assign a buffer to a Canvas use <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_buffer(canvas,</span> <span class="pre">buffer,</span> <span class="pre">width,</span> <span class="pre">height,</span> <span class="pre">LV_IMG_CF_...)</span></code>.
+<code class="docutils literal notranslate"><span class="pre">buffer</span></code> tuvalin imajını tutan bir statik ön bellektir(sadece yerel bir değişken değil).
 Örneğin
-<code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">lv_color_t</span> <span class="pre">buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width,</span> <span class="pre">height)]</span></code>. <code class="docutils literal notranslate"><span class="pre">LV_CANVAS_BUF_SIZE_...</span></code> macros help to determine the size of the buffer with different color formats.</p>
+<code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">lv_color_t</span> <span class="pre">buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width,</span> <span class="pre">height)]</span></code>. <code class="docutils literal notranslate"><span class="pre">LV_CANVAS_BUF_SIZE_...</span></code>  makroları farklı renk formatlarında ki önbellek boyutunu belirlemeye yardım eder.</p>
+<p>The canvas supports all the built in color formats like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TURE_COLOR</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_2BIT</span></code>. See the full list in the <a class="reference external" href="/overview/image.html#color-formats">Color formats</a> section.</p>
 </div>
 <div class="section" id="palet">
 <h3>Palet<a class="headerlink" href="#palet" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> için renk format paleti  <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_palette(canvas,</span> <span class="pre">3,</span> <span class="pre">LV_COLOR_RED)</span></code> ile başlatılması gerekir. Pikseli <em>index=3</em> ile kırmızı ayarlanır.</p>
+<p><code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> için bir renk format paleti  <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_palette(canvas,</span> <span class="pre">3,</span> <span class="pre">LV_COLOR_RED)</span></code> ile başlatılması gerekir. Pikseli <em>index=3</em> ile kırmızı ayarlanır.</p>
 </div>
 <div class="section" id="cizim">
 <h3>Çizim<a class="headerlink" href="#cizim" title="Permalink to this headline">¶</a></h3>
-<p>Bir pikseli ayarlamak için <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_px(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">LV_COLOR_RED)</span></code> kullanılır.
+<p>Tuvalde bir pikseli ayarlamak için <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_px(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">LV_COLOR_RED)</span></code> kullanılır.
 <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> veya <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code> ile rengin veya alfa değerinin indisi renk olarak geçmesi gerekir. Örneğin  <code class="docutils literal notranslate"><span class="pre">lv_color_t</span> <span class="pre">c;</span> <span class="pre">c.full</span> <span class="pre">=</span> <span class="pre">3;</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">lv_canvas_fill_bg(canvas,</span> <span class="pre">LV_COLOR_BLUE)</span></code> tüm tuvali mavi doldurur</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_canvas_fill_bg(canvas,</span> <span class="pre">LV_COLOR_BLUE)</span></code> tüm tuvali mavi doldurur.</p>
 <p><code class="docutils literal notranslate"><span class="pre">lv_canvas_copy_buf(canvas,</span> <span class="pre">buffer_to_copy,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height)</span></code> ile piksel dizisi tuvale kopyalanabilir . Ön belleğin ve tuvalin renk formatı eşleşmesi gerekir.</p>
-<p>Bir şey çizmek için tuval kullanılır</p>
+<p>Tuvale bir şeyler çizmek için aşağıdaki fonksiyonlar kullanılır</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_rect(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">heigth,</span> <span class="pre">&amp;style)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_text(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">max_width,</span> <span class="pre">&amp;style,</span> <span class="pre">txt,</span> <span class="pre">LV_LABEL_ALIGN_LEFT/CENTER/RIGTH)</span></code></p></li>
@@ -1125,32 +1126,33 @@ Bir tuvale bir önbellek atamak için <code class="docutils literal notranslate"
 <li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_polygon(canvas,</span> <span class="pre">points_array,</span> <span class="pre">point_cnt,</span> <span class="pre">&amp;style)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_arc(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">radius,</span> <span class="pre">start_angle,</span> <span class="pre">end_angle,</span> <span class="pre">&amp;style)</span></code></p></li>
 </ul>
+<p>The draw function can draw only to <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TURE_COLOR</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA</span></code> buffers. <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA</span></code> is working only with <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span> <span class="pre">32</span></code>.</p>
 </div>
-<div class="section" id="rotate">
-<h3>Rotate<a class="headerlink" href="#rotate" title="Permalink to this headline">¶</a></h3>
-<p>A rotated image can be added to canvas with <code class="docutils literal notranslate"><span class="pre">lv_canvas_rotate(canvas,</span> <span class="pre">&amp;imd_dsc,</span> <span class="pre">angle,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">pivot_x,</span> <span class="pre">pivot_y)</span></code>.
-It will rotate the image shown by <code class="docutils literal notranslate"><span class="pre">img_dsc</span></code> around the given pivot and stores it on the <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates of <code class="docutils literal notranslate"><span class="pre">canvas</span></code>.
-Instead of <code class="docutils literal notranslate"><span class="pre">img_dsc</span></code> and the buffer of an other canvas also can be used by <code class="docutils literal notranslate"><span class="pre">lv_canvas_get_img(canvas)</span></code>.</p>
-<p>Note that a canvas can’t be rotated on itself.  You need a source and destination canvas or image.</p>
+<div class="section" id="dondurme">
+<h3>Döndürme<a class="headerlink" href="#dondurme" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">lv_canvas_rotate(canvas,</span> <span class="pre">&amp;imd_dsc,</span> <span class="pre">angle,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">pivot_x,</span> <span class="pre">pivot_y)</span></code> ile tuvale döndürülmüş imaj eklenebilir.
+<code class="docutils literal notranslate"><span class="pre">img_dsc</span></code> tarafından gösterilen imajı verilen eksen etrafında döndürecek ve <code class="docutils literal notranslate"><span class="pre">canvas</span></code>ın  <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>  kordinatlarında saklar.
+<code class="docutils literal notranslate"><span class="pre">img_dsc</span></code> ve başka tuval ön belleğinin yerine<code class="docutils literal notranslate"><span class="pre">lv_canvas_get_img(canvas)</span></code>  de kullanılabilir .</p>
+<p>Bir tuvalin kendi üzerinde döndürülemeyeceğini dikkate alınız. Bir kaynağa ve belirlenmiş tuvale veya imaja ihtiyacınız vardır.</p>
 </div>
 </div>
-<div class="section" id="styles">
-<h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
-<p>You can set the styles with <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_style(btn,</span> <span class="pre">LV_CANVAS_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code>.
-<code class="docutils literal notranslate"><span class="pre">style.image.color</span></code> is used to tell the base color with <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code> color format.</p>
+<div class="section" id="bicim">
+<h2>Biçim<a class="headerlink" href="#bicim" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">lv_canvas_set_style(btn,</span> <span class="pre">LV_CANVAS_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code> ile biçimi ayarlayabilirsiniz.
+<code class="docutils literal notranslate"><span class="pre">style.image.color</span></code> temel rengi  <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code>renk formatı ile anlatmak için kullanılır.</p>
 </div>
-<div class="section" id="events">
-<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
-<p>Only the <a class="reference external" href="/overview/event.html#generic-events">Generic events</a> are sent by the object type.</p>
-<p>Learn more about <a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a>.</p>
+<div class="section" id="olaylar">
+<h2>Olaylar<a class="headerlink" href="#olaylar" title="Permalink to this headline">¶</a></h2>
+<p>Sadece  <a class="reference external" href="/overview/event.html#generic-events">Generic events</a> nesne tarafından gönderilebilir.</p>
+<p><a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a> hakkınad daha fazlasını öğrenin.</p>
 </div>
 <div class="section" id="keys">
 <h2>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h2>
-<p>No <em>Keys</em> are processed by the object type.</p>
-<p>Learn more about <a class="reference internal" href="../overview/indev.html"><span class="doc">Keys</span></a>.</p>
+<p>Nesne türü tarafından <em>Keys</em></p>
+<p><a class="reference internal" href="../overview/indev.html"><span class="doc">Keys</span></a> hakkında daha fazlasını öğrenin.</p>
 </div>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ornek">
+<h2>Örnek<a class="headerlink" href="#ornek" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
 <img alt="Simple Canvas example in LittlevGL" src="../_images/lv_ex_canvas_1.gif" />
@@ -1551,7 +1553,7 @@ Instead of <code class="docutils literal notranslate"><span class="pre">img_dsc<
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 22, 2019.
+        Last updated on Jul 26, 2019.
       </span>
 
     </p>

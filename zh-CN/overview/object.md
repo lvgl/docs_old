@@ -29,7 +29,7 @@ lv_obj_set_pos(btn1, 20,30);      /*按钮位置*/
 
 要查看所有可用函数请访问基本对象的[文档](/object-types/obj).
 
-### Specific attributes
+### 专有属性
 
 对象类型也有本身的专有属性，比如，一个滑动条有：
 - 最小最大值(Min. max. values)

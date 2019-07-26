@@ -11,11 +11,11 @@
 - 一个文件
 
 ### 变量
-The images stored internally in a variable has `lv_img_dsc_t` type with the following fields:
+The images stored internally in a variable has `lv_img_dsc_t` ，其中包含以下字段：
 - **header**
-  - *cf* Color format. See [below](#color-format)
-  - *w* width in pixels (<= 2048)
-  - *h* height in pixels (<= 2048)
+  - *cf* 颜色格式，查看 [下方](#color-format)
+  - *w* 长度的像素数 (<= 2048)
+  - *h* 高度的像素数 (<= 2048)
   - *always zero* 3 bits which need to be always zero
   - *reserved* reserved for future use
 - **data** pointer to an array where the image itself is stored

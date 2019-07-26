@@ -12,7 +12,7 @@ PDF版本: :download:`LittlevGL.pdf <LittlevGL.pdf>`
 
 ![](/misc/lv_theme_intro.png "LittlevGL cover")
 
-LittlevGL is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
+LittlevGL是一个免费的开源图形库，提供了创建嵌入式GUI所需的一切，具有易于使用的组件，美观的视觉效果和低内存占用等特点。
 
 **[官网](https://littlevgl.com) &nbsp; · &nbsp;** 
 **[GitHub](https://github.com/littlevgl/lvgl) &nbsp; · &nbsp;** 
@@ -26,11 +26,11 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 - 高级图形效果：动画，反锯齿，透明度，平滑滚动
 - 多种输入设备支持： 触摸板，鼠标，键盘，编码器等
 - 支持多语言的UTF-8编码
-- Multi-display support, i.e. use more TFT, monochrome displays simultaneously
+- 支持多个显示设备，例如同步显示在多个TFT, monochrome设备
 - 完全的自定义图形组件功能
-- Hardware independent to use with any microcontroller or display
-- Scalable to operate with little memory (64 kB Flash, 16 kB RAM)
-- OS, External memory and GPU supported but not required
+- 硬件独立于任何微控制器或显示器
+- 可以缩小到最小内存 (64 kB Flash, 16 kB RAM)
+- 支持操作系统、外部储存和GPU（非必须）
 - 仅仅单个帧缓冲设备就可以呈现高级视觉特效
 - 使用C编写以获得最大兼容性(兼容C++)
 - 无需拥有嵌入式硬件设备，在PC上的模拟器开始设计嵌入式GUI
@@ -58,11 +58,11 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 
 ### 从哪来开始？
 - 总体概览LittlevGL请访问[littlevgl.com](https://littlevgl.com)
-- 前往 [开始使用](/get-started/index)章节尝试在你的浏览器使用在线演示
-- A detailed porting guide can be found in the [Porting](/porting/index) section.
-- To learn how LittlevGL works go to the [Overview](/overview/index).
+- 前往 [开始使用](/get-started/index)章节尝试在你的浏览器使用在线演示、学习关于模拟器和LittlevGL基础知识
+- 关于移植指南细节可以在 [移植](/porting/index)章节找到
+- 学习如何让LittlevGL运行请前往 [概览](/overview/index).
 - 阅读教程或者分享你的见解请前往 [博客](https://blog.littlevgl.com)
-- To see the source code of the library check it on GitHub: [https://github.com/littlevgl/lvgl/](https://github.com/littlevgl/lvgl/).
+- 你可以在Github上查看此库的源码: [https://github.com/littlevgl/lvgl/](https://github.com/littlevgl/lvgl/).
 
 
 ### 在哪里我可以问问题?
@@ -77,10 +77,10 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 - "一般的"单片机如 STM32F, STM32H, NXP Kinetis, LPC, iMX, dsPIC33, PIC32 等等. 
 - 蓝牙, GSM, WiFi 模块如 Nordic NRF 和 Espressif ESP32
 - 包含在一些单片机的Linux帧缓冲设备，如树莓派上的的/dev/fb0
-- and anything else with a strong enough MCU and a periphery to drive a display
+- 和其他配置足够高的单片机和一个能够显示的外设
 
 ### 是否支持我的屏幕?
-LittlevGL needs just one simple driver to copy an array of pixels to a given area of the display. If you can do this with your display then you can use that display with LittlevGL. 
+LittlevGL仅需一个简单可以复制像素数组到屏幕所给的区域的驱动程序，如果你可以做到这个那么你可以同样可以使用LittlevGL来显示。
 它包含
 - 16或24位色彩深度的TFT屏幕
 - 带有HDMI端口的监视器
@@ -100,7 +100,7 @@ LittlevGL伴随着MIT协议，这意味着你可以以任何目的去下载和�
 更多请查看 [Tick](/porting/tick) 和[任务处理](/porting/task-handler) 章节。
 
 ### 为什么显示驱动只被调用了一次？只刷新了显示屏的上半部分。
-Be sure you are calling `lv_disp_flush_ready(drv)` at the end of you *display flush callback*. 
+确保你在*display flush callback*的最后调用了`lv_disp_flush_ready(drv)`。
 
 ### 为什么我只在我的屏幕上看到垃圾（雪花）?
 可以在你的显示驱动上有一个bug，先尝试下面不使用 LittlevGL 的代码:
@@ -136,7 +136,7 @@ my_flush_cb(NULL, &a, buf);
 - 启用编译优化(gcc -O)
 - 增加显示缓冲的大小
 - 使用双显示缓冲和在后台使用DMA（或类似的外围设备）刷新缓冲
-- Increase the clock speed of the SPI or Parallel port if you use them to drive the display
+- 如果你使用SPI或并口驱动显示，增加他们的时钟速度
 - 如果你的显示设备有SPI端口，请考虑使用并行模式，因为这样可以提高吞吐量
 - 保持显示缓冲在内部RAM (不是外部SRAM) 因为 LittlevGL 会频繁使用它所以它应该拥有较小的访问时间
  
@@ -148,11 +148,11 @@ my_flush_cb(NULL, &a, buf);
 - `--gc-sections` 链接标志
 
 来去除无用的函数和变量
-`
+
 ### 怎么减少 RAM  使用量
 - 降低*显示缓冲* 的大小
 - 减少*lv_conf.h*中的`LV_MEM_SIZE`，这个是你创建按钮、标签和其他对象时使用的内存大小
-- To work with lower `LV_MEM_SIZE` you can create the objects only when required and deleted them when they are not required anymore.
+- 为了让低的`LV_MEM_SIZE`的值工作，你可以当你需要时候创建对象并在不需要的使用删除他们
  
 ### 怎么在我的操作系统上使用?
 

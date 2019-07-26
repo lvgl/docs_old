@@ -119,23 +119,23 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/quick-overview.html">Gyors áttekintés</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#littlevgl-hozzaadasa-egy-projekthez">LittlevGL hozzáadása egy projekthez</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#learn-the-basics">Learn the basics</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#objects-widgets">Objects (Widgets)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#styles">Styles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#ismerkedj-meg-az-alapokkal">Ismerkedj meg az alapokkal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#objektumok-widget-ek">Objektumok (Widget-ek)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#stilusok">Stílusok</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#esemenyek">Események</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#examples">Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#button-with-label">Button with label</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#button-with-styles">Button with styles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#slider-and-object-alignment">Slider and object alignment</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#list-and-themes">List and themes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#use-littlevgl-from-micropython">Use LittlevGL from Micropython</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#peldak">Példák</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#gomb-felirattal">Gomb felirattal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#gomb-stilusok">Gomb stílusok</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#csuszka-es-objektum-igazitas">Csúszka és objektum igazítás</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#lista-es-temak">Lista és témák</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#littlevgl-hasznalata-micropythonnal">LittlevGL használata Micropythonnal</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#kozremukodes">Közreműködés</a><ul>
-<li class="toctree-l4"><a class="reference external" href="https://blog.littlevgl.com/2018-12-06/contributing">Contributing guide</a></li>
-<li class="toctree-l4"><a class="reference external" href="https://github.com/littlevgl/lvgl/blob/master/docs/CODING_STYLE">Coding style guide</a></li>
+<li class="toctree-l4"><a class="reference external" href="https://blog.littlevgl.com/2018-12-06/contributing">Közreműködési leírást</a></li>
+<li class="toctree-l4"><a class="reference external" href="https://github.com/littlevgl/lvgl/blob/master/docs/CODING_STYLE">Kódolási stílus útmutatót</a></li>
 </ul>
 </li>
 </ul>
@@ -1135,6 +1135,9 @@ So you need to change the <em>long mode</em> first and then set the size with  <
 <div class="section" id="draw-background">
 <h3>Draw background<a class="headerlink" href="#draw-background" title="Permalink to this headline">¶</a></h3>
 <p>You can enable to draw a background for the label with <code class="docutils literal notranslate"><span class="pre">lv_label_set_body_draw(label,</span> <span class="pre">draw)</span></code></p>
+<p>The background will be larger in every direction with <code class="docutils literal notranslate"><span class="pre">body.padding.top/bottom/left/right</span></code> values.
+However, the background is drawn only “virtually” and doesn’t make the label really larger.
+There for when the label is positioned the label’s coordinates will be taken into account and not background’s.</p>
 </div>
 <div class="section" id="text-recolor">
 <h3>Text recolor<a class="headerlink" href="#text-recolor" title="Permalink to this headline">¶</a></h3>
@@ -1198,6 +1201,81 @@ This feature can be enabled individually for each label by <code class="docutils
     <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label2</span><span class="p">,</span> <span class="s">&quot;It is a circularly scrolling text. &quot;</span><span class="p">);</span>
     <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">label2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
 <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<img alt="Label with shadow in LittlevGL" src="../_images/lv_ex_label_2.png" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @file lv_ex_templ.c</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+
+<span class="cm">/*********************</span>
+<span class="cm"> *      INCLUDES</span>
+<span class="cm"> *********************/</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+
+<span class="cm">/*********************</span>
+<span class="cm"> *      DEFINES</span>
+<span class="cm"> *********************/</span>
+
+<span class="cm">/**********************</span>
+<span class="cm"> *      TYPEDEFS</span>
+<span class="cm"> **********************/</span>
+
+<span class="cm">/**********************</span>
+<span class="cm"> *  STATIC PROTOTYPES</span>
+<span class="cm"> **********************/</span>
+
+<span class="cm">/**********************</span>
+<span class="cm"> *  STATIC VARIABLES</span>
+<span class="cm"> **********************/</span>
+
+<span class="cm">/**********************</span>
+<span class="cm"> *      MACROS</span>
+<span class="cm"> **********************/</span>
+
+<span class="cm">/**********************</span>
+<span class="cm"> *   GLOBAL FUNCTIONS</span>
+<span class="cm"> **********************/</span>
+
+<span class="kt">void</span> <span class="nf">lv_ex_label_2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* Create a style for the shadow*/</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">label_style</span><span class="p">;</span>
+    <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">label_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+    <span class="n">label_style</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">opa</span> <span class="o">=</span> <span class="n">LV_OPA_50</span><span class="p">;</span>
+
+    <span class="cm">/*Create a label for the shadow first (it&#39;s in the background) */</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">shadow_label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_style</span><span class="p">(</span><span class="n">shadow_label</span><span class="p">,</span> <span class="n">LV_LABEL_STYLE_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">label_style</span><span class="p">);</span>
+
+    <span class="cm">/* Create the main label */</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">main_label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">main_label</span><span class="p">,</span> <span class="s">&quot;A simple method to create</span><span class="se">\n</span><span class="s">&quot;</span>
+                                  <span class="s">&quot;shadows on text</span><span class="se">\n</span><span class="s">&quot;</span>
+                                  <span class="s">&quot;It even works with</span><span class="se">\n\n</span><span class="s">&quot;</span>
+                                  <span class="s">&quot;newlines     and spaces.&quot;</span><span class="p">);</span>
+
+    
+    <span class="cm">/*Set the same text for the shadow label*/</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">shadow_label</span><span class="p">,</span> <span class="n">lv_label_get_text</span><span class="p">(</span><span class="n">main_label</span><span class="p">));</span>
+
+    <span class="cm">/* Position the main label */</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">main_label</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    
+    <span class="cm">/* Shift the second label down and to the right by 1 pixel */</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">shadow_label</span><span class="p">,</span> <span class="n">main_label</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_LEFT</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/**********************</span>
+<span class="cm"> *   STATIC FUNCTIONS</span>
+<span class="cm"> **********************/</span>
 </pre></div>
 </div>
 </div>
@@ -1795,7 +1873,7 @@ This feature can be enabled individually for each label by <code class="docutils
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 22, 2019.
+        Last updated on Jul 26, 2019.
       </span>
 
     </p>

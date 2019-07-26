@@ -107,7 +107,7 @@ PC模拟器使用  [SDL 2](https://www.libsdl.org/download-2.0.php) 跨平台库
 
 ### 编译并运行
 
-Now you are ready to run the LittlevGL Graphics Library on your PC. Click on the Hammer Icon on the top menu bar to Build the project. If you have done everything right you will not get any errors. Note that on some systems additional steps might be required to "see" SDL 2 from Eclipse but in most of cases the configurations in the downloaded project is enough.
+现在你已准备好了在你的PC上运行LittlevGL图形库看. 点击上方的锤子图标来编译项目。如果你正确的完成所有步骤你应该不会看到任何错误。请注意，在某些系统上可能需要执行其他步骤来从Eclipse上“查看”SDL 2，但在大多数情况下，下载项目中的配置就足够了。
 
 在编译成功后点击在上方菜单栏中Play按钮来运行项目，现在一个窗口应该出现在你的屏幕中央
 

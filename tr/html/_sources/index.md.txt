@@ -148,7 +148,7 @@ IF you are using GCC you can add
 - `--gc-sections` linker flag
 
 to remove unused functions and variables.
-`
+
 ### How to reduce the RAM usage
 - Lower the size of the *Display buffer* 
 - Reduce `LV_MEM_SIZE` in *lv_conf.h*. This memory used when you create objects like buttons, labels, etc

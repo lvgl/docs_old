@@ -348,10 +348,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/file-system.html">File system</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#add-a-driver">Add a driver</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../overview/file-system.html#use-drivers-for-images">Use drivers for images</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#add-a-driver">Add a driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#usage-example">Usage example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#use-drivers-for-images">Use drivers for images</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#api">API</a></li>
 </ul>
 </li>
@@ -1268,6 +1267,115 @@ The new text can’t be in a local variable which is destroyed when the event ca
 </pre></div>
 </div>
 </div>
+<img alt="Form with password field in LittlevGL" src="../_images/lv_ex_ta_2.gif" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @file lv_ex_templ.c</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+
+<span class="cm">/*********************</span>
+<span class="cm"> *      INCLUDES</span>
+<span class="cm"> *********************/</span>
+<span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/*********************</span>
+<span class="cm"> *      DEFINES</span>
+<span class="cm"> *********************/</span>
+
+<span class="cm">/**********************</span>
+<span class="cm"> *      TYPEDEFS</span>
+<span class="cm"> **********************/</span>
+
+<span class="cm">/**********************</span>
+<span class="cm"> *  STATIC PROTOTYPES</span>
+<span class="cm"> **********************/</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">kb_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">event_kb</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">);</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">ta_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ta</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">);</span>
+
+<span class="cm">/**********************</span>
+<span class="cm"> *  STATIC VARIABLES</span>
+<span class="cm"> **********************/</span>
+
+<span class="k">static</span> <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">kb</span><span class="p">;</span>
+<span class="cm">/**********************</span>
+<span class="cm"> *      MACROS</span>
+<span class="cm"> **********************/</span>
+
+<span class="cm">/**********************</span>
+<span class="cm"> *   GLOBAL FUNCTIONS</span>
+<span class="cm"> **********************/</span>
+
+<span class="kt">void</span> <span class="nf">lv_ex_ta_2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* Create the password box */</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">pwd_ta</span> <span class="o">=</span> <span class="n">lv_ta_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_ta_set_text</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+    <span class="n">lv_ta_set_pwd_mode</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_ta_set_one_line</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_obj_set_width</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="n">LV_HOR_RES</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="n">ta_event_cb</span><span class="p">);</span>
+    
+    <span class="cm">/* Create a label and position it above the text box */</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">pwd_label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">pwd_label</span><span class="p">,</span> <span class="s">&quot;Password:&quot;</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">pwd_label</span><span class="p">,</span> <span class="n">pwd_ta</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_TOP_LEFT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    
+    
+    <span class="cm">/* Create the one-line mode text area */</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">oneline_ta</span> <span class="o">=</span> <span class="n">lv_ta_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">pwd_ta</span><span class="p">);</span>
+    <span class="n">lv_ta_set_pwd_mode</span><span class="p">(</span><span class="n">oneline_ta</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">lv_ta_set_cursor_type</span><span class="p">(</span><span class="n">oneline_ta</span><span class="p">,</span> <span class="n">LV_CURSOR_LINE</span> <span class="o">|</span> <span class="n">LV_CURSOR_HIDDEN</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">oneline_ta</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_RIGHT</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    
+    <span class="cm">/* Create a label and position it above the text box */</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">oneline_label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">oneline_label</span><span class="p">,</span> <span class="s">&quot;Text:&quot;</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">oneline_label</span><span class="p">,</span> <span class="n">oneline_ta</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_TOP_LEFT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="cm">/* Create a keyboard and make it fill the width of the above text areas */</span>
+    <span class="n">kb</span> <span class="o">=</span> <span class="n">lv_kb_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">90</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">kb_event_cb</span><span class="p">);</span> <span class="cm">/* Setting a custom event handler stops the keyboard from closing automatically */</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span>  <span class="n">LV_HOR_RES</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">140</span><span class="p">);</span>
+    
+    <span class="n">lv_kb_set_ta</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">pwd_ta</span><span class="p">);</span> <span class="cm">/* Focus it on one of the text areas to start */</span>
+    <span class="n">lv_kb_set_cursor_manage</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span> <span class="cm">/* Automatically show/hide cursors on text areas */</span>
+<span class="p">}</span>
+
+<span class="cm">/**********************</span>
+<span class="cm"> *   STATIC FUNCTIONS</span>
+<span class="cm"> **********************/</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">kb_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">event_kb</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* Just call the regular event handler */</span>
+    <span class="n">lv_kb_def_event_cb</span><span class="p">(</span><span class="n">event_kb</span><span class="p">,</span> <span class="n">event</span><span class="p">);</span>
+
+<span class="p">}</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">ta_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ta</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_CLICKED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* Focus on the clicked text area */</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">kb</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+            <span class="n">lv_kb_set_ta</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">ta</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_INSERT</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">str</span> <span class="o">=</span> <span class="n">lv_event_get_data</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\n&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Ready</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
@@ -2136,7 +2244,7 @@ The new text can’t be in a local variable which is destroyed when the event ca
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 19, 2019.
+        Last updated on Jul 26, 2019.
       </span>
 
     </p>

@@ -43,6 +43,10 @@ The label's text can be aligned to the left, right or middle with `lv_label_set_
 ### Draw background
 You can enable to draw a background for the label with `lv_label_set_body_draw(label, draw)`
 
+The background will be larger in every direction with `body.padding.top/bottom/left/right` values. 
+However, the background is drawn only "virtually" and doesn't make the label really larger. 
+There for when the label is positioned the label's coordinates will be taken into account and not background's.
+
 ### Text recolor
 In the text, you can use commands to re-color parts of the text. For example: `"Write a #ff0000 red# word"`. 
 This feature can be enabled individually for each label by `lv_label_set_recolor()` function. 

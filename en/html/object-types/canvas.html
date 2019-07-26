@@ -348,10 +348,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/file-system.html">File system</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#add-a-driver">Add a driver</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../overview/file-system.html#use-drivers-for-images">Use drivers for images</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#add-a-driver">Add a driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#usage-example">Usage example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#use-drivers-for-images">Use drivers for images</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#api">API</a></li>
 </ul>
 </li>
@@ -1102,10 +1101,11 @@
 <div class="section" id="buffer">
 <h3>Buffer<a class="headerlink" href="#buffer" title="Permalink to this headline">¶</a></h3>
 <p>The Canvas needs a buffer which stores the drawn image.
-To assign a buffer to a Canvas use <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_buffer(canvas,</span> <span class="pre">buffer,</span> <span class="pre">width,</span> <span class="pre">height,</span> <span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA)</span></code>.
+To assign a buffer to a Canvas use <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_buffer(canvas,</span> <span class="pre">buffer,</span> <span class="pre">width,</span> <span class="pre">height,</span> <span class="pre">LV_IMG_CF_...)</span></code>.
 <code class="docutils literal notranslate"><span class="pre">buffer</span></code> is a static buffer (not just a local variable) to hold the image of the canvas.
 For example
 <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">lv_color_t</span> <span class="pre">buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width,</span> <span class="pre">height)]</span></code>. <code class="docutils literal notranslate"><span class="pre">LV_CANVAS_BUF_SIZE_...</span></code> macros help to determine the size of the buffer with different color formats.</p>
+<p>The canvas supports all the built in color formats like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TURE_COLOR</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_2BIT</span></code>. See the full list in the <a class="reference external" href="/overview/image.html#color-formats">Color formats</a> section.</p>
 </div>
 <div class="section" id="palette">
 <h3>Palette<a class="headerlink" href="#palette" title="Permalink to this headline">¶</a></h3>
@@ -1126,6 +1126,7 @@ With <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDE
 <li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_polygon(canvas,</span> <span class="pre">points_array,</span> <span class="pre">point_cnt,</span> <span class="pre">&amp;style)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lv_canvas_draw_arc(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">radius,</span> <span class="pre">start_angle,</span> <span class="pre">end_angle,</span> <span class="pre">&amp;style)</span></code></p></li>
 </ul>
+<p>The draw function can draw only to <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TURE_COLOR</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA</span></code> buffers. <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA</span></code> is working only with <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span> <span class="pre">32</span></code>.</p>
 </div>
 <div class="section" id="rotate">
 <h3>Rotate<a class="headerlink" href="#rotate" title="Permalink to this headline">¶</a></h3>
@@ -1552,7 +1553,7 @@ Instead of <code class="docutils literal notranslate"><span class="pre">img_dsc<
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 19, 2019.
+        Last updated on Jul 26, 2019.
       </span>
 
     </p>

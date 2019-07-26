@@ -80,7 +80,7 @@ Every object has a parent object. The child object moves with the parent and if 
 The *screen* are the "root" parents. To get the current screen call `lv_scr_act()`.
 
 You can create a new object with `lv_<type>_create(parent, obj_to_copy)`. It will return an `lv_obj_t *` variable which should be used as a reference to the object to set its parameters. 
-The first parameter is the desired *parent*, te second parameters can be an object to copy (`NULL` is unused). 
+The first parameter is the desired *parent*, the second parameters can be an object to copy (`NULL` is unused). 
 For example:
 ```c
 lv_obj_t * slider1 = lv_slider_create(lv_scr_act(), NULL);
@@ -169,7 +169,7 @@ void btn_event_cb(lv_obj_t * btn, lv_event_t event)
 ![](/misc/simple_button_example.*)
 
 ### Button with styles
-Add styles to the previously button from the previous example
+Add styles to the button from the previous example:
 ```c
 static lv_style_t style_btn_rel;                        /*A variable to store the released style*/
 lv_style_copy(&style_btn_rel, &lv_style_plain);         /*Initialize from a built-in style*/

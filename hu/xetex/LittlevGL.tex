@@ -62,7 +62,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Jul 22, 2019}
+\date{Jul 26, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -357,7 +357,6 @@ IF you are using GCC you can add
 \end{itemize}
 
 to remove unused functions and variables.
-{}`
 
 
 \section{How to reduce the RAM usage}
@@ -616,60 +615,60 @@ Implementálj és regisztrálj egy függvényt, ami képes \sphinxstylestrong{pi
 \end{sphinxVerbatim}
 \begin{itemize}
 \item {} 
-Implement and register a function which can \sphinxstylestrong{read an input device}. E.g. for a touch pad:
+Implementálj és regsiztrálj egy függvényt, ami képes  egy \sphinxstylestrong{bementi eszközt olvasni}. Például egy touchpad esetében:
 
 \end{itemize}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}             \PYG{c+cm}{/*Descriptor of a input device driver*/}
-\PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{type} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}TYPE\PYGZus{}POINTER}\PYG{p}{;}    \PYG{c+cm}{/*Touch pad is a pointer\PYGZhy{}like device*/}
-\PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}touchpad\PYGZus{}read}\PYG{p}{;}      \PYG{c+cm}{/*Set your driver function*/}
-\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/*Finally register the driver*/}
+\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}             \PYG{c+cm}{/*Input device leíró*/}
+\PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{type} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}TYPE\PYGZus{}POINTER}\PYG{p}{;}    \PYG{c+cm}{/*A touch pad egy pointer szerű eszköz*/}
+\PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}touchpad\PYGZus{}read}\PYG{p}{;}      \PYG{c+cm}{/*Egy driver függvény hozzárendelése*/}
+\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/*Végül a driver regisztrálása*/}
 
 \PYG{k+kt}{bool} \PYG{n+nf}{my\PYGZus{}touchpad\PYGZus{}read}\PYG{p}{(}\PYG{n}{lv\PYGZus{}indev\PYGZus{}t} \PYG{o}{*} \PYG{n}{indev}\PYG{p}{,} \PYG{n}{lv\PYGZus{}indev\PYGZus{}data\PYGZus{}t} \PYG{o}{*} \PYG{n}{data}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
     \PYG{k}{static} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{last\PYGZus{}x} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
     \PYG{k}{static} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{last\PYGZus{}y} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
 
-    \PYG{c+cm}{/*Save the state and save the pressed coordinate*/}
+    \PYG{c+cm}{/*Az állapot és az utolsó megnyomott koordináta elmentése*/}
     \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=} \PYG{n}{touchpad\PYGZus{}is\PYGZus{}pressed}\PYG{p}{(}\PYG{p}{)} \PYG{o}{?} \PYG{n+nl}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR} \PYG{p}{:} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}REL}\PYG{p}{;} 
     \PYG{k}{if}\PYG{p}{(}\PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR}\PYG{p}{)} \PYG{n}{touchpad\PYGZus{}get\PYGZus{}xy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{last\PYGZus{}x}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{last\PYGZus{}y}\PYG{p}{)}\PYG{p}{;}
    
-    \PYG{c+cm}{/*Set the coordinates (if released use the last pressed coordinates)*/}
+    \PYG{c+cm}{/*Koordináták beállítása (ha felengedett, az utolsó lenyomott koordináta használata)*/}
     \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{x} \PYG{o}{=} \PYG{n}{last\PYGZus{}x}\PYG{p}{;}
     \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{y} \PYG{o}{=} \PYG{n}{last\PYGZus{}y}\PYG{p}{;}
 
-    \PYG{k}{return} \PYG{n+nb}{false}\PYG{p}{;} \PYG{c+cm}{/*Return {}`false{}` because we are not buffering and no more data to read*/}
+    \PYG{k}{return} \PYG{n+nb}{false}\PYG{p}{;} \PYG{c+cm}{/*Return {}`false{}` mivel nincs több kiolvasandó adat*/}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 \begin{itemize}
 \item {} 
-Call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically every few milliseconds in the main \sphinxcode{\sphinxupquote{while(1)}} loop, in Timer interrupt or in an Operation system task.
-It will redraw the screen if required, handle input devices etc.
+Hívd meg \sphinxcode{\sphinxupquote{lv\_task\_handler()}}-t periodikusan néhány milliszekundumonként a main \sphinxcode{\sphinxupquote{while(1)}}-ben, egy Timer megszakításban vagy egy Operációs rendszer task-ban.
+Ez fogja újrarajzolni a képernyőt, ha szükséges, és kezelni a bemeneti eszközöket, stb.
 
 \end{itemize}
 
 
-\paragraph{Learn the basics}
-\label{\detokenize{get-started/quick-overview:learn-the-basics}}
+\paragraph{Ismerkedj meg az alapokkal}
+\label{\detokenize{get-started/quick-overview:ismerkedj-meg-az-alapokkal}}
 
-\subparagraph{Objects (Widgets)}
-\label{\detokenize{get-started/quick-overview:objects-widgets}}
-The graphical elements like Buttons, Labels, Sliders, Charts etc are called objects in LittelvGL. Go to {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Object types}}}} to see the full list of available types.
+\subparagraph{Objektumok (Widget-ek)}
+\label{\detokenize{get-started/quick-overview:objektumok-widget-ek}}
+A grafikus elemek, mint gombok (Button), feliratok (Label), Csúszkák (Slider), grafikonok (Charts), stb gyűjtőnéven objektumok. Az {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Objektum típusok}}}} oldalán látható az összes objektum típus.
 
-Every object has a parent object. The child object moves with the parent and if you delete the parent the children will be deleted too. Children can be visible only on their parent.
+Minden objektumnak vagy egy szülő objektuma. A gyerek objektum együtt mozog a szülőjével, ha a szülő törlésre kerül, a gyerekek is törlődnek. A gyerekek cask a szülőjükön láthatók.
 
-The \sphinxstyleemphasis{screen} are the “root” parents. To get the current screen call \sphinxcode{\sphinxupquote{lv\_scr\_act()}}.
+A \sphinxstyleemphasis{képernyő (screen)} a legősibb szülő. Az \sphinxcode{\sphinxupquote{lv\_scr\_act()}} függvény megadja a jelenleg látható képernyőt.
 
-You can create a new object with \sphinxcode{\sphinxupquote{lv\_\textless{}type\textgreater{}\_create(parent, obj\_to\_copy)}}. It will return an \sphinxcode{\sphinxupquote{lv\_obj\_t *}} variable which should be used as a reference to the object to set its parameters.
-The first parameter is the desired \sphinxstyleemphasis{parent}, te second parameters can be an object to copy (\sphinxcode{\sphinxupquote{NULL}} is unused).
-For example:
+Új objektum a \sphinxcode{\sphinxupquote{lv\_\textless{}típus\textgreater{}\_create(parent, obj\_to\_copy)}} függvénnyekkel hozható létre. Ez vissaztér egy \sphinxcode{\sphinxupquote{lv\_obj\_t *}} változóval. Ezzel a változóval lehet később hivatkozni az objektumra paramétereinek módosítása vagy egyéb célokból.
+Az első paraméter a kíván \sphinxstyleemphasis{szülő} objektum , a második egy objektum lehet, ami a függvény lemásol (\sphinxcode{\sphinxupquote{NULL}} ha nem használt).
+Például:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{slider1} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-To set some basic attribute \sphinxcode{\sphinxupquote{lv\_obj\_set\_\textless{}paramters\_name\textgreater{}(obj, \textless{}value\textgreater{})}} function can be used. For example:
+Az alapvető paraméterek beállításához a\sphinxcode{\sphinxupquote{lv\_obj\_set\_\textless{}paramtéter\_név\textgreater{}(obj, \textless{}érték\textgreater{})}} függvény használható.  Például:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}x}\PYG{p}{(}\PYG{n}{btn1}\PYG{p}{,} \PYG{l+m+mi}{30}\PYG{p}{)}\PYG{p}{;}
@@ -677,33 +676,33 @@ To set some basic attribute \sphinxcode{\sphinxupquote{lv\_obj\_set\_\textless{}
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{btn1}\PYG{p}{,} \PYG{l+m+mi}{200}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-The objects has type specific parameters too which can be set by \sphinxcode{\sphinxupquote{lv\_\textless{}type\textgreater{}\_set\_\textless{}paramters\_name\textgreater{}(obj, \textless{}value\textgreater{})}} functions. For example:
+Az objektumoknak vannak típus specifikus paramétereik is, amiket a \sphinxcode{\sphinxupquote{lv\_\textless{}typus\textgreater{}\_set\_\textless{}paraméter\_név\textgreater{}(obj, \textless{}value\textgreater{})}} függvényekkel lehet beállítani. Például:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{l+m+mi}{70}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ANIM\PYGZus{}ON}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-To see the full API visit the documentation of the object types or the related header file (e.g. \sphinxcode{\sphinxupquote{lvgl/src/lv\_objx/lv\_slider.h}}).
+A teljes API az egyes objektum típusok dokumentációjában vagy a header fájlukban olvasható. (pl. \sphinxcode{\sphinxupquote{lvgl/src/lv\_objx/lv\_slider.h}}).
 
 
-\subparagraph{Styles}
-\label{\detokenize{get-started/quick-overview:styles}}
-Styles can be assigned to the objects to changed their appearance. A style describes the appearance of rectangle-like objects (like a button or slider), texts, images and lines at once.
+\subparagraph{Stílusok}
+\label{\detokenize{get-started/quick-overview:stilusok}}
+Az objektumokhoz megjelenése a hozzájuk rendelt stílusokkal módosítható. Egy stílus egyszerre írja le a téglalap (pl. gomb vagy csúszka), szöveg, kép és vonal jellegű objektumok megjelenését..
 
-You can create a new style like this:
+Egy új stílus az alábbiak szerint hozható létre:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style1}\PYG{p}{;}                 \PYG{c+cm}{/*Declare a new style. Should be {}`static{}`*/}
-\PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style1}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}  \PYG{c+cm}{/*Copy a buil\PYGZhy{}in style*/}
-\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}RED}\PYG{p}{;}          \PYG{c+cm}{/*Main color*/}
-\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex}\PYG{p}{(}\PYG{l+m+mh}{0xffd83c}\PYG{p}{)} \PYG{c+cm}{/*Gradient color (orange)*/}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style1}\PYG{p}{;}                 \PYG{c+cm}{/*Új stílus deklarálása. Ajánlott, hogy {}`static{}` legyen */}
+\PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style1}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}  \PYG{c+cm}{/*Egy beépített stílus másolása*/}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}RED}\PYG{p}{;}          \PYG{c+cm}{/*Fő szín*/}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex}\PYG{p}{(}\PYG{l+m+mh}{0xffd83c}\PYG{p}{)} \PYG{c+cm}{/*Gradiens szín (narancssárga)*/}
 \PYG{n}{style1}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{radius} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{p}{;}
-\PYG{n}{style1}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x0F0}\PYG{p}{)}        \PYG{c+cm}{/*Label color (green)*/}
-\PYG{n}{style1}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{font} \PYG{o}{=} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}font\PYGZus{}dejavu\PYGZus{}22}\PYG{p}{;}          \PYG{c+cm}{/*Change font*/}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x0F0}\PYG{p}{)}        \PYG{c+cm}{/*Felirat szín color (zöld)*/}
+\PYG{n}{style1}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{font} \PYG{o}{=} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}font\PYGZus{}dejavu\PYGZus{}22}\PYG{p}{;}          \PYG{c+cm}{/*Font megváltoztatása*/}
 \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
 \end{sphinxVerbatim}
 
-To set a new style for an object use the \sphinxcode{\sphinxupquote{lv\_\textless{}type\textgreater{}set\_style(obj, LV\_\textless{}TYPE\textgreater{}\_STYLE\_\textless{}NAME\textgreater{}, \&my\_style)}} functions. For example:
+Az objektumoknak új stílus a \sphinxcode{\sphinxupquote{lv\_\textless{}típus\textgreater{}set\_style(obj, LV\_\textless{}TÍPUS\textgreater{}\_STYLE\_\textless{}NÉV\textgreater{}, \&my\_style)}}  függvényekkel lehetséges. Például:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}BG}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}bg\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
@@ -711,51 +710,51 @@ To set a new style for an object use the \sphinxcode{\sphinxupquote{lv\_\textles
 \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}KNOB}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}knob\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-If an object’s style is \sphinxcode{\sphinxupquote{NULL}} then it will inherit its parent’s style. For example, the labels’ style are \sphinxcode{\sphinxupquote{NULL}} by default. If you place them on a button then they will use the \sphinxcode{\sphinxupquote{style.text}} properties from the button’s style.
+Ha egy objektum stílusa \sphinxcode{\sphinxupquote{NULL}} akkor az a szülő stílusát örökli. Például a feliratok (label) stílusa alapértelmezetten \sphinxcode{\sphinxupquote{NULL}}.  Így ha egy felirat egy gombon van, akkor az a gomb \sphinxcode{\sphinxupquote{style.text}} tulajdonságait fogja használni.
 
-Learn more in {\hyperref[\detokenize{overview/style::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Style overview}}}} section.
+Több információs {\hyperref[\detokenize{overview/style::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Stílus áttekintés}}}} oldalon olvasható.
 
 
-\subparagraph{Events}
-\label{\detokenize{get-started/quick-overview:events}}
-Events are used to inform the user if something has happened with an object. You can assign a callback to an object which will be called if the object is clicked, released, dragged, being deleted etc. It should look like this:
+\subparagraph{Események}
+\label{\detokenize{get-started/quick-overview:esemenyek}}
+Az \sphinxstyleemphasis{események} informálják a felhasználót, ha valami történt egy objektummal. Minden objektumhoz rendelhető egy callback függvény, ami meghívódik, ha az objektumra kattintanak, felengedik, mozgatják, törlik, stb. Például:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{btn\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}                 \PYG{c+cm}{/*Assign a callback to the button*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{btn\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}                 \PYG{c+cm}{/*Callback hozzárendelése egy gombhoz*/}
 
 \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
 
 \PYG{k+kt}{void} \PYG{n}{btn\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
     \PYG{k}{if}\PYG{p}{(}\PYG{n}{event} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}CLICKED}\PYG{p}{)} \PYG{p}{\PYGZob{}}
-        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Clicked}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Klikk}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
     \PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-Learn more about the events in the {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Event overview}}}} section.
+Több információ az eseményekről az {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Események áttekintése}}}} oldalon olvasható.
 
 
-\paragraph{Examples}
-\label{\detokenize{get-started/quick-overview:examples}}
+\paragraph{Példák}
+\label{\detokenize{get-started/quick-overview:peldak}}
 
-\subparagraph{Button with label}
-\label{\detokenize{get-started/quick-overview:button-with-label}}
+\subparagraph{Gomb felirattal}
+\label{\detokenize{get-started/quick-overview:gomb-felirattal}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn} \PYG{o}{=} \PYG{n}{lv\PYGZus{}btn\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}     \PYG{c+cm}{/*Add a button the current screen*/}
-\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}                            \PYG{c+cm}{/*Set its position*/}
-\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{;}                          \PYG{c+cm}{/*Set its size*/}
-\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{btn\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}                 \PYG{c+cm}{/*Assign a callback to the button*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn} \PYG{o}{=} \PYG{n}{lv\PYGZus{}btn\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}     \PYG{c+cm}{/*Gomb létrehozása a jelenlegi képernyőre*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}                            \PYG{c+cm}{/*Pozíció beállítása*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{l+m+mi}{100}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{;}                          \PYG{c+cm}{/*Méret beállítása*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{btn\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}                 \PYG{c+cm}{/*Callback hozzárendelése egy gombhoz*/}
 
-\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}          \PYG{c+cm}{/*Add a label to the button*/}
-\PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Button}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}                     \PYG{c+cm}{/*Set the labels text*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}          \PYG{c+cm}{/*Felirat létrehozása a gombon*/}
+\PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Button}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}                     \PYG{c+cm}{/*Felirat szövegének beállítása*/}
 
 \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
 
 \PYG{k+kt}{void} \PYG{n}{btn\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
     \PYG{k}{if}\PYG{p}{(}\PYG{n}{event} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}CLICKED}\PYG{p}{)} \PYG{p}{\PYGZob{}}
-        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Clicked}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Klikk}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
     \PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
@@ -763,13 +762,13 @@ Learn more about the events in the {\hyperref[\detokenize{overview/event::doc}]{
 \sphinxincludegraphics{{simple_button_example}.png}
 
 
-\subparagraph{Button with styles}
-\label{\detokenize{get-started/quick-overview:button-with-styles}}
-Add styles to the previously button from the previous example
+\subparagraph{Gomb stílusok}
+\label{\detokenize{get-started/quick-overview:gomb-stilusok}}
+Stílusok hozzáadása az előző példában lévő gombhoz:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{;}                        \PYG{c+cm}{/*A variable to store the released style*/}
-\PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/*Initialize from a built\PYGZhy{}in style*/}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{;}                        \PYG{c+cm}{/*Egy változó a felengedett állapot stílusának*/}
+\PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/*Inicializálás egy beépített stílusból*/}
 \PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x269}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{width} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
 \PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0xADF}\PYG{p}{)}\PYG{p}{;}
@@ -779,35 +778,35 @@ Add styles to the previously button from the previous example
 \PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{radius} \PYG{o}{=} \PYG{n}{LV\PYGZus{}RADIUS\PYGZus{}CIRCLE}\PYG{p}{;}
 \PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0xDEF}\PYG{p}{)}\PYG{p}{;}
 
-\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{;}                         \PYG{c+cm}{/*A variable to store the pressed style*/}
-\PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{)}\PYG{p}{;}           \PYG{c+cm}{/*Initialize from the released style*/}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{;}                         \PYG{c+cm}{/*Egy változó a megnyomott állapot stílusának*/}
+\PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{)}\PYG{p}{;}           \PYG{c+cm}{/*Inicializálás a felengedett stílusból*/}
 \PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x46B}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x8BD}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0x24A}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{shadow}\PYG{p}{.}\PYG{n}{width} \PYG{o}{=} \PYG{l+m+mi}{2}\PYG{p}{;}
 \PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}hex3}\PYG{p}{(}\PYG{l+m+mh}{0xBCD}\PYG{p}{)}\PYG{p}{;}
 
-\PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{LV\PYGZus{}BTN\PYGZus{}STYLE\PYGZus{}REL}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{)}\PYG{p}{;}    \PYG{c+cm}{/*Set the button\PYGZsq{}s released style*/}
-\PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{LV\PYGZus{}BTN\PYGZus{}STYLE\PYGZus{}PR}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Set the button\PYGZsq{}s pressed style*/}
+\PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{LV\PYGZus{}BTN\PYGZus{}STYLE\PYGZus{}REL}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{)}\PYG{p}{;}    \PYG{c+cm}{/*A gomb felengedett stílusának beállítása*/}
+\PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{LV\PYGZus{}BTN\PYGZus{}STYLE\PYGZus{}PR}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}btn\PYGZus{}pr}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*A gomb lenyomott stílusának beállítása*/}
 \end{sphinxVerbatim}
 
 \sphinxincludegraphics{{button_style_example}.png}
 
 
-\subparagraph{Slider and object alignment}
-\label{\detokenize{get-started/quick-overview:slider-and-object-alignment}}
+\subparagraph{Csúszka és objektum igazítás}
+\label{\detokenize{get-started/quick-overview:csuszka-es-objektum-igazitas}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{label}\PYG{p}{;}
 
 \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
 
-\PYG{c+cm}{/* Create a slider in the center of the display */}
+\PYG{c+cm}{/* Csúszka létrehozása a képernyő közepére */}
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
-\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}width}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{l+m+mi}{200}\PYG{p}{)}\PYG{p}{;}                        \PYG{c+cm}{/*Set the width*/}
-\PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}    \PYG{c+cm}{/*Align to the center of the parent (screen)*/}
-\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n}{slider\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/*Assign an event function*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}width}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{l+m+mi}{200}\PYG{p}{)}\PYG{p}{;}                        \PYG{c+cm}{/*Szélesség beállítása*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}    \PYG{c+cm}{/*A szülő (képernyő) közepére igazatás*/}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n}{slider\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/*Event callback hozzárendelése*/}
 
-\PYG{c+cm}{/* Create a label below the slider */}
+\PYG{c+cm}{/* Felirat létrehozása a csúszka alá */}
 \PYG{n}{label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{0}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}auto\PYGZus{}realign}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
@@ -818,9 +817,9 @@ Add styles to the previously button from the previous example
 \PYG{k+kt}{void} \PYG{n}{slider\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{slider}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
     \PYG{k}{if}\PYG{p}{(}\PYG{n}{event} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}VALUE\PYGZus{}CHANGED}\PYG{p}{)} \PYG{p}{\PYGZob{}}
-        \PYG{k}{static} \PYG{k+kt}{char} \PYG{n}{buf}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{;}                                 \PYG{c+cm}{/* max 3 bytes  for number plus 1 null terminating byte */}
+        \PYG{k}{static} \PYG{k+kt}{char} \PYG{n}{buf}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{;}                                 \PYG{c+cm}{/* max 3 bájt számoknak, +1 a záró nulla */}
         \PYG{n}{snprintf}\PYG{p}{(}\PYG{n}{buf}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZpc{}u}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{lv\PYGZus{}slider\PYGZus{}get\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
-        \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{slider\PYGZus{}label}\PYG{p}{,} \PYG{n}{buf}\PYG{p}{)}\PYG{p}{;}               \PYG{c+cm}{/*Refresh the text*/}
+        \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{slider\PYGZus{}label}\PYG{p}{,} \PYG{n}{buf}\PYG{p}{)}\PYG{p}{;}               \PYG{c+cm}{/*Szöveg frissítése*/}
     \PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
@@ -828,17 +827,17 @@ Add styles to the previously button from the previous example
 \sphinxincludegraphics{{slider_example}.png}
 
 
-\subparagraph{List and themes}
-\label{\detokenize{get-started/quick-overview:list-and-themes}}
+\subparagraph{Lista és témák}
+\label{\detokenize{get-started/quick-overview:lista-es-temak}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+cm}{/*Texts of the list elements*/}
+\PYG{c+cm}{/*A lista elemek feliratai*/}
 \PYG{k}{const} \PYG{k+kt}{char} \PYG{o}{*} \PYG{n}{txts}\PYG{p}{[}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{First}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Second}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Third}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Forth}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Fifth}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Sixth}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{\PYGZcb{}}\PYG{p}{;}
 
-\PYG{c+cm}{/* Initialize and set a theme. {}`LV\PYGZus{}THEME\PYGZus{}NIGHT{}` needs to enabled in lv\PYGZus{}conf.h. */}
+\PYG{c+cm}{/* Egy téma inicializálása és beállítása. {}`LV\PYGZus{}THEME\PYGZus{}NIGHT{}` engedélyezve kell legyen az lv\PYGZus{}conf.h\PYGZhy{}ben */}
 \PYG{n}{lv\PYGZus{}theme\PYGZus{}t} \PYG{o}{*} \PYG{n}{th} \PYG{o}{=} \PYG{n}{lv\PYGZus{}theme\PYGZus{}night\PYGZus{}init}\PYG{p}{(}\PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}theme\PYGZus{}set\PYGZus{}current}\PYG{p}{(}\PYG{n}{th}\PYG{p}{)}\PYG{p}{;}
 
-\PYG{c+cm}{/*Create a list*/}
+\PYG{c+cm}{/*Egy lista létrehozása*/}
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}t}\PYG{o}{*} \PYG{n}{list} \PYG{o}{=} \PYG{n}{lv\PYGZus{}list\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{l+m+mi}{120}\PYG{p}{,} \PYG{l+m+mi}{180}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}
@@ -851,17 +850,17 @@ Add styles to the previously button from the previous example
     \PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}toggle}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}               \PYG{c+cm}{/* Ki/be állalpotok engedélyezése*/}
 \PYG{p}{\PYGZcb{}}
 
-\PYG{c+cm}{/* Initialize and set an other theme. {}`LV\PYGZus{}THEME\PYGZus{}MATERIAL{}` needs to enabled in lv\PYGZus{}conf.h.}
-\PYG{c+cm}{ * If {}`LV\PYGZus{}TEHE\PYGZus{}LIVE\PYGZus{}UPDATE  1{}` then the previous list\PYGZsq{}s style will be updated too.*/}
+\PYG{c+cm}{/* Egy másik téme inicializálása és aélkalmazása. {}`LV\PYGZus{}THEME\PYGZus{}MATERIAL{}` engedélyezve kell legyen lv\PYGZus{}conf.h\PYGZhy{}ban.}
+\PYG{c+cm}{ * Ha {}`LV\PYGZus{}TEHE\PYGZus{}LIVE\PYGZus{}UPDATE  1{}` akkor az előző lista stílusa is frissülni fog.*/}
 \PYG{n}{th} \PYG{o}{=} \PYG{n}{lv\PYGZus{}theme\PYGZus{}material\PYGZus{}init}\PYG{p}{(}\PYG{l+m+mi}{210}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}theme\PYGZus{}set\PYGZus{}current}\PYG{p}{(}\PYG{n}{th}\PYG{p}{)}\PYG{p}{;}
 
-\PYG{c+cm}{/*Create an other list*/}
+\PYG{c+cm}{/*Egy másik lista létrehozása*/}
 \PYG{n}{list} \PYG{o}{=} \PYG{n}{lv\PYGZus{}list\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{l+m+mi}{120}\PYG{p}{,} \PYG{l+m+mi}{180}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{l+m+mi}{150}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}
 
-\PYG{c+cm}{/*Add buttons with the same texts*/}
+\PYG{c+cm}{/*Gombok hozzáadása ugyanazzal a szöveggel*/}
 \PYG{k}{for}\PYG{p}{(}\PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{txts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{;} \PYG{n}{i}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
     \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn} \PYG{o}{=} \PYG{n}{lv\PYGZus{}list\PYGZus{}add\PYGZus{}btn}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SYMBOL\PYGZus{}FILE}\PYG{p}{,} \PYG{n}{txts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}\PYG{p}{;}
     \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{list\PYGZus{}event}\PYG{p}{)}\PYG{p}{;}
@@ -882,12 +881,12 @@ Add styles to the previously button from the previous example
 \sphinxincludegraphics{{list_theme_example}.png}
 
 
-\subparagraph{Use LittlevGL from Micropython}
-\label{\detokenize{get-started/quick-overview:use-littlevgl-from-micropython}}
-Learn more about {\hyperref[\detokenize{get-started/micropython::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Micropython}}}}.
+\subparagraph{LittlevGL használata Micropythonnal}
+\label{\detokenize{get-started/quick-overview:littlevgl-hasznalata-micropythonnal}}
+Több információ a  {\hyperref[\detokenize{get-started/micropython::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Micropython}}}} fejezetben olvasható.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{} Create a Button and a Label}
+\PYG{c+c1}{\PYGZsh{} Egy gomb és egy felirat létrehozása}
 \PYG{n}{scr} \PYG{o}{=} \PYG{n}{lv}\PYG{o}{.}\PYG{n}{obj}\PYG{p}{(}\PYG{p}{)}
 \PYG{n}{btn} \PYG{o}{=} \PYG{n}{lv}\PYG{o}{.}\PYG{n}{btn}\PYG{p}{(}\PYG{n}{scr}\PYG{p}{)}
 \PYG{n}{btn}\PYG{o}{.}\PYG{n}{align}\PYG{p}{(}\PYG{n}{lv}\PYG{o}{.}\PYG{n}{scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{lv}\PYG{o}{.}\PYG{n}{ALIGN}\PYG{o}{.}\PYG{n}{CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
@@ -901,32 +900,32 @@ Learn more about {\hyperref[\detokenize{get-started/micropython::doc}]{\sphinxcr
 
 \paragraph{Közreműködés}
 \label{\detokenize{get-started/quick-overview:kozremukodes}}
-To ask questions please use the \sphinxhref{https://forum.littlevgl.com}{Forum}.
-For development-related things (bug reports, feature suggestions) use \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub’s Issue tracker}.
+Használd a \sphinxhref{https://forum.littlevgl.com}{Fórum}-ot, hogy kérdezz a közösség többi tagjától!
+Fejlesztéshez kapcsolódó témákban (hibajelentés, funkció kérés, stb) használd a \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub Issue}-kat!
 
-If you are interested in contributing to LittlevGL you can
+Ha szeretnéd, számos módon segítheted a LittlevGL fejlesztését:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{Help others} in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
+\sphinxstylestrong{Segíts másoknak} a \sphinxhref{https://forum.littlevgl.com}{Fórum}-ban.
 
 \item {} 
-\sphinxstylestrong{Inspire people} by speaking about your project in \sphinxhref{https://forum.littlevgl.com/c/my-projects}{My project} category in the Forum or add it to the \sphinxhref{https://blog.littlevgl.com/2018-12-26/references}{References} post
+\sphinxstylestrong{Inspirálj másokat} azzal, hogy hogy megosztod milyen projektben használtad a LittlevGL-t. Ezt a Fórun \sphinxhref{https://forum.littlevgl.com/c/my-projects}{My project} kategóriájában vagy a \sphinxhref{https://blog.littlevgl.com/2018-12-26/references}{References} blog posztban teheted meg.
 
 \item {} 
-\sphinxstylestrong{Improve and/or translate the documentation.} Go to the \sphinxhref{https://github.com/littlevgl/docs}{Documentation} repository to learn more
+\sphinxstylestrong{Fejleszd és/vagy fordítsd le a dokumentációt.} A \sphinxhref{https://github.com/littlevgl/docs}{Documentation} repository-ban többet megtudhatsz erről.
 
 \item {} 
-\sphinxstylestrong{Write a blog post} about your experiences. See how to do it in the \sphinxhref{https://github.com/littlevgl/blog}{Blog} repository
+\sphinxstylestrong{Írj egy blog posztot} a tapasztalataidról. A \sphinxhref{https://github.com/littlevgl/blog}{Blog} repository-ban megtudhatod, hogyan.
 
 \item {} 
-\sphinxstylestrong{Report and/or fix bugs} in \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub’s issue tracker}
+\sphinxstylestrong{Jelents és/vagy javíts hibákat} a \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub’s issue tracker}-ében.
 
 \item {} 
-\sphinxstylestrong{Help in the developement}. Check the \sphinxhref{https://github.com/littlevgl/lvgl/issues}{Open issues} especially the ones with \sphinxhref{https://github.com/littlevgl/lvgl/issues?q=is\%3Aissue+is\%3Aopen+label\%3A\%22help+wanted\%22}{Help wanted} label and tell your ideas about a topic or implement a feature.
+\sphinxstylestrong{Segítsd a fejlesztést}. Nézd meg a  \sphinxhref{https://github.com/littlevgl/lvgl/issues}{Nyitott issue}-kat , különösön a \sphinxhref{https://github.com/littlevgl/lvgl/issues?q=is\%3Aissue+is\%3Aopen+label\%3A\%22help+wanted\%22}{Help wanted} címkével ellátottakat, és mond el az véleményedet a témáról vagy implementáld az adott funkciót.
 
 \end{itemize}
 
-It should be useful to read the
+Hasznos lehet elolvasni a
 
 
 \subsubsection{Micropython}
@@ -14342,7 +14341,7 @@ code
 \PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}ex\PYGZus{}arc\PYGZus{}1}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)} 
 \PYG{p}{\PYGZob{}}
   \PYG{c+cm}{/*Create style for the Arcs*/}
-  \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style}\PYG{p}{;}
+  \PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style}\PYG{p}{;}
   \PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}
   \PYG{n}{style}\PYG{p}{.}\PYG{n}{line}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}BLUE}\PYG{p}{;}           \PYG{c+cm}{/*Arc color*/}
   \PYG{n}{style}\PYG{p}{.}\PYG{n}{line}\PYG{p}{.}\PYG{n}{width} \PYG{o}{=} \PYG{l+m+mi}{8}\PYG{p}{;}                       \PYG{c+cm}{/*Arc width*/}
@@ -17781,10 +17780,12 @@ A Canvas is like an {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossr
 \subparagraph{Buffer}
 \label{\detokenize{object-types/canvas:buffer}}
 The Canvas needs a buffer which stores the drawn image.
-To assign a buffer to a Canvas use \sphinxcode{\sphinxupquote{lv\_canvas\_set\_buffer(canvas, buffer, width, height, LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA)}}.
+To assign a buffer to a Canvas use \sphinxcode{\sphinxupquote{lv\_canvas\_set\_buffer(canvas, buffer, width, height, LV\_IMG\_CF\_...)}}.
 \sphinxcode{\sphinxupquote{buffer}} is a static buffer (not just a local variable) to hold the image of the canvas.
 For example
 \sphinxcode{\sphinxupquote{static lv\_color\_t buffer{[}LV\_CANVAS\_BUF\_SIZE\_TRUE\_COLOR(width, height){]}}}. \sphinxcode{\sphinxupquote{LV\_CANVAS\_BUF\_SIZE\_...}} macros help to determine the size of the buffer with different color formats.
+
+The canvas supports all the built in color formats like \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TURE\_COLOR}} or \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_INDEXED\_2BIT}}. See the full list in the \sphinxhref{/overview/image.html\#color-formats}{Color formats} section.
 
 
 \subparagraph{Palette}
@@ -17822,6 +17823,8 @@ To draw something to the canvas use
 \sphinxcode{\sphinxupquote{lv\_canvas\_draw\_arc(canvas, x, y, radius, start\_angle, end\_angle, \&style)}}
 
 \end{itemize}
+
+The draw function can draw only to \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TURE\_COLOR}}, \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TRUE\_COLOR\_CHROMA\_KEYED}} and \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA}} buffers. \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA}} is working only with \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH 32}}.
 
 
 \subparagraph{Rotate}
@@ -22587,6 +22590,156 @@ code
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
+\noindent\sphinxincludegraphics{{lv_ex_img_2}.png}
+
+code
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * @file lv\PYGZus{}ex\PYGZus{}img\PYGZus{}2.c}
+\PYG{c+cm}{ *}
+\PYG{c+cm}{ */}
+
+\PYG{c+cm}{/*********************}
+\PYG{c+cm}{ *      INCLUDES}
+\PYG{c+cm}{ *********************/}
+
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZdq{}lvgl/lvgl.h\PYGZdq{}}
+
+\PYG{c+cm}{/*********************}
+\PYG{c+cm}{ *      DEFINES}
+\PYG{c+cm}{ *********************/}
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{define SLIDER\PYGZus{}WIDTH 40}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *      TYPEDEFS}
+\PYG{c+cm}{ **********************/}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *  STATIC PROTOTYPES}
+\PYG{c+cm}{ **********************/}
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{create\PYGZus{}sliders}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}\PYG{p}{;}
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{slider\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{slider}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *  STATIC VARIABLES}
+\PYG{c+cm}{ **********************/}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{red\PYGZus{}slider}\PYG{p}{,} \PYG{o}{*} \PYG{n}{green\PYGZus{}slider}\PYG{p}{,} \PYG{o}{*} \PYG{n}{blue\PYGZus{}slider}\PYG{p}{,} \PYG{o}{*} \PYG{n}{intense\PYGZus{}slider}\PYG{p}{;}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{img1}\PYG{p}{;}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{img\PYGZus{}style}\PYG{p}{;}
+\PYG{n}{LV\PYGZus{}IMG\PYGZus{}DECLARE}\PYG{p}{(}\PYG{n}{cogwheel}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *      MACROS}
+\PYG{c+cm}{ **********************/}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *   GLOBAL FUNCTIONS}
+\PYG{c+cm}{ **********************/}
+
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}ex\PYGZus{}img\PYGZus{}2}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{c+cm}{/*Create 4 sliders to adjust RGB color and re\PYGZhy{}color intensity*/}
+    \PYG{n}{create\PYGZus{}sliders}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Now create the actual image */}
+    \PYG{n}{img1} \PYG{o}{=} \PYG{n}{lv\PYGZus{}img\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}img\PYGZus{}set\PYGZus{}src}\PYG{p}{(}\PYG{n}{img1}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{cogwheel}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{img1}\PYG{p}{,} \PYG{n}{intense\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}OUT\PYGZus{}RIGHT\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Create a message box for information */}
+    \PYG{k}{static} \PYG{k}{const} \PYG{k+kt}{char} \PYG{o}{*} \PYG{n}{btns}\PYG{p}{[}\PYG{p}{]} \PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{OK}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZdq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{mbox} \PYG{o}{=} \PYG{n}{lv\PYGZus{}mbox\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}mbox\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{mbox}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Welcome to the image recoloring demo!}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{The first three sliders control the RGB value of the recoloring.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{The last slider controls the intensity.}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}mbox\PYGZus{}add\PYGZus{}btns}\PYG{p}{(}\PYG{n}{mbox}\PYG{p}{,} \PYG{n}{btns}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{mbox}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Save the image\PYGZsq{}s style so the sliders can modify it */}
+    \PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{img\PYGZus{}style}\PYG{p}{,} \PYG{n}{lv\PYGZus{}img\PYGZus{}get\PYGZus{}style}\PYG{p}{(}\PYG{n}{img1}\PYG{p}{,} \PYG{n}{LV\PYGZus{}IMG\PYGZus{}STYLE\PYGZus{}MAIN}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *   STATIC FUNCTIONS}
+\PYG{c+cm}{ **********************/}
+
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{slider\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{slider}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{event} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}VALUE\PYGZus{}CHANGED}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{c+cm}{/* Recolor the image based on the sliders\PYGZsq{} values */}
+        \PYG{n}{img\PYGZus{}style}\PYG{p}{.}\PYG{n}{image}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}make}\PYG{p}{(}\PYG{n}{lv\PYGZus{}slider\PYGZus{}get\PYGZus{}value}\PYG{p}{(}\PYG{n}{red\PYGZus{}slider}\PYG{p}{)}\PYG{p}{,} \PYG{n}{lv\PYGZus{}slider\PYGZus{}get\PYGZus{}value}\PYG{p}{(}\PYG{n}{green\PYGZus{}slider}\PYG{p}{)}\PYG{p}{,} \PYG{n}{lv\PYGZus{}slider\PYGZus{}get\PYGZus{}value}\PYG{p}{(}\PYG{n}{blue\PYGZus{}slider}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
+        \PYG{n}{img\PYGZus{}style}\PYG{p}{.}\PYG{n}{image}\PYG{p}{.}\PYG{n}{intense} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}get\PYGZus{}value}\PYG{p}{(}\PYG{n}{intense\PYGZus{}slider}\PYG{p}{)}\PYG{p}{;}
+        \PYG{n}{lv\PYGZus{}img\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{img1}\PYG{p}{,} \PYG{n}{LV\PYGZus{}IMG\PYGZus{}STYLE\PYGZus{}MAIN}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{img\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{create\PYGZus{}sliders}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{c+cm}{/* Create a set of RGB sliders */}
+    \PYG{c+cm}{/* Use the red one as a base for all the settings */}
+    \PYG{n}{red\PYGZus{}slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}range}\PYG{p}{(}\PYG{n}{red\PYGZus{}slider}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{255}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{red\PYGZus{}slider}\PYG{p}{,} \PYG{n}{SLIDER\PYGZus{}WIDTH}\PYG{p}{,} \PYG{l+m+mi}{200}\PYG{p}{)}\PYG{p}{;} \PYG{c+cm}{/* Be sure it\PYGZsq{}s a vertical slider */}
+
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{red\PYGZus{}slider}\PYG{p}{,} \PYG{n}{slider\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Create the intensity slider first, as it does not use any custom styles */}
+    \PYG{n}{intense\PYGZus{}slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{red\PYGZus{}slider}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}range}\PYG{p}{(}\PYG{n}{intense\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}TRANSP}\PYG{p}{,} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}COVER}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Create the slider knob and fill styles */}
+    \PYG{c+cm}{/* Fill styles are initialized with a gradient between black and the slider\PYGZsq{}s respective color. */}
+    \PYG{c+cm}{/* Knob styles are simply filled with the slider\PYGZsq{}s respective color. */}
+    \PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{slider\PYGZus{}red\PYGZus{}fill\PYGZus{}style}\PYG{p}{,} \PYG{n}{slider\PYGZus{}red\PYGZus{}knob\PYGZus{}style}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}red\PYGZus{}fill\PYGZus{}style}\PYG{p}{,} \PYG{n}{lv\PYGZus{}slider\PYGZus{}get\PYGZus{}style}\PYG{p}{(}\PYG{n}{red\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}INDIC}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}red\PYGZus{}knob\PYGZus{}style}\PYG{p}{,} \PYG{n}{lv\PYGZus{}slider\PYGZus{}get\PYGZus{}style}\PYG{p}{(}\PYG{n}{red\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}KNOB}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{slider\PYGZus{}red\PYGZus{}fill\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}make}\PYG{p}{(}\PYG{l+m+mi}{255}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{slider\PYGZus{}red\PYGZus{}fill\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}BLACK}\PYG{p}{;}
+
+    \PYG{n}{slider\PYGZus{}red\PYGZus{}knob\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{slider\PYGZus{}red\PYGZus{}knob\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color} \PYG{o}{=} \PYG{n}{slider\PYGZus{}red\PYGZus{}fill\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color}\PYG{p}{;}
+
+    \PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{slider\PYGZus{}green\PYGZus{}fill\PYGZus{}style}\PYG{p}{,} \PYG{n}{slider\PYGZus{}green\PYGZus{}knob\PYGZus{}style}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}green\PYGZus{}fill\PYGZus{}style}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}red\PYGZus{}fill\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}green\PYGZus{}knob\PYGZus{}style}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}red\PYGZus{}knob\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{slider\PYGZus{}green\PYGZus{}fill\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}make}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{255}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{slider\PYGZus{}green\PYGZus{}knob\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{slider\PYGZus{}green\PYGZus{}knob\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color} \PYG{o}{=} \PYG{n}{slider\PYGZus{}green\PYGZus{}fill\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color}\PYG{p}{;}
+
+    \PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{slider\PYGZus{}blue\PYGZus{}fill\PYGZus{}style}\PYG{p}{,} \PYG{n}{slider\PYGZus{}blue\PYGZus{}knob\PYGZus{}style}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}blue\PYGZus{}fill\PYGZus{}style}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}red\PYGZus{}fill\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}blue\PYGZus{}knob\PYGZus{}style}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}red\PYGZus{}knob\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{slider\PYGZus{}blue\PYGZus{}fill\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}make}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{255}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{slider\PYGZus{}blue\PYGZus{}knob\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color} \PYG{o}{=} \PYG{n}{slider\PYGZus{}blue\PYGZus{}knob\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color} \PYG{o}{=} \PYG{n}{slider\PYGZus{}blue\PYGZus{}fill\PYGZus{}style}\PYG{p}{.}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Setup the red slider */}
+    \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{red\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}INDIC}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}red\PYGZus{}fill\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{red\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}KNOB}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}red\PYGZus{}knob\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Copy it for the other two sliders */}
+    \PYG{n}{green\PYGZus{}slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{red\PYGZus{}slider}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{green\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}INDIC}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}green\PYGZus{}fill\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{green\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}KNOB}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}green\PYGZus{}knob\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{blue\PYGZus{}slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{red\PYGZus{}slider}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{blue\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}INDIC}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}blue\PYGZus{}fill\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{blue\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}KNOB}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{slider\PYGZus{}blue\PYGZus{}knob\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{red\PYGZus{}slider}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}IN\PYGZus{}LEFT\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{green\PYGZus{}slider}\PYG{p}{,} \PYG{n}{red\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}OUT\PYGZus{}RIGHT\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{blue\PYGZus{}slider}\PYG{p}{,} \PYG{n}{green\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}OUT\PYGZus{}RIGHT\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{intense\PYGZus{}slider}\PYG{p}{,} \PYG{n}{blue\PYGZus{}slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}OUT\PYGZus{}RIGHT\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
 
 \subparagraph{MicroPython}
 \label{\detokenize{object-types/img:micropython}}
@@ -24295,6 +24448,10 @@ The label’s text can be aligned to the left, right or middle with \sphinxcode{
 \label{\detokenize{object-types/label:draw-background}}
 You can enable to draw a background for the label with \sphinxcode{\sphinxupquote{lv\_label\_set\_body\_draw(label, draw)}}
 
+The background will be larger in every direction with \sphinxcode{\sphinxupquote{body.padding.top/bottom/left/right}} values.
+However, the background is drawn only “virtually” and doesn’t make the label really larger.
+There for when the label is positioned the label’s coordinates will be taken into account and not background’s.
+
 
 \subparagraph{Text recolor}
 \label{\detokenize{object-types/label:text-recolor}}
@@ -24372,6 +24529,80 @@ code
     \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label2}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{It is a circularly scrolling text. }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
     \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{label2}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{30}\PYG{p}{)}\PYG{p}{;}
 \PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+\noindent\sphinxincludegraphics{{lv_ex_label_2}.png}
+
+code
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * @file lv\PYGZus{}ex\PYGZus{}templ.c}
+\PYG{c+cm}{ *}
+\PYG{c+cm}{ */}
+
+\PYG{c+cm}{/*********************}
+\PYG{c+cm}{ *      INCLUDES}
+\PYG{c+cm}{ *********************/}
+
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZdq{}lvgl/lvgl.h\PYGZdq{}}
+
+\PYG{c+cm}{/*********************}
+\PYG{c+cm}{ *      DEFINES}
+\PYG{c+cm}{ *********************/}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *      TYPEDEFS}
+\PYG{c+cm}{ **********************/}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *  STATIC PROTOTYPES}
+\PYG{c+cm}{ **********************/}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *  STATIC VARIABLES}
+\PYG{c+cm}{ **********************/}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *      MACROS}
+\PYG{c+cm}{ **********************/}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *   GLOBAL FUNCTIONS}
+\PYG{c+cm}{ **********************/}
+
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}ex\PYGZus{}label\PYGZus{}2}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{c+cm}{/* Create a style for the shadow*/}
+    \PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{label\PYGZus{}style}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{label\PYGZus{}style}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{label\PYGZus{}style}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{opa} \PYG{o}{=} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}50}\PYG{p}{;}
+
+    \PYG{c+cm}{/*Create a label for the shadow first (it\PYGZsq{}s in the background) */}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{shadow\PYGZus{}label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{shadow\PYGZus{}label}\PYG{p}{,} \PYG{n}{LV\PYGZus{}LABEL\PYGZus{}STYLE\PYGZus{}MAIN}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{label\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Create the main label */}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{main\PYGZus{}label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{main\PYGZus{}label}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{A simple method to create}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+                                  \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{shadows on text}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+                                  \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{It even works with}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+                                  \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{newlines     and spaces.}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+
+    
+    \PYG{c+cm}{/*Set the same text for the shadow label*/}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{shadow\PYGZus{}label}\PYG{p}{,} \PYG{n}{lv\PYGZus{}label\PYGZus{}get\PYGZus{}text}\PYG{p}{(}\PYG{n}{main\PYGZus{}label}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Position the main label */}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{main\PYGZus{}label}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+    
+    \PYG{c+cm}{/* Shift the second label down and to the right by 1 pixel */}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{shadow\PYGZus{}label}\PYG{p}{,} \PYG{n}{main\PYGZus{}label}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}IN\PYGZus{}TOP\PYGZus{}LEFT}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *   STATIC FUNCTIONS}
+\PYG{c+cm}{ **********************/}
 \end{sphinxVerbatim}
 
 
@@ -30850,7 +31081,7 @@ code
     \PYG{c+cm}{/* Create a label below the slider */}
     \PYG{n}{slider\PYGZus{}label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
     \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{slider\PYGZus{}label}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{0}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
-    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}align}\PYG{p}{(}\PYG{n}{slider\PYGZus{}label}\PYG{p}{,} \PYG{n}{LV\PYGZus{}LABEL\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}auto\PYGZus{}realign}\PYG{p}{(}\PYG{n}{slider\PYGZus{}label}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
     \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{slider\PYGZus{}label}\PYG{p}{,} \PYG{n}{slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}OUT\PYGZus{}BOTTOM\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}
     
     \PYG{c+cm}{/* Create an informative label */}
@@ -30871,7 +31102,6 @@ code
         \PYG{k}{static} \PYG{k+kt}{char} \PYG{n}{buf}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{;} \PYG{c+cm}{/* max 3 bytes for number plus 1 null terminating byte */}
         \PYG{n}{snprintf}\PYG{p}{(}\PYG{n}{buf}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZpc{}u}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{lv\PYGZus{}slider\PYGZus{}get\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
         \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{slider\PYGZus{}label}\PYG{p}{,} \PYG{n}{buf}\PYG{p}{)}\PYG{p}{;}
-        \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{slider\PYGZus{}label}\PYG{p}{,} \PYG{n}{slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}OUT\PYGZus{}BOTTOM\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}
     \PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
@@ -34247,6 +34477,114 @@ code
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
+\noindent\sphinxincludegraphics{{lv_ex_ta_2}.png}
+
+code
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * @file lv\PYGZus{}ex\PYGZus{}templ.c}
+\PYG{c+cm}{ *}
+\PYG{c+cm}{ */}
+
+\PYG{c+cm}{/*********************}
+\PYG{c+cm}{ *      INCLUDES}
+\PYG{c+cm}{ *********************/}
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZdq{}lvgl/lvgl.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZlt{}stdio.h\PYGZgt{}}
+
+\PYG{c+cm}{/*********************}
+\PYG{c+cm}{ *      DEFINES}
+\PYG{c+cm}{ *********************/}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *      TYPEDEFS}
+\PYG{c+cm}{ **********************/}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *  STATIC PROTOTYPES}
+\PYG{c+cm}{ **********************/}
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{kb\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{event\PYGZus{}kb}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}\PYG{p}{;}
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{ta\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{ta}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *  STATIC VARIABLES}
+\PYG{c+cm}{ **********************/}
+
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{kb}\PYG{p}{;}
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *      MACROS}
+\PYG{c+cm}{ **********************/}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *   GLOBAL FUNCTIONS}
+\PYG{c+cm}{ **********************/}
+
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}ex\PYGZus{}ta\PYGZus{}2}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{c+cm}{/* Create the password box */}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{pwd\PYGZus{}ta} \PYG{o}{=} \PYG{n}{lv\PYGZus{}ta\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}ta\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{pwd\PYGZus{}ta}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}ta\PYGZus{}set\PYGZus{}pwd\PYGZus{}mode}\PYG{p}{(}\PYG{n}{pwd\PYGZus{}ta}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}ta\PYGZus{}set\PYGZus{}one\PYGZus{}line}\PYG{p}{(}\PYG{n}{pwd\PYGZus{}ta}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}width}\PYG{p}{(}\PYG{n}{pwd\PYGZus{}ta}\PYG{p}{,} \PYG{n}{LV\PYGZus{}HOR\PYGZus{}RES} \PYG{o}{/} \PYG{l+m+mi}{2} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{20}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{pwd\PYGZus{}ta}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{pwd\PYGZus{}ta}\PYG{p}{,} \PYG{n}{ta\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}
+    
+    \PYG{c+cm}{/* Create a label and position it above the text box */}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{pwd\PYGZus{}label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{pwd\PYGZus{}label}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Password:}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{pwd\PYGZus{}label}\PYG{p}{,} \PYG{n}{pwd\PYGZus{}ta}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}OUT\PYGZus{}TOP\PYGZus{}LEFT}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+    
+    
+    \PYG{c+cm}{/* Create the one\PYGZhy{}line mode text area */}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{oneline\PYGZus{}ta} \PYG{o}{=} \PYG{n}{lv\PYGZus{}ta\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{pwd\PYGZus{}ta}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}ta\PYGZus{}set\PYGZus{}pwd\PYGZus{}mode}\PYG{p}{(}\PYG{n}{oneline\PYGZus{}ta}\PYG{p}{,} \PYG{n+nb}{false}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}ta\PYGZus{}set\PYGZus{}cursor\PYGZus{}type}\PYG{p}{(}\PYG{n}{oneline\PYGZus{}ta}\PYG{p}{,} \PYG{n}{LV\PYGZus{}CURSOR\PYGZus{}LINE} \PYG{o}{\textbar{}} \PYG{n}{LV\PYGZus{}CURSOR\PYGZus{}HIDDEN}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{oneline\PYGZus{}ta}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}IN\PYGZus{}TOP\PYGZus{}RIGHT}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{)}\PYG{p}{;}
+    
+    \PYG{c+cm}{/* Create a label and position it above the text box */}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{oneline\PYGZus{}label} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{oneline\PYGZus{}label}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Text:}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{oneline\PYGZus{}label}\PYG{p}{,} \PYG{n}{oneline\PYGZus{}ta}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}OUT\PYGZus{}TOP\PYGZus{}LEFT}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Create a keyboard and make it fill the width of the above text areas */}
+    \PYG{n}{kb} \PYG{o}{=} \PYG{n}{lv\PYGZus{}kb\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{kb}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{90}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{kb}\PYG{p}{,} \PYG{n}{kb\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;} \PYG{c+cm}{/* Setting a custom event handler stops the keyboard from closing automatically */}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{kb}\PYG{p}{,}  \PYG{n}{LV\PYGZus{}HOR\PYGZus{}RES} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{140}\PYG{p}{)}\PYG{p}{;}
+    
+    \PYG{n}{lv\PYGZus{}kb\PYGZus{}set\PYGZus{}ta}\PYG{p}{(}\PYG{n}{kb}\PYG{p}{,} \PYG{n}{pwd\PYGZus{}ta}\PYG{p}{)}\PYG{p}{;} \PYG{c+cm}{/* Focus it on one of the text areas to start */}
+    \PYG{n}{lv\PYGZus{}kb\PYGZus{}set\PYGZus{}cursor\PYGZus{}manage}\PYG{p}{(}\PYG{n}{kb}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;} \PYG{c+cm}{/* Automatically show/hide cursors on text areas */}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/**********************}
+\PYG{c+cm}{ *   STATIC FUNCTIONS}
+\PYG{c+cm}{ **********************/}
+
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{kb\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{event\PYGZus{}kb}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{c+cm}{/* Just call the regular event handler */}
+    \PYG{n}{lv\PYGZus{}kb\PYGZus{}def\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{event\PYGZus{}kb}\PYG{p}{,} \PYG{n}{event}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{ta\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{ta}\PYG{p}{,} \PYG{n}{lv\PYGZus{}event\PYGZus{}t} \PYG{n}{event}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{event} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}CLICKED}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{c+cm}{/* Focus on the clicked text area */}
+        \PYG{k}{if}\PYG{p}{(}\PYG{n}{kb} \PYG{o}{!}\PYG{o}{=} \PYG{n+nb}{NULL}\PYG{p}{)}
+            \PYG{n}{lv\PYGZus{}kb\PYGZus{}set\PYGZus{}ta}\PYG{p}{(}\PYG{n}{kb}\PYG{p}{,} \PYG{n}{ta}\PYG{p}{)}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n}{event} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}INSERT}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{k}{const} \PYG{k+kt}{char} \PYG{o}{*} \PYG{n}{str} \PYG{o}{=} \PYG{n}{lv\PYGZus{}event\PYGZus{}get\PYGZus{}data}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+        \PYG{k}{if}\PYG{p}{(}\PYG{n}{str}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=}\PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}}\PYG{l+s+sc}{\PYGZbs{}n}\PYG{l+s+sc}{\PYGZsq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Ready}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
 
 \subparagraph{MicroPython}
 \label{\detokenize{object-types/ta:micropython}}
@@ -35800,6 +36138,15 @@ code
     \PYG{n}{lv\PYGZus{}tileview\PYGZus{}add\PYGZus{}element}\PYG{p}{(}\PYG{n}{tileview}\PYG{p}{,} \PYG{n}{list\PYGZus{}btn}\PYG{p}{)}\PYG{p}{;}
 
     \PYG{n}{list\PYGZus{}btn} \PYG{o}{=} \PYG{n}{lv\PYGZus{}list\PYGZus{}add\PYGZus{}btn}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Five}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}tileview\PYGZus{}add\PYGZus{}element}\PYG{p}{(}\PYG{n}{tileview}\PYG{p}{,} \PYG{n}{list\PYGZus{}btn}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{list\PYGZus{}btn} \PYG{o}{=} \PYG{n}{lv\PYGZus{}list\PYGZus{}add\PYGZus{}btn}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Six}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}tileview\PYGZus{}add\PYGZus{}element}\PYG{p}{(}\PYG{n}{tileview}\PYG{p}{,} \PYG{n}{list\PYGZus{}btn}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{list\PYGZus{}btn} \PYG{o}{=} \PYG{n}{lv\PYGZus{}list\PYGZus{}add\PYGZus{}btn}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Seven}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}tileview\PYGZus{}add\PYGZus{}element}\PYG{p}{(}\PYG{n}{tileview}\PYG{p}{,} \PYG{n}{list\PYGZus{}btn}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{list\PYGZus{}btn} \PYG{o}{=} \PYG{n}{lv\PYGZus{}list\PYGZus{}add\PYGZus{}btn}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Eight}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
     \PYG{n}{lv\PYGZus{}tileview\PYGZus{}add\PYGZus{}element}\PYG{p}{(}\PYG{n}{tileview}\PYG{p}{,} \PYG{n}{list\PYGZus{}btn}\PYG{p}{)}\PYG{p}{;}
 
     \PYG{c+cm}{/*Tile3: a button*/}
