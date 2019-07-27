@@ -1248,6 +1248,8 @@ To prevent one or more that kind of actions you can protect the object against t
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="base-obejcts-with-custom-styles">
+<h4>Base obejcts with custom styles<a class="headerlink" href="#base-obejcts-with-custom-styles" title="Permalink to this headline">¶</a></h4>
 <img alt="Simeple Base object example in LittlevGL" src="../_images/lv_ex_obj_1.png" />
 <div class="toggle docutils container">
 <div class="header docutils container">
@@ -1281,6 +1283,7 @@ To prevent one or more that kind of actions you can protect the object against t
     <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">obj3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1829,6 +1832,20 @@ To prevent one or more that kind of actions you can protect the object against t
 </dd></dl>
 
 <dl class="function">
+<dt id="_CPPv416lv_obj_del_asyncP9_lv_obj_t">
+<span id="_CPPv316lv_obj_del_asyncP9_lv_obj_t"></span><span id="_CPPv216lv_obj_del_asyncP9_lv_obj_t"></span><span id="lv_obj_del_async___lv_obj_tP"></span><span class="target" id="lv__obj_8h_1a0080923cccf80af7b1756b0e418db547"></span>void <code class="sig-name descname">lv_obj_del_async</code><span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_obj_del_asyncP9_lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Helper function for asynchronously deleting objects. Useful for cases where you can’t delete an object directly in an <code class="docutils literal notranslate"><span class="pre">LV_EVENT_DELETE</span></code> handler (i.e. parent). <dl class="simple">
+<dt><strong>See</strong></dt><dd><p>lv_async_call </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">obj</span></code>: object to delete </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="_CPPv412lv_obj_cleanP8lv_obj_t">
 <span id="_CPPv312lv_obj_cleanP8lv_obj_t"></span><span id="_CPPv212lv_obj_cleanP8lv_obj_t"></span><span id="lv_obj_clean__lv_obj_tP"></span><span class="target" id="lv__obj_8h_1ab9e1d84b921e63d1da83fe711b214aea"></span>void <code class="sig-name descname">lv_obj_clean</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412lv_obj_cleanP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Delete all children of an object <dl class="simple">
@@ -2199,7 +2216,7 @@ To prevent one or more that kind of actions you can protect the object against t
 <dl class="function">
 <dt id="_CPPv420lv_obj_set_opa_scaleP8lv_obj_t8lv_opa_t">
 <span id="_CPPv320lv_obj_set_opa_scaleP8lv_obj_t8lv_opa_t"></span><span id="_CPPv220lv_obj_set_opa_scaleP8lv_obj_t8lv_opa_t"></span><span id="lv_obj_set_opa_scale__lv_obj_tP.lv_opa_t"></span><span class="target" id="lv__obj_8h_1af6b6cba5ad8a35cb580a012913d8bd0b"></span>void <code class="sig-name descname">lv_obj_set_opa_scale</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>obj</em>, <a class="reference internal" href="../overview/display.html#_CPPv48lv_opa_t" title="lv_opa_t">lv_opa_t</a> <em>opa_scale</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_obj_set_opa_scaleP8lv_obj_t8lv_opa_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set the opa scale of an object <dl class="simple">
+<dd><p>Set the opa scale of an object. The opacity of this object and all it’s children will be scaled down with this factor. <code class="docutils literal notranslate"><span class="pre">lv_obj_set_opa_scale_enable(obj,</span> <span class="pre">true)</span></code> needs to be called to enable it. (not for all children just for the parent where to start the opa scaling) <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">obj</span></code>: pointer to an object </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">opa_scale</span></code>: a factor to scale down opacity [0..255] </p></li>
@@ -3221,7 +3238,7 @@ To prevent one or more that kind of actions you can protect the object against t
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 26, 2019.
+        Last updated on Jul 27, 2019.
       </span>
 
     </p>

@@ -49,5 +49,5 @@ Nesne türü tarafından işlenilen *Keys* yok.
 
 .. doxygenfile:: lv_arc.h
   :project: lvgl
-        .
+        
 ```
