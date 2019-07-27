@@ -1155,8 +1155,8 @@ To assign a buffer to a Canvas use <code class="docutils literal notranslate"><s
 <h2>Örnek<a class="headerlink" href="#ornek" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="drawing-on-the-calvas-and-rotate">
-<h4>Drawing on the calvas and rotate<a class="headerlink" href="#drawing-on-the-calvas-and-rotate" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="drawing-on-the-canvas-and-rotate">
+<h4>Drawing on the Canvas and rotate<a class="headerlink" href="#drawing-on-the-canvas-and-rotate" title="Permalink to this headline">¶</a></h4>
 <img alt="Simple Canvas example in LittlevGL" src="../_images/lv_ex_canvas_1.gif" />
 <div class="toggle docutils container">
 <div class="header docutils container">
@@ -1210,8 +1210,8 @@ To assign a buffer to a Canvas use <code class="docutils literal notranslate"><s
 </div>
 </div>
 </div>
-<div class="section" id="transparent-canvas-with-chrome-keying">
-<h4>Transparent canvas with chrome keying<a class="headerlink" href="#transparent-canvas-with-chrome-keying" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="transparent-canvas-with-chroma-keying">
+<h4>Transparent Canvas with chroma keying<a class="headerlink" href="#transparent-canvas-with-chroma-keying" title="Permalink to this headline">¶</a></h4>
 <img alt="Handle transparency on a canvas with indexed color format" src="../_images/lv_ex_canvas_2.png" />
 <div class="toggle docutils container">
 <div class="header docutils container">
@@ -1231,36 +1231,31 @@ To assign a buffer to a Canvas use <code class="docutils literal notranslate"><s
     <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
 
     <span class="cm">/*Create a buffer for the canvas*/</span>
-    <span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">cbuf</span><span class="p">[</span><span class="n">LV_CANVAS_BUF_SIZE_INDEXED_2BIT</span><span class="p">(</span><span class="n">CANVAS_WIDTH</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span><span class="p">)];</span>
+    <span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">cbuf</span><span class="p">[</span><span class="n">LV_CANVAS_BUF_SIZE_INDEXED_1BIT</span><span class="p">(</span><span class="n">CANVAS_WIDTH</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span><span class="p">)];</span>
 
     <span class="cm">/*Create a canvas and initialize its the palette*/</span>
     <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">canvas</span> <span class="o">=</span> <span class="n">lv_canvas_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="n">lv_canvas_set_buffer</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">cbuf</span><span class="p">,</span> <span class="n">CANVAS_WIDTH</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span><span class="p">,</span> <span class="n">LV_IMG_CF_INDEXED_2BIT</span><span class="p">);</span>
+    <span class="n">lv_canvas_set_buffer</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">cbuf</span><span class="p">,</span> <span class="n">CANVAS_WIDTH</span><span class="p">,</span> <span class="n">CANVAS_HEIGHT</span><span class="p">,</span> <span class="n">LV_IMG_CF_INDEXED_1BIT</span><span class="p">);</span>
     <span class="n">lv_canvas_set_palette</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">LV_COLOR_TRANSP</span><span class="p">);</span>
     <span class="n">lv_canvas_set_palette</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">LV_COLOR_RED</span><span class="p">);</span>
-    <span class="n">lv_canvas_set_palette</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">LV_COLOR_GREEN</span><span class="p">);</span>
-    <span class="n">lv_canvas_set_palette</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">LV_COLOR_BLUE</span><span class="p">);</span>
 
     <span class="cm">/*Create colors with the indices of the palette*/</span>
     <span class="n">lv_color_t</span> <span class="n">c0</span><span class="p">;</span>
     <span class="n">lv_color_t</span> <span class="n">c1</span><span class="p">;</span>
-    <span class="n">lv_color_t</span> <span class="n">c2</span><span class="p">;</span>
-    <span class="n">lv_color_t</span> <span class="n">c3</span><span class="p">;</span>
 
     <span class="n">c0</span><span class="p">.</span><span class="n">full</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="n">c1</span><span class="p">.</span><span class="n">full</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">c2</span><span class="p">.</span><span class="n">full</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="n">c3</span><span class="p">.</span><span class="n">full</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 
     <span class="cm">/*Transparent background*/</span>
-    <span class="n">lv_canvas_fill_bg</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">c0</span><span class="p">);</span>
+    <span class="n">lv_canvas_fill_bg</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">c1</span><span class="p">);</span>
 
-    <span class="cm">/*Draw three lines with the colors*/</span>
-    <span class="kt">uint32_t</span> <span class="n">i</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">lv_canvas_set_px</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">5</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">c1</span><span class="p">);</span>
-        <span class="n">lv_canvas_set_px</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">c2</span><span class="p">);</span>
-        <span class="n">lv_canvas_set_px</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">15</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">c3</span><span class="p">);</span>
+    <span class="cm">/*Create hole on the canvas*/</span>
+    <span class="kt">uint32_t</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">uint32_t</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">lv_canvas_set_px</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c0</span><span class="p">);</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 
 <span class="p">}</span>
