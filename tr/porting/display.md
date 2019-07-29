@@ -51,9 +51,12 @@ There are some optional data fields:
 - **anti-aliasing** use anti-aliasing (edge smoothing). `LV_ANTIALIAS` by default  from *lv_conf.h*
 - **rotated** if `1` swap `hor_res` and `ver_res`. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction.
 - **screen_transp** if `1` the screen can have transparent or opaque style. `LV_COLOR_SCREEN_TRANSP` needs to enabled in *lv_conf.h*
+
 To use a GPU the following callbacks can be used:
-- **gpu_fill_cb** fill an area with colors. 
-- **gpu_blend_cb** blend two buffers using opacity.
+- **gpu_fill_cb** fill an area in memory with colors. 
+- **gpu_blend_cb** blend two memory buffers using opacity.
+
+Note that, these functions need to draw to the memory (RAM) and not your display directly. 
  
 Some other optional callbacks to make easier and more optimal to work with monochrome, gray-scale or other non-standard RGB displays: 
 - **rounder_cb** round the coordinates of areas to redraw. E.g. a 2x2 px can be converted to 2x8. 
@@ -97,9 +100,14 @@ void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * 
 void my_gpu_fill_cb(lv_disp_drv_t * disp_drv, lv_color_t * dest_buf, const lv_area_t * dest_area, const lv_area_t * fill_area, lv_color_t color);
 {
     /*It's an example code which should be done by your GPU*/
-    uint32_t x,y;
-    for(y = 0; i < length; i++) {
-        dest[i] = color;
+    uint32_t x, y;
+    dest_buf += dest_width * fill_area->y1; /*Go to the first line*/
+
+    for(y = fill_area->y1; y < fill_area->y2; y++) {
+        for(x = fill_area->x1; x < fill_area->x2; x++) {
+            dest_buf[x] = color;
+        }
+        dest_buf+=dest_width;    /*Go to the next line*/
     }
 }
 

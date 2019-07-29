@@ -3,18 +3,18 @@
 ```
 # Bar (lv_bar)
 
-## Overview
+## Giriş
 
-The Bar objects have got two main parts: 
-1. a **background** which is the object itself 
-2. an **indicator** which shape is similar to the background but its width/height can be adjusted. 
+Bar nesnesi iki ana parçaya sahiptir: 
+1. Nesnenin kendi **arka planı**
+2. Şekli arka planla aynı olan fakat genişliği/yüksekliği ayarlanabilen bir **gösterge** . 
 
-The orientation of the bar can be vertical or horizontal according to the width/height ratio. Logically on horizontal bars, the indicator's width, on vertical bars the indicator's height can be changed. 
+Barın yönü genişlik/yüksek oranına göre dikey veya yatay olarak ayarlanabilir. Mantıken yatay barlarda göstergenin genişliği, dikey barlarda göstergenin yüksekliği değiştirilebilir.
 
-### Value and range
-A new value can be set by `lv_bar_set_value(bar, new_value, LV_ANIM_ON/OFF)`. 
+### Değer ve aralık
+Yeni değer `lv_bar_set_value(bar, new_value, LV_ANIM_ON/OFF)`vasıtasıyla ayarlanabilir. 
 The value is interpreted in a range (minimum and maximum values) which can be modified with `lv_bar_set_range(bar, min, max)`. 
-The default range is 1..100.
+Varsayılan aralık 1..100.
 
 The new value in `lv_bar_set_value` can be set with our without an animation depending on the last parameter (`LV_ANIM_ON/OFF`). 
 The time of the animation can be adjusted by `lv_bar_set_anim_time(bar, 100)`. The time is in milliseconds unit. 

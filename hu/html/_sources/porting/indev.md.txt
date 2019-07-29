@@ -1,36 +1,36 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/hu/porting/indev.md
 ```
-# Input device interface
+# Bemeneti eszköz interfész
 
-## Types of input devices
+## A bementi eszközök típusai
 
-To set up an input device an `lv_indev_drv_t` variable has to be initialized:
+Egy bementi eszköz létrehozásához egy `lv_indev_drv_t` változót kell inicializálni:
 
 ```c
 lv_indev_drv_t indev_drv;
-lv_indev_drv_init(&indev_drv);      /*Basic initialization*/
-indev_drv.type =...                 /*See below.*/
-indev_drv.read_cb =...              /*See below.*/
-/*Register the driver in LittlevGL and save the created input device object*/
+lv_indev_drv_init(&indev_drv);      /*Alap inicializálás*/
+indev_drv.type =...                 /*Lásd lent.*/
+indev_drv.read_cb =...              /*Lásd lent.*/
+/*A driver regisztrálása a LittlevGL-ben és a létrehozott bemeneti eszköz elmentése*/
 lv_indev_t * my_indev = lv_indev_drv_register(&indev_drv);
 ```
 
-**type** can be 
-- **LV_INDEV_TYPE_POINTER** touchpad or mouse
-- **LV_INDEV_TYPE_KEYPAD** keyboard or keypad
-- **LV_INDEV_TYPE_ENCODER** encoder with left, right, push options
-- **LV_INDEV_TYPE_BUTTON** external buttons pressing the screen
+**type** mező lehet: 
+- **LV_INDEV_TYPE_POINTER** touchpad és egér
+- **LV_INDEV_TYPE_KEYPAD** billentyűzet or keypad
+- **LV_INDEV_TYPE_ENCODER** enkóder bal, jobb és gomb nyomás funkciókkal
+- **LV_INDEV_TYPE_BUTTON** küldő gomb ami képernyőt nyomja
   
-**read_cb** is a function pointer which will be called periodically to report the current state of an input device. 
-It can also buffer data and return `false` when no more data to be read or `true` when the buffer is not empty.
+**read_cb** egy függvény, ami periodikusan meghívódik, hogy jelentse a bemeneti eszköz állapotát.
+A függvény bufferel-het adatokat és `false`-sal térhet vissza, ha nincs több, `true`-val, ha még van adat a bufferben.
 
 
-Visit [Input devices](/overview/indev) to learn more about input devices in general.
+Több információ a [Bementi eszközök](/overview/indev) áttekintése fejezetben olvasható.
 
 
-###  Touchpad, mouse or any pointer
-Input devices which are able to click points of the screen belong to this category. 
+###  Touchpad, egér vagy más mutató eszköz
+Azok a bemeneti eszközök tartoznak ebbe a kategóriába, melyek képesek egy pontra kattintani a képernyőn  .
 
 ```c
 indev_drv.type = LV_INDEV_TYPE_POINTER;
@@ -47,21 +47,21 @@ bool my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data)
 }
 ```
 
-``` important::  Touchpad drivers must return the last X/Y coordinates even when the state is *LV_INDEV_STATE_REL*.
+``` important::  A touchpad driver-eknek az utolsó megnyomott  X/Y koordinátával kell visszatérni  *LV_INDEV_STATE_REL* állapotban.
 ```
 
-To set a mouse cursor use `lv_indev_set_cursor(my_indev, &img_cursor)`. (`my_indev` is the return value of `lv_indev_drv_register`) 
+Egér kurzor megjelenítéséhez a `lv_indev_set_cursor(my_indev, &img_cursor)` függvény használható. (`my_indev` `lv_indev_drv_register` visszatérési értéke) 
 
-### Keypad or keyboard 
+### Billentyűzet vagy keypad
 
-Full keyboards with all the letters or simple keypads with a few navigation buttons belong here.
+Teljes értékű billentyűzetek minden karakterrel vagy egyszerű keypad-ok néhány navigációs gombbal tartoznak ide.
 
-To use a keyboard/keypad:
-- Register a `read_cb` function with `LV_INDEV_TYPE_KEYPAD` type.
-- Enable `LV_USE_GROUP` in *lv_conf.h*
-- An object group has to be created: `lv_group_t * g = lv_group_create()`  and objects have to be added to it with `lv_group_add_obj(g, obj)`
-- The created group has to be assigned to an input device: `lv_indev_set_group(my_indev, g)` (`my_indev` is the return value of `lv_indev_drv_register`)
-- Use `LV_KEY_...` to navigate among the objects in the group. See `lv_core/lv_group.h` for the available keys.
+A billentyűzet/keypad használatához:
+- `read_cb` regisztrálása `LV_INDEV_TYPE_KEYPAD` típussal.
+- `LV_USE_GROUP` engedélyezése *lv_conf.h*-ban
+- Egy objektum *group* (csoport) létrehozása: `lv_group_t * g = lv_group_create()`  és objektumok a csoporthoz adása a  `lv_group_add_obj(g, obj)` függvénnyel.
+- A létrehozott *group* bemeneti eszközhöz rendelése: `lv_indev_set_group(my_indev, g)` (`my_indev` `lv_indev_drv_register` visszatérési értéke)
+- Néhány gombok `LV_KEY_...` értékre konvertálása az objektumok közötti navigációhoz. A vezérlő gombok teljes listája `lv_core/lv_group.h`-ban látható.
 
 ```c
 indev_drv.type = LV_INDEV_TYPE_KEYPAD;
@@ -70,12 +70,12 @@ indev_drv.read_cb = my_input_read;
 ...
 
 bool keyboard_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
-  data->key = last_key();            /*Get the last pressed or released key*/
+  data->key = last_key();            /*Az utolsó lenyomott vagy felengedett gomb lekérdezése*/
   
   if(key_pressed()) data->state = LV_INDEV_STATE_PR;
   else data->state = LV_INDEV_STATE_REL;
   
-  return false; /*No buffering now so no more data read*/
+  return false; /*Nincs bufferelés*/
 }
 ```
 
@@ -108,7 +108,7 @@ bool encoder_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
   if(enc_pressed()) data->state = LV_INDEV_STATE_PR;
   else data->state = LV_INDEV_STATE_REL;
   
-  return false; /*No buffering now so no more data read*/
+  return false; /*Nincs bufferelés*/
 }
 ```
 

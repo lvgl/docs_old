@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input device interface &mdash; LittlevGL 6.0 documentation</title>
+  <title>Bemeneti eszköz interfész &mdash; LittlevGL 6.0 documentation</title>
   
 
   
@@ -179,10 +179,10 @@
 <li class="toctree-l3"><a class="reference internal" href="display.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Input device interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#types-of-input-devices">Types of input devices</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Bemeneti eszköz interfész</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-bementi-eszkozok-tipusai">A bementi eszközök típusai</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#touchpad-eger-vagy-mas-mutato-eszkoz">Touchpad, egér vagy más mutató eszköz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#billentyuzet-vagy-keypad">Billentyűzet vagy keypad</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#encoder">Encoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#button">Button</a></li>
 </ul>
@@ -1071,7 +1071,7 @@
         
           <li><a href="index.html">Portolás</a> &raquo;</li>
         
-      <li>Input device interface</li>
+      <li>Bemeneti eszköz interfész</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -1093,32 +1093,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="input-device-interface">
-<h1>Input device interface<a class="headerlink" href="#input-device-interface" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="types-of-input-devices">
-<h2>Types of input devices<a class="headerlink" href="#types-of-input-devices" title="Permalink to this headline">¶</a></h2>
-<p>To set up an input device an <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_t</span></code> variable has to be initialized:</p>
+  <div class="section" id="bemeneti-eszkoz-interfesz">
+<h1>Bemeneti eszköz interfész<a class="headerlink" href="#bemeneti-eszkoz-interfesz" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="a-bementi-eszkozok-tipusai">
+<h2>A bementi eszközök típusai<a class="headerlink" href="#a-bementi-eszkozok-tipusai" title="Permalink to this headline">¶</a></h2>
+<p>Egy bementi eszköz létrehozásához egy <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_t</span></code> változót kell inicializálni:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_indev_drv_t</span> <span class="n">indev_drv</span><span class="p">;</span>
-<span class="n">lv_indev_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indev_drv</span><span class="p">);</span>      <span class="cm">/*Basic initialization*/</span>
-<span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span><span class="p">...</span>                 <span class="cm">/*See below.*/</span>
-<span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span><span class="p">...</span>              <span class="cm">/*See below.*/</span>
-<span class="cm">/*Register the driver in LittlevGL and save the created input device object*/</span>
+<span class="n">lv_indev_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indev_drv</span><span class="p">);</span>      <span class="cm">/*Alap inicializálás*/</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span><span class="p">...</span>                 <span class="cm">/*Lásd lent.*/</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span><span class="p">...</span>              <span class="cm">/*Lásd lent.*/</span>
+<span class="cm">/*A driver regisztrálása a LittlevGL-ben és a létrehozott bemeneti eszköz elmentése*/</span>
 <span class="n">lv_indev_t</span> <span class="o">*</span> <span class="n">my_indev</span> <span class="o">=</span> <span class="n">lv_indev_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indev_drv</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><strong>type</strong> can be</p>
+<p><strong>type</strong> mező lehet:</p>
 <ul class="simple">
-<li><p><strong>LV_INDEV_TYPE_POINTER</strong> touchpad or mouse</p></li>
-<li><p><strong>LV_INDEV_TYPE_KEYPAD</strong> keyboard or keypad</p></li>
-<li><p><strong>LV_INDEV_TYPE_ENCODER</strong> encoder with left, right, push options</p></li>
-<li><p><strong>LV_INDEV_TYPE_BUTTON</strong> external buttons pressing the screen</p></li>
+<li><p><strong>LV_INDEV_TYPE_POINTER</strong> touchpad és egér</p></li>
+<li><p><strong>LV_INDEV_TYPE_KEYPAD</strong> billentyűzet or keypad</p></li>
+<li><p><strong>LV_INDEV_TYPE_ENCODER</strong> enkóder bal, jobb és gomb nyomás funkciókkal</p></li>
+<li><p><strong>LV_INDEV_TYPE_BUTTON</strong> küldő gomb ami képernyőt nyomja</p></li>
 </ul>
-<p><strong>read_cb</strong> is a function pointer which will be called periodically to report the current state of an input device.
-It can also buffer data and return <code class="docutils literal notranslate"><span class="pre">false</span></code> when no more data to be read or <code class="docutils literal notranslate"><span class="pre">true</span></code> when the buffer is not empty.</p>
-<p>Visit <a class="reference internal" href="../overview/indev.html"><span class="doc">Input devices</span></a> to learn more about input devices in general.</p>
-<div class="section" id="touchpad-mouse-or-any-pointer">
-<h3>Touchpad, mouse or any pointer<a class="headerlink" href="#touchpad-mouse-or-any-pointer" title="Permalink to this headline">¶</a></h3>
-<p>Input devices which are able to click points of the screen belong to this category.</p>
+<p><strong>read_cb</strong> egy függvény, ami periodikusan meghívódik, hogy jelentse a bemeneti eszköz állapotát.
+A függvény bufferel-het adatokat és <code class="docutils literal notranslate"><span class="pre">false</span></code>-sal térhet vissza, ha nincs több, <code class="docutils literal notranslate"><span class="pre">true</span></code>-val, ha még van adat a bufferben.</p>
+<p>Több információ a <a class="reference internal" href="../overview/indev.html"><span class="doc">Bementi eszközök</span></a> áttekintése fejezetben olvasható.</p>
+<div class="section" id="touchpad-eger-vagy-mas-mutato-eszkoz">
+<h3>Touchpad, egér vagy más mutató eszköz<a class="headerlink" href="#touchpad-eger-vagy-mas-mutato-eszkoz" title="Permalink to this headline">¶</a></h3>
+<p>Azok a bemeneti eszközök tartoznak ebbe a kategóriába, melyek képesek egy pontra kattintani a képernyőn  .</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_POINTER</span><span class="p">;</span>
 <span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
 
@@ -1135,20 +1135,20 @@ It can also buffer data and return <code class="docutils literal notranslate"><s
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Touchpad drivers must return the last X/Y coordinates even when the state is <em>LV_INDEV_STATE_REL</em>.</p>
+<p>A touchpad driver-eknek az utolsó megnyomott  X/Y koordinátával kell visszatérni  <em>LV_INDEV_STATE_REL</em> állapotban.</p>
 </div>
-<p>To set a mouse cursor use <code class="docutils literal notranslate"><span class="pre">lv_indev_set_cursor(my_indev,</span> <span class="pre">&amp;img_cursor)</span></code>. (<code class="docutils literal notranslate"><span class="pre">my_indev</span></code> is the return value of <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_register</span></code>)</p>
+<p>Egér kurzor megjelenítéséhez a <code class="docutils literal notranslate"><span class="pre">lv_indev_set_cursor(my_indev,</span> <span class="pre">&amp;img_cursor)</span></code> függvény használható. (<code class="docutils literal notranslate"><span class="pre">my_indev</span></code> <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_register</span></code> visszatérési értéke)</p>
 </div>
-<div class="section" id="keypad-or-keyboard">
-<h3>Keypad or keyboard<a class="headerlink" href="#keypad-or-keyboard" title="Permalink to this headline">¶</a></h3>
-<p>Full keyboards with all the letters or simple keypads with a few navigation buttons belong here.</p>
-<p>To use a keyboard/keypad:</p>
+<div class="section" id="billentyuzet-vagy-keypad">
+<h3>Billentyűzet vagy keypad<a class="headerlink" href="#billentyuzet-vagy-keypad" title="Permalink to this headline">¶</a></h3>
+<p>Teljes értékű billentyűzetek minden karakterrel vagy egyszerű keypad-ok néhány navigációs gombbal tartoznak ide.</p>
+<p>A billentyűzet/keypad használatához:</p>
 <ul class="simple">
-<li><p>Register a <code class="docutils literal notranslate"><span class="pre">read_cb</span></code> function with <code class="docutils literal notranslate"><span class="pre">LV_INDEV_TYPE_KEYPAD</span></code> type.</p></li>
-<li><p>Enable <code class="docutils literal notranslate"><span class="pre">LV_USE_GROUP</span></code> in <em>lv_conf.h</em></p></li>
-<li><p>An object group has to be created: <code class="docutils literal notranslate"><span class="pre">lv_group_t</span> <span class="pre">*</span> <span class="pre">g</span> <span class="pre">=</span> <span class="pre">lv_group_create()</span></code>  and objects have to be added to it with <code class="docutils literal notranslate"><span class="pre">lv_group_add_obj(g,</span> <span class="pre">obj)</span></code></p></li>
-<li><p>The created group has to be assigned to an input device: <code class="docutils literal notranslate"><span class="pre">lv_indev_set_group(my_indev,</span> <span class="pre">g)</span></code> (<code class="docutils literal notranslate"><span class="pre">my_indev</span></code> is the return value of <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_register</span></code>)</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">LV_KEY_...</span></code> to navigate among the objects in the group. See <code class="docutils literal notranslate"><span class="pre">lv_core/lv_group.h</span></code> for the available keys.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_cb</span></code> regisztrálása <code class="docutils literal notranslate"><span class="pre">LV_INDEV_TYPE_KEYPAD</span></code> típussal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_USE_GROUP</span></code> engedélyezése <em>lv_conf.h</em>-ban</p></li>
+<li><p>Egy objektum <em>group</em> (csoport) létrehozása: <code class="docutils literal notranslate"><span class="pre">lv_group_t</span> <span class="pre">*</span> <span class="pre">g</span> <span class="pre">=</span> <span class="pre">lv_group_create()</span></code>  és objektumok a csoporthoz adása a  <code class="docutils literal notranslate"><span class="pre">lv_group_add_obj(g,</span> <span class="pre">obj)</span></code> függvénnyel.</p></li>
+<li><p>A létrehozott <em>group</em> bemeneti eszközhöz rendelése: <code class="docutils literal notranslate"><span class="pre">lv_indev_set_group(my_indev,</span> <span class="pre">g)</span></code> (<code class="docutils literal notranslate"><span class="pre">my_indev</span></code> <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_register</span></code> visszatérési értéke)</p></li>
+<li><p>Néhány gombok <code class="docutils literal notranslate"><span class="pre">LV_KEY_...</span></code> értékre konvertálása az objektumok közötti navigációhoz. A vezérlő gombok teljes listája <code class="docutils literal notranslate"><span class="pre">lv_core/lv_group.h</span></code>-ban látható.</p></li>
 </ul>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_KEYPAD</span><span class="p">;</span>
 <span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
@@ -1156,12 +1156,12 @@ It can also buffer data and return <code class="docutils literal notranslate"><s
 <span class="p">...</span>
 
 <span class="kt">bool</span> <span class="n">keyboard_read</span><span class="p">(</span><span class="n">lv_indev_drv_t</span> <span class="o">*</span> <span class="n">drv</span><span class="p">,</span> <span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">){</span>
-  <span class="n">data</span><span class="o">-&gt;</span><span class="n">key</span> <span class="o">=</span> <span class="n">last_key</span><span class="p">();</span>            <span class="cm">/*Get the last pressed or released key*/</span>
+  <span class="n">data</span><span class="o">-&gt;</span><span class="n">key</span> <span class="o">=</span> <span class="n">last_key</span><span class="p">();</span>            <span class="cm">/*Az utolsó lenyomott vagy felengedett gomb lekérdezése*/</span>
   
   <span class="k">if</span><span class="p">(</span><span class="n">key_pressed</span><span class="p">())</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>
   <span class="k">else</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
   
-  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering now so no more data read*/</span>
+  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*Nincs bufferelés*/</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1194,7 +1194,7 @@ It can also buffer data and return <code class="docutils literal notranslate"><s
   <span class="k">if</span><span class="p">(</span><span class="n">enc_pressed</span><span class="p">())</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>
   <span class="k">else</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
   
-  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering now so no more data read*/</span>
+  <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*Nincs bufferelés*/</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1696,7 +1696,7 @@ The associated display is stored and can be changed in <code class="docutils lit
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 27, 2019.
+        Last updated on Jul 29, 2019.
       </span>
 
     </p>

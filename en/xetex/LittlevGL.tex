@@ -65,7 +65,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Jul 27, 2019}
+\date{Jul 29, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -81,6 +81,7 @@
 \phantomsection\label{\detokenize{index::doc}}
 \sphinxhref{http://docs.littlevgl.com/en/html/index.html}{English (en)} -
 \sphinxhref{http://docs.littlevgl.com/zh-CN/html/index.html}{中文 (zh-CN)}  -
+\sphinxhref{http://docs.littlevgl.com/fr/html/index.html}{Français (fr)}  -
 \sphinxhref{http://docs.littlevgl.com/hu/html/index.html}{Magyar (hu)} -
 \sphinxhref{http://docs.littlevgl.com/tr/html/index.html}{Türk (tr)}
 
@@ -1258,15 +1259,20 @@ There are some optional data fields:
 
 \item {} 
 \sphinxstylestrong{screen\_transp} if \sphinxcode{\sphinxupquote{1}} the screen can have transparent or opaque style. \sphinxcode{\sphinxupquote{LV\_COLOR\_SCREEN\_TRANSP}} needs to enabled in \sphinxstyleemphasis{lv\_conf.h}
-To use a GPU the following callbacks can be used:
-
-\item {} 
-\sphinxstylestrong{gpu\_fill\_cb} fill an area with colors.
-
-\item {} 
-\sphinxstylestrong{gpu\_blend\_cb} blend two buffers using opacity.
 
 \end{itemize}
+
+To use a GPU the following callbacks can be used:
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{gpu\_fill\_cb} fill an area in memory with colors.
+
+\item {} 
+\sphinxstylestrong{gpu\_blend\_cb} blend two memory buffers using opacity.
+
+\end{itemize}
+
+Note that, these functions need to draw to the memory (RAM) and not your display directly.
 
 Some other optional callbacks to make easier and more optimal to work with monochrome, gray-scale or other non-standard RGB displays:
 \begin{itemize}
@@ -1320,9 +1326,14 @@ Here some simple examples of the callbacks:
 \PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}gpu\PYGZus{}fill\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp\PYGZus{}drv}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{dest\PYGZus{}buf}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{dest\PYGZus{}area}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{fill\PYGZus{}area}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{color}\PYG{p}{)}\PYG{p}{;}
 \PYG{p}{\PYGZob{}}
     \PYG{c+cm}{/*It\PYGZsq{}s an example code which should be done by your GPU*/}
-    \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{;}
-    \PYG{k}{for}\PYG{p}{(}\PYG{n}{y} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{length}\PYG{p}{;} \PYG{n}{i}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
-        \PYG{n}{dest}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{color}\PYG{p}{;}
+    \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{;}
+    \PYG{n}{dest\PYGZus{}buf} \PYG{o}{+}\PYG{o}{=} \PYG{n}{dest\PYGZus{}width} \PYG{o}{*} \PYG{n}{fill\PYGZus{}area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y1}\PYG{p}{;} \PYG{c+cm}{/*Go to the first line*/}
+
+    \PYG{k}{for}\PYG{p}{(}\PYG{n}{y} \PYG{o}{=} \PYG{n}{fill\PYGZus{}area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y1}\PYG{p}{;} \PYG{n}{y} \PYG{o}{\PYGZlt{}} \PYG{n}{fill\PYGZus{}area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y2}\PYG{p}{;} \PYG{n}{y}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{k}{for}\PYG{p}{(}\PYG{n}{x} \PYG{o}{=} \PYG{n}{fill\PYGZus{}area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{x1}\PYG{p}{;} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{n}{fill\PYGZus{}area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{x2}\PYG{p}{;} \PYG{n}{x}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{dest\PYGZus{}buf}\PYG{p}{[}\PYG{n}{x}\PYG{p}{]} \PYG{o}{=} \PYG{n}{color}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{n}{dest\PYGZus{}buf}\PYG{o}{+}\PYG{o}{=}\PYG{n}{dest\PYGZus{}width}\PYG{p}{;}    \PYG{c+cm}{/*Go to the next line*/}
     \PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZcb{}}
 
@@ -14638,6 +14649,60 @@ code
   \PYG{n}{lv\PYGZus{}arc\PYGZus{}set\PYGZus{}angles}\PYG{p}{(}\PYG{n}{arc}\PYG{p}{,} \PYG{l+m+mi}{90}\PYG{p}{,} \PYG{l+m+mi}{60}\PYG{p}{)}\PYG{p}{;}
   \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}size}\PYG{p}{(}\PYG{n}{arc}\PYG{p}{,} \PYG{l+m+mi}{150}\PYG{p}{,} \PYG{l+m+mi}{150}\PYG{p}{)}\PYG{p}{;}
   \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{arc}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subparagraph{Loader with Arc}
+\label{\detokenize{object-types/arc:loader-with-arc}}
+\noindent\sphinxincludegraphics{{lv_ex_arc_2}.png}
+
+code
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZdq{}lvgl/lvgl.h\PYGZdq{} }
+
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * An {}`lv\PYGZus{}task{}` to call periodically to set the angles of the arc}
+\PYG{c+cm}{ * @param t}
+\PYG{c+cm}{ */}
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{arc\PYGZus{}loader}\PYG{p}{(}\PYG{n}{lv\PYGZus{}task\PYGZus{}t} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{static} \PYG{k+kt}{int16\PYGZus{}t} \PYG{n}{a} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+    \PYG{n}{a}\PYG{o}{+}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{;}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{a} \PYG{o}{\PYGZgt{}}\PYG{o}{=} \PYG{l+m+mi}{359}\PYG{p}{)} \PYG{n}{a} \PYG{o}{=} \PYG{l+m+mi}{359}\PYG{p}{;}
+
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{a} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{180}\PYG{p}{)} \PYG{n}{lv\PYGZus{}arc\PYGZus{}set\PYGZus{}angles}\PYG{p}{(}\PYG{n}{t}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{user\PYGZus{}data}\PYG{p}{,} \PYG{l+m+mi}{180}\PYG{o}{\PYGZhy{}}\PYG{n}{a} \PYG{p}{,}\PYG{l+m+mi}{180}\PYG{p}{)}\PYG{p}{;}
+    \PYG{k}{else} \PYG{n}{lv\PYGZus{}arc\PYGZus{}set\PYGZus{}angles}\PYG{p}{(}\PYG{n}{t}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{user\PYGZus{}data}\PYG{p}{,} \PYG{l+m+mi}{540}\PYG{o}{\PYGZhy{}}\PYG{n}{a} \PYG{p}{,}\PYG{l+m+mi}{180}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{a} \PYG{o}{=}\PYG{o}{=} \PYG{l+m+mi}{359}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{lv\PYGZus{}task\PYGZus{}del}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}\PYG{p}{;}
+        \PYG{k}{return}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * Create an arc which acts as a loader.}
+\PYG{c+cm}{ */}
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}ex\PYGZus{}arc\PYGZus{}2}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{c+cm}{/*Create style for the Arcs*/}
+  \PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style}\PYG{p}{;}
+  \PYG{n}{lv\PYGZus{}style\PYGZus{}copy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{style}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}
+  \PYG{n}{style}\PYG{p}{.}\PYG{n}{line}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}NAVY}\PYG{p}{;}           \PYG{c+cm}{/*Arc color*/}
+  \PYG{n}{style}\PYG{p}{.}\PYG{n}{line}\PYG{p}{.}\PYG{n}{width} \PYG{o}{=} \PYG{l+m+mi}{8}\PYG{p}{;}                       \PYG{c+cm}{/*Arc width*/}
+
+  \PYG{c+cm}{/*Create an Arc*/}
+  \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{arc} \PYG{o}{=} \PYG{n}{lv\PYGZus{}arc\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+  \PYG{n}{lv\PYGZus{}arc\PYGZus{}set\PYGZus{}angles}\PYG{p}{(}\PYG{n}{arc}\PYG{p}{,} \PYG{l+m+mi}{180}\PYG{p}{,} \PYG{l+m+mi}{180}\PYG{p}{)}\PYG{p}{;}
+  \PYG{n}{lv\PYGZus{}arc\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{arc}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ARC\PYGZus{}STYLE\PYGZus{}MAIN}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style}\PYG{p}{)}\PYG{p}{;}
+  \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{arc}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+
+  \PYG{c+cm}{/* Create an {}`lv\PYGZus{}task{}` to update the arc.}
+\PYG{c+cm}{   * Store the {}`arc{}` in the user data*/}
+  \PYG{n}{lv\PYGZus{}task\PYGZus{}create}\PYG{p}{(}\PYG{n}{arc\PYGZus{}loader}\PYG{p}{,} \PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{LV\PYGZus{}TASK\PYGZus{}PRIO\PYGZus{}LOWEST}\PYG{p}{,} \PYG{n}{arc}\PYG{p}{)}\PYG{p}{;}
+
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 

@@ -179,10 +179,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Input device interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-of-input-devices">Types of input devices</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Bemeneti eszköz interfész</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#a-bementi-eszkozok-tipusai">A bementi eszközök típusai</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#touchpad-eger-vagy-mas-mutato-eszkoz">Touchpad, egér vagy más mutató eszköz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#billentyuzet-vagy-keypad">Billentyűzet vagy keypad</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
 </ul>
@@ -1160,6 +1160,61 @@ The angles should be in [0;360] range.</p>
 </div>
 </div>
 </div>
+<div class="section" id="loader-with-arc">
+<h4>Loader with Arc<a class="headerlink" href="#loader-with-arc" title="Permalink to this headline">¶</a></h4>
+<img alt="Loader with Arc in LittlevGL" src="../_images/lv_ex_arc_2.gif" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot; </span><span class="cp"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * An `lv_task` to call periodically to set the angles of the arc</span>
+<span class="cm"> * @param t</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">arc_loader</span><span class="p">(</span><span class="n">lv_task_t</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="kt">int16_t</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">a</span><span class="o">+=</span><span class="mi">5</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;=</span> <span class="mi">359</span><span class="p">)</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">359</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">180</span><span class="p">)</span> <span class="n">lv_arc_set_angles</span><span class="p">(</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">user_data</span><span class="p">,</span> <span class="mi">180</span><span class="o">-</span><span class="n">a</span> <span class="p">,</span><span class="mi">180</span><span class="p">);</span>
+    <span class="k">else</span> <span class="n">lv_arc_set_angles</span><span class="p">(</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">user_data</span><span class="p">,</span> <span class="mi">540</span><span class="o">-</span><span class="n">a</span> <span class="p">,</span><span class="mi">180</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">359</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lv_task_del</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Create an arc which acts as a loader.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">lv_ex_arc_2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="cm">/*Create style for the Arcs*/</span>
+  <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style</span><span class="p">;</span>
+  <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
+  <span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_NAVY</span><span class="p">;</span>           <span class="cm">/*Arc color*/</span>
+  <span class="n">style</span><span class="p">.</span><span class="n">line</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>                       <span class="cm">/*Arc width*/</span>
+
+  <span class="cm">/*Create an Arc*/</span>
+  <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">arc</span> <span class="o">=</span> <span class="n">lv_arc_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">lv_arc_set_angles</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">);</span>
+  <span class="n">lv_arc_set_style</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="n">LV_ARC_STYLE_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
+  <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+  <span class="cm">/* Create an `lv_task` to update the arc.</span>
+<span class="cm">   * Store the `arc` in the user data*/</span>
+  <span class="n">lv_task_create</span><span class="p">(</span><span class="n">arc_loader</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">LV_TASK_PRIO_LOWEST</span><span class="p">,</span> <span class="n">arc</span><span class="p">);</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
@@ -1322,7 +1377,7 @@ The angles should be in [0;360] range.</p>
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 27, 2019.
+        Last updated on Jul 29, 2019.
       </span>
 
     </p>

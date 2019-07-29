@@ -1144,11 +1144,14 @@ Therefore this method works the best when the MCU has an LCD/TFT interface and t
 <li><p><strong>user_data</strong> custom user data for the driver. Its type can be modified in lv_conf.h.</p></li>
 <li><p><strong>anti-aliasing</strong> use anti-aliasing (edge smoothing). <code class="docutils literal notranslate"><span class="pre">LV_ANTIALIAS</span></code> by default  from <em>lv_conf.h</em></p></li>
 <li><p><strong>rotated</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> swap <code class="docutils literal notranslate"><span class="pre">hor_res</span></code> and <code class="docutils literal notranslate"><span class="pre">ver_res</span></code>. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display’s fill direction.</p></li>
-<li><p><strong>screen_transp</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> the screen can have transparent or opaque style. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> needs to enabled in <em>lv_conf.h</em>
-To use a GPU the following callbacks can be used:</p></li>
-<li><p><strong>gpu_fill_cb</strong> fill an area with colors.</p></li>
-<li><p><strong>gpu_blend_cb</strong> blend two buffers using opacity.</p></li>
+<li><p><strong>screen_transp</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> the screen can have transparent or opaque style. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> needs to enabled in <em>lv_conf.h</em></p></li>
 </ul>
+<p>To use a GPU the following callbacks can be used:</p>
+<ul class="simple">
+<li><p><strong>gpu_fill_cb</strong> fill an area in memory with colors.</p></li>
+<li><p><strong>gpu_blend_cb</strong> blend two memory buffers using opacity.</p></li>
+</ul>
+<p>Note that, these functions need to draw to the memory (RAM) and not your display directly.</p>
 <p>Some other optional callbacks to make easier and more optimal to work with monochrome, gray-scale or other non-standard RGB displays:</p>
 <ul class="simple">
 <li><p><strong>rounder_cb</strong> round the coordinates of areas to redraw. E.g. a 2x2 px can be converted to 2x8.
@@ -1189,9 +1192,14 @@ And finally to register a display for LittlevGL <code class="docutils literal no
 <span class="kt">void</span> <span class="nf">my_gpu_fill_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="o">*</span> <span class="n">dest_buf</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">dest_area</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">fill_area</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="n">color</span><span class="p">);</span>
 <span class="p">{</span>
     <span class="cm">/*It&#39;s an example code which should be done by your GPU*/</span>
-    <span class="kt">uint32_t</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">dest</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+    <span class="kt">uint32_t</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">dest_buf</span> <span class="o">+=</span> <span class="n">dest_width</span> <span class="o">*</span> <span class="n">fill_area</span><span class="o">-&gt;</span><span class="n">y1</span><span class="p">;</span> <span class="cm">/*Go to the first line*/</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">fill_area</span><span class="o">-&gt;</span><span class="n">y1</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">fill_area</span><span class="o">-&gt;</span><span class="n">y2</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">fill_area</span><span class="o">-&gt;</span><span class="n">x1</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">fill_area</span><span class="o">-&gt;</span><span class="n">x2</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">dest_buf</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">dest_buf</span><span class="o">+=</span><span class="n">dest_width</span><span class="p">;</span>    <span class="cm">/*Go to the next line*/</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -1698,7 +1706,7 @@ And finally to register a display for LittlevGL <code class="docutils literal no
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 27, 2019.
+        Last updated on Jul 29, 2019.
       </span>
 
     </p>

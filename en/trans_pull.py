@@ -3,7 +3,7 @@
 import sys
 import os
 
-langs = ['tr', 'zh-CN', 'hu']
+langs = ['tr', 'zh-CN', 'hu', 'fr']
 folders = ['overview', 'get-started', 'object-types', 'porting'];
 files = ['index.md'];
 

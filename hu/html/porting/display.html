@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Input device interface" href="indev.html" />
+    <link rel="next" title="Bemeneti eszköz interfész" href="indev.html" />
     <link rel="prev" title="Set-up a project" href="project.html" />
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -179,10 +179,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="indev.html">Input device interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="indev.html#types-of-input-devices">Types of input devices</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="indev.html#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indev.html">Bemeneti eszköz interfész</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="indev.html#a-bementi-eszkozok-tipusai">A bementi eszközök típusai</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="indev.html#touchpad-eger-vagy-mas-mutato-eszkoz">Touchpad, egér vagy más mutató eszköz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indev.html#billentyuzet-vagy-keypad">Billentyűzet vagy keypad</a></li>
 <li class="toctree-l4"><a class="reference internal" href="indev.html#encoder">Encoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="indev.html#button">Button</a></li>
 </ul>
@@ -1144,11 +1144,14 @@ Ezért ez a mód olyan MCU-kkal működik a legjobban, amiknek van LCD/TFT perif
 <li><p><strong>user_data</strong> egyedi tetszőleges felhasználói adat. A típusa módosítható <em>lv_conf.h</em>-ban.</p></li>
 <li><p><strong>anti-aliasing</strong> anti-aliasing (élsimítás) engedélyezése. <code class="docutils literal notranslate"><span class="pre">LV_ANTIALIAS</span></code>  alapértelmezetten az <em>lv_conf.h</em>-ból</p></li>
 <li><p><strong>rotated</strong> ha <code class="docutils literal notranslate"><span class="pre">1</span></code> megcseréli <code class="docutils literal notranslate"><span class="pre">hor_res</span></code> and <code class="docutils literal notranslate"><span class="pre">ver_res</span></code> értékét. LittlevGL mindkét esetben ugyanabba az iránya rajzol (fentről le soronként) ezért a kitöltés/scan-nelés irányát a driver-ben is át kell konfigurálni.</p></li>
-<li><p><strong>screen_transp</strong> ha<code class="docutils literal notranslate"><span class="pre">1</span></code> a képernyőknek lehetnek átlátszó vagy áttetsző pixeleik. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> engedélyezve kell legyen az <em>lv_conf.h</em>-ben.
-A GPU használatához az alábbi callback-ek használhatók:</p></li>
-<li><p><strong>gpu_fill_cb</strong> tölts ki egy területet egy adott színnel.</p></li>
-<li><p><strong>gpu_blend_cb</strong> keverj össze két buffert valamilyen átlátszóság (opacity) szerint.</p></li>
+<li><p><strong>screen_transp</strong> ha<code class="docutils literal notranslate"><span class="pre">1</span></code> a képernyőknek lehetnek átlátszó vagy áttetsző pixeleik. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> engedélyezve kell legyen az <em>lv_conf.h</em>-ben.</p></li>
 </ul>
+<p>A GPU használatához az alábbi callback-ek használhatók:</p>
+<ul class="simple">
+<li><p><strong>gpu_fill_cb</strong> fill an area in memory with colors.</p></li>
+<li><p><strong>gpu_blend_cb</strong> blend two memory buffers using opacity.</p></li>
+</ul>
+<p>Note that, these functions need to draw to the memory (RAM) and not your display directly.</p>
 <p>Néhány opcionális callback, melyek megkönnyítik és optimálisabbá teszik monochrome, szürkeárnyalatos vagy nem szabványos RGB kijelzők használatát.</p>
 <ul class="simple">
 <li><p><strong>rounder_cb</strong> kerekíti az újrarajzolandó területek koordinátáit. Pl. egy 2x2 px terület 2x8re konvertálható..
@@ -1189,9 +1192,14 @@ Ennek köszönhetően a <code class="docutils literal notranslate"><span class="
 <span class="kt">void</span> <span class="nf">my_gpu_fill_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="o">*</span> <span class="n">dest_buf</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">dest_area</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">fill_area</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="n">color</span><span class="p">);</span>
 <span class="p">{</span>
     <span class="cm">/*Ez egy példa, amit a GPU-nak kellene csinálni*/</span>
-    <span class="kt">uint32_t</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">dest</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+    <span class="kt">uint32_t</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">dest_buf</span> <span class="o">+=</span> <span class="n">dest_width</span> <span class="o">*</span> <span class="n">fill_area</span><span class="o">-&gt;</span><span class="n">y1</span><span class="p">;</span> <span class="cm">/*Go to the first line*/</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">fill_area</span><span class="o">-&gt;</span><span class="n">y1</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">fill_area</span><span class="o">-&gt;</span><span class="n">y2</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">fill_area</span><span class="o">-&gt;</span><span class="n">x1</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">fill_area</span><span class="o">-&gt;</span><span class="n">x2</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">dest_buf</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">dest_buf</span><span class="o">+=</span><span class="n">dest_width</span><span class="p">;</span>    <span class="cm">/*Go to the next line*/</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -1684,7 +1692,7 @@ Ennek köszönhetően a <code class="docutils literal notranslate"><span class="
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="indev.html" class="btn btn-neutral float-right" title="Input device interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="indev.html" class="btn btn-neutral float-right" title="Bemeneti eszköz interfész" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="project.html" class="btn btn-neutral float-left" title="Set-up a project" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -1698,7 +1706,7 @@ Ennek köszönhetően a <code class="docutils literal notranslate"><span class="
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 27, 2019.
+        Last updated on Jul 29, 2019.
       </span>
 
     </p>

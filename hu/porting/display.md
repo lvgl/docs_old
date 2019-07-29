@@ -51,9 +51,12 @@ Van néhány opcionális adata mező is:
 - **anti-aliasing** anti-aliasing (élsimítás) engedélyezése. `LV_ANTIALIAS`  alapértelmezetten az *lv_conf.h*-ból
 - **rotated** ha `1` megcseréli `hor_res` and `ver_res` értékét. LittlevGL mindkét esetben ugyanabba az iránya rajzol (fentről le soronként) ezért a kitöltés/scan-nelés irányát a driver-ben is át kell konfigurálni.
 - **screen_transp** ha`1` a képernyőknek lehetnek átlátszó vagy áttetsző pixeleik. `LV_COLOR_SCREEN_TRANSP` engedélyezve kell legyen az *lv_conf.h*-ben.
+
 A GPU használatához az alábbi callback-ek használhatók:
-- **gpu_fill_cb** tölts ki egy területet egy adott színnel. 
-- **gpu_blend_cb** keverj össze két buffert valamilyen átlátszóság (opacity) szerint.
+- **gpu_fill_cb** fill an area in memory with colors. 
+- **gpu_blend_cb** blend two memory buffers using opacity.
+
+Note that, these functions need to draw to the memory (RAM) and not your display directly. 
  
 Néhány opcionális callback, melyek megkönnyítik és optimálisabbá teszik monochrome, szürkeárnyalatos vagy nem szabványos RGB kijelzők használatát.
 - **rounder_cb** kerekíti az újrarajzolandó területek koordinátáit. Pl. egy 2x2 px terület 2x8re konvertálható.. 
@@ -97,9 +100,14 @@ void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * 
 void my_gpu_fill_cb(lv_disp_drv_t * disp_drv, lv_color_t * dest_buf, const lv_area_t * dest_area, const lv_area_t * fill_area, lv_color_t color);
 {
     /*Ez egy példa, amit a GPU-nak kellene csinálni*/
-    uint32_t x,y;
-    for(y = 0; i < length; i++) {
-        dest[i] = color;
+    uint32_t x, y;
+    dest_buf += dest_width * fill_area->y1; /*Go to the first line*/
+
+    for(y = fill_area->y1; y < fill_area->y2; y++) {
+        for(x = fill_area->x1; x < fill_area->x2; x++) {
+            dest_buf[x] = color;
+        }
+        dest_buf+=dest_width;    /*Go to the next line*/
     }
 }
 
