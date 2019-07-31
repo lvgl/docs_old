@@ -1,7 +1,7 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/overview/event.md
 ```
-### Evénements
+# Evénements
 
 Dans LittlevGL, des événements sont déclenchés s'il se produit quelque chose d'intéressant pour l'utilisateur. Par exemple un objet
 - est cliqué

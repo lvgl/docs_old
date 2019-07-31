@@ -26,10 +26,10 @@ LittlevGL est une bibliothèque graphique gratuite et à code source ouvert offr
 - Graphiques avancés avec animations, anti-crénelage, opacité, défilement doux
 - Périphériques d'entrée variés : pavé tactile, souris, clavier, encodeur, etc.
 - Prise en charge multilingue avec encodage UTF-8
-- Prise en charge de plusieurs écrans, c-à-d utilisation simultanée dun écran TFT et d'un écran monochrome
+- Prise en charge de plusieurs écrans, c-à-d utilisation simultanée d'un écran TFT et d'un écran monochrome
 - Eléments graphiques entièrement personnalisables
 - Indépendant du matériel : utilisable avec n’importe quel microcontrôleur ou écran
-- Dimensionnable pour fonctionner avec peu de mémoire (64 ko de mémoire Flash, 16 ko de MEV)
+- Adaptable pour fonctionner avec peu de mémoire (64 ko de mémoire Flash, 16 ko de MEV)
 - SE, mémoire externe et GPU pris en charge mais non requis
 - Fonctionne avec un seul tampon d'affichage même avec des effets graphiques avancés
 - Ecrit en C pour une compatibilité maximale (compatible C++)
@@ -73,22 +73,22 @@ Nous utilisons le suivi des problèmes de [GitHub](https://github.com/littlevgl/
 
 
 ### Est-ce que mon microcontrôleur/matériel est supporté ?
-Chaque microcontrôleur capable de piloter un affichage via un port parallèle, SPI, une interface RVB ou autre, et conforme aux [Eléments requis](#Requirements) est pris en charge par LittlevGL.
+Chaque microcontrôleur capable de piloter un affichage via un port parallèle, SPI, une interface RVB ou autre, et conforme aux [éléments requis](#elements-requis), est pris en charge par LittlevGL.
 Cela inclut
 - Les microcontrôleurs "courants" tels que les STM32F, STM32H, NXP Kinetis, LPC, iMX, dsPIC33, PIC32, etc.
 - Les modules Bluetooth, GSM, WiFi tels que les Nordic NRF et Espressif ESP32
-- Le tampon de trame de Linux comme /dev/fb0 ce qui inclut également les ordinateurs monocarte comme le Raspberry Pi
-- et tout ce qui possède un microcontrôleur suffisamment puissant et le nécessaire pour piloter un écran
+- Le tampon de trame de Linux comme /dev/fb0 ce qui inclut également les ordinateurs monocartes comme le Raspberry Pi
+- Et tout ce qui possède un microcontrôleur suffisamment puissant et le nécessaire pour piloter un écran
 
 ### Mon écran est-il supporté?
-LittlevGL nécessite uniquement un simple pilote pour copier un tableau de pixels vers une zone donnée de l'affichage. Si vous pouvez le faire avec votre l'écran, vous pouvez utiliser cet l'écran avec LittlevGL.
+LittlevGL nécessite uniquement un simple pilote pour copier un tableau de pixels vers une zone donnée de l'affichage. Si vous pouvez le faire avec votre écran, vous pouvez utiliser cet écran avec LittlevGL.
 Cela inclut
 - Les TFT avec une profondeur de couleur de 16 ou 24 bits
 - Les moniteurs avec port HDMI
 - Les petits écrans monochromes
 - Les écrans à affichages en niveaux de gris
 - Les matrices LED
-- ou tout autre affichage où vous pouvez contrôler la couleur/l'état des pixels
+- Ou tout autre affichage où vous pouvez contrôler la couleur/l'état des pixels
 
 Consultez la section [Portage](/porting/display) pour en savoir plus.
 
@@ -161,14 +161,14 @@ Pour travailler avec un système d'exploitation où les tâches peuvent s'interr
 
 ### Comment contribuer à LittlevGL ?
 Il y a plusieurs façons de contribuer à LittlevGL :
-- écrivez quelques lignes sur votre projet pour inspirer les autres
-- répondez aux questions des autres
-- signaler et/ou corriger les bogues
-- suggérer et/ou implémenter de nouvelles fonctionnalités
-- améliorez et/ou traduisez la documentation
-- écrivez un article de blog sur vos expériences
+- Ecrivez quelques lignes sur votre projet pour inspirer les autres
+- Répondez aux questions des autres
+- Signalez et/ou corrigez des bogues
+- Suggérez et/ou implémentez de nouvelles fonctionnalités
+- Améliorez et/ou traduisez la documentation
+- Ecrivez un article de blog sur vos expériences
 
-Pour en savoir plus, consultez le [Guide de contribution] (https://blog.littlevgl.com/2018-12-06/contributing)
+Pour en savoir plus, consultez le [Guide de contribution](https://blog.littlevgl.com/2018-12-06/contributing)
 
 
 ### Où puis-je trouver la documentation de la version précédente (5.3) ?

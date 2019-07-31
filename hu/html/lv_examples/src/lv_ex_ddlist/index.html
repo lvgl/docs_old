@@ -177,10 +177,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../porting/display.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../porting/indev.html">Input device interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../porting/indev.html#types-of-input-devices">Types of input devices</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../porting/indev.html#touchpad-mouse-or-any-pointer">Touchpad, mouse or any pointer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../porting/indev.html">Bemeneti eszköz interfész</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../porting/indev.html#a-bementi-eszkozok-tipusai">A bementi eszközök típusai</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../porting/indev.html#touchpad-eger-vagy-mas-mutato-eszkoz">Touchpad, egér vagy más mutató eszköz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../porting/indev.html#billentyuzet-vagy-keypad">Billentyűzet vagy keypad</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../porting/indev.html#encoder">Encoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../porting/indev.html#button">Button</a></li>
 </ul>
@@ -1126,6 +1126,46 @@
 </div>
 </div>
 </div>
+<div class="section" id="drop-up-list">
+<h2>Drop “up” list<a class="headerlink" href="#drop-up-list" title="Permalink to this headline">¶</a></h2>
+<img alt="Drop up list example in LittlevGL" src="../../../_images/lv_ex_ddlist_2.gif" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Create a drop UP list by applying auto realign</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">lv_ex_ddlist_2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="cm">/*Create a drop down list*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ddlist</span> <span class="o">=</span> <span class="n">lv_ddlist_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_ddlist_set_options</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="s">&quot;Apple</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Banana</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Orange</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Melon</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Grape</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Raspberry&quot;</span><span class="p">);</span>
+
+    <span class="n">lv_ddlist_set_fix_width</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
+    <span class="n">lv_ddlist_set_fix_height</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
+    <span class="n">lv_ddlist_set_draw_arrow</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+    <span class="cm">/* Enable auto-realign when the size changes.</span>
+<span class="cm">     * It will keep the bottom of the ddlist fixed*/</span>
+    <span class="n">lv_obj_set_auto_realign</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+    <span class="cm">/*It will be called automatically when the size changes*/</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="micropython">
 <h1>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h1>
@@ -1145,7 +1185,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 27, 2019.
+        Last updated on Jul 31, 2019.
       </span>
 
     </p>

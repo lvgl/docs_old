@@ -1,96 +1,96 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/overview/indev.md
 ```
-# Input devices
+# Périphériques d'entrée
 
-Input devices in general means:
-- Pointer-like input devices like touchpad or mouse
-- Keypads like a normal keyboard or simple numpad
-- Encoders with left/right turn and push options
-- External hardware buttons which are assigned to specific points on the screen
+En général périphériques d'entrée signifie :
+- Périphériques de type pointeur tels que pavé tactile ou souris
+- Claviers, normal ou simple pavé numérique 
+- Encodeurs avec mouvement rotatif à gauche / droite et bouton
+- Boutons matériels externes affectés à des points spécifiques de l'écran
 
 
-``` important:: Before reading further, please read the [Porting](/porting/indev) section of Input devices
+``` important:: Avant de poursuivre votre lecture, veuillez lire la section [Portage](/porting/indev) sur les périphériques d'entrée
 ```
 
-## Pointers
+## Pointeurs
 
-Pointer input devices can have a cursor. (typically for mouses)
+Les périphériques d’entrée de type pointeur peuvent avoir un curseur (typiquement pour les souris).
 
 ```c
 ...
 lv_indev_t * mouse_indev = lv_indev_drv_register(&indev_drv);
 
-LV_IMG_DECLARE(mouse_cursor_icon);                          /*Declare the image file.*/
-lv_obj_t * cursor_obj =  lv_img_create(lv_scr_act(), NULL); /*Create an image object for the cursor */
-lv_img_set_src(cursor_obj, &mouse_cursor_icon);             /*Set the image source*/
-lv_indev_set_cursor(mouse_indev, cursor_obj);               /*Connect the image  object to the driver*/
+LV_IMG_DECLARE(mouse_cursor_icon);                          /* Declare le fichier de l'image. */
+lv_obj_t * cursor_obj =  lv_img_create(lv_scr_act(), NULL); /* Crée un objet image pour le curseur */
+lv_img_set_src(cursor_obj, &mouse_cursor_icon);             /* Définit la source de l'image */
+lv_indev_set_cursor(mouse_indev, cursor_obj);               /* Connecte l'objet image au pilote */
 
 ``` 
 
-Note that the cursor object should have `lv_obj_set_click(cursor_obj, false)`. 
-For images *clicking* is disabled by default.
+Notez que l'objet curseur devrait avoir `lv_obj_set_click(cursor_obj, false)`.
+Pour les images *cliquer* est désactivé par défaut.
 
-## Keypad and encoder
+## Clavier et encodeur
 
-You can fully control the user interface without touchpad or mouse using a keypad or encoder(s). it works similarly when you press the *TAB* key on PC to select the element in an application or a web page. 
+Vous pouvez contrôler entièrement l'interface utilisateur sans pavé tactile ou souris à l'aide d'un clavier ou d'un ou de plusieurs encodeurs. Cela fonctionne de manière similaire lorsque vous appuyez sur la touche *TAB* sur un PC pour sélectionner l'élément dans une application ou une page Web.
 
-### Groups
+### Groupes
 
-The objects, you want to control with keypad or encoder, needs to be added to a *Group*. 
-In every group, there is exactly one focused object which receives the pressed keys or the encoder actions. 
-For example, if a [Text area](/object-types/ta) is focused and you press some letter on a keyboard, the keys will be sent and inserted into the Text area. 
-Or if a [Slider](/object-types/slider) is focused and you press the left or right arrows the slider's value will be changed.
+Les objets que vous souhaitez contrôler avec un clavier ou un encodeur doivent être ajoutés à un *groupe*.
+Dans chaque groupe, il y a exactement un seul objet focalisé qui reçoit les notifications de touche pressée ou les actions du codeur.
+Par exemple, si une [Zone de texte](/object-types/ta) est sélectionnée et que vous appuyez sur une lettre d'un clavier, les codes sont envoyés et traités par la zone de texte.
+Ou si un [Curseur](/types-objets/slider) est sélectionné et que vous appuyez sur les flèches gauche ou droite, la valeur du curseur sera modifiée.
 
-You need to associate an input device with a group. An input device can send the keys to only one group but a group can receive data from more than one input devices too.
+Vous devez associer un périphérique d'entrée à un groupe. Un périphérique d'entrée peut envoyer les codes à un seul groupe, mais un groupe peut recevoir des données de plusieurs périphériques d'entrée.
 
-To create a group use `lv_group_t g = lv_group_create()` and to add an object to the group use `lv_group_add_obj(g, obj)`.
+Pour créer un groupe, utilisez `lv_group_t g = lv_group_create()` et pour ajouter un objet au groupe, utilisez `lv_group_add_obj(g, obj)`.
 
-The associate a group with an input device use `lv_indev_set_group(indev, g)`, where `indev` is the return value of `lv_indev_drv_register()`
+Pour associer un groupe à un périphérique d’entrée, utilisez `lv_indev_set_group(indev, g)`, où `indev` est la valeur de retour de `lv_indev_drv_register() `
 
-#### Keys
-There are some predefined keys which have special meaning:
-- **LV_KEY_NEXT** Focus on the next object
-- **LV_KEY_PREV** Focus on the previous object
-- **LV_KEY_ENTER** Triggers `LV_EVENT_PRESSED/CLICKED/LONG_PRESSED` etc events
-- **LV_KEY_UP** Increase value or move upwards 
-- **LV_KEY_DOWN** Decrease value or move downwards
-- **LV_KEY_RIGHT** Increase value or move the the right
-- **LV_KEY_LEFT** Decrease value or move the the left
-- **LV_KEY_ESC**  Close or exit (E.g. close a [Drop down list](/object-types/ddlist))
-- **LV_KEY_DEL**  Delete (E.g. a character on the right in a [Text area](/object-types/ta))
-- **LV_KEY_BACKSPACE** Delete a character on the left (E.g. in a [Text area](/object-types/ta))
-- **LV_KEY_HOME** Go to the beginning/top (E.g. in a [Text area](/object-types/ta))
-- **LV_KEY_END** Go to the end (E.g. in a [Text area](/object-types/ta)))
+#### Codes
+Certains codes prédéfinis ont une signification particulière :
+- **LV_KEY_NEXT** Sélectionne l'objet suivant
+- **LV_KEY_PREV** Sélectionne l'objet précédant
+- **LV_KEY_ENTER** Génère les événements `LV_EVENT_PRESSED/CLICKED/LONG_PRESSED` etc
+- **LV_KEY_UP** Augmente la valeur ou se déplace vers le haut
+- **LV_KEY_DOWN** Diminue la valeur ou se déplace vers le bas
+- **LV_KEY_RIGHT** Augmente la valeur ou se déplace vers la droite
+- **LV_KEY_LEFT** Diminue la valeur ou se déplace vers la gauche
+- **LV_KEY_ESC** Ferme ou quitte (p.ex. ferme une [Liste déroulante](/object-types/ddlist))
+- **LV_KEY_DEL**  Supprime (p.ex. le caractère à droite dans une [Zone de texte](/object-types/ta))
+- **LV_KEY_BACKSPACE** Supprime le caractère à gauche (p.ex. dans une [Zone de texte](/object-types/ta))
+- **LV_KEY_HOME** Se déplace au début ou en haut (p.ex. dans une [Zone de texte](/object-types/ta))
+- **LV_KEY_END** Se déplace à la fin (p.ex. dans une [Zone de texte](/object-types/ta))
 
-The most important special keys are: `LV_KEY_NEXT/PREV`, `LV_KEY_ENTER` and `LV_KEY_UP/DOWN/LEFT/RIGHT`. 
-In your `read_cb` function you should translate some of your keys to these special keys to navigate in the group and interact with the selected object.
+Les codes spéciaux les plus importants sont : `LV_KEY_NEXT/PREV`, `LV_KEY_ENTER` et `LV_KEY_UP/DOWN/LEFT/RIGHT`. 
+Dans votre fonction `read_cb`, vous devez traduire certaines de vos codes en ces codes spéciaux pour naviguer dans le groupe et interagir avec l'objet sélectionné.
 
-Usually, it's enough to use only `LV_KEY_LEFT/RIGHT` because most of the objects can be fully controlled with them. 
+Habituellement, il suffit d'utiliser uniquement `LV_KEY_LEFT/RIGHT` car la plupart des objets peuvent être entièrement contrôlés avec eux.
 
-With an encoder, you should use only `LV_KEY_LEFT`, `LV_KEY_RIGHT` and `LV_KEY_ENTER`. 
+Avec un encodeur, vous devez utiliser uniquement `LV_KEY_LEFT`,` LV_KEY_RIGHT` et `LV_KEY_ENTER`.
 
-#### Edit and navigate mode
+#### Edition et navigation
 
-With keypads, there are plenty of keys so it's easy to navigate among the objects and edit them. However, the encoders have a very limited number of "keys". To effectively support encoders too *Navigate* and *Edit* is created.
+Avec les claviers, il y a beaucoup de touches, il est donc facile de naviguer entre les objets et de les éditer. Cependant, les encodeurs ont un nombre très limité de "touches". Afin de prendre en charge efficacement les encodeurs également, les modes *navigation* et *édition* sont créés.
 
-In *Navigate* mode the encoders `LV_KEY_LEFT/RIGHT` is translated to `LV_KEY_NEXT/PREV`. Therefore the next or previous object will be selected by turning the encoder.
-Pressing `LV_KEY_ENTER` will change to *Edit* mode.
+En mode *navigation*, les `LV_KEY_LEFT/RIGHT` des encodeurs sont traduits en` LV_KEY_NEXT/PREV`. Par conséquent, l'objet suivant ou précédent sera sélectionné en tournant l'encodeur.
+Un appui sur `LV_KEY_ENTER` passera en mode *édition*.
 
-In *Edit* mode `LV_KEY_NEXT/PREV` is used normally to edit the object.
-Depending on the object's type a short or long press of `LV_KEY_ENTER` changes back to *Navigate* mode. 
-Usually object which can not be pressed (like a [Slider](/object-types/slider)) leaves *Edit* mode on short click but with object where short click has meaning (e.g. [Button](/object-types/btn)) long press is required.
+En mode *édition*, `LV_KEY_NEXT/PREV` sont utilisés normalement pour éditer l'objet.
+En fonction du type d'objet, une pression courte ou longue de `LV_KEY_ENTER` repasse en mode *navigation*.
+Généralement, un objet sur lequel vous ne pouvez pas appuyer (comme un [Curseur](/object-types/slider)) quitte le mode *édition* en cas de clic bref, mais avec un objet pour lequel un clic court a une signification (par exemple, [Bouton](/object-types/btn)) un appui long est requis.
 
-#### Styling the focused object
-To visually highlight the focused element its [Main style](/overview/style#use-the-styles) will be updated. 
-By default, some orange color is mixed to the original colors of the style. 
-A new style modifier callback be set by `lv_group_set_style_mod_cb(g, my_style_mod_cb)`. A style modifier callback receives a pointer to a caller group and pointer to a style to modify. 
-The default style modifier looks like this (slightly simplified):
+#### Styliser l'objet sélectionné
+Pour mettre en évidence visuellement l'élément sélectionné, son [Style principal] (/overview/style#utiliser-les-styles) sera mis à jour.
+Par défaut, de l'orange est mélangé aux couleurs d'origine du style.
+Une fonction de rappel pour modifier le style est définie par `lv_group_set_style_mod_cb(g, my_style_mod_cb)`. Cette fonction reçoit un pointeur sur un groupe d'objet et un style à modifier.
+Le modificateur de style par défaut ressemble à ceci (légèrement simplifié) :
 ```c
 static void default_style_mod_cb(lv_group_t * group, lv_style_t * style)
 {
-    /*Make the bodies a little bit orange*/
-    style->body.border.opa   = LV_OPA_COVER;
+    /* Rend les corps un peu orange */
+    style->body.border.opa = LV_OPA_COVER;
     style->body.border.color = LV_COLOR_ORANGE;
     style->body.border.width = LV_DPI / 20;
 
@@ -98,10 +98,10 @@ static void default_style_mod_cb(lv_group_t * group, lv_style_t * style)
     style->body.grad_color   = lv_color_mix(style->body.grad_color, LV_COLOR_ORANGE, LV_OPA_70);
     style->body.shadow.color = lv_color_mix(style->body.shadow.color, LV_COLOR_ORANGE, LV_OPA_60);
 
-    /*Recolor text*/
+    /* Recolore le texte*/
     style->text.color = lv_color_mix(style->text.color, LV_COLOR_ORANGE, LV_OPA_70);
 
-    /*Add some recolor to the images*/
+    /* Colorise les images */
     if(style->image.intense < LV_OPA_MIN) {
         style->image.color = LV_COLOR_ORANGE;
         style->image.intense = LV_OPA_40;
@@ -109,18 +109,18 @@ static void default_style_mod_cb(lv_group_t * group, lv_style_t * style)
 }
 ```
 
-This style modifier callback is used for keypads and encoder in *Navigate* mode. 
-For the *Edit* mode and other callback is used which can be set with `lv_group_set_style_mod_edit_cb()`. By default, it has a greenish color.
+Cette fonction de rappel modificateur de style est utilisée pour les claviers et encodeurs en mode *navigation*.
+En mode *édition*, une autre fonction de rappel est utilisée qui peut être définie avec `lv_group_set_style_mod_edit_cb()`. Par défaut, il utilise la couleur verte.
 
 
-### Live demo
+### Démonstration en ligne
 
-Try this [Live demo](https://littlevgl.com/demo-touchpadless) to see how a group and touchpad-less navigation works in the practice.
+Essayez cette [Démonstration en ligne](https://littlevgl.com/demo-touchpadless) pour voir comment une navigation de groupe sans pavé tactile fonctionne dans la pratique.
 
 ## API
 
 
-### Input device
+### Périphérique d'entrée
 
 ```eval_rst
 
@@ -129,7 +129,7 @@ Try this [Live demo](https://littlevgl.com/demo-touchpadless) to see how a group
         
 ```
 
-### Groups
+### Groupes
 
 ```eval_rst
 

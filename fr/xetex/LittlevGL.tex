@@ -62,7 +62,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Jul 29, 2019}
+\date{Jul 31, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -113,7 +113,7 @@ Périphériques d’entrée variés : pavé tactile, souris, clavier, encodeur, 
 Prise en charge multilingue avec encodage UTF-8
 
 \item {} 
-Prise en charge de plusieurs écrans, c-à-d utilisation simultanée dun écran TFT et d’un écran monochrome
+Prise en charge de plusieurs écrans, c-à-d utilisation simultanée d’un écran TFT et d’un écran monochrome
 
 \item {} 
 Eléments graphiques entièrement personnalisables
@@ -122,7 +122,7 @@ Eléments graphiques entièrement personnalisables
 Indépendant du matériel : utilisable avec n’importe quel microcontrôleur ou écran
 
 \item {} 
-Dimensionnable pour fonctionner avec peu de mémoire (64 ko de mémoire Flash, 16 ko de MEV)
+Adaptable pour fonctionner avec peu de mémoire (64 ko de mémoire Flash, 16 ko de MEV)
 
 \item {} 
 SE, mémoire externe et GPU pris en charge mais non requis
@@ -224,7 +224,7 @@ Nous utilisons le suivi des problèmes de \sphinxhref{https://github.com/littlev
 
 \section{Est-ce que mon microcontrôleur/matériel est supporté ?}
 \label{\detokenize{index:est-ce-que-mon-microcontroleur-materiel-est-supporte}}
-Chaque microcontrôleur capable de piloter un affichage via un port parallèle, SPI, une interface RVB ou autre, et conforme aux {\hyperref[\detokenize{index:Requirements}]{\emph{Eléments requis}}} est pris en charge par LittlevGL.
+Chaque microcontrôleur capable de piloter un affichage via un port parallèle, SPI, une interface RVB ou autre, et conforme aux {\hyperref[\detokenize{index:elements-requis}]{\emph{éléments requis}}}, est pris en charge par LittlevGL.
 Cela inclut
 \begin{itemize}
 \item {} 
@@ -234,17 +234,17 @@ Les microcontrôleurs “courants” tels que les STM32F, STM32H, NXP Kinetis, L
 Les modules Bluetooth, GSM, WiFi tels que les Nordic NRF et Espressif ESP32
 
 \item {} 
-Le tampon de trame de Linux comme /dev/fb0 ce qui inclut également les ordinateurs monocarte comme le Raspberry Pi
+Le tampon de trame de Linux comme /dev/fb0 ce qui inclut également les ordinateurs monocartes comme le Raspberry Pi
 
 \item {} 
-et tout ce qui possède un microcontrôleur suffisamment puissant et le nécessaire pour piloter un écran
+Et tout ce qui possède un microcontrôleur suffisamment puissant et le nécessaire pour piloter un écran
 
 \end{itemize}
 
 
 \section{Mon écran est-il supporté?}
 \label{\detokenize{index:mon-ecran-est-il-supporte}}
-LittlevGL nécessite uniquement un simple pilote pour copier un tableau de pixels vers une zone donnée de l’affichage. Si vous pouvez le faire avec votre l’écran, vous pouvez utiliser cet l’écran avec LittlevGL.
+LittlevGL nécessite uniquement un simple pilote pour copier un tableau de pixels vers une zone donnée de l’affichage. Si vous pouvez le faire avec votre écran, vous pouvez utiliser cet écran avec LittlevGL.
 Cela inclut
 \begin{itemize}
 \item {} 
@@ -263,7 +263,7 @@ Les écrans à affichages en niveaux de gris
 Les matrices LED
 
 \item {} 
-ou tout autre affichage où vous pouvez contrôler la couleur/l’état des pixels
+Ou tout autre affichage où vous pouvez contrôler la couleur/l’état des pixels
 
 \end{itemize}
 
@@ -385,26 +385,26 @@ Pour travailler avec un système d’exploitation où les tâches peuvent s’in
 Il y a plusieurs façons de contribuer à LittlevGL :
 \begin{itemize}
 \item {} 
-écrivez quelques lignes sur votre projet pour inspirer les autres
+Ecrivez quelques lignes sur votre projet pour inspirer les autres
 
 \item {} 
-répondez aux questions des autres
+Répondez aux questions des autres
 
 \item {} 
-signaler et/ou corriger les bogues
+Signalez et/ou corrigez des bogues
 
 \item {} 
-suggérer et/ou implémenter de nouvelles fonctionnalités
+Suggérez et/ou implémentez de nouvelles fonctionnalités
 
 \item {} 
-améliorez et/ou traduisez la documentation
+Améliorez et/ou traduisez la documentation
 
 \item {} 
-écrivez un article de blog sur vos expériences
+Ecrivez un article de blog sur vos expériences
 
 \end{itemize}
 
-Pour en savoir plus, consultez le {[}Guide de contribution{]} (https://blog.littlevgl.com/2018-12-06/contributing)
+Pour en savoir plus, consultez le \sphinxhref{https://blog.littlevgl.com/2018-12-06/contributing}{Guide de contribution}
 
 
 \section{Où puis-je trouver la documentation de la version précédente (5.3) ?}
@@ -1267,14 +1267,14 @@ Il y a quelques champs de données optionnels :
 Pour utiliser un GPU, les fonctions de rappel suivantes peuvent être utilisées :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{gpu\_fill\_cb} fill an area in memory with colors.
+\sphinxstylestrong{gpu\_fill\_cb} remplis une zone en mémoire avec une couleur
 
 \item {} 
-\sphinxstylestrong{gpu\_blend\_cb} blend two memory buffers using opacity.
+\sphinxstylestrong{gpu\_blend\_cb} combine deux tampons en mémoire avec gestion de l’opacité.
 
 \end{itemize}
 
-Note that, these functions need to draw to the memory (RAM) and not your display directly.
+Notez que ces fonctions doivent dessiner en mémoire (MEV) et non directement sur l’affichage.
 
 Certaines autres fonctions de rappel facultatives facilitent et optimisent l’utilisation des écrans monochromes, à niveaux de gris ou autres écrans RVB non standard :
 \begin{itemize}
@@ -1329,13 +1329,13 @@ Voici quelques exemples simples de fonctions de  rappel :
 \PYG{p}{\PYGZob{}}
     \PYG{c+cm}{/* Cet exemple de code devrait être effectué par un GPU */}
     \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{;}
-    \PYG{n}{dest\PYGZus{}buf} \PYG{o}{+}\PYG{o}{=} \PYG{n}{dest\PYGZus{}width} \PYG{o}{*} \PYG{n}{fill\PYGZus{}area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y1}\PYG{p}{;} \PYG{c+cm}{/*Go to the first line*/}
+    \PYG{n}{dest\PYGZus{}buf} \PYG{o}{+}\PYG{o}{=} \PYG{n}{dest\PYGZus{}width} \PYG{o}{*} \PYG{n}{fill\PYGZus{}area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y1}\PYG{p}{;} \PYG{c+cm}{/* Aller à la première ligne */}
 
     \PYG{k}{for}\PYG{p}{(}\PYG{n}{y} \PYG{o}{=} \PYG{n}{fill\PYGZus{}area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y1}\PYG{p}{;} \PYG{n}{y} \PYG{o}{\PYGZlt{}} \PYG{n}{fill\PYGZus{}area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y2}\PYG{p}{;} \PYG{n}{y}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
         \PYG{k}{for}\PYG{p}{(}\PYG{n}{x} \PYG{o}{=} \PYG{n}{fill\PYGZus{}area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{x1}\PYG{p}{;} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{n}{fill\PYGZus{}area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{x2}\PYG{p}{;} \PYG{n}{x}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
             \PYG{n}{dest\PYGZus{}buf}\PYG{p}{[}\PYG{n}{x}\PYG{p}{]} \PYG{o}{=} \PYG{n}{color}\PYG{p}{;}
         \PYG{p}{\PYGZcb{}}
-        \PYG{n}{dest\PYGZus{}buf}\PYG{o}{+}\PYG{o}{=}\PYG{n}{dest\PYGZus{}width}\PYG{p}{;}    \PYG{c+cm}{/*Go to the next line*/}
+        \PYG{n}{dest\PYGZus{}buf}\PYG{o}{+}\PYG{o}{=}\PYG{n}{dest\PYGZus{}width}\PYG{p}{;}    \PYG{c+cm}{/* Aller à la ligne suivante */}
     \PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZcb{}}
 
@@ -3598,12 +3598,12 @@ L’utilisateur peut affecter une fonction de rappel à un objet pour voir ces �
 Plusieurs objets peuvent utiliser la même \sphinxstyleemphasis{fonction de rappel}.
 
 
-\subsubsection{Types d’événements}
+\paragraph{Types d’événements}
 \label{\detokenize{overview/event:types-d-evenements}}
 Les types d’événements suivants existent :
 
 
-\paragraph{Evénements génériques}
+\subparagraph{Evénements génériques}
 \label{\detokenize{overview/event:evenements-generiques}}
 Tout objet peut recevoir ces événements indépendamment de son type. C-à- d. ces événements sont envoyés aux boutons, aux étiquettes, aux curseurs, etc.
 
@@ -3681,7 +3681,7 @@ Autres événements généraux envoyés par la librairie.
 \end{itemize}
 
 
-\paragraph{Evénements spéciaux}
+\subparagraph{Evénements spéciaux}
 \label{\detokenize{overview/event:evenements-speciaux}}
 Ces événements sont spécifiques à un type particulier d’objet.
 \begin{itemize}
@@ -3705,7 +3705,7 @@ Ces événements sont spécifiques à un type particulier d’objet.
 Pour voir exactement quels événements sont utilisés par un type d’objet, voir la documentation des {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Types d’objet}}}}.
 
 
-\subsubsection{Données personnalisées}
+\paragraph{Données personnalisées}
 \label{\detokenize{overview/event:donnees-personnalisees}}
 Certains événements peuvent comporter des données personnalisées. Par exemple, \sphinxcode{\sphinxupquote{LV\_EVENT\_VALUE\_CHANGED}} indique dans certains cas la nouvelle valeur. Pour plus d’informations, voir la documentation des {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Types d’objet}}}}.
 Pour obtenir les données personnalisées dans la fonction de rappel, utilisez \sphinxcode{\sphinxupquote{lv\_event\_get\_data()}}.
@@ -3721,7 +3721,7 @@ texte alors c’est un \sphinxcode{\sphinxupquote{char *}} ou un \sphinxcode{\sp
 \end{itemize}
 
 
-\subsubsection{Envoyer des événements manuellement}
+\paragraph{Envoyer des événements manuellement}
 \label{\detokenize{overview/event:envoyer-des-evenements-manuellement}}
 Pour envoyer manuellement des événements à un objet, utilisez \sphinxcode{\sphinxupquote{lv\_event\_send(obj, LV\_EVENT\_..., \&custom\_data)}}.
 
@@ -3765,8 +3765,8 @@ Les objets mémorisent uniquement un pointeur vers un style. Le style ne peut do
 \end{sphinxVerbatim}
 
 
-\paragraph{Utilisez les styles}
-\label{\detokenize{overview/style:utilisez-les-styles}}
+\paragraph{Utiliser les styles}
+\label{\detokenize{overview/style:utiliser-les-styles}}
 Les objets ont un \sphinxstyleemphasis{style principal} qui détermine l’apparence de leur arrière-plan ou de leur partie principale. Cependant, certains types d’objet ont aussi des styles supplémentaires.
 
 Certains objets ont un seul style. P.ex.
@@ -4052,32 +4052,32 @@ Il est difficile de créer des styles pour votre interface graphique, car vous a
 Pour accélérer la conception les thèmes sont introduits. Un thème est une collection de styles contenant les styles requis pour chaque type d’objet. Par exemple, 5 styles de boutons décrivant leurs 5 états possibles.
 Consultez les {[}Thèmes{]} (https://littlevgl.com/themes) existants ou essayez-les dans la section {[}Démonstration en ligne{]} (https://littlevgl.com/live-demo).
 
-To be more specific a theme is a structure variable which contains a lot of lv\_style\_t * fields. For buttons:
+Pour être plus précis, un thème est une variable structurée qui contient beaucoup de champs lv\_style\_t*. Pour les boutons :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{rel}       \PYG{c+cm}{/*Released button style*/}
-\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{pr}        \PYG{c+cm}{/*Pressed button style*/}
-\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{tgl\PYGZus{}rel}   \PYG{c+cm}{/*Toggled released button style*/}
-\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{tgl\PYGZus{}pr}    \PYG{c+cm}{/*Toggled pressed button style*/}
-\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{ina}       \PYG{c+cm}{/*Inactive button style*/}
+\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{rel}       \PYG{c+cm}{/* Style de bouton relâché */}
+\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{pr}        \PYG{c+cm}{/* Style de bouton pressé */}
+\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{tgl\PYGZus{}rel}   \PYG{c+cm}{/* Style de bouton bascule relâché */}
+\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{tgl\PYGZus{}pr}    \PYG{c+cm}{/* Style de bouton bascule pressé */}
+\PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{ina}       \PYG{c+cm}{/* Style de bouton inactif */}
 \end{sphinxVerbatim}
 
-A theme can initialized by: \sphinxcode{\sphinxupquote{lv\_theme\_\textless{}name\textgreater{}\_init(hue, font)}}. Where \sphinxcode{\sphinxupquote{hue}} is a Hue value from \sphinxhref{https://en.wikipedia.org/wiki/Hue}{HSV color space} (0..360) and \sphinxcode{\sphinxupquote{font}} is the font applied in the theme (\sphinxcode{\sphinxupquote{NULL}} to use the \sphinxcode{\sphinxupquote{LV\_FONT\_DEFAULT}})
+Un thème peut être initialisé par : \sphinxcode{\sphinxupquote{lv\_theme\_\textless{}nom\textgreater{}\_init(hue, font)}}. Où \sphinxcode{\sphinxupquote{hue}} est une valeur de teinte de l’{[}espace colorimétrique HSV{]} (https://en.wikipedia.org/wiki/Hue) (0..360) et\sphinxcode{\sphinxupquote{ font}} est la police appliquée dans le thème (\sphinxcode{\sphinxupquote{NULL}} utilise \sphinxcode{\sphinxupquote{LV\_FONT\_DEFAULT}})
 
-When a theme is initialized its styles can be used like this:
+Quand un thème est initialisé, ses styles peuvent être utilisés comme ceci :
 
 \sphinxincludegraphics{{theme-example}.png}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+cm}{/*Create a default slider*/}
+\PYG{c+cm}{/* Crée un curseur par défaut */}
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*}\PYG{n}{slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{l+m+mi}{70}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}
 
-\PYG{c+cm}{/*Initialize the alien theme with a reddish hue*/}
+\PYG{c+cm}{/* Initialise le thème alien avec une teinte rouge */}
 \PYG{n}{lv\PYGZus{}theme\PYGZus{}t} \PYG{o}{*}\PYG{n}{th} \PYG{o}{=} \PYG{n}{lv\PYGZus{}theme\PYGZus{}alien\PYGZus{}init}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 
-\PYG{c+cm}{/*Create a new slider and apply the themes styles*/}
+\PYG{c+cm}{/* Crée un nouveau curseur et applique les styles du thèmes */}
 \PYG{n}{slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{l+m+mi}{70}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}pos}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{;}
@@ -4086,161 +4086,161 @@ When a theme is initialized its styles can be used like this:
 \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}KNOB}\PYG{p}{,} \PYG{n}{th}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{slider}\PYG{p}{.}\PYG{n}{knob}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-You can ask the library to automatically apply the styles from a theme when you create new objects. To do this use \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}};
+Vous pouvez demander à la librairie d’appliquer automatiquement les styles d’un thème lorsque vous créez de nouveaux objets. Pour ce faire, utilisez \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}} :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+cm}{/*Initialize the alien theme with a reddish hue*/}
+\PYG{c+cm}{/* Initialise le thème alien avec une teinte rouge */}
 \PYG{n}{lv\PYGZus{}theme\PYGZus{}t} \PYG{o}{*}\PYG{n}{th} \PYG{o}{=} \PYG{n}{lv\PYGZus{}theme\PYGZus{}alien\PYGZus{}init}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}theme\PYGZus{}set\PYGZus{}current}\PYG{p}{(}\PYG{n}{th}\PYG{p}{)}\PYG{p}{;}
 
-\PYG{c+cm}{/*Create a slider. It will use the style from teh current theme.*/}
+\PYG{c+cm}{/* Crée un curseur. Il utilisera le style du thème actuel. */}
 \PYG{n}{slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-Themes can be enabled or disabled one by on in \sphinxcode{\sphinxupquote{lv\_conf.h}}.
+Les thèmes peuvent être activés ou désactivés individuellement dans \sphinxcode{\sphinxupquote{lv\_conf.h}}.
 
 
-\subparagraph{Live update}
-\label{\detokenize{overview/style:live-update}}
-By default if \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}} is called again it won’t refresh the styles of the existing objects. To enable live update of themes enable \sphinxcode{\sphinxupquote{LV\_THEME\_LIVE\_UPDATE}} in \sphinxcode{\sphinxupquote{lv\_conf.h}}.
+\subparagraph{Mise à jour automatique}
+\label{\detokenize{overview/style:mise-a-jour-automatique}}
+Par défaut, si \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}} est appelé à nouveau, les styles des objets existants ne seront pas actualisés. Pour activer la mise à jour automatique des thèmes, activez \sphinxcode{\sphinxupquote{LV\_THEME\_LIVE\_UPDATE}} dans\sphinxcode{\sphinxupquote{ lv\_conf.h}}.
 
-Live update will update only those objects whose style are from the theme, i.e. created after the first call of \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}} or the styles were set manually
+La mise à jour automatique mettra à jour uniquement les objets dont le style provient du thème, c’est-à-dire créés après le premier appel de \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}} ou dont les styles ont été définis manuellement.
 
 
-\subsubsection{Input devices}
-\label{\detokenize{overview/indev:input-devices}}\label{\detokenize{overview/indev::doc}}
-Input devices in general means:
+\subsubsection{Périphériques d’entrée}
+\label{\detokenize{overview/indev:peripheriques-d-entree}}\label{\detokenize{overview/indev::doc}}
+En général périphériques d’entrée signifie :
 \begin{itemize}
 \item {} 
-Pointer-like input devices like touchpad or mouse
+Périphériques de type pointeur tels que pavé tactile ou souris
 
 \item {} 
-Keypads like a normal keyboard or simple numpad
+Claviers, normal ou simple pavé numérique
 
 \item {} 
-Encoders with left/right turn and push options
+Encodeurs avec mouvement rotatif à gauche / droite et bouton
 
 \item {} 
-External hardware buttons which are assigned to specific points on the screen
+Boutons matériels externes affectés à des points spécifiques de l’écran
 
 \end{itemize}
 
 \begin{sphinxadmonition}{important}{Important:}
-Before reading further, please read the {[}Porting{]}(/porting/indev) section of Input devices
+Avant de poursuivre votre lecture, veuillez lire la section {[}Portage{]}(/porting/indev) sur les périphériques d’entrée
 \end{sphinxadmonition}
 
 
-\paragraph{Pointers}
-\label{\detokenize{overview/indev:pointers}}
-Pointer input devices can have a cursor. (typically for mouses)
+\paragraph{Pointeurs}
+\label{\detokenize{overview/indev:pointeurs}}
+Les périphériques d’entrée de type pointeur peuvent avoir un curseur (typiquement pour les souris).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
 \PYG{n}{lv\PYGZus{}indev\PYGZus{}t} \PYG{o}{*} \PYG{n}{mouse\PYGZus{}indev} \PYG{o}{=} \PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}
 
-\PYG{n}{LV\PYGZus{}IMG\PYGZus{}DECLARE}\PYG{p}{(}\PYG{n}{mouse\PYGZus{}cursor\PYGZus{}icon}\PYG{p}{)}\PYG{p}{;}                          \PYG{c+cm}{/*Declare the image file.*/}
-\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{cursor\PYGZus{}obj} \PYG{o}{=}  \PYG{n}{lv\PYGZus{}img\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;} \PYG{c+cm}{/*Create an image object for the cursor */}
-\PYG{n}{lv\PYGZus{}img\PYGZus{}set\PYGZus{}src}\PYG{p}{(}\PYG{n}{cursor\PYGZus{}obj}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{mouse\PYGZus{}cursor\PYGZus{}icon}\PYG{p}{)}\PYG{p}{;}             \PYG{c+cm}{/*Set the image source*/}
-\PYG{n}{lv\PYGZus{}indev\PYGZus{}set\PYGZus{}cursor}\PYG{p}{(}\PYG{n}{mouse\PYGZus{}indev}\PYG{p}{,} \PYG{n}{cursor\PYGZus{}obj}\PYG{p}{)}\PYG{p}{;}               \PYG{c+cm}{/*Connect the image  object to the driver*/}
+\PYG{n}{LV\PYGZus{}IMG\PYGZus{}DECLARE}\PYG{p}{(}\PYG{n}{mouse\PYGZus{}cursor\PYGZus{}icon}\PYG{p}{)}\PYG{p}{;}                          \PYG{c+cm}{/* Declare le fichier de l\PYGZsq{}image. */}
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{cursor\PYGZus{}obj} \PYG{o}{=}  \PYG{n}{lv\PYGZus{}img\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;} \PYG{c+cm}{/* Crée un objet image pour le curseur */}
+\PYG{n}{lv\PYGZus{}img\PYGZus{}set\PYGZus{}src}\PYG{p}{(}\PYG{n}{cursor\PYGZus{}obj}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{mouse\PYGZus{}cursor\PYGZus{}icon}\PYG{p}{)}\PYG{p}{;}             \PYG{c+cm}{/* Définit la source de l\PYGZsq{}image */}
+\PYG{n}{lv\PYGZus{}indev\PYGZus{}set\PYGZus{}cursor}\PYG{p}{(}\PYG{n}{mouse\PYGZus{}indev}\PYG{p}{,} \PYG{n}{cursor\PYGZus{}obj}\PYG{p}{)}\PYG{p}{;}               \PYG{c+cm}{/* Connecte l\PYGZsq{}objet image au pilote */}
 \end{sphinxVerbatim}
 
-Note that the cursor object should have \sphinxcode{\sphinxupquote{lv\_obj\_set\_click(cursor\_obj, false)}}.
-For images \sphinxstyleemphasis{clicking} is disabled by default.
+Notez que l’objet curseur devrait avoir \sphinxcode{\sphinxupquote{lv\_obj\_set\_click(cursor\_obj, false)}}.
+Pour les images \sphinxstyleemphasis{cliquer} est désactivé par défaut.
 
 
-\paragraph{Keypad and encoder}
-\label{\detokenize{overview/indev:keypad-and-encoder}}
-You can fully control the user interface without touchpad or mouse using a keypad or encoder(s). it works similarly when you press the \sphinxstyleemphasis{TAB} key on PC to select the element in an application or a web page.
+\paragraph{Clavier et encodeur}
+\label{\detokenize{overview/indev:clavier-et-encodeur}}
+Vous pouvez contrôler entièrement l’interface utilisateur sans pavé tactile ou souris à l’aide d’un clavier ou d’un ou de plusieurs encodeurs. Cela fonctionne de manière similaire lorsque vous appuyez sur la touche \sphinxstyleemphasis{TAB} sur un PC pour sélectionner l’élément dans une application ou une page Web.
 
 
-\subparagraph{Groups}
-\label{\detokenize{overview/indev:groups}}
-The objects, you want to control with keypad or encoder, needs to be added to a \sphinxstyleemphasis{Group}.
-In every group, there is exactly one focused object which receives the pressed keys or the encoder actions.
-For example, if a {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Text area}}}} is focused and you press some letter on a keyboard, the keys will be sent and inserted into the Text area.
-Or if a {\hyperref[\detokenize{object-types/slider::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Slider}}}} is focused and you press the left or right arrows the slider’s value will be changed.
+\subparagraph{Groupes}
+\label{\detokenize{overview/indev:groupes}}
+Les objets que vous souhaitez contrôler avec un clavier ou un encodeur doivent être ajoutés à un \sphinxstyleemphasis{groupe}.
+Dans chaque groupe, il y a exactement un seul objet focalisé qui reçoit les notifications de touche pressée ou les actions du codeur.
+Par exemple, si une {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Zone de texte}}}} est sélectionnée et que vous appuyez sur une lettre d’un clavier, les codes sont envoyés et traités par la zone de texte.
+Ou si un \sphinxhref{/types-objets/slider}{Curseur} est sélectionné et que vous appuyez sur les flèches gauche ou droite, la valeur du curseur sera modifiée.
 
-You need to associate an input device with a group. An input device can send the keys to only one group but a group can receive data from more than one input devices too.
+Vous devez associer un périphérique d’entrée à un groupe. Un périphérique d’entrée peut envoyer les codes à un seul groupe, mais un groupe peut recevoir des données de plusieurs périphériques d’entrée.
 
-To create a group use \sphinxcode{\sphinxupquote{lv\_group\_t g = lv\_group\_create()}} and to add an object to the group use \sphinxcode{\sphinxupquote{lv\_group\_add\_obj(g, obj)}}.
+Pour créer un groupe, utilisez \sphinxcode{\sphinxupquote{lv\_group\_t g = lv\_group\_create()}} et pour ajouter un objet au groupe, utilisez \sphinxcode{\sphinxupquote{lv\_group\_add\_obj(g, obj)}}.
 
-The associate a group with an input device use \sphinxcode{\sphinxupquote{lv\_indev\_set\_group(indev, g)}}, where \sphinxcode{\sphinxupquote{indev}} is the return value of \sphinxcode{\sphinxupquote{lv\_indev\_drv\_register()}}
+Pour associer un groupe à un périphérique d’entrée, utilisez \sphinxcode{\sphinxupquote{lv\_indev\_set\_group(indev, g)}}, où \sphinxcode{\sphinxupquote{indev}} est la valeur de retour de \sphinxcode{\sphinxupquote{lv\_indev\_drv\_register() }}
 
 
-\subparagraph{Keys}
-\label{\detokenize{overview/indev:keys}}
-There are some predefined keys which have special meaning:
+\subparagraph{Codes}
+\label{\detokenize{overview/indev:codes}}
+Certains codes prédéfinis ont une signification particulière :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KEY\_NEXT} Focus on the next object
+\sphinxstylestrong{LV\_KEY\_NEXT} Sélectionne l’objet suivant
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_PREV} Focus on the previous object
+\sphinxstylestrong{LV\_KEY\_PREV} Sélectionne l’objet précédant
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_ENTER} Triggers \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESSED/CLICKED/LONG\_PRESSED}} etc events
+\sphinxstylestrong{LV\_KEY\_ENTER} Génère les événements \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESSED/CLICKED/LONG\_PRESSED}} etc
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_UP} Increase value or move upwards
+\sphinxstylestrong{LV\_KEY\_UP} Augmente la valeur ou se déplace vers le haut
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_DOWN} Decrease value or move downwards
+\sphinxstylestrong{LV\_KEY\_DOWN} Diminue la valeur ou se déplace vers le bas
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_RIGHT} Increase value or move the the right
+\sphinxstylestrong{LV\_KEY\_RIGHT} Augmente la valeur ou se déplace vers la droite
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_LEFT} Decrease value or move the the left
+\sphinxstylestrong{LV\_KEY\_LEFT} Diminue la valeur ou se déplace vers la gauche
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_ESC}  Close or exit (E.g. close a {\hyperref[\detokenize{object-types/ddlist::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Drop down list}}}})
+\sphinxstylestrong{LV\_KEY\_ESC} Ferme ou quitte (p.ex. ferme une {\hyperref[\detokenize{object-types/ddlist::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Liste déroulante}}}})
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_DEL}  Delete (E.g. a character on the right in a {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Text area}}}})
+\sphinxstylestrong{LV\_KEY\_DEL}  Supprime (p.ex. le caractère à droite dans une {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Zone de texte}}}})
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_BACKSPACE} Delete a character on the left (E.g. in a {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Text area}}}})
+\sphinxstylestrong{LV\_KEY\_BACKSPACE} Supprime le caractère à gauche (p.ex. dans une {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Zone de texte}}}})
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_HOME} Go to the beginning/top (E.g. in a {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Text area}}}})
+\sphinxstylestrong{LV\_KEY\_HOME} Se déplace au début ou en haut (p.ex. dans une {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Zone de texte}}}})
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_END} Go to the end (E.g. in a {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Text area}}}}))
+\sphinxstylestrong{LV\_KEY\_END} Se déplace à la fin (p.ex. dans une {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Zone de texte}}}})
 
 \end{itemize}
 
-The most important special keys are: \sphinxcode{\sphinxupquote{LV\_KEY\_NEXT/PREV}}, \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} and \sphinxcode{\sphinxupquote{LV\_KEY\_UP/DOWN/LEFT/RIGHT}}.
-In your \sphinxcode{\sphinxupquote{read\_cb}} function you should translate some of your keys to these special keys to navigate in the group and interact with the selected object.
+Les codes spéciaux les plus importants sont : \sphinxcode{\sphinxupquote{LV\_KEY\_NEXT/PREV}}, \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} et \sphinxcode{\sphinxupquote{LV\_KEY\_UP/DOWN/LEFT/RIGHT}}.
+Dans votre fonction \sphinxcode{\sphinxupquote{read\_cb}}, vous devez traduire certaines de vos codes en ces codes spéciaux pour naviguer dans le groupe et interagir avec l’objet sélectionné.
 
-Usually, it’s enough to use only \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT/RIGHT}} because most of the objects can be fully controlled with them.
+Habituellement, il suffit d’utiliser uniquement \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT/RIGHT}} car la plupart des objets peuvent être entièrement contrôlés avec eux.
 
-With an encoder, you should use only \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT}}, \sphinxcode{\sphinxupquote{LV\_KEY\_RIGHT}} and \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}}.
-
-
-\subparagraph{Edit and navigate mode}
-\label{\detokenize{overview/indev:edit-and-navigate-mode}}
-With keypads, there are plenty of keys so it’s easy to navigate among the objects and edit them. However, the encoders have a very limited number of “keys”. To effectively support encoders too \sphinxstyleemphasis{Navigate} and \sphinxstyleemphasis{Edit} is created.
-
-In \sphinxstyleemphasis{Navigate} mode the encoders \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT/RIGHT}} is translated to \sphinxcode{\sphinxupquote{LV\_KEY\_NEXT/PREV}}. Therefore the next or previous object will be selected by turning the encoder.
-Pressing \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} will change to \sphinxstyleemphasis{Edit} mode.
-
-In \sphinxstyleemphasis{Edit} mode \sphinxcode{\sphinxupquote{LV\_KEY\_NEXT/PREV}} is used normally to edit the object.
-Depending on the object’s type a short or long press of \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} changes back to \sphinxstyleemphasis{Navigate} mode.
-Usually object which can not be pressed (like a {\hyperref[\detokenize{object-types/slider::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Slider}}}}) leaves \sphinxstyleemphasis{Edit} mode on short click but with object where short click has meaning (e.g. {\hyperref[\detokenize{object-types/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button}}}}) long press is required.
+Avec un encodeur, vous devez utiliser uniquement \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT}},\sphinxcode{\sphinxupquote{ LV\_KEY\_RIGHT}} et \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}}.
 
 
-\subparagraph{Styling the focused object}
-\label{\detokenize{overview/indev:styling-the-focused-object}}
-To visually highlight the focused element its \sphinxhref{/overview/style\#use-the-styles}{Main style} will be updated.
-By default, some orange color is mixed to the original colors of the style.
-A new style modifier callback be set by \sphinxcode{\sphinxupquote{lv\_group\_set\_style\_mod\_cb(g, my\_style\_mod\_cb)}}. A style modifier callback receives a pointer to a caller group and pointer to a style to modify.
-The default style modifier looks like this (slightly simplified):
+\subparagraph{Edition et navigation}
+\label{\detokenize{overview/indev:edition-et-navigation}}
+Avec les claviers, il y a beaucoup de touches, il est donc facile de naviguer entre les objets et de les éditer. Cependant, les encodeurs ont un nombre très limité de “touches”. Afin de prendre en charge efficacement les encodeurs également, les modes \sphinxstyleemphasis{navigation} et \sphinxstyleemphasis{édition} sont créés.
+
+En mode \sphinxstyleemphasis{navigation}, les \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT/RIGHT}} des encodeurs sont traduits en\sphinxcode{\sphinxupquote{ LV\_KEY\_NEXT/PREV}}. Par conséquent, l’objet suivant ou précédent sera sélectionné en tournant l’encodeur.
+Un appui sur \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} passera en mode \sphinxstyleemphasis{édition}.
+
+En mode \sphinxstyleemphasis{édition}, \sphinxcode{\sphinxupquote{LV\_KEY\_NEXT/PREV}} sont utilisés normalement pour éditer l’objet.
+En fonction du type d’objet, une pression courte ou longue de \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} repasse en mode \sphinxstyleemphasis{navigation}.
+Généralement, un objet sur lequel vous ne pouvez pas appuyer (comme un {\hyperref[\detokenize{object-types/slider::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Curseur}}}}) quitte le mode \sphinxstyleemphasis{édition} en cas de clic bref, mais avec un objet pour lequel un clic court a une signification (par exemple, {\hyperref[\detokenize{object-types/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Bouton}}}}) un appui long est requis.
+
+
+\subparagraph{Styliser l’objet sélectionné}
+\label{\detokenize{overview/indev:styliser-l-objet-selectionne}}
+Pour mettre en évidence visuellement l’élément sélectionné, son {[}Style principal{]} (/overview/style\#utiliser-les-styles) sera mis à jour.
+Par défaut, de l’orange est mélangé aux couleurs d’origine du style.
+Une fonction de rappel pour modifier le style est définie par \sphinxcode{\sphinxupquote{lv\_group\_set\_style\_mod\_cb(g, my\_style\_mod\_cb)}}. Cette fonction reçoit un pointeur sur un groupe d’objet et un style à modifier.
+Le modificateur de style par défaut ressemble à ceci (légèrement simplifié) :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{default\PYGZus{}style\PYGZus{}mod\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}group\PYGZus{}t} \PYG{o}{*} \PYG{n}{group}\PYG{p}{,} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{o}{*} \PYG{n}{style}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-    \PYG{c+cm}{/*Make the bodies a little bit orange*/}
-    \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{opa}   \PYG{o}{=} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}COVER}\PYG{p}{;}
+    \PYG{c+cm}{/* Rend les corps un peu orange */}
+    \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{opa} \PYG{o}{=} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}COVER}\PYG{p}{;}
     \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}ORANGE}\PYG{p}{;}
     \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{width} \PYG{o}{=} \PYG{n}{LV\PYGZus{}DPI} \PYG{o}{/} \PYG{l+m+mi}{20}\PYG{p}{;}
 
@@ -4248,10 +4248,10 @@ The default style modifier looks like this (slightly simplified):
     \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color}   \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}mix}\PYG{p}{(}\PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color}\PYG{p}{,} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}ORANGE}\PYG{p}{,} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}70}\PYG{p}{)}\PYG{p}{;}
     \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{shadow}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}mix}\PYG{p}{(}\PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{shadow}\PYG{p}{.}\PYG{n}{color}\PYG{p}{,} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}ORANGE}\PYG{p}{,} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}60}\PYG{p}{)}\PYG{p}{;}
 
-    \PYG{c+cm}{/*Recolor text*/}
+    \PYG{c+cm}{/* Recolore le texte*/}
     \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}mix}\PYG{p}{(}\PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color}\PYG{p}{,} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}ORANGE}\PYG{p}{,} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}70}\PYG{p}{)}\PYG{p}{;}
 
-    \PYG{c+cm}{/*Add some recolor to the images*/}
+    \PYG{c+cm}{/* Colorise les images */}
     \PYG{k}{if}\PYG{p}{(}\PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{image}\PYG{p}{.}\PYG{n}{intense} \PYG{o}{\PYGZlt{}} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}MIN}\PYG{p}{)} \PYG{p}{\PYGZob{}}
         \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{image}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}ORANGE}\PYG{p}{;}
         \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{image}\PYG{p}{.}\PYG{n}{intense} \PYG{o}{=} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}40}\PYG{p}{;}
@@ -4259,20 +4259,20 @@ The default style modifier looks like this (slightly simplified):
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-This style modifier callback is used for keypads and encoder in \sphinxstyleemphasis{Navigate} mode.
-For the \sphinxstyleemphasis{Edit} mode and other callback is used which can be set with \sphinxcode{\sphinxupquote{lv\_group\_set\_style\_mod\_edit\_cb()}}. By default, it has a greenish color.
+Cette fonction de rappel modificateur de style est utilisée pour les claviers et encodeurs en mode \sphinxstyleemphasis{navigation}.
+En mode \sphinxstyleemphasis{édition}, une autre fonction de rappel est utilisée qui peut être définie avec \sphinxcode{\sphinxupquote{lv\_group\_set\_style\_mod\_edit\_cb()}}. Par défaut, il utilise la couleur verte.
 
 
-\subparagraph{Live demo}
-\label{\detokenize{overview/indev:live-demo}}
-Try this \sphinxhref{https://littlevgl.com/demo-touchpadless}{Live demo} to see how a group and touchpad-less navigation works in the practice.
+\subparagraph{Démonstration en ligne}
+\label{\detokenize{overview/indev:demonstration-en-ligne}}
+Essayez cette \sphinxhref{https://littlevgl.com/demo-touchpadless}{Démonstration en ligne} pour voir comment une navigation de groupe sans pavé tactile fonctionne dans la pratique.
 
 
 \paragraph{API}
 \label{\detokenize{overview/indev:api}}
 
-\subparagraph{Input device}
-\label{\detokenize{overview/indev:input-device}}\subsubsection*{Functions}
+\subparagraph{Périphérique d’entrée}
+\label{\detokenize{overview/indev:peripherique-d-entree}}\subsubsection*{Functions}
 \index{lv\_indev\_init (C++ function)@\spxentry{lv\_indev\_init}\spxextra{C++ function}}
 
 \begin{fulllineitems}
@@ -4614,7 +4614,7 @@ pointer to currently active object
 
 
 
-\subparagraph{Groups}
+\subparagraph{Groupes}
 \label{\detokenize{overview/indev:id1}}\subsubsection*{Typedefs}
 \index{lv\_key\_t (C++ type)@\spxentry{lv\_key\_t}\spxextra{C++ type}}
 
@@ -5546,155 +5546,155 @@ Stores the modified style of the focused object
 
 
 
-\subsubsection{Displays}
-\label{\detokenize{overview/display:displays}}\label{\detokenize{overview/display::doc}}
+\subsubsection{Affichage}
+\label{\detokenize{overview/display:affichage}}\label{\detokenize{overview/display::doc}}
 \begin{sphinxadmonition}{important}{Important:}
-The basic concept of \sphinxstyleemphasis{Display} in LittlevGL is explained in the {[}Porting{]}(/porting/display) section. So before reading further, please read that section first.
+Le concept de base d’\sphinxstyleemphasis{affichage} dans LittlevGL est expliqué dans la section {[}Portage{]}(/porting/display). Donc, avant de continuer à lire, veuillez lire cette section en premier.
 \end{sphinxadmonition}
 
-In LittlevGL you can have multiple displays each with its own drivers and objects.
+Dans LittlevGL, vous pouvez avoir plusieurs affichages, chacun avec ses propres pilotes et objets.
 
-Creating more displays is easy: just initialize display buffers and register the drivers for every display.
-When you create the UI use \sphinxcode{\sphinxupquote{lv\_disp\_set\_deafult(disp)}} to tell the library to which display create the object.
+Il est facile de créer plus d’affichages : il suffit d’initialiser les tampons d’affichage et d’enregistrer les pilotes pour chaque affichage.
+Lorsque vous créez l’interface utilisateur, utilisez \sphinxcode{\sphinxupquote{lv\_disp\_set\_default(disp)}} pour indiquer à la librairie dans quel affichage afficher l’objet.
 
-But in which cases can you use the multi-display support? Here are some examples:
+Mais dans quels cas pouvez-vous utiliser le support multi-affichages ? Voici quelques exemples :
 \begin{itemize}
 \item {} 
-Have a “normal” TFT display with local UI and create “virtual” screens on VNC on demand. (You need to add your own VNC driver)
+Avoir un écran TFT “normal” avec une interface utilisateur locale et créer des écrans “virtuels” sur VNC à la demande (vous devez ajouter votre propre pilote VNC).
 
 \item {} 
-Have a large TFT display and a small monochrome display.
+Avoir un grand écran TFT et un petit écran monochrome.
 
 \item {} 
-Have some smaller and simple displays in a large instrument or technology
+Avoir des écrans plus petits et simples dans un grand appareil
 
 \item {} 
-Have two large TFT displays: one for a customer and one for the shop assistant
+Avoir deux grands écrans TFT : un pour le client et un pour le vendeur
 
 \end{itemize}
 
 
-\paragraph{Using only one display}
-\label{\detokenize{overview/display:using-only-one-display}}
-Using more displays can be useful but in most of the cases, it’s not required. Therefore the whole concept of multi-displays is completely hidden if you register only one display.
-By default, the lastly created (the only one) display is used as default.
+\paragraph{Utiliser un seul affichage}
+\label{\detokenize{overview/display:utiliser-un-seul-affichage}}
+L’utilisation de plusieurs affichages peut être utile, mais dans la plupart des cas, cela n’est pas nécessaire. Par conséquent, le concept de multi-affichages est complètement masqué si vous ne déclarez qu’un seul affichage.
+Par défaut, l’affichage créé en dernier (le seul) est utilisé par défaut.
 
-\sphinxcode{\sphinxupquote{lv\_scr\_act()}}, \sphinxcode{\sphinxupquote{lv\_scr\_load(scr)}}, \sphinxcode{\sphinxupquote{lv\_layer\_top()}}, \sphinxcode{\sphinxupquote{lv\_layer\_sys()}}, \sphinxcode{\sphinxupquote{LV\_HOR\_RES}} and \sphinxcode{\sphinxupquote{LV\_VER\_RES}} are always applied on the lastly created (default) screen.
-If you pass \sphinxcode{\sphinxupquote{NULL}} as \sphinxcode{\sphinxupquote{disp}} parameter to display related function usually the default display will be used.
-E.g. \sphinxcode{\sphinxupquote{lv\_disp\_trig\_activity(NULL)}} will trigger a user activity on the default screen. (See below in {\hyperref[\detokenize{overview/display:Inactivity}]{\emph{Inactivity}}}).
-
-
-\paragraph{Mirror display}
-\label{\detokenize{overview/display:mirror-display}}
-To mirror the image of display to an other display you don’t really need to use the multi-display support. Just transfer the buffer received in \sphinxcode{\sphinxupquote{drv.flush\_cb}} to an other display too.
+\sphinxcode{\sphinxupquote{lv\_scr\_act()}}, \sphinxcode{\sphinxupquote{lv\_scr\_load(scr)}}, \sphinxcode{\sphinxupquote{lv\_layer\_top()}}, \sphinxcode{\sphinxupquote{lv\_layer\_sys()}}, \sphinxcode{\sphinxupquote{LV\_HOR\_RES}} et\sphinxcode{\sphinxupquote{ LV\_VER\_RES}} sont toujours appliqués sur l’affichage créé en dernier (par défaut).
+Si vous passez \sphinxcode{\sphinxupquote{NULL}} en tant que paramètre \sphinxcode{\sphinxupquote{disp}} de fonctions associées à l’affichage, l’affichage par défaut sera utilisé.
+P.ex. \sphinxcode{\sphinxupquote{lv\_disp\_trig\_activity(NULL)}} déclenchera une activité utilisateur sur l’affichage par défaut (voir ci-dessous dans {\hyperref[\detokenize{overview/display:inactivite}]{\emph{Inactivité}}}).
 
 
-\paragraph{Split image}
-\label{\detokenize{overview/display:split-image}}
-You can create a larger display from more smaller ones. You do it like this:
+\paragraph{Affichage miroir}
+\label{\detokenize{overview/display:affichage-miroir}}
+Pour refléter l’image de l’affichage sur un autre affichage, vous n’avez pas besoin d’utiliser le support multi-affichages. Transférez simplement le tampon reçu dans \sphinxcode{\sphinxupquote{drv.flush\_cb}} vers un autre affichage.
+
+
+\paragraph{Division d’image}
+\label{\detokenize{overview/display:division-d-image}}
+Vous pouvez créer un affichage plus grand à partir de plus petits. Voici comment faire :
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-Set the resolution of the displays to the large display’s resolution
+Définissez la résolution des affichages à celle désirée
 
 \item {} 
-In \sphinxcode{\sphinxupquote{drv.flush\_cb}} truncate and modify the \sphinxcode{\sphinxupquote{area}} parameter for each display.
+Dans \sphinxcode{\sphinxupquote{drv.flush\_cb}}, tronquez et modifiez le paramètre \sphinxcode{\sphinxupquote{area}} pour chaque affichage
 
 \item {} 
-Send the buffer’s content to each display with the truncated area,
+Envoyez le contenu du tampon à chaque affichage pour la zone tronquée
 
 \end{enumerate}
 
 
-\paragraph{Screens}
-\label{\detokenize{overview/display:screens}}
-Every display has it each set of \sphinxhref{overview/object\#screen-the-most-basic-parent}{Screens} and the object on the screens.
+\paragraph{Ecrans}
+\label{\detokenize{overview/display:ecrans}}
+Chaque affichage possède son propre ensemble d’ \sphinxhref{/overview/object\#ecran-le-parent-le-plus-elementaire}{Ecrans} et d’objets à l’écran.
 
-Screens can be considered the highest level containers which have no parent.
-The screen’s size is always equal to its display’s and size their position is (0;0). Therefore the screens coordinates can’t be changed, i.e. \sphinxcode{\sphinxupquote{lv\_obj\_set\_pos()}}, \sphinxcode{\sphinxupquote{lv\_obj\_set\_size()}} or similar functions can’t be used on screens.
+Les écrans peuvent être considérés comme les conteneurs de plus haut niveau sans parent.
+La taille de l’écran est toujours égale à celle de son affichage et sa position est (0, 0). Par conséquent, les coordonnées des écrans ne peuvent pas être modifiées, c-à-d \sphinxcode{\sphinxupquote{lv\_obj\_set\_pos()}}, \sphinxcode{\sphinxupquote{lv\_obj\_set\_size()}} ou les fonctions similaires ne peuvent pas être utilisées sur les écrans.
 
-A screen can be created from any object type but two most typical types are the {\hyperref[\detokenize{object-types/obj::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Base object}}}} and the {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} (to create a wallpaper).
+Un écran peut être créé à partir de n’importe quel type d’objet, mais les deux types les plus courants sont {\hyperref[\detokenize{object-types/obj::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Objet de base}}}} et {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} (pour créer un fond d’écran).
 
-To create a screen use \sphinxcode{\sphinxupquote{lv\_obj\_t * scr = lv\_\textless{}type\textgreater{}\_create(NULL, copy)}}. \sphinxcode{\sphinxupquote{copy}} can be an other screen to copy it.
+Pour créer un écran, utilisez \sphinxcode{\sphinxupquote{lv\_obj\_t * scr = lv\_\textless{}type\textgreater{}\_create(NULL, copy)}}. \sphinxcode{\sphinxupquote{copy}} peut être un autre écran à copier.
 
-To load a screen use \sphinxcode{\sphinxupquote{lv\_scr\_load(scr)}}. The get active screen use \sphinxcode{\sphinxupquote{lv\_scr\_act()}}. These functions works on the default display to specify which display you mean use \sphinxcode{\sphinxupquote{lv\_disp\_get\_scr\_act(disp)}} and \sphinxcode{\sphinxupquote{lv\_disp\_load\_scr(disp, scr)}}.
+Pour charger un écran, utilisez \sphinxcode{\sphinxupquote{lv\_scr\_load(scr)}}. Pour obtenir l’écran actif utilisez \sphinxcode{\sphinxupquote{lv\_scr\_act()}}. Ces fonctions agissent sur l’affichage par défaut. Pour spécifier l’affichage, utilisez \sphinxcode{\sphinxupquote{lv\_disp\_get\_scr\_act(disp)}} et \sphinxcode{\sphinxupquote{lv\_disp\_load\_scr(disp, scr)}}.
 
-Screens can be deleted with \sphinxcode{\sphinxupquote{lv\_obj\_del(scr)}} but be sure to not delete currently loaded screen.
-
-
-\subparagraph{Opaque screen}
-\label{\detokenize{overview/display:opaque-screen}}
-Usually, the opacity of the screen is \sphinxcode{\sphinxupquote{LV\_OPA\_COVER}} to provide a solid, folly covering background for its children.
-However, in some special case, you might want a transparent screen. For example, if you have a video player which renders the video frames on a layer but on an other layer you want to create an OSD menu (over the video) using LittlevGL.
-In this the style of the screen you should have \sphinxcode{\sphinxupquote{body.opa = LV\_OPA\_TRANSP}} or \sphinxcode{\sphinxupquote{image.opa = LV\_OPA\_TRANSP}} (or other \sphinxcode{\sphinxupquote{LV\_OPA\_...}} values) to make the screen opaque.
-To properly handle the screens opacity \sphinxcode{\sphinxupquote{LV\_COLOR\_SCREEN\_TRANSP}} needs to be enabled. Not that, it works on with \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH = 32}}.
-The Alpha channel of 32-bit colors will be 0 where there are no objects and will be 255 where there are solid objects.
+Les écrans peuvent être supprimés avec \sphinxcode{\sphinxupquote{lv\_obj\_del(scr)}} mais assurez-vous de ne pas supprimer l’écran actuellement chargé.
 
 
-\paragraph{Features of displays}
-\label{\detokenize{overview/display:features-of-displays}}
-
-\subparagraph{Inactivity}
-\label{\detokenize{overview/display:inactivity}}
-The user’s inactivity is measured on each display. Every use of an {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Input device}}}} (if \sphinxhref{/porting/indev\#other-features}{associated with the display}) counts as an activity.
-To get time elapsed since the last activity use \sphinxcode{\sphinxupquote{lv\_disp\_get\_inactive\_time(disp)}}. If \sphinxcode{\sphinxupquote{NULL}} is passed the overall smallest inactivity time will be returned from all displays.
-
-You can manually trigger an activity using \sphinxcode{\sphinxupquote{lv\_disp\_trig\_activity(disp)}}. If \sphinxcode{\sphinxupquote{disp}} is \sphinxcode{\sphinxupquote{NULL}} the default screen will be used.
+\subparagraph{Ecran opaque}
+\label{\detokenize{overview/display:ecran-opaque}}
+Habituellement, l’opacité de l’écran est \sphinxcode{\sphinxupquote{LV\_OPA\_COVER}} afin de fournir un fond solide et totalement couvrant pour les enfants.
+Cependant, dans certains cas particuliers, vous voudrez peut-être un écran transparent. Par exemple, si vous avez un lecteur vidéo qui restitue les images vidéo sur un calque mais sur un autre calque, vous souhaitez créer un menu OSD (au-dessus de la vidéo) à l’aide de LittlevGL.
+Dans ce cas, le style de l’écran doit avoir \sphinxcode{\sphinxupquote{body.opa = LV\_OPA\_TRANSP}} ou \sphinxcode{\sphinxupquote{image.opa = LV\_OPA\_TRANSP}} (ou d’autres valeurs \sphinxcode{\sphinxupquote{LV\_OPA \_...}}) pour rendre l’écran transparent.
+Pour gérer correctement l’opacité des écrans, \sphinxcode{\sphinxupquote{LV\_COLOR\_SCREEN\_TRANSP}} doit être activé. Notez que cela ne fonctionne qu’avec \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH = 32}}.
+Le canal alpha des couleurs 32 bits sera 0 lorsqu’il n’y a pas d’objets et 255 en cas d’objets solides.
 
 
-\paragraph{Colors}
-\label{\detokenize{overview/display:colors}}
-The color module handles all color-related functions like changing color depth, creating colors from hex code, converting between color depths, mixing colors etc.
+\paragraph{Fonctionnalités des affichages}
+\label{\detokenize{overview/display:fonctionnalites-des-affichages}}
 
-The following variable types are defined by the color module:
+\subparagraph{Inactivité}
+\label{\detokenize{overview/display:inactivite}}
+L’inactivité de l’utilisateur est surveillée pour chaque affichage. Chaque utilisation d’un {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Périphérique d’entrée}}}} (s’il est \sphinxhref{/porting/indev\#autres-fonctionnalites}{associé à l’affichage}) compte comme une activité.
+Pour obtenir le temps écoulé depuis la dernière activité, utilisez \sphinxcode{\sphinxupquote{lv\_disp\_get\_inactive\_time(disp)}}. Si \sphinxcode{\sphinxupquote{NULL}} est passé comme paramètre, le temps d’inactivité le plus petit de tous les affichages sera retourné.
+
+Vous pouvez simuler une activité en utilisant \sphinxcode{\sphinxupquote{lv\_disp\_trig\_activity(disp)}}. Si \sphinxcode{\sphinxupquote{disp}} est\sphinxcode{\sphinxupquote{ NULL}}, l’affichage par défaut sera utilisé.
+
+
+\paragraph{Couleurs}
+\label{\detokenize{overview/display:couleurs}}
+Le module couleur gère toutes les fonctions liées aux couleurs telles que la modification de la profondeur de couleur, la création de couleurs à partir de code hexadécimal, la conversion entre les profondeurs de couleur, le mélange de couleurs, etc.
+
+Les types de variable suivants sont définis par le module couleur :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{lv\_color1\_t} Store monochrome color. For compatibility it also has R,G,B fields but they are always the same (1 byte)
+\sphinxstylestrong{lv\_color1\_t} Enregistre une couleur monochrome. Pour la compatibilité, il possède également des champs R, G, B mais ils sont tous identiques (1 octet)
 
 \item {} 
-\sphinxstylestrong{lv\_color8\_t} A structure to store R (3 bit),G (3 bit),B (2 bit) components for 8 bit colors (1 byte)
+\sphinxstylestrong{lv\_color8\_t} Une structure pour enregistrer R (3 bits), G (3 bits), B (2 bits) composantes d’une couleur 8 bits (1 octet)
 
 \item {} 
-\sphinxstylestrong{lv\_color16\_t} A structure to store R (5 bit),G (6 bit),B (5 bit) components for 16 bit colors (2 byte)
+\sphinxstylestrong{lv\_color16\_t} Une structure pour enregistrer R (5 bits), G (6 bits), B (5 bits) composantes d’une couleur 16 bits (2 octets)
 
 \item {} 
-\sphinxstylestrong{lv\_color32\_t} A structure to store R (8 bit),G (8 bit), B (8 bit) components for 24 bit colors (4 byte)
+\sphinxstylestrong{lv\_color32\_t} Une structure pour enregistrer R (8 bits), G (8 bits), B (8 bits) composantes d’une couleur 24 bits (4 octets)
 
 \item {} 
-\sphinxstylestrong{lv\_color\_t} Equal to \sphinxcode{\sphinxupquote{lv\_color1/8/16/24\_t}} according to color depth settings
+\sphinxstylestrong{lv\_color\_t} Equivaut à \sphinxcode{\sphinxupquote{lv\_color1/8/16/24\_t}} selon le paramètre de profondeur de couleur
 
 \item {} 
-\sphinxstylestrong{lv\_color\_int\_t} \sphinxcode{\sphinxupquote{uint8\_t}}, \sphinxcode{\sphinxupquote{uint16\_t}} or \sphinxcode{\sphinxupquote{uint32\_t}} according to color depth setting. Used to build color arrays from plain numbers.
+\sphinxstylestrong{lv\_color\_int\_t} \sphinxcode{\sphinxupquote{uint8\_t}}, \sphinxcode{\sphinxupquote{uint16\_t}} ou \sphinxcode{\sphinxupquote{uint32\_t}} selon le paramètre de profondeur de couleur. Utilisé pour construire des tableaux de couleurs à partir de valeurs numériques.
 
 \item {} 
-\sphinxstylestrong{lv\_opa\_t} A simple \sphinxcode{\sphinxupquote{uint8\_}}t type to describe opacity.
+\sphinxstylestrong{lv\_opa\_t} Un simple type \sphinxcode{\sphinxupquote{uint8\_t}} pour définir l’opacité.
 
 \end{itemize}
 
-The \sphinxcode{\sphinxupquote{lv\_color\_t}}, \sphinxcode{\sphinxupquote{lv\_color1\_t}}, \sphinxcode{\sphinxupquote{lv\_color8\_t}}, \sphinxcode{\sphinxupquote{lv\_color16\_t}} and \sphinxcode{\sphinxupquote{lv\_color32\_t}} types have got four fields:
+Les types \sphinxcode{\sphinxupquote{lv\_color\_t}},\sphinxcode{\sphinxupquote{ lv\_color1\_t}}, \sphinxcode{\sphinxupquote{lv\_color8\_t}}, \sphinxcode{\sphinxupquote{lv\_color16\_t}} et \sphinxcode{\sphinxupquote{lv\_color32\_t}} ont quatre champs :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{ch.red} red channel
+\sphinxstylestrong{ch.red} canal rouge
 
 \item {} 
-\sphinxstylestrong{ch.green} green channel
+\sphinxstylestrong{ch.green} canal vert
 
 \item {} 
-\sphinxstylestrong{ch.blue} blue channel
+\sphinxstylestrong{ch.blue} canal bleu
 
 \item {} 
-\sphinxstylestrong{full} red + green + blue as one number
+\sphinxstylestrong{full} rouge + vert + bleu en une seule valeur
 
 \end{itemize}
 
-You can set the current color depth in \sphinxstyleemphasis{lv\_conf.h} by setting the \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}} define to 1 (monochrome), 8, 16 or 32.
+Vous pouvez définir la profondeur de couleur actuelle dans \sphinxstyleemphasis{lv\_conf.h} en définissant la valeur \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}} sur 1 (monochrome), 8, 16 ou 32.
 
 
-\subparagraph{Convert color}
-\label{\detokenize{overview/display:convert-color}}
-You can convert a color from the current color depth to an other. The converter functions return with a number so you have to use the \sphinxcode{\sphinxupquote{full}} field:
+\subparagraph{Conversion de couleur}
+\label{\detokenize{overview/display:conversion-de-couleur}}
+Vous pouvez convertir une couleur de la profondeur de couleur actuelle en une autre. Les fonctions de conversion retourne un nombre, vous devez donc utiliser le champ \sphinxcode{\sphinxupquote{full}} :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{c}\PYG{p}{;}
@@ -5703,64 +5703,64 @@ You can convert a color from the current color depth to an other. The converter 
 \PYG{n}{c}\PYG{p}{.}\PYG{n}{blue}  \PYG{o}{=} \PYG{l+m+mh}{0xCC}\PYG{p}{;}
 
 \PYG{n}{lv\PYGZus{}color1\PYGZus{}t} \PYG{n}{c1}\PYG{p}{;}
-\PYG{n}{c1}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to1}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;}	\PYG{c+cm}{/*Return 1 for light colors, 0 for dark colors*/}
+\PYG{n}{c1}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to1}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;}	\PYG{c+cm}{/* Retourne 1 pour les couleurs claires, 0 pour les couleurs sombres */}
 
 \PYG{n}{lv\PYGZus{}color8\PYGZus{}t} \PYG{n}{c8}\PYG{p}{;}
-\PYG{n}{c8}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to8}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;}	\PYG{c+cm}{/*Give a 8 bit number with the converted color*/} 
+\PYG{n}{c8}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to8}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;}	\PYG{c+cm}{/* Donne un nombre de 8 bits avec la couleur convertie */} 
 
 \PYG{n}{lv\PYGZus{}color16\PYGZus{}t} \PYG{n}{c16}\PYG{p}{;}
-\PYG{n}{c16}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to16}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;} \PYG{c+cm}{/*Give a 16 bit number with the converted color*/}
+\PYG{n}{c16}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to16}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;} \PYG{c+cm}{/* Donne un nombre de 16 bits avec la couleur convertie */}
 
-\PYG{n}{lv\PYGZus{}color32\PYGZus{}t} \PYG{n}{c24}\PYG{p}{;}
-\PYG{n}{c32}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to32}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;}	\PYG{c+cm}{/*Give a 32 bit number with the converted color*/}
+\PYG{n}{lv\PYGZus{}color32\PYGZus{}t} \PYG{n}{c32}\PYG{p}{;}
+\PYG{n}{c32}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to32}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;}	\PYG{c+cm}{/* Donne un nombre de 32 bits avec la couleur convertie */}
 \end{sphinxVerbatim}
 
 
-\subparagraph{Swap 16 colors}
-\label{\detokenize{overview/display:swap-16-colors}}
-You may set \sphinxcode{\sphinxupquote{LV\_COLOR\_16\_SWAP}} in \sphinxstyleemphasis{lv\_conf.h} to swap the bytes of \sphinxstyleemphasis{RGB565} colors. It’s useful if you send the 16 bit colors via a byte-oriented interface like SPI.
-As 16 bit numbers are stored in Little Endian format (lower byte on the lower address) the interface will send the lower byte first. However, displays usually need the higher byte first. A mismatch in the byte order will result in highly distorted colors.
+\subparagraph{Permutation 16 bits}
+\label{\detokenize{overview/display:permutation-16-bits}}
+Vous pouvez définir \sphinxcode{\sphinxupquote{LV\_COLOR\_16\_SWAP}} dans \sphinxstyleemphasis{lv\_conf.h} pour permuter les octets de \sphinxstyleemphasis{couleurs RGB565}. C’est utile si vous transférez les couleurs 16 bits via une interface orientée octet comme SPI.
+Comme les nombres de 16 bits sont stockés au format Little Endian (octet le moins significatif à l’adresse la plus basse), l’interface envoie d’abord l’octet le moins significatif. Cependant, les écrans ont généralement besoin de l’octet le plus significatif en premier. Une non-concordance dans l’ordre des octets entraînera une altération des couleurs.
 
 
-\subparagraph{Create and mix colors}
-\label{\detokenize{overview/display:create-and-mix-colors}}
-You can create colors with the current color depth using the LV\_COLOR\_MAKE macro. It takes 3 arguments (red, green, blue) as 8 bit numbers.
-For example to create light red color: \sphinxcode{\sphinxupquote{my\_color = COLOR\_MAKE(0xFF,0x80,0x80)}}.
+\subparagraph{Créer et mélanger les couleurs}
+\label{\detokenize{overview/display:creer-et-melanger-les-couleurs}}
+Vous pouvez créer des couleurs avec la profondeur de couleur actuelle à l’aide de la macro LV\_COLOR\_MAKE. Il faut 3 arguments (rouge, vert, bleu) sous forme de nombres de 8 bits.
+Par exemple, pour créer une couleur rouge clair : \sphinxcode{\sphinxupquote{my\_color = COLOR\_MAKE(0xFF, 0x80,0x80)}}.
 
-Colors can be created from HEX codes too: \sphinxcode{\sphinxupquote{my\_color = lv\_color\_hex(0x288ACF)}} or \sphinxcode{\sphinxupquote{my\_color = lv\_folro\_hex3(0x28C)}}.
+Les couleurs peuvent aussi être créées à partir de codes hexadécimaux : \sphinxcode{\sphinxupquote{my\_color = lv\_color\_hex(0x288ACF)}} ou \sphinxcode{\sphinxupquote{my\_color = lv\_color\_hex(0x28C)}}.
 
-Mixing two colors is possible with \sphinxcode{\sphinxupquote{mixed\_color = lv\_color\_mix(color1, color2, ratio)}}. Ration can be 0..255. 0 results fully color2, 255 result fully color1.
+Le mélange de deux couleurs est possible avec \sphinxcode{\sphinxupquote{mixed\_color = lv\_color\_mix(color1, color2, ratio)}}. Le ratio peut être 0..255. 0 donne entièrement color2, 255 donne entièrement color1.
 
-Colors can be created with from HSV space too using \sphinxcode{\sphinxupquote{lv\_color\_hsv\_to\_rgb(hue, saturation, value)}} . \sphinxcode{\sphinxupquote{hue}} should be in 0..360 range, \sphinxcode{\sphinxupquote{saturation}} and \sphinxcode{\sphinxupquote{value}} in 0..100 range.
+Les couleurs peuvent aussi être créées avec l’espace HSV en utilisant \sphinxcode{\sphinxupquote{lv\_color\_hsv\_to\_rgb(hue, saturation, value)}}. \sphinxcode{\sphinxupquote{hue}} devrait être dans la plage 0..360, \sphinxcode{\sphinxupquote{saturation}} et \sphinxcode{\sphinxupquote{value}} dans la plage 0..100.
 
 
-\subparagraph{Opacity}
-\label{\detokenize{overview/display:opacity}}
-To describe opacity the \sphinxcode{\sphinxupquote{lv\_opa\_t}} type is created as a wrapper to \sphinxcode{\sphinxupquote{uint8\_t}}. Some defines are also introduced:
+\subparagraph{Opacité}
+\label{\detokenize{overview/display:opacite}}
+Pour décrire l’opacité, le type \sphinxcode{\sphinxupquote{lv\_opa\_t}} est créé comme équivalent d’un \sphinxcode{\sphinxupquote{uint8\_t}}. Quelques définitions sont également introduites :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_OPA\_TRANSP} Value: 0, means the opacity makes the color fully transparent
+\sphinxstylestrong{LV\_OPA\_TRANSP} Valeur : 0, l’opacité rend la couleur totalement transparente.
 
 \item {} 
-\sphinxstylestrong{LV\_OPA\_10} Value: 25, means the color covers only a little
+\sphinxstylestrong{LV\_OPA\_10} Valeur : 25, signifie que la couleur est un peu couvrante
 
 \item {} 
-\sphinxstylestrong{LV\_OPA\_20 … OPA\_80} come logically
+\sphinxstylestrong{LV\_OPA\_20 … OPA\_80} viennent logiquement
 
 \item {} 
-\sphinxstylestrong{LV\_OPA\_90} Value: 229, means the color near fully covers
+\sphinxstylestrong{LV\_OPA\_90} Valeur : 229 signifie que la couleur est presque entièrement couvrante
 
 \item {} 
-\sphinxstylestrong{LV\_OPA\_COVER} Value: 255, means the color fully covers
+\sphinxstylestrong{LV\_OPA\_COVER} Valeur : 255, signifie que la couleur couvre entièrement
 
 \end{itemize}
 
-You can also use the \sphinxcode{\sphinxupquote{LV\_OPA\_*}} defines in \sphinxcode{\sphinxupquote{lv\_color\_mix()}} as \sphinxstyleemphasis{ratio}.
+Vous pouvez également utiliser les définitions \sphinxcode{\sphinxupquote{LV\_OPA\_*}} dans \sphinxcode{\sphinxupquote{lv\_color\_mix()}} en tant que \sphinxstyleemphasis{ratio}.
 
 
-\subparagraph{Built-in colors}
-\label{\detokenize{overview/display:built-in-colors}}
-The color module defines the most basic colors:
+\subparagraph{Couleurs intégrées}
+\label{\detokenize{overview/display:couleurs-integrees}}
+Le module couleur définit les couleurs les plus basiques :
 \begin{itemize}
 \item {} 
 \sphinxincludegraphics{{000000}.png}\#000000 \sphinxcode{\sphinxupquote{LV\_COLOR\_BLACK}}
@@ -5815,14 +5815,14 @@ The color module defines the most basic colors:
 
 \end{itemize}
 
-as well as \sphinxcode{\sphinxupquote{LV\_COLOR\_WHITE}}.
+ainsi que \sphinxcode{\sphinxupquote{LV\_COLOR\_WHITE}}.
 
 
 \paragraph{API}
 \label{\detokenize{overview/display:api}}
 
-\subparagraph{Display}
-\label{\detokenize{overview/display:display}}\subsubsection*{Functions}
+\subparagraph{Affichage}
+\label{\detokenize{overview/display:id1}}\subsubsection*{Functions}
 \index{lv\_disp\_get\_scr\_act (C++ function)@\spxentry{lv\_disp\_get\_scr\_act}\spxextra{C++ function}}
 
 \begin{fulllineitems}
@@ -6052,8 +6052,8 @@ pointer to the sys layer
 
 
 
-\subparagraph{Colors}
-\label{\detokenize{overview/display:id1}}\subsubsection*{Typedefs}
+\subparagraph{Couleurs}
+\label{\detokenize{overview/display:id2}}\subsubsection*{Typedefs}
 \index{lv\_color\_int\_t (C++ type)@\spxentry{lv\_color\_int\_t}\spxextra{C++ type}}
 
 \begin{fulllineitems}
@@ -6499,38 +6499,38 @@ Opacity percentages.
 
 
 
-\subsubsection{Fonts}
-\label{\detokenize{overview/font:fonts}}\label{\detokenize{overview/font::doc}}
-In LittlevGL fonts are collections of bitmaps and other information required to render the images of the letters (glyph). A font is stored in a \sphinxstylestrong{lv\_font\_t} variable and can be set it in style’s \sphinxstyleemphasis{text.font} field. For example:
+\subsubsection{Polices}
+\label{\detokenize{overview/font:polices}}\label{\detokenize{overview/font::doc}}
+Dans LittlevGL, les polices sont des collections d’images matricielles et d’autres informations nécessaires au rendu des images des lettres (glyphes). Une police est stockée dans une variable \sphinxstylestrong{lv\_font\_t} et peut être affectée au champ \sphinxstyleemphasis{text.font} du style. Par exemple :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{my\PYGZus{}style}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{font} \PYG{o}{=} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}font\PYGZus{}roboto\PYGZus{}28}\PYG{p}{;}  \PYG{c+cm}{/*Set a larger font*/}
+\PYG{n}{my\PYGZus{}style}\PYG{p}{.}\PYG{n}{text}\PYG{p}{.}\PYG{n}{font} \PYG{o}{=} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}font\PYGZus{}roboto\PYGZus{}28}\PYG{p}{;}  \PYG{c+cm}{/* Définit une police plus grande */}
 \end{sphinxVerbatim}
 
-The fonts have a \sphinxstylestrong{bpp (Bit-Per-Pixel)} property. It shows how many bits are used to describe a pixel in the font. The value stored for a pixel determines the pixel’s opacity.
-This way with higher \sphinxstyleemphasis{bpp} the edges of the letter can be smoother. The possible \sphinxstyleemphasis{bpp} values are 1, 2, 4 and 8 (higher value means better quality).
+Les polices ont une propriété \sphinxstylestrong{bpp (Bits Par Pixel)}. Il indique combien de bits sont utilisés pour décrire un pixel dans la police. La valeur enregistrée pour un pixel détermine l’opacité du pixel.
+De cette façon, avec un \sphinxstyleemphasis{bpp} plus important, les bords de la lettre peuvent être lissés. Les valeurs de \sphinxstyleemphasis{bpp} possibles sont 1, 2, 4 et 8 (une valeur plus élevée signifie une meilleure qualité).
 
-The \sphinxstyleemphasis{bpp} also affects the required memory size to store the font. E.g. \sphinxstyleemphasis{bpp = 4} makes the font \textasciitilde{}4 times greater compared to \sphinxstyleemphasis{bpp = 1}.
+Le * bpp * affecte également la taille de la mémoire requise pour utiliser la police. P.ex. \sphinxstyleemphasis{bpp = 4} rend la police environ 4 fois plus volumineuse que \sphinxstyleemphasis{bpp = 1}.
 
 
-\paragraph{Unicode support}
-\label{\detokenize{overview/font:unicode-support}}
-LittlevGL supports \sphinxstylestrong{UTF-8} encoded Unicode characters.
-You need to configure your editor to save your code/text as UTF-8 (usually this the default) and be sure \sphinxcode{\sphinxupquote{LV\_TXT\_ENC}} is set to \sphinxcode{\sphinxupquote{LV\_TXT\_ENC\_UTF8}} in \sphinxstyleemphasis{lv\_conf.h}. (This is the default value)
+\paragraph{Support Unicode}
+\label{\detokenize{overview/font:support-unicode}}
+LittlevGL prend en charge les caractères Unicode codés \sphinxstylestrong{UTF-8}.
+Vous devez configurer votre éditeur pour qu’il enregistre votre code/texte au format UTF-8 (généralement par défaut) et assurez-vous que \sphinxcode{\sphinxupquote{LV\_TXT\_ENC}} est défini sur \sphinxcode{\sphinxupquote{LV\_TXT\_ENC\_UTF8}} dans \sphinxstyleemphasis{lv\_conf.h} (ceci est la valeur par défaut).
 
-To test it try
+Pour le vérifier, essayez
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{label1} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{label1}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SYMBOL\PYGZus{}OK}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-If all works well a \(\checkmark\) character should be displayed.
+Si tout fonctionne bien, un caractère \(\checkmark\) devrait être affiché.
 
 
-\paragraph{Built-in fonts}
-\label{\detokenize{overview/font:built-in-fonts}}
-There are several built-in fonts in different sizes which can be enabled in lv\_conf.h by \sphinxstyleemphasis{LV\_FONT\_…} defines:
+\paragraph{Polices intégrées}
+\label{\detokenize{overview/font:polices-integrees}}
+Il existe plusieurs polices intégrées de différentes tailles qui peuvent être activées dans lv\_conf.h par la définition de constantes symboliques \sphinxstyleemphasis{LV\_FONT\_…} :
 \begin{itemize}
 \item {} 
 \sphinxcode{\sphinxupquote{LV\_FONT\_ROBOTO\_12}} 12 px
@@ -6546,315 +6546,315 @@ There are several built-in fonts in different sizes which can be enabled in lv\_
 
 \end{itemize}
 
-The built-in fonts are \sphinxstylestrong{global variables} with names like \sphinxcode{\sphinxupquote{lv\_font\_roboto\_16}} for 16 px hight font. To use them in a style just add a pointer to a font variable like shown above.
+Les polices intégrées sont des \sphinxstylestrong{variables globales} portant des noms tels que \sphinxcode{\sphinxupquote{lv\_font\_roboto\_16}} pour une police de 16 pixels de haut. Pour les utiliser dans un style, ajoutez simplement un pointeur sur une variable de police, comme indiqué ci-dessus.
 
-The built-in fonts have \sphinxstyleemphasis{bpp = 4}, contains the ASCII characters and uses the \sphinxhref{https://fonts.google.com/specimen/Roboto}{Roboto} font.
+Les polices intégrées ont \sphinxstyleemphasis{bpp = 4}, contiennent les caractères ASCII et utilisent la police \sphinxhref{https://fonts.google.com/specimen/Roboto}{Roboto}.
 
-In addition to the ASCII rangle, the following symbols are also added to the built-in fonts from the \sphinxhref{https://fontawesome.com/}{FontAwesome} font.
+Outre la plage ASCII, les symboles suivants sont également ajoutés aux polices intégrées à partir de la police \sphinxhref{https://fontawesome.com/}{FontAwesome}.
 
 \sphinxincludegraphics{{symbols}.png}
 
-The symbols can be used as:
+Les symboles peuvent être utilisés ainsi :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{my\PYGZus{}label}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SYMBOL\PYGZus{}OK}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-Or with together with strings:
+Ou avec des chaînes :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{my\PYGZus{}label}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SYMBOL\PYGZus{}OK} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Apply}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-Or more symbols together:
+Ou plusieurs symboles ensemble :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{my\PYGZus{}label}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SYMBOL\PYGZus{}OK} \PYG{n}{LV\PYGZus{}SYMBOL\PYGZus{}WIFI} \PYG{n}{LV\PYGZus{}SYMBOL\PYGZus{}PLAY}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
 
-\paragraph{Add new font}
-\label{\detokenize{overview/font:add-new-font}}
-There are several ways to add a new font to your project:
+\paragraph{Ajouter une nouvelle police}
+\label{\detokenize{overview/font:ajouter-une-nouvelle-police}}
+Il y a plusieurs manières d’ajouter une nouvelle police à votre projet :
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-The most simple way is to use the \sphinxhref{https://littlevgl.com/font\_conv\_new}{Online font converter}. Just set the parameters, click the \sphinxstyleemphasis{Convert} button, copy the font to your project and use it.
+Le moyen le plus simple consiste à utiliser le \sphinxhref{https://littlevgl.com/ttf-font-to-c-array}{Convertisseur de polices en ligne}. Il suffit de définir les paramètres, de cliquer sur le bouton \sphinxstyleemphasis{Convert}, de copier la police dans votre projet et de l’utiliser.
 
 \item {} 
-Use the \sphinxhref{https://github.com/littlevgl/lv\_font\_conv}{Offline font converter}. (Requires Node.js to be installed)
+Utilisez le {[}Convertisseur de polices hors ligne{]} (https://github.com/littlevgl/lv\_font\_conv) (nécessite l’installation de Node.js).
 
 \item {} 
-If you want to create something like the built-in fonts (Roboto font and symbols) but in different size and/or ranges you can use the \sphinxcode{\sphinxupquote{built\_in\_font\_gen.py}} script in \sphinxcode{\sphinxupquote{lvgl/scripts/built\_in\_font}} folder.
-(It requires Python and \sphinxcode{\sphinxupquote{lv\_font\_conv}} to be installed)
+Si vous voulez créer quelque chose comme les polices intégrées (police Roboto et symboles) mais de tailles et/ou de plages différentes, vous pouvez utiliser le script \sphinxcode{\sphinxupquote{built\_in\_font\_gen.py}} du dossier \sphinxcode{\sphinxupquote{lvgl/scripts/built\_in\_font}}.
+Il nécessite que Python et \sphinxcode{\sphinxupquote{lv\_font\_conv}} soient installés.
 
 \end{enumerate}
 
-To declare the font in a file use \sphinxcode{\sphinxupquote{LV\_FONT\_DECLARE(my\_font\_name)}}.
+Pour déclarer la police dans un fichier, utilisez \sphinxcode{\sphinxupquote{LV\_FONT\_DECLARE(my\_font\_name)}}.
 
-To make to font globally available add them to \sphinxcode{\sphinxupquote{LV\_FONT\_CUSTOM\_DECLARE}} in \sphinxstyleemphasis{lv\_conf.h}.
+Pour rendre les polices disponibles globalement, ajoutez-les à \sphinxcode{\sphinxupquote{LV\_FONT\_CUSTOM\_DECLARE}} dans \sphinxstyleemphasis{lv\_conf.h}.
 
 
-\paragraph{Add new symbols}
-\label{\detokenize{overview/font:add-new-symbols}}
-The built-in symbols are created from \sphinxhref{https://fontawesome.com/}{FontAwesome} font. To add new symbols from the FontAwesome font do the following steps:
+\paragraph{Ajouter de nouveaux symboles}
+\label{\detokenize{overview/font:ajouter-de-nouveaux-symboles}}
+Les symboles intégrés sont créés à partir de la police \sphinxhref{https://fontawesome.com/}{FontAwesome}. Pour ajouter de nouveaux symboles à partir de la police FontAwesome, procédez comme suit :
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-Search symbol on \sphinxurl{https://fontawesome.com}. For example the \sphinxhref{https://fontawesome.com}{USB symbol}
+Recherchez un symbole sur {[}https://fontawesome.com{]} (https://fontawesome.com). Par exemple le symbole \sphinxhref{https://fontawesome.com}{USB}
 
 \item {} 
-Open the \sphinxhref{https://littlevgl.com/font\_conv\_new}{Online font converter} add \sphinxhref{https://littlevgl.com/tools/FontAwesome.ttf}{FontAwesome.ttf} and add the Unicode ID of the symbol to the range field. E.g.\sphinxcode{\sphinxupquote{ 0xf287}} for the USB symbol.
-More symbols can be enumerated with \sphinxcode{\sphinxupquote{,}}.
+Ouvrez le \sphinxhref{https://littlevgl.com/font\_conv\_new}{Convertisseur de polices en ligne}, ajoutez {[}FontAwesome.ttf{]} (https://littlevgl.com/tools/FontAwesome.ttf) et ajoutez l’ID Unicode du symbole au champ plage. P.ex. \sphinxcode{\sphinxupquote{0xf287}} pour le symbole USB.
+Plusieurs symboles peuvent être énumérés séparés par \sphinxcode{\sphinxupquote{,}}.
 
 \item {} 
-Convert the font and copy it to your project.
+Convertissez la police et copiez-la dans votre projet.
 
 \item {} 
-Convert the Unicode value to UTF8. You can do it e.g.on \sphinxhref{http://www.ltg.ed.ac.uk/\%7Erichard/utf-8.cgi?input=f287\&mode=hex}{this site}. For \sphinxcode{\sphinxupquote{0xf287}} the \sphinxstyleemphasis{Hex UTF-8 bytes} are \sphinxcode{\sphinxupquote{EF 8A 87}}.
+Convertissez la valeur Unicode en UTF8. Vous pouvez le faire, par exemple, sur ce {[}site{]} (http://www.ltg.ed.ac.uk/\textasciitilde{}richard/utf-8.cgi?input=f287\&mode=hex). Pour \sphinxcode{\sphinxupquote{0xf287}}, les \sphinxstyleemphasis{octets hexadécimaux UTF-8} sont \sphinxcode{\sphinxupquote{EF 8A 87}}.
 
 \item {} 
-Create a \sphinxcode{\sphinxupquote{define}} from the UTF8 values: \sphinxcode{\sphinxupquote{\#define MY\_USB\_SYMBOL "\textbackslash{}xEF\textbackslash{}x8A\textbackslash{}x87"}}
+Créez un \sphinxcode{\sphinxupquote{définition de constante symbolique}} à partir des valeurs UTF8 : \sphinxcode{\sphinxupquote{\#define MY\_USB\_SYMBOL "\textbackslash{} xEF \textbackslash{} x8A \textbackslash{} x87" }}
 
 \item {} 
-Use the symbol as the built-in symbols. \sphinxcode{\sphinxupquote{lv\_label\_set\_text(label, MY\_USB\_SYMBOL)}}
+Utilisez le symbole comme les symboles intégrés. \sphinxcode{\sphinxupquote{lv\_label\_set\_text (label, MY\_USB\_SYMBOL)}}
 
 \end{enumerate}
 
 
-\paragraph{Add a new font engine}
-\label{\detokenize{overview/font:add-a-new-font-engine}}
-LittlevGL’s font interface is designed to be very flexible.
-You don’t need to use LittlevGL’s internal font engine but you can add your own.
-For example use \sphinxhref{https://www.freetype.org/}{FreeType} to real-time render glyphs from TTF fonts or use an external flash to store the font’s bitmap and read them when the library need them.
+\paragraph{Ajouter un nouveau moteur de polices}
+\label{\detokenize{overview/font:ajouter-un-nouveau-moteur-de-polices}}
+L’interface de police de LittlevGL est conçue pour être très flexible.
+Vous n’avez pas besoin d’utiliser le moteur de polices interne de LittlevGL, mais vous pouvez ajouter le vôtre.
+Par exemple, utilisez {[}FreeType{]} (https://www.freetype.org/) pour restituer les glyphes en temps réel à partir de polices TTF ou utilisez une mémoire flash externe pour sauvegarder les images matricielles de la police et les lire lorsque la librairie en a besoin.
 
-To do this a custom \sphinxcode{\sphinxupquote{lv\_font\_t}} variable needs to be created:
+Pour ce faire, une variable \sphinxcode{\sphinxupquote{lv\_font\_t}} personnalisée doit être créée :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+cm}{/*Describe the properties of a font*/}
+\PYG{c+cm}{/* Décrit les propriétés d\PYGZsq{}une police */}
 \PYG{n}{lv\PYGZus{}font\PYGZus{}t} \PYG{n}{my\PYGZus{}font}\PYG{p}{;}
-\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{get\PYGZus{}glyph\PYGZus{}dsc} \PYG{o}{=} \PYG{n}{my\PYGZus{}get\PYGZus{}glyph\PYGZus{}dsc\PYGZus{}cb}\PYG{p}{;}        \PYG{c+cm}{/*Set a callback to get info about gylphs*/}
-\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{get\PYGZus{}glyph\PYGZus{}bitmap} \PYG{o}{=} \PYG{n}{my\PYGZus{}get\PYGZus{}glyph\PYGZus{}bitmap\PYGZus{}cb}\PYG{p}{;}  \PYG{c+cm}{/*Set a callback to get bitmap of a glyp*/}
-\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{line\PYGZus{}height} \PYG{o}{=} \PYG{n}{height}\PYG{p}{;}                       \PYG{c+cm}{/*The real line height where any text fits*/}
-\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{base\PYGZus{}line} \PYG{o}{=} \PYG{n}{base\PYGZus{}line}\PYG{p}{;}                      \PYG{c+cm}{/*Base line measured from the top of line\PYGZus{}height*/}
-\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{dsc} \PYG{o}{=} \PYG{n}{something\PYGZus{}required}\PYG{p}{;}                   \PYG{c+cm}{/*Store any implementation specific data here*/}
-\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{user\PYGZus{}data} \PYG{o}{=} \PYG{n}{user\PYGZus{}data}\PYG{p}{;}                      \PYG{c+cm}{/*Optionally some extra user data*/}
+\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{get\PYGZus{}glyph\PYGZus{}dsc} \PYG{o}{=} \PYG{n}{my\PYGZus{}get\PYGZus{}glyph\PYGZus{}dsc\PYGZus{}cb}\PYG{p}{;}        \PYG{c+cm}{/* Définit une fonction de rappel pour obtenir des informations sur les glyphes */}
+\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{get\PYGZus{}glyph\PYGZus{}bitmap} \PYG{o}{=} \PYG{n}{my\PYGZus{}get\PYGZus{}glyph\PYGZus{}bitmap\PYGZus{}cb}\PYG{p}{;}  \PYG{c+cm}{/* Définit une fonction de rappel pour obtenir l\PYGZsq{}image matricielle d\PYGZsq{}un glyphe */}
+\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{line\PYGZus{}height} \PYG{o}{=} \PYG{n}{height}\PYG{p}{;}                       \PYG{c+cm}{/* La hauteur réelle de la ligne où le texte s\PYGZsq{}inscrit */}
+\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{base\PYGZus{}line} \PYG{o}{=} \PYG{n}{base\PYGZus{}line}\PYG{p}{;}                      \PYG{c+cm}{/* La ligne de base mesurée à partir du haut de la ligne */}
+\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{dsc} \PYG{o}{=} \PYG{n}{something\PYGZus{}required}\PYG{p}{;}                   \PYG{c+cm}{/*  Enregistre ici toutes les données spécifiques à l\PYGZsq{}implémentation */}
+\PYG{n}{my\PYGZus{}font}\PYG{p}{.}\PYG{n}{user\PYGZus{}data} \PYG{o}{=} \PYG{n}{user\PYGZus{}data}\PYG{p}{;}                      \PYG{c+cm}{/* Éventuellement des données utilisateur supplémentaires */}
 
 \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
 
-\PYG{c+cm}{/* Get info about glyph of {}`unicode\PYGZus{}letter{}` in {}`font{}` font. }
-\PYG{c+cm}{ * Store the result in {}`dsc\PYGZus{}out{}`.}
-\PYG{c+cm}{ * The next letter ({}`unicode\PYGZus{}letter\PYGZus{}next{}`) might be used to calculate the width required by this glyph (kerning)}
+\PYG{c+cm}{/* Obtient des informations sur le glyphe de {}`unicode\PYGZus{}letter{}` dans la police {}`font{}`. }
+\PYG{c+cm}{ * Enregistre le résultat dans {}`dsc\PYGZus{}out{}`.}
+\PYG{c+cm}{ * La lettre suivante ({}`unicode\PYGZus{}letter\PYGZus{}next{}`) peut être utilisée pour calculer la largeur requise par ce glyphe (crénage)}
 \PYG{c+cm}{ */}
 \PYG{k+kt}{bool} \PYG{n}{my\PYGZus{}get\PYGZus{}glyph\PYGZus{}dsc\PYGZus{}cb}\PYG{p}{(}\PYG{k}{const} \PYG{n}{lv\PYGZus{}font\PYGZus{}t} \PYG{o}{*} \PYG{n}{font}\PYG{p}{,} \PYG{n}{lv\PYGZus{}font\PYGZus{}glyph\PYGZus{}dsc\PYGZus{}t} \PYG{o}{*} \PYG{n}{dsc\PYGZus{}out}\PYG{p}{,} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{unicode\PYGZus{}letter}\PYG{p}{,} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{unicode\PYGZus{}letter\PYGZus{}next}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-    \PYG{c+cm}{/*Your code here*/}
+    \PYG{c+cm}{/* Votre code ici */}
   
-    \PYG{c+cm}{/* Store the result.}
-\PYG{c+cm}{     * For example ... }
+    \PYG{c+cm}{/* Enregistre le résultat.}
+\PYG{c+cm}{     * Par exemple ... }
 \PYG{c+cm}{     */}
-    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{adv\PYGZus{}w} \PYG{o}{=} \PYG{l+m+mi}{12}\PYG{p}{;}        \PYG{c+cm}{/*Horizontal space required by the glyph in [px]*/}
-    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{box\PYGZus{}h} \PYG{o}{=} \PYG{l+m+mi}{8}\PYG{p}{;}         \PYG{c+cm}{/*Height of the bitmap in [px]*/}
-    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{box\PYGZus{}w} \PYG{o}{=} \PYG{l+m+mi}{6}\PYG{p}{;}         \PYG{c+cm}{/*Width of the bitmap in [px]*/}
-    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{ofs\PYGZus{}x} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}         \PYG{c+cm}{/*X offset of the bitmap in [pf]*/}
-    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{ofs\PYGZus{}y} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{p}{;}         \PYG{c+cm}{/*Y offset of the bitmap measured from the as line*/}
-    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{bpp}   \PYG{o}{=} \PYG{l+m+mi}{2}\PYG{p}{;}         \PYG{c+cm}{/*Bit per pixel: 1/2/4/8*/}
+    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{adv\PYGZus{}w} \PYG{o}{=} \PYG{l+m+mi}{12}\PYG{p}{;}        \PYG{c+cm}{/* Espace horizontal requis par le glyphe en [px] */}
+    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{box\PYGZus{}h} \PYG{o}{=} \PYG{l+m+mi}{8}\PYG{p}{;}         \PYG{c+cm}{/* Hauteur de l\PYGZsq{}image en [px] */}
+    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{box\PYGZus{}w} \PYG{o}{=} \PYG{l+m+mi}{6}\PYG{p}{;}         \PYG{c+cm}{/* Largeur de l\PYGZsq{}image en [px] */}
+    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{ofs\PYGZus{}x} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}         \PYG{c+cm}{/* Déplacement X de l\PYGZsq{}image en [px] */}
+    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{ofs\PYGZus{}y} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{p}{;}         \PYG{c+cm}{/* Déplacement Y de l\PYGZsq{}image mesuré depuis la ligne de base */}
+    \PYG{n}{dsc\PYGZus{}out}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{bpp}   \PYG{o}{=} \PYG{l+m+mi}{2}\PYG{p}{;}         \PYG{c+cm}{/* Bits par pixel : 1/2/4/8 */}
     
-    \PYG{k}{return} \PYG{n+nb}{true}\PYG{p}{;}                \PYG{c+cm}{/*true: glyph found; false: glyph was not found*/}
+    \PYG{k}{return} \PYG{n+nb}{true}\PYG{p}{;}                \PYG{c+cm}{/* true : glyphe trouvé; false : glyphe non trouvé */}
 \PYG{p}{\PYGZcb{}}
 
 
-\PYG{c+cm}{/* Get the bitmap of {}`unicode\PYGZus{}letter{}` from {}`font{}`. */}
+\PYG{c+cm}{/* Obtient l\PYGZsq{}image matricielle de {}`unicode\PYGZus{}letter{}` à partir de {}`font{}`.*/}
 \PYG{k}{const} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{o}{*} \PYG{n}{my\PYGZus{}get\PYGZus{}glyph\PYGZus{}bitmap\PYGZus{}cb}\PYG{p}{(}\PYG{k}{const} \PYG{n}{lv\PYGZus{}font\PYGZus{}t} \PYG{o}{*} \PYG{n}{font}\PYG{p}{,} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{unicode\PYGZus{}letter}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-    \PYG{c+cm}{/* Your code here */}
+    \PYG{c+cm}{/* Votre code ici */}
     
-    \PYG{c+cm}{/* The bitmap should be a continuous bitstream where }
-\PYG{c+cm}{     * each pixel is represented by {}`bpp{}` bits */} 
+    \PYG{c+cm}{/* L\PYGZsq{}image matricielle doit être un flux continu de bits où}
+\PYG{c+cm}{     * chaque pixel est représenté par {}`bpp{}` bits */} 
     
-    \PYG{k}{return} \PYG{n}{bitmap}\PYG{p}{;}    \PYG{c+cm}{/*Or NULL if not found*/}
+    \PYG{k}{return} \PYG{n}{bitmap}\PYG{p}{;}    \PYG{c+cm}{/* Ou NULL si non trouvé */}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
 
 \subsubsection{Images}
 \label{\detokenize{overview/image:images}}\label{\detokenize{overview/image::doc}}
-An image can be a file or variable which stores the image itself and some metadata.
+Une image peut être un fichier ou une variable qui enregistre l’image elle-même et des métadonnées.
 
 
-\paragraph{Store images}
-\label{\detokenize{overview/image:store-images}}
-You can store images in two places
+\paragraph{Enregistrer des images}
+\label{\detokenize{overview/image:enregistrer-des-images}}
+Vous pouvez enregistrer des images à deux endroits
 \begin{itemize}
 \item {} 
-as a variable in the internal memory (RAM or ROM)
+en tant que variable en mémoire interne (MEV ou MEM)
 
 \item {} 
-as a file
+en tant que fichier
 
 \end{itemize}
 
 
 \subparagraph{Variables}
 \label{\detokenize{overview/image:variables}}
-The images stored internally in a variable has \sphinxcode{\sphinxupquote{lv\_img\_dsc\_t}} type with the following fields:
+Les images enregistrées dans une variable ont le type \sphinxcode{\sphinxupquote{lv\_img\_dsc\_t}} avec les champs suivants :
 \begin{itemize}
 \item {} 
 \sphinxstylestrong{header}
 \begin{itemize}
 \item {} 
-\sphinxstyleemphasis{cf} Color format. See {\hyperref[\detokenize{overview/image:color-format}]{\emph{below}}}
+\sphinxstyleemphasis{cf} Format de couleur. Voir {\hyperref[\detokenize{overview/image:formats-de-couleur}]{\emph{ci-dessous}}}
 
 \item {} 
-\sphinxstyleemphasis{w} width in pixels (\textless{}= 2048)
+\sphinxstyleemphasis{w} largeur en pixels (\textless{}= 2048)
 
 \item {} 
-\sphinxstyleemphasis{h} height in pixels (\textless{}= 2048)
+\sphinxstyleemphasis{h} hauteur en pixels (\textless{}= 2048)
 
 \item {} 
-\sphinxstyleemphasis{always zero} 3 bits which need to be always zero
+\sphinxstyleemphasis{always zero} 3 bits qui doivent toujours être à zéro
 
 \item {} 
-\sphinxstyleemphasis{reserved} reserved for future use
+\sphinxstyleemphasis{reserved} réservé pour une utilisation future
 
 \end{itemize}
 
 \item {} 
-\sphinxstylestrong{data} pointer to an array where the image itself is stored
+\sphinxstylestrong{data}pointeur sur un tableau où l’image elle-même est enregistrée
 
 \item {} 
-\sphinxstylestrong{data\_size} length of \sphinxcode{\sphinxupquote{data}} in bytes
+\sphinxstylestrong{data\_size} longueur de \sphinxcode{\sphinxupquote{data}} en octets
 
 \end{itemize}
 
 
-\subparagraph{Files}
-\label{\detokenize{overview/image:files}}
-To deal with files you need to add a \sphinxstyleemphasis{Drive} to LittlevGL. In short, a Drive a collection of functions (\sphinxstyleemphasis{open}, \sphinxstyleemphasis{read}, \sphinxstyleemphasis{close}, etc) registered in LittlevGL to make file operation.
-You can add an interface to a standard file system (FAT32 on SD card) or you create your own simple file system to read data from an SPI Flash memory.
-In every cases, a Drive is just an abstraction to read and/or write data to a memory.
-See the {\hyperref[\detokenize{overview/file-system::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{File system}}}} section to learn more.
+\subparagraph{Fichiers}
+\label{\detokenize{overview/image:fichiers}}
+Pour traiter les fichiers, vous devez ajouter un \sphinxstyleemphasis{lecteur} à LittlevGL. En bref, un lecteur est une collection de fonctions (\sphinxstyleemphasis{open}, \sphinxstyleemphasis{read}, \sphinxstyleemphasis{close}, etc.) enregistrées dans LittlevGL pour effectuer des opérations sur les fichiers.
+Vous pouvez ajouter une interface à un système de fichiers standard (FAT32 sur une carte SD) ou créer votre propre système de fichiers pour lire des données à partir d’une mémoire Flash SPI.
+Dans tous les cas, un lecteur n’est qu’une abstraction pour lire et/ou écrire des données dans une mémoire.
+Voir la section {\hyperref[\detokenize{overview/file-system::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Système de fichiers}}}} pour en apprendre plus.
 
 
-\paragraph{Color formats}
-\label{\detokenize{overview/image:color-formats}}
-Various built-in color formats are supported:
+\paragraph{Formats de couleur}
+\label{\detokenize{overview/image:formats-de-couleur}}
+Divers formats de couleur intégrés sont pris en charge:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR} Simply store the RGB colors
+\sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR} Enregistre simplement les couleurs RVB
 
 \item {} 
-\sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA} Store the RGB colors but add an Alpha byte too for every pixel
+\sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA} Enregistre les couleurs RVB mais ajoute également un octet Alpha pour chaque pixel
 
 \item {} 
-\sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR\_CHROMA\_KEYED} Store the RGB color but if a pixel has \sphinxcode{\sphinxupquote{LV\_COLOR\_TRANSP}} (set in \sphinxstyleemphasis{lv\_conf.h}) color the pixel will be transparent
+\sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR\_CHROMA\_KEYED} Enregistre les couleurs RVB, mais si un pixel prend la valeur \sphinxcode{\sphinxupquote{LV\_COLOR\_TRANSP}} (défini dans \sphinxstyleemphasis{lv\_conf.h}), le pixel sera transparent
 
 \item {} 
-\sphinxstylestrong{LV\_IMG\_CF\_INDEXED\_1/2/4/8BIT} Use palette with 2, 4, 16 or 256 colors and store each pixel on 1, 2, 4 or 8 bit
+\sphinxstylestrong{LV\_IMG\_CF\_INDEXED\_1/2/4/8BIT} Utilise une palette avec 2, 4, 16 ou 256 couleurs et enregistre chaque pixel sur 1, 2, 4 ou 8 bits
 
 \item {} 
-\sphinxstylestrong{LV\_IMG\_CF\_ALPHA\_1/2/4/8BIT} Store only the Alpha value on 1, 2, 4 or 8 bits. Draw the pixels \sphinxcode{\sphinxupquote{style.image.color}} and the set opacity.
+\sphinxstylestrong{LV\_IMG\_CF\_ALPHA\_1/2/4/8BIT} Enregistre uniquement la valeur Alpha sur 1, 2, 4 ou 8 bits. Dessine les pixels avec la couleur \sphinxcode{\sphinxupquote{style.image.color}} et l’opacité définie.
 
 \end{itemize}
 
-The bytes of the \sphinxstyleemphasis{True color} 32 bit images are stored in the following order
+Les octets des images \sphinxstyleemphasis{Couleurs vraies} 32 bits sont enregistrés dans l’ordre suivant
 \begin{itemize}
 \item {} 
-Byte 0: Blue
+Byte 0: Bleu
 
 \item {} 
-Byte 1: Green
+Byte 1: Vert
 
 \item {} 
-Byte 2: Red
+Byte 2: Rouge
 
 \item {} 
 Byte 3: Alpha
 
 \end{itemize}
 
-For 16 bit color depth
+Pour une profondeur de couleur de 16 bits
 \begin{itemize}
 \item {} 
-Byte 0: Green 3 lower bit, Blue 5 bit
+Byte 0: Vert 3 bits de poids faible, Bleu 5 bits
 
 \item {} 
-Byte 1: Red 5 bit, Green 3 higher bit
+Byte 1: Rouge 5 bits, Vert 3 bits de poids fort
 
 \item {} 
-Byte 2: Alpha byte (only with LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA)
+Byte 2: octet Alpha (seulement avec LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA)
 
 \end{itemize}
 
-For 8 bit color depth
+Pour une profondeur de couleur de 8 bits
 \begin{itemize}
 \item {} 
-Byte 0: Red 3 bit, Green 3 bit, Blue 2 bit
+Byte 0: Rouge 3 bits, Vert 3 bits, Bleu 2 bits
 
 \item {} 
-Byte 2: Alpha byte (only with LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA)
+Byte 2: octet Alpha (seulement avec LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA)
 
 \end{itemize}
 
-You can store images in a \sphinxstyleemphasis{Raw} format to indicate that it’s not a built-in color format and an {\hyperref[\detokenize{overview/image:image-decoder}]{\emph{Image decoder}}} needs to be used to decode the image.
+Vous pouvez enregistrer des images au format \sphinxstyleemphasis{brut} pour indiquer qu’il ne s’agit pas d’un format de couleur intégré et qu’un {\hyperref[\detokenize{overview/image:decodeur-d-images}]{\emph{Décodeur d’images}}} doit être utilisé pour décoder l’image.
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_IMG\_CF\_RAW} A raw image e.g. a PNG or JPG image
+\sphinxstylestrong{LV\_IMG\_CF\_RAW} Une image brute, p.ex. une image PNG ou JPG
 
 \item {} 
-\sphinxstylestrong{LV\_IMG\_CF\_RAW\_ALPHA} Indicate that the image has alpha, and an Alpha byte is added for every pixel
+\sphinxstylestrong{LV\_IMG\_CF\_RAW\_ALPHA} Indique que l’image a un canal alpha et qu’un octet Alpha est ajouté pour chaque pixel
 
 \item {} 
-\sphinxstylestrong{LV\_IMG\_CF\_RAW\_CHROME\_KEYED} Indicate that the image is chrome keyed as described in \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TRUE\_COLOR\_CHROMA\_KEYED}} above.
-
-\end{itemize}
-
-
-\paragraph{Add and use images}
-\label{\detokenize{overview/image:add-and-use-images}}
-You can add images to LittlevGL in two ways:
-\begin{itemize}
-\item {} 
-using the online converter
-
-\item {} 
-manually create images
+\sphinxstylestrong{LV\_IMG\_CF\_RAW\_CHROME\_KEYED} Indique que l’image a une couleur transparente comme indiqué par \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TRUE\_COLOR\_CHROMA\_KEYED}} ci-dessus.
 
 \end{itemize}
 
 
-\subparagraph{Online converter}
-\label{\detokenize{overview/image:online-converter}}
-The Online Image Converter is available here: https://littlevgl.com/image-to-c-array
-
-You need to select a \sphinxstyleemphasis{BMP}, \sphinxstyleemphasis{PNG} or \sphinxstyleemphasis{JPG} image, give it a name, select the {\hyperref[\detokenize{overview/image:color-format}]{\emph{Color format}}}, select the type (file or variable) and hit the \sphinxstyleemphasis{Convert} button and the result file be download.
-
-In the converter C arrays (variables) the image for all the Color depths (1, 8, 16 or 32) are included and the used image will be selected in compile time based on \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}} in \sphinxstyleemphasis{lv\_conf.h}.
-
-IN case of files you need to tell which color format you want
+\paragraph{Ajouter et utiliser des images}
+\label{\detokenize{overview/image:ajouter-et-utiliser-des-images}}
+Vous pouvez ajouter des images à LittlevGL de deux manières :
 \begin{itemize}
 \item {} 
-RGB332 for 8 bit color depth
+utiliser le convertisseur en ligne
 
 \item {} 
-RGB565 for 16 bit color depth
-
-\item {} 
-RGB565 Swap for 16 bit color depth (two bytes are swapped)
-
-\item {} 
-RGB888 for 32 bit color depth
+créer manuellement des images
 
 \end{itemize}
 
 
-\subparagraph{Manually create an image}
-\label{\detokenize{overview/image:manually-create-an-image}}
-If you calculate an image run-time you can craft an image variable to display it. For example:
+\subparagraph{Convertisseur en ligne}
+\label{\detokenize{overview/image:convertisseur-en-ligne}}
+Le convertisseur d’image en ligne est disponible \sphinxhref{https://littlevgl.com/image-to-c-array}{ici}.
+
+Vous devez sélectionner une image \sphinxstyleemphasis{BMP}, \sphinxstyleemphasis{PNG} ou \sphinxstyleemphasis{JPG}, lui donner un nom, sélectionner le {\hyperref[\detokenize{overview/image:formats-de-couleur}]{\emph{Format de couleur}}}, sélectionner le type (fichier ou variable) et cliquer sur le bouton \sphinxstyleemphasis{Convert}. Le fichier de résultat est téléchargé.
+
+Dans le cas de tableaux C (variables), les données de l’image sont incluses pour toutes les profondeurs de couleurs (1, 8, 16 ou 32) et les données à utiliser seront sélectionnées lors de la compilation en fonction de \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}} dans \sphinxstyleemphasis{lv\_conf.h}.
+
+Dans le cas de fichiers, vous devez indiquer le format de couleur souhaité
+\begin{itemize}
+\item {} 
+Binary RGB332 pour une profondeur de couleur de 8 bits
+
+\item {} 
+Binary RGB565 pour une profondeur de couleur de 16 bits
+
+\item {} 
+Binary RGB565 pour une profondeur de couleur de 16 bits (les deux octets sont permutés)
+
+\item {} 
+Binary RGB888 pour une profondeur de couleur de 32 bits
+
+\end{itemize}
+
+
+\subparagraph{Créer une image manuellement}
+\label{\detokenize{overview/image:creer-une-image-manuellement}}
+Si vous réalisez une image au moment de l’exécution, vous pouvez créer une variable d’image pour l’afficher. Par exemple :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{my\PYGZus{}img\PYGZus{}data}\PYG{p}{[}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+m+mh}{0x00}\PYG{p}{,} \PYG{l+m+mh}{0x01}\PYG{p}{,} \PYG{l+m+mh}{0x02}\PYG{p}{,} \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}\PYG{p}{\PYGZcb{}}\PYG{p}{;}
@@ -6864,79 +6864,80 @@ If you calculate an image run-time you can craft an image variable to display it
     \PYG{p}{.}\PYG{n}{header}\PYG{p}{.}\PYG{n}{w} \PYG{o}{=} \PYG{l+m+mi}{80}\PYG{p}{,}
     \PYG{p}{.}\PYG{n}{header}\PYG{p}{.}\PYG{n}{h} \PYG{o}{=} \PYG{l+m+mi}{60}\PYG{p}{,}
     \PYG{p}{.}\PYG{n}{data\PYGZus{}size} \PYG{o}{=} \PYG{l+m+mi}{80} \PYG{o}{*} \PYG{l+m+mi}{60} \PYG{o}{*} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}DEPTH} \PYG{o}{/} \PYG{l+m+mi}{8}\PYG{p}{,}
-    \PYG{p}{.}\PYG{n}{header}\PYG{p}{.}\PYG{n}{cf} \PYG{o}{=} \PYG{n}{LV\PYGZus{}IMG\PYGZus{}CF\PYGZus{}TRUE\PYGZus{}COLOR}\PYG{p}{,}          \PYG{c+cm}{/*Set the color format*/}
+    \PYG{p}{.}\PYG{n}{header}\PYG{p}{.}\PYG{n}{cf} \PYG{o}{=} \PYG{n}{LV\PYGZus{}IMG\PYGZus{}CF\PYGZus{}TRUE\PYGZus{}COLOR}\PYG{p}{,}          \PYG{c+cm}{/* Définit le format de couleur */}
     \PYG{p}{.}\PYG{n}{data} \PYG{o}{=} \PYG{n}{my\PYGZus{}img\PYGZus{}data}\PYG{p}{,}
 \PYG{p}{\PYGZcb{}}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-If the color format is \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA}} you can set \sphinxcode{\sphinxupquote{data\_size}} like \sphinxcode{\sphinxupquote{80 * 60 * LV\_IMG\_PX\_SIZE\_ALPHA\_BYTE}}.
+Si le format de couleur est \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA}}, vous pouvez définir \sphinxcode{\sphinxupquote{data\_size}} comme \sphinxcode{\sphinxupquote{80 * 60 * LV\_IMG\_PX\_SIZE\_ALPHA\_BYTE}}.
 
-An other option to create image run-time is to use the {\hyperref[\detokenize{object-types/canvas::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Canvas}}}} object.
+Une autre option pour créer une image au moment de l’exécution consiste à utiliser l’objet {\hyperref[\detokenize{object-types/canvas::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Canvas}}}}.
 
 
-\subparagraph{Use images}
-\label{\detokenize{overview/image:use-images}}
-The most simple way to use an Image in LittlevGL is to display it with an {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{lv\_img}}}} object:
+\subparagraph{Utiliser des images}
+\label{\detokenize{overview/image:utiliser-des-images}}
+Le moyen le plus simple d’utiliser une image dans LittlevGL consiste à l’afficher avec un objet {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}}:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{icon} \PYG{o}{=} \PYG{n}{lv\PYGZus{}img\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 
-\PYG{c+cm}{/*From variable*/}
+\PYG{c+cm}{/* A partir d\PYGZsq{}une variable */}
 \PYG{n}{lv\PYGZus{}img\PYGZus{}set\PYGZus{}src}\PYG{p}{(}\PYG{n}{icon}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{my\PYGZus{}icon\PYGZus{}dsc}\PYG{p}{)}\PYG{p}{;}
 
-\PYG{c+cm}{/*From file*/}
+\PYG{c+cm}{/* A partir d\PYGZsq{}un fichier */}
 \PYG{n}{lv\PYGZus{}img\PYGZus{}set\PYGZus{}src}\PYG{p}{(}\PYG{n}{icon}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{S:my\PYGZus{}icon.bin}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-If the image was converted with the online converter you should use \sphinxcode{\sphinxupquote{LV\_IMG\_DECLARE(my\_icon\_dsc)}} to declare the icon in the file where you want to use it.
+Si l’image a été convertie avec le convertisseur en ligne, vous devez utiliser \sphinxcode{\sphinxupquote{LV\_IMG\_DECLARE(my\_icon\_dsc)}} pour déclarer l’icône dans le fichier où vous souhaitez l’utiliser.
 
 
-\paragraph{Image decoder}
-\label{\detokenize{overview/image:image-decoder}}
-As you can see in the {\hyperref[\detokenize{overview/image:color-formats}]{\emph{Color formats}}} section LittlevGL supports several built image formats. However, it doesn’t support for example PNG or JPG out of the box.
-To handle non-built-in image formats you need to use external libraries and attach them to LittlevGL via the \sphinxstyleemphasis{Image decoder} interface.
+\paragraph{Décodeur d’images}
+\label{\detokenize{overview/image:decodeur-d-images}}
+Comme vous pouvez le voir dans la section {[}Formats de couleur{]} (\#formats-de-couleur), LittlevGL prend en charge plusieurs formats d’image intégrés. Cependant, il ne supporte pas par exemple les formats PNG ou JPG.
+Pour gérer les formats d’image non intégrés, vous devez utiliser des librairie externes et les attacher à LittlevGL via l’interface \sphinxstyleemphasis{décodeur d’images}.
 
-The image decoder consists of 4 images:
+Le décodeur d’image comprend 4 fonctions :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{info} get some basic info about the image (width, height and color format)
+\sphinxstylestrong{info} obtient des informations de base sur l’image (largeur, hauteur et format de couleur)
 
 \item {} 
-\sphinxstylestrong{open} open the image: either store the decoded image or set it to \sphinxcode{\sphinxupquote{NULL}} to indicate the image can be read line-by-line
+\sphinxstylestrong{open} ouvre l’image : enregistre l’image décodée.
+\sphinxcode{\sphinxupquote{NULL}} indique que l’image peut être lue ligne par ligne
 
 \item {} 
-\sphinxstylestrong{read} if \sphinxstyleemphasis{open} didn’t fully open the image this function should give the some decoded data (max 1 line) from a given position.
+\sphinxstylestrong{read} si \sphinxstyleemphasis{open} ne traite pas complètement l’image, cette fonction devrait retourner les données décodées (maximum 1 ligne) à partir d’une position donnée.
 
 \item {} 
-\sphinxstylestrong{close} close the opened image, free the allocated resources.
+\sphinxstylestrong{close} ferme l’image ouverte, libére les ressources allouées.
 
 \end{itemize}
 
-You can add any number of image decoders. When an image needs to be drawn the library will try all the registered image decoder until find one which is able to open the image, i.e. know that format.
+Vous pouvez ajouter n’importe quel nombre de décodeurs d’image. Quand une image doit être dessinée, la librairie essaiera tout les décodeurs d’images enregistrés jusqu’à en trouver un capable d’ouvrir l’image, c-à-d de manipuler le format.
 
-The \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TURE\_COLOR\_...}}, \sphinxcode{\sphinxupquote{LV\_IMG\_INDEXED\_...}} and \sphinxcode{\sphinxupquote{LV\_IMG\_ALPHA\_...}} formats are known by the built-in decoder.
-
-
-\subparagraph{Custom image formats}
-\label{\detokenize{overview/image:custom-image-formats}}
-The easiest was to create a custom image is to use the Online image converter and set \sphinxcode{\sphinxupquote{Raw}}, \sphinxcode{\sphinxupquote{Raw with alpha}}, \sphinxcode{\sphinxupquote{Raw with chrome keyed}} format. It will just take the every bytes of selected image and write them as image data.
-\sphinxcode{\sphinxupquote{heafer.cf}} will be \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_RAW}}, \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_RAW\_ALPHA}} or \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_RAW\_CHROME\_KEYED}} accordingly. You should choose the correct format according to you needs: fully covering image, use alpha channel or use chroma keying.
-
-After decoding, the \sphinxstyleemphasis{raw} formats are considered \sphinxstyleemphasis{True color}. In other words the image decoder should decode the \sphinxstyleemphasis{Raw} images to \sphinxstyleemphasis{True color} according to the format described in {[}\#color-formats{]}(Color formats) section.
-
-If you want to create a really custom image you should use \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_USER\_ENCODED\_0..7}} color formats. However, the library can draw the images only in \sphinxstyleemphasis{True color} format (or \sphinxstyleemphasis{Raw} but finally it’s supposed to be in \sphinxstyleemphasis{True color} format).
-So the \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_USER\_ENCODED\_...}} formats are not known by the library therefore they should be decoded to one of the known formats from {[}\#color-formats{]}(Color formats) section.
-It’s possible to decoded the image to a non-true color format first, for example \sphinxcode{\sphinxupquote{LV\_IMG\_INDEXED\_4BITS}}, and then call the built-in decoder functions to convert it to \sphinxstyleemphasis{True color}.
-
-With \sphinxstyleemphasis{User encoded} formats the color format in the open function (\sphinxcode{\sphinxupquote{dsc-\textgreater{}header.cf}}) should be changed according to the new format.
+Les formats \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TRUE\_COLOR\_...}}, \sphinxcode{\sphinxupquote{LV\_IMG\_INDEXED\_...}} and \sphinxcode{\sphinxupquote{LV\_IMG\_ALPHA\_...}} sont connus par le décodeur intégré.
 
 
-\subparagraph{Register an image decoder}
-\label{\detokenize{overview/image:register-an-image-decoder}}
-For example, if you want LittlevGL to “understand” PNG images you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:
+\subparagraph{Formats d’image personnalisés}
+\label{\detokenize{overview/image:formats-d-image-personnalises}}
+Le moyen le plus simple de créer une image personnalisée consiste à utiliser le convertisseur d’image en ligne et à définir le format \sphinxcode{\sphinxupquote{Raw}}, \sphinxcode{\sphinxupquote{Raw with alpha}} ou  \sphinxcode{\sphinxupquote{Raw with chrome keyed}}. Le convertisseur prendra tous les octets de l’image sélectionnée et les écrira en tant que données d’image.
+\sphinxcode{\sphinxupquote{header.cf}} sera respectivement \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_RAW}}, \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_RAW\_ALPHA}} ou \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_RAW\_CHROME\_KEYED}}.Vous devez choisir le bon format en fonction de vos besoins : image normale, utilisation de canal alpha ou de couleur transparente.
+
+Après décodage, les formats \sphinxstyleemphasis{bruts} sont considérés comme des \sphinxstyleemphasis{couleurs vraies}. En d’autres termes, le décodeur d’image doit décoder les images \sphinxstyleemphasis{brutes} en \sphinxstyleemphasis{vraies couleurs} conformément au format décrit dans la section {\hyperref[\detokenize{overview/image:formats-de-couleur}]{\emph{Formats de couleur}}}.
+
+Si vous voulez créer une image vraiment personnalisée, vous devez utiliser les formats de couleur \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_USER\_ENCODED\_0..7}}. Cependant, la librairie peut dessiner les images uniquement au format \sphinxstyleemphasis{couleurs vraies} (ou \sphinxstyleemphasis{brut}, mais finalement, elles sont supposées être au format \sphinxstyleemphasis{couleurs vraies}).
+Donc, les formats \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_USER\_ENCODED\_...}} ne sont pas connus de la librairie . Ils doivent donc être décodés dans l’un des formats connus de la section {\hyperref[\detokenize{overview/image:formats-de-couleur}]{\emph{Formats de couleur}}}.
+Il est possible de décoder d’abord l’image dans un format de couleur non vraie, par exemple \sphinxcode{\sphinxupquote{LV\_IMG\_INDEXED\_4BITS}}, puis d’appeler les fonctions du décodeur intégré pour la convertir en \sphinxstyleemphasis{couleurs vraies}.
+
+Pour les formats \sphinxstyleemphasis{encodés par l’utilisateur}, le format de couleur (\sphinxcode{\sphinxupquote{dsc-\textgreater{} header.cf}}) doit être modifié en conséquence, dans la fonction open.
+
+
+\subparagraph{Enregistrer un décodeur d’image}
+\label{\detokenize{overview/image:enregistrer-un-decodeur-d-image}}
+Par exemple, si vous voulez que LittlevGL “comprenne” les images PNG, vous devez créer un nouveau décodeur d’images et définir certaines fonctions pour ouvrir/fermer les fichiers PNG. Voici à quoi cela devrait ressembler :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+cm}{/*Create a new decoder and register functions */}
+\PYG{c+cm}{/* Crée un nouveau décodeur et enregistre les fonctions */}
 \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}t} \PYG{o}{*} \PYG{n}{dec} \PYG{o}{=} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}create}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}set\PYGZus{}info\PYGZus{}cb}\PYG{p}{(}\PYG{n}{dec}\PYG{p}{,} \PYG{n}{decoder\PYGZus{}info}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}set\PYGZus{}open\PYGZus{}cb}\PYG{p}{(}\PYG{n}{dec}\PYG{p}{,} \PYG{n}{decoder\PYGZus{}open}\PYG{p}{)}\PYG{p}{;}
@@ -6944,15 +6945,15 @@ For example, if you want LittlevGL to “understand” PNG images you need to cr
 
 
 \PYG{c+cm}{/**}
-\PYG{c+cm}{ * Get info about a PNG image}
-\PYG{c+cm}{ * @param decoder pointer to the decoder where this function belongs}
-\PYG{c+cm}{ * @param src can be file name or pointer to a C array}
-\PYG{c+cm}{ * @param header store the info here}
-\PYG{c+cm}{ * @return LV\PYGZus{}RES\PYGZus{}OK: no error; LV\PYGZus{}RES\PYGZus{}INV: can\PYGZsq{}t get the info}
+\PYG{c+cm}{ * Obtient les informations sur une image PNG}
+\PYG{c+cm}{ * @param decoder pointeur vers le décodeur auquel cette fonction appartient}
+\PYG{c+cm}{ * @param src peut être un nom de fichier ou un pointeur sur un tableau C}
+\PYG{c+cm}{ * @param header enregistre l\PYGZsq{}information ici}
+\PYG{c+cm}{ * @returnLV\PYGZus{}RES\PYGZus{}OK : pas d\PYGZsq{}erreur ; LV\PYGZus{}RES\PYGZus{}INV : impossible d\PYGZsq{}obtenir l\PYGZsq{}information}
 \PYG{c+cm}{ */}
 \PYG{k}{static} \PYG{n}{lv\PYGZus{}res\PYGZus{}t} \PYG{n+nf}{decoder\PYGZus{}info}\PYG{p}{(}\PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}t} \PYG{o}{*} \PYG{n}{decoder}\PYG{p}{,} \PYG{k}{const} \PYG{k+kt}{void} \PYG{o}{*} \PYG{n}{src}\PYG{p}{,} \PYG{n}{lv\PYGZus{}img\PYGZus{}header\PYGZus{}t} \PYG{o}{*} \PYG{n}{header}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-  \PYG{c+cm}{/*Check whether the type {}`src{}` is known by the decoder*/}
+  \PYG{c+cm}{/* Vérifie si le type {}`src{}` est connu du décodeur */}
   \PYG{k}{if}\PYG{p}{(}\PYG{n}{is\PYGZus{}png}\PYG{p}{(}\PYG{n}{src}\PYG{p}{)} \PYG{o}{=}\PYG{o}{=} \PYG{n+nb}{false}\PYG{p}{)} \PYG{k}{return} \PYG{n}{LV\PYGZus{}RES\PYGZus{}INV}\PYG{p}{;} 
 
   \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
@@ -6963,89 +6964,89 @@ For example, if you want LittlevGL to “understand” PNG images you need to cr
 \PYG{p}{\PYGZcb{}}
 
 \PYG{c+cm}{/**}
-\PYG{c+cm}{ * Open a PNG image and return the decided image}
-\PYG{c+cm}{ * @param decoder pointer to the decoder where this function belongs}
-\PYG{c+cm}{ * @param dsc pointer to a descriptor which describes this decoding session}
-\PYG{c+cm}{ * @return LV\PYGZus{}RES\PYGZus{}OK: no error; LV\PYGZus{}RES\PYGZus{}INV: can\PYGZsq{}t get the info}
+\PYG{c+cm}{ * Ouvre une image PNG et retourne l\PYGZsq{}image décodée}
+\PYG{c+cm}{ * @param decoder pointeur vers le décodeur auquel cette fonction appartient}
+\PYG{c+cm}{ * @param dsc pointeur sur le descripteur de cette session de décodage}
+\PYG{c+cm}{ * @returnLV\PYGZus{}RES\PYGZus{}OK : pas d\PYGZsq{}erreur ; LV\PYGZus{}RES\PYGZus{}INV : impossible d\PYGZsq{}obtenir l\PYGZsq{}information}
 \PYG{c+cm}{ */}
 \PYG{k}{static} \PYG{n}{lv\PYGZus{}res\PYGZus{}t} \PYG{n+nf}{decoder\PYGZus{}open}\PYG{p}{(}\PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}t} \PYG{o}{*} \PYG{n}{decoder}\PYG{p}{,} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}dsc\PYGZus{}t} \PYG{o}{*} \PYG{n}{dsc}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
 
-  \PYG{c+cm}{/*Check whether the type {}`src{}` is known by the decoder*/}
+  \PYG{c+cm}{/* Vérifie si le type {}`src{}` est connu du décodeur */}
   \PYG{k}{if}\PYG{p}{(}\PYG{n}{is\PYGZus{}png}\PYG{p}{(}\PYG{n}{src}\PYG{p}{)} \PYG{o}{=}\PYG{o}{=} \PYG{n+nb}{false}\PYG{p}{)} \PYG{k}{return} \PYG{n}{LV\PYGZus{}RES\PYGZus{}INV}\PYG{p}{;} 
   
-  \PYG{c+cm}{/*Decode and store the image. If {}`dsc\PYGZhy{}\PYGZgt{}img\PYGZus{}data{}` the {}`read\PYGZus{}line{}` function will be called to get the image data liny\PYGZhy{}by\PYGZhy{}line*/}
+  \PYG{c+cm}{/* Décode et enregistre l\PYGZsq{}image. Si {}`dsc\PYGZhy{}\PYGZgt{}img\PYGZus{}data{}` est {}`NULL{}`, la fonction {}`read\PYGZus{}line{}` sera appelée pour obtenir les données de l\PYGZsq{}image ligne par ligne */}
   \PYG{n}{dsc}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{img\PYGZus{}data} \PYG{o}{=} \PYG{n}{my\PYGZus{}png\PYGZus{}decoder}\PYG{p}{(}\PYG{n}{src}\PYG{p}{)}\PYG{p}{;}
   
-  \PYG{c+cm}{/*Change the color format if required. For PNG usually \PYGZsq{}Raw\PYGZsq{} is fine*/}
+  \PYG{c+cm}{/* Change le format de couleur si nécessaire. Pour le PNG, généralement un format \PYGZsq{}brut\PYGZsq{} convient */}
   \PYG{n}{dsc}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{header}\PYG{p}{.}\PYG{n}{cf} \PYG{o}{=} \PYG{n}{LV\PYGZus{}IMG\PYGZus{}CF\PYGZus{}}\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
   
-  \PYG{c+cm}{/*Call a built in decoder function if required. It\PYGZsq{}s not required if{}`my\PYGZus{}png\PYGZus{}decoder{}` opened the image in true color format.*/}
+  \PYG{c+cm}{/* Appelle une fonction de décodeur intégré si nécessaire. Ce n\PYGZsq{}est pas nécessaire si {}`my\PYGZus{}png\PYGZus{}decoder{}` a décodé l\PYGZsq{}image au format couleurs vraies. */}
   \PYG{n}{lv\PYGZus{}res\PYGZus{}t} \PYG{n}{res} \PYG{o}{=} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}built\PYGZus{}in\PYGZus{}open}\PYG{p}{(}\PYG{n}{decoder}\PYG{p}{,} \PYG{n}{dsc}\PYG{p}{)}\PYG{p}{;}
   
   \PYG{k}{return} \PYG{n}{res}\PYG{p}{;}
 \PYG{p}{\PYGZcb{}}
 
 \PYG{c+cm}{/**}
-\PYG{c+cm}{ * Decode {}`len{}` pixels starting from the given {}`x{}`, {}`y{}` coordinates and store them in {}`buf{}`.}
-\PYG{c+cm}{ * Required only if the \PYGZdq{}open\PYGZdq{} function can\PYGZsq{}t open the whole decoded pixel array. (dsc\PYGZhy{}\PYGZgt{}img\PYGZus{}data == NULL)}
-\PYG{c+cm}{ * @param decoder pointer to the decoder the function associated with}
-\PYG{c+cm}{ * @param dsc pointer to decoder descriptor}
-\PYG{c+cm}{ * @param x start x coordinate}
-\PYG{c+cm}{ * @param y start y coordinate}
-\PYG{c+cm}{ * @param len number of pixels to decode}
-\PYG{c+cm}{ * @param buf a buffer to store the decoded pixels}
-\PYG{c+cm}{ * @return LV\PYGZus{}RES\PYGZus{}OK: ok; LV\PYGZus{}RES\PYGZus{}INV: failed}
+\PYG{c+cm}{ * Décode {}`len{}` pixels à partir des coordonnées fournies {}`x{}`, {}`y{}` et enregistre\PYGZhy{}les dans {}`buf{}`.}
+\PYG{c+cm}{* Requis uniquement si la fonction \PYGZdq{}open\PYGZdq{} ne peut pas décoder l\PYGZsq{}intégralité du tableau de pixels (dsc\PYGZhy{}\PYGZgt{}img\PYGZus{}data == NULL).}
+\PYG{c+cm}{ * @param decoder pointeur vers le décodeur associé à la fonction }
+\PYG{c+cm}{ * @param dsc pointeur vers le descripteur de décodeur}
+\PYG{c+cm}{ * @param x coordonnée x de début}
+\PYG{c+cm}{ * @param y coordonnée y de début}
+\PYG{c+cm}{ * @param len nombre de pixels à décoder}
+\PYG{c+cm}{ * @param buf un tampon pour enregistrer les pixels décodés}
+\PYG{c+cm}{ * @return LV\PYGZus{}RES\PYGZus{}OK : ok ; LV\PYGZus{}RES\PYGZus{}INV : échec}
 \PYG{c+cm}{ */}
 \PYG{n}{lv\PYGZus{}res\PYGZus{}t} \PYG{n+nf}{decoder\PYGZus{}built\PYGZus{}in\PYGZus{}read\PYGZus{}line}\PYG{p}{(}\PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}t} \PYG{o}{*} \PYG{n}{decoder}\PYG{p}{,} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}dsc\PYGZus{}t} \PYG{o}{*} \PYG{n}{dsc}\PYG{p}{,} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{x}\PYG{p}{,}
                                                   \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{y}\PYG{p}{,} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{len}\PYG{p}{,} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{o}{*} \PYG{n}{buf}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-   \PYG{c+cm}{/*With PNG it\PYGZsq{}s usually not required*/}
+   \PYG{c+cm}{/* Avec PNG, ce n\PYGZsq{}est généralement pas nécessaire */}
 
-   \PYG{c+cm}{/*Copy {}`len{}` pixels from {}`x{}` and {}`y{}` coordinates in True color format to {}`buf{}` */}
+   \PYG{c+cm}{/* Copie {}`len{}` pixels à partir des coordonnées {}`x{}` et {}`y{}` au format couleurs vraies dans {}`buf{}` */}
   
 \PYG{p}{\PYGZcb{}}
 
 \PYG{c+cm}{/**}
-\PYG{c+cm}{ * Free the allocated resources}
-\PYG{c+cm}{ * @param decoder pointer to the decoder where this function belongs}
-\PYG{c+cm}{ * @param dsc pointer to a descriptor which describes this decoding session}
+\PYG{c+cm}{* Libère les ressources allouées}
+\PYG{c+cm}{ * @param decoder pointeur vers le décodeur auquel cette fonction appartient}
+\PYG{c+cm}{ * @param dsc pointeur sur le descripteur de cette session de décodage}
 \PYG{c+cm}{ */}
 \PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{decoder\PYGZus{}close}\PYG{p}{(}\PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}t} \PYG{o}{*} \PYG{n}{decoder}\PYG{p}{,} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}dsc\PYGZus{}t} \PYG{o}{*} \PYG{n}{dsc}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-  \PYG{c+cm}{/*Free all allocated data*/}
+ \PYG{c+cm}{/* Libère toutes les données allouées */}
   
-  \PYG{c+cm}{/*Call the built\PYGZhy{}in close function if the built\PYGZhy{}in open/read\PYGZus{}line was used*/}
+  \PYG{c+cm}{/* Appelle la fonction intégrée de fermeture si les fonctions intégrées open/read\PYGZus{}line ont été utilisées */}
   \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}built\PYGZus{}in\PYGZus{}close}\PYG{p}{(}\PYG{n}{decoder}\PYG{p}{,} \PYG{n}{dsc}\PYG{p}{)}\PYG{p}{;}
   
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-So in summary:
+Donc en résumé :
 \begin{itemize}
 \item {} 
-In \sphinxcode{\sphinxupquote{decoder\_info}} you should collect some basic information about the image and store it in \sphinxcode{\sphinxupquote{header}}.
+Dans \sphinxcode{\sphinxupquote{decoder\_info}}, vous devez collecter les informations de base sur l’image et les mémoriser dans \sphinxcode{\sphinxupquote{header}}.
 
 \item {} 
-In \sphinxcode{\sphinxupquote{decoder\_open}} you should try to open the image source pointed by \sphinxcode{\sphinxupquote{dsc-\textgreater{}src}}. It’s type is already in \sphinxcode{\sphinxupquote{dsc-\textgreater{}src\_type == LV\_IMG\_SRC\_FILE/VARIABLE}}.
-If this format/type is not supported by the decoder return \sphinxcode{\sphinxupquote{LV\_RES\_INV}}.
-However, if you can open the image a pointer to the decoded \sphinxstyleemphasis{True color} image should be set in \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data}}.
-If the format is known but you don’t want decode while image (e.g. no memory for it) set \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data = NULL}} to call \sphinxcode{\sphinxupquote{read\_line}} to get the pixels.
+Dans \sphinxcode{\sphinxupquote{decoder\_open}}, vous devez essayer d’ouvrir la source de l’image indiquée par \sphinxcode{\sphinxupquote{dsc-\textgreater{} src}}. Son type est déjà dans \sphinxcode{\sphinxupquote{dsc-\textgreater{}src\_type == LV\_IMG\_SRC\_FILE/VARIABLE}}.
+Si le format/type n’est pas pris en charge par le décodeur, retournez \sphinxcode{\sphinxupquote{LV\_RES\_INV}}.
+Autrement, si vous pouvez ouvrir l’image, un pointeur sur l’image \sphinxstyleemphasis{couleurs vraies} décodée doit être défini dans \sphinxcode{\sphinxupquote{dsc-\textgreater{} img\_data}}.
+Si le format est géré mais que vous ne voulez pas décoder l’ensemble de l’image (p.ex. pas de mémoire), définissez \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data = NULL}} pour appeler \sphinxcode{\sphinxupquote{read\_line}} afin d’obtenir les pixels.
 
 \item {} 
-In \sphinxcode{\sphinxupquote{decoder\_close}} you should free all the allocated resources.
+Dans \sphinxcode{\sphinxupquote{decoder\_close}}, vous devez libérer toutes les ressources allouées.
 
 \item {} 
-\sphinxcode{\sphinxupquote{decoder\_read}} is optional. Decoding the whole image requires extra memory and some computational overhead.
-However, if can decode one line of the image without decoding the whole image you can save memory and time.
-To indicate that the \sphinxstyleemphasis{line read} function should be used set \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data = NULL}} in the open function.
+\sphinxcode{\sphinxupquote{decoder\_read}} est optionnel. Le décodage de l’ensemble de l’image nécessite de la mémoire et des calculs supplémentaires.
+Cependant, si vous pouvez décoder une ligne de l’image sans décoder toute l’image, vous pouvez économiser de la mémoire et du temps.
+Pour indiquer que la fonction \sphinxstyleemphasis{line read} doit être utilisée, définissez \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data = NULL}} dans la fonction \sphinxcode{\sphinxupquote{open}}.
 
 \end{itemize}
 
 
-\subparagraph{Manually use an image decoder}
-\label{\detokenize{overview/image:manually-use-an-image-decoder}}
-LittlevGL will use th registered image decoder automatically but you can use them manually too. Create a \sphinxcode{\sphinxupquote{lv\_img\_decoder\_dsc\_t}} variable to describe a the decoding session and call \sphinxcode{\sphinxupquote{lv\_img\_decoder\_open()}}, \sphinxcode{\sphinxupquote{lv\_img\_decoder\_open()}}.
+\subparagraph{Utiliser manuellement un décodeur d’image}
+\label{\detokenize{overview/image:utiliser-manuellement-un-decodeur-d-image}}
+LittlevGL utilisera automatiquement les décodeurs d’images enregistrés, mais vous pouvez également les utiliser manuellement. Créez une variable \sphinxcode{\sphinxupquote{lv\_img\_decoder\_dsc\_t}} pour décrire la session de décodage et appelez \sphinxcode{\sphinxupquote{lv\_img\_decoder\_open()}} et \sphinxcode{\sphinxupquote{lv\_img\_decoder\_close() }}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 
@@ -7054,54 +7055,54 @@ LittlevGL will use th registered image decoder automatically but you can use the
 \PYG{n}{res} \PYG{o}{=} \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}open}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{dsc}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{my\PYGZus{}img\PYGZus{}dsc}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}plain}\PYG{p}{)}\PYG{p}{;}
 
 \PYG{k}{if}\PYG{p}{(}\PYG{n}{res} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}RES\PYGZus{}OK}\PYG{p}{)} \PYG{p}{\PYGZob{}}
-  \PYG{c+cm}{/*Do something with {}`dsc\PYGZhy{}\PYGZgt{}img\PYGZus{}data{}`*/}
+  \PYG{c+cm}{/* Faites quelque chose avec {}`dsc\PYGZhy{}\PYGZgt{}img\PYGZus{}data{}` */}
   \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}close}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{dsc}\PYG{p}{)}\PYG{p}{;}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
 
-\paragraph{Image caching}
-\label{\detokenize{overview/image:image-caching}}
-Sometimes it takes a lot of time to open an image.
-Continuously decoding a PNG image or loading images from a slow external memory would be effective.
-Therefore LittlevGL caches a given number of images. Caching means some images will be left open hence LittlevGl can quickly access them from \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data}} instead of decoding the again.
+\paragraph{Mise en cache des images}
+\label{\detokenize{overview/image:mise-en-cache-des-images}}
+Parfois, il faut beaucoup de temps pour ouvrir une image.
+Continuellement décoder une image PNG ou charger des images à partir d’une mémoire externe lente serait inefficace.
+LittlevGL place donc en cache un certain nombre d’images. La mise en cache signifie que certaines images resteront ouvertes, ce qui permet à LittlevGL d’y accéder rapidement à partir de \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data}} au lieu de les décoder à nouveau.
 
 
-\subparagraph{Cache size}
-\label{\detokenize{overview/image:cache-size}}
-The number of cache entries can be defined in \sphinxcode{\sphinxupquote{LV\_IMG\_CACHE\_DEF\_SIZE}} in \sphinxstyleemphasis{lv\_conf.h}. The default value is 1 so only the lastly used image will be left open.
-The size of cache can be changed in tun-time with \sphinxcode{\sphinxupquote{lv\_img\_cache\_set\_size(entry\_num)}}
+\subparagraph{Taille du cache}
+\label{\detokenize{overview/image:taille-du-cache}}
+Le nombre d’entrées du cache peut être défini par \sphinxcode{\sphinxupquote{LV\_IMG\_CACHE\_DEF\_SIZE}} dans \sphinxstyleemphasis{lv\_conf.h}. La valeur par défaut est 1, de sorte que seule la dernière image utilisée reste ouverte.
+La taille du cache peut être modifiée en cours d’exécution avec \sphinxcode{\sphinxupquote{lv\_img\_cache\_set\_size(entry\_num)}}
 
 
-\subparagraph{Value of images}
-\label{\detokenize{overview/image:value-of-images}}
-If you use more images then the cache size LittlevGL can’t cache all of the images. Instead, if a new image needs to be opened but there is no place in the cache the library will close an image.
-To decide which image to close LittlevGL measured how much did it take to open the image. Images which more time consuming to open are considered more valuable and LittlevGL tries to cache them longer.
-You can manually set the \sphinxstyleemphasis{time to open} value in the decoder open function in \sphinxcode{\sphinxupquote{dsc-\textgreater{}time\_to\_open = time\_ms}} to give a higher or lower value to the image. (Leave it unchanged to let LittlevGL set it)
+\subparagraph{Valeur des images}
+\label{\detokenize{overview/image:valeur-des-images}}
+Si vous utilisez un grand nombre d’images, LittlevGL ne peut pas toutes les mettre en cache. Au lieu de cela, si une nouvelle image doit être ouverte mais qu’il n’y a pas de place dans le cache, la librairie supprimera une image pour libérer de la place.
+Pour décider quelle image supprimer, LittlevGL a mesuré combien de temps il a fallu pour ouvrir chaque image. Les images dont l’ouverture prend le plus de temps sont favorisées et LittlevGL essaie de les conserver en cache le plus longtemps.
+Vous pouvez définir manuellement la valeur \sphinxstyleemphasis{temps d’ouverture} dans la fonction d’ouverture du décodeur dans \sphinxcode{\sphinxupquote{dsc-\textgreater{}time\_to\_open = temps en ms}} pour attribuer une valeur supérieure ou inférieure à l’image (laissez inchangé pour laisser LittlevGL le gérer).
 
-Every cache entry has a \sphinxstyleemphasis{“life”} value. Every time an image opening happens through the cache the \sphinxstyleemphasis{life} of all entries are decreased to make them older.
-When a cached image is used its \sphinxstyleemphasis{life} is increased by the \sphinxstyleemphasis{time to open} value to make it more alive.
+Chaque entrée de cache a une valeur \sphinxstyleemphasis{“durée de vie”}. À chaque ouverture d’image par la mémoire cache, la \sphinxstyleemphasis{durée de vie} de toutes les entrées est réduite pour les rendre plus anciennes.
+Lorsqu’une image en cache est utilisée, sa \sphinxstyleemphasis{durée de vie} est augmentée de la valeur de \sphinxstyleemphasis{temps d’ouverture} pour la rendre plus importante.
 
-If there is no more space in the cache always the entry with the smallest life will be closed.
-
-
-\subparagraph{Memory usage}
-\label{\detokenize{overview/image:memory-usage}}
-Note that, the cached image might continuously consume memory. For example, if 3 PNG images are cached, they will consume memory while they are opened.
-Therefore it’s the user responsibility to be sure there is enough RAM to cache even the largest images at the same time.
+S’il n’y a plus d’espace dans la mémoire cache, l’entrée avec la plus petite durée de vie sera supprimée.
 
 
-\subparagraph{Clean the cache}
-\label{\detokenize{overview/image:clean-the-cache}}
-Let’s say you have loaded a PNG image into a \sphinxcode{\sphinxupquote{lv\_img\_dsc\_t my\_png}} variable and use it in an \sphinxcode{\sphinxupquote{lv\_img}} object. If the image is already cached and you change \sphinxcode{\sphinxupquote{my\_png-\textgreater{}data}} you need to notify LittlevGL to cache the image again.
-To do this use \sphinxcode{\sphinxupquote{lv\_img\_cache\_invalidate\_src(\&my\_png)}}. If \sphinxcode{\sphinxupquote{NULL}} is passed as parameter the whole cache will be cleaned.
+\subparagraph{Utilisation de la mémoire}
+\label{\detokenize{overview/image:utilisation-de-la-memoire}}
+Notez que l’image en cache peut consommer de la mémoire en permanence. Par exemple, si 3 images PNG sont mises en cache, elles consomment de la mémoire pendant le temps où elle sont ouvertes.
+Par conséquent, il incombe à l’utilisateur de s’assurer qu’il y a assez de MEV pour mettre en cache de grandes images en même temps.
+
+
+\subparagraph{Nettoyer le cache}
+\label{\detokenize{overview/image:nettoyer-le-cache}}
+Supposons que vous ayez chargé une image PNG dans une variable \sphinxcode{\sphinxupquote{lv\_img\_dsc\_t my\_png}} et que vous l’utilisiez dans un objet\sphinxcode{\sphinxupquote{ lv\_img}}. Si l’image est déjà mise en cache et que vous modifiez \sphinxcode{\sphinxupquote{my\_png-\textgreater{} data}}, vous devez avertir LittlevGL de mettre en cache l’image à nouveau.
+Pour ce faire, utilisez \sphinxcode{\sphinxupquote{lv\_img\_cache\_invalidate\_src(\&my\_png)}}. Si \sphinxcode{\sphinxupquote{NULL}} est passé en paramètre, tout le cache sera nettoyé.
 
 
 \paragraph{API}
 \label{\detokenize{overview/image:api}}
 
-\subparagraph{Image decoder}
-\label{\detokenize{overview/image:id1}}\subsubsection*{Typedefs}
+\subparagraph{Décodeur d’image}
+\label{\detokenize{overview/image:decodeur-d-image}}\subsubsection*{Typedefs}
 \index{lv\_img\_src\_t (C++ type)@\spxentry{lv\_img\_src\_t}\spxextra{C++ type}}
 
 \begin{fulllineitems}
@@ -8280,8 +8281,8 @@ Store any custom data here is required
 
 
 
-\subparagraph{Image cache}
-\label{\detokenize{overview/image:image-cache}}\subsubsection*{Functions}
+\subparagraph{Cache d’images}
+\label{\detokenize{overview/image:cache-d-images}}\subsubsection*{Functions}
 \index{lv\_img\_cache\_open (C++ function)@\spxentry{lv\_img\_cache\_open}\spxextra{C++ function}}
 
 \begin{fulllineitems}
@@ -8383,69 +8384,69 @@ Count the cache entries’s life. Add \sphinxcode{\sphinxupquote{time\_tio\_open
 
 
 
-\subsubsection{File system}
-\label{\detokenize{overview/file-system:file-system}}\label{\detokenize{overview/file-system::doc}}
-LittlevGL has File system abstraction module which enables to attache any type of file systems.
-The file system are identified by a letter.
-For example if the SD card is associated with letter\sphinxcode{\sphinxupquote{'S'}} a file can be reached like \sphinxcode{\sphinxupquote{""S:path/to/file.txt}}.
+\subsubsection{Système de fichiers}
+\label{\detokenize{overview/file-system:systeme-de-fichiers}}\label{\detokenize{overview/file-system::doc}}
+LittlevGL a un module d’abstraction de système de fichiers qui permet d’attacher tout type de système de fichiers.
+Les systèmes de fichiers sont identifiés par une lettre.
+Par exemple, si la carte SD est associée à la lettre \sphinxcode{\sphinxupquote{'S'}}, un fichier peut être localisé par \sphinxcode{\sphinxupquote{"S:path/to/file.txt"}}.
 
 
-\paragraph{Add a driver}
-\label{\detokenize{overview/file-system:add-a-driver}}
-To add a driver an \sphinxcode{\sphinxupquote{lv\_fs\_drv\_t}} needs to be initialized like this:
+\paragraph{Ajouter un pilote}
+\label{\detokenize{overview/file-system:ajouter-un-pilote}}
+Pour ajouter un pilote, un \sphinxcode{\sphinxupquote{lv\_fs\_drv\_t}} doit être initialisé comme ceci :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}fs\PYGZus{}drv\PYGZus{}t} \PYG{n}{drv}\PYG{p}{;} 
-\PYG{n}{lv\PYGZus{}fs\PYGZus{}drv\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{drv}\PYG{p}{)}\PYG{p}{;}                     \PYG{c+cm}{/*Basic initialization*/}
+\PYG{n}{lv\PYGZus{}fs\PYGZus{}drv\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{drv}\PYG{p}{)}\PYG{p}{;}                     \PYG{c+cm}{/* Initialisation de base */}
 
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{letter} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}}\PYG{l+s+sc}{S}\PYG{l+s+sc}{\PYGZsq{}}\PYG{p}{;}                         \PYG{c+cm}{/*An uppercase letter to identify the drive */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{file\PYGZus{}size} \PYG{o}{=} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{my\PYGZus{}file\PYGZus{}object}\PYG{p}{)}\PYG{p}{;}   \PYG{c+cm}{/*Size required to store a file object*/}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{rddir\PYGZus{}size} \PYG{o}{=} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{my\PYGZus{}dir\PYGZus{}object}\PYG{p}{)}\PYG{p}{;}   \PYG{c+cm}{/*Size required to store a directory object (used by dir\PYGZus{}open/close/read)*/} 
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{ready\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}ready\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to tell if the drive is ready to use */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{open\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}open\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/*Callback to open a file */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{close\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}close\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to close a file */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}read\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/*Callback to read a file */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{write\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}write\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to write a file */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{seek\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}seek\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/*Callback to seek in a file (Move cursor) */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{tell\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}tell\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/*Callback to tell the cursor position  */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{trunc\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}trunc\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to delete a file */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{size\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/*Callback to tell a file\PYGZsq{}s size */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{rename\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to rename a file */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{letter} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}}\PYG{l+s+sc}{S}\PYG{l+s+sc}{\PYGZsq{}}\PYG{p}{;}                         \PYG{c+cm}{/* Une lettre majuscule pour identifier le lecteur */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{file\PYGZus{}size} \PYG{o}{=} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{my\PYGZus{}file\PYGZus{}object}\PYG{p}{)}\PYG{p}{;}   \PYG{c+cm}{/* Taille requise pour enregistrer un objet de fichier */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{rddir\PYGZus{}size} \PYG{o}{=} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{my\PYGZus{}dir\PYGZus{}object}\PYG{p}{)}\PYG{p}{;}   \PYG{c+cm}{/* Taille requise pour enregistrer un objet répertoire (utilisé par dir\PYGZus{}open/close/read) */} 
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{ready\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}ready\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/* Fonction de rappel pour indiquer si le lecteur est prêt à être utilisé */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{open\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}open\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/* Fonction de rappel pour ouvrir un fichier */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{close\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}close\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/* Fonction de rappel pour fermer un fichier */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}read\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/* Fonction de rappel pour lire un fichier */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{write\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}write\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/* Fonction de rappel pour écrire un fichier */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{seek\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}seek\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/* Fonction de rappel pour se déplacer dans un fichier (déplacer le curseur) */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{tell\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}tell\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/* Fonction de rappel pour donner la position du curseur */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{trunc\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}trunc\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/* Fonction de rappel pour supprimer un fichier */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{size\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/* Fonction de rappel pour donner la taille d\PYGZsq{}un fichier */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{rename\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/* Fonction de rappel pour renommer un fichier */}
 
 
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}open\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}open\PYGZus{}cb}\PYG{p}{;}         \PYG{c+cm}{/*Callback to open directory to read its content */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}read\PYGZus{}cb}\PYG{p}{;}         \PYG{c+cm}{/*Callback to read a directory\PYGZsq{}s content */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}close\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}close\PYGZus{}cb}\PYG{p}{;}       \PYG{c+cm}{/*Callback to close a directory */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}open\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}open\PYGZus{}cb}\PYG{p}{;}         \PYG{c+cm}{/* Fonction de rappel pour ouvrir un répertoire et lire son contenu */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}read\PYGZus{}cb}\PYG{p}{;}         \PYG{c+cm}{/* Fonction de rappel pour lire le contenu d\PYGZsq{}un répertoire */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}close\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}close\PYGZus{}cb}\PYG{p}{;}       \PYG{c+cm}{/* Fonction de rappel pour fermer un répertoire */}
 
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{free\PYGZus{}space\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}           \PYG{c+cm}{/*Callback to tell free space on the drive */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{free\PYGZus{}space\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}           \PYG{c+cm}{/* Fonction de rappel pour donner l\PYGZsq{}espace libre d\PYGZsq{}un lecteur */}
 
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{user\PYGZus{}data} \PYG{o}{=} \PYG{n}{my\PYGZus{}user\PYGZus{}data}\PYG{p}{;}             \PYG{c+cm}{/*Any custom data if required*/}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{user\PYGZus{}data} \PYG{o}{=} \PYG{n}{my\PYGZus{}user\PYGZus{}data}\PYG{p}{;}             \PYG{c+cm}{/* Toute donnée personnalisée si nécessaire */}
 
-\PYG{n}{lv\PYGZus{}fs\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{drv}\PYG{p}{)}\PYG{p}{;}                 \PYG{c+cm}{/*Finally register the drive*/}
+\PYG{n}{lv\PYGZus{}fs\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{drv}\PYG{p}{)}\PYG{p}{;}                 \PYG{c+cm}{/* Finalement enregistre le lecteur */}
 \end{sphinxVerbatim}
 
-Any of the callbacks can be \sphinxcode{\sphinxupquote{NULL}} to indicate that operation is not supported.
+N’importe laquelle des fonctions de rappel peut être \sphinxcode{\sphinxupquote{NULL}} pour indiquer que l’opération n’est pas prise en charge.
 
-If you use \sphinxcode{\sphinxupquote{lv\_fs\_open(\&file, "S:/folder/file.txt", LV\_FS\_MODE\_WR)}} LittlevGL checks
+Si vous utilisez \sphinxcode{\sphinxupquote{lv\_fs\_open(\&file, "S:/folder/file.txt",  LV\_FS\_MODE\_WR)}} LittlevGL effectue les opérations suivantes
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-if there is drive with letter \sphinxcode{\sphinxupquote{'S'}}
+vérifie s’il y a un lecteur avec la lettre \sphinxcode{\sphinxupquote{'S'}}
 
 \item {} 
-checks if it’s \sphinxcode{\sphinxupquote{open\_cb}} is implemented (not \sphinxcode{\sphinxupquote{NULL}})
+vérifie si \sphinxcode{\sphinxupquote{open\_cb}} est implémentée (pas \sphinxcode{\sphinxupquote{NULL}})
 
 \item {} 
-calls the set \sphinxcode{\sphinxupquote{open\_cb}} with \sphinxcode{\sphinxupquote{"folder/file.txt"}} path.
+appelle \sphinxcode{\sphinxupquote{open\_cb}} avec le chemin \sphinxcode{\sphinxupquote{"folder/file.txt"}}.
 
 \end{enumerate}
 
 
-\paragraph{Usage example}
-\label{\detokenize{overview/file-system:usage-example}}
-The example below shows how to read from a file:
+\paragraph{Exemple d’utilisation}
+\label{\detokenize{overview/file-system:exemple-d-utilisation}}
+L’exemple ci-dessous montre comment lire à partir d’un fichier :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}fs\PYGZus{}file\PYGZus{}t} \PYG{n}{f}\PYG{p}{;}
@@ -8461,9 +8462,9 @@ The example below shows how to read from a file:
 \PYG{n}{lv\PYGZus{}fs\PYGZus{}close}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{f}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-\sphinxstyleemphasis{The mode in \sphinxcode{\sphinxupquote{lv\_fs\_open}} can be \sphinxcode{\sphinxupquote{LV\_FS\_MODE\_WR}} to open for write or \sphinxcode{\sphinxupquote{LV\_FS\_MODE\_RD \textbar{} LV\_FS\_MODE\_WR}} for both}
+\sphinxstyleemphasis{Le mode dans \sphinxcode{\sphinxupquote{lv\_fs\_open}} peut être \sphinxcode{\sphinxupquote{LV\_FS\_MODE\_WR}} pour ouvrir en écriture ou \sphinxcode{\sphinxupquote{LV\_FS\_MODE\_RD \textbar{} LV\_FS\_MODE\_WR}} pour lecture/écriture}
 
-This example shows how to read a directory’s content. It’s up to the driver how to mark the directories but in can be a good practice to insert a \sphinxcode{\sphinxupquote{'/'}} in front of the directory name.
+Cet exemple montre comment lire le contenu d’un répertoire. Il appartient au pilote de marquer les répertoires, mais il peut être judicieux d’insérer un “/” devant le nom du répertoire.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}fs\PYGZus{}dir\PYGZus{}t} \PYG{n}{dir}\PYG{p}{;}
@@ -8479,7 +8480,7 @@ This example shows how to read a directory’s content. It’s up to the driver 
         \PYG{k}{break}\PYG{p}{;}
     \PYG{p}{\PYGZcb{}}
 
-    \PYG{c+cm}{/*fn is empty if not more files to read*/}
+    \PYG{c+cm}{/* fn est vide s\PYGZsq{}il n\PYGZsq{}y a plus d\PYGZsq{}entrée à lire */}
     \PYG{k}{if}\PYG{p}{(}\PYG{n}{strlen}\PYG{p}{(}\PYG{n}{fn}\PYG{p}{)} \PYG{o}{=}\PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{p}{\PYGZob{}}
         \PYG{k}{break}\PYG{p}{;}
     \PYG{p}{\PYGZcb{}}
@@ -8491,11 +8492,11 @@ This example shows how to read a directory’s content. It’s up to the driver 
 \end{sphinxVerbatim}
 
 
-\paragraph{Use drivers for images}
-\label{\detokenize{overview/file-system:use-drivers-for-images}}
-{\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} objects can be open from files too (besides variables stored in the flash)
+\paragraph{Utiliser les pilotes pour les images}
+\label{\detokenize{overview/file-system:utiliser-les-pilotes-pour-les-images}}
+Les objets {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} peuvent également être ouverts à partir de fichiers (en plus des variables stockées dans la mémoire Flash)
 
-To initialize the for images the following callbacks are required:
+Pour initialiser un pilote pour les images, les fonction de rappel suivantes sont requises :
 \begin{itemize}
 \item {} 
 open
@@ -21590,6 +21591,45 @@ code
 \end{sphinxVerbatim}
 
 
+\subparagraph{Drop “up” list}
+\label{\detokenize{object-types/ddlist:drop-up-list}}
+\noindent\sphinxincludegraphics{{lv_ex_ddlist_2}.png}
+
+code
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZdq{}lvgl/lvgl.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZlt{}stdio.h\PYGZgt{}}
+
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * Create a drop UP list by applying auto realign}
+\PYG{c+cm}{ */}
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}ex\PYGZus{}ddlist\PYGZus{}2}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+
+    \PYG{c+cm}{/*Create a drop down list*/}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{ddlist} \PYG{o}{=} \PYG{n}{lv\PYGZus{}ddlist\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}ddlist\PYGZus{}set\PYGZus{}options}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Apple}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+            \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Banana}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+            \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Orange}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+            \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Melon}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+            \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Grape}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+            \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Raspberry}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}ddlist\PYGZus{}set\PYGZus{}fix\PYGZus{}width}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{l+m+mi}{150}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}ddlist\PYGZus{}set\PYGZus{}fix\PYGZus{}height}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{l+m+mi}{150}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}ddlist\PYGZus{}set\PYGZus{}draw\PYGZus{}arrow}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Enable auto\PYGZhy{}realign when the size changes.}
+\PYG{c+cm}{     * It will keep the bottom of the ddlist fixed*/}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}auto\PYGZus{}realign}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/*It will be called automatically when the size changes*/}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}IN\PYGZus{}BOTTOM\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{20}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
 \subparagraph{MicroPython}
 \label{\detokenize{object-types/ddlist:micropython}}
 No examples yet.
@@ -24993,40 +25033,7 @@ code
 code
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+cm}{/**}
-\PYG{c+cm}{ * @file lv\PYGZus{}ex\PYGZus{}templ.c}
-\PYG{c+cm}{ *}
-\PYG{c+cm}{ */}
-
-\PYG{c+cm}{/*********************}
-\PYG{c+cm}{ *      INCLUDES}
-\PYG{c+cm}{ *********************/}
-
 \PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZdq{}lvgl/lvgl.h\PYGZdq{}}
-
-\PYG{c+cm}{/*********************}
-\PYG{c+cm}{ *      DEFINES}
-\PYG{c+cm}{ *********************/}
-
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *      TYPEDEFS}
-\PYG{c+cm}{ **********************/}
-
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *  STATIC PROTOTYPES}
-\PYG{c+cm}{ **********************/}
-
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *  STATIC VARIABLES}
-\PYG{c+cm}{ **********************/}
-
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *      MACROS}
-\PYG{c+cm}{ **********************/}
-
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *   GLOBAL FUNCTIONS}
-\PYG{c+cm}{ **********************/}
 
 \PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}ex\PYGZus{}label\PYGZus{}2}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
@@ -25046,7 +25053,6 @@ code
                                   \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{It even works with}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
                                   \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{newlines     and spaces.}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
 
-    
     \PYG{c+cm}{/*Set the same text for the shadow label*/}
     \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{shadow\PYGZus{}label}\PYG{p}{,} \PYG{n}{lv\PYGZus{}label\PYGZus{}get\PYGZus{}text}\PYG{p}{(}\PYG{n}{main\PYGZus{}label}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
 
@@ -25056,10 +25062,70 @@ code
     \PYG{c+cm}{/* Shift the second label down and to the right by 1 pixel */}
     \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{shadow\PYGZus{}label}\PYG{p}{,} \PYG{n}{main\PYGZus{}label}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}IN\PYGZus{}TOP\PYGZus{}LEFT}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{;}
 \PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
 
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *   STATIC FUNCTIONS}
-\PYG{c+cm}{ **********************/}
+
+\subparagraph{Align labels}
+\label{\detokenize{object-types/label:align-labels}}
+\noindent\sphinxincludegraphics{{lv_ex_label_3}.png}
+
+code
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZdq{}lvgl/lvgl.h\PYGZdq{}}
+
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{text\PYGZus{}changer}\PYG{p}{(}\PYG{n}{lv\PYGZus{}task\PYGZus{}t} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{;}
+
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * Create three labels to demonstrate the alignments.}
+\PYG{c+cm}{ */}
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}ex\PYGZus{}label\PYGZus{}3}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{c+cm}{/*{}`lv\PYGZus{}label\PYGZus{}set\PYGZus{}align{}` is not required to align the object itslef.}
+\PYG{c+cm}{     * It\PYGZsq{}s used only when the text has multiple lines*/}
+
+    \PYG{c+cm}{/* Create a label on the top.}
+\PYG{c+cm}{     * No additional alignment so it will be the reference*/}
+    \PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}IN\PYGZus{}TOP\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{LV\PYGZus{}LABEL\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Create a label in the middle.}
+\PYG{c+cm}{     * {}`lv\PYGZus{}obj\PYGZus{}align{}` will be called every time the text changes}
+\PYG{c+cm}{     * to keep the middle position */}
+    \PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{LV\PYGZus{}LABEL\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Create a label in the bottom.}
+\PYG{c+cm}{     * Enable auto realign. */}
+    \PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}auto\PYGZus{}realign}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}IN\PYGZus{}BOTTOM\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{n}{LV\PYGZus{}LABEL\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}task\PYGZus{}t} \PYG{o}{*} \PYG{n}{t} \PYG{o}{=} \PYG{n}{lv\PYGZus{}task\PYGZus{}create}\PYG{p}{(}\PYG{n}{text\PYGZus{}changer}\PYG{p}{,} \PYG{l+m+mi}{1000}\PYG{p}{,} \PYG{n}{LV\PYGZus{}TASK\PYGZus{}PRIO\PYGZus{}MID}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}task\PYGZus{}ready}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{text\PYGZus{}changer}\PYG{p}{(}\PYG{n}{lv\PYGZus{}task\PYGZus{}t} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{const} \PYG{k+kt}{char} \PYG{o}{*} \PYG{n}{texts}\PYG{p}{[}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Text}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{A very long text}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{A text with}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{multiple}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{lines}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{\PYGZcb{}}\PYG{p}{;}
+    \PYG{k}{static} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{texts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{texts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{n}{texts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/*Manually realaign {}`labels[1]{}`*/}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{i}\PYG{o}{+}\PYG{o}{+}\PYG{p}{;}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{texts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=}\PYG{o}{=} \PYG{n+nb}{NULL}\PYG{p}{)} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+\PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
 
@@ -28879,7 +28945,7 @@ return value will be NULL unless \sphinxcode{\sphinxupquote{lv\_mbox\_add\_btns}
 
 \paragraph{Overview}
 \label{\detokenize{object-types/page:overview}}
-The Page consist of two {\hyperref[\detokenize{object-types/page::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Containers}}}} on each other:
+The Page consist of two {\hyperref[\detokenize{object-types/cont::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Containers}}}} on each other:
 \begin{itemize}
 \item {} 
 a \sphinxstylestrong{background} (or base)

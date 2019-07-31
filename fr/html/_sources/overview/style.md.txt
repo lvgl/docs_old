@@ -24,7 +24,7 @@ void my_screen_create(void)
 }
 ```
 
-## Utilisez les styles
+## Utiliser les styles
 
 Les objets ont un *style principal* qui détermine l'apparence de leur arrière-plan ou de leur partie principale. Cependant, certains types d'objet ont aussi des styles supplémentaires.
 
@@ -201,31 +201,31 @@ Il est difficile de créer des styles pour votre interface graphique, car vous a
 Pour accélérer la conception les thèmes sont introduits. Un thème est une collection de styles contenant les styles requis pour chaque type d'objet. Par exemple, 5 styles de boutons décrivant leurs 5 états possibles.
 Consultez les [Thèmes] (https://littlevgl.com/themes) existants ou essayez-les dans la section [Démonstration en ligne] (https://littlevgl.com/live-demo).
 
-To be more specific a theme is a structure variable which contains a lot of lv_style_t * fields. For buttons:
+Pour être plus précis, un thème est une variable structurée qui contient beaucoup de champs lv_style_t*. Pour les boutons :
 ```c
-theme.btn.rel       /*Released button style*/
-theme.btn.pr        /*Pressed button style*/
-theme.btn.tgl_rel   /*Toggled released button style*/
-theme.btn.tgl_pr    /*Toggled pressed button style*/
-theme.btn.ina       /*Inactive button style*/
+theme.btn.rel       /* Style de bouton relâché */
+theme.btn.pr        /* Style de bouton pressé */
+theme.btn.tgl_rel   /* Style de bouton bascule relâché */
+theme.btn.tgl_pr    /* Style de bouton bascule pressé */
+theme.btn.ina       /* Style de bouton inactif */
 ```
 
-A theme can initialized by: `lv_theme_<name>_init(hue, font)`. Where `hue` is a Hue value from [HSV color space](https://en.wikipedia.org/wiki/Hue) (0..360) and `font` is the font applied in the theme (`NULL` to use the `LV_FONT_DEFAULT`)
+Un thème peut être initialisé par : `lv_theme_<nom>_init(hue, font)`. Où `hue` est une valeur de teinte de l'[espace colorimétrique HSV] (https://en.wikipedia.org/wiki/Hue) (0..360) et` font` est la police appliquée dans le thème (`NULL` utilise `LV_FONT_DEFAULT`)
 
-When a theme is initialized its styles can be used like this:
+Quand un thème est initialisé, ses styles peuvent être utilisés comme ceci :
 
 ![](/misc/theme-example.png "Theme usage example in Littlev Embedded Graphics Library")
 
 ```c
-/*Create a default slider*/
+/* Crée un curseur par défaut */
 lv_obj_t *slider = lv_slider_create(lv_scr_act(), NULL);
 lv_slider_set_value(slider, 70);
 lv_obj_set_pos(slider, 10, 10);
 
-/*Initialize the alien theme with a reddish hue*/
+/* Initialise le thème alien avec une teinte rouge */
 lv_theme_t *th = lv_theme_alien_init(10, NULL);
 
-/*Create a new slider and apply the themes styles*/
+/* Crée un nouveau curseur et applique les styles du thèmes */
 slider = lv_slider_create(lv_scr_act(), NULL);
 lv_slider_set_value(slider, 70);
 lv_obj_set_pos(slider, 10, 50);
@@ -234,19 +234,19 @@ lv_slider_set_style(slider, LV_SLIDER_STYLE_INDIC, th->slider.indic);
 lv_slider_set_style(slider, LV_SLIDER_STYLE_KNOB, th->slider.knob);
 ```
 
-You can ask the library to automatically apply the styles from a theme when you create new objects. To do this use `lv_theme_set_current(th)`;
+Vous pouvez demander à la librairie d'appliquer automatiquement les styles d'un thème lorsque vous créez de nouveaux objets. Pour ce faire, utilisez `lv_theme_set_current(th)` :
 ```c
-/*Initialize the alien theme with a reddish hue*/
+/* Initialise le thème alien avec une teinte rouge */
 lv_theme_t *th = lv_theme_alien_init(10, NULL);
 lv_theme_set_current(th);
 
-/*Create a slider. It will use the style from teh current theme.*/
+/* Crée un curseur. Il utilisera le style du thème actuel. */
 slider = lv_slider_create(lv_scr_act(), NULL);
 ```
 
-Themes can be enabled or disabled one by on in `lv_conf.h`.
+Les thèmes peuvent être activés ou désactivés individuellement dans `lv_conf.h`.
 
-### Live update
-By default if `lv_theme_set_current(th)` is called again it won't refresh the styles of the existing objects. To enable live update of themes enable `LV_THEME_LIVE_UPDATE` in `lv_conf.h`.
+### Mise à jour automatique
+Par défaut, si `lv_theme_set_current(th)` est appelé à nouveau, les styles des objets existants ne seront pas actualisés. Pour activer la mise à jour automatique des thèmes, activez `LV_THEME_LIVE_UPDATE` dans` lv_conf.h`.
 
-Live update will update only those objects whose style are from the theme, i.e. created after the first call of `lv_theme_set_current(th)` or the styles were set manually
+La mise à jour automatique mettra à jour uniquement les objets dont le style provient du thème, c’est-à-dire créés après le premier appel de `lv_theme_set_current(th)` ou dont les styles ont été définis manuellement.

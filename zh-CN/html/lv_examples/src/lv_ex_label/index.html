@@ -1123,40 +1123,7 @@
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * @file lv_ex_templ.c</span>
-<span class="cm"> *</span>
-<span class="cm"> */</span>
-
-<span class="cm">/*********************</span>
-<span class="cm"> *      INCLUDES</span>
-<span class="cm"> *********************/</span>
-
-<span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
-
-<span class="cm">/*********************</span>
-<span class="cm"> *      DEFINES</span>
-<span class="cm"> *********************/</span>
-
-<span class="cm">/**********************</span>
-<span class="cm"> *      TYPEDEFS</span>
-<span class="cm"> **********************/</span>
-
-<span class="cm">/**********************</span>
-<span class="cm"> *  STATIC PROTOTYPES</span>
-<span class="cm"> **********************/</span>
-
-<span class="cm">/**********************</span>
-<span class="cm"> *  STATIC VARIABLES</span>
-<span class="cm"> **********************/</span>
-
-<span class="cm">/**********************</span>
-<span class="cm"> *      MACROS</span>
-<span class="cm"> **********************/</span>
-
-<span class="cm">/**********************</span>
-<span class="cm"> *   GLOBAL FUNCTIONS</span>
-<span class="cm"> **********************/</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
 <span class="kt">void</span> <span class="nf">lv_ex_label_2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1176,7 +1143,6 @@
                                   <span class="s">&quot;It even works with</span><span class="se">\n\n</span><span class="s">&quot;</span>
                                   <span class="s">&quot;newlines     and spaces.&quot;</span><span class="p">);</span>
 
-    
     <span class="cm">/*Set the same text for the shadow label*/</span>
     <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">shadow_label</span><span class="p">,</span> <span class="n">lv_label_get_text</span><span class="p">(</span><span class="n">main_label</span><span class="p">));</span>
 
@@ -1186,10 +1152,71 @@
     <span class="cm">/* Shift the second label down and to the right by 1 pixel */</span>
     <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">shadow_label</span><span class="p">,</span> <span class="n">main_label</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_LEFT</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="align-labels">
+<h2>Align labels<a class="headerlink" href="#align-labels" title="Permalink to this headline">¶</a></h2>
+<img alt="Align labels in LittlevGL" src="../../../_images/lv_ex_label_3.gif" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="cm">/**********************</span>
-<span class="cm"> *   STATIC FUNCTIONS</span>
-<span class="cm"> **********************/</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">text_changer</span><span class="p">(</span><span class="n">lv_task_t</span> <span class="o">*</span> <span class="n">t</span><span class="p">);</span>
+
+<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">labels</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Create three labels to demonstrate the alignments.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">lv_ex_label_3</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/*`lv_label_set_align` is not required to align the object itslef.</span>
+<span class="cm">     * It&#39;s used only when the text has multiple lines*/</span>
+
+    <span class="cm">/* Create a label on the top.</span>
+<span class="cm">     * No additional alignment so it will be the reference*/</span>
+    <span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+    <span class="n">lv_label_set_align</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">LV_LABEL_ALIGN_CENTER</span><span class="p">);</span>
+
+    <span class="cm">/* Create a label in the middle.</span>
+<span class="cm">     * `lv_obj_align` will be called every time the text changes</span>
+<span class="cm">     * to keep the middle position */</span>
+    <span class="n">labels</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">lv_label_set_align</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">LV_LABEL_ALIGN_CENTER</span><span class="p">);</span>
+
+    <span class="cm">/* Create a label in the bottom.</span>
+<span class="cm">     * Enable auto realign. */</span>
+    <span class="n">labels</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_auto_realign</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">);</span>
+    <span class="n">lv_label_set_align</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">LV_LABEL_ALIGN_CENTER</span><span class="p">);</span>
+
+    <span class="n">lv_task_t</span> <span class="o">*</span> <span class="n">t</span> <span class="o">=</span> <span class="n">lv_task_create</span><span class="p">(</span><span class="n">text_changer</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">LV_TASK_PRIO_MID</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_task_ready</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">text_changer</span><span class="p">(</span><span class="n">lv_task_t</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">texts</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Text&quot;</span><span class="p">,</span> <span class="s">&quot;A very long text&quot;</span><span class="p">,</span> <span class="s">&quot;A text with</span><span class="se">\n</span><span class="s">multiple</span><span class="se">\n</span><span class="s">lines&quot;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">};</span>
+    <span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+    <span class="cm">/*Manually realaign `labels[1]`*/</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1213,7 +1240,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 27, 2019.
+        Last updated on Jul 31, 2019.
       </span>
 
     </p>

@@ -53,10 +53,10 @@ Il y a quelques champs de données optionnels :
 - **screen_transp** si `1` l'écran peut avoir un style transparent ou opaque. `LV_COLOR_SCREEN_TRANSP` doit être activé dans *lv_conf.h*
 
 Pour utiliser un GPU, les fonctions de rappel suivantes peuvent être utilisées :
-- **gpu_fill_cb** fill an area in memory with colors. 
-- **gpu_blend_cb** blend two memory buffers using opacity.
+- **gpu_fill_cb** remplis une zone en mémoire avec une couleur
+- **gpu_blend_cb** combine deux tampons en mémoire avec gestion de l'opacité.
 
-Note that, these functions need to draw to the memory (RAM) and not your display directly. 
+Notez que ces fonctions doivent dessiner en mémoire (MEV) et non directement sur l'affichage.
  
 Certaines autres fonctions de rappel facultatives facilitent et optimisent l'utilisation des écrans monochromes, à niveaux de gris ou autres écrans RVB non standard :
 - **rounder_cb** arrondit les coordonnées des zones à redessiner. P.ex. une zone de 2 x 2 px peut être convertie en 2 x 8 px.
@@ -101,13 +101,13 @@ void my_gpu_fill_cb(lv_disp_drv_t * disp_drv, lv_color_t * dest_buf, const lv_ar
 {
     /* Cet exemple de code devrait être effectué par un GPU */
     uint32_t x, y;
-    dest_buf += dest_width * fill_area->y1; /*Go to the first line*/
+    dest_buf += dest_width * fill_area->y1; /* Aller à la première ligne */
 
     for(y = fill_area->y1; y < fill_area->y2; y++) {
         for(x = fill_area->x1; x < fill_area->x2; x++) {
             dest_buf[x] = color;
         }
-        dest_buf+=dest_width;    /*Go to the next line*/
+        dest_buf+=dest_width;    /* Aller à la ligne suivante */
     }
 }
 

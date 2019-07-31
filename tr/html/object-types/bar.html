@@ -429,13 +429,13 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Bar (lv_bar)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#giris">Giriş</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#deger-ve-aralik">Değer ve aralık</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#symmetrical">Symmetrical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simetrik">Simetrik</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#styles">Styles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bicimler">Biçimler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#olaylar">Olaylar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#keys">Keys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ornek">Örnek</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#micropython">MicroPython</a></li>
 </ul>
@@ -1106,36 +1106,34 @@
 <div class="section" id="deger-ve-aralik">
 <h3>Değer ve aralık<a class="headerlink" href="#deger-ve-aralik" title="Permalink to this headline">¶</a></h3>
 <p>Yeni değer <code class="docutils literal notranslate"><span class="pre">lv_bar_set_value(bar,</span> <span class="pre">new_value,</span> <span class="pre">LV_ANIM_ON/OFF)</span></code>vasıtasıyla ayarlanabilir.
-The value is interpreted in a range (minimum and maximum values) which can be modified with <code class="docutils literal notranslate"><span class="pre">lv_bar_set_range(bar,</span> <span class="pre">min,</span> <span class="pre">max)</span></code>.
-Varsayılan aralık 1..100.</p>
-<p>The new value in <code class="docutils literal notranslate"><span class="pre">lv_bar_set_value</span></code> can be set with our without an animation depending on the last parameter (<code class="docutils literal notranslate"><span class="pre">LV_ANIM_ON/OFF</span></code>).
-The time of the animation can be adjusted by <code class="docutils literal notranslate"><span class="pre">lv_bar_set_anim_time(bar,</span> <span class="pre">100)</span></code>. The time is in milliseconds unit.</p>
+Bu değer <code class="docutils literal notranslate"><span class="pre">lv_bar_set_range(bar,</span> <span class="pre">min,</span> <span class="pre">max)</span></code> ile değiştirilen bir aralıkta(minimum ve maksimum değerlerde) değerlendirilir.Varsayılan aralık 1..100.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_bar_set_value</span></code> deki yeni değer   (<code class="docutils literal notranslate"><span class="pre">LV_ANIM_ON/OFF</span></code>) deki son parametreye bağlı olarak animasyonsuz olarak ayarlanabilir  .Animasyon süresi <code class="docutils literal notranslate"><span class="pre">lv_bar_set_anim_time(bar,</span> <span class="pre">100)</span></code> yoluyla ayarlanabilir . Süre birimi milisaniyedir.</p>
 </div>
-<div class="section" id="symmetrical">
-<h3>Symmetrical<a class="headerlink" href="#symmetrical" title="Permalink to this headline">¶</a></h3>
-<p>The bar can be drawn symmetrical to zero (drawn from zero left to right) if it’s enabled with <code class="docutils literal notranslate"><span class="pre">lv_bar_set_sym(bar,</span> <span class="pre">true)</span></code></p>
+<div class="section" id="simetrik">
+<h3>Simetrik<a class="headerlink" href="#simetrik" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">lv_bar_set_sym(bar,</span> <span class="pre">true)</span></code> eğer aktif ise, bar sıfıra simetrik çizilebilir(sıfıra soldan sağa çizilmiş)</p>
 </div>
 </div>
-<div class="section" id="styles">
-<h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
-<p>To set the style of an <em>Bar</em> object use <code class="docutils literal notranslate"><span class="pre">lv_bar_set_style(arc,</span> <span class="pre">LV_BAR_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code></p>
+<div class="section" id="bicimler">
+<h2>Biçimler<a class="headerlink" href="#bicimler" title="Permalink to this headline">¶</a></h2>
+<p>Bir <em>Bar</em> nesnesinin biçimi ayarlamak için <code class="docutils literal notranslate"><span class="pre">lv_bar_set_style(arc,</span> <span class="pre">LV_BAR_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code> kullanılır</p>
 <ul class="simple">
-<li><p><strong>LV_BAR_STYLE_BG</strong> is an <a class="reference internal" href="obj.html"><span class="doc">Base object</span></a> therefore it uses its style elements. Its default style is: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty</span></code>.</p></li>
-<li><p><strong>LV_BAR_STYLE_INDIC</strong> is similar to the background. It uses the <em>left</em>, <em>right</em>, <em>top</em> and <em>bottom</em> paddings to keeps some space form the edges of the background. Its default style is: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty_color</span></code>.</p></li>
+<li><p><strong>LV_BAR_STYLE_BG</strong>  bir <a class="reference internal" href="obj.html"><span class="doc">Base object</span></a> dir. Bu yüzden kendi biçim  unsurları ile kullanılır. it uses its style elements. Its default style is: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty</span></code>.</p></li>
+<li><p><strong>LV_BAR_STYLE_INDIC</strong> arka plana benzer. <em>Sol</em>, <em>sağ</em>, <em>üst</em> ve <em>alt</em> dolgularını arka planın kenarlarından biraz boşluk kalmasını sağlamak için kullanılır. Varsayılan biçim: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty_color</span></code>.</p></li>
 </ul>
 </div>
-<div class="section" id="events">
-<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
-<p>Only the <a class="reference external" href="/overview/event.html#generic-events">Generic events</a> are sent by the object type.</p>
+<div class="section" id="olaylar">
+<h2>Olaylar<a class="headerlink" href="#olaylar" title="Permalink to this headline">¶</a></h2>
+<p>Nesne türü tarafından sadece <a class="reference external" href="/overview/event.html#generic-events">Generic events</a> gönderilir.</p>
 <p>Learn more about <a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a>.</p>
 </div>
 <div class="section" id="keys">
 <h2>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h2>
-<p>No <em>Keys</em> are processed by the object type.</p>
-<p>Learn more about <a class="reference internal" href="../overview/indev.html"><span class="doc">Keys</span></a>.</p>
+<p>Nesne türü tarafından işlenecek <em>Keys</em>  yoktur.</p>
+<p><a class="reference internal" href="../overview/indev.html"><span class="doc">Keys</span></a> hakkında fazlasını öğrenin.</p>
 </div>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ornek">
+<h2>Örnek<a class="headerlink" href="#ornek" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="simple-bar">
@@ -1461,7 +1459,7 @@ The time of the animation can be adjusted by <code class="docutils literal notra
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Jul 29, 2019.
+        Last updated on Jul 31, 2019.
       </span>
 
     </p>

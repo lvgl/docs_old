@@ -13,33 +13,33 @@ Barın yönü genişlik/yüksek oranına göre dikey veya yatay olarak ayarlanab
 
 ### Değer ve aralık
 Yeni değer `lv_bar_set_value(bar, new_value, LV_ANIM_ON/OFF)`vasıtasıyla ayarlanabilir. 
-The value is interpreted in a range (minimum and maximum values) which can be modified with `lv_bar_set_range(bar, min, max)`. 
+Bu değer `lv_bar_set_range(bar, min, max)` ile değiştirilen bir aralıkta(minimum ve maksimum değerlerde) değerlendirilir.  
 Varsayılan aralık 1..100.
 
-The new value in `lv_bar_set_value` can be set with our without an animation depending on the last parameter (`LV_ANIM_ON/OFF`). 
-The time of the animation can be adjusted by `lv_bar_set_anim_time(bar, 100)`. The time is in milliseconds unit. 
+`lv_bar_set_value` deki yeni değer   (`LV_ANIM_ON/OFF`) deki son parametreye bağlı olarak animasyonsuz olarak ayarlanabilir  .  
+Animasyon süresi `lv_bar_set_anim_time(bar, 100)` yoluyla ayarlanabilir . Süre birimi milisaniyedir.
 
-### Symmetrical
-The bar can be drawn symmetrical to zero (drawn from zero left to right) if it's enabled with `lv_bar_set_sym(bar, true)`
+### Simetrik
+`lv_bar_set_sym(bar, true)` eğer aktif ise, bar sıfıra simetrik çizilebilir(sıfıra soldan sağa çizilmiş) 
 
-## Styles
+## Biçimler
 
-To set the style of an *Bar* object use `lv_bar_set_style(arc, LV_BAR_STYLE_MAIN, &style)`
+Bir *Bar* nesnesinin biçimi ayarlamak için `lv_bar_set_style(arc, LV_BAR_STYLE_MAIN, &style)` kullanılır
 
-- **LV_BAR_STYLE_BG** is an [Base object](/object-types/obj) therefore it uses its style elements. Its default style is: `lv_style_pretty`. 
-- **LV_BAR_STYLE_INDIC** is similar to the background. It uses the *left*, *right*, *top* and *bottom* paddings to keeps some space form the edges of the background. Its default style is: `lv_style_pretty_color`.
+- **LV_BAR_STYLE_BG**  bir [Base object](/object-types/obj) dir. Bu yüzden kendi biçim  unsurları ile kullanılır. it uses its style elements. Its default style is: `lv_style_pretty`. 
+- **LV_BAR_STYLE_INDIC** arka plana benzer. *Sol*, *sağ*, *üst* ve *alt* dolgularını arka planın kenarlarından biraz boşluk kalmasını sağlamak için kullanılır. Varsayılan biçim: `lv_style_pretty_color`.
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## Olaylar
+Nesne türü tarafından sadece [Generic events](/overview/event.html#generic-events) gönderilir.
 
 Learn more about [Events](/overview/event).
 
 ## Keys
-No *Keys* are processed by the object type.
+Nesne türü tarafından işlenecek *Keys*  yoktur.
 
-Learn more about [Keys](/overview/indev).
+[Keys](/overview/indev) hakkında fazlasını öğrenin.
 
-## Example
+## Örnek
 
 ```eval_rst
 

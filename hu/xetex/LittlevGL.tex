@@ -62,7 +62,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Jul 29, 2019}
+\date{Jul 31, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -21584,6 +21584,45 @@ code
 \end{sphinxVerbatim}
 
 
+\subparagraph{Drop “up” list}
+\label{\detokenize{object-types/ddlist:drop-up-list}}
+\noindent\sphinxincludegraphics{{lv_ex_ddlist_2}.png}
+
+code
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZdq{}lvgl/lvgl.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZlt{}stdio.h\PYGZgt{}}
+
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * Create a drop UP list by applying auto realign}
+\PYG{c+cm}{ */}
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}ex\PYGZus{}ddlist\PYGZus{}2}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+
+    \PYG{c+cm}{/*Create a drop down list*/}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{ddlist} \PYG{o}{=} \PYG{n}{lv\PYGZus{}ddlist\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}ddlist\PYGZus{}set\PYGZus{}options}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Apple}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+            \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Banana}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+            \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Orange}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+            \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Melon}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+            \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Grape}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+            \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Raspberry}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}ddlist\PYGZus{}set\PYGZus{}fix\PYGZus{}width}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{l+m+mi}{150}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}ddlist\PYGZus{}set\PYGZus{}fix\PYGZus{}height}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{l+m+mi}{150}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}ddlist\PYGZus{}set\PYGZus{}draw\PYGZus{}arrow}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Enable auto\PYGZhy{}realign when the size changes.}
+\PYG{c+cm}{     * It will keep the bottom of the ddlist fixed*/}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}auto\PYGZus{}realign}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/*It will be called automatically when the size changes*/}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{ddlist}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}IN\PYGZus{}BOTTOM\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{20}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
 \subparagraph{MicroPython}
 \label{\detokenize{object-types/ddlist:micropython}}
 No examples yet.
@@ -24987,40 +25026,7 @@ code
 code
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+cm}{/**}
-\PYG{c+cm}{ * @file lv\PYGZus{}ex\PYGZus{}templ.c}
-\PYG{c+cm}{ *}
-\PYG{c+cm}{ */}
-
-\PYG{c+cm}{/*********************}
-\PYG{c+cm}{ *      INCLUDES}
-\PYG{c+cm}{ *********************/}
-
 \PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZdq{}lvgl/lvgl.h\PYGZdq{}}
-
-\PYG{c+cm}{/*********************}
-\PYG{c+cm}{ *      DEFINES}
-\PYG{c+cm}{ *********************/}
-
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *      TYPEDEFS}
-\PYG{c+cm}{ **********************/}
-
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *  STATIC PROTOTYPES}
-\PYG{c+cm}{ **********************/}
-
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *  STATIC VARIABLES}
-\PYG{c+cm}{ **********************/}
-
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *      MACROS}
-\PYG{c+cm}{ **********************/}
-
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *   GLOBAL FUNCTIONS}
-\PYG{c+cm}{ **********************/}
 
 \PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}ex\PYGZus{}label\PYGZus{}2}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
@@ -25040,7 +25046,6 @@ code
                                   \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{It even works with}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
                                   \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{newlines     and spaces.}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
 
-    
     \PYG{c+cm}{/*Set the same text for the shadow label*/}
     \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{shadow\PYGZus{}label}\PYG{p}{,} \PYG{n}{lv\PYGZus{}label\PYGZus{}get\PYGZus{}text}\PYG{p}{(}\PYG{n}{main\PYGZus{}label}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
 
@@ -25050,10 +25055,70 @@ code
     \PYG{c+cm}{/* Shift the second label down and to the right by 1 pixel */}
     \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{shadow\PYGZus{}label}\PYG{p}{,} \PYG{n}{main\PYGZus{}label}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}IN\PYGZus{}TOP\PYGZus{}LEFT}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{;}
 \PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
 
-\PYG{c+cm}{/**********************}
-\PYG{c+cm}{ *   STATIC FUNCTIONS}
-\PYG{c+cm}{ **********************/}
+
+\subparagraph{Align labels}
+\label{\detokenize{object-types/label:align-labels}}
+\noindent\sphinxincludegraphics{{lv_ex_label_3}.png}
+
+code
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{include} \PYG{c+cpf}{\PYGZdq{}lvgl/lvgl.h\PYGZdq{}}
+
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{text\PYGZus{}changer}\PYG{p}{(}\PYG{n}{lv\PYGZus{}task\PYGZus{}t} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{;}
+
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * Create three labels to demonstrate the alignments.}
+\PYG{c+cm}{ */}
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}ex\PYGZus{}label\PYGZus{}3}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{c+cm}{/*{}`lv\PYGZus{}label\PYGZus{}set\PYGZus{}align{}` is not required to align the object itslef.}
+\PYG{c+cm}{     * It\PYGZsq{}s used only when the text has multiple lines*/}
+
+    \PYG{c+cm}{/* Create a label on the top.}
+\PYG{c+cm}{     * No additional alignment so it will be the reference*/}
+    \PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}IN\PYGZus{}TOP\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{LV\PYGZus{}LABEL\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Create a label in the middle.}
+\PYG{c+cm}{     * {}`lv\PYGZus{}obj\PYGZus{}align{}` will be called every time the text changes}
+\PYG{c+cm}{     * to keep the middle position */}
+    \PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{LV\PYGZus{}LABEL\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/* Create a label in the bottom.}
+\PYG{c+cm}{     * Enable auto realign. */}
+    \PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{=} \PYG{n}{lv\PYGZus{}label\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}auto\PYGZus{}realign}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}IN\PYGZus{}BOTTOM\PYGZus{}MID}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{n}{LV\PYGZus{}LABEL\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}task\PYGZus{}t} \PYG{o}{*} \PYG{n}{t} \PYG{o}{=} \PYG{n}{lv\PYGZus{}task\PYGZus{}create}\PYG{p}{(}\PYG{n}{text\PYGZus{}changer}\PYG{p}{,} \PYG{l+m+mi}{1000}\PYG{p}{,} \PYG{n}{LV\PYGZus{}TASK\PYGZus{}PRIO\PYGZus{}MID}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}task\PYGZus{}ready}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{text\PYGZus{}changer}\PYG{p}{(}\PYG{n}{lv\PYGZus{}task\PYGZus{}t} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{const} \PYG{k+kt}{char} \PYG{o}{*} \PYG{n}{texts}\PYG{p}{[}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Text}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{A very long text}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{A text with}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{multiple}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{lines}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{\PYGZcb{}}\PYG{p}{;}
+    \PYG{k}{static} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,} \PYG{n}{texts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n}{texts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}label\PYGZus{}set\PYGZus{}text}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{,} \PYG{n}{texts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{c+cm}{/*Manually realaign {}`labels[1]{}`*/}
+    \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+
+    \PYG{n}{i}\PYG{o}{+}\PYG{o}{+}\PYG{p}{;}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{texts}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=}\PYG{o}{=} \PYG{n+nb}{NULL}\PYG{p}{)} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+\PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
 
@@ -28873,7 +28938,7 @@ return value will be NULL unless \sphinxcode{\sphinxupquote{lv\_mbox\_add\_btns}
 
 \paragraph{Overview}
 \label{\detokenize{object-types/page:overview}}
-The Page consist of two {\hyperref[\detokenize{object-types/page::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Containers}}}} on each other:
+The Page consist of two {\hyperref[\detokenize{object-types/cont::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Containers}}}} on each other:
 \begin{itemize}
 \item {} 
 a \sphinxstylestrong{background} (or base)
