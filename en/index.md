@@ -102,7 +102,7 @@ Be sure you are calling `lv_tick_inc(x)` in an interrupt and `lv_task_handler()`
 Learn more in the [Tick](/porting/tick) and [Task handler](/porting/task-handler) section.
 
 ### Why the display driver is called only one? Only the upper part of the display is refreshed. 
-Be sure you are calling `lv_disp_flush_ready(drv)` at the end of your *display flush callback*. 
+Be sure you are calling `lv_disp_flush_ready(drv)` at the end of your "*display flush callback*". 
 
 ### Why I see only garbage on the screen?
 Probably there a bug in your display driver. Try the following code without using LittlevGL:
