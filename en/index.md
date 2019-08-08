@@ -145,7 +145,7 @@ If you are using 16 bit colors with SPI (or other byte-oriented) interface proba
 ### How to reduce flash/ROM usage?
 You can disable all the unused feature (such as animations, file system, GPU etc.) and object types in *lv_conf.h*.
 
-IF you are using GCC you can add 
+If you are using GCC you can add 
 - `-fdata-sections -ffunction-sections` compiler flags 
 - `--gc-sections` linker flag
 
@@ -171,6 +171,16 @@ There are several ways to contribute to LittlevGL:
 
 To learn more see [Contributing guide](https://blog.littlevgl.com/2018-12-06/contributing)
 
+### How is LittlevGL versioned?
+
+LittlevGL follows the rules of [Semantic versioning](https://semver.org/):
+- *Major* versions for incompatible API changes. E.g. v5.0.0, v6.0.0
+- *Minor* version for new but backwards-compatible functionalities. E.g. v6.1.0, v6.2.0
+- *Patch* version for backwards-compatible bug fixes. E.g. v6.1.1, v6.1.2
+
+The new versions are developed in `dev-X.Y` branchs on GitHub. It can be cloned to test the newset features, however, still anything can be changed there.
+
+The bugfixes are added directly to the `master` branch on GitHub and a bugfix release is created every month.
 
 ### Where can I find the documentation of the previous version (v5.3)?
 
