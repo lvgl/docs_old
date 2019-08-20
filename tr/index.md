@@ -22,34 +22,34 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 **[Blog](https://blog.littlevgl.com/)**
 
 ## Key features
-- Powerful building blocks buttons, charts, lists, sliders, images etc
+- Powerful building blocks such as buttons, charts, lists, sliders, images etc.
 - Advanced graphics with animations, anti-aliasing, opacity, smooth scrolling
-- Various input devices touchpad, mouse, keyboard, encoder etc
+- Various input devices such as touchpad, mouse, keyboard, encoder etc.
 - Multi-language support with UTF-8 encoding
 - Multi-display support, i.e. use more TFT, monochrome displays simultaneously
-- Fully customizable graphical elements
+- Fully customizable graphic elements
 - Hardware independent to use with any microcontroller or display
 - Scalable to operate with little memory (64 kB Flash, 16 kB RAM)
 - OS, External memory and GPU supported but not required
 - Single frame buffer operation even with advanced graphical effects
 - Written in C for maximal compatibility (C++ compatible)
-- Simulator to start embedded GUI design on PC without embedded hardware
+- Simulator to start embedded GUI design on a PC without embedded hardware
 - Tutorials, examples, themes for rapid GUI design
-- Documentation online and offline
+- Documentation is available as online and offline
 - Free and open-source under MIT license
 
 ## Requirements
 - 16, 32 or 64 bit microcontroller or processor
-- &gt; 16 MHz clock speed is recommended
-- Flash/ROM: &gt; 64 kB for the very essential components (&gt; 180 kB is recommended)
-- RAM: 
-  - Static RAM usage: ~8..16 kB depending on the used features and objects types
-  - Stack: &gt; 2kB (&gt; 4 kB is recommended)
-  - Dynamic data (heap): &gt; 4 KB (&gt; 16 kB is recommended if using several objects).
-    Set by `LV_MEM_SIZE` in *lv_conf.h*. 
-  - Display buffer:  &gt; *"Horizontal resolution"* pixels (&gt; 10 &times; *"Horizontal resolution"* is recommended) 
+- Greater than 16 MHz clock speed is recommended
+- Flash/ROM: Greater than 64 kB size for the very essential components (greater than 180 kB is recommended)
+- RAM:
+  - Static RAM usage: approximately 8 to 16 kB depending on the used features and objects types
+  - Stack: greater than 2kB (greater than 4 kB is recommended)
+  - Dynamic data (heap): greater than 4 KB (greater than 16 kB is recommended if using several objects).
+    Set by `LV_MEM_SIZE` in *lv_conf.h* 
+  - Display buffer: greater than *"Horizontal resolution"* pixels (greater than 10 &times; *"Horizontal resolution"* is recommended) 
 -  C99 or newer compiler
-- Basic C (or C++) knowledge: [pointers](https://www.tutorialspoint.com/cprogramming/c_pointers.htm), [structs](https://www.tutorialspoint.com/cprogramming/c_structures.htm), [callbacks](https://www.geeksforgeeks.org/callbacks-in-c/).
+- Basic C (or C++) knowledge: [pointers](https://www.tutorialspoint.com/cprogramming/c_pointers.htm), [structs](https://www.tutorialspoint.com/cprogramming/c_structures.htm), [callbacks](https://www.geeksforgeeks.org/callbacks-in-c/)
 
 *Note that the memory usage might vary depending on the architecture, compiler and build options.*
 
@@ -58,11 +58,11 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 
 ### Where to get started?
 - For a general overview of LittlevGL visit [littlevgl.com](https://littlevgl.com)
-- Go to the [Get started](/get-started/index) section to try Live demos in you browser, learn about the Simulator(s) and learn the basics of LittlevGL.
-- A detailed porting guide can be found in the [Porting](/porting/index) section.
-- To learn how LittlevGL works go to the [Overview](/overview/index).
+- Go to the [Get started](/get-started/index) section to try Live demos in you browser, learn about the Simulator(s) and learn the basics of LittlevGL
+- A detailed porting guide can be found in the [Porting](/porting/index) section
+- To learn how LittlevGL works go to the [Overview](/overview/index)
 - To read tutorials or share your own experiences go to the [Blog](https://blog.littlevgl.com)
-- To see the source code of the library check it on GitHub: [https://github.com/littlevgl/lvgl/](https://github.com/littlevgl/lvgl/).
+- To see the source code of the library check it on GitHub: [https://github.com/littlevgl/lvgl/](https://github.com/littlevgl/lvgl/)
 
 
 ### Where can I ask questions?
@@ -72,16 +72,18 @@ We use [GitHub issues](https://github.com/littlevgl/lvgl/issues) for development
 
 
 ### Is my MCU/hardware supported?
-Every MCU which is capable of driving a display via Parallel port, SPI, RGB interface or anything else and fulfills the [Requirements](#Requirements) is supported by LittlevGL. 
-It includes 
+Every MCU which is capable of driving a display via Parallel port, SPI, RGB interface or anything else and fulfills the [Requirements](#Requirements) is supported by LittlevGL.
+
+It includes:
 - "Common" MCUs like STM32F, STM32H, NXP Kinetis, LPC, iMX, dsPIC33, PIC32 etc. 
 - Bluetooth, GSM, WiFi modules like Nordic NRF and Espressif ESP32
-- Linux frame buffer like /dev/fb0 which includes Single board computers too like Raspberry
-- and anything else with a strong enough MCU and a periphery to drive a display
+- Linux frame buffer like /dev/fb0 which includes Single board computers too like Raspberry Pi
+- And anything else with a strong enough MCU and a periphery to drive a display
 
 ### Is my display supported?
-LittlevGL needs just one simple driver to copy an array of pixels to a given area of the display. If you can do this with your display then you can use that display with LittlevGL. 
-It includes
+LittlevGL needs just one simple driver to copy an array of pixels into a given area of the display. If you can do this with your display then you can use the same display with LittlevGL.
+
+It includes:
 - TFTs with 16 or 24 bit color depth 
 - Monitors with HDMI port
 - Small monochrome displays
@@ -92,7 +94,7 @@ It includes
 See the [Porting](/porting/display) section to learn more.
 
 ### Is LittlevGL free? How can I use it in a commercial product?
-LittlevGL comes with MIT license which means you can download and use it for any purpose you want without any obligations.
+LittlevGL comes with [MIT license](https://github.com/littlevgl/lvgl/blob/master/LICENCE.txt) which means you can download and use it for any purpose you want without any obligations.
 
 ### Nothing happens, my display driver is not called. What have I missed?
 Be sure you are calling `lv_tick_inc(x)` in an interrupt and `lv_task_handler()` in your main `while(1)`.
@@ -100,7 +102,7 @@ Be sure you are calling `lv_tick_inc(x)` in an interrupt and `lv_task_handler()`
 Learn more in the [Tick](/porting/tick) and [Task handler](/porting/task-handler) section.
 
 ### Why the display driver is called only one? Only the upper part of the display is refreshed. 
-Be sure you are calling `lv_disp_flush_ready(drv)` at the end of you *display flush callback*. 
+Be sure you are calling `lv_disp_flush_ready(drv)` at the end of your "*display flush callback*". 
 
 ### Why I see only garbage on the screen?
 Probably there a bug in your display driver. Try the following code without using LittlevGL:
@@ -128,7 +130,7 @@ my_flush_cb(NULL, &a, buf);
 ```
 
 ### Why I see non-sense colors on the screen? 
-Probably LittlevGL's the color format is not compatible with your displays color format. Check `LV_COLOR_DEPTH` in *lv_conf.h*.
+Probably LittlevGL's color format is not compatible with your displays color format. Check `LV_COLOR_DEPTH` in *lv_conf.h*.
 
 If you are using 16 bit colors with SPI (or other byte-oriented) interface probably you need to set `LV_COLOR_16_SWAP  1` in *lv_conf.h*. It swaps the upper and lower bytes of the pixels.
 
@@ -138,12 +140,12 @@ If you are using 16 bit colors with SPI (or other byte-oriented) interface proba
 - Use 2 display buffers and flush the buffer with DMA (or similar periphery) in the background 
 - Increase the clock speed of the SPI or Parallel port if you use them to drive the display
 - If you display has SPI port consider changing to a model with parallel because it has much higher throughput
-- Keep the display buffer in the internal RAM (not external SRAM) because LittlevGL uses it a lot and it should have a small access time
+- Keep the display buffer in the internal RAM (not in external SRAM) because LittlevGL uses it a lot and it should have a small access time
  
 ### How to reduce flash/ROM usage?
-You can disable all the unused feature (like animations, file system, GPU etc) and object types in *lv_conf.h*.
+You can disable all the unused feature (such as animations, file system, GPU etc.) and object types in *lv_conf.h*.
 
-IF you are using GCC you can add 
+If you are using GCC you can add 
 - `-fdata-sections -ffunction-sections` compiler flags 
 - `--gc-sections` linker flag
 
@@ -151,8 +153,8 @@ to remove unused functions and variables.
 
 ### How to reduce the RAM usage
 - Lower the size of the *Display buffer* 
-- Reduce `LV_MEM_SIZE` in *lv_conf.h*. This memory used when you create objects like buttons, labels, etc
-- To work with lower `LV_MEM_SIZE` you can create the objects only when required and deleted them when they are not required anymore.
+- Reduce `LV_MEM_SIZE` in *lv_conf.h*. This memory used when you create objects like buttons, labels, etc.
+- To work with lower `LV_MEM_SIZE` you can create the objects only when required and deleted them when they are not required anymore
  
 ### How to work with an operating system?
 
@@ -160,15 +162,25 @@ To work with an operating system where tasks can interrupt each other you should
 
 ### How to contribute to LittlevGL?
 There are several ways to contribute to LittlevGL:
-- write a few lines about your project to inspire others
-- answer other’s questions
-- report and/or fix bugs
-- suggest and/or implement new features
-- improve and/or translate the documentation
-- write a blog post about your experiences
+- Write a few lines about your project to inspire others
+- Answer other’s questions
+- Report and/or fix bugs
+- Suggest and/or implement new features
+- Improve and/or translate the documentation
+- Write a blog post about your experiences
 
 To learn more see [Contributing guide](https://blog.littlevgl.com/2018-12-06/contributing)
 
+### How is LittlevGL versioned?
+
+LittlevGL follows the rules of [Semantic versioning](https://semver.org/):
+- *Major* versions for incompatible API changes. E.g. v5.0.0, v6.0.0
+- *Minor* version for new but backwards-compatible functionalities. E.g. v6.1.0, v6.2.0
+- *Patch* version for backwards-compatible bug fixes. E.g. v6.1.1, v6.1.2
+
+The new versions are developed in `dev-X.Y` branchs on GitHub. It can be cloned to test the newset features, however, still anything can be changed there.
+
+The bugfixes are added directly to the `master` branch on GitHub and a bugfix release is created every month.
 
 ### Where can I find the documentation of the previous version (v5.3)?
 

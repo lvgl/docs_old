@@ -34,7 +34,7 @@ Divers formats de couleur intégrés sont pris en charge:
 - **LV_IMG_CF_TRUE_COLOR_ALPHA** Enregistre les couleurs RVB mais ajoute également un octet Alpha pour chaque pixel
 - **LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED** Enregistre les couleurs RVB, mais si un pixel prend la valeur `LV_COLOR_TRANSP` (défini dans *lv_conf.h*), le pixel sera transparent
 - **LV_IMG_CF_INDEXED_1/2/4/8BIT** Utilise une palette avec 2, 4, 16 ou 256 couleurs et enregistre chaque pixel sur 1, 2, 4 ou 8 bits
-- **LV_IMG_CF_ALPHA_1/2/4/8BIT** Enregistre uniquement la valeur Alpha sur 1, 2, 4 ou 8 bits. Dessine les pixels avec la couleur `style.image.color` et l'opacité définie.
+- **LV_IMG_CF_ALPHA_1/2/4/8BIT** Enregistre uniquement la valeur Alpha sur 1, 2, 4 ou 8 bits. Dessine les pixels avec la couleur `style.image.color` et l'opacité définie. L'image source doit avoir un canal alpha.
 
 Les octets des images *Couleurs vraies* 32 bits sont enregistrés dans l'ordre suivant
 - Byte 0: Bleu

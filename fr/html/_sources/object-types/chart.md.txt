@@ -1,92 +1,92 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/chart.md
 ```
-# Chart (lv_chart)
+# Graphique (lv_chart)
 
-## Overview
+## Vue d’ensemble
 
-Charts have a rectangle-like background with horizontal and vertical division lines and data series drawn from lines, points colums or areas. 
+Les graphiques ont un arrière-plan rectangulaire avec des lignes de division horizontales et verticales et des séries de données représentées par des lignes, colonnes de points ou zones.
 
-### Data series
-You can add any number of series to the charts by `lv_chart_add_series(chart, color)`. 
-It allocates data for a `lv_chart_series_t` structure which contains the chosen `color` and an array for the data points. 
+### Série de données
+Vous pouvez ajouter un nombre quelconque de séries aux graphiques avec `lv_chart_add_series(chart, color)`. 
+Cette fonction alloue la mémoire pour une structure `lv_chart_series_t` qui contient la `couleur` choisie et un tableau pour les points.
 
-### Series' type
-The following **data display types** exists:
+### Type de série
+Les **types de données** suivants existent :
 
-- **LV_CHART_TYPE_NONE** do not display any data. It can be used to hide a series.
-- **LV_CHART_TYPE_LINE** draw lines between the points
-- **LV_CHART_TYPE_COL** Draw columns
-- **LV_CHART_TYPE_POINT** Draw points
-- **LV_CHART_TYPE_AREA** Draw areas (fill the area below the lines)
-- **LV_CHART_TYPE_VERTICAL_LINE** Draw only vertical lines to connect the points. Useful if the chart width is equal to the number of points.
+- **LV_CHART_TYPE_NONE** ne pas afficher de données. Utilisé pour masquer une série.
+- **LV_CHART_TYPE_LINE** tracer des lignes entre les points.
+- **LV_CHART_TYPE_COL** dessine des barres.
+- **LV_CHART_TYPE_POINT** dessine des points.
+- **LV_CHART_TYPE_AREA** dessine des zones (remplit la zone en dessous des lignes qui relient les points).
+- **LV_CHART_TYPE_VERTICAL_LINE** Dessine uniquement des lignes verticales pour relier les points. Utile si la largeur du graphique est égale au nombre de points.
 
-You can specify the display type with `lv_chart_set_type(chart, LV_CHART_TYPE_...)`. The types can be 'OR'ed (like `LV_CHART_TYPE_LINE | LV_CHART_TYPE_POINT`).
+Vous pouvez spécifier le type de données avec `lv_chart_set_type(chart, LV_CHART_TYPE_...)`. Les types peuvent être combinés par 'OU' (comme `LV_CHART_TYPE_LINE | LV_CHART_TYPE_POINT`).
 
-### Modify the data
-You have several options to set the data of series:
-1. Set the values manually in the array like `ser1->points[3] = 7` and refresh the chart with `lv_chart_refresh(chart)`.
-2. Use the `lv_chart_set_next(chart, ser, value)` 
-3. Initialize all points to a given value with: `lv_chart_init_points(chart, ser, value)`.
-4. Set all points from an array with: `lv_chart_set_points(chart, ser, value_array)`.
+### Modifier le données
+Vous avez plusieurs possibilités pour définir les données de la série :
+1. Définir les valeurs manuellement dans le tableau comme `ser1->points[3] = 7` et actualiser le graphique avec `lv_chart_refresh(chart)`.
+2. Utiliser `lv_chart_set_next(chart, ser, value)`.
+3. Initialiser tous les points avec une valeur donnée : `lv_chart_init_points(chart, ser, value)`.
+4. Définir tous les points à partir d'un tableau : `lv_chart_set_points(chart, ser, value_array)`.
 
-Use `LV_CHART_POINT_DEF` as value to make the library to not draw that point, column, or line segment.
+Utilisez `LV_CHART_POINT_DEF` comme valeur pour indiquer à la librairie de ne pas tracer un point, une colonne ou un segment de ligne.
 
-### Update modes
-`lv_chart_set_next` can behave in two way depending on *update mode*:
-- **LV_CHART_UPDATE_MODE_SHIFT** Shift old data to the left and add the new one o the right
-- **LV_CHART_UPDATE_MODE_CIRCULAR** Add the new data in a circular way. (Like an ECG diagram)
+### Modes de mise à jour
+`lv_chart_set_next` peut se comporter de deux manières selon le *mode de mise à jour* :
+- **LV_CHART_UPDATE_MODE_SHIFT** déplacer les anciennes données vers la gauche et ajoute la nouvelle à droite,
+- **LV_CHART_UPDATE_MODE_CIRCULAR** Ajoute les nouvelles données de manière circulaire (comme un ECG).
 
-To update mode can be changed with `lv_chart_set_update_mode(chart, LV_CHART_UPDATE_MODE_...)`.
+Le mode de mise à jour peut être changé avec `lv_chart_set_update_mode(chart, LV_CHART_UPDATE_MODE_...)`.
 
-### Number of points
-The number of points in the series can be modified by `lv_chart_set_point_count(chart, point_num)`. The default value is 10.
+### Nombre de points
+Le nombre de points de la série peut être modifié par `lv_chart_set_point_count(chart, point_num)`. La valeur par défaut est 10.
 
-### Vertical range
-You can specify a the min. and max. values in y directions with `lv_chart_set_range(chart, y_min, y_max)`. The value of the points will be scaled proportionally. The default range is: 0..100.
+### Plage verticale
+Vous pouvez spécifier des valeurs minimum et maximum dans la direction y avec `lv_chart_set_range(chart, y_min, y_max)`. La valeur des points sera mise à l'échelle proportionnellement. La plage par défaut est : 0..100.
 
-### Division lines
-The number of horizontal and vertical division lines can be modified by `lv_chart_set_div_line_count(chart, hdiv_num, vdiv_num)`. The default settings are 3 horizontal and 5 vertical division lines.
+### Quadrillage
+Le nombre de lignes horizontales et verticales du quadrillage peut être modifié par `lv_chart_set_div_line_count(chart, hdiv_num, vdiv_num)`. Les valeurs par défaut sont 3 lignes horizontales et 5 lignes verticales.
 
-### Series' appearance
-To set the **line width** and **point radius** of the series use the `lv_chart_set_series_width(chart, size)` function. The default value is: 2.
+Apparence de la série
+Pour définir l'**épaisseur de ligne** et le **rayon des points** de la série, utilisez la fonction `lv_chart_set_series_width(chart, size)`. La valeur par défaut est : 2.
 
-The **opacity of the data lines** can be specified by `lv_chart_set_series_opa(chart, opa)`. The default value is: OPA_COVER.
+L'**opacité des lignes de données** peut être spécifiée par `lv_chart_set_series_opa(chart, opa)`. La valeur par défaut est : OPA_COVER.
 
-You can apply a **dark color fade** on the bottom of columns and points by `lv_chart_set_series_darking(chart, effect)` function. The default dark level is OPA_50.
+Vous pouvez appliquer un **assombrissement** au bas des colonnes et des points avec la fonction `lv_chart_set_series_darking(chart, effect)`. Le niveau par défaut est OPA_50.
 
 
-### Tick marks and labels
-Ticks and texts to ticks can be added.
+### Graduation et étiquettes
+Des graduations et étiquettes peuvent être ajoutés.
 
-`lv_chart_set_x_tick_text(chart, list_of_values, num_tick_marks, LV_CHART_AXIS_...)` set the ticks and texts on x axis.
-`list_of_values` is a string with `'\n'` terminated text (expect the last) with text for the ticks. E.g. `const char * list_of_values = "first\nseco\nthird"`. `list_of_values` can be `NULL`.
-If `list_of_values` is set then `num_tick_marks` tells the number of ticks between two labels.  If `list_of_values` is `NULL` then it specifies the total number of ticks.
+`lv_chart_set_x_tick_text(chart, list_of_values, num_tick_marks, LV_CHART_AXIS_...)` définit les graduations et les textes sur l'axe des x.
+`list_of_values` est une chaîne de textes pour les graduations délimités par des `'\n'` (excepté le dernier). P.ex. `const char * list_of_values = "premier\ndeuxième\ntroisième"`. `list_of_values` peut être `NULL`.
+Si `list_of_values` est défini alors `num_tick_marks` indique le nombre de graduations entre deux étiquettes.  Si `list_of_values` est `NULL` alors il spécifie le nombre total de graduations.
 
-Where text are added *major tick lines* are drawn, ot the other places *minor tick lines*. `lv_chart_set_x_tick_length(chart, major_tick_len, minor_tick_len)` sets the length of tick lines on the x axis.
+Lorsque du texte est ajouté des *lignes principales* de quadrillage sont dessinées, ailleurs des *lignes secondaires*. `lv_chart_set_x_tick_length(chart, major_tick_len, minor_tick_len)` définit l'épaisseur des lignes de graduation sur l'axe des x.
 
-The same functions exists for the y axis too: `lv_chart_set_y_tick_text` and `lv_chart_set_y_tick_length`
+Les mêmes fonctions existent aussi pour l’axe des y :  `lv_chart_set_y_tick_text` et `lv_chart_set_y_tick_length`
 
-`lv_chart_set_margin(chart, 20)` needs to be used to add some extra space around the chart for the ticks and texts.
+`lv_chart_set_margin(chart, 20)` doit être utilisée pour ajouter un espace supplémentaire autour du graphique pour les graduations et les textes.
 
 ## Styles
-You can set the styles with `lv_chart_set_style(btn, LV_CHART_STYLE_MAIN, &style)`.
-- **style.body** properties set the background's appearance
-- **style.line** properties set the division lines' appearance
-- **style.text** properties set the axis labels' appearance
+Vous pouvez définir les styles avec `lv_chart_set_style(btn, LV_CHART_STYLE_MAIN, &style)`.
+- **style.body** définit l'apparence de l'arrière-plan,
+- **style.line** définit l'apparence du quadrillage,
+- **style.text** définit l'apparence des étiquettes des axes.
 
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## Evénements
+Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
 
-Learn more about [Events](/overview/event).
+Apprenez-en plus sur les [événements](/overview/event).
 
-## Keys
-No *Keys* are processed by the object type.
+## Touches
+Aucune *touche* n'est traitée par ce type d'objet.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
-## Example
+## Exemple
 
 ```eval_rst
 

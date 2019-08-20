@@ -22,9 +22,9 @@ LittlevGL est une bibliothèque graphique gratuite et à code source ouvert offr
 **[Blog](https://blog.littlevgl.com/)**
 
 ## Points forts
-- Eléments de base évolués : boutons, graphiques, listes, curseurs, images, etc.
+- Eléments de base évolués tels que boutons, graphiques, listes, curseurs, images, etc.
 - Graphiques avancés avec animations, anti-crénelage, opacité, défilement doux
-- Périphériques d'entrée variés : pavé tactile, souris, clavier, encodeur, etc.
+- Périphériques d'entrée variés tels que pavé tactile, souris, clavier, encodeur, etc.
 - Prise en charge multilingue avec encodage UTF-8
 - Prise en charge de plusieurs écrans, c-à-d utilisation simultanée d'un écran TFT et d'un écran monochrome
 - Eléments graphiques entièrement personnalisables
@@ -33,21 +33,21 @@ LittlevGL est une bibliothèque graphique gratuite et à code source ouvert offr
 - SE, mémoire externe et GPU pris en charge mais non requis
 - Fonctionne avec un seul tampon d'affichage même avec des effets graphiques avancés
 - Ecrit en C pour une compatibilité maximale (compatible C++)
-- Simulateur pour débuter la conception d'interface graphique embarquée sans le matériel embarqué
+- Simulateur pour débuter sur PC la conception d'interface graphique embarquée sans le matériel embarqué
 - Tutoriels, exemples, thèmes pour une conception rapide
-- Documentation en ligne et hors ligne
+- Documentation disponible en ligne et hors ligne
 - Gratuit et à code source ouvert, sous licence MIT
 
 ## Eléments requis
 - Microcontrôleur ou processeur 16, 32 ou 64 bits
-- Une vitesse d'horloge &gt; à 16 MHz est recommandée
-- Taille de la mémoire Flash/MEM : &gt; à 64 ko pour les composants essentiels (une taille &gt; à 180 ko est recommandée)
-- MEV : 
-  - Utilisation de MEV statique : ~8..16 ko en fonction des types d'objets et des fonctionnalités utilisés
-  - Pile : &gt; à 2 ko (une taille &gt; à 4 ko est recommandée)
-  - Données dynamiques (tas) : &gt; à 4 ko (une taille &gt; à 16 ko est recommandée si plusieurs objets sont utilisés).
+- Une vitesse d'horloge supérieure à 16 MHz est recommandée
+- Flash/MEM : une taille supérieure à 64 ko pour les composants essentiels (une taille supérieure à 180 ko est recommandée)
+- MEV :
+  - Utilisation de MEV statique : approximativement 8 à 16 ko en fonction des types d'objets et des fonctionnalités utilisés
+  - Pile : taille supérieure à 2 ko (une taille supérieure à 4 ko est recommandée)
+  - Données dynamiques (tas) : taille supérieure à 4 ko (une taille supérieure à 16 ko est recommandée si plusieurs objets sont utilisés).
     Défini par `LV_MEM_SIZE` dans *lv_conf.h*. 
-  - Tampon d'affichage :  &gt; à *"résolution horizontale"* pixels (une taille &gt; à 10 &times; *"résolution horizontale"* est recommandée) 
+  - Tampon d'affichage :  taille supérieure à *"résolution horizontale"* pixels (une taille supérieure à 10 &times; *"résolution horizontale"* est recommandée) 
 -  Compilateur conforme à C99 ou plus récent
 - Connaissances de bases en C (ou C++)  : [pointeurs](https://www.tutorialspoint.com/cprogramming/c_pointers.htm), [structures](https://www.tutorialspoint.com/cprogramming/c_structures.htm), [fonctions de rappel](https://www.geeksforgeeks.org/callbacks-in-c/).
 
@@ -74,15 +74,17 @@ Nous utilisons le suivi des problèmes de [GitHub](https://github.com/littlevgl/
 
 ### Est-ce que mon microcontrôleur/matériel est supporté ?
 Chaque microcontrôleur capable de piloter un affichage via un port parallèle, SPI, une interface RVB ou autre, et conforme aux [éléments requis](#elements-requis), est pris en charge par LittlevGL.
-Cela inclut
+
+Cela comprend :
 - Les microcontrôleurs "courants" tels que les STM32F, STM32H, NXP Kinetis, LPC, iMX, dsPIC33, PIC32, etc.
 - Les modules Bluetooth, GSM, WiFi tels que les Nordic NRF et Espressif ESP32
 - Le tampon de trame de Linux comme /dev/fb0 ce qui inclut également les ordinateurs monocartes comme le Raspberry Pi
 - Et tout ce qui possède un microcontrôleur suffisamment puissant et le nécessaire pour piloter un écran
 
 ### Mon écran est-il supporté?
-LittlevGL nécessite uniquement un simple pilote pour copier un tableau de pixels vers une zone donnée de l'affichage. Si vous pouvez le faire avec votre écran, vous pouvez utiliser cet écran avec LittlevGL.
-Cela inclut
+LittlevGL nécessite uniquement un simple pilote pour copier un tableau de pixels dans une zone donnée de l'affichage. Si vous pouvez le faire avec votre écran, vous pouvez utiliser cet écran avec LittlevGL.
+
+Cela comprend :
 - Les TFT avec une profondeur de couleur de 16 ou 24 bits
 - Les moniteurs avec port HDMI
 - Les petits écrans monochromes
@@ -93,7 +95,7 @@ Cela inclut
 Consultez la section [Portage](/porting/display) pour en savoir plus.
 
 ### LittlevGL est-il libre ? Comment puis-je l'utiliser dans un produit commercial ?
-LittlevGL est fourni avec une licence MIT, ce qui signifie que vous pouvez le télécharger et l’utiliser à vos fins sans obligation.
+LittlevGL est fourni sous [licence MIT](https://github.com/littlevgl/lvgl/blob/master/LICENCE.txt), ce qui signifie que vous pouvez le télécharger et l’utiliser à vos fins sans obligation.
 
 ### Rien ne se passe, mon pilote d'affichage n'est pas appelé. Qu'est-ce que j'ai raté ?
 Assurez-vous que vous appelez `lv_tick_inc(x)` dans une interruption et `lv_task_handler ()` dans votre boucle principale `while (1)`.
@@ -139,7 +141,7 @@ Si vous utilisez des couleurs 16 bits avec SPI (ou toute autre interface orient�
 - Utilisez 2 tampons d'affichage et transférez le tampon en DMA (ou une technique similaire) en arrière-plan
 - Augmentez la vitesse de fonctionnement des ports SPI ou parallèle si vous les utilisez pour piloter l'affichage
 - Si votre écran dispose d'un port SPI, envisagez de passer à un modèle avec port parallèle, car son débit est beaucoup plus élevé.
-- Conservez le tampon d'affichage dans la MEV interne (pas la SRAM externe) car LittlevGL l'utilise intensivement ce qui implique un temps d'accès minimal.
+- Conservez le tampon d'affichage dans la MEV interne (pas dans la SRAM externe) car LittlevGL l'utilise intensivement ce qui implique un temps d'accès minimal.
  
 ### Comment réduire l'utilisation de mémoire flash/MEM ?
 Vous pouvez désactiver toutes les fonctionnalités (animations, système de fichiers, GPU, etc.) et les types d'objet non utilisés dans *lv_conf.h*.
@@ -170,6 +172,16 @@ Il y a plusieurs façons de contribuer à LittlevGL :
 
 Pour en savoir plus, consultez le [Guide de contribution](https://blog.littlevgl.com/2018-12-06/contributing)
 
+### Comment LittlevGL est-il versionné ?
+
+LittlevGL suit les règles de [gestion sémantique de version ](https://semver.org/lang/fr/):
+- Versions *majeures* pour les modifications incompatibles de l'API. P.ex. 5.0.0, 6.0.0
+- Versions *mineures* pour des fonctionnalités nouvelles mais compatibles avec les versions antérieures. P.ex. 6.1.0, 6.2.0
+- Versions *correctives* pour les corrections de bogues à compatibilité ascendante. P.ex. 6.1.1, 6.1.2
+
+Les nouvelles versions sont développées dans les branches `dev-X.Y` sur GitHub. Elles peuvent être clonées pour tester les fonctionnalités les plus récentes. Cependant, tout peut être modifié dans ces branches.
+
+Les corrections de bogues sont ajoutées directement à la branche `master` sur GitHub et une version de correction de bogues est créée chaque mois.
 
 ### Où puis-je trouver la documentation de la version précédente (5.3) ?
 

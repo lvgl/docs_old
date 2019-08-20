@@ -1,7 +1,7 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/index.md
 ```
-# Object types (Widgets)
+# Types d'objet (éléments visuels)
 
 ```eval_rst
 

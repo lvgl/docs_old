@@ -40,7 +40,7 @@ Vous pouvez contrôler entièrement l'interface utilisateur sans pavé tactile o
 Les objets que vous souhaitez contrôler avec un clavier ou un encodeur doivent être ajoutés à un *groupe*.
 Dans chaque groupe, il y a exactement un seul objet focalisé qui reçoit les notifications de touche pressée ou les actions du codeur.
 Par exemple, si une [Zone de texte](/object-types/ta) est sélectionnée et que vous appuyez sur une lettre d'un clavier, les codes sont envoyés et traités par la zone de texte.
-Ou si un [Curseur](/types-objets/slider) est sélectionné et que vous appuyez sur les flèches gauche ou droite, la valeur du curseur sera modifiée.
+Ou si un [Curseur](/object-types/slider) est sélectionné et que vous appuyez sur les flèches gauche ou droite, la valeur du curseur sera modifiée.
 
 Vous devez associer un périphérique d'entrée à un groupe. Un périphérique d'entrée peut envoyer les codes à un seul groupe, mais un groupe peut recevoir des données de plusieurs périphériques d'entrée.
 

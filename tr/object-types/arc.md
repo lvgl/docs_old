@@ -5,7 +5,7 @@
 
 ## Giriş
 
-*Yay*nesnesi  verilen kalınlıkla ve **başlangıç ve bitiş açıları** dahilinde   **bir yay çizer** .
+*Yay* nesnesi  verilen kalınlıkla **başlangıç ve bitiş açıları** dahilinde   **bir yay çizer** .
 
 ### Açılar
 
@@ -13,7 +13,7 @@ Açıları ayarlamak için `lv_arc_set_angles(arc, start_angle, end_angle)` fonk
 Açılar  [0;360] aralığında olmalıdır.
 
 ### Notlar
-*Yayın* **genişliği ve yükseliği ** **aynı** olmalıdır.
+*Yayın*  **genişliği ve yükseliği** **aynı** olmalıdır.
 
 Şu anda , *Yay* nesnesi **antialiasing modu desteklemez**.
 

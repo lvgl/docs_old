@@ -308,6 +308,9 @@ Ha szeretnéd, számos módon segítheted a LittlevGL fejlesztését:
 - **Segítsd a fejlesztést**. Nézd meg a  [Nyitott issue](https://github.com/littlevgl/lvgl/issues)-kat , különösön a [Help wanted](https://github.com/littlevgl/lvgl/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) címkével ellátottakat, és mond el az véleményedet a témáról vagy implementáld az adott funkciót.
 
 Hasznos lehet elolvasni a
-- [Közreműködési leírást](https://blog.littlevgl.com/2018-12-06/contributing)
-- [Kódolási stílus útmutatót](https://github.com/littlevgl/lvgl/blob/master/docs/CODING_STYLE.md)
 
+```eval_rst
+- `Contributing guide <https://blog.littlevgl.com/2018-12-06/contributing>`_
+- `Coding style guide <https://github.com/littlevgl/lvgl/blob/master/docs/CODING_STYLE.md>`_
+
+```

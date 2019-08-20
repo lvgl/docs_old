@@ -308,6 +308,9 @@ Si vous souhaitez contribuer à LittlevGL, vous pouvez
 - **Aidez au développement**. Vérifiez les [problèmes en cours](https://github.com/littlevgl/lvgl/issues), en particulier ceux avec la mention [Aide demandée](https://github.com/littlevgl/lvgl/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) et partagez vos idées sur un sujet ou implémentez une fonctionnalité.
 
 Il devrait être utile de lire le
-- [Guide de contribution](https://blog.littlevgl.com/2018-12-06/contributing)
-- [Guide de style de code](https://github.com/littlevgl/lvgl/blob/master/docs/CODING_STYLE.md)
 
+```eval_rst
+- `Contributing guide <https://blog.littlevgl.com/2018-12-06/contributing>`_
+- `Coding style guide <https://github.com/littlevgl/lvgl/blob/master/docs/CODING_STYLE.md>`_
+
+```

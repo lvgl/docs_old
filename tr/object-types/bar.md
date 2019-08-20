@@ -32,7 +32,7 @@ Bir *Bar* nesnesinin biçimi ayarlamak için `lv_bar_set_style(arc, LV_BAR_STYLE
 ## Olaylar
 Nesne türü tarafından sadece [Generic events](/overview/event.html#generic-events) gönderilir.
 
-Learn more about [Events](/overview/event).
+[Events](/overview/event) hakkında daha fazlasını öğrenin.
 
 ## Keys
 Nesne türü tarafından işlenecek *Keys*  yoktur.

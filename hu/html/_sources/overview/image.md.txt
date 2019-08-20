@@ -34,7 +34,7 @@ Various built-in color formats are supported:
 - **LV_IMG_CF_TRUE_COLOR_ALPHA** Store the RGB colors but add an Alpha byte too for every pixel
 - **LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED** Store the RGB color but if a pixel has `LV_COLOR_TRANSP` (set in *lv_conf.h*) color the pixel will be transparent
 - **LV_IMG_CF_INDEXED_1/2/4/8BIT** Use palette with 2, 4, 16 or 256 colors and store each pixel on 1, 2, 4 or 8 bit
-- **LV_IMG_CF_ALPHA_1/2/4/8BIT** Store only the Alpha value on 1, 2, 4 or 8 bits. Draw the pixels `style.image.color` and the set opacity. 
+- **LV_IMG_CF_ALPHA_1/2/4/8BIT** Store only the Alpha value on 1, 2, 4 or 8 bits. Draw the pixels with `style.image.color` and the set opacity. The source image has to be alpha channel.
 
 The bytes of the *True color* 32 bit images are stored in the following order
 - Byte 0: Blue

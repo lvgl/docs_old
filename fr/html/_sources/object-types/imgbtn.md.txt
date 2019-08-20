@@ -1,65 +1,65 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/imgbtn.md
 ```
-# Image button (lv_imgbtn)
+# Bouton image (lv_imgbtn)
 
-## Overview
+## Vue d’ensemble
 
-The Image button is very similar to the simple Button object. The only difference is it displays user-defined images in each state instead of drawing a button. 
-Before reading this please read the [Button](/object-types/btn) section too.
+Le bouton Image est très similaire à l'objet bouton simple. La seule différence est qu'il affiche des images définies par l'utilisateur pour chaque état au lieu de dessiner un bouton.
+Avant de lire ceci, veuillez lire la section sur l'objet [bouton](/object-types/btn).
 
-### Image sources
-To set the image in a state the `lv_imgbtn_set_src(imgbtn, LV_BTN_STATE_..., &img_src)` The image sources works the same as described in the [Image object](/object-types/img).
+### Images sources
+Pour définir l'image d'un état, utilisez `lv_imgbtn_set_src(imgbtn, LV_BTN_STATE_..., &img_src)`.Les images sources fonctionnent comme décrit dans l'objet [image](/object-types/img).
 
-If `LV_IMGBTN_TILED` is enabled in *lv_conf.h* three sources can be set for each state:
-- left
-- center
-- right
+Si `LV_IMGBTN_TILED` est activé dans *lv_conf.h* trois sources peuvent être définies pour chaque état :
+- gauche,
+- centre,
+- droit.
 
-The *center* image will be repeated to fill the width of the object. Therefore with `LV_IMGBTN_TILED` you can set the width of the Image button while without it the width will be always the same as the image source's width.
+L'image *centre* sera répétée pour remplir l'objet sur toute sa largeur. Par conséquent, avec `LV_IMGBTN_TILED`, vous pouvez définir la largeur du bouton Image, sans quoi la largeur sera toujours identique à la largeur de l'image source.
 
 
-### States
-The states also work like with Button object. It can be set with `lv_imgbtn_set_state(imgbtn, LV_BTN_STATE_...)`. 
+### Etats
+Les états sont semblables à ceux de l'objet bouton. Il peut être défini avec `lv_imgbtn_set_state(imgbtn, LV_BTN_STATE_...)`. 
 
-### Toggle
-The toggle feature can be enabled with `lv_imgbtn_set_toggle(imgbtn, true)`
+### Bascule
+La fonctionnalité bascule peut être activée avec `lv_imgbtn_set_toggle(imgbtn, true)`.
 
-## Style usage
+## Styles
 
-Similarly to normal Buttons, Image buttons also have 5 independent styles for the 5 state. You can set them via: `lv_imgbtn_set_style(btn, LV_IMGBTN_STYLE_..., &style)`. The styles use the `style.image` properties.
+Comme pour les boutons normaux, les boutons image ont également 5 styles indépendants pour les 5 états. Vous pouvez les définir via `lv_imgbtn_set_style(btn, LV_IMGBTN_STYLE_..., &style)`. Les styles utilisent les propriétés `style.image`.
 
-- **LV_IMGBTN_STYLE_REL** style of the released state. Default: `lv_style_btn_rel`
-- **LV_IMGBTN_STYLE_PR** style of the pressed state. Default: `lv_style_btn_pr`
-- **LV_IMGBTN_STYLE_TGL_REL** style of the toggled released state. Default: `lv_style_btn_tgl_rel`
-- **LV_IMGBTN_STYLE_TGL_PR** style of the toggled pressed state. Default: `lv_style_btn_tgl_pr`
-- **LV_IMGBTN_STYLE_INA** style of the inactive state. Default: `lv_style_btn_ina`
+- **LV_IMGBTN_STYLE_REL** style de l'état relâché. Défaut : `lv_style_btn_rel`,
+- **LV_IMGBTN_STYLE_PR** style de l'état pressé. Défaut : `lv_style_btn_pr`,
+- **LV_IMGBTN_STYLE_TGL_REL** style de l'état bascule relâché. Défaut : `lv_style_btn_tgl_rel`,
+- **LV_IMGBTN_STYLE_TGL_PR** style de l'état bascule pressé. Défaut : `lv_style_btn_tgl_pr`,
+- **LV_IMGBTN_STYLE_INA** style de l'état inactif. Défaut : `lv_style_btn_ina`.
 
-When labels are created on a button, it's a good practice to set the image button's `style.text` properties too. Because labels have `style = NULL` by default they inherit the parent's (image button) style. 
-Hence you don't need to create a new style for the label. 
+Quand vous créez une étiquette sur un bouton image, la bonne pratique consiste à définir les propriétés `style.text` du bouton image. Comme les étiquettes ont `style = NULL` par défaut, elles héritent du style du parent, le bouton image.
+De ce fait, vous n'avez pas besoin de créer un nouveau style pour l'étiquette.
 
-## Events
-Besided the [Genreric events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the buttons:
- - **LV_EVENT_VALUE_CHANGED** sent when the button is toggled.
+## Evénements
+Outre les [événements génériques](/overview/event.html #evenements-generiques), les [événements spéciaux](/overview/event.html#evenements-speciaux) suivants  sont envoyés par les boutons image :
+ - **LV_EVENT_VALUE_CHANGED** envoyé lorsque le bouton image est basculé.
 
-Note that the generic input device related events (like `LV_EVENT_PRESSED`) are sent in the inactive state too. You need to check the state with `lv_btn_get_state(btn)` to ignore the events from inactive buttons.
+Notez que les événements génériques liés au périphérique d'entrée (tels que `LV_EVENT_PRESSED`) sont également envoyés dans l'état inactif. Vous devez vérifier l'état avec `lv_imgbtn_get_state(imgbtn)` pour ignorer les événements des boutons inactifs.
  
-Learn more about [Events](/overview/event).
+Apprenez-en plus sur les [événements](/overview/event).
 
-## Keys
-The following *Keys* are processed by the Buttons:
-- **LV_KEY_RIGHT/UP** Go to toggled state if toggling is enabled
-- **LV_KEY_LEFT/DOWN** Go to non-toggled state if toggling is  enabled
+## Touches
+Les *touches* suivantes sont traitées par les cases à cocher:
+- **LV_KEY_RIGHT/UP** passe à l'état bascule pressé si le mode bascule est actif
+- **LV_KEY_LEFT/DOWN** passe à l'état bascule relâché si le mode bascule est actif
 
-Note that, as usual, the state of `LV_KEY_ENTER` is translated to `LV_EVENT_PRESSED/PRESSING/RELEASED` etc.
+Notez que, comme d'habitude, l'état de `LV_KEY_ENTER` est traduit en `LV_EVENT_PRESSED/PRESSING/RELEASED` etc.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
-## Example
+## Exemple
 
 ```eval_rst
 
-.. include:: /lv_examples/src/lv_ex_imgbtn/index.rst
+.. include:: /lv_examples/src/lv_ex_obj/index.rst
 
 ```
 

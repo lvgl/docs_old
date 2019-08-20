@@ -3,36 +3,36 @@
 ```
 # LED (lv_led)
 
-## Overview
+## Vue d’ensemble
 
-The LEDs are rectangle-like (or circle) object. 
+Les LEDs sont des objets rectangulaires (ou circulaires).
 
-### Brightness
-You can set their brightness with `lv_led_set_bright(led, bright)`. The brightness should be between 0 (darkest) and 255 (lightest).
+### Luminosité
+Vous pouvez régler leur luminosité avec `lv_led_set_bright(led, bright)`. La luminosité doit être comprise entre 0 (plus sombre) et 255 (plus clair).
 
-### Toggle
-Use `lv_led_on(led)` and `lv_led_off(led)` to set the brightness to a predefined  ON or OFF value.  The `lv_led_toggle(led)` toggles between the ON and OFF state.
+### Bascule
+Utilisez `lv_led_on(led)` et `lv_led_off(led)` pour régler la luminosité sur des valeurs prédéfinies ON ou OFF. La fonction `lv_led_toggle (led)` alterne entre les états ON et OFF.
 
 ## Styles
 
-The LED uses one style which can be set by `lv_led_set_style(led, LV_LED_STYLE_MAIN, &style)`. 
-To determine the appearance the `style.body` properties are used. 
+Les LEDs utilisent un style qui peut être défini par `lv_led_set_style(led, LV_LED_STYLE_MAIN, &style)`. 
+Pour déterminer l'apparence, les propriétés de `style.body` sont utilisées.
 
-The colors are darkened and shadow width is reduced at a lower brightness and gains its original value at brightness 255 to show a lighting effect.  
+Les couleurs sont assombries et la largeur de l'ombre est réduite lorsque la luminosité est faible et les valeurs nominales sont utilisées à la luminosité 255 afin de simuler un effet d'éclairage.
 
-The default style is: `lv_style_pretty_color`. Not that, the LED doesn't really look like a LED with the default style so you should create your own style. See the example below.
+Le style par défaut est `lv_style_pretty_color`. Notez que la LED ne ressemble pas vraiment à une LED avec le style par défaut, vous devez donc créer votre propre style. Voir l'exemple ci-dessous.
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## Evénements
+Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
 
-Learn more about [Events](/overview/event).
+Apprenez-en plus sur les [événements](/overview/event).
 
-## Keys
-No *Keys* are processed by the object type.
+## Touches
+Aucune *touche* n'est traitée par ce type d'objet.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
-## Example
+## Exemple
 
 ```eval_rst
 

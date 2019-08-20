@@ -1,52 +1,52 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/tr/object-types/gauge.md
 ```
-# Gauge (lv_gauge)
+# Gösterge (lv_gauge)
 
-## Overview
+## Giriş
 
-The gauge is a meter with scale labels and needles.
+Gösterge ölçekli etiketli ve ibreli bir ölçerdir.
 
-### Scale 
-You can use the `lv_gauge_set_scale(gauge, angle, line_num, label_cnt)` function to adjust the scale angle and the number of the scale lines and labels. 
-The default settings are 220 degrees, 6 scale labels, and 21 lines.
+### Ölçek
+`lv_gauge_set_scale(gauge, angle, line_num, label_cnt)` fonksiyonunu ölçek açısını ve ölçek satırlarının ve etiketlerinin sayısını ayarlamak için kullanabilirsin.
+Varsayılan ayarlar 220 derece, 6 ölçek etiketi  ve 21 satır.
 
-### Needles
-The gauge can show more than one needle. 
-Use the `lv_gauge_set_needle_count(gauge, needle_num, color_array)` function to set the number of needles and an array with colors for each needle. The array must be static or global variable because only its pointer is stored.
+### ibreler
+Gösterge birden fazla ibre gösterebilir 
+`lv_gauge_set_needle_count(gauge, needle_num, color_array)` fonksiyonun ibrelerin sayısını ve her ibre için renkli bir dizi renin rengini ayarlamak için kullanabilirsin. Bu dizi statik veya global değişken olmalı çünkü sadece göstericisi saklanır.
 
-You can use `lv_gauge_set_value(gauge, needle_id, value)` to set the value of a needle.
+İbrenin değeri ayarlamak için`lv_gauge_set_value(gauge, needle_id, value)` kullanabilrisin.
 
-### Range
-The range of the gauge can be specified by `lv_gauge_set_range(gauge, min, max)`. The default range is 0..100.
+### Aralık
+Göstergenin aralığı `lv_gauge_set_range(gauge, min, max)` ile belirtilebilir. Varsayılan aralık 0..100'dür.
 
-### Critical value
-To set a critical value use `lv_gauge_set_critical_value(gauge, value)`. The scale color will be changed to `line.color` after this value. (default: 80)
+### Kritik Değer
+Kritik değeri ayarlamak için`lv_gauge_set_critical_value(gauge, value)` kullanılır . Bu değerden sonra ölçek rengi (varsayılan: 80)`line.color` değiştirilebilir.
 
-## Styles
+## Biçimler
 
-The gauge uses one style which can be set by `lv_gauge_set_style(gauge, LV_GAUGE_STYLE_MAIN, &style)`. The gauge's properties are derived from the following style attributes:
+Gösterge`lv_gauge_set_style(gauge, LV_GAUGE_STYLE_MAIN, &style)` tarafından ayarlanan bir biçim ile kullanılabilir. Göstergenin özellikleri aşağıdaki biçim özelliklerinden türetilir:
 
-- **body.main_color** line's color at the beginning of the scale
-- **body.grad_color** line's color at the end of the scale (gradient with main color)
-- **body.padding.left** line length
-- **body.padding.inner** label distance from the scale lines 
-- **body.radius** radius of needle origin circle
-- **line.width** line width
-- **line.color** line's color after the critical value
-- **text.font/color/letter_space** label attributes
+- **body.main_color** liölçeğin başındaki çizginin rengi
+- **body.grad_color**  ölçeğin sonundaki çizginin rengi(ana renkli gradyan)
+- **body.padding.left** çizgi uzunluğu
+- **body.padding.inner** ölçek çizgilerinden etiket arası mesafe
+- **body.radius** ibrenin kökenli dairenin yarıçapı
+- **line.width** çizgi genişliği
+- **line.color** Kritik değerden sonraki çizgi rengi
+- **text.font/color/letter_space** etiket özellikleri
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## Olaylar
+[Generic events](/overview/event.html#generic-events) sadece nesne çeşidi tarafından gönderilir.
 
-Learn more about [Events](/overview/event).
+Events](/overview/event) hakkında daha fazlasını öğrenin.
 
-## Keys
-No *Keys* are processed by the object type.
+## Anahtarlar
+Nesne çeşidi tarafından işlenecek*Keys* yoktur.
 
-Learn more about [Keys](/overview/indev).
+[Keys](/overview/indev) hakkında daha fazlasını öğrenin.
 
-## Example
+## Örnek
 
 ```eval_rst
 

@@ -24,13 +24,13 @@ Pour configurer un affichage, les variables `lv_disp_buf_t` et` lv_disp_drv_t` d
 ```
 
 Voici les configurations possibles concernant la taille de la mémoire tampon :
-1. **Un tampon** LittlevGL dessine le contenu de l'écran dans un tampon et l'envoie à l'écran.
-Le tampon peut être plus petit que l'écran. Dans ce cas, les zones les plus grandes seront redessinées en plusieurs parties.
+1. **Un tampon** LittlevGL dessine le contenu de l'écran dans un tampon et l'envoie à l'affichage.
+Le tampon peut être plus petit que l'affichage. Dans ce cas, les zones les plus grandes seront redessinées en plusieurs parties.
 Si seules de petites zones changent (p.ex. appui sur un bouton), seules ces zones seront actualisées.
 2. **Deux tampons de taille différente de l'écran** ayant deux tampons LittlevGL peut dessiner dans un tampon tandis que le contenu de l'autre tampon est envoyé à l’écran en arrière-plan.
 Le DMA ou une autre méthode doit être utilisé pour transférer les données à l’écran afin de permettre au CPU de dessiner dans le même temps.
 De cette manière, le rendu et le rafraîchissement de l'affichage deviennent parallèles.
-De même que *Un tampon*, LittlevGL dessine le contenu de l'affichage en fragments si le tampon est plus petit que la zone à actualiser.
+De même que pour *Un tampon*, LittlevGL dessine le contenu de l'affichage en fragments si le tampon est plus petit que la zone à actualiser.
 3. **Deux tampons de la taille d'un écran**.
 Contrairement à *Deux tampons de taille différente de l'écran* LittlevGL fournira toujours tout le contenu de l'affichage, pas seulement des fragments.
 De cette façon, le pilote peut simplement changer l'adresse du tampon d'affichage par celle du tampon préparé par LittlevGL.

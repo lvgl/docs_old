@@ -1,63 +1,63 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/ddlist.md
 ```
-# Drop down list (lv_ddlist)
+# Liste déroulante (lv_ddlist)
 
-## Overview
+## Vue d’ensemble
 
-Drop Down Lists allow you to simply select one option from more. The Drop Down List is closed by default an show the currently selected text. If you click on it the list opens and all the options are shown.
+Les listes déroulantes vous permettent de sélectionner simplement un élément parmi plusieurs. La liste déroulante est fermée par défaut et permet d'afficher le texte actuellement sélectionné. Si vous cliquez dessus, la liste s'ouvre et tous les éléments sont affichés.
 
-### Set options
-The options are passed to the Drop Down List as a string with `lv_ddlist_set_options(ddlist, options)`. The options should be separated by `\n`. For example: `"First\nSecond\nThird"`.
+### Définir les éléments
+Les éléments sont transmis à la liste déroulante sous forme de chaîne avec `lv_ddlist_set_options(ddlist, options)`. Les éléments doivent être séparés par `\n`. Par exemple : `"Premier\nDeuxième\nTroisième"`.
 
-You can select an option manually with `lv_ddlist_set_selected(ddlist, id)`, where _id_ is the index of an option.
+Vous pouvez sélectionner un élément manuellement avec `lv_ddlist_set_selected(ddlist, id)`, où _id_ est l'index d'un élément.
 
-### Get selected option
-The get the currently selected option use `lv_ddlist_get_selected(ddlist)` it will return the *index* of the selected option.
+### Obtenir l'élément sélectionné
+Pour obtenir l'élément actuellement sélectionné, utilisez `lv_ddlist_get_selected(ddlist)`. La fonction retourne l'*index* de l'élément sélectionné.
 
-`lv_ddlist_get_selected_str(ddlist, buf, buf_size)` copies the name of the selected option to `buf`.
+`lv_ddlist_get_selected_str(ddlist, buf, buf_size)` copie le texte de l'élément sélectionnée dans `buf`.
 
-### Align the options
-To align the label horizontally use `lv_ddlist_set_align(ddlist, LV_LABEL_ALIGN_LEFT/CENTER/RIGHT)`.
+### Aligner les éléments 
+Pour aligner le texte horizontalement, utilisez `lv_ddlist_set_align(ddlist, LV_LABEL_ALIGN_LEFT/CENTER/RIGHT)`.
 
-### Height and width
-By default, the list's height is adjusted automatically to show all options. The `lv_ddlist_set_fix_height(ddlist, height)` sets a fixed height for the opened list. `0` means to use auto height.
+### Hauteur et largeur
+Par défaut, la hauteur de la liste est ajustée automatiquement pour afficher tous les éléments. `lv_ddlist_set_fix_height(ddlist, height)` définit une hauteur fixe pour la liste ouverte. `0` utilise la hauteur automatique.
 
-The width is also adjusted automatically. To prevent this apply `lv_ddlist_set_fix_width(ddlist, width)`. `0` means to use auto width.
+La largeur est également ajustée automatiquement. Pour éviter cela, utilisez `lv_ddlist_set_fix_width(ddlist, width)`. `0` utilise la largeur automatique.
 
-### Scrollbars
-Similarly to [Page](/object-types/page) with fix height the Drop Down List supports various scrollbar display modes. It can be set by `lv_ddlist_set_sb_mode(ddlist, LV_SB_MODE_...)`.
+### Barres de défilement
+Comme pour une [page](/object-types/page) de hauteur fixe, la liste déroulante prend en charge divers modes d’affichage avec barres de défilement. Le mode est défini par `lv_ddlist_set_sb_mode(ddlist, LV_SB_MODE_...)`.
 
-### Animation time
-The Drop Down List open/close animation time is adjusted by `lv_ddlist_set_anim_time(ddlist, anim_time)`. Zero animation time means no animation.
+### Durée d'animation
+La durée d'animation d'ouverture/fermeture de la liste déroulante est spécifié par `lv_ddlist_set_anim_time(ddlist, anim_time)`. Une durée d'animation à zéro supprime l'animation.
 
-### Decoration arrow
-A down arrow can be added to the left side of the Drop down list with `lv_ddlist_set_draw_arrow(ddlist, true)`.
+### Flèche décorative
+Une flèche vers le bas peut être ajoutée à gauche de la liste déroulante avec `lv_ddlist_set_draw_arrow(ddlist, true)`.
 
-### Stay open
-You can force the Drop down list to **stay opened** when an option is selected with `lv_ddlist_set_stay_open(ddlist, true)`.
+### Rester ouvert
+Vous pouvez forcer la liste déroulante à rester **ouverte** lorsqu'un élément est sélectionné avec `lv_ddlist_set_stay_open(ddlist, true)`.
 
 ## Styles
 
-The `lv_ddlist_set_style(ddlist, LV_DDLIST_STYLE_..., &style)` set the styles of a Drop Down List.
+`lv_ddlist_set_style(ddlist, LV_DDLIST_STYLE_..., &style)` définit les styles d'une liste déroulante.
 
-- **LV_DDLIST_STYLE_BG** Style of the background. All `style.body` properties are used. `style.text` is used for the option's label. Default: `lv_style_pretty`
-- **LV_DDLIST_STYLE_SEL** Style of the selected option.  The `style.body` properties are used. The selected option will be recolored with `text.color`. Default: `lv_style_plain_color`
-- **LV_DDLIST_STYLE_SB** Style of the scrollbar. The `style.body` properties are used. Default: `lv_style_plain_color`
+- **LV_DDLIST_STYLE_BG** style de l'arrière plan. Toutes les propriétés `style.body` sont utilisées. `style.text` est utilisé pour le libellé de l'élément. Par défaut : `lv_style_pretty`,
+- **LV_DDLIST_STYLE_SEL** Style de l'élément sélectionné. Les propriétés `style.body` sont utilisées. L'élément sélectionné sera colorée avec `text.color`. Par défaut : `lv_style_plain_color`,
+- **LV_DDLIST_STYLE_SB** style de la barre de défilement. Les propriétés `style.body` sont utilisées. Par défaut : `lv_style_plain_color`.
 
-## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Drop down lists:
- - **LV_EVENT_VALUE_CHANGED** sent when the a new option is selected
+## Evénements
+Outre les [événements génériques](/overview/event.html #evenements-generiques), les [événements spéciaux](/overview/event.html#evenements-speciaux) suivants  sont envoyés par les listes déroulantes :
+ - **LV_EVENT_VALUE_CHANGED** envoyé lorsque un nouvel élément est sélectionné.
 
-Learn more about [Events](/overview/event).
+Apprenez-en plus sur les [événements](/overview/event).
 
-## Keys
-The following *Keys* are processed by the Buttons:
-- **LV_KEY_RIGHT/DOWN** Select the next option
-- **LV_KEY_LEFT/UP** Select the previous option
-- **LY_KEY_ENTER** Apply the selected option (Send `LV_EVENT_VALUE_CHANGED` event and close the Drop down list) 
+## Touches
+Les *touches* suivantes sont traitées par les listes déroulantes :
+- **LV_KEY_RIGHT/DOWN** sélectionne l'élément suivant,
+- **LV_KEY_LEFT/UP** sélectionne l'élément précédent,
+- **LY_KEY_ENTER** valide l'élément sélectionné (envoie l'événement `LV_EVENT_VALUE_CHANGED` et ferme la liste déroulante).
 
-## Example
+## Exemple
 
 ```eval_rst
 

@@ -3,27 +3,27 @@
 ```
 # Tâches
 
-LittlevGL has a built-in task system. You can register a functions to call them periodically. The tasks are handled and called in `lv_task_handler()` which needs to be called periodically in every few milliseconds. 
-See [Porting](/porting/task-handler) for more information.
+LittlevGL a un système intégré de tâches. Vous pouvez enregistrer une fonction pour l'appeler périodiquement. Les tâches sont gérées et appelées dans `lv_task_handler()`, qui doit être appelée périodiquement toutes les quelques millisecondes.
+Voir [Portage](/porting/task-handler) pour plus d'informations.
 
-The tasks are non-preemptive which means a task can interrupt an other. Therefore you can call any LittlevGL related function in a task.
+Les tâches sont non-préemptives, ce qui signifie qu'une tâche ne peut en interrompre une autre. Par conséquent, vous pouvez appeler n’importe quelle fonction liée à LittlevGL dans une tâche.
 
 
-## Create a task
-To create a new task use `lv_task_create(task_cb, period_ms, LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST, user_data)`. It will create an `lv_task_t *` variable which can be used later to modify the parameters of the task.
-`lv_task_create_basic()` also can be used to create a new task without specifying any parameters.
+## Créer une tâche
+Pour créer une nouvelle tâche, utilisez `lv_task_create(task_cb, period_ms, LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST, user_data)`. Une variable `lv_task_t *` est créée qui peut être utilisée ultérieurement pour modifier les paramètres de la tâche.
+`lv_task_create_basic ()` peut également être utilisée pour créer une nouvelle tâche sans spécifier de paramètre.
 
-A task callback should have `void (*lv_task_cb_t)(lv_task_t *);` prototype.
+La fonction de rappel d'une tâche doit avoir la signature `void (* lv_task_cb_t)(lv_task_t *)`.
 
-For example:
+Par exemple :
 ```c
 void my_task(lv_task_t * task)
 {
-  /*Use the user_data*/
+  /* Utilise les données de l'utilisateur */
   uint32_t * user_data = task->user_data;
   printf("my_task called with user data: %d\n", *user_data);
   
-  /*Do something with LittlevGL*/
+  /* Fait quelque chose avec LittlevGL */
   if(something_happened) {
     something_happened = false;
     lv_btn_create(lv_scr_act(), NULL);
@@ -37,53 +37,53 @@ lv_task_t * task = lv_task_create(my_task, 500, LV_TASK_PRIO_MID, &user_data);
 
 ```
 
-## Ready and Reset
+## Exécution et réinitialisation
 
-`lv_task_ready(task)` makes the task run on the next call of `lv_task_handler()`.
+`lv_task_ready(task)` fait exécuter la tâche lors du prochain appel de `lv_task_handler()`.
 
-`lv_task_reset(task)` resets the period of a task. It will be called the defined period milliseconds later.
+`lv_task_reset(task)` réinitialise la période d'une tâche. La tâche sera appelée après un délai égal à la période définie.
 
 
-## Set parameters
-You can modify some parameters of the tasks later:
+## Paramètres
+Vous pouvez modifier ultérieurement certains paramètres des tâches :
 - `lv_task_set_cb(task, new_cb)`
 - `lv_task_set_period(task, new_period)`
 - `lv_task_set_prio(task, new_priority)`
 
-## One-shot tasks
+## Tâches uniques
 
-You can make a task to run only once by calling`lv_task_once(task)`. The task will be automatically deleted when called for the first time.
+Vous pouvez faire en sorte qu'une tâche ne soit exécutée qu'une seule fois en appelant `lv_task_once(task)`. La tâche sera automatiquement supprimée lors du premier appel.
 
 
-## Measure idle time
+## Mesurer le temps d'inactivité
 
-You can get the idle percentage time `lv_task_handler` with `lv_task_get_idle()`. Note that, it doesn't measure the idle time of the overall system, only `lv_task_handler`. 
-It might be misleading if you use an operating system and call `lv_task_handler` in a task.
+Vous pouvez obtenir le pourcentage de temps d'inactivité de `lv_task_handler` avec` lv_task_get_idle()`. Notez que cela ne mesure pas le temps d'inactivité de l'ensemble du système, mais seulement de `lv_task_handler`.
+Cela peut être trompeur si vous utilisez un système d'exploitation et appelez `lv_task_handler` dans une tâche.
 
-## Asynchronous calls
+## Appels asynchrones
 
-In some cases, you can't do an action immediately. For example, you can't delete an object right now because something else still uses it or you don't want to block the execution now. 
-For these cases, you can use the `lv_async_call(my_function, data_p)` to make `my_function` to be called on the next call of `lv_task_handler`. `data_p` will be passed to function when it's called. 
-Note that, only the pointer of the data is saved so you need to ensure that the variable will be "alive" while the function is called. You can use *static*, global or dynamically allocated data.
+Dans certains cas, vous ne pouvez pas faire une action immédiatement. Par exemple, vous ne pouvez pas supprimer un objet pour le moment, car quelque chose d'autre l'utilise encore ou vous ne voulez pas bloquer l'exécution maintenant.
+Dans ces cas, vous pouvez utiliser `lv_async_call(my_function, data_p)` pour que `ma_fonction` soit appelée lors du prochain appel de `lv_task_handler`. `data_p` sera passé à fonction lorsqu'elle sera appelée.
+Notez que seul le pointeur des données est enregistré. Vous devez donc vous assurer que la variable sera "à portée" lors de l'appel de la fonction. Pour cela, vous pouvez utiliser des données *statiques*, globales ou allouées dynamiquement.
 
-For example:
+Par exemple :
 ```c
 void my_screen_clean_up(void * scr)
 {
-  /*Free some resources related to `scr`*/
+  /* Libére des ressources liées à `scr` */
   
-  /*Finally delete the screen*/
+  /* Au final supprime l'écran */
   lv_obj_del(scr);  
 }
 
 ...
 
-/*Do somethings with the object on the current screen*/
+/* Fait quelque chose avec l'objet sur l'écran courant */
 
-/*Delete screen on next call of `lv_task_handler`. So not now.*/
+/* Supprime l'écran lors du prochain appel de `lv_task_handler`. Donc pas maintenant. */
 lv_async_call(my_screen_clean_up, lv_scr_act());
 
-/*The screen is still valid so you can do other things with it*/
+/* L'écran est toujours valide donc vous pouvez faire d'autres choses avec */
 
 ```
 

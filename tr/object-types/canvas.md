@@ -8,13 +8,13 @@ Bir tuval kullanıcın her şeyi çizebileceği  [Image](/object-types/img) gibi
 
 ### Ön Bellek
 Tuvalin çizilmiş imajı saklayan bir ön belleğe ihtiyacı vardır.
-To assign a buffer to a Canvas use `lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_...)`. 
+Tuvale bir ön bellek atamak için`lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_...)`kullanın. 
 `buffer` tuvalin imajını tutan bir statik ön bellektir(sadece yerel bir değişken değil).
 Örneğin
 `static lv_color_t buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width, height)]`. `LV_CANVAS_BUF_SIZE_...`  makroları farklı renk formatlarında ki önbellek boyutunu belirlemeye yardım eder.
 
 
-The canvas supports all the built in color formats like `LV_IMG_CF_TURE_COLOR` or `LV_IMG_CF_INDEXED_2BIT`. See the full list in the [Color formats](/overview/image.html#color-formats) section.
+Tuval  `LV_IMG_CF_TURE_COLOR` veya`LV_IMG_CF_INDEXED_2BIT` gibi tüm yerleşil renk formatlarını destekler. Tüm listeyi görmek için [Color formats](/overview/image.html#color-formats) bölümüne bakın.
 
 ### Palet
 `LV_IMG_CF_INDEXED_...` için bir renk format paleti  `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)` ile başlatılması gerekir. Pikseli *index=3* ile kırmızı ayarlanır.
@@ -36,7 +36,7 @@ Tuvale bir şeyler çizmek için aşağıdaki fonksiyonlar kullanılır
 - `lv_canvas_draw_polygon(canvas, points_array, point_cnt, &style)`
 - `lv_canvas_draw_arc(canvas, x, y, radius, start_angle, end_angle, &style)`
 
-The draw function can draw only to `LV_IMG_CF_TURE_COLOR`, `LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED` and `LV_IMG_CF_TRUE_COLOR_ALPHA` buffers. `LV_IMG_CF_TRUE_COLOR_ALPHA` is working only with `LV_COLOR_DEPTH 32`.
+Çizim fonksiyonu sadece `LV_IMG_CF_TURE_COLOR`, `LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED` ve `LV_IMG_CF_TRUE_COLOR_ALPHA` ön belleklerini çizebilir. `LV_IMG_CF_TRUE_COLOR_ALPHA` sadece `LV_COLOR_DEPTH 32` birlikte çalışıyor.
 
 ### Döndürme
 `lv_canvas_rotate(canvas, &imd_dsc, angle, x, y, pivot_x, pivot_y)` ile tuvale döndürülmüş imaj eklenebilir. 

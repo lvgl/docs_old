@@ -69,9 +69,9 @@ Envoyés lorsqu'un objet est pressé, relâché, etc. par l'utilisateur. Ils son
 
 #### Liés au pointeur
 Ces événements sont envoyés uniquement par des périphériques d’entrée de type pointeur (p.ex. souris ou pavé tactile).
-- **LV_EVENT_DRAG_BEGIN** Le déplacement de l'objet a débuté
-- **LV_EVENT_DRAG_END** Dragging finished (including drag throw)
-- **LV_EVENT_DRAG_THROW_BEGIN** Drag throw started (released after drag with "momentum")
+- **LV_EVENT_DRAG_BEGIN** le glissé de l'objet a débuté,
+- **LV_EVENT_DRAG_END** le glissé de l'objet est terminé (lancé inclus),
+- **LV_EVENT_DRAG_THROW_BEGIN** le lancé de l'objet a débuté (généré après un glissé avec "élan")
  
 #### Liés au clavier et à l'encodeur
 Ces événements sont envoyés par les périphériques d’entrée clavier et encodeur. En savoir plus sur les *groupes* dans la section [Périphériques d'entrée] (overview/indev).

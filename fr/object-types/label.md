@@ -1,83 +1,83 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/label.md
 ```
-# Label (lv_label)
+# Etiquette (lv_label)
 
-## Overview
-The Labels are the basic objects to display text. 
+## Vue d’ensemble
+Les étiquettes sont les objets de base pour afficher du texte.
 
-### Set text
-You can modify the text in run-time at any time with `lv_label_set_text(label, "New text")`. It will allocate the text dynamically.
+### Définir le texte
+Vous pouvez modifier le texte en cours d’exécution à tout moment avec `lv_label_set_text(label, "Nouveau texte")`. Le texte sera alloué dynamiquement.
 
-Labels are able to show text from a **static array**. Use: `lv_label_set_static_text(label, char_array)`. 
-In this case, the text is not stored in the dynamic memory but the given array is used directly instead. 
-Keep in my the array can't be a local variable which destroys when the function exits.
+Les étiquettes peuvent afficher du texte à partir d'un **texte statique**. Utilisez `lv_label_set_static_text(label, text)`. 
+Dans ce cas, le texte n'est pas enregistré dans la mémoire dynamique, mais le texte est utilisé directement.
+Gardez à l'esprit que le texte ne peut pas être une variable locale, détruit lorsque la fonction se termine.
 
-You can also use a **raw character array** as label text. 
-The array doesn't have to be `\0` terminated. In this case, the text will be saved to the dynamic memory. 
-To set a raw character array use the `lv_label_set_array_text(label, char_array)` function.
-
-
-### Line break
-You can use `\n` to make line break. For example: `"line1\nline2\n\nline4"`
-
-### Long modes
-The size of the label object can be automatically expanded to the text size or the text can be manipulated according to several long mode policies:
-
-* **LV_LABEL_LONG_EXPAND** Expand the object size to the text size (Default)
-* **LV_LABEL_LONG_BREAK** Keep the object width, break (wrap) the too long lines and expand the object height
-* **LV_LABEL_LONG_DOTS** Keep the object size, break the text and write dots in the last line
-* **LV_LABEL_LONG_SROLL** Keep the size and scroll the label back and forth
-* **LV_LABEL_LONG_SROLL_CIRC** Keep the size and scroll the label circularly
-* **LV_LABEL_LONG_CROP** Keep the size and crop the text out of it.
-
-You can specify the long mode with: `lv_label_set_long_mode(label, LV_LABEL_LONG_...)`
-
-It's important to note that when a label is created and its test is set the label's size already expanded to the text size. 
-In addition with the default `LV_LABEL_LONG_EXPAND` *long mode* `lv_obj_set_width/height/size()` has no effect.
-So you need to change the *long mode* first and then set the size with  `lv_obj_set_width/height/size()` .
-
-### Text align
-The label's text can be aligned to the left, right or middle with `lv_label_set_align(label, LV_LABEL_ALIGN_LEFT/RIGHT/CENTER)`
-
-### Draw background
-You can enable to draw a background for the label with `lv_label_set_body_draw(label, draw)`
-
-The background will be larger in every direction with `body.padding.top/bottom/left/right` values. 
-However, the background is drawn only "virtually" and doesn't make the label really larger. 
-There for when the label is positioned the label's coordinates will be taken into account and not background's.
-
-### Text recolor
-In the text, you can use commands to re-color parts of the text. For example: `"Write a #ff0000 red# word"`. 
-This feature can be enabled individually for each label by `lv_label_set_recolor()` function. 
-
-Note that, recoloring work only in a single line. I.e. there can't be `\n` in a recolored text or it can be wrapped by `LV_LABEL_LONG_BREAK` else the text in the new line won't be recolored.
-
-### Very long texts
-LittlevGL can effectively handle very long (> 40k characters) by saving some extra data (~12 bytes) to speed up drawing. To enable this feature set `LV_LABEL_LONG_TXT_HINT   1` in *lv_conf.h*.
+Vous pouvez également utiliser un **tableau de caractères** comme texte d'étiquette.
+Le tableau ne doit pas obligatoirement être terminé par "\ 0". Dans ce cas, le texte sera enregistré dans la mémoire dynamique.
+Pour définir un tableau de caractères, utilisez la fonction `lv_label_set_array_text(label, array)`.
 
 
-### Symbols
-The labels can display symbols besides letters. Read the [Font](/overview/font) section to learn more about the symbols.
+### Saut de ligne
+Vous pouvez utiliser `\n` pour faire un saut de ligne. Par exemple : `"ligne 1\nligne 2\n\nligne 4"`.
+
+### Modes d'adaptation au texte
+La taille de l'objet étiquette peut être automatiquement étendue à la taille du texte ou le texte peut être manipulé selon plusieurs règles de mode :
+
+* **LV_LABEL_LONG_EXPAND** augmente la taille de l'objet à la taille du texte (par défaut),
+* **LV_LABEL_LONG_BREAK** conserve la largeur de l'objet, découpe les lignes trop longues et augmente la hauteur de l'objet,
+* **LV_LABEL_LONG_DOTS** conserve la taille de l'objet, découpe le texte et écrit des points en fin de dernière ligne,
+* **LV_LABEL_LONG_SROLL** conserve la taille de l'objet et fait défiler le texte en avant et en arrière,
+* **LV_LABEL_LONG_SROLL_CIRC** conserve la taille de l'objet et fait défiler le textede manière circulaire,
+* **LV_LABEL_LONG_CROP** conserve la taille et coupe le texte en dehors.
+
+Pour spécifier le mode d'adaptation au texte, utilisez `lv_label_set_long_mode(label, LV_LABEL_LONG_...)`
+
+Il est important de noter que lorsqu'une étiquette est créée et que son texte est défini, la taille de l'étiquette est déjà étendue à la taille du texte.
+L'utilisation des fonctions `lv_obj_set_width/height/size()` avec le *mode d'adaptation du texte* par défaut `LV_LABEL_LONG_EXPAND` ne produit aucun effet.
+Vous devez donc d'abord changer le *mode d'adaptation du texte* puis définir la taille avec `lv_obj_set_width/height/size()`.
+
+### Alignement du texte
+Le texte de l'étiquette peut être aligné à gauche, à droite ou au milieu avec `lv_label_set_align(label, LV_LABEL_ALIGN_LEFT/RIGHT/CENTER)`
+
+### Dessin d'arrière-plan
+Vous pouvez activer le dessin de l’arrière-plan de l’étiquette avec `lv_label_set_body_draw(label, draw)`
+
+L’arrière-plan sera plus grand dans toutes les directions  de la valeur de `body.padding.top/bottom/left/right`.
+Cependant, l'arrière-plan n'est dessiné que "virtuellement" et ne rend pas l'étiquette plus grande.
+Par conséquent, lorsque l'étiquette est positionnée, les coordonnées de l'étiquette sont prises en compte et non celles de l'arrière-plan.
+
+### Coloration du texte
+Dans le texte, vous pouvez utiliser des commandes pour colorer des parties du texte. Par exemple : `"Ecrire un mot #ff0000 rouge#"`. 
+Cette fonctionnalité peut être activée individuellement pour chaque étiquette à l’aide de la fonction `lv_label_set_recolor()`.
+
+Notez que la coloration ne fonctionne que sur une seule ligne. C.-à-d. il ne peut pas y avoir de `\n` dans le texte ou il ne peut être formaté par `LV_LABEL_LONG_BREAK`, sinon le texte de la nouvelle ligne ne sera pas coloré.
+
+### Très long textes
+LittlevGL peut gérer efficacement les très longs textes (> 40k caractères) en enregistrant des données supplémentaires (environ 12 octets) pour accélérer le dessin. Pour activer cette fonctionnalité, définissez `LV_LABEL_LONG_TXT_HINT 1` dans *lv_conf.h*.
+
+
+### Symboles
+Les étiquettes peuvent afficher des symboles en plus des lettres. Lisez la section [police](/overview/police) pour en savoir plus sur les symboles.
 
 ## Styles
-The Label uses one style which can be set by `lv_label_set_style(label, LV_LABEL_STYLE_MAIN, &style)`. Form the style the following properties are used:
-* all properties from `style.text`
-* for background drawing `style.body` properties. `padding` will increase the size only visually, the real object's size won't be changed.
+Les étiquettes utilisent un style qui peut être défini par `lv_label_set_style(label, LV_LABEL_STYLE_MAIN, &style)`. A partir du style, les propriétés suivantes sont utilisées :
+* toutes les propriétés de `style.text`,
+* pour le dessin de l'arrière-plan les propriétés de `style.body`. `padding` n'augmentera la taille que de manière visuelle, la taille de l'objet réel ne sera pas modifiée.
 
-The labels' default style is `NULL` so they inherit the parent's style.
+Le style par défaut des étiquettes est `NULL`. Elles héritent donc du style du parent.
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## Evénements
+Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
 
-Learn more about [Events](/overview/event).
+Apprenez-en plus sur les [événements](/overview/event).
 
-## Keys
-No *Keys* are processed by the object type.
+## Touches
+Aucune *touche* n'est traitée par ce type d'objet.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
-## Example
+## Exemple
 
 ```eval_rst
 

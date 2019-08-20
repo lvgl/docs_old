@@ -3,63 +3,63 @@
 ```
 # Canvas (lv_canvas)
 
-## Overview
-A Canvas is like an [Image](/object-types/img) where the user can draw anything. 
+## Vue d’ensemble
+Un canevas est comme une [image](/object-types/img) où l'utilisateur peut dessiner ce qu'il souhaite.
 
-### Buffer
-The Canvas needs a buffer which stores the drawn image. 
-To assign a buffer to a Canvas use `lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_...)`. 
-`buffer` is a static buffer (not just a local variable) to hold the image of the canvas. 
-For example 
-`static lv_color_t buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width, height)]`. `LV_CANVAS_BUF_SIZE_...` macros help to determine the size of the buffer with different color formats.
+### Tampon
+Le canevas a besoin d’un tampon qui mémorise l’image dessinée.
+Pour affecter un tampon à un canevas, utilisez `lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_...)`. 
+`buffer` est un tampon statique (pas seulement une variable locale) destiné à contenir l'image du canevas.
+Par exemple
+`static lv_color_t buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width, height)]`.  Les macros `LV_CANVAS_BUF_SIZE_...` aident à calculer la taille du tampon pour différents formats de couleur.
 
 
-The canvas supports all the built in color formats like `LV_IMG_CF_TURE_COLOR` or `LV_IMG_CF_INDEXED_2BIT`. See the full list in the [Color formats](/overview/image.html#color-formats) section.
+Le canvas prend en charge tous les formats de couleur intégrés tels que `LV_IMG_CF_TURE_COLOR` ou `LV_IMG_CF_INDEXED_2BIT`. Consultez la liste complète dans la section [formats de couleur](/overview/image.html#formats-de-couleur).
 
 ### Palette
-For `LV_IMG_CF_INDEXED_...` color formats a palette needs to be initialized with  `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)`. It sets pixels with *index=3* to red.
+Pour les formats de couleur `LV_IMG_CF_INDEXED_...` une palette doit être initialisée. Par exemple, `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)` colore les pixels avec *index = 3* en rouge.
 
 
-### Drawing
-To set a pixel on the canvas use `lv_canvas_set_px(canvas, x, y, LV_COLOR_RED)`. 
-With `LV_IMG_CF_INDEXED_...` or `LV_IMG_CF_ALPHA_...` the index of the color or the alpha value needs to be passed as color. E.g. `lv_color_t c; c.full = 3;`
+### Dessin
+Pour tracer un pixel sur la toile, utilisez `lv_canvas_set_px(canvas, x, y, LV_COLOR_RED)`. 
+Avec `LV_IMG_CF_INDEXED_...` ou `LV_IMG_CF_ALPHA_...` l'indice de la couleur ou la valeur alpha doit être passé en tant que couleur. P.ex. `lv_color_t c; c.full = 3;`
 
-`lv_canvas_fill_bg(canvas, LV_COLOR_BLUE)` fills the whole canvas to blue.
+`lv_canvas_fill_bg(canvas, LV_COLOR_BLUE)` remplit tout le canvas en bleu.
 
-An array of pixels can be copied to the canvas with `lv_canvas_copy_buf(canvas, buffer_to_copy, x, y, width, height)`. The color format of the buffer and the canvas need to match.
+Un tableau de pixels peut être copié sur le canvas avec `lv_canvas_copy_buf(canvas, buffer_to_copy, x, y, width, height)`. Le format de couleur du tampon et du canevas doivent correspondre.
 
-To draw something to the canvas use
-- `lv_canvas_draw_rect(canvas, x, y, width, heigth, &style)`
-- `lv_canvas_draw_text(canvas, x, y, max_width, &style, txt, LV_LABEL_ALIGN_LEFT/CENTER/RIGTH)`
-- `lv_canvas_draw_img(canvas, x, y, &img_src, &style)`
-- `lv_canvas_draw_line(canvas, point_array, point_cnt, &style)`
-- `lv_canvas_draw_polygon(canvas, points_array, point_cnt, &style)`
-- `lv_canvas_draw_arc(canvas, x, y, radius, start_angle, end_angle, &style)`
+Pour dessiner sur le canvas, utilisez
+- `lv_canvas_draw_rect(canvas, x, y, width, heigth, &style)`,
+- `lv_canvas_draw_text(canvas, x, y, max_width, &style, txt, LV_LABEL_ALIGN_LEFT/CENTER/RIGTH)`,
+- `lv_canvas_draw_img(canvas, x, y, &img_src, &style)`,
+- `lv_canvas_draw_line(canvas, point_array, point_cnt, &style)`,
+- `lv_canvas_draw_polygon(canvas, points_array, point_cnt, &style)`,
+- `lv_canvas_draw_arc(canvas, x, y, radius, start_angle, end_angle, &style)`.
 
-The draw function can draw only to `LV_IMG_CF_TURE_COLOR`, `LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED` and `LV_IMG_CF_TRUE_COLOR_ALPHA` buffers. `LV_IMG_CF_TRUE_COLOR_ALPHA` is working only with `LV_COLOR_DEPTH 32`.
+Ces fonctions ne peuvent dessiner que dans des tampons `LV_IMG_CF_TRUE_COLOR`, `LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED` et `LV_IMG_CF_TRUE_COLOR_ALPHA`. `LV_IMG_CF_TRUE_COLOR_ALPHA` fonctionne uniquement avec `LV_COLOR_DEPTH 32`.
 
-### Rotate
-A rotated image can be added to canvas with `lv_canvas_rotate(canvas, &imd_dsc, angle, x, y, pivot_x, pivot_y)`. 
-It will rotate the image shown by `img_dsc` around the given pivot and stores it on the `x`, `y` coordinates of `canvas`.
-Instead of `img_dsc` and the buffer of an other canvas also can be used by `lv_canvas_get_img(canvas)`.
+### Rotation
+Une image peut être ajoutée au canvas après rotation avec `lv_canvas_rotate(canvas, &img_dsc, angle, x, y, pivot_x, pivot_y)`. 
+L'image spécifiée par `img_dsc` est transformé par rotation autour du pivot puis copiée dans le canvas aux coordonnées `x`, `y`.
+Au lieu de `img_dsc`, un autre canevas peut être utilisé par `lv_canvas_get_img(canvas)`.
 
-Note that a canvas can't be rotated on itself.  You need a source and destination canvas or image.
+Notez que la rotation d'un canvas ne peut se fairesur lui-même. Vous avez besoin d'une source, image ou canevas, et d'un canvas de destination.
 
 ## Styles
-You can set the styles with `lv_canvas_set_style(btn, LV_CANVAS_STYLE_MAIN, &style)`. 
-`style.image.color` is used to tell the base color with `LV_IMG_CF_ALPHA_...` color format. 
+Vous pouvez définir les styles avec `lv_canvas_set_style(btn, LV_CANVAS_STYLE_MAIN, &style)`. 
+`style.image.color` est utilisé pour spécifier la couleur de base avec les formats de couleur `LV_IMG_CF_ALPHA_...`. 
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## Evénements
+Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
 
-Learn more about [Events](/overview/event).
+Apprenez-en plus sur les [événements](/overview/event).
 
-## Keys
-No *Keys* are processed by the object type.
+## Touches
+Aucune *touche* n'est traitée par ce type d'objet.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
-## Example
+## Exemple
 ```eval_rst
 
 .. include:: /lv_examples/src/lv_ex_canvas/index.rst

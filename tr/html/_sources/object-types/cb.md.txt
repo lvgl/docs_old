@@ -1,18 +1,18 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/tr/object-types/cb.md
 ```
-# Check box (lv_cb)
-## Overview
+# Onay kutusu (lv_cb)
+## Giriş
 
-The Check Box objects are built from a [Button](/object-types/btn) background which contains an also Button *bullet* and a [Label](/object-types/label) to realize a classical check box. 
+Onay kutusu nesneleri bir Button *imi* ve klasik bir onay kutusu gerçekleştirmek için bir [Label](/object-types/label) içeren bir [Button](/object-types/btn) arka planından oluşturulmuştur   . 
 
-### Text
-The text can be modified by the `lv_cb_set_text(cb, "New text")` function. It will dynamically allocate the text. 
+### Metin
+`lv_cb_set_text(cb, "New text")` fonksiyonu tarafından değiştirilebilir. Bu fonksiyon dinamik olarak metin tahsis eder. 
 
-To set a static text use `lv_cb_set_static_text(cb, txt)`. This way only a pointer of `txt` will be stored it shouldn't be deallocated while the checkbox exists. 
+Statik metin ayarlamak  için `lv_cb_set_static_text(cb, txt)` kullanın. Bu yolla sadece `txt` nin göstericisi saklanılacak, onay kutusu var iken yer tahsil edilmemelidir. 
 
-### Check/Uncheck
-You can manually check / un-check the Check box  via `lv_cb_set_checked(cb, true/false)`.
+### Onay/Onayı Kaldır
+`lv_cb_set_checked(cb, true/false)` ile manuel olarak  onay kutusunu onaylayabilirsiniz/ onayı kaldırabilirsiniz.
 
 ### Inactive
 To make the Check box inactive use `lv_cb_set_inactive(cb, true)`.
