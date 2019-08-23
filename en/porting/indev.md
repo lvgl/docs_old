@@ -117,7 +117,10 @@ bool encoder_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
 If a button is pressed it will simulate the pressing on the assigned coordinate. (Similarly to a touchpad)
 
 To assign buttons to coordinates use `lv_indev_set_button_points(my_indev, points_array)`.   
-`points_array` should look like `static lv_point_t points_array[] =  { {12,30},{60,90}, ...}`
+`points_array` should look like `const lv_point_t points_array[] =  { {12,30},{60,90}, ...}`
+
+``` important::  The points_array can't go out of scope. Either declare it as a global variable or as a `static` variable inside a function.
+```
 
 ```c
 indev_drv.type = LV_INDEV_TYPE_BUTTON;
