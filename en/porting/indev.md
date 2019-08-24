@@ -119,7 +119,7 @@ If a button is pressed it will simulate the pressing on the assigned coordinate.
 To assign buttons to coordinates use `lv_indev_set_button_points(my_indev, points_array)`.   
 `points_array` should look like `const lv_point_t points_array[] =  { {12,30},{60,90}, ...}`
 
-``` important::  The points_array can't go out of scope. Either declare it as a global variable or as a `static` variable inside a function.
+``` important::  The points_array can't go out of scope. Either declare it as a global variable or as a static variable inside a function.
 ```
 
 ```c
