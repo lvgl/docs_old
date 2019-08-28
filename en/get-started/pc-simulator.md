@@ -14,7 +14,7 @@ Simulator on the PC have the following advantages:
 
 ## Select an IDE
 
-The simulator is ported to various IDE (Integrated Development Environment)s. Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
+The simulator is ported to various IDEs (Integrated Development Environments). Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
 
 ```eval_rst
 .. raw:: html
@@ -51,6 +51,8 @@ The simulator is ported to various IDE (Integrated Development Environment)s. Ch
 
 You can use any IDEs for the development but, for simplicity, the configuration for Eclipse CDT is focused in this tutorial.
 The following section describes the set-up guide of Eclipse CDT in more details.
+
+**Note: If you are on Windows, it's usually better to use the Visual Studio or CodeBlocks projects instead. They work out of the box without requiring extra steps.**
 
 ## Set-up Eclipse CDT
 
