@@ -62,7 +62,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Aug 24, 2019}
+\date{Sep 03, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -379,7 +379,7 @@ Pour travailler avec un \sphinxcode{\sphinxupquote{LV\_MEM\_SIZE}} réduit, vous
 
 \section{Comment travailler avec un système d’exploitation ?}
 \label{\detokenize{index:comment-travailler-avec-un-systeme-d-exploitation}}
-Pour travailler avec un système d’exploitation où les tâches peuvent s’interrompre, vous devez protéger les appels de fonctions liés à LittlevGL avec un mutex. Consultez la section {\hyperref[\detokenize{porting/os::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Système d’exploitation}}}} pour en savoir plus.
+To work with an operating system where tasks can interrupt each other you should protect LittlevGL related function calls with a mutex. See the {\hyperref[\detokenize{porting/os::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Operating system and interrupts}}}} section to learn more.
 
 
 \section{Comment contribuer à LittlevGL ?}
@@ -441,26 +441,42 @@ Vous pouvez la télécharger ici et l’ouvrir hors ligne :
 
 \subsubsection{Démonstrations en ligne}
 \label{\detokenize{get-started/live-demo:demonstrations-en-ligne}}\label{\detokenize{get-started/live-demo::doc}}
-Vous pouvez découvrir à quoi ressemble LittlevGL sans installer ou télécharger quoi que ce soit.
-Il existe des interfaces utilisateurs prêtes à être essayées facilement dans votre navigateur.
+You can see how LittlevGL looks like without installing and downloading anything either on target platform or on the host machine. There are some ready made user interfaces which you can easily try in your browser.
 
 Allez à la page \sphinxhref{https://littlevgl.com/live-demo}{Démonstrations en ligne} et choisissez la démonstration qui vous intéresse.
 
 
 \subsubsection{Simulateur sur PC}
 \label{\detokenize{get-started/pc-simulator:simulateur-sur-pc}}\label{\detokenize{get-started/pc-simulator::doc}}
-Vous pouvez essayer LittlevGL \sphinxstylestrong{en utilisant uniquement votre PC} sans aucune carte de développement. Ecrivez du code, exécutez-le sur le PC et visualisez le résultat sur le moniteur. C’est multi-plateforme : Windows, Linux et OS X sont supportés.Le code écrit est portable, vous pouvez simplement le copier pour utilisation sur un matériel embarqué.
+You can try out the LittlevGL \sphinxstylestrong{using only your PC} (i.e. without any development boards). The LittlevGL will run on a simulator environment on the PC where anyone can write and experiment the real LittlevGL applications.
 
-Le simulateur est également très utile pour rapporter des bogues car c’est une plateforme commune à chaque utilisateur. De cefait c’est une bonne pratique de reproduire un bogue dans le simulateur et d’utiliser l’extrait de code dans le \sphinxhref{https://forum.littlevgl.com}{forum}.
+Simulator on the PC have the following advantages:
+\begin{itemize}
+\item {} 
+Hardware independent - Write a code, run it on the PC and see the result on the PC monitor.
+
+\item {} 
+Cross-platform - Any Windows, Linux or OSX PC can run the PC simulator.
+
+\item {} 
+Portability - the written code is portable, which means you can simply copy it when using an embedded hardware.
+
+\item {} 
+Easy Validation - The simulator is also very useful to report bugs because it means common platform for every user. So it’s a good idea to reproduce a bug in simulator and use the code snippet in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
+
+\end{itemize}
 
 
 \paragraph{Choisir un IDE}
 \label{\detokenize{get-started/pc-simulator:choisir-un-ide}}
-Le simulator est portés sur plusieurs IDEs. Choisissez votre IDE préféré, lisez son README sur GitHub, téléchargez le projet, et chargez le dans l’IDE.
+The simulator is ported to various IDEs (Integrated Development Environments). Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
 
 
 
-Par la suite, le guide de configuration d’Eclipse CDT est décrit plus en détails.
+You can use any IDEs for the development but, for simplicity, the configuration for Eclipse CDT is focused in this tutorial.
+The following section describes the set-up guide of Eclipse CDT in more details.
+
+\sphinxstylestrong{Note: If you are on Windows, it’s usually better to use the Visual Studio or CodeBlocks projects instead. They work out of the box without requiring extra steps.}
 
 
 \paragraph{Configurer Eclipse CDT}
@@ -468,13 +484,15 @@ Par la suite, le guide de configuration d’Eclipse CDT est décrit plus en dét
 
 \subparagraph{Installer Eclipse CDT}
 \label{\detokenize{get-started/pc-simulator:installer-eclipse-cdt}}
-Eclipse CDT est un IDE C/C++. Vous pouvez utiliser un autre IDE mais ce tutoriel montre la configuration pour Eclipse CDT.
+\sphinxhref{https://eclipse.org/cdt/}{Eclipse CDT} is a C/C++ IDE.
 
 Eclipse est un logiciel écrit en Java de ce fait, soyez certain que l’\sphinxstylestrong{environnement d’exécution Java} est installé sur votre système.
 
 Sur les distribution basée sur Debian (p.ex. Ubuntu) : \sphinxcode{\sphinxupquote{sudo apt-get install default-jre}}
 
-Vous pouvez télécharger Eclipse CDT à partir de : \sphinxhref{http://www.eclipse.org/downloads/}{https://eclipse.org/cdt/}. Démarrez l’installateur est choisissez \sphinxstyleemphasis{Eclipse CDT} dans la liste.
+Note: If you are using other distros, then please refer and install ‘Java Runtime Environment’ suitable to your distro.
+
+You can download Eclipse’s CDT from: \sphinxurl{https://www.eclipse.org/cdt/downloads.php}. Start the installer and choose \sphinxstyleemphasis{Eclipse CDT} from the list.
 
 
 \subparagraph{Installer SDL 2}
@@ -506,7 +524,7 @@ Si les paquets de construction essentiels ne sont pas déjà installés : \sphin
 
 \subparagraph{Windows}
 \label{\detokenize{get-started/pc-simulator:windows}}
-Si vous utilisez \sphinxstylestrong{Windows} vous devez en premier lieu installer MinGW (\sphinxhref{http://mingw-w64.org/doku.php/download}{version 64 bits}). Après ça, effectuez les étapes suivantes pour ajouter SDL 2 :
+If you are using \sphinxstylestrong{Windows} firstly you need to install MinGW (\sphinxhref{http://mingw-w64.org/doku.php/download}{64 bit version}). After installing MinGW, do the following steps to add SDL2:
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
@@ -528,26 +546,26 @@ Copiez \_…\sphinxstyleemphasis{mingw32/bin/SDL2.dll} dans \sphinxstyleemphasis
 
 \end{enumerate}
 
-Note : si vous utilisez \sphinxstylestrong{Microsoft Visual Studio} à la place d’Eclipse alors vous n’avez pas besoin d’installer MinGW.
+Note: If you are using \sphinxstylestrong{Microsoft Visual Studio} instead of Eclipse then you don’t have to install MinGW.
 
 
 \subparagraph{OS X}
 \label{\detokenize{get-started/pc-simulator:os-x}}
 Sur \sphinxstylestrong{OS X} vous pouvez facilement installer SDL 2 avec brew : \sphinxcode{\sphinxupquote{brew install sdl2}}
 
-SI quelque chose ne fonctionne pas je suggère ce \sphinxhref{http://lazyfoo.net/tutorials/SDL/01\_hello\_SDL/index.php}{tutoriel} pour débuter avec SDL.
+If something is not working, then please refer \sphinxhref{http://lazyfoo.net/tutorials/SDL/01\_hello\_SDL/index.php}{this tutorial} to get started with SDL.
 
 
 \subparagraph{Projet pré-configuré}
 \label{\detokenize{get-started/pc-simulator:projet-pre-configure}}
-Un projet pré-configuré pour la librairie graphique, basé sur la dernière version publiée, est toujours disponible.
-Vous pouvez le trouver sur \sphinxhref{https://github.com/littlevgl/proj\_pc}{GitHub} ou sur la page de \sphinxhref{https://littlevgl.com/download}{Téléchargement}.
-Le projet est configuré pour Eclipse CDT.
+A pre-configured graphics library project (based on the latest release) is always available to get started easily.
+You can find the latest one on \sphinxhref{https://github.com/littlevgl/proj\_pc}{GitHub} or on the \sphinxhref{https://littlevgl.com/download}{Download} page.
+(Please note that, the project is configured for Eclipse CDT).
 
 
 \subparagraph{Ajouter le projet pré-configuré à Eclipse CDT.}
 \label{\detokenize{get-started/pc-simulator:ajouter-le-projet-pre-configure-a-eclipse-cdt}}
-Lancez Eclipse CDT. Une boîte de dialogue au sujet du \sphinxstylestrong{chemin de l’espace de travail} est affichée. Avant de la valider, vérifiez le chemin et copiez à cet emplacement, puis décompressez, le projet pré-configuré préalablement téléchargé. Maintenant vous pouvez accepter le chemin de l’espace de travail. Bien entendu, ce chemin peut être modifié mais dans ce cas il faut copier le projet vers cet emplacement.
+Run Eclipse CDT. It will show a dialogue about the \sphinxstylestrong{workspace path}. Before accepting the path, check that path and copy (and unzip) the downloaded pre-configured project there. After that, you can accept the workspace path. Of course you can modify this path but, in that case copy the project to the corresponding location.
 
 Fermez la fenêtre de démarrage et allez à \sphinxstylestrong{Fichier-\textgreater{}Importer…} et choisissez \sphinxstylestrong{Généralités-\textgreater{}Projets existants dans l’espace de travail}. \sphinxstylestrong{Allez au répertoire racine} du projet et cliquez \sphinxstylestrong{Terminer}
 
@@ -564,9 +582,9 @@ Faites un clic droit sur le projet -\textgreater{} Propriétés -\textgreater{} 
 
 \subparagraph{Compilation et exécution}
 \label{\detokenize{get-started/pc-simulator:compilation-et-execution}}
-Vous êtes maintenant prêt à utiliser la librairie graphique LittlevGL sur votre PC. Cliquer sur l’icône Marteau de la barre de menu pour compiler le projet. Si vous avez tout fait correctement aucune erreur ne se produira. Notez que sur certains systèmes des étapes additionnelles peuvent être requises pour qu’Eclipse prenne en compte SDL 2, mais dans la plupart des cas, la configuration du projet téléchargé est suffisante.
+Now you are ready to run the LittlevGL Graphics Library on your PC. Click on the Hammer Icon on the top menu bar to Build the project. If you have done everything right, then you will not get any errors. Note that on some systems additional steps might be required to “see” SDL 2 from Eclipse but, in most of cases the configurations in the downloaded project is enough.
 
-Après avoir compiler avec succès, cliquez sur le bouton Jouer de la barre de menu pour démarrer le projet. Maintenant une fenêtre doit apparaître au milieu de l’écran.
+After a success build, click on the Play button on the top menu bar to run the project. Now a window should appear in the middle of your screen.
 
 Tout est prêt pour utiliser la librairie graphique LittlevGL pour l’apprentissage ou pour débuter le développement sur votre PC.
 
@@ -2303,6 +2321,10 @@ Pour utiliser un \sphinxstyleemphasis{encodeur} (comme un \sphinxstyleemphasis{c
 Si un bouton est pressé, il simule l’appui sur la coordonnée attribuée (comme un pavé tactile)
 
 Pour affecter des boutons aux coordonnées, utilisez \sphinxcode{\sphinxupquote{lv\_indev\_set\_button\_points(my\_indev, points\_array)}}.\sphinxcode{\sphinxupquote{points\_array}} doit ressembler à \sphinxcode{\sphinxupquote{const lv\_point\_t points\_array{[}{]} = \{ \{12, 30\}, \{60, 90\}, ... \}}}
+
+\begin{sphinxadmonition}{important}{Important:}
+The points\_array can’t go out of scope. Either declare it as a global variable or as a static variable inside a function.
+\end{sphinxadmonition}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{type} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}TYPE\PYGZus{}BUTTON}\PYG{p}{;}
@@ -32635,38 +32657,38 @@ Decrement spinbox value by one step \begin{description}
 \paragraph{Example}
 \label{\detokenize{object-types/spinbox:id1}}
 
-\subsubsection{Switch (lv\_sw)}
-\label{\detokenize{object-types/sw:switch-lv-sw}}\label{\detokenize{object-types/sw::doc}}
+\subsubsection{Commutateur (lv\_sw)}
+\label{\detokenize{object-types/sw:commutateur-lv-sw}}\label{\detokenize{object-types/sw::doc}}
 
-\paragraph{Overview}
-\label{\detokenize{object-types/sw:overview}}
-The Switch can be used to turn on/off something. The look like a little slider.
+\paragraph{Vue d’ensemble}
+\label{\detokenize{object-types/sw:vue-d-ensemble}}
+Le commutateur peut être utilisé pour activer/désactiver quelque chose. Il ressemble à un petit curseur.
 
 
-\subparagraph{Change state}
-\label{\detokenize{object-types/sw:change-state}}
-The state of the switch can be changed by
+\subparagraph{Changer d’état}
+\label{\detokenize{object-types/sw:changer-d-etat}}
+Pour changer l’état du commutateur
 \begin{itemize}
 \item {} 
-Clicking on it
+Cliquer dessus,
 
 \item {} 
-Sliding it
+Le faire glisser,
 
 \item {} 
-Using \sphinxcode{\sphinxupquote{lv\_sw\_on(sw, LV\_ANIM\_ON/OFF)}}, \sphinxcode{\sphinxupquote{lv\_sw\_off(sw, LV\_ANIM\_ON/OFF)}} or \sphinxcode{\sphinxupquote{lv\_sw\_toggle(sw, LV\_ANOM\_ON/OFF)}} functions
+Utiliser les fonctions \sphinxcode{\sphinxupquote{lv\_sw\_on(sw, LV\_ANIM\_ON/OFF)}}, \sphinxcode{\sphinxupquote{lv\_sw\_off(sw, LV\_ANIM\_ON/OFF)}} ou \sphinxcode{\sphinxupquote{lv\_sw\_toggle(sw, LV\_ANOM\_ON/OFF)}}.
 
 \end{itemize}
 
 
-\subparagraph{Animation time}
-\label{\detokenize{object-types/sw:animation-time}}
-The time of animations, when the switch changes state, can be adjusted with \sphinxcode{\sphinxupquote{lv\_sw\_set\_anim\_time(sw, anim\_time)}}.
+\subparagraph{Durée d’animation}
+\label{\detokenize{object-types/sw:duree-d-animation}}
+La durée des animations quand le commutateur change d’état peut être ajusté avec \sphinxcode{\sphinxupquote{lv\_sw\_set\_anim\_time(sw, anim\_time\_ms)}}.
 
 
 \paragraph{Styles}
 \label{\detokenize{object-types/sw:styles}}
-You can modify the Switch’s styles with \sphinxcode{\sphinxupquote{lv\_sw\_set\_style(sw, LV\_SW\_STYLE\_..., \&style)}}.
+Vous pouvez définir les styles du commutateur avec \sphinxcode{\sphinxupquote{lv\_sw\_set\_style(sw, LV\_SW\_STYLE\_..., \&style)}}.
 \begin{itemize}
 \item {} 
 \sphinxstylestrong{LV\_SW\_STYLE\_BG} Style of the background. All \sphinxcode{\sphinxupquote{style.body}} properties are used. The \sphinxcode{\sphinxupquote{padding}} values make the Switch smaller than the knob. (negative value makes is larger)
@@ -33148,106 +33170,106 @@ Style of the knob when the switch is ON (NULL to use the same as OFF)
 \subsubsection{Table (lv\_table)}
 \label{\detokenize{object-types/table:table-lv-table}}\label{\detokenize{object-types/table::doc}}
 
-\paragraph{Overview}
-\label{\detokenize{object-types/table:overview}}
-Tables, as usual, are built from rows, columns, and cells containing texts.
+\paragraph{Vue d’ensemble}
+\label{\detokenize{object-types/table:vue-d-ensemble}}
+Comme d’habitude, les tables sont construites à partir de lignes, de colonnes et de cellules contenant des textes.
 
-The Table object is very light weighted because only the texts are stored. No real objects are created for cells but they are just drawn on the fly.
-
-
-\subparagraph{Rows and Columns}
-\label{\detokenize{object-types/table:rows-and-columns}}
-To set number of rows and columns use \sphinxcode{\sphinxupquote{lv\_table\_set\_row\_cnt(table, row\_cnt)}} and \sphinxcode{\sphinxupquote{lv\_table\_set\_col\_cnt(table, col\_cnt)}}
+L’objet table est très léger, car seuls les textes sont enregistrés. Aucun objet réel n’est créé pour les cellules, elles sont simplement dessinées à la volée.
 
 
-\subparagraph{Width and Height}
-\label{\detokenize{object-types/table:width-and-height}}
-The width of the columns can be set with \sphinxcode{\sphinxupquote{lv\_table\_set\_col\_width(table, col\_id, width)}}. The overall width of the Table object will be set to the sum of columns widths.
-
-The height is calculated automatically from the cell styles (font, padding etc) and the number of rows.
+\subparagraph{Llignes et colonnes}
+\label{\detokenize{object-types/table:llignes-et-colonnes}}
+Pour définir le nombre de lignes et de colonnes, utilisez \sphinxcode{\sphinxupquote{lv\_table\_set\_row\_cnt(table, row\_cnt)}} et \sphinxcode{\sphinxupquote{lv\_table\_set\_col\_cnt(table, col\_cnt)}}.
 
 
-\subparagraph{Set cell value}
-\label{\detokenize{object-types/table:set-cell-value}}
-The cells can store on texts so need to convert numbers to text before displaying them in a table.
+\subparagraph{Largeur et hauteur}
+\label{\detokenize{object-types/table:largeur-et-hauteur}}
+La largeur des colonnes peut être définie avec \sphinxcode{\sphinxupquote{lv\_table\_set\_col\_width(table, col\_id, width)}}. La largeur totale de l’objet table sera définie par la somme des largeurs des colonnes.
 
-\sphinxcode{\sphinxupquote{lv\_table\_set\_cell\_value(table, row, col, "Content")}}. The text is saved by the table so it can be even a local variable.
-
-Line break can be used in the text like \sphinxcode{\sphinxupquote{"Value\textbackslash{}n60.3"}}.
+La hauteur est calculée automatiquement à partir des styles des cellule (police, marges, etc.) et du nombre de lignes.
 
 
-\subparagraph{Align}
-\label{\detokenize{object-types/table:align}}
-The text alignment in cells can be adjusted individually with \sphinxcode{\sphinxupquote{lv\_table\_set\_cell\_align(table, row, col, LV\_LABEL\_ALIGN\_LEFT/CENTER/RIGHT)}}.
+\subparagraph{Définir la valeur de la cellule}
+\label{\detokenize{object-types/table:definir-la-valeur-de-la-cellule}}
+Les cellules peuvent enregistrer uniquement du texte, il est donc nécessaire de convertir les nombres en texte avant de les afficher dans une table.
+
+\sphinxcode{\sphinxupquote{lv\_table\_set\_cell\_value(table, row, col, "Content")}}. Le texte est sauvegardé par la table et peut donc être une variable locale.
+
+Le saut de ligne peut être utilisé dans le texte comme \sphinxcode{\sphinxupquote{"Value\textbackslash{}n60.3"}}.
 
 
-\subparagraph{Cell type}
-\label{\detokenize{object-types/table:cell-type}}
-You can use 4 different cell types. Each has its own style.
+\subparagraph{Alignement}
+\label{\detokenize{object-types/table:alignement}}
+L’alignement du texte dans les cellules peut être ajusté individuellement avec \sphinxcode{\sphinxupquote{lv\_table\_set\_cell\_align(table, row, col, LV\_LABEL\_ALIGN\_LEFT/CENTER/RIGHT)}}.
 
-Cell types can be used to add different style for example to:
+
+\subparagraph{Type de cellule}
+\label{\detokenize{object-types/table:type-de-cellule}}
+Vous pouvez utiliser 4 types de cellules différents. Chacun a son propre style.
+
+Les types de cellules peuvent être utilisés pour ajouter un style différent, par exemple pour :
 \begin{itemize}
 \item {} 
-table header
+en-tête de table
 
 \item {} 
-first column
+première colonne
 
 \item {} 
-highlight a cell
+mise en évidence d’une cellule
 
 \item {} 
 etc
 
 \end{itemize}
 
-The type can be selected with \sphinxcode{\sphinxupquote{lv\_table\_set\_cell\_type(table, row, col, type)}} \sphinxcode{\sphinxupquote{type}} can be 1, 2, 3 or 4.
+Le type peut être sélectionné avec \sphinxcode{\sphinxupquote{lv\_table\_set\_cell\_type(table, row, col, type)}} \sphinxcode{\sphinxupquote{type}} peut être 1, 2, 3 ou 4.
 
 
-\subparagraph{Merge cells}
-\label{\detokenize{object-types/table:merge-cells}}
-Cells can be merged horizontally with \sphinxcode{\sphinxupquote{lv\_table\_set\_cell\_merge\_right(table, col, row, true)}}. To merge more adjacent cells apply this function for each cell.
+\subparagraph{Fusionner des cellules}
+\label{\detokenize{object-types/table:fusionner-des-cellules}}
+Les cellules peuvent être fusionnées horizontalement avec \sphinxcode{\sphinxupquote{lv\_table\_set\_cell\_merge\_right(table, col, row, true)}}. Pour fusionner davantage de cellules adjacentes, appliquez cette fonction à chaque cellule.
 
 
 \subparagraph{Crop text}
 \label{\detokenize{object-types/table:crop-text}}
-By default, the texts are word-wrapped to fit into the width of the cell and the height of the cell is set automatically. To disable this and keep the text as it is enable \sphinxcode{\sphinxupquote{lv\_table\_set\_cell\_crop(table, row, col, true)}}.
+Par défaut, des retours à la ligne sont insérés pour permettre aux texte de s’inscrire dans la largeur de la cellule, et la hauteur de la cellule est définie automatiquement. Pour désactiver ce comportement et conserver le texte tel qu’il est, activez \sphinxcode{\sphinxupquote{ lv\_table\_set\_cell\_crop(table, row, col, true)}}.
 
 
-\subparagraph{Scroll}
-\label{\detokenize{object-types/table:scroll}}
-The make the Table scrollable place it on a {\hyperref[\detokenize{object-types/page::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Page}}}}
+\subparagraph{Défilement}
+\label{\detokenize{object-types/table:defilement}}
+Pour pouvoir faire défiler la table, placez-la sur une {\hyperref[\detokenize{object-types/page::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{page}}}}
 
 
 \paragraph{Styles}
 \label{\detokenize{object-types/table:styles}}
-Use \sphinxcode{\sphinxupquote{lv\_table\_set\_style(page, LV\_TABLE\_STYLE\_...,  \&style)}} to set a new style for an element of the page:
+Utilisez \sphinxcode{\sphinxupquote{lv\_table\_set\_style(table, lv\_table\_set\_style..., \&style)}} pour définir un nouveau style pour un élément de la table :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_PAGE\_STYLE\_BG} background’s style which uses all \sphinxcode{\sphinxupquote{style.body}} properties (default: \sphinxcode{\sphinxupquote{lv\_style\_plain\_color}})
+\sphinxstylestrong{LV\_PAGE\_STYLE\_BG} style de l’arrière-plan qui utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}} (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_plain\_color}}).
 
 \item {} 
-\sphinxstylestrong{LV\_PAGE\_STYLE\_CELL1/2/3/4} 4 for styles for the 4 cell types. All \sphinxcode{\sphinxupquote{style.body}} properties are used. (default: \sphinxcode{\sphinxupquote{lv\_style\_plain}})
+\sphinxstylestrong{LV\_PAGE\_STYLE\_CELL1/2/3/4} 4 styles pour les 4 types de cellules. Toutes les propriétés \sphinxcode{\sphinxupquote{style.body}} sont utilisées. (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_plain}}).
 
 \end{itemize}
 
 
-\paragraph{Events}
-\label{\detokenize{object-types/table:events}}
-Only the \sphinxhref{/overview/event.html\#generic-events}{Generic events} are sent by the object type.
+\paragraph{Evénements}
+\label{\detokenize{object-types/table:evenements}}
+Seuls les \sphinxhref{/overview/event.html\#generic-events}{événements génériques} sont envoyés par ce type d’objet.
 
-Learn more about {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Events}}}}.
-
-
-\paragraph{Keys}
-\label{\detokenize{object-types/table:keys}}
-No \sphinxstyleemphasis{Keys} are processed by the object type.
-
-Learn more about {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Keys}}}}.
+Apprenez-en plus sur les {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{événements}}}}.
 
 
-\paragraph{Example}
-\label{\detokenize{object-types/table:example}}
+\paragraph{Touches}
+\label{\detokenize{object-types/table:touches}}
+Aucune \sphinxstyleemphasis{touche} n’est traitée par ce type d’objet.
+
+Apprenez-en plus sur les {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{touches}}}}.
+
+
+\paragraph{Exemple}
+\label{\detokenize{object-types/table:exemple}}
 
 \subparagraph{C}
 \label{\detokenize{object-types/table:c}}
@@ -33315,7 +33337,7 @@ No examples yet.
 
 \subparagraph{MicroPython}
 \label{\detokenize{object-types/table:micropython}}
-No examples yet.
+Pas encore d’exemple.
 
 
 \paragraph{API}
@@ -34005,114 +34027,114 @@ Use the \sphinxcode{\sphinxupquote{lv\_table}} APIs instead.
 
 
 
-\subsubsection{Tabview (lv\_tabview)}
-\label{\detokenize{object-types/tabview:tabview-lv-tabview}}\label{\detokenize{object-types/tabview::doc}}
+\subsubsection{Classeur d’onglets (lv\_tabview)}
+\label{\detokenize{object-types/tabview:classeur-d-onglets-lv-tabview}}\label{\detokenize{object-types/tabview::doc}}
 
-\paragraph{Overview}
-\label{\detokenize{object-types/tabview:overview}}
-The Tab view object can be used to organize content in tabs.
-
-
-\subparagraph{Adding tab}
-\label{\detokenize{object-types/tabview:adding-tab}}
-You can add a new tabs with \sphinxcode{\sphinxupquote{lv\_tabview\_add\_tab(tabview, "Tab name")}}. It will return with a pointer to a {\hyperref[\detokenize{object-types/page::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Page}}}} object where you can add the tab’s content.
+\paragraph{Vue d’ensemble}
+\label{\detokenize{object-types/tabview:vue-d-ensemble}}
+L’objet classeur d’onglets peut être utilisé pour organiser du contenu dans des onglets.
 
 
-\subparagraph{Change tab}
-\label{\detokenize{object-types/tabview:change-tab}}
-To select a new tab you can:
+\subparagraph{Ajouter un onglet}
+\label{\detokenize{object-types/tabview:ajouter-un-onglet}}
+Vous pouvez ajouter de nouveaux onglets avec \sphinxcode{\sphinxupquote{lv\_tabview\_add\_tab(tabview, "Tab name")}}. La fonction retourneun pointeur sur un objet {\hyperref[\detokenize{object-types/page::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{page}}}} dans lequel vous pouvez ajouter le contenu de l’onglet.
+
+
+\subparagraph{Changer d’onglet}
+\label{\detokenize{object-types/tabview:changer-d-onglet}}
+Pour sélectionner un nouvel onglet, vous pouvez :
 \begin{itemize}
 \item {} 
-Click on it on the header part
+Cliquer dessus dans la partie en-tête
 
 \item {} 
-Slide horizontally
+Glisser horizontalement
 
 \item {} 
-Use \sphinxcode{\sphinxupquote{lv\_tabview\_set\_tab\_act(tabview, id, LV\_ANIM\_ON/OFF)}} function
+Utiliser la fonction  \sphinxcode{\sphinxupquote{lv\_tabview\_set\_tab\_act(tabview, id, LV\_ANIM\_ON/OFF)}}
 
 \end{itemize}
 
-The manual sliding can be disabled with \sphinxcode{\sphinxupquote{lv\_tabview\_set\_sliding(tabview, false)}}.
+Le glissement manuel peut être désactivé avec \sphinxcode{\sphinxupquote{lv\_tabview\_set\_sliding(tabview, false)}}.
 
 
-\subparagraph{Tab button’s position}
-\label{\detokenize{object-types/tabview:tab-button-s-position}}
-By default, the tab selector buttons are placed on the top of the Tabview. It can be changed with \sphinxcode{\sphinxupquote{lv\_tabview\_set\_btns\_pos(tabview, LV\_TABVIEW\_BTNS\_POS\_TOP/BOTTOM/LEFT/RIGHT)}}
+\subparagraph{Position des boutons d’onglet}
+\label{\detokenize{object-types/tabview:position-des-boutons-d-onglet}}
+Par défaut, les boutons de sélection des onglets sont placés en haut du classeur d’onglets. Cela peut être changé avec \sphinxcode{\sphinxupquote{lv\_tabview\_set\_btns\_pos(tabview, LV\_TABVIEW\_BTNS\_POS\_TOP/BOTTOM/LEFT/RIGHT)}}
 
-Note that, you can’t change the tab position from top or bottom to left or right when tabs are already added.
-
-
-\subparagraph{Hide the tabs}
-\label{\detokenize{object-types/tabview:hide-the-tabs}}
-The tab buttons can be hidden by \sphinxcode{\sphinxupquote{lv\_tabview\_set\_btns\_hidden(tabview, true)}}
+Notez que vous ne pouvez pas modifier la position de haut ou bas vers gauche ou droite lorsque des onglets sont déjà ajoutés.
 
 
-\subparagraph{Animation time}
-\label{\detokenize{object-types/tabview:animation-time}}
-The animation time is adjusted by \sphinxcode{\sphinxupquote{lv\_tabview\_set\_anim\_time(tabview, anim\_time\_ms)}}. It is used when the new tab is loaded.
+\subparagraph{Cacher des onglets}
+\label{\detokenize{object-types/tabview:cacher-des-onglets}}
+Les boutons peuvent être cachés par \sphinxcode{\sphinxupquote{lv\_tabview\_set\_btns\_hidden(tabview, true)}}
 
 
-\paragraph{Style usage}
-\label{\detokenize{object-types/tabview:style-usage}}
-Use \sphinxcode{\sphinxupquote{lv\_tabview\_set\_style(tabview, LV\_TABVIEW\_STYLE\_...,  \&style)}} to set a new style for an element of the Tabview:
+\subparagraph{Durée d’animation}
+\label{\detokenize{object-types/tabview:duree-d-animation}}
+La durée d’animation est ajustée par \sphinxcode{\sphinxupquote{lv\_tabview\_set\_anim\_time(tabview, anim\_time\_ms)}}. Cela est utilisé lorsque le nouvel onglet est affiché.
+
+
+\paragraph{Styles}
+\label{\detokenize{object-types/tabview:styles}}
+Utilisez \sphinxcode{\sphinxupquote{lv\_tabview\_set\_style(tabview, LV\_TABVIEW\_STYLE\_...,  \&style)}} pour définir un nouveau style pour un élément du classeur d’onglets :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BG} main background which uses all \sphinxcode{\sphinxupquote{style.body}} properties (default: \sphinxcode{\sphinxupquote{lv\_style\_plain}})
+\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BG} arrière-plan principal qui utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}} (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_plain}}).
 
 \item {} 
-\sphinxstylestrong{LV\_TABVIEW\_STYLE\_INDIC} a thin rectangle on indicating the current tab. Uses all \sphinxcode{\sphinxupquote{style.body}} properties. Its height comes from \sphinxcode{\sphinxupquote{body.padding.inner}} (default: \sphinxcode{\sphinxupquote{lv\_style\_plain\_color}})
+\sphinxstylestrong{LV\_TABVIEW\_STYLE\_INDIC} un fin rectangle pour indiquer l’onglet courant. Utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}}. Sa hauteur provient de \sphinxcode{\sphinxupquote{body.padding.inner}} (valeur par défaut:\sphinxcode{\sphinxupquote{ lv\_style\_plain\_color}}).
 
 \item {} 
-\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BTN\_BG} style of the tab buttons’ background. Uses all \sphinxcode{\sphinxupquote{style.body}} properties. The header height will be set automatically considering \sphinxcode{\sphinxupquote{body.padding.top/bottom}} (default: \sphinxcode{\sphinxupquote{lv\_style\_transp}})
+\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BTN\_BG} style de l’arrière-plan des boutons d’onglets. Utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}}. La hauteur de l’en-tête sera définie automatiquement en fonction de \sphinxcode{\sphinxupquote{body.padding.top/bottom}} (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_transp}}).
 
 \item {} 
-\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BTN\_REL} style of released tab buttons. Uses all \sphinxcode{\sphinxupquote{style.body}} properties.  (default: \sphinxcode{\sphinxupquote{lv\_style\_tbn\_rel}})
+\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BTN\_REL} style des boutons d’onglets relâchés. Utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}}  (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_tbn\_rel}}).
 
 \item {} 
-\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BTN\_PR} style of released tab buttons. Uses all \sphinxcode{\sphinxupquote{style.body}} properties except \sphinxcode{\sphinxupquote{padding}}.  (default: \sphinxcode{\sphinxupquote{lv\_style\_tbn\_rel}})
+\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BTN\_PR} style des boutons d’onglets pressés. Utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}}  (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_tbn\_pr}}).
 
 \item {} 
-\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BTN\_TGL\_REL} style of selected released tab buttons. Uses all \sphinxcode{\sphinxupquote{style.body}} properties except \sphinxcode{\sphinxupquote{padding}}.  (default: \sphinxcode{\sphinxupquote{lv\_style\_tbn\_rel}})
+\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BTN\_TGL\_REL} style des boutons d’onglets sélectionnés relâchés. Utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}}  (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_tbn\_tgl\_rel}}).
 
 \item {} 
-\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BTN\_TGL\_PR} style of selected pressed tab buttons. Uses all \sphinxcode{\sphinxupquote{style.body}} properties except \sphinxcode{\sphinxupquote{padding}}.  (default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_pr}})
+\sphinxstylestrong{LV\_TABVIEW\_STYLE\_BTN\_TGL\_PR} style des boutons d’onglets sélectionnés pressés. Utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}}  (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_tbn\_tgl\_pr}}).
 
 \end{itemize}
 
-The height of the header is calculated like:
-\sphinxstyleemphasis{font height and padding.top and padding.bottom from LV\_TABVIEW\_STYLE\_BTN\_REL + padding.top and padding bottom from LV\_TABVIEW\_STYLE\_BTN\_BG}
+La hauteur de l’en-tête est calculée ainsi :
+\sphinxstyleemphasis{font height + padding.top + padding.bottom à partir de LV\_TABVIEW\_STYLE\_BTN\_REL + padding.top + padding bottom à partir de LV\_TABVIEW\_STYLE\_BTN\_BG}
 
 
-\paragraph{Events}
-\label{\detokenize{object-types/tabview:events}}
-Besides the \sphinxhref{/overview/event.html\#generic-events}{Generic events} the following \sphinxhref{/overview/event.html\#special-events}{Special events} are sent by the Slider:
+\paragraph{Evénements}
+\label{\detokenize{object-types/tabview:evenements}}
+Outre les {[}événements génériques{]}(/overview/event.html \#evenements-generiques), les \sphinxhref{/overview/event.html\#evenements-speciaux}{événements spéciaux} suivants sont envoyés par le classeur d’onglets :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} Sent when a new tab is selected by sliding or clicking the tab button
+\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} envoyé lorsque un nouvel onglet est sélectionné par glissé ou clic sur le bouton d’onglet.
 
 \end{itemize}
 
-Learn more about {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Events}}}}.
+Apprenez-en plus sur les {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{événements}}}}.
 
 
-\paragraph{Keys}
-\label{\detokenize{object-types/tabview:keys}}
-The following \sphinxstyleemphasis{Keys} are processed by the Tabview:
+\paragraph{Touches}
+\label{\detokenize{object-types/tabview:touches}}
+Les \sphinxstyleemphasis{touches} suivantes sont traitées par le classeur d’onglets :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KEY\_RIGHT/LEFT} Select a tab
+\sphinxstylestrong{LV\_KEY\_RIGHT/LEFT} sélectionne un onglet.
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_ENTER} Change to the selected tab
+\sphinxstylestrong{LV\_KEY\_ENTER} passe à l’onglet sélectionné
 
 \end{itemize}
 
-Learn more about {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Keys}}}}.
+Apprenez-en plus sur les {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{touches}}}}.
 
 
-\paragraph{Example}
-\label{\detokenize{object-types/tabview:example}}
+\paragraph{Exemple}
+\label{\detokenize{object-types/tabview:exemple}}
 
 \subparagraph{C}
 \label{\detokenize{object-types/tabview:c}}
@@ -34832,16 +34854,16 @@ whether tab buttons are hidden
 
 
 
-\subsubsection{Text area (lv\_ta)}
-\label{\detokenize{object-types/ta:text-area-lv-ta}}\label{\detokenize{object-types/ta::doc}}
+\subsubsection{Zone de texte (lv\_ta)}
+\label{\detokenize{object-types/ta:zone-de-texte-lv-ta}}\label{\detokenize{object-types/ta::doc}}
 
-\paragraph{Overview}
-\label{\detokenize{object-types/ta:overview}}
+\paragraph{Vue d’ensemble}
+\label{\detokenize{object-types/ta:vue-d-ensemble}}
 The Text Area is a {\hyperref[\detokenize{object-types/page::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Page}}}} with a {\hyperref[\detokenize{object-types/label::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Label}}}} and a cursor on it. Texts or characters can be added to it. Long lines are wrapped and when the text becomes long enough the Text area can be scrolled-
 
 
-\subparagraph{Add text}
-\label{\detokenize{object-types/ta:add-text}}
+\subparagraph{Ajouter du texte}
+\label{\detokenize{object-types/ta:ajouter-du-texte}}
 You can insert text or characters  to the current cursor’s position with:
 \begin{itemize}
 \item {} 
@@ -36588,115 +36610,116 @@ Move the cursor one line up \begin{description}
 
 
 
-\subsubsection{Tile view (lv\_tileview)}
-\label{\detokenize{object-types/tileview:tile-view-lv-tileview}}\label{\detokenize{object-types/tileview::doc}}
+\subsubsection{Mosaïque  (lv\_tileview)}
+\label{\detokenize{object-types/tileview:mosaique-lv-tileview}}\label{\detokenize{object-types/tileview::doc}}
 
-\paragraph{Overview}
-\label{\detokenize{object-types/tileview:overview}}
-The Tileview a container object where its elements (called \sphinxstyleemphasis{tiles}) can be arranged in a grid form. By swiping the user can navigate between the tiles.
+\paragraph{Vue d’ensemble}
+\label{\detokenize{object-types/tileview:vue-d-ensemble}}
+La mosaïque est un objet conteneur dans lequel ses éléments, appelés \sphinxstyleemphasis{tuiles}, peuvent être organisés sous forme de grille. En balayant l’utilisateur peut naviguer entre les tuiles.
 
-If the Tileview is screen sized it gives a user interface you might have seen on the smartwatches.
+Si la mosaïque est de la taille de l’écran, elle fournit une interface utilisateur que vous avez peut-être vue sur les montres intelligentes.
 
 
-\subparagraph{Valid positions}
-\label{\detokenize{object-types/tileview:valid-positions}}
-The tiles don’t have to form a full grid where every element exists. There can be holes in the grid but it has to be continuous, i.e. there can the be an empty row or column.
+\subparagraph{Positions valides}
+\label{\detokenize{object-types/tileview:positions-valides}}
+Les tuiles ne doivent pas nécessairement former une grille complète où chaque élément existe. La grille peut comporter des trous, mais elle doit être continue, c’est-à-dire qu’il ne peut y avoir une ligne ou une colonne vide.
 
-With \sphinxcode{\sphinxupquote{lv\_tileview\_set\_valid\_positions(tileview, valid\_pos\_array, array\_len)}}the valid positions can be set. Scrolling will be possible only to this positions. the \sphinxcode{\sphinxupquote{0,0}} index means the top left tile.
-E.g. \sphinxcode{\sphinxupquote{lv\_point\_t valid\_pos\_array{[}{]} = \{\{0,0\}, \{0,1\}, \{1,1\}, \{\{LV\_COORD\_MIN, LV\_COORD\_MIN\}\}}} gives a Tile view with “L” shape. It indicates that there is no tile in \sphinxcode{\sphinxupquote{\{1,1\}}} therefore the user can’t scroll there.
+Avec \sphinxcode{\sphinxupquote{lv\_tileview\_set\_valid\_positions(tileview, valid\_pos\_array, array\_len)}}, les positions valides peuvent être définies. Le défilement ne sera possible que vers ces positions. L’indice \sphinxcode{\sphinxupquote{0,0}} représente la tuile en haut à gauche.
+Par exemple \sphinxcode{\sphinxupquote{lv\_point\_t valid\_pos\_array {[}{]} = \{ \{ 0, 0 \}, \{ 0, 1 \}, \{ 1, 1 \}, \{ LV\_COORD\_MIN, LV\_COORD\_MIN \} \}}} donne une mosaïque en forme  de “L”. Cela indique qu’il n’y a pas de tuile dans \sphinxcode{\sphinxupquote{\{ 1,0 \}}} et que l’utilisateur ne peut donc pas s’y déplacer.
 
-In other words, the \sphinxcode{\sphinxupquote{valid\_pos\_array}} tells where the tiles are. It can be changed on the fly to disable some positions on specific tiles.
-For example, there can be a 2x2 grid where all tiles are added but the first row (y = 0) as a  “main row” and the second row (y = 1) contains options for the tile above it.
-Let’s say horizontal scrolling is possible only in the main row and not possible between the options in the second row. In this case the \sphinxcode{\sphinxupquote{valid\_pos\_array}} needs to changed when a new main tile is selected:
+En d’autres termes, \sphinxcode{\sphinxupquote{valid\_pos\_array}} indique où se trouvent les tuiles. Il peut être modifié à la volée pour désactiver certaines positions pour des tuiles spécifiques.
+Par exemple, il peut exister une grille 2 x 2 où toutes les tuiles sont présentes, où la première ligne (y = 0) est la “ligne principale” et la deuxième ligne (y = 1) contient des options pour la tuile située au-dessus.
+Supposons que le défilement horizontal est possible uniquement dans la ligne principale et impossible entre les options de la deuxième ligne . Dans ce cas, \sphinxcode{\sphinxupquote{valid\_pos\_array}} doit être modifié lorsqu’une nouvelle tuile principale est sélectionnée :
 \begin{itemize}
 \item {} 
-for the first main tile: \sphinxcode{\sphinxupquote{\{0,0\}, \{0,1\}, \{1,0\}}} to disable the \sphinxcode{\sphinxupquote{\{1,1\}}} option tile
+pour la première tuile principale : \sphinxcode{\sphinxupquote{\{ 0, 0 \}, \{ 0, 1 \}, \{ 1, 0 \}}} pour désactiver la tuile d’option \sphinxcode{\sphinxupquote{\{ 1, 1 \}}}
 
 \item {} 
-for the second main tile \sphinxcode{\sphinxupquote{\{0,0\}, \{1,0\}, \{1,1\}}} to disable the \sphinxcode{\sphinxupquote{\{0,1\}}} option tile
+pour la deuxième tuile principale : \sphinxcode{\sphinxupquote{\{ 0, 0 \}, \{ 0, 1 \}, \{ 1, 1 \}}} pour désactiver la tuile d’option \sphinxcode{\sphinxupquote{\{ 0, 1 \}}}
 
 \end{itemize}
 
 
-\subparagraph{Add element}
-\label{\detokenize{object-types/tileview:add-element}}
-To add elements just create an object on the Tileview and call \sphinxcode{\sphinxupquote{lv\_tileview\_add\_element(tielview, element)}}.
+\subparagraph{Ajouter un élément}
+\label{\detokenize{object-types/tileview:ajouter-un-element}}
+Pour ajouter des éléments, il suffit de créer un objet sur la mosaïque et d’appeler \sphinxcode{\sphinxupquote{lv\_tileview\_add\_element(tileview, element)}}.
 
-The element should have the same size than the Tile view and needs to be positioned manually to the desired position.
+L’élément doit avoir la même taille que la mosaïque et doit être positionné manuellement à la position souhaitée.
 
-The scroll propagation feature of page-like objects (like {\hyperref[\detokenize{object-types/list::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{List}}}}) can be used very well here.
-For example, there can be a full-sized List and when it reaches the top or bottom most position the user will scroll the tile view instead.
+La fonctionnalité de propagation de défilement des objets de type page (comme {\hyperref[\detokenize{object-types/list::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{liste}}}}) peut très bien être utilisée ici.
+Par exemple, l’utilisateur peut faire défiler les éléments d’une liste et quand le premier ou le dernier élément de la liste est atteint, c’est la mosaïque qui défile à la place.
 
-\sphinxcode{\sphinxupquote{lv\_tileview\_add\_element(tielview, element)}} should be used to make possible to scroll (drag) the Tileview by one its element.For example, if there is a button on a tile, the button needs to be explicitly added to the Tileview to enable the user to scroll the Tileview with the button too.
+\sphinxcode{\sphinxupquote{lv\_tileview\_add\_element(tileview, element)}} devrait être utilisé pour permettre de faire défiler (glisser) la mosaïque par un de ces éléments.
+Par exemple, s’il y a un bouton sur une tuile, le bouton doit être explicitement ajouté à la mosaïque pour permettre à l’utilisateur de faire défiler la mosaïque avec le bouton.
 
-It true for the buttons on a {\hyperref[\detokenize{object-types/list::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{List}}}} as well. Every list button and the list itself needs to be added with \sphinxcode{\sphinxupquote{lv\_tileview\_add\_element}}.
-
-
-\subparagraph{Set tile}
-\label{\detokenize{object-types/tileview:set-tile}}
-To set the currently visible tile use \sphinxcode{\sphinxupquote{lv\_tileview\_set\_tile\_act(tileview, x\_id, y\_id, LV\_ANIM\_ON/OFF)}}.
+Cela vaut aussi pour les boutons d’une {\hyperref[\detokenize{object-types/list::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{liste}}}}. Chaque bouton de la liste et la liste elle-même doivent être ajoutés avec \sphinxcode{\sphinxupquote{lv\_tileview\_add\_element}}.
 
 
-\subparagraph{Animation time}
-\label{\detokenize{object-types/tileview:animation-time}}
-The animation time when a tile
+\subparagraph{Définir la tuile}
+\label{\detokenize{object-types/tileview:definir-la-tuile}}
+Pour définir la tuile visible, utilisez \sphinxcode{\sphinxupquote{lv\_tileview\_set\_tile\_act tileview, x\_id, y\_id, LV\_ANIM\_ON/OFF)}}.
+
+
+\subparagraph{Durée d’animation}
+\label{\detokenize{object-types/tileview:duree-d-animation}}
+La durée d’animation quand une tuile
 \begin{itemize}
 \item {} 
-is selected with \sphinxcode{\sphinxupquote{lv\_tileview\_set\_tile\_act}}
+est sélectionnée par \sphinxcode{\sphinxupquote{lv\_tileview\_set\_tile\_act}}
 
 \item {} 
-is scrolled a little and then released (revert the original title)
+est légèrement déplacé, puis relâché (revient à la tuile d’origine)
 
 \item {} 
-is scrolled more than half size and  then release (move to the next tile)
+est déplacé sur plus de la moitié de sa taille, puis relâché (affiche la tuile suivante)
 
 \end{itemize}
 
-can be set with \sphinxcode{\sphinxupquote{lv\_tileview\_set\_anim\_time(tileview, anim\_time)}}.
+peut être fixée avec \sphinxcode{\sphinxupquote{lv\_tileview\_set\_anim\_time(tileview, anim\_time)}}.
 
 
-\subparagraph{Edge flash}
-\label{\detokenize{object-types/tileview:edge-flash}}
-An “edge flash” effect can be added when the tile view reached hits an invalid position or the end of tile view when scrolled.
+\subparagraph{Mise en évidence du bord}
+\label{\detokenize{object-types/tileview:mise-en-evidence-du-bord}}
+Un effet de “mise en évidence du bord” peut être ajouté lorsque la mosaïque atteint une position non valide ou une des extrémités lors du défilement.
 
-Use \sphinxcode{\sphinxupquote{lv\_tileview\_set\_edge\_flash(tileview, true)}} to enable this feature.
+Utilisez \sphinxcode{\sphinxupquote{lv\_tileview\_set\_edge\_flash(tileview, true)}} pour activer cette fonctionnalité.
 
 
 \paragraph{Styles}
 \label{\detokenize{object-types/tileview:styles}}
-The Tileview has on one style which van be changes with  \sphinxcode{\sphinxupquote{lv\_tileview\_set\_style(slider, LV\_TILEVIEW\_STYLE\_MAIN, \&style)}}.
+La mosaïque a un seul style qui peut être changé avec \sphinxcode{\sphinxupquote{lv\_tileview\_set\_style(slider, LV\_TILEVIEW\_STYLE\_MAIN, \&style)}}.
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_TILEVIEW\_STYLE\_MAIN} Style of the background. All \sphinxcode{\sphinxupquote{style.body}} properties are used.
+\sphinxstylestrong{LV\_TILEVIEW\_STYLE\_MAIN} style de l’arrière plan. Toutes les propriétés \sphinxcode{\sphinxupquote{style.body}} sont utilisées.
 
 \end{itemize}
 
 
-\paragraph{Events}
-\label{\detokenize{object-types/tileview:events}}
-Besides the \sphinxhref{/overview/event.html\#generic-events}{Generic events} the following \sphinxhref{/overview/event.html\#special-events}{Special events} are sent by the Slider:
+\paragraph{Evénements}
+\label{\detokenize{object-types/tileview:evenements}}
+Outre les {[}événements génériques{]}(/overview/event.html \#evenements-generiques), les \sphinxhref{/overview/event.html\#evenements-speciaux}{événements spéciaux} suivants sont envoyés par la mosaïque :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} Sent when a new tile loaded either with scrolling or \sphinxcode{\sphinxupquote{lv\_tileview\_set\_act}}. The event data is set ti the index of the new tile in \sphinxcode{\sphinxupquote{valid\_pos\_array}} (It’s type is \sphinxcode{\sphinxupquote{uint32\_t *}})
+\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} envoyé quand une nouvelle tuile est affichée par défilement ou appel de la fonction \sphinxcode{\sphinxupquote{lv\_tileview\_set\_act}}. Les données d’événement sont définies sur l’index de la nouvelle tuile dans \sphinxcode{\sphinxupquote{valid\_pos\_array}} (le type est \sphinxcode{\sphinxupquote{uint32\_t *}}).
 
 \end{itemize}
 
 
-\paragraph{Keys}
-\label{\detokenize{object-types/tileview:keys}}\begin{itemize}
+\paragraph{Touches}
+\label{\detokenize{object-types/tileview:touches}}\begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KEY\_UP}, \sphinxstylestrong{LV\_KEY\_RIGHT} Increment the slider’s value by 1
+\sphinxstylestrong{LV\_KEY\_UP}, \sphinxstylestrong{LV\_KEY\_RIGHT} incrémente l’index de la tuile de 1.
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_DOWN}, \sphinxstylestrong{LV\_KEY\_LEFT} Decrement the slider’s value by 1
+\sphinxstylestrong{LV\_KEY\_DOWN}, \sphinxstylestrong{LV\_KEY\_LEFT} décrémente l’index de la tuile de 1.
 
 \end{itemize}
 
-Learn more about {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Keys}}}}.
+Apprenez-en plus sur les {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{touches}}}}.
 
 
-\paragraph{Example}
-\label{\detokenize{object-types/tileview:example}}
+\paragraph{Exemple}
+\label{\detokenize{object-types/tileview:exemple}}
 
 \subparagraph{C}
 \label{\detokenize{object-types/tileview:c}}
@@ -37162,107 +37185,107 @@ style pointer to the style
 
 
 
-\subsubsection{Window (lv\_win)}
-\label{\detokenize{object-types/win:window-lv-win}}\label{\detokenize{object-types/win::doc}}
+\subsubsection{Fenêtre (lv\_win)}
+\label{\detokenize{object-types/win:fenetre-lv-win}}\label{\detokenize{object-types/win::doc}}
 
-\paragraph{Overview}
-\label{\detokenize{object-types/win:overview}}
-The windows are one of the most complex container-like objects. They are built from two main parts:
+\paragraph{Vue d’ensemble}
+\label{\detokenize{object-types/win:vue-d-ensemble}}
+Les fenêtres sont l’un des objets les plus complexes du type conteneur. Ils sont construits à partir de deux parties principales :
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-a header {\hyperref[\detokenize{object-types/cont::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Container}}}} on the top
+un en-tête {\hyperref[\detokenize{object-types/cont::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{conteneur}}}} en haut
 
 \item {} 
-a {\hyperref[\detokenize{object-types/page::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Page}}}} for the content below the header.
+une {\hyperref[\detokenize{object-types/page::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{page}}}} pour le contenu situé sous l’en-tête.
 
 \end{enumerate}
 
 
-\subparagraph{Title}
-\label{\detokenize{object-types/win:title}}
-On the header, there is a title which can be modified by: \sphinxcode{\sphinxupquote{lv\_win\_set\_title(win, "New title")}}. The title always inherits the style of the header.
+\subparagraph{Titre}
+\label{\detokenize{object-types/win:titre}}
+Sur l’en-tête, il y a un titre qui peut être modifié par : \sphinxcode{\sphinxupquote{lv\_win\_set\_title(win, "Nouveau titre")}}. Le titre hérite toujours du style de l’en-tête.
 
 
-\subparagraph{Control buttons}
-\label{\detokenize{object-types/win:control-buttons}}
-You can add control buttons to the right side of the header with: \sphinxcode{\sphinxupquote{lv\_win\_add\_btn(win, LV\_SYMBOL\_CLOSE)}}.
-The second parameter is an {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} source.
+\subparagraph{Boutons de contrôle}
+\label{\detokenize{object-types/win:boutons-de-controle}}
+Vous pouvez ajouter des boutons de contrôle à la droite de l’en-tête avec : \sphinxcode{\sphinxupquote{lv\_win\_add\_btn(win, LV\_SYMBOL\_CLOSE)}}.
+Le deuxième paramètre est une {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{image}}}} source.
 
-\sphinxcode{\sphinxupquote{lv\_win\_close\_event\_cb}} can be used as an event callback to close the Window.
+\sphinxcode{\sphinxupquote{lv\_win\_close\_event\_cb}} peut être utilisé comme fonction de rappel d’événement pour fermer la fenêtre.
 
-You can modify the size of the control buttons with the \sphinxcode{\sphinxupquote{lv\_win\_set\_btn\_size(win, new\_size)}} function.
-
-
-\subparagraph{Scrollbars}
-\label{\detokenize{object-types/win:scrollbars}}
-The scrollbar behavior can be set by \sphinxcode{\sphinxupquote{lv\_win\_set\_sb\_mode(win, LV\_SB\_MODE\_...)}}. See {\hyperref[\detokenize{object-types/page::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Page}}}} for details.
+Vous pouvez modifier la taille des boutons de contrôle avec la fonction \sphinxcode{\sphinxupquote{lv\_win\_set\_btn\_size(win, new\_size)}}.
 
 
-\subparagraph{Manual scroll and focus}
-\label{\detokenize{object-types/win:manual-scroll-and-focus}}
-To scroll the Window directly you can use \sphinxcode{\sphinxupquote{lv\_win\_scroll\_hor(win, dist\_px)}} or \sphinxcode{\sphinxupquote{lv\_win\_scroll\_ver(win, dist\_px)}}.
-
-To make the Window show an object on it use \sphinxcode{\sphinxupquote{lv\_win\_focus(win, child, LV\_ANIM\_ON/OFF)}}.
-
-The time of scroll and focus animations can  be adjusted with \sphinxcode{\sphinxupquote{lv\_win\_set\_anim\_time(win, anim\_time\_ms)}}
+\subparagraph{Barres de défilement}
+\label{\detokenize{object-types/win:barres-de-defilement}}
+Le comportement de la barre de défilement peut être défini par \sphinxcode{\sphinxupquote{lv\_win\_set\_sb\_mode(win, LV\_SB\_MODE \_...)}}. Voir {[}page{]}(/object-types/page pour plus de détails.
 
 
-\subparagraph{Layout}
-\label{\detokenize{object-types/win:layout}}
-To set a layout for the content use \sphinxcode{\sphinxupquote{lv\_win\_set\_layout(win, LV\_LAYOUT\_...)}}. See {\hyperref[\detokenize{object-types/cont::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Container}}}} for details.
+\subparagraph{Défilement manuel et focus}
+\label{\detokenize{object-types/win:defilement-manuel-et-focus}}
+Pour faire défiler la fenêtre directement, vous pouvez utiliser \sphinxcode{\sphinxupquote{lv\_win\_scroll\_hor(win, dist\_px)}} ou \sphinxcode{\sphinxupquote{lv\_win\_scroll\_ver(win, dist\_px)}}.
+
+Pour que la fenêtre affiche un de ses objets, utilisez \sphinxcode{\sphinxupquote{lv\_win\_focus (win, child, LV\_ANIM\_ON/OFF)}}.
+
+La durée des animations de défilement et de focus peut être ajusté avec \sphinxcode{\sphinxupquote{lv\_win\_set\_anim\_time(win, anim\_time\_ms)}}.
 
 
-\paragraph{Style usage}
-\label{\detokenize{object-types/win:style-usage}}
-Use \sphinxcode{\sphinxupquote{lv\_win\_set\_style(win, LV\_WIN\_STYLE\_...,  \&style)}} to set a new style for an element of the Window:
+\subparagraph{Mise en page}
+\label{\detokenize{object-types/win:mise-en-page}}
+Pour définir une disposition du contenu, utilisez \sphinxcode{\sphinxupquote{lv\_win\_set\_layout (win, LV\_LAYOUT\_...)}}. Voir {\hyperref[\detokenize{object-types/cont::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{conteneur}}}} pour plus de détails.
+
+
+\paragraph{Styles}
+\label{\detokenize{object-types/win:styles}}
+Utilisez \sphinxcode{\sphinxupquote{lv\_win\_set\_style(win, LV\_WIN\_STYLE\_..., \&style)}} pour définir un nouveau style pour un élément de la fenêtre :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_WIN\_STYE\_BG} main background which uses all \sphinxcode{\sphinxupquote{style.body}} properties (header and content page are placed on it) (default: \sphinxcode{\sphinxupquote{lv\_style\_plain}})
+\sphinxstylestrong{LV\_WIN\_STYE\_BG} arrière-plan principal (l’en-tête et la page de contenu sont placés dessus) qui utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}} (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_plain}})
 
 \item {} 
-\sphinxstylestrong{LV\_WIN\_STYLE\_CONTENT} content page’s scrollable part which uses all \sphinxcode{\sphinxupquote{style.body}} properties (default: \sphinxcode{\sphinxupquote{lv\_style\_transp}})
+\sphinxstylestrong{LV\_WIN\_STYLE\_CONTENT} partie déroulante de la page de contenu qui utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}} (valeur par défaut :\sphinxcode{\sphinxupquote{ lv\_style\_transp}})
 
 \item {} 
-\sphinxstylestrong{LV\_WIN\_STYLE\_SB} scroll bar’s style which uses all \sphinxcode{\sphinxupquote{style.body}} properties. \sphinxcode{\sphinxupquote{left/top}} padding sets the scrollbars’ padding respectively and the inner padding sets the scrollbar’s width.  (default: \sphinxcode{\sphinxupquote{lv\_style\_pretty\_color}})
+\sphinxstylestrong{LV\_WIN\_STYLE\_SB} le style de la barre de défilement qui utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}}. \sphinxcode{\sphinxupquote{body.padding.left/top}} définit les marges des barres de défilement et \sphinxcode{\sphinxupquote{body.inner.padding}} définit la largeur de la barre de défilement (valeur  par défaut: \sphinxcode{\sphinxupquote{lv\_style\_pretty\_color}})
 
 \item {} 
-\sphinxstylestrong{LV\_WIN\_STYLE\_HEADER} header’s style which uses all \sphinxcode{\sphinxupquote{style.body}} properties (default: \sphinxcode{\sphinxupquote{lv\_style\_plain\_color}})
+\sphinxstylestrong{LV\_WIN\_STYLE\_HEADER} style de l’en-tête qui utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}} (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_plain\_color}})
 
 \item {} 
-\sphinxstylestrong{LV\_WIN\_STYLE\_BTN\_REL} released button’s style (on header) which uses all \sphinxcode{\sphinxupquote{style.body}} properties (default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}})
+\sphinxstylestrong{LV\_WIN\_STYLE\_BTN\_REL} style du bouton relâché (sur l’en-tête) qui utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}} (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}})
 
 \item {} 
-\sphinxstylestrong{LV\_WIN\_STYLE\_BTN\_PR} released button’s style (on header) which uses all \sphinxcode{\sphinxupquote{style.body}} properties (default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}})
+\sphinxstylestrong{LV\_WIN\_STYLE\_BTN\_PR} style du bouton pressé (sur l’en-tête) qui utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}} (valeur par défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}})
 
 \end{itemize}
 
-The height of the header is set to the greater value from \sphinxstyleemphasis{buttons’ height} (set by \sphinxcode{\sphinxupquote{lv\_win\_set\_btn\_size}}) and \sphinxstyleemphasis{title height} (comes from \sphinxcode{\sphinxupquote{header\_style.text.font}}) plus the \sphinxcode{\sphinxupquote{body.padding.top}} and \sphinxcode{\sphinxupquote{body.padding.bottom}} of the header style.
+La hauteur de l’en-tête est définie par la plus grande valeur de \sphinxstyleemphasis{hauteur des boutons} (définie par \sphinxcode{\sphinxupquote{lv\_win\_set\_btn\_size}}) et \sphinxstyleemphasis{hauteur de titre} (provenant de \sphinxcode{\sphinxupquote{header\_style.text.font}}), plus les éléments \sphinxcode{\sphinxupquote{body.padding.top}} et \sphinxcode{\sphinxupquote{body.padding.bottom}} du style de l’en-tête.
 
 
-\paragraph{Events}
-\label{\detokenize{object-types/win:events}}
-Only the \sphinxhref{/overview/event.html\#generic-events}{Generic events} are sent by the object type.
+\paragraph{Evénements}
+\label{\detokenize{object-types/win:evenements}}
+Seuls les \sphinxhref{/overview/event.html\#generic-events}{événements génériques} sont envoyés par ce type d’objet.
 
-Learn more about {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Events}}}}.
+Apprenez-en plus sur les {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{événements}}}}.
 
 
-\paragraph{Keys}
-\label{\detokenize{object-types/win:keys}}
-The following \sphinxstyleemphasis{Keys} are processed by the Page:
+\paragraph{Touches}
+\label{\detokenize{object-types/win:touches}}
+Les \sphinxstyleemphasis{touches} suivantes sont traitées par la page :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KEY\_RIGHT/LEFT/UP/DOWN} Scroll the page
+\sphinxstylestrong{LV\_KEY\_RIGHT/LEFT/UP/DOWN} font défiler la page
 
 \end{itemize}
 
-Learn more about {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Keys}}}}.
+Apprenez-en plus sur les {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{touches}}}}.
 
 
-\paragraph{Example}
-\label{\detokenize{object-types/win:example}}
+\paragraph{Exemple}
+\label{\detokenize{object-types/win:exemple}}
 
 \subparagraph{C}
 \label{\detokenize{object-types/win:c}}

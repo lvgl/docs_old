@@ -3,7 +3,6 @@
 ```
 # 在线演示
 
-你可以在不下载安装LittlevGL的情况下了解它具体长什么样子
-你可以轻松的在你的浏览器上查看这些已经制备好的用户界面
+You can see how LittlevGL looks like without installing and downloading anything either on target platform or on the host machine. There are some ready made user interfaces which you can easily try in your browser.
 
 前往 [在线演示](https://littlevgl.com/live-demo) 页面选择你感兴趣的演示项目。

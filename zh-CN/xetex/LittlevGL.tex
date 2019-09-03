@@ -64,7 +64,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Aug 24, 2019}
+\date{Sep 03, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -380,7 +380,7 @@ To work with lower \sphinxcode{\sphinxupquote{LV\_MEM\_SIZE}} you can create the
 
 \section{怎么在我的操作系统上使用?}
 \label{\detokenize{index:id13}}
-为了在拥有中断的操作系统上使用，为了保护LittlevGL，你可以与互斥锁一同调用相关函数，请查看 {\hyperref[\detokenize{porting/os::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{操作系统}}}} 章节获取更多内容
+To work with an operating system where tasks can interrupt each other you should protect LittlevGL related function calls with a mutex. See the {\hyperref[\detokenize{porting/os::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Operating system and interrupts}}}} section to learn more.
 
 
 \section{如何为LittlevGL做出贡献?}
@@ -442,27 +442,42 @@ The bugfixes are added directly to the \sphinxcode{\sphinxupquote{master}} branc
 
 \subsubsection{在线演示}
 \label{\detokenize{get-started/live-demo:id1}}\label{\detokenize{get-started/live-demo::doc}}
-你可以在不下载安装LittlevGL的情况下了解它具体长什么样子
-你可以轻松的在你的浏览器上查看这些已经制备好的用户界面
+You can see how LittlevGL looks like without installing and downloading anything either on target platform or on the host machine. There are some ready made user interfaces which you can easily try in your browser.
 
 前往 \sphinxhref{https://littlevgl.com/live-demo}{在线演示} 页面选择你感兴趣的演示项目。
 
 
 \subsubsection{PC上的模拟器}
 \label{\detokenize{get-started/pc-simulator:pc}}\label{\detokenize{get-started/pc-simulator::doc}}
-你可以通过\sphinxstylestrong{使用你的PC}来尝试LittlevGL而无需任何开发板，你可以在PC上编写、运行代码和在监视器上查看运行结果。这种方式是跨平台的，Windows, Linux 和 OSX都支持。
-这些代码都是可移植的，你可以轻易的复制运行到你的嵌入式硬件设备上。
+You can try out the LittlevGL \sphinxstylestrong{using only your PC} (i.e. without any development boards). The LittlevGL will run on a simulator environment on the PC where anyone can write and experiment the real LittlevGL applications.
 
-同样的，模拟器也对反馈bug非常有帮助，因为它意味着每个用户的通用平台，所以最好在模拟器上用你的代码复现bug反馈到\sphinxhref{https://forum.littlevgl.com}{论坛}。
+Simulator on the PC have the following advantages:
+\begin{itemize}
+\item {} 
+Hardware independent - Write a code, run it on the PC and see the result on the PC monitor.
+
+\item {} 
+Cross-platform - Any Windows, Linux or OSX PC can run the PC simulator.
+
+\item {} 
+Portability - the written code is portable, which means you can simply copy it when using an embedded hardware.
+
+\item {} 
+Easy Validation - The simulator is also very useful to report bugs because it means common platform for every user. So it’s a good idea to reproduce a bug in simulator and use the code snippet in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
+
+\end{itemize}
 
 
 \paragraph{选择一个IDE}
 \label{\detokenize{get-started/pc-simulator:ide}}
-模拟器已经一直到多个IDE中，选择你最喜欢的IDE，阅读GitHub上的README，下载并在IDE上加载。
+The simulator is ported to various IDEs (Integrated Development Environments). Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
 
 
 
-下面详细地描述了Eclipse CDT的配置指南
+You can use any IDEs for the development but, for simplicity, the configuration for Eclipse CDT is focused in this tutorial.
+The following section describes the set-up guide of Eclipse CDT in more details.
+
+\sphinxstylestrong{Note: If you are on Windows, it’s usually better to use the Visual Studio or CodeBlocks projects instead. They work out of the box without requiring extra steps.}
 
 
 \paragraph{配置 Eclipse CDT}
@@ -470,13 +485,15 @@ The bugfixes are added directly to the \sphinxcode{\sphinxupquote{master}} branc
 
 \subparagraph{安装 Eclipse CDT}
 \label{\detokenize{get-started/pc-simulator:id1}}
-Eclipse CDT 是 C/C++ IDE，你也可以使用其他IDE，但在这个教程里我们呈现如何配置Eclipse CDT
+\sphinxhref{https://eclipse.org/cdt/}{Eclipse CDT} is a C/C++ IDE.
 
 Eclipse 是基于Java的软件，因此请确保 \sphinxstylestrong{Java 运行时环境（JRE）} 已经安装在你的系统上
 
 在类Debian发行版上运行 (如：Ubuntu): \sphinxcode{\sphinxupquote{sudo apt-get install default-jre}}
 
-你可以从这里下载Eclipse’s CDT: \sphinxhref{http://www.eclipse.org/downloads/}{https://eclipse.org/cdt/}，运行安装器从列表中选择 \sphinxstyleemphasis{Eclipse CDT}
+Note: If you are using other distros, then please refer and install ‘Java Runtime Environment’ suitable to your distro.
+
+You can download Eclipse’s CDT from: \sphinxurl{https://www.eclipse.org/cdt/downloads.php}. Start the installer and choose \sphinxstyleemphasis{Eclipse CDT} from the list.
 
 
 \subparagraph{安装 SDL 2}
@@ -508,7 +525,7 @@ PC模拟器使用  \sphinxhref{https://www.libsdl.org/download-2.0.php}{SDL 2} �
 
 \subparagraph{Windows}
 \label{\detokenize{get-started/pc-simulator:windows}}
-如果你使用的是 \sphinxstylestrong{Windows} 首先你需要安装 MinGW (\sphinxhref{http://mingw-w64.org/doku.php/download}{64 位版本})，然后再按以下步骤安装SDL2：
+If you are using \sphinxstylestrong{Windows} firstly you need to install MinGW (\sphinxhref{http://mingw-w64.org/doku.php/download}{64 bit version}). After installing MinGW, do the following steps to add SDL2:
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
@@ -530,26 +547,26 @@ PC模拟器使用  \sphinxhref{https://www.libsdl.org/download-2.0.php}{SDL 2} �
 
 \end{enumerate}
 
-请注意：如果你使用的是 \sphinxstylestrong{Microsoft Visual Studio}而不是 Eclipse，那么你不需要安装 MinGW.
+Note: If you are using \sphinxstylestrong{Microsoft Visual Studio} instead of Eclipse then you don’t have to install MinGW.
 
 
 \subparagraph{OSX}
 \label{\detokenize{get-started/pc-simulator:osx}}
 你可以容易的通过brew在 \sphinxstylestrong{OSX} 上安装SDL2 ：\sphinxcode{\sphinxupquote{brew install sdl2}}
 
-如果没有用我建议查看\sphinxhref{http://lazyfoo.net/tutorials/SDL/01\_hello\_SDL/index.php}{这个教程} 来开始使用SDL。
+If something is not working, then please refer \sphinxhref{http://lazyfoo.net/tutorials/SDL/01\_hello\_SDL/index.php}{this tutorial} to get started with SDL.
 
 
 \subparagraph{预配置项目}
 \label{\detokenize{get-started/pc-simulator:id2}}
-一个预配置的图形库项目（基于最新的版本）总是可用
-你可以在 \sphinxhref{https://github.com/littlevgl/proj\_pc}{GitHub} 或 \sphinxhref{https://littlevgl.com/download}{下载} 页面中找到它
-(这个项目是为Eclipse CDT配置的)
+A pre-configured graphics library project (based on the latest release) is always available to get started easily.
+You can find the latest one on \sphinxhref{https://github.com/littlevgl/proj\_pc}{GitHub} or on the \sphinxhref{https://littlevgl.com/download}{Download} page.
+(Please note that, the project is configured for Eclipse CDT).
 
 
 \subparagraph{添加预配置项目到Eclipse CDT}
 \label{\detokenize{get-started/pc-simulator:id3}}
-运行Eclipse CDT，他会显示一个关于 \sphinxstylestrong{workspace path}的对话框，在接受之前复制 (并解压) 已下载好的预配置项目到上面的路径中，现在你可以接受这个workspace path。当然你也可以修改这个路径并复制项目到你自定义的路径中
+Run Eclipse CDT. It will show a dialogue about the \sphinxstylestrong{workspace path}. Before accepting the path, check that path and copy (and unzip) the downloaded pre-configured project there. After that, you can accept the workspace path. Of course you can modify this path but, in that case copy the project to the corresponding location.
 
 关闭开始窗口并前往 \sphinxstylestrong{File-\textgreater{}Import} 选择 \sphinxstylestrong{General-\textgreater{}Existing project into Workspace}. \sphinxstylestrong{选择项目根目录} 并点击 \sphinxstylestrong{Finish}
 
@@ -566,9 +583,9 @@ PC模拟器使用  \sphinxhref{https://www.libsdl.org/download-2.0.php}{SDL 2} �
 
 \subparagraph{编译并运行}
 \label{\detokenize{get-started/pc-simulator:id4}}
-现在你已准备好了在你的PC上运行LittlevGL图形库看. 点击上方的锤子图标来编译项目。如果你正确的完成所有步骤你应该不会看到任何错误。请注意，在某些系统上可能需要执行其他步骤来从Eclipse上“查看”SDL 2，但在大多数情况下，下载项目中的配置就足够了。
+Now you are ready to run the LittlevGL Graphics Library on your PC. Click on the Hammer Icon on the top menu bar to Build the project. If you have done everything right, then you will not get any errors. Note that on some systems additional steps might be required to “see” SDL 2 from Eclipse but, in most of cases the configurations in the downloaded project is enough.
 
-在编译成功后点击在上方菜单栏中Play按钮来运行项目，现在一个窗口应该出现在你的屏幕中央
+After a success build, click on the Play button on the top menu bar to run the project. Now a window should appear in the middle of your screen.
 
 现在所有东西已经准备好，你可以开始在你PC上实践使用LittlevGL图形库了。
 
@@ -2301,6 +2318,10 @@ To use an \sphinxstyleemphasis{Encoder} (similarly to the \sphinxstyleemphasis{K
 If a button is pressed it will simulate the pressing on the assigned coordinate. (Similarly to a touchpad)
 
 To assign buttons to coordinates use \sphinxcode{\sphinxupquote{lv\_indev\_set\_button\_points(my\_indev, points\_array)}}.\sphinxcode{\sphinxupquote{points\_array}} should look like \sphinxcode{\sphinxupquote{const lv\_point\_t points\_array{[}{]} =  \{ \{12,30\},\{60,90\}, ...\}}}
+
+\begin{sphinxadmonition}{important}{Important:}
+The points\_array can’t go out of scope. Either declare it as a global variable or as a static variable inside a function.
+\end{sphinxadmonition}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{type} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}TYPE\PYGZus{}BUTTON}\PYG{p}{;}

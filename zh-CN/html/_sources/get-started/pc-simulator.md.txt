@@ -4,14 +4,17 @@
 # PC上的模拟器
 
 
-你可以通过**使用你的PC**来尝试LittlevGL而无需任何开发板，你可以在PC上编写、运行代码和在监视器上查看运行结果。这种方式是跨平台的，Windows, Linux 和 OSX都支持。
-这些代码都是可移植的，你可以轻易的复制运行到你的嵌入式硬件设备上。
+You can try out the LittlevGL **using only your PC** (i.e. without any development boards). The LittlevGL will run on a simulator environment on the PC where anyone can write and experiment the real LittlevGL applications.
 
-同样的，模拟器也对反馈bug非常有帮助，因为它意味着每个用户的通用平台，所以最好在模拟器上用你的代码复现bug反馈到[论坛](https://forum.littlevgl.com)。
+Simulator on the PC have the following advantages:
+- Hardware independent - Write a code, run it on the PC and see the result on the PC monitor.
+- Cross-platform - Any Windows, Linux or OSX PC can run the PC simulator.  
+- Portability - the written code is portable, which means you can simply copy it when using an embedded hardware.
+- Easy Validation - The simulator is also very useful to report bugs because it means common platform for every user. So it's a good idea to reproduce a bug in simulator and use the code snippet in the [Forum](https://forum.littlevgl.com).
 
 ## 选择一个IDE
 
-模拟器已经一直到多个IDE中，选择你最喜欢的IDE，阅读GitHub上的README，下载并在IDE上加载。
+The simulator is ported to various IDEs (Integrated Development Environments). Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
 
 ```eval_rst
 .. raw:: html
@@ -45,19 +48,25 @@
   </tbody></table>
 ```
 
-下面详细地描述了Eclipse CDT的配置指南
+
+You can use any IDEs for the development but, for simplicity, the configuration for Eclipse CDT is focused in this tutorial.
+The following section describes the set-up guide of Eclipse CDT in more details.
+
+**Note: If you are on Windows, it's usually better to use the Visual Studio or CodeBlocks projects instead. They work out of the box without requiring extra steps.**
 
 ## 配置 Eclipse CDT
 
 ### 安装 Eclipse CDT
 
-Eclipse CDT 是 C/C++ IDE，你也可以使用其他IDE，但在这个教程里我们呈现如何配置Eclipse CDT
+[Eclipse CDT](https://eclipse.org/cdt/) is a C/C++ IDE.
 
 Eclipse 是基于Java的软件，因此请确保 **Java 运行时环境（JRE）** 已经安装在你的系统上
 
 在类Debian发行版上运行 (如：Ubuntu): `sudo apt-get install default-jre`
 
-你可以从这里下载Eclipse's CDT: [https://eclipse.org/cdt/](http://www.eclipse.org/downloads/)，运行安装器从列表中选择 *Eclipse CDT*
+Note: If you are using other distros, then please refer and install 'Java Runtime Environment' suitable to your distro.
+
+You can download Eclipse's CDT from: [https://www.eclipse.org/cdt/downloads.php](https://www.eclipse.org/cdt/downloads.php). Start the installer and choose *Eclipse CDT* from the list.
 
 ### 安装 SDL 2
 
@@ -72,7 +81,7 @@ PC模拟器使用  [SDL 2](https://www.libsdl.org/download-2.0.php) 跨平台库
 4. 如果基本编译库build essentials尚未安装: `sudo apt-get install build-essential`
 
 #### Windows
-如果你使用的是 **Windows** 首先你需要安装 MinGW ([64 位版本](http://mingw-w64.org/doku.php/download))，然后再按以下步骤安装SDL2：
+If you are using **Windows** firstly you need to install MinGW ([64 bit version](http://mingw-w64.org/doku.php/download)). After installing MinGW, do the following steps to add SDL2:
 
 1. 下载SDL的开发库   
 前往 [https://www.libsdl.org/download-2.0.php](https://www.libsdl.org/download-2.0.php) 并 _下载库: SDL2-devel-2.0.5-mingw.tar.gz_
@@ -81,22 +90,22 @@ PC模拟器使用  [SDL 2](https://www.libsdl.org/download-2.0.php) 跨平台库
 4. 复制_..._mingw32/lib/_ 中的内容到 _C:/MinGW/.../x86_64-w64-mingw32/lib_
 5. 复制_..._mingw32/bin/SDL2.dll_ 到_{eclipse_worksapce}/pc_simulator/Debug/_，请在Eclipse完成安装后执行
 
-请注意：如果你使用的是 **Microsoft Visual Studio**而不是 Eclipse，那么你不需要安装 MinGW. 
+Note: If you are using **Microsoft Visual Studio** instead of Eclipse then you don't have to install MinGW. 
 
 #### OSX
 你可以容易的通过brew在 **OSX** 上安装SDL2 ：`brew install sdl2`
 
-如果没有用我建议查看[这个教程](http://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php) 来开始使用SDL。
+If something is not working, then please refer [this tutorial](http://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php) to get started with SDL.
 
 ### 预配置项目
 
-一个预配置的图形库项目（基于最新的版本）总是可用
-你可以在 [GitHub](https://github.com/littlevgl/proj_pc) 或 [下载](https://littlevgl.com/download) 页面中找到它
-(这个项目是为Eclipse CDT配置的) 
+A pre-configured graphics library project (based on the latest release) is always available to get started easily. 
+You can find the latest one on [GitHub](https://github.com/littlevgl/proj_pc) or on the [Download](https://littlevgl.com/download) page. 
+(Please note that, the project is configured for Eclipse CDT). 
 
 ### 添加预配置项目到Eclipse CDT
 
-运行Eclipse CDT，他会显示一个关于 **workspace path**的对话框，在接受之前复制 (并解压) 已下载好的预配置项目到上面的路径中，现在你可以接受这个workspace path。当然你也可以修改这个路径并复制项目到你自定义的路径中
+Run Eclipse CDT. It will show a dialogue about the **workspace path**. Before accepting the path, check that path and copy (and unzip) the downloaded pre-configured project there. After that, you can accept the workspace path. Of course you can modify this path but, in that case copy the project to the corresponding location.
 
 关闭开始窗口并前往 **File-&gt;Import** 选择 **General-&gt;Existing project into Workspace**. **选择项目根目录** 并点击 **Finish**
 
@@ -107,8 +116,8 @@ PC模拟器使用  [SDL 2](https://www.libsdl.org/download-2.0.php) 跨平台库
 
 ### 编译并运行
 
-现在你已准备好了在你的PC上运行LittlevGL图形库看. 点击上方的锤子图标来编译项目。如果你正确的完成所有步骤你应该不会看到任何错误。请注意，在某些系统上可能需要执行其他步骤来从Eclipse上“查看”SDL 2，但在大多数情况下，下载项目中的配置就足够了。
+Now you are ready to run the LittlevGL Graphics Library on your PC. Click on the Hammer Icon on the top menu bar to Build the project. If you have done everything right, then you will not get any errors. Note that on some systems additional steps might be required to "see" SDL 2 from Eclipse but, in most of cases the configurations in the downloaded project is enough.
 
-在编译成功后点击在上方菜单栏中Play按钮来运行项目，现在一个窗口应该出现在你的屏幕中央
+After a success build, click on the Play button on the top menu bar to run the project. Now a window should appear in the middle of your screen.
 
 现在所有东西已经准备好，你可以开始在你PC上实践使用LittlevGL图形库了。

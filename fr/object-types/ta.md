@@ -1,13 +1,13 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/ta.md
 ```
-# Text area (lv_ta)
+# Zone de texte (lv_ta)
 
-## Overview
+## Vue d'ensemble
 
 The Text Area is a [Page](/object-types/page) with a [Label](/object-types/label) and a cursor on it. Texts or characters can be added to it. Long lines are wrapped and when the text becomes long enough the Text area can be scrolled-
 
-### Add text
+### Ajouter du texte
 
 You can insert text or characters  to the current cursor's position with:
 

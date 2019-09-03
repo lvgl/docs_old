@@ -159,7 +159,7 @@ pour supprimer les fonctions et variables inutilisées.
  
 ### Comment travailler avec un système d'exploitation ?
 
-Pour travailler avec un système d'exploitation où les tâches peuvent s'interrompre, vous devez protéger les appels de fonctions liés à LittlevGL avec un mutex. Consultez la section [Système d'exploitation](/porting/os) pour en savoir plus.
+To work with an operating system where tasks can interrupt each other you should protect LittlevGL related function calls with a mutex. See the [Operating system and interrupts](/porting/os) section to learn more.
 
 ### Comment contribuer à LittlevGL ?
 Il y a plusieurs façons de contribuer à LittlevGL :

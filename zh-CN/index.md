@@ -158,7 +158,7 @@ If you are using GCC you can add
  
 ### 怎么在我的操作系统上使用?
 
-为了在拥有中断的操作系统上使用，为了保护LittlevGL，你可以与互斥锁一同调用相关函数，请查看 [操作系统](/porting/os) 章节获取更多内容
+To work with an operating system where tasks can interrupt each other you should protect LittlevGL related function calls with a mutex. See the [Operating system and interrupts](/porting/os) section to learn more.
 
 ### 如何为LittlevGL做出贡献?
 这里有多种方法为LittlevGL做出贡献:

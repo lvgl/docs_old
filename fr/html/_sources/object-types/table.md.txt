@@ -3,76 +3,76 @@
 ```
 # Table (lv_table)
 
-## Overview
+## Vue d'ensemble
 
-Tables, as usual, are built from rows, columns, and cells containing texts.
+Comme d'habitude, les tables sont construites à partir de lignes, de colonnes et de cellules contenant des textes.
 
-The Table object is very light weighted because only the texts are stored. No real objects are created for cells but they are just drawn on the fly.
+L'objet table est très léger, car seuls les textes sont enregistrés. Aucun objet réel n'est créé pour les cellules, elles sont simplement dessinées à la volée.
 
-### Rows and Columns
+### Llignes et colonnes
 
-To set number of rows and columns use `lv_table_set_row_cnt(table, row_cnt)` and `lv_table_set_col_cnt(table, col_cnt)`
+Pour définir le nombre de lignes et de colonnes, utilisez `lv_table_set_row_cnt(table, row_cnt)` et `lv_table_set_col_cnt(table, col_cnt)`.
 
-### Width and Height
+### Largeur et hauteur
 
-The width of the columns can be set with `lv_table_set_col_width(table, col_id, width)`. The overall width of the Table object will be set to the sum of columns widths.
+La largeur des colonnes peut être définie avec `lv_table_set_col_width(table, col_id, width)`. La largeur totale de l'objet table sera définie par la somme des largeurs des colonnes.
 
-The height is calculated automatically from the cell styles (font, padding etc) and the number of rows.
+La hauteur est calculée automatiquement à partir des styles des cellule (police, marges, etc.) et du nombre de lignes.
 
-### Set cell value
+### Définir la valeur de la cellule
 
-The cells can store on texts so need to convert numbers to text before displaying them in a table.
+Les cellules peuvent enregistrer uniquement du texte, il est donc nécessaire de convertir les nombres en texte avant de les afficher dans une table.
 
-`lv_table_set_cell_value(table, row, col, "Content")`. The text is saved by the table so it can be even a local variable.
+`lv_table_set_cell_value(table, row, col, "Content")`. Le texte est sauvegardé par la table et peut donc être une variable locale.
 
-Line break can be used in the text like `"Value\n60.3"`.
+Le saut de ligne peut être utilisé dans le texte comme `"Value\n60.3"`.
 
-### Align
+### Alignement
 
-The text alignment in cells can be adjusted individually with `lv_table_set_cell_align(table, row, col, LV_LABEL_ALIGN_LEFT/CENTER/RIGHT)`.
+L’alignement du texte dans les cellules peut être ajusté individuellement avec `lv_table_set_cell_align(table, row, col, LV_LABEL_ALIGN_LEFT/CENTER/RIGHT)`.
 
-### Cell type
+### Type de cellule
 
-You can use 4 different cell types. Each has its own style.
+Vous pouvez utiliser 4 types de cellules différents. Chacun a son propre style.
 
-Cell types can be used to add different style for example to:
-- table header
-- first column
-- highlight a cell
+Les types de cellules peuvent être utilisés pour ajouter un style différent, par exemple pour :
+- en-tête de table
+- première colonne
+- mise en évidence d'une cellule
 - etc
 
-The type can be selected with `lv_table_set_cell_type(table, row, col, type)` `type` can be 1, 2, 3 or 4.
+Le type peut être sélectionné avec `lv_table_set_cell_type(table, row, col, type)` `type` peut être 1, 2, 3 ou 4.
 
-### Merge cells
+### Fusionner des cellules
 
-Cells can be merged horizontally with `lv_table_set_cell_merge_right(table, col, row, true)`. To merge more adjacent cells apply this function for each cell.
+Les cellules peuvent être fusionnées horizontalement avec `lv_table_set_cell_merge_right(table, col, row, true)`. Pour fusionner davantage de cellules adjacentes, appliquez cette fonction à chaque cellule.
 
 
 ### Crop text
-By default, the texts are word-wrapped to fit into the width of the cell and the height of the cell is set automatically. To disable this and keep the text as it is enable `lv_table_set_cell_crop(table, row, col, true)`.
+Par défaut, des retours à la ligne sont insérés pour permettre aux texte de s'inscrire dans la largeur de la cellule, et la hauteur de la cellule est définie automatiquement. Pour désactiver ce comportement et conserver le texte tel qu'il est, activez ` lv_table_set_cell_crop(table, row, col, true)`.
 
-### Scroll
-The make the Table scrollable place it on a [Page](/object-types/page)
+### Défilement
+Pour pouvoir faire défiler la table, placez-la sur une [page](/object-types/page)
 
 ## Styles
   
-Use `lv_table_set_style(page, LV_TABLE_STYLE_...,  &style)` to set a new style for an element of the page:
+Utilisez `lv_table_set_style(table, lv_table_set_style..., &style)` pour définir un nouveau style pour un élément de la table :
 
-- **LV_PAGE_STYLE_BG** background's style which uses all `style.body` properties (default: `lv_style_plain_color`)
-- **LV_PAGE_STYLE_CELL1/2/3/4** 4 for styles for the 4 cell types. All `style.body` properties are used. (default: `lv_style_plain`)
+- **LV_PAGE_STYLE_BG** style de l'arrière-plan qui utilise toutes les propriétés `style.body` (valeur par défaut : `lv_style_plain_color`).
+- **LV_PAGE_STYLE_CELL1/2/3/4** 4 styles pour les 4 types de cellules. Toutes les propriétés `style.body` sont utilisées. (valeur par défaut : `lv_style_plain`).
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## Evénements
+Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
 
-Learn more about [Events](/overview/event).
+Apprenez-en plus sur les [événements](/overview/event).
 
-## Keys
+## Touches
 
-No *Keys* are processed by the object type.
+Aucune *touche* n'est traitée par ce type d'objet.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
-## Example
+## Exemple
 
 ```eval_rst
 
@@ -81,7 +81,7 @@ Learn more about [Keys](/overview/indev).
 ```
 
 ### MicroPython
-No examples yet.
+Pas encore d'exemple.
 
 ## API 
 

@@ -1,66 +1,66 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/win.md
 ```
-# Window (lv_win)
+# Fenêtre (lv_win)
 
-## Overview
+## Vue d'ensemble
 
-The windows are one of the most complex container-like objects. They are built from two main parts: 
-1. a header [Container](/object-types/cont) on the top 
-2. a [Page](/object-types/page) for the content below the header. 
+Les fenêtres sont l’un des objets les plus complexes du type conteneur. Ils sont construits à partir de deux parties principales :
+1. un en-tête [conteneur](/object-types/cont) en haut
+2. une [page](/object-types/page) pour le contenu situé sous l'en-tête.
 
-### Title
-On the header, there is a title which can be modified by: `lv_win_set_title(win, "New title")`. The title always inherits the style of the header.
+### Titre
+Sur l'en-tête, il y a un titre qui peut être modifié par : `lv_win_set_title(win, "Nouveau titre")`. Le titre hérite toujours du style de l'en-tête.
 
-### Control buttons
-You can add control buttons to the right side of the header with: `lv_win_add_btn(win, LV_SYMBOL_CLOSE)`. 
-The second parameter is an [Image](/object-types/img) source.
+### Boutons de contrôle
+Vous pouvez ajouter des boutons de contrôle à la droite de l'en-tête avec : `lv_win_add_btn(win, LV_SYMBOL_CLOSE)`.
+Le deuxième paramètre est une [image](/object-types/img) source.
 
-`lv_win_close_event_cb` can be used as an event callback to close the Window.
+`lv_win_close_event_cb` peut être utilisé comme fonction de rappel d'événement pour fermer la fenêtre.
 
-You can modify the size of the control buttons with the `lv_win_set_btn_size(win, new_size)` function.
+Vous pouvez modifier la taille des boutons de contrôle avec la fonction `lv_win_set_btn_size(win, new_size)`.
 
-### Scrollbars
+### Barres de défilement
 
-The scrollbar behavior can be set by `lv_win_set_sb_mode(win, LV_SB_MODE_...)`. See [Page](/object-types/page) for details.
+Le comportement de la barre de défilement peut être défini par `lv_win_set_sb_mode(win, LV_SB_MODE _...)`. Voir [page](/object-types/page pour plus de détails.
 
-### Manual scroll and focus
-To scroll the Window directly you can use `lv_win_scroll_hor(win, dist_px)` or `lv_win_scroll_ver(win, dist_px)`.
+### Défilement manuel et focus
+Pour faire défiler la fenêtre directement, vous pouvez utiliser `lv_win_scroll_hor(win, dist_px)` ou `lv_win_scroll_ver(win, dist_px)`.
 
-To make the Window show an object on it use `lv_win_focus(win, child, LV_ANIM_ON/OFF)`.
+Pour que la fenêtre affiche un de ses objets, utilisez `lv_win_focus (win, child, LV_ANIM_ON/OFF)`.
 
-The time of scroll and focus animations can  be adjusted with `lv_win_set_anim_time(win, anim_time_ms)`
+La durée des animations de défilement et de focus peut être ajusté avec `lv_win_set_anim_time(win, anim_time_ms)`.
 
-### Layout
-To set a layout for the content use `lv_win_set_layout(win, LV_LAYOUT_...)`. See [Container](/object-types/cont) for details.
+### Mise en page
+Pour définir une disposition du contenu, utilisez `lv_win_set_layout (win, LV_LAYOUT_...)`. Voir [conteneur](/object-types/cont) pour plus de détails.
 
-## Style usage
+## Styles
 
-Use `lv_win_set_style(win, LV_WIN_STYLE_...,  &style)` to set a new style for an element of the Window:
+Utilisez `lv_win_set_style(win, LV_WIN_STYLE_..., &style)` pour définir un nouveau style pour un élément de la fenêtre :
 
-- **LV_WIN_STYE_BG** main background which uses all `style.body` properties (header and content page are placed on it) (default: `lv_style_plain`)
-- **LV_WIN_STYLE_CONTENT** content page's scrollable part which uses all `style.body` properties (default: `lv_style_transp`)
-- **LV_WIN_STYLE_SB** scroll bar's style which uses all `style.body` properties. `left/top` padding sets the scrollbars' padding respectively and the inner padding sets the scrollbar's width.  (default: `lv_style_pretty_color`)
-- **LV_WIN_STYLE_HEADER** header's style which uses all `style.body` properties (default: `lv_style_plain_color`)
-- **LV_WIN_STYLE_BTN_REL** released button's style (on header) which uses all `style.body` properties (default: `lv_style_btn_rel`)
-- **LV_WIN_STYLE_BTN_PR** released button's style (on header) which uses all `style.body` properties (default: `lv_style_btn_pr`)
+- **LV_WIN_STYE_BG** arrière-plan principal (l'en-tête et la page de contenu sont placés dessus) qui utilise toutes les propriétés `style.body` (valeur par défaut : `lv_style_plain`)
+- **LV_WIN_STYLE_CONTENT** partie déroulante de la page de contenu qui utilise toutes les propriétés `style.body` (valeur par défaut :` lv_style_transp`)
+- **LV_WIN_STYLE_SB** le style de la barre de défilement qui utilise toutes les propriétés `style.body`. `body.padding.left/top` définit les marges des barres de défilement et `body.inner.padding` définit la largeur de la barre de défilement (valeur  par défaut: `lv_style_pretty_color`)
+- **LV_WIN_STYLE_HEADER** style de l'en-tête qui utilise toutes les propriétés `style.body` (valeur par défaut : `lv_style_plain_color`)
+- **LV_WIN_STYLE_BTN_REL** style du bouton relâché (sur l'en-tête) qui utilise toutes les propriétés `style.body` (valeur par défaut : `lv_style_btn_rel`)
+- **LV_WIN_STYLE_BTN_PR** style du bouton pressé (sur l'en-tête) qui utilise toutes les propriétés `style.body` (valeur par défaut : `lv_style_btn_pr`)
 
-The height of the header is set to the greater value from *buttons' height* (set by `lv_win_set_btn_size`) and *title height* (comes from `header_style.text.font`) plus the `body.padding.top` and `body.padding.bottom` of the header style.
+La hauteur de l'en-tête est définie par la plus grande valeur de *hauteur des boutons* (définie par `lv_win_set_btn_size`) et *hauteur de titre* (provenant de `header_style.text.font`), plus les éléments `body.padding.top` et `body.padding.bottom` du style de l'en-tête.
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## Evénements
+Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
 
-Learn more about [Events](/overview/event).
+Apprenez-en plus sur les [événements](/overview/event).
 
-## Keys
+## Touches
 
-The following *Keys* are processed by the Page:
-- **LV_KEY_RIGHT/LEFT/UP/DOWN** Scroll the page
+Les *touches* suivantes sont traitées par la page :
+- **LV_KEY_RIGHT/LEFT/UP/DOWN** font défiler la page
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
 
-## Example
+## Exemple
 
 ```eval_rst
 

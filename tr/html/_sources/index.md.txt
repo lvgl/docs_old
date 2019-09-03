@@ -158,7 +158,7 @@ to remove unused functions and variables.
  
 ### How to work with an operating system?
 
-To work with an operating system where tasks can interrupt each other you should protect LittlevGL related function calls with a mutex. See the [Operation system](/porting/os) section to learn more.
+To work with an operating system where tasks can interrupt each other you should protect LittlevGL related function calls with a mutex. See the [Operating system and interrupts](/porting/os) section to learn more.
 
 ### How to contribute to LittlevGL?
 There are several ways to contribute to LittlevGL:

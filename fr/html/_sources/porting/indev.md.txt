@@ -119,6 +119,9 @@ Si un bouton est pressé, il simule l'appui sur la coordonnée attribuée (comme
 Pour affecter des boutons aux coordonnées, utilisez `lv_indev_set_button_points(my_indev, points_array)`.  
 `points_array` doit ressembler à `const lv_point_t points_array[] = { {12, 30}, {60, 90}, ... }`
 
+``` important::  The points_array can't go out of scope. Either declare it as a global variable or as a static variable inside a function.
+```
+
 ```c
 indev_drv.type = LV_INDEV_TYPE_BUTTON;
 indev_drv.read_cb = my_input_read;
