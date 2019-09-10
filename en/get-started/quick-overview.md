@@ -1,16 +1,16 @@
 # Quick overview
 
-Here you can learn the most important things about LittlevGL. 
+Here you can learn the most important things about LittlevGL.
 You should read it first to get a general impression and read the detailed [Porting](/porting/index) and [Overview](/overview/index) sections after that.
 
 ## Add LittlevGL into your project
 
-The steps below show how to setup LittlevGL on an embedded system with a display and a touchpad. 
-You can use the [Simulators](/get-started/pc-simulator) to get ready to use projects which can be run on your PC. 
+The following steps show how to setup LittlevGL on an embedded system with a display and a touchpad.
+You can use the [Simulators](/get-started/pc-simulator) to get 'ready to use' projects which can be run on your PC.
 
 - [Download](https://littlevgl.com/download) or [Clone](https://github.com/littlevgl/lvgl) the library
 - Copy the `lvgl` folder into your project
-- Copy `lvgl/lv_conf_templ.h` as `lv_conf.h` next to the `lvgl` folder and set at least `LV_HOR_RES_MAX`, `LV_VER_RES_MAX` and `LV_COLOR_DEPTH`. 
+- Copy `lvgl/lv_conf_templ.h` as `lv_conf.h` next to the `lvgl` folder and set at least `LV_HOR_RES_MAX`, `LV_VER_RES_MAX` and `LV_COLOR_DEPTH` macros.
 - Include `lvgl/lvgl.h` where you need to use LittlevGL related functions.
 - Call `lv_tick_inc(x)` every `x` milliseconds **in a Timer or Task** (`x` should be between 1 and 10). It is required for the internal timing of LittlevGL.
 - Call `lv_init()`
@@ -27,7 +27,7 @@ lv_disp_drv_init(&disp_drv);          /*Basic initialization*/
 disp_drv.flush_cb = my_disp_flush;    /*Set your driver function*/
 disp_drv.buffer = &disp_buf;          /*Assign the buffer to the display*/
 lv_disp_drv_register(&disp_drv);      /*Finally register the driver*/
-    
+
 void my_disp_flush(lv_disp_t * disp, const lv_area_t * area, lv_color_t * color_p)
 {
     int32_t x, y;
@@ -40,7 +40,7 @@ void my_disp_flush(lv_disp_t * disp, const lv_area_t * area, lv_color_t * color_
 
     lv_disp_flush_ready(disp);         /* Indicate you are ready with the flushing*/
 }
-    
+
 ```
 - Implement and register a function which can **read an input device**. E.g. for a touch pad:
 ```c
@@ -55,9 +55,9 @@ bool my_touchpad_read(lv_indev_t * indev, lv_indev_data_t * data)
     static lv_coord_t last_y = 0;
 
     /*Save the state and save the pressed coordinate*/
-    data->state = touchpad_is_pressed() ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL; 
+    data->state = touchpad_is_pressed() ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
     if(data->state == LV_INDEV_STATE_PR) touchpad_get_xy(&last_x, &last_y);
-   
+
     /*Set the coordinates (if released use the last pressed coordinates)*/
     data->point.x = last_x;
     data->point.y = last_y;
@@ -65,8 +65,8 @@ bool my_touchpad_read(lv_indev_t * indev, lv_indev_data_t * data)
     return false; /*Return `false` because we are not buffering and no more data to read*/
 }
 ```
-- Call `lv_task_handler()` periodically every few milliseconds in the main `while(1)` loop, in Timer interrupt or in an Operation system task. 
-It will redraw the screen if required, handle input devices etc. 
+- Call `lv_task_handler()` periodically every few milliseconds in the main `while(1)` loop, in Timer interrupt or in an Operation system task.
+It will redraw the screen if required, handle input devices etc.
 
 
 ## Learn the basics
@@ -77,10 +77,10 @@ The graphical elements like Buttons, Labels, Sliders, Charts etc are called obje
 
 Every object has a parent object. The child object moves with the parent and if you delete the parent the children will be deleted too. Children can be visible only on their parent.
 
-The *screen* are the "root" parents. To get the current screen call `lv_scr_act()`.
+The *screen* is the "root" parents. To get the current screen call `lv_scr_act()`.
 
-You can create a new object with `lv_<type>_create(parent, obj_to_copy)`. It will return an `lv_obj_t *` variable which should be used as a reference to the object to set its parameters. 
-The first parameter is the desired *parent*, the second parameters can be an object to copy (`NULL` is unused). 
+You can create a new object with `lv_<type>_create(parent, obj_to_copy)`. It will return an `lv_obj_t *` variable which should be used as a reference to the object to set its parameters.
+The first parameter is the desired *parent*, the second parameters can be an object to copy (`NULL` is unused).
 For example:
 ```c
 lv_obj_t * slider1 = lv_slider_create(lv_scr_act(), NULL);
@@ -101,7 +101,7 @@ lv_slider_set_value(slider1, 70, LV_ANIM_ON);
 To see the full API visit the documentation of the object types or the related header file (e.g. `lvgl/src/lv_objx/lv_slider.h`).
 
 ### Styles
-Styles can be assigned to the objects to changed their appearance. A style describes the appearance of rectangle-like objects (like a button or slider), texts, images and lines at once. 
+Styles can be assigned to the objects to changed their appearance. A style describes the appearance of rectangle-like objects (like a button or slider), texts, images and lines at once.
 
 You can create a new style like this:
 ```c
@@ -127,7 +127,7 @@ If an object's style is `NULL` then it will inherit its parent's style. For exam
 Learn more in [Style overview](/overview/style) section.
 
 ### Events
-Events are used to inform the user if something has happened with an object. You can assign a callback to an object which will be called if the object is clicked, released, dragged, being deleted etc. It should look like this: 
+Events are used to inform the user if something has happened with an object. You can assign a callback to an object which will be called if the object is clicked, released, dragged, being deleted etc. It should look like this:
 
 ```c
 lv_obj_set_event_cb(btn, btn_event_cb);                 /*Assign a callback to the button*/
@@ -142,10 +142,10 @@ void btn_event_cb(lv_obj_t * btn, lv_event_t event)
 }
 ```
 
-Learn more about the events in the [Event overview](/overview/event) section. 
+Learn more about the events in the [Event overview](/overview/event) section.
 
 
-## Examples 
+## Examples
 
 ### Button with label
 ```c
@@ -297,7 +297,7 @@ lv.scr_load(scr)
 
 ## Contributing
 To ask questions please use the [Forum](https://forum.littlevgl.com).
-For development-related things (bug reports, feature suggestions) use [GitHub's Issue tracker](https://github.com/littlevgl/lvgl/issues). 
+For development-related things (bug reports, feature suggestions) use [GitHub's Issue tracker](https://github.com/littlevgl/lvgl/issues).
 
 If you are interested in contributing to LittlevGL you can
 - **Help others** in the [Forum](https://forum.littlevgl.com).
