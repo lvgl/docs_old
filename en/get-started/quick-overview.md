@@ -77,7 +77,7 @@ The graphical elements like Buttons, Labels, Sliders, Charts etc are called obje
 
 Every object has a parent object. The child object moves with the parent and if you delete the parent the children will be deleted too. Children can be visible only on their parent.
 
-The *screen* is the "root" parents. To get the current screen call `lv_scr_act()`.
+The *screen* is the "root" parent. To get the current screen call `lv_scr_act()`.
 
 You can create a new object with `lv_<type>_create(parent, obj_to_copy)`. It will return an `lv_obj_t *` variable which should be used as a reference to the object to set its parameters.
 The first parameter is the desired *parent*, the second parameters can be an object to copy (`NULL` is unused).
