@@ -296,10 +296,9 @@ lv.scr_load(scr)
 
 
 ## Contributing
-To ask questions please use the [Forum](https://forum.littlevgl.com).
-For development-related things (bug reports, feature suggestions) use [GitHub's Issue tracker](https://github.com/littlevgl/lvgl/issues).
+LittlevGL uses the [Forum](https://forum.littlevgl.com) to ask and answer questions and [GitHub's Issue tracker](https://github.com/littlevgl/lvgl/issues) for development-related discussion (such as bug reports, feature suggestions etc.).
 
-If you are interested in contributing to LittlevGL you can
+There are many opportunities to contribute to LittlevGL such as:
 - **Help others** in the [Forum](https://forum.littlevgl.com).
 - **Inspire people** by speaking about your project in [My project](https://forum.littlevgl.com/c/my-projects) category in the Forum or add it to the [References](https://blog.littlevgl.com/2018-12-26/references) post
 - **Improve and/or translate the documentation.** Go to the [Documentation](https://github.com/littlevgl/docs) repository to learn more
@@ -307,7 +306,7 @@ If you are interested in contributing to LittlevGL you can
 - **Report and/or fix bugs** in [GitHub's issue tracker](https://github.com/littlevgl/lvgl/issues)
 - **Help in the developement**. Check the [Open issues](https://github.com/littlevgl/lvgl/issues) especially the ones with [Help wanted](https://github.com/littlevgl/lvgl/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) label and tell your ideas about a topic or implement a feature.
 
-It should be useful to read the
+If you are interested in contributing to LittlevGL, then please read the guides below to get started.
 
 ```eval_rst
 - `Contributing guide <https://blog.littlevgl.com/2018-12-06/contributing>`_
