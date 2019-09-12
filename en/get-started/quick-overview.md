@@ -298,7 +298,7 @@ lv.scr_load(scr)
 ## Contributing
 LittlevGL uses the [Forum](https://forum.littlevgl.com) to ask and answer questions and [GitHub's Issue tracker](https://github.com/littlevgl/lvgl/issues) for development-related discussion (such as bug reports, feature suggestions etc.).
 
-There are a bunch of contribution opportunities in the LittlevGL such as:
+There are many opportunities to contribute to LittlevGL such as:
 - **Help others** in the [Forum](https://forum.littlevgl.com).
 - **Inspire people** by speaking about your project in [My project](https://forum.littlevgl.com/c/my-projects) category in the Forum or add it to the [References](https://blog.littlevgl.com/2018-12-26/references) post
 - **Improve and/or translate the documentation.** Go to the [Documentation](https://github.com/littlevgl/docs) repository to learn more
