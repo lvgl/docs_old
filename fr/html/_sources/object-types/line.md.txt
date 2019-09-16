@@ -1,38 +1,38 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/line.md
 ```
-# Line (lv_line)
+# Ligne (lv_line)
 
-## Overview
+## Vue d'ensemble
 
-The Line object is capable of drawing straight lines between a set of points.
+L'objet ligne sert à tracer des lignes droites entre un ensemble de points.
 
-### Set points 
-The points has to be stored in an `lv_point_t` array and passed to the object by the `lv_line_set_points(lines, point_array, point_cnt)` function. 
+### Ensemble de points 
+Les points doivent être enregistrés dans un tableau `lv_point_t` et transmis à l'objet par la fonction `lv_line_set_points(line, point_array, point_cnt)`.
 
-### Auto-size
-It is possible to automatically set the size of the line object according to its points. 
-You can enable it with the `lv_line_set_auto_size(line, true)` function. 
-If enabled then when the points are set the object's width and height will be changed according to the maximal x and y coordinates among the points. The *auto size* is enabled by default.
+### Dimensionnement automatique
+Il est possible de définir automatiquement les dimensions de l'objet ligne en fonction de ses points.
+Vous pouvez l'activer avec la fonction `lv_line_set_auto_size(line, true)`.
+Si activé, alors lorsque les points sont définis, la largeur et la hauteur de l'objet seront modifiées en fonction des coordonnées x et y maximales des points. Le *dimensionnement automatique* est activé par défaut.
 
-### Invert y
-By deafult, the *y == 0* point is in the top of the object but you can invert the y coordinates with `lv_line_set_y_invert(line, true)`. The *y invert* is disabled by default.
+### Y inversé
+Par défaut, le point *y == 0* est en haut de l'objet, mais vous pouvez inverser les coordonnées y avec `lv_line_set_y_invert (line, true)`. Le *y inversé* est désactivé par défaut.
 
 ## Styles
 
-The Line uses one style which can be set by `lv_line_set_style(led, LV_LINE_STYLE_MAIN, &style)` and it uses all `style.line` properties.
+La ligne utilise un style qui peut être défini par `lv_line_set_style(line, LV_LINE_STYLE_MAIN, &style)` et utilise toutes les propriétés `style.line`.
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## Evénements
+Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
 
-Learn more about [Events](/overview/event).
+Apprenez-en plus sur les [événements](/overview/event).
 
-## Keys
-No *Keys* are processed by the object type.
+## Touches
+Aucune *touche* n'est traitée par ce type d'objet.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
-## Example
+## Exemple
 
 ```eval_rst
 

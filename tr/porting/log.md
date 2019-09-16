@@ -20,7 +20,7 @@ If your system supports `printf` you just need to enable `LV_LOG_PRINTF` in *lv_
 
 
 ## Custom log function
-If you can't use `printf` or want to use a custom function to log you can register a "logger" callback with `lv_log_register_print()`. 
+If you can't use `printf` or want to use a custom function to log you can register a "logger" callback with `lv_log_register_print_cb()`. 
 
 For example:
 
@@ -49,7 +49,7 @@ void my_log_cb(lv_log_level_t level, const char * file, int line, const char * d
 ...
 
 
-lv_log_register_print(my_log_cb);
+lv_log_register_print_cb(my_log_cb);
 
 ```
 

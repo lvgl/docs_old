@@ -1,44 +1,44 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/slider.md
 ```
-# Slider (lv_slider)
+# Curseur (lv_slider)
 
-## Overview
+## Vue d'ensemble
 
-The Slider object looks like a [Bar](/object-types/bar) supplemented with a knob. The knob can be dragged to set a value. The Slider also can be vertical or horizontal.
+L'objet curseur ressemble à une [barre](/object-types/bar) complété par un bouton. Le bouton peut être déplacé pour définir une valeur. Le curseur peut également être vertical ou horizontal.
 
-## Value and range
-To set an initial value use `lv_slider_set_value(slider, new_value, LV_ANIM_ON/OFF)`. 
-`lv_slider_set_anim_time(slider, anim_time)` sets the animation time in milliseconds.
+## Valeur et intervalle
+Pour définir une valeur initiale, utilisez `lv_slider_set_value(slider, new_value, LV_ANIM_ON/OFF)`. 
+`lv_slider_set_anim_time(slider, anim_time)` définit la durée d'animation en millisecondes.
 
-To specify the **range** (min, max values) the `lv_slider_set_range(slider, min , max)` can be used.
+Pour spécifier l'**intervalle** (valeurs minimum et maximum) la fonction `lv_slider_set_range(slider, min , max)` est utilisée.
 
-### Knob placement
-The knob can be placed in two ways:
-- inside the background
-- on the edges on min/max values
+### Placement du bouton
+Le bouton peut être placé de deux manières :
+- sur l'arrière-plan
+- sur les bords aux valeurs minimum/maximum
 
-Use the `lv_slider_set_knob_in(slider, true/false)` to choose between the modes. (*knob_in = false* is the default)
+Utilisez `lv_slider_set_knob_in(slider, true/false)`choisir entre les modes (*knob_in = false* est la valeur par défaut).
 
 
 ## Styles
-You can modify the slider's styles with `lv_slider_set_style(slider, LV_SLIDER_STYLE_..., &style)`.
+Vous pouvez modifier les styles du curseur avec `lv_slider_set_style(slider, LV_SLIDER_STYLE_..., &style)`.
 
-- **LV_SLIDER_STYLE_BG** Style of the background. All `style.body` properties are used. The `padding` values make the knob larger than the background. (negative value makes is larger)
-- **LV_SLIDER_STYLE_INDIC** Style of the indicator. All `style.body` properties are used. The `padding` values make the indicator smaller than the background. 
-- **LV_SLIDER_STYLE_KNOB** Style of the knob.  All `style.body` properties are used except `padding`. 
+- **LV_SLIDER_STYLE_BG** style de l'arrière plan. Toutes les propriétés `style.body` sont utilisées. Les valeurs `padding` rendent le bouton plus grand que l'arrière-plan (les valeurs négatives le rendent plus grand)
+- **LV_SLIDER_STYLE_INDIC** style de l'indicateur. Toutes les propriétés `style.body` sont utilisées. Les valeurs `padding` rendent l'indicateur plus petit que l'arrière-plan.
+- **LV_SLIDER_STYLE_KNOB** style du bouton. Toutes les propriétés `style.body` sont utilisées sauf` padding`.
 
-## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
-- **LV_EVENT_VALUE_CHANGED** Sent while the slider is being dragged or changed with keys.
+## Evénements
+Outre les [événements génériques](/overview/event.html #evenements-generiques), les [événements spéciaux](/overview/event.html#evenements-speciaux) suivants sont envoyés par le curseur :
+- **LV_EVENT_VALUE_CHANGED** envoyé quand le curseur est déplacé ou modifié avec les touches.
 
-## Keys
-- **LV_KEY_UP**, **LV_KEY_RIGHT** Increment the slider's value by 1
-- **LV_KEY_DOWN**, **LV_KEY_LEFT** Decrement the slider's value by 1
+## Touches
+- **LV_KEY_UP**, **LV_KEY_RIGHT** incrémente la valeur du curseur de 1.
+- **LV_KEY_DOWN**, **LV_KEY_LEFT** décrémente la valeur du curseur de 1.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
-## Example
+## Exemple
 
 ```eval_rst
 

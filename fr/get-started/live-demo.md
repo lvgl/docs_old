@@ -3,6 +3,6 @@
 ```
 # Démonstrations en ligne
 
-You can see how LittlevGL looks like without installing and downloading anything either on target platform or on the host machine. There are some ready made user interfaces which you can easily try in your browser.
+Vous pouvez découvrir à quoi ressemble LittlevGL sans installer ou télécharger quoi que ce soit, sur la plateforme cible ou sur l'ordinateur de développement. Il existe des interfaces utilisateurs prêtes à être essayées facilement dans votre navigateur.
 
 Allez à la page [Démonstrations en ligne](https://littlevgl.com/live-demo) et choisissez la démonstration qui vous intéresse.

@@ -3,7 +3,7 @@
 ```
 # Spinbox (lv_spinbox)
 
-## Overview
+## Vue d'ensemble
 The Spinbox contains a number as text which can be increased or decreased by *Keys* or API functions. 
 The Spinbox is a modified [Text area](/object-types/ta).
 

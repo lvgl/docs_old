@@ -64,7 +64,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Sep 03, 2019}
+\date{Sep 16, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -598,8 +598,8 @@ You should read it first to get a general impression and read the detailed {\hyp
 
 \paragraph{Add LittlevGL into your project}
 \label{\detokenize{get-started/quick-overview:add-littlevgl-into-your-project}}
-The steps below show how to setup LittlevGL on an embedded system with a display and a touchpad.
-You can use the {\hyperref[\detokenize{get-started/pc-simulator::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Simulators}}}} to get ready to use projects which can be run on your PC.
+The following steps show how to setup LittlevGL on an embedded system with a display and a touchpad.
+You can use the {\hyperref[\detokenize{get-started/pc-simulator::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Simulators}}}} to get ‘ready to use’ projects which can be run on your PC.
 \begin{itemize}
 \item {} 
 \sphinxhref{https://littlevgl.com/download}{Download} or \sphinxhref{https://github.com/littlevgl/lvgl}{Clone} the library
@@ -608,7 +608,7 @@ You can use the {\hyperref[\detokenize{get-started/pc-simulator::doc}]{\sphinxcr
 Copy the \sphinxcode{\sphinxupquote{lvgl}} folder into your project
 
 \item {} 
-Copy \sphinxcode{\sphinxupquote{lvgl/lv\_conf\_templ.h}} as \sphinxcode{\sphinxupquote{lv\_conf.h}} next to the \sphinxcode{\sphinxupquote{lvgl}} folder and set at least \sphinxcode{\sphinxupquote{LV\_HOR\_RES\_MAX}}, \sphinxcode{\sphinxupquote{LV\_VER\_RES\_MAX}} and \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}}.
+Copy \sphinxcode{\sphinxupquote{lvgl/lv\_conf\_templ.h}} as \sphinxcode{\sphinxupquote{lv\_conf.h}} next to the \sphinxcode{\sphinxupquote{lvgl}} folder and set at least \sphinxcode{\sphinxupquote{LV\_HOR\_RES\_MAX}}, \sphinxcode{\sphinxupquote{LV\_VER\_RES\_MAX}} and \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}} macros.
 
 \item {} 
 Include \sphinxcode{\sphinxupquote{lvgl/lvgl.h}} where you need to use LittlevGL related functions.
@@ -641,7 +641,7 @@ Implement and register a function which can \sphinxstylestrong{copy a pixel arra
 \PYG{n}{disp\PYGZus{}drv}\PYG{p}{.}\PYG{n}{flush\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}disp\PYGZus{}flush}\PYG{p}{;}    \PYG{c+cm}{/*Set your driver function*/}
 \PYG{n}{disp\PYGZus{}drv}\PYG{p}{.}\PYG{n}{buffer} \PYG{o}{=} \PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}buf}\PYG{p}{;}          \PYG{c+cm}{/*Assign the buffer to the display*/}
 \PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Finally register the driver*/}
-    
+
 \PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}disp\PYGZus{}flush}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{area}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{color\PYGZus{}p}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
     \PYG{k+kt}{int32\PYGZus{}t} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{;}
@@ -654,7 +654,6 @@ Implement and register a function which can \sphinxstylestrong{copy a pixel arra
 
     \PYG{n}{lv\PYGZus{}disp\PYGZus{}flush\PYGZus{}ready}\PYG{p}{(}\PYG{n}{disp}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/* Indicate you are ready with the flushing*/}
 \PYG{p}{\PYGZcb{}}
-    
 \end{sphinxVerbatim}
 \begin{itemize}
 \item {} 
@@ -674,9 +673,9 @@ Implement and register a function which can \sphinxstylestrong{read an input dev
     \PYG{k}{static} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{last\PYGZus{}y} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
 
     \PYG{c+cm}{/*Save the state and save the pressed coordinate*/}
-    \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=} \PYG{n}{touchpad\PYGZus{}is\PYGZus{}pressed}\PYG{p}{(}\PYG{p}{)} \PYG{o}{?} \PYG{n+nl}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR} \PYG{p}{:} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}REL}\PYG{p}{;} 
+    \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=} \PYG{n}{touchpad\PYGZus{}is\PYGZus{}pressed}\PYG{p}{(}\PYG{p}{)} \PYG{o}{?} \PYG{n+nl}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR} \PYG{p}{:} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}REL}\PYG{p}{;}
     \PYG{k}{if}\PYG{p}{(}\PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR}\PYG{p}{)} \PYG{n}{touchpad\PYGZus{}get\PYGZus{}xy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{last\PYGZus{}x}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{last\PYGZus{}y}\PYG{p}{)}\PYG{p}{;}
-   
+
     \PYG{c+cm}{/*Set the coordinates (if released use the last pressed coordinates)*/}
     \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{x} \PYG{o}{=} \PYG{n}{last\PYGZus{}x}\PYG{p}{;}
     \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{y} \PYG{o}{=} \PYG{n}{last\PYGZus{}y}\PYG{p}{;}
@@ -701,7 +700,7 @@ The graphical elements like Buttons, Labels, Sliders, Charts etc are called obje
 
 Every object has a parent object. The child object moves with the parent and if you delete the parent the children will be deleted too. Children can be visible only on their parent.
 
-The \sphinxstyleemphasis{screen} are the “root” parents. To get the current screen call \sphinxcode{\sphinxupquote{lv\_scr\_act()}}.
+The \sphinxstyleemphasis{screen} is the “root” parent. To get the current screen call \sphinxcode{\sphinxupquote{lv\_scr\_act()}}.
 
 You can create a new object with \sphinxcode{\sphinxupquote{lv\_\textless{}type\textgreater{}\_create(parent, obj\_to\_copy)}}. It will return an \sphinxcode{\sphinxupquote{lv\_obj\_t *}} variable which should be used as a reference to the object to set its parameters.
 The first parameter is the desired \sphinxstyleemphasis{parent}, the second parameters can be an object to copy (\sphinxcode{\sphinxupquote{NULL}} is unused).
@@ -943,10 +942,9 @@ Learn more about {\hyperref[\detokenize{get-started/micropython::doc}]{\sphinxcr
 
 \paragraph{Contributing}
 \label{\detokenize{get-started/quick-overview:contributing}}
-To ask questions please use the \sphinxhref{https://forum.littlevgl.com}{Forum}.
-For development-related things (bug reports, feature suggestions) use \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub’s Issue tracker}.
+LittlevGL uses the \sphinxhref{https://forum.littlevgl.com}{Forum} to ask and answer questions and \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub’s Issue tracker} for development-related discussion (such as bug reports, feature suggestions etc.).
 
-If you are interested in contributing to LittlevGL you can
+There are many opportunities to contribute to LittlevGL such as:
 \begin{itemize}
 \item {} 
 \sphinxstylestrong{Help others} in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
@@ -968,7 +966,7 @@ If you are interested in contributing to LittlevGL you can
 
 \end{itemize}
 
-It should be useful to read the
+If you are interested in contributing to LittlevGL, then please read the guides below to get started.
 \begin{itemize}
 \item {} 
 \sphinxhref{https://blog.littlevgl.com/2018-12-06/contributing}{Contributing guide}
@@ -984,25 +982,25 @@ It should be useful to read the
 
 \paragraph{What is Micropython?}
 \label{\detokenize{get-started/micropython:what-is-micropython}}
-\sphinxhref{http://micropython.org/}{Micropython} is Python for microcontrollers.With Micropython you can write Python3 code and run it on bare metal architectures with limited resources.
+\sphinxhref{http://micropython.org/}{Micropython} is Python for microcontrollers.Using Micropython, you can write Python3 code and run it even on a bare metal architecture with limited resources.
 
 
-\subparagraph{Micropython highlights}
-\label{\detokenize{get-started/micropython:micropython-highlights}}\begin{itemize}
+\subparagraph{Highlights of Micropython}
+\label{\detokenize{get-started/micropython:highlights-of-micropython}}\begin{itemize}
 \item {} 
-\sphinxstylestrong{Compact} - fit and run within just 256k of code space and 16k of RAM. No OS is needed, although you can also run it with OS, if you want.
-
-\item {} 
-\sphinxstylestrong{Compatible} - strives to be as compatible as possible with normal Python (known as CPython)
+\sphinxstylestrong{Compact} - Fits and runs within just 256k of code space and 16k of RAM. No OS is needed, although you can also run it with an OS, if you want.
 
 \item {} 
-\sphinxstylestrong{Verstile} - Supports many architectures (x86, x86-64, ARM, ARM Thumb, Xtensa)
+\sphinxstylestrong{Compatible} - Strives to be as compatible as possible with normal Python (known as CPython).
+
+\item {} 
+\sphinxstylestrong{Versatile} - Supports many architectures (x86, x86-64, ARM, ARM Thumb, Xtensa).
 
 \item {} 
 \sphinxstylestrong{Interactive} - No need for the compile-flash-boot cycle. With the REPL (interactive prompt) you can type commands and execute them immediately, run scripts etc.
 
 \item {} 
-\sphinxstylestrong{Popular} - Many platforms are supported. User base is growing bigger.Notable forks: \sphinxhref{https://github.com/micropython/micropython}{MicroPython}, \sphinxhref{https://github.com/adafruit/circuitpython}{CircuitPython}, \sphinxhref{https://github.com/loboris/MicroPython\_ESP32\_psRAM\_LoBo}{MicroPython\_ESP32\_psRAM\_LoBo}
+\sphinxstylestrong{Popular} - Many platforms are supported. The user base is growing bigger. Notable forks: \sphinxhref{https://github.com/micropython/micropython}{MicroPython}, \sphinxhref{https://github.com/adafruit/circuitpython}{CircuitPython}, \sphinxhref{https://github.com/loboris/MicroPython\_ESP32\_psRAM\_LoBo}{MicroPython\_ESP32\_psRAM\_LoBo}
 
 \item {} 
 \sphinxstylestrong{Embedded Oriented} - Comes with modules specifically for embedded systems, such as the \sphinxhref{https://docs.micropython.org/en/latest/library/machine.html\#classes}{machine module} for accessing low-level hardware (I/O pins, ADC, UART, SPI, I2C, RTC, Timers etc.)
@@ -1016,7 +1014,7 @@ It should be useful to read the
 
 \paragraph{Why Micropython + LittlevGL?}
 \label{\detokenize{get-started/micropython:why-micropython-littlevgl}}
-Micropython today \sphinxhref{https://forum.micropython.org/viewtopic.php?f=18\&t=5543}{does not have a good high-level GUI library}.LittlevGL is a good high-level GUI library, it’s implemented in C and its API is in C.LittlevGL is an \sphinxhref{https://blog.littlevgl.com/2018-12-13/extend-lvgl-objects}{Object Oriented Component Based} library, which seems a natural candidate to map into a higher level language, such as Python.
+Currently, Micropython \sphinxhref{https://forum.micropython.org/viewtopic.php?f=18\&t=5543}{does not have a good high-level GUI library} by default. LittlevGL is an \sphinxhref{https://blog.littlevgl.com/2018-12-13/extend-lvgl-objects}{Object Oriented Component Based} high-level GUI library, which seems to be a natural candidate to map into a higher level language, such as Python. LittlevGL is implemented in C and its APIs are in C.
 
 
 \subparagraph{Here are some advantages of using LittlevGL in Micropython:}
@@ -1025,7 +1023,7 @@ Micropython today \sphinxhref{https://forum.micropython.org/viewtopic.php?f=18\&
 Develop GUI in Python, a very popular high level language. Use paradigms such as Object Oriented Programming.
 
 \item {} 
-GUI development requires multiple iterations to get things right.With C, each iteration consists of \sphinxstylestrong{\sphinxcode{\sphinxupquote{Change code}} \textgreater{} \sphinxcode{\sphinxupquote{Build}} \textgreater{} \sphinxcode{\sphinxupquote{Flash}} \textgreater{} \sphinxcode{\sphinxupquote{Run}}}.In Micropython it’s just \sphinxstylestrong{\sphinxcode{\sphinxupquote{Change code}} \textgreater{} \sphinxcode{\sphinxupquote{Run}}}. You can even run commands interactively using the \sphinxhref{https://en.wikipedia.org/wiki/Read\%E2\%80\%93eval\%E2\%80\%93print\_loop}{REPL} (the interactive prompt)
+Usually, GUI development requires multiple iterations to get things right. With C, each iteration consists of \sphinxstylestrong{\sphinxcode{\sphinxupquote{Change code}} \textgreater{} \sphinxcode{\sphinxupquote{Build}} \textgreater{} \sphinxcode{\sphinxupquote{Flash}} \textgreater{} \sphinxcode{\sphinxupquote{Run}}}.In Micropython it’s just \sphinxstylestrong{\sphinxcode{\sphinxupquote{Change code}} \textgreater{} \sphinxcode{\sphinxupquote{Run}}} ! You can even run commands interactively using the \sphinxhref{https://en.wikipedia.org/wiki/Read\%E2\%80\%93eval\%E2\%80\%93print\_loop}{REPL} (the interactive prompt)
 
 \end{itemize}
 
@@ -1044,6 +1042,9 @@ Model the GUI in a more abstract way by defining reusable composite objects, tak
 \item {} 
 Make LittlevGL accessible to a larger audience. No need to know C in order to create a nice GUI on an embedded system.This goes well with \sphinxhref{https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython}{CircuitPython vision}. CircuitPython was designed with education in mind, to make it easier for new or unexperienced users to get started with embedded development.
 
+\item {} 
+Creating tools to work with LittlevGL at a higher level (e.g. drag-and-drop designer).
+
 \end{itemize}
 
 
@@ -1051,8 +1052,8 @@ Make LittlevGL accessible to a larger audience. No need to know C in order to cr
 
 
 
-\paragraph{So how does it look like?}
-\label{\detokenize{get-started/micropython:so-how-does-it-look-like}}\begin{quote}
+\paragraph{So what does it look like?}
+\label{\detokenize{get-started/micropython:so-what-does-it-look-like}}\begin{quote}
 
 TL;DR:
 It’s very much like the C API, but Object Oriented for LittlevGL components.
@@ -1082,19 +1083,19 @@ Let’s dive right into an example!
 \label{\detokenize{get-started/micropython:online-simulator}}
 If you want to experiment with LittlevGL + Micropython without downloading anything - you can use our online simulator!It’s a fully functional LittlevGL + Micropython that runs entirely in the browser and allows you to edit a python script and run it.
 
-\sphinxhref{https://cdn.statically.io/gh/littlevgl/lv\_micropython/ef943a1ab40b32a8a77059d6e833a440446c51e8/ports/javascript/lvgl\_editor.html?env=dev\&script=https://raw.githubusercontent.com/littlevgl/lv\_binding\_micropython/dev-6.0/examples/chart\_anim\_example.py}{Link to the online simulator}
+\sphinxhref{https://cdn.statically.io/gh/littlevgl/lv\_micropython/ef943a1ab40b32a8a77059d6e833a440446c51e8/ports/javascript/lvgl\_editor.html?env=dev\&script=https://raw.githubusercontent.com/littlevgl/lv\_binding\_micropython/dev-6.0/examples/chart\_anim\_example.py}{Click here to experiment on the online simulator}
 
 
 \subparagraph{PC Simulator}
 \label{\detokenize{get-started/micropython:pc-simulator}}
-Micropython is ported to many platform, one of the is the “unix port”, which allows you to build and run Micropython (+LittlevGL) on a Linux machine. (On a windows machine you might need Virtual Box or WSL or MinGW or Cygwin etc.)
+Micropython is ported to many platforms. One notable port is “unix”, which allows you to build and run Micropython (+LittlevGL) on a Linux machine. (On a Windows machine you might need Virtual Box or WSL or MinGW or Cygwin etc.)
 
-\sphinxhref{https://github.com/littlevgl/lv\_micropython}{More information about building and running the unix port}
+\sphinxhref{https://github.com/littlevgl/lv\_micropython}{Click here to know more information about building and running the unix port}
 
 
-\subparagraph{The real thing}
-\label{\detokenize{get-started/micropython:the-real-thing}}
-At the end, the goal is to run it all on an embedded platform.Both Micropython and LittlevGL can be used on many embedded architectures, such as stm32, ESP32 etc.You would also need display and input drivers. We have some example drivers (ESP32+ILI9341, as well as some other examples), but most chances are you would want to create your own input/display drivers for your specific purposes.Drivers can be implemented either in C as Micropython module, or in pure Micropython!
+\subparagraph{Embedded platform}
+\label{\detokenize{get-started/micropython:embedded-platform}}
+At the end, the goal is to run it all on an embedded platform.Both Micropython and LittlevGL can be used on many embedded architectures, such as stm32, ESP32 etc.You would also need display and input drivers. We have some sample drivers (ESP32+ILI9341, as well as some other examples), but most chances are you would want to create your own input/display drivers for your specific purposes.Drivers can be implemented either in C as Micropython module, or in pure Micropython!
 
 
 \paragraph{Where can I find more information?}
@@ -1137,7 +1138,7 @@ Besides your specific drivers, it contains functions to drive your display, opti
 \bigskip\hrule\bigskip
 
 
-There are \sphinxstylestrong{two typical hardware set-ups} depending on the MCU has an LCD/TFT driver periphery or not. In both cases, a frame buffer will be required to store the current image of the screen.
+Depending on the MCU, there are two typical hardware set-ups. One with built-in LCD/TFT driver periphery and another without it. In both cases, a frame buffer will be required to store the current image of the screen.
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
@@ -1330,7 +1331,7 @@ It can be used if the display controller can refresh only areas with specific he
 \item {} 
 \sphinxstylestrong{set\_px\_cb} a custom function to write the \sphinxstyleemphasis{display buffer}.
 It can be used to store the pixels in a more compact way if the display has a special color format. (e.g. 1 bit monochrome, 2  bit gray-scale etc.)
-This way the buffers used in \sphinxcode{\sphinxupquote{lv\_disp\_buf\_t}} can be smaller to hold only the required number of bits for the given area size.
+This way the buffers used in \sphinxcode{\sphinxupquote{lv\_disp\_buf\_t}} can be smaller to hold only the required number of bits for the given area size. \sphinxcode{\sphinxupquote{set\_px\_cb}} is not working with \sphinxcode{\sphinxupquote{Two screen-sized buffers}} display buffer configuration.
 
 \item {} 
 \sphinxstylestrong{monitor\_cb} a callback function tell how many pixels were refreshed in how much time.
@@ -3300,7 +3301,7 @@ If your system supports \sphinxcode{\sphinxupquote{printf}} you just need to ena
 
 \paragraph{Custom log function}
 \label{\detokenize{porting/log:custom-log-function}}
-If you can’t use \sphinxcode{\sphinxupquote{printf}} or want to use a custom function to log you can register a “logger” callback with \sphinxcode{\sphinxupquote{lv\_log\_register\_print()}}.
+If you can’t use \sphinxcode{\sphinxupquote{printf}} or want to use a custom function to log you can register a “logger” callback with \sphinxcode{\sphinxupquote{lv\_log\_register\_print\_cb()}}.
 
 For example:
 
@@ -3329,7 +3330,7 @@ For example:
 \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
 
 
-\PYG{n}{lv\PYGZus{}log\PYGZus{}register\PYGZus{}print}\PYG{p}{(}\PYG{n}{my\PYGZus{}log\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{lv\PYGZus{}log\PYGZus{}register\PYGZus{}print\PYGZus{}cb}\PYG{p}{(}\PYG{n}{my\PYGZus{}log\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
 

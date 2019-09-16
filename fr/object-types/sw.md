@@ -21,25 +21,25 @@ La durée des animations quand le commutateur change d'état peut être ajusté 
 
 Vous pouvez définir les styles du commutateur avec `lv_sw_set_style(sw, LV_SW_STYLE_..., &style)`.
 
-- **LV_SW_STYLE_BG** Style of the background. All `style.body` properties are used. The `padding` values make the Switch smaller than the knob. (negative value makes is larger)
-- **LV_SW_STYLE_INDIC** Style of the indicator. All `style.body` properties are used. The `padding` values make the indicator smaller than the background. 
-- **LV_SW_STYLE_KNOB_OFF** Style of the knob when the switch is off.  The `style.body` properties are used except padding.
-- **LV_SW_STYLE_KNOB_ON** Style of the knob when the switch is on.  The `style.body` properties are used except padding.
+- **LV_SW_STYLE_BG** style de l'arrière plan. Toutes les propriétés `style.body` sont utilisées. Les valeurs `padding` rendent le commutateur plus petit que le bouton (une valeur négative le rend plus grand).
+- **LV_SW_STYLE_INDIC** style de l'indicateur. Toutes les propriétés `style.body` sont utilisées. Les valeurs `padding` rendent l'indicateur plus petit que l'arrière-plan.
+- **LV_SW_STYLE_KNOB_OFF** style du bouton lorsque le commutateur est désactivé. Les propriétés `style.body` sont utilisées sauf `padding`.
+- **LV_SW_STYLE_KNOB_ON** Style du bouton lorsque le commutateur est activé. Les propriétés `style.body` sont utilisées sauf `padding`.
 
 
 
 
-## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Switch:
-- **LV_EVENT_VALUE_CHANGED** Sent when the switch changes state.
+## Evénements
+Outre les [événements génériques](/overview/event.html #evenements-generiques), les [événements spéciaux](/overview/event.html#evenements-speciaux) suivants sont envoyés par les commutateurs :
+ - **LV_EVENT_VALUE_CHANGED** envoyé lorsque le commutateur change d'état.
 
-## Keys
-- **LV_KEY_UP**, **LV_KEY_RIGHT** Turn on the slider
-- **LV_KEY_DOWN**, **LV_KEY_LEFT** Turn off the slider
+## Touches
+- **LV_KEY_UP**, **LV_KEY_RIGHT** active le commutateur.
+- **LV_KEY_DOWN**, **LV_KEY_LEFT** désactive le commutateur.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
-## Example
+## Exemple
 
 ```eval_rst
 

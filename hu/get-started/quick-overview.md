@@ -1,16 +1,16 @@
 # Gyors áttekintés
 
-Ebben a fejezetben megtanulhatod a legfontosabb dolgokat a LittlevGL-ről.
+Here you can learn the most important things about LittlevGL.
 Ajánlott először ezt a fejezetet elolvasni, hogy egy átfogó képet kapj, majd a részletes [Portolás](/porting/index) és [Áttekintés](/overview/index) fejezetekkel folytatni.
 
 ## LittlevGL hozzáadása egy projekthez
 
-Az alábbi lépések mutatják, hogy hogyan kell beállítani a LittlevGL-t egy kijelzővel és egy touchpaddal rendelkező beágyazott rendszer esetében.
-A [Szimulátorok](/get-started/pc-simulator) is használhatók, hogy egy használatra kész projekttel tudd kipróbálni a LittlevGL-t a PC-den.
+The following steps show how to setup LittlevGL on an embedded system with a display and a touchpad.
+You can use the [Simulators](/get-started/pc-simulator) to get 'ready to use' projects which can be run on your PC.
 
 - [Töltsd le](https://littlevgl.com/download) vagy [Klónozd](https://github.com/littlevgl/lvgl) a könyvtárat!
 - Másold az `lvgl` mappát a projektedbe!
-- Másold az `lvgl/lv_conf_templ.h` fájlt  `lv_conf.h`-ként  az `lvgl` mappa mellé és állíts be legalább a  `LV_HOR_RES_MAX`, `LV_VER_RES_MAX` és `LV_COLOR_DEPTH` paramétereket! 
+- Copy `lvgl/lv_conf_templ.h` as `lv_conf.h` next to the `lvgl` folder and set at least `LV_HOR_RES_MAX`, `LV_VER_RES_MAX` and `LV_COLOR_DEPTH` macros.
 - Include-old `lvgl/lvgl.h`-t, ahol LittlevGL függvénykeet akarsz használni!
 - Hívd meg  `lv_tick_inc(x)`-t minden `x` milliszekundumban **egy Timer-ben vagy Task-ban** (`x` 1..10 között legyen)! Ez a LittlevGL belső időzítéseihez szükséges..
 - Hívd meg az `lv_init()`-et!
@@ -27,7 +27,7 @@ lv_disp_drv_init(&disp_drv);          /*Alap inicializálás*/
 disp_drv.flush_cb = my_disp_flush;    /*A driver függvény hozzárendelése*/
 disp_drv.buffer = &disp_buf;          /*A kijelző buffer hozzárendelése*/
 lv_disp_drv_register(&disp_drv);      /*Végül a driver regisztrálása*/
-    
+
 void my_disp_flush(lv_disp_t * disp, const lv_area_t * area, lv_color_t * color_p)
 {
     int32_t x, y;
@@ -40,7 +40,7 @@ void my_disp_flush(lv_disp_t * disp, const lv_area_t * area, lv_color_t * color_
 
     lv_disp_flush_ready(disp);         /*Jelezd, hogy kész vagy a a pixelek kiírásával*/
 }
-    
+
 ```
 - Implementálj és regsiztrálj egy függvényt, ami képes  egy **bementi eszközt olvasni**. Például egy touchpad esetében:
 ```c
@@ -55,9 +55,9 @@ bool my_touchpad_read(lv_indev_t * indev, lv_indev_data_t * data)
     static lv_coord_t last_y = 0;
 
     /*Az állapot és az utolsó megnyomott koordináta elmentése*/
-    data->state = touchpad_is_pressed() ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL; 
+    data->state = touchpad_is_pressed() ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
     if(data->state == LV_INDEV_STATE_PR) touchpad_get_xy(&last_x, &last_y);
-   
+
     /*Koordináták beállítása (ha felengedett, az utolsó lenyomott koordináta használata)*/
     data->point.x = last_x;
     data->point.y = last_y;
@@ -65,8 +65,8 @@ bool my_touchpad_read(lv_indev_t * indev, lv_indev_data_t * data)
     return false; /*Return `false` mivel nincs több kiolvasandó adat*/
 }
 ```
-- Hívd meg `lv_task_handler()`-t periodikusan néhány milliszekundumonként a main `while(1)`-ben, egy Timer megszakításban vagy egy Operációs rendszer task-ban. 
-Ez fogja újrarajzolni a képernyőt, ha szükséges, és kezelni a bemeneti eszközöket, stb.
+- Call `lv_task_handler()` periodically every few milliseconds in the main `while(1)` loop, in Timer interrupt or in an Operation system task.
+It will redraw the screen if required, handle input devices etc.
 
 
 ## Ismerkedj meg az alapokkal
@@ -77,10 +77,10 @@ A grafikus elemek, mint gombok (Button), feliratok (Label), Csúszkák (Slider),
 
 Minden objektumnak vagy egy szülő objektuma. A gyerek objektum együtt mozog a szülőjével, ha a szülő törlésre kerül, a gyerekek is törlődnek. A gyerekek cask a szülőjükön láthatók.
 
-A *képernyő (screen)* a legősibb szülő. Az `lv_scr_act()` függvény megadja a jelenleg látható képernyőt.
+The *screen* is the "root" parent. To get the current screen call `lv_scr_act()`.
 
-Új objektum a `lv_<típus>_create(parent, obj_to_copy)` függvénnyekkel hozható létre. Ez vissaztér egy `lv_obj_t *` változóval. Ezzel a változóval lehet később hivatkozni az objektumra paramétereinek módosítása vagy egyéb célokból. 
-Az első paraméter a kíván *szülő* objektum , a második egy objektum lehet, ami a függvény lemásol (`NULL` ha nem használt). 
+You can create a new object with `lv_<type>_create(parent, obj_to_copy)`. It will return an `lv_obj_t *` variable which should be used as a reference to the object to set its parameters.
+The first parameter is the desired *parent*, the second parameters can be an object to copy (`NULL` is unused).
 Például:
 ```c
 lv_obj_t * slider1 = lv_slider_create(lv_scr_act(), NULL);
@@ -101,7 +101,7 @@ lv_slider_set_value(slider1, 70, LV_ANIM_ON);
 A teljes API az egyes objektum típusok dokumentációjában vagy a header fájlukban olvasható. (pl. `lvgl/src/lv_objx/lv_slider.h`).
 
 ### Stílusok
-Az objektumokhoz megjelenése a hozzájuk rendelt stílusokkal módosítható. Egy stílus egyszerre írja le a téglalap (pl. gomb vagy csúszka), szöveg, kép és vonal jellegű objektumok megjelenését.. 
+Styles can be assigned to the objects to changed their appearance. A style describes the appearance of rectangle-like objects (like a button or slider), texts, images and lines at once.
 
 Egy új stílus az alábbiak szerint hozható létre:
 ```c
@@ -127,7 +127,7 @@ Ha egy objektum stílusa `NULL` akkor az a szülő stílusát örökli. Példáu
 Több információs [Stílus áttekintés](/overview/style) oldalon olvasható.
 
 ### Események
-Az *események* informálják a felhasználót, ha valami történt egy objektummal. Minden objektumhoz rendelhető egy callback függvény, ami meghívódik, ha az objektumra kattintanak, felengedik, mozgatják, törlik, stb. Például:
+Events are used to inform the user if something has happened with an object. You can assign a callback to an object which will be called if the object is clicked, released, dragged, being deleted etc. It should look like this:
 
 ```c
 lv_obj_set_event_cb(btn, btn_event_cb);                 /*Callback hozzárendelése egy gombhoz*/
@@ -142,10 +142,10 @@ void btn_event_cb(lv_obj_t * btn, lv_event_t event)
 }
 ```
 
-Több információ az eseményekről az [Események áttekintése](/overview/event) oldalon olvasható. 
+Learn more about the events in the [Event overview](/overview/event) section.
 
 
-## Példák 
+## Examples
 
 ### Gomb felirattal
 ```c
@@ -296,10 +296,9 @@ lv.scr_load(scr)
 
 
 ## Közreműködés
-Használd a [Fórum](https://forum.littlevgl.com)-ot, hogy kérdezz a közösség többi tagjától!
-Fejlesztéshez kapcsolódó témákban (hibajelentés, funkció kérés, stb) használd a [GitHub Issue](https://github.com/littlevgl/lvgl/issues)-kat! 
+LittlevGL uses the [Forum](https://forum.littlevgl.com) to ask and answer questions and [GitHub's Issue tracker](https://github.com/littlevgl/lvgl/issues) for development-related discussion (such as bug reports, feature suggestions etc.).
 
-Ha szeretnéd, számos módon segítheted a LittlevGL fejlesztését:
+There are many opportunities to contribute to LittlevGL such as:
 - **Segíts másoknak** a [Fórum](https://forum.littlevgl.com)-ban.
 - **Inspirálj másokat** azzal, hogy hogy megosztod milyen projektben használtad a LittlevGL-t. Ezt a Fórun [My project](https://forum.littlevgl.com/c/my-projects) kategóriájában vagy a [References](https://blog.littlevgl.com/2018-12-26/references) blog posztban teheted meg.
 - **Fejleszd és/vagy fordítsd le a dokumentációt.** A [Documentation](https://github.com/littlevgl/docs) repository-ban többet megtudhatsz erről.
@@ -307,7 +306,7 @@ Ha szeretnéd, számos módon segítheted a LittlevGL fejlesztését:
 - **Jelents és/vagy javíts hibákat** a [GitHub's issue tracker](https://github.com/littlevgl/lvgl/issues)-ében.
 - **Segítsd a fejlesztést**. Nézd meg a  [Nyitott issue](https://github.com/littlevgl/lvgl/issues)-kat , különösön a [Help wanted](https://github.com/littlevgl/lvgl/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) címkével ellátottakat, és mond el az véleményedet a témáról vagy implementáld az adott funkciót.
 
-Hasznos lehet elolvasni a
+If you are interested in contributing to LittlevGL, then please read the guides below to get started.
 
 ```eval_rst
 - `Contributing guide <https://blog.littlevgl.com/2018-12-06/contributing>`_

@@ -63,7 +63,7 @@ Some other optional callbacks to make easier and more optimal to work with monoc
 It can be used if the display controller can refresh only areas with specific height or width (usually 8 px height with monochrome displays).
 - **set_px_cb** a custom function to write the *display buffer*. 
 It can be used to store the pixels in a more compact way if the display has a special color format. (e.g. 1 bit monochrome, 2  bit gray-scale etc.) 
-This way the buffers used in `lv_disp_buf_t` can be smaller to hold only the required number of bits for the given area size.
+This way the buffers used in `lv_disp_buf_t` can be smaller to hold only the required number of bits for the given area size. `set_px_cb` is not working with `Two screen-sized buffers` display buffer configuration.
 - **monitor_cb** a callback function tell how many pixels were refreshed in how much time.
 
 To set the fields of *lv_disp_drv_t* variable it needs to be initialized with `lv_disp_drv_init(&disp_drv)`.

@@ -20,7 +20,7 @@ Si votre système prend en charge `printf`, il vous suffit d'activer `LV_LOG_PRI
 
 
 ## Fonction de journalisation personnalisée
-Si vous ne pouvez pas utiliser `printf` ou si vous souhaitez utiliser une fonction personnalisée pour journaliser, vous pouvez enregistrer une fonction de  rappel "journaliseur" avec `lv_log_register_print() `.
+If you can't use `printf` or want to use a custom function to log you can register a "logger" callback with `lv_log_register_print_cb()`. 
 
 Par exemple :
 
@@ -49,7 +49,7 @@ void my_log_cb(lv_log_level_t level, const char * file, int line, const char * d
 ...
 
 
-lv_log_register_print(my_log_cb);
+lv_log_register_print_cb(my_log_cb);
 
 ```
 

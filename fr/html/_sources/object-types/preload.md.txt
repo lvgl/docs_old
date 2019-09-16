@@ -1,44 +1,44 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/preload.md
 ```
-# Preloader (lv_preload)
+# Indicateur de chargement (lv_preload)
 
-## Overview
-The preloader object is a spinning arc over a border. 
+## Vue d'ensemble
+L'objet indicateur de chargement est un arc en rotation sur une bordure circulaire.
 
-### Arc length
-The length of the arc can be adjusted by `lv_preload_set_arc_length(preload, deg)`.
+###Longueur de l'arc
+La longueur de l'arc peut être ajustée par `lv_preload_set_arc_length(preload, deg)`.
 
-### Spinning speed
-The speed of the spinning can be adjusted by `lv_preload_set_spin_time(preload, time_ms)`.
+### Vitesse de rotation
+La vitesse de rotation peut être ajustée par `lv_preload_set_spin_time(preload, time_ms)`.
 
-### Spin types
-You can choose from more spin types:
-- **LV_PRELOAD_TYPE_SPINNING_ARC** spin the arc, slow down on the top
-- **LV_PRELOAD_TYPE_FILLSPIN_ARC** spin the arc, slow down on the top but also stretch the arc
+### Types de rotation
+Vous pouvez choisir parmi plusieurs types de rotation :
+- **LV_PRELOAD_TYPE_SPINNING_ARC** rotation de l'arc avec ralentissement au sommet du cercle
+- **LV_PRELOAD_TYPE_FILLSPIN_ARC** rotation de l'arc avec ralentissement au sommet du cercle mais étire également l'arc
 
-To apply one if them use `lv_preload_set_type(preload, LV_PRELOAD_TYPE_...)`
+Pour appliquer un type, utilisez `lv_preload_set_type(preload, LV_PRELOAD_TYPE_...)`
 
-### Spin direction
-The direction of spinning can be changed with `lv_preload_set_dir(preload, LV_PRELOAD_DIR_FORWARD/BACKWARD)`.
+### Direction de rotation
+Le sens de rotation peut être changé avec `lv_preload_set_dir(preload, LV_PRELOAD_DIR_FORWARD/BACKWARD)`.
 
 ## Styles
-You can set the styles with `lv_preload_set_style(btn, LV_PRELOAD_STYLE_MAIN, &style)`. It describes both the arc and the border style:
-- **arc** is described by the `line` properties
-- **border** is described by the `body.border` properties including `body.padding.left/top` (the smaller is used) to give a smaller radius for the border.
+Vous pouvez définir les styles avec `lv_preload_set_style(btn, LV_PRELOAD_STYLE_MAIN, &style)`. Il décrit à la fois le style de l'arc et celui de la bordure :
+- **arc** est décrit par les propriétés `line`
+- **border** est décrit par les propriétés `body.border` notamment `body.padding.left/top` pour donner un rayon plus petit à la bordure (le plus petit est utilisé).
 
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## Evénements
+Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
 
-## Keys
-No *Keys* are processed by the object type.
+## Touches
+Aucune *touche* n'est traitée par ce type d'objet.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
 
 
-## Example
+## Exemple
 
 ```eval_rst
 
@@ -47,7 +47,7 @@ Learn more about [Keys](/overview/indev).
 ```
 
 ### MicroPython
-No examples yet.
+Pas encore d'exemple.
 
 ## API 
 

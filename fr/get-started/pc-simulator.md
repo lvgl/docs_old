@@ -4,17 +4,17 @@
 # Simulateur sur PC
 
 
-You can try out the LittlevGL **using only your PC** (i.e. without any development boards). The LittlevGL will run on a simulator environment on the PC where anyone can write and experiment the real LittlevGL applications.
+Vous pouvez essayer LittlevGL **en utilisant uniquement votre PC** (c’est-à-dire sans carte de développement). LittlevGL fonctionnera sur un environnement de simulation sur le PC dans lequel il est possible d'écrire et d'expérimenter de réelles applications LittlevGL.
 
-Simulator on the PC have the following advantages:
-- Hardware independent - Write a code, run it on the PC and see the result on the PC monitor.
-- Cross-platform - Any Windows, Linux or OSX PC can run the PC simulator.  
-- Portability - the written code is portable, which means you can simply copy it when using an embedded hardware.
-- Easy Validation - The simulator is also very useful to report bugs because it means common platform for every user. So it's a good idea to reproduce a bug in simulator and use the code snippet in the [Forum](https://forum.littlevgl.com).
+Le simulateur sur PC présente les avantages suivants :
+- Indépendant du matériel - Écrivez du code, exécutez-le sur PC et visualisez le résultat sur le moniteur du PC.
+- Multi-plateforme - Tous les ordinateurs Windows, Linux ou OS X peuvent exécuter le simulateur PC.
+- Portabilité - Le code écrit est portable, ce qui signifie qu'il suffit de le copier pour l'utiliser sur un matériel embarqué.
+- Validation facile - Le simulateur est également très utile pour signaler des bogues car il représente une plateforme commune pour chaque utilisateur. C'est donc une bonne idée de reproduire un bogue dans le simulateur et d'utiliser l'extrait de code dans le [forum](https://forum.littlevgl.com).
 
-## Choisir un IDE
+## Choisir un EDI
 
-The simulator is ported to various IDEs (Integrated Development Environments). Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
+Le simulator est portés sur plusieurs EDIs (Environnement de Développement Intégré). Choisissez votre EDI préféré, lisez son README sur GitHub, téléchargez le projet, et chargez le dans EDI.
 
 ```eval_rst
 .. raw:: html
@@ -49,24 +49,24 @@ The simulator is ported to various IDEs (Integrated Development Environments). C
 ```
 
 
-You can use any IDEs for the development but, for simplicity, the configuration for Eclipse CDT is focused in this tutorial.
-The following section describes the set-up guide of Eclipse CDT in more details.
+Vous pouvez utiliser n’importe quel EDI pour le développement mais, pour des raisons de simplicité, ce didacticiel est axé sur la configuration d’Eclipse CDT.
+La section suivante décrit la configuration d’Eclipse CDT de manière plus détaillée.
 
-**Note: If you are on Windows, it's usually better to use the Visual Studio or CodeBlocks projects instead. They work out of the box without requiring extra steps.**
+**Note : si vous utilisez Windows, il est généralement préférable d'utiliser Visual Studio ou CodeBlocks. Ils fonctionnent directement sans nécessiter d'étapes supplémentaires.**
 
 ## Configurer Eclipse CDT
 
 ### Installer Eclipse CDT
 
-[Eclipse CDT](https://eclipse.org/cdt/) is a C/C++ IDE.
+[Eclipse CDT](https://eclipse.org/cdt/) iest un IDE C/C++.
 
 Eclipse est un logiciel écrit en Java de ce fait, soyez certain que l'**environnement d'exécution Java** est installé sur votre système.   
 
 Sur les distribution basée sur Debian (p.ex. Ubuntu) : `sudo apt-get install default-jre`
 
-Note: If you are using other distros, then please refer and install 'Java Runtime Environment' suitable to your distro.
+Note : si vous utilisez d'autres distributions, installez un 'Java Runtime Environment' adapté à votre distribution.
 
-You can download Eclipse's CDT from: [https://www.eclipse.org/cdt/downloads.php](https://www.eclipse.org/cdt/downloads.php). Start the installer and choose *Eclipse CDT* from the list.
+Vous pouvez télécharger Eclipse CDT à partir de : [https://eclipse.org/cdt/downloads.php](http://www.eclipse.org/downloads/downloads.php). Démarrez l'installeur est choisissez *Eclipse CDT* dans la liste.
 
 ### Installer SDL 2
 
@@ -81,7 +81,7 @@ Sur **Linux** vous pouvez installer facilement SDL 2 à partir d'un terminal :
 4. Si les paquets de construction essentiels ne sont pas déjà installés : `sudo apt-get install build-essential`
 
 #### Windows
-If you are using **Windows** firstly you need to install MinGW ([64 bit version](http://mingw-w64.org/doku.php/download)). After installing MinGW, do the following steps to add SDL2:
+Si vous utilisez **Windows** vous devez en premier lieu installer MinGW ([version 64 bits](http://mingw-w64.org/doku.php/download)). Après ça, effectuez les étapes suivantes pour ajouter SDL 2 :
 
 1. Téléchargez les libraries de développement de SDL.   
 Allez sur [https://www.libsdl.org/download-2.0.php](https://www.libsdl.org/download-2.0.php) et téléchargez _Development Libraries: SDL2-devel-2.0.5-mingw.tar.gz_
@@ -90,22 +90,22 @@ Allez sur [https://www.libsdl.org/download-2.0.php](https://www.libsdl.org/downl
 4. Copiez le contenu de _..._mingw32/lib/_ dans _C:/MinGW/.../x86_64-w64-mingw32/lib_
 5. Copiez _..._mingw32/bin/SDL2.dll_ dans _{eclipse_workspace}/pc_simulator/Debug/_.  Faites le plus tard quand Eclipse est installé. 
 
-Note: If you are using **Microsoft Visual Studio** instead of Eclipse then you don't have to install MinGW. 
+Note : si vous utilisez **Microsoft Visual Studio** à la place d'Eclipse alors vous n'avez pas besoin d'installer MinGW.
 
 #### OS X
 Sur **OS X** vous pouvez facilement installer SDL 2 avec brew : `brew install sdl2`
 
-If something is not working, then please refer [this tutorial](http://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php) to get started with SDL.
+Si quelque chose ne fonctionne pas, alors référez-vous à ce [tutoriel](http://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php) pour débuter avec SDL.
 
 ### Projet pré-configuré
 
-A pre-configured graphics library project (based on the latest release) is always available to get started easily. 
-You can find the latest one on [GitHub](https://github.com/littlevgl/proj_pc) or on the [Download](https://littlevgl.com/download) page. 
-(Please note that, the project is configured for Eclipse CDT). 
+Un projet pré-configuré pour la librairie graphique, basé sur la dernière version publiée, est toujours disponible. 
+Vous pouvez trouver le plus récent sur [GitHub](https://github.com/littlevgl/proj_pc) ou sur la page de [téléchargement](https://littlevgl.com/download). 
+Notez que le projet est configuré pour Eclipse CDT.
 
 ### Ajouter le projet pré-configuré à Eclipse CDT.
 
-Run Eclipse CDT. It will show a dialogue about the **workspace path**. Before accepting the path, check that path and copy (and unzip) the downloaded pre-configured project there. After that, you can accept the workspace path. Of course you can modify this path but, in that case copy the project to the corresponding location.
+Lancez Eclipse CDT. Une boîte de dialogue au sujet du **chemin de l'espace de travail** est affichée. Avant de la valider, vérifiez le chemin et copiez à cet emplacement, puis décompressez, le projet pré-configuré préalablement téléchargé. Après ça vous pouvez accepter le chemin de l'espace de travail. Bien entendu, ce chemin peut être modifié mais dans ce cas il faut copier le projet vers l'emplacement correspondant.
 
 Fermez la fenêtre de démarrage et allez à **Fichier-&gt;Importer...** et choisissez **Généralités-&gt;Projets existants dans l'espace de travail**. **Allez au répertoire racine** du projet et cliquez **Terminer**
 
@@ -116,8 +116,8 @@ Sur **Windows** vous devez effectuer deux actions additionnelles :
 
 ### Compilation et exécution
 
-Now you are ready to run the LittlevGL Graphics Library on your PC. Click on the Hammer Icon on the top menu bar to Build the project. If you have done everything right, then you will not get any errors. Note that on some systems additional steps might be required to "see" SDL 2 from Eclipse but, in most of cases the configurations in the downloaded project is enough.
+Vous êtes maintenant prêt à utiliser la librairie graphique LittlevGL sur votre PC. Cliquer sur l'icône Marteau de la barre de menu pour compiler le projet. Si vous avez tout fait correctement aucune erreur ne se produira. Notez que sur certains systèmes des étapes additionnelles peuvent être requises pour qu'Eclipse prenne en compte SDL 2, mais dans la plupart des cas, la configuration du projet téléchargé est suffisante.
 
-After a success build, click on the Play button on the top menu bar to run the project. Now a window should appear in the middle of your screen.
+Après avoir compiler avec succès, cliquez sur le bouton Jouer de la barre de menu pour démarrer le projet. Maintenant une fenêtre doit apparaître au milieu de l'écran.
 
 Tout est prêt pour utiliser la librairie graphique LittlevGL pour l'apprentissage ou pour débuter le développement sur votre PC.

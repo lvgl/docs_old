@@ -63,7 +63,7 @@ Certaines autres fonctions de rappel facultatives facilitent et optimisent l'uti
 Utile si la carte graphique ne peut actualiser que les zones ayant une hauteur ou une largeur spécifique (généralement une hauteur de 8 px avec des écrans monochromes).
 - **set_px_cb** une fonction personnalisée pour écrire le *tampon d’affichage*.
 Utile pour enregistrer les pixels de manière plus compacte si l’affichage présente un format de couleur spécial. (par exemple monochrome 1 bit, échelle de gris 2 bit, etc.)
-De cette façon, les tampons utilisés dans `lv_disp_buf_t` peuvent être plus petits pour ne contenir que le nombre de bits requis pour la taille de zone donnée.
+This way the buffers used in `lv_disp_buf_t` can be smaller to hold only the required number of bits for the given area size. `set_px_cb` is not working with `Two screen-sized buffers` display buffer configuration.
 - **monitor_cb** indique combien de pixels ont été actualisés et en combien de temps.
 
 Pour définir les champs de la variable *lv_disp_drv_t*, celle-ci doit être initialisée avec `lv_disp_drv_init(&disp_drv)`.

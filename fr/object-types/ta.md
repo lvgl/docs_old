@@ -9,99 +9,99 @@ The Text Area is a [Page](/object-types/page) with a [Label](/object-types/label
 
 ### Ajouter du texte
 
-You can insert text or characters  to the current cursor's position with:
+Vous pouvez insérer du texte ou des caractères à la position du curseur actuel avec :
 
 - `lv_ta_add_char(ta, 'c')`
 - `lv_ta_add_text(ta, "insert this text")`
 
-To add wide characters like `'á'`, `'ß'` or CJK characters use `lv_ta_add_text(ta, "á")`.
+Pour ajouter des caractères étendus comme `'á'`, `'ß'` ou des caractères CJK utilisez `lv_ta_add_text(ta, "á")`.
 
-`lv_ta_set_text(ta, "New text")` changes the whole text.
+`lv_ta_set_text(ta, "New text")` change le texte en totalité.
 
-### Placeholder
+### Substitutif
 
-A placeholder text can be specified which is displayed when the Text area is empty with `lv_ta_set_placeholder_text(ta, "Placeholder text")`
+Vous pouvez spécifier un texte de substitution qui s’affiche lorsque la zone de texte est vide avec`lv_ta_set_placeholder_text(ta, "Placeholder text")`
 
-### Delete character
+### Supprimer un caractère
 
-To delete a character from the left of the current cursor position use `lv_ta_del_char(ta)`. The delete from teh right use `lv_ta_del_char_forward(ta)`
+Pour supprimer un caractère à gauche de la position actuelle du curseur, utilisez `lv_ta_del_char(ta)`. Pour supprimer à droite, utilisez `lv_ta_del_char_forward(ta)`.
 
-### Move the cursor
+### Déplacer le curseur
 
-The cursor position can be modified directly with `lv_ta_set_cursor_pos(ta, 10)`. The `0` position means "before the first characters", `LV_TA_CURSOR_LAST` means "after the last character"
+La position du curseur peut être modifiée directement avec `lv_ta_set_cursor_pos(ta, 10)`. La position `0` signifie "avant les premiers caractères ", `LV_TA_CURSOR_LAST`signifie "après le dernier caractère".
 
-You can step the cursor with
+Vous pouvez déplacer le curseur d'un caractère avec
 - `lv_ta_cursor_right(ta)`
 - `lv_ta_cursor_left(ta)`
 - `lv_ta_cursor_up(ta)`
 - `lv_ta_cursor_down(ta)`
 
-If `lv_ta_set_cursor_click_pos(ta, true)` is called the cursor will jump to the position where the Text area was clicked.
+Si `lv_ta_set_cursor_click_pos(ta, true)`est appelé le curseur se déplacera à la position où la zone de texte a été cliquée.
 
-### Cursor types
+### Types de curseur
 
-There are several cursor types. You can set one of them with: `lv_ta_set_cursor_type(ta, LV_CURSOR_...)`
-- **LV_CURSOR_NONE** No cursor
-- **LV_CURSOR_LINE** A simple vertical line
-- **LV_CURSOR_BLOCK** A filled rectangle on the current character
-- **LV_CURSOR_OUTLINE** A rectangle border around the current character
-- **LV_CURSOR_UNDERLINE** Underline the current character
+Il existe plusieurs types de curseur. Vous pouvez en choisir un avec : `lv_ta_set_cursor_type(ta, LV_CURSOR_...)`
+- **LV_CURSOR_NONE** pas de curseur
+- **LV_CURSOR_LINE** une simple ligne verticale
+- **LV_CURSOR_BLOCK** un rectangle plein sur le caractère courant
+- **LV_CURSOR_OUTLINE** une bordure rectangulaire autour du caractère courant
+- **LV_CURSOR_UNDERLINE** souligne le caractère courant
 
-You can 'OR' `LV_CURSOR_HIDDEN` to any type to temporarily hide the cursor.
+Vous pouvez faire un ou logique de n'importe quel type de curseur avec `LV_CURSOR_HIDDEN` pour le masquer temporairement .
 
-The blink time of the cursor can be adjusted with `lv_ta_set_cursor_blink_time(ta, time_ms)`.
+La durée de clignotement du curseur peut être réglée avec `lv_ta_set_cursor_blink_time(ta, time_ms)`.
 
 
-### One line mode
-The Text area can be configures to be one lined with `lv_ta_set_one_line(ta, true)`. In this mode the height is set automatically to show only one line, line break character are ignored, and word wrap is disabled. 
+### Mode une ligne
+La zone de texte peut être configurée en mode une ligne avec `lv_ta_set_one_line(ta, true)`. Dans ce mode, la hauteur est calculée automatiquement pour afficher une seule ligne, les caractères de fin de ligne sont ignorés et le retour à la ligne est désactivé.
 
-### Password mode
-The text area supports password mode which can be enabled with `lv_ta_set_pwd_mode(ta, true)`. In password mode, the enters characters are converted to `*` after some time or when a new character is entered. 
+### Mode mot de passe
+La zone de texte gère un mode de mot de passe qui peut être activé avec `lv_ta_set_pwd_mode(ta, true)`.En mode mot de passe, les caractères saisis sont convertis en `*` après un certain temps ou lorsqu'un nouveau caractère est entré.
 
-In password mode `lv_ta_get_text(ta)` gives the real text and not the asterisk characters
+En mode mot de passe `lv_ta_get_text(ta)` donne le texte réel et non les astérisques.
 
-The visibility time can be adjusted with `lv_ta_set_pwd_show_time(ta, time_ms)`.
+La durée de visibilité peut être ajustée avec `lv_ta_set_pwd_show_time(ta, time_ms)`.
 
-### Text align
-The text can be aligned to the left, center or right with `lv_ta_set_text_align(ta, LV_LABEL_ALIGN_LET/CENTER/RIGHT)`.
+### Alignement du texte
+Le texte peut être aligné à gauche, au milieu ou à droite avec `lv_label_set_align(label, LV_LABEL_ALIGN_LEFT/CENTER/RIGHT)`.
 
-In one line mode, the text can be scrolled horizontally only if the text is left aligned.
+En mode une ligne, le texte ne peut défiler horizontalement que si le texte est aligné à gauche.
 
-### Accepted characters
-You can set a list of accepted characters with `lv_ta_set_accepted_chars(ta, "0123456789.+-")`. Other characters will be ignored. 
+### Caractères autorisés
+Vous pouvez définir une liste de caractères autorisés avec `lv_ta_set_accepted_chars(ta, "0123456789.+-")`. Les autres caractères seront ignorés.
 
-### Max text length
-The maximum number of characters can be limited with `lv_ta_set_max_length(ta, max_char_num)`
+### Longueur de texte maximum.
+Le nombre maximum de caractères peut être limité avec `lv_ta_set_max_length(ta, max_char_num)`
 
-### Very long texts
-If there is a  very long text in the Text area  (> 20k characters) its scrolling and drawing might be slow. 
-However, by enabling `LV_LABEL_LONG_TXT_HINT   1` in *lv_conf.h* it can be hugely improved. 
-It will save some info about the label to speed up its drawing. Using `LV_LABEL_LONG_TXT_HINT` the scrolling and drawing will as fast as with "normal" short texts.
+### Très long texte
+S'il y a un texte très long dans la zone de texte (> 20000 caractères ) le défilement et l'affichage pourraient être lents. 
+Cependant, en activant `LV_LABEL_LONG_TXT_HINT   1` dans *lv_conf.h* cela peut être grandement amélioré. 
+Cela enregistre des informations sur l’étiquette pour accélérer son affichage. En utilisant `LV_LABEL_LONG_TXT_HINT` le défilement et l'affichage sont aussi rapides qu'avec des textes courts "normaux".
 
-### Select text
-A part of text can be selected if enabled with `lv_ta_set_text_sel(ta, true)`. It works like when you select a text on your PC with your mouse. 
+### Sélection de texte
+Une partie du texte peut être sélectionnée si la fonctionnalité est activée avec `lv_ta_set_text_sel (ta, true)`. Cela fonctionne comme lorsque vous sélectionnez un texte sur votre PC avec votre souris.
 
-### Scrollbars
-The scrollbars can shown according to different policies set by `lv_ta_set_sb_mode(ta, LV_SB_MODE_...)`. Learn more at the [Page](/object-types/page) object.
+### Barres de défilement
+Les barres de défilement peuvent être affichées selon différentes stratégies définies par `lv_ta_set_sb_mode(ta, LV_SB_MODE_...)`. Apprenez-en plus sur l'objet [page](/object-types/page).
 
-### Scroll propagation
-When the Text area is scrolled on an other scrollable object (like a Page) and the scrolling has reached the edge of the Text area, the scrolling can be propagated to the parent. 
-In other words, when the Text area can be scrolled further, the parent will be scrolled instead.
+### Propagation du défilement
+Lorsque la zone de texte défile sur un autre objet défilant (comme une page) et que le défilement a atteint le bord de la zone de texte, le défilement peut être propagé au parent.
+En d’autres termes, lorsque la zone de texte ne peut continuer à défiler, le parent sera défilé à la place.
 
-It can be enabled with `lv_ta_set_scroll_propagation(ta, true)`.
+Cela peut être activé avec `lv_ta_set_scroll_propagation(ta, true)`.
 
-Learn more at the [Page](/object-types/page) object.
+Apprenez-en plus sur l'objet [page](/object-types/page).
 
-### Edge flash
-When the Text area is scrolled to edge a circle like flash animation can be shown if it is enabled with `lv_ta_set_edge_flash(ta, true)`
+### Mise en évidence du bord
+Lorsque vous faites défiler la zone de texte jusqu'à une bordure, l'animation d'un cercle peut être affichée si cela est activé avec`lv_ta_set_edge_flash(ta, true)`
 
-## Style usage
+## Styles
 
-Use `lv_ta_set_style(page, LV_TA_STYLE_...,  &style)` to set a new style for an element of the text area:
+Utilisez `lv_ta_set_style(page, LV_TA_STYLE_...,  &style)` pour définir un nouveau style pour un élément de la zone de texte :
 
-- **LV_TA_STYLE_BG** background's style which uses all `style.body` properties. The label uses `style.label` from this style.  (default: `lv_style_pretty`)
-- **LV_TA_STYLE_SB** scrollbar's style which uses all `style.body` properties (default: `lv_style_pretty_color`)
-- **LV_TA_STYLE_CURSOR** cursor style. If `NULL` then the library sets a style automatically according to the label's color and font
+- **LV_TA_STYLE_BG** style de l'arrière-plan qui utilise toutes les propriétés `style.body`. L'étiquette utilise `style.label` de ce style (valeur par défaut : `lv_style_pretty`).
+- **LV_TA_STYLE_SB** style de la barre de défilement qui utilise toutes les propriétés `style.body` (valeur par défaut : `lv_style_pretty_color`).
+- **LV_TA_STYLE_CURSOR** style du curseur. Si `NULL` alors la librairie définit automatiquement un style en fonction de la couleur et de la police de l'étiquette.
     - *LV_CURSOR_LINE*: a `style.line.width` wide line but drawn as a rectangle as `style.body`. `padding.top/left` makes an offset on the cursor
     - *LV_CURSOR_BLOCK*: a rectangle as `style.body`  `padding` makes the rectangle larger
     - *LV_CURSOR_OUTLINE*: an empty rectangle (just a border) as `style.body` `padding` makes the rectangle larger
@@ -109,20 +109,20 @@ Use `lv_ta_set_style(page, LV_TA_STYLE_...,  &style)` to set a new style for an 
 
 
 
-## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
-- **LV_EVENT_INSERT** Sent when a character before a character is inserted. 
-The evnet data is the text planned to insert. `lv_ta_set_insert_replace(ta, "New text")` replaces the text to insert. 
-The new text can't be in a local variable which is destroyed when the event callback exists. `""` means do not insert anything.
-- **LV_EVENT_VALUE_CHANGED** When the content of the text area has been changed. 
+## Evénements
+Outre les [événements génériques](/overview/event.html #evenements-generiques), les [événements spéciaux](/overview/event.html#evenements-speciaux) suivants sont envoyés par la zone de texte :
+- **LV_EVENT_INSERT** envoyé avant l'insertion d'un caractère.
+La donnée d'événement est le texte qu'il est prévu d'insérer. `lv_ta_set_insert_replace(ta, "New text")` remplace le texte à insérer.
+Le nouveau texte ne peut être une variable locale, détruite lorsque la fonction de rappel se termine. `" "` annule l'insertion.
+- **LV_EVENT_VALUE_CHANGED** envoyé quand le contenu de la zone de texte a été modifié.
 
-## Keys
-- **LV_KEY_UP/DOWN/LEFT/RIGHT** Move the cursor
-- **Any character** Add the character to the current cursor position
+## Touches
+- **LV_KEY_UP/DOWN/LEFT/RIGHT** déplace le curseur
+- **Tout caractère** insère le caractère à la position du curseur
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
-## Example
+## Exemple
 
 ```eval_rst
 

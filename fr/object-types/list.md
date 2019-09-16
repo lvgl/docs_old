@@ -1,85 +1,85 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/list.md
 ```
-# List (lv_list)
+# Liste (lv_list)
 
-## Overview
+## Vue d'ensemble
 
-The Lists are built from a background [Page](/object-types/page) and [Buttons](/object-types/btn) on it. 
-The Buttons contain an optional icon-like [Image](/object-types/img) (which can be a symbol too) and a [Label](/object-types/label). 
-When the list becomes long enough it can be scrolled. 
+Les listes sont construites à partir d'une [page](/object-types/page) d'arrière-plan sur laquelle sont placés des [boutons](/object-types/btn) on it. 
+Les boutons contiennent une [image](/object-types/img) comme icône optionnelle (qui peut être un symbole aussi) et une [étiquette](/object-types/label). 
+Lorsque la liste est suffisamment longue, vous pouvez la faire défiler.
 
-### Add buttons
-You can add new list elements with `lv_list_add_btn(list, &icon_img, "Text")` or with symbol `lv_list_add_btn(list, SYMBOL_EDIT, "Edit text")`. 
-If you do not want to add image use `NULL` as image source. The function returns with a pointer to the created button to allow further configurations.
+### Ajouter des boutons
+Vous pouvez ajouter de nouveaux éléments de liste avec `lv_list_add_btn(list, &icon_img, "Text")` ou avec symbole `lv_list_add_btn(list, SYMBOL_EDIT, "Edit text")`. 
+Si vous ne souhaitez pas ajouter d'image, utilisez `NULL` comme source d'image. La fonction retourne un pointeur sur le bouton créé pour permettre d'autres configurations.
 
-The width of the buttons is set to maximum according to the object width. 
-The height of the buttons are adjusted automatically according to the content. (*content height* + *padding.top* + *padding.bottom*).
+La largeur des boutons est fixée au maximum de la largeur de l'objet.
+La hauteur des boutons est ajustée automatiquement en fonction du contenu (*content height* + *padding.top* + *padding.bottom*).
 
-The labels are created with `LV_LABEL_LONG_SROLL_CIRC` long mode to automatically scroll the long labels circularly.
+Les étiquettes sont créées avec le mode `LV_LABEL_LONG_SROLL_CIRC` pour faire défiler automatiquement les libellés longs de manière circulaire.
 
-You can use `lv_list_get_btn_label(list_btn)` and `lv_list_get_btn_img(list_btn)` to get the label and the image of a list button. You can get the text directly with `lv_list_get_btn_text(list_btn)`.
+Vous pouvez utiliser `lv_list_get_btn_label(list_btn)` and `lv_list_get_btn_img(list_btn)` pour obtenir le libellé et l'image d'un bouton de liste. Vous pouvez obtenir le texte directement avec `lv_list_get_btn_text(list_btn)`.
 
-### Delete buttons
-To delete a list element just use `lv_obj_del(btn)` on the return value of `lv_list_add_btn()`. 
+### Supprimer des boutons
+Pour supprimer un élément de la liste, utilisez simplement `lv_obj_del(btn)` sur la valeur de retour de `lv_list_add_btn()`. 
 
-To clean the list (remove all buttons) use `lv_list_clean(list)`
-
-
-### Manual navigation
-You can navigate manually in the list with `lv_list_up(list)` and `lv_list_down(list)`.
-
-You can focus on a button directly using `lv_list_focus(btn, LV_ANIM_ON/OFF)`.
-
-The **animation time** of up/down/focus movements can be set via: `lv_list_set_anim_time(list, anim_time)`. Zero animation time means not animations. 
-
-### Edge flash
-A circle-like effect can be shown when the list reaches the most top or bottom position. 
-`lv_list_set_edge_flash(list, en)` enables this feature.
-
-### Scroll propagation
-If the list is created on an other scrollable element (like a [Page](/object-types/page)) and the list can't be scrolled further the **scrolling can be propagated to the parent**. 
-This way the scroll will be continued on the parent. It can be enabled with `lv_list_set_scroll_propagation(list, true)`
-
-If the buttons have `lv_btn_set_toggle` enabled then `lv_list_set_single_mode(list, true)` can be used to ensure that only one button can be in toggled state at the same time.
-
-## Style usage
-
-The `lv_list_set_style(list, LV_LIST_STYLE_..., &style)` function sets the style of a list. 
-- **LV_LIST_STYLE_BG** list background style. Default: `lv_style_transp_fit`
-- **LV_LIST_STYLE_SCRL** scrollable part's style. Default: `lv_style_pretty`
-- **LV_LIST_STYLE_SB** scrollbars' style. Default: `lv_style_pretty_color`. For details see [Page](/object-types/page) 
-- **LV_LIST_STYLE_BTN_REL** button released style. Default: `lv_style_btn_rel`
-- **LV_LIST_STYLE_BTN_PR** button pressed style. Default: `lv_style_btn_pr`
-- **LV_LIST_STYLE_BTN_TGL_REL** button toggled released style. Default: `lv_style_btn_tgl_rel`
-- **LV_LIST_STYLE_BTN_TGL_PR** button toggled pressed style. Default: `lv_style_btn_tgl_pr`
-- **LV_LIST_STYLE_BTN_INA** button inactive style. Default: `lv_style_btn_ina`
-
-Because *BG* has a transparent style by default if there is only a few buttons the list will look shorter but become scrollable when more list elements are added.
-
-To modify the height of the buttons adjust the `body.padding.top/bottom` fields of the corresponding styles (`LV_LIST_STYLE_BTN_REL/PR/...`)
+Pour vider la liste (supprimer tous les boutons), utilisez `lv_list_clean(list)`
 
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+### Navigation manuelle
+Vous pouvez naviguer manuellement dans la liste avec `lv_list_up(list)` et `lv_list_down(list)`.
 
-Learn more about [Events](/overview/event).
+Vous pouvez accéder directement  à un bouton en utilisant `lv_list_focus(btn, LV_ANIM_ON/OFF)`.
 
-## Keys
-The following *Keys* are processed by the Lists:
-- **LV_KEY_RIGHT/DOWN** Select the next button
-- **LV_KEY_LEFT/UP** Select the previous button
+La **durée d'animation** des déplacements haut/bas/accès direct peut être définie via : `lv_list_set_anim_time(list, anim_time)`. Zéro supprime les animations.
 
-Note that, as usual, the state of `LV_KEY_ENTER` is translated to `LV_EVENT_PRESSED/PRESSING/RELEASED` etc.
+### Mise en évidence du bord
+L'animation d'un cercle peut être affichée quand la liste atteint les positions supérieure ou inférieure.
+`lv_list_set_edge_flash(list, en)` active cette fonctionnalité.
 
-The Selected buttons are in `LV_BTN_STATE_PR/TG_PR` state.
+### Propagation du défilement
+Si la liste est créée sur un autre objet défilant (comme une [page](/object-types/page)) et que la liste ne peut pas être défilées plus, le **défilement peut être propagé au parent**.
+De cette manière, le défilement sera poursuivi sur le parent. Cela peut être activé avec `lv_list_set_scroll_propagation(list, true)`.
 
-To manually select a button use `lv_list_set_btn_selected(list, btn)`. When the list is defocused and focused again it will restore the last selected button.
+SI les bouton ont `lv_btn_set_toggle` activé alors `lv_list_set_single_mode(list, true)` est utilisé pour s’assurer qu’un seul bouton ne peut être dans l’état basculé à un instant donné.
 
-Learn more about [Keys](/overview/indev).
+## Styles
+
+La fonction `lv_list_set_style(list, LV_LIST_STYLE _..., &style)` définit les styles d'une liste.
+- **LV_LIST_STYLE_BG** style d'arrière-plan de liste. Valeur par défaut : `lv_style_transp_fit`
+- **LV_LIST_STYLE_SCRL** style de la partie défilante. Valeur par défaut : `lv_style_pretty`
+- **LV_LIST_STYLE_SB** style de la barre de défilement. Valeur par défaut : `lv_style_pretty_color`. Pour plus de détails voir l'objet [page](/object-types/page) 
+- **LV_LIST_STYLE_BTN_REL** style des boutons relâchés. Valeur par défaut : `lv_style_btn_rel`
+- **LV_LIST_STYLE_BTN_PR** style des boutons pressés. Valeur par défaut : `lv_style_btn_pr`
+- **LV_LIST_STYLE_BTN_TGL_REL** style des boutons bascules relâchés. Valeur par défaut : `lv_style_btn_tgl_rel`,
+- **LV_LIST_STYLE_BTN_TGL_PR** style des boutons bascules pressés. Valeur par défaut : `lv_style_btn_tgl_pr`
+- **LV_LIST_STYLE_BTN_INA** style des boutons inactifs. Valeur par défaut : `lv_style_btn_ina`.
+
+Étant donné que *BG* a un style transparent par défaut s'il n'y a que quelques boutons, la liste paraîtra plus courte mais pourra défiler lorsque plusieurs éléments de la liste sont ajoutés.
+
+Pour modifier la hauteur des boutons, ajustez les champs `body.padding.top/bottom` des styles relatifs (`LV_LIST_STYLE_BTN_REL/PR/...`).
 
 
-## Example
+## Evénements
+Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
+
+Apprenez-en plus sur les [événements](/overview/event).
+
+## Touches
+Les *touches* suivantes sont traitées par les listes :
+- **LV_KEY_RIGHT/DOWN** sélectionne le bouton suivant,
+- **LV_KEY_LEFT/UP** sélectionne le bouton précédent,
+
+Notez que, comme d'habitude, l'état de `LV_KEY_ENTER` est traduit en `LV_EVENT_PRESSED/PRESSING/RELEASED` etc.
+
+Les boutons sélectionnés sont dans l'état `LV_BTN_STATE_PR/TG_PR`.
+
+Pour sélectionner manuellement un bouton, utilisez `lv_list_set_btn_selected(list, btn)`. Lorsque la liste est défocalisée et focalisée à nouveau, le dernier bouton sélectionné est restauré.
+
+Apprenez-en plus sur les [touches](/overview/indev).
+
+
+## Exemple
 
 ```eval_rst
 

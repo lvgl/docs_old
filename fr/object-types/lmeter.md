@@ -1,44 +1,44 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/lmeter.md
 ```
-# Line meter (lv_lmeter)
+# Compteur (lv_lmeter)
 
-## Overview
+## Vue d'ensemble
 
-The Line Meter object consists of some radial lines which draw a scale. 
+L'objet  compteur est constitué de quelques lignes radiales qui dessinent une échelle.
 
-### Set value
-When setting a new value with `lv_lmeter_set_value(lmeter, new_value)` the proportional part of the scale will be recolored. 
+### Définir la valeur
+Lors de la définition d'une nouvelle valeur avec `lv_lmeter_set_value(lmeter, new_value)`, la partie proportionnelle de l'échelle sera recolorée.
 
-### Range and Angles
-The `lv_lmeter_set_range(lmeter, min, max)` function sets the range of the line meter. 
+### Intervalle et angles
+La fonction `lv_lmeter_set_range(lmeter, min, max)` définit l'intervalle du compteur linéaire.
 
-You can set the angle of the scale and the number of the lines by: `lv_lmeter_set_scale(lmeter, angle, line_num)`. 
-The default angle is 240 and the default line number is 31.
+Vous pouvez définir l'angle de l'échelle et le nombre de lignes à l'aide de : `lv_lmeter_set_scale(lmeter, angle, line_num)`.
+L'angle par défaut est 240 et le nombre de ligne par défaut est 31.
 
 ## Styles
 
-The line meter uses one style which can be set by `lv_lmeter_set_style(lmeter, LV_LMETER_STYLE_MAIN, &style)`. The line meter's properties are derived from the following style attributes:
+Le compteur utilise un style qui peut être défini par `lv_lmeter_set_style(lmeter, LV_LMETER_STYLE_MAIN, &style)`. Les propriétés du compteur sont dérivées des attributs de style suivants :
 
-- **line.color** "inactive line's" color which are greater then the current value
-- **body.main_color** "active line's" color at the beginning of the scale
-- **body.grad_color** "active line's" color at the end of the scale (gradient with main color)
-- **body.padding.hor** line length
-- **line.width** line width
+- **line.color** la couleur des "lignes inactives" qui sont supérieure à la valeur actuelle
+- **body.main_color** couleur de la "ligne active" au début de l'échelle
+- **body.grad_color** couleur de la "ligne active" à la fin de l'échelle (dégradé avec la couleur principale)
+- **body.padding.hor** longueur des lignes
+- **line.width** largeur des lignes
 
-The default style is `lv_style_pretty_color`.
+Le style par défaut est `lv_style_pretty_color`.
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## Evénements
+Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
 
-Learn more about [Events](/overview/event).
+Apprenez-en plus sur les [événements](/overview/event).
 
-## Keys
-No *Keys* are processed by the object type.
+## Touches
+Aucune *touche* n'est traitée par ce type d'objet.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
-## Example
+## Exemple
 
 ```eval_rst
 

@@ -63,7 +63,7 @@ Néhány opcionális callback, melyek megkönnyítik és optimálisabbá teszik 
 Ez akkor használható, ha kijelző vezérlő csak bizony magasságú vagy szélességű területeket tud frissíteni. (Általában 8px magasság monochrome kijelzőknél)
 - **set_px_cb** egyedi függvény  *kijelző buffer* írásához. 
 Használatával a pixeleket egy tömörebb formában tárolhatók a kijelzőnek speciális színformátuma van (pl. 1 bit monochrome, 2  bit szürkeárnyalat etc.) 
-Ennek köszönhetően a `lv_disp_buf_t`-ben használt buffer-ek kisebbek lehetnek, hogy szükséges mennyiségű bitet tartalmazzák.
+This way the buffers used in `lv_disp_buf_t` can be smaller to hold only the required number of bits for the given area size. `set_px_cb` is not working with `Two screen-sized buffers` display buffer configuration.
 - **monitor_cb** egy callback, mely megmutatja, hogy mennyi pixel került frissítésre adott idő alatt.
 
 Egy *lv_disp_drv_t* változó mezőinek beállítása előtt azt inicializálni kell a `lv_disp_drv_init(&disp_drv)` függvénnyel.

@@ -1,60 +1,60 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/mbox.md
 ```
-# Message box (lv_mbox)
+# Boîte de message (lv_mbox)
 
-## Overview
+## Vue d'ensemble
 
-The Message boxes act as pop-ups. They are built from a background [Container](/object-types/cont), a [Label](/object-types/label) and a [Button matrix](/object-types/btnm) for buttons. 
+Les boîtes de message font office de fenêtres contextuelles. Elles sont construites à partir d'un [conteneur](/object-types/cont) de fond, d'un [label](/object-types/label) et d'une [matrice de boutons](/object-types/btnm). 
 
 
-The text will be broken into multiple lines automatically (has `LV_LABEL_LONG_MODE_BREAK`) and the height will be set automatically to involve the text and the buttons (`LV_FIT_TIGHT` auto fit vertically)-
+Le texte sera automatiquement divisé en plusieurs lignes (mode `LV_LABEL_LONG_MODE_BREAK`) et la hauteur sera définie automatiquement pour afficher le texte et les boutons (`LV_FIT_TIGHT` ajustement automatique vertical)-
 
-### Set text
-To set the text use the `lv_mbox_set_text(mbox, "My text")` function.
+### Définir le texte
+Pour définir le texte, utilisez la fonction `lv_mbox_set_text(mbox,"My text")`.
 
-### Add buttons
- To add buttons use the `lv_mbox_add_btns(mbox, btn_str)` function. You need specify the button's text like `const char * btn_str[] = {"Apply", "Close", ""}`. 
- For more information visit the [Button matrix](/object-types/btnm) documentation.
+### Ajouter des boutons
+Pour ajouter des boutons, utilisez la fonction `lv_mbox_add_btns(mbox, btn_str)`. Vous devez spécifier le texte des boutons ainsi `const char * btn_str[] = {"Apply", "Close", ""}`. 
+Pour plus d'informations, consultez la documentation de la [matrice de boutons](/object-types/btnm).
 
-### Auto-close
-With `lv_mbox_start_auto_close(mbox, delay)` the message box can be closed automatically after `delay` milliseconds with an animation. The `lv_mbox_stop_auto_close(mbox)` function stops a started auto close.
+### Fermeture automatique
+Avec `lv_mbox_start_auto_close(mbox, delay)` la boîte de message peut être fermée automatiquement après `delay` millisecondes avec une animation. La fonction `lv_mbox_stop_auto_close(mbox)` arrête une fermeture automatique en cours.
 
-The duration of the close animation can be set by `lv_mbox_set_anim_time(mbox, anim_time)`.
+La durée de l'animation de fermeture peut être définie par `lv_mbox_set_anim_time(mbox, anim_time)`.
 
 ## Styles
 
-Use `lv_mbox_set_style(mbox, LV_MBOX_STYLE_...,  &style)` to set a new style for an element of the Message box:
+Utilisez `lv_mbox_set_style(mbox, LV_MBOX_STYLE _..., &style)` pour définir un nouveau style pour un élément de la boîte de message :
 
-- **LV_MBOX_STYLE_BG** specifies the background container's style. `style.body` sets the background and`_style.label` sets the text appearance. Default: `lv_style_pretty`
-- **LV_MBOX_STYLE_BTN_BG** style of the Button matrix background. Default: `lv_style_trans`
-- **LV_MBOX_STYLE_BTN_REL** style of the released buttons. Default: `lv_style_btn_rel`
-- **LV_MBOX_STYLE_BTN_PR** style of the pressed buttons. Default: `lv_style_btn_pr`
-- **LV_MBOX_STYLE_BTN_TGL_REL** style of the toggled released buttons. Default: `lv_style_btn_tgl_rel`
-- **LV_MBOX_STYLE_BTN_TGL_PR** style of the toggled pressed buttons. Default: `lv_style_btn_tgl_pr`
-- **LV_MBOX_STYLE_BTN_INA** style of the inactive buttons. Default: `lv_style_btn_ina`
+- **LV_MBOX_STYLE_BG** spécifie le style du conteneur d'arrière-plan. `style.body` définit l'arrière-plan et `style.label` définit l'apparence du texte. Valeur par défaut : `lv_style_pretty`
+- **LV_MBOX_STYLE_BTN_BG** style de l’arrière-plan de la matrice de boutons. Valeur par défaut : `lv_style_trans`
+- **LV_MBOX_STYLE_BTN_REL** style des boutons relâchés. Valeur par défaut : `lv_style_btn_rel`
+- **LV_MBOX_STYLE_BTN_PR** style des boutons pressés. Valeur par défaut : `lv_style_btn_pr`
+- **LV_MBOX_STYLE_BTN_TGL_REL** style des boutons bascules relâchés. Valeur par défaut : `lv_style_btn_tgl_rel`,
+- **LV_MBOX_STYLE_BTN_TGL_PR** style des boutons bascules pressés. Valeur par défaut : `lv_style_btn_tgl_pr`
+- **LV_MBOX_STYLE_BTN_INA** style des boutons inactifs. Valeur par défaut : `lv_style_btn_ina`.
 
-The height of the button area comes from *font height + padding.top + padding.bottom* of `LV_MBOX_STYLE_BTN_REL`.
+La hauteur de la zone des boutons est égal à *font height + padding.top + padding.bottom* de `LV_MBOX_STYLE_BTN_REL`.
 
-## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Message boxes:
- - **LV_EVENT_VALUE_CHANGED** sent when the button is clicked. The event data is set to ID of the clicked button.
+## Evénements
+Outre les [événements génériques](/overview/event.html #evenements-generiques), les [événements spéciaux](/overview/event.html#evenements-speciaux) suivants  sont envoyés par les boîtes de message :
+ - **LV_EVENT_VALUE_CHANGED** envoyé lorsque le bouton est cliqué. Les données d'événement sont l'ID du bouton cliqué.
 
-The Message box has a default event callback which closes itself when a button is clicked.
+La boîte de message a une fonction de rappel par défaut qui la referme lorsqu'un clic est effectué sur un bouton.
 
-Learn more about [Events](/overview/event).
+Apprenez-en plus sur les [événements](/overview/event).
 
-##Keys
+## Touches
 
-The following *Keys* are processed by the Buttons:
-- **LV_KEY_RIGHT/DOWN** Select the next button
-- **LV_KEY_LEFT/TOP** Select the previous button
-- **LV_KEY_ENTER** Clicks the selected button 
+Les *touches* suivantes sont traitées par les boutons :
+- **LV_KEY_RIGHT/DOWN** sélectionne le bouton suivant,
+- **LV_KEY_LEFT/UP** sélectionne le bouton précédent,
+- **LV_KEY_ENTER** pour clique le bouton sélectionné.
 
-Learn more about [Keys](/overview/indev).
+Apprenez-en plus sur les [touches](/overview/indev).
 
 
-## Example
+## Exemple
 
 ```eval_rst
 
