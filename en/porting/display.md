@@ -23,7 +23,7 @@ To set up a display an `lv_disp_buf_t` and an `lv_disp_drv_t` variable has to be
     lv_disp_buf_init(&disp_buf, buf_1, buf_2, MY_DISP_HOR_RES*10);
 ```
 
-There are there possible configurations regarding the buffer size:
+There are 3 possible configurations regarding the buffer size:
 1. **One buffer** LittlevGL draws the content of the screen into a buffer and sends it to the display.
 The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts.
 If only small areas changes (e.g. button press) then only those areas will be refreshed.
