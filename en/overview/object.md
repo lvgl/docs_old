@@ -12,7 +12,7 @@ Check all the [Object types](/object-types/index) here.
 
 ### Basic attributes
 
-The objects have basic attributes which are common independently from their type:
+All object types share some basic attributes:
 - Position
 - Size
 - Parent
@@ -51,7 +51,7 @@ The API of the object types are described in their [Documentation](/object-types
 
 ### Parent-child structure
 
-A parent object can be considered as the container of its children. Every object has exactly one parent object (except screens) but, a parent can have an unlimited number of children.
+A parent object can be considered as the container of its children. Every object has exactly one parent object (except screens), but a parent can have an unlimited number of children.
 There is no limitation for the type of the parent but, there are typical parent (e.g. button) and typical child (e.g. label) objects.
 
 ### Moving together
@@ -83,7 +83,7 @@ lv_obj_set_pos(par, 50, 50);	/*Move the parent. The child will move with it.*/
 
 ### Visibility only on the parent
 
-If a child partially or fully out of its parent then the parts outside will not be visible.
+If a child is partially or fully out of its parent then the parts outside will not be visible.
 
 ![](/misc/par_child3.png "A graphical object is visible on its parent")  
 
@@ -97,12 +97,12 @@ In LittlevGL objects can be created and deleted dynamically in run-time.
 It means only the currently created objects consume RAM.
 For example, if you need a chart, you can create it when required and delete it when it is not visible or necessary.
 
-Every objects type has its own **create** function with a unified prototype.
+Every object type has its own **create** function with a unified prototype.
 It needs two parameters:
 - A pointer to the *parent* object. To create a screen give *NULL* as parent.
 - Optionally, a pointer to *copy* object with the same type to copy it. This *copy* object can be *NULL* to avoid the copy operation.
 
-Independently from the object type, a common variable type `lv_obj_t` is used. This pointer can be used later to set or get the attributes of the object.
+All objects are referenced in C code using an `lv_obj_t` pointer as a handle. This pointer can later be used to set or get the attributes of the object.
 
 The create functions look like this:
 
@@ -118,9 +118,9 @@ void lv_obj_del(lv_obj_t * obj);
 
 `lv_obj_del` will delete the object immediately.
 If for any reason you can't delete the object immediately you can use `lv_obj_del_async(obj)`.
-It is useful e.g. if you want to delete the parent of an object in `LV_EVENT_DELETE` signal.
+It is useful e.g. if you want to delete the parent of an object in the child's `LV_EVENT_DELETE` signal.
 
-You can delete only the children of an object but leave the object itself "alive":
+You can remove all the children of an object (but not the object itself) using `lv_obj_clean`:
 
 ```c
 void lv_obj_clean(lv_obj_t * obj);
@@ -133,14 +133,14 @@ The screens are special objects which have no parent object. So it is created li
 lv_obj_t * scr1 = lv_obj_create(NULL, NULL);
 ```
 
-Always there is an active screen on display. By default, the library creates and loads one.  
-To get the currently active screen use the `lv_scr_act()` function to load new one use `lv_scr_load(scr1)`.
+There is always an active screen on each display. By default, the library creates and loads a "Base object" as the screen for each display.  
+To get the currently active screen use the `lv_scr_act()` function. To load a new one, use `lv_scr_load(scr1)`.
 
 Screens can be created with any object type. For example, a [Base object](/object-types/obj) or an image to make a wallpaper.
 
 
-Screens are created on the *default display*.
-The *default screen* is the lastly registered screen with `lv_disp_drv_register` (if there is only screen then that one) or you can explicitly select display with `lv_disp_set_default(disp)`.
+Screens are created on the currently selected *default display*.
+The *default screen* is the last registered screen with `lv_disp_drv_register` or you can explicitly select a new default display using `lv_disp_set_default(disp)`.
 `lv_scr_act()` and `lv_scr_load()` operate on the currently default screen.
 
 Visit [Multi-display support](/overview/display) to learn more.
