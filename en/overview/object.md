@@ -99,8 +99,8 @@ For example, if you need a chart, you can create it when required and delete it 
 
 Every objects type has its own **create** function with a unified prototype.
 It needs two parameters:
-- A pointer the parent object. To create a screen give *NULL* as parent.
-- Optionally, a pointer to copy object with the same type to copy it. This copy object can be *NULL* to not perform the copy operation.
+- A pointer to the *parent* object. To create a screen give *NULL* as parent.
+- Optionally, a pointer to *copy* object with the same type to copy it. This *copy* object can be *NULL* to avoid the copy operation.
 
 Independently from the object type, a common variable type `lv_obj_t` is used. This pointer can be used later to set or get the attributes of the object.
 
