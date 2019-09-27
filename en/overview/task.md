@@ -47,7 +47,7 @@ lv_task_t * task = lv_task_create(my_task, 500, LV_TASK_PRIO_MID, &user_data);
 ## Set parameters
 You can modify some parameters of the tasks later:
 - `lv_task_set_cb(task, new_cb)`
-- `lv_task_set_period(task, new_period)`
+- `lv_task_set_period(task, new_period)` after you set period, the first and following call will happen the defined new period milliseconds later.
 - `lv_task_set_prio(task, new_priority)`
 
 ## One-shot tasks
