@@ -3,10 +3,10 @@
 ```
 # Events
 
-Events are triggered in LittlevGL, if something happens which might be interesting to the user. For example an object
+Events are triggered in LittlevGL when something happens which might be interesting to the user, e.g. if an object:
 - is clicked
 - is dragged
-- its value has changed etc.
+- its value has changed, etc.
 
 The user can assign a callback function to an object to see these events. In practice, it looks like this:
 ```c
@@ -54,14 +54,15 @@ More objects can use the same *event callback*.
 The following event types exist:
 
 ### Generic events
-Any object (such as Buttons/Labels/Sliders etc.) can receive these events independently from their type.
+
+All objects (such as Buttons/Labels/Sliders etc.) receive these generic events regardless of their type.
 
 #### Related to the input devices
-Sent when an object is pressed/released etc. by the user. They are used not only for *Pointers* but can used for *Keypad*, *Encoder* and *Button* input devices as well. Visit the [Overview of input devices](/overview/indev) section to learn more about them.
+These are sent when an object is pressed/released etc. by the user. They are used not only for *Pointers* but can used for *Keypad*, *Encoder* and *Button* input devices as well. Visit the [Overview of input devices](/overview/indev) section to learn more about them.
 - **LV_EVENT_PRESSED** The object has been pressed
 - **LV_EVENT_PRESSING** The object is being pressed (sent continuously while pressing)
-- **LV_EVENT_PRESS_LOST** Still pressing but slid from the objects
-- **LV_EVENT_SHORT_CLICKED** Released before l`LV_INDEV_LONG_PRESS_TIME`. Not called if dragged.
+- **LV_EVENT_PRESS_LOST** The input device is still being pressed but is no longer on the object
+- **LV_EVENT_SHORT_CLICKED** Released before `LV_INDEV_LONG_PRESS_TIME` time. Not called if dragged.
 - **LV_EVENT_LONG_PRESSED**  Pressing for `LV_INDEV_LONG_PRESS_TIME` time.  Not called if dragged.
 - **LV_EVENT_LONG_PRESSED_REPEAT** Called after `LV_INDEV_LONG_PRESS_TIME` in every `LV_INDEV_LONG_PRESS_REP_TIME` ms.  Not called if dragged.
 - **LV_EVENT_CLICKED** Called on release if not dragged (regardless to long press)
@@ -106,7 +107,7 @@ The type of the custom data depends on the sending object but if it's a
 
 To manually send events to an object, use `lv_event_send(obj, LV_EVENT_..., &custom_data)`.
 
-For example, it can be used to manually close a message box by simulating a button press:
+For example, it can be used to manually close a message box by simulating a button press (although there are simpler ways of doing this):
 ```c
 /*Simulate the press of the first button (indexes start from zero)*/
 uint32_t btn_id = 0;
