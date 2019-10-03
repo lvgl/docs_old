@@ -3,19 +3,19 @@
 ```
 # Styles
 
-*Styles* are used to set the appearance of the objects. A style is a structure variable with attributes like colors, paddings, opacity, font etc. 
+*Styles* are used to set the appearance of the objects. A style is a structure variable with attributes like colors, paddings, opacity, font etc.
 
 There is common style type called **lv_style_t** for every object type.
 
-By setting the fields of the `lv_style_t` variables and assigning to to an object you can influence the appearance of the objects.
+By setting the fields of the `lv_style_t` variables and assigning to an object, you can influence the appearance of the objects.
 
-``` important:: The objects store only a pointer to a style so the style cannot be a local variable which is destroyed after the function exists. **You should use static, global or dynamically allocated variables.**
+``` important:: The objects store only a pointer to a style so the style cannot be a local variable which is destroyed after the function exits. **You should use static, global or dynamically allocated variables.**
 ```
 
 ```c
 lv_style_t style_1;             /*OK! Global variables for styles are fine*/
 static lv_style_t style_2;      /*OK! Static variables outside the functions are fine*/
-void my_screen_create(void) 
+void my_screen_create(void)
 {
   static lv_style_t style_3;    /*OK! Static variables in the functions are fine*/
   lv_style_t style_4;           /*WRONG! Styles can't be local variables*/
@@ -24,9 +24,9 @@ void my_screen_create(void)
 }
 ```
 
-## Use the styles 
+## Use the styles
 
-The objects have a *Main style* which determines the appearance of their background or main part. However, some object types have additional styles too. 
+The objects have a *Main style* which determines the appearance of their background or main part. However, some object types have additional styles too.
 
 Some object has only one style. E.g.
 - Label
@@ -38,7 +38,7 @@ For example, a slider has 3 styles:
 - Indicator
 - Know
 
-Every object type has its own style set/get functions. For example 
+Every object type has its own style set/get functions. For example
 ```c
 const lv_style_t * btn_style = lv_btn_get_style(btn, LV_BTN_STYLE_REL);
 lv_btn_set_style(btn, LV_BTN_STYLE_REL, &new_style);
@@ -50,7 +50,7 @@ If you **modify a style which is already used** by one or more objects then the 
 
 ```c
 /*Notify an object about its style is modified*/
-void lv_obj_refresh_style(lv_obj_t * obj); 
+void lv_obj_refresh_style(lv_obj_t * obj);
 
 /*Notify all objects with a given style. (NULL to notify all objects)*/
 void lv_obj_report_style_mod(void * style);
@@ -65,8 +65,8 @@ If the *Main style* of an object is `NULL` then its style will be inherited from
 Setting the `glass` style property will prevent inheriting that style. You should use it if the style is transparent so that its children use colors and others from its grandparent.
 
 ## Style properties
-A style has 5 main parts: common, body, text, image and line. An object will use those fields which are relevant to it. 
-For example, *Lines* don't care about the *letter_space*. 
+A style has 5 main parts: common, body, text, image and line. An object will use those fields which are relevant to it.
+For example, *Lines* don't care about the *letter_space*.
 To see which fields are used by an object type see their [Documentation](/object-types/index).
 
 The fields of a style structure are the followings:
@@ -74,7 +74,7 @@ The fields of a style structure are the followings:
 #### Common properties
   * **glass** 1: Do not inherit this style
 
-#### Body style properties 
+#### Body style properties
 Used by the rectangle-like objects
   - **body.main_color** Main color (top color)
   - **body.grad_color** Gradient color (bottom color)
@@ -92,7 +92,7 @@ Used by the rectangle-like objects
   - **body.padding.left** Left padding
   - **body.padding.right** Right padding
   - **body.padding.inner** Inner padding (between content elements or children)
-  
+
 #### Text style properties
 Used by the objects which show texts
   - **text.color** Text color
@@ -119,22 +119,22 @@ There are several built-in styles in the library:
 
 ![](/misc/style-built-in.png "Built-in styles in LittlevGL Embedded Graphics Library")
 
-As you can see there is a style for screens, for buttons, plain and pretty styles and transparent styles as well. 
+As you can see there is a style for screens, for buttons, plain and pretty styles and transparent styles as well.
 
 The `lv_style_transp`, `lv_style_transp_fit` and `lv_style_transp_tight` differ only in paddings: for `lv_style_transp_tight` all paddings are zero, for `lv_style_transp_fit` only hor and ver paddings are zero but has inner padding.
 
 ``` important:: Transparent built-in styles have *glass = 1* by default which means these styles (e.g. their colors) won't be inherited by children.
 ```
 
-The built in styles are global `lv_style_t` variables. You can use them like: 
+The built in styles are global `lv_style_t` variables. You can use them like:
 ```c
 lv_btn_set_style(obj, LV_BTN_STYLE_REL, &lv_style_btn_rel)
 ```
 
 ## Create new styles
-You can modify the built-in styles or you can create new styles. 
+You can modify the built-in styles or you can create new styles.
 
-When creating new styles it's recommended to first copy a built-in style with `lv_style_copy(&dest_style, &src_style)` to be sure all fields are initialized with a proper value. 
+When creating new styles it's recommended to first copy a built-in style with `lv_style_copy(&dest_style, &src_style)` to be sure all fields are initialized with a proper value.
 
 Do not forget the created style should be `static` or global. For example:
 ```c
@@ -198,7 +198,7 @@ lv_bar_set_value(bar1, 70);                             /*Set the bar's value*/
 ## Themes
 To create styles for your GUI is challenging because you need a deeper understanding of the library and you need to have some design skills. In addition, it takes a lot of time to create so many styles.
 
-To speed up the design part themes are introduced. A theme is a style collection which contains the required styles for every object type. For example 5 styles for buttons to describe their 5 possible states. 
+To speed up the design part themes are introduced. A theme is a style collection which contains the required styles for every object type. For example 5 styles for buttons to describe their 5 possible states.
 Check the [Existing themes](https://littlevgl.com/themes) or try some in the [Live demo](https://littlevgl.com/live-demo) section.
 
 To be more specific a theme is a structure variable which contains a lot of lv_style_t * fields. For buttons:
