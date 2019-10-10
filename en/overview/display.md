@@ -5,13 +5,13 @@
 
 ``` important:: The basic concept of *display* in LittlevGL is explained in the [Porting](/porting/display) section. So before reading further, please read the [Porting](/porting/display) section first.
 ```
-In LittlevGL, you can have multiple displays, each with its drivers and objects.
+In LittlevGL, you can have multiple displays, each with their own driver and objects.
 
-Creating more displays is easy: just initialize display buffers and register the drivers for every display.
-When you create the UI, use `lv_disp_set_deafult(disp)` to tell the library to which display creates the object.
+Creating more displays is easy: just initialize more display buffers and register another driver for every display.
+When you create the UI, use `lv_disp_set_default(disp)` to tell the library which display to create objects on.
 
 
-But, in which cases can you use the multi-display support? Here are some examples:
+Why would you want multi-display support? Here are some examples:
 - Have a "normal" TFT display with local UI and create "virtual" screens on VNC on demand. (You need to add your VNC driver).
 - Have a large TFT display and a small monochrome display.
 - Have some smaller and simple displays in a large instrument or technology.
@@ -39,6 +39,11 @@ You can create a larger display from smaller ones. You can create it as below:
 
 Every display has each set of [Screens](overview/object#screen-the-most-basic-parent) and the object on the screens.
 
+Be sure not to confuse displays and screens:
+
+* **Displays** are the physical hardware drawing the pixels.
+* **Screens** are the high-level root objects associated with a particular display. One display can have multiple screens associated with it, but not vice versa.
+
 Screens can be considered the highest level containers which have no parent.
 The screen's size is always equal to its display and size their position is (0;0). Therefore, the screens coordinates can't be changed, i.e. `lv_obj_set_pos()`, `lv_obj_set_size()` or similar functions can't be used on screens.
 
@@ -46,27 +51,30 @@ A screen can be created from any object type but, the two most typical types are
 
 To create a screen, use `lv_obj_t * scr = lv_<type>_create(NULL, copy)`. `copy` can be an other screen to copy it.
 
-To load a screen, use `lv_scr_load(scr)`. The get active screen use `lv_scr_act()`. These functions works on the default display to specify which display you mean use `lv_disp_get_scr_act(disp)` and `lv_disp_load_scr(disp, scr)`.
+To load a screen, use `lv_scr_load(scr)`. To get the active screen, use `lv_scr_act()`. These functions works on the default display. If you want to to specify which display to work on, use `lv_disp_get_scr_act(disp)` and `lv_disp_load_scr(disp, scr)`.
 
-Screens can be deleted with `lv_obj_del(scr)` but, be sure to not delete currently loaded screen.
+Screens can be deleted with `lv_obj_del(scr)`, but ensure that you do not delete the currently loaded screen.
 
 
 ### Opaque screen
-Usually, the opacity of the screen is `LV_OPA_COVER` to provide a solid, fully covering background for its children.
-However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders the video frames on a layer but, on another layer, you want to create an OSD menu (over the video) using LittlevGL.
-In this, the style of the screen you should have `body.opa = LV_OPA_TRANSP` or `image.opa = LV_OPA_TRANSP` (or other `LV_OPA_...` values) to make the screen opaque.
-To properly handle the screens opacity, `LV_COLOR_SCREEN_TRANSP` needs to be enabled. Not that, it works on with `LV_COLOR_DEPTH = 32`.
-The Alpha channel of 32-bit colors will be 0 where there are no objects and will be 255 where there are solid objects.
+Usually, the opacity of the screen is `LV_OPA_COVER` to provide a solid background for its children.
 
+However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LittlevGL.
+
+To do this, the screen should have a style that sets `body.opa` or `image.opa` to `LV_OPA_TRANSP` (or another non-opaque value) to make the screen opaque.
+
+Also, `LV_COLOR_SCREEN_TRANSP` needs to be enabled. Please note that it only works with `LV_COLOR_DEPTH = 32`.
+
+The Alpha channel of 32-bit colors will be 0 where there are no objects and will be 255 where there are solid objects.
 
 ## Features of displays
 
 ### Inactivity
 
 The user's inactivity is measured on each display. Every use of an [Input device](/overview/indev) (if [associated with the display](/porting/indev#other-features)) counts as an activity.
-To get time elapsed since the last activity, use `lv_disp_get_inactive_time(disp)`. If `NULL` is passed, the overall smallest inactivity time will be returned from all displays.
+To get time elapsed since the last activity, use `lv_disp_get_inactive_time(disp)`. If `NULL` is passed, the overall smallest inactivity time will be returned from all displays (**not the default display**).
 
-You can manually trigger an activity using `lv_disp_trig_activity(disp)`. If `disp` is `NULL`, the default screen will be used.
+You can manually trigger an activity using `lv_disp_trig_activity(disp)`. If `disp` is `NULL`, the default screen will be used (**and not all displays**).
 
 
 ## Colors
@@ -75,7 +83,7 @@ The color module handles all color-related functions like changing color depth, 
 
 The following variable types are defined by the color module:
 
-- **lv_color1_t** Store monochrome color. For compatibility, it also has R, G, B fields but they are always the same (1 byte)
+- **lv_color1_t** Store monochrome color. For compatibility, it also has R, G, B fields but they are always the same value (1 byte)
 - **lv_color8_t** A structure to store R (3 bit),G (3 bit),B (2 bit) components for 8-bit colors (1 byte)
 - **lv_color16_t** A structure to store R (5 bit),G (6 bit),B (5 bit) components for 16-bit colors (2 byte)
 - **lv_color32_t** A structure to store R (8 bit),G (8 bit), B (8 bit) components for 24-bit colors (4 byte)
@@ -116,8 +124,8 @@ c32.full = lv_color_to32(c);	/*Give a 32 bit number with the converted color*/
 
 ### Swap 16 colors
 You may set `LV_COLOR_16_SWAP` in *lv_conf.h* to swap the bytes of *RGB565* colors. It's useful if you send the 16-bit colors via a byte-oriented interface like SPI.
-As 16-bit numbers are stored in Little Endian format (lower byte on the lower address), the interface will send the lower byte first. However, displays usually need the higher byte first. A mismatch in the byte order will result in highly distorted colors.
 
+As 16-bit numbers are stored in Little Endian format (lower byte on the lower address), the interface will send the lower byte first. However, displays usually need the higher byte first. A mismatch in the byte order will result in highly distorted colors.
 
 ### Create and mix colors
 You can create colors with the current color depth using the LV_COLOR_MAKE macro. It takes 3 arguments (red, green, blue) as 8-bit numbers.
@@ -162,9 +170,7 @@ The color module defines the most basic colors such as:
 - ![#ffa500](https://placehold.it/15/ffa500/000000?text=+) `LV_COLOR_ORANGE`
 - ![#ffff00](https://placehold.it/15/ffff00/000000?text=+) `LV_COLOR_YELLOW`
 
-as well as `LV_COLOR_WHITE`.
-
-
+as well as `LV_COLOR_WHITE` (fully white).
 
 ## API
 
