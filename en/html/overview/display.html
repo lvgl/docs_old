@@ -165,7 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/project.html#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/project.html#initialization">Initialization</a></li>
 </ul>
 </li>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="event.html">Events</a><ul>
@@ -1093,55 +1093,60 @@
 <h1>Displays<a class="headerlink" href="#displays" title="Permalink to this headline">¶</a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The basic concept of <em>Display</em> in LittlevGL is explained in the [Porting](/porting/display) section. So before reading further, please read that section first.</p>
+<p>The basic concept of <em>display</em> in LittlevGL is explained in the [Porting](/porting/display) section. So before reading further, please read the [Porting](/porting/display) section first.</p>
 </div>
-<p>In LittlevGL you can have multiple displays each with its own drivers and objects.</p>
-<p>Creating more displays is easy: just initialize display buffers and register the drivers for every display.
-When you create the UI use <code class="docutils literal notranslate"><span class="pre">lv_disp_set_deafult(disp)</span></code> to tell the library to which display create the object.</p>
-<p>But in which cases can you use the multi-display support? Here are some examples:</p>
+<p>In LittlevGL, you can have multiple displays, each with their own driver and objects.</p>
+<p>Creating more displays is easy: just initialize more display buffers and register another driver for every display.
+When you create the UI, use <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default(disp)</span></code> to tell the library which display to create objects on.</p>
+<p>Why would you want multi-display support? Here are some examples:</p>
 <ul class="simple">
-<li><p>Have a “normal” TFT display with local UI and create “virtual” screens on VNC on demand. (You need to add your own VNC driver)</p></li>
+<li><p>Have a “normal” TFT display with local UI and create “virtual” screens on VNC on demand. (You need to add your VNC driver).</p></li>
 <li><p>Have a large TFT display and a small monochrome display.</p></li>
-<li><p>Have some smaller and simple displays in a large instrument or technology</p></li>
-<li><p>Have two large TFT displays: one for a customer and one for the shop assistant</p></li>
+<li><p>Have some smaller and simple displays in a large instrument or technology.</p></li>
+<li><p>Have two large TFT displays: one for a customer and one for the shop assistant.</p></li>
 </ul>
 <div class="section" id="using-only-one-display">
 <h2>Using only one display<a class="headerlink" href="#using-only-one-display" title="Permalink to this headline">¶</a></h2>
-<p>Using more displays can be useful but in most of the cases, it’s not required. Therefore the whole concept of multi-displays is completely hidden if you register only one display.
+<p>Using more displays can be useful, but in most cases, it’s not required. Therefore, the whole concept of multi-display is completely hidden if you register only one display.
 By default, the lastly created (the only one) display is used as default.</p>
 <p><code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr)</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_layer_top()</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_layer_sys()</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_HOR_RES</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_VER_RES</span></code> are always applied on the lastly created (default) screen.
-If you pass <code class="docutils literal notranslate"><span class="pre">NULL</span></code> as <code class="docutils literal notranslate"><span class="pre">disp</span></code> parameter to display related function usually the default display will be used.
+If you pass <code class="docutils literal notranslate"><span class="pre">NULL</span></code> as <code class="docutils literal notranslate"><span class="pre">disp</span></code> parameter to display related function, usually the default display will be used.
 E.g. <code class="docutils literal notranslate"><span class="pre">lv_disp_trig_activity(NULL)</span></code> will trigger a user activity on the default screen. (See below in <a class="reference external" href="#Inactivity">Inactivity</a>).</p>
 </div>
 <div class="section" id="mirror-display">
 <h2>Mirror display<a class="headerlink" href="#mirror-display" title="Permalink to this headline">¶</a></h2>
-<p>To mirror the image of display to an other display you don’t really need to use the multi-display support. Just transfer the buffer received in <code class="docutils literal notranslate"><span class="pre">drv.flush_cb</span></code> to an other display too.</p>
+<p>To mirror the image of the display to another display, you don’t need to use the multi-display support. Just transfer the buffer received in <code class="docutils literal notranslate"><span class="pre">drv.flush_cb</span></code> to another display too.</p>
 </div>
 <div class="section" id="split-image">
 <h2>Split image<a class="headerlink" href="#split-image" title="Permalink to this headline">¶</a></h2>
-<p>You can create a larger display from more smaller ones. You do it like this:</p>
+<p>You can create a larger display from smaller ones. You can create it as below:</p>
 <ol class="simple">
-<li><p>Set the resolution of the displays to the large display’s resolution</p></li>
-<li><p>In <code class="docutils literal notranslate"><span class="pre">drv.flush_cb</span></code> truncate and modify the <code class="docutils literal notranslate"><span class="pre">area</span></code> parameter for each display.</p></li>
-<li><p>Send the buffer’s content to each display with the truncated area,</p></li>
+<li><p>Set the resolution of the displays to the large display’s resolution.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">drv.flush_cb</span></code>, truncate and modify the <code class="docutils literal notranslate"><span class="pre">area</span></code> parameter for each display.</p></li>
+<li><p>Send the buffer’s content to each display with the truncated area.</p></li>
 </ol>
 </div>
 <div class="section" id="screens">
 <h2>Screens<a class="headerlink" href="#screens" title="Permalink to this headline">¶</a></h2>
-<p>Every display has it each set of <a class="reference external" href="overview/object#screen-the-most-basic-parent">Screens</a> and the object on the screens.</p>
+<p>Every display has each set of <a class="reference external" href="overview/object#screen-the-most-basic-parent">Screens</a> and the object on the screens.</p>
+<p>Be sure not to confuse displays and screens:</p>
+<ul class="simple">
+<li><p><strong>Displays</strong> are the physical hardware drawing the pixels.</p></li>
+<li><p><strong>Screens</strong> are the high-level root objects associated with a particular display. One display can have multiple screens associated with it, but not vice versa.</p></li>
+</ul>
 <p>Screens can be considered the highest level containers which have no parent.
-The screen’s size is always equal to its display’s and size their position is (0;0). Therefore the screens coordinates can’t be changed, i.e. <code class="docutils literal notranslate"><span class="pre">lv_obj_set_pos()</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_obj_set_size()</span></code> or similar functions can’t be used on screens.</p>
-<p>A screen can be created from any object type but two most typical types are the <a class="reference internal" href="../object-types/obj.html"><span class="doc">Base object</span></a> and the <a class="reference internal" href="../object-types/img.html"><span class="doc">Image</span></a> (to create a wallpaper).</p>
-<p>To create a screen use <code class="docutils literal notranslate"><span class="pre">lv_obj_t</span> <span class="pre">*</span> <span class="pre">scr</span> <span class="pre">=</span> <span class="pre">lv_&lt;type&gt;_create(NULL,</span> <span class="pre">copy)</span></code>. <code class="docutils literal notranslate"><span class="pre">copy</span></code> can be an other screen to copy it.</p>
-<p>To load a screen use <code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr)</span></code>. The get active screen use <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code>. These functions works on the default display to specify which display you mean use <code class="docutils literal notranslate"><span class="pre">lv_disp_get_scr_act(disp)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_disp_load_scr(disp,</span> <span class="pre">scr)</span></code>.</p>
-<p>Screens can be deleted with <code class="docutils literal notranslate"><span class="pre">lv_obj_del(scr)</span></code> but be sure to not delete currently loaded screen.</p>
+The screen’s size is always equal to its display and size their position is (0;0). Therefore, the screens coordinates can’t be changed, i.e. <code class="docutils literal notranslate"><span class="pre">lv_obj_set_pos()</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_obj_set_size()</span></code> or similar functions can’t be used on screens.</p>
+<p>A screen can be created from any object type but, the two most typical types are the <a class="reference internal" href="../object-types/obj.html"><span class="doc">Base object</span></a> and the <a class="reference internal" href="../object-types/img.html"><span class="doc">Image</span></a> (to create a wallpaper).</p>
+<p>To create a screen, use <code class="docutils literal notranslate"><span class="pre">lv_obj_t</span> <span class="pre">*</span> <span class="pre">scr</span> <span class="pre">=</span> <span class="pre">lv_&lt;type&gt;_create(NULL,</span> <span class="pre">copy)</span></code>. <code class="docutils literal notranslate"><span class="pre">copy</span></code> can be an other screen to copy it.</p>
+<p>To load a screen, use <code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr)</span></code>. To get the active screen, use <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code>. These functions works on the default display. If you want to to specify which display to work on, use <code class="docutils literal notranslate"><span class="pre">lv_disp_get_scr_act(disp)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_disp_load_scr(disp,</span> <span class="pre">scr)</span></code>.</p>
+<p>Screens can be deleted with <code class="docutils literal notranslate"><span class="pre">lv_obj_del(scr)</span></code>, but ensure that you do not delete the currently loaded screen.</p>
 <div class="section" id="opaque-screen">
 <h3>Opaque screen<a class="headerlink" href="#opaque-screen" title="Permalink to this headline">¶</a></h3>
-<p>Usually, the opacity of the screen is <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code> to provide a solid, folly covering background for its children.
-However, in some special case, you might want a transparent screen. For example, if you have a video player which renders the video frames on a layer but on an other layer you want to create an OSD menu (over the video) using LittlevGL.
-In this the style of the screen you should have <code class="docutils literal notranslate"><span class="pre">body.opa</span> <span class="pre">=</span> <span class="pre">LV_OPA_TRANSP</span></code> or <code class="docutils literal notranslate"><span class="pre">image.opa</span> <span class="pre">=</span> <span class="pre">LV_OPA_TRANSP</span></code> (or other <code class="docutils literal notranslate"><span class="pre">LV_OPA_...</span></code> values) to make the screen opaque.
-To properly handle the screens opacity <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> needs to be enabled. Not that, it works on with <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span> <span class="pre">=</span> <span class="pre">32</span></code>.
-The Alpha channel of 32-bit colors will be 0 where there are no objects and will be 255 where there are solid objects.</p>
+<p>Usually, the opacity of the screen is <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code> to provide a solid background for its children.</p>
+<p>However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LittlevGL.</p>
+<p>To do this, the screen should have a style that sets <code class="docutils literal notranslate"><span class="pre">body.opa</span></code> or <code class="docutils literal notranslate"><span class="pre">image.opa</span></code> to <code class="docutils literal notranslate"><span class="pre">LV_OPA_TRANSP</span></code> (or another non-opaque value) to make the screen opaque.</p>
+<p>Also, <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> needs to be enabled. Please note that it only works with <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span> <span class="pre">=</span> <span class="pre">32</span></code>.</p>
+<p>The Alpha channel of 32-bit colors will be 0 where there are no objects and will be 255 where there are solid objects.</p>
 </div>
 </div>
 <div class="section" id="features-of-displays">
@@ -1149,19 +1154,19 @@ The Alpha channel of 32-bit colors will be 0 where there are no objects and will
 <div class="section" id="inactivity">
 <h3>Inactivity<a class="headerlink" href="#inactivity" title="Permalink to this headline">¶</a></h3>
 <p>The user’s inactivity is measured on each display. Every use of an <a class="reference internal" href="indev.html"><span class="doc">Input device</span></a> (if <a class="reference external" href="/porting/indev#other-features">associated with the display</a>) counts as an activity.
-To get time elapsed since the last activity use <code class="docutils literal notranslate"><span class="pre">lv_disp_get_inactive_time(disp)</span></code>. If <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is passed the overall smallest inactivity time will be returned from all displays.</p>
-<p>You can manually trigger an activity using <code class="docutils literal notranslate"><span class="pre">lv_disp_trig_activity(disp)</span></code>. If <code class="docutils literal notranslate"><span class="pre">disp</span></code> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> the default screen will be used.</p>
+To get time elapsed since the last activity, use <code class="docutils literal notranslate"><span class="pre">lv_disp_get_inactive_time(disp)</span></code>. If <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is passed, the overall smallest inactivity time will be returned from all displays (<strong>not the default display</strong>).</p>
+<p>You can manually trigger an activity using <code class="docutils literal notranslate"><span class="pre">lv_disp_trig_activity(disp)</span></code>. If <code class="docutils literal notranslate"><span class="pre">disp</span></code> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, the default screen will be used (<strong>and not all displays</strong>).</p>
 </div>
 </div>
 <div class="section" id="colors">
 <h2>Colors<a class="headerlink" href="#colors" title="Permalink to this headline">¶</a></h2>
-<p>The color module handles all color-related functions like changing color depth, creating colors from hex code, converting between color depths, mixing colors etc.</p>
+<p>The color module handles all color-related functions like changing color depth, creating colors from hex code, converting between color depths, mixing colors, etc.</p>
 <p>The following variable types are defined by the color module:</p>
 <ul class="simple">
-<li><p><strong>lv_color1_t</strong> Store monochrome color. For compatibility it also has R,G,B fields but they are always the same (1 byte)</p></li>
-<li><p><strong>lv_color8_t</strong> A structure to store R (3 bit),G (3 bit),B (2 bit) components for 8 bit colors (1 byte)</p></li>
-<li><p><strong>lv_color16_t</strong> A structure to store R (5 bit),G (6 bit),B (5 bit) components for 16 bit colors (2 byte)</p></li>
-<li><p><strong>lv_color32_t</strong> A structure to store R (8 bit),G (8 bit), B (8 bit) components for 24 bit colors (4 byte)</p></li>
+<li><p><strong>lv_color1_t</strong> Store monochrome color. For compatibility, it also has R, G, B fields but they are always the same value (1 byte)</p></li>
+<li><p><strong>lv_color8_t</strong> A structure to store R (3 bit),G (3 bit),B (2 bit) components for 8-bit colors (1 byte)</p></li>
+<li><p><strong>lv_color16_t</strong> A structure to store R (5 bit),G (6 bit),B (5 bit) components for 16-bit colors (2 byte)</p></li>
+<li><p><strong>lv_color32_t</strong> A structure to store R (8 bit),G (8 bit), B (8 bit) components for 24-bit colors (4 byte)</p></li>
 <li><p><strong>lv_color_t</strong> Equal to <code class="docutils literal notranslate"><span class="pre">lv_color1/8/16/24_t</span></code> according to color depth settings</p></li>
 <li><p><strong>lv_color_int_t</strong> <code class="docutils literal notranslate"><span class="pre">uint8_t</span></code>, <code class="docutils literal notranslate"><span class="pre">uint16_t</span></code> or <code class="docutils literal notranslate"><span class="pre">uint32_t</span></code> according to color depth setting. Used to build color arrays from plain numbers.</p></li>
 <li><p><strong>lv_opa_t</strong> A simple <code class="docutils literal notranslate"><span class="pre">uint8_</span></code>t type to describe opacity.</p></li>
@@ -1173,10 +1178,10 @@ To get time elapsed since the last activity use <code class="docutils literal no
 <li><p><strong>ch.blue</strong> blue channel</p></li>
 <li><p><strong>full</strong> red + green + blue as one number</p></li>
 </ul>
-<p>You can set the current color depth in <em>lv_conf.h</em> by setting the <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span></code> define to 1 (monochrome), 8, 16 or 32.</p>
+<p>You can set the current color depth in <em>lv_conf.h</em>, by setting the <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span></code> define to 1 (monochrome), 8, 16 or 32.</p>
 <div class="section" id="convert-color">
 <h3>Convert color<a class="headerlink" href="#convert-color" title="Permalink to this headline">¶</a></h3>
-<p>You can convert a color from the current color depth to an other. The converter functions return with a number so you have to use the <code class="docutils literal notranslate"><span class="pre">full</span></code> field:</p>
+<p>You can convert a color from the current color depth to another. The converter functions return with a number, so you have to use the <code class="docutils literal notranslate"><span class="pre">full</span></code> field:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_color_t</span> <span class="n">c</span><span class="p">;</span>
 <span class="n">c</span><span class="p">.</span><span class="n">red</span>   <span class="o">=</span> <span class="mh">0x38</span><span class="p">;</span>
 <span class="n">c</span><span class="p">.</span><span class="n">green</span> <span class="o">=</span> <span class="mh">0x70</span><span class="p">;</span>
@@ -1186,7 +1191,7 @@ To get time elapsed since the last activity use <code class="docutils literal no
 <span class="n">c1</span><span class="p">.</span><span class="n">full</span> <span class="o">=</span> <span class="n">lv_color_to1</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>	<span class="cm">/*Return 1 for light colors, 0 for dark colors*/</span>
 
 <span class="n">lv_color8_t</span> <span class="n">c8</span><span class="p">;</span>
-<span class="n">c8</span><span class="p">.</span><span class="n">full</span> <span class="o">=</span> <span class="n">lv_color_to8</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>	<span class="cm">/*Give a 8 bit number with the converted color*/</span> 
+<span class="n">c8</span><span class="p">.</span><span class="n">full</span> <span class="o">=</span> <span class="n">lv_color_to8</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>	<span class="cm">/*Give a 8 bit number with the converted color*/</span>
 
 <span class="n">lv_color16_t</span> <span class="n">c16</span><span class="p">;</span>
 <span class="n">c16</span><span class="p">.</span><span class="n">full</span> <span class="o">=</span> <span class="n">lv_color_to16</span><span class="p">(</span><span class="n">c</span><span class="p">);</span> <span class="cm">/*Give a 16 bit number with the converted color*/</span>
@@ -1198,12 +1203,12 @@ To get time elapsed since the last activity use <code class="docutils literal no
 </div>
 <div class="section" id="swap-16-colors">
 <h3>Swap 16 colors<a class="headerlink" href="#swap-16-colors" title="Permalink to this headline">¶</a></h3>
-<p>You may set <code class="docutils literal notranslate"><span class="pre">LV_COLOR_16_SWAP</span></code> in <em>lv_conf.h</em> to swap the bytes of <em>RGB565</em> colors. It’s useful if you send the 16 bit colors via a byte-oriented interface like SPI.
-As 16 bit numbers are stored in Little Endian format (lower byte on the lower address) the interface will send the lower byte first. However, displays usually need the higher byte first. A mismatch in the byte order will result in highly distorted colors.</p>
+<p>You may set <code class="docutils literal notranslate"><span class="pre">LV_COLOR_16_SWAP</span></code> in <em>lv_conf.h</em> to swap the bytes of <em>RGB565</em> colors. It’s useful if you send the 16-bit colors via a byte-oriented interface like SPI.</p>
+<p>As 16-bit numbers are stored in Little Endian format (lower byte on the lower address), the interface will send the lower byte first. However, displays usually need the higher byte first. A mismatch in the byte order will result in highly distorted colors.</p>
 </div>
 <div class="section" id="create-and-mix-colors">
 <h3>Create and mix colors<a class="headerlink" href="#create-and-mix-colors" title="Permalink to this headline">¶</a></h3>
-<p>You can create colors with the current color depth using the LV_COLOR_MAKE macro. It takes 3 arguments (red, green, blue) as 8 bit numbers.
+<p>You can create colors with the current color depth using the LV_COLOR_MAKE macro. It takes 3 arguments (red, green, blue) as 8-bit numbers.
 For example to create light red color: <code class="docutils literal notranslate"><span class="pre">my_color</span> <span class="pre">=</span> <span class="pre">COLOR_MAKE(0xFF,0x80,0x80)</span></code>.</p>
 <p>Colors can be created from HEX codes too: <code class="docutils literal notranslate"><span class="pre">my_color</span> <span class="pre">=</span> <span class="pre">lv_color_hex(0x288ACF)</span></code> or <code class="docutils literal notranslate"><span class="pre">my_color</span> <span class="pre">=</span> <span class="pre">lv_folro_hex3(0x28C)</span></code>.</p>
 <p>Mixing two colors is possible with <code class="docutils literal notranslate"><span class="pre">mixed_color</span> <span class="pre">=</span> <span class="pre">lv_color_mix(color1,</span> <span class="pre">color2,</span> <span class="pre">ratio)</span></code>. Ration can be 0..255. 0 results fully color2, 255 result fully color1.</p>
@@ -1213,17 +1218,17 @@ For example to create light red color: <code class="docutils literal notranslate
 <h3>Opacity<a class="headerlink" href="#opacity" title="Permalink to this headline">¶</a></h3>
 <p>To describe opacity the <code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code> type is created as a wrapper to <code class="docutils literal notranslate"><span class="pre">uint8_t</span></code>. Some defines are also introduced:</p>
 <ul class="simple">
-<li><p><strong>LV_OPA_TRANSP</strong> Value: 0, means the opacity makes the color fully transparent</p></li>
+<li><p><strong>LV_OPA_TRANSP</strong> Value: 0, means the opacity makes the color completely transparent</p></li>
 <li><p><strong>LV_OPA_10</strong> Value: 25, means the color covers only a little</p></li>
 <li><p><strong>LV_OPA_20 … OPA_80</strong> come logically</p></li>
-<li><p><strong>LV_OPA_90</strong> Value: 229, means the color near fully covers</p></li>
-<li><p><strong>LV_OPA_COVER</strong> Value: 255, means the color fully covers</p></li>
+<li><p><strong>LV_OPA_90</strong> Value: 229, means the color near completely covers</p></li>
+<li><p><strong>LV_OPA_COVER</strong> Value: 255, means the color completely covers</p></li>
 </ul>
-<p>You can also use the <code class="docutils literal notranslate"><span class="pre">LV_OPA_*</span></code> defines in <code class="docutils literal notranslate"><span class="pre">lv_color_mix()</span></code> as <em>ratio</em>.</p>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">LV_OPA_*</span></code> defines in <code class="docutils literal notranslate"><span class="pre">lv_color_mix()</span></code> as a <em>ratio</em>.</p>
 </div>
 <div class="section" id="built-in-colors">
 <h3>Built-in colors<a class="headerlink" href="#built-in-colors" title="Permalink to this headline">¶</a></h3>
-<p>The color module defines the most basic colors:</p>
+<p>The color module defines the most basic colors such as:</p>
 <ul class="simple">
 <li><p><img alt="https://placehold.it/15/000000/000000?text=+" src="https://placehold.it/15/000000/000000?text=+" />#000000 <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code></p></li>
 <li><p><img alt="https://placehold.it/15/808080/000000?text=+" src="https://placehold.it/15/808080/000000?text=+" />#808080 <code class="docutils literal notranslate"><span class="pre">LV_COLOR_GRAY</span></code></p></li>
@@ -1243,7 +1248,7 @@ For example to create light red color: <code class="docutils literal notranslate
 <li><p><img alt="https://placehold.it/15/ffa500/000000?text=+" src="https://placehold.it/15/ffa500/000000?text=+" />#ffa500 <code class="docutils literal notranslate"><span class="pre">LV_COLOR_ORANGE</span></code></p></li>
 <li><p><img alt="https://placehold.it/15/ffff00/000000?text=+" src="https://placehold.it/15/ffff00/000000?text=+" />#ffff00 <code class="docutils literal notranslate"><span class="pre">LV_COLOR_YELLOW</span></code></p></li>
 </ul>
-<p>as well as <code class="docutils literal notranslate"><span class="pre">LV_COLOR_WHITE</span></code>.</p>
+<p>as well as <code class="docutils literal notranslate"><span class="pre">LV_COLOR_WHITE</span></code> (fully white).</p>
 </div>
 </div>
 <div class="section" id="api">
@@ -1690,7 +1695,7 @@ For example to create light red color: <code class="docutils literal notranslate
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

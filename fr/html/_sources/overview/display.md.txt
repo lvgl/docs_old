@@ -3,82 +3,90 @@
 ```
 # Affichage
 
-``` important:: Le concept de base d'*affichage* dans LittlevGL est expliqué dans la section [Portage](/porting/display). Donc, avant de continuer à lire, veuillez lire cette section en premier.
+``` important:: The basic concept of *display* in LittlevGL is explained in the [Porting](/porting/display) section. So before reading further, please read the [Porting](/porting/display) section first.
 ```
-Dans LittlevGL, vous pouvez avoir plusieurs affichages, chacun avec ses propres pilotes et objets.
+In LittlevGL, you can have multiple displays, each with their own driver and objects.
 
-Il est facile de créer plus d'affichages : il suffit d’initialiser les tampons d’affichage et d’enregistrer les pilotes pour chaque affichage.
-Lorsque vous créez l'interface utilisateur, utilisez `lv_disp_set_default(disp)` pour indiquer à la librairie dans quel affichage afficher l'objet.
+Creating more displays is easy: just initialize more display buffers and register another driver for every display.
+When you create the UI, use `lv_disp_set_default(disp)` to tell the library which display to create objects on.
 
 
-Mais dans quels cas pouvez-vous utiliser le support multi-affichages ? Voici quelques exemples :
-- Avoir un écran TFT "normal" avec une interface utilisateur locale et créer des écrans "virtuels" sur VNC à la demande (vous devez ajouter votre propre pilote VNC).
+Why would you want multi-display support? Here are some examples:
+- Have a "normal" TFT display with local UI and create "virtual" screens on VNC on demand. (You need to add your VNC driver).
 - Avoir un grand écran TFT et un petit écran monochrome.
-- Avoir des écrans plus petits et simples dans un grand appareil
-- Avoir deux grands écrans TFT : un pour le client et un pour le vendeur
+- Have some smaller and simple displays in a large instrument or technology.
+- Have two large TFT displays: one for a customer and one for the shop assistant.
 
 ### Utiliser un seul affichage
-L'utilisation de plusieurs affichages peut être utile, mais dans la plupart des cas, cela n'est pas nécessaire. Par conséquent, le concept de multi-affichages est complètement masqué si vous ne déclarez qu'un seul affichage.
-Par défaut, l’affichage créé en dernier (le seul) est utilisé par défaut.
+Using more displays can be useful, but in most cases, it's not required. Therefore, the whole concept of multi-display is completely hidden if you register only one display.
+By default, the lastly created (the only one) display is used as default.
 
 `lv_scr_act()`, `lv_scr_load(scr)`, `lv_layer_top()`, `lv_layer_sys()`, `LV_HOR_RES` et` LV_VER_RES` sont toujours appliqués sur l’affichage créé en dernier (par défaut).
-Si vous passez `NULL` en tant que paramètre `disp` de fonctions associées à l'affichage, l'affichage par défaut sera utilisé.
+If you pass `NULL` as `disp` parameter to display related function, usually the default display will be used.
 P.ex. `lv_disp_trig_activity(NULL)` déclenchera une activité utilisateur sur l'affichage par défaut (voir ci-dessous dans [Inactivité](#inactivite)).
 
 ### Affichage miroir
 
-Pour refléter l'image de l'affichage sur un autre affichage, vous n'avez pas besoin d'utiliser le support multi-affichages. Transférez simplement le tampon reçu dans `drv.flush_cb` vers un autre affichage.
+To mirror the image of the display to another display, you don't need to use the multi-display support. Just transfer the buffer received in `drv.flush_cb` to another display too.
 
 ### Division d'image
-Vous pouvez créer un affichage plus grand à partir de plus petits. Voici comment faire :
-1. Définissez la résolution des affichages à celle désirée
-2. Dans `drv.flush_cb`, tronquez et modifiez le paramètre `area` pour chaque affichage
-3. Envoyez le contenu du tampon à chaque affichage pour la zone tronquée
+You can create a larger display from smaller ones. You can create it as below:
+1. Set the resolution of the displays to the large display's resolution.
+2. In `drv.flush_cb`, truncate and modify the `area` parameter for each display.
+3. Send the buffer's content to each display with the truncated area.
 
 ## Ecrans
 
-Chaque affichage possède son propre ensemble d' [Ecrans](/overview/object#ecran-le-parent-le-plus-elementaire) et d'objets à l'écran.
+Every display has each set of [Screens](overview/object#screen-the-most-basic-parent) and the object on the screens.
 
-Les écrans peuvent être considérés comme les conteneurs de plus haut niveau sans parent.
-La taille de l'écran est toujours égale à celle de son affichage et sa position est (0, 0). Par conséquent, les coordonnées des écrans ne peuvent pas être modifiées, c-à-d `lv_obj_set_pos()`, `lv_obj_set_size()` ou les fonctions similaires ne peuvent pas être utilisées sur les écrans.
+Be sure not to confuse displays and screens:
 
-Un écran peut être créé à partir de n'importe quel type d'objet, mais les deux types les plus courants sont [Objet de base](/object-types/obj) et [Image](/object-types/img) (pour créer un fond d'écran).
+* **Displays** are the physical hardware drawing the pixels.
+* **Screens** are the high-level root objects associated with a particular display. One display can have multiple screens associated with it, but not vice versa.
 
-Pour créer un écran, utilisez `lv_obj_t * scr = lv_<type>_create(NULL, copy)`. `copy` peut être un autre écran à copier.
+Screens can be considered the highest level containers which have no parent.
+The screen's size is always equal to its display and size their position is (0;0). Therefore, the screens coordinates can't be changed, i.e. `lv_obj_set_pos()`, `lv_obj_set_size()` or similar functions can't be used on screens.
 
-Pour charger un écran, utilisez `lv_scr_load(scr)`. Pour obtenir l'écran actif utilisez `lv_scr_act()`. Ces fonctions agissent sur l’affichage par défaut. Pour spécifier l’affichage, utilisez `lv_disp_get_scr_act(disp)` et `lv_disp_load_scr(disp, scr)`.
- 
-Les écrans peuvent être supprimés avec `lv_obj_del(scr)` mais assurez-vous de ne pas supprimer l'écran actuellement chargé.
+A screen can be created from any object type but, the two most typical types are the [Base object](/object-types/obj) and the [Image](/object-types/img) (to create a wallpaper).
+
+To create a screen, use `lv_obj_t * scr = lv_<type>_create(NULL, copy)`. `copy` can be an other screen to copy it.
+
+To load a screen, use `lv_scr_load(scr)`. To get the active screen, use `lv_scr_act()`. These functions works on the default display. If you want to to specify which display to work on, use `lv_disp_get_scr_act(disp)` and `lv_disp_load_scr(disp, scr)`.
+
+Screens can be deleted with `lv_obj_del(scr)`, but ensure that you do not delete the currently loaded screen.
 
 
 ### Ecran opaque
-Habituellement, l’opacité de l’écran est `LV_OPA_COVER` afin de fournir un fond solide et totalement couvrant pour les enfants.
-Cependant, dans certains cas particuliers, vous voudrez peut-être un écran transparent. Par exemple, si vous avez un lecteur vidéo qui restitue les images vidéo sur un calque mais sur un autre calque, vous souhaitez créer un menu OSD (au-dessus de la vidéo) à l'aide de LittlevGL.
-Dans ce cas, le style de l'écran doit avoir `body.opa = LV_OPA_TRANSP` ou `image.opa = LV_OPA_TRANSP` (ou d'autres valeurs `LV_OPA _...`) pour rendre l'écran transparent.
-Pour gérer correctement l'opacité des écrans, `LV_COLOR_SCREEN_TRANSP` doit être activé. Notez que cela ne fonctionne qu'avec `LV_COLOR_DEPTH = 32`.
-Le canal alpha des couleurs 32 bits sera 0 lorsqu'il n'y a pas d'objets et 255 en cas d'objets solides.
+Usually, the opacity of the screen is `LV_OPA_COVER` to provide a solid background for its children.
 
+However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LittlevGL.
+
+To do this, the screen should have a style that sets `body.opa` or `image.opa` to `LV_OPA_TRANSP` (or another non-opaque value) to make the screen opaque.
+
+Also, `LV_COLOR_SCREEN_TRANSP` needs to be enabled. Please note that it only works with `LV_COLOR_DEPTH = 32`.
+
+The Alpha channel of 32-bit colors will be 0 where there are no objects and will be 255 where there are solid objects.
 
 ## Fonctionnalités des affichages
 
 ### Inactivité
 
-L'inactivité de l'utilisateur est surveillée pour chaque affichage. Chaque utilisation d'un [Périphérique d'entrée](/overview/indev) (s'il est [associé à l'affichage](/porting/indev#autres-fonctionnalites)) compte comme une activité.
-Pour obtenir le temps écoulé depuis la dernière activité, utilisez `lv_disp_get_inactive_time(disp)`. Si `NULL` est passé comme paramètre, le temps d'inactivité le plus petit de tous les affichages sera retourné.
+The user's inactivity is measured on each display. Every use of an [Input device](/overview/indev) (if [associated with the display](/porting/indev#other-features)) counts as an activity.
+To get time elapsed since the last activity, use `lv_disp_get_inactive_time(disp)`. If `NULL` is passed, the overall smallest inactivity time will be returned from all displays (**not the default display**).
 
-Vous pouvez simuler une activité en utilisant `lv_disp_trig_activity(disp)`. Si `disp` est` NULL`, l'affichage par défaut sera utilisé.
+You can manually trigger an activity using `lv_disp_trig_activity(disp)`. If `disp` is `NULL`, the default screen will be used (**and not all displays**).
 
 
 ## Couleurs
 
-Le module couleur gère toutes les fonctions liées aux couleurs telles que la modification de la profondeur de couleur, la création de couleurs à partir de code hexadécimal, la conversion entre les profondeurs de couleur, le mélange de couleurs, etc.
+The color module handles all color-related functions like changing color depth, creating colors from hex code, converting between color depths, mixing colors, etc.
 
 Les types de variable suivants sont définis par le module couleur :
 
-- **lv_color1_t** Enregistre une couleur monochrome. Pour la compatibilité, il possède également des champs R, G, B mais ils sont tous identiques (1 octet)
-- **lv_color8_t** Une structure pour enregistrer R (3 bits), G (3 bits), B (2 bits) composantes d'une couleur 8 bits (1 octet)
-- **lv_color16_t** Une structure pour enregistrer R (5 bits), G (6 bits), B (5 bits) composantes d'une couleur 16 bits (2 octets)
-- **lv_color32_t** Une structure pour enregistrer R (8 bits), G (8 bits), B (8 bits) composantes d'une couleur 24 bits (4 octets)
+- **lv_color1_t** Store monochrome color. For compatibility, it also has R, G, B fields but they are always the same value (1 byte)
+- **lv_color8_t** A structure to store R (3 bit),G (3 bit),B (2 bit) components for 8-bit colors (1 byte)
+- **lv_color16_t** A structure to store R (5 bit),G (6 bit),B (5 bit) components for 16-bit colors (2 byte)
+- **lv_color32_t** A structure to store R (8 bit),G (8 bit), B (8 bit) components for 24-bit colors (4 byte)
 - **lv_color_t** Equivaut à `lv_color1/8/16/24_t` selon le paramètre de profondeur de couleur
 - **lv_color_int_t** `uint8_t`, `uint16_t` ou `uint32_t` selon le paramètre de profondeur de couleur. Utilisé pour construire des tableaux de couleurs à partir de valeurs numériques.
 - **lv_opa_t** Un simple type `uint8_t` pour définir l'opacité.
@@ -90,10 +98,10 @@ Les types `lv_color_t`,` lv_color1_t`, `lv_color8_t`, `lv_color16_t` et `lv_colo
 - **ch.blue** canal bleu
 - **full** rouge + vert + bleu en une seule valeur
 
-Vous pouvez définir la profondeur de couleur actuelle dans *lv_conf.h* en définissant la valeur `LV_COLOR_DEPTH` sur 1 (monochrome), 8, 16 ou 32.
+You can set the current color depth in *lv_conf.h*, by setting the `LV_COLOR_DEPTH` define to 1 (monochrome), 8, 16 or 32.
 
 ### Conversion de couleur
-Vous pouvez convertir une couleur de la profondeur de couleur actuelle en une autre. Les fonctions de conversion retourne un nombre, vous devez donc utiliser le champ `full` :
+You can convert a color from the current color depth to another. The converter functions return with a number, so you have to use the `full` field:
 
 ```c
 lv_color_t c;
@@ -105,7 +113,7 @@ lv_color1_t c1;
 c1.full = lv_color_to1(c);	/* Retourne 1 pour les couleurs claires, 0 pour les couleurs sombres */
 
 lv_color8_t c8;
-c8.full = lv_color_to8(c);	/* Donne un nombre de 8 bits avec la couleur convertie */ 
+c8.full = lv_color_to8(c);	/*Give a 8 bit number with the converted color*/
 
 lv_color16_t c16;
 c16.full = lv_color_to16(c); /* Donne un nombre de 16 bits avec la couleur convertie */
@@ -115,34 +123,34 @@ c32.full = lv_color_to32(c);	/* Donne un nombre de 32 bits avec la couleur conve
 ```
 
 ### Permutation 16 bits
-Vous pouvez définir `LV_COLOR_16_SWAP` dans *lv_conf.h* pour permuter les octets de *couleurs RGB565*. C'est utile si vous transférez les couleurs 16 bits via une interface orientée octet comme SPI.
-Comme les nombres de 16 bits sont stockés au format Little Endian (octet le moins significatif à l'adresse la plus basse), l'interface envoie d'abord l'octet le moins significatif. Cependant, les écrans ont généralement besoin de l'octet le plus significatif en premier. Une non-concordance dans l'ordre des octets entraînera une altération des couleurs.
+You may set `LV_COLOR_16_SWAP` in *lv_conf.h* to swap the bytes of *RGB565* colors. It's useful if you send the 16-bit colors via a byte-oriented interface like SPI.
 
+As 16-bit numbers are stored in Little Endian format (lower byte on the lower address), the interface will send the lower byte first. However, displays usually need the higher byte first. A mismatch in the byte order will result in highly distorted colors.
 
 ### Créer et mélanger les couleurs
-Vous pouvez créer des couleurs avec la profondeur de couleur actuelle à l'aide de la macro LV_COLOR_MAKE. Il faut 3 arguments (rouge, vert, bleu) sous forme de nombres de 8 bits.
-Par exemple, pour créer une couleur rouge clair : `my_color = COLOR_MAKE(0xFF, 0x80,0x80)`.
+You can create colors with the current color depth using the LV_COLOR_MAKE macro. It takes 3 arguments (red, green, blue) as 8-bit numbers.
+For example to create light red color: `my_color = COLOR_MAKE(0xFF,0x80,0x80)`.
 
 Les couleurs peuvent aussi être créées à partir de codes hexadécimaux : `my_color = lv_color_hex(0x288ACF)` ou `my_color = lv_color_hex(0x28C)`.
 
-Le mélange de deux couleurs est possible avec `mixed_color = lv_color_mix(color1, color2, ratio)`. Le ratio peut être 0..255. 0 donne entièrement color2, 255 donne entièrement color1.
+Mixing two colors is possible with `mixed_color = lv_color_mix(color1, color2, ratio)`. Ration can be 0..255. 0 results fully color2, 255 result fully color1.
 
-Les couleurs peuvent aussi être créées avec l’espace HSV en utilisant `lv_color_hsv_to_rgb(hue, saturation, value)`. `hue` devrait être dans la plage 0..360, `saturation` et `value` dans la plage 0..100.
+Colors can be created with from HSV space too using `lv_color_hsv_to_rgb(hue, saturation, value)` . `hue` should be in 0..360 range, `saturation` and `value` in 0..100 range.
 
 ### Opacité
-Pour décrire l'opacité, le type `lv_opa_t` est créé comme équivalent d'un `uint8_t`. Quelques définitions sont également introduites :
+To describe opacity the `lv_opa_t` type is created as a wrapper to `uint8_t`. Some defines are also introduced:
 
-- **LV_OPA_TRANSP** Valeur : 0, l'opacité rend la couleur totalement transparente.
+- **LV_OPA_TRANSP** Value: 0, means the opacity makes the color completely transparent
 - **LV_OPA_10** Valeur : 25, signifie que la couleur est un peu couvrante
 - **LV_OPA_20 ... OPA_80** viennent logiquement
-- **LV_OPA_90** Valeur : 229 signifie que la couleur est presque entièrement couvrante
-- **LV_OPA_COVER** Valeur : 255, signifie que la couleur couvre entièrement
+- **LV_OPA_90** Value: 229, means the color near completely covers
+- **LV_OPA_COVER** Value: 255, means the color completely covers
 
-Vous pouvez également utiliser les définitions `LV_OPA_*` dans `lv_color_mix()` en tant que *ratio*.
+You can also use the `LV_OPA_*` defines in `lv_color_mix()` as a *ratio*.
 
 ### Couleurs intégrées
 
-Le module couleur définit les couleurs les plus basiques :
+The color module defines the most basic colors such as:
 
 - ![#000000](https://placehold.it/15/000000/000000?text=+) `LV_COLOR_BLACK`
 - ![#808080](https://placehold.it/15/808080/000000?text=+) `LV_COLOR_GRAY`
@@ -162,9 +170,7 @@ Le module couleur définit les couleurs les plus basiques :
 - ![#ffa500](https://placehold.it/15/ffa500/000000?text=+) `LV_COLOR_ORANGE`
 - ![#ffff00](https://placehold.it/15/ffff00/000000?text=+) `LV_COLOR_YELLOW`
 
-ainsi que `LV_COLOR_WHITE`.
-
-
+as well as `LV_COLOR_WHITE` (fully white).
 
 ## API
 
@@ -175,7 +181,7 @@ ainsi que `LV_COLOR_WHITE`.
 
 .. doxygenfile:: lv_disp.h
   :project: lvgl
-        
+
 ```
 
 ### Couleurs
@@ -184,5 +190,5 @@ ainsi que `LV_COLOR_WHITE`.
 
 .. doxygenfile:: lv_color.h
   :project: lvgl
-        
+
 ```

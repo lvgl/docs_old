@@ -3,18 +3,18 @@
 ```
 # Système d'exploitation et interruptions
 
-LittlevGL n'est **pas compatible avec les fils d’exécution** par défaut.
+LittlevGL is **not thread-safe** by default.
 
-Cependant, dans les cas suivants, il est valide d'appeler des fonctions liées à LittlevGL :
+However, in the following conditions it's valid to call LittlevGL related functions:
 - Dans les *événements*. Apprenez-en plus dans [Evénements](/overview/event).
 - Dans *lv_tasks*.  Apprenez-en plus dans [Tâches](/overview/task).
 
 
 ## Tâches et fils d’exécution
-Si vous avez besoin d'utiliser de vraies tâches ou des fils d'exécution, vous avez besoin d'un mutex qui doit être acquis avant l'appel de `lv_task_handler` et libéré ensuite.
-Par ailleurs, vous devez utiliser ce mutex dans les autres tâches et  fils d'exécution lors de chaque appel de fonction et code liés à LittlevGL (`lv_...`).
-De cette façon, vous pouvez utiliser LittlevGL dans un environnement réellement multitâche. Utilisez simplement un mutex pour éviter l'appel concurrent des fonctions LittlevGL.
+If you need to use real tasks or threads, you need a mutex which should be invoked before the call of `lv_task_handler` and released after it.
+Also, you have to use the same mutex in other tasks and threads around every LittlevGL (`lv_...`) related function calls and codes.
+This way you can use LittlevGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LittlevGL functions.
 
 ## Interruptions
-Essayez d'éviter d'appeler les fonctions LittlevGL à partir d'une interruption (sauf `lv_tick_inc()` et `lv_disp_flush_ready ()`). Mais si vous avez vraiment besoin de le faire, vous devez désactiver l’interruption qui utilise les fonctions LittlevGL pendant que `lv_task_handler` est en cours d’exécution.
-Il est préférable de positionner un indicateur ou toute autre valeur et de le vérifier périodiquement dans une `lv_task`.
+Try to avoid calling LittlevGL functions from the interrupts (except `lv_tick_inc()` and `lv_disp_flush_ready()`). But, if you need to do this you have to disable the interrupt which uses LittlevGL functions while `lv_task_handler` is running.
+It's a better approach to set a flag or some value and periodically check it in an `lv_task`.

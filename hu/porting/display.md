@@ -3,36 +3,36 @@
 ```
 # Kijelző interface
 
-Ahhoz használhass egy kijelzőt egy `lv_disp_buf_t` és egy `lv_disp_drv_t` typusú változót kell inicializálnod.
-- **lv_disp_buf_t** egy belső grafikus buffert tartalmaz 
-- **lv_disp_drv_t** a kijelzőhöz kapcsolódó callback függvényeket és egyén beállításokat tartalmaz
+To set up a display an `lv_disp_buf_t` and an `lv_disp_drv_t` variable has to be initialized.
+- **lv_disp_buf_t** contains internal graphics buffer(s).
+- **lv_disp_drv_t** contains callback functions to interact with the display and manipulate drawing related things.
 
 
-## Kijelző buffer 
+## Display buffer
 
 `lv_disp_buf_t` így inicializálható:
 ```c
     /*Egy static vagy global változó a buffers tárolásához*/
     static lv_disp_buf_t disp_buf;
-    
+
     /*Static vagy global buffer(ek). (A második buffer opcionális*/
     static lv_color_t buf_1[MY_DISP_HOR_RES * 10];
     static lv_color_t buf_2[MY_DISP_HOR_RES * 10];
-    
+
     /*`disp_buf` inicializálása a buffer(ekkel) */
     lv_disp_buf_init(&disp_buf, buf_1, buf_2, MY_DISP_HOR_RES*10);
 ```
 
-Három beállítási lehetőség van a bufferek méretének és számának megfelelően 
-1. **Egy buffer** LittlevGL a bufferbe rajzolja a képernyő tartalmát és elküldi a  kijelzőre.
-A buffer kisebb is lehet, mint kijelző. Ebben az esetben a nagyobb területek kisebb darabokban kerülnek kirajzolásra.
+There are 3 possible configurations regarding the buffer size:
+1. **One buffer** LittlevGL draws the content of the screen into a buffer and sends it to the display.
+The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts.
 Ha csak egy kis terület változik (pl. egy gomb megnyomásánál), akkor csak az a kis terület kerül firssítésre.
 2. **Kettő nem képernyőméretű buffer** két bufferrel  LittlevGL képes az egyik bufferbe rajzolni, míg a másik buffer tartalmát el tudja küldeni a kijelzőnek a háttérben.
 DMA vagy egyéb hardware használata ajánlott, hogy az adatokat háttérben küldd el a kijelzőnek és hagyd a CPU-t rajzolni a másik bufferbe időközben.
-Íly' módon a rajzolás és a kijelző frissítése párhozamosan történhet.
-Az *Egy buffer* módhoz hasonlóan LittlevGL kisebb darabokban fogja rajzolni a buffernél nagyobb területeket.
+This way the rendering and refreshing of the display become parallel.
+Similarly to the *One buffer*, LittlevGL will draw the display's content in chunks if the buffer is smaller than the area to refresh.
 3. **Két képernyőméretű buffer**.
-Ellentétben a *Két nem képernyőméretű buffer* móddal LittlevGL mindig teljes képenyő képét szolgáltatja, nem csak egy kis darabot.
+In contrast to *Two non-screen-sized buffers* LittlevGL will always provide the whole screen's content not only chunks.
 Ennek köszönhetően a driver egyszerűen kicserélheti a frame buffer címét a kapott bufferre.
 Ezért ez a mód olyan MCU-kkal működik a legjobban, amiknek van LCD/TFT perifériája és a frame buffer  csak egy terület a RAM-ban.
 
@@ -44,27 +44,27 @@ Ha buffer inicializálása kész a kijlező dirver-t kell inicializálni. Legegy
 - **flush_cb** egy callback függvény, hogy a buffer tartalmát e kijelző egy megadott területére másolja
 
 Van néhány opcionális adata mező is:
-- **hor_res** a kijelző vízszintes felbontása. (`LV_HOR_RES_MAX` alapértelmezetten az *lv_conf.h*-ból)
-- **ver_res** a kijelző függőleges felbontása. (`LV_VER_RES_MAX`  alapértelmezetten az *lv_conf.h*-ból)
-- **color_chroma_key** egy szín ami átlátszóként lesz megjelenítve chrome keyed képeken. `LV_COLOR_TRANSP`  alapértelmezetten az *lv_conf.h*-ból)
+- **hor_res** horizontal resolution of the display. (`LV_HOR_RES_MAX` by default from *lv_conf.h*).
+- **ver_res** vertical resolution of the display. (`LV_VER_RES_MAX` by default from *lv_conf.h*).
+- **color_chroma_key** a color which will be drawn as transparent on chrome keyed images. `LV_COLOR_TRANSP` by default from *lv_conf.h*).
 - **user_data** egyedi tetszőleges felhasználói adat. A típusa módosítható *lv_conf.h*-ban.
-- **anti-aliasing** anti-aliasing (élsimítás) engedélyezése. `LV_ANTIALIAS`  alapértelmezetten az *lv_conf.h*-ból
+- **anti-aliasing** use anti-aliasing (edge smoothing). `LV_ANTIALIAS` by default  from *lv_conf.h*.
 - **rotated** ha `1` megcseréli `hor_res` and `ver_res` értékét. LittlevGL mindkét esetben ugyanabba az iránya rajzol (fentről le soronként) ezért a kitöltés/scan-nelés irányát a driver-ben is át kell konfigurálni.
-- **screen_transp** ha`1` a képernyőknek lehetnek átlátszó vagy áttetsző pixeleik. `LV_COLOR_SCREEN_TRANSP` engedélyezve kell legyen az *lv_conf.h*-ben.
+- **screen_transp** if `1` the screen can have transparent or opaque style. `LV_COLOR_SCREEN_TRANSP` needs to enabled in *lv_conf.h*.
 
 A GPU használatához az alábbi callback-ek használhatók:
-- **gpu_fill_cb** fill an area in memory with colors. 
+- **gpu_fill_cb** fill an area in memory with colors.
 - **gpu_blend_cb** blend two memory buffers using opacity.
 
-Note that, these functions need to draw to the memory (RAM) and not your display directly. 
- 
-Néhány opcionális callback, melyek megkönnyítik és optimálisabbá teszik monochrome, szürkeárnyalatos vagy nem szabványos RGB kijelzők használatát.
-- **rounder_cb** kerekíti az újrarajzolandó területek koordinátáit. Pl. egy 2x2 px terület 2x8re konvertálható.. 
+Note that, these functions need to draw to the memory (RAM) and not your display directly.
+
+Some other optional callbacks to make easier and more optimal to work with monochrome, grayscale or other non-standard RGB displays:
+- **rounder_cb** round the coordinates of areas to redraw. E.g. a 2x2 px can be converted to 2x8.
 Ez akkor használható, ha kijelző vezérlő csak bizony magasságú vagy szélességű területeket tud frissíteni. (Általában 8px magasság monochrome kijelzőknél)
-- **set_px_cb** egyedi függvény  *kijelző buffer* írásához. 
-Használatával a pixeleket egy tömörebb formában tárolhatók a kijelzőnek speciális színformátuma van (pl. 1 bit monochrome, 2  bit szürkeárnyalat etc.) 
+- **set_px_cb** a custom function to write the *display buffer*.
+It can be used to store the pixels more compactly if the display has a special color format. (e.g. 1-bit monochrome, 2-bit grayscale etc.)
 This way the buffers used in `lv_disp_buf_t` can be smaller to hold only the required number of bits for the given area size. `set_px_cb` is not working with `Two screen-sized buffers` display buffer configuration.
-- **monitor_cb** egy callback, mely megmutatja, hogy mennyi pixel került frissítésre adott idő alatt.
+- **monitor_cb** a callback function tells how many pixels were refreshed in how much time.
 
 Egy *lv_disp_drv_t* változó mezőinek beállítása előtt azt inicializálni kell a `lv_disp_drv_init(&disp_drv)` függvénnyel.
 És végül a kijelző regisztrálásához a `lv_disp_drv_register(&disp_drv)` függvényt kell meghívni.
@@ -125,13 +125,13 @@ void my_rounder_cb(lv_disp_drv_t * disp_drv, lv_area_t * area)
   /* Frissítsd az `area`-t ahogy szükséges. Csak nagyobb lehet. 
    * Például legyen mindig N x 8 px magas*/
    area->y1 = area->y1 & 0x07;
-   area->y2 = (area->y2 & 0x07) + 8; 
+   area->y2 = (area->y2 & 0x07) + 8;
 }
 
 void my_set_px_cb(lv_disp_drv_t * disp_drv, uint8_t * buf, lv_coord_t buf_w, lv_coord_t x, lv_coord_t y, lv_color_t color, lv_opa_t opa)
 {
-    /* Írd a buffert ahogy szükséges
-     * 1 bit írása egy monochrome kijelzőre, ahol bitek függőlegesen vannak bájtokhoz mappolva:*/
+    /* Write to the buffer as required for the display.
+     * Write only 1-bit for monochrome displays mapped vertically:*/
  buf += buf_w * (y >> 3) + x;
  if(lv_color_brightness(color) > 128) (*buf) |= (1 << (y % 8));
  else (*buf) &= ~(1 << (y % 8));
@@ -143,12 +143,11 @@ void my_monitor_cb(lv_disp_drv_t * disp_drv, uint32_t time, uint32_t px)
 }
 ```
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_hal_disp.h
   :project: lvgl
-        
-```
 
+```

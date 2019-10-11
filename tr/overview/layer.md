@@ -6,12 +6,11 @@
 
 ## Order of creation
 
-The earlier created object (and its children) will be drawn earlier (nearer to the background). In other words, the lastly created object will be on the top among its siblings. 
-It is very important, the order is calculated among the objects on the same level ("siblings").
+By default, LittlevGL draws old objects on the background and new objects on the foreground.
 
-Layers can be added easily by creating 2 objects (which can be transparent). Firstly 'A' and secondly 'B'. 'A' and every object on it will be in the background and can be covered by 'B' and its children.
+For example, assume we added a button to a parent object named button1 and then another button named button2. Then button1 (with its child object(s)) will be in the background and can be covered by button2 and its children.
 
-  
+
 ![](/misc/layers.png "Creating graphical objects in Littlev Graphics Library")  
 
 ```c
@@ -41,20 +40,20 @@ lv_obj_del(label2);
 ## Bring to the foreground
 
 There are several ways to bring an object to the foreground:
-- Use `lv_obj_set_top(obj, true)`. If `obj` or any of its children is clicked then LittlevGL will automatically bring the object to the foreground. 
-It works similarly to the windows on PC. When a window in the background is clicked it will come to the foreground automatically.
-- Use `lv_obj_move_foreground(obj)` and `lv_obj_move_background(obj)` to explicitly tell the library to bring an object to the foreground or move to the background.
-- When `lv_obj_set_parent(obj, new_parent)` is used `obj` will be on the foreground on the new parent.
+- Use `lv_obj_set_top(obj, true)`. If `obj` or any of its children is clicked, then LittlevGL will automatically bring the object to the foreground.
+It works similarly to a typical GUI on a PC. When a window in the background is clicked, it will come to the foreground automatically.
+- Use `lv_obj_move_foreground(obj)` to explicitly tell the library to bring an object to the foreground. Similarly, use `lv_obj_move_background(obj)` to move to the background.
+- When `lv_obj_set_parent(obj, new_parent)` is used, `obj` will be on the foreground on the `new_parent`.
 
 
-## Top and sys layer
+## Top and sys layers
 
-There are two special layers called `layer_top` and `layer_sys`. 
-Both of them is visible and the same on all screens of a display. `layer_top` is on top of "normal screen" and `layer_sys` is on top of `layer_top` too.
+LittlevGL uses two special layers named as `layer_top` and `layer_sys`.
+Both are visible and common on all screens of a display. **They are not, however, shared among multiple physical displays.** The `layer_top` is always on top of the default screen (`lv_scr_act()`), and `layer_sys` is on top of `layer_top`.
 
-`layer_top` can be used by the user to create some content visible everywhere. For example a menu bar, a pop-up, etc. If the `click` attribute is enabled then `layer_top` will absorb all user click and acts as a modal.
+The `layer_top` can be used by the user to create some content visible everywhere. For example, a menu bar, a pop-up, etc. If the `click` attribute is enabled, then `layer_top` will absorb all user click and acts as a modal.
 ```c
 lv_obj_set_click(lv_layer_top(), true);
-``` 
+```
 
-`layer_sys` is used by LittlevGL. For example, it places the mouse cursor there to be sure it's always visible. 
+The `layer_sys` is also using for similar purpose on LittlevGL. For example, it places the mouse cursor there to be sure it's always visible.

@@ -165,7 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="project.html">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="project.html#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="project.html#initialization">Initialization</a></li>
 </ul>
 </li>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Events</a><ul>
@@ -1091,12 +1091,12 @@
             
   <div class="section" id="sleep-management">
 <h1>Sleep management<a class="headerlink" href="#sleep-management" title="Permalink to this headline">¶</a></h1>
-<p>The MCU can go to sleep when no user input happens. In this case the main <code class="docutils literal notranslate"><span class="pre">while(1)</span></code> should look like this:</p>
+<p>The MCU can go to sleep when no user input happens. In this case, the main <code class="docutils literal notranslate"><span class="pre">while(1)</span></code> should look like this:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-  <span class="cm">/*Normal operation (no sleep) in &lt; 1 sec inactivity*/</span> 
+  <span class="cm">/*Normal operation (no sleep) in &lt; 1 sec inactivity*/</span>
   <span class="k">if</span><span class="p">(</span><span class="n">lv_disp_get_inactive_time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">{</span>
 	  <span class="n">lv_task_handler</span><span class="p">();</span>
-  <span class="p">}</span> 
+  <span class="p">}</span>
   <span class="cm">/*Sleep after 1 sec inactivity*/</span>
   <span class="k">else</span> <span class="p">{</span>
 	  <span class="n">timer_stop</span><span class="p">();</span>   <span class="cm">/*Stop the timer where lv_tick_inc() is called*/</span>
@@ -1106,10 +1106,10 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>You should also add these lines to your input device read function if a press happens:</p>
+<p>You should also add below lines to your input device read function if a wake-up (press, touch or click etc.) happens:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_tick_inc</span><span class="p">(</span><span class="n">LV_DISP_DEF_REFR_PERIOD</span><span class="p">);</span>  <span class="cm">/*Force task execution on wake-up*/</span>
 <span class="n">timer_start</span><span class="p">();</span>                         <span class="cm">/*Restart the timer where lv_tick_inc() is called*/</span>
-<span class="n">lv_task_handler</span><span class="p">();</span>                     <span class="cm">/*Call `lv_task_handler()` manually to process the press event*/</span>
+<span class="n">lv_task_handler</span><span class="p">();</span>                     <span class="cm">/*Call `lv_task_handler()` manually to process the wake-up event*/</span>
 </pre></div>
 </div>
 <p>In addition to <code class="docutils literal notranslate"><span class="pre">lv_disp_get_inactive_time()</span></code> you can check <code class="docutils literal notranslate"><span class="pre">lv_anim_count_running()</span></code> to see if every animations are finished.</p>
@@ -1137,7 +1137,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

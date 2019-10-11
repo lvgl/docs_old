@@ -165,7 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="project.html">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="project.html#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="project.html#initialization">Initialization</a></li>
 </ul>
 </li>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Events</a><ul>
@@ -1091,21 +1091,21 @@
   <div class="section" id="operating-system-and-interrupts">
 <h1>Operating system and interrupts<a class="headerlink" href="#operating-system-and-interrupts" title="Permalink to this headline">¶</a></h1>
 <p>LittlevGL is <strong>not thread-safe</strong> by default.</p>
-<p>However, in the following case it’s valid to call LittlevGL related functions:</p>
+<p>However, in the following conditions it’s valid to call LittlevGL related functions:</p>
 <ul class="simple">
 <li><p>In <em>events</em>. Learn more in <a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a>.</p></li>
 <li><p>In <em>lv_tasks</em>. Learn more in <a class="reference internal" href="../overview/task.html"><span class="doc">Tasks</span></a>.</p></li>
 </ul>
 <div class="section" id="tasks-and-threads">
 <h2>Tasks and threads<a class="headerlink" href="#tasks-and-threads" title="Permalink to this headline">¶</a></h2>
-<p>If you need to use real tasks or threads you need a mutex which should be taken before the call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> and released after it.
-In addition, you have to use to that mutex in other tasks and threads around every LittlevGL (<code class="docutils literal notranslate"><span class="pre">lv_...</span></code>) related function call and code.
-This way you can use LittlevGL in a real multitasking environment. Just use a mutex to avoid the concurrent calling of LittlevGL functions.</p>
+<p>If you need to use real tasks or threads, you need a mutex which should be invoked before the call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> and released after it.
+Also, you have to use the same mutex in other tasks and threads around every LittlevGL (<code class="docutils literal notranslate"><span class="pre">lv_...</span></code>) related function calls and codes.
+This way you can use LittlevGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LittlevGL functions.</p>
 </div>
 <div class="section" id="interrupts">
 <h2>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">¶</a></h2>
-<p>Try to avoid calling LittlevGL function from an interrupts (except <code class="docutils literal notranslate"><span class="pre">lv_tick_inc()</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready()</span></code>). But if you really need to do this you have to disable the interrupt which uses LittlevGL functions while <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> is running.
-It’s a better approach to set a flag or other value and periodically check it in an <code class="docutils literal notranslate"><span class="pre">lv_task</span></code>.</p>
+<p>Try to avoid calling LittlevGL functions from the interrupts (except <code class="docutils literal notranslate"><span class="pre">lv_tick_inc()</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready()</span></code>). But, if you need to do this you have to disable the interrupt which uses LittlevGL functions while <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> is running.
+It’s a better approach to set a flag or some value and periodically check it in an <code class="docutils literal notranslate"><span class="pre">lv_task</span></code>.</p>
 </div>
 </div>
 
@@ -1131,7 +1131,7 @@ It’s a better approach to set a flag or other value and periodically check it 
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

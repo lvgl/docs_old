@@ -165,7 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/project.html#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/project.html#initialization">Initialization</a></li>
 </ul>
 </li>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="event.html">Events</a><ul>
@@ -1098,7 +1098,7 @@ For example a <a class="reference internal" href="../object-types/btn.html"><spa
 <h2>Object attributes<a class="headerlink" href="#object-attributes" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="basic-attributes">
 <h3>Basic attributes<a class="headerlink" href="#basic-attributes" title="Permalink to this headline">¶</a></h3>
-<p>The objects have basic attributes which are common independently from their type:</p>
+<p>All object types share some basic attributes:</p>
 <ul class="simple">
 <li><p>Position</p></li>
 <li><p>Size</p></li>
@@ -1106,7 +1106,7 @@ For example a <a class="reference internal" href="../object-types/btn.html"><spa
 <li><p>Drag enable</p></li>
 <li><p>Click enable etc.</p></li>
 </ul>
-<p>You can set/get this attributes with <code class="docutils literal notranslate"><span class="pre">lv_obj_set_...</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_obj_get_...</span></code> functions. For example:</p>
+<p>You can set/get these attributes with <code class="docutils literal notranslate"><span class="pre">lv_obj_set_...</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_obj_get_...</span></code> functions. For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Set basic object attributes*/</span>
 <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>	 <span class="cm">/*Button size*/</span>
 <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">);</span>      <span class="cm">/*Button position*/</span>
@@ -1122,7 +1122,7 @@ For example a <a class="reference internal" href="../object-types/btn.html"><spa
 <li><p>Current value</p></li>
 <li><p>Custom styles</p></li>
 </ul>
-<p>For these attributes every object type have unique API functions. For example for a slider:</p>
+<p>For these attributes, every object type have unique API functions. For example for a slider:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Set slider specific attributes*/</span>
 <span class="n">lv_slider_set_range</span><span class="p">(</span><span class="n">slider1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>	   <span class="cm">/*Set min. and max. values*/</span>
 <span class="n">lv_slider_set_value</span><span class="p">(</span><span class="n">slider1</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">LV_ANIM_ON</span><span class="p">);</span>	<span class="cm">/*Set the current value (position)*/</span>
@@ -1136,8 +1136,8 @@ For example a <a class="reference internal" href="../object-types/btn.html"><spa
 <h2>Object’s working mechanisms<a class="headerlink" href="#object-s-working-mechanisms" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="parent-child-structure">
 <h3>Parent-child structure<a class="headerlink" href="#parent-child-structure" title="Permalink to this headline">¶</a></h3>
-<p>A parent object can be considered as the container of its children. Every object has exactly one parent object (except screens) but a parent can have unlimited number of children.
-There is no limitation for the type of the parent but there are typical parent (e.g. button) and typical child (e.g. label) objects.</p>
+<p>A parent object can be considered as the container of its children. Every object has exactly one parent object (except screens), but a parent can have an unlimited number of children.
+There is no limitation for the type of the parent but, there are typical parent (e.g. button) and typical child (e.g. label) objects.</p>
 </div>
 <div class="section" id="moving-together">
 <h3>Moving together<a class="headerlink" href="#moving-together" title="Permalink to this headline">¶</a></h3>
@@ -1161,7 +1161,7 @@ Therefore all positions are relative to the parent.</p>
 </div>
 <div class="section" id="visibility-only-on-the-parent">
 <h3>Visibility only on the parent<a class="headerlink" href="#visibility-only-on-the-parent" title="Permalink to this headline">¶</a></h3>
-<p>If a child partially or fully out of its parent then the parts outside will not be visible.</p>
+<p>If a child is partially or fully out of its parent then the parts outside will not be visible.</p>
 <p><img alt="A graphical object is visible on its parent" src="../_images/par_child3.png" /></p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_set_x</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">);</span>	<span class="cm">/*Move the child a little bit of the parent*/</span>
 </pre></div>
@@ -1171,14 +1171,14 @@ Therefore all positions are relative to the parent.</p>
 <h3>Create - delete objects<a class="headerlink" href="#create-delete-objects" title="Permalink to this headline">¶</a></h3>
 <p>In LittlevGL objects can be created and deleted dynamically in run-time.
 It means only the currently created objects consume RAM.
-For example, if you need a chart you can create it when required and delete it when it is not visible or necessary.</p>
-<p>Every objects type has its own <strong>create</strong> function with a unified prototype.
+For example, if you need a chart, you can create it when required and delete it when it is not visible or necessary.</p>
+<p>Every object type has its own <strong>create</strong> function with a unified prototype.
 It needs two parameters:</p>
 <ul class="simple">
-<li><p>a pointer the parent object. To create a screen give <em>NULL</em> as parent.</p></li>
-<li><p>optionally a pointer to an other object with the same type to copy it. Can be <em>NULL</em> to not copy an other object.</p></li>
+<li><p>A pointer to the <em>parent</em> object. To create a screen give <em>NULL</em> as parent.</p></li>
+<li><p>Optionally, a pointer to <em>copy</em> object with the same type to copy it. This <em>copy</em> object can be <em>NULL</em> to avoid the copy operation.</p></li>
 </ul>
-<p>Independently from the object type a common variable type <code class="docutils literal notranslate"><span class="pre">lv_obj_t</span></code> is used. This pointer can be used later to set or get the attributes of the object.</p>
+<p>All objects are referenced in C code using an <code class="docutils literal notranslate"><span class="pre">lv_obj_t</span></code> pointer as a handle. This pointer can later be used to set or get the attributes of the object.</p>
 <p>The create functions look like this:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">lv_</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">_create</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">parent</span><span class="p">,</span> <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">copy</span><span class="p">);</span>
 </pre></div>
@@ -1187,10 +1187,10 @@ It needs two parameters:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">lv_obj_del</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">lv_obj_del</span></code> will delete the the object immediately.
+<p><code class="docutils literal notranslate"><span class="pre">lv_obj_del</span></code> will delete the object immediately.
 If for any reason you can’t delete the object immediately you can use <code class="docutils literal notranslate"><span class="pre">lv_obj_del_async(obj)</span></code>.
-It is useful e.g. is you want to delete the parent of an object in <code class="docutils literal notranslate"><span class="pre">LV_EVENT_DELETE</span></code> signal.</p>
-<p>You can delete only the children of an object but leave the object itself “alive”:</p>
+It is useful e.g. if you want to delete the parent of an object in the child’s <code class="docutils literal notranslate"><span class="pre">LV_EVENT_DELETE</span></code> signal.</p>
+<p>You can remove all the children of an object (but not the object itself) using <code class="docutils literal notranslate"><span class="pre">lv_obj_clean</span></code>:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">lv_obj_clean</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -1201,12 +1201,12 @@ It is useful e.g. is you want to delete the parent of an object in <code class="
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">scr1</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Always there is an active screen on display. By default, the library creates and loads one.To get the currently active screen use the <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> function to load new one use <code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr1)</span></code>.</p>
+<p>There is always an active screen on each display. By default, the library creates and loads a “Base object” as the screen for each display.To get the currently active screen use the <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> function. To load a new one, use <code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr1)</span></code>.</p>
 <p>Screens can be created with any object type. For example, a <a class="reference internal" href="../object-types/obj.html"><span class="doc">Base object</span></a> or an image to make a wallpaper.</p>
-<p>Screens are created on the <em>default display</em>.
-The <em>default screen</em> is the lastly registered screen with <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register</span></code> (if there is only screen then that one) or you can explicitly selected display with <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default(disp)</span></code>.
+<p>Screens are created on the currently selected <em>default display</em>.
+The <em>default screen</em> is the last registered screen with <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register</span></code> or you can explicitly select a new default display using <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default(disp)</span></code>.
 <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_scr_load()</span></code> operate on the currently default screen.</p>
-<p>Visit <a class="reference internal" href="display.html"><span class="doc">Multi display support</span></a> to learn more.</p>
+<p>Visit <a class="reference internal" href="display.html"><span class="doc">Multi-display support</span></a> to learn more.</p>
 </div>
 </div>
 </div>
@@ -1233,7 +1233,7 @@ The <em>default screen</em> is the lastly registered screen with <code class="do
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

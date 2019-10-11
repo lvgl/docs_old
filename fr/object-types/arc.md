@@ -25,7 +25,7 @@ Pour définir le style d'un objet *arc* la fonction `lv_arc_set_style(arc, LV_AR
 - **line.color** la couleur de l'arc.
 
 ## Evénements
-Les [événements génériques](/overview/event.html#generic-events) sont les seuls à être envoyés par ce type d'objet.
+Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
 
 Apprenez-en plus sur les [événements](/overview/event).
 

@@ -62,7 +62,7 @@
 
 
 \title{LittlevGL Documentation}
-\date{Sep 16, 2019}
+\date{Oct 11, 2019}
 \release{6.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -591,14 +591,14 @@ Tout est prêt pour utiliser la librairie graphique LittlevGL pour l’apprentis
 
 \subsubsection{Aperçu rapide}
 \label{\detokenize{get-started/quick-overview:apercu-rapide}}\label{\detokenize{get-started/quick-overview::doc}}
-Here you can learn the most important things about LittlevGL.
+Ici, vous pouvez apprendre les points les plus importants sur LittlevGL.
 Vous devriez le lire en premier pour avoir une impression générale, puis les sections détaillées {\hyperref[\detokenize{porting/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Portage}}}} et {\hyperref[\detokenize{overview/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Vue d’ensemble}}}} après cela.
 
 
 \paragraph{Ajouter LittlevGL à votre projet}
 \label{\detokenize{get-started/quick-overview:ajouter-littlevgl-a-votre-projet}}
-The following steps show how to setup LittlevGL on an embedded system with a display and a touchpad.
-You can use the {\hyperref[\detokenize{get-started/pc-simulator::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Simulators}}}} to get ‘ready to use’ projects which can be run on your PC.
+Les étapes suivantes montrent comment configurer LittlevGL sur un système embarqué avec un écran et un pavé tactile.
+Vous pouvez utiliser le {\hyperref[\detokenize{get-started/pc-simulator::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Simulateur}}}} pour obtenir des projets ‘prêts à utiliser’ pouvant être exécutés sur votre PC.
 \begin{itemize}
 \item {} 
 \sphinxhref{https://littlevgl.com/download}{Téléchargez} ou \sphinxhref{https://github.com/littlevgl/lvgl}{clonez} la librairie
@@ -607,7 +607,7 @@ You can use the {\hyperref[\detokenize{get-started/pc-simulator::doc}]{\sphinxcr
 Copiez le répertoire \sphinxcode{\sphinxupquote{lvgl}} dans votre projet
 
 \item {} 
-Copy \sphinxcode{\sphinxupquote{lvgl/lv\_conf\_templ.h}} as \sphinxcode{\sphinxupquote{lv\_conf.h}} next to the \sphinxcode{\sphinxupquote{lvgl}} folder and set at least \sphinxcode{\sphinxupquote{LV\_HOR\_RES\_MAX}}, \sphinxcode{\sphinxupquote{LV\_VER\_RES\_MAX}} and \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}} macros.
+Copiez \sphinxcode{\sphinxupquote{lvgl/lv\_conf\_templ.h}} sous le nom \sphinxcode{\sphinxupquote{lv\_conf.h}} au même niveau que le répertoire \sphinxcode{\sphinxupquote{lvgl}}et définissez au minimum les macros \sphinxcode{\sphinxupquote{LV\_HOR\_RES\_MAX}}, \sphinxcode{\sphinxupquote{LV\_VER\_RES\_MAX}} et \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}}.
 
 \item {} 
 Incluez \sphinxcode{\sphinxupquote{lvgl/lvgl.h}} quand vous devez utiliser les fonctions de LittlevGL.
@@ -661,7 +661,8 @@ Implémentez et enregistrez une fonction qui peut \sphinxstylestrong{lire un pé
 \end{itemize}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}             \PYG{c+cm}{/* Descripteur du pilote du périphérique d\PYGZsq{}entrée */}
+\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}t} \PYG{n}{indev\PYGZus{}drv}\PYG{p}{;}                  \PYG{c+cm}{/*Descriptor of a input device driver*/}
+\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}             \PYG{c+cm}{/*Basic initialization*/}
 \PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{type} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}TYPE\PYGZus{}POINTER}\PYG{p}{;}    \PYG{c+cm}{/* Le pavé tactile est un périphérique semblable à un pointeur */}
 \PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}touchpad\PYGZus{}read}\PYG{p}{;}     \PYG{c+cm}{/* Définit la fonction du pilote */}
 \PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}         \PYG{c+cm}{/* Finalement, enregistre le pilote */}
@@ -684,8 +685,8 @@ Implémentez et enregistrez une fonction qui peut \sphinxstylestrong{lire un pé
 \end{sphinxVerbatim}
 \begin{itemize}
 \item {} 
-Call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically every few milliseconds in the main \sphinxcode{\sphinxupquote{while(1)}} loop, in Timer interrupt or in an Operation system task.
-It will redraw the screen if required, handle input devices etc.
+Appelez \sphinxcode{\sphinxupquote{lv\_task\_handler()}} périodiquement, chaque quelques millisecondes, dans la boucle principale \sphinxcode{\sphinxupquote{while(1)}}, sur interruption d’une horloge ou à partir d’une tâche du système d’exploitation.
+Cela redessine l’écran si nécessaire, gère les périphériques d’entrée, etc.
 
 \end{itemize}
 
@@ -699,10 +700,10 @@ Les éléments graphiques tels que les boutons, les étiquettes, les curseurs, l
 
 Chaque objet possède un objet parent. L’objet enfant se déplace avec le parent et si vous supprimez le parent, les enfants seront également supprimés. Les enfants ne peuvent être visibles que sur leurs parents.
 
-The \sphinxstyleemphasis{screen} is the “root” parent. To get the current screen call \sphinxcode{\sphinxupquote{lv\_scr\_act()}}.
+L’\sphinxstyleemphasis{écran} est le parent “racine”. Pour obtenir l’écran actuel, appelez \sphinxcode{\sphinxupquote{lv\_scr\_act()}}.
 
-You can create a new object with \sphinxcode{\sphinxupquote{lv\_\textless{}type\textgreater{}\_create(parent, obj\_to\_copy)}}. It will return an \sphinxcode{\sphinxupquote{lv\_obj\_t *}} variable which should be used as a reference to the object to set its parameters.
-The first parameter is the desired \sphinxstyleemphasis{parent}, the second parameters can be an object to copy (\sphinxcode{\sphinxupquote{NULL}} is unused).
+Vous pouvez créer un nouvel objet avec \sphinxcode{\sphinxupquote{lv\_\textless{}type\textgreater{}\_create(parent, obj\_to\_copy)}}. Une variable \sphinxcode{\sphinxupquote{lv\_obj\_t *}} est retournée qui doit être utilisée comme référence à l’objet pour définir ses paramètres.
+Le premier paramètre est le \sphinxstyleemphasis{parent} souhaité, le second paramètre peut être un objet à copier (\sphinxcode{\sphinxupquote{NULL}} si inutilisé).
 Par exemple :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -728,7 +729,7 @@ Pour voir l’API complète, consultez la documentation des types d’objet ou l
 
 \subparagraph{Styles}
 \label{\detokenize{get-started/quick-overview:styles}}
-Styles can be assigned to the objects to changed their appearance. A style describes the appearance of rectangle-like objects (like a button or slider), texts, images and lines at once.
+Les styles peuvent être affectés aux objets pour changer leur apparence. Un style décrit tout à la fois l’apparence des objets de type rectangle (comme un bouton ou un curseur), des textes, des images et des lignes.
 
 Voici comment créer un nouveau style :
 
@@ -758,7 +759,7 @@ Apprenez-en plus dans la section {\hyperref[\detokenize{overview/style::doc}]{\s
 
 \subparagraph{Evénements}
 \label{\detokenize{get-started/quick-overview:evenements}}
-Events are used to inform the user if something has happened with an object. You can assign a callback to an object which will be called if the object is clicked, released, dragged, being deleted etc. It should look like this:
+Les événements sont utilisés pour informer l’utilisateur si quelque chose s’est produit avec un objet. Vous pouvez affecter une fonction de rappel à un objet qui sera appelée si l’objet est cliqué, relâché, déplacé, en cours de suppression, etc. Voici à quoi cela ressemble :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}event\PYGZus{}cb}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{btn\PYGZus{}event\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}                 \PYG{c+cm}{/* Affecte une fonction de rappel au bouton */}
@@ -773,11 +774,11 @@ Events are used to inform the user if something has happened with an object. You
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-Learn more about the events in the {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Event overview}}}} section.
+Apprenez-en plus dans la section {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{événements}}}}.
 
 
-\paragraph{Examples}
-\label{\detokenize{get-started/quick-overview:examples}}
+\paragraph{Exemples}
+\label{\detokenize{get-started/quick-overview:exemples}}
 
 \subparagraph{Bouton avec étiquette}
 \label{\detokenize{get-started/quick-overview:bouton-avec-etiquette}}
@@ -941,9 +942,9 @@ Apprenez-en plus sur {\hyperref[\detokenize{get-started/micropython::doc}]{\sphi
 
 \paragraph{Contribuer}
 \label{\detokenize{get-started/quick-overview:contribuer}}
-LittlevGL uses the \sphinxhref{https://forum.littlevgl.com}{Forum} to ask and answer questions and \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub’s Issue tracker} for development-related discussion (such as bug reports, feature suggestions etc.).
+LittlevGL utilise le \sphinxhref{https://forum.littlevgl.com}{forum} pour poser et répondre aux questions et  l’\sphinxhref{https://github.com/littlevgl/lvgl/issues}{outil de suivi des problèmes de GitHub} pour les discussions relatives au développement (comme les rapports de bogues, les suggestions de fonctionnalités etc.).
 
-There are many opportunities to contribute to LittlevGL such as:
+Il existe de nombreuses possibilités de contribuer à LittlevGL telles que :
 \begin{itemize}
 \item {} 
 \sphinxstylestrong{Aidez les autres} sur le \sphinxhref{https://forum.littlevgl.com}{forum}.
@@ -963,13 +964,13 @@ There are many opportunities to contribute to LittlevGL such as:
 
 \end{itemize}
 
-If you are interested in contributing to LittlevGL, then please read the guides below to get started.
+Si vous souhaitez contribuer à LittlevGL, veuillez lire les guides ci-dessous pour commencer.
 \begin{itemize}
 \item {} 
-\sphinxhref{https://blog.littlevgl.com/2018-12-06/contributing}{Contributing guide}
+\sphinxhref{https://blog.littlevgl.com/2018-12-06/contributing}{Guide de contribution}
 
 \item {} 
-\sphinxhref{https://github.com/littlevgl/lvgl/blob/master/docs/CODING\_STYLE.md}{Coding style guide}
+\sphinxhref{https://github.com/littlevgl/lvgl/blob/master/docs/CODING\_STYLE.md}{Guide de convention de code}
 
 \end{itemize}
 
@@ -979,25 +980,25 @@ If you are interested in contributing to LittlevGL, then please read the guides 
 
 \paragraph{Qu’est-ce que Micropython ?}
 \label{\detokenize{get-started/micropython:qu-est-ce-que-micropython}}
-\sphinxhref{http://micropython.org/}{Micropython} est une version de Python destinées aux microcontrôleurs.Using Micropython, you can write Python3 code and run it even on a bare metal architecture with limited resources.
+\sphinxhref{http://micropython.org/}{Micropython} est une version de Python destinées aux microcontrôleurs.En utilisant Micropython vous pouvez écrire du code Python 3 et l’exécuter directement sur des architectures aux ressources limitées.
 
 
-\subparagraph{Highlights of Micropython}
-\label{\detokenize{get-started/micropython:highlights-of-micropython}}\begin{itemize}
+\subparagraph{Points forts de Micropython}
+\label{\detokenize{get-started/micropython:points-forts-de-micropython}}\begin{itemize}
 \item {} 
-\sphinxstylestrong{Compact} - Fits and runs within just 256k of code space and 16k of RAM. No OS is needed, although you can also run it with an OS, if you want.
-
-\item {} 
-\sphinxstylestrong{Compatible} - Strives to be as compatible as possible with normal Python (known as CPython).
+\sphinxstylestrong{Compact} - s’exécute dans seulement 256 ko d’espace de code et 16 ko de MEV. Aucun SE n’est nécessaire, bien qu’il soit possible de l’exécuter sur un SE, si vous le souhaitez.
 
 \item {} 
-\sphinxstylestrong{Versatile} - Supports many architectures (x86, x86-64, ARM, ARM Thumb, Xtensa).
+\sphinxstylestrong{Compatible} - s’efforce d’être aussi compatible que possible avec le Python de référence (CPython).
+
+\item {} 
+\sphinxstylestrong{Adaptable} - supporte de multiples architectures (x86, x86-64, ARM, ARM Thumb, Xtensa).
 
 \item {} 
 \sphinxstylestrong{Interactif} - le cycle compilation-programmation-démarrage n’est pas nécessaire. Avec REPL (l’invite interactive) vous pouvez entrer des commandes et les exécuter immédiatement, lancer des scripts etc.
 
 \item {} 
-\sphinxstylestrong{Popular} - Many platforms are supported. The user base is growing bigger. Notable forks: \sphinxhref{https://github.com/micropython/micropython}{MicroPython}, \sphinxhref{https://github.com/adafruit/circuitpython}{CircuitPython}, \sphinxhref{https://github.com/loboris/MicroPython\_ESP32\_psRAM\_LoBo}{MicroPython\_ESP32\_psRAM\_LoBo}
+\sphinxstylestrong{Populaire} - de nombreuses plateformes sont supportées. Le nombre d’utilisateurs est en constante augmentation. Variantes notables : \sphinxhref{https://github.com/micropython/micropython}{MicroPython}, \sphinxhref{https://github.com/adafruit/circuitpython}{CircuitPython}, \sphinxhref{https://github.com/loboris/MicroPython\_ESP32\_psRAM\_LoBo}{MicroPython\_ESP32\_psRAM\_LoBo}
 
 \item {} 
 \sphinxstylestrong{Orienté embarqué} - fourni avec des modules spécifiques aux systèmes embarqués, comme le module \sphinxhref{https://docs.micropython.org/en/latest/library/machine.html\#classes}{machine} pour accéder au matériel bas-niveau (broches d’E/S, CAN, UART, SPI, I2C, RTC, horloges etc.)
@@ -1011,7 +1012,7 @@ If you are interested in contributing to LittlevGL, then please read the guides 
 
 \paragraph{Pourquoi Micropython + LittlevGL ?}
 \label{\detokenize{get-started/micropython:pourquoi-micropython-littlevgl}}
-Currently, Micropython \sphinxhref{https://forum.micropython.org/viewtopic.php?f=18\&t=5543}{does not have a good high-level GUI library} by default. LittlevGL is an \sphinxhref{https://blog.littlevgl.com/2018-12-13/extend-lvgl-objects}{Object Oriented Component Based} high-level GUI library, which seems to be a natural candidate to map into a higher level language, such as Python. LittlevGL is implemented in C and its APIs are in C.
+Actuellement, par défaut, Micropython \sphinxhref{https://forum.micropython.org/viewtopic.php?f=18\&t=5543}{ne dispose pas d’une bonne librairie de haut-niveau pour réaliser des interfaces graphiques}.  LittlevGL est une librairie basée sur l’utilisation de \sphinxhref{https://blog.littlevgl.com/2018-12-13/extend-lvgl-objects}{composants orientés objet}, ce qui en fait une candidate idéale pour s’interfacer à un langage de plus haut-niveau tel que Python. LittlevGL est implémentée en C est ses APIs sont en C.
 
 
 \subparagraph{Voici quelques avantages à utiliser LittlevGL avec Micropython :}
@@ -1020,7 +1021,7 @@ Currently, Micropython \sphinxhref{https://forum.micropython.org/viewtopic.php?f
 Développez des interfaces graphiques en Python, language de haut-niveau très populaire. Utilisez des paradigmes tels que la programmation orientée objet.
 
 \item {} 
-Usually, GUI development requires multiple iterations to get things right. With C, each iteration consists of \sphinxstylestrong{\sphinxcode{\sphinxupquote{Change code}} \textgreater{} \sphinxcode{\sphinxupquote{Build}} \textgreater{} \sphinxcode{\sphinxupquote{Flash}} \textgreater{} \sphinxcode{\sphinxupquote{Run}}}.In Micropython it’s just \sphinxstylestrong{\sphinxcode{\sphinxupquote{Change code}} \textgreater{} \sphinxcode{\sphinxupquote{Run}}} ! You can even run commands interactively using the \sphinxhref{https://en.wikipedia.org/wiki/Read\%E2\%80\%93eval\%E2\%80\%93print\_loop}{REPL} (the interactive prompt)
+Actuellement, le développement d’interface graphique nécessite de nombreuses itérations pour obtenir un résultat correct. Avec C, chaque itération nécessite de \sphinxstylestrong{\sphinxcode{\sphinxupquote{modifier le code}} \textgreater{} \sphinxcode{\sphinxupquote{compiler}} \textgreater{} \sphinxcode{\sphinxupquote{programmer}} \textgreater{} \sphinxcode{\sphinxupquote{exécuter}}}.En Micropython il faut seulement \sphinxstylestrong{\sphinxcode{\sphinxupquote{modifier le code}} \textgreater{} \sphinxcode{\sphinxupquote{exécuter}}}. Vous pouvez même exécuter des commandes de manière interactive en utilisant \sphinxhref{https://en.wikipedia.org/wiki/Read\%E2\%80\%93eval\%E2\%80\%93print\_loop}{REPL} (l’invite interactive)
 
 \end{itemize}
 
@@ -1041,7 +1042,7 @@ listes en compréhension, les générateurs, la gestion d’exception, les entie
 Rendre LittlevGL accessible à une plus large audience.  Aucun besoin de connaître le C dans le but de créer une interface graphique fonctionnelle sur un système embarqué.C’est également vrai pour \sphinxhref{https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython}{CircuitPython vision}. CircuitPython a été conçu avec l’éducation à l’esprit, pour rendre plus facile à des utilisateurs, nouveaux ou inexpérimentés, de débuter avec le développement embarqué.
 
 \item {} 
-Creating tools to work with LittlevGL at a higher level (e.g. drag-and-drop designer).
+Création d’outils pour utiliser LittlevGL à un niveau supérieur (concepteur graphique par glisser-déposer, par exemple).
 
 \end{itemize}
 
@@ -1050,8 +1051,8 @@ Creating tools to work with LittlevGL at a higher level (e.g. drag-and-drop desi
 
 
 
-\paragraph{So what does it look like?}
-\label{\detokenize{get-started/micropython:so-what-does-it-look-like}}\begin{quote}
+\paragraph{Alors, à quoi ça ressemble ?}
+\label{\detokenize{get-started/micropython:alors-a-quoi-ca-ressemble}}\begin{quote}
 
 TL;DR :
 C’est très similaire à l’API C, mais orienté objet pour les composants de LittlevGL.
@@ -1081,20 +1082,21 @@ Plongeons droit dans un exemple !
 \label{\detokenize{get-started/micropython:simulateur-en-ligne}}
 Si vous souhaitez expérimenter LittlevGL + Micropython sans télécharger quoi que ce soit - vous pouvez utiliser notre simulateur en ligne !C’est un ensemble LittlevGL + Micropython entièrement fonctionnel qui s’exécute dans le navigateur et permet d’éditer et d’exécuter un script Python.
 
-\sphinxhref{https://cdn.statically.io/gh/littlevgl/lv\_micropython/ef943a1ab40b32a8a77059d6e833a440446c51e8/ports/javascript/lvgl\_editor.html?env=dev\&script=https://raw.githubusercontent.com/littlevgl/lv\_binding\_micropython/dev-6.0/examples/chart\_anim\_example.py}{Click here to experiment on the online simulator}
+\sphinxhref{https://cdn.statically.io/gh/littlevgl/lv\_micropython/ef943a1ab40b32a8a77059d6e833a440446c51e8/ports/javascript/lvgl\_editor.html?env=dev\&script=https://raw.githubusercontent.com/littlevgl/lv\_binding\_micropython/dev-6.0/examples/chart\_anim\_example.py}{Cliquez ici pour expérimenter le simulateur en ligne}
 
 
 \subparagraph{Simulateur PC}
 \label{\detokenize{get-started/micropython:simulateur-pc}}
-Micropython is ported to many platforms. One notable port is “unix”, which allows you to build and run Micropython (+LittlevGL) on a Linux machine. (On a Windows machine you might need Virtual Box or WSL or MinGW or Cygwin etc.)
+Micropython est porté sur de nombresues plateformes, dont Unix, ce qui permet de compiler et exécuter Micropython (+ LittlevGL) sur une machine Linux (sur une machine Windows, d’autres outils peuvent être nécessaires : VirtualBox ou WSL ou MinGW ou Cygwin etc.).
 
-\sphinxhref{https://github.com/littlevgl/lv\_micropython}{Click here to know more information about building and running the unix port}
+\sphinxhref{https://github.com/littlevgl/lv\_micropython}{Cliquez ici pour en savoir plus sur la compilation et l’utilisation du port Unix}
 
 
-\subparagraph{Embedded platform}
-\label{\detokenize{get-started/micropython:embedded-platform}}
+\subparagraph{Plateforme embarquée}
+\label{\detokenize{get-started/micropython:plateforme-embarquee}}
 Au final, le but est d’exécuter sur une plateforme embarquée.
-Micropython et LittlevGL peuvent être utilisés sur de nombreuses architectures embarquées, telles que STM32, ESP32 etc.You would also need display and input drivers. We have some sample drivers (ESP32+ILI9341, as well as some other examples), but most chances are you would want to create your own input/display drivers for your specific purposes.Les pilotes peuvent être implémentés soit en C en tant que module Micropython, soit en Micropython pur !
+Micropython et LittlevGL peuvent être utilisés sur de nombreuses architectures embarquées, telles que STM32, ESP32 etc.Vous aurez également besoin de pilotes d’affichage et d’entrée. Nous avons quelques exemples de pilotes (ESP32 + ILI9341, ainsi que d’autres exemples), mais il est fort probable que vous souhaitiez créer vos propres pilotes d’affichage et d’entrée pour vos besoins spécifiques.
+Les pilotes peuvent être implémentés soit en C en tant que module Micropython, soit en Micropython pur !
 
 
 \paragraph{Où trouver plus d’informations ?}
@@ -1128,16 +1130,16 @@ Dans la \sphinxhref{http://docs.micropython.org/en/latest/}{documentation} et su
 Votre application qui crée l’interface graphique et gère les tâches spécifiques.
 
 \sphinxstylestrong{LittlevGL}
-The graphics library itself. Your application can communicate with the library to create a GUI. It contains a HAL (Hardware Abstraction Layer) interface to register your display and input device drivers.
+La bibliothèque graphique elle-même. Votre application peut communiquer avec la bibliothèque pour créer une interface graphique. Elle contient une interface HAL (Hardware Abstraction Layer, couche d’abstraction matérielle) permettant d’enregistrer vos pilotes de périphérique d’affichage et d’entrée.
 
 \sphinxstylestrong{Pilote}
-Besides your specific drivers, it contains functions to drive your display, optionally to a GPU and to read the touchpad or buttons.
+Outre vos pilotes spécifiques, il contient des fonctions pour gérer l’écran, éventuellement un GPU (processeur graphique), et lire un pavé tactile ou des boutons.
 
 
 \bigskip\hrule\bigskip
 
 
-Depending on the MCU, there are two typical hardware set-ups. One with built-in LCD/TFT driver periphery and another without it. In both cases, a frame buffer will be required to store the current image of the screen.
+Selon le microcontrôleur, l existe deux configurations matérielles typiques? Une avec contrôleur LCD/TFT intégré et l’autre sans. Dans les deux cas, un tampon d’affichage sera nécessaire pour mémoriser l’image actuelle de l’écran.
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
@@ -1149,9 +1151,9 @@ Dans ce cas, le tampon d’affichage peut résider dans la MEV interne (si le mi
 
 \item {} 
 \sphinxstylestrong{Contrôleur d’affichage externe}
-If the MCU doesn’t have TFT/LCD driver interface then an external display controller (E.g. SSD1963, SSD1306, ILI9341) has to be used.
-In this case, the MCU can communicate with the display controller via Parallel port, SPI or sometimes I2C.
-The frame buffer is usually located in the display controller which saves a lot of RAM for the MCU.
+Si votre microcontrôleur ne dispose pas d’un contrôleur  TFT/LCD alors un contrôleur d’affichage externe (par exemple SSD1963, SSD1306, ILI9341) doit être utilisé.
+Dans ce cas, le microcontrôleur peut communiquer avec le contrôleur d’affichage via un port parallèle, SPI ou parfois I2C.
+Le tampon d’affichage est généralement situé dans le contrôleur d’affichage, ce qui économise beaucoup de MEV pour le microcontrôleur.
 
 \end{enumerate}
 
@@ -1161,23 +1163,20 @@ The frame buffer is usually located in the display controller which saves a lot 
 
 \paragraph{Obtenir la librairie}
 \label{\detokenize{porting/project:obtenir-la-librairie}}
-LittlevGL Graphics Library est disponible sur GitHub : \sphinxurl{https://github.com/littlevgl/lvgl}.
+LittlevGL Graphics Library is available on GitHub: \sphinxurl{https://github.com/littlevgl/lvgl}.
 
-Vous pouvez la cloner ou télécharger la dernière version de la librairie depuis GitHub ou vous pouvez également utiliser la page {[}Télécharger{]} (https://littlevgl.com/download).
+You can clone it or download the latest version of the library from GitHub or you can use the \sphinxhref{https://littlevgl.com/download}{Download} page as well.
 
 La librairie graphique est le répertoire \sphinxstylestrong{lvgl} qui doit être copié dans votre projet.
 
 
-\paragraph{Fichier de configuration}
-\label{\detokenize{porting/project:fichier-de-configuration}}
-Il existe un fichier d’en-tête de configuration pour LittlevGL appelé \sphinxstylestrong{lv\_conf.h}. Il définit le comportement de base de la bibliothèque, désactive les modules et fonctionnalités inutilisés, ajuste la taille des tampons au moment de la compilation, etc.
+\paragraph{Configuration file}
+\label{\detokenize{porting/project:configuration-file}}
+There is a configuration header file for LittlevGL called \sphinxstylestrong{lv\_conf.h}. It sets the library’s basic behaviour, disables unused modules and features, adjusts the size of memory buffers in compile-time, etc.
 
-Copiez \sphinxstylestrong{lvgl/lv\_conf\_template.h} au même niveau que le répertoire \sphinxstyleemphasis{lvgl} et renommez-le en \sphinxstyleemphasis{lv\_conf.h}. Ouvrez le fichier et changez le \sphinxcode{\sphinxupquote{\#if 0}} du début en\sphinxcode{\sphinxupquote{ \#if 1}} pour activer son contenu.
-\begin{itemize}
-\item {} 
-lv\_conf.h * peut également être copié à d’autres emplacements, mais vous devez ensuite ajouter \sphinxcode{\sphinxupquote{LV\_CONF\_INCLUDE\_SIMPLE}} à vos options de compilation (p.ex. \sphinxcode{\sphinxupquote{-DLV\_CONF\_INCLUDE\_SIMPLE}} pour gcc) et définir le chemin d’inclusion manuellement.
+Copy \sphinxstylestrong{lvgl/lv\_conf\_template.h} next to the \sphinxstyleemphasis{lvgl} directory and rename it to \sphinxstyleemphasis{lv\_conf.h}. Open the file and change the \sphinxcode{\sphinxupquote{\#if 0}} at the beginning to \sphinxcode{\sphinxupquote{\#if 1}} to enable its content.
 
-\end{itemize}
+\sphinxstyleemphasis{lv\_conf.h} can be copied other places as well but then you should add \sphinxcode{\sphinxupquote{LV\_CONF\_INCLUDE\_SIMPLE}} define to your compiler options (e.g. \sphinxcode{\sphinxupquote{-DLV\_CONF\_INCLUDE\_SIMPLE}} for gcc compiler) and set the include path manually.
 
 Dans le fichier de configuration, les commentaires expliquent la signification des options. Vérifiez au moins ces trois options de configuration et modifiez-les en fonction de votre matériel :
 \begin{enumerate}
@@ -1185,29 +1184,29 @@ Dans le fichier de configuration, les commentaires expliquent la signification d
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-\sphinxstylestrong{LV\_HOR\_RES\_MAX} la résolution horizontale de votre écran
+\sphinxstylestrong{LV\_HOR\_RES\_MAX} Your display’s horizontal resolution.
 
 \item {} 
-\sphinxstylestrong{LV\_VER\_RES\_MAX} la résolution verticale de votre écran
+\sphinxstylestrong{LV\_VER\_RES\_MAX} Your display’s vertical resolution.
 
 \item {} 
-\sphinxstylestrong{LV\_COLOR\_DEPTH} 8 pour (RG332), 16 pour (RGB565) ou 32 pour (RGB888 et ARGB8888).
+\sphinxstylestrong{LV\_COLOR\_DEPTH} 8 for (RG332), 16 for (RGB565) or 32 for (RGB888 and ARGB8888).
 
 \end{enumerate}
 
 
 \paragraph{Initialisation}
 \label{\detokenize{porting/project:initialisation}}
-Pour utiliser la librairie graphique, vous devez l’initialiser ainsi que les autres composants. Voici l’ordre d’initialisation :
+To use the graphics library you have to initialize it and the other components too. The order of the initialization is:
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-Appelez \sphinxstyleemphasis{lv\_init()}
+Call \sphinxstyleemphasis{lv\_init()}.
 
 \item {} 
-Initialisez vos pilotes
+Initialize your drivers.
 
 \item {} 
 Enregistrez les pilotes de périphérique d’affichage et d’entrée dans LittlevGL. En savoir plus sur l’enregistrement : {\hyperref[\detokenize{porting/display::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Affichage}}}} et {\hyperref[\detokenize{porting/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Périphérique d’entrée}}}}.
@@ -1223,52 +1222,52 @@ Appelez \sphinxcode{\sphinxupquote{lv\_task\_handler()}} périodiquement toutes 
 
 \subsubsection{Interface d’affichage}
 \label{\detokenize{porting/display:interface-d-affichage}}\label{\detokenize{porting/display::doc}}
-Pour configurer un affichage, les variables \sphinxcode{\sphinxupquote{lv\_disp\_buf\_t}} et\sphinxcode{\sphinxupquote{ lv\_disp\_drv\_t}} doivent être initialisées.
+To set up a display an \sphinxcode{\sphinxupquote{lv\_disp\_buf\_t}} and an \sphinxcode{\sphinxupquote{lv\_disp\_drv\_t}} variable has to be initialized.
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{lv\_disp\_buf\_t} contient le(s) tampon(s) graphique(s) interne(s).
+\sphinxstylestrong{lv\_disp\_buf\_t} contains internal graphics buffer(s).
 
 \item {} 
-** lv\_disp\_drv\_t ** contient les fonctions de rappel pour interagir avec l’affichage et manipuler des éléments liés au dessin.
+\sphinxstylestrong{lv\_disp\_drv\_t} contains callback functions to interact with the display and manipulate drawing related things.
 
 \end{itemize}
 
 
-\paragraph{Tampon d’affichage}
-\label{\detokenize{porting/display:tampon-d-affichage}}
+\paragraph{Display buffer}
+\label{\detokenize{porting/display:display-buffer}}
 \sphinxcode{\sphinxupquote{lv\_disp\_buf\_t}} peut être initialisé comme ceci :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+cm}{/* Une variable statique ou globale pour mémoriser les tampons */}
     \PYG{k}{static} \PYG{n}{lv\PYGZus{}disp\PYGZus{}buf\PYGZus{}t} \PYG{n}{disp\PYGZus{}buf}\PYG{p}{;}
-    
+
    \PYG{c+cm}{/* Tampon(s) statique(s) ou global(aux). Le second tampon est optionnel */}
     \PYG{k}{static} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{buf\PYGZus{}1}\PYG{p}{[}\PYG{n}{MY\PYGZus{}DISP\PYGZus{}HOR\PYGZus{}RES} \PYG{o}{*} \PYG{l+m+mi}{10}\PYG{p}{]}\PYG{p}{;}
     \PYG{k}{static} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{buf\PYGZus{}2}\PYG{p}{[}\PYG{n}{MY\PYGZus{}DISP\PYGZus{}HOR\PYGZus{}RES} \PYG{o}{*} \PYG{l+m+mi}{10}\PYG{p}{]}\PYG{p}{;}
-    
+
 \PYG{c+cm}{/* Initialise {}`disp\PYGZus{}buf{}` avec le(s) tampon(s) */}
     \PYG{n}{lv\PYGZus{}disp\PYGZus{}buf\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}buf}\PYG{p}{,} \PYG{n}{buf\PYGZus{}1}\PYG{p}{,} \PYG{n}{buf\PYGZus{}2}\PYG{p}{,} \PYG{n}{MY\PYGZus{}DISP\PYGZus{}HOR\PYGZus{}RES}\PYG{o}{*}\PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-Voici les configurations possibles concernant la taille de la mémoire tampon :
+There are 3 possible configurations regarding the buffer size:
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-\sphinxstylestrong{Un tampon} LittlevGL dessine le contenu de l’écran dans un tampon et l’envoie à l’affichage.
-Le tampon peut être plus petit que l’affichage. Dans ce cas, les zones les plus grandes seront redessinées en plusieurs parties.
+\sphinxstylestrong{One buffer} LittlevGL draws the content of the screen into a buffer and sends it to the display.
+The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts.
 Si seules de petites zones changent (p.ex. appui sur un bouton), seules ces zones seront actualisées.
 
 \item {} 
 \sphinxstylestrong{Deux tampons de taille différente de l’écran} ayant deux tampons LittlevGL peut dessiner dans un tampon tandis que le contenu de l’autre tampon est envoyé à l’écran en arrière-plan.
 Le DMA ou une autre méthode doit être utilisé pour transférer les données à l’écran afin de permettre au CPU de dessiner dans le même temps.
-De cette manière, le rendu et le rafraîchissement de l’affichage deviennent parallèles.
-De même que pour \sphinxstyleemphasis{Un tampon}, LittlevGL dessine le contenu de l’affichage en fragments si le tampon est plus petit que la zone à actualiser.
+This way the rendering and refreshing of the display become parallel.
+Similarly to the \sphinxstyleemphasis{One buffer}, LittlevGL will draw the display’s content in chunks if the buffer is smaller than the area to refresh.
 
 \item {} 
 \sphinxstylestrong{Deux tampons de la taille d’un écran}.
-Contrairement à \sphinxstyleemphasis{Deux tampons de taille différente de l’écran} LittlevGL fournira toujours tout le contenu de l’affichage, pas seulement des fragments.
+In contrast to \sphinxstyleemphasis{Two non-screen-sized buffers} LittlevGL will always provide the whole screen’s content not only chunks.
 De cette façon, le pilote peut simplement changer l’adresse du tampon d’affichage par celle du tampon préparé par LittlevGL.
 Par conséquent, cette méthode est la meilleure lorsque le microcontrôleur dispose d’une interface LCD/TFT et que le tampon d’affichage est un emplacement dans la MEV.
 
@@ -1290,53 +1289,53 @@ Une fois l’initialisation des tampons effectuée, les pilotes d’affichage do
 Il y a quelques champs de données optionnels :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{hor\_res} résolution horizontale de l’écran. (\sphinxcode{\sphinxupquote{LV\_HOR\_RES\_MAX}} par défaut à partir de \sphinxstyleemphasis{lv\_conf.h})
+\sphinxstylestrong{hor\_res} horizontal resolution of the display. (\sphinxcode{\sphinxupquote{LV\_HOR\_RES\_MAX}} by default from \sphinxstyleemphasis{lv\_conf.h}).
 
 \item {} 
-\sphinxstylestrong{ver\_res} résolution verticale de l’écran. (\sphinxcode{\sphinxupquote{LV\_VER\_RES\_MAX}} par défaut à partir de \sphinxstyleemphasis{lv\_conf.h})
+\sphinxstylestrong{ver\_res} vertical resolution of the display. (\sphinxcode{\sphinxupquote{LV\_VER\_RES\_MAX}} by default from \sphinxstyleemphasis{lv\_conf.h}).
 
 \item {} 
-\sphinxstylestrong{color\_chroma\_key} une couleur qui sera dessinée de manière transparente sur les images incrustées. \sphinxcode{\sphinxupquote{LV\_COLOR\_TRANSP}} par défaut à partir de \sphinxstyleemphasis{lv\_conf.h})
+\sphinxstylestrong{color\_chroma\_key} a color which will be drawn as transparent on chrome keyed images. \sphinxcode{\sphinxupquote{LV\_COLOR\_TRANSP}} by default from \sphinxstyleemphasis{lv\_conf.h}).
 
 \item {} 
 ** user\_data ** donnée utilisateur personnalisée pour le pilote. Son type peut être modifié dans \sphinxstyleemphasis{lv\_conf.h}.
 
 \item {} 
-** anti-aliasing ** utilise un anti-crénelage  (lissage des bords). \sphinxcode{\sphinxupquote{LV\_ANTIALIAS}} par défaut à partir de \sphinxstyleemphasis{lv\_conf.h}
+\sphinxstylestrong{anti-aliasing} use anti-aliasing (edge smoothing). \sphinxcode{\sphinxupquote{LV\_ANTIALIAS}} by default  from \sphinxstyleemphasis{lv\_conf.h}.
 
 \item {} 
 \sphinxstylestrong{rotated} si \sphinxcode{\sphinxupquote{1}} permute \sphinxcode{\sphinxupquote{hor\_res et }}ver\_res{}`. LittlevGL dessine dans le même sens dans les deux cas (lignes du haut vers le bas); le pilote doit donc également être reconfiguré pour modifier le sens de remplissage de l’écran.
 
 \item {} 
-\sphinxstylestrong{screen\_transp} si \sphinxcode{\sphinxupquote{1}} l’écran peut avoir un style transparent ou opaque. \sphinxcode{\sphinxupquote{LV\_COLOR\_SCREEN\_TRANSP}} doit être activé dans \sphinxstyleemphasis{lv\_conf.h}
+\sphinxstylestrong{screen\_transp} if \sphinxcode{\sphinxupquote{1}} the screen can have transparent or opaque style. \sphinxcode{\sphinxupquote{LV\_COLOR\_SCREEN\_TRANSP}} needs to enabled in \sphinxstyleemphasis{lv\_conf.h}.
 
 \end{itemize}
 
 Pour utiliser un GPU, les fonctions de rappel suivantes peuvent être utilisées :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{gpu\_fill\_cb} remplis une zone en mémoire avec une couleur
+\sphinxstylestrong{gpu\_fill\_cb} fill an area in memory with colors.
 
 \item {} 
 \sphinxstylestrong{gpu\_blend\_cb} combine deux tampons en mémoire avec gestion de l’opacité.
 
 \end{itemize}
 
-Notez que ces fonctions doivent dessiner en mémoire (MEV) et non directement sur l’affichage.
+Note that, these functions need to draw to the memory (RAM) and not your display directly.
 
-Certaines autres fonctions de rappel facultatives facilitent et optimisent l’utilisation des écrans monochromes, à niveaux de gris ou autres écrans RVB non standard :
+Some other optional callbacks to make easier and more optimal to work with monochrome, grayscale or other non-standard RGB displays:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{rounder\_cb} arrondit les coordonnées des zones à redessiner. P.ex. une zone de 2 x 2 px peut être convertie en 2 x 8 px.
+\sphinxstylestrong{rounder\_cb} round the coordinates of areas to redraw. E.g. a 2x2 px can be converted to 2x8.
 Utile si la carte graphique ne peut actualiser que les zones ayant une hauteur ou une largeur spécifique (généralement une hauteur de 8 px avec des écrans monochromes).
 
 \item {} 
-\sphinxstylestrong{set\_px\_cb} une fonction personnalisée pour écrire le \sphinxstyleemphasis{tampon d’affichage}.
-Utile pour enregistrer les pixels de manière plus compacte si l’affichage présente un format de couleur spécial. (par exemple monochrome 1 bit, échelle de gris 2 bit, etc.)
-This way the buffers used in \sphinxcode{\sphinxupquote{lv\_disp\_buf\_t}} can be smaller to hold only the required number of bits for the given area size. \sphinxcode{\sphinxupquote{set\_px\_cb}} is not working with \sphinxcode{\sphinxupquote{Two screen-sized buffers}} display buffer configuration.
+\sphinxstylestrong{set\_px\_cb} a custom function to write the \sphinxstyleemphasis{display buffer}.
+It can be used to store the pixels more compactly if the display has a special color format. (e.g. 1-bit monochrome, 2-bit grayscale etc.)
+De cette façon, les tampons utilisés dans \sphinxcode{\sphinxupquote{lv\_disp\_buf\_t}} peuvent être plus petits pour ne contenir que le nombre de bits requis pour la taille de zone donnée. \sphinxcode{\sphinxupquote{set\_px\_cb}} ne fonctionne pas avec la configuration de tampons d’affichage \sphinxcode{\sphinxupquote{Deux tampons de la taille d'un écran}}.
 
 \item {} 
-\sphinxstylestrong{monitor\_cb} indique combien de pixels ont été actualisés et en combien de temps.
+\sphinxstylestrong{monitor\_cb} a callback function tells how many pixels were refreshed in how much time.
 
 \end{itemize}
 
@@ -1401,22 +1400,22 @@ Voici quelques exemples simples de fonctions de  rappel :
   \PYG{c+cm}{/* Modifie les zones en fonction des besoins. Agrandir uniquement.}
 \PYG{c+cm}{   * Par exemple, pour toujours avoir des lignes de 8 px de hauteur : */}
    \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y1} \PYG{o}{=} \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y1} \PYG{o}{\PYGZam{}} \PYG{l+m+mh}{0x07}\PYG{p}{;}
-   \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y2} \PYG{o}{=} \PYG{p}{(}\PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y2} \PYG{o}{\PYGZam{}} \PYG{l+m+mh}{0x07}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mi}{8}\PYG{p}{;} 
+   \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y2} \PYG{o}{=} \PYG{p}{(}\PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y2} \PYG{o}{\PYGZam{}} \PYG{l+m+mh}{0x07}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mi}{8}\PYG{p}{;}
 \PYG{p}{\PYGZcb{}}
 
 \PYG{k+kt}{void} \PYG{n}{my\PYGZus{}set\PYGZus{}px\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp\PYGZus{}drv}\PYG{p}{,} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{o}{*} \PYG{n}{buf}\PYG{p}{,} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{buf\PYGZus{}w}\PYG{p}{,} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{x}\PYG{p}{,} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{y}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{color}\PYG{p}{,} \PYG{n}{lv\PYGZus{}opa\PYGZus{}t} \PYG{n}{opa}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-    \PYG{c+cm}{/* Écrit dans le tampon comme requis par l\PYGZsq{}affichage. }
-\PYG{c+cm}{* Ecrit seulement 1 bit pour les écrans monochromes orientés verticalement : * /}
-\PYG{c+cm}{ buf += buf\PYGZus{}w * (y \PYGZgt{}\PYGZgt{} 3) + x;}
-\PYG{c+cm}{ if(lv\PYGZus{}color\PYGZus{}brightness(color) \PYGZgt{} 128) (*buf) \textbar{}= (1 \PYGZlt{}\PYGZlt{} (y \PYGZpc{} 8));}
-\PYG{c+cm}{ else (*buf) \PYGZam{}= \PYGZti{}(1 \PYGZlt{}\PYGZlt{} (y \PYGZpc{} 8));}
-\PYG{c+cm}{\PYGZcb{}}
+    \PYG{c+cm}{/* Write to the buffer as required for the display.}
+\PYG{c+cm}{     * Write only 1\PYGZhy{}bit for monochrome displays mapped vertically:*/}
+ \PYG{n}{buf} \PYG{o}{+}\PYG{o}{=} \PYG{n}{buf\PYGZus{}w} \PYG{o}{*} \PYG{p}{(}\PYG{n}{y} \PYG{o}{\PYGZgt{}}\PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{3}\PYG{p}{)} \PYG{o}{+} \PYG{n}{x}\PYG{p}{;}
+ \PYG{k}{if}\PYG{p}{(}\PYG{n}{lv\PYGZus{}color\PYGZus{}brightness}\PYG{p}{(}\PYG{n}{color}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{128}\PYG{p}{)} \PYG{p}{(}\PYG{o}{*}\PYG{n}{buf}\PYG{p}{)} \PYG{o}{\textbar{}}\PYG{o}{=} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZlt{}}\PYG{o}{\PYGZlt{}} \PYG{p}{(}\PYG{n}{y} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{8}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
+ \PYG{k}{else} \PYG{p}{(}\PYG{o}{*}\PYG{n}{buf}\PYG{p}{)} \PYG{o}{\PYGZam{}}\PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZlt{}}\PYG{o}{\PYGZlt{}} \PYG{p}{(}\PYG{n}{y} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{8}\PYG{p}{)}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
 
-\PYG{c+cm}{void my\PYGZus{}monitor\PYGZus{}cb(lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}t * disp\PYGZus{}drv, uint32\PYGZus{}t time, uint32\PYGZus{}t px)}
-\PYG{c+cm}{\PYGZob{}}
-\PYG{c+cm}{  printf(\PYGZdq{}\PYGZpc{}d px refreshed in \PYGZpc{}d ms\PYGZbs{}n\PYGZdq{}, time, ms);}
-\PYG{c+cm}{\PYGZcb{}}
+\PYG{k+kt}{void} \PYG{n}{my\PYGZus{}monitor\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp\PYGZus{}drv}\PYG{p}{,} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{time}\PYG{p}{,} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{px}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZpc{}d px refreshed in \PYGZpc{}d ms}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{time}\PYG{p}{,} \PYG{n}{ms}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
 
@@ -2171,7 +2170,7 @@ Pour configurer un périphérique d’entrée, une variable \sphinxcode{\sphinxu
 \PYG{n}{lv\PYGZus{}indev\PYGZus{}t} \PYG{o}{*} \PYG{n}{my\PYGZus{}indev} \PYG{o}{=} \PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-\sphinxstylestrong{type} peut être
+\sphinxstylestrong{type} can be
 \begin{itemize}
 \item {} 
 \sphinxstylestrong{LV\_INDEV\_TYPE\_POINTER} pavé tactile ou souris
@@ -2187,7 +2186,7 @@ Pour configurer un périphérique d’entrée, une variable \sphinxcode{\sphinxu
 
 \end{itemize}
 
-\sphinxstylestrong{read\_cb} est une fonction de rappel qui sera appelé périodiquement pour indiquer l’état actuel d’un périphérique d’entrée.
+\sphinxstylestrong{read\_cb} is a function pointer which will be called periodically to report the current state of an input device.
 Les données peuvent être placées dans un tampon, la fonction retourne \sphinxcode{\sphinxupquote{false}} lorsqu’il ne reste plus de données à lire ou\sphinxcode{\sphinxupquote{ true}} lorsque le tampon n’est pas vide.
 
 Visitez {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Périphériques d’entrée}}}} pour en savoir plus sur les périphériques d’entrée en général.
@@ -2195,7 +2194,7 @@ Visitez {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc
 
 \subparagraph{Pavé tactile, souris ou autre pointeur}
 \label{\detokenize{porting/indev:pave-tactile-souris-ou-autre-pointeur}}
-Les périphériques d’entrée pouvant cliquer sur des points de l’écran appartiennent à cette catégorie.
+Input devices which can click points of the screen belong to this category.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{type} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}TYPE\PYGZus{}POINTER}\PYG{p}{;}
@@ -2205,7 +2204,7 @@ Les périphériques d’entrée pouvant cliquer sur des points de l’écran app
 
 \PYG{k+kt}{bool} \PYG{n}{my\PYGZus{}input\PYGZus{}read}\PYG{p}{(}\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{drv}\PYG{p}{,} \PYG{n}{lv\PYGZus{}indev\PYGZus{}data\PYGZus{}t}\PYG{o}{*}\PYG{n}{data}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-    \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{x} \PYG{o}{=} \PYG{n}{touchpad\PYGZus{}x}\PYG{p}{;} 
+    \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{x} \PYG{o}{=} \PYG{n}{touchpad\PYGZus{}x}\PYG{p}{;}
     \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{y} \PYG{o}{=} \PYG{n}{touchpad\PYGZus{}y}\PYG{p}{;}
     \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR} \PYG{n}{or} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}REL}\PYG{p}{;}
     \PYG{k}{return} \PYG{n+nb}{false}\PYG{p}{;} \PYG{c+cm}{/* Pas de tampon donc plus de données à lire */}
@@ -2216,11 +2215,11 @@ Les périphériques d’entrée pouvant cliquer sur des points de l’écran app
 Les pilotes de pavé tactile doivent renvoyer les dernières coordonnées X/Y même lorsque l’état est \sphinxstyleemphasis{LV\_INDEV\_STATE\_REL}.
 \end{sphinxadmonition}
 
-Pour définir un curseur de souris, utilisez \sphinxcode{\sphinxupquote{lv\_indev\_set\_cursor(my\_indev, \&img\_cursor)}}  (\sphinxcode{\sphinxupquote{my\_indev}} est la valeur de retour de\sphinxcode{\sphinxupquote{ lv\_indev\_drv\_register}}).
+To set a mouse cursor use \sphinxcode{\sphinxupquote{lv\_indev\_set\_cursor(my\_indev, \&img\_cursor)}}. (\sphinxcode{\sphinxupquote{my\_indev}} is the return value of \sphinxcode{\sphinxupquote{lv\_indev\_drv\_register}})
 
 
-\subparagraph{Clavier}
-\label{\detokenize{porting/indev:clavier}}
+\subparagraph{Keypad or keyboard}
+\label{\detokenize{porting/indev:keypad-or-keyboard}}
 Les claviers complets avec toutes les lettres ou plus simples avec quelques boutons de navigation sont décrits ici.
 
 Pour utiliser un clavier :
@@ -2250,17 +2249,17 @@ Utilisez \sphinxcode{\sphinxupquote{LV\_KEY\_...}} pour naviguer parmi les objet
 
 \PYG{k+kt}{bool} \PYG{n}{keyboard\PYGZus{}read}\PYG{p}{(}\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{drv}\PYG{p}{,} \PYG{n}{lv\PYGZus{}indev\PYGZus{}data\PYGZus{}t}\PYG{o}{*}\PYG{n}{data}\PYG{p}{)}\PYG{p}{\PYGZob{}}
   \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{key} \PYG{o}{=} \PYG{n}{last\PYGZus{}key}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}            \PYG{c+cm}{/* Obtient  la dernière touche pressée ou relâchée */}
-  
+
   \PYG{k}{if}\PYG{p}{(}\PYG{n}{key\PYGZus{}pressed}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)} \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR}\PYG{p}{;}
   \PYG{k}{else} \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}REL}\PYG{p}{;}
-  
+
   \PYG{k}{return} \PYG{n+nb}{false}\PYG{p}{;} \PYG{c+cm}{/* Pas de tampon donc plus de données à lire */}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
 
-\subparagraph{Encodeur}
-\label{\detokenize{porting/indev:encodeur}}
+\subparagraph{Encoder}
+\label{\detokenize{porting/indev:encoder}}
 Avec un encodeur, vous pouvez réaliser 4 actions :
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
@@ -2270,7 +2269,7 @@ Avec un encodeur, vous pouvez réaliser 4 actions :
 Appuyer son bouton
 
 \item {} 
-Appuyer longuement son bouton
+Long-press its button
 
 \item {} 
 Tourner à gauche
@@ -2283,13 +2282,13 @@ Tourner à droite
 En bref, les encodeurs fonctionnent comme ceci :
 \begin{itemize}
 \item {} 
-En tournant l’encodeur, vous pouvez sélectionner l’objet suivant/précédent.
+By turning the encoder you can focus on the next/previous object.
 
 \item {} 
-Lorsque vous appuyez sur l’encodeur sur un objet simple (comme un bouton), vous cliquez dessus.
+When you press the encoder on a simple object (like a button), it will be clicked.
 
 \item {} 
-Si vous appuyez sur l’encodeur sur un objet complexe (comme une liste, une boîte de message, etc.), l’objet passera en mode édition. Vous pouvez alors naviguer dans l’encodeur en le tournant.
+If you press the encoder on a complex object (like a list, message box, etc.) the object will go to edit mode whereby turning the encoder you can navigate inside the object.
 
 \item {} 
 Pour quitter le mode édition, appuyez longuement sur le bouton.
@@ -2302,28 +2301,28 @@ Pour utiliser un \sphinxstyleemphasis{encodeur} (comme un \sphinxstyleemphasis{c
 \PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{type} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}TYPE\PYGZus{}ENCODER}\PYG{p}{;}
 \PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}input\PYGZus{}read}\PYG{p}{;}
 
-\PYG{p}{.}\PYG{p}{.}\PYG{p}{.} 
- 
+\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
+
 \PYG{k+kt}{bool} \PYG{n}{encoder\PYGZus{}read}\PYG{p}{(}\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{drv}\PYG{p}{,} \PYG{n}{lv\PYGZus{}indev\PYGZus{}data\PYGZus{}t}\PYG{o}{*}\PYG{n}{data}\PYG{p}{)}\PYG{p}{\PYGZob{}}
   \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{enc\PYGZus{}diff} \PYG{o}{=} \PYG{n}{enc\PYGZus{}get\PYGZus{}new\PYGZus{}moves}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
-  
+
   \PYG{k}{if}\PYG{p}{(}\PYG{n}{enc\PYGZus{}pressed}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)} \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR}\PYG{p}{;}
   \PYG{k}{else} \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}REL}\PYG{p}{;}
-  
+
   \PYG{k}{return} \PYG{n+nb}{false}\PYG{p}{;} \PYG{c+cm}{/* Pas de tampon donc plus de données à lire */}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
 
-\subparagraph{Bouton}
-\label{\detokenize{porting/indev:bouton}}
-\sphinxstyleemphasis{Bouton} signifie bouton “matériel” externe à côté de l’écran, affecté à des coordonnées spécifiques de l’écran.
+\subparagraph{Button}
+\label{\detokenize{porting/indev:button}}
+\sphinxstyleemphasis{Buttons} mean external “hardware” buttons next to the screen which are assigned to specific coordinates of the screen.
 Si un bouton est pressé, il simule l’appui sur la coordonnée attribuée (comme un pavé tactile)
 
 Pour affecter des boutons aux coordonnées, utilisez \sphinxcode{\sphinxupquote{lv\_indev\_set\_button\_points(my\_indev, points\_array)}}.\sphinxcode{\sphinxupquote{points\_array}} doit ressembler à \sphinxcode{\sphinxupquote{const lv\_point\_t points\_array{[}{]} = \{ \{12, 30\}, \{60, 90\}, ... \}}}
 
 \begin{sphinxadmonition}{important}{Important:}
-The points\_array can’t go out of scope. Either declare it as a global variable or as a static variable inside a function.
+points\_array ne peut être hors de portée. Déclarez-le en tant que variable globale ou en tant que variable statique dans une fonction.
 \end{sphinxadmonition}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -2333,7 +2332,7 @@ The points\_array can’t go out of scope. Either declare it as a global variabl
 \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
 
 \PYG{k+kt}{bool} \PYG{n}{button\PYGZus{}read}\PYG{p}{(}\PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{drv}\PYG{p}{,} \PYG{n}{lv\PYGZus{}indev\PYGZus{}data\PYGZus{}t}\PYG{o}{*}\PYG{n}{data}\PYG{p}{)}\PYG{p}{\PYGZob{}}
-    \PYG{k}{static} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{last\PYGZus{}btn} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}   \PYG{c+cm}{/* Mémorise le dernier bouton pressé */} 
+    \PYG{k}{static} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{last\PYGZus{}btn} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}   \PYG{c+cm}{/*Store the last pressed button*/}
     \PYG{k+kt}{int} \PYG{n}{btn\PYGZus{}pr} \PYG{o}{=} \PYG{n}{my\PYGZus{}btn\PYGZus{}read}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}     \PYG{c+cm}{/* Obtient l\PYGZsq{}ID (0, 1, 2 ...) du bouton pressé */}
     \PYG{k}{if}\PYG{p}{(}\PYG{n}{btn\PYGZus{}pr} \PYG{o}{\PYGZgt{}}\PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{p}{\PYGZob{}}               \PYG{c+cm}{/* Un bouton est\PYGZhy{}il pressé ? P.ex. \PYGZhy{}1 indique qu\PYGZsq{}aucun bouton n\PYGZsq{}est pressé */}
        \PYG{n}{last\PYGZus{}btn} \PYG{o}{=} \PYG{n}{btn\PYGZus{}pr}\PYG{p}{;}           \PYG{c+cm}{/* Sauvegarde l\PYGZsq{}ID du bouton pressé */}
@@ -2341,9 +2340,9 @@ The points\_array can’t go out of scope. Either declare it as a global variabl
     \PYG{p}{\PYGZcb{}} \PYG{k}{else} \PYG{p}{\PYGZob{}}
        \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}REL}\PYG{p}{;} \PYG{c+cm}{/* Définit l\PYGZsq{}état relâché */}
     \PYG{p}{\PYGZcb{}}
-  
+
     \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{btn} \PYG{o}{=} \PYG{n}{last\PYGZus{}btn}\PYG{p}{;}            \PYG{c+cm}{/* Enregistre le dernier bouton */}
-   
+
     \PYG{k}{return} \PYG{n+nb}{false}\PYG{p}{;}                    \PYG{c+cm}{/* Pas de tampon donc plus de données à lire */}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
@@ -2351,8 +2350,8 @@ The points\_array can’t go out of scope. Either declare it as a global variabl
 
 \paragraph{Autres fonctionnalités}
 \label{\detokenize{porting/indev:autres-fonctionnalites}}
-Outre \sphinxcode{\sphinxupquote{read\_cb}}, une autre fonction de rappel \sphinxcode{\sphinxupquote{feedback\_cb}} peut également être spécifiée dans \sphinxcode{\sphinxupquote{lv\_indev\_drv\_t}}.
-\sphinxcode{\sphinxupquote{feedback\_cb}} est appelée lorsqu’un événement, quel qu’il soit, est envoyé par les périphériques d’entrée. (indépendamment de leur type). Cela permet de faire un retour à l’utilisateur, par exemple. jouer un son sur \sphinxcode{\sphinxupquote{LV\_EVENT\_CLICK}}.
+Besides \sphinxcode{\sphinxupquote{read\_cb}} a \sphinxcode{\sphinxupquote{feedback\_cb}} callback can be also specified in \sphinxcode{\sphinxupquote{lv\_indev\_drv\_t}}.
+\sphinxcode{\sphinxupquote{feedback\_cb}} is called when any type of event is sent by the input devices. (independently from its type). It allows making feedback for the user e.g. to play a sound on \sphinxcode{\sphinxupquote{LV\_EVENT\_CLICK}}.
 
 La valeur par défaut des paramètres suivants peut être définie dans \sphinxstyleemphasis{lv\_conf.h} mais la valeur par défaut peut être surchargée dans \sphinxcode{\sphinxupquote{lv\_indev\_drv\_t}} :
 \begin{itemize}
@@ -2369,11 +2368,11 @@ La valeur par défaut des paramètres suivants peut être définie dans \sphinxs
 \sphinxstylestrong{long\_press\_rep\_time} Intervalle de temps entre deux envois \sphinxcode{\sphinxupquote{LV\_EVENT\_LONG\_PRESSED\_REPEAT}} (en millisecondes)
 
 \item {} 
-\sphinxstylestrong{read\_task} pointeur sur l’objet \sphinxcode{\sphinxupquote{lv\_task}} qui lit le périphérique d’entrée. Ses paramètres peuvent être modifiés avec les fonctions \sphinxcode{\sphinxupquote{lv\_task\_...()}}
+\sphinxstylestrong{read\_task} pointer to the \sphinxcode{\sphinxupquote{lv\_task}} which reads the input device. Its parameters can be changed by \sphinxcode{\sphinxupquote{lv\_task\_...()}} functions
 
 \end{itemize}
 
-Chaque périphérique d’entrée est associé à un affichage. Par défaut, un nouveau périphérique d’entrée est ajouté à l’affichage créé en dernier ou explicitement sélectionné (à l’aide de \sphinxcode{\sphinxupquote{lv\_disp\_set\_default()}}).
+Every Input device is associated with a display. By default, a new input device is added to the lastly created or the explicitly selected (using \sphinxcode{\sphinxupquote{lv\_disp\_set\_default()}}) display.
 L’affichage associé est sauvegardé et peut être modifié dans le champ \sphinxcode{\sphinxupquote{disp}} du pilote.
 
 
@@ -3115,15 +3114,15 @@ Array points assigned to the button ()screen will be pressed here by the buttons
 
 \subsubsection{Interface tic}
 \label{\detokenize{porting/tick:interface-tic}}\label{\detokenize{porting/tick::doc}}
-LittlevGL a besoin d’un tic système pour connaître le temps écoulé pour l’animation et d’autres tâches.
+The LittlevGL needs a system tick to know the elapsed time for animation and other tasks.
 
-Vous devez appeler la fonction \sphinxcode{\sphinxupquote{lv\_tick\_inc(tick\_period)}} périodiquement et indiquer la période d’appel en millisecondes. Par exemple, si elle est appelée chaque milliseconde : \sphinxcode{\sphinxupquote{lv\_tick\_inc(1)}}.
+You need to call the \sphinxcode{\sphinxupquote{lv\_tick\_inc(tick\_period)}} function periodically and tell the call period in milliseconds. For example, \sphinxcode{\sphinxupquote{lv\_tick\_inc(1)}} for calling in every millisecond.
 
-\sphinxcode{\sphinxupquote{lv\_tick\_inc}} doit être appelée dans une routine de priorité supérieure à \sphinxcode{\sphinxupquote{lv\_task\_handler()}} (par exemple, dans une interruption) pour connaître avec précision les millisecondes écoulées, même si l’exécution de \sphinxcode{\sphinxupquote{lv\_task\_handler}} prend plus de temps.
+\sphinxcode{\sphinxupquote{lv\_tick\_inc}} should be called in a higher priority routine than \sphinxcode{\sphinxupquote{lv\_task\_handler()}} (e.g. in an interrupt) to precisely know the elapsed milliseconds even if the execution of \sphinxcode{\sphinxupquote{lv\_task\_handler}} takes longer time.
 
 Sur FreeRTOS, \sphinxcode{\sphinxupquote{lv\_tick\_inc}} peut être appelée dans \sphinxcode{\sphinxupquote{vApplicationTickHook}}.
 
-Sur les systèmes d’exploitation basés sur Linux (par exemple, sur Raspberry), \sphinxcode{\sphinxupquote{lv\_tick\_inc}} peut être appelée dans un fil d’exécution :
+On Linux based operating system (e.g. on Raspberry Pi) \sphinxcode{\sphinxupquote{lv\_tick\_inc}} can be called in a thread as below:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kt}{void} \PYG{o}{*} \PYG{n+nf}{tick\PYGZus{}thread} \PYG{p}{(}\PYG{k+kt}{void} \PYG{o}{*}\PYG{n}{args}\PYG{p}{)}
@@ -3131,7 +3130,7 @@ Sur les systèmes d’exploitation basés sur Linux (par exemple, sur Raspberry)
       \PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{\PYGZob{}}
         \PYG{n}{usleep}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{o}{*}\PYG{l+m+mi}{1000}\PYG{p}{)}\PYG{p}{;}   \PYG{c+cm}{/* Dors pendant 5 millisecondes */}
         \PYG{n}{lv\PYGZus{}tick\PYGZus{}inc}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/* Indique à LittlevGL que 5 millisecondes se sont écoulées */}
-    \PYG{p}{\PYGZcb{}} 
+    \PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
@@ -3211,14 +3210,14 @@ Pour en savoir plus sur les tâches, visitez la section {\hyperref[\detokenize{o
 
 \subsubsection{Gestion du sommeil}
 \label{\detokenize{porting/sleep:gestion-du-sommeil}}\label{\detokenize{porting/sleep::doc}}
-Le microcontrôleur peut s’endormir lorsque aucune intervention de l’utilisateur n’est effectuée. Dans ce cas, la boucle principale \sphinxcode{\sphinxupquote{while (1)}} devrait ressembler à ceci :
+The MCU can go to sleep when no user input happens. In this case, the main \sphinxcode{\sphinxupquote{while(1)}} should look like this:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{\PYGZob{}}
-  \PYG{c+cm}{/* Fonctionnement normal (pas de sommeil) si moins de 1 seconde d\PYGZsq{}inactivité */} 
+  \PYG{c+cm}{/*Normal operation (no sleep) in \PYGZlt{} 1 sec inactivity*/}
   \PYG{k}{if}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}get\PYGZus{}inactive\PYGZus{}time}\PYG{p}{(}\PYG{n+nb}{NULL}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{1000}\PYG{p}{)} \PYG{p}{\PYGZob{}}
 	  \PYG{n}{lv\PYGZus{}task\PYGZus{}handler}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
-  \PYG{p}{\PYGZcb{}} 
+  \PYG{p}{\PYGZcb{}}
   \PYG{c+cm}{/* Sommeil après une seconde d\PYGZsq{}inactivité */}
   \PYG{k}{else} \PYG{p}{\PYGZob{}}
 	  \PYG{n}{timer\PYGZus{}stop}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}   \PYG{c+cm}{/* Arrêt de l\PYGZsq{}horloge où lv\PYGZus{}tick\PYGZus{}inc() est appelée */}
@@ -3228,12 +3227,12 @@ Le microcontrôleur peut s’endormir lorsque aucune intervention de l’utilisa
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-Vous devez également ajouter ces lignes à la fonction de lecture de votre périphérique d’entrée si un appui est effectué :
+You should also add below lines to your input device read function if a wake-up (press, touch or click etc.) happens:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}tick\PYGZus{}inc}\PYG{p}{(}\PYG{n}{LV\PYGZus{}DISP\PYGZus{}DEF\PYGZus{}REFR\PYGZus{}PERIOD}\PYG{p}{)}\PYG{p}{;}  \PYG{c+cm}{/* Force l\PYGZsq{}exécution de la tâche au réveil */}
 \PYG{n}{timer\PYGZus{}start}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}                         \PYG{c+cm}{/* Redémarre l\PYGZsq{}horloge où lv\PYGZus{}tick\PYGZus{}inc() est appelée */}
-\PYG{n}{lv\PYGZus{}task\PYGZus{}handler}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}                     \PYG{c+cm}{/* Appelle {}`lv\PYGZus{}task\PYGZus{}handler(){}` manuellement pour traiter l\PYGZsq{}appui */}
+\PYG{n}{lv\PYGZus{}task\PYGZus{}handler}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}                     \PYG{c+cm}{/*Call {}`lv\PYGZus{}task\PYGZus{}handler(){}` manually to process the wake\PYGZhy{}up event*/}
 \end{sphinxVerbatim}
 
 En plus de \sphinxcode{\sphinxupquote{lv\_disp\_get\_inactive\_time()}}, vous pouvez vérifier \sphinxcode{\sphinxupquote{lv\_anim\_count\_running()}} pour voir si toutes les animations sont terminées.
@@ -3241,9 +3240,9 @@ En plus de \sphinxcode{\sphinxupquote{lv\_disp\_get\_inactive\_time()}}, vous po
 
 \subsubsection{Système d’exploitation et interruptions}
 \label{\detokenize{porting/os:systeme-d-exploitation-et-interruptions}}\label{\detokenize{porting/os::doc}}
-LittlevGL n’est \sphinxstylestrong{pas compatible avec les fils d’exécution} par défaut.
+LittlevGL is \sphinxstylestrong{not thread-safe} by default.
 
-Cependant, dans les cas suivants, il est valide d’appeler des fonctions liées à LittlevGL :
+However, in the following conditions it’s valid to call LittlevGL related functions:
 \begin{itemize}
 \item {} 
 Dans les \sphinxstyleemphasis{événements}. Apprenez-en plus dans {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Evénements}}}}.
@@ -3256,15 +3255,15 @@ Dans \sphinxstyleemphasis{lv\_tasks}.  Apprenez-en plus dans {\hyperref[\detoken
 
 \paragraph{Tâches et fils d’exécution}
 \label{\detokenize{porting/os:taches-et-fils-dexecution}}
-Si vous avez besoin d’utiliser de vraies tâches ou des fils d’exécution, vous avez besoin d’un mutex qui doit être acquis avant l’appel de \sphinxcode{\sphinxupquote{lv\_task\_handler}} et libéré ensuite.
-Par ailleurs, vous devez utiliser ce mutex dans les autres tâches et  fils d’exécution lors de chaque appel de fonction et code liés à LittlevGL (\sphinxcode{\sphinxupquote{lv\_...}}).
-De cette façon, vous pouvez utiliser LittlevGL dans un environnement réellement multitâche. Utilisez simplement un mutex pour éviter l’appel concurrent des fonctions LittlevGL.
+If you need to use real tasks or threads, you need a mutex which should be invoked before the call of \sphinxcode{\sphinxupquote{lv\_task\_handler}} and released after it.
+Also, you have to use the same mutex in other tasks and threads around every LittlevGL (\sphinxcode{\sphinxupquote{lv\_...}}) related function calls and codes.
+This way you can use LittlevGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LittlevGL functions.
 
 
 \paragraph{Interruptions}
 \label{\detokenize{porting/os:interruptions}}
-Essayez d’éviter d’appeler les fonctions LittlevGL à partir d’une interruption (sauf \sphinxcode{\sphinxupquote{lv\_tick\_inc()}} et \sphinxcode{\sphinxupquote{lv\_disp\_flush\_ready ()}}). Mais si vous avez vraiment besoin de le faire, vous devez désactiver l’interruption qui utilise les fonctions LittlevGL pendant que \sphinxcode{\sphinxupquote{lv\_task\_handler}} est en cours d’exécution.
-Il est préférable de positionner un indicateur ou toute autre valeur et de le vérifier périodiquement dans une \sphinxcode{\sphinxupquote{lv\_task}}.
+Try to avoid calling LittlevGL functions from the interrupts (except \sphinxcode{\sphinxupquote{lv\_tick\_inc()}} and \sphinxcode{\sphinxupquote{lv\_disp\_flush\_ready()}}). But, if you need to do this you have to disable the interrupt which uses LittlevGL functions while \sphinxcode{\sphinxupquote{lv\_task\_handler}} is running.
+It’s a better approach to set a flag or some value and periodically check it in an \sphinxcode{\sphinxupquote{lv\_task}}.
 
 
 \subsubsection{Journalisation}
@@ -3274,7 +3273,7 @@ LittlevGL a un module \sphinxstyleemphasis{journal} intégré pour informer l’
 
 \paragraph{Niveau de détail}
 \label{\detokenize{porting/log:niveau-de-detail}}
-Pour activer la journalisation, définissez \sphinxcode{\sphinxupquote{LV\_USE\_LOG 1}} dans \sphinxstyleemphasis{lv\_conf.h} et définissez\sphinxcode{\sphinxupquote{ LV\_LOG\_LEVEL}} sur l’une des valeurs suivantes :
+To enable logging, set \sphinxcode{\sphinxupquote{LV\_USE\_LOG  1}} in \sphinxstyleemphasis{lv\_conf.h} and set \sphinxcode{\sphinxupquote{LV\_LOG\_LEVEL}} to one of the following values:
 \begin{itemize}
 \item {} 
 \sphinxstylestrong{LV\_LOG\_LEVEL\_TRACE} Beaucoup de messages pour donner des informations détaillées
@@ -3293,17 +3292,17 @@ Pour activer la journalisation, définissez \sphinxcode{\sphinxupquote{LV\_USE\_
 
 \end{itemize}
 
-Les événements dont le niveau est supérieur au niveau de journalisation défini seront également consignés. P. ex. si vous activez \sphinxcode{\sphinxupquote{LV\_LOG\_LEVEL\_WARN}}, \sphinxstyleemphasis{les erreurs} seront également consignées.
+The events which have a higher level than the set log level will be logged too. E.g. if you \sphinxcode{\sphinxupquote{LV\_LOG\_LEVEL\_WARN}}, \sphinxstyleemphasis{errors} will be also logged.
 
 
 \paragraph{Journalisation avec printf}
 \label{\detokenize{porting/log:journalisation-avec-printf}}
-Si votre système prend en charge \sphinxcode{\sphinxupquote{printf}}, il vous suffit d’activer \sphinxcode{\sphinxupquote{LV\_LOG\_PRINTF}} dans \sphinxstyleemphasis{lv\_conf.h} pour traiter les journaux avec \sphinxcode{\sphinxupquote{printf}}.
+If your system supports \sphinxcode{\sphinxupquote{printf}}, you just need to enable \sphinxcode{\sphinxupquote{LV\_LOG\_PRINTF}} in \sphinxstyleemphasis{lv\_conf.h} to send the logs with \sphinxcode{\sphinxupquote{printf}}.
 
 
 \paragraph{Fonction de journalisation personnalisée}
 \label{\detokenize{porting/log:fonction-de-journalisation-personnalisee}}
-If you can’t use \sphinxcode{\sphinxupquote{printf}} or want to use a custom function to log you can register a “logger” callback with \sphinxcode{\sphinxupquote{lv\_log\_register\_print\_cb()}}.
+If you can’t use \sphinxcode{\sphinxupquote{printf}} or want to use a custom function to log, you can register a “logger” callback with \sphinxcode{\sphinxupquote{lv\_log\_register\_print\_cb()}}.
 
 Par exemple :
 
@@ -3315,15 +3314,15 @@ Par exemple :
   \PYG{k}{if}\PYG{p}{(}\PYG{n}{level} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}LOG\PYGZus{}LEVEL\PYGZus{}WARN}\PYG{p}{)}  \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{WARNING: }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
   \PYG{k}{if}\PYG{p}{(}\PYG{n}{level} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}LOG\PYGZus{}LEVEL\PYGZus{}INFO}\PYG{p}{)}  \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{INFO: }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
   \PYG{k}{if}\PYG{p}{(}\PYG{n}{level} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}LOG\PYGZus{}LEVEL\PYGZus{}TRACE}\PYG{p}{)} \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{TRACE: }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
-  
+
   \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{File: }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
   \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{n}{file}\PYG{p}{)}\PYG{p}{;}
-  
+
   \PYG{k+kt}{char} \PYG{n}{line\PYGZus{}str}\PYG{p}{[}\PYG{l+m+mi}{8}\PYG{p}{]}\PYG{p}{;}
   \PYG{n}{sprintf}\PYG{p}{(}\PYG{n}{line\PYGZus{}str}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZpc{}d}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{line}\PYG{p}{)}\PYG{p}{;}
   \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{\PYGZsh{}}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
   \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{n}{line\PYGZus{}str}\PYG{p}{)}\PYG{p}{;}
-  
+
   \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{: }\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
   \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{n}{dsc}\PYG{p}{)}\PYG{p}{;}
   \PYG{n}{serial\PYGZus{}send}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{;}
@@ -3346,7 +3345,7 @@ Vous pouvez également utiliser le module de journalisation via les fonctions \s
 
 \subsubsection{Objets}
 \label{\detokenize{overview/object:objets}}\label{\detokenize{overview/object::doc}}
-Dans LittlevGL, les \sphinxstylestrong{éléments de base} d’une interface utilisateur sont les objets, également appelés \sphinxstyleemphasis{éléments visuels}.
+In the LittlevGL the \sphinxstylestrong{basic building blocks} of a user interface are the objects, also called \sphinxstyleemphasis{Widgets}.
 Par exemple, un {\hyperref[\detokenize{object-types/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Bouton}}}}, une {\hyperref[\detokenize{object-types/label::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Etiquette}}}}, une {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}}, une {\hyperref[\detokenize{object-types/list::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Liste}}}}, un {\hyperref[\detokenize{object-types/chart::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Graphique}}}} ou une {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Zone de texte}}}}.
 
 Découvrez tous les {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Types d’objet}}}} ici.
@@ -3357,7 +3356,7 @@ Découvrez tous les {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcros
 
 \subparagraph{Attributs de base}
 \label{\detokenize{overview/object:attributs-de-base}}
-Les objets ont des attributs de base communs indépendamment de leur type :
+All object types share some basic attributes:
 \begin{itemize}
 \item {} 
 Position
@@ -3376,7 +3375,7 @@ Autorisation du clic etc.
 
 \end{itemize}
 
-Vous pouvez définir/obtenir ces attributs avec les fonctions \sphinxcode{\sphinxupquote{lv\_obj\_set \_...}} et \sphinxcode{\sphinxupquote{lv\_obj\_get \_...}}. Par exemple :
+You can set/get these attributes with \sphinxcode{\sphinxupquote{lv\_obj\_set\_...}} and \sphinxcode{\sphinxupquote{lv\_obj\_get\_...}} functions. For example:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+cm}{/* Définit les attributs de base de l\PYGZsq{}objet */}
@@ -3402,7 +3401,7 @@ Des styles personnalisés
 
 \end{itemize}
 
-Pour ces attributs, chaque type d’objet possède des fonctions API uniques. Par exemple pour un curseur :
+For these attributes, every object type have unique API functions. For example for a slider:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+cm}{/* Définit les attributs spécifiques du curseur */}
@@ -3419,14 +3418,14 @@ Les API des types d’objet sont décrites dans leur {\hyperref[\detokenize{obje
 
 \subparagraph{Structure parent-enfant}
 \label{\detokenize{overview/object:structure-parent-enfant}}
-Un objet parent peut être considéré comme le conteneur de ses enfants. Chaque objet a exactement un objet parent (à l’exception des écrans), mais un parent peut avoir un nombre illimité d’enfants.
-Il n’y a pas de contrainte pour le type du parent, mais il existe des objets parent typiques (p.ex. un bouton) et enfants (p.ex.  une étiquette).
+A parent object can be considered as the container of its children. Every object has exactly one parent object (except screens), but a parent can have an unlimited number of children.
+There is no limitation for the type of the parent but, there are typical parent (e.g. button) and typical child (e.g. label) objects.
 
 
 \subparagraph{Se déplacer ensemble}
 \label{\detokenize{overview/object:se-deplacer-ensemble}}
-Si la position du parent est modifiée, les enfants se déplaceront avec lui.
-Par conséquent, toutes les positions sont relatives au parent.
+If the position of the parent is changed the children will move with the parent.
+Therefore all positions are relative to the parent.
 
 Les coordonnées (0, 0) signifient que les objets resteront dans le coin supérieur gauche du parent indépendamment de la position du parent.
 
@@ -3453,7 +3452,7 @@ Pour simplifier, la définition des couleurs des objets n’est pas montrée dan
 
 \subparagraph{Visibilité uniquement sur le parent}
 \label{\detokenize{overview/object:visibilite-uniquement-sur-le-parent}}
-Si un enfant est partiellement ou complètement hors de son parent, les parties extérieures ne seront pas visibles.
+If a child is partially or fully out of its parent then the parts outside will not be visible.
 
 \sphinxincludegraphics{{par_child3}.png}
 
@@ -3464,22 +3463,22 @@ Si un enfant est partiellement ou complètement hors de son parent, les parties 
 
 \subparagraph{Créer - supprimer des objets}
 \label{\detokenize{overview/object:creer-supprimer-des-objets}}
-Dans LittlevGL, les objets peuvent être créés et supprimés dynamiquement à l’exécution.
-Cela signifie que seuls les objets actuellement créés consomment de la MEV.
-Par exemple, si vous avez besoin d’un graphique, vous pouvez le créer à l’utilisation et le supprimer s’il n’est pas visible ou plus nécessaire.
+In LittlevGL objects can be created and deleted dynamically in run-time.
+It means only the currently created objects consume RAM.
+For example, if you need a chart, you can create it when required and delete it when it is not visible or necessary.
 
-Chaque type d’objet a sa propre fonction \sphinxstylestrong{create} avec une signature unifiée.
-Deux paramètres sont nécessaires :
+Every object type has its own \sphinxstylestrong{create} function with a unified prototype.
+It needs two parameters:
 \begin{itemize}
 \item {} 
-un pointeur sur l’objet parent. Pour créer un écran, donnez \sphinxstyleemphasis{NULL} en tant que parent.
+A pointer to the \sphinxstyleemphasis{parent} object. To create a screen give \sphinxstyleemphasis{NULL} as parent.
 
 \item {} 
-éventuellement un pointeur sur un autre objet du même type pour copie. Peut être \sphinxstyleemphasis{NULL} pour ne pas copier un autre objet.
+Optionally, a pointer to \sphinxstyleemphasis{copy} object with the same type to copy it. This \sphinxstyleemphasis{copy} object can be \sphinxstyleemphasis{NULL} to avoid the copy operation.
 
 \end{itemize}
 
-Indépendamment du type d’objet, un type de variable commun \sphinxcode{\sphinxupquote{lv\_obj\_t}} est utilisé. Ce pointeur peut être utilisé ultérieurement pour définir ou obtenir les attributs de l’objet.
+All objects are referenced in C code using an \sphinxcode{\sphinxupquote{lv\_obj\_t}} pointer as a handle. This pointer can later be used to set or get the attributes of the object.
 
 Les fonctions de création ressemblent à ceci :
 
@@ -3493,11 +3492,11 @@ Il existe une fonction commune de \sphinxstylestrong{suppression} pour tous les 
 \PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}obj\PYGZus{}del}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{obj}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-\sphinxcode{\sphinxupquote{lv\_obj\_del}} supprimera immédiatement l’objet.
-Si pour une quelconque raison vous ne pouvez pas supprimer l’objet immédiatement, vous pouvez utiliser \sphinxcode{\sphinxupquote{lv\_obj\_del\_async(obj)}}.
-Utile, p.ex. si vous voulez supprimer le parent d’un objet dans le traitement de l’événement \sphinxcode{\sphinxupquote{LV\_EVENT\_DELETE}}.
+\sphinxcode{\sphinxupquote{lv\_obj\_del}} will delete the object immediately.
+If for any reason you can’t delete the object immediately you can use \sphinxcode{\sphinxupquote{lv\_obj\_del\_async(obj)}}.
+It is useful e.g. if you want to delete the parent of an object in the child’s \sphinxcode{\sphinxupquote{LV\_EVENT\_DELETE}} signal.
 
-Vous pouvez supprimer uniquement les enfants d’un objet mais laissez l’objet lui-même “vivant” :
+You can remove all the children of an object (but not the object itself) using \sphinxcode{\sphinxupquote{lv\_obj\_clean}}:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}obj\PYGZus{}clean}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{obj}\PYG{p}{)}\PYG{p}{;}
@@ -3512,16 +3511,15 @@ Les écrans sont des objets spéciaux qui n’ont pas d’objet parent. Il est d
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{scr1} \PYG{o}{=} \PYG{n}{lv\PYGZus{}obj\PYGZus{}create}\PYG{p}{(}\PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-Il y a toujours un écran actif affiché. Par défaut, la librairie en crée et en charge un.
-Pour obtenir l’écran actuellement actif, utilisez la fonction \sphinxcode{\sphinxupquote{lv\_scr\_act()}} pour en charger un nouveau, utilisez \sphinxcode{\sphinxupquote{lv\_scr\_load(scr1)}}.
+There is always an active screen on each display. By default, the library creates and loads a “Base object” as the screen for each display.To get the currently active screen use the \sphinxcode{\sphinxupquote{lv\_scr\_act()}} function. To load a new one, use \sphinxcode{\sphinxupquote{lv\_scr\_load(scr1)}}.
 
 Les écrans peuvent être créés avec n’importe quel type d’objet. Par exemple, un {\hyperref[\detokenize{object-types/obj::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Objet de base}}}} ou une image pour créer un fond d’écran.
 
-Les écrans sont créés sur l’ \sphinxstyleemphasis{affichage par défaut}.
-L’écran \sphinxstyleemphasis{par défaut} est le dernier écran enregistré avec \sphinxcode{\sphinxupquote{lv\_disp\_drv\_register}} (s’il n’y a qu’un seul écran, alors c’est celui-ci) ou vous pouvez explicitement sélectionner l’affichage avec \sphinxcode{\sphinxupquote{lv\_disp\_set\_default (disp)}}.
-\sphinxcode{\sphinxupquote{lv\_scr\_act()}} et \sphinxcode{\sphinxupquote{lv\_scr\_load()}} fonctionnent sur l’écran courant par défaut.
+Screens are created on the currently selected \sphinxstyleemphasis{default display}.
+The \sphinxstyleemphasis{default screen} is the last registered screen with \sphinxcode{\sphinxupquote{lv\_disp\_drv\_register}} or you can explicitly select a new default display using \sphinxcode{\sphinxupquote{lv\_disp\_set\_default(disp)}}.
+\sphinxcode{\sphinxupquote{lv\_scr\_act()}} and \sphinxcode{\sphinxupquote{lv\_scr\_load()}} operate on the currently default screen.
 
-Visitez {\hyperref[\detokenize{overview/display::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Support multi-affichage}}}} pour en savoir plus.
+Visit {\hyperref[\detokenize{overview/display::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Multi-display support}}}} to learn more.
 
 
 \subsubsection{Couches}
@@ -3529,10 +3527,9 @@ Visitez {\hyperref[\detokenize{overview/display::doc}]{\sphinxcrossref{\DUrole{d
 
 \paragraph{Ordre de création}
 \label{\detokenize{overview/layer:ordre-de-creation}}
-L’objet créé le plus tôt (et ses enfants) sera dessiné le plus tôt (au plus près de l’arrière-plan). En d’autres termes, le dernier objet créé sera au-dessus de ses frères et sœurs.
-C’est très important, l’ordre est calculé entre les objets de même niveau (“frères et sœurs”).
+By default, LittlevGL draws old objects on the background and new objects on the foreground.
 
-Des couches peuvent être facilement ajoutées en créant 2 objets (qui peuvent être transparents). D’abord ‘A’ et ensuite ‘B’. ‘A’ et tous les objets qu’il contient seront à l’arrière-plan et pourront être couverts par ‘B’ et ses enfants.
+For example, assume we added a button to a parent object named button1 and then another button named button2. Then button1 (with its child object(s)) will be in the background and can be covered by button2 and its children.
 
 \sphinxincludegraphics{{layers}.png}
 
@@ -3566,35 +3563,35 @@ Des couches peuvent être facilement ajoutées en créant 2 objets (qui peuvent 
 Il y a plusieurs façons d’amener un objet au premier plan :
 \begin{itemize}
 \item {} 
-Utilisez \sphinxcode{\sphinxupquote{lv\_obj\_set\_top(obj, true)}}. Si vous cliquez sur \sphinxcode{\sphinxupquote{obj}} ou l’un de ses enfants, LittlevGL amènera automatiquement l’objet au premier plan.
-Cela fonctionne de manière similaire aux fenêtres sur PC. Lorsque vous cliquez sur une fenêtre en arrière-plan, elle apparaît automatiquement au premier plan.
+Use \sphinxcode{\sphinxupquote{lv\_obj\_set\_top(obj, true)}}. If \sphinxcode{\sphinxupquote{obj}} or any of its children is clicked, then LittlevGL will automatically bring the object to the foreground.
+It works similarly to a typical GUI on a PC. When a window in the background is clicked, it will come to the foreground automatically.
 
 \item {} 
-Utilisez \sphinxcode{\sphinxupquote{lv\_obj\_move\_foreground(obj)}} et \sphinxcode{\sphinxupquote{lv\_obj\_move\_background(obj)}} pour indiquer explicitement à la librairie de placer un objet au premier plan ou de le passer à l’arrière-plan.
+Use \sphinxcode{\sphinxupquote{lv\_obj\_move\_foreground(obj)}} to explicitly tell the library to bring an object to the foreground. Similarly, use \sphinxcode{\sphinxupquote{lv\_obj\_move\_background(obj)}} to move to the background.
 
 \item {} 
-Quand \sphinxcode{\sphinxupquote{lv\_obj\_set\_parent(obj, new\_parent)}} est utilisé, \sphinxcode{\sphinxupquote{obj}} sera au premier plan sur le nouveau parent.
+When \sphinxcode{\sphinxupquote{lv\_obj\_set\_parent(obj, new\_parent)}} is used, \sphinxcode{\sphinxupquote{obj}} will be on the foreground on the \sphinxcode{\sphinxupquote{new\_parent}}.
 
 \end{itemize}
 
 
-\paragraph{Couches supérieure et système}
-\label{\detokenize{overview/layer:couches-superieure-et-systeme}}
-Il y a deux couches spéciales appelées \sphinxcode{\sphinxupquote{layer\_top}} et \sphinxcode{\sphinxupquote{layer\_sys}}.
-Les deux sont visibles et identiques sur tous les écrans d’un affichage. \sphinxcode{\sphinxupquote{layer\_top}} est au-dessus de “l’écran normal” et \sphinxcode{\sphinxupquote{layer\_sys}} lui-même au-dessus de \sphinxcode{\sphinxupquote{layer\_top}}.
+\paragraph{Top and sys layers}
+\label{\detokenize{overview/layer:top-and-sys-layers}}
+LittlevGL uses two special layers named as \sphinxcode{\sphinxupquote{layer\_top}} and \sphinxcode{\sphinxupquote{layer\_sys}}.
+Both are visible and common on all screens of a display. \sphinxstylestrong{They are not, however, shared among multiple physical displays.} The \sphinxcode{\sphinxupquote{layer\_top}} is always on top of the default screen (\sphinxcode{\sphinxupquote{lv\_scr\_act()}}), and \sphinxcode{\sphinxupquote{layer\_sys}} is on top of \sphinxcode{\sphinxupquote{layer\_top}}.
 
-\sphinxcode{\sphinxupquote{layer\_top}} peut être utilisé par l’utilisateur pour créer du contenu visible partout. Par exemple, une barre de menus, une fenêtre contextuelle, etc. Si l’attribut \sphinxcode{\sphinxupquote{click}} est activé,\sphinxcode{\sphinxupquote{ layer\_top}} absorbera tous les clics de l’utilisateur et agira comme modal.
+The \sphinxcode{\sphinxupquote{layer\_top}} can be used by the user to create some content visible everywhere. For example, a menu bar, a pop-up, etc. If the \sphinxcode{\sphinxupquote{click}} attribute is enabled, then \sphinxcode{\sphinxupquote{layer\_top}} will absorb all user click and acts as a modal.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}click}\PYG{p}{(}\PYG{n}{lv\PYGZus{}layer\PYGZus{}top}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-\sphinxcode{\sphinxupquote{layer\_sys}} est utilisé par LittlevGL. Par exemple, la librairie y place le curseur de la souris pour s’assurer qu’il est toujours visible.
+The \sphinxcode{\sphinxupquote{layer\_sys}} is also using for similar purpose on LittlevGL. For example, it places the mouse cursor there to be sure it’s always visible.
 
 
 \subsubsection{Evénements}
 \label{\detokenize{overview/event:evenements}}\label{\detokenize{overview/event::doc}}
-Dans LittlevGL, des événements sont déclenchés s’il se produit quelque chose d’intéressant pour l’utilisateur. Par exemple un objet
+Events are triggered in LittlevGL when something happens which might be interesting to the user, e.g. if an object:
 \begin{itemize}
 \item {} 
 est cliqué
@@ -3607,7 +3604,7 @@ sa valeur a changé, etc.
 
 \end{itemize}
 
-L’utilisateur peut affecter une fonction de rappel à un objet pour voir ces événements. Dans la pratique, cela ressemble à ceci :
+The user can assign a callback function to an object to see these events. In practice, it looks like this:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn} \PYG{o}{=} \PYG{n}{lv\PYGZus{}btn\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
@@ -3657,12 +3654,12 @@ Les types d’événements suivants existent :
 
 \subparagraph{Evénements génériques}
 \label{\detokenize{overview/event:evenements-generiques}}
-Tout objet peut recevoir ces événements indépendamment de son type. C-à- d. ces événements sont envoyés aux boutons, aux étiquettes, aux curseurs, etc.
+All objects (such as Buttons/Labels/Sliders etc.) receive these generic events regardless of their type.
 
 
-\subparagraph{Liés au périphérique d’entrée}
-\label{\detokenize{overview/event:lies-au-peripherique-d-entree}}
-Envoyés lorsqu’un objet est pressé, relâché, etc. par l’utilisateur. Ils sont utilisés pour les périphériques d’entrée \sphinxstyleemphasis{clavier}, \sphinxstyleemphasis{encodeur} et \sphinxstyleemphasis{bouton}, ainsi que pour les \sphinxstyleemphasis{pointeurs}. Consultez la section {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Périphériques d’entrée}}}} pour en savoir plus à leur sujet.
+\subparagraph{Related to the input devices}
+\label{\detokenize{overview/event:related-to-the-input-devices}}
+These are sent when an object is pressed/released etc. by the user. They are used not only for \sphinxstyleemphasis{Pointers} but can used for \sphinxstyleemphasis{Keypad}, \sphinxstyleemphasis{Encoder} and \sphinxstyleemphasis{Button} input devices as well. Visit the {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Overview of input devices}}}} section to learn more about them.
 \begin{itemize}
 \item {} 
 \sphinxstylestrong{LV\_EVENT\_PRESSED} L’objet a été pressé
@@ -3671,10 +3668,10 @@ Envoyés lorsqu’un objet est pressé, relâché, etc. par l’utilisateur. Ils
 \sphinxstylestrong{LV\_EVENT\_PRESSING} L’objet est pressé(envoyé continuellement pendant l’appui)
 
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_PRESS\_LOST} Toujours pressé mais hors de l’objet
+\sphinxstylestrong{LV\_EVENT\_PRESS\_LOST} The input device is still being pressed but is no longer on the object
 
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_SHORT\_CLICKED} Relâché avant \sphinxcode{\sphinxupquote{LV\_INDEV\_LONG\_PRESS\_TIME}}. Pas généré si l’objet est déplacé.
+\sphinxstylestrong{LV\_EVENT\_SHORT\_CLICKED} Released before \sphinxcode{\sphinxupquote{LV\_INDEV\_LONG\_PRESS\_TIME}} time. Not called if dragged.
 
 \item {} 
 \sphinxstylestrong{LV\_EVENT\_LONG\_PRESSED}  Pressé durant \sphinxcode{\sphinxupquote{LV\_INDEV\_LONG\_PRESS\_TIME}}. Pas généré si l’objet est déplacé.
@@ -3686,13 +3683,13 @@ Envoyés lorsqu’un objet est pressé, relâché, etc. par l’utilisateur. Ils
 \sphinxstylestrong{LV\_EVENT\_CLICKED} Généré au relâché si l’objet n’est pas déplacé (indépendamment d’un appui long)
 
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_RELEASED} Généré dans tous les cas lorsque l’objet a été relâché, même s’il a été déplacé. Non généré si il y a eu déplacement pendant l’appui et si le relâché intervient hors de l’objet. Dans ce cas, \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESS\_LOST}} est généré.
+\sphinxstylestrong{LV\_EVENT\_RELEASED}  Called in every case when the object has been released even if it was dragged. Not called if slid from the object while pressing and released outside of the object. In this case, \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESS\_LOST}} is sent.
 
 \end{itemize}
 
 
-\subparagraph{Liés au pointeur}
-\label{\detokenize{overview/event:lies-au-pointeur}}
+\subparagraph{Related to pointer}
+\label{\detokenize{overview/event:related-to-pointer}}
 Ces événements sont envoyés uniquement par des périphériques d’entrée de type pointeur (p.ex. souris ou pavé tactile).
 \begin{itemize}
 \item {} 
@@ -3707,12 +3704,12 @@ Ces événements sont envoyés uniquement par des périphériques d’entrée de
 \end{itemize}
 
 
-\subparagraph{Liés au clavier et à l’encodeur}
-\label{\detokenize{overview/event:lies-au-clavier-et-a-l-encodeur}}
+\subparagraph{Related to keypad and encoder}
+\label{\detokenize{overview/event:related-to-keypad-and-encoder}}
 Ces événements sont envoyés par les périphériques d’entrée clavier et encodeur. En savoir plus sur les \sphinxstyleemphasis{groupes} dans la section {[}Périphériques d’entrée{]} (overview/indev).
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_KEY} Une touche* est envoyée à l’objet. Typiquement quand elle a été pressée ou répétée après un appui long
+\sphinxstylestrong{LV\_EVENT\_KEY} A \sphinxstyleemphasis{Key} is sent to the object. Typically when it was pressed or repeated after a long press
 
 \item {} 
 \sphinxstylestrong{LV\_EVENT\_FOCUSED} L’objet est activé dans son groupe
@@ -3735,7 +3732,7 @@ Autres événements généraux envoyés par la librairie.
 
 \subparagraph{Evénements spéciaux}
 \label{\detokenize{overview/event:evenements-speciaux}}
-Ces événements sont spécifiques à un type particulier d’objet.
+These events are specific to a particular object type.
 \begin{itemize}
 \item {} 
 \sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} La valeur de l’objet a changé (p.ex. pour un {\hyperref[\detokenize{object-types/slider::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Curseur}}}})
@@ -3754,15 +3751,15 @@ Ces événements sont spécifiques à un type particulier d’objet.
 
 \end{itemize}
 
-Pour voir exactement quels événements sont utilisés par un type d’objet, voir la documentation des {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Types d’objet}}}}.
+Visit particular {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Object type’s documentation}}}} to understand which events are used by an object type.
 
 
 \paragraph{Données personnalisées}
 \label{\detokenize{overview/event:donnees-personnalisees}}
-Certains événements peuvent comporter des données personnalisées. Par exemple, \sphinxcode{\sphinxupquote{LV\_EVENT\_VALUE\_CHANGED}} indique dans certains cas la nouvelle valeur. Pour plus d’informations, voir la documentation des {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Types d’objet}}}}.
+Some events might contain custom data. For example, \sphinxcode{\sphinxupquote{LV\_EVENT\_VALUE\_CHANGED}} in some cases tells the new value. For more information, see the particular {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Object type’s documentation}}}}.
 Pour obtenir les données personnalisées dans la fonction de rappel, utilisez \sphinxcode{\sphinxupquote{lv\_event\_get\_data()}}.
 
-Le type des données personnalisées dépend de l’objet, mais si c’est un
+The type of the custom data depends on the sending object but if it’s a
 \begin{itemize}
 \item {} 
 entier alors c’est un \sphinxcode{\sphinxupquote{uint32\_t *}} ou un  \sphinxcode{\sphinxupquote{int32\_t *}}
@@ -3775,9 +3772,9 @@ texte alors c’est un \sphinxcode{\sphinxupquote{char *}} ou un \sphinxcode{\sp
 
 \paragraph{Envoyer des événements manuellement}
 \label{\detokenize{overview/event:envoyer-des-evenements-manuellement}}
-Pour envoyer manuellement des événements à un objet, utilisez \sphinxcode{\sphinxupquote{lv\_event\_send(obj, LV\_EVENT\_..., \&custom\_data)}}.
+To manually send events to an object, use \sphinxcode{\sphinxupquote{lv\_event\_send(obj, LV\_EVENT\_..., \&custom\_data)}}.
 
-Cela peut être utilisé par exemple pour fermer manuellement une boîte de message en simulant un appui sur un bouton :
+For example, it can be used to manually close a message box by simulating a button press (although there are simpler ways of doing this):
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+cm}{/* Simuler l\PYGZsq{}appui du premier bouton (les index partent de zéro) */}
@@ -3785,7 +3782,7 @@ Cela peut être utilisé par exemple pour fermer manuellement une boîte de mess
 \PYG{n}{lv\PYGZus{}event\PYGZus{}send}\PYG{p}{(}\PYG{n}{mbox}\PYG{p}{,} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}VALUE\PYGZus{}CHANGED}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{btn\PYGZus{}id}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-Ou pour demander une actualisation de manière générique.
+Or to perform refresh generically:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}event\PYGZus{}send}\PYG{p}{(}\PYG{n}{label}\PYG{p}{,} \PYG{n}{LV\PYGZus{}EVENT\PYGZus{}REFRESH}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
@@ -3794,21 +3791,23 @@ Ou pour demander une actualisation de manière générique.
 
 \subsubsection{Styles}
 \label{\detokenize{overview/style:styles}}\label{\detokenize{overview/style::doc}}
-Les \sphinxstyleemphasis{styles} sont utilisés pour définir l’apparence des objets. Un style est une variable structurée avec des attributs tels que couleurs, marges, opacité, police, etc.
+\sphinxstyleemphasis{Styles} are used to set the appearance of the objects. A style is a structure with attributes like colors, paddings, opacity, font, etc.
 
-Il existe un type de style commun nommé \sphinxstylestrong{lv\_style\_t} pour chaque type d’objet.
+There is a common style type called \sphinxstylestrong{lv\_style\_t} for every object type.
 
-En définissant les champs des variables \sphinxcode{\sphinxupquote{lv\_style\_t}} et en les affectant à un objet, vous pouvez modifier l’apparence des objets.
+By setting the fields of the \sphinxcode{\sphinxupquote{lv\_style\_t}} variables and assigning them to objects with \sphinxcode{\sphinxupquote{lv\_obj\_set\_style}}, you can influence the appearance of the objects.
 
 \begin{sphinxadmonition}{important}{Important:}
-Les objets mémorisent uniquement un pointeur vers un style. Le style ne peut donc pas être une variable locale détruite après la sortie de la fonction. \sphinxstylestrong{Vous devez utiliser des variables statiques, globales ou allouées dynamiquement.}
+The objects only store a pointer to a style so the style cannot be a local variable which is destroyed after the function exits. \sphinxstylestrong{You should use static, global or dynamically allocated variables.}
 \end{sphinxadmonition}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/* file scope */}
 \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}1}\PYG{p}{;}             \PYG{c+cm}{/* OK ! Les variables globales pour les styles sont adaptées */}
 \PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}2}\PYG{p}{;}      \PYG{c+cm}{/* OK ! Les variables statiques en dehors des fonctions sont adaptées */}
-\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}screen\PYGZus{}create}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)} 
+\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}screen\PYGZus{}create}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
+  \PYG{c+cm}{/* function scope */}
   \PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}3}\PYG{p}{;}    \PYG{c+cm}{/* OK ! Les variables statiques dans les fonctions sont adaptées */}
   \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{style\PYGZus{}4}\PYG{p}{;}           \PYG{c+cm}{/* Non ! Les styles ne peuvent pas être des variables locales */}
 
@@ -3817,22 +3816,9 @@ Les objets mémorisent uniquement un pointeur vers un style. Le style ne peut do
 \end{sphinxVerbatim}
 
 
-\paragraph{Utiliser les styles}
-\label{\detokenize{overview/style:utiliser-les-styles}}
-Les objets ont un \sphinxstyleemphasis{style principal} qui détermine l’apparence de leur arrière-plan ou de leur partie principale. Cependant, certains types d’objet ont aussi des styles supplémentaires.
-
-Certains objets ont un seul style. P.ex.
-\begin{itemize}
-\item {} 
-Etiquette
-
-\item {} 
-Image
-
-\item {} 
-Ligne, etc
-
-\end{itemize}
+\paragraph{Use the styles}
+\label{\detokenize{overview/style:use-the-styles}}
+Objects have a \sphinxstyleemphasis{main style} which determines the appearance of their background or main section. However, some object types have additional styles too.
 
 Par exemple, un curseur a 3 styles :
 \begin{itemize}
@@ -3847,40 +3833,54 @@ Bouton
 
 \end{itemize}
 
-Chaque type d’objet a ses propres fonctions de gestion des styles. Par exemple
+Some object types only have one style. For example:
+\begin{itemize}
+\item {} 
+Etiquette
+
+\item {} 
+Image
+
+\item {} 
+Line, etc.
+
+\end{itemize}
+
+Every object type implements its own version of the style setter and getter functions. You should use these instead of \sphinxcode{\sphinxupquote{lv\_obj\_set\_style}} where possible. For example:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{const} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{o}{*} \PYG{n}{btn\PYGZus{}style} \PYG{o}{=} \PYG{n}{lv\PYGZus{}btn\PYGZus{}get\PYGZus{}style}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{LV\PYGZus{}BTN\PYGZus{}STYLE\PYGZus{}REL}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{btn}\PYG{p}{,} \PYG{n}{LV\PYGZus{}BTN\PYGZus{}STYLE\PYGZus{}REL}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{new\PYGZus{}style}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-Pour voir les styles pris en charge par un type d’objet (\sphinxstyleemphasis{LV\_\textless{}OBJ\_TYPE\textgreater{}\sphinxstyleemphasis{STYLE}\textless{}STYLE\_TYPE\textgreater{}}) vérifier la documentation du {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Type d’objet}}}} particulier.
+To see the styles supported by an object type  (\sphinxstyleemphasis{LV\_\textless{}OBJ\_TYPE\textgreater{}\sphinxstyleemphasis{STYLE}\textless{}STYLE\_TYPE\textgreater{}}), check the documentation of the particular {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Object type}}}}.
 
-Si vous \sphinxstylestrong{modifiez un style déjà utilisé} par un ou plusieurs objets, les objets doivent être avertis du changement de style. Vous avez deux possibilités pour le faire :
+If you \sphinxstylestrong{modify a style which is already used} by one or more objects, then the objects have to be notified about the style is changed. There are two options to do this notification:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+cm}{/* Notifie un objet que son style est modifié */}
-\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}obj\PYGZus{}refresh\PYGZus{}style}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{obj}\PYG{p}{)}\PYG{p}{;} 
+\PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}obj\PYGZus{}refresh\PYGZus{}style}\PYG{p}{(}\PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{obj}\PYG{p}{)}\PYG{p}{;}
 
 \PYG{c+cm}{/* Notifie tous les objets avec un style donné (NULL pour notifier tous les objets) */}
 \PYG{k+kt}{void} \PYG{n+nf}{lv\PYGZus{}obj\PYGZus{}report\PYGZus{}style\PYGZus{}mod}\PYG{p}{(}\PYG{k+kt}{void} \PYG{o}{*} \PYG{n}{style}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-\sphinxcode{\sphinxupquote{lv\_obj\_report\_style\_mod}} ne peut actualiser que les \sphinxstyleemphasis{styles principaux}.
+\sphinxcode{\sphinxupquote{lv\_obj\_report\_style\_mod}} will only refresh the \sphinxstyleemphasis{Main styles} of objects. If you change a different style, you will have to use \sphinxcode{\sphinxupquote{lv\_obj\_refresh\_style}}.
 
 
 \paragraph{Héritage de styles}
 \label{\detokenize{overview/style:heritage-de-styles}}
-Si le \sphinxstyleemphasis{style principal} d’un objet est \sphinxcode{\sphinxupquote{NULL}}, son style sera hérité du style de son parent. Cela facilite la création d’une interface cohérente. N’oubliez pas qu’un style décrit beaucoup de propriétés en même temps. Ainsi, par exemple, si vous définissez le style d’un bouton et créez une étiquette avec le style \sphinxcode{\sphinxupquote{NULL}}, l’étiquette sera rendue en fonction du style du bouton. En d’autres termes, le bouton garantit à ses enfants une apparence correcte.
+If the \sphinxstyleemphasis{Main style} of an object is \sphinxcode{\sphinxupquote{NULL}}, then its style will be inherited from its parent’s style. It makes easier to create a consistent design. Don’t forget a style describes a lot of properties at the same time. So for example, if you set a button’s style and create a label on it with \sphinxcode{\sphinxupquote{NULL}} style, then the label will be rendered according to the button’s style. In other words, the button makes sure its children will look good on it.
 
-La définition de la propriété de style \sphinxcode{\sphinxupquote{glass}} empêchera d’hériter ce style. Vous devez l’utiliser si le style est transparent pour que les enfants utilisent les couleurs et autres des grands-parents.
+Setting the \sphinxcode{\sphinxupquote{glass}} style property will prevent inheriting that style (i.e. cause the child object to inherit its style from its grandparent). You should use it if the style is transparent so children use colors and features from its grandparent. Otherwise, the child objects would also be transparent.
 
 
 \paragraph{Propriétés de style}
 \label{\detokenize{overview/style:proprietes-de-style}}
-Un style comporte 5 parties principales : commun, corps, texte, image et ligne. Un objet utilisera les champs qui le concernent.
-Par exemple, les \sphinxstyleemphasis{lignes} ne se soucient pas de \sphinxstyleemphasis{letter\_space}.
-Pour voir quels champs sont utilisés par un type d’objet, voir la documentation des {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Types d’objet}}}}.
+A style has 5 main parts: common, body, text, image and line. Each object type only uses the fields which are relevant to it.
+For example, \sphinxstyleemphasis{Lines} don’t care about the \sphinxstyleemphasis{letter\_space}, because they are not concerned with rendering text.
+
+To see which fields are used by an object type, see their {\hyperref[\detokenize{object-types/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Documentation}}}}.
 
 Les champs d’une structure de style sont les suivants :
 
@@ -3893,8 +3893,8 @@ Les champs d’une structure de style sont les suivants :
 \end{itemize}
 
 
-\subparagraph{Propriétés de style de corps}
-\label{\detokenize{overview/style:proprietes-de-style-de-corps}}
+\subparagraph{Body style properties}
+\label{\detokenize{overview/style:body-style-properties}}
 Utilisé par les objets rectangulaires
 \begin{itemize}
 \item {} 
@@ -3978,13 +3978,13 @@ Utilisés par les objets qui affichent du texte
 Utilisé par les objets de type image ou les icônes sur les objets
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{image.color} Couleur pour la re-coloration de l’image en fonction de la luminosité des pixels
+\sphinxstylestrong{image.color} Color for image re-coloring based on the brightness of its pixels
 
 \item {} 
 \sphinxstylestrong{image.intense} Intensité de re-coloration (0..255 ou \sphinxstyleemphasis{LV\_OPA\_TRANSP}, \sphinxstyleemphasis{LV\_OPA\_10}, \sphinxstyleemphasis{LV\_OPA\_20} … \sphinxstyleemphasis{LV\_OPA\_COVER})
 
 \item {} 
-\sphinxstylestrong{image.opa} Opacité de l’image (0..255 ou \sphinxstyleemphasis{LV\_OPA\_TRANSP}, \sphinxstyleemphasis{LV\_OPA\_10}, \sphinxstyleemphasis{LV\_OPA\_20} … \sphinxstyleemphasis{LV\_OPA\_COVER})
+\sphinxstylestrong{image.opa} Overall image opacity (0..255 or \sphinxstyleemphasis{LV\_OPA\_TRANSP}, \sphinxstyleemphasis{LV\_OPA\_10}, \sphinxstyleemphasis{LV\_OPA\_20} … \sphinxstyleemphasis{LV\_OPA\_COVER})
 
 \end{itemize}
 
@@ -4011,15 +4011,15 @@ Il existe plusieurs styles intégrés dans la librairie :
 
 \sphinxincludegraphics{{style-built-in}.png}
 
-Comme vous pouvez le constater, il existe un style pour les écrans, un pour les boutons, des styles simples ou améliorés et des styles transparents.
+As you can see, there are built-in styles for screens, buttons, solid containers, and transparent containers.
 
-Les styles \sphinxcode{\sphinxupquote{lv\_style\_transp}}, \sphinxcode{\sphinxupquote{lv\_style\_transp\_fit}} et \sphinxcode{\sphinxupquote{lv\_style\_transp\_tight}} diffèrent uniquement par les marges : pour \sphinxcode{\sphinxupquote{lv\_style\_transp\_tight}} les marges sont nulles, pour \sphinxcode{\sphinxupquote{lv\_style\_transp\_fit}} seules les marges horizontales et verticalles sont nulles mais il y a une marge intérieure.
+The \sphinxcode{\sphinxupquote{lv\_style\_transp}}, \sphinxcode{\sphinxupquote{lv\_style\_transp\_fit}} and \sphinxcode{\sphinxupquote{lv\_style\_transp\_tight}} differ only in paddings: for \sphinxcode{\sphinxupquote{lv\_style\_transp\_tight}} all paddings are zero, for \sphinxcode{\sphinxupquote{lv\_style\_transp\_fit}} only horizontal and vertical paddings are zero but has inner padding.
 
 \begin{sphinxadmonition}{important}{Important:}
 Les styles intégrés transparents ont \sphinxstyleemphasis{glass = 1} par défaut, ce qui signifie que ces styles (les couleurs, par exemple) ne seront pas hérités par les enfants.
 \end{sphinxadmonition}
 
-Les styles intégrés sont des variables globales \sphinxcode{\sphinxupquote{lv\_style\_t}}. Vous pouvez les utiliser ainsi :
+The built in styles are global \sphinxcode{\sphinxupquote{lv\_style\_t}} variables. You can use them like:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}btn\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{LV\PYGZus{}BTN\PYGZus{}STYLE\PYGZus{}REL}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}style\PYGZus{}btn\PYGZus{}rel}\PYG{p}{)}
@@ -4028,11 +4028,11 @@ Les styles intégrés sont des variables globales \sphinxcode{\sphinxupquote{lv\
 
 \paragraph{Créer de nouveaux styles}
 \label{\detokenize{overview/style:creer-de-nouveaux-styles}}
-Vous pouvez modifier les styles intégrés ou en créer de nouveaux.
+You can either modify the built-in styles or can create new styles.
 
-Lors de la création de nouveaux styles, il est recommandé de copier d’abord un style intégré avec \sphinxcode{\sphinxupquote{lv\_style\_copy(\&dest\_style, \&src\_style)}} pour s’assurer que tous les champs sont initialisés avec une valeur appropriée.
+When creating new styles, it’s recommended to first copy a built-in style with \sphinxcode{\sphinxupquote{lv\_style\_copy(\&dest\_style, \&src\_style)}} to be sure all fields are initialized with the proper value.
 
-N’oubliez pas que le style créé doit être \sphinxcode{\sphinxupquote{statique}} ou global. Par exemple :
+Do not forget to initialize the new style as \sphinxcode{\sphinxupquote{static}} or \sphinxcode{\sphinxupquote{global}}. For example:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{static} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{n}{my\PYGZus{}red\PYGZus{}style}\PYG{p}{;}
@@ -4044,7 +4044,9 @@ N’oubliez pas que le style créé doit être \sphinxcode{\sphinxupquote{statiq
 
 \paragraph{Animations de style}
 \label{\detokenize{overview/style:animations-de-style}}
-Vous modifiez les styles avec des animations en utilisant la fonction \sphinxcode{\sphinxupquote{lv\_style\_anim \_... ()}}. Deux styles sont requis pour représenter les états \sphinxstyleemphasis{initial} et \sphinxstyleemphasis{final}, et un troisième style qui sera animé. Voici un exemple pour montrer comment cela fonctionne.
+You can change the styles with animations using \sphinxcode{\sphinxupquote{lv\_style\_anim\_...()}} function. The \sphinxcode{\sphinxupquote{lv\_style\_anim\_set\_styles()}} uses 3 styles. Two styles are required to represent the \sphinxstyleemphasis{start} and \sphinxstyleemphasis{end} state, and a third style required for the \sphinxstyleemphasis{animation}.
+
+Here is an example to show how it works.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}anim\PYGZus{}t} \PYG{n}{a}\PYG{p}{;}
@@ -4054,9 +4056,11 @@ Vous modifiez les styles avec des animations en utilisant la fonction \sphinxcod
 \PYG{n}{lv\PYGZus{}style\PYGZus{}anim\PYGZus{}create}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{a}\PYG{p}{)}\PYG{p}{;}                                               \PYG{c+cm}{/* Crée l\PYGZsq{}animation */}
 \end{sphinxVerbatim}
 
-Pour découvrir l’intégralité de l’API des animations de style, voir \sphinxcode{\sphinxupquote{lv\_core/lv\_style.h}}.
+Essentially, \sphinxcode{\sphinxupquote{style\_start}} and \sphinxcode{\sphinxupquote{style\_end}} remain unchanged, and \sphinxcode{\sphinxupquote{style\_to\_anim}} is interpolated over the course of the animation.
 
-Ici, vous pouvez en apprendre plus sur les {\hyperref[\detokenize{overview/animation::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Animations}}}}.
+See \sphinxcode{\sphinxupquote{lv\_core/lv\_style.h}} to know the whole API of style animations.
+
+Check {\hyperref[\detokenize{overview/animation::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Animations}}}} for more information.
 
 
 \paragraph{Exemple de style}
@@ -4099,12 +4103,12 @@ L’exemple ci-dessous illustre l’utilisation des styles.
 
 \paragraph{Thèmes}
 \label{\detokenize{overview/style:themes}}
-Il est difficile de créer des styles pour votre interface graphique, car vous avez besoin d’une profonde compréhension de la librairie et de compétences en matière de conception. En outre, il faut beaucoup de temps pour créer autant de styles.
+Creating styles for the GUI is challenging because you need a deeper understanding of the library, and you need to have some design skills. Also, it takes a lot of time to create so many styles for many different objects.
 
-Pour accélérer la conception les thèmes sont introduits. Un thème est une collection de styles contenant les styles requis pour chaque type d’objet. Par exemple, 5 styles de boutons décrivant leurs 5 états possibles.
-Consultez les {[}Thèmes{]} (https://littlevgl.com/themes) existants ou essayez-les dans la section {[}Démonstration en ligne{]} (https://littlevgl.com/live-demo).
+Themes are introduced to speed up the design part. A theme is a style collection which contains the required styles for every object type. For example, 5 styles for a button to describe its 5 possible states.
+Check the \sphinxhref{https://littlevgl.com/themes}{Existing themes} or try some in the \sphinxhref{https://littlevgl.com/live-demo}{Live demo} section. The \sphinxhref{https://littlevgl.com/demo-theme-selector}{theme selector demo} is useful to see how a given theme and color hue looks on the display.
 
-Pour être plus précis, un thème est une variable structurée qui contient beaucoup de champs lv\_style\_t*. Pour les boutons :
+To be more specific, a theme is a structure variable that contains a lot of \sphinxcode{\sphinxupquote{lv\_style\_t *}} fields. For buttons:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{theme}\PYG{p}{.}\PYG{n}{btn}\PYG{p}{.}\PYG{n}{rel}       \PYG{c+cm}{/* Style de bouton relâché */}
@@ -4138,7 +4142,7 @@ Quand un thème est initialisé, ses styles peuvent être utilisés comme ceci :
 \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{slider}\PYG{p}{,} \PYG{n}{LV\PYGZus{}SLIDER\PYGZus{}STYLE\PYGZus{}KNOB}\PYG{p}{,} \PYG{n}{th}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{slider}\PYG{p}{.}\PYG{n}{knob}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-Vous pouvez demander à la librairie d’appliquer automatiquement les styles d’un thème lorsque vous créez de nouveaux objets. Pour ce faire, utilisez \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}} :
+You can ask the library to automatically apply the styles from a theme when you create new objects. To do this use \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+cm}{/* Initialise le thème alien avec une teinte rouge */}
@@ -4149,25 +4153,25 @@ Vous pouvez demander à la librairie d’appliquer automatiquement les styles d�
 \PYG{n}{slider} \PYG{o}{=} \PYG{n}{lv\PYGZus{}slider\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-Les thèmes peuvent être activés ou désactivés individuellement dans \sphinxcode{\sphinxupquote{lv\_conf.h}}.
+Themes can be enabled or disabled one by one in \sphinxcode{\sphinxupquote{lv\_conf.h}}.
 
 
 \subparagraph{Mise à jour automatique}
 \label{\detokenize{overview/style:mise-a-jour-automatique}}
-Par défaut, si \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}} est appelé à nouveau, les styles des objets existants ne seront pas actualisés. Pour activer la mise à jour automatique des thèmes, activez \sphinxcode{\sphinxupquote{LV\_THEME\_LIVE\_UPDATE}} dans\sphinxcode{\sphinxupquote{ lv\_conf.h}}.
+By default, if \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}} is called again, it won’t refresh the styles of the existing objects. To enable live update of themes, enable \sphinxcode{\sphinxupquote{LV\_THEME\_LIVE\_UPDATE}} in \sphinxcode{\sphinxupquote{lv\_conf.h}}.
 
-La mise à jour automatique mettra à jour uniquement les objets dont le style provient du thème, c’est-à-dire créés après le premier appel de \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}} ou dont les styles ont été définis manuellement.
+Live update will only update objects using the unchanged theme styles, i.e. objects created after the first call of \sphinxcode{\sphinxupquote{lv\_theme\_set\_current(th)}} or to which the theme’s styles were applied manually.
 
 
 \subsubsection{Périphériques d’entrée}
 \label{\detokenize{overview/indev:peripheriques-d-entree}}\label{\detokenize{overview/indev::doc}}
-En général périphériques d’entrée signifie :
+An input device usually means:
 \begin{itemize}
 \item {} 
-Périphériques de type pointeur tels que pavé tactile ou souris
+Pointer-like input device like touchpad or mouse
 
 \item {} 
-Claviers, normal ou simple pavé numérique
+Keypads like a normal keyboard or simple numeric keypad
 
 \item {} 
 Encodeurs avec mouvement rotatif à gauche / droite et bouton
@@ -4196,23 +4200,23 @@ Les périphériques d’entrée de type pointeur peuvent avoir un curseur (typiq
 \PYG{n}{lv\PYGZus{}indev\PYGZus{}set\PYGZus{}cursor}\PYG{p}{(}\PYG{n}{mouse\PYGZus{}indev}\PYG{p}{,} \PYG{n}{cursor\PYGZus{}obj}\PYG{p}{)}\PYG{p}{;}               \PYG{c+cm}{/* Connecte l\PYGZsq{}objet image au pilote */}
 \end{sphinxVerbatim}
 
-Notez que l’objet curseur devrait avoir \sphinxcode{\sphinxupquote{lv\_obj\_set\_click(cursor\_obj, false)}}.
-Pour les images \sphinxstyleemphasis{cliquer} est désactivé par défaut.
+Note that the cursor object should have \sphinxcode{\sphinxupquote{lv\_obj\_set\_click(cursor\_obj, false)}}.
+For images, \sphinxstyleemphasis{clicking} is disabled by default.
 
 
 \paragraph{Clavier et encodeur}
 \label{\detokenize{overview/indev:clavier-et-encodeur}}
-Vous pouvez contrôler entièrement l’interface utilisateur sans pavé tactile ou souris à l’aide d’un clavier ou d’un ou de plusieurs encodeurs. Cela fonctionne de manière similaire lorsque vous appuyez sur la touche \sphinxstyleemphasis{TAB} sur un PC pour sélectionner l’élément dans une application ou une page Web.
+You can fully control the user interface without touchpad or mouse using a keypad or encoder(s). It works similar to the \sphinxstyleemphasis{TAB} key on the PC to select the element in an application or a web page.
 
 
 \subparagraph{Groupes}
 \label{\detokenize{overview/indev:groupes}}
-Les objets que vous souhaitez contrôler avec un clavier ou un encodeur doivent être ajoutés à un \sphinxstyleemphasis{groupe}.
-Dans chaque groupe, il y a exactement un seul objet focalisé qui reçoit les notifications de touche pressée ou les actions du codeur.
-Par exemple, si une {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Zone de texte}}}} est sélectionnée et que vous appuyez sur une lettre d’un clavier, les codes sont envoyés et traités par la zone de texte.
-Ou si un {\hyperref[\detokenize{object-types/slider::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Curseur}}}} est sélectionné et que vous appuyez sur les flèches gauche ou droite, la valeur du curseur sera modifiée.
+The objects, you want to control with keypad or encoder, needs to be added to a \sphinxstyleemphasis{Group}.
+In every group, there is exactly one focused object which receives the pressed keys or the encoder actions.
+For example, if a {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Text area}}}} is focused and you press some letter on a keyboard, the keys will be sent and inserted into the text area.
+Similarly, if a {\hyperref[\detokenize{object-types/slider::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Slider}}}} is focused and you press the left or right arrows, the slider’s value will be changed.
 
-Vous devez associer un périphérique d’entrée à un groupe. Un périphérique d’entrée peut envoyer les codes à un seul groupe, mais un groupe peut recevoir des données de plusieurs périphériques d’entrée.
+You need to associate an input device with a group. An input device can send the keys to only one group but, a group can receive data from more than one input device too.
 
 Pour créer un groupe, utilisez \sphinxcode{\sphinxupquote{lv\_group\_t g = lv\_group\_create()}} et pour ajouter un objet au groupe, utilisez \sphinxcode{\sphinxupquote{lv\_group\_add\_obj(g, obj)}}.
 
@@ -4230,10 +4234,10 @@ Certains codes prédéfinis ont une signification particulière :
 \sphinxstylestrong{LV\_KEY\_PREV} Sélectionne l’objet précédant
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_ENTER} Génère les événements \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESSED/CLICKED/LONG\_PRESSED}} etc
+\sphinxstylestrong{LV\_KEY\_ENTER} Triggers \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESSED/CLICKED/LONG\_PRESSED}} etc. events
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_UP} Augmente la valeur ou se déplace vers le haut
+\sphinxstylestrong{LV\_KEY\_UP} Increase value or move upwards
 
 \item {} 
 \sphinxstylestrong{LV\_KEY\_DOWN} Diminue la valeur ou se déplace vers le bas
@@ -4261,31 +4265,31 @@ Certains codes prédéfinis ont une signification particulière :
 
 \end{itemize}
 
-Les codes spéciaux les plus importants sont : \sphinxcode{\sphinxupquote{LV\_KEY\_NEXT/PREV}}, \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} et \sphinxcode{\sphinxupquote{LV\_KEY\_UP/DOWN/LEFT/RIGHT}}.
-Dans votre fonction \sphinxcode{\sphinxupquote{read\_cb}}, vous devez traduire certaines de vos codes en ces codes spéciaux pour naviguer dans le groupe et interagir avec l’objet sélectionné.
+The most important special keys are \sphinxcode{\sphinxupquote{LV\_KEY\_NEXT/PREV}}, \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} and \sphinxcode{\sphinxupquote{LV\_KEY\_UP/DOWN/LEFT/RIGHT}}.
+In your \sphinxcode{\sphinxupquote{read\_cb}} function, you should translate some of your keys to these special keys to navigate in the group and interact with the selected object.
 
-Habituellement, il suffit d’utiliser uniquement \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT/RIGHT}} car la plupart des objets peuvent être entièrement contrôlés avec eux.
+Usually, it’s enough to use only \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT/RIGHT}} because most of the objects can be fully controlled with them.
 
-Avec un encodeur, vous devez utiliser uniquement \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT}},\sphinxcode{\sphinxupquote{ LV\_KEY\_RIGHT}} et \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}}.
+With an encoder, you should use only \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT}}, \sphinxcode{\sphinxupquote{LV\_KEY\_RIGHT}}, and \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}}.
 
 
 \subparagraph{Edition et navigation}
 \label{\detokenize{overview/indev:edition-et-navigation}}
-Avec les claviers, il y a beaucoup de touches, il est donc facile de naviguer entre les objets et de les éditer. Cependant, les encodeurs ont un nombre très limité de “touches”. Afin de prendre en charge efficacement les encodeurs également, les modes \sphinxstyleemphasis{navigation} et \sphinxstyleemphasis{édition} sont créés.
+Since keypad has plenty of keys, it’s easy to navigate between the objects and edit them using the keypad. But, the encoders have a limited number of “keys” hence, difficult to navigate using the default options. \sphinxstyleemphasis{Navigate} and \sphinxstyleemphasis{Edit} are created to avoid this problem with the encoders.
 
-En mode \sphinxstyleemphasis{navigation}, les \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT/RIGHT}} des encodeurs sont traduits en\sphinxcode{\sphinxupquote{ LV\_KEY\_NEXT/PREV}}. Par conséquent, l’objet suivant ou précédent sera sélectionné en tournant l’encodeur.
+In \sphinxstyleemphasis{Navigate} mode, the encoders \sphinxcode{\sphinxupquote{LV\_KEY\_LEFT/RIGHT}} is translated to \sphinxcode{\sphinxupquote{LV\_KEY\_NEXT/PREV}}. Therefore the next or previous object will be selected by turning the encoder.
 Un appui sur \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} passera en mode \sphinxstyleemphasis{édition}.
 
-En mode \sphinxstyleemphasis{édition}, \sphinxcode{\sphinxupquote{LV\_KEY\_NEXT/PREV}} sont utilisés normalement pour éditer l’objet.
-En fonction du type d’objet, une pression courte ou longue de \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} repasse en mode \sphinxstyleemphasis{navigation}.
-Généralement, un objet sur lequel vous ne pouvez pas appuyer (comme un {\hyperref[\detokenize{object-types/slider::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Curseur}}}}) quitte le mode \sphinxstyleemphasis{édition} en cas de clic bref, mais avec un objet pour lequel un clic court a une signification (par exemple, {\hyperref[\detokenize{object-types/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Bouton}}}}) un appui long est requis.
+In \sphinxstyleemphasis{Edit} mode, \sphinxcode{\sphinxupquote{LV\_KEY\_NEXT/PREV}} is usually used to edit the object.
+Depending on the object’s type, a short or long press of \sphinxcode{\sphinxupquote{LV\_KEY\_ENTER}} changes back to \sphinxstyleemphasis{Navigate} mode.
+Usually, an object which can not be pressed (like a {\hyperref[\detokenize{object-types/slider::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Slider}}}}) leaves \sphinxstyleemphasis{Edit} mode on short click. But with object where short click has meaning (e.g. {\hyperref[\detokenize{object-types/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button}}}}), long press is required.
 
 
 \subparagraph{Styliser l’objet sélectionné}
 \label{\detokenize{overview/indev:styliser-l-objet-selectionne}}
-Pour mettre en évidence visuellement l’élément sélectionné, son {[}Style principal{]} (/overview/style\#utiliser-les-styles) sera mis à jour.
-Par défaut, de l’orange est mélangé aux couleurs d’origine du style.
-Une fonction de rappel pour modifier le style est définie par \sphinxcode{\sphinxupquote{lv\_group\_set\_style\_mod\_cb(g, my\_style\_mod\_cb)}}. Cette fonction reçoit un pointeur sur un groupe d’objet et un style à modifier.
+To visually highlight the focused element, its \sphinxhref{/overview/style\#use-the-styles}{Main style} will be updated.
+By default, some orange color is mixed with the original colors of the style.
+A new style modifier callback be set by \sphinxcode{\sphinxupquote{lv\_group\_set\_style\_mod\_cb(g, my\_style\_mod\_cb)}}. A style modifier callback receives a pointer to a caller group and a pointer to a style to modify.
 Le modificateur de style par défaut ressemble à ceci (légèrement simplifié) :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -4311,7 +4315,7 @@ Le modificateur de style par défaut ressemble à ceci (légèrement simplifié)
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-Cette fonction de rappel modificateur de style est utilisée pour les claviers et encodeurs en mode \sphinxstyleemphasis{navigation}.
+This style modifier callback is used for keypads and encoder in \sphinxstyleemphasis{Navigate} mode.
 En mode \sphinxstyleemphasis{édition}, une autre fonction de rappel est utilisée qui peut être définie avec \sphinxcode{\sphinxupquote{lv\_group\_set\_style\_mod\_edit\_cb()}}. Par défaut, il utilise la couleur verte.
 
 
@@ -5601,88 +5605,102 @@ Stores the modified style of the focused object
 \subsubsection{Affichage}
 \label{\detokenize{overview/display:affichage}}\label{\detokenize{overview/display::doc}}
 \begin{sphinxadmonition}{important}{Important:}
-Le concept de base d’\sphinxstyleemphasis{affichage} dans LittlevGL est expliqué dans la section {[}Portage{]}(/porting/display). Donc, avant de continuer à lire, veuillez lire cette section en premier.
+The basic concept of \sphinxstyleemphasis{display} in LittlevGL is explained in the {[}Porting{]}(/porting/display) section. So before reading further, please read the {[}Porting{]}(/porting/display) section first.
 \end{sphinxadmonition}
 
-Dans LittlevGL, vous pouvez avoir plusieurs affichages, chacun avec ses propres pilotes et objets.
+In LittlevGL, you can have multiple displays, each with their own driver and objects.
 
-Il est facile de créer plus d’affichages : il suffit d’initialiser les tampons d’affichage et d’enregistrer les pilotes pour chaque affichage.
-Lorsque vous créez l’interface utilisateur, utilisez \sphinxcode{\sphinxupquote{lv\_disp\_set\_default(disp)}} pour indiquer à la librairie dans quel affichage afficher l’objet.
+Creating more displays is easy: just initialize more display buffers and register another driver for every display.
+When you create the UI, use \sphinxcode{\sphinxupquote{lv\_disp\_set\_default(disp)}} to tell the library which display to create objects on.
 
-Mais dans quels cas pouvez-vous utiliser le support multi-affichages ? Voici quelques exemples :
+Why would you want multi-display support? Here are some examples:
 \begin{itemize}
 \item {} 
-Avoir un écran TFT “normal” avec une interface utilisateur locale et créer des écrans “virtuels” sur VNC à la demande (vous devez ajouter votre propre pilote VNC).
+Have a “normal” TFT display with local UI and create “virtual” screens on VNC on demand. (You need to add your VNC driver).
 
 \item {} 
 Avoir un grand écran TFT et un petit écran monochrome.
 
 \item {} 
-Avoir des écrans plus petits et simples dans un grand appareil
+Have some smaller and simple displays in a large instrument or technology.
 
 \item {} 
-Avoir deux grands écrans TFT : un pour le client et un pour le vendeur
+Have two large TFT displays: one for a customer and one for the shop assistant.
 
 \end{itemize}
 
 
 \paragraph{Utiliser un seul affichage}
 \label{\detokenize{overview/display:utiliser-un-seul-affichage}}
-L’utilisation de plusieurs affichages peut être utile, mais dans la plupart des cas, cela n’est pas nécessaire. Par conséquent, le concept de multi-affichages est complètement masqué si vous ne déclarez qu’un seul affichage.
-Par défaut, l’affichage créé en dernier (le seul) est utilisé par défaut.
+Using more displays can be useful, but in most cases, it’s not required. Therefore, the whole concept of multi-display is completely hidden if you register only one display.
+By default, the lastly created (the only one) display is used as default.
 
 \sphinxcode{\sphinxupquote{lv\_scr\_act()}}, \sphinxcode{\sphinxupquote{lv\_scr\_load(scr)}}, \sphinxcode{\sphinxupquote{lv\_layer\_top()}}, \sphinxcode{\sphinxupquote{lv\_layer\_sys()}}, \sphinxcode{\sphinxupquote{LV\_HOR\_RES}} et\sphinxcode{\sphinxupquote{ LV\_VER\_RES}} sont toujours appliqués sur l’affichage créé en dernier (par défaut).
-Si vous passez \sphinxcode{\sphinxupquote{NULL}} en tant que paramètre \sphinxcode{\sphinxupquote{disp}} de fonctions associées à l’affichage, l’affichage par défaut sera utilisé.
+If you pass \sphinxcode{\sphinxupquote{NULL}} as \sphinxcode{\sphinxupquote{disp}} parameter to display related function, usually the default display will be used.
 P.ex. \sphinxcode{\sphinxupquote{lv\_disp\_trig\_activity(NULL)}} déclenchera une activité utilisateur sur l’affichage par défaut (voir ci-dessous dans {\hyperref[\detokenize{overview/display:inactivite}]{\emph{Inactivité}}}).
 
 
 \paragraph{Affichage miroir}
 \label{\detokenize{overview/display:affichage-miroir}}
-Pour refléter l’image de l’affichage sur un autre affichage, vous n’avez pas besoin d’utiliser le support multi-affichages. Transférez simplement le tampon reçu dans \sphinxcode{\sphinxupquote{drv.flush\_cb}} vers un autre affichage.
+To mirror the image of the display to another display, you don’t need to use the multi-display support. Just transfer the buffer received in \sphinxcode{\sphinxupquote{drv.flush\_cb}} to another display too.
 
 
 \paragraph{Division d’image}
 \label{\detokenize{overview/display:division-d-image}}
-Vous pouvez créer un affichage plus grand à partir de plus petits. Voici comment faire :
+You can create a larger display from smaller ones. You can create it as below:
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-Définissez la résolution des affichages à celle désirée
+Set the resolution of the displays to the large display’s resolution.
 
 \item {} 
-Dans \sphinxcode{\sphinxupquote{drv.flush\_cb}}, tronquez et modifiez le paramètre \sphinxcode{\sphinxupquote{area}} pour chaque affichage
+In \sphinxcode{\sphinxupquote{drv.flush\_cb}}, truncate and modify the \sphinxcode{\sphinxupquote{area}} parameter for each display.
 
 \item {} 
-Envoyez le contenu du tampon à chaque affichage pour la zone tronquée
+Send the buffer’s content to each display with the truncated area.
 
 \end{enumerate}
 
 
 \paragraph{Ecrans}
 \label{\detokenize{overview/display:ecrans}}
-Chaque affichage possède son propre ensemble d’ \sphinxhref{/overview/object\#ecran-le-parent-le-plus-elementaire}{Ecrans} et d’objets à l’écran.
+Every display has each set of \sphinxhref{overview/object\#screen-the-most-basic-parent}{Screens} and the object on the screens.
 
-Les écrans peuvent être considérés comme les conteneurs de plus haut niveau sans parent.
-La taille de l’écran est toujours égale à celle de son affichage et sa position est (0, 0). Par conséquent, les coordonnées des écrans ne peuvent pas être modifiées, c-à-d \sphinxcode{\sphinxupquote{lv\_obj\_set\_pos()}}, \sphinxcode{\sphinxupquote{lv\_obj\_set\_size()}} ou les fonctions similaires ne peuvent pas être utilisées sur les écrans.
+Be sure not to confuse displays and screens:
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{Displays} are the physical hardware drawing the pixels.
 
-Un écran peut être créé à partir de n’importe quel type d’objet, mais les deux types les plus courants sont {\hyperref[\detokenize{object-types/obj::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Objet de base}}}} et {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} (pour créer un fond d’écran).
+\item {} 
+\sphinxstylestrong{Screens} are the high-level root objects associated with a particular display. One display can have multiple screens associated with it, but not vice versa.
 
-Pour créer un écran, utilisez \sphinxcode{\sphinxupquote{lv\_obj\_t * scr = lv\_\textless{}type\textgreater{}\_create(NULL, copy)}}. \sphinxcode{\sphinxupquote{copy}} peut être un autre écran à copier.
+\end{itemize}
 
-Pour charger un écran, utilisez \sphinxcode{\sphinxupquote{lv\_scr\_load(scr)}}. Pour obtenir l’écran actif utilisez \sphinxcode{\sphinxupquote{lv\_scr\_act()}}. Ces fonctions agissent sur l’affichage par défaut. Pour spécifier l’affichage, utilisez \sphinxcode{\sphinxupquote{lv\_disp\_get\_scr\_act(disp)}} et \sphinxcode{\sphinxupquote{lv\_disp\_load\_scr(disp, scr)}}.
+Screens can be considered the highest level containers which have no parent.
+The screen’s size is always equal to its display and size their position is (0;0). Therefore, the screens coordinates can’t be changed, i.e. \sphinxcode{\sphinxupquote{lv\_obj\_set\_pos()}}, \sphinxcode{\sphinxupquote{lv\_obj\_set\_size()}} or similar functions can’t be used on screens.
 
-Les écrans peuvent être supprimés avec \sphinxcode{\sphinxupquote{lv\_obj\_del(scr)}} mais assurez-vous de ne pas supprimer l’écran actuellement chargé.
+A screen can be created from any object type but, the two most typical types are the {\hyperref[\detokenize{object-types/obj::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Base object}}}} and the {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} (to create a wallpaper).
+
+To create a screen, use \sphinxcode{\sphinxupquote{lv\_obj\_t * scr = lv\_\textless{}type\textgreater{}\_create(NULL, copy)}}. \sphinxcode{\sphinxupquote{copy}} can be an other screen to copy it.
+
+To load a screen, use \sphinxcode{\sphinxupquote{lv\_scr\_load(scr)}}. To get the active screen, use \sphinxcode{\sphinxupquote{lv\_scr\_act()}}. These functions works on the default display. If you want to to specify which display to work on, use \sphinxcode{\sphinxupquote{lv\_disp\_get\_scr\_act(disp)}} and \sphinxcode{\sphinxupquote{lv\_disp\_load\_scr(disp, scr)}}.
+
+Screens can be deleted with \sphinxcode{\sphinxupquote{lv\_obj\_del(scr)}}, but ensure that you do not delete the currently loaded screen.
 
 
 \subparagraph{Ecran opaque}
 \label{\detokenize{overview/display:ecran-opaque}}
-Habituellement, l’opacité de l’écran est \sphinxcode{\sphinxupquote{LV\_OPA\_COVER}} afin de fournir un fond solide et totalement couvrant pour les enfants.
-Cependant, dans certains cas particuliers, vous voudrez peut-être un écran transparent. Par exemple, si vous avez un lecteur vidéo qui restitue les images vidéo sur un calque mais sur un autre calque, vous souhaitez créer un menu OSD (au-dessus de la vidéo) à l’aide de LittlevGL.
-Dans ce cas, le style de l’écran doit avoir \sphinxcode{\sphinxupquote{body.opa = LV\_OPA\_TRANSP}} ou \sphinxcode{\sphinxupquote{image.opa = LV\_OPA\_TRANSP}} (ou d’autres valeurs \sphinxcode{\sphinxupquote{LV\_OPA \_...}}) pour rendre l’écran transparent.
-Pour gérer correctement l’opacité des écrans, \sphinxcode{\sphinxupquote{LV\_COLOR\_SCREEN\_TRANSP}} doit être activé. Notez que cela ne fonctionne qu’avec \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH = 32}}.
-Le canal alpha des couleurs 32 bits sera 0 lorsqu’il n’y a pas d’objets et 255 en cas d’objets solides.
+Usually, the opacity of the screen is \sphinxcode{\sphinxupquote{LV\_OPA\_COVER}} to provide a solid background for its children.
+
+However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LittlevGL.
+
+To do this, the screen should have a style that sets \sphinxcode{\sphinxupquote{body.opa}} or \sphinxcode{\sphinxupquote{image.opa}} to \sphinxcode{\sphinxupquote{LV\_OPA\_TRANSP}} (or another non-opaque value) to make the screen opaque.
+
+Also, \sphinxcode{\sphinxupquote{LV\_COLOR\_SCREEN\_TRANSP}} needs to be enabled. Please note that it only works with \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH = 32}}.
+
+The Alpha channel of 32-bit colors will be 0 where there are no objects and will be 255 where there are solid objects.
 
 
 \paragraph{Fonctionnalités des affichages}
@@ -5690,29 +5708,29 @@ Le canal alpha des couleurs 32 bits sera 0 lorsqu’il n’y a pas d’objets et
 
 \subparagraph{Inactivité}
 \label{\detokenize{overview/display:inactivite}}
-L’inactivité de l’utilisateur est surveillée pour chaque affichage. Chaque utilisation d’un {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Périphérique d’entrée}}}} (s’il est \sphinxhref{/porting/indev\#autres-fonctionnalites}{associé à l’affichage}) compte comme une activité.
-Pour obtenir le temps écoulé depuis la dernière activité, utilisez \sphinxcode{\sphinxupquote{lv\_disp\_get\_inactive\_time(disp)}}. Si \sphinxcode{\sphinxupquote{NULL}} est passé comme paramètre, le temps d’inactivité le plus petit de tous les affichages sera retourné.
+The user’s inactivity is measured on each display. Every use of an {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Input device}}}} (if \sphinxhref{/porting/indev\#other-features}{associated with the display}) counts as an activity.
+To get time elapsed since the last activity, use \sphinxcode{\sphinxupquote{lv\_disp\_get\_inactive\_time(disp)}}. If \sphinxcode{\sphinxupquote{NULL}} is passed, the overall smallest inactivity time will be returned from all displays (\sphinxstylestrong{not the default display}).
 
-Vous pouvez simuler une activité en utilisant \sphinxcode{\sphinxupquote{lv\_disp\_trig\_activity(disp)}}. Si \sphinxcode{\sphinxupquote{disp}} est\sphinxcode{\sphinxupquote{ NULL}}, l’affichage par défaut sera utilisé.
+You can manually trigger an activity using \sphinxcode{\sphinxupquote{lv\_disp\_trig\_activity(disp)}}. If \sphinxcode{\sphinxupquote{disp}} is \sphinxcode{\sphinxupquote{NULL}}, the default screen will be used (\sphinxstylestrong{and not all displays}).
 
 
 \paragraph{Couleurs}
 \label{\detokenize{overview/display:couleurs}}
-Le module couleur gère toutes les fonctions liées aux couleurs telles que la modification de la profondeur de couleur, la création de couleurs à partir de code hexadécimal, la conversion entre les profondeurs de couleur, le mélange de couleurs, etc.
+The color module handles all color-related functions like changing color depth, creating colors from hex code, converting between color depths, mixing colors, etc.
 
 Les types de variable suivants sont définis par le module couleur :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{lv\_color1\_t} Enregistre une couleur monochrome. Pour la compatibilité, il possède également des champs R, G, B mais ils sont tous identiques (1 octet)
+\sphinxstylestrong{lv\_color1\_t} Store monochrome color. For compatibility, it also has R, G, B fields but they are always the same value (1 byte)
 
 \item {} 
-\sphinxstylestrong{lv\_color8\_t} Une structure pour enregistrer R (3 bits), G (3 bits), B (2 bits) composantes d’une couleur 8 bits (1 octet)
+\sphinxstylestrong{lv\_color8\_t} A structure to store R (3 bit),G (3 bit),B (2 bit) components for 8-bit colors (1 byte)
 
 \item {} 
-\sphinxstylestrong{lv\_color16\_t} Une structure pour enregistrer R (5 bits), G (6 bits), B (5 bits) composantes d’une couleur 16 bits (2 octets)
+\sphinxstylestrong{lv\_color16\_t} A structure to store R (5 bit),G (6 bit),B (5 bit) components for 16-bit colors (2 byte)
 
 \item {} 
-\sphinxstylestrong{lv\_color32\_t} Une structure pour enregistrer R (8 bits), G (8 bits), B (8 bits) composantes d’une couleur 24 bits (4 octets)
+\sphinxstylestrong{lv\_color32\_t} A structure to store R (8 bit),G (8 bit), B (8 bit) components for 24-bit colors (4 byte)
 
 \item {} 
 \sphinxstylestrong{lv\_color\_t} Equivaut à \sphinxcode{\sphinxupquote{lv\_color1/8/16/24\_t}} selon le paramètre de profondeur de couleur
@@ -5741,12 +5759,12 @@ Les types \sphinxcode{\sphinxupquote{lv\_color\_t}},\sphinxcode{\sphinxupquote{ 
 
 \end{itemize}
 
-Vous pouvez définir la profondeur de couleur actuelle dans \sphinxstyleemphasis{lv\_conf.h} en définissant la valeur \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}} sur 1 (monochrome), 8, 16 ou 32.
+You can set the current color depth in \sphinxstyleemphasis{lv\_conf.h}, by setting the \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}} define to 1 (monochrome), 8, 16 or 32.
 
 
 \subparagraph{Conversion de couleur}
 \label{\detokenize{overview/display:conversion-de-couleur}}
-Vous pouvez convertir une couleur de la profondeur de couleur actuelle en une autre. Les fonctions de conversion retourne un nombre, vous devez donc utiliser le champ \sphinxcode{\sphinxupquote{full}} :
+You can convert a color from the current color depth to another. The converter functions return with a number, so you have to use the \sphinxcode{\sphinxupquote{full}} field:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{c}\PYG{p}{;}
@@ -5758,7 +5776,7 @@ Vous pouvez convertir une couleur de la profondeur de couleur actuelle en une au
 \PYG{n}{c1}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to1}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;}	\PYG{c+cm}{/* Retourne 1 pour les couleurs claires, 0 pour les couleurs sombres */}
 
 \PYG{n}{lv\PYGZus{}color8\PYGZus{}t} \PYG{n}{c8}\PYG{p}{;}
-\PYG{n}{c8}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to8}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;}	\PYG{c+cm}{/* Donne un nombre de 8 bits avec la couleur convertie */} 
+\PYG{n}{c8}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to8}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;}	\PYG{c+cm}{/*Give a 8 bit number with the converted color*/}
 
 \PYG{n}{lv\PYGZus{}color16\PYGZus{}t} \PYG{n}{c16}\PYG{p}{;}
 \PYG{n}{c16}\PYG{p}{.}\PYG{n}{full} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}to16}\PYG{p}{(}\PYG{n}{c}\PYG{p}{)}\PYG{p}{;} \PYG{c+cm}{/* Donne un nombre de 16 bits avec la couleur convertie */}
@@ -5770,28 +5788,29 @@ Vous pouvez convertir une couleur de la profondeur de couleur actuelle en une au
 
 \subparagraph{Permutation 16 bits}
 \label{\detokenize{overview/display:permutation-16-bits}}
-Vous pouvez définir \sphinxcode{\sphinxupquote{LV\_COLOR\_16\_SWAP}} dans \sphinxstyleemphasis{lv\_conf.h} pour permuter les octets de \sphinxstyleemphasis{couleurs RGB565}. C’est utile si vous transférez les couleurs 16 bits via une interface orientée octet comme SPI.
-Comme les nombres de 16 bits sont stockés au format Little Endian (octet le moins significatif à l’adresse la plus basse), l’interface envoie d’abord l’octet le moins significatif. Cependant, les écrans ont généralement besoin de l’octet le plus significatif en premier. Une non-concordance dans l’ordre des octets entraînera une altération des couleurs.
+You may set \sphinxcode{\sphinxupquote{LV\_COLOR\_16\_SWAP}} in \sphinxstyleemphasis{lv\_conf.h} to swap the bytes of \sphinxstyleemphasis{RGB565} colors. It’s useful if you send the 16-bit colors via a byte-oriented interface like SPI.
+
+As 16-bit numbers are stored in Little Endian format (lower byte on the lower address), the interface will send the lower byte first. However, displays usually need the higher byte first. A mismatch in the byte order will result in highly distorted colors.
 
 
 \subparagraph{Créer et mélanger les couleurs}
 \label{\detokenize{overview/display:creer-et-melanger-les-couleurs}}
-Vous pouvez créer des couleurs avec la profondeur de couleur actuelle à l’aide de la macro LV\_COLOR\_MAKE. Il faut 3 arguments (rouge, vert, bleu) sous forme de nombres de 8 bits.
-Par exemple, pour créer une couleur rouge clair : \sphinxcode{\sphinxupquote{my\_color = COLOR\_MAKE(0xFF, 0x80,0x80)}}.
+You can create colors with the current color depth using the LV\_COLOR\_MAKE macro. It takes 3 arguments (red, green, blue) as 8-bit numbers.
+For example to create light red color: \sphinxcode{\sphinxupquote{my\_color = COLOR\_MAKE(0xFF,0x80,0x80)}}.
 
 Les couleurs peuvent aussi être créées à partir de codes hexadécimaux : \sphinxcode{\sphinxupquote{my\_color = lv\_color\_hex(0x288ACF)}} ou \sphinxcode{\sphinxupquote{my\_color = lv\_color\_hex(0x28C)}}.
 
-Le mélange de deux couleurs est possible avec \sphinxcode{\sphinxupquote{mixed\_color = lv\_color\_mix(color1, color2, ratio)}}. Le ratio peut être 0..255. 0 donne entièrement color2, 255 donne entièrement color1.
+Mixing two colors is possible with \sphinxcode{\sphinxupquote{mixed\_color = lv\_color\_mix(color1, color2, ratio)}}. Ration can be 0..255. 0 results fully color2, 255 result fully color1.
 
-Les couleurs peuvent aussi être créées avec l’espace HSV en utilisant \sphinxcode{\sphinxupquote{lv\_color\_hsv\_to\_rgb(hue, saturation, value)}}. \sphinxcode{\sphinxupquote{hue}} devrait être dans la plage 0..360, \sphinxcode{\sphinxupquote{saturation}} et \sphinxcode{\sphinxupquote{value}} dans la plage 0..100.
+Colors can be created with from HSV space too using \sphinxcode{\sphinxupquote{lv\_color\_hsv\_to\_rgb(hue, saturation, value)}} . \sphinxcode{\sphinxupquote{hue}} should be in 0..360 range, \sphinxcode{\sphinxupquote{saturation}} and \sphinxcode{\sphinxupquote{value}} in 0..100 range.
 
 
 \subparagraph{Opacité}
 \label{\detokenize{overview/display:opacite}}
-Pour décrire l’opacité, le type \sphinxcode{\sphinxupquote{lv\_opa\_t}} est créé comme équivalent d’un \sphinxcode{\sphinxupquote{uint8\_t}}. Quelques définitions sont également introduites :
+To describe opacity the \sphinxcode{\sphinxupquote{lv\_opa\_t}} type is created as a wrapper to \sphinxcode{\sphinxupquote{uint8\_t}}. Some defines are also introduced:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_OPA\_TRANSP} Valeur : 0, l’opacité rend la couleur totalement transparente.
+\sphinxstylestrong{LV\_OPA\_TRANSP} Value: 0, means the opacity makes the color completely transparent
 
 \item {} 
 \sphinxstylestrong{LV\_OPA\_10} Valeur : 25, signifie que la couleur est un peu couvrante
@@ -5800,19 +5819,19 @@ Pour décrire l’opacité, le type \sphinxcode{\sphinxupquote{lv\_opa\_t}} est 
 \sphinxstylestrong{LV\_OPA\_20 … OPA\_80} viennent logiquement
 
 \item {} 
-\sphinxstylestrong{LV\_OPA\_90} Valeur : 229 signifie que la couleur est presque entièrement couvrante
+\sphinxstylestrong{LV\_OPA\_90} Value: 229, means the color near completely covers
 
 \item {} 
-\sphinxstylestrong{LV\_OPA\_COVER} Valeur : 255, signifie que la couleur couvre entièrement
+\sphinxstylestrong{LV\_OPA\_COVER} Value: 255, means the color completely covers
 
 \end{itemize}
 
-Vous pouvez également utiliser les définitions \sphinxcode{\sphinxupquote{LV\_OPA\_*}} dans \sphinxcode{\sphinxupquote{lv\_color\_mix()}} en tant que \sphinxstyleemphasis{ratio}.
+You can also use the \sphinxcode{\sphinxupquote{LV\_OPA\_*}} defines in \sphinxcode{\sphinxupquote{lv\_color\_mix()}} as a \sphinxstyleemphasis{ratio}.
 
 
 \subparagraph{Couleurs intégrées}
 \label{\detokenize{overview/display:couleurs-integrees}}
-Le module couleur définit les couleurs les plus basiques :
+The color module defines the most basic colors such as:
 \begin{itemize}
 \item {} 
 \sphinxincludegraphics{{000000}.png}\#000000 \sphinxcode{\sphinxupquote{LV\_COLOR\_BLACK}}
@@ -5867,7 +5886,7 @@ Le module couleur définit les couleurs les plus basiques :
 
 \end{itemize}
 
-ainsi que \sphinxcode{\sphinxupquote{LV\_COLOR\_WHITE}}.
+as well as \sphinxcode{\sphinxupquote{LV\_COLOR\_WHITE}} (fully white).
 
 
 \paragraph{API}
@@ -14670,7 +14689,7 @@ Pour définir le style d’un objet \sphinxstyleemphasis{arc} la fonction \sphin
 
 \paragraph{Evénements}
 \label{\detokenize{object-types/arc:evenements}}
-Les \sphinxhref{/overview/event.html\#generic-events}{événements génériques} sont les seuls à être envoyés par ce type d’objet.
+Only the \sphinxhref{/overview/event.html\#generic-events}{Generic events} are sent by the object type.
 
 Apprenez-en plus sur les {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{événements}}}}.
 
@@ -18215,7 +18234,7 @@ Pour affecter un tampon à un canevas, utilisez \sphinxcode{\sphinxupquote{lv\_c
 Par exemple
 \sphinxcode{\sphinxupquote{static lv\_color\_t buffer{[}LV\_CANVAS\_BUF\_SIZE\_TRUE\_COLOR(width, height){]}}}.  Les macros \sphinxcode{\sphinxupquote{LV\_CANVAS\_BUF\_SIZE\_...}} aident à calculer la taille du tampon pour différents formats de couleur.
 
-Le canvas prend en charge tous les formats de couleur intégrés tels que \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TURE\_COLOR}} ou \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_INDEXED\_2BIT}}. Consultez la liste complète dans la section \sphinxhref{/overview/image.html\#formats-de-couleur}{formats de couleur}.
+The canvas supports all the built in color formats like \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TRUE\_COLOR}} or \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_INDEXED\_2BIT}}. See the full list in the \sphinxhref{/overview/image.html\#color-formats}{Color formats} section.
 
 
 \subparagraph{Palette}
@@ -23681,7 +23700,7 @@ Avant de lire ceci, veuillez lire la section sur l’objet {\hyperref[\detokeniz
 
 \subparagraph{Images sources}
 \label{\detokenize{object-types/imgbtn:images-sources}}
-Pour définir l’image d’un état, utilisez \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_src(imgbtn, LV\_BTN\_STATE\_..., \&img\_src)}}.Les images sources fonctionnent comme décrit dans l’objet {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{image}}}}.
+To set the image in a state the \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_src(imgbtn, LV\_BTN\_STATE\_..., \&img\_src)}} The image sources works the same as described in the {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image object}}}} except that “Symbols” are not supported by the Image button.
 
 Si \sphinxcode{\sphinxupquote{LV\_IMGBTN\_TILED}} est activé dans \sphinxstyleemphasis{lv\_conf.h} trois sources peuvent être définies pour chaque état :
 \begin{itemize}
@@ -29001,52 +29020,52 @@ return value will be NULL unless \sphinxcode{\sphinxupquote{lv\_mbox\_add\_btns}
 \subsubsection{Page (lv\_page)}
 \label{\detokenize{object-types/page:page-lv-page}}\label{\detokenize{object-types/page::doc}}
 
-\paragraph{Overview}
-\label{\detokenize{object-types/page:overview}}
-The Page consist of two {\hyperref[\detokenize{object-types/cont::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Containers}}}} on each other:
+\paragraph{Vue d’ensemble}
+\label{\detokenize{object-types/page:vue-d-ensemble}}
+La page se compose de deux {\hyperref[\detokenize{object-types/cont::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{conteneurs}}}} l’un sur l’autre :
 \begin{itemize}
 \item {} 
-a \sphinxstylestrong{background} (or base)
+un \sphinxstylestrong{arrière-plan} (ou base)
 
 \item {} 
-a top which is \sphinxstylestrong{scrollable}.
+un plan supérieur \sphinxstylestrong{pouvant défiler}.
 
 \end{itemize}
 
-The background object can be referenced as the page itself like: \sphinxcode{\sphinxupquote{lv\_obj\_set\_width(page, 100)}}.
+L’objet d’arrière-plan peut être référencé comme la page elle-même : \sphinxcode{\sphinxupquote{lv\_obj\_set\_width(page, 100)}}.
 
-If you create a child on the page it will be automatically moved to the scrollable container.
-If the scrollable container becomes larger then the background it can be *scrolled by dragging (like the lists on smartphones).
+Si vous créez un enfant sur la page, celui-ci sera automatiquement déplacé vers le conteneur pouvant défiler.
+Si le conteneur pouvant défiler devient plus grand que l’arrière-plan, vous pouvez le faire *défiler en le faisant glisser (comme dans les listes sur les smartphones).
 
 By default, the scrollable’s has \sphinxcode{\sphinxupquote{LV\_FIT\_FILL}}auto fit in all directions.
 It means the scrollable size will be the same as the background’s size (minus the paddings) while the children are in the background.
 But when an object is positioned out of the background the scrollable size will be increased to involve it.
 
 
-\subparagraph{Scrollbars}
-\label{\detokenize{object-types/page:scrollbars}}
-Scrollbars can be shown according to four policies:
+\subparagraph{Barres de défilement}
+\label{\detokenize{object-types/page:barres-de-defilement}}
+Les barres de défilement peuvent être affichées selon quatre stratégies :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_SB\_MODE\_OFF} Never show scrollbars
+\sphinxstylestrong{LV\_SB\_MODE\_OFF} les barres de défilement ne sont jamais affichées
 
 \item {} 
-\sphinxstylestrong{LV\_SB\_MODE\_ON} Always show scrollbars
+\sphinxstylestrong{LV\_SB\_MODE\_ON} les barres de défilement sont toujours affichées
 
 \item {} 
-\sphinxstylestrong{LV\_SB\_MODE\_DRAG} Show scrollbars when the page is being dragged
+\sphinxstylestrong{LV\_SB\_MODE\_DRAG} les barres de défilement sont affichées quand la page est tirée
 
 \item {} 
-\sphinxstylestrong{LV\_SB\_MODE\_AUTO} Show scrollbars when the scrollable container is large enough to be scrolled
+\sphinxstylestrong{LV\_SB\_MODE\_AUTO} affiche les barres de défilement quand le conteneur est suffisamment grand pour être défilé
 
 \end{itemize}
 
-You can set scroll bar show policy by: \sphinxcode{\sphinxupquote{lv\_page\_set\_sb\_mode(page, SB\_MODE)}}. The default value is \sphinxcode{\sphinxupquote{LV\_SB\_MODE\_AUTO}}.
+Vous pouvez définir la politique d’affichage de la barre de défilement avec : \sphinxcode{\sphinxupquote{lv\_page\_set\_sb\_mode(page, SB\_MODE)}}. La valeur par défaut est \sphinxcode{\sphinxupquote{LV\_SB\_MODE\_AUTO}}.
 
 
-\subparagraph{Glue object}
-\label{\detokenize{object-types/page:glue-object}}
-You can glue children to the page. In this case, you can scroll the page by dragging the child object.
+\subparagraph{Objet collé}
+\label{\detokenize{object-types/page:objet-colle}}
+Vous pouvez coller des enfants à la page. Dans ce cas, vous pouvez faire défiler la page en faisant glisser l’objet enfant.
 It can be enabled by the \sphinxcode{\sphinxupquote{lv\_page\_glue\_obj(child, true)}}.
 
 

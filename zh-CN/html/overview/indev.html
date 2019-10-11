@@ -165,7 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/project.html#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/project.html#initialization">Initialization</a></li>
 </ul>
 </li>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="event.html">Events</a><ul>
@@ -1091,10 +1091,10 @@
             
   <div class="section" id="input-devices">
 <h1>Input devices<a class="headerlink" href="#input-devices" title="Permalink to this headline">¶</a></h1>
-<p>Input devices in general means:</p>
+<p>An input device usually means:</p>
 <ul class="simple">
-<li><p>Pointer-like input devices like touchpad or mouse</p></li>
-<li><p>Keypads like a normal keyboard or simple numpad</p></li>
+<li><p>Pointer-like input device like touchpad or mouse</p></li>
+<li><p>Keypads like a normal keyboard or simple numeric keypad</p></li>
 <li><p>Encoders with left/right turn and push options</p></li>
 <li><p>External hardware buttons which are assigned to specific points on the screen</p></li>
 </ul>
@@ -1115,18 +1115,18 @@
 </pre></div>
 </div>
 <p>Note that the cursor object should have <code class="docutils literal notranslate"><span class="pre">lv_obj_set_click(cursor_obj,</span> <span class="pre">false)</span></code>.
-For images <em>clicking</em> is disabled by default.</p>
+For images, <em>clicking</em> is disabled by default.</p>
 </div>
 <div class="section" id="keypad-and-encoder">
 <h2>Keypad and encoder<a class="headerlink" href="#keypad-and-encoder" title="Permalink to this headline">¶</a></h2>
-<p>You can fully control the user interface without touchpad or mouse using a keypad or encoder(s). it works similarly when you press the <em>TAB</em> key on PC to select the element in an application or a web page.</p>
+<p>You can fully control the user interface without touchpad or mouse using a keypad or encoder(s). It works similar to the <em>TAB</em> key on the PC to select the element in an application or a web page.</p>
 <div class="section" id="groups">
 <h3>Groups<a class="headerlink" href="#groups" title="Permalink to this headline">¶</a></h3>
 <p>The objects, you want to control with keypad or encoder, needs to be added to a <em>Group</em>.
 In every group, there is exactly one focused object which receives the pressed keys or the encoder actions.
-For example, if a <a class="reference internal" href="../object-types/ta.html"><span class="doc">Text area</span></a> is focused and you press some letter on a keyboard, the keys will be sent and inserted into the Text area.
-Or if a <a class="reference internal" href="../object-types/slider.html"><span class="doc">Slider</span></a> is focused and you press the left or right arrows the slider’s value will be changed.</p>
-<p>You need to associate an input device with a group. An input device can send the keys to only one group but a group can receive data from more than one input devices too.</p>
+For example, if a <a class="reference internal" href="../object-types/ta.html"><span class="doc">Text area</span></a> is focused and you press some letter on a keyboard, the keys will be sent and inserted into the text area.
+Similarly, if a <a class="reference internal" href="../object-types/slider.html"><span class="doc">Slider</span></a> is focused and you press the left or right arrows, the slider’s value will be changed.</p>
+<p>You need to associate an input device with a group. An input device can send the keys to only one group but, a group can receive data from more than one input device too.</p>
 <p>To create a group use <code class="docutils literal notranslate"><span class="pre">lv_group_t</span> <span class="pre">g</span> <span class="pre">=</span> <span class="pre">lv_group_create()</span></code> and to add an object to the group use <code class="docutils literal notranslate"><span class="pre">lv_group_add_obj(g,</span> <span class="pre">obj)</span></code>.</p>
 <p>The associate a group with an input device use <code class="docutils literal notranslate"><span class="pre">lv_indev_set_group(indev,</span> <span class="pre">g)</span></code>, where <code class="docutils literal notranslate"><span class="pre">indev</span></code> is the return value of <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_register()</span></code></p>
 <div class="section" id="keys">
@@ -1135,7 +1135,7 @@ Or if a <a class="reference internal" href="../object-types/slider.html"><span c
 <ul class="simple">
 <li><p><strong>LV_KEY_NEXT</strong> Focus on the next object</p></li>
 <li><p><strong>LV_KEY_PREV</strong> Focus on the previous object</p></li>
-<li><p><strong>LV_KEY_ENTER</strong> Triggers <code class="docutils literal notranslate"><span class="pre">LV_EVENT_PRESSED/CLICKED/LONG_PRESSED</span></code> etc events</p></li>
+<li><p><strong>LV_KEY_ENTER</strong> Triggers <code class="docutils literal notranslate"><span class="pre">LV_EVENT_PRESSED/CLICKED/LONG_PRESSED</span></code> etc. events</p></li>
 <li><p><strong>LV_KEY_UP</strong> Increase value or move upwards</p></li>
 <li><p><strong>LV_KEY_DOWN</strong> Decrease value or move downwards</p></li>
 <li><p><strong>LV_KEY_RIGHT</strong> Increase value or move the the right</p></li>
@@ -1146,25 +1146,25 @@ Or if a <a class="reference internal" href="../object-types/slider.html"><span c
 <li><p><strong>LV_KEY_HOME</strong> Go to the beginning/top (E.g. in a <a class="reference internal" href="../object-types/ta.html"><span class="doc">Text area</span></a>)</p></li>
 <li><p><strong>LV_KEY_END</strong> Go to the end (E.g. in a <a class="reference internal" href="../object-types/ta.html"><span class="doc">Text area</span></a>))</p></li>
 </ul>
-<p>The most important special keys are: <code class="docutils literal notranslate"><span class="pre">LV_KEY_NEXT/PREV</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_KEY_UP/DOWN/LEFT/RIGHT</span></code>.
-In your <code class="docutils literal notranslate"><span class="pre">read_cb</span></code> function you should translate some of your keys to these special keys to navigate in the group and interact with the selected object.</p>
+<p>The most important special keys are <code class="docutils literal notranslate"><span class="pre">LV_KEY_NEXT/PREV</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_KEY_UP/DOWN/LEFT/RIGHT</span></code>.
+In your <code class="docutils literal notranslate"><span class="pre">read_cb</span></code> function, you should translate some of your keys to these special keys to navigate in the group and interact with the selected object.</p>
 <p>Usually, it’s enough to use only <code class="docutils literal notranslate"><span class="pre">LV_KEY_LEFT/RIGHT</span></code> because most of the objects can be fully controlled with them.</p>
-<p>With an encoder, you should use only <code class="docutils literal notranslate"><span class="pre">LV_KEY_LEFT</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_KEY_RIGHT</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code>.</p>
+<p>With an encoder, you should use only <code class="docutils literal notranslate"><span class="pre">LV_KEY_LEFT</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_KEY_RIGHT</span></code>, and <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code>.</p>
 </div>
 <div class="section" id="edit-and-navigate-mode">
 <h4>Edit and navigate mode<a class="headerlink" href="#edit-and-navigate-mode" title="Permalink to this headline">¶</a></h4>
-<p>With keypads, there are plenty of keys so it’s easy to navigate among the objects and edit them. However, the encoders have a very limited number of “keys”. To effectively support encoders too <em>Navigate</em> and <em>Edit</em> is created.</p>
-<p>In <em>Navigate</em> mode the encoders <code class="docutils literal notranslate"><span class="pre">LV_KEY_LEFT/RIGHT</span></code> is translated to <code class="docutils literal notranslate"><span class="pre">LV_KEY_NEXT/PREV</span></code>. Therefore the next or previous object will be selected by turning the encoder.
+<p>Since keypad has plenty of keys, it’s easy to navigate between the objects and edit them using the keypad. But, the encoders have a limited number of “keys” hence, difficult to navigate using the default options. <em>Navigate</em> and <em>Edit</em> are created to avoid this problem with the encoders.</p>
+<p>In <em>Navigate</em> mode, the encoders <code class="docutils literal notranslate"><span class="pre">LV_KEY_LEFT/RIGHT</span></code> is translated to <code class="docutils literal notranslate"><span class="pre">LV_KEY_NEXT/PREV</span></code>. Therefore the next or previous object will be selected by turning the encoder.
 Pressing <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code> will change to <em>Edit</em> mode.</p>
-<p>In <em>Edit</em> mode <code class="docutils literal notranslate"><span class="pre">LV_KEY_NEXT/PREV</span></code> is used normally to edit the object.
-Depending on the object’s type a short or long press of <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code> changes back to <em>Navigate</em> mode.
-Usually object which can not be pressed (like a <a class="reference internal" href="../object-types/slider.html"><span class="doc">Slider</span></a>) leaves <em>Edit</em> mode on short click but with object where short click has meaning (e.g. <a class="reference internal" href="../object-types/btn.html"><span class="doc">Button</span></a>) long press is required.</p>
+<p>In <em>Edit</em> mode, <code class="docutils literal notranslate"><span class="pre">LV_KEY_NEXT/PREV</span></code> is usually used to edit the object.
+Depending on the object’s type, a short or long press of <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code> changes back to <em>Navigate</em> mode.
+Usually, an object which can not be pressed (like a <a class="reference internal" href="../object-types/slider.html"><span class="doc">Slider</span></a>) leaves <em>Edit</em> mode on short click. But with object where short click has meaning (e.g. <a class="reference internal" href="../object-types/btn.html"><span class="doc">Button</span></a>), long press is required.</p>
 </div>
 <div class="section" id="styling-the-focused-object">
 <h4>Styling the focused object<a class="headerlink" href="#styling-the-focused-object" title="Permalink to this headline">¶</a></h4>
-<p>To visually highlight the focused element its <a class="reference external" href="/overview/style#use-the-styles">Main style</a> will be updated.
-By default, some orange color is mixed to the original colors of the style.
-A new style modifier callback be set by <code class="docutils literal notranslate"><span class="pre">lv_group_set_style_mod_cb(g,</span> <span class="pre">my_style_mod_cb)</span></code>. A style modifier callback receives a pointer to a caller group and pointer to a style to modify.
+<p>To visually highlight the focused element, its <a class="reference external" href="/overview/style#use-the-styles">Main style</a> will be updated.
+By default, some orange color is mixed with the original colors of the style.
+A new style modifier callback be set by <code class="docutils literal notranslate"><span class="pre">lv_group_set_style_mod_cb(g,</span> <span class="pre">my_style_mod_cb)</span></code>. A style modifier callback receives a pointer to a caller group and a pointer to a style to modify.
 The default style modifier looks like this (slightly simplified):</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">default_style_mod_cb</span><span class="p">(</span><span class="n">lv_group_t</span> <span class="o">*</span> <span class="n">group</span><span class="p">,</span> <span class="n">lv_style_t</span> <span class="o">*</span> <span class="n">style</span><span class="p">)</span>
 <span class="p">{</span>
@@ -2000,7 +2000,7 @@ For the <em>Edit</em> mode and other callback is used which can be set with <cod
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

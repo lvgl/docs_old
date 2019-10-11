@@ -9,7 +9,7 @@ The Image button is very similar to the simple Button object. The only differenc
 Before reading this please read the [Button](/object-types/btn) section too.
 
 ### Image sources
-To set the image in a state the `lv_imgbtn_set_src(imgbtn, LV_BTN_STATE_..., &img_src)` The image sources works the same as described in the [Image object](/object-types/img).
+To set the image in a state the `lv_imgbtn_set_src(imgbtn, LV_BTN_STATE_..., &img_src)` The image sources works the same as described in the [Image object](/object-types/img) except that "Symbols" are not supported by the Image button.
 
 If `LV_IMGBTN_TILED` is enabled in *lv_conf.h* three sources can be set for each state:
 - left

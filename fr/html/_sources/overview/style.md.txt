@@ -3,20 +3,22 @@
 ```
 # Styles
 
-Les *styles* sont utilisés pour définir l'apparence des objets. Un style est une variable structurée avec des attributs tels que couleurs, marges, opacité, police, etc.
+*Styles* are used to set the appearance of the objects. A style is a structure with attributes like colors, paddings, opacity, font, etc.
 
-Il existe un type de style commun nommé **lv_style_t** pour chaque type d'objet.
+There is a common style type called **lv_style_t** for every object type.
 
-En définissant les champs des variables `lv_style_t` et en les affectant à un objet, vous pouvez modifier l'apparence des objets.
+By setting the fields of the `lv_style_t` variables and assigning them to objects with `lv_obj_set_style`, you can influence the appearance of the objects.
 
-``` important:: Les objets mémorisent uniquement un pointeur vers un style. Le style ne peut donc pas être une variable locale détruite après la sortie de la fonction. **Vous devez utiliser des variables statiques, globales ou allouées dynamiquement.**
+``` important:: The objects only store a pointer to a style so the style cannot be a local variable which is destroyed after the function exits. **You should use static, global or dynamically allocated variables.**
 ```
 
 ```c
+/* file scope */
 lv_style_t style_1;             /* OK ! Les variables globales pour les styles sont adaptées */
 static lv_style_t style_2;      /* OK ! Les variables statiques en dehors des fonctions sont adaptées */
-void my_screen_create(void) 
+void my_screen_create(void)
 {
+  /* function scope */
   static lv_style_t style_3;    /* OK ! Les variables statiques dans les fonctions sont adaptées */
   lv_style_t style_4;           /* Non ! Les styles ne peuvent pas être des variables locales */
 
@@ -24,57 +26,58 @@ void my_screen_create(void)
 }
 ```
 
-## Utiliser les styles
+## Use the styles
 
-Les objets ont un *style principal* qui détermine l'apparence de leur arrière-plan ou de leur partie principale. Cependant, certains types d'objet ont aussi des styles supplémentaires.
-
-Certains objets ont un seul style. P.ex.
-- Etiquette
-- Image
-- Ligne, etc
+Objects have a *main style* which determines the appearance of their background or main section. However, some object types have additional styles too.
 
 Par exemple, un curseur a 3 styles :
 - Arrière-plan (style principal)
 - Indicateur
 - Bouton
 
-Chaque type d'objet a ses propres fonctions de gestion des styles. Par exemple
+Some object types only have one style. For example:
+- Etiquette
+- Image
+- Line, etc.
+
+Every object type implements its own version of the style setter and getter functions. You should use these instead of `lv_obj_set_style` where possible. For example:
 ```c
 const lv_style_t * btn_style = lv_btn_get_style(btn, LV_BTN_STYLE_REL);
 lv_btn_set_style(btn, LV_BTN_STYLE_REL, &new_style);
 ```
 
-Pour voir les styles pris en charge par un type d'objet (*LV_<OBJ_TYPE>_STYLE_<STYLE_TYPE>*) vérifier la documentation du [Type d'objet](/object-types/index) particulier.
+To see the styles supported by an object type  (*LV_<OBJ_TYPE>_STYLE_<STYLE_TYPE>*), check the documentation of the particular [Object type](/object-types/index).
 
-Si vous **modifiez un style déjà utilisé** par un ou plusieurs objets, les objets doivent être avertis du changement de style. Vous avez deux possibilités pour le faire :
+If you **modify a style which is already used** by one or more objects, then the objects have to be notified about the style is changed. There are two options to do this notification:
 
 ```c
 /* Notifie un objet que son style est modifié */
-void lv_obj_refresh_style(lv_obj_t * obj); 
+void lv_obj_refresh_style(lv_obj_t * obj);
 
 /* Notifie tous les objets avec un style donné (NULL pour notifier tous les objets) */
 void lv_obj_report_style_mod(void * style);
 ```
 
-`lv_obj_report_style_mod` ne peut actualiser que les *styles principaux*.
+`lv_obj_report_style_mod` will only refresh the *Main styles* of objects. If you change a different style, you will have to use `lv_obj_refresh_style`. 
 
 ## Héritage de styles
 
-Si le *style principal* d'un objet est `NULL`, son style sera hérité du style de son parent. Cela facilite la création d'une interface cohérente. N'oubliez pas qu'un style décrit beaucoup de propriétés en même temps. Ainsi, par exemple, si vous définissez le style d'un bouton et créez une étiquette avec le style `NULL`, l'étiquette sera rendue en fonction du style du bouton. En d'autres termes, le bouton garantit à ses enfants une apparence correcte.
+If the *Main style* of an object is `NULL`, then its style will be inherited from its parent's style. It makes easier to create a consistent design. Don't forget a style describes a lot of properties at the same time. So for example, if you set a button's style and create a label on it with `NULL` style, then the label will be rendered according to the button's style. In other words, the button makes sure its children will look good on it.
 
-La définition de la propriété de style `glass` empêchera d'hériter ce style. Vous devez l'utiliser si le style est transparent pour que les enfants utilisent les couleurs et autres des grands-parents.
+Setting the `glass` style property will prevent inheriting that style (i.e. cause the child object to inherit its style from its grandparent). You should use it if the style is transparent so children use colors and features from its grandparent. Otherwise, the child objects would also be transparent.
 
 ## Propriétés de style
-Un style comporte 5 parties principales : commun, corps, texte, image et ligne. Un objet utilisera les champs qui le concernent.
-Par exemple, les *lignes* ne se soucient pas de *letter_space*.
-Pour voir quels champs sont utilisés par un type d'objet, voir la documentation des [Types d'objet](/object-types/index).
+A style has 5 main parts: common, body, text, image and line. Each object type only uses the fields which are relevant to it.
+For example, *Lines* don't care about the *letter_space*, because they are not concerned with rendering text.
+
+To see which fields are used by an object type, see their [Documentation](/object-types/index).
 
 Les champs d'une structure de style sont les suivants :
 
 #### Propriétés communes
   * **glass** 1: Ne pas hériter de ce style
 
-#### Propriétés de style de corps
+#### Body style properties
 Utilisé par les objets rectangulaires
   - **body.main_color** Couleur principale (couleur du haut)
   - **body.grad_color** Dégradé de couleur (couleur de fond)
@@ -92,7 +95,7 @@ Utilisé par les objets rectangulaires
   - **body.padding.left** Marge gauche
   - **body.padding.right** Marge droite
   - **body.padding.inner** Marge intérieure (entre les éléments constitutifs ou les enfants)
-  
+
 #### Propriétés de style de texte
 Utilisés par les objets qui affichent du texte
   - **text.color** Couleur de texte
@@ -104,9 +107,9 @@ Utilisés par les objets qui affichent du texte
 
 #### Propriétés de style d'image
 Utilisé par les objets de type image ou les icônes sur les objets
-  - **image.color** Couleur pour la re-coloration de l'image en fonction de la luminosité des pixels
+  - **image.color** Color for image re-coloring based on the brightness of its pixels
   - **image.intense** Intensité de re-coloration (0..255 ou *LV_OPA_TRANSP*, *LV_OPA_10*, *LV_OPA_20* ... *LV_OPA_COVER*)
-  - **image.opa** Opacité de l'image (0..255 ou *LV_OPA_TRANSP*, *LV_OPA_10*, *LV_OPA_20* ... *LV_OPA_COVER*)
+  - **image.opa** Overall image opacity (0..255 or *LV_OPA_TRANSP*, *LV_OPA_10*, *LV_OPA_20* ... *LV_OPA_COVER*)
 
 #### Propriétés de style de ligne
 Utilisé par des objets contenant des lignes ou des éléments de type ligne
@@ -119,24 +122,24 @@ Il existe plusieurs styles intégrés dans la librairie :
 
 ![](/misc/style-built-in.png "Built-in styles in LittlevGL Embedded Graphics Library")
 
-Comme vous pouvez le constater, il existe un style pour les écrans, un pour les boutons, des styles simples ou améliorés et des styles transparents.
+As you can see, there are built-in styles for screens, buttons, solid containers, and transparent containers.
 
-Les styles `lv_style_transp`, `lv_style_transp_fit` et `lv_style_transp_tight` diffèrent uniquement par les marges : pour `lv_style_transp_tight` les marges sont nulles, pour `lv_style_transp_fit` seules les marges horizontales et verticalles sont nulles mais il y a une marge intérieure.
+The `lv_style_transp`, `lv_style_transp_fit` and `lv_style_transp_tight` differ only in paddings: for `lv_style_transp_tight` all paddings are zero, for `lv_style_transp_fit` only horizontal and vertical paddings are zero but has inner padding.
 
 ``` important:: Les styles intégrés transparents ont *glass = 1* par défaut, ce qui signifie que ces styles (les couleurs, par exemple) ne seront pas hérités par les enfants.
 ```
 
-Les styles intégrés sont des variables globales `lv_style_t`. Vous pouvez les utiliser ainsi :
+The built in styles are global `lv_style_t` variables. You can use them like:
 ```c
 lv_btn_set_style(obj, LV_BTN_STYLE_REL, &lv_style_btn_rel)
 ```
 
 ## Créer de nouveaux styles
-Vous pouvez modifier les styles intégrés ou en créer de nouveaux.
+You can either modify the built-in styles or can create new styles.
 
-Lors de la création de nouveaux styles, il est recommandé de copier d'abord un style intégré avec `lv_style_copy(&dest_style, &src_style)` pour s'assurer que tous les champs sont initialisés avec une valeur appropriée.
+When creating new styles, it's recommended to first copy a built-in style with `lv_style_copy(&dest_style, &src_style)` to be sure all fields are initialized with the proper value.
 
-N'oubliez pas que le style créé doit être `statique` ou global. Par exemple :
+Do not forget to initialize the new style as `static` or `global`. For example:
 ```c
 static lv_style_t my_red_style;
 lv_style_copy(&my_red_style, &lv_style_plain);
@@ -146,7 +149,9 @@ my_red_style.body.grad_color = LV_COLOR_RED;
 
 
 ## Animations de style
-Vous modifiez les styles avec des animations en utilisant la fonction `lv_style_anim _... ()`. Deux styles sont requis pour représenter les états *initial* et *final*, et un troisième style qui sera animé. Voici un exemple pour montrer comment cela fonctionne.
+You can change the styles with animations using `lv_style_anim_...()` function. The `lv_style_anim_set_styles()` uses 3 styles. Two styles are required to represent the *start* and *end* state, and a third style required for the *animation*.
+
+Here is an example to show how it works.
 
 ```c
 lv_anim_t a;
@@ -156,9 +161,11 @@ lv_style_anim_set_time(&a, duration, delay);                           /* Défin
 lv_style_anim_create(&a);                                               /* Crée l'animation */
 ```
 
-Pour découvrir l'intégralité de l'API des animations de style, voir `lv_core/lv_style.h`.
+Essentially, `style_start` and `style_end` remain unchanged, and `style_to_anim` is interpolated over the course of the animation.
+ 
+See `lv_core/lv_style.h` to know the whole API of style animations.
 
-Ici, vous pouvez en apprendre plus sur les [Animations](/overview/animation).
+Check [Animations](/overview/animation) for more information.
 
 ## Exemple de style
 L'exemple ci-dessous illustre l'utilisation des styles.
@@ -196,12 +203,12 @@ lv_bar_set_value(bar1, 70);                             /* Définit la valeur de
 ```
 
 ## Thèmes
-Il est difficile de créer des styles pour votre interface graphique, car vous avez besoin d’une profonde compréhension de la librairie et de compétences en matière de conception. En outre, il faut beaucoup de temps pour créer autant de styles.
+Creating styles for the GUI is challenging because you need a deeper understanding of the library, and you need to have some design skills. Also, it takes a lot of time to create so many styles for many different objects.
 
-Pour accélérer la conception les thèmes sont introduits. Un thème est une collection de styles contenant les styles requis pour chaque type d'objet. Par exemple, 5 styles de boutons décrivant leurs 5 états possibles.
-Consultez les [Thèmes] (https://littlevgl.com/themes) existants ou essayez-les dans la section [Démonstration en ligne] (https://littlevgl.com/live-demo).
+Themes are introduced to speed up the design part. A theme is a style collection which contains the required styles for every object type. For example, 5 styles for a button to describe its 5 possible states.
+Check the [Existing themes](https://littlevgl.com/themes) or try some in the [Live demo](https://littlevgl.com/live-demo) section. The [theme selector demo](https://littlevgl.com/demo-theme-selector) is useful to see how a given theme and color hue looks on the display.
 
-Pour être plus précis, un thème est une variable structurée qui contient beaucoup de champs lv_style_t*. Pour les boutons :
+To be more specific, a theme is a structure variable that contains a lot of `lv_style_t *` fields. For buttons:
 ```c
 theme.btn.rel       /* Style de bouton relâché */
 theme.btn.pr        /* Style de bouton pressé */
@@ -234,7 +241,8 @@ lv_slider_set_style(slider, LV_SLIDER_STYLE_INDIC, th->slider.indic);
 lv_slider_set_style(slider, LV_SLIDER_STYLE_KNOB, th->slider.knob);
 ```
 
-Vous pouvez demander à la librairie d'appliquer automatiquement les styles d'un thème lorsque vous créez de nouveaux objets. Pour ce faire, utilisez `lv_theme_set_current(th)` :
+You can ask the library to automatically apply the styles from a theme when you create new objects. To do this use `lv_theme_set_current(th)`.
+
 ```c
 /* Initialise le thème alien avec une teinte rouge */
 lv_theme_t *th = lv_theme_alien_init(10, NULL);
@@ -244,9 +252,9 @@ lv_theme_set_current(th);
 slider = lv_slider_create(lv_scr_act(), NULL);
 ```
 
-Les thèmes peuvent être activés ou désactivés individuellement dans `lv_conf.h`.
+Themes can be enabled or disabled one by one in `lv_conf.h`.
 
 ### Mise à jour automatique
-Par défaut, si `lv_theme_set_current(th)` est appelé à nouveau, les styles des objets existants ne seront pas actualisés. Pour activer la mise à jour automatique des thèmes, activez `LV_THEME_LIVE_UPDATE` dans` lv_conf.h`.
+By default, if `lv_theme_set_current(th)` is called again, it won't refresh the styles of the existing objects. To enable live update of themes, enable `LV_THEME_LIVE_UPDATE` in `lv_conf.h`.
 
-La mise à jour automatique mettra à jour uniquement les objets dont le style provient du thème, c’est-à-dire créés après le premier appel de `lv_theme_set_current(th)` ou dont les styles ont été définis manuellement.
+Live update will only update objects using the unchanged theme styles, i.e. objects created after the first call of `lv_theme_set_current(th)` or to which the theme's styles were applied manually.

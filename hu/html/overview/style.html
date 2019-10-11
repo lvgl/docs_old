@@ -165,12 +165,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/project.html#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/project.html#initialization">Initialization</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Kijelző interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#kijelzo-buffer">Kijelző buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#kijelzo-driver">Kijelző driver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
@@ -178,7 +178,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Bemeneti eszköz interfész</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#a-bementi-eszkozok-tipusai">A bementi eszközök típusai</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#touchpad-eger-vagy-mas-mutato-eszkoz">Touchpad, egér vagy más mutató eszköz</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#billentyuzet-vagy-keypad">Billentyűzet vagy keypad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
 </ul>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="event.html">Events</a><ul>
@@ -1091,17 +1091,19 @@
             
   <div class="section" id="styles">
 <h1>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h1>
-<p><em>Styles</em> are used to set the appearance of the objects. A style is a structure variable with attributes like colors, paddings, opacity, font etc.</p>
-<p>There is common style type called <strong>lv_style_t</strong> for every object type.</p>
-<p>By setting the fields of the <code class="docutils literal notranslate"><span class="pre">lv_style_t</span></code> variables and assigning to to an object you can influence the appearance of the objects.</p>
+<p><em>Styles</em> are used to set the appearance of the objects. A style is a structure with attributes like colors, paddings, opacity, font, etc.</p>
+<p>There is a common style type called <strong>lv_style_t</strong> for every object type.</p>
+<p>By setting the fields of the <code class="docutils literal notranslate"><span class="pre">lv_style_t</span></code> variables and assigning them to objects with <code class="docutils literal notranslate"><span class="pre">lv_obj_set_style</span></code>, you can influence the appearance of the objects.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The objects store only a pointer to a style so the style cannot be a local variable which is destroyed after the function exists. <strong>You should use static, global or dynamically allocated variables.</strong></p>
+<p>The objects only store a pointer to a style so the style cannot be a local variable which is destroyed after the function exits. <strong>You should use static, global or dynamically allocated variables.</strong></p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_style_t</span> <span class="n">style_1</span><span class="p">;</span>             <span class="cm">/*OK! Global variables for styles are fine*/</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* file scope */</span>
+<span class="n">lv_style_t</span> <span class="n">style_1</span><span class="p">;</span>             <span class="cm">/*OK! Global variables for styles are fine*/</span>
 <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_2</span><span class="p">;</span>      <span class="cm">/*OK! Static variables outside the functions are fine*/</span>
-<span class="kt">void</span> <span class="nf">my_screen_create</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> 
+<span class="kt">void</span> <span class="nf">my_screen_create</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
+  <span class="cm">/* function scope */</span>
   <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_3</span><span class="p">;</span>    <span class="cm">/*OK! Static variables in the functions are fine*/</span>
   <span class="n">lv_style_t</span> <span class="n">style_4</span><span class="p">;</span>           <span class="cm">/*WRONG! Styles can&#39;t be local variables*/</span>
 
@@ -1111,45 +1113,45 @@
 </div>
 <div class="section" id="use-the-styles">
 <h2>Use the styles<a class="headerlink" href="#use-the-styles" title="Permalink to this headline">¶</a></h2>
-<p>The objects have a <em>Main style</em> which determines the appearance of their background or main part. However, some object types have additional styles too.</p>
-<p>Some object has only one style. E.g.</p>
-<ul class="simple">
-<li><p>Label</p></li>
-<li><p>Image</p></li>
-<li><p>Line, etc</p></li>
-</ul>
+<p>Objects have a <em>main style</em> which determines the appearance of their background or main section. However, some object types have additional styles too.</p>
 <p>For example, a slider has 3 styles:</p>
 <ul class="simple">
 <li><p>Background (main style)</p></li>
 <li><p>Indicator</p></li>
 <li><p>Know</p></li>
 </ul>
-<p>Every object type has its own style set/get functions. For example</p>
+<p>Some object types only have one style. For example:</p>
+<ul class="simple">
+<li><p>Label</p></li>
+<li><p>Image</p></li>
+<li><p>Line, etc.</p></li>
+</ul>
+<p>Every object type implements its own version of the style setter and getter functions. You should use these instead of <code class="docutils literal notranslate"><span class="pre">lv_obj_set_style</span></code> where possible. For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">const</span> <span class="n">lv_style_t</span> <span class="o">*</span> <span class="n">btn_style</span> <span class="o">=</span> <span class="n">lv_btn_get_style</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">LV_BTN_STYLE_REL</span><span class="p">);</span>
 <span class="n">lv_btn_set_style</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">LV_BTN_STYLE_REL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">new_style</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>To see the styles supported by an object type  (<em>LV_&lt;OBJ_TYPE&gt;<em>STYLE</em>&lt;STYLE_TYPE&gt;</em>) check the documentation of the particular <a class="reference internal" href="../object-types/index.html"><span class="doc">Object type</span></a>.</p>
-<p>If you <strong>modify a style which is already used</strong> by one or more objects then the objects have to be notified about the style is changed. You have two options to do that:</p>
+<p>To see the styles supported by an object type  (<em>LV_&lt;OBJ_TYPE&gt;<em>STYLE</em>&lt;STYLE_TYPE&gt;</em>), check the documentation of the particular <a class="reference internal" href="../object-types/index.html"><span class="doc">Object type</span></a>.</p>
+<p>If you <strong>modify a style which is already used</strong> by one or more objects, then the objects have to be notified about the style is changed. There are two options to do this notification:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Notify an object about its style is modified*/</span>
-<span class="kt">void</span> <span class="nf">lv_obj_refresh_style</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">);</span> 
+<span class="kt">void</span> <span class="nf">lv_obj_refresh_style</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">);</span>
 
 <span class="cm">/*Notify all objects with a given style. (NULL to notify all objects)*/</span>
 <span class="kt">void</span> <span class="nf">lv_obj_report_style_mod</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">style</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">lv_obj_report_style_mod</span></code> can refresh only the <em>Main styles</em>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_obj_report_style_mod</span></code> will only refresh the <em>Main styles</em> of objects. If you change a different style, you will have to use <code class="docutils literal notranslate"><span class="pre">lv_obj_refresh_style</span></code>.</p>
 </div>
 <div class="section" id="inherit-styles">
 <h2>Inherit styles<a class="headerlink" href="#inherit-styles" title="Permalink to this headline">¶</a></h2>
-<p>If the <em>Main style</em> of an object is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> then its style will be inherited from its parent’s style. It makes easier to create a consistent design. Don’t forget a style describes a lot of properties at the same time. So for example, if you set a button’s style and create a label on it with <code class="docutils literal notranslate"><span class="pre">NULL</span></code> style then the label will be rendered according to the button’s style. In other words, the button makes sure its children will look well on it.</p>
-<p>Setting the <code class="docutils literal notranslate"><span class="pre">glass</span></code> style property will prevent inheriting that style. You should use it if the style is transparent so that its children use colors and others from its grandparent.</p>
+<p>If the <em>Main style</em> of an object is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, then its style will be inherited from its parent’s style. It makes easier to create a consistent design. Don’t forget a style describes a lot of properties at the same time. So for example, if you set a button’s style and create a label on it with <code class="docutils literal notranslate"><span class="pre">NULL</span></code> style, then the label will be rendered according to the button’s style. In other words, the button makes sure its children will look good on it.</p>
+<p>Setting the <code class="docutils literal notranslate"><span class="pre">glass</span></code> style property will prevent inheriting that style (i.e. cause the child object to inherit its style from its grandparent). You should use it if the style is transparent so children use colors and features from its grandparent. Otherwise, the child objects would also be transparent.</p>
 </div>
 <div class="section" id="style-properties">
 <h2>Style properties<a class="headerlink" href="#style-properties" title="Permalink to this headline">¶</a></h2>
-<p>A style has 5 main parts: common, body, text, image and line. An object will use those fields which are relevant to it.
-For example, <em>Lines</em> don’t care about the <em>letter_space</em>.
-To see which fields are used by an object type see their <a class="reference internal" href="../object-types/index.html"><span class="doc">Documentation</span></a>.</p>
+<p>A style has 5 main parts: common, body, text, image and line. Each object type only uses the fields which are relevant to it.
+For example, <em>Lines</em> don’t care about the <em>letter_space</em>, because they are not concerned with rendering text.</p>
+<p>To see which fields are used by an object type, see their <a class="reference internal" href="../object-types/index.html"><span class="doc">Documentation</span></a>.</p>
 <p>The fields of a style structure are the followings:</p>
 <div class="section" id="common-properties">
 <h3>Common properties<a class="headerlink" href="#common-properties" title="Permalink to this headline">¶</a></h3>
@@ -1195,9 +1197,9 @@ To see which fields are used by an object type see their <a class="reference int
 <h3>Image style properties<a class="headerlink" href="#image-style-properties" title="Permalink to this headline">¶</a></h3>
 <p>Used by image-like objects or icons on objects</p>
 <ul class="simple">
-<li><p><strong>image.color</strong> Color for image re-coloring based on the pixels brightness</p></li>
+<li><p><strong>image.color</strong> Color for image re-coloring based on the brightness of its pixels</p></li>
 <li><p><strong>image.intense</strong> Re-color intensity (0..255 or <em>LV_OPA_TRANSP</em>, <em>LV_OPA_10</em>, <em>LV_OPA_20</em> … <em>LV_OPA_COVER</em>)</p></li>
-<li><p><strong>image.opa</strong> Image opacity (0..255 or <em>LV_OPA_TRANSP</em>, <em>LV_OPA_10</em>, <em>LV_OPA_20</em> … <em>LV_OPA_COVER</em>)</p></li>
+<li><p><strong>image.opa</strong> Overall image opacity (0..255 or <em>LV_OPA_TRANSP</em>, <em>LV_OPA_10</em>, <em>LV_OPA_20</em> … <em>LV_OPA_COVER</em>)</p></li>
 </ul>
 </div>
 <div class="section" id="line-style-properties">
@@ -1214,8 +1216,8 @@ To see which fields are used by an object type see their <a class="reference int
 <h2>Built-in styles<a class="headerlink" href="#built-in-styles" title="Permalink to this headline">¶</a></h2>
 <p>There are several built-in styles in the library:</p>
 <p><img alt="Built-in styles in LittlevGL Embedded Graphics Library" src="../_images/style-built-in.png" /></p>
-<p>As you can see there is a style for screens, for buttons, plain and pretty styles and transparent styles as well.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">lv_style_transp</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_style_transp_fit</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_style_transp_tight</span></code> differ only in paddings: for <code class="docutils literal notranslate"><span class="pre">lv_style_transp_tight</span></code> all paddings are zero, for <code class="docutils literal notranslate"><span class="pre">lv_style_transp_fit</span></code> only hor and ver paddings are zero but has inner padding.</p>
+<p>As you can see, there are built-in styles for screens, buttons, solid containers, and transparent containers.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lv_style_transp</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_style_transp_fit</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_style_transp_tight</span></code> differ only in paddings: for <code class="docutils literal notranslate"><span class="pre">lv_style_transp_tight</span></code> all paddings are zero, for <code class="docutils literal notranslate"><span class="pre">lv_style_transp_fit</span></code> only horizontal and vertical paddings are zero but has inner padding.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Transparent built-in styles have <em>glass = 1</em> by default which means these styles (e.g. their colors) won’t be inherited by children.</p>
@@ -1227,9 +1229,9 @@ To see which fields are used by an object type see their <a class="reference int
 </div>
 <div class="section" id="create-new-styles">
 <h2>Create new styles<a class="headerlink" href="#create-new-styles" title="Permalink to this headline">¶</a></h2>
-<p>You can modify the built-in styles or you can create new styles.</p>
-<p>When creating new styles it’s recommended to first copy a built-in style with <code class="docutils literal notranslate"><span class="pre">lv_style_copy(&amp;dest_style,</span> <span class="pre">&amp;src_style)</span></code> to be sure all fields are initialized with a proper value.</p>
-<p>Do not forget the created style should be <code class="docutils literal notranslate"><span class="pre">static</span></code> or global. For example:</p>
+<p>You can either modify the built-in styles or can create new styles.</p>
+<p>When creating new styles, it’s recommended to first copy a built-in style with <code class="docutils literal notranslate"><span class="pre">lv_style_copy(&amp;dest_style,</span> <span class="pre">&amp;src_style)</span></code> to be sure all fields are initialized with the proper value.</p>
+<p>Do not forget to initialize the new style as <code class="docutils literal notranslate"><span class="pre">static</span></code> or <code class="docutils literal notranslate"><span class="pre">global</span></code>. For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">my_red_style</span><span class="p">;</span>
 <span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_red_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>
 <span class="n">my_red_style</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_RED</span><span class="p">;</span>
@@ -1239,7 +1241,8 @@ To see which fields are used by an object type see their <a class="reference int
 </div>
 <div class="section" id="style-animations">
 <h2>Style animations<a class="headerlink" href="#style-animations" title="Permalink to this headline">¶</a></h2>
-<p>You change the styles with animations using <code class="docutils literal notranslate"><span class="pre">lv_style_anim_...()</span></code> function. Two styles are required to represent the <em>start</em> and <em>end</em> state, and a third style which will be animated. Here is an example to show how it works.</p>
+<p>You can change the styles with animations using <code class="docutils literal notranslate"><span class="pre">lv_style_anim_...()</span></code> function. The <code class="docutils literal notranslate"><span class="pre">lv_style_anim_set_styles()</span></code> uses 3 styles. Two styles are required to represent the <em>start</em> and <em>end</em> state, and a third style required for the <em>animation</em>.</p>
+<p>Here is an example to show how it works.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_anim_t</span> <span class="n">a</span><span class="p">;</span>
 <span class="n">lv_style_anim_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">);</span>                                                 <span class="cm">/*A basic initialization*/</span>
 <span class="n">lv_style_anim_set_styles</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_to_anim</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_start</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_end</span><span class="p">);</span> <span class="cm">/*Set the styles to use*/</span>
@@ -1247,8 +1250,9 @@ To see which fields are used by an object type see their <a class="reference int
 <span class="n">lv_style_anim_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">);</span>                                               <span class="cm">/*Create the animation*/</span>
 </pre></div>
 </div>
-<p>To see the whole API of style animations see <code class="docutils literal notranslate"><span class="pre">lv_core/lv_style.h</span></code>.</p>
-<p>Here you can learn more about the <a class="reference internal" href="animation.html"><span class="doc">Animations</span></a>.</p>
+<p>Essentially, <code class="docutils literal notranslate"><span class="pre">style_start</span></code> and <code class="docutils literal notranslate"><span class="pre">style_end</span></code> remain unchanged, and <code class="docutils literal notranslate"><span class="pre">style_to_anim</span></code> is interpolated over the course of the animation.</p>
+<p>See <code class="docutils literal notranslate"><span class="pre">lv_core/lv_style.h</span></code> to know the whole API of style animations.</p>
+<p>Check <a class="reference internal" href="animation.html"><span class="doc">Animations</span></a> for more information.</p>
 </div>
 <div class="section" id="style-example">
 <h2>Style example<a class="headerlink" href="#style-example" title="Permalink to this headline">¶</a></h2>
@@ -1287,10 +1291,10 @@ To see which fields are used by an object type see their <a class="reference int
 </div>
 <div class="section" id="themes">
 <h2>Themes<a class="headerlink" href="#themes" title="Permalink to this headline">¶</a></h2>
-<p>To create styles for your GUI is challenging because you need a deeper understanding of the library and you need to have some design skills. In addition, it takes a lot of time to create so many styles.</p>
-<p>To speed up the design part themes are introduced. A theme is a style collection which contains the required styles for every object type. For example 5 styles for buttons to describe their 5 possible states.
-Check the <a class="reference external" href="https://littlevgl.com/themes">Existing themes</a> or try some in the <a class="reference external" href="https://littlevgl.com/live-demo">Live demo</a> section.</p>
-<p>To be more specific a theme is a structure variable which contains a lot of lv_style_t * fields. For buttons:</p>
+<p>Creating styles for the GUI is challenging because you need a deeper understanding of the library, and you need to have some design skills. Also, it takes a lot of time to create so many styles for many different objects.</p>
+<p>Themes are introduced to speed up the design part. A theme is a style collection which contains the required styles for every object type. For example, 5 styles for a button to describe its 5 possible states.
+Check the <a class="reference external" href="https://littlevgl.com/themes">Existing themes</a> or try some in the <a class="reference external" href="https://littlevgl.com/live-demo">Live demo</a> section. The <a class="reference external" href="https://littlevgl.com/demo-theme-selector">theme selector demo</a> is useful to see how a given theme and color hue looks on the display.</p>
+<p>To be more specific, a theme is a structure variable that contains a lot of <code class="docutils literal notranslate"><span class="pre">lv_style_t</span> <span class="pre">*</span></code> fields. For buttons:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">theme</span><span class="p">.</span><span class="n">btn</span><span class="p">.</span><span class="n">rel</span>       <span class="cm">/*Released button style*/</span>
 <span class="n">theme</span><span class="p">.</span><span class="n">btn</span><span class="p">.</span><span class="n">pr</span>        <span class="cm">/*Pressed button style*/</span>
 <span class="n">theme</span><span class="p">.</span><span class="n">btn</span><span class="p">.</span><span class="n">tgl_rel</span>   <span class="cm">/*Toggled released button style*/</span>
@@ -1318,7 +1322,7 @@ Check the <a class="reference external" href="https://littlevgl.com/themes">Exis
 <span class="n">lv_slider_set_style</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">LV_SLIDER_STYLE_KNOB</span><span class="p">,</span> <span class="n">th</span><span class="o">-&gt;</span><span class="n">slider</span><span class="p">.</span><span class="n">knob</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>You can ask the library to automatically apply the styles from a theme when you create new objects. To do this use <code class="docutils literal notranslate"><span class="pre">lv_theme_set_current(th)</span></code>;</p>
+<p>You can ask the library to automatically apply the styles from a theme when you create new objects. To do this use <code class="docutils literal notranslate"><span class="pre">lv_theme_set_current(th)</span></code>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Initialize the alien theme with a reddish hue*/</span>
 <span class="n">lv_theme_t</span> <span class="o">*</span><span class="n">th</span> <span class="o">=</span> <span class="n">lv_theme_alien_init</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
 <span class="n">lv_theme_set_current</span><span class="p">(</span><span class="n">th</span><span class="p">);</span>
@@ -1327,11 +1331,11 @@ Check the <a class="reference external" href="https://littlevgl.com/themes">Exis
 <span class="n">slider</span> <span class="o">=</span> <span class="n">lv_slider_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Themes can be enabled or disabled one by on in <code class="docutils literal notranslate"><span class="pre">lv_conf.h</span></code>.</p>
+<p>Themes can be enabled or disabled one by one in <code class="docutils literal notranslate"><span class="pre">lv_conf.h</span></code>.</p>
 <div class="section" id="live-update">
 <h3>Live update<a class="headerlink" href="#live-update" title="Permalink to this headline">¶</a></h3>
-<p>By default if <code class="docutils literal notranslate"><span class="pre">lv_theme_set_current(th)</span></code> is called again it won’t refresh the styles of the existing objects. To enable live update of themes enable <code class="docutils literal notranslate"><span class="pre">LV_THEME_LIVE_UPDATE</span></code> in <code class="docutils literal notranslate"><span class="pre">lv_conf.h</span></code>.</p>
-<p>Live update will update only those objects whose style are from the theme, i.e. created after the first call of <code class="docutils literal notranslate"><span class="pre">lv_theme_set_current(th)</span></code> or the styles were set manually</p>
+<p>By default, if <code class="docutils literal notranslate"><span class="pre">lv_theme_set_current(th)</span></code> is called again, it won’t refresh the styles of the existing objects. To enable live update of themes, enable <code class="docutils literal notranslate"><span class="pre">LV_THEME_LIVE_UPDATE</span></code> in <code class="docutils literal notranslate"><span class="pre">lv_conf.h</span></code>.</p>
+<p>Live update will only update objects using the unchanged theme styles, i.e. objects created after the first call of <code class="docutils literal notranslate"><span class="pre">lv_theme_set_current(th)</span></code> or to which the theme’s styles were applied manually.</p>
 </div>
 </div>
 </div>
@@ -1358,7 +1362,7 @@ Check the <a class="reference external" href="https://littlevgl.com/themes">Exis
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

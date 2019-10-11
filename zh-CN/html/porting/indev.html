@@ -165,7 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="project.html">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="project.html#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="project.html#initialization">Initialization</a></li>
 </ul>
 </li>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Events</a><ul>
@@ -1114,7 +1114,7 @@ It can also buffer data and return <code class="docutils literal notranslate"><s
 <p>Visit <a class="reference internal" href="../overview/indev.html"><span class="doc">Input devices</span></a> to learn more about input devices in general.</p>
 <div class="section" id="touchpad-mouse-or-any-pointer">
 <h3>Touchpad, mouse or any pointer<a class="headerlink" href="#touchpad-mouse-or-any-pointer" title="Permalink to this headline">¶</a></h3>
-<p>Input devices which are able to click points of the screen belong to this category.</p>
+<p>Input devices which can click points of the screen belong to this category.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_POINTER</span><span class="p">;</span>
 <span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
 
@@ -1122,7 +1122,7 @@ It can also buffer data and return <code class="docutils literal notranslate"><s
 
 <span class="kt">bool</span> <span class="n">my_input_read</span><span class="p">(</span><span class="n">lv_indev_drv_t</span> <span class="o">*</span> <span class="n">drv</span><span class="p">,</span> <span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">touchpad_x</span><span class="p">;</span> 
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">touchpad_x</span><span class="p">;</span>
     <span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">touchpad_y</span><span class="p">;</span>
     <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span> <span class="n">or</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
     <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering now so no more data read*/</span>
@@ -1153,10 +1153,10 @@ It can also buffer data and return <code class="docutils literal notranslate"><s
 
 <span class="kt">bool</span> <span class="n">keyboard_read</span><span class="p">(</span><span class="n">lv_indev_drv_t</span> <span class="o">*</span> <span class="n">drv</span><span class="p">,</span> <span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">){</span>
   <span class="n">data</span><span class="o">-&gt;</span><span class="n">key</span> <span class="o">=</span> <span class="n">last_key</span><span class="p">();</span>            <span class="cm">/*Get the last pressed or released key*/</span>
-  
+
   <span class="k">if</span><span class="p">(</span><span class="n">key_pressed</span><span class="p">())</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>
   <span class="k">else</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
-  
+
   <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering now so no more data read*/</span>
 <span class="p">}</span>
 </pre></div>
@@ -1167,7 +1167,7 @@ It can also buffer data and return <code class="docutils literal notranslate"><s
 <p>With an encoder you can do 4 things:</p>
 <ol class="simple">
 <li><p>Press its button</p></li>
-<li><p>Long press its button</p></li>
+<li><p>Long-press its button</p></li>
 <li><p>Turn left</p></li>
 <li><p>Turn right</p></li>
 </ol>
@@ -1175,21 +1175,21 @@ It can also buffer data and return <code class="docutils literal notranslate"><s
 <ul class="simple">
 <li><p>By turning the encoder you can focus on the next/previous object.</p></li>
 <li><p>When you press the encoder on a simple object (like a button), it will be clicked.</p></li>
-<li><p>If you press the encoder on a complex object (like a list, message box, etc.) the object will go to edit mode where by turning the encoder you can navigate inside the object.</p></li>
+<li><p>If you press the encoder on a complex object (like a list, message box, etc.) the object will go to edit mode whereby turning the encoder you can navigate inside the object.</p></li>
 <li><p>To leave edit mode press long the button.</p></li>
 </ul>
 <p>To use an <em>Encoder</em> (similarly to the <em>Keypads</em>) the objects should be added to groups.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_ENCODER</span><span class="p">;</span>
 <span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
 
-<span class="p">...</span> 
- 
+<span class="p">...</span>
+
 <span class="kt">bool</span> <span class="n">encoder_read</span><span class="p">(</span><span class="n">lv_indev_drv_t</span> <span class="o">*</span> <span class="n">drv</span><span class="p">,</span> <span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">){</span>
   <span class="n">data</span><span class="o">-&gt;</span><span class="n">enc_diff</span> <span class="o">=</span> <span class="n">enc_get_new_moves</span><span class="p">();</span>
-  
+
   <span class="k">if</span><span class="p">(</span><span class="n">enc_pressed</span><span class="p">())</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>
   <span class="k">else</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
-  
+
   <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering now so no more data read*/</span>
 <span class="p">}</span>
 </pre></div>
@@ -1210,7 +1210,7 @@ If a button is pressed it will simulate the pressing on the assigned coordinate.
 <span class="p">...</span>
 
 <span class="kt">bool</span> <span class="n">button_read</span><span class="p">(</span><span class="n">lv_indev_drv_t</span> <span class="o">*</span> <span class="n">drv</span><span class="p">,</span> <span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">){</span>
-    <span class="k">static</span> <span class="kt">uint32_t</span> <span class="n">last_btn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="cm">/*Store the last pressed button*/</span> 
+    <span class="k">static</span> <span class="kt">uint32_t</span> <span class="n">last_btn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="cm">/*Store the last pressed button*/</span>
     <span class="kt">int</span> <span class="n">btn_pr</span> <span class="o">=</span> <span class="n">my_btn_read</span><span class="p">();</span>     <span class="cm">/*Get the ID (0,1,2...) of the pressed button*/</span>
     <span class="k">if</span><span class="p">(</span><span class="n">btn_pr</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>               <span class="cm">/*Is there a button press? (E.g. -1 indicated no button was pressed)*/</span>
        <span class="n">last_btn</span> <span class="o">=</span> <span class="n">btn_pr</span><span class="p">;</span>           <span class="cm">/*Save the ID of the pressed button*/</span>
@@ -1218,9 +1218,9 @@ If a button is pressed it will simulate the pressing on the assigned coordinate.
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
        <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span> <span class="cm">/*Set the released state*/</span>
     <span class="p">}</span>
-  
+
     <span class="n">data</span><span class="o">-&gt;</span><span class="n">btn</span> <span class="o">=</span> <span class="n">last_btn</span><span class="p">;</span>            <span class="cm">/*Save the last button*/</span>
-   
+
     <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>                    <span class="cm">/*No buffering now so no more data read*/</span>
 <span class="p">}</span>
 </pre></div>
@@ -1230,14 +1230,14 @@ If a button is pressed it will simulate the pressing on the assigned coordinate.
 <div class="section" id="other-features">
 <h2>Other features<a class="headerlink" href="#other-features" title="Permalink to this headline">¶</a></h2>
 <p>Besides <code class="docutils literal notranslate"><span class="pre">read_cb</span></code> a <code class="docutils literal notranslate"><span class="pre">feedback_cb</span></code> callback can be also specified in <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_t</span></code>.
-<code class="docutils literal notranslate"><span class="pre">feedback_cb</span></code> is called when any type of event is sent by the input devices. (independently from its type). It gives the opportunity to make feedback for the user e.g. to play a sound on <code class="docutils literal notranslate"><span class="pre">LV_EVENT_CLICK</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">feedback_cb</span></code> is called when any type of event is sent by the input devices. (independently from its type). It allows making feedback for the user e.g. to play a sound on <code class="docutils literal notranslate"><span class="pre">LV_EVENT_CLICK</span></code>.</p>
 <p>The default value of the following parameters can be set in <em>lv_conf.h</em> but the default value can be overwritten in <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_t</span></code>:</p>
 <ul class="simple">
 <li><p><strong>drag_limit</strong> Number of pixels to slide before actually drag the object</p></li>
 <li><p><strong>drag_throw</strong>  Drag throw slow-down in [%]. Greater value means faster slow-down</p></li>
 <li><p><strong>long_press_time</strong> Press time to send <code class="docutils literal notranslate"><span class="pre">LV_EVENT_LONG_PRESSED</span></code> (in milliseconds)</p></li>
 <li><p><strong>long_press_rep_time</strong> Interval of sending <code class="docutils literal notranslate"><span class="pre">LV_EVENT_LONG_PRESSED_REPEAT</span></code> (in milliseconds)</p></li>
-<li><p><strong>read_task</strong> pointer to the <code class="docutils literal notranslate"><span class="pre">lv_task</span></code> which reads the input device. It parameters can be changed by <code class="docutils literal notranslate"><span class="pre">lv_task_...()</span></code> functions</p></li>
+<li><p><strong>read_task</strong> pointer to the <code class="docutils literal notranslate"><span class="pre">lv_task</span></code> which reads the input device. Its parameters can be changed by <code class="docutils literal notranslate"><span class="pre">lv_task_...()</span></code> functions</p></li>
 </ul>
 <p>Every Input device is associated with a display. By default, a new input device is added to the lastly created or the explicitly selected (using <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default()</span></code>) display.
 The associated display is stored and can be changed in <code class="docutils literal notranslate"><span class="pre">disp</span></code> field of the driver.</p>
@@ -1696,7 +1696,7 @@ The associated display is stored and can be changed in <code class="docutils lit
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

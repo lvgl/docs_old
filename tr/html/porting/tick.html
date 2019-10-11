@@ -165,7 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="project.html">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="project.html#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="project.html#initialization">Initialization</a></li>
 </ul>
 </li>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Events</a><ul>
@@ -1090,17 +1090,17 @@
             
   <div class="section" id="tick-interface">
 <h1>Tick interface<a class="headerlink" href="#tick-interface" title="Permalink to this headline">¶</a></h1>
-<p>The LittlevGL needs a system tick to know the elapsed time for animation and other task.</p>
-<p>You need to call the <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(tick_period)</span></code> function periodically and tell the call period in milliseconds. For example, if called in every millisecond: <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(1)</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">lv_tick_inc</span></code> should be called in a higher priority routine than<code class="docutils literal notranslate"> <span class="pre">lv_task_handler()</span></code> (e.g. in an interrupt) to precisely know the elapsed milliseconds even if the execution of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> takes longer time.</p>
+<p>The LittlevGL needs a system tick to know the elapsed time for animation and other tasks.</p>
+<p>You need to call the <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(tick_period)</span></code> function periodically and tell the call period in milliseconds. For example, <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(1)</span></code> for calling in every millisecond.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_tick_inc</span></code> should be called in a higher priority routine than <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code> (e.g. in an interrupt) to precisely know the elapsed milliseconds even if the execution of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> takes longer time.</p>
 <p>With FreeRTOS <code class="docutils literal notranslate"><span class="pre">lv_tick_inc</span></code> can be called in <code class="docutils literal notranslate"><span class="pre">vApplicationTickHook</span></code>.</p>
-<p>On Linux based operation system (e.g. on Raspberry) <code class="docutils literal notranslate"><span class="pre">lv_tick_inc</span></code> can be called in a thread:</p>
+<p>On Linux based operating system (e.g. on Raspberry Pi) <code class="docutils literal notranslate"><span class="pre">lv_tick_inc</span></code> can be called in a thread as below:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="o">*</span> <span class="nf">tick_thread</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
 <span class="p">{</span>
       <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">usleep</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>   <span class="cm">/*Sleep for 5 millisecond*/</span>
         <span class="n">lv_tick_inc</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>      <span class="cm">/*Tell LittlevGL that 5 milliseconds were elapsed*/</span>
-    <span class="p">}</span> 
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1159,7 +1159,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

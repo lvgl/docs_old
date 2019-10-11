@@ -165,7 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/project.html#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/project.html#initialization">Initialization</a></li>
 </ul>
 </li>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="event.html">Events</a><ul>
@@ -1091,14 +1091,14 @@
             
   <div class="section" id="id1">
 <h1>对象<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<p>在LittlevGL中用户界面的<strong>基本构件</strong>是对象，也叫做<em>小部件</em>
+<p>In the LittlevGL the <strong>basic building blocks</strong> of a user interface are the objects, also called <em>Widgets</em>.
 举个例子，一个<a class="reference internal" href="../object-types/btn.html"><span class="doc">按钮</span></a>, <a class="reference internal" href="../object-types/label.html"><span class="doc">标签</span></a>, <a class="reference internal" href="../object-types/img.html"><span class="doc">图像</span></a>, <a class="reference internal" href="../object-types/list.html"><span class="doc">列表</span></a>, <a class="reference internal" href="../object-types/chart.html"><span class="doc">图表</span></a> 或<a class="reference internal" href="../object-types/ta.html"><span class="doc">文本框</span></a></p>
 <p>在<a class="reference internal" href="../object-types/index.html"><span class="doc">对象类型</span></a>这里查看所有对象类型</p>
 <div class="section" id="id2">
 <h2>对象属性<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id3">
 <h3>基本属性<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<p>对象具有以下与其类型无关的基本属性：</p>
+<p>All object types share some basic attributes:</p>
 <ul class="simple">
 <li><p>位置(Position)</p></li>
 <li><p>大小(Size)</p></li>
@@ -1106,7 +1106,7 @@
 <li><p>是否可拖拽(Drag enable)</p></li>
 <li><p>是否可点击(Click enable)等等</p></li>
 </ul>
-<p>你可以使用 <code class="docutils literal notranslate"><span class="pre">lv_obj_set_...</span></code> 和 <code class="docutils literal notranslate"><span class="pre">lv_obj_get_...</span></code> 函数来获取或者设置这些属性，比如：</p>
+<p>You can set/get these attributes with <code class="docutils literal notranslate"><span class="pre">lv_obj_set_...</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_obj_get_...</span></code> functions. For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*设置对象基本属性*/</span>
 <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>	 <span class="cm">/*按钮大小*/</span>
 <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">);</span>      <span class="cm">/*按钮位置*/</span>
@@ -1122,7 +1122,7 @@
 <li><p>当前值(Current value)</p></li>
 <li><p>自定义样式(Custom styles)</p></li>
 </ul>
-<p>对于这些属性，每个对象类型都具有专门的API函数，例如对于滑动条：</p>
+<p>For these attributes, every object type have unique API functions. For example for a slider:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*设置滑动条专有属性*/</span>
 <span class="n">lv_slider_set_range</span><span class="p">(</span><span class="n">slider1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>	   <span class="cm">/*设置最大最小值*/</span>
 <span class="n">lv_slider_set_value</span><span class="p">(</span><span class="n">slider1</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">LV_ANIM_ON</span><span class="p">);</span>	<span class="cm">/*设置当前值（位置）*/</span>
@@ -1136,13 +1136,13 @@
 <h2>对象工作机制<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id6">
 <h3>父子结构<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<p>一个父对象可以被视为他所有子对象的容器。每一个对象都只有一个父对象（除了屏幕对象(screens)），但是一个父对象可以拥有不限数量的子对象
-父对象的类型没有限制，但是有一些典型的父对象 (例如按钮) 和典型的子对象(例如标签)</p>
+<p>A parent object can be considered as the container of its children. Every object has exactly one parent object (except screens), but a parent can have an unlimited number of children.
+There is no limitation for the type of the parent but, there are typical parent (e.g. button) and typical child (e.g. label) objects.</p>
 </div>
 <div class="section" id="moving-together">
 <h3>一起移动(Moving together)<a class="headerlink" href="#moving-together" title="Permalink to this headline">¶</a></h3>
-<p>如果父对象的位置改变了，子对象的位置也会随着父对象改变
-因此所有位置是相对于父对象的</p>
+<p>If the position of the parent is changed the children will move with the parent.
+Therefore all positions are relative to the parent.</p>
 <p>(0;0) 坐标表示对象的位置会保持在他们各自父对象的左上角</p>
 <p><img alt="Objects are moving together 1" src="../_images/par_child1.png" /></p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">par</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span> <span class="cm">/*在当前屏幕上创建一个父对象*/</span>
@@ -1161,7 +1161,7 @@
 </div>
 <div class="section" id="id7">
 <h3>只可显示在父对象上<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<p>如果子对象部分或全部内容溢出父对象，溢出部分会不可见</p>
+<p>If a child is partially or fully out of its parent then the parts outside will not be visible.</p>
 <p><img alt="A graphical object is visible on its parent" src="../_images/par_child3.png" /></p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_set_x</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">);</span>	<span class="cm">/*在父对象移动子对象的位置*/</span>
 </pre></div>
@@ -1169,16 +1169,16 @@
 </div>
 <div class="section" id="id8">
 <h3>创建-删除对象<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<p>在LittlevGL中，对象可以在运行时被动态的创建或删除
-这意味着当前创建的对象只会消耗RAM
-例如，如果你需要一个图表，你可以在需要的时候创建它并在他不可见或不需要的时候删除它</p>
-<p>每个对象类型有他自己的**创建(create)**原型统一的函数
-它需要两个参数：</p>
+<p>In LittlevGL objects can be created and deleted dynamically in run-time.
+It means only the currently created objects consume RAM.
+For example, if you need a chart, you can create it when required and delete it when it is not visible or necessary.</p>
+<p>Every object type has its own <strong>create</strong> function with a unified prototype.
+It needs two parameters:</p>
 <ul class="simple">
-<li><p>一个父对象的指针，要创建一个屏幕对象请使用<em>NULL</em>作为父对象</p></li>
-<li><p>一个可选指针表示另一个相同类型的对象并复制它，当不需要复制其他对象时可以为 <em>NULL</em></p></li>
+<li><p>A pointer to the <em>parent</em> object. To create a screen give <em>NULL</em> as parent.</p></li>
+<li><p>Optionally, a pointer to <em>copy</em> object with the same type to copy it. This <em>copy</em> object can be <em>NULL</em> to avoid the copy operation.</p></li>
 </ul>
-<p>独立于对象类型，使用通用变量类型<code class="docutils literal notranslate"><span class="pre">lv_obj_t</span></code>。 之后可以使用此指针来设置或获取对象的属性</p>
+<p>All objects are referenced in C code using an <code class="docutils literal notranslate"><span class="pre">lv_obj_t</span></code> pointer as a handle. This pointer can later be used to set or get the attributes of the object.</p>
 <p>创建函数看起来像这样：</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">lv_</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">_create</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">parent</span><span class="p">,</span> <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">copy</span><span class="p">);</span>
 </pre></div>
@@ -1187,10 +1187,10 @@
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">lv_obj_del</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">lv_obj_del</span></code> 会立刻删除对象
-如果你有某些原因不想立即删除对象，你可以使用 <code class="docutils literal notranslate"><span class="pre">lv_obj_del_async(obj)</span></code>.
-这有时候会很有用，比如你想在 <code class="docutils literal notranslate"><span class="pre">LV_EVENT_DELETE</span></code> 信号中删除一个对象的父对象</p>
-<p>你可以只删除一个父对象的子对象而让父对象自己”存活”：</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_obj_del</span></code> will delete the object immediately.
+If for any reason you can’t delete the object immediately you can use <code class="docutils literal notranslate"><span class="pre">lv_obj_del_async(obj)</span></code>.
+It is useful e.g. if you want to delete the parent of an object in the child’s <code class="docutils literal notranslate"><span class="pre">LV_EVENT_DELETE</span></code> signal.</p>
+<p>You can remove all the children of an object (but not the object itself) using <code class="docutils literal notranslate"><span class="pre">lv_obj_clean</span></code>:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">lv_obj_clean</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -1201,13 +1201,12 @@
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">scr1</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>在显示时始终会有一个活动(active)的屏幕对象，默认情况下，库会创建并加载一个屏幕对象
-要获取当前活动的屏幕对象，可以使用<code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code>函数，要加载新的屏幕对象，可以使用<code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr1)</span></code>函数</p>
+<p>There is always an active screen on each display. By default, the library creates and loads a “Base object” as the screen for each display.To get the currently active screen use the <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> function. To load a new one, use <code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr1)</span></code>.</p>
 <p>屏幕对象可以被创建为任何对象类型。例如，一个 <a class="reference internal" href="../object-types/obj.html"><span class="doc">基本对象</span></a>或一个用一个图像对象作为壁纸</p>
-<p>屏幕对象被创建在<em>默认显示(default display)</em>
-<em>默认显示</em> 是最后一个用 <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register</span></code> 函数注册的屏幕对象 (如果只有一个屏幕对象则使它) 或者你可以显式地通过 <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default(disp)</span></code>来选择
-<code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> 和<code class="docutils literal notranslate"><span class="pre">lv_scr_load()</span></code> 操作在当前默认屏幕对象上</p>
-<p>访问<a class="reference internal" href="display.html"><span class="doc">多显示器支持</span></a> 获取更多内容</p>
+<p>Screens are created on the currently selected <em>default display</em>.
+The <em>default screen</em> is the last registered screen with <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register</span></code> or you can explicitly select a new default display using <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default(disp)</span></code>.
+<code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_scr_load()</span></code> operate on the currently default screen.</p>
+<p>Visit <a class="reference internal" href="display.html"><span class="doc">Multi-display support</span></a> to learn more.</p>
 </div>
 </div>
 </div>
@@ -1234,7 +1233,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

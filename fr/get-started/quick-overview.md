@@ -1,16 +1,16 @@
 # Aperçu rapide
 
-Here you can learn the most important things about LittlevGL.
+Ici, vous pouvez apprendre les points les plus importants sur LittlevGL. 
 Vous devriez le lire en premier pour avoir une impression générale, puis les sections détaillées [Portage](/porting/index) et [Vue d'ensemble](/overview/index) après cela.
 
 ## Ajouter LittlevGL à votre projet
 
-The following steps show how to setup LittlevGL on an embedded system with a display and a touchpad.
-You can use the [Simulators](/get-started/pc-simulator) to get 'ready to use' projects which can be run on your PC.
+Les étapes suivantes montrent comment configurer LittlevGL sur un système embarqué avec un écran et un pavé tactile.
+Vous pouvez utiliser le [Simulateur](/get-started/pc-simulator) pour obtenir des projets 'prêts à utiliser' pouvant être exécutés sur votre PC.
 
 - [Téléchargez](https://littlevgl.com/download) ou [clonez](https://github.com/littlevgl/lvgl) la librairie
 - Copiez le répertoire `lvgl` dans votre projet
-- Copy `lvgl/lv_conf_templ.h` as `lv_conf.h` next to the `lvgl` folder and set at least `LV_HOR_RES_MAX`, `LV_VER_RES_MAX` and `LV_COLOR_DEPTH` macros.
+- Copiez `lvgl/lv_conf_templ.h` sous le nom `lv_conf.h` au même niveau que le répertoire `lvgl`et définissez au minimum les macros `LV_HOR_RES_MAX`, `LV_VER_RES_MAX` et `LV_COLOR_DEPTH`. 
 - Incluez `lvgl/lvgl.h` quand vous devez utiliser les fonctions de LittlevGL.
 - Appelez `lv_tick_inc(x)` chaque `x` millisecondes **à partir d'une horloge ou d'une tâche** (`x` doit être compris entre 1 et 10). Ceci est requis pour la synchronisation interne de LittlevGL.
 - Appelez `lv_init()`
@@ -44,7 +44,8 @@ void my_disp_flush(lv_disp_t * disp, const lv_area_t * area, lv_color_t * color_
 ```
 - Implémentez et enregistrez une fonction qui peut **lire un périphérique d'entrée**. P.ex. pour un pavé tactile :
 ```c
-lv_indev_drv_init(&indev_drv);             /* Descripteur du pilote du périphérique d'entrée */
+lv_indev_drv_t indev_drv;                  /*Descriptor of a input device driver*/
+lv_indev_drv_init(&indev_drv);             /*Basic initialization*/
 indev_drv.type = LV_INDEV_TYPE_POINTER;    /* Le pavé tactile est un périphérique semblable à un pointeur */
 indev_drv.read_cb = my_touchpad_read;     /* Définit la fonction du pilote */
 lv_indev_drv_register(&indev_drv);         /* Finalement, enregistre le pilote */
@@ -65,8 +66,8 @@ bool my_touchpad_read(lv_indev_t * indev, lv_indev_data_t * data)
     return false; /* Retourne `faux` car pas de tampon et plus de données à lire */
 }
 ```
-- Call `lv_task_handler()` periodically every few milliseconds in the main `while(1)` loop, in Timer interrupt or in an Operation system task.
-It will redraw the screen if required, handle input devices etc.
+- Appelez `lv_task_handler()` périodiquement, chaque quelques millisecondes, dans la boucle principale `while(1)`, sur interruption d'une horloge ou à partir d'une tâche du système d'exploitation. 
+Cela redessine l'écran si nécessaire, gère les périphériques d'entrée, etc. 
 
 
 ## Apprendre les bases
@@ -77,10 +78,10 @@ Les éléments graphiques tels que les boutons, les étiquettes, les curseurs, l
 
 Chaque objet possède un objet parent. L'objet enfant se déplace avec le parent et si vous supprimez le parent, les enfants seront également supprimés. Les enfants ne peuvent être visibles que sur leurs parents.
 
-The *screen* is the "root" parent. To get the current screen call `lv_scr_act()`.
+L'*écran* est le parent "racine". Pour obtenir l'écran actuel, appelez `lv_scr_act()`.
 
-You can create a new object with `lv_<type>_create(parent, obj_to_copy)`. It will return an `lv_obj_t *` variable which should be used as a reference to the object to set its parameters.
-The first parameter is the desired *parent*, the second parameters can be an object to copy (`NULL` is unused).
+Vous pouvez créer un nouvel objet avec `lv_<type>_create(parent, obj_to_copy)`. Une variable `lv_obj_t *` est retournée qui doit être utilisée comme référence à l'objet pour définir ses paramètres.
+Le premier paramètre est le *parent* souhaité, le second paramètre peut être un objet à copier (`NULL` si inutilisé).
 Par exemple :
 ```c
 lv_obj_t * slider1 = lv_slider_create(lv_scr_act(), NULL);
@@ -101,7 +102,7 @@ lv_slider_set_value(slider1, 70, LV_ANIM_ON);
 Pour voir l'API complète, consultez la documentation des types d'objet ou le fichier d'en-tête associé (p.ex. `lvgl/src/lv_objx/lv_slider.h`).
 
 ### Styles
-Styles can be assigned to the objects to changed their appearance. A style describes the appearance of rectangle-like objects (like a button or slider), texts, images and lines at once.
+Les styles peuvent être affectés aux objets pour changer leur apparence. Un style décrit tout à la fois l'apparence des objets de type rectangle (comme un bouton ou un curseur), des textes, des images et des lignes.
 
 Voici comment créer un nouveau style :
 ```c
@@ -127,7 +128,7 @@ Si le style d'un objet est `NULL`, il héritera du style de son parent. Par exem
 Apprenez-en plus dans la section [Styles](/overview/style).
 
 ### Evénements
-Events are used to inform the user if something has happened with an object. You can assign a callback to an object which will be called if the object is clicked, released, dragged, being deleted etc. It should look like this:
+Les événements sont utilisés pour informer l'utilisateur si quelque chose s'est produit avec un objet. Vous pouvez affecter une fonction de rappel à un objet qui sera appelée si l'objet est cliqué, relâché, déplacé, en cours de suppression, etc. Voici à quoi cela ressemble :
 
 ```c
 lv_obj_set_event_cb(btn, btn_event_cb);                 /* Affecte une fonction de rappel au bouton */
@@ -142,10 +143,10 @@ void btn_event_cb(lv_obj_t * btn, lv_event_t event)
 }
 ```
 
-Learn more about the events in the [Event overview](/overview/event) section.
+Apprenez-en plus dans la section [événements](/overview/event). 
 
 
-## Examples
+## Exemples 
 
 ### Bouton avec étiquette
 ```c
@@ -296,9 +297,9 @@ lv.scr_load(scr)
 
 
 ## Contribuer
-LittlevGL uses the [Forum](https://forum.littlevgl.com) to ask and answer questions and [GitHub's Issue tracker](https://github.com/littlevgl/lvgl/issues) for development-related discussion (such as bug reports, feature suggestions etc.).
+LittlevGL utilise le [forum](https://forum.littlevgl.com) pour poser et répondre aux questions et  l'[outil de suivi des problèmes de GitHub](https://github.com/littlevgl/lvgl/issues) pour les discussions relatives au développement (comme les rapports de bogues, les suggestions de fonctionnalités etc.).
 
-There are many opportunities to contribute to LittlevGL such as:
+Il existe de nombreuses possibilités de contribuer à LittlevGL telles que :
 - **Aidez les autres** sur le [forum](https://forum.littlevgl.com).
 - **Inspirez les gens** en parlant de votre projet dans la catégorie [Mon projet](https://forum.littlevgl.com/c/my-projects) du forum ou en l'ajoutant à la rubrique [Références](https: / /blog.littlevgl.com/2018-12-26/references)
 - **Améliorez et/ou traduisez la documentation.** Visitez le dépôt [Documentation](https://github.com/littlevgl/docs) pour en apprendre plus
@@ -306,10 +307,10 @@ There are many opportunities to contribute to LittlevGL such as:
 - **Signalez et/ou corrigez des bogues** avec l'outil de suivi des problèmes de [GitHub](https://github.com/littlevgl/lvgl/issues)
 - **Aidez au développement**. Vérifiez les [problèmes en cours](https://github.com/littlevgl/lvgl/issues), en particulier ceux avec la mention [Aide demandée](https://github.com/littlevgl/lvgl/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) et partagez vos idées sur un sujet ou implémentez une fonctionnalité.
 
-If you are interested in contributing to LittlevGL, then please read the guides below to get started.
+Si vous souhaitez contribuer à LittlevGL, veuillez lire les guides ci-dessous pour commencer.
 
 ```eval_rst
-- `Contributing guide <https://blog.littlevgl.com/2018-12-06/contributing>`_
-- `Coding style guide <https://github.com/littlevgl/lvgl/blob/master/docs/CODING_STYLE.md>`_
+- `Guide de contribution <https://blog.littlevgl.com/2018-12-06/contributing>`_
+- `Guide de convention de code  <https://github.com/littlevgl/lvgl/blob/master/docs/CODING_STYLE.md>`_
 
 ```

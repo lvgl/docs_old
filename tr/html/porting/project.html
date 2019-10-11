@@ -165,7 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sys.html">System overview</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#initialization">Initialization</a></li>
 </ul>
 </li>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Events</a><ul>
@@ -1096,24 +1096,24 @@
 <p>You can clone it or download the latest version of the library from GitHub or you can use the <a class="reference external" href="https://littlevgl.com/download">Download</a> page as well.</p>
 <p>The graphics library is the <strong>lvgl</strong> directory which should be copied into your project.</p>
 </div>
-<div class="section" id="config-file">
-<h2>Config file<a class="headerlink" href="#config-file" title="Permalink to this headline">¶</a></h2>
-<p>There is a configuration header file for LittlevGL called <strong>lv_conf.h</strong>. It sets the library’s basic behavior, disables unused modules and features, adjusts the size of memory buffers in compile time, etc.</p>
+<div class="section" id="configuration-file">
+<h2>Configuration file<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>There is a configuration header file for LittlevGL called <strong>lv_conf.h</strong>. It sets the library’s basic behaviour, disables unused modules and features, adjusts the size of memory buffers in compile-time, etc.</p>
 <p>Copy <strong>lvgl/lv_conf_template.h</strong> next to the <em>lvgl</em> directory and rename it to <em>lv_conf.h</em>. Open the file and change the <code class="docutils literal notranslate"><span class="pre">#if</span> <span class="pre">0</span></code> at the beginning to <code class="docutils literal notranslate"><span class="pre">#if</span> <span class="pre">1</span></code> to enable its content.</p>
-<p><em>lv_conf.h</em> can be copied other places as well but then you should add <code class="docutils literal notranslate"><span class="pre">LV_CONF_INCLUDE_SIMPLE</span></code> define to your compiler options (e.g. <code class="docutils literal notranslate"><span class="pre">-DLV_CONF_INCLUDE_SIMPLE</span></code> for gcc) and set the include path manually.</p>
+<p><em>lv_conf.h</em> can be copied other places as well but then you should add <code class="docutils literal notranslate"><span class="pre">LV_CONF_INCLUDE_SIMPLE</span></code> define to your compiler options (e.g. <code class="docutils literal notranslate"><span class="pre">-DLV_CONF_INCLUDE_SIMPLE</span></code> for gcc compiler) and set the include path manually.</p>
 <p>In the config file comments explain the meaning of the options. Check at least these three configuration options and modify them according to your hardware:</p>
 <ol class="simple">
-<li><p><strong>LV_HOR_RES_MAX</strong> Your display’s horizontal resolution</p></li>
-<li><p><strong>LV_VER_RES_MAX</strong> Your display’s vertical resolution</p></li>
+<li><p><strong>LV_HOR_RES_MAX</strong> Your display’s horizontal resolution.</p></li>
+<li><p><strong>LV_VER_RES_MAX</strong> Your display’s vertical resolution.</p></li>
 <li><p><strong>LV_COLOR_DEPTH</strong> 8 for (RG332), 16 for (RGB565) or 32 for (RGB888 and ARGB8888).</p></li>
 </ol>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
-<p>In order to use the graphics library you have to initialize it and the other components too. To order of the initialization is:</p>
+<p>To use the graphics library you have to initialize it and the other components too. The order of the initialization is:</p>
 <ol class="simple">
-<li><p>Call <em>lv_init()</em></p></li>
-<li><p>Initialize your drivers</p></li>
+<li><p>Call <em>lv_init()</em>.</p></li>
+<li><p>Initialize your drivers.</p></li>
 <li><p>Register the display and input devices drivers in LittlevGL.  More about <a class="reference internal" href="display.html"><span class="doc">Display</span></a> and <a class="reference internal" href="indev.html"><span class="doc">Input device</span></a> registration.</p></li>
 <li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(x)</span></code> in every <code class="docutils literal notranslate"><span class="pre">x</span></code> milliseconds in an interrupt to tell the elapsed time. <a class="reference internal" href="tick.html"><span class="doc">Learn more</span></a>.</p></li>
 <li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code> periodically in every few milliseconds to handle LittlevGL related tasks. <a class="reference internal" href="task-handler.html"><span class="doc">Learn more</span></a>.</p></li>
@@ -1143,7 +1143,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

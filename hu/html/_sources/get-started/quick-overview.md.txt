@@ -44,7 +44,8 @@ void my_disp_flush(lv_disp_t * disp, const lv_area_t * area, lv_color_t * color_
 ```
 - Implementálj és regsiztrálj egy függvényt, ami képes  egy **bementi eszközt olvasni**. Például egy touchpad esetében:
 ```c
-lv_indev_drv_init(&indev_drv);             /*Input device leíró*/
+lv_indev_drv_t indev_drv;                  /*Descriptor of a input device driver*/
+lv_indev_drv_init(&indev_drv);             /*Basic initialization*/
 indev_drv.type = LV_INDEV_TYPE_POINTER;    /*A touch pad egy pointer szerű eszköz*/
 indev_drv.read_cb = my_touchpad_read;      /*Egy driver függvény hozzárendelése*/
 lv_indev_drv_register(&indev_drv);         /*Végül a driver regisztrálása*/

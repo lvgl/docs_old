@@ -25,7 +25,7 @@ Açılar  [0;360] aralığında olmalıdır.
 - **line.color** Yayın rengi.
 
 ## Olaylar
-Sadece [Genreric events](/overview/event.html#generic-events) nesne türü tarafından gönderilir .
+Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
 
 [Events](/overview/event) hakkında daha fazlasını öğrenin.
 

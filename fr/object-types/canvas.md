@@ -14,7 +14,7 @@ Par exemple
 `static lv_color_t buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width, height)]`.  Les macros `LV_CANVAS_BUF_SIZE_...` aident à calculer la taille du tampon pour différents formats de couleur.
 
 
-Le canvas prend en charge tous les formats de couleur intégrés tels que `LV_IMG_CF_TURE_COLOR` ou `LV_IMG_CF_INDEXED_2BIT`. Consultez la liste complète dans la section [formats de couleur](/overview/image.html#formats-de-couleur).
+The canvas supports all the built in color formats like `LV_IMG_CF_TRUE_COLOR` or `LV_IMG_CF_INDEXED_2BIT`. See the full list in the [Color formats](/overview/image.html#color-formats) section.
 
 ### Palette
 Pour les formats de couleur `LV_IMG_CF_INDEXED_...` une palette doit être initialisée. Par exemple, `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)` colore les pixels avec *index = 3* en rouge.

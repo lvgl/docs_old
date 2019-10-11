@@ -25,7 +25,7 @@ To set the style of an *Arc* object use `lv_arc_set_style(arc, LV_ARC_STYLE_MAIN
 - **line.color** the color of the arc.
 
 ## Events
-Only the [Genreric events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

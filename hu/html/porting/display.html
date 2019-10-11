@@ -165,12 +165,12 @@
 <li class="toctree-l2"><a class="reference internal" href="sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="project.html">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="project.html#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="project.html#initialization">Initialization</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Kijelző interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#kijelzo-buffer">Kijelző buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#kijelzo-driver">Kijelző driver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
 </ul>
@@ -178,7 +178,7 @@
 <li class="toctree-l2"><a class="reference internal" href="indev.html">Bemeneti eszköz interfész</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="indev.html#a-bementi-eszkozok-tipusai">A bementi eszközök típusai</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="indev.html#touchpad-eger-vagy-mas-mutato-eszkoz">Touchpad, egér vagy más mutató eszköz</a></li>
-<li class="toctree-l4"><a class="reference internal" href="indev.html#billentyuzet-vagy-keypad">Billentyűzet vagy keypad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
 <li class="toctree-l4"><a class="reference internal" href="indev.html#encoder">Encoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="indev.html#button">Button</a></li>
 </ul>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Events</a><ul>
@@ -1091,36 +1091,36 @@
             
   <div class="section" id="kijelzo-interface">
 <h1>Kijelző interface<a class="headerlink" href="#kijelzo-interface" title="Permalink to this headline">¶</a></h1>
-<p>Ahhoz használhass egy kijelzőt egy <code class="docutils literal notranslate"><span class="pre">lv_disp_buf_t</span></code> és egy <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_t</span></code> typusú változót kell inicializálnod.</p>
+<p>To set up a display an <code class="docutils literal notranslate"><span class="pre">lv_disp_buf_t</span></code> and an <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_t</span></code> variable has to be initialized.</p>
 <ul class="simple">
-<li><p><strong>lv_disp_buf_t</strong> egy belső grafikus buffert tartalmaz</p></li>
-<li><p><strong>lv_disp_drv_t</strong> a kijelzőhöz kapcsolódó callback függvényeket és egyén beállításokat tartalmaz</p></li>
+<li><p><strong>lv_disp_buf_t</strong> contains internal graphics buffer(s).</p></li>
+<li><p><strong>lv_disp_drv_t</strong> contains callback functions to interact with the display and manipulate drawing related things.</p></li>
 </ul>
-<div class="section" id="kijelzo-buffer">
-<h2>Kijelző buffer<a class="headerlink" href="#kijelzo-buffer" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="display-buffer">
+<h2>Display buffer<a class="headerlink" href="#display-buffer" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">lv_disp_buf_t</span></code> így inicializálható:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="cm">/*Egy static vagy global változó a buffers tárolásához*/</span>
     <span class="k">static</span> <span class="n">lv_disp_buf_t</span> <span class="n">disp_buf</span><span class="p">;</span>
-    
+
     <span class="cm">/*Static vagy global buffer(ek). (A második buffer opcionális*/</span>
     <span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">buf_1</span><span class="p">[</span><span class="n">MY_DISP_HOR_RES</span> <span class="o">*</span> <span class="mi">10</span><span class="p">];</span>
     <span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">buf_2</span><span class="p">[</span><span class="n">MY_DISP_HOR_RES</span> <span class="o">*</span> <span class="mi">10</span><span class="p">];</span>
-    
+
     <span class="cm">/*`disp_buf` inicializálása a buffer(ekkel) */</span>
     <span class="n">lv_disp_buf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">,</span> <span class="n">buf_1</span><span class="p">,</span> <span class="n">buf_2</span><span class="p">,</span> <span class="n">MY_DISP_HOR_RES</span><span class="o">*</span><span class="mi">10</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Három beállítási lehetőség van a bufferek méretének és számának megfelelően</p>
+<p>There are 3 possible configurations regarding the buffer size:</p>
 <ol class="simple">
-<li><p><strong>Egy buffer</strong> LittlevGL a bufferbe rajzolja a képernyő tartalmát és elküldi a  kijelzőre.
-A buffer kisebb is lehet, mint kijelző. Ebben az esetben a nagyobb területek kisebb darabokban kerülnek kirajzolásra.
+<li><p><strong>One buffer</strong> LittlevGL draws the content of the screen into a buffer and sends it to the display.
+The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts.
 Ha csak egy kis terület változik (pl. egy gomb megnyomásánál), akkor csak az a kis terület kerül firssítésre.</p></li>
 <li><p><strong>Kettő nem képernyőméretű buffer</strong> két bufferrel  LittlevGL képes az egyik bufferbe rajzolni, míg a másik buffer tartalmát el tudja küldeni a kijelzőnek a háttérben.
 DMA vagy egyéb hardware használata ajánlott, hogy az adatokat háttérben küldd el a kijelzőnek és hagyd a CPU-t rajzolni a másik bufferbe időközben.
-Íly’ módon a rajzolás és a kijelző frissítése párhozamosan történhet.
-Az <em>Egy buffer</em> módhoz hasonlóan LittlevGL kisebb darabokban fogja rajzolni a buffernél nagyobb területeket.</p></li>
+This way the rendering and refreshing of the display become parallel.
+Similarly to the <em>One buffer</em>, LittlevGL will draw the display’s content in chunks if the buffer is smaller than the area to refresh.</p></li>
 <li><p><strong>Két képernyőméretű buffer</strong>.
-Ellentétben a <em>Két nem képernyőméretű buffer</em> móddal LittlevGL mindig teljes képenyő képét szolgáltatja, nem csak egy kis darabot.
+In contrast to <em>Two non-screen-sized buffers</em> LittlevGL will always provide the whole screen’s content not only chunks.
 Ennek köszönhetően a driver egyszerűen kicserélheti a frame buffer címét a kapott bufferre.
 Ezért ez a mód olyan MCU-kkal működik a legjobban, amiknek van LCD/TFT perifériája és a frame buffer  csak egy terület a RAM-ban.</p></li>
 </ol>
@@ -1134,13 +1134,13 @@ Ezért ez a mód olyan MCU-kkal működik a legjobban, amiknek van LCD/TFT perif
 </ul>
 <p>Van néhány opcionális adata mező is:</p>
 <ul class="simple">
-<li><p><strong>hor_res</strong> a kijelző vízszintes felbontása. (<code class="docutils literal notranslate"><span class="pre">LV_HOR_RES_MAX</span></code> alapértelmezetten az <em>lv_conf.h</em>-ból)</p></li>
-<li><p><strong>ver_res</strong> a kijelző függőleges felbontása. (<code class="docutils literal notranslate"><span class="pre">LV_VER_RES_MAX</span></code>  alapértelmezetten az <em>lv_conf.h</em>-ból)</p></li>
-<li><p><strong>color_chroma_key</strong> egy szín ami átlátszóként lesz megjelenítve chrome keyed képeken. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code>  alapértelmezetten az <em>lv_conf.h</em>-ból)</p></li>
+<li><p><strong>hor_res</strong> horizontal resolution of the display. (<code class="docutils literal notranslate"><span class="pre">LV_HOR_RES_MAX</span></code> by default from <em>lv_conf.h</em>).</p></li>
+<li><p><strong>ver_res</strong> vertical resolution of the display. (<code class="docutils literal notranslate"><span class="pre">LV_VER_RES_MAX</span></code> by default from <em>lv_conf.h</em>).</p></li>
+<li><p><strong>color_chroma_key</strong> a color which will be drawn as transparent on chrome keyed images. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code> by default from <em>lv_conf.h</em>).</p></li>
 <li><p><strong>user_data</strong> egyedi tetszőleges felhasználói adat. A típusa módosítható <em>lv_conf.h</em>-ban.</p></li>
-<li><p><strong>anti-aliasing</strong> anti-aliasing (élsimítás) engedélyezése. <code class="docutils literal notranslate"><span class="pre">LV_ANTIALIAS</span></code>  alapértelmezetten az <em>lv_conf.h</em>-ból</p></li>
+<li><p><strong>anti-aliasing</strong> use anti-aliasing (edge smoothing). <code class="docutils literal notranslate"><span class="pre">LV_ANTIALIAS</span></code> by default  from <em>lv_conf.h</em>.</p></li>
 <li><p><strong>rotated</strong> ha <code class="docutils literal notranslate"><span class="pre">1</span></code> megcseréli <code class="docutils literal notranslate"><span class="pre">hor_res</span></code> and <code class="docutils literal notranslate"><span class="pre">ver_res</span></code> értékét. LittlevGL mindkét esetben ugyanabba az iránya rajzol (fentről le soronként) ezért a kitöltés/scan-nelés irányát a driver-ben is át kell konfigurálni.</p></li>
-<li><p><strong>screen_transp</strong> ha<code class="docutils literal notranslate"><span class="pre">1</span></code> a képernyőknek lehetnek átlátszó vagy áttetsző pixeleik. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> engedélyezve kell legyen az <em>lv_conf.h</em>-ben.</p></li>
+<li><p><strong>screen_transp</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> the screen can have transparent or opaque style. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> needs to enabled in <em>lv_conf.h</em>.</p></li>
 </ul>
 <p>A GPU használatához az alábbi callback-ek használhatók:</p>
 <ul class="simple">
@@ -1148,14 +1148,14 @@ Ezért ez a mód olyan MCU-kkal működik a legjobban, amiknek van LCD/TFT perif
 <li><p><strong>gpu_blend_cb</strong> blend two memory buffers using opacity.</p></li>
 </ul>
 <p>Note that, these functions need to draw to the memory (RAM) and not your display directly.</p>
-<p>Néhány opcionális callback, melyek megkönnyítik és optimálisabbá teszik monochrome, szürkeárnyalatos vagy nem szabványos RGB kijelzők használatát.</p>
+<p>Some other optional callbacks to make easier and more optimal to work with monochrome, grayscale or other non-standard RGB displays:</p>
 <ul class="simple">
-<li><p><strong>rounder_cb</strong> kerekíti az újrarajzolandó területek koordinátáit. Pl. egy 2x2 px terület 2x8re konvertálható..
+<li><p><strong>rounder_cb</strong> round the coordinates of areas to redraw. E.g. a 2x2 px can be converted to 2x8.
 Ez akkor használható, ha kijelző vezérlő csak bizony magasságú vagy szélességű területeket tud frissíteni. (Általában 8px magasság monochrome kijelzőknél)</p></li>
-<li><p><strong>set_px_cb</strong> egyedi függvény  <em>kijelző buffer</em> írásához.
-Használatával a pixeleket egy tömörebb formában tárolhatók a kijelzőnek speciális színformátuma van (pl. 1 bit monochrome, 2  bit szürkeárnyalat etc.)
+<li><p><strong>set_px_cb</strong> a custom function to write the <em>display buffer</em>.
+It can be used to store the pixels more compactly if the display has a special color format. (e.g. 1-bit monochrome, 2-bit grayscale etc.)
 This way the buffers used in <code class="docutils literal notranslate"><span class="pre">lv_disp_buf_t</span></code> can be smaller to hold only the required number of bits for the given area size. <code class="docutils literal notranslate"><span class="pre">set_px_cb</span></code> is not working with <code class="docutils literal notranslate"><span class="pre">Two</span> <span class="pre">screen-sized</span> <span class="pre">buffers</span></code> display buffer configuration.</p></li>
-<li><p><strong>monitor_cb</strong> egy callback, mely megmutatja, hogy mennyi pixel került frissítésre adott idő alatt.</p></li>
+<li><p><strong>monitor_cb</strong> a callback function tells how many pixels were refreshed in how much time.</p></li>
 </ul>
 <p>Egy <em>lv_disp_drv_t</em> változó mezőinek beállítása előtt azt inicializálni kell a <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_init(&amp;disp_drv)</span></code> függvénnyel.
 És végül a kijelző regisztrálásához a <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register(&amp;disp_drv)</span></code> függvényt kell meghívni.</p>
@@ -1213,13 +1213,13 @@ This way the buffers used in <code class="docutils literal notranslate"><span cl
   <span class="cm">/* Frissítsd az `area`-t ahogy szükséges. Csak nagyobb lehet. </span>
 <span class="cm">   * Például legyen mindig N x 8 px magas*/</span>
    <span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span> <span class="o">=</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span> <span class="o">&amp;</span> <span class="mh">0x07</span><span class="p">;</span>
-   <span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span> <span class="o">=</span> <span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span> <span class="o">&amp;</span> <span class="mh">0x07</span><span class="p">)</span> <span class="o">+</span> <span class="mi">8</span><span class="p">;</span> 
+   <span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span> <span class="o">=</span> <span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span> <span class="o">&amp;</span> <span class="mh">0x07</span><span class="p">)</span> <span class="o">+</span> <span class="mi">8</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="n">my_set_px_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">buf_w</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">x</span><span class="p">,</span> <span class="n">lv_coord_t</span> <span class="n">y</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="n">color</span><span class="p">,</span> <span class="n">lv_opa_t</span> <span class="n">opa</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="cm">/* Írd a buffert ahogy szükséges</span>
-<span class="cm">     * 1 bit írása egy monochrome kijelzőre, ahol bitek függőlegesen vannak bájtokhoz mappolva:*/</span>
+    <span class="cm">/* Write to the buffer as required for the display.</span>
+<span class="cm">     * Write only 1-bit for monochrome displays mapped vertically:*/</span>
  <span class="n">buf</span> <span class="o">+=</span> <span class="n">buf_w</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span>
  <span class="k">if</span><span class="p">(</span><span class="n">lv_color_brightness</span><span class="p">(</span><span class="n">color</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">128</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="n">buf</span><span class="p">)</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">y</span> <span class="o">%</span> <span class="mi">8</span><span class="p">));</span>
  <span class="k">else</span> <span class="p">(</span><span class="o">*</span><span class="n">buf</span><span class="p">)</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">y</span> <span class="o">%</span> <span class="mi">8</span><span class="p">));</span>
@@ -1702,7 +1702,7 @@ This way the buffers used in <code class="docutils literal notranslate"><span cl
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

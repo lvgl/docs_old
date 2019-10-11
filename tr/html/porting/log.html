@@ -165,7 +165,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sys.html">System overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="project.html">Set-up a project</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="project.html#get-the-library">Get the library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="project.html#config-file">Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="project.html#initialization">Initialization</a></li>
 </ul>
 </li>
@@ -227,7 +227,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#order-of-creation">Order of creation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#bring-to-the-foreground">Bring to the foreground</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layer">Top and sys layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layers">Top and sys layers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Events</a><ul>
@@ -1093,7 +1093,7 @@
 <p>LittlevGL has built-in <em>log</em> module to inform the user about what is happening in the library.</p>
 <div class="section" id="log-level">
 <h2>Log level<a class="headerlink" href="#log-level" title="Permalink to this headline">¶</a></h2>
-<p>To enable logging set <code class="docutils literal notranslate"><span class="pre">LV_USE_LOG</span>&#160; <span class="pre">1</span></code> in <em>lv_conf.h</em> and set <code class="docutils literal notranslate"><span class="pre">LV_LOG_LEVEL</span></code> to one of the following values:</p>
+<p>To enable logging, set <code class="docutils literal notranslate"><span class="pre">LV_USE_LOG</span>&#160; <span class="pre">1</span></code> in <em>lv_conf.h</em> and set <code class="docutils literal notranslate"><span class="pre">LV_LOG_LEVEL</span></code> to one of the following values:</p>
 <ul class="simple">
 <li><p><strong>LV_LOG_LEVEL_TRACE</strong> A lot of logs to give detailed information</p></li>
 <li><p><strong>LV_LOG_LEVEL_INFO</strong>  Log important events</p></li>
@@ -1101,15 +1101,15 @@
 <li><p><strong>LV_LOG_LEVEL_ERROR</strong> Only critical issue, when the system may fail</p></li>
 <li><p><strong>LV_LOG_LEVEL_NONE</strong>  Do not log anything</p></li>
 </ul>
-<p>The events which have higher level than the set log level will be logged too. E.g. if you <code class="docutils literal notranslate"><span class="pre">LV_LOG_LEVEL_WARN</span></code>, <em>errors</em> will be also logged.</p>
+<p>The events which have a higher level than the set log level will be logged too. E.g. if you <code class="docutils literal notranslate"><span class="pre">LV_LOG_LEVEL_WARN</span></code>, <em>errors</em> will be also logged.</p>
 </div>
 <div class="section" id="logging-with-printf">
 <h2>Logging with printf<a class="headerlink" href="#logging-with-printf" title="Permalink to this headline">¶</a></h2>
-<p>If your system supports <code class="docutils literal notranslate"><span class="pre">printf</span></code> you just need to enable <code class="docutils literal notranslate"><span class="pre">LV_LOG_PRINTF</span></code> in <em>lv_conf.h</em> to send the logs with <code class="docutils literal notranslate"><span class="pre">printf</span></code>.</p>
+<p>If your system supports <code class="docutils literal notranslate"><span class="pre">printf</span></code>, you just need to enable <code class="docutils literal notranslate"><span class="pre">LV_LOG_PRINTF</span></code> in <em>lv_conf.h</em> to send the logs with <code class="docutils literal notranslate"><span class="pre">printf</span></code>.</p>
 </div>
 <div class="section" id="custom-log-function">
 <h2>Custom log function<a class="headerlink" href="#custom-log-function" title="Permalink to this headline">¶</a></h2>
-<p>If you can’t use <code class="docutils literal notranslate"><span class="pre">printf</span></code> or want to use a custom function to log you can register a “logger” callback with <code class="docutils literal notranslate"><span class="pre">lv_log_register_print_cb()</span></code>.</p>
+<p>If you can’t use <code class="docutils literal notranslate"><span class="pre">printf</span></code> or want to use a custom function to log, you can register a “logger” callback with <code class="docutils literal notranslate"><span class="pre">lv_log_register_print_cb()</span></code>.</p>
 <p>For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_log_cb</span><span class="p">(</span><span class="n">lv_log_level_t</span> <span class="n">level</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">file</span><span class="p">,</span> <span class="kt">int</span> <span class="n">line</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">dsc</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1118,15 +1118,15 @@
   <span class="k">if</span><span class="p">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">LV_LOG_LEVEL_WARN</span><span class="p">)</span>  <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;WARNING: &quot;</span><span class="p">);</span>
   <span class="k">if</span><span class="p">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">LV_LOG_LEVEL_INFO</span><span class="p">)</span>  <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;INFO: &quot;</span><span class="p">);</span>
   <span class="k">if</span><span class="p">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">LV_LOG_LEVEL_TRACE</span><span class="p">)</span> <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;TRACE: &quot;</span><span class="p">);</span>
-  
+
   <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;File: &quot;</span><span class="p">);</span>
   <span class="n">serial_send</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
-  
+
   <span class="kt">char</span> <span class="n">line_str</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
   <span class="n">sprintf</span><span class="p">(</span><span class="n">line_str</span><span class="p">,</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
   <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;#&quot;</span><span class="p">);</span>
   <span class="n">serial_send</span><span class="p">(</span><span class="n">line_str</span><span class="p">);</span>
-  
+
   <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;: &quot;</span><span class="p">);</span>
   <span class="n">serial_send</span><span class="p">(</span><span class="n">dsc</span><span class="p">);</span>
   <span class="n">serial_send</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
@@ -1167,7 +1167,7 @@
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Sep 16, 2019.
+        Last updated on Oct 11, 2019.
       </span>
 
     </p>

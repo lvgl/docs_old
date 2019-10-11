@@ -3,34 +3,34 @@
 ```
 # Page (lv_page)
 
-## Overview
+## Vue d'ensemble
 
-The Page consist of two [Containers](/object-types/cont) on each other: 
-- a **background** (or base)
-- a top which is **scrollable**. 
+La page se compose de deux [conteneurs](/object-types/cont) l'un sur l'autre : 
+- un **arrière-plan** (ou base)
+- un plan supérieur **pouvant défiler**. 
 
-The background object can be referenced as the page itself like: `lv_obj_set_width(page, 100)`.
+L'objet d'arrière-plan peut être référencé comme la page elle-même : `lv_obj_set_width(page, 100)`.
 
-If you create a child on the page it will be automatically moved to the scrollable container. 
-If the scrollable container becomes larger then the background it can be *scrolled by dragging (like the lists on smartphones).
+Si vous créez un enfant sur la page, celui-ci sera automatiquement déplacé vers le conteneur pouvant défiler.
+Si le conteneur pouvant défiler devient plus grand que l'arrière-plan, vous pouvez le faire *défiler en le faisant glisser (comme dans les listes sur les smartphones).
 
 By default, the scrollable's has `LV_FIT_FILL`auto fit in all directions. 
 It means the scrollable size will be the same as the background's size (minus the paddings) while the children are in the background. 
 But when an object is positioned out of the background the scrollable size will be increased to involve it.
   
-### Scrollbars
+### Barres de défilement
  
-Scrollbars can be shown according to four policies:
+Les barres de défilement peuvent être affichées selon quatre stratégies :
 
-- **LV_SB_MODE_OFF** Never show scrollbars
-- **LV_SB_MODE_ON** Always show scrollbars
-- **LV_SB_MODE_DRAG** Show scrollbars when the page is being dragged
-- **LV_SB_MODE_AUTO** Show scrollbars when the scrollable container is large enough to be scrolled
+- **LV_SB_MODE_OFF** les barres de défilement ne sont jamais affichées
+- **LV_SB_MODE_ON** les barres de défilement sont toujours affichées
+- **LV_SB_MODE_DRAG** les barres de défilement sont affichées quand la page est tirée
+- **LV_SB_MODE_AUTO** affiche les barres de défilement quand le conteneur est suffisamment grand pour être défilé
 
-You can set scroll bar show policy by: `lv_page_set_sb_mode(page, SB_MODE)`. The default value is `LV_SB_MODE_AUTO`.
+Vous pouvez définir la politique d'affichage de la barre de défilement avec : `lv_page_set_sb_mode(page, SB_MODE)`. La valeur par défaut est `LV_SB_MODE_AUTO`.
 
-### Glue object
-You can glue children to the page. In this case, you can scroll the page by dragging the child object. 
+### Objet collé
+Vous pouvez coller des enfants à la page. Dans ce cas, vous pouvez faire défiler la page en faisant glisser l'objet enfant.
 It can be enabled by the `lv_page_glue_obj(child, true)`.
 
 ### Focus object

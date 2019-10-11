@@ -14,7 +14,7 @@ Tuvale bir ön bellek atamak için`lv_canvas_set_buffer(canvas, buffer, width, h
 `static lv_color_t buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width, height)]`. `LV_CANVAS_BUF_SIZE_...`  makroları farklı renk formatlarında ki önbellek boyutunu belirlemeye yardım eder.
 
 
-Tuval  `LV_IMG_CF_TURE_COLOR` veya`LV_IMG_CF_INDEXED_2BIT` gibi tüm yerleşil renk formatlarını destekler. Tüm listeyi görmek için [Color formats](/overview/image.html#color-formats) bölümüne bakın.
+The canvas supports all the built in color formats like `LV_IMG_CF_TRUE_COLOR` or `LV_IMG_CF_INDEXED_2BIT`. See the full list in the [Color formats](/overview/image.html#color-formats) section.
 
 ### Palet
 `LV_IMG_CF_INDEXED_...` için bir renk format paleti  `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)` ile başlatılması gerekir. Pikseli *index=3* ile kırmızı ayarlanır.
