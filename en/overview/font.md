@@ -60,19 +60,19 @@ lv_label_set_text(my_label, LV_SYMBOL_OK LV_SYMBOL_WIFI LV_SYMBOL_PLAY);
 ## Add new font
 
 There are several ways to add a new font to your project:
-1. The most simple way is to use the [Online font converter](https://littlevgl.com/font_conv_new). Just set the parameters, click the *Convert* button, copy the font to your project and use it.
+1. The simplest method is to use the [Online font converter](https://littlevgl.com/ttf-font-to-c-array). Just set the parameters, click the *Convert* button, copy the font to your project and use it. **Be sure to carefully read the steps provided on that site or you will get an error while converting.**
 2. Use the [Offline font converter](https://github.com/littlevgl/lv_font_conv). (Requires Node.js to be installed)
 3. If you want to create something like the built-in fonts (Roboto font and symbols) but in different size and/or ranges, you can use the `built_in_font_gen.py` script in `lvgl/scripts/built_in_font` folder.
 (It requires Python and `lv_font_conv` to be installed)
 
 To declare the font in a file, use `LV_FONT_DECLARE(my_font_name)`.
 
-To make to font globally available, add them to `LV_FONT_CUSTOM_DECLARE` in *lv_conf.h*.
+To make the fonts globally available (like the builtin fonts), add them to `LV_FONT_CUSTOM_DECLARE` in *lv_conf.h*.
 
 ## Add new symbols
 The built-in symbols are created from [FontAwesome](https://fontawesome.com/) font. To add new symbols from the FontAwesome font do the following steps:
 1. Search symbol on [https://fontawesome.com](https://fontawesome.com). For example the [USB symbol](https://fontawesome.com)
-2. Open the [Online font converter](https://littlevgl.com/font_conv_new) add [FontAwesome.ttf](https://littlevgl.com/tools/FontAwesome.ttf) and add the Unicode ID of the symbol to the range field. E.g.` 0xf287` for the USB symbol.
+2. Open the [Online font converter](https://littlevgl.com/ttf-font-to-c-array) add [FontAwesome.ttf](https://littlevgl.com/tools/FontAwesome.ttf) and add the Unicode ID of the symbol to the range field. E.g.` 0xf287` for the USB symbol.
 More symbols can be enumerated with `,`.
 3. Convert the font and copy it to your project.
 4. Convert the Unicode value to UTF8. You can do it e.g.on [this site](http://www.ltg.ed.ac.uk/~richard/utf-8.cgi?input=f287&mode=hex). For `0xf287` the *Hex UTF-8 bytes* are `EF 8A 87`.
