@@ -6,7 +6,7 @@
 LittlevGL has a built-in task system. You can register a functions to call them periodically. The tasks are handled and called in `lv_task_handler()` which needs to be called periodically in every few milliseconds. 
 See [Porting](/porting/task-handler) for more information.
 
-The tasks are non-preemptive which means a task can interrupt an other. Therefore you can call any LittlevGL related function in a task.
+The tasks are non-preemptive which means a task can not interrupt an other. Therefore you can call any LittlevGL related function in a task.
 
 
 ## Create a task
