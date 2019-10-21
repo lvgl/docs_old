@@ -5,7 +5,7 @@
 
 ## Overview
 
-The 'Base Object' contains the most basic attributes of the objects such as:
+The 'Base Object' implements the basic properties of an object on a screen, such as:
 
 - coordinates
 - parent object
@@ -13,36 +13,37 @@ The 'Base Object' contains the most basic attributes of the objects such as:
 - main style
 - attributes like *Click enable*, *Drag enable*, etc.
 
-### Coordinates
-The object size can be modified with `lv_obj_set_width(obj, new_width)` and `lv_obj_set_height(obj, new_height)` or in one function with `lv_obj_set_size(obj, new_width, new_height)`.
+In object-oriented thinking, it is the base class which all other objects in LittlevGL inherit from. This, among another things, helps reduce code duplication.
 
-You can set the x and y coordinates relative to the parent with `lv_obj_set_x(obj, new_x)` and `lv_obj_set_y(obj, new_y)` or in one function with `lv_obj_set_pos(obj, new_x, new_y)`.
+### Coordinates
+The object size can be modified on individual axes with `lv_obj_set_width(obj, new_width)` and `lv_obj_set_height(obj, new_height)`, or both axes can be modified at the same time with `lv_obj_set_size(obj, new_width, new_height)`.
+
+You can set the x and y coordinates relative to the parent with `lv_obj_set_x(obj, new_x)` and `lv_obj_set_y(obj, new_y)`, or both at the same time with `lv_obj_set_pos(obj, new_x, new_y)`.
 
 You can align the object to another with `lv_obj_align(obj, obj_ref, LV_ALIGN_..., x_shift, y_shift)`.
-The second argument is a reference object, `obj` will be aligned to it. If `obj_ref = NULL`, then the parent of `obj` will be used.
-The third argument is the *type* of alignment. These are the possible options:
+
+- `obj` is the object to align.
+- `obj_ref` is a reference object. `obj` will be aligned to it. If `obj_ref = NULL`, then the parent of `obj` will be used.
+- The third argument is the *type* of alignment. These are the possible options:
 ![](/misc/align.png "Alignment types in LittlevGL")
 
-The alignment types build like `LV_ALIGN_OUT_TOP_MID`.
-
-The last two-argument means an x and y shift after the alignment.
+  The alignment types build like `LV_ALIGN_OUT_TOP_MID`.
+- The last two arguments allow you to shift the object by a specified number of pixels after aligning it.
 
 For example, to align a text below an image: `lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)`.   
 Or to align a text in the middle of its parent: `lv_obj_align(text, NULL, LV_ALIGN_CENTER, 0, 0)`.
 
-`lv_obj_align_origo` works similarly to `lv_obj_align` but, it aligns the middle point of the object.
+`lv_obj_align_origo` works similarly to `lv_obj_align` but, it aligns the center of the object rather than the top-left corner.
+
 For example, `lv_obj_align_origo(btn, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 0)` will align the center of the button the bottom of the image.
 
-The parameters of the alignment will be saved in the object if `LV_USE_OBJ_REALIGN` is enabled in *lv_conf.h*. You can realign the objects manually with `lv_obj_realign(obj)`.
-It's equivalent to calling `lv_obj_align` again with the same parameters.
+The parameters of the alignment will be saved in the object if `LV_USE_OBJ_REALIGN` is enabled in *lv_conf.h*. You can then realign the objects simply by calling `lv_obj_realign(obj)`. (It's equivalent to calling `lv_obj_align` again with the same parameters.)
 
 If the alignment happened with `lv_obj_align_origo`, then it will be used when the object is realigned.
 
-If `lv_obj_set_auto_realign(obj, true)` is used the object will be realigned automatically, if its size changes in `lv_obj_set_width/height/size()` functions.
+If `lv_obj_set_auto_realign(obj, true)` is used the object will be realigned automatically, if its size changes in `lv_obj_set_width/height/size()` functions. It's very useful when size animations are applied to the object and the original position needs to be kept.
 
-It's very useful when size animations are applied to the object and the original position needs to be kept.
-
-Note that, the coordinates of screens can't be changed. Attempting to use these functions on screens will result in undefined behavior.
+**Note that the coordinates of screens can't be changed. Attempting to use these functions on screens will result in undefined behavior.**
 
 ### Parents and children
 You can set a new parent for an object with `lv_obj_set_parent(obj, new_parent)`. To get the current parent, use `lv_obj_get_parent(obj)`.
@@ -64,9 +65,9 @@ while(child) {
 ### Screens
 When you have created a screen like `lv_obj_create(NULL, NULL)`, you can load it with `lv_scr_load(screen1)`. The `lv_scr_act()` function gives you a pointer to the current screen.
 
-If you have more display then it's important to know that, these functions operate on the lastly created or the explicitly selected (with `lv_disp_set_default`) display.
+If you have more display then it's important to know that these functions operate on the lastly created or the explicitly selected (with `lv_disp_set_default`) display.
 
-To get the screen of an object, use the `lv_obj_get_screen(obj)` function.
+To get the screen an object is assigned to, use the `lv_obj_get_screen(obj)` function.
 
 ### Layers
 There are two  automatically generated layers:
@@ -85,9 +86,9 @@ Read the [Layer overview](/overview/layer) section to learn more about layers.
 ### Style
 The base object stores the [Main style](/overview/style) of the object. To set a new style, use `lv_obj_set_style(obj, &new_style)` function. If `NULL` is set as style, then the object will inherit its parent's style.
 
-Note that, you should use `lv_obj_set_style` only for "Base objects". Every object type has its own style set function which should be used for them. For example, button should use `lv_btn_set_style()`.
+Note that, you should use `lv_obj_set_style` only for "Base objects". Every other object type has its own style set function which should be used for them. For example, a button should use `lv_btn_set_style()`.
 
-If you modify a style, which is already used by objects, in order to refresh the affected objects you can use either `lv_obj_refresh_style(obj)` or to notify all objects with a given style `lv_obj_report_style_mod(&style)`. If the parameter of `lv_obj_report_style_mod` is `NULL`, all objects will be notified.
+If you modify a style, which is already used by objects, in order to refresh the affected objects you can use either `lv_obj_refresh_style(obj)` on each object using it or to notify all objects with a given style use `lv_obj_report_style_mod(&style)`. If the parameter of `lv_obj_report_style_mod` is `NULL`, all objects will be notified.
 
 Read the [Style overview](/overview/style) to learn more about styles.
 
@@ -102,8 +103,8 @@ Read the [Event overview](/overview/event) to learn more about the events.
 ### Attributes
 There are some attributes which can be enabled/disabled by `lv_obj_set_...(obj, true/false)`:
 
-- **hidden** -  Hide the object. It will not be drawn and will be considered as if it doesn't exist., Its children will be hidden too.
-- **click** -  Enabled to click the object via input devices. If disabled, then the object behind this object will be clicked. (E.g. [Labels](/object-types/label) are not clickable by default)
+- **hidden** -  Hide the object. It will not be drawn and will be considered by input devices as if it doesn't exist., Its children will be hidden too.
+- **click** -  Allows you to click the object via input devices. If disabled, then click events are passed to the object behind this one. (E.g. [Labels](/object-types/label) are not clickable by default)
 - **top** -  If enabled then when this object or any of its children is clicked then this object comes to the foreground.
 - **drag** - Enable dragging (moving by an input device)
 - **drag_dir** - Enable dragging only in specific directions. Can be `LV_DRAG_DIR_HOR/VER/ALL`.
@@ -118,8 +119,10 @@ The opacities stored in the styles will be scaled down by this factor.
 
 It is very useful to fade in/out an object with some children using an [Animation](/overview/animation).
 
-A little bit of technical background: during the rendering process, the object and its parents are checked recursively to find a parent with an enabled *Opa scale*.
-If an object has found with an enabled *Opa scale*, then that *Opa scale* will be used by the rendered object too.
+A little bit of technical background: during the rendering process, the opacity of the object is decided by searching recursively up the object's family tree to find the first object with opacity scaling (Opa scale) enabled.
+
+If an object is found with an enabled *Opa scale*, then that *Opa scale* will be used by the rendered object too.
+
 Therefore, if you want to disable the Opa scaling for an object when the parent has Opa scale, just enable Opa scaling for the object and set its value to `LV_OPA_COVER`. It will overwrite the parent's settings.
 
 ### Protect
@@ -145,7 +148,7 @@ Read the [Input devices overview](/overview/indev) to learn more about the *Grou
 
 ### Extended click area
 By default, the objects can be clicked only on their coordinates, however, this area can be extended with `lv_obj_set_ext_click_area(obj, left, right, top, bottom)`.
-`left/right/top/bottom` tells extra size the directions respectively.
+`left/right/top/bottom` describes how far the clickable area should extend past the default in each direction.
 
 This feature needs to enabled in *lv_conf.h* with `LV_USE_EXT_CLICK_AREA`. The possible values are:
 - **LV_EXT_CLICK_AREA_FULL** store all 4 coordinates as `lv_coord_t`
