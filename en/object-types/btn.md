@@ -30,8 +30,9 @@ You can disable the layout with `lv_btn_set_layout(btn, LV_LAYOUT_OFF)`.
 - `lv_btn_set_fit/fit2/fit4(btn, LV_FIT_..)` enables to set the button width and/or height automatically according to the children, parent, and fit type.
 
 ### Ink effect
-You can enable a special animation on buttons: when a button is pressed, the pressed state will be drawn in a growing circle starting from the point of pressing. It's like an ink droplet in the water.
-When the button is released, the released state will be reverted by fading. It's like the ink is fully mixed with a lot of water and become no visible in it.
+You can enable a special animation on buttons: when a button is pressed, the pressed state will be drawn in a growing circle starting from the point of pressing. It's similar in appearance and functionality to the Material Design ripple effect.
+
+Another way to think about it is like an ink droplet dropped into water. When the button is released, the released state will be reverted by fading. It's like the ink is fully mixed with a lot of water and becomes invisible.
 
 To control this animation, use the following functions:
 - `lv_btn_set_ink_in_time(btn, time_ms)` - time of circle growing.
@@ -43,7 +44,7 @@ This feature needs to be enabled with `LV_BTN_INK_EFFECT  1` in *lv_conf.h*.
 
 ## Styles
 
-A button can have 5 independent styles for the 5 state. You can set them via: `lv_btn_set_style(btn, LV_BTN_STYLE_..., &style)`. The styles use the `style.body` properties.
+A button can have 5 independent styles for the 5 states. You can set them via: `lv_btn_set_style(btn, LV_BTN_STYLE_..., &style)`. The styles use the `style.body` properties.
 
 - **LV_BTN_STYLE_REL** - style of the released state. Default: `lv_style_btn_rel`.
 - **LV_BTN_STYLE_PR** - style of the pressed state. Default: `lv_style_btn_pr`.
