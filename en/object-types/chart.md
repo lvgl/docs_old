@@ -5,7 +5,11 @@
 
 ## Overview
 
-Charts have a rectangle-like background with horizontal and vertical division lines and data series drawn from lines, points, columns or areas.
+Charts consist of the following:
+
+* A background
+* Horizontal and vertical division lines
+* Data series, which can be represented with points, lines, columns, or filled areas.
 
 ### Data series
 You can add any number of series to the charts by `lv_chart_add_series(chart, color)`.
@@ -19,7 +23,7 @@ The following **data display types** exist:
 - **LV_CHART_TYPE_COL** - Draw columns.
 - **LV_CHART_TYPE_POINT** - Draw points.
 - **LV_CHART_TYPE_AREA** - Draw areas (fill the area below the lines).
-- **LV_CHART_TYPE_VERTICAL_LINE** - Draw only vertical lines to connect the points. Useful if the chart width is equal to the number of points.
+- **LV_CHART_TYPE_VERTICAL_LINE** - Draw only vertical lines to connect the points. Useful if the chart width is equal to the number of points, because it can redraw much faster than the `LV_CHART_TYPE_AREA`.
 
 You can specify the display type with `lv_chart_set_type(chart, LV_CHART_TYPE_...)`. The types can be 'OR'ed (like `LV_CHART_TYPE_LINE | LV_CHART_TYPE_POINT`).
 
@@ -30,7 +34,7 @@ You have several options to set the data of series:
 3. Initialize all points to a given value with: `lv_chart_init_points(chart, ser, value)`.
 4. Set all points from an array with: `lv_chart_set_points(chart, ser, value_array)`.
 
-Use `LV_CHART_POINT_DEF` as value to make the library to not draw that point, column, or line segment.
+Use `LV_CHART_POINT_DEF` as value to make the library skip drawing that point, column, or line segment.
 
 ### Update modes
 `lv_chart_set_next` can behave in two ways depending on *update mode*:
@@ -51,23 +55,23 @@ The number of horizontal and vertical division lines can be modified by `lv_char
 ### Series' appearance
 To set the **line width** and **point radius** of the series, use the `lv_chart_set_series_width(chart, size)` function. The default value is 2.
 
-The **opacity of the data lines** can be specified by `lv_chart_set_series_opa(chart, opa)`. The default value is: OPA_COVER.
+The **opacity of the data lines** can be specified by `lv_chart_set_series_opa(chart, opa)`. The default value is `LV_OPA_COVER`.
 
-You can apply a **dark color fade** on the bottom of columns and points by `lv_chart_set_series_darking(chart, effect)` function. The default dark level is OPA_50.
+You can apply a **dark color fade** on the bottom of columns and points by `lv_chart_set_series_darking(chart, effect)` function. The default dark level is `LV_OPA_50`.
 
 
 ### Tick marks and labels
-Ticks and texts to ticks can be added.
+Ticks and labels beside them can be added.
+
+**`lv_chart_set_margin(chart, 20)` needs to be used to add some extra space around the chart for the ticks and texts. Otherwise, you will not see them at all. You may need to adjust the number 20 depending on your requirements.**
 
 `lv_chart_set_x_tick_text(chart, list_of_values, num_tick_marks, LV_CHART_AXIS_...)` set the ticks and texts on x axis.
 `list_of_values` is a string with `'\n'` terminated text (expect the last) with text for the ticks. E.g. `const char * list_of_values = "first\nseco\nthird"`. `list_of_values` can be `NULL`.
 If `list_of_values` is set then `num_tick_marks` tells the number of ticks between two labels.  If `list_of_values` is `NULL` then it specifies the total number of ticks.
 
-Where text are added *major tick lines* are drawn, not the other places *minor tick lines*. `lv_chart_set_x_tick_length(chart, major_tick_len, minor_tick_len)` sets the length of tick lines on the x-axis.
+*Major tick lines* are drawn where text is placed, and *minor tick lines* are drawn elsewhere. `lv_chart_set_x_tick_length(chart, major_tick_len, minor_tick_len)` sets the length of tick lines on the x-axis.
 
 The same functions exists for the y axis too: `lv_chart_set_y_tick_text` and `lv_chart_set_y_tick_length`.
-
-`lv_chart_set_margin(chart, 20)` needs to be used to add some extra space around the chart for the ticks and texts.
 
 ## Styles
 You can set the styles with `lv_chart_set_style(btn, LV_CHART_STYLE_MAIN, &style)`.
