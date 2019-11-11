@@ -11,7 +11,7 @@ You can modify the text in run-time at any time with `lv_label_set_text(label, "
 
 Labels are able to show text from a **static array**. Use: `lv_label_set_static_text(label, char_array)`. 
 In this case, the text is not stored in the dynamic memory but the given array is used directly instead. 
-Keep in my the array can't be a local variable which destroys when the function exits.
+Keep in mind that the array can't be a local variable which destroys when the function exits.
 
 You can also use a **raw character array** as label text. 
 The array doesn't have to be `\0` terminated. In this case, the text will be saved to the dynamic memory. 
