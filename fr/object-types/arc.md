@@ -9,7 +9,7 @@ L'objet *arc*  **trace un arc** entre les **angles de début et de fin** dans un
 
 ### Angles
 
-Pour définir les angles, la fonction `lv_arc_set_angles(arc, start_angle, end_angle)` est utilisée. Le degré zéro est en bas de l'objet et les degrés s'incrémentent dans la direction des aiguilles d'une montre. 
+To set the angles, use the `lv_arc_set_angles(arc, start_angle, end_angle)` function. The zero degree is at the bottom of the object and the degrees are increasing in a counter-clockwise direction.
 Les angles doivent être compris dans l'intervalle [0;360].
 
 ### Notes
@@ -18,14 +18,14 @@ Les **largeur et hauteur** de l'*arc* doivent être **identiques**.
 Actuellement, l'objet *arc* **ne prend pas en charge l'anticrénelage**.
 
 ## Styles
-Pour définir le style d'un objet *arc* la fonction `lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &style)` est utilisée
+To set the style of an *Arc* object, use `lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &style)`
 
-- **line.rounded** rend les extrémités arrondies (l'opacité ne fonctionnera pas correctement si elle est définie à 1)
-- **line.width** l'épaisseur de l'arc
-- **line.color** la couleur de l'arc.
+- **line.rounded** - make the endpoints rounded (opacity won't work properly if set to 1)
+- **line.width** - the thickness of the arc
+- **line.color** - the color of the arc.
 
 ## Evénements
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
 
 Apprenez-en plus sur les [événements](/overview/event).
 
@@ -33,7 +33,7 @@ Apprenez-en plus sur les [événements](/overview/event).
 Aucune *touche* n'est traitée par ce type d'objet.
 
 Apprenez-en plus sur les [touches](/overview/indev).
-  
+
 
 ## Exemple
 
@@ -43,11 +43,11 @@ Apprenez-en plus sur les [touches](/overview/indev).
 
 ```
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_arc.h
   :project: lvgl
-        
+
 ```

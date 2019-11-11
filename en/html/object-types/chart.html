@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Container (lv_cont)" href="cont.html" />
-    <link rel="prev" title="Check box (lv_cb)" href="cb.html" />
+    <link rel="prev" title="Checkbox (lv_cb)" href="cb.html" />
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78811084-3"></script>
@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#example">Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#micropython">MicroPython</a></li>
@@ -516,7 +517,7 @@
 <li class="toctree-l3"><a class="reference internal" href="canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cb.html">Check box (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cb.html#overview">Overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#text">Text</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#check-uncheck">Check/Uncheck</a></li>
@@ -1093,7 +1094,12 @@
 <h1>Chart (lv_chart)<a class="headerlink" href="#chart-lv-chart" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>Charts have a rectangle-like background with horizontal and vertical division lines and data series drawn from lines, points colums or areas.</p>
+<p>Charts consist of the following:</p>
+<ul class="simple">
+<li><p>A background</p></li>
+<li><p>Horizontal and vertical division lines</p></li>
+<li><p>Data series, which can be represented with points, lines, columns, or filled areas.</p></li>
+</ul>
 <div class="section" id="data-series">
 <h3>Data series<a class="headerlink" href="#data-series" title="Permalink to this headline">¶</a></h3>
 <p>You can add any number of series to the charts by <code class="docutils literal notranslate"><span class="pre">lv_chart_add_series(chart,</span> <span class="pre">color)</span></code>.
@@ -1101,14 +1107,14 @@ It allocates data for a <code class="docutils literal notranslate"><span class="
 </div>
 <div class="section" id="series-type">
 <h3>Series’ type<a class="headerlink" href="#series-type" title="Permalink to this headline">¶</a></h3>
-<p>The following <strong>data display types</strong> exists:</p>
+<p>The following <strong>data display types</strong> exist:</p>
 <ul class="simple">
-<li><p><strong>LV_CHART_TYPE_NONE</strong> do not display any data. It can be used to hide a series.</p></li>
-<li><p><strong>LV_CHART_TYPE_LINE</strong> draw lines between the points</p></li>
-<li><p><strong>LV_CHART_TYPE_COL</strong> Draw columns</p></li>
-<li><p><strong>LV_CHART_TYPE_POINT</strong> Draw points</p></li>
-<li><p><strong>LV_CHART_TYPE_AREA</strong> Draw areas (fill the area below the lines)</p></li>
-<li><p><strong>LV_CHART_TYPE_VERTICAL_LINE</strong> Draw only vertical lines to connect the points. Useful if the chart width is equal to the number of points.</p></li>
+<li><p><strong>LV_CHART_TYPE_NONE</strong> - Do not display any data. It can be used to hide a series.</p></li>
+<li><p><strong>LV_CHART_TYPE_LINE</strong> - Draw lines between the points.</p></li>
+<li><p><strong>LV_CHART_TYPE_COL</strong> - Draw columns.</p></li>
+<li><p><strong>LV_CHART_TYPE_POINT</strong> - Draw points.</p></li>
+<li><p><strong>LV_CHART_TYPE_AREA</strong> - Draw areas (fill the area below the lines).</p></li>
+<li><p><strong>LV_CHART_TYPE_VERTICAL_LINE</strong> - Draw only vertical lines to connect the points. Useful if the chart width is equal to the number of points, because it can redraw much faster than the <code class="docutils literal notranslate"><span class="pre">LV_CHART_TYPE_AREA</span></code>.</p></li>
 </ul>
 <p>You can specify the display type with <code class="docutils literal notranslate"><span class="pre">lv_chart_set_type(chart,</span> <span class="pre">LV_CHART_TYPE_...)</span></code>. The types can be ‘OR’ed (like <code class="docutils literal notranslate"><span class="pre">LV_CHART_TYPE_LINE</span> <span class="pre">|</span> <span class="pre">LV_CHART_TYPE_POINT</span></code>).</p>
 </div>
@@ -1117,20 +1123,20 @@ It allocates data for a <code class="docutils literal notranslate"><span class="
 <p>You have several options to set the data of series:</p>
 <ol class="simple">
 <li><p>Set the values manually in the array like <code class="docutils literal notranslate"><span class="pre">ser1-&gt;points[3]</span> <span class="pre">=</span> <span class="pre">7</span></code> and refresh the chart with <code class="docutils literal notranslate"><span class="pre">lv_chart_refresh(chart)</span></code>.</p></li>
-<li><p>Use the <code class="docutils literal notranslate"><span class="pre">lv_chart_set_next(chart,</span> <span class="pre">ser,</span> <span class="pre">value)</span></code></p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">lv_chart_set_next(chart,</span> <span class="pre">ser,</span> <span class="pre">value)</span></code>.</p></li>
 <li><p>Initialize all points to a given value with: <code class="docutils literal notranslate"><span class="pre">lv_chart_init_points(chart,</span> <span class="pre">ser,</span> <span class="pre">value)</span></code>.</p></li>
 <li><p>Set all points from an array with: <code class="docutils literal notranslate"><span class="pre">lv_chart_set_points(chart,</span> <span class="pre">ser,</span> <span class="pre">value_array)</span></code>.</p></li>
 </ol>
-<p>Use <code class="docutils literal notranslate"><span class="pre">LV_CHART_POINT_DEF</span></code> as value to make the library to not draw that point, column, or line segment.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">LV_CHART_POINT_DEF</span></code> as value to make the library skip drawing that point, column, or line segment.</p>
 </div>
 <div class="section" id="update-modes">
 <h3>Update modes<a class="headerlink" href="#update-modes" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">lv_chart_set_next</span></code> can behave in two way depending on <em>update mode</em>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_chart_set_next</span></code> can behave in two ways depending on <em>update mode</em>:</p>
 <ul class="simple">
-<li><p><strong>LV_CHART_UPDATE_MODE_SHIFT</strong> Shift old data to the left and add the new one o the right</p></li>
-<li><p><strong>LV_CHART_UPDATE_MODE_CIRCULAR</strong> Add the new data in a circular way. (Like an ECG diagram)</p></li>
+<li><p><strong>LV_CHART_UPDATE_MODE_SHIFT</strong> - Shift old data to the left and add the new one o the right.</p></li>
+<li><p><strong>LV_CHART_UPDATE_MODE_CIRCULAR</strong> - Circularly add the new data (Like an ECG diagram).</p></li>
 </ul>
-<p>To update mode can be changed with <code class="docutils literal notranslate"><span class="pre">lv_chart_set_update_mode(chart,</span> <span class="pre">LV_CHART_UPDATE_MODE_...)</span></code>.</p>
+<p>The update mode can be changed with <code class="docutils literal notranslate"><span class="pre">lv_chart_set_update_mode(chart,</span> <span class="pre">LV_CHART_UPDATE_MODE_...)</span></code>.</p>
 </div>
 <div class="section" id="number-of-points">
 <h3>Number of points<a class="headerlink" href="#number-of-points" title="Permalink to this headline">¶</a></h3>
@@ -1138,7 +1144,7 @@ It allocates data for a <code class="docutils literal notranslate"><span class="
 </div>
 <div class="section" id="vertical-range">
 <h3>Vertical range<a class="headerlink" href="#vertical-range" title="Permalink to this headline">¶</a></h3>
-<p>You can specify a the min. and max. values in y directions with <code class="docutils literal notranslate"><span class="pre">lv_chart_set_range(chart,</span> <span class="pre">y_min,</span> <span class="pre">y_max)</span></code>. The value of the points will be scaled proportionally. The default range is: 0..100.</p>
+<p>You can specify the minimum and maximum values in y-direction with <code class="docutils literal notranslate"><span class="pre">lv_chart_set_range(chart,</span> <span class="pre">y_min,</span> <span class="pre">y_max)</span></code>. The value of the points will be scaled proportionally. The default range is: 0..100.</p>
 </div>
 <div class="section" id="division-lines">
 <h3>Division lines<a class="headerlink" href="#division-lines" title="Permalink to this headline">¶</a></h3>
@@ -1146,28 +1152,28 @@ It allocates data for a <code class="docutils literal notranslate"><span class="
 </div>
 <div class="section" id="series-appearance">
 <h3>Series’ appearance<a class="headerlink" href="#series-appearance" title="Permalink to this headline">¶</a></h3>
-<p>To set the <strong>line width</strong> and <strong>point radius</strong> of the series use the <code class="docutils literal notranslate"><span class="pre">lv_chart_set_series_width(chart,</span> <span class="pre">size)</span></code> function. The default value is: 2.</p>
-<p>The <strong>opacity of the data lines</strong> can be specified by <code class="docutils literal notranslate"><span class="pre">lv_chart_set_series_opa(chart,</span> <span class="pre">opa)</span></code>. The default value is: OPA_COVER.</p>
-<p>You can apply a <strong>dark color fade</strong> on the bottom of columns and points by <code class="docutils literal notranslate"><span class="pre">lv_chart_set_series_darking(chart,</span> <span class="pre">effect)</span></code> function. The default dark level is OPA_50.</p>
+<p>To set the <strong>line width</strong> and <strong>point radius</strong> of the series, use the <code class="docutils literal notranslate"><span class="pre">lv_chart_set_series_width(chart,</span> <span class="pre">size)</span></code> function. The default value is 2.</p>
+<p>The <strong>opacity of the data lines</strong> can be specified by <code class="docutils literal notranslate"><span class="pre">lv_chart_set_series_opa(chart,</span> <span class="pre">opa)</span></code>. The default value is <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code>.</p>
+<p>You can apply a <strong>dark color fade</strong> on the bottom of columns and points by <code class="docutils literal notranslate"><span class="pre">lv_chart_set_series_darking(chart,</span> <span class="pre">effect)</span></code> function. The default dark level is <code class="docutils literal notranslate"><span class="pre">LV_OPA_50</span></code>.</p>
 </div>
 <div class="section" id="tick-marks-and-labels">
 <h3>Tick marks and labels<a class="headerlink" href="#tick-marks-and-labels" title="Permalink to this headline">¶</a></h3>
-<p>Ticks and texts to ticks can be added.</p>
+<p>Ticks and labels beside them can be added.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">lv_chart_set_margin(chart,</span> <span class="pre">20)</span></code> needs to be used to add some extra space around the chart for the ticks and texts. Otherwise, you will not see them at all. You may need to adjust the number 20 depending on your requirements.</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">lv_chart_set_x_tick_text(chart,</span> <span class="pre">list_of_values,</span> <span class="pre">num_tick_marks,</span> <span class="pre">LV_CHART_AXIS_...)</span></code> set the ticks and texts on x axis.
 <code class="docutils literal notranslate"><span class="pre">list_of_values</span></code> is a string with <code class="docutils literal notranslate"><span class="pre">'\n'</span></code> terminated text (expect the last) with text for the ticks. E.g. <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*</span> <span class="pre">list_of_values</span> <span class="pre">=</span> <span class="pre">&quot;first\nseco\nthird&quot;</span></code>. <code class="docutils literal notranslate"><span class="pre">list_of_values</span></code> can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.
 If <code class="docutils literal notranslate"><span class="pre">list_of_values</span></code> is set then <code class="docutils literal notranslate"><span class="pre">num_tick_marks</span></code> tells the number of ticks between two labels.  If <code class="docutils literal notranslate"><span class="pre">list_of_values</span></code> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> then it specifies the total number of ticks.</p>
-<p>Where text are added <em>major tick lines</em> are drawn, ot the other places <em>minor tick lines</em>. <code class="docutils literal notranslate"><span class="pre">lv_chart_set_x_tick_length(chart,</span> <span class="pre">major_tick_len,</span> <span class="pre">minor_tick_len)</span></code> sets the length of tick lines on the x axis.</p>
-<p>The same functions exists for the y axis too: <code class="docutils literal notranslate"><span class="pre">lv_chart_set_y_tick_text</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_chart_set_y_tick_length</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">lv_chart_set_margin(chart,</span> <span class="pre">20)</span></code> needs to be used to add some extra space around the chart for the ticks and texts.</p>
+<p><em>Major tick lines</em> are drawn where text is placed, and <em>minor tick lines</em> are drawn elsewhere. <code class="docutils literal notranslate"><span class="pre">lv_chart_set_x_tick_length(chart,</span> <span class="pre">major_tick_len,</span> <span class="pre">minor_tick_len)</span></code> sets the length of tick lines on the x-axis.</p>
+<p>The same functions exists for the y axis too: <code class="docutils literal notranslate"><span class="pre">lv_chart_set_y_tick_text</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_chart_set_y_tick_length</span></code>.</p>
 </div>
 </div>
 <div class="section" id="styles">
 <h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
 <p>You can set the styles with <code class="docutils literal notranslate"><span class="pre">lv_chart_set_style(btn,</span> <span class="pre">LV_CHART_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code>.</p>
 <ul class="simple">
-<li><p><strong>style.body</strong> properties set the background’s appearance</p></li>
-<li><p><strong>style.line</strong> properties set the division lines’ appearance</p></li>
-<li><p><strong>style.text</strong> properties set the axis labels’ appearance</p></li>
+<li><p><strong>style.body</strong> - properties set the background’s appearance.</p></li>
+<li><p><strong>style.line</strong> - properties set the division lines’ appearance.</p></li>
+<li><p><strong>style.text</strong> - properties set the axis labels’ appearance.</p></li>
 </ul>
 </div>
 <div class="section" id="events">
@@ -1915,7 +1921,7 @@ If <code class="docutils literal notranslate"><span class="pre">list_of_values</
         <a href="cont.html" class="btn btn-neutral float-right" title="Container (lv_cont)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="cb.html" class="btn btn-neutral float-left" title="Check box (lv_cb)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="cb.html" class="btn btn-neutral float-left" title="Checkbox (lv_cb)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1926,7 +1932,7 @@ If <code class="docutils literal notranslate"><span class="pre">list_of_values</
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

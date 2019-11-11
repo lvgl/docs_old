@@ -6,21 +6,21 @@
 LittlevGL a un module *journal* intégré pour informer l'utilisateur de ce qui se passe dans la librairie.
 
 ## Niveau de détail
-To enable logging, set `LV_USE_LOG  1` in *lv_conf.h* and set `LV_LOG_LEVEL` to one of the following values:
+Pour activer la journalisation, définissez `LV_USE_LOG 1` dans *lv_conf.h* et définissez` LV_LOG_LEVEL` sur l'une des valeurs suivantes :
 - **LV_LOG_LEVEL_TRACE** Beaucoup de messages pour donner des informations détaillées
 - **LV_LOG_LEVEL_INFO**  Consigne les événements importants
 - **LV_LOG_LEVEL_WARN**  Journalise si quelque chose d'inattendu s'est produit mais n'a pas causé de problème
 - **LV_LOG_LEVEL_ERROR** Uniquement les problèmes critiques, lorsque le système peut planter
 - **LV_LOG_LEVEL_NONE**  Ne journalise rien
 
-The events which have a higher level than the set log level will be logged too. E.g. if you `LV_LOG_LEVEL_WARN`, *errors* will be also logged.
+Les événements dont le niveau est supérieur au niveau de journalisation défini seront également consignés. Par exemple si vous activez `LV_LOG_LEVEL_WARN`, *les erreurs* seront également consignées.
 
 ## Journalisation avec printf
-If your system supports `printf`, you just need to enable `LV_LOG_PRINTF` in *lv_conf.h* to send the logs with `printf`.
+Si votre système prend en charge `printf`, il vous suffit d'activer `LV_LOG_PRINTF` dans *lv_conf.h* pour traiter les journaux avec `printf`.
 
 
 ## Fonction de journalisation personnalisée
-If you can't use `printf` or want to use a custom function to log, you can register a "logger" callback with `lv_log_register_print_cb()`. 
+Si vous ne pouvez pas utiliser `printf` ou si vous souhaitez utiliser une fonction personnalisée pour journaliser, vous pouvez enregistrer une fonction de  rappel "journaliseur" avec `lv_log_register_print_cb() `.
 
 Par exemple :
 

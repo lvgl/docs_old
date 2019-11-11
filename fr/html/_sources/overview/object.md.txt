@@ -3,7 +3,7 @@
 ```
 # Objets
 
-In the LittlevGL the **basic building blocks** of a user interface are the objects, also called *Widgets*.
+Dans LittlevGL, les **éléments de base** d'une interface utilisateur sont les objets, également appelés *éléments visuels*.
 Par exemple, un [Bouton](/object-types/btn), une [Etiquette](/object-types/label), une [Image](/object-types/img), une [Liste](/object-types/list), un [Graphique](/object-types/chart) ou une [Zone de texte](/object-types/ta).
 
 Découvrez tous les [Types d'objet](/object-types/index) ici.
@@ -12,14 +12,14 @@ Découvrez tous les [Types d'objet](/object-types/index) ici.
 
 ### Attributs de base
 
-All object types share some basic attributes:
+Tous les types d'objet partagent certains attributs de base :
 - Position
 - Taille
 - Parent
 - Autorisation du glissé
 - Autorisation du clic etc.
 
-You can set/get these attributes with `lv_obj_set_...` and `lv_obj_get_...` functions. For example:
+Vous pouvez définir/obtenir ces attributs avec les fonctions `lv_obj_set _...` et `lv_obj_get _...`. Par exemple :
 
 ```c
 /* Définit les attributs de base de l'objet */
@@ -36,7 +36,7 @@ Les types d'objet ont aussi des attributs spéciaux. Par exemple, un curseur a
 - Une valeur courante
 - Des styles personnalisés
 
-For these attributes, every object type have unique API functions. For example for a slider:
+Pour ces attributs, chaque type d'objet possède des fonctions API uniques. Par exemple pour un curseur :
 
 ```c
 /* Définit les attributs spécifiques du curseur */
@@ -51,13 +51,13 @@ Les API des types d’objet sont décrites dans leur [Documentation](/object-typ
 
 ### Structure parent-enfant
 
-A parent object can be considered as the container of its children. Every object has exactly one parent object (except screens), but a parent can have an unlimited number of children.
-There is no limitation for the type of the parent but, there are typical parent (e.g. button) and typical child (e.g. label) objects.
+Un objet parent peut être considéré comme le conteneur de ses enfants. Chaque objet a exactement un objet parent (à l'exception des écrans), mais un parent peut avoir un nombre illimité d'enfants.
+Il n'y a pas de contrainte pour le type du parent, mais il existe des objets parent typiques (par exemple un bouton) et enfants (par exemple une étiquette).
 
 ### Se déplacer ensemble
 
-If the position of the parent is changed the children will move with the parent.
-Therefore all positions are relative to the parent.
+Si la position du parent est modifiée, les enfants se déplaceront avec lui.
+Par conséquent, toutes les positions sont relatives au parent.
 
 Les coordonnées (0, 0) signifient que les objets resteront dans le coin supérieur gauche du parent indépendamment de la position du parent.
 
@@ -83,7 +83,7 @@ Pour simplifier, la définition des couleurs des objets n'est pas montrée dans 
 
 ### Visibilité uniquement sur le parent
 
-If a child is partially or fully out of its parent then the parts outside will not be visible.
+Si un enfant est partiellement ou complètement hors de son parent, les parties extérieures ne seront pas visibles.
 
 ![](/misc/par_child3.png "A graphical object is visible on its parent")  
 
@@ -93,16 +93,16 @@ lv_obj_set_x(obj1, -30);	/* Déplace l'enfant en partie en dehors du parent */
 
 ### Créer - supprimer des objets
 
-In LittlevGL objects can be created and deleted dynamically in run-time.
-It means only the currently created objects consume RAM.
-For example, if you need a chart, you can create it when required and delete it when it is not visible or necessary.
+Dans LittlevGL, les objets peuvent être créés et supprimés dynamiquement à l'exécution.
+Cela signifie que seuls les objets actuellement créés consomment de la MEV.
+Par exemple, si vous avez besoin d'un graphique, vous pouvez le créer à l'utilisation et le supprimer s'il n'est pas visible ou plus nécessaire.
 
-Every object type has its own **create** function with a unified prototype.
-It needs two parameters:
-- A pointer to the *parent* object. To create a screen give *NULL* as parent.
-- Optionally, a pointer to *copy* object with the same type to copy it. This *copy* object can be *NULL* to avoid the copy operation.
+Chaque type d'objet a sa propre fonction **create** avec une signature unifiée.
+Deux paramètres sont nécessaires :
+- un pointeur sur l'objet parent. Pour créer un écran, donnez *NULL* comme parent.
+- éventuellement un pointeur sur un autre objet du même type pour copie. Peut être *NULL* pour ne pas copier un autre objet.
 
-All objects are referenced in C code using an `lv_obj_t` pointer as a handle. This pointer can later be used to set or get the attributes of the object.
+Tous les objets sont référencés dans le code C en utilisant un pointeur `lv_obj_t`. Ce pointeur peut ensuite être utilisé pour définir ou obtenir les attributs de l'objet.
 
 Les fonctions de création ressemblent à ceci :
 
@@ -116,11 +116,11 @@ Il existe une fonction commune de **suppression** pour tous les types d'objet. I
 void lv_obj_del(lv_obj_t * obj);
 ```
 
-`lv_obj_del` will delete the object immediately.
-If for any reason you can't delete the object immediately you can use `lv_obj_del_async(obj)`.
-It is useful e.g. if you want to delete the parent of an object in the child's `LV_EVENT_DELETE` signal.
+`lv_obj_del` supprimera immédiatement l'objet.
+Si pour une quelconque raison vous ne pouvez pas supprimer l'objet immédiatement, vous pouvez utiliser `lv_obj_del_async(obj)`.
+Utile, par exemple si vous voulez supprimer le parent d'un objet dans le traitement de l’événement `LV_EVENT_DELETE`.
 
-You can remove all the children of an object (but not the object itself) using `lv_obj_clean`:
+Vous pouvez supprimer tous les enfants d'un objet (mais pas l'objet lui-même) en utilisant `lv_obj_clean` :
 
 ```c
 void lv_obj_clean(lv_obj_t * obj);
@@ -133,14 +133,14 @@ Les écrans sont des objets spéciaux qui n'ont pas d'objet parent. Il est donc 
 lv_obj_t * scr1 = lv_obj_create(NULL, NULL);
 ```
 
-There is always an active screen on each display. By default, the library creates and loads a "Base object" as the screen for each display.  
-To get the currently active screen use the `lv_scr_act()` function. To load a new one, use `lv_scr_load(scr1)`.
+Il y a toujours un écran actif sur chaque affichage. Par défaut, la librairie crée et charge un "objet de base" comme écran pour chaque affichage.
+Pour obtenir l’écran actuellement actif, utilisez la fonction `lv_scr_act()`. Pour en charger un nouveau, utilisez `lv_scr_load(scr1)`.
 
 Les écrans peuvent être créés avec n'importe quel type d'objet. Par exemple, un [Objet de base](/object-types/obj) ou une image pour créer un fond d'écran.
 
 
-Screens are created on the currently selected *default display*.
-The *default screen* is the last registered screen with `lv_disp_drv_register` or you can explicitly select a new default display using `lv_disp_set_default(disp)`.
-`lv_scr_act()` and `lv_scr_load()` operate on the currently default screen.
+Les écrans sont créés sur l' *affichage par défaut* actuellement sélectionné.
+L'écran *par défaut* est le dernier écran enregistré avec `lv_disp_drv_register` ou vous pouvez explicitement sélectionner un nouvel affichage par défaut avec `lv_disp_set_default (disp)`.
+`lv_scr_act()` et `lv_scr_load()` opèrent sur l'écran courant par défaut.
 
-Visit [Multi-display support](/overview/display) to learn more.
+Visitez [Support multi-affichage](/overview/display) pour en savoir plus.

@@ -170,7 +170,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Interface d’affichage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#tampon-d-affichage">Tampon d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#pilote-d-affichage">Pilote d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
@@ -178,9 +178,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Interface de périphérique d’entrée</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-de-peripheriques-d-entree">Types de périphériques d’entrée</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-tactile-souris-ou-autre-pointeur">Pavé tactile, souris ou autre pointeur</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-numerique-ou-clavier">Pavé numérique ou clavier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encodeur">Encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#bouton">Bouton</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#autres-fonctionnalites">Autres fonctionnalités</a></li>
@@ -233,6 +233,12 @@
 <li class="toctree-l2"><a class="reference internal" href="event.html">Evénements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="event.html#types-d-evenements">Types d’événements</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generiques">Evénements génériques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="event.html#relatifs-aux-peripheriques-d-entree">Relatifs aux  périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pointeur">Relatif au pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pave-numerique-et-encodeur">Relatif au pavé numérique et encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generaux">Evénements généraux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-speciaux">Evénements spéciaux</a></li>
 </ul>
 </li>
@@ -241,11 +247,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="style.html">Styles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="style.html#utiliser-les-styles">Utiliser les styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#heritage-de-styles">Héritage de styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#proprietes-de-style">Propriétés de style</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-communes">Propriétés communes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-corps">Propriétés de style de corps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-texte">Propriétés de style de texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-d-image">Propriétés de style d’image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-ligne">Propriétés de style de ligne</a></li>
@@ -469,7 +475,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#evenements">Evénements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#exemple">Exemple</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -517,7 +523,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Case à cocher (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#texte">Texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#cocher-decocher">Cocher/décocher</a></li>
@@ -1091,13 +1097,13 @@
             
   <div class="section" id="taches">
 <h1>Tâches<a class="headerlink" href="#taches" title="Permalink to this headline">¶</a></h1>
-<p>LittlevGL a un système intégré de tâches. Vous pouvez enregistrer une fonction pour l’appeler périodiquement. Les tâches sont gérées et appelées dans <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code>, qui doit être appelée périodiquement toutes les quelques millisecondes.
+<p>LittlevGL has a built-in task system. You can register a function to have it be called periodically. The tasks are handled and called in <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code>, which needs to be called periodically every few milliseconds.
 Voir <a class="reference internal" href="../porting/task-handler.html"><span class="doc">Portage</span></a> pour plus d’informations.</p>
-<p>Les tâches sont non-préemptives, ce qui signifie qu’une tâche ne peut en interrompre une autre. Par conséquent, vous pouvez appeler n’importe quelle fonction liée à LittlevGL dans une tâche.</p>
+<p>The tasks are non-preemptive, which means a task cannot interrupt another task. Therefore, you can call any LittlevGL related function in a task.</p>
 <div class="section" id="creer-une-tache">
 <h2>Créer une tâche<a class="headerlink" href="#creer-une-tache" title="Permalink to this headline">¶</a></h2>
-<p>Pour créer une nouvelle tâche, utilisez <code class="docutils literal notranslate"><span class="pre">lv_task_create(task_cb,</span> <span class="pre">period_ms,</span> <span class="pre">LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST,</span> <span class="pre">user_data)</span></code>. Une variable <code class="docutils literal notranslate"><span class="pre">lv_task_t</span> <span class="pre">*</span></code> est créée qui peut être utilisée ultérieurement pour modifier les paramètres de la tâche.
-<code class="docutils literal notranslate"><span class="pre">lv_task_create_basic</span> <span class="pre">()</span></code> peut également être utilisée pour créer une nouvelle tâche sans spécifier de paramètre.</p>
+<p>To create a new task, use <code class="docutils literal notranslate"><span class="pre">lv_task_create(task_cb,</span> <span class="pre">period_ms,</span> <span class="pre">LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST,</span> <span class="pre">user_data)</span></code>. It will create an <code class="docutils literal notranslate"><span class="pre">lv_task_t</span> <span class="pre">*</span></code> variable, which can be used later to modify the parameters of the task.
+<code class="docutils literal notranslate"><span class="pre">lv_task_create_basic()</span></code> can also be used. It allows you to create a new task without specifying any parameters.</p>
 <p>La fonction de rappel d’une tâche doit avoir la signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">(*</span> <span class="pre">lv_task_cb_t)(lv_task_t</span> <span class="pre">*)</span></code>.</p>
 <p>Par exemple :</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_task</span><span class="p">(</span><span class="n">lv_task_t</span> <span class="o">*</span> <span class="n">task</span><span class="p">)</span>
@@ -1105,7 +1111,7 @@ Voir <a class="reference internal" href="../porting/task-handler.html"><span cla
   <span class="cm">/* Utilise les données de l&#39;utilisateur */</span>
   <span class="kt">uint32_t</span> <span class="o">*</span> <span class="n">user_data</span> <span class="o">=</span> <span class="n">task</span><span class="o">-&gt;</span><span class="n">user_data</span><span class="p">;</span>
   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;my_task called with user data: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">user_data</span><span class="p">);</span>
-  
+
   <span class="cm">/* Fait quelque chose avec LittlevGL */</span>
   <span class="k">if</span><span class="p">(</span><span class="n">something_happened</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">something_happened</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
@@ -1123,7 +1129,7 @@ Voir <a class="reference internal" href="../porting/task-handler.html"><span cla
 <div class="section" id="execution-et-reinitialisation">
 <h2>Exécution et réinitialisation<a class="headerlink" href="#execution-et-reinitialisation" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">lv_task_ready(task)</span></code> fait exécuter la tâche lors du prochain appel de <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">lv_task_reset(task)</span></code> réinitialise la période d’une tâche. La tâche sera appelée après un délai égal à la période définie.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_task_reset(task)</span></code> resets the period of a task. It will be called again after the defined period of milliseconds has elapsed.</p>
 </div>
 <div class="section" id="parametres">
 <h2>Paramètres<a class="headerlink" href="#parametres" title="Permalink to this headline">¶</a></h2>
@@ -1136,23 +1142,23 @@ Voir <a class="reference internal" href="../porting/task-handler.html"><span cla
 </div>
 <div class="section" id="taches-uniques">
 <h2>Tâches uniques<a class="headerlink" href="#taches-uniques" title="Permalink to this headline">¶</a></h2>
-<p>Vous pouvez faire en sorte qu’une tâche ne soit exécutée qu’une seule fois en appelant <code class="docutils literal notranslate"><span class="pre">lv_task_once(task)</span></code>. La tâche sera automatiquement supprimée lors du premier appel.</p>
+<p>You can make a task to run only once by calling<code class="docutils literal notranslate"><span class="pre">lv_task_once(task)</span></code>. The task will automatically be deleted after being called for the first time.</p>
 </div>
 <div class="section" id="mesurer-le-temps-d-inactivite">
 <h2>Mesurer le temps d’inactivité<a class="headerlink" href="#mesurer-le-temps-d-inactivite" title="Permalink to this headline">¶</a></h2>
-<p>Vous pouvez obtenir le pourcentage de temps d’inactivité de <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> avec<code class="docutils literal notranslate"> <span class="pre">lv_task_get_idle()</span></code>. Notez que cela ne mesure pas le temps d’inactivité de l’ensemble du système, mais seulement de <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>.
-Cela peut être trompeur si vous utilisez un système d’exploitation et appelez <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> dans une tâche.</p>
+<p>You can get the idle percentage time <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> with <code class="docutils literal notranslate"><span class="pre">lv_task_get_idle()</span></code>. Note that, it doesn’t measure the idle time of the overall system, only <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>.
+It can be misleading if you use an operating system and call <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> in an  task, as it won’t actually measure the time the OS spends in an idle thread.</p>
 </div>
 <div class="section" id="appels-asynchrones">
 <h2>Appels asynchrones<a class="headerlink" href="#appels-asynchrones" title="Permalink to this headline">¶</a></h2>
-<p>Dans certains cas, vous ne pouvez pas faire une action immédiatement. Par exemple, vous ne pouvez pas supprimer un objet pour le moment, car quelque chose d’autre l’utilise encore ou vous ne voulez pas bloquer l’exécution maintenant.
-Dans ces cas, vous pouvez utiliser <code class="docutils literal notranslate"><span class="pre">lv_async_call(my_function,</span> <span class="pre">data_p)</span></code> pour que <code class="docutils literal notranslate"><span class="pre">ma_fonction</span></code> soit appelée lors du prochain appel de <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>. <code class="docutils literal notranslate"><span class="pre">data_p</span></code> sera passé à fonction lorsqu’elle sera appelée.
+<p>In some cases, you can’t do an action immediately. For example, you can’t delete an object right now because something else is still using it or you don’t want to block the execution now.
+For these cases, you can use the <code class="docutils literal notranslate"><span class="pre">lv_async_call(my_function,</span> <span class="pre">data_p)</span></code> to make <code class="docutils literal notranslate"><span class="pre">my_function</span></code> be called on the next call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>. <code class="docutils literal notranslate"><span class="pre">data_p</span></code> will be passed to function when it’s called.
 Notez que seul le pointeur des données est enregistré. Vous devez donc vous assurer que la variable sera “à portée” lors de l’appel de la fonction. Pour cela, vous pouvez utiliser des données <em>statiques</em>, globales ou allouées dynamiquement.</p>
 <p>Par exemple :</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_screen_clean_up</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">scr</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="cm">/* Libére des ressources liées à `scr` */</span>
-  
+
   <span class="cm">/* Au final supprime l&#39;écran */</span>
   <span class="n">lv_obj_del</span><span class="p">(</span><span class="n">scr</span><span class="p">);</span>  
 <span class="p">}</span>
@@ -1167,6 +1173,7 @@ Notez que seul le pointeur des données est enregistré. Vous devez donc vous as
 <span class="cm">/* L&#39;écran est toujours valide donc vous pouvez faire d&#39;autres choses avec */</span>
 </pre></div>
 </div>
+<p>If you just want to delete an object, and don’t need to clean anything up in <code class="docutils literal notranslate"><span class="pre">my_screen_cleanup</span></code>, you could just use <code class="docutils literal notranslate"><span class="pre">lv_obj_del_async</span></code>, which will delete the object on the next call to <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>.</p>
 </div>
 <div class="section" id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
@@ -1450,7 +1457,7 @@ Notez que seul le pointeur des données est enregistré. Vous devez donc vous as
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#example">Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -516,7 +517,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Check box (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#overview">Overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#text">Text</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#check-uncheck">Check/Uncheck</a></li>
@@ -1091,13 +1092,13 @@
             
   <div class="section" id="tasks">
 <h1>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h1>
-<p>LittlevGL has a built-in task system. You can register a functions to call them periodically. The tasks are handled and called in <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code> which needs to be called periodically in every few milliseconds.
+<p>LittlevGL has a built-in task system. You can register a function to have it be called periodically. The tasks are handled and called in <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code>, which needs to be called periodically every few milliseconds.
 See <a class="reference internal" href="../porting/task-handler.html"><span class="doc">Porting</span></a> for more information.</p>
-<p>The tasks are non-preemptive which means a task can interrupt an other. Therefore you can call any LittlevGL related function in a task.</p>
+<p>The tasks are non-preemptive, which means a task cannot interrupt another task. Therefore, you can call any LittlevGL related function in a task.</p>
 <div class="section" id="create-a-task">
 <h2>Create a task<a class="headerlink" href="#create-a-task" title="Permalink to this headline">¶</a></h2>
-<p>To create a new task use <code class="docutils literal notranslate"><span class="pre">lv_task_create(task_cb,</span> <span class="pre">period_ms,</span> <span class="pre">LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST,</span> <span class="pre">user_data)</span></code>. It will create an <code class="docutils literal notranslate"><span class="pre">lv_task_t</span> <span class="pre">*</span></code> variable which can be used later to modify the parameters of the task.
-<code class="docutils literal notranslate"><span class="pre">lv_task_create_basic()</span></code> also can be used to create a new task without specifying any parameters.</p>
+<p>To create a new task, use <code class="docutils literal notranslate"><span class="pre">lv_task_create(task_cb,</span> <span class="pre">period_ms,</span> <span class="pre">LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST,</span> <span class="pre">user_data)</span></code>. It will create an <code class="docutils literal notranslate"><span class="pre">lv_task_t</span> <span class="pre">*</span></code> variable, which can be used later to modify the parameters of the task.
+<code class="docutils literal notranslate"><span class="pre">lv_task_create_basic()</span></code> can also be used. It allows you to create a new task without specifying any parameters.</p>
 <p>A task callback should have <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">(*lv_task_cb_t)(lv_task_t</span> <span class="pre">*);</span></code> prototype.</p>
 <p>For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_task</span><span class="p">(</span><span class="n">lv_task_t</span> <span class="o">*</span> <span class="n">task</span><span class="p">)</span>
@@ -1105,7 +1106,7 @@ See <a class="reference internal" href="../porting/task-handler.html"><span clas
   <span class="cm">/*Use the user_data*/</span>
   <span class="kt">uint32_t</span> <span class="o">*</span> <span class="n">user_data</span> <span class="o">=</span> <span class="n">task</span><span class="o">-&gt;</span><span class="n">user_data</span><span class="p">;</span>
   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;my_task called with user data: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">user_data</span><span class="p">);</span>
-  
+
   <span class="cm">/*Do something with LittlevGL*/</span>
   <span class="k">if</span><span class="p">(</span><span class="n">something_happened</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">something_happened</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
@@ -1123,7 +1124,7 @@ See <a class="reference internal" href="../porting/task-handler.html"><span clas
 <div class="section" id="ready-and-reset">
 <h2>Ready and Reset<a class="headerlink" href="#ready-and-reset" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">lv_task_ready(task)</span></code> makes the task run on the next call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">lv_task_reset(task)</span></code> resets the period of a task. It will be called the defined period milliseconds later.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_task_reset(task)</span></code> resets the period of a task. It will be called again after the defined period of milliseconds has elapsed.</p>
 </div>
 <div class="section" id="set-parameters">
 <h2>Set parameters<a class="headerlink" href="#set-parameters" title="Permalink to this headline">¶</a></h2>
@@ -1136,23 +1137,23 @@ See <a class="reference internal" href="../porting/task-handler.html"><span clas
 </div>
 <div class="section" id="one-shot-tasks">
 <h2>One-shot tasks<a class="headerlink" href="#one-shot-tasks" title="Permalink to this headline">¶</a></h2>
-<p>You can make a task to run only once by calling<code class="docutils literal notranslate"><span class="pre">lv_task_once(task)</span></code>. The task will be automatically deleted when called for the first time.</p>
+<p>You can make a task to run only once by calling<code class="docutils literal notranslate"><span class="pre">lv_task_once(task)</span></code>. The task will automatically be deleted after being called for the first time.</p>
 </div>
 <div class="section" id="measure-idle-time">
 <h2>Measure idle time<a class="headerlink" href="#measure-idle-time" title="Permalink to this headline">¶</a></h2>
 <p>You can get the idle percentage time <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> with <code class="docutils literal notranslate"><span class="pre">lv_task_get_idle()</span></code>. Note that, it doesn’t measure the idle time of the overall system, only <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>.
-It might be misleading if you use an operating system and call <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> in a task.</p>
+It can be misleading if you use an operating system and call <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> in an  task, as it won’t actually measure the time the OS spends in an idle thread.</p>
 </div>
 <div class="section" id="asynchronous-calls">
 <h2>Asynchronous calls<a class="headerlink" href="#asynchronous-calls" title="Permalink to this headline">¶</a></h2>
-<p>In some cases, you can’t do an action immediately. For example, you can’t delete an object right now because something else still uses it or you don’t want to block the execution now.
-For these cases, you can use the <code class="docutils literal notranslate"><span class="pre">lv_async_call(my_function,</span> <span class="pre">data_p)</span></code> to make <code class="docutils literal notranslate"><span class="pre">my_function</span></code> to be called on the next call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>. <code class="docutils literal notranslate"><span class="pre">data_p</span></code> will be passed to function when it’s called.
+<p>In some cases, you can’t do an action immediately. For example, you can’t delete an object right now because something else is still using it or you don’t want to block the execution now.
+For these cases, you can use the <code class="docutils literal notranslate"><span class="pre">lv_async_call(my_function,</span> <span class="pre">data_p)</span></code> to make <code class="docutils literal notranslate"><span class="pre">my_function</span></code> be called on the next call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>. <code class="docutils literal notranslate"><span class="pre">data_p</span></code> will be passed to function when it’s called.
 Note that, only the pointer of the data is saved so you need to ensure that the variable will be “alive” while the function is called. You can use <em>static</em>, global or dynamically allocated data.</p>
 <p>For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_screen_clean_up</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">scr</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="cm">/*Free some resources related to `scr`*/</span>
-  
+
   <span class="cm">/*Finally delete the screen*/</span>
   <span class="n">lv_obj_del</span><span class="p">(</span><span class="n">scr</span><span class="p">);</span>  
 <span class="p">}</span>
@@ -1167,6 +1168,7 @@ Note that, only the pointer of the data is saved so you need to ensure that the 
 <span class="cm">/*The screen is still valid so you can do other things with it*/</span>
 </pre></div>
 </div>
+<p>If you just want to delete an object, and don’t need to clean anything up in <code class="docutils literal notranslate"><span class="pre">my_screen_cleanup</span></code>, you could just use <code class="docutils literal notranslate"><span class="pre">lv_obj_del_async</span></code>, which will delete the object on the next call to <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>.</p>
 </div>
 <div class="section" id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
@@ -1450,7 +1452,7 @@ Note that, only the pointer of the data is saved so you need to ensure that the 
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

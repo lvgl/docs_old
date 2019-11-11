@@ -3,7 +3,7 @@
 ```
 # Animasyon
 
-Animasyon yardımıyla bir değişkenin değerini başlangıç ve bitiş değerleri arasında otomatik değiştirebilirsiniz.
+You can automatically change the value of a variable between a start and an end value using animations.
 Animasyon "animatör" fonksiyonunun ilişkili parametre değerleriyle peryodik çağrılmasıyla gerçekleşir.
 
 *animator* fonksiyonları aşağıdaki prototipe sahiptir:
@@ -18,7 +18,7 @@ Animasyon oluşturmak için, `lv_anim_t`değişkeni ilklendirilmek zorundadır v
 
 ```c
 lv_anim_t a;
-lv_anim_set_exec_cb(&a, btn1, lv_obj_set_x);    /*animatör fonksiyonunu ve animasyonun gerçekleştirileceği değişkeni ayarla*/ 
+lv_anim_set_exec_cb(&a, btn1, lv_obj_set_x);    /*Set the animator function and variable to animate*/
 lv_anim_set_time(&a, duration, delay);
 lv_anim_set_values(&a, start, end);             /*Başlangıç ve bitiş değerlerini ayarla. Ör. 0, 150*/
 lv_anim_set_path_cb(&a, lv_anim_path_linear);   /*`lv_anim_path_...` fonksiyonlardan animasyon davranışını ayarla.*/
@@ -30,14 +30,14 @@ lv_anim_create(&a);                             /*Animasyonu başlat*/
 ```
 
 
-Aynı zamanda aynı değişken üzerinde **çoklu farklı animasyonlar** uygulanabilir.
-Örneğin  `lv_obj_set_x` ve `lv_obj_set_y` ile x ve y koordinatlarını animate eder. Fakat, verilen bir değişken ve fonksiyon çiftile yalnız bir animasyon ilişkilendirilir.
-Bu yüzden `lv_anim_create()` zaten var olan değişken-fonksiyon animasyonlarını silecek. 
+You can apply **multiple different animations** on the same variable at the same time.
+For example, animate the x and y coordinates with `lv_obj_set_x` and `lv_obj_set_y`. However, only one animation can exist with a given variable and function pair.
+Therefore `lv_anim_create()` will delete the already existing variable-function animations.
 
 ##  Animasyon davranılı
 
-**Animasyon şeklini** belirleyebilirsiniz. En basit durumda, doğrusaldır, yani * start * ve * end * arasındaki geçerli değer doğrusal olarak değiştirilir.
-*Path/yol/şekil*, animasyonun o andaki durumuna göre ayarlanacak bir sonraki değeri hesaplayan bir fonksiyondur. Şu anda, aşağıdaki yerleşik yollar/şekiller vardır:
+You can determinate the **path of animation**. In the most simple case, it is linear, which means the current value between *start* and *end*  is changed linearly.
+A *path* is a function which calculates the next value to set based on the current state of the animation. Currently, there are the following built-in paths:
 
 - **lv_anim_path_linear** doğrusal animasyon
 - **lv_anim_path_step** son duruma bir adımda geç
@@ -45,14 +45,14 @@ Bu yüzden `lv_anim_create()` zaten var olan değişken-fonksiyon animasyonları
 - **lv_anim_path_ease_out** sonda yavaş
 - **lv_anim_path_ease_in_out** başta ve sonda yavaş
 - **lv_anim_path_overshoot** son değeri aşsın
-- **lv_anim_path_bounce** son değerden biraz geri zıplar (duvara vurma davranışı gibi)
+- **lv_anim_path_bounce** bounce back a little from the end value (like hitting a wall)
 
 
 ## Hız mı süre mi
-Varsayılan olarak, animasyon zamanını ayarlayabilirsiniz. Ancak bazı durumlarda, **animasyon hızı** daha pratiktir.
+By default, you can set the animation time. But, in some cases, the **animation speed** is more practical.
 
-`lv_anim_speed_to_time(speed, start, end)` işlevi, verilen hız ile bir başlangıç değerinden bitiş değerine ulaşmak için gereken süreyi milisaniye cinsinden hesaplar.
-Hız, _unit/sec_ boyutunda yorumlanır. Örneğin, `lv_anim_speed_to_time(20,0,100)`, 5000 milisaniye verir. Örneğin `lv_obj_set_x` durumunda, *unit* pikseldir. Bu yüzden *20*, *20 pixel/saniye* hız anlamına gelir.
+The `lv_anim_speed_to_time(speed, start, end)` function calculates the required time in milliseconds to reach the end value from a start value with the given speed.
+The speed is interpreted in _unit/sec_ dimension. For example,  `lv_anim_speed_to_time(20,0,100)` will give 5000 milliseconds. For example, in case of `lv_obj_set_x` *unit* is pixels so *20* means *20 px/sec* speed.
 
 ## Animasyonu sil
 
@@ -66,7 +66,5 @@ Hız, _unit/sec_ boyutunda yorumlanır. Örneğin, `lv_anim_speed_to_time(20,0,1
 
 .. doxygenfile:: lv_anim.h
   :project: lvgl
-                
 
 ```
-

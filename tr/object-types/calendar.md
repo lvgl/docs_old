@@ -12,41 +12,41 @@ Günlerin ismi göster
 - Buton tıklaması yardımıyla sonraki/önceki aya git
 Tıklanan günü vurgula
 
-Takvimde tarihleri ayarlama ve alma `year`, `month` ve`day` alanlarını içeren yapı olan `lv_calendar_date_t` türü kullanılır.
+To set and get dates in the calendar, the `lv_calendar_date_t` type is used which is a structure with `year`, `month` and `day` fields.
 
 ### Şuan ki tarih
-Şuan ki tarihi(bugün) ayarlamak için  `lv_calendar_set_today_date(calendar, &today_date)` fonksiyonunu kullan.
+To set the current date (today), use the `lv_calendar_set_today_date(calendar, &today_date)` function.
 
 ### Gösterilen tarih
-Gösterilen tarihi ayarlamak için `lv_calendar_set_shown_date(calendar, &shown_date)` kullan;
+To set the shown date, use `lv_calendar_set_shown_date(calendar, &shown_date)`;
 
 ### Vurgulanan günler
-Vurgulanan tarih listesi `lv_calendar_date_t` fonksiyonu içinde saklanır ve vurgulanan liste `lv_calendar_set_highlighted_dates(calendar, &highlighted_dates)` fonksiyonu ile takvime yüklenir.
-Sadece dizi(liste) göstergeci kaydedileceği için tanımlanmış dizi(liste) statik veya global(evrensel) değişken olmalıdır.
+The list of highlighted dates should be stored in a `lv_calendar_date_t` array loaded by `lv_calendar_set_highlighted_dates(calendar, &highlighted_dates)`.  
+Only the arrays pointer will be saved so the array should be a static or global variable.
 
 ### Gün İsimleri
 Gün isimleri `lv_calendar_set_day_names(calendar, day_names)` ile ayarlanabilir, `day_names`  şuna benziyorsa `const char * day_names[7] = {"Su", "Mo", ...};`
 
 ### Ay İsimleri
-Gün isimlerine benzer şekilde ay isimleri de `lv_calendar_set_month_names(calendar, month_names_array)` ile ayarlanabilir.
+Similarly to `day_names`, the name of the month can be set with `lv_calendar_set_month_names(calendar, month_names_array)`.
 
 ## Biçim
-Biçimi `lv_calendar_set_style(btn, LV_CALENDAR_STYLE_..., &style)` ile ayarlayabilirsiniz. 
+You can set the styles with `lv_calendar_set_style(btn, LV_CALENDAR_STYLE_..., &style)`.
 
-- **LV_CALENDAR_STYLE_BG** `body` özelliklerini kullanan arka plan biçimi ve `text` özelliklerini kullanan tarih numara biçimi. `body.padding.left/rigth/bottom` dolgular tarih  numaraları etrafındaki kenarlar eklenecektir. 
-- **LV_CALENDAR_STYLE_HEADER** geçerli yıl ve ay gösterildiğinde ki başlık biçimi. `body` ve `text` özellikleri kullanılır.
-- **LV_CALENDAR_STYLE_HEADER_PR** basılı başlık biçimi, used when the önceki/sonraki. ay butonu basılı olduğunda kullanılır. text` özellikleri ok tarafından kullanılır.
-- **LV_CALENDAR_STYLE_DAY_NAMES** gün isim biçimi. `text` özellikleri metin tarafından kullanılır ve `body.padding.top` gün isimleri üzerindeki boşluğu belirler.
-- **LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS** `text` özellikleri vurgulu günlerin biçimini  ayarlamak için kullanılır
-- **LV_CALENDAR_STYLE_INACTIVE_DAYS** `text` özellikleri önceki/sonraki ayın görülen gününün biçimini ayarlamak için kullanılır .
-- **LV_CALENDAR_STYLE_WEEK_BOX** `body` özellikleri haftakutucuğunu biçimini ayarlamak için kullanılır
-- **LV_CALENDAR_STYLE_TODAY_BOX** `body` and `text` özellikleri gün kutucuğunu biçimini ayarlamak için kullanılır
+- **LV_CALENDAR_STYLE_BG** - Style of the background using the `body` properties and the style of the date numbers using the `text` properties. `body.padding.left/right/bottom` padding will be added on the edges around the date numbers.
+- **LV_CALENDAR_STYLE_HEADER** - Style of the header where the current year and month is displayed. `body` and `text` properties are used.
+- **LV_CALENDAR_STYLE_HEADER_PR** - Pressed header style, used when the next/prev. month button is being pressed. `text` properties are used by the arrows.
+- **LV_CALENDAR_STYLE_DAY_NAMES** - Style of the day names. `text` properties are used by the 'day' texts and `body.padding.top` determines the space above the day names.
+- **LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS** - `text` properties are used to adjust the style of the highlights days.
+- **LV_CALENDAR_STYLE_INACTIVE_DAYS** - `text` properties are used to adjust the style of the visible days of previous/next month.
+- **LV_CALENDAR_STYLE_WEEK_BOX** - `body` properties are used to set the style of the week box.
+- **LV_CALENDAR_STYLE_TODAY_BOX** - `body` and `text` properties are used to set the style of the today box.
 
 Aksiyonlar
-[Generic events](/overview/event.html#generic-events) dışında [Special events](/overview/event.html#special-events) da  takvim tarafından gönderilir
+Besides the [Generic events](/overview/event.html#generic-events), the following [Special events](/overview/event.html#special-events) are sent by the calendars:
 **LV_EVENT_VALUE_CHANGED** ay değiştiğinde gönderilir.
 
-*Giriş cihazı ile alakalı * aksiyonlarda  `lv_calendar_get_pressed_date(calendar)`  hangi günün şu an basılı olduğunu bildirir veya hiç bir tarih basılı olmasa `NULL` döndürür.
+In *Input device related* events, `lv_calendar_get_pressed_date(calendar)` tells which day is currently being pressed or return `NULL` if no date is pressed.
 
 ## Keys
 Obje türü tarafından işlenilen *Keys* bulunmamaktadır.
@@ -62,11 +62,11 @@ Obje türü tarafından işlenilen *Keys* bulunmamaktadır.
 
 ```
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_calendar.h
   :project: lvgl
-        
+
 ```

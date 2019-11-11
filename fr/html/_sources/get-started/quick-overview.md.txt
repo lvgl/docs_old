@@ -44,8 +44,8 @@ void my_disp_flush(lv_disp_t * disp, const lv_area_t * area, lv_color_t * color_
 ```
 - Implémentez et enregistrez une fonction qui peut **lire un périphérique d'entrée**. P.ex. pour un pavé tactile :
 ```c
-lv_indev_drv_t indev_drv;                  /*Descriptor of a input device driver*/
-lv_indev_drv_init(&indev_drv);             /*Basic initialization*/
+lv_indev_drv_t indev_drv;                  /* Descripteur du pilote du périphérique d'entrée */
+lv_indev_drv_init(&indev_drv);             /* Initialisation de base */
 indev_drv.type = LV_INDEV_TYPE_POINTER;    /* Le pavé tactile est un périphérique semblable à un pointeur */
 indev_drv.read_cb = my_touchpad_read;     /* Définit la fonction du pilote */
 lv_indev_drv_register(&indev_drv);         /* Finalement, enregistre le pilote */

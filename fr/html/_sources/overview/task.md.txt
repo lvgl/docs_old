@@ -3,15 +3,15 @@
 ```
 # Tâches
 
-LittlevGL a un système intégré de tâches. Vous pouvez enregistrer une fonction pour l'appeler périodiquement. Les tâches sont gérées et appelées dans `lv_task_handler()`, qui doit être appelée périodiquement toutes les quelques millisecondes.
+LittlevGL has a built-in task system. You can register a function to have it be called periodically. The tasks are handled and called in `lv_task_handler()`, which needs to be called periodically every few milliseconds.
 Voir [Portage](/porting/task-handler) pour plus d'informations.
 
-Les tâches sont non-préemptives, ce qui signifie qu'une tâche ne peut en interrompre une autre. Par conséquent, vous pouvez appeler n’importe quelle fonction liée à LittlevGL dans une tâche.
+The tasks are non-preemptive, which means a task cannot interrupt another task. Therefore, you can call any LittlevGL related function in a task.
 
 
 ## Créer une tâche
-Pour créer une nouvelle tâche, utilisez `lv_task_create(task_cb, period_ms, LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST, user_data)`. Une variable `lv_task_t *` est créée qui peut être utilisée ultérieurement pour modifier les paramètres de la tâche.
-`lv_task_create_basic ()` peut également être utilisée pour créer une nouvelle tâche sans spécifier de paramètre.
+To create a new task, use `lv_task_create(task_cb, period_ms, LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST, user_data)`. It will create an `lv_task_t *` variable, which can be used later to modify the parameters of the task.
+`lv_task_create_basic()` can also be used. It allows you to create a new task without specifying any parameters.
 
 La fonction de rappel d'une tâche doit avoir la signature `void (* lv_task_cb_t)(lv_task_t *)`.
 
@@ -22,7 +22,7 @@ void my_task(lv_task_t * task)
   /* Utilise les données de l'utilisateur */
   uint32_t * user_data = task->user_data;
   printf("my_task called with user data: %d\n", *user_data);
-  
+
   /* Fait quelque chose avec LittlevGL */
   if(something_happened) {
     something_happened = false;
@@ -41,7 +41,7 @@ lv_task_t * task = lv_task_create(my_task, 500, LV_TASK_PRIO_MID, &user_data);
 
 `lv_task_ready(task)` fait exécuter la tâche lors du prochain appel de `lv_task_handler()`.
 
-`lv_task_reset(task)` réinitialise la période d'une tâche. La tâche sera appelée après un délai égal à la période définie.
+`lv_task_reset(task)` resets the period of a task. It will be called again after the defined period of milliseconds has elapsed.
 
 
 ## Paramètres
@@ -52,18 +52,18 @@ Vous pouvez modifier ultérieurement certains paramètres des tâches :
 
 ## Tâches uniques
 
-Vous pouvez faire en sorte qu'une tâche ne soit exécutée qu'une seule fois en appelant `lv_task_once(task)`. La tâche sera automatiquement supprimée lors du premier appel.
+You can make a task to run only once by calling`lv_task_once(task)`. The task will automatically be deleted after being called for the first time.
 
 
 ## Mesurer le temps d'inactivité
 
-Vous pouvez obtenir le pourcentage de temps d'inactivité de `lv_task_handler` avec` lv_task_get_idle()`. Notez que cela ne mesure pas le temps d'inactivité de l'ensemble du système, mais seulement de `lv_task_handler`.
-Cela peut être trompeur si vous utilisez un système d'exploitation et appelez `lv_task_handler` dans une tâche.
+You can get the idle percentage time `lv_task_handler` with `lv_task_get_idle()`. Note that, it doesn't measure the idle time of the overall system, only `lv_task_handler`.
+It can be misleading if you use an operating system and call `lv_task_handler` in an  task, as it won't actually measure the time the OS spends in an idle thread.
 
 ## Appels asynchrones
 
-Dans certains cas, vous ne pouvez pas faire une action immédiatement. Par exemple, vous ne pouvez pas supprimer un objet pour le moment, car quelque chose d'autre l'utilise encore ou vous ne voulez pas bloquer l'exécution maintenant.
-Dans ces cas, vous pouvez utiliser `lv_async_call(my_function, data_p)` pour que `ma_fonction` soit appelée lors du prochain appel de `lv_task_handler`. `data_p` sera passé à fonction lorsqu'elle sera appelée.
+In some cases, you can't do an action immediately. For example, you can't delete an object right now because something else is still using it or you don't want to block the execution now.
+For these cases, you can use the `lv_async_call(my_function, data_p)` to make `my_function` be called on the next call of `lv_task_handler`. `data_p` will be passed to function when it's called.
 Notez que seul le pointeur des données est enregistré. Vous devez donc vous assurer que la variable sera "à portée" lors de l'appel de la fonction. Pour cela, vous pouvez utiliser des données *statiques*, globales ou allouées dynamiquement.
 
 Par exemple :
@@ -71,7 +71,7 @@ Par exemple :
 void my_screen_clean_up(void * scr)
 {
   /* Libére des ressources liées à `scr` */
-  
+
   /* Au final supprime l'écran */
   lv_obj_del(scr);  
 }
@@ -87,12 +87,13 @@ lv_async_call(my_screen_clean_up, lv_scr_act());
 
 ```
 
+If you just want to delete an object, and don't need to clean anything up in `my_screen_cleanup`, you could just use `lv_obj_del_async`, which will delete the object on the next call to `lv_task_handler`.
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_task.h
   :project: lvgl
-        
+
 ```

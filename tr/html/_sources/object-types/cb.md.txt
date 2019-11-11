@@ -1,47 +1,47 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/tr/object-types/cb.md
 ```
-# Onay kutusu (lv_cb)
+# Checkbox (lv_cb)
 ## Giriş
 
-Onay kutusu nesneleri bir Button *imi* ve klasik bir onay kutusu gerçekleştirmek için bir [Label](/object-types/label) içeren bir [Button](/object-types/btn) arka planından oluşturulmuştur   . 
+The Checkbox objects are built from a [Button](/object-types/btn) background which contains an also Button *bullet* and a [Label](/object-types/label) to realize a classical checkbox.
 
 ### Metin
-`lv_cb_set_text(cb, "New text")` fonksiyonu tarafından değiştirilebilir. Bu fonksiyon dinamik olarak metin tahsis eder. 
+The text can be modified by the `lv_cb_set_text(cb, "New text")` function. It will dynamically allocate the text.
 
-Statik metin ayarlamak  için `lv_cb_set_static_text(cb, txt)` kullanın. Bu yolla sadece `txt` nin göstericisi saklanılacak, onay kutusu var iken yer tahsil edilmemelidir. 
+To set a static text, use `lv_cb_set_static_text(cb, txt)`. This way, only a pointer of `txt` will be stored and it shouldn't be deallocated while the checkbox exists.
 
 ### Onay/Onayı Kaldır
-`lv_cb_set_checked(cb, true/false)` ile manuel olarak  onay kutusunu onaylayabilirsiniz/ onayı kaldırabilirsiniz.
+You can manually check / un-check the Checkbox  via `lv_cb_set_checked(cb, true/false)`. Setting `true` will check the checkbox and `false` will un-check the checkbox.
 
 ### Pasif
-Onay kutusunu pasif yapmak için `lv_cb_set_inactive(cb, true)` kullanın.
+To make the Checkbox inactive, use `lv_cb_set_inactive(cb, true)`.
 
 ## Biçim
 
-Onay kutusu biçimleri `lv_cb_set_style(cb, LV_CB_STYLE_..., &style)` ile modife edilebilir.
+The Checkbox styles can be modified with `lv_cb_set_style(cb, LV_CB_STYLE_..., &style)`.
 
-- **LV_CB_STYLE_BG** Arka plan biçimi. Tüm ` style.body`özellikleri kullanılır. Etiket biçimi `style.text` den gelir. Varsayılan: `lv_style_transp`
-- **LV_CB_STYLE_BOX_REL** Bırakılmış kutucuk biçimi. `style.body` özellikleri kullanılır. Varsaylan: `lv_style_btn_rel`
-- **LV_CB_STYLE_BOX_PR** Basılmış kutucuk biçimi. `style.body` özellikleri kullanılır. Varsayılan: `lv_style_btn_pr`
-- **LV_CB_STYLE_BOX_TGL_REL** Onaylanmış bırakılmış kutucuk biçimi. `style.body` özellikleri kullanılır. Varsayılan: `lv_style_btn_tgl_rel`
-- **LV_CB_STYLE_BOX_TGL_PR** Onaylanmış basılmış kutucuk içimi. `style.body` özellikleri kullanılır. Varsayılan: `lv_style_btn_tgl_pr`
-- **LV_CB_STYLE_BOX_INA** Pasif kutucuk biçimi. `style.body` özellikleri kullanılır. Varsayılan: `lv_style_btn_ina`
+- **LV_CB_STYLE_BG** - Background style. Uses all `style.body` properties. The label's style comes from  `style.text`. Default: `lv_style_transp`
+- **LV_CB_STYLE_BOX_REL** - Style of the released box. Uses the `style.body` properties. Default: `lv_style_btn_rel`
+- **LV_CB_STYLE_BOX_PR** - Style of the pressed box. Uses the `style.body` properties. Default: `lv_style_btn_pr`
+- **LV_CB_STYLE_BOX_TGL_REL** - Style of the checked released box. Uses the `style.body` properties. Default: `lv_style_btn_tgl_rel`
+- **LV_CB_STYLE_BOX_TGL_PR** - Style of the checked released box. Uses the `style.body` properties. Default: `lv_style_btn_tgl_pr`
+- **LV_CB_STYLE_BOX_INA** - Style of the inactive box. Uses the `style.body` properties. Default: `lv_style_btn_ina`
 
 
 ## Aksiyonlar
-[Generic events](/overview/event.html#generic-events) dışında aşağıdaki  [Special events](/overview/event.html#special-events)  onay kutusu tarafından gönderilir :
- - **LV_EVENT_VALUE_CHANGED** onay kutusu değiştiği zaman gönderilir.
+Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Checkboxes:
+ - **LV_EVENT_VALUE_CHANGED** - sent when the checkbox is toggled.
 
-Genel giriş cihazı ile ilgili aksiyonlar (`LV_EVENT_PRESSED` gibi) pasif durumda da gönderilir. Pasif onay kutusundan gelen aksiyonları umursamamak için `lv_cb_is_inactive(cb)` ile durumu kontrol etmelisin.
- 
+Note that, the generic input device-related events (like `LV_EVENT_PRESSED`) are sent in the inactive state too. You need to check the state with `lv_cb_is_inactive(cb)` to ignore the events from inactive Checkboxes.
+
 [Events](/overview/event) hakkında daha fazlasını öğrenin.
 
 
 ## Keys
-Aşağıdaki *Keys* buton tarafından işlenmiştir:
-- **LV_KEY_RIGHT/UP** Değiştir aktif ise değiştirmeli durumuna geçer
-- **LV_KEY_LEFT/DOWN** Değiştir aktif ise değiştirmez duruma geçer
+The following *Keys* are processed by the 'Buttons':
+- **LV_KEY_RIGHT/UP** - Go to toggled state if toggling is enabled
+- **LV_KEY_LEFT/DOWN** - Go to non-toggled state if toggling is  enabled
 
 Her zaman olduğu gibi `LV_KEY_ENTER`  `LV_EVENT_PRESSED/PRESSING/RELEASED` vs olarak çevrilir.
 
@@ -56,11 +56,11 @@ Her zaman olduğu gibi `LV_KEY_ENTER`  `LV_EVENT_PRESSED/PRESSING/RELEASED` vs o
 
 ```
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_cb.h
   :project: lvgl
-        
+
 ```

@@ -3,20 +3,20 @@
 ```
 # File system
 
-LittlevGL has File system abstraction module which enables to attache any type of file systems.
-The file system are identified by a letter. 
-For example if the SD card is associated with letter`'S'` a file can be reached like `""S:path/to/file.txt`.
+LittlevGL has a 'File system' abstraction module that enables you to attach any type of file systems.
+The file system is identified by a drive letter.
+For example, if the SD card is associated with the letter `'S'`, a file can be reached like `"S:path/to/file.txt"`.
 
 ## Add a driver
 
-To add a driver an `lv_fs_drv_t` needs to be initialized like this:
+To add a driver, `lv_fs_drv_t` needs to be initialized like this:
 ```c
-lv_fs_drv_t drv; 
+lv_fs_drv_t drv;
 lv_fs_drv_init(&drv);                     /*Basic initialization*/
 
 drv.letter = 'S';                         /*An uppercase letter to identify the drive */
 drv.file_size = sizeof(my_file_object);   /*Size required to store a file object*/
-drv.rddir_size = sizeof(my_dir_object);   /*Size required to store a directory object (used by dir_open/close/read)*/ 
+drv.rddir_size = sizeof(my_dir_object);   /*Size required to store a directory object (used by dir_open/close/read)*/
 drv.ready_cb = my_ready_cb;               /*Callback to tell if the drive is ready to use */
 drv.open_cb = my_open_cb;                 /*Callback to open a file */
 drv.close_cb = my_close_cb;               /*Callback to close a file */
@@ -41,12 +41,13 @@ lv_fs_drv_register(&drv);                 /*Finally register the drive*/
 
 ```
 
-Any of the callbacks can be `NULL` to indicate that operation is not supported.
+Any of the callbacks can be `NULL` to indicate that that operation is not supported.
 
-If you use `lv_fs_open(&file, "S:/folder/file.txt", LV_FS_MODE_WR)` LittlevGL checks 
-1. if there is drive with letter `'S'`
-2. checks if it's `open_cb` is implemented (not `NULL`)
-3. calls the set `open_cb` with `"folder/file.txt"` path.
+As an example of how the callbacks are used, if you use `lv_fs_open(&file, "S:/folder/file.txt", LV_FS_MODE_WR)`, LittlevGL:
+
+1. Verifies that a registered drive exists with the letter `'S'`.
+2. Checks if it's `open_cb` is implemented (not `NULL`).
+3. Calls the set `open_cb` with `"folder/file.txt"` path.
 
 ## Usage example
 
@@ -66,7 +67,7 @@ lv_fs_close(&f);
 ```
 *The mode in `lv_fs_open` can be `LV_FS_MODE_WR` to open for write or `LV_FS_MODE_RD | LV_FS_MODE_WR` for both*
 
-This example shows how to read a directory's content. It's up to the driver how to mark the directories but in can be a good practice to insert a `'/'` in front of the directory name.
+This example shows how to read a directory's content. It's up to the driver how to mark the directories, but it can be a good practice to insert a `'/'` in front of the directory name.
 ```c
 lv_fs_dir_t dir;
 lv_fs_res_t res;
@@ -81,7 +82,7 @@ while(1) {
         break;
     }
 
-    /*fn is empty if not more files to read*/
+    /*fn is empty, if not more files to read*/
     if(strlen(fn) == 0) {
         break;
     }
@@ -94,9 +95,9 @@ lv_fs_dir_close(&dir);
 
 ## Use drivers for images
 
-[Image](/object-types/img) objects can be open from files too (besides variables stored in the flash)
+[Image](/object-types/img) objects can be opened from files too (besides variables stored in the flash).
 
-To initialize the for images the following callbacks are required:
+To initialize the image, the following callbacks are required:
 - open
 - close
 - read
@@ -104,13 +105,11 @@ To initialize the for images the following callbacks are required:
 - tell
 
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_fs.h
   :project: lvgl
-        
+
 ```
-
-

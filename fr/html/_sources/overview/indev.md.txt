@@ -3,9 +3,9 @@
 ```
 # Périphériques d'entrée
 
-An input device usually means:
-- Pointer-like input device like touchpad or mouse
-- Keypads like a normal keyboard or simple numeric keypad
+Un périphérique d'entrée signifie généralement :
+- Périphérique de type pointeur tel que pavé tactile ou souris
+- Claviers, normal ou simple pavé numérique 
 - Encodeurs avec mouvement rotatif à gauche / droite et bouton
 - Boutons matériels externes affectés à des points spécifiques de l'écran
 
@@ -28,23 +28,23 @@ lv_indev_set_cursor(mouse_indev, cursor_obj);               /* Connecte l'objet 
 
 ```
 
-Note that the cursor object should have `lv_obj_set_click(cursor_obj, false)`.
-For images, *clicking* is disabled by default.
+Notez que l'objet curseur devrait avoir `lv_obj_set_click(cursor_obj, false)`.
+Pour les images *cliquer* est désactivé par défaut.
 
 ## Clavier et encodeur
 
-You can fully control the user interface without touchpad or mouse using a keypad or encoder(s). It works similar to the *TAB* key on the PC to select the element in an application or a web page.
+Vous pouvez contrôler entièrement l'interface utilisateur sans pavé tactile ou souris à l'aide d'un clavier ou d'un ou plusieurs encodeurs. Cela fonctionne de manière similaire à la touche  *TAB* sur un PC pour sélectionner l'élément dans une application ou une page Web.
 
 ### Groupes
 
-The objects, you want to control with keypad or encoder, needs to be added to a *Group*.
-In every group, there is exactly one focused object which receives the pressed keys or the encoder actions.
-For example, if a [Text area](/object-types/ta) is focused and you press some letter on a keyboard, the keys will be sent and inserted into the text area.
-Similarly, if a [Slider](/object-types/slider) is focused and you press the left or right arrows, the slider's value will be changed.
+Les objets que vous souhaitez contrôler avec un clavier ou un encodeur doivent être ajoutés à un *groupe*.
+Dans chaque groupe, il y a exactement un seul objet focalisé qui reçoit les notifications de touche pressée ou les actions de l'encodeur.
+Par exemple, si une [Zone de texte](/object-types/ta) est sélectionnée et que vous appuyez sur une lettre d'un clavier, les codes sont envoyés et traités par la zone de texte.
+De la même manière, si un [Curseur](/object-types/slider) est sélectionné et que vous appuyez sur les flèches gauche ou droite, la valeur du curseur sera modifiée.
 
-You need to associate an input device with a group. An input device can send the keys to only one group but, a group can receive data from more than one input device too.
+Vous devez associer un périphérique d'entrée à un groupe. Un périphérique d'entrée peut envoyer les codes à un seul groupe, mais un groupe peut recevoir des données de plusieurs périphériques d'entrée.
 
-Pour créer un groupe, utilisez `lv_group_t g = lv_group_create()` et pour ajouter un objet au groupe, utilisez `lv_group_add_obj(g, obj)`.
+To create a group use `lv_group_t * g = lv_group_create()` and to add an object to the group use `lv_group_add_obj(g, obj)`.
 
 Pour associer un groupe à un périphérique d’entrée, utilisez `lv_indev_set_group(indev, g)`, où `indev` est la valeur de retour de `lv_indev_drv_register() `
 
@@ -52,8 +52,8 @@ Pour associer un groupe à un périphérique d’entrée, utilisez `lv_indev_set
 Certains codes prédéfinis ont une signification particulière :
 - **LV_KEY_NEXT** Sélectionne l'objet suivant
 - **LV_KEY_PREV** Sélectionne l'objet précédant
-- **LV_KEY_ENTER** Triggers `LV_EVENT_PRESSED/CLICKED/LONG_PRESSED` etc. events
-- **LV_KEY_UP** Increase value or move upwards
+- **LV_KEY_ENTER** Génère les événements `LV_EVENT_PRESSED/CLICKED/LONG_PRESSED` etc
+- **LV_KEY_UP** Augmente la valeur ou se déplace vers le haut
 - **LV_KEY_DOWN** Diminue la valeur ou se déplace vers le bas
 - **LV_KEY_RIGHT** Augmente la valeur ou se déplace vers la droite
 - **LV_KEY_LEFT** Diminue la valeur ou se déplace vers la gauche
@@ -63,28 +63,28 @@ Certains codes prédéfinis ont une signification particulière :
 - **LV_KEY_HOME** Se déplace au début ou en haut (p.ex. dans une [Zone de texte](/object-types/ta))
 - **LV_KEY_END** Se déplace à la fin (p.ex. dans une [Zone de texte](/object-types/ta))
 
-The most important special keys are `LV_KEY_NEXT/PREV`, `LV_KEY_ENTER` and `LV_KEY_UP/DOWN/LEFT/RIGHT`.
-In your `read_cb` function, you should translate some of your keys to these special keys to navigate in the group and interact with the selected object.
+Les codes spéciaux les plus importants sont : `LV_KEY_NEXT/PREV`, `LV_KEY_ENTER` et `LV_KEY_UP/DOWN/LEFT/RIGHT`. 
+Dans votre fonction `read_cb`, vous devez traduire certaines de vos codes en ces codes spéciaux pour naviguer dans le groupe et interagir avec l'objet sélectionné.
 
-Usually, it's enough to use only `LV_KEY_LEFT/RIGHT` because most of the objects can be fully controlled with them.
+Habituellement, il suffit d'utiliser uniquement `LV_KEY_LEFT/RIGHT` car la plupart des objets peuvent être entièrement contrôlés avec eux.
 
-With an encoder, you should use only `LV_KEY_LEFT`, `LV_KEY_RIGHT`, and `LV_KEY_ENTER`.
+Avec un encodeur, vous devez utiliser uniquement `LV_KEY_LEFT`,` LV_KEY_RIGHT` et `LV_KEY_ENTER`.
 
 #### Edition et navigation
 
-Since keypad has plenty of keys, it's easy to navigate between the objects and edit them using the keypad. But, the encoders have a limited number of "keys" hence, difficult to navigate using the default options. *Navigate* and *Edit* are created to avoid this problem with the encoders.
+Comme les claviers disposent de nombreuses touches, il est facile de naviguer entre les objets et de les éditer. Cependant, les encodeurs ont un nombre très limité de "touches" ce qui rend la navigation difficile pas défaut. Les modes *navigation* et *édition* sont créés afin de résoudre ce problème avec les encodeurs, .
 
-In *Navigate* mode, the encoders `LV_KEY_LEFT/RIGHT` is translated to `LV_KEY_NEXT/PREV`. Therefore the next or previous object will be selected by turning the encoder.
+En mode *navigation*, les `LV_KEY_LEFT/RIGHT` des encodeurs sont traduits en` LV_KEY_NEXT/PREV`. Par conséquent, l'objet suivant ou précédent sera sélectionné en tournant l'encodeur.
 Un appui sur `LV_KEY_ENTER` passera en mode *édition*.
 
-In *Edit* mode, `LV_KEY_NEXT/PREV` is usually used to edit the object.
-Depending on the object's type, a short or long press of `LV_KEY_ENTER` changes back to *Navigate* mode.
-Usually, an object which can not be pressed (like a [Slider](/object-types/slider)) leaves *Edit* mode on short click. But with object where short click has meaning (e.g. [Button](/object-types/btn)), long press is required.
+En mode *édition*, `LV_KEY_NEXT/PREV` sont utilisés normalement pour éditer l'objet.
+En fonction du type d'objet, une pression courte ou longue de `LV_KEY_ENTER` repasse en mode *navigation*.
+Généralement, un objet sur lequel vous ne pouvez pas appuyer (comme un [Curseur](/object-types/slider)) quitte le mode *édition* en cas de clic bref, mais avec un objet pour lequel un clic court a une signification (par exemple, [Bouton](/object-types/btn)) un appui long est requis.
 
 #### Styliser l'objet sélectionné
-To visually highlight the focused element, its [Main style](/overview/style#use-the-styles) will be updated.
-By default, some orange color is mixed with the original colors of the style.
-A new style modifier callback be set by `lv_group_set_style_mod_cb(g, my_style_mod_cb)`. A style modifier callback receives a pointer to a caller group and a pointer to a style to modify.
+Pour mettre en évidence visuellement l'élément sélectionné, son [Style principal] (/overview/style#utiliser-les-styles) sera mis à jour.
+Par défaut, de l'orange est mélangé aux couleurs d'origine du style.
+Une fonction de rappel pour modifier le style est définie par `lv_group_set_style_mod_cb(g, my_style_mod_cb)`. Cette fonction reçoit un pointeur sur un groupe d'objet et un style à modifier.
 Le modificateur de style par défaut ressemble à ceci (légèrement simplifié) :
 ```c
 static void default_style_mod_cb(lv_group_t * group, lv_style_t * style)
@@ -109,7 +109,7 @@ static void default_style_mod_cb(lv_group_t * group, lv_style_t * style)
 }
 ```
 
-This style modifier callback is used for keypads and encoder in *Navigate* mode.
+Cette fonction de rappel modificateur de style est utilisée pour les claviers et encodeurs en mode *navigation*.
 En mode *édition*, une autre fonction de rappel est utilisée qui peut être définie avec `lv_group_set_style_mod_edit_cb()`. Par défaut, il utilise la couleur verte.
 
 

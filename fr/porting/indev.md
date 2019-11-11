@@ -16,13 +16,13 @@ indev_drv.read_cb =...              /* Voir ci-dessous. */
 lv_indev_t * my_indev = lv_indev_drv_register(&indev_drv);
 ```
 
-**type** can be
+**type** peut être 
 - **LV_INDEV_TYPE_POINTER** pavé tactile ou souris
 - **LV_INDEV_TYPE_KEYPAD** clavier
 - **LV_INDEV_TYPE_ENCODER** encodeur avec options gauche, droite et appui
 - **LV_INDEV_TYPE_BUTTON** bouton externe
 
-**read_cb** is a function pointer which will be called periodically to report the current state of an input device.
+**read_cb** est un pointeur sur une fonction qui sera appelée périodiquement pour indiquer l’état actuel d’un périphérique d’entrée.
 Les données peuvent être placées dans un tampon, la fonction retourne `false` lorsqu'il ne reste plus de données à lire ou` true` lorsque le tampon n'est pas vide.
 
 
@@ -30,7 +30,7 @@ Visitez [Périphériques d'entrée](/overview/indev) pour en savoir plus sur les
 
 
 ###  Pavé tactile, souris ou autre pointeur
-Input devices which can click points of the screen belong to this category.
+Les périphériques d'entrée qui peuvent cliquer sur des points de l'écran appartiennent à cette catégorie.
 
 ```c
 indev_drv.type = LV_INDEV_TYPE_POINTER;
@@ -50,9 +50,9 @@ bool my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data)
 ``` important::  Les pilotes de pavé tactile doivent renvoyer les dernières coordonnées X/Y même lorsque l'état est *LV_INDEV_STATE_REL*.
 ```
 
-To set a mouse cursor use `lv_indev_set_cursor(my_indev, &img_cursor)`. (`my_indev` is the return value of `lv_indev_drv_register`)
+Pour définir un curseur de souris, utilisez `lv_indev_set_cursor(my_indev, &img_cursor)`  (`my_indev` est la valeur de retour de` lv_indev_drv_register`).
 
-### Keypad or keyboard
+### Pavé numérique ou clavier 
 
 Les claviers complets avec toutes les lettres ou plus simples avec quelques boutons de navigation sont décrits ici.
 
@@ -79,17 +79,17 @@ bool keyboard_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
 }
 ```
 
-### Encoder
+### Encodeur 
 Avec un encodeur, vous pouvez réaliser 4 actions :
 1. Appuyer son bouton
-2. Long-press its button
+2. Appuyer longuement son bouton
 3. Tourner à gauche
 4. Tourner à droite
 
 En bref, les encodeurs fonctionnent comme ceci :
-- By turning the encoder you can focus on the next/previous object.
-- When you press the encoder on a simple object (like a button), it will be clicked.
-- If you press the encoder on a complex object (like a list, message box, etc.) the object will go to edit mode whereby turning the encoder you can navigate inside the object.
+- En tournant l'encodeur, vous pouvez sélectionner l'objet suivant/précédent.
+- Lorsque vous appuyez sur l'encodeur sur un objet simple (comme un bouton), vous cliquez dessus.
+- Si vous appuyez sur l'encodeur sur un objet complexe (comme une liste, une boîte de message, etc.), l'objet passera en mode édition. Vous pouvez alors naviguer dans l'objet en tournant l'encodeur.
 - Pour quitter le mode édition, appuyez longuement sur le bouton.
 
 
@@ -112,8 +112,8 @@ bool encoder_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
 }
 ```
 
-### Button
-*Buttons* mean external "hardware" buttons next to the screen which are assigned to specific coordinates of the screen.
+### Bouton
+*Bouton* signifie bouton "matériel" externe à côté de l'écran, affecté à des coordonnées spécifiques de l'écran.
 Si un bouton est pressé, il simule l'appui sur la coordonnée attribuée (comme un pavé tactile)
 
 Pour affecter des boutons aux coordonnées, utilisez `lv_indev_set_button_points(my_indev, points_array)`.  
@@ -129,7 +129,7 @@ indev_drv.read_cb = my_input_read;
 ...
 
 bool button_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
-    static uint32_t last_btn = 0;   /*Store the last pressed button*/
+    static uint32_t last_btn = 0;   /* Mémorise le dernier bouton pressé */ 
     int btn_pr = my_btn_read();     /* Obtient l'ID (0, 1, 2 ...) du bouton pressé */
     if(btn_pr >= 0) {               /* Un bouton est-il pressé ? P.ex. -1 indique qu'aucun bouton n'est pressé */
        last_btn = btn_pr;           /* Sauvegarde l'ID du bouton pressé */
@@ -146,18 +146,18 @@ bool button_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
 
 ## Autres fonctionnalités
 
-Besides `read_cb` a `feedback_cb` callback can be also specified in `lv_indev_drv_t`.
-`feedback_cb` is called when any type of event is sent by the input devices. (independently from its type). It allows making feedback for the user e.g. to play a sound on `LV_EVENT_CLICK`.
+Outre `read_cb`, une autre fonction de rappel `feedback_cb` peut également être spécifiée dans `lv_indev_drv_t`.
+`feedback_cb` est appelée lorsqu'un événement, quel qu'il soit, est envoyé par les périphériques d'entrée. (indépendamment de leur type). Cela permet de faire un retour à l’utilisateur, par exemple. jouer un son sur `LV_EVENT_CLICK`.
 
 La valeur par défaut des paramètres suivants peut être définie dans *lv_conf.h* mais la valeur par défaut peut être surchargée dans `lv_indev_drv_t` :
 - **drag_limit** Nombre de pixels à parcourir avant de faire glisser l'objet
 - **drag_throw** Ralentissement du glissé après lâché en [%]. Une valeur haute signifie un ralentissement plus rapide
 - **long_press_time** Temps d'appui avant de générer `LV_EVENT_LONG_PRESSED` (en millisecondes)
 - **long_press_rep_time** Intervalle de temps entre deux envois `LV_EVENT_LONG_PRESSED_REPEAT` (en millisecondes)
-- **read_task** pointer to the `lv_task` which reads the input device. Its parameters can be changed by `lv_task_...()` functions
+- **read_task** pointeur sur l'objet `lv_task` qui lit le périphérique d’entrée. Ses paramètres peuvent être modifiés avec les fonctions `lv_task_...()` 
 
 
-Every Input device is associated with a display. By default, a new input device is added to the lastly created or the explicitly selected (using `lv_disp_set_default()`) display.
+Chaque périphérique d'entrée est associé à un affichage. Par défaut, un nouveau périphérique d'entrée est ajouté à l'affichage créé en dernier ou explicitement sélectionné (à l'aide de `lv_disp_set_default()`).
 L’affichage associé est sauvegardé et peut être modifié dans le champ `disp` du pilote.
 
 

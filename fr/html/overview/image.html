@@ -170,7 +170,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Interface d’affichage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#tampon-d-affichage">Tampon d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#pilote-d-affichage">Pilote d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
@@ -178,9 +178,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Interface de périphérique d’entrée</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-de-peripheriques-d-entree">Types de périphériques d’entrée</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-tactile-souris-ou-autre-pointeur">Pavé tactile, souris ou autre pointeur</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-numerique-ou-clavier">Pavé numérique ou clavier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encodeur">Encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#bouton">Bouton</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#autres-fonctionnalites">Autres fonctionnalités</a></li>
@@ -233,6 +233,12 @@
 <li class="toctree-l2"><a class="reference internal" href="event.html">Evénements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="event.html#types-d-evenements">Types d’événements</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generiques">Evénements génériques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="event.html#relatifs-aux-peripheriques-d-entree">Relatifs aux  périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pointeur">Relatif au pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pave-numerique-et-encodeur">Relatif au pavé numérique et encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generaux">Evénements généraux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-speciaux">Evénements spéciaux</a></li>
 </ul>
 </li>
@@ -241,11 +247,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="style.html">Styles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="style.html#utiliser-les-styles">Utiliser les styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#heritage-de-styles">Héritage de styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#proprietes-de-style">Propriétés de style</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-communes">Propriétés communes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-corps">Propriétés de style de corps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-texte">Propriétés de style de texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-d-image">Propriétés de style d’image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-ligne">Propriétés de style de ligne</a></li>
@@ -469,7 +475,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#evenements">Evénements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#exemple">Exemple</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -517,7 +523,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Case à cocher (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#texte">Texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#cocher-decocher">Cocher/décocher</a></li>
@@ -1091,17 +1097,17 @@
             
   <div class="section" id="images">
 <h1>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h1>
-<p>Une image peut être un fichier ou une variable qui enregistre l’image elle-même et des métadonnées.</p>
+<p>An image can be a file or variable which stores the bitmap itself and some metadata.</p>
 <div class="section" id="enregistrer-des-images">
 <h2>Enregistrer des images<a class="headerlink" href="#enregistrer-des-images" title="Permalink to this headline">¶</a></h2>
 <p>Vous pouvez enregistrer des images à deux endroits</p>
 <ul class="simple">
 <li><p>en tant que variable en mémoire interne (MEV ou MEM)</p></li>
-<li><p>en tant que fichier</p></li>
+<li><p>as a file</p></li>
 </ul>
 <div class="section" id="variables">
 <h3>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
-<p>Les images enregistrées dans une variable ont le type <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> avec les champs suivants :</p>
+<p>The images stored internally in a variable is composed mainly of an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> structure with the following fields:</p>
 <ul class="simple">
 <li><p><strong>header</strong></p>
 <ul>
@@ -1113,75 +1119,85 @@
 </ul>
 </li>
 <li><p><strong>data</strong>pointeur sur un tableau où l’image elle-même est enregistrée</p></li>
-<li><p><strong>data_size</strong> longueur de <code class="docutils literal notranslate"><span class="pre">data</span></code> en octets</p></li>
+<li><p><strong>data_size</strong> length of <code class="docutils literal notranslate"><span class="pre">data</span></code> in bytes</p></li>
 </ul>
+<p>These are usually stored within a project as C files. They are linked into the resulting executable like any other constant data.</p>
 </div>
 <div class="section" id="fichiers">
 <h3>Fichiers<a class="headerlink" href="#fichiers" title="Permalink to this headline">¶</a></h3>
-<p>Pour traiter les fichiers, vous devez ajouter un <em>lecteur</em> à LittlevGL. En bref, un lecteur est une collection de fonctions (<em>open</em>, <em>read</em>, <em>close</em>, etc.) enregistrées dans LittlevGL pour effectuer des opérations sur les fichiers.
-Vous pouvez ajouter une interface à un système de fichiers standard (FAT32 sur une carte SD) ou créer votre propre système de fichiers pour lire des données à partir d’une mémoire Flash SPI.
-Dans tous les cas, un lecteur n’est qu’une abstraction pour lire et/ou écrire des données dans une mémoire.
-Voir la section <a class="reference internal" href="file-system.html"><span class="doc">Système de fichiers</span></a> pour en apprendre plus.</p>
+<p>To deal with files you need to add a <em>Drive</em> to LittlevGL. In short, a <em>Drive</em> is a collection of functions (<em>open</em>, <em>read</em>, <em>close</em>, etc.) registered in LittlevGL to make file operations.
+You can add an interface to a standard file system (FAT32 on SD card) or you create your simple file system to read data from an SPI Flash memory.
+In every case, a <em>Drive</em> is just an abstraction to read and/or write data to a memory.
+See the <a class="reference internal" href="file-system.html"><span class="doc">File system</span></a> section to learn more.</p>
+<p>Images stored as files are not linked into the resulting executable, and must be read to RAM before being drawn. As a result, they are not as resource-friendly as variable images. However, they are easier to replace without needing to recompile the main program.</p>
 </div>
 </div>
 <div class="section" id="formats-de-couleur">
 <h2>Formats de couleur<a class="headerlink" href="#formats-de-couleur" title="Permalink to this headline">¶</a></h2>
 <p>Divers formats de couleur intégrés sont pris en charge:</p>
 <ul class="simple">
-<li><p><strong>LV_IMG_CF_TRUE_COLOR</strong> Enregistre simplement les couleurs RVB</p></li>
-<li><p><strong>LV_IMG_CF_TRUE_COLOR_ALPHA</strong> Enregistre les couleurs RVB mais ajoute également un octet Alpha pour chaque pixel</p></li>
-<li><p><strong>LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</strong> Enregistre les couleurs RVB, mais si un pixel prend la valeur <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code> (défini dans <em>lv_conf.h</em>), le pixel sera transparent</p></li>
-<li><p><strong>LV_IMG_CF_INDEXED_1/2/4/8BIT</strong> Utilise une palette avec 2, 4, 16 ou 256 couleurs et enregistre chaque pixel sur 1, 2, 4 ou 8 bits</p></li>
-<li><p><strong>LV_IMG_CF_ALPHA_1/2/4/8BIT</strong> Enregistre uniquement la valeur Alpha sur 1, 2, 4 ou 8 bits. Dessine les pixels avec la couleur <code class="docutils literal notranslate"><span class="pre">style.image.color</span></code> et l’opacité définie. L’image source doit avoir un canal alpha.</p></li>
+<li><p><strong>LV_IMG_CF_TRUE_COLOR</strong> Simply stores the RGB colors (in whatever color depth LittlevGL is configured for).</p></li>
+<li><p><strong>LV_IMG_CF_TRUE_COLOR_ALPHA</strong> Like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> but it also adds an alpha (transparency) byte for every pixel.</p></li>
+<li><p><strong>LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</strong> Like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> but if a pixel has <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code> (set in <em>lv_conf.h</em>) color the pixel will be transparent.</p></li>
+<li><p><strong>LV_IMG_CF_INDEXED_1/2/4/8BIT</strong> Uses a palette with 2, 4, 16 or 256 colors and stores each pixel in 1, 2, 4 or 8 bits.</p></li>
+<li><p><strong>LV_IMG_CF_ALPHA_1/2/4/8BIT</strong> <strong>Only stores the Alpha value on 1, 2, 4 or 8 bits.</strong> The pixels take the color of <code class="docutils literal notranslate"><span class="pre">style.image.color</span></code> and the set opacity. The source image has to be an alpha channel. This is ideal for bitmaps similar to fonts (where the whole image is one color but you’d like to be able to change it).</p></li>
 </ul>
-<p>Les octets des images <em>Couleurs vraies</em> 32 bits sont enregistrés dans l’ordre suivant</p>
+<p>The bytes of the <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> images are stored in the following order.</p>
+<p>For 32-bit color depth:</p>
 <ul class="simple">
 <li><p>Byte 0: Bleu</p></li>
 <li><p>Byte 1: Vert</p></li>
 <li><p>Byte 2: Rouge</p></li>
 <li><p>Byte 3: Alpha</p></li>
 </ul>
-<p>Pour une profondeur de couleur de 16 bits</p>
+<p>For 16-bit color depth:</p>
 <ul class="simple">
-<li><p>Byte 0: Vert 3 bits de poids faible, Bleu 5 bits</p></li>
+<li><p>Byte 0: Green 3 lower bit, Blue 5 bit</p></li>
 <li><p>Byte 1: Rouge 5 bits, Vert 3 bits de poids fort</p></li>
 <li><p>Byte 2: octet Alpha (seulement avec LV_IMG_CF_TRUE_COLOR_ALPHA)</p></li>
 </ul>
-<p>Pour une profondeur de couleur de 8 bits</p>
+<p>For 8-bit color depth:</p>
 <ul class="simple">
 <li><p>Byte 0: Rouge 3 bits, Vert 3 bits, Bleu 2 bits</p></li>
 <li><p>Byte 2: octet Alpha (seulement avec LV_IMG_CF_TRUE_COLOR_ALPHA)</p></li>
 </ul>
-<p>Vous pouvez enregistrer des images au format <em>brut</em> pour indiquer qu’il ne s’agit pas d’un format de couleur intégré et qu’un <a class="reference external" href="#decodeur-d-images">Décodeur d’images</a> doit être utilisé pour décoder l’image.</p>
+<p>You can store images in a <em>Raw</em> format to indicate that, it’s not a built-in color format and an external <a class="reference external" href="#image-decoder">Image decoder</a> needs to be used to decode the image.</p>
 <ul class="simple">
-<li><p><strong>LV_IMG_CF_RAW</strong> Une image brute, p.ex. une image PNG ou JPG</p></li>
-<li><p><strong>LV_IMG_CF_RAW_ALPHA</strong> Indique que l’image a un canal alpha et qu’un octet Alpha est ajouté pour chaque pixel</p></li>
-<li><p><strong>LV_IMG_CF_RAW_CHROME_KEYED</strong> Indique que l’image a une couleur transparente comme indiqué par <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</span></code> ci-dessus.</p></li>
+<li><p><strong>LV_IMG_CF_RAW</strong> Indicates a basic raw image (e.g. a PNG or JPG image).</p></li>
+<li><p><strong>LV_IMG_CF_RAW_ALPHA</strong> Indicates that the image has alpha and an alpha byte is added for every pixel.</p></li>
+<li><p><strong>LV_IMG_CF_RAW_CHROME_KEYED</strong> Indicates that the image is chrome keyed as described in <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</span></code> above.</p></li>
 </ul>
 </div>
 <div class="section" id="ajouter-et-utiliser-des-images">
 <h2>Ajouter et utiliser des images<a class="headerlink" href="#ajouter-et-utiliser-des-images" title="Permalink to this headline">¶</a></h2>
 <p>Vous pouvez ajouter des images à LittlevGL de deux manières :</p>
 <ul class="simple">
-<li><p>utiliser le convertisseur en ligne</p></li>
+<li><p>using the online converter</p></li>
 <li><p>créer manuellement des images</p></li>
 </ul>
 <div class="section" id="convertisseur-en-ligne">
 <h3>Convertisseur en ligne<a class="headerlink" href="#convertisseur-en-ligne" title="Permalink to this headline">¶</a></h3>
-<p>Le convertisseur d’image en ligne est disponible <a class="reference external" href="https://littlevgl.com/image-to-c-array">ici</a>.</p>
-<p>Vous devez sélectionner une image <em>BMP</em>, <em>PNG</em> ou <em>JPG</em>, lui donner un nom, sélectionner le <a class="reference external" href="#formats-de-couleur">Format de couleur</a>, sélectionner le type (fichier ou variable) et cliquer sur le bouton <em>Convert</em>. Le fichier de résultat est téléchargé.</p>
-<p>Dans le cas de tableaux C (variables), les données de l’image sont incluses pour toutes les profondeurs de couleurs (1, 8, 16 ou 32) et les données à utiliser seront sélectionnées lors de la compilation en fonction de <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span></code> dans <em>lv_conf.h</em>.</p>
-<p>Dans le cas de fichiers, vous devez indiquer le format de couleur souhaité</p>
+<p>The online Image converter is available here: https://littlevgl.com/image-to-c-array</p>
+<p>Adding an image to LittlevGL via online converter is easy.</p>
+<ol class="simple">
+<li><p>You need to select a <em>BMP</em>, <em>PNG</em> or <em>JPG</em> image first.</p></li>
+<li><p>Give the image a name that will be used within LittlevGL.</p></li>
+<li><p>Select the <a class="reference external" href="#color-formats">Color format</a>.</p></li>
+<li><p>Select the type of image you want. Choosing a binary will generate a <code class="docutils literal notranslate"><span class="pre">.bin</span></code> file that must be stored separately and read using the <a class="reference external" href="#files">file support</a>. Choosing a variable will generate a standard C file that can be linked into your project.</p></li>
+<li><p>Hit the <em>Convert</em> button. Once the conversion is finished, your browser will automatically download the resulting file.</p></li>
+</ol>
+<p>In the converter C arrays (variables), the bitmaps for all the color depths (1, 8, 16 or 32) are included in the C file, but only the color depth that matches <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span></code> in <em>lv_conf.h</em> will actually be linked into the resulting executable.</p>
+<p>In case of binary files, you need to specify the color format you want:</p>
 <ul class="simple">
-<li><p>Binary RGB332 pour une profondeur de couleur de 8 bits</p></li>
-<li><p>Binary RGB565 pour une profondeur de couleur de 16 bits</p></li>
-<li><p>Binary RGB565 pour une profondeur de couleur de 16 bits (les deux octets sont permutés)</p></li>
-<li><p>Binary RGB888 pour une profondeur de couleur de 32 bits</p></li>
+<li><p>RGB332 for 8-bit color depth</p></li>
+<li><p>RGB565 for 16-bit color depth</p></li>
+<li><p>RGB565 Swap for 16-bit color depth (two bytes are swapped)</p></li>
+<li><p>RGB888 for 32-bit color depth</p></li>
 </ul>
 </div>
 <div class="section" id="creer-une-image-manuellement">
 <h3>Créer une image manuellement<a class="headerlink" href="#creer-une-image-manuellement" title="Permalink to this headline">¶</a></h3>
-<p>Si vous réalisez une image au moment de l’exécution, vous pouvez créer une variable d’image pour l’afficher. Par exemple :</p>
+<p>If you are generating an image at run-time, you can craft an image variable to display it using LittlevGL. For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">my_img_data</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">,</span> <span class="p">...};</span>
 
 <span class="k">static</span> <span class="n">lv_img_dsc_t</span> <span class="n">my_img_dsc</span> <span class="o">=</span> <span class="p">{</span>
@@ -1194,12 +1210,12 @@ Voir la section <a class="reference internal" href="file-system.html"><span clas
 <span class="p">};</span>
 </pre></div>
 </div>
-<p>Si le format de couleur est <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA</span></code>, vous pouvez définir <code class="docutils literal notranslate"><span class="pre">data_size</span></code> comme <code class="docutils literal notranslate"><span class="pre">80</span> <span class="pre">*</span> <span class="pre">60</span> <span class="pre">*</span> <span class="pre">LV_IMG_PX_SIZE_ALPHA_BYTE</span></code>.</p>
-<p>Une autre option pour créer une image au moment de l’exécution consiste à utiliser l’objet <a class="reference internal" href="../object-types/canvas.html"><span class="doc">Canvas</span></a>.</p>
+<p>If the color format is <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA</span></code> you can set <code class="docutils literal notranslate"><span class="pre">data_size</span></code> like <code class="docutils literal notranslate"><span class="pre">80</span> <span class="pre">*</span> <span class="pre">60</span> <span class="pre">*</span> <span class="pre">LV_IMG_PX_SIZE_ALPHA_BYTE</span></code>.</p>
+<p>Another (possibly simpler) option to create and display an image at run-time is to use the <a class="reference internal" href="../object-types/canvas.html"><span class="doc">Canvas</span></a> object.</p>
 </div>
 <div class="section" id="utiliser-des-images">
 <h3>Utiliser des images<a class="headerlink" href="#utiliser-des-images" title="Permalink to this headline">¶</a></h3>
-<p>Le moyen le plus simple d’utiliser une image dans LittlevGL consiste à l’afficher avec un objet <a class="reference internal" href="../object-types/img.html"><span class="doc">Image</span></a>:</p>
+<p>The simplest way to use an image in LittlevGL is to display it with an <a class="reference internal" href="../object-types/img.html"><span class="doc">lv_img</span></a> object:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">icon</span> <span class="o">=</span> <span class="n">lv_img_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
 
 <span class="cm">/* A partir d&#39;une variable */</span>
@@ -1209,41 +1225,41 @@ Voir la section <a class="reference internal" href="file-system.html"><span clas
 <span class="n">lv_img_set_src</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="s">&quot;S:my_icon.bin&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Si l’image a été convertie avec le convertisseur en ligne, vous devez utiliser <code class="docutils literal notranslate"><span class="pre">LV_IMG_DECLARE(my_icon_dsc)</span></code> pour déclarer l’icône dans le fichier où vous souhaitez l’utiliser.</p>
+<p>If the image was converted with the online converter, you should use <code class="docutils literal notranslate"><span class="pre">LV_IMG_DECLARE(my_icon_dsc)</span></code> to declare the image in the file where you want to use it.</p>
 </div>
 </div>
 <div class="section" id="decodeur-d-images">
 <h2>Décodeur d’images<a class="headerlink" href="#decodeur-d-images" title="Permalink to this headline">¶</a></h2>
-<p>Comme vous pouvez le voir dans la section [Formats de couleur] (#formats-de-couleur), LittlevGL prend en charge plusieurs formats d’image intégrés. Cependant, il ne supporte pas par exemple les formats PNG ou JPG.
-Pour gérer les formats d’image non intégrés, vous devez utiliser des librairie externes et les attacher à LittlevGL via l’interface <em>décodeur d’images</em>.</p>
-<p>Le décodeur d’image comprend 4 fonctions :</p>
+<p>As you can see in the <a class="reference external" href="#color-formats">Color formats</a> section, LittlevGL supports several built-in image formats. In many cases, these will be all you need. LittlevGL doesn’t directly support, however, generic image formats like PNG or JPG.</p>
+<p>To handle non-built-in image formats, you need to use external libraries and attach them to LittlevGL via the <em>Image decoder</em> interface.</p>
+<p>The image decoder consists of 4 callbacks:</p>
 <ul class="simple">
-<li><p><strong>info</strong> obtient des informations de base sur l’image (largeur, hauteur et format de couleur)</p></li>
-<li><p><strong>open</strong> ouvre l’image : enregistre l’image décodée.
-<code class="docutils literal notranslate"><span class="pre">NULL</span></code> indique que l’image peut être lue ligne par ligne</p></li>
-<li><p><strong>read</strong> si <em>open</em> ne traite pas complètement l’image, cette fonction devrait retourner les données décodées (maximum 1 ligne) à partir d’une position donnée.</p></li>
+<li><p><strong>info</strong> get some basic info about the image (width, height and color format).</p></li>
+<li><p><strong>open</strong> open the image: either store the decoded image or set it to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to indicate the image can be read line-by-line.</p></li>
+<li><p><strong>read</strong> if <em>open</em> didn’t fully open the image this function should give some decoded data (max 1 line) from a given position.</p></li>
 <li><p><strong>close</strong> ferme l’image ouverte, libére les ressources allouées.</p></li>
 </ul>
-<p>Vous pouvez ajouter n’importe quel nombre de décodeurs d’image. Quand une image doit être dessinée, la librairie essaiera tout les décodeurs d’images enregistrés jusqu’à en trouver un capable d’ouvrir l’image, c-à-d de manipuler le format.</p>
-<p>Les formats <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_...</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_INDEXED_...</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_IMG_ALPHA_...</span></code> sont connus par le décodeur intégré.</p>
+<p>You can add any number of image decoders. When an image needs to be drawn, the library will try all the registered image decoder until finding one which can open the image, i.e. knowing that format.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_...</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_INDEXED_...</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_IMG_ALPHA_...</span></code> formats (essentially, all non-<code class="docutils literal notranslate"><span class="pre">RAW</span></code> formats) are understood by the built-in decoder.</p>
 <div class="section" id="formats-d-image-personnalises">
 <h3>Formats d’image personnalisés<a class="headerlink" href="#formats-d-image-personnalises" title="Permalink to this headline">¶</a></h3>
-<p>Le moyen le plus simple de créer une image personnalisée consiste à utiliser le convertisseur d’image en ligne et à définir le format <code class="docutils literal notranslate"><span class="pre">Raw</span></code>, <code class="docutils literal notranslate"><span class="pre">Raw</span> <span class="pre">with</span> <span class="pre">alpha</span></code> ou  <code class="docutils literal notranslate"><span class="pre">Raw</span> <span class="pre">with</span> <span class="pre">chrome</span> <span class="pre">keyed</span></code>. Le convertisseur prendra tous les octets de l’image sélectionnée et les écrira en tant que données d’image.
-<code class="docutils literal notranslate"><span class="pre">header.cf</span></code> sera respectivement <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW_ALPHA</span></code> ou <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW_CHROME_KEYED</span></code>.Vous devez choisir le bon format en fonction de vos besoins : image normale, utilisation de canal alpha ou de couleur transparente.</p>
-<p>Après décodage, les formats <em>bruts</em> sont considérés comme des <em>couleurs vraies</em>. En d’autres termes, le décodeur d’image doit décoder les images <em>brutes</em> en <em>vraies couleurs</em> conformément au format décrit dans la section <a class="reference external" href="#formats-de-couleur">Formats de couleur</a>.</p>
-<p>Si vous voulez créer une image vraiment personnalisée, vous devez utiliser les formats de couleur <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_USER_ENCODED_0..7</span></code>. Cependant, la librairie peut dessiner les images uniquement au format <em>couleurs vraies</em> (ou <em>brut</em>, mais finalement, elles sont supposées être au format <em>couleurs vraies</em>).
-Donc, les formats <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_USER_ENCODED_...</span></code> ne sont pas connus de la librairie . Ils doivent donc être décodés dans l’un des formats connus de la section <a class="reference external" href="#formats-de-couleur">Formats de couleur</a>.
-Il est possible de décoder d’abord l’image dans un format de couleur non vraie, par exemple <code class="docutils literal notranslate"><span class="pre">LV_IMG_INDEXED_4BITS</span></code>, puis d’appeler les fonctions du décodeur intégré pour la convertir en <em>couleurs vraies</em>.</p>
-<p>Pour les formats <em>encodés par l’utilisateur</em>, le format de couleur (<code class="docutils literal notranslate"><span class="pre">dsc-&gt;</span> <span class="pre">header.cf</span></code>) doit être modifié en conséquence, dans la fonction open.</p>
+<p>The easiest way to create a custom image is to use the online image converter and set <code class="docutils literal notranslate"><span class="pre">Raw</span></code>, <code class="docutils literal notranslate"><span class="pre">Raw</span> <span class="pre">with</span> <span class="pre">alpha</span></code> or <code class="docutils literal notranslate"><span class="pre">Raw</span> <span class="pre">with</span> <span class="pre">chrome</span> <span class="pre">keyed</span></code> format. It will just take every byte of the binary file you uploaded and write it as the image “bitmap”. You then need to attach an image decoder that will parse that bitmap and generate the real, renderable bitmap.</p>
+<p><code class="docutils literal notranslate"><span class="pre">header.cf</span></code> will be <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW_ALPHA</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW_CHROME_KEYED</span></code> accordingly. You should choose the correct format according to your needs: fully opaque image, use alpha channel or use chroma keying.</p>
+<p>After decoding, the <em>raw</em> formats are considered <em>True color</em> by the library. In other words, the image decoder must decode the <em>Raw</em> images to <em>True color</em> according to the format described in [#color-formats](Color formats) section.</p>
+<p>If you want to create a custom image, you should use <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_USER_ENCODED_0..7</span></code> color formats. However, the library can draw the images only in <em>True color</em> format (or <em>Raw</em> but finally it’s supposed to be in <em>True color</em> format).
+So the <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_USER_ENCODED_...</span></code> formats are not known by the library, therefore, they should be decoded to one of the known formats from [#color-formats](Color formats) section.
+It’s possible to decode the image to a non-true color format first, for example, <code class="docutils literal notranslate"><span class="pre">LV_IMG_INDEXED_4BITS</span></code>, and then call the built-in decoder functions to convert it to <em>True color</em>.</p>
+<p>With <em>User encoded</em> formats, the color format in the open function (<code class="docutils literal notranslate"><span class="pre">dsc-&gt;header.cf</span></code>) should be changed according to the new format.</p>
 </div>
 <div class="section" id="enregistrer-un-decodeur-d-image">
 <h3>Enregistrer un décodeur d’image<a class="headerlink" href="#enregistrer-un-decodeur-d-image" title="Permalink to this headline">¶</a></h3>
-<p>Par exemple, si vous voulez que LittlevGL “comprenne” les images PNG, vous devez créer un nouveau décodeur d’images et définir certaines fonctions pour ouvrir/fermer les fichiers PNG. Voici à quoi cela devrait ressembler :</p>
+<p>Here’s an example of getting LittlevGL to work with PNG images.</p>
+<p>First, you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Crée un nouveau décodeur et enregistre les fonctions */</span>
 <span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">dec</span> <span class="o">=</span> <span class="n">lv_img_decoder_create</span><span class="p">();</span>
 <span class="n">lv_img_decoder_set_info_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_info</span><span class="p">);</span>
 <span class="n">lv_img_decoder_set_open_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_open</span><span class="p">);</span>
-<span class="n">lv_img_decoder_set_close_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_close</span><span class="p">);</span> 
+<span class="n">lv_img_decoder_set_close_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_close</span><span class="p">);</span>
 
 
 <span class="cm">/**</span>
@@ -1256,10 +1272,11 @@ Il est possible de décoder d’abord l’image dans un format de couleur non vr
 <span class="k">static</span> <span class="n">lv_res_t</span> <span class="nf">decoder_info</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="n">lv_img_header_t</span> <span class="o">*</span> <span class="n">header</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="cm">/* Vérifie si le type `src` est connu du décodeur */</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">is_png</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span> <span class="n">LV_RES_INV</span><span class="p">;</span> 
+  <span class="k">if</span><span class="p">(</span><span class="n">is_png</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span> <span class="n">LV_RES_INV</span><span class="p">;</span>
 
+  <span class="cm">/* Read the PNG header and find `width` and `height` */</span>
   <span class="p">...</span>
-  
+
   <span class="n">header</span><span class="o">-&gt;</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_RAW_ALPHA</span><span class="p">;</span>
   <span class="n">header</span><span class="o">-&gt;</span><span class="n">w</span> <span class="o">=</span> <span class="n">width</span><span class="p">;</span>
   <span class="n">header</span><span class="o">-&gt;</span><span class="n">h</span> <span class="o">=</span> <span class="n">height</span><span class="p">;</span>
@@ -1275,17 +1292,17 @@ Il est possible de décoder d’abord l’image dans un format de couleur non vr
 <span class="p">{</span>
 
   <span class="cm">/* Vérifie si le type `src` est connu du décodeur */</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">is_png</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span> <span class="n">LV_RES_INV</span><span class="p">;</span> 
-  
-  <span class="cm">/* Décode et enregistre l&#39;image. Si `dsc-&gt;img_data` est `NULL`, la fonction `read_line` sera appelée pour obtenir les données de l&#39;image ligne par ligne */</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">is_png</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span> <span class="n">LV_RES_INV</span><span class="p">;</span>
+
+  <span class="cm">/*Decode and store the image. If `dsc-&gt;img_data` is `NULL`, the `read_line` function will be called to get the image data line-by-line*/</span>
   <span class="n">dsc</span><span class="o">-&gt;</span><span class="n">img_data</span> <span class="o">=</span> <span class="n">my_png_decoder</span><span class="p">(</span><span class="n">src</span><span class="p">);</span>
-  
+
   <span class="cm">/* Change le format de couleur si nécessaire. Pour le PNG, généralement un format &#39;brut&#39; convient */</span>
   <span class="n">dsc</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">.</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_</span><span class="p">...</span>
-  
+
   <span class="cm">/* Appelle une fonction de décodeur intégré si nécessaire. Ce n&#39;est pas nécessaire si `my_png_decoder` a décodé l&#39;image au format couleurs vraies. */</span>
   <span class="n">lv_res_t</span> <span class="n">res</span> <span class="o">=</span> <span class="n">lv_img_decoder_built_in_open</span><span class="p">(</span><span class="n">decoder</span><span class="p">,</span> <span class="n">dsc</span><span class="p">);</span>
-  
+
   <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -1306,7 +1323,7 @@ Il est possible de décoder d’abord l’image dans un format de couleur non vr
    <span class="cm">/* Avec PNG, ce n&#39;est généralement pas nécessaire */</span>
 
    <span class="cm">/* Copie `len` pixels à partir des coordonnées `x` et `y` au format couleurs vraies dans `buf` */</span>
-  
+
 <span class="p">}</span>
 
 <span class="cm">/**</span>
@@ -1317,29 +1334,29 @@ Il est possible de décoder d’abord l’image dans un format de couleur non vr
 <span class="k">static</span> <span class="kt">void</span> <span class="nf">decoder_close</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">lv_img_decoder_dsc_t</span> <span class="o">*</span> <span class="n">dsc</span><span class="p">)</span>
 <span class="p">{</span>
  <span class="cm">/* Libère toutes les données allouées */</span>
-  
+
   <span class="cm">/* Appelle la fonction intégrée de fermeture si les fonctions intégrées open/read_line ont été utilisées */</span>
   <span class="n">lv_img_decoder_built_in_close</span><span class="p">(</span><span class="n">decoder</span><span class="p">,</span> <span class="n">dsc</span><span class="p">);</span>
-  
+
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Donc en résumé :</p>
 <ul class="simple">
-<li><p>Dans <code class="docutils literal notranslate"><span class="pre">decoder_info</span></code>, vous devez collecter les informations de base sur l’image et les mémoriser dans <code class="docutils literal notranslate"><span class="pre">header</span></code>.</p></li>
-<li><p>Dans <code class="docutils literal notranslate"><span class="pre">decoder_open</span></code>, vous devez essayer d’ouvrir la source de l’image indiquée par <code class="docutils literal notranslate"><span class="pre">dsc-&gt;</span> <span class="pre">src</span></code>. Son type est déjà dans <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src_type</span> <span class="pre">==</span> <span class="pre">LV_IMG_SRC_FILE/VARIABLE</span></code>.
-Si le format/type n’est pas pris en charge par le décodeur, retournez <code class="docutils literal notranslate"><span class="pre">LV_RES_INV</span></code>.
-Autrement, si vous pouvez ouvrir l’image, un pointeur sur l’image <em>couleurs vraies</em> décodée doit être défini dans <code class="docutils literal notranslate"><span class="pre">dsc-&gt;</span> <span class="pre">img_data</span></code>.
-Si le format est géré mais que vous ne voulez pas décoder l’ensemble de l’image (p.ex. pas de mémoire), définissez <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> pour appeler <code class="docutils literal notranslate"><span class="pre">read_line</span></code> afin d’obtenir les pixels.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">decoder_info</span></code>, you should collect some basic information about the image and store it in <code class="docutils literal notranslate"><span class="pre">header</span></code>.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">decoder_open</span></code>, you should try to open the image source pointed by <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src</span></code>. Its type is already in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src_type</span> <span class="pre">==</span> <span class="pre">LV_IMG_SRC_FILE/VARIABLE</span></code>.
+If this format/type is not supported by the decoder, return <code class="docutils literal notranslate"><span class="pre">LV_RES_INV</span></code>.
+However, if you can open the image, a pointer to the decoded <em>True color</em> image should be set in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code>.
+If the format is known but, you don’t want to decode while image (e.g. no memory for it) set <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> to call <code class="docutils literal notranslate"><span class="pre">read_line</span></code> to get the pixels.</p></li>
 <li><p>Dans <code class="docutils literal notranslate"><span class="pre">decoder_close</span></code>, vous devez libérer toutes les ressources allouées.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">decoder_read</span></code> est optionnel. Le décodage de l’ensemble de l’image nécessite de la mémoire et des calculs supplémentaires.
-Cependant, si vous pouvez décoder une ligne de l’image sans décoder toute l’image, vous pouvez économiser de la mémoire et du temps.
-Pour indiquer que la fonction <em>line read</em> doit être utilisée, définissez <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> dans la fonction <code class="docutils literal notranslate"><span class="pre">open</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">decoder_read</span></code> is optional. Decoding the whole image requires extra memory and some computational overhead.
+However, if can decode one line of the image without decoding the whole image, you can save memory and time.
+To indicate that, the <em>line read</em> function should be used, set <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> in the open function.</p></li>
 </ul>
 </div>
 <div class="section" id="utiliser-manuellement-un-decodeur-d-image">
 <h3>Utiliser manuellement un décodeur d’image<a class="headerlink" href="#utiliser-manuellement-un-decodeur-d-image" title="Permalink to this headline">¶</a></h3>
-<p>LittlevGL utilisera automatiquement les décodeurs d’images enregistrés, mais vous pouvez également les utiliser manuellement. Créez une variable <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_dsc_t</span></code> pour décrire la session de décodage et appelez <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code> et <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_close()</span> </code>.</p>
+<p>LittlevGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the <code class="docutils literal notranslate"><span class="pre">lv_img</span></code> object) but you can use them manually too. Create a <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_dsc_t</span></code> variable to describe the decoding session and call <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
 <span class="n">lv_res_t</span> <span class="n">res</span><span class="p">;</span>
 <span class="n">lv_img_decoder_dsc_t</span> <span class="n">dsc</span><span class="p">;</span>
@@ -1355,32 +1372,33 @@ Pour indiquer que la fonction <em>line read</em> doit être utilisée, définiss
 </div>
 <div class="section" id="mise-en-cache-des-images">
 <h2>Mise en cache des images<a class="headerlink" href="#mise-en-cache-des-images" title="Permalink to this headline">¶</a></h2>
-<p>Parfois, il faut beaucoup de temps pour ouvrir une image.
-Continuellement décoder une image PNG ou charger des images à partir d’une mémoire externe lente serait inefficace.
-LittlevGL place donc en cache un certain nombre d’images. La mise en cache signifie que certaines images resteront ouvertes, ce qui permet à LittlevGL d’y accéder rapidement à partir de <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code> au lieu de les décoder à nouveau.</p>
+<p>Sometimes it takes a lot of time to open an image.
+Continuously decoding a PNG image or loading images from a slow external memory would be inefficient and detrimental to the user experience.</p>
+<p>Therefore, LittlevGL caches a given number of images. Caching means some images will be left open, hence LittlevGL can quickly access them from <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code> instead of needing to decode them again.</p>
+<p>Of course, caching images is resource-intensive as it uses more RAM (to store the decoded image). LittlevGL tries to optimize the process as much as possible (see below), but you will still need to evaluate if this would be beneficial for your platform or not. If you have a deeply embedded target which decodes small images from a relatively fast storage medium, image caching may not be worth it.</p>
 <div class="section" id="taille-du-cache">
 <h3>Taille du cache<a class="headerlink" href="#taille-du-cache" title="Permalink to this headline">¶</a></h3>
-<p>Le nombre d’entrées du cache peut être défini par <code class="docutils literal notranslate"><span class="pre">LV_IMG_CACHE_DEF_SIZE</span></code> dans <em>lv_conf.h</em>. La valeur par défaut est 1, de sorte que seule la dernière image utilisée reste ouverte.
-La taille du cache peut être modifiée en cours d’exécution avec <code class="docutils literal notranslate"><span class="pre">lv_img_cache_set_size(entry_num)</span></code></p>
+<p>The number of cache entries can be defined in <code class="docutils literal notranslate"><span class="pre">LV_IMG_CACHE_DEF_SIZE</span></code> in <em>lv_conf.h</em>. The default value is 1 so only the most recently used image will be left open.</p>
+<p>The size of the cache can be changed at run-time with <code class="docutils literal notranslate"><span class="pre">lv_img_cache_set_size(entry_num)</span></code>.</p>
 </div>
 <div class="section" id="valeur-des-images">
 <h3>Valeur des images<a class="headerlink" href="#valeur-des-images" title="Permalink to this headline">¶</a></h3>
-<p>Si vous utilisez un grand nombre d’images, LittlevGL ne peut pas toutes les mettre en cache. Au lieu de cela, si une nouvelle image doit être ouverte mais qu’il n’y a pas de place dans le cache, la librairie supprimera une image pour libérer de la place.
-Pour décider quelle image supprimer, LittlevGL a mesuré combien de temps il a fallu pour ouvrir chaque image. Les images dont l’ouverture prend le plus de temps sont favorisées et LittlevGL essaie de les conserver en cache le plus longtemps.
-Vous pouvez définir manuellement la valeur <em>temps d’ouverture</em> dans la fonction d’ouverture du décodeur dans <code class="docutils literal notranslate"><span class="pre">dsc-&gt;time_to_open</span> <span class="pre">=</span> <span class="pre">temps</span> <span class="pre">en</span> <span class="pre">ms</span></code> pour attribuer une valeur supérieure ou inférieure à l’image (laissez inchangé pour laisser LittlevGL le gérer).</p>
-<p>Chaque entrée de cache a une valeur <em>“durée de vie”</em>. À chaque ouverture d’image par la mémoire cache, la <em>durée de vie</em> de toutes les entrées est réduite pour les rendre plus anciennes.
-Lorsqu’une image en cache est utilisée, sa <em>durée de vie</em> est augmentée de la valeur de <em>temps d’ouverture</em> pour la rendre plus importante.</p>
-<p>S’il n’y a plus d’espace dans la mémoire cache, l’entrée avec la plus petite durée de vie sera supprimée.</p>
+<p>When you use more images than cache entries, LittlevGL can’t cache all of the images. Instead, the library will close one of the cached images (to free space).</p>
+<p>To decide which image to close, LittlevGL uses a measurement it previously made of how long it took to open the image. Cache entries that hold slower-to-open images are considered more valuable and are kept in the cache as long as possible.</p>
+<p>If you want or need to override LittlevGL’s measurement, you can manually set the <em>time to open</em> value in the decoder open function in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;time_to_open</span> <span class="pre">=</span> <span class="pre">time_ms</span></code> to give a higher or lower value. (Leave it unchanged to let LittlevGL set it.)</p>
+<p>Every cache entry has a <em>“life”</em> value. Every time an image opening happens through the cache, the <em>life</em> of all entries are decreased to make them older.
+When a cached image is used, its <em>life</em> is increased by the <em>time to open</em> value to make it more alive.</p>
+<p>If there is no more space in the cache, always the entry with the smallest life will be closed.</p>
 </div>
 <div class="section" id="utilisation-de-la-memoire">
 <h3>Utilisation de la mémoire<a class="headerlink" href="#utilisation-de-la-memoire" title="Permalink to this headline">¶</a></h3>
-<p>Notez que l’image en cache peut consommer de la mémoire en permanence. Par exemple, si 3 images PNG sont mises en cache, elles consomment de la mémoire pendant le temps où elle sont ouvertes.
-Par conséquent, il incombe à l’utilisateur de s’assurer qu’il y a assez de MEV pour mettre en cache de grandes images en même temps.</p>
+<p>Note that, the cached image might continuously consume memory. For example, if 3 PNG images are cached, they will consume memory while they are opened.</p>
+<p>Therefore, it’s the user’s responsibility to be sure there is enough RAM to cache, even the largest images at the same time.</p>
 </div>
 <div class="section" id="nettoyer-le-cache">
 <h3>Nettoyer le cache<a class="headerlink" href="#nettoyer-le-cache" title="Permalink to this headline">¶</a></h3>
-<p>Supposons que vous ayez chargé une image PNG dans une variable <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span> <span class="pre">my_png</span></code> et que vous l’utilisiez dans un objet<code class="docutils literal notranslate"> <span class="pre">lv_img</span></code>. Si l’image est déjà mise en cache et que vous modifiez <code class="docutils literal notranslate"><span class="pre">my_png-&gt;</span> <span class="pre">data</span></code>, vous devez avertir LittlevGL de mettre en cache l’image à nouveau.
-Pour ce faire, utilisez <code class="docutils literal notranslate"><span class="pre">lv_img_cache_invalidate_src(&amp;my_png)</span></code>. Si <code class="docutils literal notranslate"><span class="pre">NULL</span></code> est passé en paramètre, tout le cache sera nettoyé.</p>
+<p>Let’s say you have loaded a PNG image into a <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span> <span class="pre">my_png</span></code> variable and use it in an <code class="docutils literal notranslate"><span class="pre">lv_img</span></code> object. If the image is already cached and you then change the underlying PNG file, you need to notify LittlevGL to cache the image again. Otherwise, there is no easy way of detecting that the underlying file changed and LittlevGL will still draw the old image.</p>
+<p>To do this, use <code class="docutils literal notranslate"><span class="pre">lv_img_cache_invalidate_src(&amp;my_png)</span></code>. If <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is passed as a parameter, the whole cache will be cleaned.</p>
 </div>
 </div>
 <div class="section" id="api">
@@ -2155,7 +2173,7 @@ Pour ce faire, utilisez <code class="docutils literal notranslate"><span class="
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

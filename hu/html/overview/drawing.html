@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#example">Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -516,7 +517,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Check box (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#overview">Overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#text">Text</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#check-uncheck">Check/Uncheck</a></li>
@@ -1091,56 +1092,56 @@
             
   <div class="section" id="drawing">
 <h1>Drawing<a class="headerlink" href="#drawing" title="Permalink to this headline">¶</a></h1>
-<p>With LittlevGL you don’t need to draw anything manually. Just create objects (like buttons and labels), move and change them and LittlevGL will refresh and redraw what is required.</p>
+<p>With LittlevGL, you don’t need to draw anything manually. Just create objects (like buttons and labels), move and change them and LittlevGL will refresh and redraw what is required.</p>
 <p>However, it might be useful to have a basic understanding of how drawing happens in LittlevGL.</p>
-<p>The basic concept is to not draw directly to screen but draw to an internal buffer first and then copy that buffer to screen when the rendering is ready. It has two main advantages:</p>
+<p>The basic concept is to not draw directly to the screen, but draw to an internal buffer first and then copy that buffer to screen when the rendering is ready. It has two main advantages:</p>
 <ol class="simple">
-<li><p><strong>Avoids flickering</strong> while layers of the UI are drawn. E.g. when drawing a <em>background + button + text</em> each “stage” would be visible for a short time.</p></li>
-<li><p><strong>It’s faster</strong> because when pixels are redrawn multiple times (e.g. background + button + text) it’s faster to modify a buffer in RAM and finally write one pixel once
-than read/write a display directly on each pixel access. (e.g. via a display controller with SPI interface).</p></li>
+<li><p><strong>Avoids flickering</strong> while layers of the UI are drawn. For example, when drawing a <em>background + button + text</em>, each “stage” would be visible for a short time.</p></li>
+<li><p><strong>It’s faster</strong> to modify a buffer in RAM and finally write one pixel once
+than read/write a display directly on each pixel access. (e.g. via a display controller with SPI interface). Hence, it’s suitable for pixels that are redrawn multiple times (e.g. background + button + text).</p></li>
 </ol>
 <div class="section" id="buffering-types">
 <h2>Buffering types<a class="headerlink" href="#buffering-types" title="Permalink to this headline">¶</a></h2>
-<p>As you already might learn in the <a class="reference internal" href="../porting/display.html"><span class="doc">Porting</span></a> section there are 3 types of buffering:</p>
+<p>As you already might learn in the <a class="reference internal" href="../porting/display.html"><span class="doc">Porting</span></a> section, there are 3 types of buffers:</p>
 <ol class="simple">
-<li><p><strong>One buffer</strong> LittlevGL draws the content of the screen into a buffer and sends it to the display. The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts. If only small areas changes (e.g. button press) then only those areas will be refreshed.</p></li>
-<li><p><strong>Two non-screen-sized buffers</strong> having two buffers LittlevGL can draw into one buffer while the content of the other buffer is sent to display in the background.
+<li><p><strong>One buffer</strong> -  LittlevGL draws the content of the screen into a buffer and sends it to the display. The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts. If only small areas changes (e.g. button press), then only those areas will be refreshed.</p></li>
+<li><p><strong>Two non-screen-sized buffers</strong> -  having two buffers, LittlevGL can draw into one buffer while the content of the other buffer is sent to display in the background.
 DMA or other hardware should be used to transfer the data to the display to let the CPU draw meanwhile.
-This way the rendering and refreshing of the display become parallel. Similarly to the <em>One buffer</em> LittlevGL will draw the display’s content in chunks if the buffer is smaller than the area to refresh.</p></li>
-<li><p><strong>Two screen-sized buffers</strong>.
-In contrast to <em>Two non-screen-sized buffers</em> LittlevGL will always provide the whole screen’s content not only chunks. This way the driver can simply change the address of the frame buffer to the buffer received from LittlevGL.
-Therefore this method works the best when the MCU has an LCD/TFT interface and the frame buffer is just a location in the RAM.</p></li>
+This way, the rendering and refreshing of the display become parallel. If the buffer is smaller than the area to refresh, LittlevGL will draw the display’s content in chunks similar to the <em>One buffer</em>.</p></li>
+<li><p><strong>Two screen-sized buffers</strong> -
+In contrast to <em>Two non-screen-sized buffers</em>, LittlevGL will always provide the whole screen’s content, not only chunks. This way, the driver can simply change the address of the frame buffer to the buffer received from LittlevGL.
+Therefore, this method works best when the MCU has an LCD/TFT interface and the frame buffer is just a location in the RAM.</p></li>
 </ol>
 </div>
 <div class="section" id="mechanism-of-screen-refreshing">
 <h2>Mechanism of screen refreshing<a class="headerlink" href="#mechanism-of-screen-refreshing" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li><p>Something happens on the GUI which requires redrawing. E.g. a button has been pressed, a chart has been changed or an animation happened, etc.</p></li>
-<li><p>LittlevGL saves the changed object’s old and new area into a buffer, called <em>Invalid area buffer</em>. For optimization in some cases objects are not added to the buffer:</p>
+<li><p>Something happens on the GUI which requires redrawing. For example, a button has been pressed, a chart has been changed or an animation happened, etc.</p></li>
+<li><p>LittlevGL saves the changed object’s old and new area into a buffer, called an <em>Invalid area buffer</em>. For optimization, in some cases, objects are not added to the buffer:</p>
 <ul class="simple">
-<li><p>Hidden objects are not added</p></li>
-<li><p>Objects completely out of their parent are not added</p></li>
-<li><p>Areas out of the parent are cropped to the parent’s area</p></li>
-<li><p>The object on other screens are not added</p></li>
+<li><p>Hidden objects are not added.</p></li>
+<li><p>Objects completely out of their parent are not added.</p></li>
+<li><p>Areas out of the parent are cropped to the parent’s area.</p></li>
+<li><p>The object on other screens are not added.</p></li>
 </ul>
 </li>
 <li><p>In every <code class="docutils literal notranslate"><span class="pre">LV_DISP_DEF_REFR_PERIOD</span></code> (set in <em>lv_conf.h</em>):</p>
 <ul class="simple">
-<li><p>LittlevGL checks the invalid areas and joins the adjacent or intersecting areas</p></li>
-<li><p>Takes the first joined area if it’s smaller the <em>display buffer</em> then simply draws the areas content to the <em>display buffer</em>. If the area doesn’t fit into the buffer draw as many lines as possible to the <em>display buffer</em>.</p></li>
-<li><p>When the area is drawn call <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> from the display driver to refresh the display</p></li>
-<li><p>If the area was larger than the buffer redraw the remaining parts too.</p></li>
+<li><p>LittlevGL checks the invalid areas and joins the adjacent or intersecting areas.</p></li>
+<li><p>Takes the first joined area, if it’s smaller than the <em>display buffer</em>, then simply draw the areas’ content to the <em>display buffer</em>. If the area doesn’t fit into the buffer, draw as many lines as possible to the <em>display buffer</em>.</p></li>
+<li><p>When the area is drawn, call <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> from the display driver to refresh the display.</p></li>
+<li><p>If the area was larger than the buffer, redraw the remaining parts too.</p></li>
 <li><p>Do the same with all the joined areas.</p></li>
 </ul>
 </li>
 </ol>
-<p>While an area is redrawn the library searches the most top object which covers the area to redraw and starts to draw from that object.
-For example, if a button’s label has changed the library will see that it’s enough to draw the button under the text and it’s not required to draw the background too.</p>
+<p>While an area is redrawn, the library searches the most top object which covers the area to redraw, and starts to draw from that object.
+For example, if a button’s label has changed, the library will see that it’s enough to draw the button under the text, and it’s not required to draw the background too.</p>
 <p>The difference between buffer types regarding the drawing mechanism is the following:</p>
 <ol class="simple">
-<li><p><strong>One buffer</strong> LittlevGL needs to wait for <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready()</span></code> (called at the end of <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code>) before starting to redraw the next part.</p></li>
-<li><p><strong>Two non-screen-sized buffers</strong> LittlevGL can immediately draw to the second buffer when the first is sent to <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> because the flushing should be done by DMA (or similar hardware) in the background.</p></li>
-<li><p><strong>Two screen-sized buffers</strong> After calling <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> the first buffer if being displayed as frame buffer. Its content is copied to the second buffer and all the changes are drawn on top of it.</p></li>
+<li><p><strong>One buffer</strong> - LittlevGL needs to wait for <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready()</span></code> (called at the end of <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code>) before starting to redraw the next part.</p></li>
+<li><p><strong>Two non-screen-sized buffers</strong> -  LittlevGL can immediately draw to the second buffer when the first is sent to <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> because the flushing should be done by DMA (or similar hardware) in the background.</p></li>
+<li><p><strong>Two screen-sized buffers</strong> -  After calling <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code>, the first buffer, if being displayed as frame buffer. Its content is copied to the second buffer and all the changes are drawn on top of it.</p></li>
 </ol>
 </div>
 </div>
@@ -1167,7 +1168,7 @@ For example, if a button’s label has changed the library will see that it’s 
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

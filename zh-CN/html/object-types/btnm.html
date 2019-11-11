@@ -350,15 +350,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../overview/animation.html">Animations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#create-an-animation">Create an animation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#animation-path">Animation path</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#speed-vs-time">Speed vs time</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#delete-animations">Delete animations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#api">API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../overview/animation.html#input-device">Input device</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/animation.html">Animation path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/animation.html#speed-vs-time">Speed vs time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/animation.html#delete-animations">Delete animations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/animation.html#api">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#input-device">Input device</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/task.html">Tasks</a><ul>
@@ -422,16 +418,16 @@
 <li class="toctree-l3"><a class="reference internal" href="arc.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="bar.html">Bar (lv_bar)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="bar.html#overview">Overview</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="bar.html#value-and-range">Value and range</a></li>
-<li class="toctree-l4"><a class="reference internal" href="bar.html#symmetrical">Symmetrical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bar.html">进度条 (lv_bar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#id1">概述</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#id2">数值和范围</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#id3">对称</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="bar.html#styles">Styles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="bar.html#events">Events</a></li>
-<li class="toctree-l3"><a class="reference internal" href="bar.html#keys">Keys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="bar.html#example">Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#id4">样式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#id5">事件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#id6">按键</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#id7">例子</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="bar.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="bar.html#micropython">MicroPython</a></li>
 </ul>
@@ -469,6 +465,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#micropython">MicroPython</a></li>
@@ -516,7 +513,7 @@
 <li class="toctree-l3"><a class="reference internal" href="canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cb.html">Check box (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cb.html#overview">Overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#text">Text</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#check-uncheck">Check/Uncheck</a></li>
@@ -1094,44 +1091,50 @@
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>The Button Matrix objects can display <strong>multiple buttons</strong> in rows and columns.</p>
+<p>The main reasons for wanting to use a button matrix instead of a container and individual button objects are:</p>
+<ul class="simple">
+<li><p>The button matrix is simpler to use for grid-based button layouts.</p></li>
+<li><p>The button matrix consumes a lot less memory per button.</p></li>
+</ul>
 <div class="section" id="button-s-text">
 <h3>Button’s text<a class="headerlink" href="#button-s-text" title="Permalink to this headline">¶</a></h3>
 <p>There is a text on each button. To specify them a descriptor string array, called <em>map</em>, needs to be used.
 The map can be set with <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_map(btnm,</span> <span class="pre">my_map)</span></code>.
 The declaration of a map should look like <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*</span> <span class="pre">map[]</span> <span class="pre">=</span> <span class="pre">{&quot;btn1&quot;,</span> <span class="pre">&quot;btn2&quot;,</span> <span class="pre">&quot;btn3&quot;,</span> <span class="pre">&quot;&quot;}</span></code>.
 Note that <strong>the last element has to be an empty string</strong>!</p>
-<p>Use <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> in the map  to make <strong>line break</strong>. E.g. <code class="docutils literal notranslate"><span class="pre">{&quot;btn1&quot;,</span> <span class="pre">&quot;btn2&quot;,</span> <span class="pre">&quot;\n&quot;,</span> <span class="pre">&quot;btn3&quot;,</span> <span class="pre">&quot;&quot;}</span></code>. The button’s width is recalculated in every line to will the whole line.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> in the map  to make <strong>line break</strong>. E.g. <code class="docutils literal notranslate"><span class="pre">{&quot;btn1&quot;,</span> <span class="pre">&quot;btn2&quot;,</span> <span class="pre">&quot;\n&quot;,</span> <span class="pre">&quot;btn3&quot;,</span> <span class="pre">&quot;&quot;}</span></code>. Each line’s buttons have their width calculated automatically.</p>
 </div>
 <div class="section" id="control-buttons">
 <h3>Control buttons<a class="headerlink" href="#control-buttons" title="Permalink to this headline">¶</a></h3>
 <p>The <strong>buttons width</strong> can be set relative to the other button in the same line with <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_btn_width(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">width)</span></code>
-E.g. in a line with two buttons: <em>btnA, width = 1</em> and <em>btnB, width = 2</em>, <em>btnA</em> will have 33 % width adnd <em>btnB</em> will have 66 % width.</p>
-<p>In addition to width each button can be customized with the following parameters:</p>
+E.g. in a line with two buttons: <em>btnA, width = 1</em> and <em>btnB, width = 2</em>, <em>btnA</em> will have 33 % width and <em>btnB</em> will have 66 % width. It’s similar to how the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow"><code class="docutils literal notranslate"><span class="pre">flex-grow</span></code></a> property works in CSS.</p>
+<p>In addition to width, each button can be customized with the following parameters:</p>
 <ul class="simple">
-<li><p><strong>LV_BTNM_CTRL_HIDDEN</strong> make a button hidden</p></li>
-<li><p><strong>LV_BTNM_CTRL_NO_REPEAT</strong> disable repeating when the button is long pressed</p></li>
-<li><p><strong>LV_BTNM_CTRL_INACTIVE</strong> make a button inactive</p></li>
-<li><p><strong>LV_BTNM_CTRL_TGL_ENABLE</strong> enable toggling of a button</p></li>
-<li><p><strong>LV_BTNM_CTRL_TGL_STATE</strong> set the toggle state</p></li>
-<li><p><strong>LV_BTNM_CTRL_CLICK_TRIG</strong> if 0 the button will react on press, if 1 will react on release</p></li>
+<li><p><strong>LV_BTNM_CTRL_HIDDEN</strong> - make a button hidden (hidden buttons still take up space in the layout, they are just not visible or clickable)</p></li>
+<li><p><strong>LV_BTNM_CTRL_NO_REPEAT</strong> - disable repeating when the button is long pressed</p></li>
+<li><p><strong>LV_BTNM_CTRL_INACTIVE</strong> - make a button inactive</p></li>
+<li><p><strong>LV_BTNM_CTRL_TGL_ENABLE</strong> - enable toggling of a button</p></li>
+<li><p><strong>LV_BTNM_CTRL_TGL_STATE</strong> - set the toggle state</p></li>
+<li><p><strong>LV_BTNM_CTRL_CLICK_TRIG</strong> - if 0, the button will react on press, if 1, will react on release</p></li>
 </ul>
-<p>The set or clear a button’s control attribute use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_btn_ctrl(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_btnm_clear_btn_ctrl(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> respectively. More <code class="docutils literal notranslate"><span class="pre">LV_BTNM_CTRL_...</span></code> values can be <em>Or</em>ed</p>
-<p>The set/clear the same control attribute for all buttons of a button matrix use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_btn_ctrl_all(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_btnm_clear_btn_ctrl_all(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code>.</p>
-<p>The set a control map for a button matrix (similarly to the map for the text) use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_ctrl_map(btnm,</span> <span class="pre">ctrl_map)</span></code>.
+<p>The set or clear a button’s control attribute, use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_btn_ctrl(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_btnm_clear_btn_ctrl(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> respectively. More <code class="docutils literal notranslate"><span class="pre">LV_BTNM_CTRL_...</span></code> values can be <em>Or</em>ed</p>
+<p>The set/clear the same control attribute for all buttons of a button matrix, use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_btn_ctrl_all(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_btnm_clear_btn_ctrl_all(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code>.</p>
+<p>The set a control map for a button matrix (similarly to the map for the text), use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_ctrl_map(btnm,</span> <span class="pre">ctrl_map)</span></code>.
 An element of <code class="docutils literal notranslate"><span class="pre">ctrl_map</span></code> should look like <code class="docutils literal notranslate"><span class="pre">ctrl_map[0]</span> <span class="pre">=</span> <span class="pre">width</span> <span class="pre">|</span> <span class="pre">LV_BTNM_CTRL_NO_REPEAT</span> <span class="pre">|</span>&#160; <span class="pre">LV_BTNM_CTRL_TGL_ENABLE</span></code>. The number of elements should be equal to the number of buttons (excluding newlines characters).</p>
 </div>
 <div class="section" id="one-toggle">
 <h3>One toggle<a class="headerlink" href="#one-toggle" title="Permalink to this headline">¶</a></h3>
-<p>The “One toggle” feature can be enabled with <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_one_toggle(btnm,</span> <span class="pre">true)</span></code> to allow only one toggled button at once.</p>
+<p>The “One toggle” feature can be enabled with <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_one_toggle(btnm,</span> <span class="pre">true)</span></code> to allow only one button to be toggled at once.</p>
 </div>
 <div class="section" id="recolor">
 <h3>Recolor<a class="headerlink" href="#recolor" title="Permalink to this headline">¶</a></h3>
-<p>The <strong>texts</strong> on the button can be <strong>recolored</strong> similarly to the recolor feature for <a class="reference internal" href="label.html"><span class="doc">Label</span></a> object. To enabel it use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_recolor(btnm,</span> <span class="pre">true)</span></code>. After that a button with <code class="docutils literal notranslate"><span class="pre">#FF0000</span> <span class="pre">Red#</span></code> text will be red.</p>
+<p>The <strong>texts</strong> on the button can be <strong>recolored</strong> similarly to the recolor feature for <a class="reference internal" href="label.html"><span class="doc">Label</span></a> object. To enable it, use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_recolor(btnm,</span> <span class="pre">true)</span></code>. After that a button with <code class="docutils literal notranslate"><span class="pre">#FF0000</span> <span class="pre">Red#</span></code> text will be red.</p>
 </div>
 <div class="section" id="notes">
 <h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
 <p>The Button matrix object is very light weighted because the buttons are not created just virtually drawn on the fly.
-This way 1 button use only 8 extra bytes instead of the ~100-150 byte size of a normal <a class="reference internal" href="btn.html"><span class="doc">Button</span></a> object.</p>
+This way, 1 button use only 8 extra bytes instead of the ~100-150 byte size of a normal <a class="reference internal" href="btn.html"><span class="doc">Button</span></a> object (plus the size of its container and a label for each button).</p>
+<p>The disadvantage of this setup is that the ability to style individual buttons to be different from others is limited (aside from the toggling feature). If you require that ability, using individual buttons is very likely to be a better approach.</p>
 </div>
 </div>
 <div class="section" id="styles">
@@ -1139,26 +1142,28 @@ This way 1 button use only 8 extra bytes instead of the ~100-150 byte size of a 
 <p>The Button matrix works with 6 styles: a background and 5 button styles for each state. You can set the styles with <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_style(btn,</span> <span class="pre">LV_BTNM_STYLE_...,</span> <span class="pre">&amp;style)</span></code>.
 The background and the buttons use the <code class="docutils literal notranslate"><span class="pre">style.body</span></code> properties. The labels use the <code class="docutils literal notranslate"><span class="pre">style.text</span></code> properties of the button styles.</p>
 <ul class="simple">
-<li><p><strong>LV_BTNM_STYLE_BG</strong> Background style. Uses all <em>style.body</em> properties including <em>padding</em> Default: <em>lv_style_pretty</em></p></li>
-<li><p><strong>LV_BTNM_STYLE_BTN_REL</strong> style of the released  buttons. Default: <em>lv_style_btn_rel</em></p></li>
-<li><p><strong>LV_BTNM_STYLE_BTN_PR</strong> style of the pressed buttons. Default: <em>lv_style_btn_pr</em></p></li>
-<li><p><strong>LV_BTNM_STYLE_BTN_TGL_REL</strong> style of the toggled released  buttons. Default: <em>lv_style_btn_tgl_rel</em></p></li>
-<li><p><strong>LV_BTNM_STYLE_BTN_TGL_PR</strong> style of the toggled pressed  buttons. Default: <em>lv_style_btn_tgl_pr</em></p></li>
-<li><p><strong>LV_BTNM_STYLE_BTN_INA</strong> style of the inactive  buttons. Default: <em>lv_style_btn_ina</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BG</strong> - Background style. Uses all <em>style.body</em> properties including <em>padding</em> Default: <em>lv_style_pretty</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BTN_REL</strong> - style of the released  buttons. Default: <em>lv_style_btn_rel</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BTN_PR</strong> - style of the pressed buttons. Default: <em>lv_style_btn_pr</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BTN_TGL_REL</strong> - style of the toggled released  buttons. Default: <em>lv_style_btn_tgl_rel</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BTN_TGL_PR</strong> - style of the toggled pressed  buttons. Default: <em>lv_style_btn_tgl_pr</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BTN_INA</strong> - style of the inactive  buttons. Default: <em>lv_style_btn_ina</em></p></li>
 </ul>
 </div>
 <div class="section" id="events">
 <h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
-<p>Besides the <a class="reference external" href="/overview/events.html#generic-event">Genreric events</a> the following <a class="reference external" href="/overview/event.html#special-events">Special events</a> are sent by the button matrices:</p>
+<p>Besides the <a class="reference external" href="/overview/events.html#generic-event">Generic events</a>, the following <a class="reference external" href="/overview/event.html#special-events">Special events</a> are sent by the button matrices:</p>
 <ul class="simple">
-<li><p><strong>LV_EVENT_VALUE_CHANGED</strong> sent when the button is pressed/released or repeated after long press. The event data is set to ID of the pressed/released button.</p></li>
+<li><p><strong>LV_EVENT_VALUE_CHANGED</strong> - sent when the button is pressed/released or repeated after long press. The event data is set to the ID of the pressed/released button.</p></li>
 </ul>
 <p>Learn more about <a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a>.</p>
-<p>##Keys</p>
+</div>
+<div class="section" id="keys">
+<h2>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h2>
 <p>The following <em>Keys</em> are processed by the Buttons:</p>
 <ul class="simple">
-<li><p><strong>LV_KEY_RIGHT/UP/LEFT/RIGHT</strong> To navigate among the buttons to select one</p></li>
-<li><p><strong>LV_KEY_ENTER</strong> To press/release the selected button</p></li>
+<li><p><strong>LV_KEY_RIGHT/UP/LEFT/RIGHT</strong> - To navigate among the buttons to select one</p></li>
+<li><p><strong>LV_KEY_ENTER</strong> - To press/release the selected button</p></li>
 </ul>
 <p>Learn more about <a class="reference internal" href="../overview/indev.html"><span class="doc">Keys</span></a>.</p>
 </div>
@@ -1679,7 +1684,7 @@ The background and the buttons use the <code class="docutils literal notranslate
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

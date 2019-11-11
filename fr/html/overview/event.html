@@ -170,7 +170,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Interface d’affichage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#tampon-d-affichage">Tampon d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#pilote-d-affichage">Pilote d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
@@ -178,9 +178,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Interface de périphérique d’entrée</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-de-peripheriques-d-entree">Types de périphériques d’entrée</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-tactile-souris-ou-autre-pointeur">Pavé tactile, souris ou autre pointeur</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-numerique-ou-clavier">Pavé numérique ou clavier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encodeur">Encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#bouton">Bouton</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#autres-fonctionnalites">Autres fonctionnalités</a></li>
@@ -233,6 +233,12 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Evénements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#types-d-evenements">Types d’événements</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#evenements-generiques">Evénements génériques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#relatifs-aux-peripheriques-d-entree">Relatifs aux  périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#relatif-au-pointeur">Relatif au pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#relatif-au-pave-numerique-et-encodeur">Relatif au pavé numérique et encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#evenements-generaux">Evénements généraux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#evenements-speciaux">Evénements spéciaux</a></li>
 </ul>
 </li>
@@ -241,11 +247,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="style.html">Styles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="style.html#utiliser-les-styles">Utiliser les styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#heritage-de-styles">Héritage de styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#proprietes-de-style">Propriétés de style</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-communes">Propriétés communes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-corps">Propriétés de style de corps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-texte">Propriétés de style de texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-d-image">Propriétés de style d’image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-ligne">Propriétés de style de ligne</a></li>
@@ -469,7 +475,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#evenements">Evénements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#exemple">Exemple</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -517,7 +523,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Case à cocher (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#texte">Texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#cocher-decocher">Cocher/décocher</a></li>
@@ -1091,13 +1097,13 @@
             
   <div class="section" id="evenements">
 <h1>Evénements<a class="headerlink" href="#evenements" title="Permalink to this headline">¶</a></h1>
-<p>Events are triggered in LittlevGL when something happens which might be interesting to the user, e.g. if an object:</p>
+<p>Les événements sont déclenchés dans LittlevGL quand il se produit quelque chose d’intéressant pour l’utilisateur, par exemple si un objet :</p>
 <ul class="simple">
 <li><p>est cliqué</p></li>
 <li><p>est déplacé</p></li>
 <li><p>sa valeur a changé, etc.</p></li>
 </ul>
-<p>The user can assign a callback function to an object to see these events. In practice, it looks like this:</p>
+<p>L’utilisateur peut affecter une fonction de rappel à un objet pour voir ces événements. En pratique, cela ressemble à ceci :</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
 <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">my_event_cb</span><span class="p">);</span>   <span class="cm">/* Assigne une fonction de rappel */</span>
 
@@ -1141,23 +1147,24 @@
 <p>Les types d’événements suivants existent :</p>
 <div class="section" id="evenements-generiques">
 <h3>Evénements génériques<a class="headerlink" href="#evenements-generiques" title="Permalink to this headline">¶</a></h3>
-<p>All objects (such as Buttons/Labels/Sliders etc.) receive these generic events regardless of their type.</p>
-<div class="section" id="related-to-the-input-devices">
-<h4>Related to the input devices<a class="headerlink" href="#related-to-the-input-devices" title="Permalink to this headline">¶</a></h4>
-<p>These are sent when an object is pressed/released etc. by the user. They are used not only for <em>Pointers</em> but can used for <em>Keypad</em>, <em>Encoder</em> and <em>Button</em> input devices as well. Visit the <a class="reference internal" href="indev.html"><span class="doc">Overview of input devices</span></a> section to learn more about them.</p>
+<p>Tous les objets (tels que boutons/étiquettes/curseurs etc.) reçoivent ces événements génériques quel que soit leur type.</p>
+</div>
+</div>
+<div class="section" id="relatifs-aux-peripheriques-d-entree">
+<h2>Relatifs aux  périphériques d’entrée<a class="headerlink" href="#relatifs-aux-peripheriques-d-entree" title="Permalink to this headline">¶</a></h2>
+<p>Ils sont envoyés lorsqu’un objet est pressé/relâché etc. par l’utilisateur. Ils sont utilisés pour les périphériques d’entrée <em>clavier</em>, <em>encodeur</em> et <em>bouton</em>, ainsi que pour les <em>pointeurs</em>. Consultez la section <a class="reference internal" href="indev.html"><span class="doc">Périphériques d’entrée</span></a> pour en savoir plus à leur sujet.</p>
 <ul class="simple">
 <li><p><strong>LV_EVENT_PRESSED</strong> L’objet a été pressé</p></li>
 <li><p><strong>LV_EVENT_PRESSING</strong> L’objet est pressé(envoyé continuellement pendant l’appui)</p></li>
-<li><p><strong>LV_EVENT_PRESS_LOST</strong> The input device is still being pressed but is no longer on the object</p></li>
-<li><p><strong>LV_EVENT_SHORT_CLICKED</strong> Released before <code class="docutils literal notranslate"><span class="pre">LV_INDEV_LONG_PRESS_TIME</span></code> time. Not called if dragged.</p></li>
+<li><p><strong>LV_EVENT_PRESS_LOST</strong> Le périphérique d’entrée est toujours pressé mais hors de l’objet</p></li>
+<li><p><strong>LV_EVENT_SHORT_CLICKED</strong> Relâché avant un délai <code class="docutils literal notranslate"><span class="pre">LV_INDEV_LONG_PRESS_TIME</span></code>. Pas généré si l’objet est déplacé.</p></li>
 <li><p><strong>LV_EVENT_LONG_PRESSED</strong>  Pressé durant <code class="docutils literal notranslate"><span class="pre">LV_INDEV_LONG_PRESS_TIME</span></code>. Pas généré si l’objet est déplacé.</p></li>
 <li><p><strong>LV_EVENT_LONG_PRESSED_REPEAT</strong> Généré après <code class="docutils literal notranslate"><span class="pre">LV_INDEV_LONG_PRESS_TIME</span></code> à chaque <code class="docutils literal notranslate"><span class="pre">LV_INDEV_LONG_PRESS_REP_TIME</span></code> ms. Pas généré si l’objet est déplacé.</p></li>
 <li><p><strong>LV_EVENT_CLICKED</strong> Généré au relâché si l’objet n’est pas déplacé (indépendamment d’un appui long)</p></li>
-<li><p><strong>LV_EVENT_RELEASED</strong>  Called in every case when the object has been released even if it was dragged. Not called if slid from the object while pressing and released outside of the object. In this case, <code class="docutils literal notranslate"><span class="pre">LV_EVENT_PRESS_LOST</span></code> is sent.</p></li>
+<li><p><strong>LV_EVENT_RELEASED</strong> Généré dans tous les cas lorsque l’objet a été relâché, même s’il a été déplacé. Non généré si il y a eu déplacement pendant l’appui et si le relâché intervient en dehors de l’objet. Dans ce cas, <code class="docutils literal notranslate"><span class="pre">LV_EVENT_PRESS_LOST</span></code> est généré.</p></li>
 </ul>
-</div>
-<div class="section" id="related-to-pointer">
-<h4>Related to pointer<a class="headerlink" href="#related-to-pointer" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="relatif-au-pointeur">
+<h3>Relatif au pointeur<a class="headerlink" href="#relatif-au-pointeur" title="Permalink to this headline">¶</a></h3>
 <p>Ces événements sont envoyés uniquement par des périphériques d’entrée de type pointeur (p.ex. souris ou pavé tactile).</p>
 <ul class="simple">
 <li><p><strong>LV_EVENT_DRAG_BEGIN</strong> le glissé de l’objet a débuté,</p></li>
@@ -1165,26 +1172,25 @@
 <li><p><strong>LV_EVENT_DRAG_THROW_BEGIN</strong> le lancé de l’objet a débuté (généré après un glissé avec “élan”)</p></li>
 </ul>
 </div>
-<div class="section" id="related-to-keypad-and-encoder">
-<h4>Related to keypad and encoder<a class="headerlink" href="#related-to-keypad-and-encoder" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="relatif-au-pave-numerique-et-encodeur">
+<h3>Relatif au pavé numérique et encodeur<a class="headerlink" href="#relatif-au-pave-numerique-et-encodeur" title="Permalink to this headline">¶</a></h3>
 <p>Ces événements sont envoyés par les périphériques d’entrée clavier et encodeur. En savoir plus sur les <em>groupes</em> dans la section [Périphériques d’entrée] (overview/indev).</p>
 <ul class="simple">
-<li><p><strong>LV_EVENT_KEY</strong> A <em>Key</em> is sent to the object. Typically when it was pressed or repeated after a long press</p></li>
+<li><p><strong>LV_EVENT_KEY</strong> Une <em>touche</em> est envoyée à l’objet. Typiquement quand elle a été pressée ou répétée après un appui long</p></li>
 <li><p><strong>LV_EVENT_FOCUSED</strong> L’objet est activé dans son groupe</p></li>
 <li><p><strong>LV_EVENT_DEFOCUSED</strong> L’objet est désactivé dans son groupe</p></li>
 </ul>
 </div>
 <div class="section" id="evenements-generaux">
-<h4>Evénements généraux<a class="headerlink" href="#evenements-generaux" title="Permalink to this headline">¶</a></h4>
+<h3>Evénements généraux<a class="headerlink" href="#evenements-generaux" title="Permalink to this headline">¶</a></h3>
 <p>Autres événements généraux envoyés par la librairie.</p>
 <ul class="simple">
 <li><p><strong>LV_EVENT_DELETE</strong> L’objet est en cours de suppression. Libérez les données associées allouées par l’utilisateur.</p></li>
 </ul>
 </div>
-</div>
 <div class="section" id="evenements-speciaux">
 <h3>Evénements spéciaux<a class="headerlink" href="#evenements-speciaux" title="Permalink to this headline">¶</a></h3>
-<p>These events are specific to a particular object type.</p>
+<p>Ces événements sont spécifiques à un type particulier d’objet.</p>
 <ul class="simple">
 <li><p><strong>LV_EVENT_VALUE_CHANGED</strong> La valeur de l’objet a changé (p.ex. pour un <a class="reference internal" href="../object-types/slider.html"><span class="doc">Curseur</span></a>)</p></li>
 <li><p><strong>LV_EVENT_INSERT</strong> Quelque chose est inséré dans l’objet (typiquement à une <a class="reference internal" href="../object-types/ta.html"><span class="doc">Zone de texte</span></a>)</p></li>
@@ -1192,14 +1198,14 @@
 <li><p><strong>LV_EVENT_CANCEL</strong> “Fermer”, “Annuler” ou un bouton spécifique similaire a été cliqué (typiquement à partir d’un objet <a class="reference internal" href="../object-types/kb.html"><span class="doc">Clavier</span></a>)</p></li>
 <li><p><strong>LV_EVENT_REFRESH</strong> Demande à actualiser l’objet. Jamais généré par la lirbarie mais peut l’être par l’utilisateur.</p></li>
 </ul>
-<p>Visit particular <a class="reference internal" href="../object-types/index.html"><span class="doc">Object type’s documentation</span></a> to understand which events are used by an object type.</p>
+<p>Visitez la documentation spécifique à partir de <a class="reference internal" href="../object-types/index.html"><span class="doc">Types d’objet</span></a> pour comprendre quels événements sont utilisés par un type d’objet.</p>
 </div>
 </div>
 <div class="section" id="donnees-personnalisees">
 <h2>Données personnalisées<a class="headerlink" href="#donnees-personnalisees" title="Permalink to this headline">¶</a></h2>
-<p>Some events might contain custom data. For example, <code class="docutils literal notranslate"><span class="pre">LV_EVENT_VALUE_CHANGED</span></code> in some cases tells the new value. For more information, see the particular <a class="reference internal" href="../object-types/index.html"><span class="doc">Object type’s documentation</span></a>.
+<p>Certains événements peuvent comporter des données personnalisées. Par exemple, <code class="docutils literal notranslate"><span class="pre">LV_EVENT_VALUE_CHANGED</span></code> indique dans certains cas la nouvelle valeur. Pour plus d’informations, voir la documentation des <a class="reference internal" href="../object-types/index.html"><span class="doc">Types d’objet</span></a>.
 Pour obtenir les données personnalisées dans la fonction de rappel, utilisez <code class="docutils literal notranslate"><span class="pre">lv_event_get_data()</span></code>.</p>
-<p>The type of the custom data depends on the sending object but if it’s a</p>
+<p>Le type des données personnalisées dépend de l’objet, mais si c’est un</p>
 <ul class="simple">
 <li><p>entier alors c’est un <code class="docutils literal notranslate"><span class="pre">uint32_t</span> <span class="pre">*</span></code> ou un  <code class="docutils literal notranslate"><span class="pre">int32_t</span> <span class="pre">*</span></code></p></li>
 <li><p>texte alors c’est un <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*</span></code> ou un <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*</span></code></p></li>
@@ -1207,14 +1213,14 @@ Pour obtenir les données personnalisées dans la fonction de rappel, utilisez <
 </div>
 <div class="section" id="envoyer-des-evenements-manuellement">
 <h2>Envoyer des événements manuellement<a class="headerlink" href="#envoyer-des-evenements-manuellement" title="Permalink to this headline">¶</a></h2>
-<p>To manually send events to an object, use <code class="docutils literal notranslate"><span class="pre">lv_event_send(obj,</span> <span class="pre">LV_EVENT_...,</span> <span class="pre">&amp;custom_data)</span></code>.</p>
-<p>For example, it can be used to manually close a message box by simulating a button press (although there are simpler ways of doing this):</p>
+<p>Pour envoyer manuellement des événements à un objet, utilisez <code class="docutils literal notranslate"><span class="pre">lv_event_send(obj,</span> <span class="pre">LV_EVENT_...,</span> <span class="pre">&amp;custom_data)</span></code>.</p>
+<p>Par exemple, cela peut être utilisé pour fermer manuellement une boîte de message en simulant un appui sur un bouton, bien qu’il existe des manières plus simples de faire cela :</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Simuler l&#39;appui du premier bouton (les index partent de zéro) */</span>
 <span class="kt">uint32_t</span> <span class="n">btn_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="n">lv_event_send</span><span class="p">(</span><span class="n">mbox</span><span class="p">,</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">btn_id</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Or to perform refresh generically:</p>
+<p>Ou pour effectuer une actualisation générique :</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_event_send</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">LV_EVENT_REFRESH</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -1243,7 +1249,7 @@ Pour obtenir les données personnalisées dans la fonction de rappel, utilisez <
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

@@ -3,15 +3,15 @@
 ```
 # Görevler
 
-LittlevGL dahili  görev sistemine sahiptir. Periyodik olarak çağırmak için bir fonksiyon kaydedebilirsiniz. Birkaç saniyede çağrılması gereken bu görevler görevler `lv_task_handler()` ile çağrılır ve işlenir.
+LittlevGL has a built-in task system. You can register a function to have it be called periodically. The tasks are handled and called in `lv_task_handler()`, which needs to be called periodically every few milliseconds.
 Daha fazla bilgi için [Porting](/porting/task-handler) bakınız.
 
-Görevler non-preemptive dir yani bir görev diğerini kesebilir. Bu yüzden görevin içinde herhangi bir LittlevGL fonksiyonunu çağırabilirsiniz.
+The tasks are non-preemptive, which means a task cannot interrupt another task. Therefore, you can call any LittlevGL related function in a task.
 
 
 ## Bir görev oluştur
-`lv_task_create(task_cb, period_ms, LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST, user_data)` yeni bir görev oluşturmak için kullanılır. Görevin parametrelerini değiştirmek için sonradan kullanılabilen bir `lv_task_t *` değişkeni oluşturacak.
-Ayrıca `lv_task_create_basic()` herhangi bir parametre belirtmeksizin yeni ir görev oluşturmak içinde kullanılabilir.
+To create a new task, use `lv_task_create(task_cb, period_ms, LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST, user_data)`. It will create an `lv_task_t *` variable, which can be used later to modify the parameters of the task.
+`lv_task_create_basic()` can also be used. It allows you to create a new task without specifying any parameters.
 
 Bşir görev geri çağırması `void (*lv_task_cb_t)(lv_task_t *);` prototipine sahip olmalı.
 
@@ -22,7 +22,7 @@ void my_task(lv_task_t * task)
   /*Kullanıcı verisini kullan*/
   uint32_t * user_data = task->user_data;
   printf("my_task called with user data: %d\n", *user_data);
-  
+
   /*i LittlevGL ile birşeyler yap*/
   if(something_happened) {
     something_happened = false;
@@ -41,7 +41,7 @@ lv_task_t * task = lv_task_create(my_task, 500, LV_TASK_PRIO_MID, &user_data);
 
 `lv_task_ready(task)` görevin `lv_task_handler()` 'ın bir sonraki çağrısında çalışmasını sağlar.
 
-`lv_task_reset(task)` bir görevin periyotunu resetler. Belirlenen milisaniye periyotu süresi sonrasında çağrılır.göre
+`lv_task_reset(task)` resets the period of a task. It will be called again after the defined period of milliseconds has elapsed.
 
 
 ## Parametreleri ayarlama
@@ -52,18 +52,18 @@ Görevlerin bazı parametreleri daha sora değiştirebilirsiniz:
 
 ## Tek seferlik görevler
 
-`lv_task_once(task)`çağırarak bir kez çalışacak bir görev yapabilirsiniz. Bu görev ilk çağırmadan sonra otomatik olarak silinecektir.
+You can make a task to run only once by calling`lv_task_once(task)`. The task will automatically be deleted after being called for the first time.
 
 
 ## Boş zaman ölçme
 
-`lv_task_get_idle()` ile `lv_task_handler`'ın boş zaman yüzdesini elde edebilirsiniz. Tüm sistemin boş zaman süresini değil, sadece`lv_task_handler`'ın ölçtüğünü unutmayınız. 
-Eğer bir işletim sistemi kullanıyorsunuz bir görevde `lv_task_handler`'ı çağırırsanız,yanıltıcı olabilir.
+You can get the idle percentage time `lv_task_handler` with `lv_task_get_idle()`. Note that, it doesn't measure the idle time of the overall system, only `lv_task_handler`.
+It can be misleading if you use an operating system and call `lv_task_handler` in an  task, as it won't actually measure the time the OS spends in an idle thread.
 
 ## Eş zamanlı olmayan çağırmalar
 
-Bazı durumlarda, hızlıca bir aksiyon yapamazsınız. Örneğin, bir nesneyi şuan silemezsin çünkü bir şey onu hala kullanılıyor veya yürütmeyi şuan kapatmak istemezsin.
-Bazı durumlar için, `lv_task_handler' 'ın bir sonraki çağrısında `my_function` çağrılması için `lv_async_call(my_function, data_p)` kullanılabilir. `data_p` çağrıldığında fonksiyona geçecek. 
+In some cases, you can't do an action immediately. For example, you can't delete an object right now because something else is still using it or you don't want to block the execution now.
+For these cases, you can use the `lv_async_call(my_function, data_p)` to make `my_function` be called on the next call of `lv_task_handler`. `data_p` will be passed to function when it's called.
 Note that, only the pointer of the data is saved so you need to ensure that the variable will be "alive" while the function is called. Global veya dinamik olarak ayrılmış veri, *static* kullanılabilir.
 
 Örneğin:
@@ -71,7 +71,7 @@ Note that, only the pointer of the data is saved so you need to ensure that the 
 void my_screen_clean_up(void * scr)
 {
   /*`scr` ile ilgili bazı kaynakları serbest bırakın*/
-  
+
   /*En sonunda ekranı sil*/
   lv_obj_del(scr);  
 }
@@ -87,12 +87,13 @@ lv_async_call(my_screen_clean_up, lv_scr_act());
 
 ```
 
+If you just want to delete an object, and don't need to clean anything up in `my_screen_cleanup`, you could just use `lv_obj_del_async`, which will delete the object on the next call to `lv_task_handler`.
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_task.h
   :project: lvgl
-        
+
 ```

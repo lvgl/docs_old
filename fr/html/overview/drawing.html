@@ -170,7 +170,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Interface d’affichage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#tampon-d-affichage">Tampon d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#pilote-d-affichage">Pilote d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
@@ -178,9 +178,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Interface de périphérique d’entrée</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-de-peripheriques-d-entree">Types de périphériques d’entrée</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-tactile-souris-ou-autre-pointeur">Pavé tactile, souris ou autre pointeur</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-numerique-ou-clavier">Pavé numérique ou clavier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encodeur">Encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#bouton">Bouton</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#autres-fonctionnalites">Autres fonctionnalités</a></li>
@@ -233,6 +233,12 @@
 <li class="toctree-l2"><a class="reference internal" href="event.html">Evénements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="event.html#types-d-evenements">Types d’événements</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generiques">Evénements génériques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="event.html#relatifs-aux-peripheriques-d-entree">Relatifs aux  périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pointeur">Relatif au pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pave-numerique-et-encodeur">Relatif au pavé numérique et encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generaux">Evénements généraux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-speciaux">Evénements spéciaux</a></li>
 </ul>
 </li>
@@ -241,11 +247,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="style.html">Styles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="style.html#utiliser-les-styles">Utiliser les styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#heritage-de-styles">Héritage de styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#proprietes-de-style">Propriétés de style</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-communes">Propriétés communes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-corps">Propriétés de style de corps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-texte">Propriétés de style de texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-d-image">Propriétés de style d’image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-ligne">Propriétés de style de ligne</a></li>
@@ -469,7 +475,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#evenements">Evénements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#exemple">Exemple</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -517,7 +523,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Case à cocher (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#texte">Texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#cocher-decocher">Cocher/décocher</a></li>
@@ -1091,56 +1097,58 @@
             
   <div class="section" id="dessin">
 <h1>Dessin<a class="headerlink" href="#dessin" title="Permalink to this headline">¶</a></h1>
-<p>Avec LittlevGL, vous n’avez pas besoin de dessiner quoi que ce soit manuellement. Créez simplement des objets (comme des boutons et des étiquettes), déplacez-les et modifiez-les. LittlevGL actualisera et redessinera les éléments requis.</p>
+<p>With LittlevGL, you don’t need to draw anything manually. Just create objects (like buttons and labels), move and change them and LittlevGL will refresh and redraw what is required.</p>
 <p>Cependant, il peut être utile d’avoir une compréhension de base de la façon dont le dessin est effectué dans LittlevGL.</p>
-<p>Le concept de base est de ne pas dessiner directement à l’écran, mais d’abord dans un tampon interne, puis de le copier sur l’écran lorsque le rendu est prêt. Cela présente deux avantages principaux :</p>
+<p>The basic concept is to not draw directly to the screen, but draw to an internal buffer first and then copy that buffer to screen when the rendering is ready. It has two main advantages:</p>
 <ol class="simple">
-<li><p><strong>Évite le scintillement</strong> pendant que des couches de l’interface utilisateur sont dessinées. P.ex. lorsque vous dessinez un <em>arrière-plan + bouton + texte</em>, chaque “étape” sera visible pendant un court instant.</p></li>
-<li><p><strong>C’est plus rapide</strong>, car lorsque les pixels sont redessinés plusieurs fois (p.ex. arrière-plan + bouton + texte), il est plus rapide de modifier un tampon dans la MEV et d’écrire physiquement le pixel une seule fois
-que de lire/écrire un affichage directement sur chaque accès pixel (p.ex. via un contrôleur d’affichage avec interface SPI).</p></li>
+<li><p><strong>Avoids flickering</strong> while layers of the UI are drawn. For example, when drawing a <em>background + button + text</em>, each “stage” would be visible for a short time.</p></li>
+<li><p><strong>It’s faster</strong> to modify a buffer in RAM and finally write one pixel once
+than read/write a display directly on each pixel access. (e.g. via a display controller with SPI interface). Hence, it’s suitable for pixels that are redrawn multiple times (e.g. background + button + text).</p></li>
 </ol>
 <div class="section" id="types-de-tampons">
 <h2>Types de tampons<a class="headerlink" href="#types-de-tampons" title="Permalink to this headline">¶</a></h2>
-<p>Comme vous l’avez peut-être déjà appris dans la section <a class="reference internal" href="../porting/display.html"><span class="doc">Portage</span></a>, il existe 3 techniques d’utilisation de tampon :</p>
+<p>As you already might learn in the <a class="reference internal" href="../porting/display.html"><span class="doc">Porting</span></a> section, there are 3 types of buffers:</p>
 <ol class="simple">
-<li><p><strong>Un tampon</strong> LittlevGL dessine le contenu de l’écran dans un tampon et l’envoie à l’affichage. Le tampon peut être plus petit que l’affichage. Dans ce cas, les zones les plus grandes seront redessinées en plusieurs parties. Si seules de petites zones changent (p.ex. appui sur un bouton), seules ces zones seront actualisées.</p></li>
-<li><p><strong>Deux tampons de taille différente de l’écran</strong> ayant deux tampons LittlevGL peut dessiner dans un tampon tandis que le contenu de l’autre tampon est envoyé à l’écran en arrière-plan.
+<li><p><strong>One buffer</strong> -  LittlevGL draws the content of the screen into a buffer and sends it to the display. The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts. If only small areas changes (e.g. button press), then only those areas will be refreshed.</p></li>
+<li><p><strong>Two non-screen-sized buffers</strong> -  having two buffers, LittlevGL can draw into one buffer while the content of the other buffer is sent to display in the background.
 Le DMA ou une autre méthode doit être utilisé pour transférer les données à l’écran afin de permettre au CPU de dessiner dans le même temps.
-De cette manière, le rendu et le rafraîchissement de l’affichage deviennent parallèles. De même que pour <em>Un tampon</em>, LittlevGL dessine le contenu de l’affichage en fragments si le tampon est plus petit que la zone à actualiser.</p></li>
-<li><p><strong>Deux tampons de la taille d’un écran</strong>.
-Contrairement à <em>Deux tampons de taille différente de l’écran</em> LittlevGL fournira toujours tout le contenu de l’affichage, pas seulement des fragments. De cette façon, le pilote peut simplement changer l’adresse du tampon d’affichage par celle du tampon préparé par LittlevGL.
-Par conséquent, cette méthode est la meilleure lorsque le microcontrôleur dispose d’une interface LCD/TFT et que le tampon d’affichage est un emplacement dans la MEV.</p></li>
+This way, the rendering and refreshing of the display become parallel. If the buffer is smaller than the area to refresh, LittlevGL will draw the display’s content in chunks similar to the <em>One buffer</em>.</p></li>
+<li><p><strong>Two screen-sized buffers</strong> -
+In contrast to <em>Two non-screen-sized buffers</em>, LittlevGL will always provide the whole screen’s content, not only chunks. This way, the driver can simply change the address of the frame buffer to the buffer received from LittlevGL.
+Therefore, this method works best when the MCU has an LCD/TFT interface and the frame buffer is just a location in the RAM.</p></li>
 </ol>
 </div>
 <div class="section" id="mecanisme-de-rafraichissement-de-l-ecran">
 <h2>Mécanisme de rafraîchissement de l’écran<a class="headerlink" href="#mecanisme-de-rafraichissement-de-l-ecran" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li><p>Quelque chose se passe dans l’interface graphique qui nécessite de redessiner. P.ex. un bouton a été pressé, un graphique a été modifié ou une animation s’est produite, etc.</p></li>
-<li><p>LittlevGL enregistre l’ancienne et la nouvelle zone de l’objet modifié dans un tampon appelé <em>tampon de zone non valide</em>. Pour l’optimisation, dans certains cas, des objets ne sont pas ajoutés au tampon :</p></li>
-</ol>
+<li><p>Something happens on the GUI which requires redrawing. For example, a button has been pressed, a chart has been changed or an animation happened, etc.</p></li>
+<li><p>LittlevGL saves the changed object’s old and new area into a buffer, called an <em>Invalid area buffer</em>. For optimization, in some cases, objects are not added to the buffer:</p>
 <ul class="simple">
-<li><p>Les objets cachés ne sont pas ajoutés</p></li>
-<li><p>Les objets complètement en-dehors de leur parent ne sont pas ajoutés</p></li>
-<li><p>Les zones partiellement hors du parent sont limitées à la zone du parent</p></li>
-<li><p>Les objets sur d’autres écrans ne sont pas ajoutés</p></li>
+<li><p>Hidden objects are not added.</p></li>
+<li><p>Objects completely out of their parent are not added.</p></li>
+<li><p>Areas out of the parent are cropped to the parent’s area.</p></li>
+<li><p>The object on other screens are not added.</p></li>
 </ul>
-<ol class="simple">
-<li><p>A chaque <code class="docutils literal notranslate"><span class="pre">LV_DISP_DEF_REFR_PERIOD</span></code> (définie dans <em>lv_conf.h</em>) :</p></li>
+</li>
+<li><p>A chaque <code class="docutils literal notranslate"><span class="pre">LV_DISP_DEF_REFR_PERIOD</span></code> (définie dans <em>lv_conf.h</em>) :</p>
+<ul class="simple">
+<li><p>LittlevGL checks the invalid areas and joins the adjacent or intersecting areas.</p></li>
+<li><p>Takes the first joined area, if it’s smaller than the <em>display buffer</em>, then simply draw the areas’ content to the <em>display buffer</em>. If the area doesn’t fit into the buffer, draw as many lines as possible to the <em>display buffer</em>.</p></li>
+<li><p>When the area is drawn, call <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> from the display driver to refresh the display.</p></li>
+<li><p>If the area was larger than the buffer, redraw the remaining parts too.</p></li>
+</ul>
+</li>
 </ol>
 <ul class="simple">
-<li><p>LittlevGL vérifie les zones non valides et joint les zones adjacentes sécantes</p></li>
-<li><p>Prend la première zone jointe si elle est plus petite que le <em>tampon d’affichage</em>, puis dessine simplement le contenu de la zone dans la <em>tampon d’affichage</em>. Si la zone ne rentre pas dans le tampon, dessine autant de lignes que possible dans le <em>tampon d’affichage</em>.</p></li>
-<li><p>Quand la zone est dessinée, appelle <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> du pilote d’affichage pour actualiser l’affichage</p></li>
-<li><p>Si la zone était plus grande que le tampon, redessine également les parties restantes.</p></li>
 <li><p>Fait la même chose avec toutes les zones jointes.</p></li>
 </ul>
-<p>Lorsqu’une zone est redessinée, la librairie recherche l’objet le plus haut couvrant la zone à redessiner et commence à dessiner à partir de cet objet.
-Par exemple, si l’étiquette d’un bouton a changée, la librairie verra qu’il suffit de dessiner le bouton sous le texte et qu’il n’est pas nécessaire de dessiner l’arrière-plan également.</p>
-<p>La différence entre les types de tampons en ce qui concerne le mécanisme de dessin est la suivante :</p>
+<p>While an area is redrawn, the library searches the most top object which covers the area to redraw, and starts to draw from that object.
+For example, if a button’s label has changed, the library will see that it’s enough to draw the button under the text, and it’s not required to draw the background too.</p>
+<p>The difference between buffer types regarding the drawing mechanism is the following:</p>
 <ol class="simple">
-<li><p><strong>Un tampon</strong> LittlevGL doit attendre <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready()</span></code> (appelée à la fin de <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code>) avant de commencer à redessiner la partie suivante.</p></li>
-<li><p><strong>Deux tampons de taille différente de l’écran</strong> LittlevGL peut immédiatement utiliser le second tampon lorsque le premier est envoyé à <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> car le transfert doit être effectué par DMA (ou une autre méthode) en arrière-plan.</p></li>
-<li><p><strong>Deux tampons de la taille de l’écran</strong> Après avoir appelé <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code>, un premier tampon est affiché. Son contenu est copié dans le second tampon et toutes les modifications sont dessinées dessus.</p></li>
+<li><p><strong>One buffer</strong> - LittlevGL needs to wait for <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready()</span></code> (called at the end of <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code>) before starting to redraw the next part.</p></li>
+<li><p><strong>Two non-screen-sized buffers</strong> -  LittlevGL can immediately draw to the second buffer when the first is sent to <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> because the flushing should be done by DMA (or similar hardware) in the background.</p></li>
+<li><p><strong>Two screen-sized buffers</strong> -  After calling <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code>, the first buffer, if being displayed as frame buffer. Its content is copied to the second buffer and all the changes are drawn on top of it.</p></li>
 </ol>
 </div>
 </div>
@@ -1167,7 +1175,7 @@ Par exemple, si l’étiquette d’un bouton a changée, la librairie verra qu�
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

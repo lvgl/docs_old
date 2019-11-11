@@ -5,29 +5,29 @@
 
 ## Vue d'ensemble
 
-L'objet barre possède deux parties principales : 
-1. un **fond**, l'objet lui-même 
-2. un **indicateur** dont la forme est similaire à celle du fond mais dont les largeur et hauteur peuvent être ajustée. 
+The 'Bar' objects have got two main parts:
+1. a **background** which is the object itself.
+2. an **indicator** which shape is similar to the background but its width/height can be adjusted.
 
-L'orientation de la barre peut être verticale ou horizontale selon le rapport largeur/hauteur. Logiquement, sur les barres horizontales, la largeur de l'indicateur est modifiable. Sur les barres verticales, c'est la hauteur de l'indicateur qui peut être modifiée. 
+The orientation of the bar can be vertical or horizontal according to the width/height ratio. Logically, on horizontal bars, the indicator's width can be changed. Similarly, on vertical bars, the indicator's height can be changed.
 
 ### Valeur et intervalle
-Une nouvelle valeur peut être définie par `lv_bar_set_value(bar, new_value, LV_ANIM_ON/OFF)`. 
-La valeur est comprise dans un intervalle (valeurs minimale et maximale) qui peut être modifié avec `lv_bar_set_range(bar, min, max)`. 
+A new value can be set by `lv_bar_set_value(bar, new_value, LV_ANIM_ON/OFF)`.
+The value is interpreted in a range (minimum and maximum values) which can be modified with `lv_bar_set_range(bar, min, max)`.
 L'intervalle par défaut est 1..100.
 
-La nouvelle valeur définie par `lv_bar_set_value` est affichée avec ou sans animation selon la valeur du dernier paramètre (`LV_ANIM_ON/OFF`). 
-La durée de l'animation peut être ajustée par `lv_bar_set_anim_time(bar, 100)`. L'unité de durée est la milliseconde. 
+The new value in `lv_bar_set_value` can be set with or without an animation depending on the last parameter (`LV_ANIM_ON/OFF`).
+The time of the animation can be adjusted by `lv_bar_set_anim_time(bar, 100)`. The time is in milliseconds unit.
 
 ### Symétrique
-La barre peut être dessinée symétriquement par rapport à zéro (de zéro vers la gauche ou la droite, le haut ou le bas) si cela est activé par `lv_bar_set_sym(bar, true)`
+The bar can be drawn symmetrical to zero (drawn from zero, left to right), if it's enabled with `lv_bar_set_sym(bar, true)`
 
 ## Styles
 
-Pour définir le style d'un objet *barre* `lv_bar_set_style(arc, LV_BAR_STYLE_MAIN, &style)` est utilisée.
+To set the style of an *Bar* object, use `lv_bar_set_style(arc, LV_BAR_STYLE_MAIN, &style)`:
 
-- **LV_BAR_STYLE_BG** est un [objet de base](/object-types/obj) de ce fait, il utilise ses éléments de style. Son style par défaut est: `lv_style_pretty`.
-- **LV_BAR_STYLE_INDIC** est similaire au fond.Il utilise les marges *left*, *right*, *top* et *bottom* pour conserver un peu d'espace sur les bords du fond. Son style par défaut est `lv_style_pretty_color`.
+- **LV_BAR_STYLE_BG** - is a [Base object](/object-types/obj), therefore, it uses its style elements. Its default style is: `lv_style_pretty`.
+- **LV_BAR_STYLE_INDIC** - is similar to the background. It uses the *left*, *right*, *top* and *bottom* paddings to keeps some space form the edges of the background. Its default style is: `lv_style_pretty_color`.
 
 ## Evénements
 Les [événements génériques](/overview/event.html#generic-events) sont les seuls à être envoyés par ce type d'objet.
@@ -47,11 +47,11 @@ Apprenez-en plus sur les [touches](/overview/indev).
 
 ```
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_bar.h
   :project: lvgl
-        
+
 ```

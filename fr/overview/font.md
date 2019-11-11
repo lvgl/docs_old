@@ -3,20 +3,20 @@
 ```
 # Polices
 
-Dans LittlevGL, les polices sont des collections d'images matricielles et d’autres informations nécessaires au rendu des images des lettres (glyphes). Une police est stockée dans une variable **lv_font_t** et peut être affectée au champ *text.font* du style. Par exemple :
+In LittlevGL fonts are collections of bitmaps and other information required to render the images of the letters (glyph). A font is stored in a **lv_font_t** variable and can be set in style's *text.font* field. For example:
 ```c
 my_style.text.font = &lv_font_roboto_28;  /* Définit une police plus grande */
 ```
 
-Les polices ont une propriété **bpp (Bits Par Pixel)**. Il indique combien de bits sont utilisés pour décrire un pixel dans la police. La valeur enregistrée pour un pixel détermine l'opacité du pixel.
-De cette façon, avec un *bpp* plus important, les bords de la lettre peuvent être lissés. Les valeurs de *bpp* possibles sont 1, 2, 4 et 8 (une valeur plus élevée signifie une meilleure qualité).
+The fonts have a **bpp (bits per pixel)** property. It shows how many bits are used to describe a pixel in the font. The value stored for a pixel determines the pixel's opacity.
+This way, with higher *bpp*, the edges of the letter can be smoother. The possible *bpp* values are 1, 2, 4 and 8 (higher value means better quality).
 
-Le * bpp * affecte également la taille de la mémoire requise pour utiliser la police. P.ex. *bpp = 4* rend la police environ 4 fois plus volumineuse que *bpp = 1*.
+The *bpp* also affects the required memory size to store the font. For example, *bpp = 4* makes the font nearly 4 times greater compared to *bpp = 1*.  
 
 ## Support Unicode
 
-LittlevGL prend en charge les caractères Unicode codés **UTF-8**.
-Vous devez configurer votre éditeur pour qu'il enregistre votre code/texte au format UTF-8 (généralement par défaut) et assurez-vous que `LV_TXT_ENC` est défini sur `LV_TXT_ENC_UTF8` dans *lv_conf.h* (ceci est la valeur par défaut).
+LittlevGL supports **UTF-8** encoded Unicode characters.
+You need to configure your editor to save your code/text as UTF-8 (usually this the default) and be sure that, `LV_TXT_ENC` is set to `LV_TXT_ENC_UTF8` in *lv_conf.h*. (This is the default value)
 
 Pour le vérifier, essayez
 ```c
@@ -24,21 +24,21 @@ lv_obj_t * label1 = lv_label_create(lv_scr_act(), NULL);
 lv_label_set_text(label1, LV_SYMBOL_OK);
 ```
 
-Si tout fonctionne bien, un caractère ✓ devrait être affiché.
+If all works well, a ✓ character should be displayed.
 
 ## Polices intégrées
 
-Il existe plusieurs polices intégrées de différentes tailles qui peuvent être activées dans lv_conf.h par la définition de constantes symboliques *LV_FONT_...* :
+There are several built-in fonts in different sizes, which can be enabled in lv_conf.h by *LV_FONT_...* defines:
 - `LV_FONT_ROBOTO_12` 12 px
 - `LV_FONT_ROBOTO_16` 16 px
 - `LV_FONT_ROBOTO_22` 22 px
 - `LV_FONT_ROBOTO_28` 28 px
 
-Les polices intégrées sont des **variables globales** portant des noms tels que `lv_font_roboto_16` pour une police de 16 pixels de haut. Pour les utiliser dans un style, ajoutez simplement un pointeur sur une variable de police, comme indiqué ci-dessus.
+The built-in fonts are **global variables** with names like `lv_font_roboto_16` for 16 px hight font. To use them in a style, just add a pointer to a font variable like shown above.
 
 Les polices intégrées ont *bpp = 4*, contiennent les caractères ASCII et utilisent la police [Roboto](https://fonts.google.com/specimen/Roboto).
 
-Outre la plage ASCII, les symboles suivants sont également ajoutés aux polices intégrées à partir de la police [FontAwesome](https://fontawesome.com/).
+In addition to the ASCII range, the following symbols are also added to the built-in fonts from the [FontAwesome](https://fontawesome.com/) font.
 
 ![](/misc/symbols.png "Built-in Symbols in LittlevGL")
 
@@ -60,30 +60,30 @@ lv_label_set_text(my_label, LV_SYMBOL_OK LV_SYMBOL_WIFI LV_SYMBOL_PLAY);
 ## Ajouter une nouvelle police
 
 Il y a plusieurs manières d'ajouter une nouvelle police à votre projet :
-1. Le moyen le plus simple consiste à utiliser le [Convertisseur de polices en ligne](https://littlevgl.com/ttf-font-to-c-array). Il suffit de définir les paramètres, de cliquer sur le bouton *Convert*, de copier la police dans votre projet et de l’utiliser.
+1. The simplest method is to use the [Online font converter](https://littlevgl.com/ttf-font-to-c-array). Just set the parameters, click the *Convert* button, copy the font to your project and use it. **Be sure to carefully read the steps provided on that site or you will get an error while converting.**
 2. Utilisez le [Convertisseur de polices hors ligne] (https://github.com/littlevgl/lv_font_conv) (nécessite l'installation de Node.js).
-3. Si vous voulez créer quelque chose comme les polices intégrées (police Roboto et symboles) mais de tailles et/ou de plages différentes, vous pouvez utiliser le script `built_in_font_gen.py` du dossier `lvgl/scripts/built_in_font`.
-Il nécessite que Python et `lv_font_conv` soient installés.
+3. If you want to create something like the built-in fonts (Roboto font and symbols) but in different size and/or ranges, you can use the `built_in_font_gen.py` script in `lvgl/scripts/built_in_font` folder.
+(It requires Python and `lv_font_conv` to be installed)
 
-Pour déclarer la police dans un fichier, utilisez `LV_FONT_DECLARE(my_font_name)`.
+To declare the font in a file, use `LV_FONT_DECLARE(my_font_name)`.
 
-Pour rendre les polices disponibles globalement, ajoutez-les à `LV_FONT_CUSTOM_DECLARE` dans *lv_conf.h*.
+To make the fonts globally available (like the builtin fonts), add them to `LV_FONT_CUSTOM_DECLARE` in *lv_conf.h*.
 
 ## Ajouter de nouveaux symboles
 Les symboles intégrés sont créés à partir de la police [FontAwesome](https://fontawesome.com/). Pour ajouter de nouveaux symboles à partir de la police FontAwesome, procédez comme suit :
 1. Recherchez un symbole sur [https://fontawesome.com] (https://fontawesome.com). Par exemple le symbole [USB](https://fontawesome.com)
-2. Ouvrez le [Convertisseur de polices en ligne](https://littlevgl.com/font_conv_new), ajoutez [FontAwesome.ttf] (https://littlevgl.com/tools/FontAwesome.ttf) et ajoutez l’ID Unicode du symbole au champ plage. P.ex. `0xf287` pour le symbole USB.
+2. Open the [Online font converter](https://littlevgl.com/ttf-font-to-c-array) add [FontAwesome.ttf](https://littlevgl.com/tools/FontAwesome.ttf) and add the Unicode ID of the symbol to the range field. E.g.` 0xf287` for the USB symbol.
 Plusieurs symboles peuvent être énumérés séparés par `,`.
 3. Convertissez la police et copiez-la dans votre projet.
-4. Convertissez la valeur Unicode en UTF8. Vous pouvez le faire, par exemple, sur ce [site] (http://www.ltg.ed.ac.uk/~richard/utf-8.cgi?input=f287&mode=hex). Pour `0xf287`, les *octets hexadécimaux UTF-8* sont `EF 8A 87`.
+4. Convert the Unicode value to UTF8. You can do it e.g.on [this site](http://www.ltg.ed.ac.uk/~richard/utf-8.cgi?input=f287&mode=hex). For `0xf287` the *Hex UTF-8 bytes* are `EF 8A 87`.
 5. Créez un `définition de constante symbolique` à partir des valeurs UTF8 : `#define MY_USB_SYMBOL "\ xEF \ x8A \ x87" `
 6. Utilisez le symbole comme les symboles intégrés. `lv_label_set_text (label, MY_USB_SYMBOL)`
 
 ## Ajouter un nouveau moteur de polices
 
-L'interface de police de LittlevGL est conçue pour être très flexible.
-Vous n'avez pas besoin d'utiliser le moteur de polices interne de LittlevGL, mais vous pouvez ajouter le vôtre.
-Par exemple, utilisez [FreeType] (https://www.freetype.org/) pour restituer les glyphes en temps réel à partir de polices TTF ou utilisez une mémoire flash externe pour sauvegarder les images matricielles de la police et les lire lorsque la librairie en a besoin.
+LittlevGL's font interface is designed to be very flexible.
+You don't need to use LittlevGL's internal font engine but, you can add your own.
+For example, use [FreeType](https://www.freetype.org/) to real-time render glyphs from TTF fonts or use an external flash to store the font's bitmap and read them when the library needs them.
 
 Pour ce faire, une variable `lv_font_t` personnalisée doit être créée :
 ```c
@@ -98,24 +98,24 @@ my_font.user_data = user_data;                      /* Éventuellement des donn�
 
 ...
 
-/* Obtient des informations sur le glyphe de `unicode_letter` dans la police `font`. 
+/* Get info about glyph of `unicode_letter` in `font` font.
  * Enregistre le résultat dans `dsc_out`.
  * La lettre suivante (`unicode_letter_next`) peut être utilisée pour calculer la largeur requise par ce glyphe (crénage)
  */
 bool my_get_glyph_dsc_cb(const lv_font_t * font, lv_font_glyph_dsc_t * dsc_out, uint32_t unicode_letter, uint32_t unicode_letter_next)
 {
     /* Votre code ici */
-  
+
     /* Enregistre le résultat.
-     * Par exemple ... 
+     * For example ...
      */
     dsc_out->adv_w = 12;        /* Espace horizontal requis par le glyphe en [px] */
     dsc_out->box_h = 8;         /* Hauteur de l'image en [px] */
     dsc_out->box_w = 6;         /* Largeur de l'image en [px] */
     dsc_out->ofs_x = 0;         /* Déplacement X de l'image en [px] */
     dsc_out->ofs_y = 3;         /* Déplacement Y de l'image mesuré depuis la ligne de base */
-    dsc_out->bpp   = 2;         /* Bits par pixel : 1/2/4/8 */
-    
+    dsc_out->bpp   = 2;         /*Bits per pixel: 1/2/4/8*/
+
     return true;                /* true : glyphe trouvé; false : glyphe non trouvé */
 }
 
@@ -124,13 +124,10 @@ bool my_get_glyph_dsc_cb(const lv_font_t * font, lv_font_glyph_dsc_t * dsc_out, 
 const uint8_t * my_get_glyph_bitmap_cb(const lv_font_t * font, uint32_t unicode_letter)
 {
     /* Votre code ici */
-    
-    /* L'image matricielle doit être un flux continu de bits où
-     * chaque pixel est représenté par `bpp` bits */ 
-    
+
+    /* The bitmap should be a continuous bitstream where
+     * each pixel is represented by `bpp` bits */
+
     return bitmap;    /* Ou NULL si non trouvé */
 }
 ```
- 
-
-

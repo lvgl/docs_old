@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Case à cocher (lv_cb)" href="cb.html" />
+    <link rel="next" title="Checkbox (lv_cb)" href="cb.html" />
     <link rel="prev" title="Calendrier (lv_calendar)" href="calendar.html" />
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -170,7 +170,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Interface d’affichage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#tampon-d-affichage">Tampon d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#pilote-d-affichage">Pilote d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
@@ -178,9 +178,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Interface de périphérique d’entrée</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-de-peripheriques-d-entree">Types de périphériques d’entrée</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-tactile-souris-ou-autre-pointeur">Pavé tactile, souris ou autre pointeur</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-numerique-ou-clavier">Pavé numérique ou clavier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encodeur">Encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#bouton">Bouton</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#autres-fonctionnalites">Autres fonctionnalités</a></li>
@@ -233,6 +233,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Evénements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/event.html#types-d-evenements">Types d’événements</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/event.html#evenements-generiques">Evénements génériques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#relatifs-aux-peripheriques-d-entree">Relatifs aux  périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#relatif-au-pointeur">Relatif au pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#relatif-au-pave-numerique-et-encodeur">Relatif au pavé numérique et encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#evenements-generaux">Evénements généraux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/event.html#evenements-speciaux">Evénements spéciaux</a></li>
 </ul>
 </li>
@@ -241,11 +247,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/style.html">Styles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#utiliser-les-styles">Utiliser les styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#heritage-de-styles">Héritage de styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#proprietes-de-style">Propriétés de style</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-communes">Propriétés communes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-de-corps">Propriétés de style de corps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-de-texte">Propriétés de style de texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-d-image">Propriétés de style d’image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-de-ligne">Propriétés de style de ligne</a></li>
@@ -469,7 +475,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#evenements">Evénements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="btnm.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#exemple">Exemple</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#micropython">MicroPython</a></li>
@@ -517,7 +523,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cb.html">Case à cocher (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#texte">Texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#cocher-decocher">Cocher/décocher</a></li>
@@ -1093,24 +1099,24 @@
 <h1>Canvas (lv_canvas)<a class="headerlink" href="#canvas-lv-canvas" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="vue-densemble">
 <h2>Vue d’ensemble<a class="headerlink" href="#vue-densemble" title="Permalink to this headline">¶</a></h2>
-<p>Un canevas est comme une <a class="reference internal" href="img.html"><span class="doc">image</span></a> où l’utilisateur peut dessiner ce qu’il souhaite.</p>
+<p>A Canvas is like an <a class="reference internal" href="img.html"><span class="doc">Image</span></a> where the user can draw anything.</p>
 <div class="section" id="tampon">
 <h3>Tampon<a class="headerlink" href="#tampon" title="Permalink to this headline">¶</a></h3>
-<p>Le canevas a besoin d’un tampon qui mémorise l’image dessinée.
-Pour affecter un tampon à un canevas, utilisez <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_buffer(canvas,</span> <span class="pre">buffer,</span> <span class="pre">width,</span> <span class="pre">height,</span> <span class="pre">LV_IMG_CF_...)</span></code>.
-<code class="docutils literal notranslate"><span class="pre">buffer</span></code> est un tampon statique (pas seulement une variable locale) destiné à contenir l’image du canevas.
-Par exemple
+<p>The Canvas needs a buffer which stores the drawn image.
+To assign a buffer to a Canvas, use <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_buffer(canvas,</span> <span class="pre">buffer,</span> <span class="pre">width,</span> <span class="pre">height,</span> <span class="pre">LV_IMG_CF_...)</span></code>.
+<code class="docutils literal notranslate"><span class="pre">buffer</span></code> is a static buffer (not just a local variable) to hold the image of the canvas.
+For example,
 <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">lv_color_t</span> <span class="pre">buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width,</span> <span class="pre">height)]</span></code>.  Les macros <code class="docutils literal notranslate"><span class="pre">LV_CANVAS_BUF_SIZE_...</span></code> aident à calculer la taille du tampon pour différents formats de couleur.</p>
-<p>The canvas supports all the built in color formats like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_2BIT</span></code>. See the full list in the <a class="reference external" href="/overview/image.html#color-formats">Color formats</a> section.</p>
+<p>The canvas supports all the built-in color formats like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_2BIT</span></code>. See the full list in the <a class="reference external" href="/overview/image.html#color-formats">Color formats</a> section.</p>
 </div>
 <div class="section" id="palette">
 <h3>Palette<a class="headerlink" href="#palette" title="Permalink to this headline">¶</a></h3>
-<p>Pour les formats de couleur <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> une palette doit être initialisée. Par exemple, <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_palette(canvas,</span> <span class="pre">3,</span> <span class="pre">LV_COLOR_RED)</span></code> colore les pixels avec <em>index = 3</em> en rouge.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> color formats, a palette needs to be initialized with  <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_palette(canvas,</span> <span class="pre">3,</span> <span class="pre">LV_COLOR_RED)</span></code>. It sets pixels with <em>index=3</em> to red.</p>
 </div>
 <div class="section" id="dessin">
 <h3>Dessin<a class="headerlink" href="#dessin" title="Permalink to this headline">¶</a></h3>
-<p>Pour tracer un pixel sur la toile, utilisez <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_px(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">LV_COLOR_RED)</span></code>.
-Avec <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> ou <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code> l’indice de la couleur ou la valeur alpha doit être passé en tant que couleur. P.ex. <code class="docutils literal notranslate"><span class="pre">lv_color_t</span> <span class="pre">c;</span> <span class="pre">c.full</span> <span class="pre">=</span> <span class="pre">3;</span></code></p>
+<p>To set a pixel on the canvas, use <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_px(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">LV_COLOR_RED)</span></code>.
+With <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code>, the index of the color or the alpha value needs to be passed as color. E.g. <code class="docutils literal notranslate"><span class="pre">lv_color_t</span> <span class="pre">c;</span> <span class="pre">c.full</span> <span class="pre">=</span> <span class="pre">3;</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">lv_canvas_fill_bg(canvas,</span> <span class="pre">LV_COLOR_BLUE)</span></code> remplit tout le canvas en bleu.</p>
 <p>Un tableau de pixels peut être copié sur le canvas avec <code class="docutils literal notranslate"><span class="pre">lv_canvas_copy_buf(canvas,</span> <span class="pre">buffer_to_copy,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height)</span></code>. Le format de couleur du tampon et du canevas doivent correspondre.</p>
 <p>Pour dessiner sur le canvas, utilisez</p>
@@ -1126,16 +1132,16 @@ Avec <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDE
 </div>
 <div class="section" id="rotation">
 <h3>Rotation<a class="headerlink" href="#rotation" title="Permalink to this headline">¶</a></h3>
-<p>Une image peut être ajoutée au canvas après rotation avec <code class="docutils literal notranslate"><span class="pre">lv_canvas_rotate(canvas,</span> <span class="pre">&amp;img_dsc,</span> <span class="pre">angle,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">pivot_x,</span> <span class="pre">pivot_y)</span></code>.
+<p>A rotated image can be added to canvas with <code class="docutils literal notranslate"><span class="pre">lv_canvas_rotate(canvas,</span> <span class="pre">&amp;imd_dsc,</span> <span class="pre">angle,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">pivot_x,</span> <span class="pre">pivot_y)</span></code>.
 L’image spécifiée par <code class="docutils literal notranslate"><span class="pre">img_dsc</span></code> est transformé par rotation autour du pivot puis copiée dans le canvas aux coordonnées <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>.
-Au lieu de <code class="docutils literal notranslate"><span class="pre">img_dsc</span></code>, un autre canevas peut être utilisé par <code class="docutils literal notranslate"><span class="pre">lv_canvas_get_img(canvas)</span></code>.</p>
+Instead of <code class="docutils literal notranslate"><span class="pre">img_dsc</span></code>, the buffer of another canvas also can be used by <code class="docutils literal notranslate"><span class="pre">lv_canvas_get_img(canvas)</span></code>.</p>
 <p>Notez que la rotation d’un canvas ne peut se fairesur lui-même. Vous avez besoin d’une source, image ou canevas, et d’un canvas de destination.</p>
 </div>
 </div>
 <div class="section" id="styles">
 <h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
-<p>Vous pouvez définir les styles avec <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_style(btn,</span> <span class="pre">LV_CANVAS_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code>.
-<code class="docutils literal notranslate"><span class="pre">style.image.color</span></code> est utilisé pour spécifier la couleur de base avec les formats de couleur <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code>.</p>
+<p>You can set the styles with <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_style(btn,</span> <span class="pre">LV_CANVAS_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code>.
+<code class="docutils literal notranslate"><span class="pre">style.image.color</span></code> is used to tell the base color with <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code> color format.</p>
 </div>
 <div class="section" id="evenements">
 <h2>Evénements<a class="headerlink" href="#evenements" title="Permalink to this headline">¶</a></h2>
@@ -1591,7 +1597,7 @@ Au lieu de <code class="docutils literal notranslate"><span class="pre">img_dsc<
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="cb.html" class="btn btn-neutral float-right" title="Case à cocher (lv_cb)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="cb.html" class="btn btn-neutral float-right" title="Checkbox (lv_cb)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="calendar.html" class="btn btn-neutral float-left" title="Calendrier (lv_calendar)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -1605,7 +1611,7 @@ Au lieu de <code class="docutils literal notranslate"><span class="pre">img_dsc<
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

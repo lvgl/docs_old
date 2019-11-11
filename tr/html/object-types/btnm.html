@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#bicimler">Biçimler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#olaylar">Olaylar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ornek">Örnek</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#micropython">MicroPython</a></li>
@@ -515,7 +516,7 @@
 <li class="toctree-l3"><a class="reference internal" href="canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cb.html">Onay kutusu (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cb.html#giris">Giriş</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#metin">Metin</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#onay-onayi-kaldir">Onay/Onayı Kaldır</a></li>
@@ -1092,71 +1093,81 @@
 <h1>Buton matris (lv_btnm)<a class="headerlink" href="#buton-matris-lv-btnm" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="giris">
 <h2>Giriş<a class="headerlink" href="#giris" title="Permalink to this headline">¶</a></h2>
-<p>Buton matris nesneleri  satır ve sütunlarda <strong>çoklu butonları</strong>  gösterilebilir.</p>
+<p>The Button Matrix objects can display <strong>multiple buttons</strong> in rows and columns.</p>
+<p>The main reasons for wanting to use a button matrix instead of a container and individual button objects are:</p>
+<ul class="simple">
+<li><p>The button matrix is simpler to use for grid-based button layouts.</p></li>
+<li><p>The button matrix consumes a lot less memory per button.</p></li>
+</ul>
 <div class="section" id="buton-metni">
 <h3>Buton metni<a class="headerlink" href="#buton-metni" title="Permalink to this headline">¶</a></h3>
-<p>Her butonda bir metin vardır. Tanımlayıcı karakter dizisi belirtmek için   <em>map</em> çağrısı kullanılması gerekiyor.
-Map <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_map(btnm,</span> <span class="pre">my_map)</span></code> ile ayarlanabilir.
-Map bildirimi  <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*</span> <span class="pre">map[]</span> <span class="pre">=</span> <span class="pre">{&quot;btn1&quot;,</span> <span class="pre">&quot;btn2&quot;,</span> <span class="pre">&quot;btn3&quot;,</span> <span class="pre">&quot;&quot;}</span></code> gibi olmalıdır.
+<p>There is a text on each button. To specify them a descriptor string array, called <em>map</em>, needs to be used.
+The map can be set with <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_map(btnm,</span> <span class="pre">my_map)</span></code>.
+The declaration of a map should look like <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*</span> <span class="pre">map[]</span> <span class="pre">=</span> <span class="pre">{&quot;btn1&quot;,</span> <span class="pre">&quot;btn2&quot;,</span> <span class="pre">&quot;btn3&quot;,</span> <span class="pre">&quot;&quot;}</span></code>.
 Unutmayın ki <strong>sonuncu elemanın boş karakter olması gerekir</strong>!</p>
-<p><strong>Satır sonuna</strong> geçmek için <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> kullanın . Örneğin <code class="docutils literal notranslate"><span class="pre">{&quot;btn1&quot;,</span> <span class="pre">&quot;btn2&quot;,</span> <span class="pre">&quot;\n&quot;,</span> <span class="pre">&quot;btn3&quot;,</span> <span class="pre">&quot;&quot;}</span></code>. Butonun genişliği tüm satırı alacak şekilde her satırda yeniden hesaplanır.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> in the map  to make <strong>line break</strong>. E.g. <code class="docutils literal notranslate"><span class="pre">{&quot;btn1&quot;,</span> <span class="pre">&quot;btn2&quot;,</span> <span class="pre">&quot;\n&quot;,</span> <span class="pre">&quot;btn3&quot;,</span> <span class="pre">&quot;&quot;}</span></code>. Each line’s buttons have their width calculated automatically.</p>
 </div>
 <div class="section" id="kontrol-butonlari">
 <h3>Kontrol butonları<a class="headerlink" href="#kontrol-butonlari" title="Permalink to this headline">¶</a></h3>
-<p><strong>Buton genişliği</strong> aynı satırdaki başa butona göre<code class="docutils literal notranslate"><span class="pre">lv_btnm_set_btn_width(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">width)</span></code> ile ayarlanabilir.
-Örneğin: Bir satırdaki iki buton ile : <em>btnA, width = 1</em> ve <em>btnB, width = 2</em>, <em>btnA</em> %33 genişğinde ve <em>btnB</em> %66 genişliğine sahip olacaktır.</p>
-<p>Genişliğe ek olarak her bir buton aşağıdaki parametreler ile özelleştirilebilir:</p>
+<p>The <strong>buttons width</strong> can be set relative to the other button in the same line with <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_btn_width(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">width)</span></code>
+E.g. in a line with two buttons: <em>btnA, width = 1</em> and <em>btnB, width = 2</em>, <em>btnA</em> will have 33 % width and <em>btnB</em> will have 66 % width. It’s similar to how the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow"><code class="docutils literal notranslate"><span class="pre">flex-grow</span></code></a> property works in CSS.</p>
+<p>In addition to width, each button can be customized with the following parameters:</p>
 <ul class="simple">
-<li><p><strong>LV_BTNM_CTRL_HIDDEN</strong> bir gizli buton yapar</p></li>
-<li><p><strong>LV_BTNM_CTRL_NO_REPEAT</strong> buton uzun basıldığında  yinelemeyi etkisiz kılar</p></li>
-<li><p><strong>LV_BTNM_CTRL_INACTIVE</strong> bir butonu pasif yapar</p></li>
-<li><p><strong>LV_BTNM_CTRL_TGL_ENABLE</strong> buton değişimini(toggle) aktif yapar</p></li>
-<li><p><strong>LV_BTNM_CTRL_TGL_STATE</strong> değişim durumunu ayarlar</p></li>
-<li><p><strong>LV_BTNM_CTRL_CLICK_TRIG</strong>  0 ise buton basıldığında tepki verir, 1 ise buton bırakıldığında tepki verir</p></li>
+<li><p><strong>LV_BTNM_CTRL_HIDDEN</strong> - make a button hidden (hidden buttons still take up space in the layout, they are just not visible or clickable)</p></li>
+<li><p><strong>LV_BTNM_CTRL_NO_REPEAT</strong> - disable repeating when the button is long pressed</p></li>
+<li><p><strong>LV_BTNM_CTRL_INACTIVE</strong> - make a button inactive</p></li>
+<li><p><strong>LV_BTNM_CTRL_TGL_ENABLE</strong> - enable toggling of a button</p></li>
+<li><p><strong>LV_BTNM_CTRL_TGL_STATE</strong> - set the toggle state</p></li>
+<li><p><strong>LV_BTNM_CTRL_CLICK_TRIG</strong> - if 0, the button will react on press, if 1, will react on release</p></li>
 </ul>
-<p>Bir butonun kontrol özelliğini ayarlamak ve silmek için sırası ile<code class="docutils literal notranslate"><span class="pre">lv_btnm_set_btn_ctrl(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> ve <code class="docutils literal notranslate"><span class="pre">lv_btnm_clear_btn_ctrl(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> kullanın . Daha fazla<code class="docutils literal notranslate"><span class="pre">LV_BTNM_CTRL_...</span></code> değerleri  kullanılabilir.</p>
-<p>Bir buton matrisin tüm butonların için aynı kontrol özelliklerini ayarlama/silmede  <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_btn_ctrl_all(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code>ve<code class="docutils literal notranslate"><span class="pre">lv_btnm_clear_btn_ctrl_all(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> kullanılır.</p>
-<p>Bir buton matrisi için kontrol map’i ayarlamada <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_ctrl_map(btnm,</span> <span class="pre">ctrl_map)</span></code> kullanılır.
+<p>The set or clear a button’s control attribute, use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_btn_ctrl(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_btnm_clear_btn_ctrl(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> respectively. More <code class="docutils literal notranslate"><span class="pre">LV_BTNM_CTRL_...</span></code> values can be <em>Or</em>ed</p>
+<p>The set/clear the same control attribute for all buttons of a button matrix, use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_btn_ctrl_all(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_btnm_clear_btn_ctrl_all(btnm,</span> <span class="pre">btn_id,</span> <span class="pre">LV_BTNM_CTRL_...)</span></code>.</p>
+<p>The set a control map for a button matrix (similarly to the map for the text), use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_ctrl_map(btnm,</span> <span class="pre">ctrl_map)</span></code>.
 <code class="docutils literal notranslate"><span class="pre">ctrl_map</span></code>in bir unsuru<code class="docutils literal notranslate"><span class="pre">ctrl_map[0]</span> <span class="pre">=</span> <span class="pre">width</span> <span class="pre">|</span> <span class="pre">LV_BTNM_CTRL_NO_REPEAT</span> <span class="pre">|</span>&#160; <span class="pre">LV_BTNM_CTRL_TGL_ENABLE</span></code> gibi olmalı. Unsurların numarası butonların numarasına(yeni satır karakteri hariç) eşit olmalı.</p>
 </div>
 <div class="section" id="tek-gecis-one-toggle">
 <h3>Tek geçiş (One toggle)<a class="headerlink" href="#tek-gecis-one-toggle" title="Permalink to this headline">¶</a></h3>
-<p>“Tek geçiş” özellikleri bir seferde sadece bir geçiş butonuna izin vermek için<code class="docutils literal notranslate"><span class="pre">lv_btnm_set_one_toggle(btnm,</span> <span class="pre">true)</span></code> ile aktif olabilir.</p>
+<p>The “One toggle” feature can be enabled with <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_one_toggle(btnm,</span> <span class="pre">true)</span></code> to allow only one button to be toggled at once.</p>
 </div>
 <div class="section" id="yeniden-renklendirme-recolor">
 <h3>Yeniden renklendirme(Recolor)<a class="headerlink" href="#yeniden-renklendirme-recolor" title="Permalink to this headline">¶</a></h3>
-<p>Buton üzerindeki <strong>metinler</strong>  <a class="reference internal" href="label.html"><span class="doc">Label</span></a> nesnesin yeniden renklenmesine benzer şekilde  <strong>yeniden renklendirilebilir</strong> .Aktif etmek için<code class="docutils literal notranslate"><span class="pre">lv_btnm_set_recolor(btnm,</span> <span class="pre">true)</span></code> kullanılır. Ondan sonra  buton<code class="docutils literal notranslate"><span class="pre">#FF0000</span> <span class="pre">Red#</span></code> ile metin kırımızı olacak.</p>
+<p>The <strong>texts</strong> on the button can be <strong>recolored</strong> similarly to the recolor feature for <a class="reference internal" href="label.html"><span class="doc">Label</span></a> object. To enable it, use <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_recolor(btnm,</span> <span class="pre">true)</span></code>. After that a button with <code class="docutils literal notranslate"><span class="pre">#FF0000</span> <span class="pre">Red#</span></code> text will be red.</p>
 </div>
 <div class="section" id="notlar">
 <h3>Notlar<a class="headerlink" href="#notlar" title="Permalink to this headline">¶</a></h3>
 <p>Buton matris objesi çok hafiftir çünkü butonlar sadece o anda sanal olarak çizilmiş şekilde
 oluşturulmaz.
-Bu yolla  bir buton ~100-150 bayt normal bir  <a class="reference internal" href="btn.html"><span class="doc">Button</span></a> nesnesinin boyutunun yerine sadece 8 ekstra bayt kullanır.</p>
+This way, 1 button use only 8 extra bytes instead of the ~100-150 byte size of a normal <a class="reference internal" href="btn.html"><span class="doc">Button</span></a> object (plus the size of its container and a label for each button).</p>
+<p>The disadvantage of this setup is that the ability to style individual buttons to be different from others is limited (aside from the toggling feature). If you require that ability, using individual buttons is very likely to be a better approach.</p>
 </div>
 </div>
 <div class="section" id="bicimler">
 <h2>Biçimler<a class="headerlink" href="#bicimler" title="Permalink to this headline">¶</a></h2>
-<p>Buton matris 6 biçim ile çalışır : Bir arka plan ve her bir durum için 5 buton biçimleri. Biçimleri  <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_style(btn,</span> <span class="pre">LV_BTNM_STYLE_...,</span> <span class="pre">&amp;style)</span></code> ile ayarlayabilirsin.
+<p>The Button matrix works with 6 styles: a background and 5 button styles for each state. You can set the styles with <code class="docutils literal notranslate"><span class="pre">lv_btnm_set_style(btn,</span> <span class="pre">LV_BTNM_STYLE_...,</span> <span class="pre">&amp;style)</span></code>.
 Arka plan ve butonlar <code class="docutils literal notranslate"><span class="pre">style.body</span></code> özelliklerini kullanır. Etiketler <code class="docutils literal notranslate"><span class="pre">style.text</span></code> buton biçimlerinin özelliklerini kullanır.</p>
 <ul class="simple">
-<li><p><strong>LV_BTNM_STYLE_BG</strong> Arka plan biçimi.  <em>Padding</em>  içeren tüm <em>style.body</em> özellikleri kullanılır. Varsayılan: <em>lv_style_pretty</em></p></li>
-<li><p><strong>LV_BTNM_STYLE_BTN_REL</strong> bırakılmış butonların biçimi. Varsayılan: <em>lv_style_btn_rel</em></p></li>
-<li><p><strong>LV_BTNM_STYLE_BTN_PR</strong> basılmış butonların biçimi. Varsayılan: <em>lv_style_btn_pr</em></p></li>
-<li><p><strong>LV_BTNM_STYLE_BTN_TGL_REL</strong> geçiş bırakılmış butonların biçimi. Varsayılan: <em>lv_style_btn_tgl_rel</em></p></li>
-<li><p><strong>LV_BTNM_STYLE_BTN_TGL_PR</strong> geçiş basılmış butonların biçimi. Varsayılan: <em>lv_style_btn_tgl_pr</em></p></li>
-<li><p><strong>LV_BTNM_STYLE_BTN_INA</strong>aktif olmayan butonların biçimi. Varsayılan: <em>lv_style_btn_ina</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BG</strong> - Background style. Uses all <em>style.body</em> properties including <em>padding</em> Default: <em>lv_style_pretty</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BTN_REL</strong> - style of the released  buttons. Default: <em>lv_style_btn_rel</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BTN_PR</strong> - style of the pressed buttons. Default: <em>lv_style_btn_pr</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BTN_TGL_REL</strong> - style of the toggled released  buttons. Default: <em>lv_style_btn_tgl_rel</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BTN_TGL_PR</strong> - style of the toggled pressed  buttons. Default: <em>lv_style_btn_tgl_pr</em></p></li>
+<li><p><strong>LV_BTNM_STYLE_BTN_INA</strong> - style of the inactive  buttons. Default: <em>lv_style_btn_ina</em></p></li>
 </ul>
 </div>
 <div class="section" id="olaylar">
 <h2>Olaylar<a class="headerlink" href="#olaylar" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="/overview/events.html#generic-event">Genreric events</a> yanında aşağıdaki  <a class="reference external" href="/overview/event.html#special-events">Special events</a> buton matris tarafından gönderilir:
--Buton basıldığında/bırakıldığında veya uzun basmadan sonra tekrarladığında <strong>LV_EVENT_VALUE_CHANGED</strong>  gönderir . Olay verisi basılmış/bırakılmış butonun kimliğine(ID) ayarlanır.</p>
+<p>Besides the <a class="reference external" href="/overview/events.html#generic-event">Generic events</a>, the following <a class="reference external" href="/overview/event.html#special-events">Special events</a> are sent by the button matrices:</p>
+<ul class="simple">
+<li><p><strong>LV_EVENT_VALUE_CHANGED</strong> - sent when the button is pressed/released or repeated after long press. The event data is set to the ID of the pressed/released button.</p></li>
+</ul>
 <p><a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a> hakkında daha fazlasını öğrenin.</p>
-<p>##Keys</p>
+</div>
+<div class="section" id="keys">
+<h2>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h2>
 <p>Aşağıdaki  <em>Keys</em> butonlar tarafından işlenmiş:</p>
 <ul class="simple">
-<li><p><strong>LV_KEY_RIGHT/UP/LEFT/RIGHT</strong> Butonların arasında dolaşıp birini seçmek için</p></li>
-<li><p><strong>LV_KEY_ENTER</strong>  Seçili butona bamak/bırakmak için</p></li>
+<li><p><strong>LV_KEY_RIGHT/UP/LEFT/RIGHT</strong> - To navigate among the buttons to select one</p></li>
+<li><p><strong>LV_KEY_ENTER</strong> - To press/release the selected button</p></li>
 </ul>
 <p><a class="reference internal" href="../overview/indev.html"><span class="doc">Keys</span></a> hakkında daha fazlasını öğrenin.</p>
 </div>
@@ -1677,7 +1688,7 @@ Arka plan ve butonlar <code class="docutils literal notranslate"><span class="pr
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

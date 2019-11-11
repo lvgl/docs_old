@@ -44,7 +44,7 @@ Similarly, if a [Slider](/object-types/slider) is focused and you press the left
 
 You need to associate an input device with a group. An input device can send the keys to only one group but, a group can receive data from more than one input device too.
 
-To create a group use `lv_group_t g = lv_group_create()` and to add an object to the group use `lv_group_add_obj(g, obj)`.
+To create a group use `lv_group_t * g = lv_group_create()` and to add an object to the group use `lv_group_add_obj(g, obj)`.
 
 The associate a group with an input device use `lv_indev_set_group(indev, g)`, where `indev` is the return value of `lv_indev_drv_register()`
 

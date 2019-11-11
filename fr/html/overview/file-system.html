@@ -170,7 +170,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Interface d’affichage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#tampon-d-affichage">Tampon d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#pilote-d-affichage">Pilote d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
@@ -178,9 +178,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Interface de périphérique d’entrée</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-de-peripheriques-d-entree">Types de périphériques d’entrée</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-tactile-souris-ou-autre-pointeur">Pavé tactile, souris ou autre pointeur</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-numerique-ou-clavier">Pavé numérique ou clavier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encodeur">Encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#bouton">Bouton</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#autres-fonctionnalites">Autres fonctionnalités</a></li>
@@ -233,6 +233,12 @@
 <li class="toctree-l2"><a class="reference internal" href="event.html">Evénements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="event.html#types-d-evenements">Types d’événements</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generiques">Evénements génériques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="event.html#relatifs-aux-peripheriques-d-entree">Relatifs aux  périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pointeur">Relatif au pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pave-numerique-et-encodeur">Relatif au pavé numérique et encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generaux">Evénements généraux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-speciaux">Evénements spéciaux</a></li>
 </ul>
 </li>
@@ -241,11 +247,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="style.html">Styles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="style.html#utiliser-les-styles">Utiliser les styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#heritage-de-styles">Héritage de styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#proprietes-de-style">Propriétés de style</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-communes">Propriétés communes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-corps">Propriétés de style de corps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-texte">Propriétés de style de texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-d-image">Propriétés de style d’image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-ligne">Propriétés de style de ligne</a></li>
@@ -469,7 +475,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#evenements">Evénements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#exemple">Exemple</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -517,7 +523,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Case à cocher (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#texte">Texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#cocher-decocher">Cocher/décocher</a></li>
@@ -1091,18 +1097,18 @@
             
   <div class="section" id="systeme-de-fichiers">
 <h1>Système de fichiers<a class="headerlink" href="#systeme-de-fichiers" title="Permalink to this headline">¶</a></h1>
-<p>LittlevGL a un module d’abstraction de système de fichiers qui permet d’attacher tout type de système de fichiers.
-Les systèmes de fichiers sont identifiés par une lettre.
-Par exemple, si la carte SD est associée à la lettre <code class="docutils literal notranslate"><span class="pre">'S'</span></code>, un fichier peut être localisé par <code class="docutils literal notranslate"><span class="pre">&quot;S:path/to/file.txt&quot;</span></code>.</p>
+<p>LittlevGL has a ‘File system’ abstraction module that enables you to attach any type of file systems.
+The file system is identified by a drive letter.
+For example, if the SD card is associated with the letter <code class="docutils literal notranslate"><span class="pre">'S'</span></code>, a file can be reached like <code class="docutils literal notranslate"><span class="pre">&quot;S:path/to/file.txt&quot;</span></code>.</p>
 <div class="section" id="ajouter-un-pilote">
 <h2>Ajouter un pilote<a class="headerlink" href="#ajouter-un-pilote" title="Permalink to this headline">¶</a></h2>
-<p>Pour ajouter un pilote, un <code class="docutils literal notranslate"><span class="pre">lv_fs_drv_t</span></code> doit être initialisé comme ceci :</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_fs_drv_t</span> <span class="n">drv</span><span class="p">;</span> 
+<p>To add a driver, <code class="docutils literal notranslate"><span class="pre">lv_fs_drv_t</span></code> needs to be initialized like this:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_fs_drv_t</span> <span class="n">drv</span><span class="p">;</span>
 <span class="n">lv_fs_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">drv</span><span class="p">);</span>                     <span class="cm">/* Initialisation de base */</span>
 
 <span class="n">drv</span><span class="p">.</span><span class="n">letter</span> <span class="o">=</span> <span class="sc">&#39;S&#39;</span><span class="p">;</span>                         <span class="cm">/* Une lettre majuscule pour identifier le lecteur */</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">file_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_file_object</span><span class="p">);</span>   <span class="cm">/* Taille requise pour enregistrer un objet de fichier */</span>
-<span class="n">drv</span><span class="p">.</span><span class="n">rddir_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_dir_object</span><span class="p">);</span>   <span class="cm">/* Taille requise pour enregistrer un objet répertoire (utilisé par dir_open/close/read) */</span> 
+<span class="n">drv</span><span class="p">.</span><span class="n">rddir_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_dir_object</span><span class="p">);</span>   <span class="cm">/*Size required to store a directory object (used by dir_open/close/read)*/</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">ready_cb</span> <span class="o">=</span> <span class="n">my_ready_cb</span><span class="p">;</span>               <span class="cm">/* Fonction de rappel pour indiquer si le lecteur est prêt à être utilisé */</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">open_cb</span> <span class="o">=</span> <span class="n">my_open_cb</span><span class="p">;</span>                 <span class="cm">/* Fonction de rappel pour ouvrir un fichier */</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">close_cb</span> <span class="o">=</span> <span class="n">my_close_cb</span><span class="p">;</span>               <span class="cm">/* Fonction de rappel pour fermer un fichier */</span>
@@ -1126,12 +1132,12 @@ Par exemple, si la carte SD est associée à la lettre <code class="docutils lit
 <span class="n">lv_fs_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">drv</span><span class="p">);</span>                 <span class="cm">/* Finalement enregistre le lecteur */</span>
 </pre></div>
 </div>
-<p>N’importe laquelle des fonctions de rappel peut être <code class="docutils literal notranslate"><span class="pre">NULL</span></code> pour indiquer que l’opération n’est pas prise en charge.</p>
-<p>Si vous utilisez <code class="docutils literal notranslate"><span class="pre">lv_fs_open(&amp;file,</span> <span class="pre">&quot;S:/folder/file.txt&quot;,</span>&#160; <span class="pre">LV_FS_MODE_WR)</span></code> LittlevGL effectue les opérations suivantes</p>
+<p>Any of the callbacks can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to indicate that that operation is not supported.</p>
+<p>As an example of how the callbacks are used, if you use <code class="docutils literal notranslate"><span class="pre">lv_fs_open(&amp;file,</span> <span class="pre">&quot;S:/folder/file.txt&quot;,</span> <span class="pre">LV_FS_MODE_WR)</span></code>, LittlevGL:</p>
 <ol class="simple">
-<li><p>vérifie s’il y a un lecteur avec la lettre <code class="docutils literal notranslate"><span class="pre">'S'</span></code></p></li>
-<li><p>vérifie si <code class="docutils literal notranslate"><span class="pre">open_cb</span></code> est implémentée (pas <code class="docutils literal notranslate"><span class="pre">NULL</span></code>)</p></li>
-<li><p>appelle <code class="docutils literal notranslate"><span class="pre">open_cb</span></code> avec le chemin <code class="docutils literal notranslate"><span class="pre">&quot;folder/file.txt&quot;</span></code>.</p></li>
+<li><p>Verifies that a registered drive exists with the letter <code class="docutils literal notranslate"><span class="pre">'S'</span></code>.</p></li>
+<li><p>Checks if it’s <code class="docutils literal notranslate"><span class="pre">open_cb</span></code> is implemented (not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>).</p></li>
+<li><p>Calls the set <code class="docutils literal notranslate"><span class="pre">open_cb</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;folder/file.txt&quot;</span></code> path.</p></li>
 </ol>
 </div>
 <div class="section" id="exemple-d-utilisation">
@@ -1151,7 +1157,7 @@ Par exemple, si la carte SD est associée à la lettre <code class="docutils lit
 </pre></div>
 </div>
 <p><em>Le mode dans <code class="docutils literal notranslate"><span class="pre">lv_fs_open</span></code> peut être <code class="docutils literal notranslate"><span class="pre">LV_FS_MODE_WR</span></code> pour ouvrir en écriture ou <code class="docutils literal notranslate"><span class="pre">LV_FS_MODE_RD</span> <span class="pre">|</span> <span class="pre">LV_FS_MODE_WR</span></code> pour lecture/écriture</em></p>
-<p>Cet exemple montre comment lire le contenu d’un répertoire. Il appartient au pilote de marquer les répertoires, mais il peut être judicieux d’insérer un “/” devant le nom du répertoire.</p>
+<p>This example shows how to read a directory’s content. It’s up to the driver how to mark the directories, but it can be a good practice to insert a <code class="docutils literal notranslate"><span class="pre">'/'</span></code> in front of the directory name.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_fs_dir_t</span> <span class="n">dir</span><span class="p">;</span>
 <span class="n">lv_fs_res_t</span> <span class="n">res</span><span class="p">;</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">lv_fs_dir_open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dir</span><span class="p">,</span> <span class="s">&quot;S:/folder&quot;</span><span class="p">);</span>
@@ -1165,7 +1171,7 @@ Par exemple, si la carte SD est associée à la lettre <code class="docutils lit
         <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="cm">/* fn est vide s&#39;il n&#39;y a plus d&#39;entrée à lire */</span>
+    <span class="cm">/*fn is empty, if not more files to read*/</span>
     <span class="k">if</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
@@ -1179,8 +1185,8 @@ Par exemple, si la carte SD est associée à la lettre <code class="docutils lit
 </div>
 <div class="section" id="utiliser-les-pilotes-pour-les-images">
 <h2>Utiliser les pilotes pour les images<a class="headerlink" href="#utiliser-les-pilotes-pour-les-images" title="Permalink to this headline">¶</a></h2>
-<p>Les objets <a class="reference internal" href="../object-types/img.html"><span class="doc">Image</span></a> peuvent également être ouverts à partir de fichiers (en plus des variables stockées dans la mémoire Flash)</p>
-<p>Pour initialiser un pilote pour les images, les fonction de rappel suivantes sont requises :</p>
+<p><a class="reference internal" href="../object-types/img.html"><span class="doc">Image</span></a> objects can be opened from files too (besides variables stored in the flash).</p>
+<p>To initialize the image, the following callbacks are required:</p>
 <ul class="simple">
 <li><p>open</p></li>
 <li><p>close</p></li>
@@ -1795,7 +1801,7 @@ Par exemple, si la carte SD est associée à la lettre <code class="docutils lit
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

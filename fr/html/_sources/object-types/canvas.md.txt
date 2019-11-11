@@ -4,25 +4,25 @@
 # Canvas (lv_canvas)
 
 ## Vue d’ensemble
-Un canevas est comme une [image](/object-types/img) où l'utilisateur peut dessiner ce qu'il souhaite.
+A Canvas is like an [Image](/object-types/img) where the user can draw anything.
 
 ### Tampon
-Le canevas a besoin d’un tampon qui mémorise l’image dessinée.
-Pour affecter un tampon à un canevas, utilisez `lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_...)`. 
-`buffer` est un tampon statique (pas seulement une variable locale) destiné à contenir l'image du canevas.
-Par exemple
+The Canvas needs a buffer which stores the drawn image.
+To assign a buffer to a Canvas, use `lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_...)`.
+`buffer` is a static buffer (not just a local variable) to hold the image of the canvas.
+For example,
 `static lv_color_t buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width, height)]`.  Les macros `LV_CANVAS_BUF_SIZE_...` aident à calculer la taille du tampon pour différents formats de couleur.
 
 
-The canvas supports all the built in color formats like `LV_IMG_CF_TRUE_COLOR` or `LV_IMG_CF_INDEXED_2BIT`. See the full list in the [Color formats](/overview/image.html#color-formats) section.
+The canvas supports all the built-in color formats like `LV_IMG_CF_TRUE_COLOR` or `LV_IMG_CF_INDEXED_2BIT`. See the full list in the [Color formats](/overview/image.html#color-formats) section.
 
 ### Palette
-Pour les formats de couleur `LV_IMG_CF_INDEXED_...` une palette doit être initialisée. Par exemple, `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)` colore les pixels avec *index = 3* en rouge.
+For `LV_IMG_CF_INDEXED_...` color formats, a palette needs to be initialized with  `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)`. It sets pixels with *index=3* to red.
 
 
 ### Dessin
-Pour tracer un pixel sur la toile, utilisez `lv_canvas_set_px(canvas, x, y, LV_COLOR_RED)`. 
-Avec `LV_IMG_CF_INDEXED_...` ou `LV_IMG_CF_ALPHA_...` l'indice de la couleur ou la valeur alpha doit être passé en tant que couleur. P.ex. `lv_color_t c; c.full = 3;`
+To set a pixel on the canvas, use `lv_canvas_set_px(canvas, x, y, LV_COLOR_RED)`.
+With `LV_IMG_CF_INDEXED_...` or `LV_IMG_CF_ALPHA_...`, the index of the color or the alpha value needs to be passed as color. E.g. `lv_color_t c; c.full = 3;`
 
 `lv_canvas_fill_bg(canvas, LV_COLOR_BLUE)` remplit tout le canvas en bleu.
 
@@ -39,15 +39,15 @@ Pour dessiner sur le canvas, utilisez
 Ces fonctions ne peuvent dessiner que dans des tampons `LV_IMG_CF_TRUE_COLOR`, `LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED` et `LV_IMG_CF_TRUE_COLOR_ALPHA`. `LV_IMG_CF_TRUE_COLOR_ALPHA` fonctionne uniquement avec `LV_COLOR_DEPTH 32`.
 
 ### Rotation
-Une image peut être ajoutée au canvas après rotation avec `lv_canvas_rotate(canvas, &img_dsc, angle, x, y, pivot_x, pivot_y)`. 
+A rotated image can be added to canvas with `lv_canvas_rotate(canvas, &imd_dsc, angle, x, y, pivot_x, pivot_y)`.
 L'image spécifiée par `img_dsc` est transformé par rotation autour du pivot puis copiée dans le canvas aux coordonnées `x`, `y`.
-Au lieu de `img_dsc`, un autre canevas peut être utilisé par `lv_canvas_get_img(canvas)`.
+Instead of `img_dsc`, the buffer of another canvas also can be used by `lv_canvas_get_img(canvas)`.
 
 Notez que la rotation d'un canvas ne peut se fairesur lui-même. Vous avez besoin d'une source, image ou canevas, et d'un canvas de destination.
 
 ## Styles
-Vous pouvez définir les styles avec `lv_canvas_set_style(btn, LV_CANVAS_STYLE_MAIN, &style)`. 
-`style.image.color` est utilisé pour spécifier la couleur de base avec les formats de couleur `LV_IMG_CF_ALPHA_...`. 
+You can set the styles with `lv_canvas_set_style(btn, LV_CANVAS_STYLE_MAIN, &style)`.
+`style.image.color` is used to tell the base color with `LV_IMG_CF_ALPHA_...` color format.
 
 ## Evénements
 Seuls les [événements génériques](/overview/event.html#generic-events) sont envoyés par ce type d'objet.
@@ -66,11 +66,11 @@ Apprenez-en plus sur les [touches](/overview/indev).
 
 ```
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_canvas.h
   :project: lvgl
-        
+
 ```

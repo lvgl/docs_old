@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#bicimler">Biçimler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#olaylar">Olaylar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#ornek">Örnek</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#micropython">MicroPython</a></li>
@@ -515,7 +516,7 @@
 <li class="toctree-l3"><a class="reference internal" href="canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cb.html">Onay kutusu (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cb.html#giris">Giriş</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#metin">Metin</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#onay-onayi-kaldir">Onay/Onayı Kaldır</a></li>
@@ -1100,19 +1101,18 @@ Günlerin ismi göster</p></li>
 <li><p>Buton tıklaması yardımıyla sonraki/önceki aya git
 Tıklanan günü vurgula</p></li>
 </ul>
-<p>Takvimde tarihleri ayarlama ve alma <code class="docutils literal notranslate"><span class="pre">year</span></code>, <code class="docutils literal notranslate"><span class="pre">month</span></code> ve<code class="docutils literal notranslate"><span class="pre">day</span></code> alanlarını içeren yapı olan <code class="docutils literal notranslate"><span class="pre">lv_calendar_date_t</span></code> türü kullanılır.</p>
+<p>To set and get dates in the calendar, the <code class="docutils literal notranslate"><span class="pre">lv_calendar_date_t</span></code> type is used which is a structure with <code class="docutils literal notranslate"><span class="pre">year</span></code>, <code class="docutils literal notranslate"><span class="pre">month</span></code> and <code class="docutils literal notranslate"><span class="pre">day</span></code> fields.</p>
 <div class="section" id="suan-ki-tarih">
 <h3>Şuan ki tarih<a class="headerlink" href="#suan-ki-tarih" title="Permalink to this headline">¶</a></h3>
-<p>Şuan ki tarihi(bugün) ayarlamak için  <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_today_date(calendar,</span> <span class="pre">&amp;today_date)</span></code> fonksiyonunu kullan.</p>
+<p>To set the current date (today), use the <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_today_date(calendar,</span> <span class="pre">&amp;today_date)</span></code> function.</p>
 </div>
 <div class="section" id="gosterilen-tarih">
 <h3>Gösterilen tarih<a class="headerlink" href="#gosterilen-tarih" title="Permalink to this headline">¶</a></h3>
-<p>Gösterilen tarihi ayarlamak için <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_shown_date(calendar,</span> <span class="pre">&amp;shown_date)</span></code> kullan;</p>
+<p>To set the shown date, use <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_shown_date(calendar,</span> <span class="pre">&amp;shown_date)</span></code>;</p>
 </div>
 <div class="section" id="vurgulanan-gunler">
 <h3>Vurgulanan günler<a class="headerlink" href="#vurgulanan-gunler" title="Permalink to this headline">¶</a></h3>
-<p>Vurgulanan tarih listesi <code class="docutils literal notranslate"><span class="pre">lv_calendar_date_t</span></code> fonksiyonu içinde saklanır ve vurgulanan liste <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_highlighted_dates(calendar,</span> <span class="pre">&amp;highlighted_dates)</span></code> fonksiyonu ile takvime yüklenir.
-Sadece dizi(liste) göstergeci kaydedileceği için tanımlanmış dizi(liste) statik veya global(evrensel) değişken olmalıdır.</p>
+<p>The list of highlighted dates should be stored in a <code class="docutils literal notranslate"><span class="pre">lv_calendar_date_t</span></code> array loaded by <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_highlighted_dates(calendar,</span> <span class="pre">&amp;highlighted_dates)</span></code>.Only the arrays pointer will be saved so the array should be a static or global variable.</p>
 </div>
 <div class="section" id="gun-isimleri">
 <h3>Gün İsimleri<a class="headerlink" href="#gun-isimleri" title="Permalink to this headline">¶</a></h3>
@@ -1120,26 +1120,26 @@ Sadece dizi(liste) göstergeci kaydedileceği için tanımlanmış dizi(liste) s
 </div>
 <div class="section" id="ay-isimleri">
 <h3>Ay İsimleri<a class="headerlink" href="#ay-isimleri" title="Permalink to this headline">¶</a></h3>
-<p>Gün isimlerine benzer şekilde ay isimleri de <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_month_names(calendar,</span> <span class="pre">month_names_array)</span></code> ile ayarlanabilir.</p>
+<p>Similarly to <code class="docutils literal notranslate"><span class="pre">day_names</span></code>, the name of the month can be set with <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_month_names(calendar,</span> <span class="pre">month_names_array)</span></code>.</p>
 </div>
 </div>
 <div class="section" id="bicim">
 <h2>Biçim<a class="headerlink" href="#bicim" title="Permalink to this headline">¶</a></h2>
-<p>Biçimi <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_style(btn,</span> <span class="pre">LV_CALENDAR_STYLE_...,</span> <span class="pre">&amp;style)</span></code> ile ayarlayabilirsiniz.</p>
+<p>You can set the styles with <code class="docutils literal notranslate"><span class="pre">lv_calendar_set_style(btn,</span> <span class="pre">LV_CALENDAR_STYLE_...,</span> <span class="pre">&amp;style)</span></code>.</p>
 <ul class="simple">
-<li><p><strong>LV_CALENDAR_STYLE_BG</strong> <code class="docutils literal notranslate"><span class="pre">body</span></code> özelliklerini kullanan arka plan biçimi ve <code class="docutils literal notranslate"><span class="pre">text</span></code> özelliklerini kullanan tarih numara biçimi. <code class="docutils literal notranslate"><span class="pre">body.padding.left/rigth/bottom</span></code> dolgular tarih  numaraları etrafındaki kenarlar eklenecektir.</p></li>
-<li><p><strong>LV_CALENDAR_STYLE_HEADER</strong> geçerli yıl ve ay gösterildiğinde ki başlık biçimi. <code class="docutils literal notranslate"><span class="pre">body</span></code> ve <code class="docutils literal notranslate"><span class="pre">text</span></code> özellikleri kullanılır.</p></li>
-<li><p><strong>LV_CALENDAR_STYLE_HEADER_PR</strong> basılı başlık biçimi, used when the önceki/sonraki. ay butonu basılı olduğunda kullanılır. text` özellikleri ok tarafından kullanılır.</p></li>
-<li><p><strong>LV_CALENDAR_STYLE_DAY_NAMES</strong> gün isim biçimi. <code class="docutils literal notranslate"><span class="pre">text</span></code> özellikleri metin tarafından kullanılır ve <code class="docutils literal notranslate"><span class="pre">body.padding.top</span></code> gün isimleri üzerindeki boşluğu belirler.</p></li>
-<li><p><strong>LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS</strong> <code class="docutils literal notranslate"><span class="pre">text</span></code> özellikleri vurgulu günlerin biçimini  ayarlamak için kullanılır</p></li>
-<li><p><strong>LV_CALENDAR_STYLE_INACTIVE_DAYS</strong> <code class="docutils literal notranslate"><span class="pre">text</span></code> özellikleri önceki/sonraki ayın görülen gününün biçimini ayarlamak için kullanılır .</p></li>
-<li><p><strong>LV_CALENDAR_STYLE_WEEK_BOX</strong> <code class="docutils literal notranslate"><span class="pre">body</span></code> özellikleri haftakutucuğunu biçimini ayarlamak için kullanılır</p></li>
-<li><p><strong>LV_CALENDAR_STYLE_TODAY_BOX</strong> <code class="docutils literal notranslate"><span class="pre">body</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code> özellikleri gün kutucuğunu biçimini ayarlamak için kullanılır</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_BG</strong> - Style of the background using the <code class="docutils literal notranslate"><span class="pre">body</span></code> properties and the style of the date numbers using the <code class="docutils literal notranslate"><span class="pre">text</span></code> properties. <code class="docutils literal notranslate"><span class="pre">body.padding.left/right/bottom</span></code> padding will be added on the edges around the date numbers.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_HEADER</strong> - Style of the header where the current year and month is displayed. <code class="docutils literal notranslate"><span class="pre">body</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_HEADER_PR</strong> - Pressed header style, used when the next/prev. month button is being pressed. <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used by the arrows.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_DAY_NAMES</strong> - Style of the day names. <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used by the ‘day’ texts and <code class="docutils literal notranslate"><span class="pre">body.padding.top</span></code> determines the space above the day names.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_HIGHLIGHTED_DAYS</strong> - <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used to adjust the style of the highlights days.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_INACTIVE_DAYS</strong> - <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used to adjust the style of the visible days of previous/next month.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_WEEK_BOX</strong> - <code class="docutils literal notranslate"><span class="pre">body</span></code> properties are used to set the style of the week box.</p></li>
+<li><p><strong>LV_CALENDAR_STYLE_TODAY_BOX</strong> - <code class="docutils literal notranslate"><span class="pre">body</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code> properties are used to set the style of the today box.</p></li>
 </ul>
 <p>Aksiyonlar
-<a class="reference external" href="/overview/event.html#generic-events">Generic events</a> dışında <a class="reference external" href="/overview/event.html#special-events">Special events</a> da  takvim tarafından gönderilir
+Besides the <a class="reference external" href="/overview/event.html#generic-events">Generic events</a>, the following <a class="reference external" href="/overview/event.html#special-events">Special events</a> are sent by the calendars:
 <strong>LV_EVENT_VALUE_CHANGED</strong> ay değiştiğinde gönderilir.</p>
-<p>*Giriş cihazı ile alakalı * aksiyonlarda  <code class="docutils literal notranslate"><span class="pre">lv_calendar_get_pressed_date(calendar)</span></code>  hangi günün şu an basılı olduğunu bildirir veya hiç bir tarih basılı olmasa <code class="docutils literal notranslate"><span class="pre">NULL</span></code> döndürür.</p>
+<p>In <em>Input device related</em> events, <code class="docutils literal notranslate"><span class="pre">lv_calendar_get_pressed_date(calendar)</span></code> tells which day is currently being pressed or return <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if no date is pressed.</p>
 </div>
 <div class="section" id="keys">
 <h2>Keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h2>
@@ -1621,7 +1621,7 @@ Sadece dizi(liste) göstergeci kaydedileceği için tanımlanmış dizi(liste) s
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

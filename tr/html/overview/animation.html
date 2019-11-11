@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#bicimler">Biçimler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#olaylar">Olaylar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#ornek">Örnek</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -515,7 +516,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Onay kutusu (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#giris">Giriş</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#metin">Metin</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#onay-onayi-kaldir">Onay/Onayı Kaldır</a></li>
@@ -1090,7 +1091,7 @@
             
   <div class="section" id="animasyon">
 <h1>Animasyon<a class="headerlink" href="#animasyon" title="Permalink to this headline">¶</a></h1>
-<p>Animasyon yardımıyla bir değişkenin değerini başlangıç ve bitiş değerleri arasında otomatik değiştirebilirsiniz.
+<p>You can automatically change the value of a variable between a start and an end value using animations.
 Animasyon “animatör” fonksiyonunun ilişkili parametre değerleriyle peryodik çağrılmasıyla gerçekleşir.</p>
 <p><em>animator</em> fonksiyonları aşağıdaki prototipe sahiptir:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">var</span><span class="p">,</span> <span class="n">lv_anim_var_t</span> <span class="n">value</span><span class="p">);</span>
@@ -1101,7 +1102,7 @@ Animasyon “animatör” fonksiyonunun ilişkili parametre değerleriyle peryod
 <h2>Animasyon Oluşturma<a class="headerlink" href="#animasyon-olusturma" title="Permalink to this headline">¶</a></h2>
 <p>Animasyon oluşturmak için, <code class="docutils literal notranslate"><span class="pre">lv_anim_t</span></code>değişkeni ilklendirilmek zorundadır ve <code class="docutils literal notranslate"><span class="pre">lv_anim_set_...()</span></code> fonksiyonlarıyla ayarlanabilir.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_anim_t</span> <span class="n">a</span><span class="p">;</span>
-<span class="n">lv_anim_set_exec_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">btn1</span><span class="p">,</span> <span class="n">lv_obj_set_x</span><span class="p">);</span>    <span class="cm">/*animatör fonksiyonunu ve animasyonun gerçekleştirileceği değişkeni ayarla*/</span> 
+<span class="n">lv_anim_set_exec_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">btn1</span><span class="p">,</span> <span class="n">lv_obj_set_x</span><span class="p">);</span>    <span class="cm">/*Set the animator function and variable to animate*/</span>
 <span class="n">lv_anim_set_time</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">delay</span><span class="p">);</span>
 <span class="n">lv_anim_set_values</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>             <span class="cm">/*Başlangıç ve bitiş değerlerini ayarla. Ör. 0, 150*/</span>
 <span class="n">lv_anim_set_path_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">lv_anim_path_linear</span><span class="p">);</span>   <span class="cm">/*`lv_anim_path_...` fonksiyonlardan animasyon davranışını ayarla.*/</span>
@@ -1112,14 +1113,14 @@ Animasyon “animatör” fonksiyonunun ilişkili parametre değerleriyle peryod
 <span class="n">lv_anim_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">);</span>                             <span class="cm">/*Animasyonu başlat*/</span>
 </pre></div>
 </div>
-<p>Aynı zamanda aynı değişken üzerinde <strong>çoklu farklı animasyonlar</strong> uygulanabilir.
-Örneğin  <code class="docutils literal notranslate"><span class="pre">lv_obj_set_x</span></code> ve <code class="docutils literal notranslate"><span class="pre">lv_obj_set_y</span></code> ile x ve y koordinatlarını animate eder. Fakat, verilen bir değişken ve fonksiyon çiftile yalnız bir animasyon ilişkilendirilir.
-Bu yüzden <code class="docutils literal notranslate"><span class="pre">lv_anim_create()</span></code> zaten var olan değişken-fonksiyon animasyonlarını silecek.</p>
+<p>You can apply <strong>multiple different animations</strong> on the same variable at the same time.
+For example, animate the x and y coordinates with <code class="docutils literal notranslate"><span class="pre">lv_obj_set_x</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_obj_set_y</span></code>. However, only one animation can exist with a given variable and function pair.
+Therefore <code class="docutils literal notranslate"><span class="pre">lv_anim_create()</span></code> will delete the already existing variable-function animations.</p>
 </div>
 <div class="section" id="animasyon-davranili">
 <h2>Animasyon davranılı<a class="headerlink" href="#animasyon-davranili" title="Permalink to this headline">¶</a></h2>
-<p><strong>Animasyon şeklini</strong> belirleyebilirsiniz. En basit durumda, doğrusaldır, yani * start * ve * end * arasındaki geçerli değer doğrusal olarak değiştirilir.
-<em>Path/yol/şekil</em>, animasyonun o andaki durumuna göre ayarlanacak bir sonraki değeri hesaplayan bir fonksiyondur. Şu anda, aşağıdaki yerleşik yollar/şekiller vardır:</p>
+<p>You can determinate the <strong>path of animation</strong>. In the most simple case, it is linear, which means the current value between <em>start</em> and <em>end</em>  is changed linearly.
+A <em>path</em> is a function which calculates the next value to set based on the current state of the animation. Currently, there are the following built-in paths:</p>
 <ul class="simple">
 <li><p><strong>lv_anim_path_linear</strong> doğrusal animasyon</p></li>
 <li><p><strong>lv_anim_path_step</strong> son duruma bir adımda geç</p></li>
@@ -1127,14 +1128,14 @@ Bu yüzden <code class="docutils literal notranslate"><span class="pre">lv_anim_
 <li><p><strong>lv_anim_path_ease_out</strong> sonda yavaş</p></li>
 <li><p><strong>lv_anim_path_ease_in_out</strong> başta ve sonda yavaş</p></li>
 <li><p><strong>lv_anim_path_overshoot</strong> son değeri aşsın</p></li>
-<li><p><strong>lv_anim_path_bounce</strong> son değerden biraz geri zıplar (duvara vurma davranışı gibi)</p></li>
+<li><p><strong>lv_anim_path_bounce</strong> bounce back a little from the end value (like hitting a wall)</p></li>
 </ul>
 </div>
 <div class="section" id="hiz-mi-sure-mi">
 <h2>Hız mı süre mi<a class="headerlink" href="#hiz-mi-sure-mi" title="Permalink to this headline">¶</a></h2>
-<p>Varsayılan olarak, animasyon zamanını ayarlayabilirsiniz. Ancak bazı durumlarda, <strong>animasyon hızı</strong> daha pratiktir.</p>
-<p><code class="docutils literal notranslate"><span class="pre">lv_anim_speed_to_time(speed,</span> <span class="pre">start,</span> <span class="pre">end)</span></code> işlevi, verilen hız ile bir başlangıç değerinden bitiş değerine ulaşmak için gereken süreyi milisaniye cinsinden hesaplar.
-Hız, <em>unit/sec</em> boyutunda yorumlanır. Örneğin, <code class="docutils literal notranslate"><span class="pre">lv_anim_speed_to_time(20,0,100)</span></code>, 5000 milisaniye verir. Örneğin <code class="docutils literal notranslate"><span class="pre">lv_obj_set_x</span></code> durumunda, <em>unit</em> pikseldir. Bu yüzden <em>20</em>, <em>20 pixel/saniye</em> hız anlamına gelir.</p>
+<p>By default, you can set the animation time. But, in some cases, the <strong>animation speed</strong> is more practical.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lv_anim_speed_to_time(speed,</span> <span class="pre">start,</span> <span class="pre">end)</span></code> function calculates the required time in milliseconds to reach the end value from a start value with the given speed.
+The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code class="docutils literal notranslate"><span class="pre">lv_anim_speed_to_time(20,0,100)</span></code> will give 5000 milliseconds. For example, in case of <code class="docutils literal notranslate"><span class="pre">lv_obj_set_x</span></code> <em>unit</em> is pixels so <em>20</em> means <em>20 px/sec</em> speed.</p>
 </div>
 <div class="section" id="animasyonu-sil">
 <h2>Animasyonu sil<a class="headerlink" href="#animasyonu-sil" title="Permalink to this headline">¶</a></h2>
@@ -1651,7 +1652,7 @@ Hız, <em>unit/sec</em> boyutunda yorumlanır. Örneğin, <code class="docutils 
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

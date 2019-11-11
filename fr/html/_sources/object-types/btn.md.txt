@@ -5,73 +5,74 @@
 
 ## Vue d'ensemble
 
-Les boutons sont de simples objets rectangulaires dont le style et l'état changent quand ils sont pressés ou relâchés. 
+Buttons are simple rectangle-like objects, but they change their style and state when they are pressed or released.
 
 ### Etats
 Les boutons peuvent prendre l'un des 5 états possibles :
-- **LV_BTN_STATE_REL** état relâché
-- **LV_BTN_STATE_PR** état  pressé
-- **LV_BTN_STATE_TGL_REL** état bascule relâché
-- **LV_BTN_STATE_TGL_PR** état bascule pressé
-- **LV_BTN_STATE_INA** état désactivé
+- **LV_BTN_STATE_REL** - Released state
+- **LV_BTN_STATE_PR** - Pressed state
+- **LV_BTN_STATE_TGL_REL** - Toggled released state
+- **LV_BTN_STATE_TGL_PR** - Toggled pressed state
+- **LV_BTN_STATE_INA** - Inactive state
 
-L'état passe automatiquement de `..._REL` à `..._PR` quand le bouton est pressé et inversement quand il est relâché.
+The state from `..._REL` to `..._PR` will be changed automatically when the button is pressed or released.
 
 L'état peut être défini par programmation avec `lv_btn_set_state(btn, LV_BTN_STATE_...)`.
 
 ### Bascule
-Les boutons peuvent être configurés comme *bouton bascule* avec`lv_btn_set_toggle(btn, true)`. Dans ce cas, au relâchement, le bouton prend l'état *bascule relâché*.
+You can configure the buttons as *toggle button* with `lv_btn_set_toggle(btn, true)`. In this case, on release, the button goes to *toggled released* state.
 
 ### Mise en page et adaptation
-De la même manière que les [conteneurs](/object-types/cont), les boutons ont des attributs de mise en page et d'adaptation.
-- `lv_btn_set_layout(btn, LV_LAYOUT_...)` définit une mise en page. La valeur par défaut est `LV_LAYOUT_CENTER`. 
-Ainsi, si vous ajoutez une étiquette, elle sera automatiquement alignée au milieu et ne pourra pas être déplacée avec `lv_obj_set_pos()`.
-La mise en page peut être désactivée avec `lv_btn_set_layout(btn, LV_LAYOUT_OFF)`
+Similarly to [Containers](/object-types/cont), buttons also have layout and fit attributes.
+- `lv_btn_set_layout(btn, LV_LAYOUT_...) `set a layout. The default is `LV_LAYOUT_CENTER`.
+So, if you add a label, then it will be automatically aligned to the middle and can't be moved with `lv_obj_set_pos()`.
+You can disable the layout with `lv_btn_set_layout(btn, LV_LAYOUT_OFF)`.
 - `lv_btn_set_fit/fit2/fit4(btn, LV_FIT_..)` permet d'adapter automatiquement la largeur et/ou la hauteur du bouton en fonction des enfants, du parent et du type d'adaptation.
 
 ### Effet d'encre
-Vous pouvez activer une animation spéciale sur les boutons : quand un bouton est pressé, l’état pressé est tracé dans un cercle grandissant à partir de l'endroit de l'appui. C'est comme une gouttelette d'encre qui s'étale dans l'eau.
-Lorsque le bouton est relâché, l'état relâché est visualisé en estompant le cercle. C'est comme si l'encre s'était complètement mélangée à l'eau et devenait invisible.
+You can enable a special animation on buttons: when a button is pressed, the pressed state will be drawn in a growing circle starting from the point of pressing. It's similar in appearance and functionality to the Material Design ripple effect.
 
-Pour contrôler cette animation, utilisez les fonctions suivantes :
-- `lv_btn_set_ink_in_time(btn, time_ms)` temps de croissance du cercle
-- `lv_btn_set_ink_wait_time(btn, time_ms)` durée minimum d'affichage du cercle complet à l'état pressé
-- `lv_btn_set_ink_out_time(btn, time_ms)` temps de passage à l'état relâché
+Another way to think about it is like an ink droplet dropped into water. When the button is released, the released state will be reverted by fading. It's like the ink is fully mixed with a lot of water and becomes invisible.
+
+To control this animation, use the following functions:
+- `lv_btn_set_ink_in_time(btn, time_ms)` - time of circle growing.
+- `lv_btn_set_ink_wait_time(btn, time_ms)` - minim time to keep the fully covering (pressed) state.
+- `lv_btn_set_ink_out_time(btn, time_ms)` - time fade back to releases state.
 
 Cette fonctionnalité doit être activée avec `LV_BTN_INK_EFFECT 1` dans *lv_conf.h*.
 
 
 ## Styles
 
-Un bouton peut avoir 5 styles indépendants pour les 5 états. Vous pouvez les définir via : `lv_btn_set_style(btn, LV_BTN_STYLE_..., &style)`. Les styles utilisent les propriétés `style.body`.
+A button can have 5 independent styles for the 5 states. You can set them via: `lv_btn_set_style(btn, LV_BTN_STYLE_..., &style)`. The styles use the `style.body` properties.
 
-- **LV_BTN_STYLE_REL** style de l'état relâché. Défaut : `lv_style_btn_rel`
-- **LV_BTN_STYLE_PR**  style de l'état pressé. Défaut : `lv_style_btn_pr`
-- **LV_BTN_STYLE_TGL_REL**  style de l'état bascule relâché. Défaut : `lv_style_btn_tgl_rel`
-- **LV_BTN_STYLE_TGL_PR** style de l'état bascule pressé. Défaut : `lv_style_btn_tgl_pr`
-- **LV_BTN_STYLE_INA** style de l'état désactivé. Défaut : `lv_style_btn_ina`
+- **LV_BTN_STYLE_REL** - style of the released state. Default: `lv_style_btn_rel`.
+- **LV_BTN_STYLE_PR** - style of the pressed state. Default: `lv_style_btn_pr`.
+- **LV_BTN_STYLE_TGL_REL** - style of the toggled released state. Default: `lv_style_btn_tgl_rel`.
+- **LV_BTN_STYLE_TGL_PR** - style of the toggled pressed state. Default: `lv_style_btn_tgl_pr`.
+- **LV_BTN_STYLE_INA** - style of the inactive state. Default: `lv_style_btn_ina`.
 
-Quand vous créez une étiquette sur un bouton, la bonne pratique consiste à définir les propriétés `style.text` du bouton. Comme les étiquettes ont `style = NULL` par défaut, elles héritent du style du parent, le bouton.
-De ce fait, vous n'avez pas besoin de créer un nouveau style pour l'étiquette.
+When you create a label on a button, it's a good practice to set the button's `style.text` properties too. Because labels have `style = NULL` by default, they inherit the parent's (button) style.
+Hence you don't need to create a new style for the label.
 
 
 ## Evénements
 Outre les [événements génériques](/overview/event.html #evenements-generiques), les [événements spéciaux](/overview/event.html#evenements-speciaux) suivants  sont envoyés par les boutons :
- - **LV_EVENT_VALUE_CHANGED** envoyé lorsque le bouton est basculé.
+ - **LV_EVENT_VALUE_CHANGED** - sent when the button is toggled.
 
-Notez que les événements génériques liés au périphérique d'entrée (tels que `LV_EVENT_PRESSED`) sont également envoyés dans l'état désactivé. Vous devez vérifier l'état avec `lv_btn_get_state(btn)` pour ignorer les événements des boutons désactivés.
- 
+Note that, the generic input device-related events (like `LV_EVENT_PRESSED`) are sent in the inactive state too. You need to check the state with `lv_btn_get_state(btn)` to ignore the events from inactive buttons.
+
 Apprenez-en plus sur les [événements](/overview/event).
 
 ## Touches
 Les *touches* suivantes sont traitées par les boutons:
-- **LV_KEY_RIGHT/UP** passe à l'état bascule pressé si le mode bascule est activé
-- **LV_KEY_LEFT/DOWN** passe à l'état bascule relâché si le mode bascule est activé
+- **LV_KEY_RIGHT/UP** - Go to toggled state if toggling is enabled.
+- **LV_KEY_LEFT/DOWN** - Go to non-toggled state if toggling is enabled.
 
-Notez que, comme d'habitude, l'état de `LV_KEY_ENTER` est traduit en `LV_EVENT_PRESSED/PRESSING/RELEASED` etc.
+Note that, by default, the state of `LV_KEY_ENTER` is translated to `LV_EVENT_PRESSED/PRESSING/RELEASED` etc.
 
 Apprenez-en plus sur les [touches](/overview/indev).
-  
+
 ## Exemple
 ```eval_rst
 
@@ -79,11 +80,11 @@ Apprenez-en plus sur les [touches](/overview/indev).
 
 ```
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_btn.h
   :project: lvgl
-        
+
 ```

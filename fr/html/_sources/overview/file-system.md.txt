@@ -3,20 +3,20 @@
 ```
 # Système de fichiers
 
-LittlevGL a un module d'abstraction de système de fichiers qui permet d'attacher tout type de système de fichiers.
-Les systèmes de fichiers sont identifiés par une lettre.
-Par exemple, si la carte SD est associée à la lettre `'S'`, un fichier peut être localisé par `"S:path/to/file.txt"`.
+LittlevGL has a 'File system' abstraction module that enables you to attach any type of file systems.
+The file system is identified by a drive letter.
+For example, if the SD card is associated with the letter `'S'`, a file can be reached like `"S:path/to/file.txt"`.
 
 ## Ajouter un pilote
 
-Pour ajouter un pilote, un `lv_fs_drv_t` doit être initialisé comme ceci :
+To add a driver, `lv_fs_drv_t` needs to be initialized like this:
 ```c
-lv_fs_drv_t drv; 
+lv_fs_drv_t drv;
 lv_fs_drv_init(&drv);                     /* Initialisation de base */
 
 drv.letter = 'S';                         /* Une lettre majuscule pour identifier le lecteur */
 drv.file_size = sizeof(my_file_object);   /* Taille requise pour enregistrer un objet de fichier */
-drv.rddir_size = sizeof(my_dir_object);   /* Taille requise pour enregistrer un objet répertoire (utilisé par dir_open/close/read) */ 
+drv.rddir_size = sizeof(my_dir_object);   /*Size required to store a directory object (used by dir_open/close/read)*/
 drv.ready_cb = my_ready_cb;               /* Fonction de rappel pour indiquer si le lecteur est prêt à être utilisé */
 drv.open_cb = my_open_cb;                 /* Fonction de rappel pour ouvrir un fichier */
 drv.close_cb = my_close_cb;               /* Fonction de rappel pour fermer un fichier */
@@ -41,12 +41,13 @@ lv_fs_drv_register(&drv);                 /* Finalement enregistre le lecteur */
 
 ```
 
-N'importe laquelle des fonctions de rappel peut être `NULL` pour indiquer que l'opération n'est pas prise en charge.
+Any of the callbacks can be `NULL` to indicate that that operation is not supported.
 
-Si vous utilisez `lv_fs_open(&file, "S:/folder/file.txt",  LV_FS_MODE_WR)` LittlevGL effectue les opérations suivantes
-1. vérifie s'il y a un lecteur avec la lettre `'S'`
-2. vérifie si `open_cb` est implémentée (pas `NULL`)
-3. appelle `open_cb` avec le chemin `"folder/file.txt"`.
+As an example of how the callbacks are used, if you use `lv_fs_open(&file, "S:/folder/file.txt", LV_FS_MODE_WR)`, LittlevGL:
+
+1. Verifies that a registered drive exists with the letter `'S'`.
+2. Checks if it's `open_cb` is implemented (not `NULL`).
+3. Calls the set `open_cb` with `"folder/file.txt"` path.
 
 ## Exemple d'utilisation
 
@@ -66,7 +67,7 @@ lv_fs_close(&f);
 ```
 *Le mode dans `lv_fs_open` peut être `LV_FS_MODE_WR` pour ouvrir en écriture ou `LV_FS_MODE_RD | LV_FS_MODE_WR` pour lecture/écriture*
 
-Cet exemple montre comment lire le contenu d'un répertoire. Il appartient au pilote de marquer les répertoires, mais il peut être judicieux d’insérer un "/" devant le nom du répertoire.
+This example shows how to read a directory's content. It's up to the driver how to mark the directories, but it can be a good practice to insert a `'/'` in front of the directory name.
 ```c
 lv_fs_dir_t dir;
 lv_fs_res_t res;
@@ -81,7 +82,7 @@ while(1) {
         break;
     }
 
-    /* fn est vide s'il n'y a plus d'entrée à lire */
+    /*fn is empty, if not more files to read*/
     if(strlen(fn) == 0) {
         break;
     }
@@ -94,9 +95,9 @@ lv_fs_dir_close(&dir);
 
 ## Utiliser les pilotes pour les images
 
-Les objets [Image](/object-types/img) peuvent également être ouverts à partir de fichiers (en plus des variables stockées dans la mémoire Flash)
+[Image](/object-types/img) objects can be opened from files too (besides variables stored in the flash).
 
-Pour initialiser un pilote pour les images, les fonction de rappel suivantes sont requises :
+To initialize the image, the following callbacks are required:
 - open
 - close
 - read
@@ -104,13 +105,11 @@ Pour initialiser un pilote pour les images, les fonction de rappel suivantes son
 - tell
 
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_fs.h
   :project: lvgl
-        
+
 ```
-
-

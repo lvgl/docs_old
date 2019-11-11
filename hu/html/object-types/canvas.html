@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Check box (lv_cb)" href="cb.html" />
+    <link rel="next" title="Checkbox (lv_cb)" href="cb.html" />
     <link rel="prev" title="Calendar (lv_calendar)" href="calendar.html" />
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#example">Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#micropython">MicroPython</a></li>
@@ -516,7 +517,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cb.html">Check box (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cb.html#overview">Overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#text">Text</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#check-uncheck">Check/Uncheck</a></li>
@@ -1097,20 +1098,20 @@
 <div class="section" id="buffer">
 <h3>Buffer<a class="headerlink" href="#buffer" title="Permalink to this headline">¶</a></h3>
 <p>The Canvas needs a buffer which stores the drawn image.
-To assign a buffer to a Canvas use <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_buffer(canvas,</span> <span class="pre">buffer,</span> <span class="pre">width,</span> <span class="pre">height,</span> <span class="pre">LV_IMG_CF_...)</span></code>.
+To assign a buffer to a Canvas, use <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_buffer(canvas,</span> <span class="pre">buffer,</span> <span class="pre">width,</span> <span class="pre">height,</span> <span class="pre">LV_IMG_CF_...)</span></code>.
 <code class="docutils literal notranslate"><span class="pre">buffer</span></code> is a static buffer (not just a local variable) to hold the image of the canvas.
-For example
+For example,
 <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">lv_color_t</span> <span class="pre">buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width,</span> <span class="pre">height)]</span></code>. <code class="docutils literal notranslate"><span class="pre">LV_CANVAS_BUF_SIZE_...</span></code> macros help to determine the size of the buffer with different color formats.</p>
-<p>The canvas supports all the built in color formats like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_2BIT</span></code>. See the full list in the <a class="reference external" href="/overview/image.html#color-formats">Color formats</a> section.</p>
+<p>The canvas supports all the built-in color formats like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_2BIT</span></code>. See the full list in the <a class="reference external" href="/overview/image.html#color-formats">Color formats</a> section.</p>
 </div>
 <div class="section" id="palette">
 <h3>Palette<a class="headerlink" href="#palette" title="Permalink to this headline">¶</a></h3>
-<p>For <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> color formats a palette needs to be initialized with  <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_palette(canvas,</span> <span class="pre">3,</span> <span class="pre">LV_COLOR_RED)</span></code>. It sets pixels with <em>index=3</em> to red.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> color formats, a palette needs to be initialized with  <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_palette(canvas,</span> <span class="pre">3,</span> <span class="pre">LV_COLOR_RED)</span></code>. It sets pixels with <em>index=3</em> to red.</p>
 </div>
 <div class="section" id="drawing">
 <h3>Drawing<a class="headerlink" href="#drawing" title="Permalink to this headline">¶</a></h3>
-<p>To set a pixel on the canvas use <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_px(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">LV_COLOR_RED)</span></code>.
-With <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code> the index of the color or the alpha value needs to be passed as color. E.g. <code class="docutils literal notranslate"><span class="pre">lv_color_t</span> <span class="pre">c;</span> <span class="pre">c.full</span> <span class="pre">=</span> <span class="pre">3;</span></code></p>
+<p>To set a pixel on the canvas, use <code class="docutils literal notranslate"><span class="pre">lv_canvas_set_px(canvas,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">LV_COLOR_RED)</span></code>.
+With <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED_...</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code>, the index of the color or the alpha value needs to be passed as color. E.g. <code class="docutils literal notranslate"><span class="pre">lv_color_t</span> <span class="pre">c;</span> <span class="pre">c.full</span> <span class="pre">=</span> <span class="pre">3;</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">lv_canvas_fill_bg(canvas,</span> <span class="pre">LV_COLOR_BLUE)</span></code> fills the whole canvas to blue.</p>
 <p>An array of pixels can be copied to the canvas with <code class="docutils literal notranslate"><span class="pre">lv_canvas_copy_buf(canvas,</span> <span class="pre">buffer_to_copy,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">width,</span> <span class="pre">height)</span></code>. The color format of the buffer and the canvas need to match.</p>
 <p>To draw something to the canvas use</p>
@@ -1128,7 +1129,7 @@ With <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDE
 <h3>Rotate<a class="headerlink" href="#rotate" title="Permalink to this headline">¶</a></h3>
 <p>A rotated image can be added to canvas with <code class="docutils literal notranslate"><span class="pre">lv_canvas_rotate(canvas,</span> <span class="pre">&amp;imd_dsc,</span> <span class="pre">angle,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">pivot_x,</span> <span class="pre">pivot_y)</span></code>.
 It will rotate the image shown by <code class="docutils literal notranslate"><span class="pre">img_dsc</span></code> around the given pivot and stores it on the <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates of <code class="docutils literal notranslate"><span class="pre">canvas</span></code>.
-Instead of <code class="docutils literal notranslate"><span class="pre">img_dsc</span></code> and the buffer of an other canvas also can be used by <code class="docutils literal notranslate"><span class="pre">lv_canvas_get_img(canvas)</span></code>.</p>
+Instead of <code class="docutils literal notranslate"><span class="pre">img_dsc</span></code>, the buffer of another canvas also can be used by <code class="docutils literal notranslate"><span class="pre">lv_canvas_get_img(canvas)</span></code>.</p>
 <p>Note that a canvas can’t be rotated on itself.  You need a source and destination canvas or image.</p>
 </div>
 </div>
@@ -1591,7 +1592,7 @@ Instead of <code class="docutils literal notranslate"><span class="pre">img_dsc<
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="cb.html" class="btn btn-neutral float-right" title="Check box (lv_cb)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="cb.html" class="btn btn-neutral float-right" title="Checkbox (lv_cb)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="calendar.html" class="btn btn-neutral float-left" title="Calendar (lv_calendar)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -1605,7 +1606,7 @@ Instead of <code class="docutils literal notranslate"><span class="pre">img_dsc<
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

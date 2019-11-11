@@ -152,11 +152,12 @@ You can also use the `LV_OPA_*` defines in `lv_color_mix()` as a *ratio*.
 
 The color module defines the most basic colors such as:
 
+- ![#FFFFFF](https://placehold.it/15/ffffff/ffffff?text=+) `LV_COLOR_WHITE`
 - ![#000000](https://placehold.it/15/000000/000000?text=+) `LV_COLOR_BLACK`
 - ![#808080](https://placehold.it/15/808080/000000?text=+) `LV_COLOR_GRAY`
 - ![#c0c0c0](https://placehold.it/15/c0c0c0/000000?text=+) `LV_COLOR_SILVER`
 - ![#ff0000](https://placehold.it/15/ff0000/000000?text=+) `LV_COLOR_RED`
-- ![#800000](https://placehold.it/15/800000/000000?text=+) `LV_COLOR_MARRON`
+- ![#800000](https://placehold.it/15/800000/000000?text=+) `LV_COLOR_MAROON`
 - ![#00ff00](https://placehold.it/15/00ff00/000000?text=+) `LV_COLOR_LIME`
 - ![#008000](https://placehold.it/15/008000/000000?text=+) `LV_COLOR_GREEN`
 - ![#808000](https://placehold.it/15/808000/000000?text=+) `LV_COLOR_OLIVE`

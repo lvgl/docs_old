@@ -170,7 +170,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Interface d’affichage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#tampon-d-affichage">Tampon d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#pilote-d-affichage">Pilote d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
@@ -178,9 +178,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Interface de périphérique d’entrée</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-de-peripheriques-d-entree">Types de périphériques d’entrée</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-tactile-souris-ou-autre-pointeur">Pavé tactile, souris ou autre pointeur</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-numerique-ou-clavier">Pavé numérique ou clavier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encodeur">Encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#bouton">Bouton</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#autres-fonctionnalites">Autres fonctionnalités</a></li>
@@ -233,6 +233,12 @@
 <li class="toctree-l2"><a class="reference internal" href="event.html">Evénements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="event.html#types-d-evenements">Types d’événements</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generiques">Evénements génériques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="event.html#relatifs-aux-peripheriques-d-entree">Relatifs aux  périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pointeur">Relatif au pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pave-numerique-et-encodeur">Relatif au pavé numérique et encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generaux">Evénements généraux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-speciaux">Evénements spéciaux</a></li>
 </ul>
 </li>
@@ -241,11 +247,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="style.html">Styles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="style.html#utiliser-les-styles">Utiliser les styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#heritage-de-styles">Héritage de styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#proprietes-de-style">Propriétés de style</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-communes">Propriétés communes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-corps">Propriétés de style de corps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-texte">Propriétés de style de texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-d-image">Propriétés de style d’image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-ligne">Propriétés de style de ligne</a></li>
@@ -469,7 +475,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#evenements">Evénements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#exemple">Exemple</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -517,7 +523,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Case à cocher (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#texte">Texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#cocher-decocher">Cocher/décocher</a></li>
@@ -1091,7 +1097,7 @@
             
   <div class="section" id="animations">
 <h1>Animations<a class="headerlink" href="#animations" title="Permalink to this headline">¶</a></h1>
-<p>Vous pouvez faire évoluer automatiquement la valeur d’une variable entre une valeur initiale et une valeur finale en utilisant les animations.
+<p>You can automatically change the value of a variable between a start and an end value using animations.
 L’animation est réalisée par l’appel périodique d’une fonction “animateur” avec comme paramètre la valeur correspondante.</p>
 <p>La fonction “animateur” a la signature suivante :</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">var</span><span class="p">,</span> <span class="n">lv_anim_var_t</span> <span class="n">value</span><span class="p">);</span>
@@ -1102,7 +1108,7 @@ L’animation est réalisée par l’appel périodique d’une fonction “anima
 <h2>Créer une animation<a class="headerlink" href="#creer-une-animation" title="Permalink to this headline">¶</a></h2>
 <p>Pour créer une animation, une variable <code class="docutils literal notranslate"><span class="pre">lv_anim_t</span></code> doit être initialisée et configurée avec les fonctions <code class="docutils literal notranslate"><span class="pre">lv_anim_set_...()</span></code>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_anim_t</span> <span class="n">a</span><span class="p">;</span>
-<span class="n">lv_anim_set_exec_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">btn1</span><span class="p">,</span> <span class="n">lv_obj_set_x</span><span class="p">);</span>    <span class="cm">/* Définit la fonction animateur et la variable à animer */</span> 
+<span class="n">lv_anim_set_exec_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">btn1</span><span class="p">,</span> <span class="n">lv_obj_set_x</span><span class="p">);</span>    <span class="cm">/*Set the animator function and variable to animate*/</span>
 <span class="n">lv_anim_set_time</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">delay</span><span class="p">);</span>
 <span class="n">lv_anim_set_values</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>             <span class="cm">/* Définit les valeurs initiale et finale. P. ex. 0, 150 */</span>
 <span class="n">lv_anim_set_path_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">lv_anim_path_linear</span><span class="p">);</span>   <span class="cm">/* Définit le chemin à partir d&#39;une des fonctions `lv_anim_path_...` ou d&#39;une fonction spécifique. */</span>
@@ -1113,14 +1119,14 @@ L’animation est réalisée par l’appel périodique d’une fonction “anima
 <span class="n">lv_anim_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">);</span>                             <span class="cm">/* Débute l&#39;animation */</span>
 </pre></div>
 </div>
-<p>Vous pouvez appliquer de <strong>multiples différentes animations</strong> à la même variable au même moment.
-Par exemple animer les coordonnées x et y avec <code class="docutils literal notranslate"><span class="pre">lv_obj_set_x</span></code> et <code class="docutils literal notranslate"><span class="pre">lv_obj_set_y</span></code>. Cependant, une seule animation peut exister avec une variable et une fonction données.
-Par conséquent, <code class="docutils literal notranslate"><span class="pre">lv_anim_create()</span></code> supprimera les animations variable/fonction déjà existantes.</p>
+<p>You can apply <strong>multiple different animations</strong> on the same variable at the same time.
+For example, animate the x and y coordinates with <code class="docutils literal notranslate"><span class="pre">lv_obj_set_x</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_obj_set_y</span></code>. However, only one animation can exist with a given variable and function pair.
+Therefore <code class="docutils literal notranslate"><span class="pre">lv_anim_create()</span></code> will delete the already existing variable-function animations.</p>
 </div>
 <div class="section" id="chemin-d-animation">
 <h2>Chemin d’animation<a class="headerlink" href="#chemin-d-animation" title="Permalink to this headline">¶</a></h2>
-<p>Vous pouvez déterminer le <strong>chemin de l’animation</strong>. Dans les cas les plus simples, il est linéaire ce qui veut dire que la valeur entre <em>start</em> et <em>end</em> évolue linéairement.
-Un <em>chemin</em> est une fonction qui calcule la prochaine valeur à assigner, basée sur le statut actuel de l’animation. Actuellement, les chemins suivants sont prédéfinis :</p>
+<p>You can determinate the <strong>path of animation</strong>. In the most simple case, it is linear, which means the current value between <em>start</em> and <em>end</em>  is changed linearly.
+A <em>path</em> is a function which calculates the next value to set based on the current state of the animation. Currently, there are the following built-in paths:</p>
 <ul class="simple">
 <li><p><strong>lv_anim_path_linear</strong> animation linéaire</p></li>
 <li><p><strong>lv_anim_path_step</strong> change en une seule fois à la fin</p></li>
@@ -1128,14 +1134,14 @@ Un <em>chemin</em> est une fonction qui calcule la prochaine valeur à assigner,
 <li><p><strong>lv_anim_path_ease_out</strong> lent à la fin</p></li>
 <li><p><strong>lv_anim_path_ease_in_out</strong> lent au début et à la fin</p></li>
 <li><p><strong>lv_anim_path_overshoot</strong> dépasse la valeur finale</p></li>
-<li><p><strong>lv_anim_path_bounce</strong> rebondit un peu sur la valeur finale (comme en frappant un mur)</p></li>
+<li><p><strong>lv_anim_path_bounce</strong> bounce back a little from the end value (like hitting a wall)</p></li>
 </ul>
 </div>
 <div class="section" id="vitesse-et-duree">
 <h2>Vitesse et durée<a class="headerlink" href="#vitesse-et-duree" title="Permalink to this headline">¶</a></h2>
-<p>Par défaut, vous pouvez définir la durée de l’animation. Mais dans certains cas, il est plus pratique d’utiliser la <strong>vitesse d’animation</strong>.</p>
-<p>La fonction <code class="docutils literal notranslate"><span class="pre">lv_anim_speed_to_time(speed,</span> <span class="pre">start,</span> <span class="pre">end)</span></code> calcule la durée requise en millisecondes pour atteindre la valeur finale à partir de la valeur initiale avec une vitesse donnée.
-La vitesse est interprétée en <em>unité/seconde</em>. Par exemple <code class="docutils literal notranslate"><span class="pre">lv_anim_speed_to_time(20,</span> <span class="pre">0,</span> <span class="pre">100)</span></code> donnera 5000 millisecondes. Par exemple dans le cas de <code class="docutils literal notranslate"><span class="pre">lv_obj_set_x</span></code> l’<em>unité</em> est le pixel donc <em>20</em> signifie une vitesse de <em>20 px/s</em>.</p>
+<p>By default, you can set the animation time. But, in some cases, the <strong>animation speed</strong> is more practical.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lv_anim_speed_to_time(speed,</span> <span class="pre">start,</span> <span class="pre">end)</span></code> function calculates the required time in milliseconds to reach the end value from a start value with the given speed.
+The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code class="docutils literal notranslate"><span class="pre">lv_anim_speed_to_time(20,0,100)</span></code> will give 5000 milliseconds. For example, in case of <code class="docutils literal notranslate"><span class="pre">lv_obj_set_x</span></code> <em>unit</em> is pixels so <em>20</em> means <em>20 px/sec</em> speed.</p>
 </div>
 <div class="section" id="supprimer-des-animations">
 <h2>Supprimer des animations<a class="headerlink" href="#supprimer-des-animations" title="Permalink to this headline">¶</a></h2>
@@ -1652,7 +1658,7 @@ La vitesse est interprétée en <em>unité/seconde</em>. Par exemple <code class
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

@@ -4,25 +4,25 @@
 # Tuval (lv_canvas)
 
 ## Giriş
-Bir tuval kullanıcın her şeyi çizebileceği  [Image](/object-types/img) gibidir.
+A Canvas is like an [Image](/object-types/img) where the user can draw anything.
 
 ### Ön Bellek
-Tuvalin çizilmiş imajı saklayan bir ön belleğe ihtiyacı vardır.
-Tuvale bir ön bellek atamak için`lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_...)`kullanın. 
-`buffer` tuvalin imajını tutan bir statik ön bellektir(sadece yerel bir değişken değil).
-Örneğin
+The Canvas needs a buffer which stores the drawn image.
+To assign a buffer to a Canvas, use `lv_canvas_set_buffer(canvas, buffer, width, height, LV_IMG_CF_...)`.
+`buffer` is a static buffer (not just a local variable) to hold the image of the canvas.
+For example,
 `static lv_color_t buffer[LV_CANVAS_BUF_SIZE_TRUE_COLOR(width, height)]`. `LV_CANVAS_BUF_SIZE_...`  makroları farklı renk formatlarında ki önbellek boyutunu belirlemeye yardım eder.
 
 
-The canvas supports all the built in color formats like `LV_IMG_CF_TRUE_COLOR` or `LV_IMG_CF_INDEXED_2BIT`. See the full list in the [Color formats](/overview/image.html#color-formats) section.
+The canvas supports all the built-in color formats like `LV_IMG_CF_TRUE_COLOR` or `LV_IMG_CF_INDEXED_2BIT`. See the full list in the [Color formats](/overview/image.html#color-formats) section.
 
 ### Palet
-`LV_IMG_CF_INDEXED_...` için bir renk format paleti  `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)` ile başlatılması gerekir. Pikseli *index=3* ile kırmızı ayarlanır.
+For `LV_IMG_CF_INDEXED_...` color formats, a palette needs to be initialized with  `lv_canvas_set_palette(canvas, 3, LV_COLOR_RED)`. It sets pixels with *index=3* to red.
 
 
 ### Çizim
-Tuvalde bir pikseli ayarlamak için `lv_canvas_set_px(canvas, x, y, LV_COLOR_RED)` kullanılır.
-`LV_IMG_CF_INDEXED_...` veya `LV_IMG_CF_ALPHA_...` ile rengin veya alfa değerinin indisi renk olarak geçmesi gerekir. Örneğin  `lv_color_t c; c.full = 3;`
+To set a pixel on the canvas, use `lv_canvas_set_px(canvas, x, y, LV_COLOR_RED)`.
+With `LV_IMG_CF_INDEXED_...` or `LV_IMG_CF_ALPHA_...`, the index of the color or the alpha value needs to be passed as color. E.g. `lv_color_t c; c.full = 3;`
 
 `lv_canvas_fill_bg(canvas, LV_COLOR_BLUE)` tüm tuvali mavi doldurur.
 
@@ -39,15 +39,15 @@ Tuvale bir şeyler çizmek için aşağıdaki fonksiyonlar kullanılır
 Çizim fonksiyonu sadece `LV_IMG_CF_TURE_COLOR`, `LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED` ve `LV_IMG_CF_TRUE_COLOR_ALPHA` ön belleklerini çizebilir. `LV_IMG_CF_TRUE_COLOR_ALPHA` sadece `LV_COLOR_DEPTH 32` birlikte çalışıyor.
 
 ### Döndürme
-`lv_canvas_rotate(canvas, &imd_dsc, angle, x, y, pivot_x, pivot_y)` ile tuvale döndürülmüş imaj eklenebilir. 
+A rotated image can be added to canvas with `lv_canvas_rotate(canvas, &imd_dsc, angle, x, y, pivot_x, pivot_y)`.
 `img_dsc` tarafından gösterilen imajı verilen eksen etrafında döndürecek ve `canvas`ın  `x`, `y`  kordinatlarında saklar.
-`img_dsc` ve başka tuval ön belleğinin yerine`lv_canvas_get_img(canvas)`  de kullanılabilir .
+Instead of `img_dsc`, the buffer of another canvas also can be used by `lv_canvas_get_img(canvas)`.
 
 Bir tuvalin kendi üzerinde döndürülemeyeceğini dikkate alınız. Bir kaynağa ve belirlenmiş tuvale veya imaja ihtiyacınız vardır. 
 
 ## Biçim
-`lv_canvas_set_style(btn, LV_CANVAS_STYLE_MAIN, &style)` ile biçimi ayarlayabilirsiniz. 
-`style.image.color` temel rengi  `LV_IMG_CF_ALPHA_...`renk formatı ile anlatmak için kullanılır. 
+You can set the styles with `lv_canvas_set_style(btn, LV_CANVAS_STYLE_MAIN, &style)`.
+`style.image.color` is used to tell the base color with `LV_IMG_CF_ALPHA_...` color format.
 
 ## Olaylar
 Sadece  [Generic events](/overview/event.html#generic-events) nesne tarafından gönderilebilir.
@@ -66,11 +66,11 @@ Nesne türü tarafından *Keys*
 
 ```
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_canvas.h
   :project: lvgl
-        
+
 ```

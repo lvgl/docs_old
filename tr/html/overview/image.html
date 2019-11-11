@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#bicimler">Biçimler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#olaylar">Olaylar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#ornek">Örnek</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -515,7 +516,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Onay kutusu (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#giris">Giriş</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#metin">Metin</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#onay-onayi-kaldir">Onay/Onayı Kaldır</a></li>
@@ -1090,7 +1091,7 @@
             
   <div class="section" id="images">
 <h1>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h1>
-<p>An image can be a file or variable which stores the image itself and some metadata.</p>
+<p>An image can be a file or variable which stores the bitmap itself and some metadata.</p>
 <div class="section" id="store-images">
 <h2>Store images<a class="headerlink" href="#store-images" title="Permalink to this headline">¶</a></h2>
 <p>You can store images in two places</p>
@@ -1100,7 +1101,7 @@
 </ul>
 <div class="section" id="variables">
 <h3>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
-<p>The images stored internally in a variable has <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> type with the following fields:</p>
+<p>The images stored internally in a variable is composed mainly of an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> structure with the following fields:</p>
 <ul class="simple">
 <li><p><strong>header</strong></p>
 <ul>
@@ -1114,48 +1115,51 @@
 <li><p><strong>data</strong> pointer to an array where the image itself is stored</p></li>
 <li><p><strong>data_size</strong> length of <code class="docutils literal notranslate"><span class="pre">data</span></code> in bytes</p></li>
 </ul>
+<p>These are usually stored within a project as C files. They are linked into the resulting executable like any other constant data.</p>
 </div>
 <div class="section" id="files">
 <h3>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h3>
-<p>To deal with files you need to add a <em>Drive</em> to LittlevGL. In short, a Drive a collection of functions (<em>open</em>, <em>read</em>, <em>close</em>, etc) registered in LittlevGL to make file operation.
-You can add an interface to a standard file system (FAT32 on SD card) or you create your own simple file system to read data from an SPI Flash memory.
-In every cases, a Drive is just an abstraction to read and/or write data to a memory.
+<p>To deal with files you need to add a <em>Drive</em> to LittlevGL. In short, a <em>Drive</em> is a collection of functions (<em>open</em>, <em>read</em>, <em>close</em>, etc.) registered in LittlevGL to make file operations.
+You can add an interface to a standard file system (FAT32 on SD card) or you create your simple file system to read data from an SPI Flash memory.
+In every case, a <em>Drive</em> is just an abstraction to read and/or write data to a memory.
 See the <a class="reference internal" href="file-system.html"><span class="doc">File system</span></a> section to learn more.</p>
+<p>Images stored as files are not linked into the resulting executable, and must be read to RAM before being drawn. As a result, they are not as resource-friendly as variable images. However, they are easier to replace without needing to recompile the main program.</p>
 </div>
 </div>
 <div class="section" id="color-formats">
 <h2>Color formats<a class="headerlink" href="#color-formats" title="Permalink to this headline">¶</a></h2>
 <p>Various built-in color formats are supported:</p>
 <ul class="simple">
-<li><p><strong>LV_IMG_CF_TRUE_COLOR</strong> Simply store the RGB colors</p></li>
-<li><p><strong>LV_IMG_CF_TRUE_COLOR_ALPHA</strong> Store the RGB colors but add an Alpha byte too for every pixel</p></li>
-<li><p><strong>LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</strong> Store the RGB color but if a pixel has <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code> (set in <em>lv_conf.h</em>) color the pixel will be transparent</p></li>
-<li><p><strong>LV_IMG_CF_INDEXED_1/2/4/8BIT</strong> Use palette with 2, 4, 16 or 256 colors and store each pixel on 1, 2, 4 or 8 bit</p></li>
-<li><p><strong>LV_IMG_CF_ALPHA_1/2/4/8BIT</strong> Store only the Alpha value on 1, 2, 4 or 8 bits. Draw the pixels with <code class="docutils literal notranslate"><span class="pre">style.image.color</span></code> and the set opacity. The source image has to be alpha channel.</p></li>
+<li><p><strong>LV_IMG_CF_TRUE_COLOR</strong> Simply stores the RGB colors (in whatever color depth LittlevGL is configured for).</p></li>
+<li><p><strong>LV_IMG_CF_TRUE_COLOR_ALPHA</strong> Like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> but it also adds an alpha (transparency) byte for every pixel.</p></li>
+<li><p><strong>LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</strong> Like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> but if a pixel has <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code> (set in <em>lv_conf.h</em>) color the pixel will be transparent.</p></li>
+<li><p><strong>LV_IMG_CF_INDEXED_1/2/4/8BIT</strong> Uses a palette with 2, 4, 16 or 256 colors and stores each pixel in 1, 2, 4 or 8 bits.</p></li>
+<li><p><strong>LV_IMG_CF_ALPHA_1/2/4/8BIT</strong> <strong>Only stores the Alpha value on 1, 2, 4 or 8 bits.</strong> The pixels take the color of <code class="docutils literal notranslate"><span class="pre">style.image.color</span></code> and the set opacity. The source image has to be an alpha channel. This is ideal for bitmaps similar to fonts (where the whole image is one color but you’d like to be able to change it).</p></li>
 </ul>
-<p>The bytes of the <em>True color</em> 32 bit images are stored in the following order</p>
+<p>The bytes of the <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> images are stored in the following order.</p>
+<p>For 32-bit color depth:</p>
 <ul class="simple">
 <li><p>Byte 0: Blue</p></li>
 <li><p>Byte 1: Green</p></li>
 <li><p>Byte 2: Red</p></li>
 <li><p>Byte 3: Alpha</p></li>
 </ul>
-<p>For 16 bit color depth</p>
+<p>For 16-bit color depth:</p>
 <ul class="simple">
 <li><p>Byte 0: Green 3 lower bit, Blue 5 bit</p></li>
 <li><p>Byte 1: Red 5 bit, Green 3 higher bit</p></li>
 <li><p>Byte 2: Alpha byte (only with LV_IMG_CF_TRUE_COLOR_ALPHA)</p></li>
 </ul>
-<p>For 8 bit color depth</p>
+<p>For 8-bit color depth:</p>
 <ul class="simple">
 <li><p>Byte 0: Red 3 bit, Green 3 bit, Blue 2 bit</p></li>
 <li><p>Byte 2: Alpha byte (only with LV_IMG_CF_TRUE_COLOR_ALPHA)</p></li>
 </ul>
-<p>You can store images in a <em>Raw</em> format to indicate that it’s not a built-in color format and an <a class="reference external" href="#image-decoder">Image decoder</a> needs to be used to decode the image.</p>
+<p>You can store images in a <em>Raw</em> format to indicate that, it’s not a built-in color format and an external <a class="reference external" href="#image-decoder">Image decoder</a> needs to be used to decode the image.</p>
 <ul class="simple">
-<li><p><strong>LV_IMG_CF_RAW</strong> A raw image e.g. a PNG or JPG image</p></li>
-<li><p><strong>LV_IMG_CF_RAW_ALPHA</strong> Indicate that the image has alpha, and an Alpha byte is added for every pixel</p></li>
-<li><p><strong>LV_IMG_CF_RAW_CHROME_KEYED</strong> Indicate that the image is chrome keyed as described in <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</span></code> above.</p></li>
+<li><p><strong>LV_IMG_CF_RAW</strong> Indicates a basic raw image (e.g. a PNG or JPG image).</p></li>
+<li><p><strong>LV_IMG_CF_RAW_ALPHA</strong> Indicates that the image has alpha and an alpha byte is added for every pixel.</p></li>
+<li><p><strong>LV_IMG_CF_RAW_CHROME_KEYED</strong> Indicates that the image is chrome keyed as described in <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</span></code> above.</p></li>
 </ul>
 </div>
 <div class="section" id="add-and-use-images">
@@ -1167,20 +1171,27 @@ See the <a class="reference internal" href="file-system.html"><span class="doc">
 </ul>
 <div class="section" id="online-converter">
 <h3>Online converter<a class="headerlink" href="#online-converter" title="Permalink to this headline">¶</a></h3>
-<p>The Online Image Converter is available here: https://littlevgl.com/image-to-c-array</p>
-<p>You need to select a <em>BMP</em>, <em>PNG</em> or <em>JPG</em> image, give it a name, select the <a class="reference external" href="#color-format">Color format</a>, select the type (file or variable) and hit the <em>Convert</em> button and the result file be download.</p>
-<p>In the converter C arrays (variables) the image for all the Color depths (1, 8, 16 or 32) are included and the used image will be selected in compile time based on <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span></code> in <em>lv_conf.h</em>.</p>
-<p>IN case of files you need to tell which color format you want</p>
+<p>The online Image converter is available here: https://littlevgl.com/image-to-c-array</p>
+<p>Adding an image to LittlevGL via online converter is easy.</p>
+<ol class="simple">
+<li><p>You need to select a <em>BMP</em>, <em>PNG</em> or <em>JPG</em> image first.</p></li>
+<li><p>Give the image a name that will be used within LittlevGL.</p></li>
+<li><p>Select the <a class="reference external" href="#color-formats">Color format</a>.</p></li>
+<li><p>Select the type of image you want. Choosing a binary will generate a <code class="docutils literal notranslate"><span class="pre">.bin</span></code> file that must be stored separately and read using the <a class="reference external" href="#files">file support</a>. Choosing a variable will generate a standard C file that can be linked into your project.</p></li>
+<li><p>Hit the <em>Convert</em> button. Once the conversion is finished, your browser will automatically download the resulting file.</p></li>
+</ol>
+<p>In the converter C arrays (variables), the bitmaps for all the color depths (1, 8, 16 or 32) are included in the C file, but only the color depth that matches <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span></code> in <em>lv_conf.h</em> will actually be linked into the resulting executable.</p>
+<p>In case of binary files, you need to specify the color format you want:</p>
 <ul class="simple">
-<li><p>RGB332 for 8 bit color depth</p></li>
-<li><p>RGB565 for 16 bit color depth</p></li>
-<li><p>RGB565 Swap for 16 bit color depth (two bytes are swapped)</p></li>
-<li><p>RGB888 for 32 bit color depth</p></li>
+<li><p>RGB332 for 8-bit color depth</p></li>
+<li><p>RGB565 for 16-bit color depth</p></li>
+<li><p>RGB565 Swap for 16-bit color depth (two bytes are swapped)</p></li>
+<li><p>RGB888 for 32-bit color depth</p></li>
 </ul>
 </div>
 <div class="section" id="manually-create-an-image">
 <h3>Manually create an image<a class="headerlink" href="#manually-create-an-image" title="Permalink to this headline">¶</a></h3>
-<p>If you calculate an image run-time you can craft an image variable to display it. For example:</p>
+<p>If you are generating an image at run-time, you can craft an image variable to display it using LittlevGL. For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">my_img_data</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">,</span> <span class="p">...};</span>
 
 <span class="k">static</span> <span class="n">lv_img_dsc_t</span> <span class="n">my_img_dsc</span> <span class="o">=</span> <span class="p">{</span>
@@ -1194,11 +1205,11 @@ See the <a class="reference internal" href="file-system.html"><span class="doc">
 </pre></div>
 </div>
 <p>If the color format is <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA</span></code> you can set <code class="docutils literal notranslate"><span class="pre">data_size</span></code> like <code class="docutils literal notranslate"><span class="pre">80</span> <span class="pre">*</span> <span class="pre">60</span> <span class="pre">*</span> <span class="pre">LV_IMG_PX_SIZE_ALPHA_BYTE</span></code>.</p>
-<p>An other option to create image run-time is to use the <a class="reference internal" href="../object-types/canvas.html"><span class="doc">Canvas</span></a> object.</p>
+<p>Another (possibly simpler) option to create and display an image at run-time is to use the <a class="reference internal" href="../object-types/canvas.html"><span class="doc">Canvas</span></a> object.</p>
 </div>
 <div class="section" id="use-images">
 <h3>Use images<a class="headerlink" href="#use-images" title="Permalink to this headline">¶</a></h3>
-<p>The most simple way to use an Image in LittlevGL is to display it with an <a class="reference internal" href="../object-types/img.html"><span class="doc">lv_img</span></a> object:</p>
+<p>The simplest way to use an image in LittlevGL is to display it with an <a class="reference internal" href="../object-types/img.html"><span class="doc">lv_img</span></a> object:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">icon</span> <span class="o">=</span> <span class="n">lv_img_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
 
 <span class="cm">/*From variable*/</span>
@@ -1208,40 +1219,41 @@ See the <a class="reference internal" href="file-system.html"><span class="doc">
 <span class="n">lv_img_set_src</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="s">&quot;S:my_icon.bin&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>If the image was converted with the online converter you should use <code class="docutils literal notranslate"><span class="pre">LV_IMG_DECLARE(my_icon_dsc)</span></code> to declare the icon in the file where you want to use it.</p>
+<p>If the image was converted with the online converter, you should use <code class="docutils literal notranslate"><span class="pre">LV_IMG_DECLARE(my_icon_dsc)</span></code> to declare the image in the file where you want to use it.</p>
 </div>
 </div>
 <div class="section" id="image-decoder">
 <h2>Image decoder<a class="headerlink" href="#image-decoder" title="Permalink to this headline">¶</a></h2>
-<p>As you can see in the <a class="reference external" href="#color-formats">Color formats</a> section LittlevGL supports several built image formats. However, it doesn’t support for example PNG or JPG out of the box.
-To handle non-built-in image formats you need to use external libraries and attach them to LittlevGL via the <em>Image decoder</em> interface.</p>
-<p>The image decoder consists of 4 images:</p>
+<p>As you can see in the <a class="reference external" href="#color-formats">Color formats</a> section, LittlevGL supports several built-in image formats. In many cases, these will be all you need. LittlevGL doesn’t directly support, however, generic image formats like PNG or JPG.</p>
+<p>To handle non-built-in image formats, you need to use external libraries and attach them to LittlevGL via the <em>Image decoder</em> interface.</p>
+<p>The image decoder consists of 4 callbacks:</p>
 <ul class="simple">
-<li><p><strong>info</strong> get some basic info about the image (width, height and color format)</p></li>
-<li><p><strong>open</strong> open the image: either store the decoded image or set it to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to indicate the image can be read line-by-line</p></li>
-<li><p><strong>read</strong> if <em>open</em> didn’t fully open the image this function should give the some decoded data (max 1 line) from a given position.</p></li>
+<li><p><strong>info</strong> get some basic info about the image (width, height and color format).</p></li>
+<li><p><strong>open</strong> open the image: either store the decoded image or set it to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to indicate the image can be read line-by-line.</p></li>
+<li><p><strong>read</strong> if <em>open</em> didn’t fully open the image this function should give some decoded data (max 1 line) from a given position.</p></li>
 <li><p><strong>close</strong> close the opened image, free the allocated resources.</p></li>
 </ul>
-<p>You can add any number of image decoders. When an image needs to be drawn the library will try all the registered image decoder until find one which is able to open the image, i.e. know that format.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TURE_COLOR_...</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_INDEXED_...</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_IMG_ALPHA_...</span></code> formats are known by the built-in decoder.</p>
+<p>You can add any number of image decoders. When an image needs to be drawn, the library will try all the registered image decoder until finding one which can open the image, i.e. knowing that format.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR_...</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_INDEXED_...</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_IMG_ALPHA_...</span></code> formats (essentially, all non-<code class="docutils literal notranslate"><span class="pre">RAW</span></code> formats) are understood by the built-in decoder.</p>
 <div class="section" id="custom-image-formats">
 <h3>Custom image formats<a class="headerlink" href="#custom-image-formats" title="Permalink to this headline">¶</a></h3>
-<p>The easiest was to create a custom image is to use the Online image converter and set <code class="docutils literal notranslate"><span class="pre">Raw</span></code>, <code class="docutils literal notranslate"><span class="pre">Raw</span> <span class="pre">with</span> <span class="pre">alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">Raw</span> <span class="pre">with</span> <span class="pre">chrome</span> <span class="pre">keyed</span></code> format. It will just take the every bytes of selected image and write them as image data.
-<code class="docutils literal notranslate"><span class="pre">heafer.cf</span></code> will be <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW_ALPHA</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW_CHROME_KEYED</span></code> accordingly. You should choose the correct format according to you needs: fully covering image, use alpha channel or use chroma keying.</p>
-<p>After decoding, the <em>raw</em> formats are considered <em>True color</em>. In other words the image decoder should decode the <em>Raw</em> images to <em>True color</em> according to the format described in [#color-formats](Color formats) section.</p>
-<p>If you want to create a really custom image you should use <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_USER_ENCODED_0..7</span></code> color formats. However, the library can draw the images only in <em>True color</em> format (or <em>Raw</em> but finally it’s supposed to be in <em>True color</em> format).
-So the <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_USER_ENCODED_...</span></code> formats are not known by the library therefore they should be decoded to one of the known formats from [#color-formats](Color formats) section.
-It’s possible to decoded the image to a non-true color format first, for example <code class="docutils literal notranslate"><span class="pre">LV_IMG_INDEXED_4BITS</span></code>, and then call the built-in decoder functions to convert it to <em>True color</em>.</p>
-<p>With <em>User encoded</em> formats the color format in the open function (<code class="docutils literal notranslate"><span class="pre">dsc-&gt;header.cf</span></code>) should be changed according to the new format.</p>
+<p>The easiest way to create a custom image is to use the online image converter and set <code class="docutils literal notranslate"><span class="pre">Raw</span></code>, <code class="docutils literal notranslate"><span class="pre">Raw</span> <span class="pre">with</span> <span class="pre">alpha</span></code> or <code class="docutils literal notranslate"><span class="pre">Raw</span> <span class="pre">with</span> <span class="pre">chrome</span> <span class="pre">keyed</span></code> format. It will just take every byte of the binary file you uploaded and write it as the image “bitmap”. You then need to attach an image decoder that will parse that bitmap and generate the real, renderable bitmap.</p>
+<p><code class="docutils literal notranslate"><span class="pre">header.cf</span></code> will be <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW_ALPHA</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_RAW_CHROME_KEYED</span></code> accordingly. You should choose the correct format according to your needs: fully opaque image, use alpha channel or use chroma keying.</p>
+<p>After decoding, the <em>raw</em> formats are considered <em>True color</em> by the library. In other words, the image decoder must decode the <em>Raw</em> images to <em>True color</em> according to the format described in [#color-formats](Color formats) section.</p>
+<p>If you want to create a custom image, you should use <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_USER_ENCODED_0..7</span></code> color formats. However, the library can draw the images only in <em>True color</em> format (or <em>Raw</em> but finally it’s supposed to be in <em>True color</em> format).
+So the <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_USER_ENCODED_...</span></code> formats are not known by the library, therefore, they should be decoded to one of the known formats from [#color-formats](Color formats) section.
+It’s possible to decode the image to a non-true color format first, for example, <code class="docutils literal notranslate"><span class="pre">LV_IMG_INDEXED_4BITS</span></code>, and then call the built-in decoder functions to convert it to <em>True color</em>.</p>
+<p>With <em>User encoded</em> formats, the color format in the open function (<code class="docutils literal notranslate"><span class="pre">dsc-&gt;header.cf</span></code>) should be changed according to the new format.</p>
 </div>
 <div class="section" id="register-an-image-decoder">
 <h3>Register an image decoder<a class="headerlink" href="#register-an-image-decoder" title="Permalink to this headline">¶</a></h3>
-<p>For example, if you want LittlevGL to “understand” PNG images you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:</p>
+<p>Here’s an example of getting LittlevGL to work with PNG images.</p>
+<p>First, you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create a new decoder and register functions */</span>
 <span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">dec</span> <span class="o">=</span> <span class="n">lv_img_decoder_create</span><span class="p">();</span>
 <span class="n">lv_img_decoder_set_info_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_info</span><span class="p">);</span>
 <span class="n">lv_img_decoder_set_open_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_open</span><span class="p">);</span>
-<span class="n">lv_img_decoder_set_close_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_close</span><span class="p">);</span> 
+<span class="n">lv_img_decoder_set_close_cb</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">decoder_close</span><span class="p">);</span>
 
 
 <span class="cm">/**</span>
@@ -1254,10 +1266,11 @@ It’s possible to decoded the image to a non-true color format first, for examp
 <span class="k">static</span> <span class="n">lv_res_t</span> <span class="nf">decoder_info</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">src</span><span class="p">,</span> <span class="n">lv_img_header_t</span> <span class="o">*</span> <span class="n">header</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="cm">/*Check whether the type `src` is known by the decoder*/</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">is_png</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span> <span class="n">LV_RES_INV</span><span class="p">;</span> 
+  <span class="k">if</span><span class="p">(</span><span class="n">is_png</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span> <span class="n">LV_RES_INV</span><span class="p">;</span>
 
+  <span class="cm">/* Read the PNG header and find `width` and `height` */</span>
   <span class="p">...</span>
-  
+
   <span class="n">header</span><span class="o">-&gt;</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_RAW_ALPHA</span><span class="p">;</span>
   <span class="n">header</span><span class="o">-&gt;</span><span class="n">w</span> <span class="o">=</span> <span class="n">width</span><span class="p">;</span>
   <span class="n">header</span><span class="o">-&gt;</span><span class="n">h</span> <span class="o">=</span> <span class="n">height</span><span class="p">;</span>
@@ -1273,17 +1286,17 @@ It’s possible to decoded the image to a non-true color format first, for examp
 <span class="p">{</span>
 
   <span class="cm">/*Check whether the type `src` is known by the decoder*/</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">is_png</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span> <span class="n">LV_RES_INV</span><span class="p">;</span> 
-  
-  <span class="cm">/*Decode and store the image. If `dsc-&gt;img_data` the `read_line` function will be called to get the image data liny-by-line*/</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">is_png</span><span class="p">(</span><span class="n">src</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span> <span class="n">LV_RES_INV</span><span class="p">;</span>
+
+  <span class="cm">/*Decode and store the image. If `dsc-&gt;img_data` is `NULL`, the `read_line` function will be called to get the image data line-by-line*/</span>
   <span class="n">dsc</span><span class="o">-&gt;</span><span class="n">img_data</span> <span class="o">=</span> <span class="n">my_png_decoder</span><span class="p">(</span><span class="n">src</span><span class="p">);</span>
-  
+
   <span class="cm">/*Change the color format if required. For PNG usually &#39;Raw&#39; is fine*/</span>
   <span class="n">dsc</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">.</span><span class="n">cf</span> <span class="o">=</span> <span class="n">LV_IMG_CF_</span><span class="p">...</span>
-  
+
   <span class="cm">/*Call a built in decoder function if required. It&#39;s not required if`my_png_decoder` opened the image in true color format.*/</span>
   <span class="n">lv_res_t</span> <span class="n">res</span> <span class="o">=</span> <span class="n">lv_img_decoder_built_in_open</span><span class="p">(</span><span class="n">decoder</span><span class="p">,</span> <span class="n">dsc</span><span class="p">);</span>
-  
+
   <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -1304,7 +1317,7 @@ It’s possible to decoded the image to a non-true color format first, for examp
    <span class="cm">/*With PNG it&#39;s usually not required*/</span>
 
    <span class="cm">/*Copy `len` pixels from `x` and `y` coordinates in True color format to `buf` */</span>
-  
+
 <span class="p">}</span>
 
 <span class="cm">/**</span>
@@ -1315,29 +1328,29 @@ It’s possible to decoded the image to a non-true color format first, for examp
 <span class="k">static</span> <span class="kt">void</span> <span class="nf">decoder_close</span><span class="p">(</span><span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">lv_img_decoder_dsc_t</span> <span class="o">*</span> <span class="n">dsc</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="cm">/*Free all allocated data*/</span>
-  
+
   <span class="cm">/*Call the built-in close function if the built-in open/read_line was used*/</span>
   <span class="n">lv_img_decoder_built_in_close</span><span class="p">(</span><span class="n">decoder</span><span class="p">,</span> <span class="n">dsc</span><span class="p">);</span>
-  
+
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>So in summary:</p>
 <ul class="simple">
-<li><p>In <code class="docutils literal notranslate"><span class="pre">decoder_info</span></code> you should collect some basic information about the image and store it in <code class="docutils literal notranslate"><span class="pre">header</span></code>.</p></li>
-<li><p>In <code class="docutils literal notranslate"><span class="pre">decoder_open</span></code> you should try to open the image source pointed by <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src</span></code>. It’s type is already in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src_type</span> <span class="pre">==</span> <span class="pre">LV_IMG_SRC_FILE/VARIABLE</span></code>.
-If this format/type is not supported by the decoder return <code class="docutils literal notranslate"><span class="pre">LV_RES_INV</span></code>.
-However, if you can open the image a pointer to the decoded <em>True color</em> image should be set in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code>.
-If the format is known but you don’t want decode while image (e.g. no memory for it) set <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> to call <code class="docutils literal notranslate"><span class="pre">read_line</span></code> to get the pixels.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">decoder_info</span></code>, you should collect some basic information about the image and store it in <code class="docutils literal notranslate"><span class="pre">header</span></code>.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">decoder_open</span></code>, you should try to open the image source pointed by <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src</span></code>. Its type is already in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;src_type</span> <span class="pre">==</span> <span class="pre">LV_IMG_SRC_FILE/VARIABLE</span></code>.
+If this format/type is not supported by the decoder, return <code class="docutils literal notranslate"><span class="pre">LV_RES_INV</span></code>.
+However, if you can open the image, a pointer to the decoded <em>True color</em> image should be set in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code>.
+If the format is known but, you don’t want to decode while image (e.g. no memory for it) set <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> to call <code class="docutils literal notranslate"><span class="pre">read_line</span></code> to get the pixels.</p></li>
 <li><p>In <code class="docutils literal notranslate"><span class="pre">decoder_close</span></code> you should free all the allocated resources.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">decoder_read</span></code> is optional. Decoding the whole image requires extra memory and some computational overhead.
-However, if can decode one line of the image without decoding the whole image you can save memory and time.
-To indicate that the <em>line read</em> function should be used set <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> in the open function.</p></li>
+However, if can decode one line of the image without decoding the whole image, you can save memory and time.
+To indicate that, the <em>line read</em> function should be used, set <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span> <span class="pre">=</span> <span class="pre">NULL</span></code> in the open function.</p></li>
 </ul>
 </div>
 <div class="section" id="manually-use-an-image-decoder">
 <h3>Manually use an image decoder<a class="headerlink" href="#manually-use-an-image-decoder" title="Permalink to this headline">¶</a></h3>
-<p>LittlevGL will use th registered image decoder automatically but you can use them manually too. Create a <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_dsc_t</span></code> variable to describe a the decoding session and call <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>.</p>
+<p>LittlevGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the <code class="docutils literal notranslate"><span class="pre">lv_img</span></code> object) but you can use them manually too. Create a <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_dsc_t</span></code> variable to describe the decoding session and call <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
 <span class="n">lv_res_t</span> <span class="n">res</span><span class="p">;</span>
 <span class="n">lv_img_decoder_dsc_t</span> <span class="n">dsc</span><span class="p">;</span>
@@ -1354,31 +1367,32 @@ To indicate that the <em>line read</em> function should be used set <code class=
 <div class="section" id="image-caching">
 <h2>Image caching<a class="headerlink" href="#image-caching" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes it takes a lot of time to open an image.
-Continuously decoding a PNG image or loading images from a slow external memory would be effective.
-Therefore LittlevGL caches a given number of images. Caching means some images will be left open hence LittlevGl can quickly access them from <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code> instead of decoding the again.</p>
+Continuously decoding a PNG image or loading images from a slow external memory would be inefficient and detrimental to the user experience.</p>
+<p>Therefore, LittlevGL caches a given number of images. Caching means some images will be left open, hence LittlevGL can quickly access them from <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code> instead of needing to decode them again.</p>
+<p>Of course, caching images is resource-intensive as it uses more RAM (to store the decoded image). LittlevGL tries to optimize the process as much as possible (see below), but you will still need to evaluate if this would be beneficial for your platform or not. If you have a deeply embedded target which decodes small images from a relatively fast storage medium, image caching may not be worth it.</p>
 <div class="section" id="cache-size">
 <h3>Cache size<a class="headerlink" href="#cache-size" title="Permalink to this headline">¶</a></h3>
-<p>The number of cache entries can be defined in <code class="docutils literal notranslate"><span class="pre">LV_IMG_CACHE_DEF_SIZE</span></code> in <em>lv_conf.h</em>. The default value is 1 so only the lastly used image will be left open.
-The size of cache can be changed in tun-time with <code class="docutils literal notranslate"><span class="pre">lv_img_cache_set_size(entry_num)</span></code></p>
+<p>The number of cache entries can be defined in <code class="docutils literal notranslate"><span class="pre">LV_IMG_CACHE_DEF_SIZE</span></code> in <em>lv_conf.h</em>. The default value is 1 so only the most recently used image will be left open.</p>
+<p>The size of the cache can be changed at run-time with <code class="docutils literal notranslate"><span class="pre">lv_img_cache_set_size(entry_num)</span></code>.</p>
 </div>
 <div class="section" id="value-of-images">
 <h3>Value of images<a class="headerlink" href="#value-of-images" title="Permalink to this headline">¶</a></h3>
-<p>If you use more images then the cache size LittlevGL can’t cache all of the images. Instead, if a new image needs to be opened but there is no place in the cache the library will close an image.
-To decide which image to close LittlevGL measured how much did it take to open the image. Images which more time consuming to open are considered more valuable and LittlevGL tries to cache them longer.
-You can manually set the <em>time to open</em> value in the decoder open function in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;time_to_open</span> <span class="pre">=</span> <span class="pre">time_ms</span></code> to give a higher or lower value to the image. (Leave it unchanged to let LittlevGL set it)</p>
-<p>Every cache entry has a <em>“life”</em> value. Every time an image opening happens through the cache the <em>life</em> of all entries are decreased to make them older.
-When a cached image is used its <em>life</em> is increased by the <em>time to open</em> value to make it more alive.</p>
-<p>If there is no more space in the cache always the entry with the smallest life will be closed.</p>
+<p>When you use more images than cache entries, LittlevGL can’t cache all of the images. Instead, the library will close one of the cached images (to free space).</p>
+<p>To decide which image to close, LittlevGL uses a measurement it previously made of how long it took to open the image. Cache entries that hold slower-to-open images are considered more valuable and are kept in the cache as long as possible.</p>
+<p>If you want or need to override LittlevGL’s measurement, you can manually set the <em>time to open</em> value in the decoder open function in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;time_to_open</span> <span class="pre">=</span> <span class="pre">time_ms</span></code> to give a higher or lower value. (Leave it unchanged to let LittlevGL set it.)</p>
+<p>Every cache entry has a <em>“life”</em> value. Every time an image opening happens through the cache, the <em>life</em> of all entries are decreased to make them older.
+When a cached image is used, its <em>life</em> is increased by the <em>time to open</em> value to make it more alive.</p>
+<p>If there is no more space in the cache, always the entry with the smallest life will be closed.</p>
 </div>
 <div class="section" id="memory-usage">
 <h3>Memory usage<a class="headerlink" href="#memory-usage" title="Permalink to this headline">¶</a></h3>
-<p>Note that, the cached image might continuously consume memory. For example, if 3 PNG images are cached, they will consume memory while they are opened.
-Therefore it’s the user responsibility to be sure there is enough RAM to cache even the largest images at the same time.</p>
+<p>Note that, the cached image might continuously consume memory. For example, if 3 PNG images are cached, they will consume memory while they are opened.</p>
+<p>Therefore, it’s the user’s responsibility to be sure there is enough RAM to cache, even the largest images at the same time.</p>
 </div>
 <div class="section" id="clean-the-cache">
 <h3>Clean the cache<a class="headerlink" href="#clean-the-cache" title="Permalink to this headline">¶</a></h3>
-<p>Let’s say you have loaded a PNG image into a <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span> <span class="pre">my_png</span></code> variable and use it in an <code class="docutils literal notranslate"><span class="pre">lv_img</span></code> object. If the image is already cached and you change <code class="docutils literal notranslate"><span class="pre">my_png-&gt;data</span></code> you need to notify LittlevGL to cache the image again.
-To do this use <code class="docutils literal notranslate"><span class="pre">lv_img_cache_invalidate_src(&amp;my_png)</span></code>. If <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is passed as parameter the whole cache will be cleaned.</p>
+<p>Let’s say you have loaded a PNG image into a <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span> <span class="pre">my_png</span></code> variable and use it in an <code class="docutils literal notranslate"><span class="pre">lv_img</span></code> object. If the image is already cached and you then change the underlying PNG file, you need to notify LittlevGL to cache the image again. Otherwise, there is no easy way of detecting that the underlying file changed and LittlevGL will still draw the old image.</p>
+<p>To do this, use <code class="docutils literal notranslate"><span class="pre">lv_img_cache_invalidate_src(&amp;my_png)</span></code>. If <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is passed as a parameter, the whole cache will be cleaned.</p>
 </div>
 </div>
 <div class="section" id="api">
@@ -2153,7 +2167,7 @@ To do this use <code class="docutils literal notranslate"><span class="pre">lv_i
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

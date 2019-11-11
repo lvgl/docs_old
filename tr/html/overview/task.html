@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#bicimler">Biçimler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#olaylar">Olaylar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#ornek">Örnek</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -515,7 +516,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Onay kutusu (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#giris">Giriş</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#metin">Metin</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#onay-onayi-kaldir">Onay/Onayı Kaldır</a></li>
@@ -1090,13 +1091,13 @@
             
   <div class="section" id="gorevler">
 <h1>Görevler<a class="headerlink" href="#gorevler" title="Permalink to this headline">¶</a></h1>
-<p>LittlevGL dahili  görev sistemine sahiptir. Periyodik olarak çağırmak için bir fonksiyon kaydedebilirsiniz. Birkaç saniyede çağrılması gereken bu görevler görevler <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code> ile çağrılır ve işlenir.
+<p>LittlevGL has a built-in task system. You can register a function to have it be called periodically. The tasks are handled and called in <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code>, which needs to be called periodically every few milliseconds.
 Daha fazla bilgi için <a class="reference internal" href="../porting/task-handler.html"><span class="doc">Porting</span></a> bakınız.</p>
-<p>Görevler non-preemptive dir yani bir görev diğerini kesebilir. Bu yüzden görevin içinde herhangi bir LittlevGL fonksiyonunu çağırabilirsiniz.</p>
+<p>The tasks are non-preemptive, which means a task cannot interrupt another task. Therefore, you can call any LittlevGL related function in a task.</p>
 <div class="section" id="bir-gorev-olustur">
 <h2>Bir görev oluştur<a class="headerlink" href="#bir-gorev-olustur" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">lv_task_create(task_cb,</span> <span class="pre">period_ms,</span> <span class="pre">LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST,</span> <span class="pre">user_data)</span></code> yeni bir görev oluşturmak için kullanılır. Görevin parametrelerini değiştirmek için sonradan kullanılabilen bir <code class="docutils literal notranslate"><span class="pre">lv_task_t</span> <span class="pre">*</span></code> değişkeni oluşturacak.
-Ayrıca <code class="docutils literal notranslate"><span class="pre">lv_task_create_basic()</span></code> herhangi bir parametre belirtmeksizin yeni ir görev oluşturmak içinde kullanılabilir.</p>
+<p>To create a new task, use <code class="docutils literal notranslate"><span class="pre">lv_task_create(task_cb,</span> <span class="pre">period_ms,</span> <span class="pre">LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST,</span> <span class="pre">user_data)</span></code>. It will create an <code class="docutils literal notranslate"><span class="pre">lv_task_t</span> <span class="pre">*</span></code> variable, which can be used later to modify the parameters of the task.
+<code class="docutils literal notranslate"><span class="pre">lv_task_create_basic()</span></code> can also be used. It allows you to create a new task without specifying any parameters.</p>
 <p>Bşir görev geri çağırması <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">(*lv_task_cb_t)(lv_task_t</span> <span class="pre">*);</span></code> prototipine sahip olmalı.</p>
 <p>Örneğin:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_task</span><span class="p">(</span><span class="n">lv_task_t</span> <span class="o">*</span> <span class="n">task</span><span class="p">)</span>
@@ -1104,7 +1105,7 @@ Ayrıca <code class="docutils literal notranslate"><span class="pre">lv_task_cre
   <span class="cm">/*Kullanıcı verisini kullan*/</span>
   <span class="kt">uint32_t</span> <span class="o">*</span> <span class="n">user_data</span> <span class="o">=</span> <span class="n">task</span><span class="o">-&gt;</span><span class="n">user_data</span><span class="p">;</span>
   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;my_task called with user data: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">user_data</span><span class="p">);</span>
-  
+
   <span class="cm">/*i LittlevGL ile birşeyler yap*/</span>
   <span class="k">if</span><span class="p">(</span><span class="n">something_happened</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">something_happened</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
@@ -1122,7 +1123,7 @@ Ayrıca <code class="docutils literal notranslate"><span class="pre">lv_task_cre
 <div class="section" id="hazir-ve-reset">
 <h2>Hazır ve Reset<a class="headerlink" href="#hazir-ve-reset" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">lv_task_ready(task)</span></code> görevin <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code> ‘ın bir sonraki çağrısında çalışmasını sağlar.</p>
-<p><code class="docutils literal notranslate"><span class="pre">lv_task_reset(task)</span></code> bir görevin periyotunu resetler. Belirlenen milisaniye periyotu süresi sonrasında çağrılır.göre</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_task_reset(task)</span></code> resets the period of a task. It will be called again after the defined period of milliseconds has elapsed.</p>
 </div>
 <div class="section" id="parametreleri-ayarlama">
 <h2>Parametreleri ayarlama<a class="headerlink" href="#parametreleri-ayarlama" title="Permalink to this headline">¶</a></h2>
@@ -1135,23 +1136,23 @@ Ayrıca <code class="docutils literal notranslate"><span class="pre">lv_task_cre
 </div>
 <div class="section" id="tek-seferlik-gorevler">
 <h2>Tek seferlik görevler<a class="headerlink" href="#tek-seferlik-gorevler" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">lv_task_once(task)</span></code>çağırarak bir kez çalışacak bir görev yapabilirsiniz. Bu görev ilk çağırmadan sonra otomatik olarak silinecektir.</p>
+<p>You can make a task to run only once by calling<code class="docutils literal notranslate"><span class="pre">lv_task_once(task)</span></code>. The task will automatically be deleted after being called for the first time.</p>
 </div>
 <div class="section" id="bos-zaman-olcme">
 <h2>Boş zaman ölçme<a class="headerlink" href="#bos-zaman-olcme" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">lv_task_get_idle()</span></code> ile <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>’ın boş zaman yüzdesini elde edebilirsiniz. Tüm sistemin boş zaman süresini değil, sadece<code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>’ın ölçtüğünü unutmayınız.
-Eğer bir işletim sistemi kullanıyorsunuz bir görevde <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>’ı çağırırsanız,yanıltıcı olabilir.</p>
+<p>You can get the idle percentage time <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> with <code class="docutils literal notranslate"><span class="pre">lv_task_get_idle()</span></code>. Note that, it doesn’t measure the idle time of the overall system, only <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>.
+It can be misleading if you use an operating system and call <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> in an  task, as it won’t actually measure the time the OS spends in an idle thread.</p>
 </div>
 <div class="section" id="es-zamanli-olmayan-cagirmalar">
 <h2>Eş zamanlı olmayan çağırmalar<a class="headerlink" href="#es-zamanli-olmayan-cagirmalar" title="Permalink to this headline">¶</a></h2>
-<p>Bazı durumlarda, hızlıca bir aksiyon yapamazsınız. Örneğin, bir nesneyi şuan silemezsin çünkü bir şey onu hala kullanılıyor veya yürütmeyi şuan kapatmak istemezsin.
-Bazı durumlar için, <code class="docutils literal notranslate"><span class="pre">lv_task_handler'</span> <span class="pre">'ın</span> <span class="pre">bir</span> <span class="pre">sonraki</span> <span class="pre">çağrısında</span> </code>my_function<code class="docutils literal notranslate"><span class="pre">çağrılması</span> <span class="pre">için</span></code>lv_async_call(my_function, data_p)<code class="docutils literal notranslate"><span class="pre">kullanılabilir.</span></code>data_p` çağrıldığında fonksiyona geçecek.
+<p>In some cases, you can’t do an action immediately. For example, you can’t delete an object right now because something else is still using it or you don’t want to block the execution now.
+For these cases, you can use the <code class="docutils literal notranslate"><span class="pre">lv_async_call(my_function,</span> <span class="pre">data_p)</span></code> to make <code class="docutils literal notranslate"><span class="pre">my_function</span></code> be called on the next call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>. <code class="docutils literal notranslate"><span class="pre">data_p</span></code> will be passed to function when it’s called.
 Note that, only the pointer of the data is saved so you need to ensure that the variable will be “alive” while the function is called. Global veya dinamik olarak ayrılmış veri, <em>static</em> kullanılabilir.</p>
 <p>Örneğin:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">my_screen_clean_up</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span> <span class="n">scr</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="cm">/*`scr` ile ilgili bazı kaynakları serbest bırakın*/</span>
-  
+
   <span class="cm">/*En sonunda ekranı sil*/</span>
   <span class="n">lv_obj_del</span><span class="p">(</span><span class="n">scr</span><span class="p">);</span>  
 <span class="p">}</span>
@@ -1166,6 +1167,7 @@ Note that, only the pointer of the data is saved so you need to ensure that the 
 <span class="cm">/*Ekran hala geçerlidir, bu yüzden onunla başka şeyler yapabilirsiniz*/</span>
 </pre></div>
 </div>
+<p>If you just want to delete an object, and don’t need to clean anything up in <code class="docutils literal notranslate"><span class="pre">my_screen_cleanup</span></code>, you could just use <code class="docutils literal notranslate"><span class="pre">lv_obj_del_async</span></code>, which will delete the object on the next call to <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code>.</p>
 </div>
 <div class="section" id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
@@ -1449,7 +1451,7 @@ Note that, only the pointer of the data is saved so you need to ensure that the 
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

@@ -170,7 +170,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Interface d’affichage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#tampon-d-affichage">Tampon d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#pilote-d-affichage">Pilote d’affichage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
@@ -178,9 +178,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Interface de périphérique d’entrée</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-de-peripheriques-d-entree">Types de périphériques d’entrée</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-tactile-souris-ou-autre-pointeur">Pavé tactile, souris ou autre pointeur</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#keypad-or-keyboard">Keypad or keyboard</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encoder">Encoder</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#button">Button</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-numerique-ou-clavier">Pavé numérique ou clavier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encodeur">Encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#bouton">Bouton</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#autres-fonctionnalites">Autres fonctionnalités</a></li>
@@ -233,6 +233,12 @@
 <li class="toctree-l2"><a class="reference internal" href="event.html">Evénements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="event.html#types-d-evenements">Types d’événements</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generiques">Evénements génériques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="event.html#relatifs-aux-peripheriques-d-entree">Relatifs aux  périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pointeur">Relatif au pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#relatif-au-pave-numerique-et-encodeur">Relatif au pavé numérique et encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event.html#evenements-generaux">Evénements généraux</a></li>
 <li class="toctree-l4"><a class="reference internal" href="event.html#evenements-speciaux">Evénements spéciaux</a></li>
 </ul>
 </li>
@@ -241,11 +247,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="style.html">Styles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="style.html#use-the-styles">Use the styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="style.html#utiliser-les-styles">Utiliser les styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#heritage-de-styles">Héritage de styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="style.html#proprietes-de-style">Propriétés de style</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-communes">Propriétés communes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="style.html#body-style-properties">Body style properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-corps">Propriétés de style de corps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-texte">Propriétés de style de texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-d-image">Propriétés de style d’image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="style.html#proprietes-de-style-de-ligne">Propriétés de style de ligne</a></li>
@@ -469,7 +475,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#evenements">Evénements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#exemple">Exemple</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -517,7 +523,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Case à cocher (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#texte">Texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#cocher-decocher">Cocher/décocher</a></li>
@@ -1091,14 +1097,14 @@
             
   <div class="section" id="objets">
 <h1>Objets<a class="headerlink" href="#objets" title="Permalink to this headline">¶</a></h1>
-<p>In the LittlevGL the <strong>basic building blocks</strong> of a user interface are the objects, also called <em>Widgets</em>.
+<p>Dans LittlevGL, les <strong>éléments de base</strong> d’une interface utilisateur sont les objets, également appelés <em>éléments visuels</em>.
 Par exemple, un <a class="reference internal" href="../object-types/btn.html"><span class="doc">Bouton</span></a>, une <a class="reference internal" href="../object-types/label.html"><span class="doc">Etiquette</span></a>, une <a class="reference internal" href="../object-types/img.html"><span class="doc">Image</span></a>, une <a class="reference internal" href="../object-types/list.html"><span class="doc">Liste</span></a>, un <a class="reference internal" href="../object-types/chart.html"><span class="doc">Graphique</span></a> ou une <a class="reference internal" href="../object-types/ta.html"><span class="doc">Zone de texte</span></a>.</p>
 <p>Découvrez tous les <a class="reference internal" href="../object-types/index.html"><span class="doc">Types d’objet</span></a> ici.</p>
 <div class="section" id="attributs-d-objet">
 <h2>Attributs d’objet<a class="headerlink" href="#attributs-d-objet" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="attributs-de-base">
 <h3>Attributs de base<a class="headerlink" href="#attributs-de-base" title="Permalink to this headline">¶</a></h3>
-<p>All object types share some basic attributes:</p>
+<p>Tous les types d’objet partagent certains attributs de base :</p>
 <ul class="simple">
 <li><p>Position</p></li>
 <li><p>Taille</p></li>
@@ -1106,7 +1112,7 @@ Par exemple, un <a class="reference internal" href="../object-types/btn.html"><s
 <li><p>Autorisation du glissé</p></li>
 <li><p>Autorisation du clic etc.</p></li>
 </ul>
-<p>You can set/get these attributes with <code class="docutils literal notranslate"><span class="pre">lv_obj_set_...</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_obj_get_...</span></code> functions. For example:</p>
+<p>Vous pouvez définir/obtenir ces attributs avec les fonctions <code class="docutils literal notranslate"><span class="pre">lv_obj_set</span> <span class="pre">_...</span></code> et <code class="docutils literal notranslate"><span class="pre">lv_obj_get</span> <span class="pre">_...</span></code>. Par exemple :</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Définit les attributs de base de l&#39;objet */</span>
 <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>	 <span class="cm">/* Taille du bouton */</span>
 <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">);</span>      <span class="cm">/* Position du bouton */</span>
@@ -1122,7 +1128,7 @@ Par exemple, un <a class="reference internal" href="../object-types/btn.html"><s
 <li><p>Une valeur courante</p></li>
 <li><p>Des styles personnalisés</p></li>
 </ul>
-<p>For these attributes, every object type have unique API functions. For example for a slider:</p>
+<p>Pour ces attributs, chaque type d’objet possède des fonctions API uniques. Par exemple pour un curseur :</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Définit les attributs spécifiques du curseur */</span>
 <span class="n">lv_slider_set_range</span><span class="p">(</span><span class="n">slider1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>	   <span class="cm">/* Définit les valeurs minimum et maximum */</span>
 <span class="n">lv_slider_set_value</span><span class="p">(</span><span class="n">slider1</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">LV_ANIM_ON</span><span class="p">);</span>	<span class="cm">/* Définit la valeur courante (position) */</span>
@@ -1136,13 +1142,13 @@ Par exemple, un <a class="reference internal" href="../object-types/btn.html"><s
 <h2>Mécanismes de fonctionnement de l’objet<a class="headerlink" href="#mecanismes-de-fonctionnement-de-l-objet" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="structure-parent-enfant">
 <h3>Structure parent-enfant<a class="headerlink" href="#structure-parent-enfant" title="Permalink to this headline">¶</a></h3>
-<p>A parent object can be considered as the container of its children. Every object has exactly one parent object (except screens), but a parent can have an unlimited number of children.
-There is no limitation for the type of the parent but, there are typical parent (e.g. button) and typical child (e.g. label) objects.</p>
+<p>Un objet parent peut être considéré comme le conteneur de ses enfants. Chaque objet a exactement un objet parent (à l’exception des écrans), mais un parent peut avoir un nombre illimité d’enfants.
+Il n’y a pas de contrainte pour le type du parent, mais il existe des objets parent typiques (par exemple un bouton) et enfants (par exemple une étiquette).</p>
 </div>
 <div class="section" id="se-deplacer-ensemble">
 <h3>Se déplacer ensemble<a class="headerlink" href="#se-deplacer-ensemble" title="Permalink to this headline">¶</a></h3>
-<p>If the position of the parent is changed the children will move with the parent.
-Therefore all positions are relative to the parent.</p>
+<p>Si la position du parent est modifiée, les enfants se déplaceront avec lui.
+Par conséquent, toutes les positions sont relatives au parent.</p>
 <p>Les coordonnées (0, 0) signifient que les objets resteront dans le coin supérieur gauche du parent indépendamment de la position du parent.</p>
 <p><img alt="Objects are moving together 1" src="../_images/par_child1.png" /></p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">par</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span> <span class="cm">/* Crée un objet parent sur l&#39;écran actuel */</span>
@@ -1161,7 +1167,7 @@ Therefore all positions are relative to the parent.</p>
 </div>
 <div class="section" id="visibilite-uniquement-sur-le-parent">
 <h3>Visibilité uniquement sur le parent<a class="headerlink" href="#visibilite-uniquement-sur-le-parent" title="Permalink to this headline">¶</a></h3>
-<p>If a child is partially or fully out of its parent then the parts outside will not be visible.</p>
+<p>Si un enfant est partiellement ou complètement hors de son parent, les parties extérieures ne seront pas visibles.</p>
 <p><img alt="A graphical object is visible on its parent" src="../_images/par_child3.png" /></p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_set_x</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">);</span>	<span class="cm">/* Déplace l&#39;enfant en partie en dehors du parent */</span>
 </pre></div>
@@ -1169,16 +1175,16 @@ Therefore all positions are relative to the parent.</p>
 </div>
 <div class="section" id="creer-supprimer-des-objets">
 <h3>Créer - supprimer des objets<a class="headerlink" href="#creer-supprimer-des-objets" title="Permalink to this headline">¶</a></h3>
-<p>In LittlevGL objects can be created and deleted dynamically in run-time.
-It means only the currently created objects consume RAM.
-For example, if you need a chart, you can create it when required and delete it when it is not visible or necessary.</p>
-<p>Every object type has its own <strong>create</strong> function with a unified prototype.
-It needs two parameters:</p>
+<p>Dans LittlevGL, les objets peuvent être créés et supprimés dynamiquement à l’exécution.
+Cela signifie que seuls les objets actuellement créés consomment de la MEV.
+Par exemple, si vous avez besoin d’un graphique, vous pouvez le créer à l’utilisation et le supprimer s’il n’est pas visible ou plus nécessaire.</p>
+<p>Chaque type d’objet a sa propre fonction <strong>create</strong> avec une signature unifiée.
+Deux paramètres sont nécessaires :</p>
 <ul class="simple">
-<li><p>A pointer to the <em>parent</em> object. To create a screen give <em>NULL</em> as parent.</p></li>
-<li><p>Optionally, a pointer to <em>copy</em> object with the same type to copy it. This <em>copy</em> object can be <em>NULL</em> to avoid the copy operation.</p></li>
+<li><p>un pointeur sur l’objet parent. Pour créer un écran, donnez <em>NULL</em> comme parent.</p></li>
+<li><p>éventuellement un pointeur sur un autre objet du même type pour copie. Peut être <em>NULL</em> pour ne pas copier un autre objet.</p></li>
 </ul>
-<p>All objects are referenced in C code using an <code class="docutils literal notranslate"><span class="pre">lv_obj_t</span></code> pointer as a handle. This pointer can later be used to set or get the attributes of the object.</p>
+<p>Tous les objets sont référencés dans le code C en utilisant un pointeur <code class="docutils literal notranslate"><span class="pre">lv_obj_t</span></code>. Ce pointeur peut ensuite être utilisé pour définir ou obtenir les attributs de l’objet.</p>
 <p>Les fonctions de création ressemblent à ceci :</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">lv_</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">_create</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">parent</span><span class="p">,</span> <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">copy</span><span class="p">);</span>
 </pre></div>
@@ -1187,10 +1193,10 @@ It needs two parameters:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">lv_obj_del</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">lv_obj_del</span></code> will delete the object immediately.
-If for any reason you can’t delete the object immediately you can use <code class="docutils literal notranslate"><span class="pre">lv_obj_del_async(obj)</span></code>.
-It is useful e.g. if you want to delete the parent of an object in the child’s <code class="docutils literal notranslate"><span class="pre">LV_EVENT_DELETE</span></code> signal.</p>
-<p>You can remove all the children of an object (but not the object itself) using <code class="docutils literal notranslate"><span class="pre">lv_obj_clean</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_obj_del</span></code> supprimera immédiatement l’objet.
+Si pour une quelconque raison vous ne pouvez pas supprimer l’objet immédiatement, vous pouvez utiliser <code class="docutils literal notranslate"><span class="pre">lv_obj_del_async(obj)</span></code>.
+Utile, par exemple si vous voulez supprimer le parent d’un objet dans le traitement de l’événement <code class="docutils literal notranslate"><span class="pre">LV_EVENT_DELETE</span></code>.</p>
+<p>Vous pouvez supprimer tous les enfants d’un objet (mais pas l’objet lui-même) en utilisant <code class="docutils literal notranslate"><span class="pre">lv_obj_clean</span></code> :</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">lv_obj_clean</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -1201,12 +1207,13 @@ It is useful e.g. if you want to delete the parent of an object in the child’s
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">scr1</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>There is always an active screen on each display. By default, the library creates and loads a “Base object” as the screen for each display.To get the currently active screen use the <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> function. To load a new one, use <code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr1)</span></code>.</p>
+<p>Il y a toujours un écran actif sur chaque affichage. Par défaut, la librairie crée et charge un “objet de base” comme écran pour chaque affichage.
+Pour obtenir l’écran actuellement actif, utilisez la fonction <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code>. Pour en charger un nouveau, utilisez <code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr1)</span></code>.</p>
 <p>Les écrans peuvent être créés avec n’importe quel type d’objet. Par exemple, un <a class="reference internal" href="../object-types/obj.html"><span class="doc">Objet de base</span></a> ou une image pour créer un fond d’écran.</p>
-<p>Screens are created on the currently selected <em>default display</em>.
-The <em>default screen</em> is the last registered screen with <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register</span></code> or you can explicitly select a new default display using <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default(disp)</span></code>.
-<code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_scr_load()</span></code> operate on the currently default screen.</p>
-<p>Visit <a class="reference internal" href="display.html"><span class="doc">Multi-display support</span></a> to learn more.</p>
+<p>Les écrans sont créés sur l’ <em>affichage par défaut</em> actuellement sélectionné.
+L’écran <em>par défaut</em> est le dernier écran enregistré avec <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register</span></code> ou vous pouvez explicitement sélectionner un nouvel affichage par défaut avec <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default</span> <span class="pre">(disp)</span></code>.
+<code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> et <code class="docutils literal notranslate"><span class="pre">lv_scr_load()</span></code> opèrent sur l’écran courant par défaut.</p>
+<p>Visitez <a class="reference internal" href="display.html"><span class="doc">Support multi-affichage</span></a> pour en savoir plus.</p>
 </div>
 </div>
 </div>
@@ -1233,7 +1240,7 @@ The <em>default screen</em> is the last registered screen with <code class="docu
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

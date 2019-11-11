@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#bicimler">Biçimler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#olaylar">Olaylar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#ornek">Örnek</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#micropython">MicroPython</a></li>
@@ -515,7 +516,7 @@
 <li class="toctree-l3"><a class="reference internal" href="canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cb.html">Onay kutusu (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cb.html#giris">Giriş</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#metin">Metin</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#onay-onayi-kaldir">Onay/Onayı Kaldır</a></li>
@@ -1092,29 +1093,31 @@
 <h1>Bar (lv_bar)<a class="headerlink" href="#bar-lv-bar" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="giris">
 <h2>Giriş<a class="headerlink" href="#giris" title="Permalink to this headline">¶</a></h2>
-<p>Bar nesnesi iki ana parçaya sahiptir:</p>
+<p>The ‘Bar’ objects have got two main parts:</p>
 <ol class="simple">
-<li><p>Nesnenin kendi <strong>arka planı</strong></p></li>
-<li><p>Şekli arka planla aynı olan fakat genişliği/yüksekliği ayarlanabilen bir <strong>gösterge</strong> .</p></li>
+<li><p>a <strong>background</strong> which is the object itself.</p></li>
+<li><p>an <strong>indicator</strong> which shape is similar to the background but its width/height can be adjusted.</p></li>
 </ol>
-<p>Barın yönü genişlik/yüksek oranına göre dikey veya yatay olarak ayarlanabilir. Mantıken yatay barlarda göstergenin genişliği, dikey barlarda göstergenin yüksekliği değiştirilebilir.</p>
+<p>The orientation of the bar can be vertical or horizontal according to the width/height ratio. Logically, on horizontal bars, the indicator’s width can be changed. Similarly, on vertical bars, the indicator’s height can be changed.</p>
 <div class="section" id="deger-ve-aralik">
 <h3>Değer ve aralık<a class="headerlink" href="#deger-ve-aralik" title="Permalink to this headline">¶</a></h3>
-<p>Yeni değer <code class="docutils literal notranslate"><span class="pre">lv_bar_set_value(bar,</span> <span class="pre">new_value,</span> <span class="pre">LV_ANIM_ON/OFF)</span></code>vasıtasıyla ayarlanabilir.
-Bu değer <code class="docutils literal notranslate"><span class="pre">lv_bar_set_range(bar,</span> <span class="pre">min,</span> <span class="pre">max)</span></code> ile değiştirilen bir aralıkta(minimum ve maksimum değerlerde) değerlendirilir.Varsayılan aralık 1..100.</p>
-<p><code class="docutils literal notranslate"><span class="pre">lv_bar_set_value</span></code> deki yeni değer   (<code class="docutils literal notranslate"><span class="pre">LV_ANIM_ON/OFF</span></code>) deki son parametreye bağlı olarak animasyonsuz olarak ayarlanabilir  .Animasyon süresi <code class="docutils literal notranslate"><span class="pre">lv_bar_set_anim_time(bar,</span> <span class="pre">100)</span></code> yoluyla ayarlanabilir . Süre birimi milisaniyedir.</p>
+<p>A new value can be set by <code class="docutils literal notranslate"><span class="pre">lv_bar_set_value(bar,</span> <span class="pre">new_value,</span> <span class="pre">LV_ANIM_ON/OFF)</span></code>.
+The value is interpreted in a range (minimum and maximum values) which can be modified with <code class="docutils literal notranslate"><span class="pre">lv_bar_set_range(bar,</span> <span class="pre">min,</span> <span class="pre">max)</span></code>.
+Varsayılan aralık 1..100.</p>
+<p>The new value in <code class="docutils literal notranslate"><span class="pre">lv_bar_set_value</span></code> can be set with or without an animation depending on the last parameter (<code class="docutils literal notranslate"><span class="pre">LV_ANIM_ON/OFF</span></code>).
+The time of the animation can be adjusted by <code class="docutils literal notranslate"><span class="pre">lv_bar_set_anim_time(bar,</span> <span class="pre">100)</span></code>. The time is in milliseconds unit.</p>
 </div>
 <div class="section" id="simetrik">
 <h3>Simetrik<a class="headerlink" href="#simetrik" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">lv_bar_set_sym(bar,</span> <span class="pre">true)</span></code> eğer aktif ise, bar sıfıra simetrik çizilebilir(sıfıra soldan sağa çizilmiş)</p>
+<p>The bar can be drawn symmetrical to zero (drawn from zero, left to right), if it’s enabled with <code class="docutils literal notranslate"><span class="pre">lv_bar_set_sym(bar,</span> <span class="pre">true)</span></code></p>
 </div>
 </div>
 <div class="section" id="bicimler">
 <h2>Biçimler<a class="headerlink" href="#bicimler" title="Permalink to this headline">¶</a></h2>
-<p>Bir <em>Bar</em> nesnesinin biçimi ayarlamak için <code class="docutils literal notranslate"><span class="pre">lv_bar_set_style(arc,</span> <span class="pre">LV_BAR_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code> kullanılır</p>
+<p>To set the style of an <em>Bar</em> object, use <code class="docutils literal notranslate"><span class="pre">lv_bar_set_style(arc,</span> <span class="pre">LV_BAR_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code>:</p>
 <ul class="simple">
-<li><p><strong>LV_BAR_STYLE_BG</strong>  bir <a class="reference internal" href="obj.html"><span class="doc">Base object</span></a> dir. Bu yüzden kendi biçim  unsurları ile kullanılır. it uses its style elements. Its default style is: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty</span></code>.</p></li>
-<li><p><strong>LV_BAR_STYLE_INDIC</strong> arka plana benzer. <em>Sol</em>, <em>sağ</em>, <em>üst</em> ve <em>alt</em> dolgularını arka planın kenarlarından biraz boşluk kalmasını sağlamak için kullanılır. Varsayılan biçim: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty_color</span></code>.</p></li>
+<li><p><strong>LV_BAR_STYLE_BG</strong> - is a <a class="reference internal" href="obj.html"><span class="doc">Base object</span></a>, therefore, it uses its style elements. Its default style is: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty</span></code>.</p></li>
+<li><p><strong>LV_BAR_STYLE_INDIC</strong> - is similar to the background. It uses the <em>left</em>, <em>right</em>, <em>top</em> and <em>bottom</em> paddings to keeps some space form the edges of the background. Its default style is: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty_color</span></code>.</p></li>
 </ul>
 </div>
 <div class="section" id="olaylar">
@@ -1454,7 +1457,7 @@ Bu değer <code class="docutils literal notranslate"><span class="pre">lv_bar_se
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

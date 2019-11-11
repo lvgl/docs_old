@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#bicimler">Biçimler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#olaylar">Olaylar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="btnm.html#ornek">Örnek</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="btnm.html#micropython">MicroPython</a></li>
@@ -515,7 +516,7 @@
 <li class="toctree-l3"><a class="reference internal" href="canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cb.html">Onay kutusu (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cb.html#giris">Giriş</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#metin">Metin</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#onay-onayi-kaldir">Onay/Onayı Kaldır</a></li>
@@ -1092,77 +1093,77 @@
 <h1>Buton (lv_btn)<a class="headerlink" href="#buton-lv-btn" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="giris">
 <h2>Giriş<a class="headerlink" href="#giris" title="Permalink to this headline">¶</a></h2>
-<p>Butonlar, baskı uygulandığında veya bırakıldığında biçimleri ve durumları değişen basit dikdörtgenimsi nesnelerdir.</p>
+<p>Buttons are simple rectangle-like objects, but they change their style and state when they are pressed or released.</p>
 <div class="section" id="durumlar">
 <h3>Durumlar<a class="headerlink" href="#durumlar" title="Permalink to this headline">¶</a></h3>
 <p>Butonlar 5 olası durumdan birinde olabilir</p>
 <ul class="simple">
-<li><p><strong>LV_BTN_STATE_REL</strong> Bası uygulanmama durumu</p></li>
-<li><p><strong>LV_BTN_STATE_PR</strong> Bası uygulanma durumu</p></li>
-<li><p><strong>LV_BTN_STATE_TGL_REL</strong> Değiştir basılma uygulanmama durumu</p></li>
-<li><p><strong>LV_BTN_STATE_TGL_PR</strong> Değiştir basılma uygulanma durumu</p></li>
-<li><p><strong>LV_BTN_STATE_INA</strong> Pasif durumu</p></li>
+<li><p><strong>LV_BTN_STATE_REL</strong> - Released state</p></li>
+<li><p><strong>LV_BTN_STATE_PR</strong> - Pressed state</p></li>
+<li><p><strong>LV_BTN_STATE_TGL_REL</strong> - Toggled released state</p></li>
+<li><p><strong>LV_BTN_STATE_TGL_PR</strong> - Toggled pressed state</p></li>
+<li><p><strong>LV_BTN_STATE_INA</strong> - Inactive state</p></li>
 </ul>
-<p>Butona basıldığında veya bırakıldığında, buton <code class="docutils literal notranslate"><span class="pre">..._REL</span></code> to <code class="docutils literal notranslate"><span class="pre">..._PR</span></code> durumları arasındaki değişim otomatik olur.</p>
+<p>The state from <code class="docutils literal notranslate"><span class="pre">..._REL</span></code> to <code class="docutils literal notranslate"><span class="pre">..._PR</span></code> will be changed automatically when the button is pressed or released.</p>
 <p>Butonun durumu el ile <code class="docutils literal notranslate"><span class="pre">lv_btn_set_state(btn,</span> <span class="pre">LV_BTN_STATE_TGL_REL)</span></code> fonksiyonu ile değiştirilebilir.</p>
 </div>
 <div class="section" id="degistir">
 <h3>Değiştir<a class="headerlink" href="#degistir" title="Permalink to this headline">¶</a></h3>
-<p>Butonları `lv_btn_set_toggle(btn, true) fonksiyonu ile  <em>toggle button</em> olarak  ayarlanabilir, bu durumda serbest bırakıldığında  buton <em>toggled released</em> durumuna geçer.</p>
+<p>You can configure the buttons as <em>toggle button</em> with <code class="docutils literal notranslate"><span class="pre">lv_btn_set_toggle(btn,</span> <span class="pre">true)</span></code>. In this case, on release, the button goes to <em>toggled released</em> state.</p>
 </div>
 <div class="section" id="yerlesim-plani-ve-uyum">
 <h3>Yerleşim planı ve Uyum<a class="headerlink" href="#yerlesim-plani-ve-uyum" title="Permalink to this headline">¶</a></h3>
-<p>Butonlar <a class="reference internal" href="cont.html"><span class="doc">Taşıyıcı çerçeve</span></a>’lerde olduğu gibi benzer yerleşim planı ve uyum özelliklerine sahiptir.</p>
+<p>Similarly to <a class="reference internal" href="cont.html"><span class="doc">Containers</span></a>, buttons also have layout and fit attributes.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">lv_btn_set_layout(btn,</span> <span class="pre">LV_LAYOUT_...)</span> </code> fonksiyonu ile yerleşim planı ayarlanır. Varsayılarn yerleşim planı <code class="docutils literal notranslate"><span class="pre">LV_LAYOUT_CENTER</span></code> şeklindedir.
-Bu yüzden eğer butona bir etiket eklendiğinde, etiket otomatik olarak ortaya hizalanır ve <code class="docutils literal notranslate"><span class="pre">lv_obj_set_pos()</span></code> fonksiyonu ile haraket ettirilemez.
-<code class="docutils literal notranslate"><span class="pre">lv_btn_set_layout(btn,</span> <span class="pre">LV_LAYOUT_OFF)</span></code> fonksiyonu ile yerleşim planı etkisiz hale getirilir.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_btn_set_layout(btn,</span> <span class="pre">LV_LAYOUT_...)</span> </code>set a layout. The default is <code class="docutils literal notranslate"><span class="pre">LV_LAYOUT_CENTER</span></code>.
+So, if you add a label, then it will be automatically aligned to the middle and can’t be moved with <code class="docutils literal notranslate"><span class="pre">lv_obj_set_pos()</span></code>.
+You can disable the layout with <code class="docutils literal notranslate"><span class="pre">lv_btn_set_layout(btn,</span> <span class="pre">LV_LAYOUT_OFF)</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lv_btn_set_fit/fit2/fit4(btn,</span> <span class="pre">LV_FIT_..)</span></code> fonksiyonu butonun genişlik ve/veya yüksekliğini otomatik olarak bağlı bulunduğu üst birimi veya kendi alt birimleri için aktifleştirir ve şekil uyumunu sağlar.</p></li>
 </ul>
 </div>
 <div class="section" id="murekkep-etkisi">
 <h3>Mürekkep Etkisi<a class="headerlink" href="#murekkep-etkisi" title="Permalink to this headline">¶</a></h3>
-<p>Butonlarda özel animasyonu aktifleştirebilirsiniz. Bir butona basıldığında bası uygulandığı noktadan başlayarak büyüyen bir daire çizilir. Bu durum mürekkebin suya damlaması gibi bir etki oluşturur.
-Buton bırakıldığında, bırakılma durumu sönümleyerek eski haline döndürülmesidir. Bu durum mürekkebin çok fazla su ile tam olarak karışması ve hiçbir şeyin görünmemesi gibidir.</p>
-<p>Animasyonu kontrol etmek için aşağıdaki fonksiyonlar kullanılır:</p>
+<p>You can enable a special animation on buttons: when a button is pressed, the pressed state will be drawn in a growing circle starting from the point of pressing. It’s similar in appearance and functionality to the Material Design ripple effect.</p>
+<p>Another way to think about it is like an ink droplet dropped into water. When the button is released, the released state will be reverted by fading. It’s like the ink is fully mixed with a lot of water and becomes invisible.</p>
+<p>To control this animation, use the following functions:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">lv_btn_set_ink_in_time(btn,</span> <span class="pre">time_ms)</span></code> dairenin büyüme zamanı</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lv_btn_set_ink_wait_time(btn,</span> <span class="pre">time_ms)</span></code> full kaplı(basılı) durumu devam ettirmek için minim süre</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lv_btn_set_ink_out_time(btn,</span> <span class="pre">time_ms)</span></code> bırakılma durumuna dönmek için sönümleme süresi</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_btn_set_ink_in_time(btn,</span> <span class="pre">time_ms)</span></code> - time of circle growing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_btn_set_ink_wait_time(btn,</span> <span class="pre">time_ms)</span></code> - minim time to keep the fully covering (pressed) state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_btn_set_ink_out_time(btn,</span> <span class="pre">time_ms)</span></code> - time fade back to releases state.</p></li>
 </ul>
 <p>Bu özelliğin <code class="docutils literal notranslate"><span class="pre">LV_BTN_INK_EFFECT</span>&#160; <span class="pre">1</span></code> in <em>lv_conf.h</em> ile aktifleştirilmesi gerekir.</p>
 </div>
 </div>
 <div class="section" id="bicimler">
 <h2>Biçimler<a class="headerlink" href="#bicimler" title="Permalink to this headline">¶</a></h2>
-<p>Bir buton 5 durum için 5 bağımsız biçime sahip olabilir. Onları <code class="docutils literal notranslate"><span class="pre">lv_btn_set_style(btn,</span> <span class="pre">LV_BTN_STYLE_...,</span> <span class="pre">&amp;style)</span></code>ile ayarlayabilirsiniz. Bu biçimler <code class="docutils literal notranslate"><span class="pre">style.body</span></code> özelliklerini kullanılır.</p>
+<p>A button can have 5 independent styles for the 5 states. You can set them via: <code class="docutils literal notranslate"><span class="pre">lv_btn_set_style(btn,</span> <span class="pre">LV_BTN_STYLE_...,</span> <span class="pre">&amp;style)</span></code>. The styles use the <code class="docutils literal notranslate"><span class="pre">style.body</span></code> properties.</p>
 <ul class="simple">
-<li><p><strong>LV_BTN_STYLE_REL</strong> bırakılma durum biçimi. Varsayılan: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_rel</span></code></p></li>
-<li><p><strong>LV_BTN_STYLE_PR</strong> basılma durum biçimi. Varsayılan: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_pr</span></code></p></li>
-<li><p><strong>LV_BTN_STYLE_TGL_REL</strong> değiştir bırakılma durum(toggled released) biçimi . Varsayılan: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_tgl_rel</span></code></p></li>
-<li><p><strong>LV_BTN_STYLE_TGL_PR</strong> değiştir basılma(toggled pressed) durum biçimi. Varsayılan: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_tgl_pr</span></code></p></li>
-<li><p><strong>LV_BTN_STYLE_INA</strong> pasif durum biçimi. Varsayılan: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_ina</span></code></p></li>
+<li><p><strong>LV_BTN_STYLE_REL</strong> - style of the released state. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_rel</span></code>.</p></li>
+<li><p><strong>LV_BTN_STYLE_PR</strong> - style of the pressed state. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_pr</span></code>.</p></li>
+<li><p><strong>LV_BTN_STYLE_TGL_REL</strong> - style of the toggled released state. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_tgl_rel</span></code>.</p></li>
+<li><p><strong>LV_BTN_STYLE_TGL_PR</strong> - style of the toggled pressed state. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_tgl_pr</span></code>.</p></li>
+<li><p><strong>LV_BTN_STYLE_INA</strong> - style of the inactive state. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_ina</span></code>.</p></li>
 </ul>
-<p>Buton üzerinde bir etiket oluşturduğunuzda, butonun<code class="docutils literal notranslate"><span class="pre">style.text</span></code> özelliklerini de ayarlamak iyi bir pratiktir . Çünkü etiketler varsayılan olarak <code class="docutils literal notranslate"><span class="pre">style</span> <span class="pre">=</span> <span class="pre">NULL</span></code> sahiptir , üst öğenin(button) biçimini devralırlar.
-Bundan dolayı etiket için yeni bir biçim oluşturmaya gerek yoktur.</p>
+<p>When you create a label on a button, it’s a good practice to set the button’s <code class="docutils literal notranslate"><span class="pre">style.text</span></code> properties too. Because labels have <code class="docutils literal notranslate"><span class="pre">style</span> <span class="pre">=</span> <span class="pre">NULL</span></code> by default, they inherit the parent’s (button) style.
+Hence you don’t need to create a new style for the label.</p>
 </div>
 <div class="section" id="aksiyonlar">
 <h2>Aksiyonlar<a class="headerlink" href="#aksiyonlar" title="Permalink to this headline">¶</a></h2>
 <p>Buton tarafından <a class="reference external" href="/overview/event.html#generic-events">Generic events</a> yanında  <a class="reference external" href="/overview/event.html#special-events">Special events</a> gönderilir:</p>
 <ul class="simple">
-<li><p><strong>LV_EVENT_VALUE_CHANGED</strong> buton değiştirildiğinde gönderir.</p></li>
+<li><p><strong>LV_EVENT_VALUE_CHANGED</strong> - sent when the button is toggled.</p></li>
 </ul>
-<p>Genel girdi cihazlarıyla ilgili olayların (<code class="docutils literal notranslate"><span class="pre">LV_EVENT_PRESSED</span></code> gibi) pasif durumda da gönderildiğini dikkate alınız. Pasif butonlardan aksiyonları yok saymak için <code class="docutils literal notranslate"><span class="pre">lv_btn_get_state(btn)</span></code> ile durum kontrol etmek gerekir.</p>
+<p>Note that, the generic input device-related events (like <code class="docutils literal notranslate"><span class="pre">LV_EVENT_PRESSED</span></code>) are sent in the inactive state too. You need to check the state with <code class="docutils literal notranslate"><span class="pre">lv_btn_get_state(btn)</span></code> to ignore the events from inactive buttons.</p>
 <p><a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a> hakkında daha fazlasını öğrenin.</p>
 </div>
 <div class="section" id="anahtarlar">
 <h2>Anahtarlar<a class="headerlink" href="#anahtarlar" title="Permalink to this headline">¶</a></h2>
 <p>Aşağıdaki <em>Keys</em> butonlar tarafından işlenmiştir:</p>
 <ul class="simple">
-<li><p><strong>LV_KEY_RIGHT/UP</strong> Geçiş aktif ise geçiş(toggled)durumuna gitme</p></li>
-<li><p><strong>LV_KEY_LEFT/DOWN</strong> Geçiş aktif ise  geçiş(non-toggled) yapmayan duruma gitme</p></li>
+<li><p><strong>LV_KEY_RIGHT/UP</strong> - Go to toggled state if toggling is enabled.</p></li>
+<li><p><strong>LV_KEY_LEFT/DOWN</strong> - Go to non-toggled state if toggling is enabled.</p></li>
 </ul>
-<p>Dikkate alınız ki , genel olarak,  <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code> durumu  <code class="docutils literal notranslate"><span class="pre">LV_EVENT_PRESSED/PRESSING/RELEASED</span></code> vs. olarak çevrilir.</p>
+<p>Note that, by default, the state of <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code> is translated to <code class="docutils literal notranslate"><span class="pre">LV_EVENT_PRESSED/PRESSING/RELEASED</span></code> etc.</p>
 <p><a class="reference internal" href="../overview/indev.html"><span class="doc">Keys</span></a> hakkında daha fazlasını öğrenin.</p>
 </div>
 <div class="section" id="ornek">
@@ -1714,7 +1715,7 @@ Bundan dolayı etiket için yeni bir biçim oluşturmaya gerek yoktur.</p>
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>

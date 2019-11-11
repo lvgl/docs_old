@@ -9,7 +9,7 @@
 
 ### Açılar
 
-Açıları ayarlamak için `lv_arc_set_angles(arc, start_angle, end_angle)` fonksiyonu kullanılır. Sıfır derece nesnenin alt tarafıdır ve bu derece saat yönünün tersi yönünde artmaktadır. 
+To set the angles, use the `lv_arc_set_angles(arc, start_angle, end_angle)` function. The zero degree is at the bottom of the object and the degrees are increasing in a counter-clockwise direction.
 Açılar  [0;360] aralığında olmalıdır.
 
 ### Notlar
@@ -18,11 +18,11 @@ Açılar  [0;360] aralığında olmalıdır.
 Şu anda , *Yay* nesnesi **antialiasing modu desteklemez**.
 
 ## Biçim
-*Yay* nesnesinin biçimini ayarlamak için `lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &style)`
+To set the style of an *Arc* object, use `lv_arc_set_style(arc, LV_ARC_STYLE_MAIN, &style)`
 
-- **line.rounded** uç noktaları yuvarlar.(Eğer 1'e set edilir ise opaklık düzgün çalışmaz)
-- **line.width** yayın kalınlığı
-- **line.color** Yayın rengi.
+- **line.rounded** - make the endpoints rounded (opacity won't work properly if set to 1)
+- **line.width** - the thickness of the arc
+- **line.color** - the color of the arc.
 
 ## Olaylar
 Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
@@ -33,7 +33,7 @@ Only the [Generic events](/overview/event.html#generic-events) are sent by the o
 Nesne türü tarafından işlenilen *Keys* yok.
 
 [Keys](/overview/indev) hakkında daha fazlasını öğrenin.
-  
+
 
 ## Örnek
 
@@ -43,11 +43,11 @@ Nesne türü tarafından işlenilen *Keys* yok.
 
 ```
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_arc.h
   :project: lvgl
-        
+
 ```

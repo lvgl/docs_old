@@ -3,15 +3,15 @@
 ```
 # Images
 
-Une image peut être un fichier ou une variable qui enregistre l'image elle-même et des métadonnées.
+An image can be a file or variable which stores the bitmap itself and some metadata.
 
 ## Enregistrer des images
 Vous pouvez enregistrer des images à deux endroits
 - en tant que variable en mémoire interne (MEV ou MEM)
-- en tant que fichier
+- as a file
 
 ### Variables
-Les images enregistrées dans une variable ont le type `lv_img_dsc_t` avec les champs suivants :
+The images stored internally in a variable is composed mainly of an `lv_img_dsc_t` structure with the following fields:
 - **header**
   - *cf* Format de couleur. Voir [ci-dessous](#formats-de-couleur)
   - *w* largeur en pixels (<= 2048)
@@ -19,66 +19,77 @@ Les images enregistrées dans une variable ont le type `lv_img_dsc_t` avec les c
   - *always zero* 3 bits qui doivent toujours être à zéro
   - *reserved* réservé pour une utilisation future
 - **data**pointeur sur un tableau où l'image elle-même est enregistrée
-- **data_size** longueur de `data` en octets
+- **data_size** length of `data` in bytes
+
+These are usually stored within a project as C files. They are linked into the resulting executable like any other constant data.
 
 ### Fichiers
-Pour traiter les fichiers, vous devez ajouter un *lecteur* à LittlevGL. En bref, un lecteur est une collection de fonctions (*open*, *read*, *close*, etc.) enregistrées dans LittlevGL pour effectuer des opérations sur les fichiers.
-Vous pouvez ajouter une interface à un système de fichiers standard (FAT32 sur une carte SD) ou créer votre propre système de fichiers pour lire des données à partir d'une mémoire Flash SPI.
-Dans tous les cas, un lecteur n'est qu'une abstraction pour lire et/ou écrire des données dans une mémoire.
-Voir la section [Système de fichiers](/overview/file-system) pour en apprendre plus.
+To deal with files you need to add a *Drive* to LittlevGL. In short, a *Drive* is a collection of functions (*open*, *read*, *close*, etc.) registered in LittlevGL to make file operations.
+You can add an interface to a standard file system (FAT32 on SD card) or you create your simple file system to read data from an SPI Flash memory.
+In every case, a *Drive* is just an abstraction to read and/or write data to a memory.
+See the [File system](/overview/file-system) section to learn more.
 
+Images stored as files are not linked into the resulting executable, and must be read to RAM before being drawn. As a result, they are not as resource-friendly as variable images. However, they are easier to replace without needing to recompile the main program.
 
 ## Formats de couleur
 Divers formats de couleur intégrés sont pris en charge:
-- **LV_IMG_CF_TRUE_COLOR** Enregistre simplement les couleurs RVB
-- **LV_IMG_CF_TRUE_COLOR_ALPHA** Enregistre les couleurs RVB mais ajoute également un octet Alpha pour chaque pixel
-- **LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED** Enregistre les couleurs RVB, mais si un pixel prend la valeur `LV_COLOR_TRANSP` (défini dans *lv_conf.h*), le pixel sera transparent
-- **LV_IMG_CF_INDEXED_1/2/4/8BIT** Utilise une palette avec 2, 4, 16 ou 256 couleurs et enregistre chaque pixel sur 1, 2, 4 ou 8 bits
-- **LV_IMG_CF_ALPHA_1/2/4/8BIT** Enregistre uniquement la valeur Alpha sur 1, 2, 4 ou 8 bits. Dessine les pixels avec la couleur `style.image.color` et l'opacité définie. L'image source doit avoir un canal alpha.
+- **LV_IMG_CF_TRUE_COLOR** Simply stores the RGB colors (in whatever color depth LittlevGL is configured for).
+- **LV_IMG_CF_TRUE_COLOR_ALPHA** Like `LV_IMG_CF_TRUE_COLOR` but it also adds an alpha (transparency) byte for every pixel.
+- **LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED** Like `LV_IMG_CF_TRUE_COLOR` but if a pixel has `LV_COLOR_TRANSP` (set in *lv_conf.h*) color the pixel will be transparent.
+- **LV_IMG_CF_INDEXED_1/2/4/8BIT** Uses a palette with 2, 4, 16 or 256 colors and stores each pixel in 1, 2, 4 or 8 bits.
+- **LV_IMG_CF_ALPHA_1/2/4/8BIT** **Only stores the Alpha value on 1, 2, 4 or 8 bits.** The pixels take the color of `style.image.color` and the set opacity. The source image has to be an alpha channel. This is ideal for bitmaps similar to fonts (where the whole image is one color but you'd like to be able to change it).
 
-Les octets des images *Couleurs vraies* 32 bits sont enregistrés dans l'ordre suivant
+The bytes of the `LV_IMG_CF_TRUE_COLOR` images are stored in the following order.
+
+For 32-bit color depth:
 - Byte 0: Bleu
 - Byte 1: Vert
 - Byte 2: Rouge
 - Byte 3: Alpha
 
-Pour une profondeur de couleur de 16 bits
-- Byte 0: Vert 3 bits de poids faible, Bleu 5 bits 
+For 16-bit color depth:
+- Byte 0: Green 3 lower bit, Blue 5 bit
 - Byte 1: Rouge 5 bits, Vert 3 bits de poids fort
 - Byte 2: octet Alpha (seulement avec LV_IMG_CF_TRUE_COLOR_ALPHA)
 
-Pour une profondeur de couleur de 8 bits
+For 8-bit color depth:
 - Byte 0: Rouge 3 bits, Vert 3 bits, Bleu 2 bits
 - Byte 2: octet Alpha (seulement avec LV_IMG_CF_TRUE_COLOR_ALPHA)
 
 
-Vous pouvez enregistrer des images au format *brut* pour indiquer qu'il ne s'agit pas d'un format de couleur intégré et qu'un [Décodeur d'images](#decodeur-d-images) doit être utilisé pour décoder l'image.
-- **LV_IMG_CF_RAW** Une image brute, p.ex. une image PNG ou JPG
-- **LV_IMG_CF_RAW_ALPHA** Indique que l'image a un canal alpha et qu'un octet Alpha est ajouté pour chaque pixel
-- **LV_IMG_CF_RAW_CHROME_KEYED** Indique que l'image a une couleur transparente comme indiqué par `LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED` ci-dessus.
+You can store images in a *Raw* format to indicate that, it's not a built-in color format and an external [Image decoder](#image-decoder) needs to be used to decode the image.
+- **LV_IMG_CF_RAW** Indicates a basic raw image (e.g. a PNG or JPG image).
+- **LV_IMG_CF_RAW_ALPHA** Indicates that the image has alpha and an alpha byte is added for every pixel.
+- **LV_IMG_CF_RAW_CHROME_KEYED** Indicates that the image is chrome keyed as described in `LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED` above.
 
 
 ## Ajouter et utiliser des images
 
 Vous pouvez ajouter des images à LittlevGL de deux manières :
-- utiliser le convertisseur en ligne
+- using the online converter
 - créer manuellement des images
 
 ### Convertisseur en ligne
-Le convertisseur d’image en ligne est disponible [ici]( https://littlevgl.com/image-to-c-array).
+The online Image converter is available here: https://littlevgl.com/image-to-c-array
 
-Vous devez sélectionner une image *BMP*, *PNG* ou *JPG*, lui donner un nom, sélectionner le [Format de couleur](#formats-de-couleur), sélectionner le type (fichier ou variable) et cliquer sur le bouton *Convert*. Le fichier de résultat est téléchargé.
+Adding an image to LittlevGL via online converter is easy.
 
-Dans le cas de tableaux C (variables), les données de l'image sont incluses pour toutes les profondeurs de couleurs (1, 8, 16 ou 32) et les données à utiliser seront sélectionnées lors de la compilation en fonction de `LV_COLOR_DEPTH` dans *lv_conf.h*.
+1. You need to select a *BMP*, *PNG* or *JPG* image first.
+2. Give the image a name that will be used within LittlevGL.
+3. Select the [Color format](#color-formats).
+4. Select the type of image you want. Choosing a binary will generate a `.bin` file that must be stored separately and read using the [file support](#files). Choosing a variable will generate a standard C file that can be linked into your project.
+5. Hit the *Convert* button. Once the conversion is finished, your browser will automatically download the resulting file.
 
-Dans le cas de fichiers, vous devez indiquer le format de couleur souhaité
-- Binary RGB332 pour une profondeur de couleur de 8 bits
-- Binary RGB565 pour une profondeur de couleur de 16 bits
-- Binary RGB565 pour une profondeur de couleur de 16 bits (les deux octets sont permutés)
-- Binary RGB888 pour une profondeur de couleur de 32 bits
+In the converter C arrays (variables), the bitmaps for all the color depths (1, 8, 16 or 32) are included in the C file, but only the color depth that matches `LV_COLOR_DEPTH` in *lv_conf.h* will actually be linked into the resulting executable.
+
+In case of binary files, you need to specify the color format you want:
+- RGB332 for 8-bit color depth
+- RGB565 for 16-bit color depth
+- RGB565 Swap for 16-bit color depth (two bytes are swapped)
+- RGB888 for 32-bit color depth
 
 ### Créer une image manuellement
-Si vous réalisez une image au moment de l'exécution, vous pouvez créer une variable d'image pour l'afficher. Par exemple :
+If you are generating an image at run-time, you can craft an image variable to display it using LittlevGL. For example:
 
 ```c
 uint8_t my_img_data[] = {0x00, 0x01, 0x02, ...};
@@ -94,13 +105,13 @@ static lv_img_dsc_t my_img_dsc = {
 
 ```
 
-Si le format de couleur est `LV_IMG_CF_TRUE_COLOR_ALPHA`, vous pouvez définir `data_size` comme `80 * 60 * LV_IMG_PX_SIZE_ALPHA_BYTE`.
+If the color format is `LV_IMG_CF_TRUE_COLOR_ALPHA` you can set `data_size` like `80 * 60 * LV_IMG_PX_SIZE_ALPHA_BYTE`.
 
-Une autre option pour créer une image au moment de l'exécution consiste à utiliser l'objet [Canvas](/object-types/canvas).
+Another (possibly simpler) option to create and display an image at run-time is to use the [Canvas](/object-types/canvas) object.
 
 ### Utiliser des images
 
-Le moyen le plus simple d'utiliser une image dans LittlevGL consiste à l'afficher avec un objet [Image](/object-types/img):
+The simplest way to use an image in LittlevGL is to display it with an [lv_img](/object-types/img) object:
 
 ```c
 lv_obj_t * icon = lv_img_create(lv_scr_act(), NULL);
@@ -112,48 +123,51 @@ lv_img_set_src(icon, &my_icon_dsc);
 lv_img_set_src(icon, "S:my_icon.bin");
 ```
 
-Si l'image a été convertie avec le convertisseur en ligne, vous devez utiliser `LV_IMG_DECLARE(my_icon_dsc)` pour déclarer l'icône dans le fichier où vous souhaitez l'utiliser.
+If the image was converted with the online converter, you should use `LV_IMG_DECLARE(my_icon_dsc)` to declare the image in the file where you want to use it.
 
 
 ## Décodeur d'images
-Comme vous pouvez le voir dans la section [Formats de couleur] (#formats-de-couleur), LittlevGL prend en charge plusieurs formats d'image intégrés. Cependant, il ne supporte pas par exemple les formats PNG ou JPG.
-Pour gérer les formats d'image non intégrés, vous devez utiliser des librairie externes et les attacher à LittlevGL via l'interface *décodeur d'images*.
+As you can see in the [Color formats](#color-formats) section, LittlevGL supports several built-in image formats. In many cases, these will be all you need. LittlevGL doesn't directly support, however, generic image formats like PNG or JPG.
 
-Le décodeur d'image comprend 4 fonctions :
-- **info** obtient des informations de base sur l'image (largeur, hauteur et format de couleur)
-- **open** ouvre l'image : enregistre l'image décodée. 
- `NULL` indique que l'image peut être lue ligne par ligne
-- **read** si *open* ne traite pas complètement l'image, cette fonction devrait retourner les données décodées (maximum 1 ligne) à partir d'une position donnée.
+To handle non-built-in image formats, you need to use external libraries and attach them to LittlevGL via the *Image decoder* interface.
+
+The image decoder consists of 4 callbacks:
+- **info** get some basic info about the image (width, height and color format).
+- **open** open the image: either store the decoded image or set it to `NULL` to indicate the image can be read line-by-line.
+- **read** if *open* didn't fully open the image this function should give some decoded data (max 1 line) from a given position.
 - **close** ferme l'image ouverte, libére les ressources allouées.
 
-Vous pouvez ajouter n'importe quel nombre de décodeurs d'image. Quand une image doit être dessinée, la librairie essaiera tout les décodeurs d’images enregistrés jusqu’à en trouver un capable d’ouvrir l’image, c-à-d de manipuler le format.
+You can add any number of image decoders. When an image needs to be drawn, the library will try all the registered image decoder until finding one which can open the image, i.e. knowing that format.
 
-Les formats `LV_IMG_CF_TRUE_COLOR_...`, `LV_IMG_INDEXED_...` and `LV_IMG_ALPHA_...` sont connus par le décodeur intégré.
+The `LV_IMG_CF_TRUE_COLOR_...`, `LV_IMG_INDEXED_...` and `LV_IMG_ALPHA_...` formats (essentially, all non-`RAW` formats) are understood by the built-in decoder.
 
 ### Formats d'image personnalisés
 
-Le moyen le plus simple de créer une image personnalisée consiste à utiliser le convertisseur d’image en ligne et à définir le format `Raw`, `Raw with alpha` ou  `Raw with chrome keyed`. Le convertisseur prendra tous les octets de l'image sélectionnée et les écrira en tant que données d'image.
-`header.cf` sera respectivement `LV_IMG_CF_RAW`, `LV_IMG_CF_RAW_ALPHA` ou `LV_IMG_CF_RAW_CHROME_KEYED`.Vous devez choisir le bon format en fonction de vos besoins : image normale, utilisation de canal alpha ou de couleur transparente.
+The easiest way to create a custom image is to use the online image converter and set `Raw`, `Raw with alpha` or `Raw with chrome keyed` format. It will just take every byte of the binary file you uploaded and write it as the image "bitmap". You then need to attach an image decoder that will parse that bitmap and generate the real, renderable bitmap.
 
-Après décodage, les formats *bruts* sont considérés comme des *couleurs vraies*. En d’autres termes, le décodeur d’image doit décoder les images *brutes* en *vraies couleurs* conformément au format décrit dans la section [Formats de couleur](#formats-de-couleur).
+`header.cf` will be `LV_IMG_CF_RAW`, `LV_IMG_CF_RAW_ALPHA` or `LV_IMG_CF_RAW_CHROME_KEYED` accordingly. You should choose the correct format according to your needs: fully opaque image, use alpha channel or use chroma keying.
 
-Si vous voulez créer une image vraiment personnalisée, vous devez utiliser les formats de couleur `LV_IMG_CF_USER_ENCODED_0..7`. Cependant, la librairie peut dessiner les images uniquement au format *couleurs vraies* (ou *brut*, mais finalement, elles sont supposées être au format *couleurs vraies*).
-Donc, les formats `LV_IMG_CF_USER_ENCODED_...` ne sont pas connus de la librairie . Ils doivent donc être décodés dans l'un des formats connus de la section [Formats de couleur](#formats-de-couleur).
-Il est possible de décoder d'abord l'image dans un format de couleur non vraie, par exemple `LV_IMG_INDEXED_4BITS`, puis d'appeler les fonctions du décodeur intégré pour la convertir en *couleurs vraies*.
+After decoding, the *raw* formats are considered *True color* by the library. In other words, the image decoder must decode the *Raw* images to *True color* according to the format described in [#color-formats](Color formats) section.
 
-Pour les formats *encodés par l'utilisateur*, le format de couleur (`dsc-> header.cf`) doit être modifié en conséquence, dans la fonction open.
- 
+If you want to create a custom image, you should use `LV_IMG_CF_USER_ENCODED_0..7` color formats. However, the library can draw the images only in *True color* format (or *Raw* but finally it's supposed to be in *True color* format).
+So the `LV_IMG_CF_USER_ENCODED_...` formats are not known by the library, therefore, they should be decoded to one of the known formats from [#color-formats](Color formats) section.
+It's possible to decode the image to a non-true color format first, for example, `LV_IMG_INDEXED_4BITS`, and then call the built-in decoder functions to convert it to *True color*.
+
+With *User encoded* formats, the color format in the open function (`dsc->header.cf`) should be changed according to the new format.
+
 
 ### Enregistrer un décodeur d'image
 
-Par exemple, si vous voulez que LittlevGL "comprenne" les images PNG, vous devez créer un nouveau décodeur d'images et définir certaines fonctions pour ouvrir/fermer les fichiers PNG. Voici à quoi cela devrait ressembler :
+Here's an example of getting LittlevGL to work with PNG images.
+
+First, you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:
 
 ```c
 /* Crée un nouveau décodeur et enregistre les fonctions */
 lv_img_decoder_t * dec = lv_img_decoder_create();
 lv_img_decoder_set_info_cb(dec, decoder_info);
 lv_img_decoder_set_open_cb(dec, decoder_open);
-lv_img_decoder_set_close_cb(dec, decoder_close); 
+lv_img_decoder_set_close_cb(dec, decoder_close);
 
 
 /**
@@ -166,10 +180,11 @@ lv_img_decoder_set_close_cb(dec, decoder_close);
 static lv_res_t decoder_info(lv_img_decoder_t * decoder, const void * src, lv_img_header_t * header)
 {
   /* Vérifie si le type `src` est connu du décodeur */
-  if(is_png(src) == false) return LV_RES_INV; 
+  if(is_png(src) == false) return LV_RES_INV;
 
+  /* Read the PNG header and find `width` and `height` */
   ...
-  
+
   header->cf = LV_IMG_CF_RAW_ALPHA;
   header->w = width;
   header->h = height;
@@ -185,17 +200,17 @@ static lv_res_t decoder_open(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * 
 {
 
   /* Vérifie si le type `src` est connu du décodeur */
-  if(is_png(src) == false) return LV_RES_INV; 
-  
-  /* Décode et enregistre l'image. Si `dsc->img_data` est `NULL`, la fonction `read_line` sera appelée pour obtenir les données de l'image ligne par ligne */
+  if(is_png(src) == false) return LV_RES_INV;
+
+  /*Decode and store the image. If `dsc->img_data` is `NULL`, the `read_line` function will be called to get the image data line-by-line*/
   dsc->img_data = my_png_decoder(src);
-  
+
   /* Change le format de couleur si nécessaire. Pour le PNG, généralement un format 'brut' convient */
   dsc->header.cf = LV_IMG_CF_...
-  
+
   /* Appelle une fonction de décodeur intégré si nécessaire. Ce n'est pas nécessaire si `my_png_decoder` a décodé l'image au format couleurs vraies. */
   lv_res_t res = lv_img_decoder_built_in_open(decoder, dsc);
-  
+
   return res;
 }
 
@@ -216,7 +231,7 @@ lv_res_t decoder_built_in_read_line(lv_img_decoder_t * decoder, lv_img_decoder_d
    /* Avec PNG, ce n'est généralement pas nécessaire */
 
    /* Copie `len` pixels à partir des coordonnées `x` et `y` au format couleurs vraies dans `buf` */
-  
+
 }
 
 /**
@@ -227,29 +242,29 @@ lv_res_t decoder_built_in_read_line(lv_img_decoder_t * decoder, lv_img_decoder_d
 static void decoder_close(lv_img_decoder_t * decoder, lv_img_decoder_dsc_t * dsc)
 {
  /* Libère toutes les données allouées */
-  
+
   /* Appelle la fonction intégrée de fermeture si les fonctions intégrées open/read_line ont été utilisées */
   lv_img_decoder_built_in_close(decoder, dsc);
-  
+
 }
 
 ```
 
 Donc en résumé :
-- Dans `decoder_info`, vous devez collecter les informations de base sur l'image et les mémoriser dans `header`.
-- Dans `decoder_open`, vous devez essayer d'ouvrir la source de l'image indiquée par `dsc-> src`. Son type est déjà dans `dsc->src_type == LV_IMG_SRC_FILE/VARIABLE`.
-Si le format/type n'est pas pris en charge par le décodeur, retournez `LV_RES_INV`.
-Autrement, si vous pouvez ouvrir l'image, un pointeur sur l'image *couleurs vraies* décodée doit être défini dans `dsc-> img_data`.
-Si le format est géré mais que vous ne voulez pas décoder l’ensemble de l’image (p.ex. pas de mémoire), définissez `dsc->img_data = NULL` pour appeler `read_line` afin d’obtenir les pixels.
+- In `decoder_info`, you should collect some basic information about the image and store it in `header`.
+- In `decoder_open`, you should try to open the image source pointed by `dsc->src`. Its type is already in `dsc->src_type == LV_IMG_SRC_FILE/VARIABLE`.
+If this format/type is not supported by the decoder, return `LV_RES_INV`.
+However, if you can open the image, a pointer to the decoded *True color* image should be set in `dsc->img_data`.
+If the format is known but, you don't want to decode while image (e.g. no memory for it) set `dsc->img_data = NULL` to call `read_line` to get the pixels.
 - Dans `decoder_close`, vous devez libérer toutes les ressources allouées.
-- `decoder_read` est optionnel. Le décodage de l’ensemble de l’image nécessite de la mémoire et des calculs supplémentaires.
-Cependant, si vous pouvez décoder une ligne de l'image sans décoder toute l'image, vous pouvez économiser de la mémoire et du temps.
-Pour indiquer que la fonction *line read* doit être utilisée, définissez `dsc->img_data = NULL` dans la fonction `open`.
+- `decoder_read` is optional. Decoding the whole image requires extra memory and some computational overhead.
+However, if can decode one line of the image without decoding the whole image, you can save memory and time.
+To indicate that, the *line read* function should be used, set `dsc->img_data = NULL` in the open function.
 
 
 ### Utiliser manuellement un décodeur d'image
 
-LittlevGL utilisera automatiquement les décodeurs d'images enregistrés, mais vous pouvez également les utiliser manuellement. Créez une variable `lv_img_decoder_dsc_t` pour décrire la session de décodage et appelez `lv_img_decoder_open()` et `lv_img_decoder_close() `.
+LittlevGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the `lv_img` object) but you can use them manually too. Create a `lv_img_decoder_dsc_t` variable to describe the decoding session and call `lv_img_decoder_open()`, `lv_img_decoder_open()`.
 
 ```c
 
@@ -266,31 +281,39 @@ if(res == LV_RES_OK) {
 
 
 ## Mise en cache des images
-Parfois, il faut beaucoup de temps pour ouvrir une image.
-Continuellement décoder une image PNG ou charger des images à partir d'une mémoire externe lente serait inefficace.
-LittlevGL place donc en cache un certain nombre d’images. La mise en cache signifie que certaines images resteront ouvertes, ce qui permet à LittlevGL d'y accéder rapidement à partir de `dsc->img_data` au lieu de les décoder à nouveau.
+Sometimes it takes a lot of time to open an image.
+Continuously decoding a PNG image or loading images from a slow external memory would be inefficient and detrimental to the user experience.
+
+Therefore, LittlevGL caches a given number of images. Caching means some images will be left open, hence LittlevGL can quickly access them from `dsc->img_data` instead of needing to decode them again.
+
+Of course, caching images is resource-intensive as it uses more RAM (to store the decoded image). LittlevGL tries to optimize the process as much as possible (see below), but you will still need to evaluate if this would be beneficial for your platform or not. If you have a deeply embedded target which decodes small images from a relatively fast storage medium, image caching may not be worth it.
 
 ### Taille du cache
-Le nombre d'entrées du cache peut être défini par `LV_IMG_CACHE_DEF_SIZE` dans *lv_conf.h*. La valeur par défaut est 1, de sorte que seule la dernière image utilisée reste ouverte.
-La taille du cache peut être modifiée en cours d’exécution avec `lv_img_cache_set_size(entry_num)`
+The number of cache entries can be defined in `LV_IMG_CACHE_DEF_SIZE` in *lv_conf.h*. The default value is 1 so only the most recently used image will be left open.
+
+The size of the cache can be changed at run-time with `lv_img_cache_set_size(entry_num)`.
 
 ### Valeur des images
-Si vous utilisez un grand nombre d'images, LittlevGL ne peut pas toutes les mettre en cache. Au lieu de cela, si une nouvelle image doit être ouverte mais qu'il n'y a pas de place dans le cache, la librairie supprimera une image pour libérer de la place.
-Pour décider quelle image supprimer, LittlevGL a mesuré combien de temps il a fallu pour ouvrir chaque image. Les images dont l’ouverture prend le plus de temps sont favorisées et LittlevGL essaie de les conserver en cache le plus longtemps.
-Vous pouvez définir manuellement la valeur *temps d'ouverture* dans la fonction d'ouverture du décodeur dans `dsc->time_to_open = temps en ms` pour attribuer une valeur supérieure ou inférieure à l'image (laissez inchangé pour laisser LittlevGL le gérer).
+When you use more images than cache entries, LittlevGL can't cache all of the images. Instead, the library will close one of the cached images (to free space).
 
-Chaque entrée de cache a une valeur *"durée de vie"*. À chaque ouverture d'image par la mémoire cache, la *durée de vie* de toutes les entrées est réduite pour les rendre plus anciennes.
-Lorsqu'une image en cache est utilisée, sa *durée de vie* est augmentée de la valeur de *temps d'ouverture* pour la rendre plus importante.
+To decide which image to close, LittlevGL uses a measurement it previously made of how long it took to open the image. Cache entries that hold slower-to-open images are considered more valuable and are kept in the cache as long as possible.
 
-S'il n'y a plus d'espace dans la mémoire cache, l'entrée avec la plus petite durée de vie sera supprimée.
+If you want or need to override LittlevGL's measurement, you can manually set the *time to open* value in the decoder open function in `dsc->time_to_open = time_ms` to give a higher or lower value. (Leave it unchanged to let LittlevGL set it.)
+
+Every cache entry has a *"life"* value. Every time an image opening happens through the cache, the *life* of all entries are decreased to make them older.
+When a cached image is used, its *life* is increased by the *time to open* value to make it more alive.
+
+If there is no more space in the cache, always the entry with the smallest life will be closed.
 
 ### Utilisation de la mémoire
-Notez que l'image en cache peut consommer de la mémoire en permanence. Par exemple, si 3 images PNG sont mises en cache, elles consomment de la mémoire pendant le temps où elle sont ouvertes.
-Par conséquent, il incombe à l'utilisateur de s'assurer qu'il y a assez de MEV pour mettre en cache de grandes images en même temps.
+Note that, the cached image might continuously consume memory. For example, if 3 PNG images are cached, they will consume memory while they are opened.
+
+Therefore, it's the user's responsibility to be sure there is enough RAM to cache, even the largest images at the same time.
 
 ### Nettoyer le cache
-Supposons que vous ayez chargé une image PNG dans une variable `lv_img_dsc_t my_png` et que vous l'utilisiez dans un objet` lv_img`. Si l'image est déjà mise en cache et que vous modifiez `my_png-> data`, vous devez avertir LittlevGL de mettre en cache l'image à nouveau.
-Pour ce faire, utilisez `lv_img_cache_invalidate_src(&my_png)`. Si `NULL` est passé en paramètre, tout le cache sera nettoyé.
+Let's say you have loaded a PNG image into a `lv_img_dsc_t my_png` variable and use it in an `lv_img` object. If the image is already cached and you then change the underlying PNG file, you need to notify LittlevGL to cache the image again. Otherwise, there is no easy way of detecting that the underlying file changed and LittlevGL will still draw the old image.
+
+To do this, use `lv_img_cache_invalidate_src(&my_png)`. If `NULL` is passed as a parameter, the whole cache will be cleaned.
 
 
 ## API
@@ -301,7 +324,7 @@ Pour ce faire, utilisez `lv_img_cache_invalidate_src(&my_png)`. Si `NULL` est pa
 
 .. doxygenfile:: lv_img_decoder.h
   :project: lvgl
-        
+
 ```
 
 
@@ -311,5 +334,5 @@ Pour ce faire, utilisez `lv_img_cache_invalidate_src(&my_png)`. Si `NULL` est pa
 
 .. doxygenfile:: lv_img_cache.h
   :project: lvgl
-        
+
 ```

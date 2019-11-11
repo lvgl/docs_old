@@ -469,6 +469,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#bicimler">Biçimler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#olaylar">Olaylar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#ornek">Örnek</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
@@ -515,7 +516,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Onay kutusu (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#giris">Giriş</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#metin">Metin</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#onay-onayi-kaldir">Onay/Onayı Kaldır</a></li>
@@ -1090,18 +1091,18 @@
             
   <div class="section" id="file-system">
 <h1>File system<a class="headerlink" href="#file-system" title="Permalink to this headline">¶</a></h1>
-<p>LittlevGL has File system abstraction module which enables to attache any type of file systems.
-The file system are identified by a letter.
-For example if the SD card is associated with letter<code class="docutils literal notranslate"><span class="pre">'S'</span></code> a file can be reached like <code class="docutils literal notranslate"><span class="pre">&quot;&quot;S:path/to/file.txt</span></code>.</p>
+<p>LittlevGL has a ‘File system’ abstraction module that enables you to attach any type of file systems.
+The file system is identified by a drive letter.
+For example, if the SD card is associated with the letter <code class="docutils literal notranslate"><span class="pre">'S'</span></code>, a file can be reached like <code class="docutils literal notranslate"><span class="pre">&quot;S:path/to/file.txt&quot;</span></code>.</p>
 <div class="section" id="add-a-driver">
 <h2>Add a driver<a class="headerlink" href="#add-a-driver" title="Permalink to this headline">¶</a></h2>
-<p>To add a driver an <code class="docutils literal notranslate"><span class="pre">lv_fs_drv_t</span></code> needs to be initialized like this:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_fs_drv_t</span> <span class="n">drv</span><span class="p">;</span> 
+<p>To add a driver, <code class="docutils literal notranslate"><span class="pre">lv_fs_drv_t</span></code> needs to be initialized like this:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_fs_drv_t</span> <span class="n">drv</span><span class="p">;</span>
 <span class="n">lv_fs_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">drv</span><span class="p">);</span>                     <span class="cm">/*Basic initialization*/</span>
 
 <span class="n">drv</span><span class="p">.</span><span class="n">letter</span> <span class="o">=</span> <span class="sc">&#39;S&#39;</span><span class="p">;</span>                         <span class="cm">/*An uppercase letter to identify the drive */</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">file_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_file_object</span><span class="p">);</span>   <span class="cm">/*Size required to store a file object*/</span>
-<span class="n">drv</span><span class="p">.</span><span class="n">rddir_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_dir_object</span><span class="p">);</span>   <span class="cm">/*Size required to store a directory object (used by dir_open/close/read)*/</span> 
+<span class="n">drv</span><span class="p">.</span><span class="n">rddir_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">my_dir_object</span><span class="p">);</span>   <span class="cm">/*Size required to store a directory object (used by dir_open/close/read)*/</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">ready_cb</span> <span class="o">=</span> <span class="n">my_ready_cb</span><span class="p">;</span>               <span class="cm">/*Callback to tell if the drive is ready to use */</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">open_cb</span> <span class="o">=</span> <span class="n">my_open_cb</span><span class="p">;</span>                 <span class="cm">/*Callback to open a file */</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">close_cb</span> <span class="o">=</span> <span class="n">my_close_cb</span><span class="p">;</span>               <span class="cm">/*Callback to close a file */</span>
@@ -1125,12 +1126,12 @@ For example if the SD card is associated with letter<code class="docutils litera
 <span class="n">lv_fs_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">drv</span><span class="p">);</span>                 <span class="cm">/*Finally register the drive*/</span>
 </pre></div>
 </div>
-<p>Any of the callbacks can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to indicate that operation is not supported.</p>
-<p>If you use <code class="docutils literal notranslate"><span class="pre">lv_fs_open(&amp;file,</span> <span class="pre">&quot;S:/folder/file.txt&quot;,</span> <span class="pre">LV_FS_MODE_WR)</span></code> LittlevGL checks</p>
+<p>Any of the callbacks can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to indicate that that operation is not supported.</p>
+<p>As an example of how the callbacks are used, if you use <code class="docutils literal notranslate"><span class="pre">lv_fs_open(&amp;file,</span> <span class="pre">&quot;S:/folder/file.txt&quot;,</span> <span class="pre">LV_FS_MODE_WR)</span></code>, LittlevGL:</p>
 <ol class="simple">
-<li><p>if there is drive with letter <code class="docutils literal notranslate"><span class="pre">'S'</span></code></p></li>
-<li><p>checks if it’s <code class="docutils literal notranslate"><span class="pre">open_cb</span></code> is implemented (not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>)</p></li>
-<li><p>calls the set <code class="docutils literal notranslate"><span class="pre">open_cb</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;folder/file.txt&quot;</span></code> path.</p></li>
+<li><p>Verifies that a registered drive exists with the letter <code class="docutils literal notranslate"><span class="pre">'S'</span></code>.</p></li>
+<li><p>Checks if it’s <code class="docutils literal notranslate"><span class="pre">open_cb</span></code> is implemented (not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>).</p></li>
+<li><p>Calls the set <code class="docutils literal notranslate"><span class="pre">open_cb</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;folder/file.txt&quot;</span></code> path.</p></li>
 </ol>
 </div>
 <div class="section" id="usage-example">
@@ -1150,7 +1151,7 @@ For example if the SD card is associated with letter<code class="docutils litera
 </pre></div>
 </div>
 <p><em>The mode in <code class="docutils literal notranslate"><span class="pre">lv_fs_open</span></code> can be <code class="docutils literal notranslate"><span class="pre">LV_FS_MODE_WR</span></code> to open for write or <code class="docutils literal notranslate"><span class="pre">LV_FS_MODE_RD</span> <span class="pre">|</span> <span class="pre">LV_FS_MODE_WR</span></code> for both</em></p>
-<p>This example shows how to read a directory’s content. It’s up to the driver how to mark the directories but in can be a good practice to insert a <code class="docutils literal notranslate"><span class="pre">'/'</span></code> in front of the directory name.</p>
+<p>This example shows how to read a directory’s content. It’s up to the driver how to mark the directories, but it can be a good practice to insert a <code class="docutils literal notranslate"><span class="pre">'/'</span></code> in front of the directory name.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_fs_dir_t</span> <span class="n">dir</span><span class="p">;</span>
 <span class="n">lv_fs_res_t</span> <span class="n">res</span><span class="p">;</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">lv_fs_dir_open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dir</span><span class="p">,</span> <span class="s">&quot;S:/folder&quot;</span><span class="p">);</span>
@@ -1164,7 +1165,7 @@ For example if the SD card is associated with letter<code class="docutils litera
         <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="cm">/*fn is empty if not more files to read*/</span>
+    <span class="cm">/*fn is empty, if not more files to read*/</span>
     <span class="k">if</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
@@ -1178,8 +1179,8 @@ For example if the SD card is associated with letter<code class="docutils litera
 </div>
 <div class="section" id="use-drivers-for-images">
 <h2>Use drivers for images<a class="headerlink" href="#use-drivers-for-images" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="../object-types/img.html"><span class="doc">Image</span></a> objects can be open from files too (besides variables stored in the flash)</p>
-<p>To initialize the for images the following callbacks are required:</p>
+<p><a class="reference internal" href="../object-types/img.html"><span class="doc">Image</span></a> objects can be opened from files too (besides variables stored in the flash).</p>
+<p>To initialize the image, the following callbacks are required:</p>
 <ul class="simple">
 <li><p>open</p></li>
 <li><p>close</p></li>
@@ -1794,7 +1795,7 @@ For example if the SD card is associated with letter<code class="docutils litera
     <p>
         &copy; Copyright 2019, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Oct 11, 2019.
+        Last updated on Nov 11, 2019.
       </span>
 
     </p>
