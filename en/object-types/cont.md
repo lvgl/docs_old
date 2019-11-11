@@ -5,7 +5,7 @@
 
 ## Overview
 
-The containers are **rectangle-like object** with some special features.
+The containers are essentially a **basic object** with some special features.
 
 ### Layout
 You can apply a layout on the containers to automatically order their children. The layout spacing comes from `style.body.padding. ...` properties. The possible layout options:
@@ -20,16 +20,16 @@ You can apply a layout on the containers to automatically order their children. 
 - **LV_LAYOUT_ROW_B** - Align children in a bottom justified row. Keep `padding.left` space on the left, `padding.bottom` space on the bottom and `padding.inner` space between the children.
 - **LV_LAYOUT_PRETTY** - Put as many objects as possible in a row (with at least `padding.inner` space and `padding.left/right` space on the sides). Divide the space in each line equally between the children.
 Keep `padding.top` space on the top and `pad.inner` space between the lines.
-- **LV_LAYOUT_GRID** Similar to `LV_LAYOUT_PRETTY` but not divide horizontal space equally just let `padding.left/right` on the edges and `padding.inner` space between the elements.
+- **LV_LAYOUT_GRID** - Similar to `LV_LAYOUT_PRETTY` but not divide horizontal space equally just let `padding.left/right` on the edges and `padding.inner` space between the elements.
 
 ### Autofit
-Container have an autofit features which can automatically change the size of the container according to its children and/or parent. The following options exist:
+Container have an autofit feature which can automatically change the size of the container according to its children and/or parent. The following options exist:
 - **LV_FIT_NONE** - Do not change the size automatically.
-- **LV_FIT_TIGHT** - Set the size to involve all children by keeping `padding.top/bottom/left/right` space on the edges.
-- **LV_FIT_FLOOD** - Set the size to the parent's size by keeping `padding.top/bottom/left/right` (from the parent's style) space.
-- **LV_FIT_FILL** - Use `LV_FIT_FLOOD` while smaller than the parent and `LV_FIT_TIGHT` when larger.
+- **LV_FIT_TIGHT** - Shrink-wrap the container around all of its children, while keeping `padding.top/bottom/left/right` space on the edges.
+- **LV_FIT_FLOOD** - Set the size to the parent's size minus `padding.top/bottom/left/right` (from the parent's style) space.
+- **LV_FIT_FILL** - Use `LV_FIT_FLOOD` while smaller than the parent and `LV_FIT_TIGHT` when larger. It will ensure that the container is, at minimum, the size of its parent.
 
-To set the auto fit, use `lv_cont_set_fit(cont, LV_FIT_...)`. It will set the same auto fit in every directions.
+To set the auto fit mode for all directions, use `lv_cont_set_fit(cont, LV_FIT_...)`.
 To use different auto fit horizontally and vertically, use `lv_cont_set_fit2(cont, hor_fit_type, ver_fit_type)`.
 To use different auto fit in all 4 directions, use `lv_cont_set_fit4(cont, left_fit_type, right_fit_type, top_fit_type, bottom_fit_type)`.
 
