@@ -34,6 +34,9 @@ The drop-down list's open/close animation time is adjusted by `lv_ddlist_set_ani
 ### Decoration arrow
 A down arrow can be added to the left side of the drop-down list with `lv_ddlist_set_draw_arrow(ddlist, true)`.
 
+### Manually open/close
+To manually open or close the drop-down list the `lv_ddlist_open/close(ddlist)` function can be used.
+
 ### Stay open
 You can force the drop-down list to **stay opened**, when an option is selected with `lv_ddlist_set_stay_open(ddlist, true)`.
 
