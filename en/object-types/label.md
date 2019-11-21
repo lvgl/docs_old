@@ -9,6 +9,8 @@ The Labels are the basic objects to display text.
 ### Set text
 You can modify the text in run-time at any time with `lv_label_set_text(label, "New text")`. It will allocate the text dynamically.
 
+With `lv_label_set_text_fmt(label, "Value: %d", 15)`a **printf-like formatting** can used to set the text.
+
 Labels are able to show text from a **static array**. Use: `lv_label_set_static_text(label, char_array)`. 
 In this case, the text is not stored in the dynamic memory but the given array is used directly instead. 
 Keep in mind that the array can't be a local variable which destroys when the function exits.
@@ -55,7 +57,6 @@ Note that, recoloring work only in a single line. I.e. there can't be `\n` in a 
 
 ### Very long texts
 LittlevGL can effectively handle very long (> 40k characters) by saving some extra data (~12 bytes) to speed up drawing. To enable this feature set `LV_LABEL_LONG_TXT_HINT   1` in *lv_conf.h*.
-
 
 ### Symbols
 The labels can display symbols besides letters. Read the [Font](/overview/font) section to learn more about the symbols.

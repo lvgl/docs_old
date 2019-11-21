@@ -13,6 +13,9 @@ To set an initial value use `lv_slider_set_value(slider, new_value, LV_ANIM_ON/O
 
 To specify the **range** (min, max values) the `lv_slider_set_range(slider, min , max)` can be used.
 
+### Symmetrical
+The slider can be drawn symmetrical to zero (drawn from zero, left to right), if it's enabled with `lv_slider_set_sym(slider, true)`
+
 ### Knob placement
 The knob can be placed in two ways:
 - inside the background
