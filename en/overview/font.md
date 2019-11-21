@@ -57,6 +57,28 @@ Or more symbols together:
 lv_label_set_text(my_label, LV_SYMBOL_OK LV_SYMBOL_WIFI LV_SYMBOL_PLAY);
 ```
 
+## Subpixel rendering
+
+Subpixel rendering means to increase the horizontal resolution by rendering on Red, Green and Blue channel instead of pixel level. It results in higher quality letter anti-alaising.
+
+Subpixel rendering requires to generate the fonts with special settings: 
+- In the online converter tick the `Subpixel` box
+- In the command line tool use `--lcd` flag. Note that the generated font needs about 3 times more memory.
+
+Subpixel rendering works only if the color channels of the pixels have a horizontal layout. That is the R, G, B channels are next eachother and not above eachother. 
+The order of color channels also needs to match with the library settings. By default the LittlevGL assumes `RGB` order, however it can ba swapped by setting `LV_SUBPX_BGR  1` in *lv_conf.h*.
+
+## Compress fonts
+The bitmaps of the fonts can be compressed by 
+- ticking the `Compressed` check box in the online converter
+- not passing `--no-compress`flag to the offline converter (applies compression by default) 
+
+The compression is more effective with larger fonts and higher bpp. However, it's about 30% slower to render the compressed fonts.
+Therefore it's recommended to compress only the largest fonts of user interface, because
+- they need the most memory 
+- they can be compressed better
+- and probably they are used less frequently then the medium sized fonts. (so performance cost is smaller)
+
 ## Add new font
 
 There are several ways to add a new font to your project:
