@@ -57,6 +57,64 @@ Ou plusieurs symboles ensemble :
 lv_label_set_text(my_label, LV_SYMBOL_OK LV_SYMBOL_WIFI LV_SYMBOL_PLAY);
 ```
 
+## Special features
+
+### Bidirectional support
+Most of the languages use Left-to-Right (LTR for short) writing direction, however some languages (such as Hebrew) uses Right-to-Left (RTL for short) direction. 
+
+LittlevGL not only supports RTL texts but supports mixed (a.k.a. bidirectional, BiDi) text rendering too. Some examples:
+
+![](/misc/bidi.png "Bidirectional text examples")
+
+The BiDi support can be enabled by `LV_USE_BIDI` in *lv_conf.h*
+
+All texts have a base direction (LTR or RTL) which determines some rendering rules and the default alignment of the text (Left or Right).
+However, in LittlevGL, base direction is not only for labels. It's a general property which can be set for every object. 
+If unset then it will be inherited from the parent. 
+So it's enough to set the base direction of the screen and every object will inherit it.
+
+The default base direction of screen can be set by `LV_BIDI_BASE_DIR_DEF` in *lv_conf.h*.
+
+To set an object's base direction use `lv_obj_set_base_dir(obj, base_dir)`.  The possible base direction are:
+- `LV_BIDI_DIR_LTR`: Left to Right base direction
+- `LV_BIDI_DIR_RTL`: Right to Left base direction
+- `LV_BIDI_DIR_AUTO`: Auto detect base direction
+- `LV_BIDI_DIR_INHERIT`: Inherit the base direction from the parent (default for non-screen objects)
+
+
+This list summarizes the effect of RTL base direction on objects:
+- Create objects by default on the right
+- `lv_tabview`: displays tabs from right to left
+- `lv_cb`: Show the box on the right
+- `lv_btnm`: Show buttons from right to left
+- `lv_list`: Show the icon on the right
+- `lv_ddlist`: Align the options to the right
+- The texts in `lv_table`, `lv_btnm`, `lv_kb`, `lv_tabview`, `lv_ddlist`, `lv_roller` are processed to display correctly with RTL parts too
+
+
+
+### Subpixel rendering
+
+Subpixel rendering means to increase the horizontal resolution by rendering on Red, Green and Blue channel instead of pixel level. It results in higher quality letter anti-alaising.
+
+Subpixel rendering requires to generate the fonts with special settings: 
+- In the online converter tick the `Subpixel` box
+- In the command line tool use `--lcd` flag. Note that the generated font needs about 3 times more memory.
+
+Subpixel rendering works only if the color channels of the pixels have a horizontal layout. That is the R, G, B channels are next eachother and not above eachother. 
+The order of color channels also needs to match with the library settings. By default the LittlevGL assumes `RGB` order, however it can ba swapped by setting `LV_SUBPX_BGR  1` in *lv_conf.h*.
+
+### Compress fonts
+The bitmaps of the fonts can be compressed by 
+- ticking the `Compressed` check box in the online converter
+- not passing `--no-compress`flag to the offline converter (applies compression by default) 
+
+The compression is more effective with larger fonts and higher bpp. However, it's about 30% slower to render the compressed fonts.
+Therefore it's recommended to compress only the largest fonts of user interface, because
+- they need the most memory 
+- they can be compressed better
+- and probably they are used less frequently then the medium sized fonts. (so performance cost is smaller)
+
 ## Ajouter une nouvelle police
 
 Il y a plusieurs manières d'ajouter une nouvelle police à votre projet :

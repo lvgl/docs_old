@@ -5,74 +5,74 @@
 
 ## Vue d’ensemble
 
-Les images sont les objets de base pour afficher des images.
+'Images' are the basic object to display images.
 
 ### Image source
-Pour offrir un maximum de flexibilité, la source de l'image peut être :
+To provide maximum flexibility, the source of the image can be:
 
-- une variable dans le code (un tableau C avec les pixels),
-- un fichier enregistré sur support externe (comme une carte SD),
-- un texte avec [symboles](/overview/font).
+- a variable in the code (a C array with the pixels).
+- a file stored externally (like on an SD card).
+- a text with [Symbols](/overview/font).
 
-Pour définir la source d'une image, utilisez `lv_img_set_src(img, src)`
+To set the source of an image, use `lv_img_set_src(img, src)`.
 
-Pour générer un **tableau de pixels** à partir d’une image PNG, JPG ou BMP, utilisez le [convertisseur d’images en ligne](https://littlevgl.com/image-to-c-array) et définissez l'image convertie avec son pointeur : `lv_img_set_src(img1, &converted_img_var)`.
-Pour rendre la variable visible dans le fichier C, vous devez la déclarer avec `LV_IMG_DECLARE(converted_img_var)`.
+To generate a **pixel array** from a PNG, JPG or BMP image, use the [Online image converter tool](https://littlevgl.com/image-to-c-array) and set the converted image with its pointer: `lv_img_set_src(img1, &converted_img_var);`
+To make the variable visible in the C file, you need to declare it with `LV_IMG_DECLARE(converted_img_var)`.
 
-Pour utiliser des **fichiers externes**, vous devez également convertir les fichiers image à l'aide de l'outil de conversion en ligne, mais vous devez dans ce cas sélectionner le format de sortie binaire.
+To use **external files**, you also need to convert the image files using the online converter tool but now you should select the binary Output format.
 Vous devez également utiliser le module de système de fichiers de LittlevGL et enregistrer un pilote avec certaines fonctions pour le fonctionnement de base des fichiers. Allez dans [Système de fichiers](/overview/file-system) pour en savoir plus.
-Pour définir une source d'image à partir d'un fichier, utilisez `lv_img_set_src(img, "S:folder1/my_img.bin")`.
+To set an image sourced from a file, use `lv_img_set_src(img, "S:folder1/my_img.bin")`.
 
 
-Vous pouvez définir un **symbole** de la même manière que pour les [étiquettes](/object-types/label). Dans ce cas, l'image sera rendue sous forme de texte conformément à la *police* spécifiée dans le style.
-Cela permet d’utiliser des "lettres" monochromes lègères au lieu d’images réelles. Pour définir une source d'image à partir d'un symbole, utilisez `lv_img_set_src(img1, LV_SYMBOL_OK)`.
+You can set a **symbol** similarly to [Labels](/object-types/label). In this case, the image will be rendered as text according to the *font* specified in the style.  It enables to use of light-weighted mono-color
+"letters" instead of real images. You can set symbol like `lv_img_set_src(img1, LV_SYMBOL_OK)`.
 
 ### Etiquette comme image
-Les images et les étiquettes ont parfois la même utilisation. P.ex., décrire ce que fait un bouton. Par conséquent, les images et les étiquettes sont quelque peu interchangeables.
-Pour gérer cela, les images peuvent même afficher des textes en utilisant `LV_SYMBOL_DUMMY` comme préfixe du texte. Par exemple `lv_img_set_src(img, LV_SYMBOL_DUMMY "Some text")`.
+Images and labels are sometimes used to convey the same thing. For example, to describe what a button does. Therefore, images and labels are somewhat interchangeable.
+To handle these images can even display texts by using `LV_SYMBOL_DUMMY` as the prefix of the text. For example, `lv_img_set_src(img, LV_SYMBOL_DUMMY "Some text")`.
 
 
 ### Transparence
 Les images internes (variables) et externes prennent en charge 2 méthodes de traitement de la transparence :
 
-- **couleur transparente** les pixels avec la couleur `LV_COLOR_TRANSP` (*lv_conf.h*) seront transparents,
-- **canal alpha** un canal alpha est ajouté à chaque pixel.
+- **Chrome keying** - Pixels with `LV_COLOR_TRANSP` (*lv_conf.h*) color will be transparent.
+- **Alpha byte** - An alpha byte is added to every pixel.
 
 ### Palette et index alpha
-Outre le format de couleur *couleurs vraies* (RVB), les formats suivants sont également pris en charge :
-- **indexé** l'image a une palette,
-- **alpha indexé ** seules les valeurs alpha sont enregistrées.
+Besides *True color* (RGB) color format, the following formats are also supported:
+- **Indexed** - Image has a palette.
+- **Alpha indexed** - Only alpha values are stored.
 
-Ces options peuvent être sélectionnées dans le convertisseur d'images. Pour en savoir plus sur les formats de couleur, lisez la section [Images](/overview/image).
+These options can be selected in the font converter. To learn more about the color formats, read the [Images](/overview/image) section.
 
 ### Coloration
-Les images peuvent être re-colorées au moment de l'exécution en n'importe quelle couleur en fonction de la luminosité des pixels. 
-C'est très utile pour montrer différents états (sélectionné, désactivé, pressé, etc.) d’une image sans enregistrer plusieurs de versions de la même image.
-Cette fonctionnalité peut être activée dans le style en définissant `img.intense` de `LV_OPA_TRANSP` (pas de coloration, valeur : 0) à `LV_OPA_COVER` (coloration totale, valeur : 255).
+The images can be re-colored in run-time to any color according to the brightness of the pixels.
+It is very useful to show different states (selected, inactive, pressed, etc.) of an image without storing more versions of the same image.
+This feature can be enabled in the style by setting `img.intense` between `LV_OPA_TRANSP` (no recolor, value: 0) and `LV_OPA_COVER` (full recolor, value: 255).
 La valeur par défaut est `LV_OPA_TRANSP`, cette fonctionnalité est donc désactivée.
 
 ### Taille automatique
-Il est possible de définir automatiquement la taille de l'objet image à la largeur et la hauteur de la source de l'image si ceci est activée par la fonction `lv_img_set_auto_size(image, true)`.
-Si la *taille automatique* est activée, lorsqu'un nouveau fichier est défini, la taille de l'objet est automatiquement modifiée. Plus tard, vous pouvez modifier la taille manuellement. La *taille automatique* est activée par défaut si l'image n'est pas un écran
+It is possible to automatically set the size of the image object to the image source's width and height if enabled by the `lv_img_set_auto_size(image, true)` function.
+If *auto-size* is enabled, then when a new file is set, the object size is automatically changed. Later, you can modify the size manually. The *auto-size* is enabled by default if the image is not a screen.
 
 ### Mosaïque
-Si la taille de l'objet est supérieure à la taille de l'image dans n'importe quelle direction, l'image sera répétée comme une mosaïque.
-C'est une fonctionnalité très utile pour créer une grande image à partir d'une source plus petite.
+If the object size is greater than the image size in any directions, then the image will be repeated like a mosaic.
+It's a very useful feature to create a large image from only a very narrow source.
 Par exemple, vous pouvez avoir une image *300 x 1* avec un dégradé spécial et la définir comme fond d’écran à l’aide de la fonction mosaïque.
 
 ### Décalage
-Avec `lv_img_set_offset_x(img, x_ofs)` et`lv_img_set_offset_y(img, y_ofs)`vous pouvez ajouter un décalage à l'image affichée.
-Cela est utile si la taille de l'objet est inférieure à la taille de la source de l'image.
-En utilisant le paramètre décalage un [atlas de texture](https://en.wikipedia.org/wiki/Texture_atlas) ou un effet d'"image mouvante" peut être créer en [animant](/overview/animation) le décalage x ou y. 
+With `lv_img_set_offset_x(img, x_ofs)` and `lv_img_set_offset_y(img, y_ofs)`, you can add some offset to the displayed image.
+It is useful if the object size is smaller than the image source size.
+Using the offset parameter a [Texture atlas](https://en.wikipedia.org/wiki/Texture_atlas) or a "running image" effect can be created by [Animating](/overview/animation) the x or y offset.
 
 
 ## Styles
-Les images utilisent un style qui peut être défini par `lv_img_set_style(lmeter, LV_IMG_STYLE_MAIN, &style)`. Toutes les propriétés `style.image` sont utilisées :
-- **image.intense** intensité de coloration (0..255 ou *LV_OPA_...*),
-- **image.color** couleur pour colorer ou couleur des images indexées alpha,
-- **image.opa** opacité globale de l'image.
+The images uses one style at a time which can be set by `lv_img_set_style(lmeter, LV_IMG_STYLE_MAIN, &style)`. All the `style.image` properties are used:
+- **image.intense** - Intensity of recoloring (0..255 or *LV_OPA_...*).
+- **image.color** - Color for recoloring or color of the alpha indexed images.
+- **image.opa** - Overall opacity of image.
 
-Lorsque l'objet Image affiche un texte, les propriétés `style.text` sont utilisées. Voir [étiquette](/object-types/label) pour plus d'informations.
+When the image object displays a text then `style.text` properties are used. See [Label](/object-types/label) for more information.
 
 Le style par défaut des images est *NULL* donc elles **héritent du style du parent**.
 
@@ -94,11 +94,11 @@ Apprenez-en plus sur les [touches](/overview/indev).
 
 ```
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_img.h
   :project: lvgl
-        
+
 ```

@@ -9,9 +9,11 @@ Les étiquettes sont les objets de base pour afficher du texte.
 ### Définir le texte
 Vous pouvez modifier le texte en cours d’exécution à tout moment avec `lv_label_set_text(label, "Nouveau texte")`. Le texte sera alloué dynamiquement.
 
+With `lv_label_set_text_fmt(label, "Value: %d", 15)`a **printf-like formatting** can used to set the text.
+
 Les étiquettes peuvent afficher du texte à partir d'un **texte statique**. Utilisez `lv_label_set_static_text(label, text)`. 
 Dans ce cas, le texte n'est pas enregistré dans la mémoire dynamique, mais le texte est utilisé directement.
-Gardez à l'esprit que le texte ne peut pas être une variable locale, détruit lorsque la fonction se termine.
+Keep in mind that the array can't be a local variable which destroys when the function exits.
 
 Vous pouvez également utiliser un **tableau de caractères** comme texte d'étiquette.
 Le tableau ne doit pas obligatoirement être terminé par "\ 0". Dans ce cas, le texte sera enregistré dans la mémoire dynamique.
@@ -55,7 +57,6 @@ Notez que la coloration ne fonctionne que sur une seule ligne. C.-à-d. il ne pe
 
 ### Très long textes
 LittlevGL peut gérer efficacement les très longs textes (> 40k caractères) en enregistrant des données supplémentaires (environ 12 octets) pour accélérer le dessin. Pour activer cette fonctionnalité, définissez `LV_LABEL_LONG_TXT_HINT 1` dans *lv_conf.h*.
-
 
 ### Symboles
 Les étiquettes peuvent afficher des symboles en plus des lettres. Lisez la section [police](/overview/police) pour en savoir plus sur les symboles.

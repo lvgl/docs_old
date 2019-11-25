@@ -13,6 +13,9 @@ Başlangıç değeri ayarlamak içim `lv_slider_set_value(slider, new_value, LV_
 
 **range**  belirtmek için (min, max değerler) `lv_slider_set_range(slider, min , max)` kullanılabilir.
 
+### Symmetrical
+The slider can be drawn symmetrical to zero (drawn from zero, left to right), if it's enabled with `lv_slider_set_sym(slider, true)`
+
 ### Düğme yerleştirme
 Düğme iki şekilde yerleştirilir:
 - arka plan içinde

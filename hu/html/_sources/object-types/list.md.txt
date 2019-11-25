@@ -25,7 +25,6 @@ To delete a list element just use `lv_obj_del(btn)` on the return value of `lv_l
 
 To clean the list (remove all buttons) use `lv_list_clean(list)`
 
-
 ### Manual navigation
 You can navigate manually in the list with `lv_list_up(list)` and `lv_list_down(list)`.
 
@@ -33,6 +32,9 @@ You can focus on a button directly using `lv_list_focus(btn, LV_ANIM_ON/OFF)`.
 
 The **animation time** of up/down/focus movements can be set via: `lv_list_set_anim_time(list, anim_time)`. Zero animation time means not animations. 
 
+### Layout
+By default the list is vertical. To get a horizontal list use `lv_list_set_layout(list, LV_LAYOUT_ROW_M)`.
+ 
 ### Edge flash
 A circle-like effect can be shown when the list reaches the most top or bottom position. 
 `lv_list_set_edge_flash(list, en)` enables this feature.

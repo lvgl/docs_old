@@ -16,6 +16,10 @@ La fonction `lv_lmeter_set_range(lmeter, min, max)` définit l'intervalle du com
 Vous pouvez définir l'angle de l'échelle et le nombre de lignes à l'aide de : `lv_lmeter_set_scale(lmeter, angle, line_num)`.
 L'angle par défaut est 240 et le nombre de ligne par défaut est 31.
 
+### Angle offset
+By default the scale angle is interpreted symmetrically to the y axis. It results in "standing" line meter. With `lv_lmeter_set_angle_offset` an offset can be added the scale angle. 
+It can used e.g to put a quarter line meter into a corner or a half line meter to the right or left side. 
+
 ## Styles
 
 Le compteur utilise un style qui peut être défini par `lv_lmeter_set_style(lmeter, LV_LMETER_STYLE_MAIN, &style)`. Les propriétés du compteur sont dérivées des attributs de style suivants :

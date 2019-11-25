@@ -16,6 +16,10 @@ The `lv_lmeter_set_range(lmeter, min, max)` function sets the range of the line 
 You can set the angle of the scale and the number of the lines by: `lv_lmeter_set_scale(lmeter, angle, line_num)`. 
 The default angle is 240 and the default line number is 31.
 
+### Angle offset
+By default the scale angle is interpreted symmetrically to the y axis. It results in "standing" line meter. With `lv_lmeter_set_angle_offset` an offset can be added the scale angle. 
+It can used e.g to put a quarter line meter into a corner or a half line meter to the right or left side. 
+
 ## Styles
 
 The line meter uses one style which can be set by `lv_lmeter_set_style(lmeter, LV_LMETER_STYLE_MAIN, &style)`. The line meter's properties are derived from the following style attributes:

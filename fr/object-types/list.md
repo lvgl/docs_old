@@ -25,7 +25,6 @@ Pour supprimer un élément de la liste, utilisez simplement `lv_obj_del(btn)` s
 
 Pour vider la liste (supprimer tous les boutons), utilisez `lv_list_clean(list)`
 
-
 ### Navigation manuelle
 Vous pouvez naviguer manuellement dans la liste avec `lv_list_up(list)` et `lv_list_down(list)`.
 
@@ -33,6 +32,9 @@ Vous pouvez accéder directement  à un bouton en utilisant `lv_list_focus(btn, 
 
 La **durée d'animation** des déplacements haut/bas/accès direct peut être définie via : `lv_list_set_anim_time(list, anim_time)`. Zéro supprime les animations.
 
+### Layout
+By default the list is vertical. To get a horizontal list use `lv_list_set_layout(list, LV_LAYOUT_ROW_M)`.
+ 
 ### Mise en évidence du bord
 L'animation d'un cercle peut être affichée quand la liste atteint les positions supérieure ou inférieure.
 `lv_list_set_edge_flash(list, en)` active cette fonctionnalité.

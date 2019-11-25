@@ -7,12 +7,12 @@
 
 Gösterge ölçekli etiketli ve ibreli bir ölçerdir.
 
-### Ölçek
-`lv_gauge_set_scale(gauge, angle, line_num, label_cnt)` fonksiyonunu ölçek açısını ve ölçek satırlarının ve etiketlerinin sayısını ayarlamak için kullanabilirsin.
+### Scale
+You can use the `lv_gauge_set_scale(gauge, angle, line_num, label_cnt)` function to adjust the scale angle and the number of the scale lines and labels.
 Varsayılan ayarlar 220 derece, 6 ölçek etiketi  ve 21 satır.
 
 ### ibreler
-Gösterge birden fazla ibre gösterebilir 
+The gauge can show more than one needle.
 `lv_gauge_set_needle_count(gauge, needle_num, color_array)` fonksiyonun ibrelerin sayısını ve her ibre için renkli bir dizi renin rengini ayarlamak için kullanabilirsin. Bu dizi statik veya global değişken olmalı çünkü sadece göstericisi saklanır.
 
 İbrenin değeri ayarlamak için`lv_gauge_set_value(gauge, needle_id, value)` kullanabilrisin.
@@ -21,20 +21,20 @@ Gösterge birden fazla ibre gösterebilir
 Göstergenin aralığı `lv_gauge_set_range(gauge, min, max)` ile belirtilebilir. Varsayılan aralık 0..100'dür.
 
 ### Kritik Değer
-Kritik değeri ayarlamak için`lv_gauge_set_critical_value(gauge, value)` kullanılır . Bu değerden sonra ölçek rengi (varsayılan: 80)`line.color` değiştirilebilir.
+To set a critical value, use `lv_gauge_set_critical_value(gauge, value)`. The scale color will be changed to `line.color` after this value. (default: 80)
 
 ## Biçimler
 
-Gösterge`lv_gauge_set_style(gauge, LV_GAUGE_STYLE_MAIN, &style)` tarafından ayarlanan bir biçim ile kullanılabilir. Göstergenin özellikleri aşağıdaki biçim özelliklerinden türetilir:
+The gauge uses one style at a time which can be set by `lv_gauge_set_style(gauge, LV_GAUGE_STYLE_MAIN, &style)`. The gauge's properties are derived from the following style attributes:
 
-- **body.main_color** liölçeğin başındaki çizginin rengi
-- **body.grad_color**  ölçeğin sonundaki çizginin rengi(ana renkli gradyan)
-- **body.padding.left** çizgi uzunluğu
-- **body.padding.inner** ölçek çizgilerinden etiket arası mesafe
-- **body.radius** ibrenin kökenli dairenin yarıçapı
-- **line.width** çizgi genişliği
-- **line.color** Kritik değerden sonraki çizgi rengi
-- **text.font/color/letter_space** etiket özellikleri
+- **body.main_color** - Line's color at the beginning of the scale.
+- **body.grad_color** - Line's color at the end of the scale (gradient with main color).
+- **body.padding.left** - Line length.
+- **body.padding.inner** - Label distance from the scale lines.
+- **body.radius** - Radius of needle origin circle.
+- **line.width** - Line width.
+- **line.color** - Line's color after the critical value.
+- **text.font/color/letter_space** - Label attributes.
 
 ## Olaylar
 [Generic events](/overview/event.html#generic-events) sadece nesne çeşidi tarafından gönderilir.
@@ -53,11 +53,11 @@ Nesne çeşidi tarafından işlenecek*Keys* yoktur.
 .. include:: /lv_examples/src/lv_ex_gauge/index.rst
 
 ```
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_gauge.h
   :project: lvgl
-        
+
 ```

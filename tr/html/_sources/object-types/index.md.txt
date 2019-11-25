@@ -18,6 +18,7 @@
    cb
    chart
    cont
+   cpicker
    ddlist
    gauge
    img

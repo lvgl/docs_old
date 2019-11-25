@@ -13,6 +13,9 @@ Pour définir une valeur initiale, utilisez `lv_slider_set_value(slider, new_val
 
 Pour spécifier l'**intervalle** (valeurs minimum et maximum) la fonction `lv_slider_set_range(slider, min , max)` est utilisée.
 
+### Symmetrical
+The slider can be drawn symmetrical to zero (drawn from zero, left to right), if it's enabled with `lv_slider_set_sym(slider, true)`
+
 ### Placement du bouton
 Le bouton peut être placé de deux manières :
 - sur l'arrière-plan
