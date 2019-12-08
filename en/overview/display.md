@@ -163,7 +163,7 @@ The color module defines the most basic colors such as:
 - ![#808000](https://placehold.it/15/808000/000000?text=+) `LV_COLOR_OLIVE`
 - ![#0000ff](https://placehold.it/15/0000ff/000000?text=+) `LV_COLOR_BLUE`
 - ![#000080](https://placehold.it/15/000080/000000?text=+) `LV_COLOR_NAVY`
-- ![#008080](https://placehold.it/15/008080/000000?text=+) `LV_COLOR_TAIL`
+- ![#008080](https://placehold.it/15/008080/000000?text=+) `LV_COLOR_TEAL`
 - ![#00ffff](https://placehold.it/15/00ffff/000000?text=+) `LV_COLOR_CYAN`
 - ![#00ffff](https://placehold.it/15/00ffff/000000?text=+) `LV_COLOR_AQUA`
 - ![#800080](https://placehold.it/15/800080/000000?text=+) `LV_COLOR_PURPLE`
