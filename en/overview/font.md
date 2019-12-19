@@ -128,14 +128,21 @@ To declare the font in a file, use `LV_FONT_DECLARE(my_font_name)`.
 To make the fonts globally available (like the builtin fonts), add them to `LV_FONT_CUSTOM_DECLARE` in *lv_conf.h*.
 
 ## Add new symbols
-The built-in symbols are created from [FontAwesome](https://fontawesome.com/) font. To add new symbols from the FontAwesome font do the following steps:
-1. Search symbol on [https://fontawesome.com](https://fontawesome.com). For example the [USB symbol](https://fontawesome.com)
-2. Open the [Online font converter](https://littlevgl.com/ttf-font-to-c-array) add [FontAwesome.ttf](https://littlevgl.com/tools/FontAwesome.ttf) and add the Unicode ID of the symbol to the range field. E.g.` 0xf287` for the USB symbol.
-More symbols can be enumerated with `,`.
-3. Convert the font and copy it to your project.
-4. Convert the Unicode value to UTF8. You can do it e.g.on [this site](http://www.ltg.ed.ac.uk/~richard/utf-8.cgi?input=f287&mode=hex). For `0xf287` the *Hex UTF-8 bytes* are `EF 8A 87`.
-5. Create a `define` from the UTF8 values: `#define MY_USB_SYMBOL "\xEF\x8A\x87"`
-6. Use the symbol as the built-in symbols. `lv_label_set_text(label, MY_USB_SYMBOL)`
+The built-in symbols are created from [FontAwesome](https://fontawesome.com/) font. 
+
+1. Search symbol on [https://fontawesome.com](https://fontawesome.com). For example the [USB symbol](https://fontawesome.com/icons/usb?style=brands). Copy it's Unicode ID which is `0xf287` in this case.
+2. Open the [Online font converter](https://littlevgl.com/ttf-font-to-c-array). Add [FontAwesome.ttf](https://littlevgl.com/tools/FontAwesome.ttf). 
+3. Set the parameters such as Name, Size, BPP. You'll use this name to declare and use the font in your code.
+4. Add the Unicode ID of the symbol to the range field. E.g.` 0xf287` for the USB symbol. More symbols can be enumerated with `,`.
+5. Convert the font and copy it to your project. Make sure to compile the .c file of your font.
+6. Declare the font using `extern lv_font_t my_font_name;` or simply `LV_FONT_DECLARE(my_font_name);`.
+
+**Using the symbol**
+1. Convert the Unicode value to UTF8. You can do it e.g on [this site](http://www.ltg.ed.ac.uk/~richard/utf-8.cgi?input=f287&mode=hex). For `0xf287` the *Hex UTF-8 bytes* are `EF 8A 87`.
+2. Create a `define` from the UTF8 values: `#define MY_USB_SYMBOL "\xEF\x8A\x87"`
+3. Create a label and set the text. Eg. `lv_label_set_text(label, MY_USB_SYMBOL)`
+
+Note - `lv_label_set_text(label, MY_USB_SYMBOL)` searches for this symbol in the font defined in `style.text.font` properties. To use the symbol you may need to change it. Eg ` style.text.font = my_font_name` 
 
 ## Add a new font engine
 
