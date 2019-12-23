@@ -131,7 +131,7 @@ To make the fonts globally available (like the builtin fonts), add them to `LV_F
 The built-in symbols are created from [FontAwesome](https://fontawesome.com/) font. 
 
 1. Search symbol on [https://fontawesome.com](https://fontawesome.com). For example the [USB symbol](https://fontawesome.com/icons/usb?style=brands). Copy it's Unicode ID which is `0xf287` in this case.
-2. Open the [Online font converter](https://littlevgl.com/ttf-font-to-c-array). Add [FontAwesome.ttf](https://littlevgl.com/tools/FontAwesome.ttf). 
+2. Open the [Online font converter](https://littlevgl.com/ttf-font-to-c-array). Add Add [FontAwesome.woff](https://littlevgl.com/tools/FontAwesome5-Solid+Brands+Regular.woff). . 
 3. Set the parameters such as Name, Size, BPP. You'll use this name to declare and use the font in your code.
 4. Add the Unicode ID of the symbol to the range field. E.g.` 0xf287` for the USB symbol. More symbols can be enumerated with `,`.
 5. Convert the font and copy it to your project. Make sure to compile the .c file of your font.
