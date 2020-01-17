@@ -19,9 +19,6 @@ if clean:
 else: 
   cmd_clean = ""
   
-print(cmd_clean)
-exit()
-  
 cmd_pdf =   " echo '------------\nBuild PDF...\n------------'; sphinx-build -b latex . xetex && cd xetex; xelatex -interaction=batchmode *.tex; xelatex -interaction=batchmode *.tex;  cp -f LittlevGL.pdf ../LittlevGL.pdf; cd ..; "
 cmd_html =  " echo '------------\nBuild HTML...\n------------'; sphinx-build -b html . html; "
 
