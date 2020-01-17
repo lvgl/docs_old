@@ -5,20 +5,20 @@
 
 ## Vue d'ensemble
 
-L'objet  compteur est constitué de quelques lignes radiales qui dessinent une échelle.
+L'objet  compteur est constitué de quelques lignes radiales qui dessinent une graduation.
 
 ### Définir la valeur
-Lors de la définition d'une nouvelle valeur avec `lv_lmeter_set_value(lmeter, new_value)`, la partie proportionnelle de l'échelle sera recolorée.
+Lors de la définition d'une nouvelle valeur avec `lv_lmeter_set_value(lmeter, new_value)`, la partie proportionnelle de la graduation sera recolorée.
 
 ### Intervalle et angles
 La fonction `lv_lmeter_set_range(lmeter, min, max)` définit l'intervalle du compteur linéaire.
 
-Vous pouvez définir l'angle de l'échelle et le nombre de lignes à l'aide de : `lv_lmeter_set_scale(lmeter, angle, line_num)`.
+Vous pouvez définir l'angle de la graduation et le nombre de lignes à l'aide de : `lv_lmeter_set_scale(lmeter, angle, line_num)`.
 L'angle par défaut est 240 et le nombre de ligne par défaut est 31.
 
-### Angle offset
-By default the scale angle is interpreted symmetrically to the y axis. It results in "standing" line meter. With `lv_lmeter_set_angle_offset` an offset can be added the scale angle. 
-It can used e.g to put a quarter line meter into a corner or a half line meter to the right or left side. 
+### Décalage d'angle
+Par défaut, l'angle de la graduation est interprété symétriquement à l'axe y. Il en résulte un compteur de ligne "debout". Avec `lv_lmeter_set_angle_offset` un décalage peut être ajouté à l'angle de la graduation. 
+Cela peut être utilisé par exemple pour placer un compteur linéaire d'un quart de cercle dans un coin ou d'un demi-cercle sur le côté droit ou gauche. 
 
 ## Styles
 
@@ -26,7 +26,7 @@ Le compteur utilise un style qui peut être défini par `lv_lmeter_set_style(lme
 
 - **line.color** la couleur des "lignes inactives" qui sont supérieure à la valeur actuelle
 - **body.main_color** couleur de la "ligne active" au début de l'échelle
-- **body.grad_color** couleur de la "ligne active" à la fin de l'échelle (dégradé avec la couleur principale)
+- **body.grad_color** couleur de la "ligne active" à la fin de la graduation (dégradé avec la couleur principale)
 - **body.padding.hor** longueur des lignes
 - **line.width** largeur des lignes
 

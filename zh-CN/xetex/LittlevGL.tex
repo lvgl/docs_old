@@ -65,7 +65,7 @@
 
 \title{LittlevGL Documentation}
 \date{Jan 17, 2020}
-\release{6.1.1}
+\release{6.1}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
@@ -442,7 +442,7 @@ The bugfixes are added directly to the \sphinxcode{\sphinxupquote{master}} branc
 
 \subsubsection{在线演示}
 \label{\detokenize{get-started/live-demo:id1}}\label{\detokenize{get-started/live-demo::doc}}
-You can see how LittlevGL looks like without installing and downloading anything either on target platform or on the host machine. There are some ready made user interfaces which you can easily try in your browser.
+你不需要在目标平台或主机上安装和下载任何东西，就可以看到 LittlevGL 的样子。你可以很容易地在浏览器里尝试一些现成的用户界面。
 
 前往 \sphinxhref{https://littlevgl.com/live-demo}{在线演示} 页面选择你感兴趣的演示项目。
 
@@ -1084,7 +1084,9 @@ Let’s dive right into an example!
 \label{\detokenize{get-started/micropython:online-simulator}}
 If you want to experiment with LittlevGL + Micropython without downloading anything - you can use our online simulator!It’s a fully functional LittlevGL + Micropython that runs entirely in the browser and allows you to edit a python script and run it.
 
-\sphinxhref{https://cdn.statically.io/gh/littlevgl/lv\_micropython/ef943a1ab40b32a8a77059d6e833a440446c51e8/ports/javascript/lvgl\_editor.html?env=dev\&script=https://raw.githubusercontent.com/littlevgl/lv\_binding\_micropython/dev-6.0/examples/chart\_anim\_example.py}{Click here to experiment on the online simulator}
+\sphinxhref{https://sim.littlevgl.com/v6/micropython/ports/javascript/lvgl\_editor.html}{Click here to experiment on the online simulator}
+
+\sphinxhref{https://sim.littlevgl.com/v6/micropython/ports/javascript/lvgl\_editor.html?script=https://gist.githubusercontent.com/amirgon/51299ce9b6448328a855826149482ae6/raw/0f235c6d40462fd2f0e55364b874f14fe3fd613c/lvgl\_hello\_world.py\&script\_startup=https://gist.githubusercontent.com/amirgon/7bf15a66ba6d959bbf90d10f3da571be/raw/8684b5fa55318c184b1310663b187aaab5c65be6/init\_lv\_mp\_js.py}{Hello World}
 
 
 \subparagraph{PC Simulator}
@@ -3114,15 +3116,15 @@ Array points assigned to the button ()screen will be pressed here by the buttons
 
 \subsubsection{Tick interface}
 \label{\detokenize{porting/tick:tick-interface}}\label{\detokenize{porting/tick::doc}}
-The LittlevGL needs a system tick to know the elapsed time for animation and other tasks.
+LittlevGL 需要一个系统嘀嗒 (tick) 来了解动画和其他任务的运行时间。
 
-You need to call the \sphinxcode{\sphinxupquote{lv\_tick\_inc(tick\_period)}} function periodically and tell the call period in milliseconds. For example, \sphinxcode{\sphinxupquote{lv\_tick\_inc(1)}} for calling in every millisecond.
+您需要定期调用 ‘ lv\_tick\_inc(tick\_period) ‘ 函数，并以毫秒为单位告知调用周期。例如，’ lv\_tick\_inc(1) ‘ 是每毫秒调用一次。
 
-\sphinxcode{\sphinxupquote{lv\_tick\_inc}} should be called in a higher priority routine than \sphinxcode{\sphinxupquote{lv\_task\_handler()}} (e.g. in an interrupt) to precisely know the elapsed milliseconds even if the execution of \sphinxcode{\sphinxupquote{lv\_task\_handler}} takes longer time.
+‘ lv\_tick\_inc ‘ 应该在一个比 \sphinxcode{\sphinxupquote{lv\_task\_handler()}} 更高优先级的例程中调用(例如在一个中断中)，以精确地知道经过的毫秒数，即使 ‘ lv\_task\_handler ‘ 的执行需要更长的时间。
 
-With FreeRTOS \sphinxcode{\sphinxupquote{lv\_tick\_inc}} can be called in \sphinxcode{\sphinxupquote{vApplicationTickHook}}.
+在 FreeRTOS 中 ‘ lv\_tick\_inc ‘ 可以在 ‘ vApplicationTickHook ‘ 中调用。
 
-On Linux based operating system (e.g. on Raspberry Pi) \sphinxcode{\sphinxupquote{lv\_tick\_inc}} can be called in a thread as below:
+基于 Linux 的操作系统 (例如在Raspberry Pi上) 可以在线程中调用 ‘ lv\_tick\_inc ‘，如下所示:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kt}{void} \PYG{o}{*} \PYG{n+nf}{tick\PYGZus{}thread} \PYG{p}{(}\PYG{k+kt}{void} \PYG{o}{*}\PYG{n}{args}\PYG{p}{)}
@@ -3179,24 +3181,16 @@ the elapsed milliseconds since ‘prev\_tick’
 
 
 
-\subsubsection{Task Handler}
-\label{\detokenize{porting/task-handler:task-handler}}\label{\detokenize{porting/task-handler::doc}}
-To handle the tasks of LittlevGL you need to call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically in one of the followings:
-\begin{itemize}
-\item {} 
-\sphinxstyleemphasis{while(1)} of \sphinxstyleemphasis{main()} function
+\subsubsection{任务处理程序}
+\label{\detokenize{porting/task-handler:id1}}\label{\detokenize{porting/task-handler::doc}}
+为了处理 LittlevGL 的任务，需要在以下代码中周期性调用 ‘ lv\_task\_handler() ‘:
+main() 里的 while(1) 函数
+周期性的定时中断（优先级要低于  \sphinxcode{\sphinxupquote{lv\_tick\_inc()}} ）
+一个周期性的 OS 任务
 
-\item {} 
-timer interrupt periodically (low priority then \sphinxcode{\sphinxupquote{lv\_tick\_inc()}})
+时间不是关键，但它应该是大约5毫秒，以保持系统的响应。
 
-\item {} 
-an OS task periodically
-
-\end{itemize}
-
-The timing is not critical but it should be about 5 milliseconds to keep the system responsive.
-
-Example:
+例子：
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{\PYGZob{}}
@@ -3205,12 +3199,12 @@ Example:
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-To learn more about task visit the {\hyperref[\detokenize{overview/task::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Tasks}}}} section.
+了解更多访问 {\hyperref[\detokenize{overview/task::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Tasks}}}}  章节
 
 
-\subsubsection{Sleep management}
-\label{\detokenize{porting/sleep:sleep-management}}\label{\detokenize{porting/sleep::doc}}
-The MCU can go to sleep when no user input happens. In this case, the main \sphinxcode{\sphinxupquote{while(1)}} should look like this:
+\subsubsection{休眠管理}
+\label{\detokenize{porting/sleep:id1}}\label{\detokenize{porting/sleep::doc}}
+当没有用户输入时，MCU可以休眠。在这种情况下，main \sphinxcode{\sphinxupquote{while(1)}} 应该是这样的:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{\PYGZob{}}
@@ -3227,7 +3221,7 @@ The MCU can go to sleep when no user input happens. In this case, the main \sphi
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
-You should also add below lines to your input device read function if a wake-up (press, touch or click etc.) happens:
+如果唤醒(按，触摸或点击等)发生，您还应该在您的输入设备中添加以下代码:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}tick\PYGZus{}inc}\PYG{p}{(}\PYG{n}{LV\PYGZus{}DISP\PYGZus{}DEF\PYGZus{}REFR\PYGZus{}PERIOD}\PYG{p}{)}\PYG{p}{;}  \PYG{c+cm}{/*Force task execution on wake\PYGZhy{}up*/}
@@ -3235,7 +3229,7 @@ You should also add below lines to your input device read function if a wake-up 
 \PYG{n}{lv\PYGZus{}task\PYGZus{}handler}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}                     \PYG{c+cm}{/*Call {}`lv\PYGZus{}task\PYGZus{}handler(){}` manually to process the wake\PYGZhy{}up event*/}
 \end{sphinxVerbatim}
 
-In addition to \sphinxcode{\sphinxupquote{lv\_disp\_get\_inactive\_time()}} you can check \sphinxcode{\sphinxupquote{lv\_anim\_count\_running()}} to see if every animations are finished.
+除了 ‘ lv\_\_get\_inactive\_time() ‘ 之外，您还可以检查 ‘ lv\_anim\_count\_running() ‘，看看是否每个动画都完成了。
 
 
 \subsubsection{Operating system and interrupts}
@@ -3340,8 +3334,8 @@ For example:
 You can also use the log module via the \sphinxcode{\sphinxupquote{LV\_LOG\_TRACE/INFO/WARN/ERROR(description)}} functions.
 
 
-\subsection{Overview}
-\label{\detokenize{overview/index:overview}}\label{\detokenize{overview/index::doc}}
+\subsection{概述}
+\label{\detokenize{overview/index:id1}}\label{\detokenize{overview/index::doc}}
 
 \subsubsection{对象}
 \label{\detokenize{overview/object:id1}}\label{\detokenize{overview/object::doc}}
@@ -5867,7 +5861,7 @@ The color module defines the most basic colors such as:
 \sphinxincludegraphics{{0000009}.png}\#000080 \sphinxcode{\sphinxupquote{LV\_COLOR\_NAVY}}
 
 \item {} 
-\sphinxincludegraphics{{00000010}.png}\#008080 \sphinxcode{\sphinxupquote{LV\_COLOR\_TAIL}}
+\sphinxincludegraphics{{00000010}.png}\#008080 \sphinxcode{\sphinxupquote{LV\_COLOR\_TEAL}}
 
 \item {} 
 \sphinxincludegraphics{{00000011}.png}\#00ffff \sphinxcode{\sphinxupquote{LV\_COLOR\_CYAN}}
@@ -6952,31 +6946,48 @@ To make the fonts globally available (like the builtin fonts), add them to \sphi
 
 \paragraph{Add new symbols}
 \label{\detokenize{overview/font:add-new-symbols}}
-The built-in symbols are created from \sphinxhref{https://fontawesome.com/}{FontAwesome} font. To add new symbols from the FontAwesome font do the following steps:
+The built-in symbols are created from \sphinxhref{https://fontawesome.com/}{FontAwesome} font.
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-Search symbol on \sphinxurl{https://fontawesome.com}. For example the \sphinxhref{https://fontawesome.com}{USB symbol}
+Search symbol on \sphinxurl{https://fontawesome.com}. For example the \sphinxhref{https://fontawesome.com/icons/usb?style=brands}{USB symbol}. Copy it’s Unicode ID which is \sphinxcode{\sphinxupquote{0xf287}} in this case.
 
 \item {} 
-Open the \sphinxhref{https://littlevgl.com/ttf-font-to-c-array}{Online font converter} add \sphinxhref{https://littlevgl.com/tools/FontAwesome.ttf}{FontAwesome.ttf} and add the Unicode ID of the symbol to the range field. E.g.\sphinxcode{\sphinxupquote{ 0xf287}} for the USB symbol.
-More symbols can be enumerated with \sphinxcode{\sphinxupquote{,}}.
+Open the \sphinxhref{https://littlevgl.com/ttf-font-to-c-array}{Online font converter}. Add Add \sphinxhref{https://littlevgl.com/tools/FontAwesome5-Solid+Brands+Regular.woff}{FontAwesome.woff}. .
 
 \item {} 
-Convert the font and copy it to your project.
+Set the parameters such as Name, Size, BPP. You’ll use this name to declare and use the font in your code.
 
 \item {} 
-Convert the Unicode value to UTF8. You can do it e.g.on \sphinxhref{http://www.ltg.ed.ac.uk/\%7Erichard/utf-8.cgi?input=f287\&mode=hex}{this site}. For \sphinxcode{\sphinxupquote{0xf287}} the \sphinxstyleemphasis{Hex UTF-8 bytes} are \sphinxcode{\sphinxupquote{EF 8A 87}}.
+Add the Unicode ID of the symbol to the range field. E.g.\sphinxcode{\sphinxupquote{ 0xf287}} for the USB symbol. More symbols can be enumerated with \sphinxcode{\sphinxupquote{,}}.
+
+\item {} 
+Convert the font and copy it to your project. Make sure to compile the .c file of your font.
+
+\item {} 
+Declare the font using \sphinxcode{\sphinxupquote{extern lv\_font\_t my\_font\_name;}} or simply \sphinxcode{\sphinxupquote{LV\_FONT\_DECLARE(my\_font\_name);}}.
+
+\end{enumerate}
+
+\sphinxstylestrong{Using the symbol}
+\begin{enumerate}
+\def\theenumi{\arabic{enumi}}
+\def\labelenumi{\theenumi .}
+\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
+\item {} 
+Convert the Unicode value to UTF8. You can do it e.g on \sphinxhref{http://www.ltg.ed.ac.uk/\%7Erichard/utf-8.cgi?input=f287\&mode=hex}{this site}. For \sphinxcode{\sphinxupquote{0xf287}} the \sphinxstyleemphasis{Hex UTF-8 bytes} are \sphinxcode{\sphinxupquote{EF 8A 87}}.
 
 \item {} 
 Create a \sphinxcode{\sphinxupquote{define}} from the UTF8 values: \sphinxcode{\sphinxupquote{\#define MY\_USB\_SYMBOL "\textbackslash{}xEF\textbackslash{}x8A\textbackslash{}x87"}}
 
 \item {} 
-Use the symbol as the built-in symbols. \sphinxcode{\sphinxupquote{lv\_label\_set\_text(label, MY\_USB\_SYMBOL)}}
+Create a label and set the text. Eg. \sphinxcode{\sphinxupquote{lv\_label\_set\_text(label, MY\_USB\_SYMBOL)}}
 
 \end{enumerate}
+
+Note - \sphinxcode{\sphinxupquote{lv\_label\_set\_text(label, MY\_USB\_SYMBOL)}} searches for this symbol in the font defined in \sphinxcode{\sphinxupquote{style.text.font}} properties. To use the symbol you may need to change it. Eg \sphinxcode{\sphinxupquote{ style.text.font = my\_font\_name}}
 
 
 \paragraph{Add a new font engine}
@@ -15507,66 +15518,52 @@ style pointer to the style
 
 \paragraph{概述}
 \label{\detokenize{object-types/bar:id1}}
-The ‘Bar’ objects have got two main parts:
-\begin{enumerate}
-\def\theenumi{\arabic{enumi}}
-\def\labelenumi{\theenumi .}
-\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
-\item {} 
-a \sphinxstylestrong{background} which is the object itself.
+进度条对象有两个主要部分：
+其一 是 \sphinxstylestrong{背景} ，它是对象本身
+另一是 \sphinxstylestrong{指示器}，它的形状与背景相似，但是它的高度和宽度可调
 
-\item {} 
-an \sphinxstylestrong{indicator} which shape is similar to the background but its width/height can be adjusted.
-
-\end{enumerate}
-
-The orientation of the bar can be vertical or horizontal according to the width/height ratio. Logically, on horizontal bars, the indicator’s width can be changed. Similarly, on vertical bars, the indicator’s height can be changed.
+进度条的方向可以是垂直的，也可以是水平的，取决与宽度/高度比。在逻辑上，水平放置的进度条的指示器的宽度，和竖直放置进度条的指示器的高度均可调。
 
 
 \subparagraph{数值和范围}
 \label{\detokenize{object-types/bar:id2}}
-A new value can be set by \sphinxcode{\sphinxupquote{lv\_bar\_set\_value(bar, new\_value, LV\_ANIM\_ON/OFF)}}.
-The value is interpreted in a range (minimum and maximum values) which can be modified with \sphinxcode{\sphinxupquote{lv\_bar\_set\_range(bar, min, max)}}.
+可以设定新的数值，通过调用函数 \sphinxcode{\sphinxupquote{lv\_bar\_set\_value(bar, new\_value, LV\_ANIM\_ON/OFF)}}
+该值需要在一个范围内(最小值和最大值)，使用 ‘lv\_bar\_set\_range(bar, min, max)’ 修改这个范围。
 默认的范围是 1 - 100
 
-The new value in \sphinxcode{\sphinxupquote{lv\_bar\_set\_value}} can be set with or without an animation depending on the last parameter (\sphinxcode{\sphinxupquote{LV\_ANIM\_ON/OFF}}).
-The time of the animation can be adjusted by \sphinxcode{\sphinxupquote{lv\_bar\_set\_anim\_time(bar, 100)}}. The time is in milliseconds unit.
+新的数值可以使用 \sphinxcode{\sphinxupquote{lv\_bar\_set\_value}} 函数设定，有没有动画效果取决与最后的一个参数 (\sphinxcode{\sphinxupquote{LV\_ANIM\_ON/OFF}})。
+动画的时间可以通过 \sphinxcode{\sphinxupquote{lv\_bar\_set\_anim\_time(bar, 100)}} 来调整。时间以毫秒为单位。
 
 
-\subparagraph{对称}
-\label{\detokenize{object-types/bar:id3}}
-The bar can be drawn symmetrical to zero (drawn from zero, left to right), if it’s enabled with \sphinxcode{\sphinxupquote{lv\_bar\_set\_sym(bar, true)}}
+\subparagraph{对称 (Symmetrical)}
+\label{\detokenize{object-types/bar:symmetrical}}
+如果启用了\sphinxcode{\sphinxupquote{lv\_bar\_set\_sym(bar, true)}}，则进度条可以从左到右对称至0(即从0开始从左到右绘制)。
 
 
-\paragraph{样式}
-\label{\detokenize{object-types/bar:id4}}
-To set the style of an \sphinxstyleemphasis{Bar} object, use \sphinxcode{\sphinxupquote{lv\_bar\_set\_style(arc, LV\_BAR\_STYLE\_MAIN, \&style)}}:
-\begin{itemize}
-\item {} 
-\sphinxstylestrong{LV\_BAR\_STYLE\_BG} - is a {\hyperref[\detokenize{object-types/obj::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Base object}}}}, therefore, it uses its style elements. Its default style is: \sphinxcode{\sphinxupquote{lv\_style\_pretty}}.
+\paragraph{样式(Styles)}
+\label{\detokenize{object-types/bar:styles}}
+设定一个目标进度条的样式使用  lv\_bar\_set\_style(arc, LV\_BAR\_STYLE\_MAIN, \& style)
 
-\item {} 
-\sphinxstylestrong{LV\_BAR\_STYLE\_INDIC} - is similar to the background. It uses the \sphinxstyleemphasis{left}, \sphinxstyleemphasis{right}, \sphinxstyleemphasis{top} and \sphinxstyleemphasis{bottom} paddings to keeps some space form the edges of the background. Its default style is: \sphinxcode{\sphinxupquote{lv\_style\_pretty\_color}}.
-
-\end{itemize}
+\sphinxstylestrong{LV\_BAR\_STYLE\_BG} 是一个{\hyperref[\detokenize{object-types/obj::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{基本对象}}}} ，因此它使用它的样式元素。它的默认样式是:’ lv\_style\_pretty ‘ 。
+\sphinxstylestrong{LV\_BAR\_STYLE\_INDIC}类似于背景。它使用\sphinxstyleemphasis{左}，\sphinxstyleemphasis{右}，\sphinxstyleemphasis{顶}和\sphinxstyleemphasis{底}来和背景边沿保持空间。它的默认样式是:’ lv\_style\_pretty\_color ‘。
 
 
-\paragraph{事件}
-\label{\detokenize{object-types/bar:id5}}
+\paragraph{事件 (Events)}
+\label{\detokenize{object-types/bar:events}}
 只有 \sphinxhref{/overview/event.html\#generic-events}{Generic events} 事件是被目标样式发送。
 
-Learn more about {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Events}}}}.
+了解更多关于  {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{事件}}}}.
 
 
-\paragraph{按键}
-\label{\detokenize{object-types/bar:id6}}
+\paragraph{按键 (Keys)}
+\label{\detokenize{object-types/bar:keys}}
 此对象类型不处理 \sphinxstyleemphasis{按键}
 
 了解更多关于 {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{按键}}}}.
 
 
 \paragraph{例子}
-\label{\detokenize{object-types/bar:id7}}
+\label{\detokenize{object-types/bar:id3}}
 
 \subparagraph{C}
 \label{\detokenize{object-types/bar:c}}
@@ -15595,7 +15592,7 @@ code
 \label{\detokenize{object-types/bar:micropython}}
 
 \subparagraph{Simple Bar}
-\label{\detokenize{object-types/bar:id8}}
+\label{\detokenize{object-types/bar:id4}}
 \noindent\sphinxincludegraphics{{lv_ex_bar_1}.png}
 
 code
@@ -15610,10 +15607,459 @@ code
 
 
 \paragraph{API}
-\label{\detokenize{object-types/bar:api}}
-\begin{sphinxadmonition}{warning}{Warning:}
-doxygenfile: No breathe\_default\_project config setting to fall back on for directive with no ‘project’ or ‘path’ specified.
-\end{sphinxadmonition}
+\label{\detokenize{object-types/bar:api}}\subsubsection*{Typedefs}
+\index{lv\_bar\_style\_t (C++ type)@\spxentry{lv\_bar\_style\_t}\spxextra{C++ type}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv414lv_bar_style_t}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1acdcf2152f57219703d95d18f7eb31264}}\sphinxbfcode{\sphinxupquote{typedef }}uint8\_t \sphinxbfcode{\sphinxupquote{lv\_bar\_style\_t}}}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\subsubsection*{Enums}
+\index{{[}anonymous{]} (C++ enum)@\spxentry{{[}anonymous{]}}\spxextra{C++ enum}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv4Ut7_anon_41}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1afa231099d07583c3ed0981e0bb665f55}}\sphinxbfcode{\sphinxupquote{enum }}\sphinxstylestrong{{[}anonymous{]}}}%
+\pysigstopmultiline
+Bar styles. 
+
+\sphinxstyleemphasis{Values:}
+\index{LV\_BAR\_STYLE\_BG (C++ enumerator)@\spxentry{LV\_BAR\_STYLE\_BG}\spxextra{C++ enumerator}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv415LV_BAR_STYLE_BG}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1afa231099d07583c3ed0981e0bb665f55a2fde6b3fbc35fbcdb033a9a717ab3c7c}}\sphinxbfcode{\sphinxupquote{LV\_BAR\_STYLE\_BG}}}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{LV\_BAR\_STYLE\_INDIC (C++ enumerator)@\spxentry{LV\_BAR\_STYLE\_INDIC}\spxextra{C++ enumerator}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv418LV_BAR_STYLE_INDIC}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1afa231099d07583c3ed0981e0bb665f55ac27fde51920f55d4e701a6f516f6dd5c}}\sphinxbfcode{\sphinxupquote{LV\_BAR\_STYLE\_INDIC}}}%
+\pysigstopmultiline
+Bar background style. 
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\subsubsection*{Functions}
+\index{LV\_EXPORT\_CONST\_INT (C++ function)@\spxentry{LV\_EXPORT\_CONST\_INT}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv419LV_EXPORT_CONST_INT23LV_BAR_ANIM_STATE_START}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1a399563c2c3f217fa1823e0d04ff5ff8d}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{LV\_EXPORT\_CONST\_INT}}}{LV\_BAR\_ANIM\_STATE\_START}{}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{LV\_EXPORT\_CONST\_INT (C++ function)@\spxentry{LV\_EXPORT\_CONST\_INT}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv419LV_EXPORT_CONST_INT21LV_BAR_ANIM_STATE_END}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1a15cc81b2de67ae06eb213d7b800b0fc7}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{LV\_EXPORT\_CONST\_INT}}}{LV\_BAR\_ANIM\_STATE\_END}{}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{LV\_EXPORT\_CONST\_INT (C++ function)@\spxentry{LV\_EXPORT\_CONST\_INT}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv419LV_EXPORT_CONST_INT21LV_BAR_ANIM_STATE_INV}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1af1975b6f735a62d068d83140aa24a573}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{LV\_EXPORT\_CONST\_INT}}}{LV\_BAR\_ANIM\_STATE\_INV}{}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{LV\_EXPORT\_CONST\_INT (C++ function)@\spxentry{LV\_EXPORT\_CONST\_INT}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv419LV_EXPORT_CONST_INT22LV_BAR_ANIM_STATE_NORM}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1ae1bc12fa2439eb1e4303b3c0d41fea85}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{LV\_EXPORT\_CONST\_INT}}}{LV\_BAR\_ANIM\_STATE\_NORM}{}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{lv\_bar\_create (C++ function)@\spxentry{lv\_bar\_create}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv413lv_bar_createP8lv_obj_tPK8lv_obj_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1ac4863a6fc2c19461806eae7795d0f1fa}}\pysiglinewithargsret{{\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxbfcode{\sphinxupquote{lv\_bar\_create}}}{{\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{par}, \sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{copy}}{}%
+\pysigstopmultiline
+Create a bar objects \begin{description}
+\item[{\sphinxstylestrong{Return}}] \leavevmode
+pointer to the created bar 
+
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{par}}: pointer to an object, it will be the parent of the new bar 
+
+\item {} 
+\sphinxcode{\sphinxupquote{copy}}: pointer to a bar object, if not NULL then the new object will be copied from it 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_set\_value (C++ function)@\spxentry{lv\_bar\_set\_value}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv416lv_bar_set_valueP8lv_obj_t7int16_t16lv_anim_enable_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1afbc4c3481727e56cee7f9c66cf89f7b4}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_bar\_set\_value}}}{{\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{bar}, int16\_t \sphinxstyleemphasis{value}, {\hyperref[\detokenize{overview/animation:_CPPv416lv_anim_enable_t}]{\sphinxcrossref{lv\_anim\_enable\_t}}} \sphinxstyleemphasis{anim}}{}%
+\pysigstopmultiline
+Set a new value on the bar \begin{description}
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{bar}}: pointer to a bar object 
+
+\item {} 
+\sphinxcode{\sphinxupquote{value}}: new value 
+
+\item {} 
+\sphinxcode{\sphinxupquote{anim}}: LV\_ANIM\_ON: set the value with an animation; LV\_ANIM\_OFF: change the value immediately 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_set\_range (C++ function)@\spxentry{lv\_bar\_set\_range}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv416lv_bar_set_rangeP8lv_obj_t7int16_t7int16_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1aba7ab8511c3b9354a78ee89c8df0ff57}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_bar\_set\_range}}}{{\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{bar}, int16\_t \sphinxstyleemphasis{min}, int16\_t \sphinxstyleemphasis{max}}{}%
+\pysigstopmultiline
+Set minimum and the maximum values of a bar \begin{description}
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{bar}}: pointer to the bar object 
+
+\item {} 
+\sphinxcode{\sphinxupquote{min}}: minimum value 
+
+\item {} 
+\sphinxcode{\sphinxupquote{max}}: maximum value 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_set\_sym (C++ function)@\spxentry{lv\_bar\_set\_sym}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv414lv_bar_set_symP8lv_obj_tb}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1a767d5492013ef8b68c42e16e10b87b2a}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_bar\_set\_sym}}}{{\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{bar}, bool \sphinxstyleemphasis{en}}{}%
+\pysigstopmultiline
+Make the bar symmetric to zero. The indicator will grow from zero instead of the minimum position. \begin{description}
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{bar}}: pointer to a bar object 
+
+\item {} 
+\sphinxcode{\sphinxupquote{en}}: true: enable disable symmetric behavior; false: disable 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_set\_anim\_time (C++ function)@\spxentry{lv\_bar\_set\_anim\_time}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv420lv_bar_set_anim_timeP8lv_obj_t8uint16_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1aa7b620ec46f93c0005bea65260a6e5f8}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_bar\_set\_anim\_time}}}{{\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{bar}, uint16\_t \sphinxstyleemphasis{anim\_time}}{}%
+\pysigstopmultiline
+Set the animation time of the bar \begin{description}
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{bar}}: pointer to a bar object 
+
+\item {} 
+\sphinxcode{\sphinxupquote{anim\_time}}: the animation time in milliseconds. 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_set\_style (C++ function)@\spxentry{lv\_bar\_set\_style}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv416lv_bar_set_styleP8lv_obj_t14lv_bar_style_tPK10lv_style_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1a4f919e7ed772bacd08302b6bec78fb1f}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_bar\_set\_style}}}{{\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{bar}, {\hyperref[\detokenize{object-types/bar:_CPPv414lv_bar_style_t}]{\sphinxcrossref{lv\_bar\_style\_t}}} \sphinxstyleemphasis{type}, \sphinxbfcode{\sphinxupquote{const}} lv\_style\_t *\sphinxstyleemphasis{style}}{}%
+\pysigstopmultiline
+Set a style of a bar \begin{description}
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{bar}}: pointer to a bar object 
+
+\item {} 
+\sphinxcode{\sphinxupquote{type}}: which style should be set 
+
+\item {} 
+\sphinxcode{\sphinxupquote{style}}: pointer to a style 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_get\_value (C++ function)@\spxentry{lv\_bar\_get\_value}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv416lv_bar_get_valuePK8lv_obj_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1a27af31a4405905b65400f83a4e65cf79}}\pysiglinewithargsret{int16\_t \sphinxbfcode{\sphinxupquote{lv\_bar\_get\_value}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{bar}}{}%
+\pysigstopmultiline
+Get the value of a bar \begin{description}
+\item[{\sphinxstylestrong{Return}}] \leavevmode
+the value of the bar 
+
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{bar}}: pointer to a bar object 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_get\_min\_value (C++ function)@\spxentry{lv\_bar\_get\_min\_value}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv420lv_bar_get_min_valuePK8lv_obj_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1a062d5da09bc4723d4a2fd195ff7818d7}}\pysiglinewithargsret{int16\_t \sphinxbfcode{\sphinxupquote{lv\_bar\_get\_min\_value}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{bar}}{}%
+\pysigstopmultiline
+Get the minimum value of a bar \begin{description}
+\item[{\sphinxstylestrong{Return}}] \leavevmode
+the minimum value of the bar 
+
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{bar}}: pointer to a bar object 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_get\_max\_value (C++ function)@\spxentry{lv\_bar\_get\_max\_value}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv420lv_bar_get_max_valuePK8lv_obj_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1a070e92061e9c4f24046e3948921fcedc}}\pysiglinewithargsret{int16\_t \sphinxbfcode{\sphinxupquote{lv\_bar\_get\_max\_value}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{bar}}{}%
+\pysigstopmultiline
+Get the maximum value of a bar \begin{description}
+\item[{\sphinxstylestrong{Return}}] \leavevmode
+the maximum value of the bar 
+
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{bar}}: pointer to a bar object 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_get\_sym (C++ function)@\spxentry{lv\_bar\_get\_sym}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv414lv_bar_get_symP8lv_obj_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1a21b6fd59d607161d5885e0183e486d06}}\pysiglinewithargsret{bool \sphinxbfcode{\sphinxupquote{lv\_bar\_get\_sym}}}{{\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{bar}}{}%
+\pysigstopmultiline
+Get whether the bar is symmetric or not. \begin{description}
+\item[{\sphinxstylestrong{Return}}] \leavevmode
+true: symmetric is enabled; false: disable 
+
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{bar}}: pointer to a bar object 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_get\_anim\_time (C++ function)@\spxentry{lv\_bar\_get\_anim\_time}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv420lv_bar_get_anim_timeP8lv_obj_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1a553fb4d704a39da66f9fc8025746144c}}\pysiglinewithargsret{uint16\_t \sphinxbfcode{\sphinxupquote{lv\_bar\_get\_anim\_time}}}{{\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{bar}}{}%
+\pysigstopmultiline
+Get the animation time of the bar \begin{description}
+\item[{\sphinxstylestrong{Return}}] \leavevmode
+the animation time in milliseconds. 
+
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{bar}}: pointer to a bar object 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_get\_style (C++ function)@\spxentry{lv\_bar\_get\_style}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv416lv_bar_get_stylePK8lv_obj_t14lv_bar_style_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:lv__bar_8h_1a81683a7af915a17bb41057f5b70174c7}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{const}} lv\_style\_t *\sphinxbfcode{\sphinxupquote{lv\_bar\_get\_style}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{object-types/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{bar}, {\hyperref[\detokenize{object-types/bar:_CPPv414lv_bar_style_t}]{\sphinxcrossref{lv\_bar\_style\_t}}} \sphinxstyleemphasis{type}}{}%
+\pysigstopmultiline
+Get a style of a bar \begin{description}
+\item[{\sphinxstylestrong{Return}}] \leavevmode
+style pointer to a style 
+
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{bar}}: pointer to a bar object 
+
+\item {} 
+\sphinxcode{\sphinxupquote{type}}: which style should be get 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_bar\_ext\_t (C++ class)@\spxentry{lv\_bar\_ext\_t}\spxextra{C++ class}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv412lv_bar_ext_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{object-types/bar:structlv__bar__ext__t}}\pysigline{\sphinxbfcode{\sphinxupquote{struct }}\sphinxbfcode{\sphinxupquote{lv\_bar\_ext\_t}}}%
+\pysigstopmultiline~\sphinxstyleemphasis{\#include \textless{}lv\_bar.h\textgreater{}}
+Data of bar 
+\subsubsection*{Public Members}
+\index{lv\_bar\_ext\_t::cur\_value (C++ member)@\spxentry{lv\_bar\_ext\_t::cur\_value}\spxextra{C++ member}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv4N12lv_bar_ext_t9cur_valueE}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:structlv__bar__ext__t_1ac7c6f6e23bd63b251b2b58e6d76cd678}}int16\_t \sphinxbfcode{\sphinxupquote{cur\_value}}}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{lv\_bar\_ext\_t::min\_value (C++ member)@\spxentry{lv\_bar\_ext\_t::min\_value}\spxextra{C++ member}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv4N12lv_bar_ext_t9min_valueE}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:structlv__bar__ext__t_1a778a7fb7602b12620b7ad7d6978892e1}}int16\_t \sphinxbfcode{\sphinxupquote{min\_value}}}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{lv\_bar\_ext\_t::max\_value (C++ member)@\spxentry{lv\_bar\_ext\_t::max\_value}\spxextra{C++ member}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv4N12lv_bar_ext_t9max_valueE}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:structlv__bar__ext__t_1afb950f1804bb0146740e4c0081c78ae9}}int16\_t \sphinxbfcode{\sphinxupquote{max\_value}}}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{lv\_bar\_ext\_t::anim\_start (C++ member)@\spxentry{lv\_bar\_ext\_t::anim\_start}\spxextra{C++ member}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv4N12lv_bar_ext_t10anim_startE}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:structlv__bar__ext__t_1ab03a1984280092662448c840c754a3c3}}{\hyperref[\detokenize{overview/animation:_CPPv415lv_anim_value_t}]{\sphinxcrossref{lv\_anim\_value\_t}}} \sphinxbfcode{\sphinxupquote{anim\_start}}}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{lv\_bar\_ext\_t::anim\_end (C++ member)@\spxentry{lv\_bar\_ext\_t::anim\_end}\spxextra{C++ member}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv4N12lv_bar_ext_t8anim_endE}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:structlv__bar__ext__t_1a7ea63042c7b5b2b8b3642708997f2433}}{\hyperref[\detokenize{overview/animation:_CPPv415lv_anim_value_t}]{\sphinxcrossref{lv\_anim\_value\_t}}} \sphinxbfcode{\sphinxupquote{anim\_end}}}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{lv\_bar\_ext\_t::anim\_state (C++ member)@\spxentry{lv\_bar\_ext\_t::anim\_state}\spxextra{C++ member}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv4N12lv_bar_ext_t10anim_stateE}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:structlv__bar__ext__t_1a4a59fa363ee0b0313a5a7236a1eb12c9}}{\hyperref[\detokenize{overview/animation:_CPPv415lv_anim_value_t}]{\sphinxcrossref{lv\_anim\_value\_t}}} \sphinxbfcode{\sphinxupquote{anim\_state}}}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{lv\_bar\_ext\_t::anim\_time (C++ member)@\spxentry{lv\_bar\_ext\_t::anim\_time}\spxextra{C++ member}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv4N12lv_bar_ext_t9anim_timeE}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:structlv__bar__ext__t_1a32ed6d9c8bb502397d12fdc8c95dfe42}}{\hyperref[\detokenize{overview/animation:_CPPv415lv_anim_value_t}]{\sphinxcrossref{lv\_anim\_value\_t}}} \sphinxbfcode{\sphinxupquote{anim\_time}}}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{lv\_bar\_ext\_t::sym (C++ member)@\spxentry{lv\_bar\_ext\_t::sym}\spxextra{C++ member}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv4N12lv_bar_ext_t3symE}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:structlv__bar__ext__t_1af5690ee045f7f0705390d9e807a0981c}}uint8\_t \sphinxbfcode{\sphinxupquote{sym}}}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+\index{lv\_bar\_ext\_t::style\_indic (C++ member)@\spxentry{lv\_bar\_ext\_t::style\_indic}\spxextra{C++ member}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{object-types/bar:_CPPv4N12lv_bar_ext_t11style_indicE}}%
+\pysigstartmultiline
+\pysigline{\phantomsection\label{\detokenize{object-types/bar:structlv__bar__ext__t_1a673742ca7b097a77628222f217d38cc0}}\sphinxbfcode{\sphinxupquote{const}} lv\_style\_t *\sphinxbfcode{\sphinxupquote{style\_indic}}}%
+\pysigstopmultiline
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
 
 
 \subsubsection{Button (lv\_btn)}
@@ -25155,15 +25601,15 @@ pointer to the image’s style
 
 \paragraph{Overview}
 \label{\detokenize{object-types/imgbtn:overview}}
-The Image button is very similar to the simple Button object. The only difference is it displays user-defined images in each state instead of drawing a button.
-Before reading this please read the {\hyperref[\detokenize{object-types/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button}}}} section too.
+The Image button is very similar to the simple ‘Button’ object. The only difference is that, it displays user-defined images in each state instead of drawing a button.
+Before reading this section, please read the {\hyperref[\detokenize{object-types/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button}}}} section for better understanding.
 
 
 \subparagraph{Image sources}
 \label{\detokenize{object-types/imgbtn:image-sources}}
-To set the image in a state the \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_src(imgbtn, LV\_BTN\_STATE\_..., \&img\_src)}} The image sources works the same as described in the {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image object}}}} except that “Symbols” are not supported by the Image button.
+To set the image in a state, use the \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_src(imgbtn, LV\_BTN\_STATE\_..., \&img\_src)}}. The image sources works the same as described in the {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image object}}}} except that, “Symbols” are not supported by the Image button.
 
-If \sphinxcode{\sphinxupquote{LV\_IMGBTN\_TILED}} is enabled in \sphinxstyleemphasis{lv\_conf.h} three sources can be set for each state:
+If \sphinxcode{\sphinxupquote{LV\_IMGBTN\_TILED}} is enabled in \sphinxstyleemphasis{lv\_conf.h}, then three sources can be set for each state:
 \begin{itemize}
 \item {} 
 left
@@ -25176,7 +25622,7 @@ right
 
 \end{itemize}
 
-The \sphinxstyleemphasis{center} image will be repeated to fill the width of the object. Therefore with \sphinxcode{\sphinxupquote{LV\_IMGBTN\_TILED}} you can set the width of the Image button while without it the width will be always the same as the image source’s width.
+The \sphinxstyleemphasis{center} image will be repeated to fill the width of the object. Therefore with \sphinxcode{\sphinxupquote{LV\_IMGBTN\_TILED}}, you can set the width of the Image button. However, without this option, the width will be always the same as the image source’s width.
 
 
 \subparagraph{States}
@@ -25191,39 +25637,39 @@ The toggle feature can be enabled with \sphinxcode{\sphinxupquote{lv\_imgbtn\_se
 
 \paragraph{Style usage}
 \label{\detokenize{object-types/imgbtn:style-usage}}
-Similarly to normal Buttons, Image buttons also have 5 independent styles for the 5 state. You can set them via: \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_style(btn, LV\_IMGBTN\_STYLE\_..., \&style)}}. The styles use the \sphinxcode{\sphinxupquote{style.image}} properties.
+Similar to normal Buttons, Image buttons also have 5 independent styles for the 5 state. You can set them via: \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_style(btn, LV\_IMGBTN\_STYLE\_..., \&style)}}. The styles use the \sphinxcode{\sphinxupquote{style.image}} properties.
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_IMGBTN\_STYLE\_REL} style of the released state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}}
+\sphinxstylestrong{LV\_IMGBTN\_STYLE\_REL} - Style of the released state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}}.
 
 \item {} 
-\sphinxstylestrong{LV\_IMGBTN\_STYLE\_PR} style of the pressed state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}}
+\sphinxstylestrong{LV\_IMGBTN\_STYLE\_PR} - Style of the pressed state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}}.
 
 \item {} 
-\sphinxstylestrong{LV\_IMGBTN\_STYLE\_TGL\_REL} style of the toggled released state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_rel}}
+\sphinxstylestrong{LV\_IMGBTN\_STYLE\_TGL\_REL} - Style of the toggled released state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_rel}}.
 
 \item {} 
-\sphinxstylestrong{LV\_IMGBTN\_STYLE\_TGL\_PR} style of the toggled pressed state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_pr}}
+\sphinxstylestrong{LV\_IMGBTN\_STYLE\_TGL\_PR} - Style of the toggled pressed state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_pr}}.
 
 \item {} 
-\sphinxstylestrong{LV\_IMGBTN\_STYLE\_INA} style of the inactive state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_ina}}
+\sphinxstylestrong{LV\_IMGBTN\_STYLE\_INA} - Style of the inactive state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_ina}}.
 
 \end{itemize}
 
-When labels are created on a button, it’s a good practice to set the image button’s \sphinxcode{\sphinxupquote{style.text}} properties too. Because labels have \sphinxcode{\sphinxupquote{style = NULL}} by default they inherit the parent’s (image button) style.
+When labels are created on a button, it’s a good practice to set the image button’s \sphinxcode{\sphinxupquote{style.text}} properties too. Because labels have \sphinxcode{\sphinxupquote{style = NULL}}, by default, they inherit the parent’s (image button) style.
 Hence you don’t need to create a new style for the label.
 
 
 \paragraph{Events}
 \label{\detokenize{object-types/imgbtn:events}}
-Besided the \sphinxhref{/overview/event.html\#generic-events}{Genreric events} the following \sphinxhref{/overview/event.html\#special-events}{Special events} are sent by the buttons:
+Beside the \sphinxhref{/overview/event.html\#generic-events}{Generic events}, the following \sphinxhref{/overview/event.html\#special-events}{Special events} are sent by the buttons:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} sent when the button is toggled.
+\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} - Sent when the button is toggled.
 
 \end{itemize}
 
-Note that the generic input device related events (like \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESSED}}) are sent in the inactive state too. You need to check the state with \sphinxcode{\sphinxupquote{lv\_btn\_get\_state(btn)}} to ignore the events from inactive buttons.
+Note that, the generic input device related events (like \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESSED}}) are sent in the inactive state too. You need to check the state with \sphinxcode{\sphinxupquote{lv\_btn\_get\_state(btn)}} to ignore the events from inactive buttons.
 
 Learn more about {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Events}}}}.
 
@@ -25233,10 +25679,10 @@ Learn more about {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\D
 The following \sphinxstyleemphasis{Keys} are processed by the Buttons:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KEY\_RIGHT/UP} Go to toggled state if toggling is enabled
+\sphinxstylestrong{LV\_KEY\_RIGHT/UP} - Go to toggled state if toggling is enabled.
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_LEFT/DOWN} Go to non-toggled state if toggling is  enabled
+\sphinxstylestrong{LV\_KEY\_LEFT/DOWN} - Go to non-toggled state if toggling is  enabled.
 
 \end{itemize}
 
@@ -25782,117 +26228,117 @@ The Keyboard object is a special {\hyperref[\detokenize{object-types/btnm::doc}]
 The Keyboards have two modes:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KB\_MODE\_TEXT} display letters, number, and special characters
+\sphinxstylestrong{LV\_KB\_MODE\_TEXT} - Display letters, number, and special characters.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_MODE\_NUM} display numbers, +/- sign and decimal dot
+\sphinxstylestrong{LV\_KB\_MODE\_NUM} - Display numbers, +/- sign, and decimal dot.
 
 \end{itemize}
 
-To set the mode use \sphinxcode{\sphinxupquote{lv\_kb\_set\_mode(kb, mode)}}. The default is  \sphinxstyleemphasis{LV\_KB\_MODE\_TEXT}
+To set the mode, use \sphinxcode{\sphinxupquote{lv\_kb\_set\_mode(kb, mode)}}. The default is  \sphinxstyleemphasis{LV\_KB\_MODE\_TEXT}.
 
 
 \subparagraph{Assign Text area}
 \label{\detokenize{object-types/kb:assign-text-area}}
 You can assign a {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Text area}}}} to the Keyboard to automatically put the clicked characters there.
-To assign the Text area use \sphinxcode{\sphinxupquote{lv\_kb\_set\_ta(kb, ta)}}.
+To assign the text area, use \sphinxcode{\sphinxupquote{lv\_kb\_set\_ta(kb, ta)}}.
 
-The assigned Text area’s \sphinxstylestrong{cursor can be managed} by the keyboard: when the keyboard is assigned the previous Text area’s cursor will be hidden an the new’s will be shown.
-When the keyboard is closed by the \sphinxstyleemphasis{Ok} or \sphinxstyleemphasis{Close} buttons the cursor also will be hidden. The cursor manager feature is enabled by \sphinxcode{\sphinxupquote{lv\_kb\_set\_cursor\_manage(kb, true)}}. The default is not managed.
+The assigned text area’s \sphinxstylestrong{cursor can be managed} by the keyboard: when the keyboard is assigned, the previous text area’s cursor will be hidden and the new one will be shown.
+When the keyboard is closed by the \sphinxstyleemphasis{Ok} or \sphinxstyleemphasis{Close} buttons, the cursor also will be hidden. The cursor manager feature is enabled by \sphinxcode{\sphinxupquote{lv\_kb\_set\_cursor\_manage(kb, true)}}. The default is not managed.
 
 
-\subparagraph{New key map}
-\label{\detokenize{object-types/kb:new-key-map}}
-You can specify a new map (layout) for the keyboard with \sphinxcode{\sphinxupquote{lv\_kb\_set\_map(kb, map)}}. and \sphinxcode{\sphinxupquote{lv\_kb\_set\_ctrl\_map(kb, ctrl\_map)}}.
-Learn more about in the {\hyperref[\detokenize{object-types/btnm::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button matrix}}}} object.
-Keep in mind using following keywords will have the same effect as with the original map:
+\subparagraph{New Keymap}
+\label{\detokenize{object-types/kb:new-keymap}}
+You can specify a new map (layout) for the keyboard with \sphinxcode{\sphinxupquote{lv\_kb\_set\_map(kb, map)}} and \sphinxcode{\sphinxupquote{lv\_kb\_set\_ctrl\_map(kb, ctrl\_map)}}.
+Learn more about the {\hyperref[\detokenize{object-types/btnm::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button matrix}}}} object.
+Keep in mind that, using following keywords will have the same effect as with the original map:
 \begin{itemize}
 \item {} 
-\sphinxstyleemphasis{LV\_SYMBOL\_OK} Apply
+\sphinxstyleemphasis{LV\_SYMBOL\_OK} - Apply.
 
 \item {} 
-\sphinxstyleemphasis{SYMBOL\_CLOSE} Close
+\sphinxstyleemphasis{SYMBOL\_CLOSE} - Close.
 
 \item {} 
-\sphinxstyleemphasis{LV\_SYMBOL\_LEFT} Move the cursor left
+\sphinxstyleemphasis{LV\_SYMBOL\_LEFT} - Move the cursor left.
 
 \item {} 
-\sphinxstyleemphasis{LV\_SYMBOL\_RIGHT} Move the cursor right
+\sphinxstyleemphasis{LV\_SYMBOL\_RIGHT} - Move the cursor right.
 
 \item {} 
-\sphinxstyleemphasis{“ABC”} load the uppercase map
+\sphinxstyleemphasis{“ABC”} - Load the uppercase map.
 
 \item {} 
-\sphinxstyleemphasis{“abc”} load the lower case map
+\sphinxstyleemphasis{“abc”} - Load the lower case map.
 
 \item {} 
-\sphinxstyleemphasis{“Enter”} new line
+\sphinxstyleemphasis{“Enter”} - New line.
 
 \item {} 
-\sphinxstyleemphasis{“Bkps”} Delete on the left
+\sphinxstyleemphasis{“Bkps”} - Delete on the left.
 
 \end{itemize}
 
 
 \paragraph{Styles}
 \label{\detokenize{object-types/kb:styles}}
-The Keyboards work with 6 styles: a background and 5 button styles for each state.
+The Keyboard work with 6 styles: a background and 5 button styles for each state.
 You can set the styles with \sphinxcode{\sphinxupquote{lv\_kb\_set\_style(btn, LV\_KB\_STYLE\_..., \&style)}}.
 The background and the buttons use the \sphinxcode{\sphinxupquote{style.body}} properties.
 The labels use the \sphinxcode{\sphinxupquote{style.text}} properties of the buttons’ styles.
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BG} Background style. Uses all \sphinxcode{\sphinxupquote{style.body}} properties including \sphinxcode{\sphinxupquote{padding}} Default: \sphinxcode{\sphinxupquote{lv\_style\_pretty}}
+\sphinxstylestrong{LV\_KB\_STYLE\_BG} - Background style. Uses all \sphinxcode{\sphinxupquote{style.body}} properties including \sphinxcode{\sphinxupquote{padding}} Default: \sphinxcode{\sphinxupquote{lv\_style\_pretty}}.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_REL} style of the released  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}}
+\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_REL} - Style of the released  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}}.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_PR} style of the pressed buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}}
+\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_PR} - Style of the pressed buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}}.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_TGL\_REL} style of the toggled released  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_rel}}
+\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_TGL\_REL} - Style of the toggled released  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_rel}}.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_TGL\_PR} style of the toggled pressed  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_pr}}
+\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_TGL\_PR} - Style of the toggled pressed  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_pr}}.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_INA} style of the inactive  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_ina}}
+\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_INA} - Style of the inactive  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_ina}}.
 
 \end{itemize}
 
 
 \paragraph{Events}
 \label{\detokenize{object-types/kb:events}}
-Besides the \sphinxhref{/overview/event.html\#generic-events}{Generic events} the following \sphinxhref{/overview/event.html\#special-events}{Special events} are sent by the keyboards:
+Besides the \sphinxhref{/overview/event.html\#generic-events}{Generic events}, the following \sphinxhref{/overview/event.html\#special-events}{Special events} are sent by the keyboards:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} sent when the button is pressed/released or repeated after long press. The event data is set to ID of the pressed/released button.
+\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} - Sent when the button is pressed/released or repeated after long press. The event data is set to the ID of the pressed/released button.
 
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_APPLY} the \sphinxstyleemphasis{Ok} button is clicked
+\sphinxstylestrong{LV\_EVENT\_APPLY} - The \sphinxstyleemphasis{Ok} button is clicked.
 
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_CANCEL} the \sphinxstyleemphasis{Close} button is clicked
+\sphinxstylestrong{LV\_EVENT\_CANCEL} - The \sphinxstyleemphasis{Close} button is clicked.
 
 \end{itemize}
 
 The keyboard has a \sphinxstylestrong{default event handler} callback called \sphinxcode{\sphinxupquote{lv\_kb\_def\_event\_cb}}.
-It handles the button pressing, map changing, the assigned Text area, etc.
-You can completely replace it with your custom event handler but you can call \sphinxcode{\sphinxupquote{lv\_kb\_def\_event\_cb}} at the beginning of your event handler to handle the same things as before.
+It handles the button pressing, map changing, the assigned text area, etc.
+You can completely replace it with your custom event handler however, you can call \sphinxcode{\sphinxupquote{lv\_kb\_def\_event\_cb}} at the beginning of your event handler to handle the same things as before.
 
 Learn more about {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Events}}}}.
 
 
 \paragraph{Keys}
 \label{\detokenize{object-types/kb:keys}}
-The following \sphinxstyleemphasis{Keys} are processed by the Buttons:
+The following \sphinxstyleemphasis{Keys} are processed by the buttons:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KEY\_RIGHT/UP/LEFT/RIGHT} To navigate among the buttons and elect one
+\sphinxstylestrong{LV\_KEY\_RIGHT/UP/LEFT/RIGHT} - To navigate among the buttons and select one.
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_ENTER} To press/release the selected button
+\sphinxstylestrong{LV\_KEY\_ENTER} - To press/release the selected button.
 
 \end{itemize}
 
@@ -26459,63 +26905,63 @@ Default keyboard event to add characters to the Text area and change the map. If
 
 \paragraph{Overview}
 \label{\detokenize{object-types/label:overview}}
-The Labels are the basic objects to display text.
+A label is the basic object type that is used to display text.
 
 
 \subparagraph{Set text}
 \label{\detokenize{object-types/label:set-text}}
-You can modify the text in run-time at any time with \sphinxcode{\sphinxupquote{lv\_label\_set\_text(label, "New text")}}. It will allocate the text dynamically.
+You can set the text on a label at runtime with \sphinxcode{\sphinxupquote{lv\_label\_set\_text(label, "New text")}}. It will allocate a buffer dynamically, and the provided string will be copied into that buffer. Therefore, you don’t need to keep the text you pass to \sphinxcode{\sphinxupquote{lv\_label\_set\_text}} in scope after that function returns.
 
-With \sphinxcode{\sphinxupquote{lv\_label\_set\_text\_fmt(label, "Value: \%d", 15)}}a \sphinxstylestrong{printf-like formatting} can used to set the text.
+With \sphinxcode{\sphinxupquote{lv\_label\_set\_text\_fmt(label, "Value: \%d", 15)}} \sphinxstylestrong{printf formatting} can used to set the text.
 
-Labels are able to show text from a \sphinxstylestrong{static array}. Use: \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text(label, char\_array)}}.
-In this case, the text is not stored in the dynamic memory but the given array is used directly instead.
-Keep in mind that the array can’t be a local variable which destroys when the function exits.
+Labels are able to show text from a \sphinxstylestrong{static character buffer} which is NUL-terminated. To do so, use \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text(label, char\_array)}}. In this case, the text is not stored in the dynamic memory and the given buffer is used directly instead. This means that the array can’t be a local variable which goes out of scope when the function exits. Constant strings are safe to use with \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text}} (except when used with \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_DOTS}}, as it modifies the buffer in-place), as they are stored in RO memory, which is always accessible.
 
-You can also use a \sphinxstylestrong{raw character array} as label text.
-The array doesn’t have to be \sphinxcode{\sphinxupquote{\textbackslash{}0}} terminated. In this case, the text will be saved to the dynamic memory.
-To set a raw character array use the \sphinxcode{\sphinxupquote{lv\_label\_set\_array\_text(label, char\_array)}} function.
+You can also use a \sphinxstylestrong{raw array} as label text. The array doesn’t have to be \sphinxcode{\sphinxupquote{\textbackslash{}0}} terminated. In this case, the text will be saved to the dynamic memory like with \sphinxcode{\sphinxupquote{lv\_label\_set\_text}}. To set a raw character array, use the \sphinxcode{\sphinxupquote{lv\_label\_set\_array\_text(label, char\_array, size)}} function.
 
 
 \subparagraph{Line break}
 \label{\detokenize{object-types/label:line-break}}
-You can use \sphinxcode{\sphinxupquote{\textbackslash{}n}} to make line break. For example: \sphinxcode{\sphinxupquote{"line1\textbackslash{}nline2\textbackslash{}n\textbackslash{}nline4"}}
+Line breaks are handled automatically by the label object. You can use \sphinxcode{\sphinxupquote{\textbackslash{}n}} to make a line break. For example: \sphinxcode{\sphinxupquote{"line1\textbackslash{}nline2\textbackslash{}n\textbackslash{}nline4"}}
 
 
 \subparagraph{Long modes}
 \label{\detokenize{object-types/label:long-modes}}
-The size of the label object can be automatically expanded to the text size or the text can be manipulated according to several long mode policies:
+By default, the width of the label object automatically expands to the text size. Otherwise, the text can be manipulated according to several long mode policies:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_EXPAND} Expand the object size to the text size (Default)
+\sphinxstylestrong{LV\_LABEL\_LONG\_EXPAND} - Expand the object size to the text size (Default)
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_BREAK} Keep the object width, break (wrap) the too long lines and expand the object height
+\sphinxstylestrong{LV\_LABEL\_LONG\_BREAK} - Keep the object width, break (wrap) the too long lines and expand the object height
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_DOTS} Keep the object size, break the text and write dots in the last line
+\sphinxstylestrong{LV\_LABEL\_LONG\_DOTS} - Keep the object size, break the text and write dots in the last line (\sphinxstylestrong{not supported when using \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text}}})
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_SROLL} Keep the size and scroll the label back and forth
+\sphinxstylestrong{LV\_LABEL\_LONG\_SROLL} - Keep the size and scroll the label back and forth
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_SROLL\_CIRC} Keep the size and scroll the label circularly
+\sphinxstylestrong{LV\_LABEL\_LONG\_SROLL\_CIRC} - Keep the size and scroll the label circularly
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_CROP} Keep the size and crop the text out of it.
+\sphinxstylestrong{LV\_LABEL\_LONG\_CROP} - Keep the size and crop the text out of it
 
 \end{itemize}
 
-You can specify the long mode with: \sphinxcode{\sphinxupquote{lv\_label\_set\_long\_mode(label, LV\_LABEL\_LONG\_...)}}
+You can specify the long mode with \sphinxcode{\sphinxupquote{lv\_label\_set\_long\_mode(label, LV\_LABEL\_LONG\_...)}}
 
-It’s important to note that when a label is created and its test is set the label’s size already expanded to the text size.
-In addition with the default \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_EXPAND}} \sphinxstyleemphasis{long mode} \sphinxcode{\sphinxupquote{lv\_obj\_set\_width/height/size()}} has no effect.
-So you need to change the \sphinxstyleemphasis{long mode} first and then set the size with  \sphinxcode{\sphinxupquote{lv\_obj\_set\_width/height/size()}} .
+It’s important to note that, when a label is created and its text is set, the label’s size already expanded to the text size.
+In addition with the default \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_EXPAND}}, \sphinxstyleemphasis{long mode} \sphinxcode{\sphinxupquote{lv\_obj\_set\_width/height/size()}} has no effect.
+So you need to change the \sphinxstyleemphasis{long mode} first and then set the size with  \sphinxcode{\sphinxupquote{lv\_obj\_set\_width/height/size()}}.
+
+Another important note is that \sphinxstylestrong{\sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_DOTS}} manipulates the text buffer in-place} in order to add/remove the dots. When \sphinxcode{\sphinxupquote{lv\_label\_set\_text}} or \sphinxcode{\sphinxupquote{lv\_label\_set\_array\_text}} are used, a separate buffer is allocated and this implementation detail is unnoticed. This is not the case with \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text}}! \sphinxstylestrong{The buffer you pass to \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text}} must be writable if you plan to use \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_DOTS}}.}
 
 
 \subparagraph{Text align}
 \label{\detokenize{object-types/label:text-align}}
-The label’s text can be aligned to the left, right or middle with \sphinxcode{\sphinxupquote{lv\_label\_set\_align(label, LV\_LABEL\_ALIGN\_LEFT/RIGHT/CENTER)}}
+The label’s text can be aligned to the left, right or middle with \sphinxcode{\sphinxupquote{lv\_label\_set\_align(label, LV\_LABEL\_ALIGN\_LEFT/RIGHT/CENTER)}}.
+
+Vertical alignment is not supported by the label itself; you should place the label inside a larger container and align the whole label object instead.
 
 
 \subparagraph{Draw background}
@@ -26523,41 +26969,41 @@ The label’s text can be aligned to the left, right or middle with \sphinxcode{
 You can enable to draw a background for the label with \sphinxcode{\sphinxupquote{lv\_label\_set\_body\_draw(label, draw)}}
 
 The background will be larger in every direction with \sphinxcode{\sphinxupquote{body.padding.top/bottom/left/right}} values.
-However, the background is drawn only “virtually” and doesn’t make the label really larger.
-There for when the label is positioned the label’s coordinates will be taken into account and not background’s.
+However, the background is drawn only “virtually” and doesn’t make the label’s logical coordinates any larger.
+Therefore when the label is positioned, the label’s coordinates will be taken into account and not background’s.
 
 
 \subparagraph{Text recolor}
 \label{\detokenize{object-types/label:text-recolor}}
-In the text, you can use commands to re-color parts of the text. For example: \sphinxcode{\sphinxupquote{"Write a \#ff0000 red\# word"}}.
+In the text, you can use commands to recolor parts of the text. For example: \sphinxcode{\sphinxupquote{"Write a \#ff0000 red\# word"}}.
 This feature can be enabled individually for each label by \sphinxcode{\sphinxupquote{lv\_label\_set\_recolor()}} function.
 
-Note that, recoloring work only in a single line. I.e. there can’t be \sphinxcode{\sphinxupquote{\textbackslash{}n}} in a recolored text or it can be wrapped by \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_BREAK}} else the text in the new line won’t be recolored.
+Note that, recoloring work only in a single line. Therefore, \sphinxcode{\sphinxupquote{\textbackslash{}n}} should not use in a recolored text or it should be wrapped by \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_BREAK}} else, the text in the new line won’t be recolored.
 
 
 \subparagraph{Very long texts}
 \label{\detokenize{object-types/label:very-long-texts}}
-LittlevGL can effectively handle very long (\textgreater{} 40k characters) by saving some extra data (\textasciitilde{}12 bytes) to speed up drawing. To enable this feature set \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_TXT\_HINT   1}} in \sphinxstyleemphasis{lv\_conf.h}.
+LittlevGL can efficiently handle very long (\textgreater{} 40k characters) by saving some extra data (\textasciitilde{}12 bytes) to speed up drawing. To enable this feature, set \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_TXT\_HINT   1}} in \sphinxstyleemphasis{lv\_conf.h}.
 
 
 \subparagraph{Symbols}
 \label{\detokenize{object-types/label:symbols}}
-The labels can display symbols besides letters. Read the {\hyperref[\detokenize{overview/font::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Font}}}} section to learn more about the symbols.
+The labels can display symbols alongside letters (or on their own). Read the {\hyperref[\detokenize{overview/font::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Font}}}} section to learn more about the symbols.
 
 
 \paragraph{Styles}
 \label{\detokenize{object-types/label:styles}}
-The Label uses one style which can be set by \sphinxcode{\sphinxupquote{lv\_label\_set\_style(label, LV\_LABEL\_STYLE\_MAIN, \&style)}}. Form the style the following properties are used:
+The Label uses one style which can be set by \sphinxcode{\sphinxupquote{lv\_label\_set\_style(label, LV\_LABEL\_STYLE\_MAIN, \&style)}}. From the style the following properties are used:
 \begin{itemize}
 \item {} 
-all properties from \sphinxcode{\sphinxupquote{style.text}}
+All properties from \sphinxcode{\sphinxupquote{style.text}}
 
 \item {} 
-for background drawing \sphinxcode{\sphinxupquote{style.body}} properties. \sphinxcode{\sphinxupquote{padding}} will increase the size only visually, the real object’s size won’t be changed.
+For background drawing \sphinxcode{\sphinxupquote{style.body}} properties. \sphinxcode{\sphinxupquote{padding}} will increase the size only visually, the real object’s size won’t be changed.
 
 \end{itemize}
 
-The labels’ default style is \sphinxcode{\sphinxupquote{NULL}} so they inherit the parent’s style.
+The labels’ default style is \sphinxcode{\sphinxupquote{NULL}} so they inherit the parent’s style. It’s useful because it allows the parent to set an appropriate text style for any child labels.
 
 
 \paragraph{Events}
@@ -27848,53 +28294,52 @@ Data of label
 \end{fulllineitems}
 
 
-
-\subsubsection{LED (lv\_led)}
-\label{\detokenize{object-types/led:led-lv-led}}\label{\detokenize{object-types/led::doc}}
-
-\paragraph{Overview}
-\label{\detokenize{object-types/led:overview}}
-The LEDs are rectangle-like (or circle) object.
+LED (lv\_led)
 
 
-\subparagraph{Brightness}
-\label{\detokenize{object-types/led:brightness}}
-You can set their brightness with \sphinxcode{\sphinxupquote{lv\_led\_set\_bright(led, bright)}}. The brightness should be between 0 (darkest) and 255 (lightest).
+\subsubsection{概述}
+\label{\detokenize{object-types/led:id1}}\label{\detokenize{object-types/led::doc}}
+LED 是长方形 (或圆形) 对象
 
 
-\subparagraph{Toggle}
+\paragraph{亮度}
+\label{\detokenize{object-types/led:id2}}
+你可以用 “lv\_led\_set\_bright(led, bright)” 来设置它们的亮度。亮度应该在 0 (最暗) 和 255 (最亮) 之间。
+
+
+\paragraph{切换 (Toggle)}
 \label{\detokenize{object-types/led:toggle}}
-Use \sphinxcode{\sphinxupquote{lv\_led\_on(led)}} and \sphinxcode{\sphinxupquote{lv\_led\_off(led)}} to set the brightness to a predefined  ON or OFF value.  The \sphinxcode{\sphinxupquote{lv\_led\_toggle(led)}} toggles between the ON and OFF state.
+Use \sphinxcode{\sphinxupquote{lv\_led\_on(led)}} and \sphinxcode{\sphinxupquote{lv\_led\_off(led)}} to set the brightness to a predefined ON or OFF value. The \sphinxcode{\sphinxupquote{lv\_led\_toggle(led)}} toggles between the ON and OFF state.
 
 
-\paragraph{Styles}
+\subsubsection{样式(Styles)}
 \label{\detokenize{object-types/led:styles}}
-The LED uses one style which can be set by \sphinxcode{\sphinxupquote{lv\_led\_set\_style(led, LV\_LED\_STYLE\_MAIN, \&style)}}.
-To determine the appearance the \sphinxcode{\sphinxupquote{style.body}} properties are used.
+LED 可以通过 “lv\_led\_set\_style(LED, LV\_LED\_STYLE\_MAIN， \& style)” 设置使用一种样式。
+To determine the appearance, the \sphinxcode{\sphinxupquote{style.body}} properties are used.
 
-The colors are darkened and shadow width is reduced at a lower brightness and gains its original value at brightness 255 to show a lighting effect.
+颜色变暗，阴影宽度降低，亮度降低。增大值到原始的 255 显示照明效果
 
-The default style is: \sphinxcode{\sphinxupquote{lv\_style\_pretty\_color}}. Not that, the LED doesn’t really look like a LED with the default style so you should create your own style. See the example below.
+The default style is: \sphinxcode{\sphinxupquote{lv\_style\_pretty\_color}}. Note that, the LED doesn’t look like a LED with the default style so you should create your style. See the example below.
 
 
-\paragraph{Events}
+\subsubsection{事件 (Events)}
 \label{\detokenize{object-types/led:events}}
-Only the \sphinxhref{/overview/event.html\#generic-events}{Generic events} are sent by the object type.
+只有 \sphinxhref{/overview/event.html\#generic-events}{Generic events} 事件是被目标样式发送。
 
-Learn more about {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Events}}}}.
+了解更多关于  {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{事件}}}}.
 
 
-\paragraph{Keys}
+\subsubsection{按键 (Keys)}
 \label{\detokenize{object-types/led:keys}}
-No \sphinxstyleemphasis{Keys} are processed by the object type.
+此对象类型不处理 \sphinxstyleemphasis{按键}
 
-Learn more about {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Keys}}}}.
+了解更多关于 {\hyperref[\detokenize{overview/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{按键}}}}.
 
 
-\paragraph{Example}
-\label{\detokenize{object-types/led:example}}
+\subsubsection{例子}
+\label{\detokenize{object-types/led:id3}}
 
-\subparagraph{C}
+\paragraph{C}
 \label{\detokenize{object-types/led:c}}
 
 \subparagraph{LED with custom style}
@@ -27939,11 +28384,11 @@ code
 \end{sphinxVerbatim}
 
 
-\subparagraph{MicroPython}
+\paragraph{MicroPython}
 \label{\detokenize{object-types/led:micropython}}
 
 \subparagraph{LED with custom style}
-\label{\detokenize{object-types/led:id1}}
+\label{\detokenize{object-types/led:id4}}
 \noindent\sphinxincludegraphics{{lv_ex_led_1}.png}
 
 code
@@ -27979,7 +28424,7 @@ code
 \end{sphinxVerbatim}
 
 
-\paragraph{API}
+\subsubsection{API}
 \label{\detokenize{object-types/led:api}}\subsubsection*{Typedefs}
 \index{lv\_led\_style\_t (C++ type)@\spxentry{lv\_led\_style\_t}\spxextra{C++ type}}
 
@@ -34385,7 +34830,7 @@ style pointer to a style
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{object-types/slider:_CPPv4N15lv_slider_ext_t3barE}}%
 \pysigstartmultiline
-\pysigline{\phantomsection\label{\detokenize{object-types/slider:structlv__slider__ext__t_1a2a8baad1e348f486975c653d6a17a173}}lv\_bar\_ext\_t \sphinxbfcode{\sphinxupquote{bar}}}%
+\pysigline{\phantomsection\label{\detokenize{object-types/slider:structlv__slider__ext__t_1a2a8baad1e348f486975c653d6a17a173}}{\hyperref[\detokenize{object-types/bar:_CPPv412lv_bar_ext_t}]{\sphinxcrossref{lv\_bar\_ext\_t}}} \sphinxbfcode{\sphinxupquote{bar}}}%
 \pysigstopmultiline
 \end{fulllineitems}
 

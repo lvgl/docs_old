@@ -65,7 +65,7 @@
 
 \title{LittlevGL Documentation}
 \date{Jan 17, 2020}
-\release{6.1.1}
+\release{6.1}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
@@ -1084,7 +1084,9 @@ Plongeons droit dans un exemple !
 \label{\detokenize{get-started/micropython:simulateur-en-ligne}}
 Si vous souhaitez expérimenter LittlevGL + Micropython sans télécharger quoi que ce soit - vous pouvez utiliser notre simulateur en ligne !C’est un ensemble LittlevGL + Micropython entièrement fonctionnel qui s’exécute dans le navigateur et permet d’éditer et d’exécuter un script Python.
 
-\sphinxhref{https://cdn.statically.io/gh/littlevgl/lv\_micropython/ef943a1ab40b32a8a77059d6e833a440446c51e8/ports/javascript/lvgl\_editor.html?env=dev\&script=https://raw.githubusercontent.com/littlevgl/lv\_binding\_micropython/dev-6.0/examples/chart\_anim\_example.py}{Cliquez ici pour expérimenter le simulateur en ligne}
+\sphinxhref{https://sim.littlevgl.com/v6/micropython/ports/javascript/lvgl\_editor.html}{Click here to experiment on the online simulator}
+
+\sphinxhref{https://sim.littlevgl.com/v6/micropython/ports/javascript/lvgl\_editor.html?script=https://gist.githubusercontent.com/amirgon/51299ce9b6448328a855826149482ae6/raw/0f235c6d40462fd2f0e55364b874f14fe3fd613c/lvgl\_hello\_world.py\&script\_startup=https://gist.githubusercontent.com/amirgon/7bf15a66ba6d959bbf90d10f3da571be/raw/8684b5fa55318c184b1310663b187aaab5c65be6/init\_lv\_mp\_js.py}{Hello World}
 
 
 \subparagraph{Simulateur PC}
@@ -3242,9 +3244,9 @@ En plus de \sphinxcode{\sphinxupquote{lv\_disp\_get\_inactive\_time()}}, vous po
 
 \subsubsection{Système d’exploitation et interruptions}
 \label{\detokenize{porting/os:systeme-d-exploitation-et-interruptions}}\label{\detokenize{porting/os::doc}}
-LittlevGL is \sphinxstylestrong{not thread-safe} by default.
+LittlevGL n’est \sphinxstylestrong{pas compatible avec les fils d’exécution} par défaut.
 
-However, in the following conditions it’s valid to call LittlevGL related functions:
+Cependant, dans les cas suivants, il est valide d’appeler des fonctions liées à LittlevGL :
 \begin{itemize}
 \item {} 
 Dans les \sphinxstyleemphasis{événements}. Apprenez-en plus dans {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Evénements}}}}.
@@ -3257,15 +3259,15 @@ Dans \sphinxstyleemphasis{lv\_tasks}.  Apprenez-en plus dans {\hyperref[\detoken
 
 \paragraph{Tâches et fils d’exécution}
 \label{\detokenize{porting/os:taches-et-fils-dexecution}}
-If you need to use real tasks or threads, you need a mutex which should be invoked before the call of \sphinxcode{\sphinxupquote{lv\_task\_handler}} and released after it.
-Also, you have to use the same mutex in other tasks and threads around every LittlevGL (\sphinxcode{\sphinxupquote{lv\_...}}) related function calls and codes.
-This way you can use LittlevGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LittlevGL functions.
+Si vous avez besoin d’utiliser de vraies tâches ou des fils d’exécution, vous avez besoin d’un mutex qui doit être acquis avant l’appel de \sphinxcode{\sphinxupquote{lv\_task\_handler}} et libéré ensuite.
+Par ailleurs, vous devez utiliser ce même mutex dans les autres tâches et fils d’exécution lors de chaque appel de fonction et code liés à LittlevGL (\sphinxcode{\sphinxupquote{lv\_...}}).
+De cette façon, vous pouvez utiliser LittlevGL dans un environnement réellement multitâche. Utilisez simplement un mutex pour éviter l’appel concurrent des fonctions LittlevGL.
 
 
 \paragraph{Interruptions}
 \label{\detokenize{porting/os:interruptions}}
-Try to avoid calling LittlevGL functions from the interrupts (except \sphinxcode{\sphinxupquote{lv\_tick\_inc()}} and \sphinxcode{\sphinxupquote{lv\_disp\_flush\_ready()}}). But, if you need to do this you have to disable the interrupt which uses LittlevGL functions while \sphinxcode{\sphinxupquote{lv\_task\_handler}} is running.
-It’s a better approach to set a flag or some value and periodically check it in an \sphinxcode{\sphinxupquote{lv\_task}}.
+Essayez d’éviter d’appeler les fonctions LittlevGL à partir d’une interruption (sauf \sphinxcode{\sphinxupquote{lv\_tick\_inc()}} et \sphinxcode{\sphinxupquote{lv\_disp\_flush\_ready ()}}). Mais si vous avez besoin de le faire, vous devez désactiver l’interruption qui utilise les fonctions LittlevGL pendant que \sphinxcode{\sphinxupquote{lv\_task\_handler}} est en cours d’exécution.
+Il est préférable de positionner un indicateur ou une valeur et de le vérifier périodiquement dans une \sphinxcode{\sphinxupquote{lv\_task}}.
 
 
 \subsubsection{Journalisation}
@@ -4221,7 +4223,7 @@ De la même manière, si un {\hyperref[\detokenize{object-types/slider::doc}]{\s
 
 Vous devez associer un périphérique d’entrée à un groupe. Un périphérique d’entrée peut envoyer les codes à un seul groupe, mais un groupe peut recevoir des données de plusieurs périphériques d’entrée.
 
-To create a group use \sphinxcode{\sphinxupquote{lv\_group\_t * g = lv\_group\_create()}} and to add an object to the group use \sphinxcode{\sphinxupquote{lv\_group\_add\_obj(g, obj)}}.
+Pour créer un groupe, utilisez \sphinxcode{\sphinxupquote{lv\_group\_t * g = lv\_group\_create()}} et pour ajouter un objet au groupe, utilisez \sphinxcode{\sphinxupquote{lv\_group\_add\_obj(g, obj)}}.
 
 Pour associer un groupe à un périphérique d’entrée, utilisez \sphinxcode{\sphinxupquote{lv\_indev\_set\_group(indev, g)}}, où \sphinxcode{\sphinxupquote{indev}} est la valeur de retour de \sphinxcode{\sphinxupquote{lv\_indev\_drv\_register() }}
 
@@ -5870,7 +5872,7 @@ The color module defines the most basic colors such as:
 \sphinxincludegraphics{{0000009}.png}\#000080 \sphinxcode{\sphinxupquote{LV\_COLOR\_NAVY}}
 
 \item {} 
-\sphinxincludegraphics{{00000010}.png}\#008080 \sphinxcode{\sphinxupquote{LV\_COLOR\_TAIL}}
+\sphinxincludegraphics{{00000010}.png}\#008080 \sphinxcode{\sphinxupquote{LV\_COLOR\_TEAL}}
 
 \item {} 
 \sphinxincludegraphics{{00000011}.png}\#00ffff \sphinxcode{\sphinxupquote{LV\_COLOR\_CYAN}}
@@ -6955,31 +6957,48 @@ To make the fonts globally available (like the builtin fonts), add them to \sphi
 
 \paragraph{Ajouter de nouveaux symboles}
 \label{\detokenize{overview/font:ajouter-de-nouveaux-symboles}}
-Les symboles intégrés sont créés à partir de la police \sphinxhref{https://fontawesome.com/}{FontAwesome}. Pour ajouter de nouveaux symboles à partir de la police FontAwesome, procédez comme suit :
+The built-in symbols are created from \sphinxhref{https://fontawesome.com/}{FontAwesome} font.
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-Recherchez un symbole sur {[}https://fontawesome.com{]} (https://fontawesome.com). Par exemple le symbole \sphinxhref{https://fontawesome.com}{USB}
+Search symbol on \sphinxurl{https://fontawesome.com}. For example the \sphinxhref{https://fontawesome.com/icons/usb?style=brands}{USB symbol}. Copy it’s Unicode ID which is \sphinxcode{\sphinxupquote{0xf287}} in this case.
 
 \item {} 
-Open the \sphinxhref{https://littlevgl.com/ttf-font-to-c-array}{Online font converter} add \sphinxhref{https://littlevgl.com/tools/FontAwesome.ttf}{FontAwesome.ttf} and add the Unicode ID of the symbol to the range field. E.g.\sphinxcode{\sphinxupquote{ 0xf287}} for the USB symbol.
-Plusieurs symboles peuvent être énumérés séparés par \sphinxcode{\sphinxupquote{,}}.
+Open the \sphinxhref{https://littlevgl.com/ttf-font-to-c-array}{Online font converter}. Add Add \sphinxhref{https://littlevgl.com/tools/FontAwesome5-Solid+Brands+Regular.woff}{FontAwesome.woff}. .
 
 \item {} 
-Convertissez la police et copiez-la dans votre projet.
+Set the parameters such as Name, Size, BPP. You’ll use this name to declare and use the font in your code.
 
 \item {} 
-Convert the Unicode value to UTF8. You can do it e.g.on \sphinxhref{http://www.ltg.ed.ac.uk/\%7Erichard/utf-8.cgi?input=f287\&mode=hex}{this site}. For \sphinxcode{\sphinxupquote{0xf287}} the \sphinxstyleemphasis{Hex UTF-8 bytes} are \sphinxcode{\sphinxupquote{EF 8A 87}}.
+Add the Unicode ID of the symbol to the range field. E.g.\sphinxcode{\sphinxupquote{ 0xf287}} for the USB symbol. More symbols can be enumerated with \sphinxcode{\sphinxupquote{,}}.
 
 \item {} 
-Créez un \sphinxcode{\sphinxupquote{définition de constante symbolique}} à partir des valeurs UTF8 : \sphinxcode{\sphinxupquote{\#define MY\_USB\_SYMBOL "\textbackslash{} xEF \textbackslash{} x8A \textbackslash{} x87" }}
+Convert the font and copy it to your project. Make sure to compile the .c file of your font.
 
 \item {} 
-Utilisez le symbole comme les symboles intégrés. \sphinxcode{\sphinxupquote{lv\_label\_set\_text (label, MY\_USB\_SYMBOL)}}
+Declare the font using \sphinxcode{\sphinxupquote{extern lv\_font\_t my\_font\_name;}} or simply \sphinxcode{\sphinxupquote{LV\_FONT\_DECLARE(my\_font\_name);}}.
 
 \end{enumerate}
+
+\sphinxstylestrong{Using the symbol}
+\begin{enumerate}
+\def\theenumi{\arabic{enumi}}
+\def\labelenumi{\theenumi .}
+\makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
+\item {} 
+Convert the Unicode value to UTF8. You can do it e.g on \sphinxhref{http://www.ltg.ed.ac.uk/\%7Erichard/utf-8.cgi?input=f287\&mode=hex}{this site}. For \sphinxcode{\sphinxupquote{0xf287}} the \sphinxstyleemphasis{Hex UTF-8 bytes} are \sphinxcode{\sphinxupquote{EF 8A 87}}.
+
+\item {} 
+Create a \sphinxcode{\sphinxupquote{define}} from the UTF8 values: \sphinxcode{\sphinxupquote{\#define MY\_USB\_SYMBOL "\textbackslash{}xEF\textbackslash{}x8A\textbackslash{}x87"}}
+
+\item {} 
+Create a label and set the text. Eg. \sphinxcode{\sphinxupquote{lv\_label\_set\_text(label, MY\_USB\_SYMBOL)}}
+
+\end{enumerate}
+
+Note - \sphinxcode{\sphinxupquote{lv\_label\_set\_text(label, MY\_USB\_SYMBOL)}} searches for this symbol in the font defined in \sphinxcode{\sphinxupquote{style.text.font}} properties. To use the symbol you may need to change it. Eg \sphinxcode{\sphinxupquote{ style.text.font = my\_font\_name}}
 
 
 \paragraph{Ajouter un nouveau moteur de polices}
@@ -19741,79 +19760,79 @@ Draw an arc on the canvas \begin{description}
 
 
 
-\subsubsection{Checkbox (lv\_cb)}
-\label{\detokenize{object-types/cb:checkbox-lv-cb}}\label{\detokenize{object-types/cb::doc}}
+\subsubsection{Case à cocher (lv\_cb)}
+\label{\detokenize{object-types/cb:case-a-cocher-lv-cb}}\label{\detokenize{object-types/cb::doc}}
 
 \paragraph{Vue d’ensemble}
 \label{\detokenize{object-types/cb:vue-densemble}}
-The Checkbox objects are built from a {\hyperref[\detokenize{object-types/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button}}}} background which contains an also Button \sphinxstyleemphasis{bullet} and a {\hyperref[\detokenize{object-types/label::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Label}}}} to realize a classical checkbox.
+Les objets case à cocher sont construits à partir d’un {\hyperref[\detokenize{object-types/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{bouton}}}} en arrière-plan qui contient un second bouton (la marque) et une {\hyperref[\detokenize{object-types/label::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{étiquette}}}} pour créer une case à cocher classique.
 
 
 \subparagraph{Texte}
 \label{\detokenize{object-types/cb:texte}}
-The text can be modified by the \sphinxcode{\sphinxupquote{lv\_cb\_set\_text(cb, "New text")}} function. It will dynamically allocate the text.
+Le texte peut être modifié par la fonction \sphinxcode{\sphinxupquote{lv\_cb\_set\_text(cb, "Nouveau texte")}}. Le texte est alloué dynamiquement.
 
-To set a static text, use \sphinxcode{\sphinxupquote{lv\_cb\_set\_static\_text(cb, txt)}}. This way, only a pointer of \sphinxcode{\sphinxupquote{txt}} will be stored and it shouldn’t be deallocated while the checkbox exists.
+Pour définir un texte statique utilisez \sphinxcode{\sphinxupquote{lv\_cb\_set\_static\_text(cb, txt)}}. De cette façon, seul un pointeur vers \sphinxcode{\sphinxupquote{txt}} sera sauvegardé et il ne doit pas être désalloué tant que la case à cocher existe.
 
 
 \subparagraph{Cocher/décocher}
 \label{\detokenize{object-types/cb:cocher-decocher}}
-You can manually check / un-check the Checkbox  via \sphinxcode{\sphinxupquote{lv\_cb\_set\_checked(cb, true/false)}}. Setting \sphinxcode{\sphinxupquote{true}} will check the checkbox and \sphinxcode{\sphinxupquote{false}} will un-check the checkbox.
+Vous pouvez manuellement cocher/décocher la case à cocher via \sphinxcode{\sphinxupquote{lv\_cb\_set\_checked(cb, true/false)}}. La valeur \sphinxcode{\sphinxupquote{true}} coche la case à cocher, la valeur \sphinxcode{\sphinxupquote{false}} la décoche.
 
 
 \subparagraph{Désactiver}
 \label{\detokenize{object-types/cb:desactiver}}
-To make the Checkbox inactive, use \sphinxcode{\sphinxupquote{lv\_cb\_set\_inactive(cb, true)}}.
+Pour désactiver la case à cocher utilisez \sphinxcode{\sphinxupquote{lv\_cb\_set\_inactive(cb, true)}}.
 
 
 \paragraph{Styles}
 \label{\detokenize{object-types/cb:styles}}
-The Checkbox styles can be modified with \sphinxcode{\sphinxupquote{lv\_cb\_set\_style(cb, LV\_CB\_STYLE\_..., \&style)}}.
+Les styles de case à cocher peuvent être modifiés avec \sphinxcode{\sphinxupquote{lv\_cb\_set\_style(cb, LV\_CB\_STYLE\_..., \&style)}}.
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_CB\_STYLE\_BG} - Background style. Uses all \sphinxcode{\sphinxupquote{style.body}} properties. The label’s style comes from  \sphinxcode{\sphinxupquote{style.text}}. Default: \sphinxcode{\sphinxupquote{lv\_style\_transp}}
+\sphinxstylestrong{LV\_CB\_STYLE\_BG}  - Style d’arrière-plan. Utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}}. Le style de l’étiquette provient de \sphinxcode{\sphinxupquote{style.text}}. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_transp}}.
 
 \item {} 
-\sphinxstylestrong{LV\_CB\_STYLE\_BOX\_REL} - Style of the released box. Uses the \sphinxcode{\sphinxupquote{style.body}} properties. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}}
+\sphinxstylestrong{LV\_CB\_STYLE\_BOX\_REL} - Style de la marque décochée relâchée. Utilise les propriétés \sphinxcode{\sphinxupquote{style.body}}. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}}.
 
 \item {} 
-\sphinxstylestrong{LV\_CB\_STYLE\_BOX\_PR} - Style of the pressed box. Uses the \sphinxcode{\sphinxupquote{style.body}} properties. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}}
+\sphinxstylestrong{LV\_CB\_STYLE\_BOX\_PR} - Style de la marque décochée pressée. Utilise les propriétés \sphinxcode{\sphinxupquote{style.body}}. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}}.
 
 \item {} 
-\sphinxstylestrong{LV\_CB\_STYLE\_BOX\_TGL\_REL} - Style of the checked released box. Uses the \sphinxcode{\sphinxupquote{style.body}} properties. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_rel}}
+\sphinxstylestrong{LV\_CB\_STYLE\_BOX\_TGL\_REL}  - Style de la marque cochée relâchée. Utilise les propriétés \sphinxcode{\sphinxupquote{style.body}}. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_rel}}
 
 \item {} 
-\sphinxstylestrong{LV\_CB\_STYLE\_BOX\_TGL\_PR} - Style of the checked released box. Uses the \sphinxcode{\sphinxupquote{style.body}} properties. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_pr}}
+\sphinxstylestrong{LV\_CB\_STYLE\_BOX\_TGL\_PR} - Style de la marque cochée pressée. Utilise les propriétés \sphinxcode{\sphinxupquote{style.body}}. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_pr}}
 
 \item {} 
-\sphinxstylestrong{LV\_CB\_STYLE\_BOX\_INA} - Style of the inactive box. Uses the \sphinxcode{\sphinxupquote{style.body}} properties. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_ina}}
+\sphinxstylestrong{LV\_CB\_STYLE\_BOX\_INA} - Style de la marque désactivée. Utilise les propriétés \sphinxcode{\sphinxupquote{style.body}}. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_ina}}
 
 \end{itemize}
 
 
 \paragraph{Evénements}
 \label{\detokenize{object-types/cb:evenements}}
-Besides the \sphinxhref{/overview/event.html\#generic-events}{Generic events} the following \sphinxhref{/overview/event.html\#special-events}{Special events} are sent by the Checkboxes:
+Outre les {[}événements génériques{]}(/overview/event.html \#evenements-generiques), les \sphinxhref{/overview/event.html\#evenements-speciaux}{événements spéciaux} suivants sont envoyés par les case à cocher :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} - sent when the checkbox is toggled.
+\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} - Envoyé lorsque le bouton image est basculé.
 
 \end{itemize}
 
-Note that, the generic input device-related events (like \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESSED}}) are sent in the inactive state too. You need to check the state with \sphinxcode{\sphinxupquote{lv\_cb\_is\_inactive(cb)}} to ignore the events from inactive Checkboxes.
+Notez que les événements génériques liés au périphérique d’entrée (tels que \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESSED}}) sont également envoyés dans l’état désactivé. Vous devez vérifier l’état avec \sphinxcode{\sphinxupquote{lv\_cb\_is\_inactive(cb)}} pour ignorer les événements des cases à cocher désactivées.
 
 Apprenez-en plus sur les {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{événements}}}}.
 
 
 \paragraph{Touches}
 \label{\detokenize{object-types/cb:touches}}
-The following \sphinxstyleemphasis{Keys} are processed by the ‘Buttons’:
+Les \sphinxstyleemphasis{touches} suivantes sont traitées par les ‘boutons’ :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KEY\_RIGHT/UP} - Go to toggled state if toggling is enabled
+\sphinxstylestrong{LV\_KEY\_RIGHT/UP} - Passe à l’état bascule pressé si le mode bascule est actif
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_LEFT/DOWN} - Go to non-toggled state if toggling is  enabled
+\sphinxstylestrong{LV\_KEY\_LEFT/DOWN} - Passe à l’état bascule relâché si le mode bascule est actif
 
 \end{itemize}
 
@@ -25611,15 +25630,15 @@ pointer to the image’s style
 
 \paragraph{Vue d’ensemble}
 \label{\detokenize{object-types/imgbtn:vue-densemble}}
-Le bouton Image est très similaire à l’objet bouton simple. La seule différence est qu’il affiche des images définies par l’utilisateur pour chaque état au lieu de dessiner un bouton.
-Avant de lire ceci, veuillez lire la section sur l’objet {\hyperref[\detokenize{object-types/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{bouton}}}}.
+The Image button is very similar to the simple ‘Button’ object. The only difference is that, it displays user-defined images in each state instead of drawing a button.
+Before reading this section, please read the {\hyperref[\detokenize{object-types/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button}}}} section for better understanding.
 
 
 \subparagraph{Images sources}
 \label{\detokenize{object-types/imgbtn:images-sources}}
-Pour définir l’image d’un état, utilisez \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_src(imgbtn, LV\_BTN\_STATE\_..., \&img\_src)}}.Les images sources fonctionnent comme décrit dans l’objet {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{image}}}} excepté que les “Symboles” ne sont pas pris en charge.
+To set the image in a state, use the \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_src(imgbtn, LV\_BTN\_STATE\_..., \&img\_src)}}. The image sources works the same as described in the {\hyperref[\detokenize{object-types/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image object}}}} except that, “Symbols” are not supported by the Image button.
 
-Si \sphinxcode{\sphinxupquote{LV\_IMGBTN\_TILED}} est activé dans \sphinxstyleemphasis{lv\_conf.h} trois sources peuvent être définies pour chaque état :
+If \sphinxcode{\sphinxupquote{LV\_IMGBTN\_TILED}} is enabled in \sphinxstyleemphasis{lv\_conf.h}, then three sources can be set for each state:
 \begin{itemize}
 \item {} 
 gauche,
@@ -25632,12 +25651,12 @@ droit.
 
 \end{itemize}
 
-L’image \sphinxstyleemphasis{centre} sera répétée pour remplir l’objet sur toute sa largeur. Par conséquent, avec \sphinxcode{\sphinxupquote{LV\_IMGBTN\_TILED}}, vous pouvez définir la largeur du bouton Image, sans quoi la largeur sera toujours identique à la largeur de l’image source.
+The \sphinxstyleemphasis{center} image will be repeated to fill the width of the object. Therefore with \sphinxcode{\sphinxupquote{LV\_IMGBTN\_TILED}}, you can set the width of the Image button. However, without this option, the width will be always the same as the image source’s width.
 
 
 \subparagraph{Etats}
 \label{\detokenize{object-types/imgbtn:etats}}
-Les états sont semblables à ceux de l’objet bouton. Il peut être défini avec \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_state(imgbtn, LV\_BTN\_STATE\_...)}}.
+The states also work like with Button object. It can be set with \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_state(imgbtn, LV\_BTN\_STATE\_...)}}.
 
 
 \subparagraph{Bascule}
@@ -25647,39 +25666,39 @@ La fonctionnalité bascule peut être activée avec \sphinxcode{\sphinxupquote{l
 
 \paragraph{Styles}
 \label{\detokenize{object-types/imgbtn:styles}}
-Comme pour les boutons normaux, les boutons image ont également 5 styles indépendants pour les 5 états. Vous pouvez les définir via \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_style(btn, LV\_IMGBTN\_STYLE\_..., \&style)}}. Les styles utilisent les propriétés \sphinxcode{\sphinxupquote{style.image}}.
+Similar to normal Buttons, Image buttons also have 5 independent styles for the 5 state. You can set them via: \sphinxcode{\sphinxupquote{lv\_imgbtn\_set\_style(btn, LV\_IMGBTN\_STYLE\_..., \&style)}}. The styles use the \sphinxcode{\sphinxupquote{style.image}} properties.
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_IMGBTN\_STYLE\_REL} style de l’état relâché. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}},
+\sphinxstylestrong{LV\_IMGBTN\_STYLE\_REL} - Style of the released state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}}.
 
 \item {} 
-\sphinxstylestrong{LV\_IMGBTN\_STYLE\_PR} style de l’état pressé. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}},
+\sphinxstylestrong{LV\_IMGBTN\_STYLE\_PR} - Style of the pressed state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}}.
 
 \item {} 
-\sphinxstylestrong{LV\_IMGBTN\_STYLE\_TGL\_REL} style de l’état bascule relâché. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_rel}},
+\sphinxstylestrong{LV\_IMGBTN\_STYLE\_TGL\_REL} - Style of the toggled released state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_rel}}.
 
 \item {} 
-\sphinxstylestrong{LV\_IMGBTN\_STYLE\_TGL\_PR} style de l’état bascule pressé. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_pr}},
+\sphinxstylestrong{LV\_IMGBTN\_STYLE\_TGL\_PR} - Style of the toggled pressed state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_pr}}.
 
 \item {} 
-\sphinxstylestrong{LV\_IMGBTN\_STYLE\_INA} style de l’état inactif. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_ina}}.
+\sphinxstylestrong{LV\_IMGBTN\_STYLE\_INA} - Style of the inactive state. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_ina}}.
 
 \end{itemize}
 
-Quand vous créez une étiquette sur un bouton image, la bonne pratique consiste à définir les propriétés \sphinxcode{\sphinxupquote{style.text}} du bouton image. Comme les étiquettes ont \sphinxcode{\sphinxupquote{style = NULL}} par défaut, elles héritent du style du parent, le bouton image.
-De ce fait, vous n’avez pas besoin de créer un nouveau style pour l’étiquette.
+When labels are created on a button, it’s a good practice to set the image button’s \sphinxcode{\sphinxupquote{style.text}} properties too. Because labels have \sphinxcode{\sphinxupquote{style = NULL}}, by default, they inherit the parent’s (image button) style.
+Hence you don’t need to create a new style for the label.
 
 
 \paragraph{Evénements}
 \label{\detokenize{object-types/imgbtn:evenements}}
-Outre les {[}événements génériques{]}(/overview/event.html \#evenements-generiques), les \sphinxhref{/overview/event.html\#evenements-speciaux}{événements spéciaux} suivants  sont envoyés par les boutons image :
+Beside the \sphinxhref{/overview/event.html\#generic-events}{Generic events}, the following \sphinxhref{/overview/event.html\#special-events}{Special events} are sent by the buttons:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} envoyé lorsque le bouton image est basculé.
+\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} - Sent when the button is toggled.
 
 \end{itemize}
 
-Notez que les événements génériques liés au périphérique d’entrée (tels que \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESSED}}) sont également envoyés dans l’état inactif. Vous devez vérifier l’état avec \sphinxcode{\sphinxupquote{lv\_imgbtn\_get\_state(imgbtn)}} pour ignorer les événements des boutons inactifs.
+Note that, the generic input device related events (like \sphinxcode{\sphinxupquote{LV\_EVENT\_PRESSED}}) are sent in the inactive state too. You need to check the state with \sphinxcode{\sphinxupquote{lv\_btn\_get\_state(btn)}} to ignore the events from inactive buttons.
 
 Apprenez-en plus sur les {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{événements}}}}.
 
@@ -25689,10 +25708,10 @@ Apprenez-en plus sur les {\hyperref[\detokenize{overview/event::doc}]{\sphinxcro
 Les \sphinxstyleemphasis{touches} suivantes sont traitées par les cases à cocher:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KEY\_RIGHT/UP} passe à l’état bascule pressé si le mode bascule est actif
+\sphinxstylestrong{LV\_KEY\_RIGHT/UP} - Go to toggled state if toggling is enabled.
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_LEFT/DOWN} passe à l’état bascule relâché si le mode bascule est actif
+\sphinxstylestrong{LV\_KEY\_LEFT/DOWN} - Go to non-toggled state if toggling is  enabled.
 
 \end{itemize}
 
@@ -26258,7 +26277,7 @@ style pointer to the style
 
 \paragraph{Vue d’ensemble}
 \label{\detokenize{object-types/kb:vue-densemble}}
-L’objet clavier est une {\hyperref[\detokenize{object-types/btnm::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{matrice de boutons}}}} spéciale avec des dispositions de touches prédéfinies et autres fonctionnalités qui implémente un clavier virtuel pour écrire du texte.
+The Keyboard object is a special {\hyperref[\detokenize{object-types/btnm::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button matrix}}}} with predefined keymaps and other features to realize a virtual keyboard to write text.
 
 
 \subparagraph{Modes}
@@ -26266,117 +26285,117 @@ L’objet clavier est une {\hyperref[\detokenize{object-types/btnm::doc}]{\sphin
 Les claviers ont deux modes :
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KB\_MODE\_TEXT} affiche lettres, chiffres et des caractères spéciaux,
+\sphinxstylestrong{LV\_KB\_MODE\_TEXT} - Display letters, number, and special characters.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_MODE\_NUM} affiche chiffres, signe +/- et point décimal.
+\sphinxstylestrong{LV\_KB\_MODE\_NUM} - Display numbers, +/- sign, and decimal dot.
 
 \end{itemize}
 
-Pour définir le mode, utilisez \sphinxcode{\sphinxupquote{lv\_kb\_set\_mode(kb, mode)}}. Le défaut est \sphinxstyleemphasis{LV\_KB\_MODE\_TEXT}.
+To set the mode, use \sphinxcode{\sphinxupquote{lv\_kb\_set\_mode(kb, mode)}}. The default is  \sphinxstyleemphasis{LV\_KB\_MODE\_TEXT}.
 
 
 \subparagraph{Zone de texte}
 \label{\detokenize{object-types/kb:zone-de-texte}}
-Vous pouvez attribuer une {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{zone de texte}}}} au clavier pour insérer automatiquement les caractères sur lesquels vous avez cliqué.
-Pour définir la zone de texte, utilisez.\sphinxcode{\sphinxupquote{lv\_kb\_set\_ta(kb, ta)}}.
+You can assign a {\hyperref[\detokenize{object-types/ta::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Text area}}}} to the Keyboard to automatically put the clicked characters there.
+To assign the text area, use \sphinxcode{\sphinxupquote{lv\_kb\_set\_ta(kb, ta)}}.
 
-Le \sphinxstylestrong{curseur de la zone de texte peut être géré} par le clavier : lorsque le clavier est lié, le curseur de la zone de texte est masqué et un nouveau est affiché.
-Lorsque le clavier est fermé avec les touches \sphinxstyleemphasis{Ok} ou \sphinxstyleemphasis{Fermer}, le curseur est également masqué. La fonctionnalité de gestion du curseur est activée par \sphinxcode{\sphinxupquote{lv\_kb\_set\_cursor\_manage(kb, true)}}. La valeur par défaut est non géré.
+The assigned text area’s \sphinxstylestrong{cursor can be managed} by the keyboard: when the keyboard is assigned, the previous text area’s cursor will be hidden and the new one will be shown.
+When the keyboard is closed by the \sphinxstyleemphasis{Ok} or \sphinxstyleemphasis{Close} buttons, the cursor also will be hidden. The cursor manager feature is enabled by \sphinxcode{\sphinxupquote{lv\_kb\_set\_cursor\_manage(kb, true)}}. The default is not managed.
 
 
-\subparagraph{Nouvelle disposition de touches}
-\label{\detokenize{object-types/kb:nouvelle-disposition-de-touches}}
-Vous pouvez spécifier une nouvelle disposition pour le clavier avec \sphinxcode{\sphinxupquote{lv\_kb\_set\_map(kb, map)}} et \sphinxcode{\sphinxupquote{lv\_kb\_set\_ctrl\_map(kb, ctrl\_map)}}.
-Apprenez en plus sur le sujet avec l’objet {\hyperref[\detokenize{object-types/btnm::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{matrice de boutons}}}}
-N’oubliez pas que l’utilisation des mots clés suivants aura le même effet qu’avec la disposition de touches d’origine:
+\subparagraph{New Keymap}
+\label{\detokenize{object-types/kb:new-keymap}}
+You can specify a new map (layout) for the keyboard with \sphinxcode{\sphinxupquote{lv\_kb\_set\_map(kb, map)}} and \sphinxcode{\sphinxupquote{lv\_kb\_set\_ctrl\_map(kb, ctrl\_map)}}.
+Learn more about the {\hyperref[\detokenize{object-types/btnm::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button matrix}}}} object.
+Keep in mind that, using following keywords will have the same effect as with the original map:
 \begin{itemize}
 \item {} 
-\sphinxstyleemphasis{LV\_SYMBOL\_OK} appliquer,
+\sphinxstyleemphasis{LV\_SYMBOL\_OK} - Apply.
 
 \item {} 
-\sphinxstyleemphasis{SYMBOL\_CLOSE} fermer,
+\sphinxstyleemphasis{SYMBOL\_CLOSE} - Close.
 
 \item {} 
-\sphinxstyleemphasis{LV\_SYMBOL\_LEFT} déplacer le curseur à gauche,
+\sphinxstyleemphasis{LV\_SYMBOL\_LEFT} - Move the cursor left.
 
 \item {} 
-\sphinxstyleemphasis{LV\_SYMBOL\_RIGHT} déplacer le curseur à droite,
+\sphinxstyleemphasis{LV\_SYMBOL\_RIGHT} - Move the cursor right.
 
 \item {} 
-\sphinxstyleemphasis{“ABC”} charger la disposition des touches majuscules,
+\sphinxstyleemphasis{“ABC”} - Load the uppercase map.
 
 \item {} 
-\sphinxstyleemphasis{“abc”} charger la disposition des touches minuscules,
+\sphinxstyleemphasis{“abc”} - Load the lower case map.
 
 \item {} 
-*”Enter”*nouvelle ligne,
+\sphinxstyleemphasis{“Enter”} - New line.
 
 \item {} 
-\sphinxstyleemphasis{“Bkps”} suppression à gauche.
+\sphinxstyleemphasis{“Bkps”} - Delete on the left.
 
 \end{itemize}
 
 
 \paragraph{Styles}
 \label{\detokenize{object-types/kb:styles}}
-Les claviers fonctionnent avec 6 styles : un arrière-plan et 5 styles de boutons pour chaque état.
-Vous pouvez définir les styles avec \sphinxcode{\sphinxupquote{lv\_kb\_set\_style(cont, LV\_KB\_STYLE\_MAIN, \&style)}}.
-L’arrière-plan et les boutons utilisent les propriétés \sphinxcode{\sphinxupquote{style.body}}.
+The Keyboard work with 6 styles: a background and 5 button styles for each state.
+You can set the styles with \sphinxcode{\sphinxupquote{lv\_kb\_set\_style(btn, LV\_KB\_STYLE\_..., \&style)}}.
+The background and the buttons use the \sphinxcode{\sphinxupquote{style.body}} properties.
 Les étiquettes utilisent les propriétés \sphinxcode{\sphinxupquote{style.text}} des styles de boutons.
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BG} style d’arrière-plan. Utilise toutes les propriétés \sphinxcode{\sphinxupquote{style.body}}, y compris \sphinxcode{\sphinxupquote{padding}}. Par défaut : \sphinxcode{\sphinxupquote{lv\_style\_pretty}}
+\sphinxstylestrong{LV\_KB\_STYLE\_BG} - Background style. Uses all \sphinxcode{\sphinxupquote{style.body}} properties including \sphinxcode{\sphinxupquote{padding}} Default: \sphinxcode{\sphinxupquote{lv\_style\_pretty}}.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_REL} style des boutons relâchés. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}}
+\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_REL} - Style of the released  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_rel}}.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_PR} style des boutons pressés. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}}
+\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_PR} - Style of the pressed buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_pr}}.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_TGL\_REL} style des boutons bascules relâchés. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_rel}},
+\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_TGL\_REL} - Style of the toggled released  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_rel}}.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_TGL\_PR} style des boutons bascules pressés. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_pr}}
+\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_TGL\_PR} - Style of the toggled pressed  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_tgl\_pr}}.
 
 \item {} 
-\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_INA} style des boutons inactifs. Défaut : \sphinxcode{\sphinxupquote{lv\_style\_btn\_ina}}.
+\sphinxstylestrong{LV\_KB\_STYLE\_BTN\_INA} - Style of the inactive  buttons. Default: \sphinxcode{\sphinxupquote{lv\_style\_btn\_ina}}.
 
 \end{itemize}
 
 
 \paragraph{Evénements}
 \label{\detokenize{object-types/kb:evenements}}
-Outre les {[}événements génériques{]}(/overview/event.html \#evenements-generiques), les \sphinxhref{/overview/event.html\#evenements-speciaux}{événements spéciaux} suivants  sont envoyés par les claviers :
+Besides the \sphinxhref{/overview/event.html\#generic-events}{Generic events}, the following \sphinxhref{/overview/event.html\#special-events}{Special events} are sent by the keyboards:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} envoyé lorsque le bouton est enfoncé/relâché ou répété après un appui prolongé. Les données d’événement sont l’ID du bouton enfoncé/relâché.
+\sphinxstylestrong{LV\_EVENT\_VALUE\_CHANGED} - Sent when the button is pressed/released or repeated after long press. The event data is set to the ID of the pressed/released button.
 
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_APPLY} le bouton \sphinxstyleemphasis{Ok} est cliqué
+\sphinxstylestrong{LV\_EVENT\_APPLY} - The \sphinxstyleemphasis{Ok} button is clicked.
 
 \item {} 
-\sphinxstylestrong{LV\_EVENT\_CANCEL} le bouton \sphinxstyleemphasis{Close} est cliqué
+\sphinxstylestrong{LV\_EVENT\_CANCEL} - The \sphinxstyleemphasis{Close} button is clicked.
 
 \end{itemize}
 
-Le clavier a une \sphinxstylestrong{fonction de rappel par défaut} du gestionnaire d’événements appelée \sphinxcode{\sphinxupquote{lv\_kb\_def\_event\_cb}}.
-Cette fonction gère l’appui sur les boutons, le changement de disposition, la zone de texte liée, etc.
-Vous pouvez écrire votre gestionnaire d’événements personnalisé et vous pouvez utiliser \sphinxcode{\sphinxupquote{lv\_kb\_def\_event\_cb}} au début de votre gestionnaire pour conserver un comportement par défaut pour certains événements.
+The keyboard has a \sphinxstylestrong{default event handler} callback called \sphinxcode{\sphinxupquote{lv\_kb\_def\_event\_cb}}.
+It handles the button pressing, map changing, the assigned text area, etc.
+You can completely replace it with your custom event handler however, you can call \sphinxcode{\sphinxupquote{lv\_kb\_def\_event\_cb}} at the beginning of your event handler to handle the same things as before.
 
 Apprenez-en plus sur les {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{événements}}}}.
 
 
 \paragraph{Touches}
 \label{\detokenize{object-types/kb:touches}}
-Les \sphinxstyleemphasis{touches} suivantes sont traitées par les boutons :
+The following \sphinxstyleemphasis{Keys} are processed by the buttons:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_KEY\_RIGHT/UP/LEFT/RIGHT} pour naviguer parmi les boutons et en sélectionner un,
+\sphinxstylestrong{LV\_KEY\_RIGHT/UP/LEFT/RIGHT} - To navigate among the buttons and select one.
 
 \item {} 
-\sphinxstylestrong{LV\_KEY\_ENTER} pour presser/relâcher le bouton sélectionné.
+\sphinxstylestrong{LV\_KEY\_ENTER} - To press/release the selected button.
 
 \end{itemize}
 
@@ -26943,63 +26962,63 @@ Default keyboard event to add characters to the Text area and change the map. If
 
 \paragraph{Vue d’ensemble}
 \label{\detokenize{object-types/label:vue-densemble}}
-Les étiquettes sont les objets de base pour afficher du texte.
+A label is the basic object type that is used to display text.
 
 
 \subparagraph{Définir le texte}
 \label{\detokenize{object-types/label:definir-le-texte}}
-Vous pouvez modifier le texte en cours d’exécution à tout moment avec \sphinxcode{\sphinxupquote{lv\_label\_set\_text(label, "Nouveau texte")}}. Le texte sera alloué dynamiquement.
+You can set the text on a label at runtime with \sphinxcode{\sphinxupquote{lv\_label\_set\_text(label, "New text")}}. It will allocate a buffer dynamically, and the provided string will be copied into that buffer. Therefore, you don’t need to keep the text you pass to \sphinxcode{\sphinxupquote{lv\_label\_set\_text}} in scope after that function returns.
 
-With \sphinxcode{\sphinxupquote{lv\_label\_set\_text\_fmt(label, "Value: \%d", 15)}}a \sphinxstylestrong{printf-like formatting} can used to set the text.
+With \sphinxcode{\sphinxupquote{lv\_label\_set\_text\_fmt(label, "Value: \%d", 15)}} \sphinxstylestrong{printf formatting} can used to set the text.
 
-Les étiquettes peuvent afficher du texte à partir d’un \sphinxstylestrong{texte statique}. Utilisez \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text(label, text)}}.
-Dans ce cas, le texte n’est pas enregistré dans la mémoire dynamique, mais le texte est utilisé directement.
-Keep in mind that the array can’t be a local variable which destroys when the function exits.
+Labels are able to show text from a \sphinxstylestrong{static character buffer} which is NUL-terminated. To do so, use \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text(label, char\_array)}}. In this case, the text is not stored in the dynamic memory and the given buffer is used directly instead. This means that the array can’t be a local variable which goes out of scope when the function exits. Constant strings are safe to use with \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text}} (except when used with \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_DOTS}}, as it modifies the buffer in-place), as they are stored in RO memory, which is always accessible.
 
-Vous pouvez également utiliser un \sphinxstylestrong{tableau de caractères} comme texte d’étiquette.
-Le tableau ne doit pas obligatoirement être terminé par “\textbackslash{} 0”. Dans ce cas, le texte sera enregistré dans la mémoire dynamique.
-Pour définir un tableau de caractères, utilisez la fonction \sphinxcode{\sphinxupquote{lv\_label\_set\_array\_text(label, array)}}.
+You can also use a \sphinxstylestrong{raw array} as label text. The array doesn’t have to be \sphinxcode{\sphinxupquote{\textbackslash{}0}} terminated. In this case, the text will be saved to the dynamic memory like with \sphinxcode{\sphinxupquote{lv\_label\_set\_text}}. To set a raw character array, use the \sphinxcode{\sphinxupquote{lv\_label\_set\_array\_text(label, char\_array, size)}} function.
 
 
 \subparagraph{Saut de ligne}
 \label{\detokenize{object-types/label:saut-de-ligne}}
-Vous pouvez utiliser \sphinxcode{\sphinxupquote{\textbackslash{}n}} pour faire un saut de ligne. Par exemple : \sphinxcode{\sphinxupquote{"ligne 1\textbackslash{}nligne 2\textbackslash{}n\textbackslash{}nligne 4"}}.
+Line breaks are handled automatically by the label object. You can use \sphinxcode{\sphinxupquote{\textbackslash{}n}} to make a line break. For example: \sphinxcode{\sphinxupquote{"line1\textbackslash{}nline2\textbackslash{}n\textbackslash{}nline4"}}
 
 
 \subparagraph{Modes d’adaptation au texte}
 \label{\detokenize{object-types/label:modes-d-adaptation-au-texte}}
-La taille de l’objet étiquette peut être automatiquement étendue à la taille du texte ou le texte peut être manipulé selon plusieurs règles de mode :
+By default, the width of the label object automatically expands to the text size. Otherwise, the text can be manipulated according to several long mode policies:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_EXPAND} augmente la taille de l’objet à la taille du texte (par défaut),
+\sphinxstylestrong{LV\_LABEL\_LONG\_EXPAND} - Expand the object size to the text size (Default)
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_BREAK} conserve la largeur de l’objet, découpe les lignes trop longues et augmente la hauteur de l’objet,
+\sphinxstylestrong{LV\_LABEL\_LONG\_BREAK} - Keep the object width, break (wrap) the too long lines and expand the object height
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_DOTS} conserve la taille de l’objet, découpe le texte et écrit des points en fin de dernière ligne,
+\sphinxstylestrong{LV\_LABEL\_LONG\_DOTS} - Keep the object size, break the text and write dots in the last line (\sphinxstylestrong{not supported when using \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text}}})
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_SROLL} conserve la taille de l’objet et fait défiler le texte en avant et en arrière,
+\sphinxstylestrong{LV\_LABEL\_LONG\_SROLL} - Keep the size and scroll the label back and forth
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_SROLL\_CIRC} conserve la taille de l’objet et fait défiler le textede manière circulaire,
+\sphinxstylestrong{LV\_LABEL\_LONG\_SROLL\_CIRC} - Keep the size and scroll the label circularly
 
 \item {} 
-\sphinxstylestrong{LV\_LABEL\_LONG\_CROP} conserve la taille et coupe le texte en dehors.
+\sphinxstylestrong{LV\_LABEL\_LONG\_CROP} - Keep the size and crop the text out of it
 
 \end{itemize}
 
-Pour spécifier le mode d’adaptation au texte, utilisez \sphinxcode{\sphinxupquote{lv\_label\_set\_long\_mode(label, LV\_LABEL\_LONG\_...)}}
+You can specify the long mode with \sphinxcode{\sphinxupquote{lv\_label\_set\_long\_mode(label, LV\_LABEL\_LONG\_...)}}
 
-Il est important de noter que lorsqu’une étiquette est créée et que son texte est défini, la taille de l’étiquette est déjà étendue à la taille du texte.
-L’utilisation des fonctions \sphinxcode{\sphinxupquote{lv\_obj\_set\_width/height/size()}} avec le \sphinxstyleemphasis{mode d’adaptation du texte} par défaut \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_EXPAND}} ne produit aucun effet.
-Vous devez donc d’abord changer le \sphinxstyleemphasis{mode d’adaptation du texte} puis définir la taille avec \sphinxcode{\sphinxupquote{lv\_obj\_set\_width/height/size()}}.
+It’s important to note that, when a label is created and its text is set, the label’s size already expanded to the text size.
+In addition with the default \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_EXPAND}}, \sphinxstyleemphasis{long mode} \sphinxcode{\sphinxupquote{lv\_obj\_set\_width/height/size()}} has no effect.
+So you need to change the \sphinxstyleemphasis{long mode} first and then set the size with  \sphinxcode{\sphinxupquote{lv\_obj\_set\_width/height/size()}}.
+
+Another important note is that \sphinxstylestrong{\sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_DOTS}} manipulates the text buffer in-place} in order to add/remove the dots. When \sphinxcode{\sphinxupquote{lv\_label\_set\_text}} or \sphinxcode{\sphinxupquote{lv\_label\_set\_array\_text}} are used, a separate buffer is allocated and this implementation detail is unnoticed. This is not the case with \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text}}! \sphinxstylestrong{The buffer you pass to \sphinxcode{\sphinxupquote{lv\_label\_set\_static\_text}} must be writable if you plan to use \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_DOTS}}.}
 
 
 \subparagraph{Alignement du texte}
 \label{\detokenize{object-types/label:alignement-du-texte}}
-Le texte de l’étiquette peut être aligné à gauche, à droite ou au milieu avec \sphinxcode{\sphinxupquote{lv\_label\_set\_align(label, LV\_LABEL\_ALIGN\_LEFT/RIGHT/CENTER)}}
+The label’s text can be aligned to the left, right or middle with \sphinxcode{\sphinxupquote{lv\_label\_set\_align(label, LV\_LABEL\_ALIGN\_LEFT/RIGHT/CENTER)}}.
+
+Vertical alignment is not supported by the label itself; you should place the label inside a larger container and align the whole label object instead.
 
 
 \subparagraph{Dessin d’arrière-plan}
@@ -27007,41 +27026,41 @@ Le texte de l’étiquette peut être aligné à gauche, à droite ou au milieu 
 Vous pouvez activer le dessin de l’arrière-plan de l’étiquette avec \sphinxcode{\sphinxupquote{lv\_label\_set\_body\_draw(label, draw)}}
 
 L’arrière-plan sera plus grand dans toutes les directions  de la valeur de \sphinxcode{\sphinxupquote{body.padding.top/bottom/left/right}}.
-Cependant, l’arrière-plan n’est dessiné que “virtuellement” et ne rend pas l’étiquette plus grande.
-Par conséquent, lorsque l’étiquette est positionnée, les coordonnées de l’étiquette sont prises en compte et non celles de l’arrière-plan.
+However, the background is drawn only “virtually” and doesn’t make the label’s logical coordinates any larger.
+Therefore when the label is positioned, the label’s coordinates will be taken into account and not background’s.
 
 
 \subparagraph{Coloration du texte}
 \label{\detokenize{object-types/label:coloration-du-texte}}
-Dans le texte, vous pouvez utiliser des commandes pour colorer des parties du texte. Par exemple : \sphinxcode{\sphinxupquote{"Ecrire un mot \#ff0000 rouge\#"}}.
+In the text, you can use commands to recolor parts of the text. For example: \sphinxcode{\sphinxupquote{"Write a \#ff0000 red\# word"}}.
 Cette fonctionnalité peut être activée individuellement pour chaque étiquette à l’aide de la fonction \sphinxcode{\sphinxupquote{lv\_label\_set\_recolor()}}.
 
-Notez que la coloration ne fonctionne que sur une seule ligne. C.-à-d. il ne peut pas y avoir de \sphinxcode{\sphinxupquote{\textbackslash{}n}} dans le texte ou il ne peut être formaté par \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_BREAK}}, sinon le texte de la nouvelle ligne ne sera pas coloré.
+Note that, recoloring work only in a single line. Therefore, \sphinxcode{\sphinxupquote{\textbackslash{}n}} should not use in a recolored text or it should be wrapped by \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_BREAK}} else, the text in the new line won’t be recolored.
 
 
 \subparagraph{Très long textes}
 \label{\detokenize{object-types/label:tres-long-textes}}
-LittlevGL peut gérer efficacement les très longs textes (\textgreater{} 40k caractères) en enregistrant des données supplémentaires (environ 12 octets) pour accélérer le dessin. Pour activer cette fonctionnalité, définissez \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_TXT\_HINT 1}} dans \sphinxstyleemphasis{lv\_conf.h}.
+LittlevGL can efficiently handle very long (\textgreater{} 40k characters) by saving some extra data (\textasciitilde{}12 bytes) to speed up drawing. To enable this feature, set \sphinxcode{\sphinxupquote{LV\_LABEL\_LONG\_TXT\_HINT   1}} in \sphinxstyleemphasis{lv\_conf.h}.
 
 
 \subparagraph{Symboles}
 \label{\detokenize{object-types/label:symboles}}
-Les étiquettes peuvent afficher des symboles en plus des lettres. Lisez la section \sphinxhref{/overview/police}{police} pour en savoir plus sur les symboles.
+The labels can display symbols alongside letters (or on their own). Read the {\hyperref[\detokenize{overview/font::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Font}}}} section to learn more about the symbols.
 
 
 \paragraph{Styles}
 \label{\detokenize{object-types/label:styles}}
-Les étiquettes utilisent un style qui peut être défini par \sphinxcode{\sphinxupquote{lv\_label\_set\_style(label, LV\_LABEL\_STYLE\_MAIN, \&style)}}. A partir du style, les propriétés suivantes sont utilisées :
+The Label uses one style which can be set by \sphinxcode{\sphinxupquote{lv\_label\_set\_style(label, LV\_LABEL\_STYLE\_MAIN, \&style)}}. From the style the following properties are used:
 \begin{itemize}
 \item {} 
-toutes les propriétés de \sphinxcode{\sphinxupquote{style.text}},
+All properties from \sphinxcode{\sphinxupquote{style.text}}
 
 \item {} 
-pour le dessin de l’arrière-plan les propriétés de \sphinxcode{\sphinxupquote{style.body}}. \sphinxcode{\sphinxupquote{padding}} n’augmentera la taille que de manière visuelle, la taille de l’objet réel ne sera pas modifiée.
+For background drawing \sphinxcode{\sphinxupquote{style.body}} properties. \sphinxcode{\sphinxupquote{padding}} will increase the size only visually, the real object’s size won’t be changed.
 
 \end{itemize}
 
-Le style par défaut des étiquettes est \sphinxcode{\sphinxupquote{NULL}}. Elles héritent donc du style du parent.
+The labels’ default style is \sphinxcode{\sphinxupquote{NULL}} so they inherit the parent’s style. It’s useful because it allows the parent to set an appropriate text style for any child labels.
 
 
 \paragraph{Evénements}
@@ -28348,17 +28367,17 @@ Vous pouvez régler leur luminosité avec \sphinxcode{\sphinxupquote{lv\_led\_se
 
 \subparagraph{Bascule}
 \label{\detokenize{object-types/led:bascule}}
-Utilisez \sphinxcode{\sphinxupquote{lv\_led\_on(led)}} et \sphinxcode{\sphinxupquote{lv\_led\_off(led)}} pour régler la luminosité sur des valeurs prédéfinies ON ou OFF. La fonction \sphinxcode{\sphinxupquote{lv\_led\_toggle (led)}} alterne entre les états ON et OFF.
+Use \sphinxcode{\sphinxupquote{lv\_led\_on(led)}} and \sphinxcode{\sphinxupquote{lv\_led\_off(led)}} to set the brightness to a predefined ON or OFF value. The \sphinxcode{\sphinxupquote{lv\_led\_toggle(led)}} toggles between the ON and OFF state.
 
 
 \paragraph{Styles}
 \label{\detokenize{object-types/led:styles}}
 Les LEDs utilisent un style qui peut être défini par \sphinxcode{\sphinxupquote{lv\_led\_set\_style(led, LV\_LED\_STYLE\_MAIN, \&style)}}.
-Pour déterminer l’apparence, les propriétés de \sphinxcode{\sphinxupquote{style.body}} sont utilisées.
+To determine the appearance, the \sphinxcode{\sphinxupquote{style.body}} properties are used.
 
 Les couleurs sont assombries et la largeur de l’ombre est réduite lorsque la luminosité est faible et les valeurs nominales sont utilisées à la luminosité 255 afin de simuler un effet d’éclairage.
 
-Le style par défaut est \sphinxcode{\sphinxupquote{lv\_style\_pretty\_color}}. Notez que la LED ne ressemble pas vraiment à une LED avec le style par défaut, vous devez donc créer votre propre style. Voir l’exemple ci-dessous.
+The default style is: \sphinxcode{\sphinxupquote{lv\_style\_pretty\_color}}. Note that, the LED doesn’t look like a LED with the default style so you should create your style. See the example below.
 
 
 \paragraph{Evénements}
@@ -29111,9 +29130,9 @@ Vous pouvez accéder directement  à un bouton en utilisant \sphinxcode{\sphinxu
 La \sphinxstylestrong{durée d’animation} des déplacements haut/bas/accès direct peut être définie via : \sphinxcode{\sphinxupquote{lv\_list\_set\_anim\_time(list, anim\_time)}}. Zéro supprime les animations.
 
 
-\subparagraph{Layout}
-\label{\detokenize{object-types/list:layout}}
-By default the list is vertical. To get a horizontal list use \sphinxcode{\sphinxupquote{lv\_list\_set\_layout(list, LV\_LAYOUT\_ROW\_M)}}.
+\subparagraph{Mise en page}
+\label{\detokenize{object-types/list:mise-en-page}}
+Par défaut la liste est verticale. Pour obtenir une liste horizontale, utilisez \sphinxcode{\sphinxupquote{lv\_list\_set\_layout(list, LV\_LAYOUT\_ROW\_M)}}.
 
 
 \subparagraph{Mise en évidence du bord}
@@ -30164,26 +30183,26 @@ Focus on a list button. It ensures that the button will be visible on the list. 
 
 \paragraph{Vue d’ensemble}
 \label{\detokenize{object-types/lmeter:vue-d-ensemble}}
-L’objet  compteur est constitué de quelques lignes radiales qui dessinent une échelle.
+L’objet  compteur est constitué de quelques lignes radiales qui dessinent une graduation.
 
 
 \subparagraph{Définir la valeur}
 \label{\detokenize{object-types/lmeter:definir-la-valeur}}
-Lors de la définition d’une nouvelle valeur avec \sphinxcode{\sphinxupquote{lv\_lmeter\_set\_value(lmeter, new\_value)}}, la partie proportionnelle de l’échelle sera recolorée.
+Lors de la définition d’une nouvelle valeur avec \sphinxcode{\sphinxupquote{lv\_lmeter\_set\_value(lmeter, new\_value)}}, la partie proportionnelle de la graduation sera recolorée.
 
 
 \subparagraph{Intervalle et angles}
 \label{\detokenize{object-types/lmeter:intervalle-et-angles}}
 La fonction \sphinxcode{\sphinxupquote{lv\_lmeter\_set\_range(lmeter, min, max)}} définit l’intervalle du compteur linéaire.
 
-Vous pouvez définir l’angle de l’échelle et le nombre de lignes à l’aide de : \sphinxcode{\sphinxupquote{lv\_lmeter\_set\_scale(lmeter, angle, line\_num)}}.
+Vous pouvez définir l’angle de la graduation et le nombre de lignes à l’aide de : \sphinxcode{\sphinxupquote{lv\_lmeter\_set\_scale(lmeter, angle, line\_num)}}.
 L’angle par défaut est 240 et le nombre de ligne par défaut est 31.
 
 
-\subparagraph{Angle offset}
-\label{\detokenize{object-types/lmeter:angle-offset}}
-By default the scale angle is interpreted symmetrically to the y axis. It results in “standing” line meter. With \sphinxcode{\sphinxupquote{lv\_lmeter\_set\_angle\_offset}} an offset can be added the scale angle.
-It can used e.g to put a quarter line meter into a corner or a half line meter to the right or left side.
+\subparagraph{Décalage d’angle}
+\label{\detokenize{object-types/lmeter:decalage-d-angle}}
+Par défaut, l’angle de la graduation est interprété symétriquement à l’axe y. Il en résulte un compteur de ligne “debout”. Avec \sphinxcode{\sphinxupquote{lv\_lmeter\_set\_angle\_offset}} un décalage peut être ajouté à l’angle de la graduation.
+Cela peut être utilisé par exemple pour placer un compteur linéaire d’un quart de cercle dans un coin ou d’un demi-cercle sur le côté droit ou gauche.
 
 
 \paragraph{Styles}
@@ -30197,7 +30216,7 @@ Le compteur utilise un style qui peut être défini par \sphinxcode{\sphinxupquo
 \sphinxstylestrong{body.main\_color} couleur de la “ligne active” au début de l’échelle
 
 \item {} 
-\sphinxstylestrong{body.grad\_color} couleur de la “ligne active” à la fin de l’échelle (dégradé avec la couleur principale)
+\sphinxstylestrong{body.grad\_color} couleur de la “ligne active” à la fin de la graduation (dégradé avec la couleur principale)
 
 \item {} 
 \sphinxstylestrong{body.padding.hor} longueur des lignes
@@ -34164,9 +34183,9 @@ Pour définir une valeur initiale, utilisez \sphinxcode{\sphinxupquote{lv\_slide
 Pour spécifier l’\sphinxstylestrong{intervalle} (valeurs minimum et maximum) la fonction \sphinxcode{\sphinxupquote{lv\_slider\_set\_range(slider, min , max)}} est utilisée.
 
 
-\subparagraph{Symmetrical}
-\label{\detokenize{object-types/slider:symmetrical}}
-The slider can be drawn symmetrical to zero (drawn from zero, left to right), if it’s enabled with \sphinxcode{\sphinxupquote{lv\_slider\_set\_sym(slider, true)}}
+\subparagraph{Symétrie}
+\label{\detokenize{object-types/slider:symetrie}}
+Le curseur peut être dessiné symétriquement par rapport à zéro (de zéro vers la gauche ou la droite) si cela est activé par \sphinxcode{\sphinxupquote{lv\_slider\_set\_sym(slider, true)}}
 
 
 \subparagraph{Placement du bouton}

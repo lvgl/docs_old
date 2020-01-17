@@ -67,7 +67,9 @@ lv.scr_load(scr)
 If you want to experiment with LittlevGL + Micropython without downloading anything - you can use our online simulator!  
 It's a fully functional LittlevGL + Micropython that runs entirely in the browser and allows you to edit a python script and run it.
 
-[Click here to experiment on the online simulator](https://cdn.statically.io/gh/littlevgl/lv_micropython/ef943a1ab40b32a8a77059d6e833a440446c51e8/ports/javascript/lvgl_editor.html?env=dev&script=https://raw.githubusercontent.com/littlevgl/lv_binding_micropython/dev-6.0/examples/chart_anim_example.py)
+[Click here to experiment on the online simulator](https://sim.littlevgl.com/v6/micropython/ports/javascript/lvgl_editor.html)
+
+[Hello World](https://sim.littlevgl.com/v6/micropython/ports/javascript/lvgl_editor.html?script=https://gist.githubusercontent.com/amirgon/51299ce9b6448328a855826149482ae6/raw/0f235c6d40462fd2f0e55364b874f14fe3fd613c/lvgl_hello_world.py&script_startup=https://gist.githubusercontent.com/amirgon/7bf15a66ba6d959bbf90d10f3da571be/raw/8684b5fa55318c184b1310663b187aaab5c65be6/init_lv_mp_js.py)
 
 ### PC Simulator
 

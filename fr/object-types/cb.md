@@ -1,47 +1,47 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/fr/object-types/cb.md
 ```
-# Checkbox (lv_cb)
+# Case à cocher (lv_cb)
 ## Vue d’ensemble
 
-The Checkbox objects are built from a [Button](/object-types/btn) background which contains an also Button *bullet* and a [Label](/object-types/label) to realize a classical checkbox.
+Les objets case à cocher sont construits à partir d'un [bouton](/object-types/btn) en arrière-plan qui contient un second bouton (la marque) et une [étiquette](/object-types/label) pour créer une case à cocher classique.
 
 ### Texte
-The text can be modified by the `lv_cb_set_text(cb, "New text")` function. It will dynamically allocate the text.
+Le texte peut être modifié par la fonction `lv_cb_set_text(cb, "Nouveau texte")`. Le texte est alloué dynamiquement.
 
-To set a static text, use `lv_cb_set_static_text(cb, txt)`. This way, only a pointer of `txt` will be stored and it shouldn't be deallocated while the checkbox exists.
+Pour définir un texte statique utilisez `lv_cb_set_static_text(cb, txt)`. De cette façon, seul un pointeur vers `txt` sera sauvegardé et il ne doit pas être désalloué tant que la case à cocher existe.
 
 ### Cocher/décocher
-You can manually check / un-check the Checkbox  via `lv_cb_set_checked(cb, true/false)`. Setting `true` will check the checkbox and `false` will un-check the checkbox.
+Vous pouvez manuellement cocher/décocher la case à cocher via `lv_cb_set_checked(cb, true/false)`. La valeur `true` coche la case à cocher, la valeur `false` la décoche.
 
 ### Désactiver
-To make the Checkbox inactive, use `lv_cb_set_inactive(cb, true)`.
+Pour désactiver la case à cocher utilisez `lv_cb_set_inactive(cb, true)`.
 
 ## Styles
 
-The Checkbox styles can be modified with `lv_cb_set_style(cb, LV_CB_STYLE_..., &style)`.
+Les styles de case à cocher peuvent être modifiés avec `lv_cb_set_style(cb, LV_CB_STYLE_..., &style)`.
 
-- **LV_CB_STYLE_BG** - Background style. Uses all `style.body` properties. The label's style comes from  `style.text`. Default: `lv_style_transp`
-- **LV_CB_STYLE_BOX_REL** - Style of the released box. Uses the `style.body` properties. Default: `lv_style_btn_rel`
-- **LV_CB_STYLE_BOX_PR** - Style of the pressed box. Uses the `style.body` properties. Default: `lv_style_btn_pr`
-- **LV_CB_STYLE_BOX_TGL_REL** - Style of the checked released box. Uses the `style.body` properties. Default: `lv_style_btn_tgl_rel`
-- **LV_CB_STYLE_BOX_TGL_PR** - Style of the checked released box. Uses the `style.body` properties. Default: `lv_style_btn_tgl_pr`
-- **LV_CB_STYLE_BOX_INA** - Style of the inactive box. Uses the `style.body` properties. Default: `lv_style_btn_ina`
+- **LV_CB_STYLE_BG**  - Style d'arrière-plan. Utilise toutes les propriétés `style.body`. Le style de l'étiquette provient de `style.text`. Défaut : `lv_style_transp`.
+- **LV_CB_STYLE_BOX_REL** - Style de la marque décochée relâchée. Utilise les propriétés `style.body`. Défaut : `lv_style_btn_rel`.
+- **LV_CB_STYLE_BOX_PR** - Style de la marque décochée pressée. Utilise les propriétés `style.body`. Défaut : `lv_style_btn_pr`.
+- **LV_CB_STYLE_BOX_TGL_REL**  - Style de la marque cochée relâchée. Utilise les propriétés `style.body`. Défaut : `lv_style_btn_tgl_rel`
+- **LV_CB_STYLE_BOX_TGL_PR** - Style de la marque cochée pressée. Utilise les propriétés `style.body`. Défaut : `lv_style_btn_tgl_pr`
+- **LV_CB_STYLE_BOX_INA** - Style de la marque désactivée. Utilise les propriétés `style.body`. Défaut : `lv_style_btn_ina`
 
 
 ## Evénements
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Checkboxes:
- - **LV_EVENT_VALUE_CHANGED** - sent when the checkbox is toggled.
+Outre les [événements génériques](/overview/event.html #evenements-generiques), les [événements spéciaux](/overview/event.html#evenements-speciaux) suivants sont envoyés par les case à cocher :
+ - **LV_EVENT_VALUE_CHANGED** - Envoyé lorsque le bouton image est basculé.
 
-Note that, the generic input device-related events (like `LV_EVENT_PRESSED`) are sent in the inactive state too. You need to check the state with `lv_cb_is_inactive(cb)` to ignore the events from inactive Checkboxes.
+Notez que les événements génériques liés au périphérique d'entrée (tels que `LV_EVENT_PRESSED`) sont également envoyés dans l'état désactivé. Vous devez vérifier l'état avec `lv_cb_is_inactive(cb)` pour ignorer les événements des cases à cocher désactivées.
 
 Apprenez-en plus sur les [événements](/overview/event).
 
 
 ## Touches
-The following *Keys* are processed by the 'Buttons':
-- **LV_KEY_RIGHT/UP** - Go to toggled state if toggling is enabled
-- **LV_KEY_LEFT/DOWN** - Go to non-toggled state if toggling is  enabled
+Les *touches* suivantes sont traitées par les 'boutons' :
+- **LV_KEY_RIGHT/UP** - Passe à l'état bascule pressé si le mode bascule est actif
+- **LV_KEY_LEFT/DOWN** - Passe à l'état bascule relâché si le mode bascule est actif
 
 Notez que, comme d'habitude, l'état de `LV_KEY_ENTER` est traduit en `LV_EVENT_PRESSED/PRESSING/RELEASED` etc.
 

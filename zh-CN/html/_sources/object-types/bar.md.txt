@@ -5,36 +5,36 @@
 
 ## 概述
 
-The 'Bar' objects have got two main parts:
-1. a **background** which is the object itself.
-2. an **indicator** which shape is similar to the background but its width/height can be adjusted.
+进度条对象有两个主要部分：
+其一 是 **背景** ，它是对象本身
+另一是 **指示器**，它的形状与背景相似，但是它的高度和宽度可调
 
-The orientation of the bar can be vertical or horizontal according to the width/height ratio. Logically, on horizontal bars, the indicator's width can be changed. Similarly, on vertical bars, the indicator's height can be changed.
+进度条的方向可以是垂直的，也可以是水平的，取决与宽度/高度比。在逻辑上，水平放置的进度条的指示器的宽度，和竖直放置进度条的指示器的高度均可调。
 
 ### 数值和范围
-A new value can be set by `lv_bar_set_value(bar, new_value, LV_ANIM_ON/OFF)`.
-The value is interpreted in a range (minimum and maximum values) which can be modified with `lv_bar_set_range(bar, min, max)`.
+可以设定新的数值，通过调用函数 `lv_bar_set_value(bar, new_value, LV_ANIM_ON/OFF)` 
+该值需要在一个范围内(最小值和最大值)，使用 ‘lv_bar_set_range(bar, min, max)’ 修改这个范围。
 默认的范围是 1 - 100
 
-The new value in `lv_bar_set_value` can be set with or without an animation depending on the last parameter (`LV_ANIM_ON/OFF`).
-The time of the animation can be adjusted by `lv_bar_set_anim_time(bar, 100)`. The time is in milliseconds unit.
+新的数值可以使用 `lv_bar_set_value` 函数设定，有没有动画效果取决与最后的一个参数 (`LV_ANIM_ON/OFF`)。
+动画的时间可以通过 `lv_bar_set_anim_time(bar, 100)` 来调整。时间以毫秒为单位。
 
-### 对称
-The bar can be drawn symmetrical to zero (drawn from zero, left to right), if it's enabled with `lv_bar_set_sym(bar, true)`
+### 对称 (Symmetrical)
+如果启用了`lv_bar_set_sym(bar, true)`，则进度条可以从左到右对称至0(即从0开始从左到右绘制)。
 
-## 样式
+## 样式(Styles)
 
-To set the style of an *Bar* object, use `lv_bar_set_style(arc, LV_BAR_STYLE_MAIN, &style)`:
+设定一个目标进度条的样式使用  lv_bar_set_style(arc, LV_BAR_STYLE_MAIN, & style)
 
-- **LV_BAR_STYLE_BG** - is a [Base object](/object-types/obj), therefore, it uses its style elements. Its default style is: `lv_style_pretty`.
-- **LV_BAR_STYLE_INDIC** - is similar to the background. It uses the *left*, *right*, *top* and *bottom* paddings to keeps some space form the edges of the background. Its default style is: `lv_style_pretty_color`.
+**LV_BAR_STYLE_BG** 是一个[基本对象](/object-types/obj) ，因此它使用它的样式元素。它的默认样式是:' lv_style_pretty ' 。
+**LV_BAR_STYLE_INDIC**类似于背景。它使用*左*，*右*，*顶*和*底*来和背景边沿保持空间。它的默认样式是:' lv_style_pretty_color '。
 
-## 事件
+## 事件 (Events)
 只有 [Generic events](/overview/event.html#generic-events) 事件是被目标样式发送。
 
-Learn more about [Events](/overview/event).
+了解更多关于  [事件](/overview/event).
 
-## 按键
+## 按键 (Keys)
 此对象类型不处理 *按键*
 
 了解更多关于 [按键](/overview/indev).
@@ -47,11 +47,11 @@ Learn more about [Events](/overview/event).
 
 ```
 
-## API
+## API 
 
 ```eval_rst
 
 .. doxygenfile:: lv_bar.h
-   project
+  :project: lvgl
 
 ```

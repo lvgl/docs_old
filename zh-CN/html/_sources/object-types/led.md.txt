@@ -1,38 +1,38 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/zh-CN/object-types/led.md
 ```
-# LED (lv_led)
+LED (lv_led)
 
-## Overview
+## 概述
 
-The LEDs are rectangle-like (or circle) object. 
+LED 是长方形 (或圆形) 对象
 
-### Brightness
-You can set their brightness with `lv_led_set_bright(led, bright)`. The brightness should be between 0 (darkest) and 255 (lightest).
+### 亮度
+你可以用 “lv_led_set_bright(led, bright)” 来设置它们的亮度。亮度应该在 0 (最暗) 和 255 (最亮) 之间。
 
-### Toggle
-Use `lv_led_on(led)` and `lv_led_off(led)` to set the brightness to a predefined  ON or OFF value.  The `lv_led_toggle(led)` toggles between the ON and OFF state.
+### 切换 (Toggle)
+Use `lv_led_on(led)` and `lv_led_off(led)` to set the brightness to a predefined ON or OFF value. The `lv_led_toggle(led)` toggles between the ON and OFF state.
 
-## Styles
+## 样式(Styles)
 
-The LED uses one style which can be set by `lv_led_set_style(led, LV_LED_STYLE_MAIN, &style)`. 
-To determine the appearance the `style.body` properties are used. 
+LED 可以通过 “lv_led_set_style(LED, LV_LED_STYLE_MAIN， & style)” 设置使用一种样式。
+To determine the appearance, the `style.body` properties are used. 
 
-The colors are darkened and shadow width is reduced at a lower brightness and gains its original value at brightness 255 to show a lighting effect.  
+颜色变暗，阴影宽度降低，亮度降低。增大值到原始的 255 显示照明效果
 
-The default style is: `lv_style_pretty_color`. Not that, the LED doesn't really look like a LED with the default style so you should create your own style. See the example below.
+The default style is: `lv_style_pretty_color`. Note that, the LED doesn't look like a LED with the default style so you should create your style. See the example below.
 
-## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+## 事件 (Events)
+只有 [Generic events](/overview/event.html#generic-events) 事件是被目标样式发送。
 
-Learn more about [Events](/overview/event).
+了解更多关于  [事件](/overview/event).
 
-## Keys
-No *Keys* are processed by the object type.
+## 按键 (Keys)
+此对象类型不处理 *按键*
 
-Learn more about [Keys](/overview/indev).
+了解更多关于 [按键](/overview/indev).
 
-## Example
+## 例子
 
 ```eval_rst
 

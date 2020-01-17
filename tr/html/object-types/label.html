@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Label (lv_label) &mdash; LittlevGL 6.1.1 documentation</title>
+  <title>Label (lv_label) &mdash; LittlevGL 6.1 documentation</title>
   
 
   
@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                6.1.1
+                6.1
               </div>
             
           
@@ -682,7 +682,7 @@
 <li class="toctree-l3"><a class="reference internal" href="kb.html#overview">Overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="kb.html#modes">Modes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="kb.html#assign-text-area">Assign Text area</a></li>
-<li class="toctree-l4"><a class="reference internal" href="kb.html#new-key-map">New key map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#new-keymap">New Keymap</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="kb.html#styles">Styles</a></li>
@@ -1116,72 +1116,70 @@
 <h1>Label (lv_label)<a class="headerlink" href="#label-lv-label" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>The Labels are the basic objects to display text.</p>
+<p>A label is the basic object type that is used to display text.</p>
 <div class="section" id="set-text">
 <h3>Set text<a class="headerlink" href="#set-text" title="Permalink to this headline">¶</a></h3>
-<p>You can modify the text in run-time at any time with <code class="docutils literal notranslate"><span class="pre">lv_label_set_text(label,</span> <span class="pre">&quot;New</span> <span class="pre">text&quot;)</span></code>. It will allocate the text dynamically.</p>
-<p>With <code class="docutils literal notranslate"><span class="pre">lv_label_set_text_fmt(label,</span> <span class="pre">&quot;Value:</span> <span class="pre">%d&quot;,</span> <span class="pre">15)</span></code>a <strong>printf-like formatting</strong> can used to set the text.</p>
-<p>Labels are able to show text from a <strong>static array</strong>. Use: <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text(label,</span> <span class="pre">char_array)</span></code>.
-In this case, the text is not stored in the dynamic memory but the given array is used directly instead.
-Keep in mind that the array can’t be a local variable which destroys when the function exits.</p>
-<p>You can also use a <strong>raw character array</strong> as label text.
-The array doesn’t have to be <code class="docutils literal notranslate"><span class="pre">\0</span></code> terminated. In this case, the text will be saved to the dynamic memory.
-To set a raw character array use the <code class="docutils literal notranslate"><span class="pre">lv_label_set_array_text(label,</span> <span class="pre">char_array)</span></code> function.</p>
+<p>You can set the text on a label at runtime with <code class="docutils literal notranslate"><span class="pre">lv_label_set_text(label,</span> <span class="pre">&quot;New</span> <span class="pre">text&quot;)</span></code>. It will allocate a buffer dynamically, and the provided string will be copied into that buffer. Therefore, you don’t need to keep the text you pass to <code class="docutils literal notranslate"><span class="pre">lv_label_set_text</span></code> in scope after that function returns.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">lv_label_set_text_fmt(label,</span> <span class="pre">&quot;Value:</span> <span class="pre">%d&quot;,</span> <span class="pre">15)</span></code> <strong>printf formatting</strong> can used to set the text.</p>
+<p>Labels are able to show text from a <strong>static character buffer</strong> which is NUL-terminated. To do so, use <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text(label,</span> <span class="pre">char_array)</span></code>. In this case, the text is not stored in the dynamic memory and the given buffer is used directly instead. This means that the array can’t be a local variable which goes out of scope when the function exits. Constant strings are safe to use with <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code> (except when used with <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOTS</span></code>, as it modifies the buffer in-place), as they are stored in RO memory, which is always accessible.</p>
+<p>You can also use a <strong>raw array</strong> as label text. The array doesn’t have to be <code class="docutils literal notranslate"><span class="pre">\0</span></code> terminated. In this case, the text will be saved to the dynamic memory like with <code class="docutils literal notranslate"><span class="pre">lv_label_set_text</span></code>. To set a raw character array, use the <code class="docutils literal notranslate"><span class="pre">lv_label_set_array_text(label,</span> <span class="pre">char_array,</span> <span class="pre">size)</span></code> function.</p>
 </div>
 <div class="section" id="line-break">
 <h3>Line break<a class="headerlink" href="#line-break" title="Permalink to this headline">¶</a></h3>
-<p>You can use <code class="docutils literal notranslate"><span class="pre">\n</span></code> to make line break. For example: <code class="docutils literal notranslate"><span class="pre">&quot;line1\nline2\n\nline4&quot;</span></code></p>
+<p>Line breaks are handled automatically by the label object. You can use <code class="docutils literal notranslate"><span class="pre">\n</span></code> to make a line break. For example: <code class="docutils literal notranslate"><span class="pre">&quot;line1\nline2\n\nline4&quot;</span></code></p>
 </div>
 <div class="section" id="long-modes">
 <h3>Long modes<a class="headerlink" href="#long-modes" title="Permalink to this headline">¶</a></h3>
-<p>The size of the label object can be automatically expanded to the text size or the text can be manipulated according to several long mode policies:</p>
+<p>By default, the width of the label object automatically expands to the text size. Otherwise, the text can be manipulated according to several long mode policies:</p>
 <ul class="simple">
-<li><p><strong>LV_LABEL_LONG_EXPAND</strong> Expand the object size to the text size (Default)</p></li>
-<li><p><strong>LV_LABEL_LONG_BREAK</strong> Keep the object width, break (wrap) the too long lines and expand the object height</p></li>
-<li><p><strong>LV_LABEL_LONG_DOTS</strong> Keep the object size, break the text and write dots in the last line</p></li>
-<li><p><strong>LV_LABEL_LONG_SROLL</strong> Keep the size and scroll the label back and forth</p></li>
-<li><p><strong>LV_LABEL_LONG_SROLL_CIRC</strong> Keep the size and scroll the label circularly</p></li>
-<li><p><strong>LV_LABEL_LONG_CROP</strong> Keep the size and crop the text out of it.</p></li>
+<li><p><strong>LV_LABEL_LONG_EXPAND</strong> - Expand the object size to the text size (Default)</p></li>
+<li><p><strong>LV_LABEL_LONG_BREAK</strong> - Keep the object width, break (wrap) the too long lines and expand the object height</p></li>
+<li><p><strong>LV_LABEL_LONG_DOTS</strong> - Keep the object size, break the text and write dots in the last line (<strong>not supported when using <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code></strong>)</p></li>
+<li><p><strong>LV_LABEL_LONG_SROLL</strong> - Keep the size and scroll the label back and forth</p></li>
+<li><p><strong>LV_LABEL_LONG_SROLL_CIRC</strong> - Keep the size and scroll the label circularly</p></li>
+<li><p><strong>LV_LABEL_LONG_CROP</strong> - Keep the size and crop the text out of it</p></li>
 </ul>
-<p>You can specify the long mode with: <code class="docutils literal notranslate"><span class="pre">lv_label_set_long_mode(label,</span> <span class="pre">LV_LABEL_LONG_...)</span></code></p>
-<p>It’s important to note that when a label is created and its test is set the label’s size already expanded to the text size.
-In addition with the default <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_EXPAND</span></code> <em>long mode</em> <code class="docutils literal notranslate"><span class="pre">lv_obj_set_width/height/size()</span></code> has no effect.
-So you need to change the <em>long mode</em> first and then set the size with  <code class="docutils literal notranslate"><span class="pre">lv_obj_set_width/height/size()</span></code> .</p>
+<p>You can specify the long mode with <code class="docutils literal notranslate"><span class="pre">lv_label_set_long_mode(label,</span> <span class="pre">LV_LABEL_LONG_...)</span></code></p>
+<p>It’s important to note that, when a label is created and its text is set, the label’s size already expanded to the text size.
+In addition with the default <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_EXPAND</span></code>, <em>long mode</em> <code class="docutils literal notranslate"><span class="pre">lv_obj_set_width/height/size()</span></code> has no effect.
+So you need to change the <em>long mode</em> first and then set the size with  <code class="docutils literal notranslate"><span class="pre">lv_obj_set_width/height/size()</span></code>.</p>
+<p>Another important note is that <strong><code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOTS</span></code> manipulates the text buffer in-place</strong> in order to add/remove the dots. When <code class="docutils literal notranslate"><span class="pre">lv_label_set_text</span></code> or <code class="docutils literal notranslate"><span class="pre">lv_label_set_array_text</span></code> are used, a separate buffer is allocated and this implementation detail is unnoticed. This is not the case with <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code>! <strong>The buffer you pass to <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code> must be writable if you plan to use <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOTS</span></code>.</strong></p>
 </div>
 <div class="section" id="text-align">
 <h3>Text align<a class="headerlink" href="#text-align" title="Permalink to this headline">¶</a></h3>
-<p>The label’s text can be aligned to the left, right or middle with <code class="docutils literal notranslate"><span class="pre">lv_label_set_align(label,</span> <span class="pre">LV_LABEL_ALIGN_LEFT/RIGHT/CENTER)</span></code></p>
+<p>The label’s text can be aligned to the left, right or middle with <code class="docutils literal notranslate"><span class="pre">lv_label_set_align(label,</span> <span class="pre">LV_LABEL_ALIGN_LEFT/RIGHT/CENTER)</span></code>.</p>
+<p>Vertical alignment is not supported by the label itself; you should place the label inside a larger container and align the whole label object instead.</p>
 </div>
 <div class="section" id="draw-background">
 <h3>Draw background<a class="headerlink" href="#draw-background" title="Permalink to this headline">¶</a></h3>
 <p>You can enable to draw a background for the label with <code class="docutils literal notranslate"><span class="pre">lv_label_set_body_draw(label,</span> <span class="pre">draw)</span></code></p>
 <p>The background will be larger in every direction with <code class="docutils literal notranslate"><span class="pre">body.padding.top/bottom/left/right</span></code> values.
-However, the background is drawn only “virtually” and doesn’t make the label really larger.
-There for when the label is positioned the label’s coordinates will be taken into account and not background’s.</p>
+However, the background is drawn only “virtually” and doesn’t make the label’s logical coordinates any larger.
+Therefore when the label is positioned, the label’s coordinates will be taken into account and not background’s.</p>
 </div>
 <div class="section" id="text-recolor">
 <h3>Text recolor<a class="headerlink" href="#text-recolor" title="Permalink to this headline">¶</a></h3>
-<p>In the text, you can use commands to re-color parts of the text. For example: <code class="docutils literal notranslate"><span class="pre">&quot;Write</span> <span class="pre">a</span> <span class="pre">#ff0000</span> <span class="pre">red#</span> <span class="pre">word&quot;</span></code>.
+<p>In the text, you can use commands to recolor parts of the text. For example: <code class="docutils literal notranslate"><span class="pre">&quot;Write</span> <span class="pre">a</span> <span class="pre">#ff0000</span> <span class="pre">red#</span> <span class="pre">word&quot;</span></code>.
 This feature can be enabled individually for each label by <code class="docutils literal notranslate"><span class="pre">lv_label_set_recolor()</span></code> function.</p>
-<p>Note that, recoloring work only in a single line. I.e. there can’t be <code class="docutils literal notranslate"><span class="pre">\n</span></code> in a recolored text or it can be wrapped by <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_BREAK</span></code> else the text in the new line won’t be recolored.</p>
+<p>Note that, recoloring work only in a single line. Therefore, <code class="docutils literal notranslate"><span class="pre">\n</span></code> should not use in a recolored text or it should be wrapped by <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_BREAK</span></code> else, the text in the new line won’t be recolored.</p>
 </div>
 <div class="section" id="very-long-texts">
 <h3>Very long texts<a class="headerlink" href="#very-long-texts" title="Permalink to this headline">¶</a></h3>
-<p>LittlevGL can effectively handle very long (&gt; 40k characters) by saving some extra data (~12 bytes) to speed up drawing. To enable this feature set <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_TXT_HINT</span>&#160;&#160; <span class="pre">1</span></code> in <em>lv_conf.h</em>.</p>
+<p>LittlevGL can efficiently handle very long (&gt; 40k characters) by saving some extra data (~12 bytes) to speed up drawing. To enable this feature, set <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_TXT_HINT</span>&#160;&#160; <span class="pre">1</span></code> in <em>lv_conf.h</em>.</p>
 </div>
 <div class="section" id="symbols">
 <h3>Symbols<a class="headerlink" href="#symbols" title="Permalink to this headline">¶</a></h3>
-<p>The labels can display symbols besides letters. Read the <a class="reference internal" href="../overview/font.html"><span class="doc">Font</span></a> section to learn more about the symbols.</p>
+<p>The labels can display symbols alongside letters (or on their own). Read the <a class="reference internal" href="../overview/font.html"><span class="doc">Font</span></a> section to learn more about the symbols.</p>
 </div>
 </div>
 <div class="section" id="styles">
 <h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
-<p>The Label uses one style which can be set by <code class="docutils literal notranslate"><span class="pre">lv_label_set_style(label,</span> <span class="pre">LV_LABEL_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code>. Form the style the following properties are used:</p>
+<p>The Label uses one style which can be set by <code class="docutils literal notranslate"><span class="pre">lv_label_set_style(label,</span> <span class="pre">LV_LABEL_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code>. From the style the following properties are used:</p>
 <ul class="simple">
-<li><p>all properties from <code class="docutils literal notranslate"><span class="pre">style.text</span></code></p></li>
-<li><p>for background drawing <code class="docutils literal notranslate"><span class="pre">style.body</span></code> properties. <code class="docutils literal notranslate"><span class="pre">padding</span></code> will increase the size only visually, the real object’s size won’t be changed.</p></li>
+<li><p>All properties from <code class="docutils literal notranslate"><span class="pre">style.text</span></code></p></li>
+<li><p>For background drawing <code class="docutils literal notranslate"><span class="pre">style.body</span></code> properties. <code class="docutils literal notranslate"><span class="pre">padding</span></code> will increase the size only visually, the real object’s size won’t be changed.</p></li>
 </ul>
-<p>The labels’ default style is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> so they inherit the parent’s style.</p>
+<p>The labels’ default style is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> so they inherit the parent’s style. It’s useful because it allows the parent to set an appropriate text style for any child labels.</p>
 </div>
 <div class="section" id="events">
 <h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Clavier (lv_kb) &mdash; LittlevGL 6.1.1 documentation</title>
+  <title>Clavier (lv_kb) &mdash; LittlevGL 6.1 documentation</title>
   
 
   
@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                6.1.1
+                6.1
               </div>
             
           
@@ -529,7 +529,7 @@
 <li class="toctree-l3"><a class="reference internal" href="canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cb.html">Checkbox (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Case à cocher (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#texte">Texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cb.html#cocher-decocher">Cocher/décocher</a></li>
@@ -688,7 +688,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#modes">Modes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#zone-de-texte">Zone de texte</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#nouvelle-disposition-de-touches">Nouvelle disposition de touches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#new-keymap">New Keymap</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#styles">Styles</a></li>
@@ -765,7 +765,7 @@
 <li class="toctree-l4"><a class="reference internal" href="list.html#ajouter-des-boutons">Ajouter des boutons</a></li>
 <li class="toctree-l4"><a class="reference internal" href="list.html#supprimer-des-boutons">Supprimer des boutons</a></li>
 <li class="toctree-l4"><a class="reference internal" href="list.html#navigation-manuelle">Navigation manuelle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="list.html#layout">Layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#mise-en-page">Mise en page</a></li>
 <li class="toctree-l4"><a class="reference internal" href="list.html#mise-en-evidence-du-bord">Mise en évidence du bord</a></li>
 <li class="toctree-l4"><a class="reference internal" href="list.html#propagation-du-defilement">Propagation du défilement</a></li>
 </ul>
@@ -785,7 +785,7 @@
 <li class="toctree-l3"><a class="reference internal" href="lmeter.html#vue-d-ensemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="lmeter.html#definir-la-valeur">Définir la valeur</a></li>
 <li class="toctree-l4"><a class="reference internal" href="lmeter.html#intervalle-et-angles">Intervalle et angles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="lmeter.html#angle-offset">Angle offset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#decalage-d-angle">Décalage d’angle</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="lmeter.html#styles">Styles</a></li>
@@ -881,7 +881,7 @@
 <li class="toctree-l2"><a class="reference internal" href="slider.html">Curseur (lv_slider)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="slider.html#vue-d-ensemble">Vue d’ensemble</a></li>
 <li class="toctree-l3"><a class="reference internal" href="slider.html#valeur-et-intervalle">Valeur et intervalle</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="slider.html#symmetrical">Symmetrical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#symetrie">Symétrie</a></li>
 <li class="toctree-l4"><a class="reference internal" href="slider.html#placement-du-bouton">Placement du bouton</a></li>
 </ul>
 </li>
@@ -1122,74 +1122,74 @@
 <h1>Clavier (lv_kb)<a class="headerlink" href="#clavier-lv-kb" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="vue-densemble">
 <h2>Vue d’ensemble<a class="headerlink" href="#vue-densemble" title="Permalink to this headline">¶</a></h2>
-<p>L’objet clavier est une <a class="reference internal" href="btnm.html"><span class="doc">matrice de boutons</span></a> spéciale avec des dispositions de touches prédéfinies et autres fonctionnalités qui implémente un clavier virtuel pour écrire du texte.</p>
+<p>The Keyboard object is a special <a class="reference internal" href="btnm.html"><span class="doc">Button matrix</span></a> with predefined keymaps and other features to realize a virtual keyboard to write text.</p>
 <div class="section" id="modes">
 <h3>Modes<a class="headerlink" href="#modes" title="Permalink to this headline">¶</a></h3>
 <p>Les claviers ont deux modes :</p>
 <ul class="simple">
-<li><p><strong>LV_KB_MODE_TEXT</strong> affiche lettres, chiffres et des caractères spéciaux,</p></li>
-<li><p><strong>LV_KB_MODE_NUM</strong> affiche chiffres, signe +/- et point décimal.</p></li>
+<li><p><strong>LV_KB_MODE_TEXT</strong> - Display letters, number, and special characters.</p></li>
+<li><p><strong>LV_KB_MODE_NUM</strong> - Display numbers, +/- sign, and decimal dot.</p></li>
 </ul>
-<p>Pour définir le mode, utilisez <code class="docutils literal notranslate"><span class="pre">lv_kb_set_mode(kb,</span> <span class="pre">mode)</span></code>. Le défaut est <em>LV_KB_MODE_TEXT</em>.</p>
+<p>To set the mode, use <code class="docutils literal notranslate"><span class="pre">lv_kb_set_mode(kb,</span> <span class="pre">mode)</span></code>. The default is  <em>LV_KB_MODE_TEXT</em>.</p>
 </div>
 <div class="section" id="zone-de-texte">
 <h3>Zone de texte<a class="headerlink" href="#zone-de-texte" title="Permalink to this headline">¶</a></h3>
-<p>Vous pouvez attribuer une <a class="reference internal" href="ta.html"><span class="doc">zone de texte</span></a> au clavier pour insérer automatiquement les caractères sur lesquels vous avez cliqué.
-Pour définir la zone de texte, utilisez.<code class="docutils literal notranslate"><span class="pre">lv_kb_set_ta(kb,</span> <span class="pre">ta)</span></code>.</p>
-<p>Le <strong>curseur de la zone de texte peut être géré</strong> par le clavier : lorsque le clavier est lié, le curseur de la zone de texte est masqué et un nouveau est affiché.
-Lorsque le clavier est fermé avec les touches <em>Ok</em> ou <em>Fermer</em>, le curseur est également masqué. La fonctionnalité de gestion du curseur est activée par <code class="docutils literal notranslate"><span class="pre">lv_kb_set_cursor_manage(kb,</span> <span class="pre">true)</span></code>. La valeur par défaut est non géré.</p>
+<p>You can assign a <a class="reference internal" href="ta.html"><span class="doc">Text area</span></a> to the Keyboard to automatically put the clicked characters there.
+To assign the text area, use <code class="docutils literal notranslate"><span class="pre">lv_kb_set_ta(kb,</span> <span class="pre">ta)</span></code>.</p>
+<p>The assigned text area’s <strong>cursor can be managed</strong> by the keyboard: when the keyboard is assigned, the previous text area’s cursor will be hidden and the new one will be shown.
+When the keyboard is closed by the <em>Ok</em> or <em>Close</em> buttons, the cursor also will be hidden. The cursor manager feature is enabled by <code class="docutils literal notranslate"><span class="pre">lv_kb_set_cursor_manage(kb,</span> <span class="pre">true)</span></code>. The default is not managed.</p>
 </div>
-<div class="section" id="nouvelle-disposition-de-touches">
-<h3>Nouvelle disposition de touches<a class="headerlink" href="#nouvelle-disposition-de-touches" title="Permalink to this headline">¶</a></h3>
-<p>Vous pouvez spécifier une nouvelle disposition pour le clavier avec <code class="docutils literal notranslate"><span class="pre">lv_kb_set_map(kb,</span> <span class="pre">map)</span></code> et <code class="docutils literal notranslate"><span class="pre">lv_kb_set_ctrl_map(kb,</span> <span class="pre">ctrl_map)</span></code>.
-Apprenez en plus sur le sujet avec l’objet <a class="reference internal" href="btnm.html"><span class="doc">matrice de boutons</span></a>
-N’oubliez pas que l’utilisation des mots clés suivants aura le même effet qu’avec la disposition de touches d’origine:</p>
+<div class="section" id="new-keymap">
+<h3>New Keymap<a class="headerlink" href="#new-keymap" title="Permalink to this headline">¶</a></h3>
+<p>You can specify a new map (layout) for the keyboard with <code class="docutils literal notranslate"><span class="pre">lv_kb_set_map(kb,</span> <span class="pre">map)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_kb_set_ctrl_map(kb,</span> <span class="pre">ctrl_map)</span></code>.
+Learn more about the <a class="reference internal" href="btnm.html"><span class="doc">Button matrix</span></a> object.
+Keep in mind that, using following keywords will have the same effect as with the original map:</p>
 <ul class="simple">
-<li><p><em>LV_SYMBOL_OK</em> appliquer,</p></li>
-<li><p><em>SYMBOL_CLOSE</em> fermer,</p></li>
-<li><p><em>LV_SYMBOL_LEFT</em> déplacer le curseur à gauche,</p></li>
-<li><p><em>LV_SYMBOL_RIGHT</em> déplacer le curseur à droite,</p></li>
-<li><p><em>“ABC”</em> charger la disposition des touches majuscules,</p></li>
-<li><p><em>“abc”</em> charger la disposition des touches minuscules,</p></li>
-<li><p>*”Enter”*nouvelle ligne,</p></li>
-<li><p><em>“Bkps”</em> suppression à gauche.</p></li>
+<li><p><em>LV_SYMBOL_OK</em> - Apply.</p></li>
+<li><p><em>SYMBOL_CLOSE</em> - Close.</p></li>
+<li><p><em>LV_SYMBOL_LEFT</em> - Move the cursor left.</p></li>
+<li><p><em>LV_SYMBOL_RIGHT</em> - Move the cursor right.</p></li>
+<li><p><em>“ABC”</em> - Load the uppercase map.</p></li>
+<li><p><em>“abc”</em> - Load the lower case map.</p></li>
+<li><p><em>“Enter”</em> - New line.</p></li>
+<li><p><em>“Bkps”</em> - Delete on the left.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="styles">
 <h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
-<p>Les claviers fonctionnent avec 6 styles : un arrière-plan et 5 styles de boutons pour chaque état.
-Vous pouvez définir les styles avec <code class="docutils literal notranslate"><span class="pre">lv_kb_set_style(cont,</span> <span class="pre">LV_KB_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code>.
-L’arrière-plan et les boutons utilisent les propriétés <code class="docutils literal notranslate"><span class="pre">style.body</span></code>.
+<p>The Keyboard work with 6 styles: a background and 5 button styles for each state.
+You can set the styles with <code class="docutils literal notranslate"><span class="pre">lv_kb_set_style(btn,</span> <span class="pre">LV_KB_STYLE_...,</span> <span class="pre">&amp;style)</span></code>.
+The background and the buttons use the <code class="docutils literal notranslate"><span class="pre">style.body</span></code> properties.
 Les étiquettes utilisent les propriétés <code class="docutils literal notranslate"><span class="pre">style.text</span></code> des styles de boutons.</p>
 <ul class="simple">
-<li><p><strong>LV_KB_STYLE_BG</strong> style d’arrière-plan. Utilise toutes les propriétés <code class="docutils literal notranslate"><span class="pre">style.body</span></code>, y compris <code class="docutils literal notranslate"><span class="pre">padding</span></code>. Par défaut : <code class="docutils literal notranslate"><span class="pre">lv_style_pretty</span></code></p></li>
-<li><p><strong>LV_KB_STYLE_BTN_REL</strong> style des boutons relâchés. Défaut : <code class="docutils literal notranslate"><span class="pre">lv_style_btn_rel</span></code></p></li>
-<li><p><strong>LV_KB_STYLE_BTN_PR</strong> style des boutons pressés. Défaut : <code class="docutils literal notranslate"><span class="pre">lv_style_btn_pr</span></code></p></li>
-<li><p><strong>LV_KB_STYLE_BTN_TGL_REL</strong> style des boutons bascules relâchés. Défaut : <code class="docutils literal notranslate"><span class="pre">lv_style_btn_tgl_rel</span></code>,</p></li>
-<li><p><strong>LV_KB_STYLE_BTN_TGL_PR</strong> style des boutons bascules pressés. Défaut : <code class="docutils literal notranslate"><span class="pre">lv_style_btn_tgl_pr</span></code></p></li>
-<li><p><strong>LV_KB_STYLE_BTN_INA</strong> style des boutons inactifs. Défaut : <code class="docutils literal notranslate"><span class="pre">lv_style_btn_ina</span></code>.</p></li>
+<li><p><strong>LV_KB_STYLE_BG</strong> - Background style. Uses all <code class="docutils literal notranslate"><span class="pre">style.body</span></code> properties including <code class="docutils literal notranslate"><span class="pre">padding</span></code> Default: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty</span></code>.</p></li>
+<li><p><strong>LV_KB_STYLE_BTN_REL</strong> - Style of the released  buttons. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_rel</span></code>.</p></li>
+<li><p><strong>LV_KB_STYLE_BTN_PR</strong> - Style of the pressed buttons. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_pr</span></code>.</p></li>
+<li><p><strong>LV_KB_STYLE_BTN_TGL_REL</strong> - Style of the toggled released  buttons. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_tgl_rel</span></code>.</p></li>
+<li><p><strong>LV_KB_STYLE_BTN_TGL_PR</strong> - Style of the toggled pressed  buttons. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_tgl_pr</span></code>.</p></li>
+<li><p><strong>LV_KB_STYLE_BTN_INA</strong> - Style of the inactive  buttons. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_btn_ina</span></code>.</p></li>
 </ul>
 </div>
 <div class="section" id="evenements">
 <h2>Evénements<a class="headerlink" href="#evenements" title="Permalink to this headline">¶</a></h2>
-<p>Outre les [événements génériques](/overview/event.html #evenements-generiques), les <a class="reference external" href="/overview/event.html#evenements-speciaux">événements spéciaux</a> suivants  sont envoyés par les claviers :</p>
+<p>Besides the <a class="reference external" href="/overview/event.html#generic-events">Generic events</a>, the following <a class="reference external" href="/overview/event.html#special-events">Special events</a> are sent by the keyboards:</p>
 <ul class="simple">
-<li><p><strong>LV_EVENT_VALUE_CHANGED</strong> envoyé lorsque le bouton est enfoncé/relâché ou répété après un appui prolongé. Les données d’événement sont l’ID du bouton enfoncé/relâché.</p></li>
-<li><p><strong>LV_EVENT_APPLY</strong> le bouton <em>Ok</em> est cliqué</p></li>
-<li><p><strong>LV_EVENT_CANCEL</strong> le bouton <em>Close</em> est cliqué</p></li>
+<li><p><strong>LV_EVENT_VALUE_CHANGED</strong> - Sent when the button is pressed/released or repeated after long press. The event data is set to the ID of the pressed/released button.</p></li>
+<li><p><strong>LV_EVENT_APPLY</strong> - The <em>Ok</em> button is clicked.</p></li>
+<li><p><strong>LV_EVENT_CANCEL</strong> - The <em>Close</em> button is clicked.</p></li>
 </ul>
-<p>Le clavier a une <strong>fonction de rappel par défaut</strong> du gestionnaire d’événements appelée <code class="docutils literal notranslate"><span class="pre">lv_kb_def_event_cb</span></code>.
-Cette fonction gère l’appui sur les boutons, le changement de disposition, la zone de texte liée, etc.
-Vous pouvez écrire votre gestionnaire d’événements personnalisé et vous pouvez utiliser <code class="docutils literal notranslate"><span class="pre">lv_kb_def_event_cb</span></code> au début de votre gestionnaire pour conserver un comportement par défaut pour certains événements.</p>
+<p>The keyboard has a <strong>default event handler</strong> callback called <code class="docutils literal notranslate"><span class="pre">lv_kb_def_event_cb</span></code>.
+It handles the button pressing, map changing, the assigned text area, etc.
+You can completely replace it with your custom event handler however, you can call <code class="docutils literal notranslate"><span class="pre">lv_kb_def_event_cb</span></code> at the beginning of your event handler to handle the same things as before.</p>
 <p>Apprenez-en plus sur les <a class="reference internal" href="../overview/event.html"><span class="doc">événements</span></a>.</p>
 </div>
 <div class="section" id="touches">
 <h2>Touches<a class="headerlink" href="#touches" title="Permalink to this headline">¶</a></h2>
-<p>Les <em>touches</em> suivantes sont traitées par les boutons :</p>
+<p>The following <em>Keys</em> are processed by the buttons:</p>
 <ul class="simple">
-<li><p><strong>LV_KEY_RIGHT/UP/LEFT/RIGHT</strong> pour naviguer parmi les boutons et en sélectionner un,</p></li>
-<li><p><strong>LV_KEY_ENTER</strong> pour presser/relâcher le bouton sélectionné.</p></li>
+<li><p><strong>LV_KEY_RIGHT/UP/LEFT/RIGHT</strong> - To navigate among the buttons and select one.</p></li>
+<li><p><strong>LV_KEY_ENTER</strong> - To press/release the selected button.</p></li>
 </ul>
 <p>Apprenez-en plus sur les <a class="reference internal" href="../overview/indev.html"><span class="doc">touches</span></a>.</p>
 </div>

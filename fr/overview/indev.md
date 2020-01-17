@@ -44,7 +44,7 @@ De la même manière, si un [Curseur](/object-types/slider) est sélectionné et
 
 Vous devez associer un périphérique d'entrée à un groupe. Un périphérique d'entrée peut envoyer les codes à un seul groupe, mais un groupe peut recevoir des données de plusieurs périphériques d'entrée.
 
-To create a group use `lv_group_t * g = lv_group_create()` and to add an object to the group use `lv_group_add_obj(g, obj)`.
+Pour créer un groupe, utilisez `lv_group_t * g = lv_group_create()` et pour ajouter un objet au groupe, utilisez `lv_group_add_obj(g, obj)`.
 
 Pour associer un groupe à un périphérique d’entrée, utilisez `lv_indev_set_group(indev, g)`, où `indev` est la valeur de retour de `lv_indev_drv_register() `
 

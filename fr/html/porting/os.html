@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Système d’exploitation et interruptions &mdash; LittlevGL 6.1.1 documentation</title>
+  <title>Système d’exploitation et interruptions &mdash; LittlevGL 6.1 documentation</title>
   
 
   
@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                6.1.1
+                6.1
               </div>
             
           
@@ -529,7 +529,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Case à cocher (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#texte">Texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#cocher-decocher">Cocher/décocher</a></li>
@@ -688,7 +688,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#modes">Modes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#zone-de-texte">Zone de texte</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#nouvelle-disposition-de-touches">Nouvelle disposition de touches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#new-keymap">New Keymap</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#styles">Styles</a></li>
@@ -765,7 +765,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#ajouter-des-boutons">Ajouter des boutons</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#supprimer-des-boutons">Supprimer des boutons</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#navigation-manuelle">Navigation manuelle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#layout">Layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#mise-en-page">Mise en page</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#mise-en-evidence-du-bord">Mise en évidence du bord</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#propagation-du-defilement">Propagation du défilement</a></li>
 </ul>
@@ -785,7 +785,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#vue-d-ensemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#definir-la-valeur">Définir la valeur</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#intervalle-et-angles">Intervalle et angles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#angle-offset">Angle offset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#decalage-d-angle">Décalage d’angle</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#styles">Styles</a></li>
@@ -881,7 +881,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../object-types/slider.html">Curseur (lv_slider)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#vue-d-ensemble">Vue d’ensemble</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#valeur-et-intervalle">Valeur et intervalle</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#symmetrical">Symmetrical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#symetrie">Symétrie</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#placement-du-bouton">Placement du bouton</a></li>
 </ul>
 </li>
@@ -1120,22 +1120,22 @@
             
   <div class="section" id="systeme-d-exploitation-et-interruptions">
 <h1>Système d’exploitation et interruptions<a class="headerlink" href="#systeme-d-exploitation-et-interruptions" title="Permalink to this headline">¶</a></h1>
-<p>LittlevGL is <strong>not thread-safe</strong> by default.</p>
-<p>However, in the following conditions it’s valid to call LittlevGL related functions:</p>
+<p>LittlevGL n’est <strong>pas compatible avec les fils d’exécution</strong> par défaut.</p>
+<p>Cependant, dans les cas suivants, il est valide d’appeler des fonctions liées à LittlevGL :</p>
 <ul class="simple">
 <li><p>Dans les <em>événements</em>. Apprenez-en plus dans <a class="reference internal" href="../overview/event.html"><span class="doc">Evénements</span></a>.</p></li>
 <li><p>Dans <em>lv_tasks</em>.  Apprenez-en plus dans <a class="reference internal" href="../overview/task.html"><span class="doc">Tâches</span></a>.</p></li>
 </ul>
 <div class="section" id="taches-et-fils-dexecution">
 <h2>Tâches et fils d’exécution<a class="headerlink" href="#taches-et-fils-dexecution" title="Permalink to this headline">¶</a></h2>
-<p>If you need to use real tasks or threads, you need a mutex which should be invoked before the call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> and released after it.
-Also, you have to use the same mutex in other tasks and threads around every LittlevGL (<code class="docutils literal notranslate"><span class="pre">lv_...</span></code>) related function calls and codes.
-This way you can use LittlevGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LittlevGL functions.</p>
+<p>Si vous avez besoin d’utiliser de vraies tâches ou des fils d’exécution, vous avez besoin d’un mutex qui doit être acquis avant l’appel de <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> et libéré ensuite.
+Par ailleurs, vous devez utiliser ce même mutex dans les autres tâches et fils d’exécution lors de chaque appel de fonction et code liés à LittlevGL (<code class="docutils literal notranslate"><span class="pre">lv_...</span></code>).
+De cette façon, vous pouvez utiliser LittlevGL dans un environnement réellement multitâche. Utilisez simplement un mutex pour éviter l’appel concurrent des fonctions LittlevGL.</p>
 </div>
 <div class="section" id="interruptions">
 <h2>Interruptions<a class="headerlink" href="#interruptions" title="Permalink to this headline">¶</a></h2>
-<p>Try to avoid calling LittlevGL functions from the interrupts (except <code class="docutils literal notranslate"><span class="pre">lv_tick_inc()</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready()</span></code>). But, if you need to do this you have to disable the interrupt which uses LittlevGL functions while <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> is running.
-It’s a better approach to set a flag or some value and periodically check it in an <code class="docutils literal notranslate"><span class="pre">lv_task</span></code>.</p>
+<p>Essayez d’éviter d’appeler les fonctions LittlevGL à partir d’une interruption (sauf <code class="docutils literal notranslate"><span class="pre">lv_tick_inc()</span></code> et <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready</span> <span class="pre">()</span></code>). Mais si vous avez besoin de le faire, vous devez désactiver l’interruption qui utilise les fonctions LittlevGL pendant que <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> est en cours d’exécution.
+Il est préférable de positionner un indicateur ou une valeur et de le vérifier périodiquement dans une <code class="docutils literal notranslate"><span class="pre">lv_task</span></code>.</p>
 </div>
 </div>
 

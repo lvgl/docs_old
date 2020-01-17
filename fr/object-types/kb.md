@@ -5,67 +5,67 @@
 
 ## Vue d’ensemble
 
-L'objet clavier est une [matrice de boutons](/object-types/btnm) spéciale avec des dispositions de touches prédéfinies et autres fonctionnalités qui implémente un clavier virtuel pour écrire du texte.
+The Keyboard object is a special [Button matrix](/object-types/btnm) with predefined keymaps and other features to realize a virtual keyboard to write text.
 
 ### Modes
 Les claviers ont deux modes :
-- **LV_KB_MODE_TEXT** affiche lettres, chiffres et des caractères spéciaux,
-- **LV_KB_MODE_NUM** affiche chiffres, signe +/- et point décimal.
+- **LV_KB_MODE_TEXT** - Display letters, number, and special characters.
+- **LV_KB_MODE_NUM** - Display numbers, +/- sign, and decimal dot.
 
-Pour définir le mode, utilisez `lv_kb_set_mode(kb, mode)`. Le défaut est _LV_KB_MODE_TEXT_.
+To set the mode, use `lv_kb_set_mode(kb, mode)`. The default is  _LV_KB_MODE_TEXT_.
 
 ### Zone de texte
-Vous pouvez attribuer une [zone de texte](/object-types/ta) au clavier pour insérer automatiquement les caractères sur lesquels vous avez cliqué.
-Pour définir la zone de texte, utilisez.`lv_kb_set_ta(kb, ta)`.
+You can assign a [Text area](/object-types/ta) to the Keyboard to automatically put the clicked characters there.
+To assign the text area, use `lv_kb_set_ta(kb, ta)`.
 
-Le **curseur de la zone de texte peut être géré** par le clavier : lorsque le clavier est lié, le curseur de la zone de texte est masqué et un nouveau est affiché.
-Lorsque le clavier est fermé avec les touches *Ok* ou *Fermer*, le curseur est également masqué. La fonctionnalité de gestion du curseur est activée par `lv_kb_set_cursor_manage(kb, true)`. La valeur par défaut est non géré.
+The assigned text area's **cursor can be managed** by the keyboard: when the keyboard is assigned, the previous text area's cursor will be hidden and the new one will be shown.
+When the keyboard is closed by the *Ok* or *Close* buttons, the cursor also will be hidden. The cursor manager feature is enabled by `lv_kb_set_cursor_manage(kb, true)`. The default is not managed.
 
 
-### Nouvelle disposition de touches
-Vous pouvez spécifier une nouvelle disposition pour le clavier avec `lv_kb_set_map(kb, map)` et `lv_kb_set_ctrl_map(kb, ctrl_map)`. 
-Apprenez en plus sur le sujet avec l'objet [matrice de boutons](/object-types/btnm)
-N'oubliez pas que l'utilisation des mots clés suivants aura le même effet qu'avec la disposition de touches d'origine:
-- *LV_SYMBOL_OK* appliquer,
-- *SYMBOL_CLOSE* fermer,
-- *LV_SYMBOL_LEFT* déplacer le curseur à gauche,
-- *LV_SYMBOL_RIGHT* déplacer le curseur à droite,
-- *"ABC"* charger la disposition des touches majuscules,
-- *"abc"* charger la disposition des touches minuscules,
-- *"Enter"*nouvelle ligne,
-- *"Bkps"* suppression à gauche.
+### New Keymap
+You can specify a new map (layout) for the keyboard with `lv_kb_set_map(kb, map)` and `lv_kb_set_ctrl_map(kb, ctrl_map)`.
+Learn more about the [Button matrix](/object-types/btnm) object.
+Keep in mind that, using following keywords will have the same effect as with the original map:  
+- *LV_SYMBOL_OK* - Apply.
+- *SYMBOL_CLOSE* - Close.
+- *LV_SYMBOL_LEFT* - Move the cursor left.
+- *LV_SYMBOL_RIGHT* - Move the cursor right.
+- *"ABC"* - Load the uppercase map.
+- *"abc"* - Load the lower case map.
+- *"Enter"* - New line.
+- *"Bkps"* - Delete on the left.
 
 ## Styles
 
-Les claviers fonctionnent avec 6 styles : un arrière-plan et 5 styles de boutons pour chaque état.
-Vous pouvez définir les styles avec `lv_kb_set_style(cont, LV_KB_STYLE_MAIN, &style)`. 
-L'arrière-plan et les boutons utilisent les propriétés `style.body`.
+The Keyboard work with 6 styles: a background and 5 button styles for each state.
+You can set the styles with `lv_kb_set_style(btn, LV_KB_STYLE_..., &style)`.
+The background and the buttons use the `style.body` properties.
 Les étiquettes utilisent les propriétés `style.text` des styles de boutons.
 
-- **LV_KB_STYLE_BG** style d'arrière-plan. Utilise toutes les propriétés `style.body`, y compris `padding`. Par défaut : `lv_style_pretty`
-- **LV_KB_STYLE_BTN_REL** style des boutons relâchés. Défaut : `lv_style_btn_rel`
-- **LV_KB_STYLE_BTN_PR** style des boutons pressés. Défaut : `lv_style_btn_pr`
-- **LV_KB_STYLE_BTN_TGL_REL** style des boutons bascules relâchés. Défaut : `lv_style_btn_tgl_rel`,
-- **LV_KB_STYLE_BTN_TGL_PR** style des boutons bascules pressés. Défaut : `lv_style_btn_tgl_pr`
-- **LV_KB_STYLE_BTN_INA** style des boutons inactifs. Défaut : `lv_style_btn_ina`.
+- **LV_KB_STYLE_BG** - Background style. Uses all `style.body` properties including `padding` Default: `lv_style_pretty`.
+- **LV_KB_STYLE_BTN_REL** - Style of the released  buttons. Default: `lv_style_btn_rel`.
+- **LV_KB_STYLE_BTN_PR** - Style of the pressed buttons. Default: `lv_style_btn_pr`.
+- **LV_KB_STYLE_BTN_TGL_REL** - Style of the toggled released  buttons. Default: `lv_style_btn_tgl_rel`.
+- **LV_KB_STYLE_BTN_TGL_PR** - Style of the toggled pressed  buttons. Default: `lv_style_btn_tgl_pr`.
+- **LV_KB_STYLE_BTN_INA** - Style of the inactive  buttons. Default: `lv_style_btn_ina`.
 
 ## Evénements
-Outre les [événements génériques](/overview/event.html #evenements-generiques), les [événements spéciaux](/overview/event.html#evenements-speciaux) suivants  sont envoyés par les claviers :
- - **LV_EVENT_VALUE_CHANGED** envoyé lorsque le bouton est enfoncé/relâché ou répété après un appui prolongé. Les données d'événement sont l'ID du bouton enfoncé/relâché.
- - **LV_EVENT_APPLY** le bouton *Ok* est cliqué
- - **LV_EVENT_CANCEL** le bouton *Close* est cliqué
- 
-Le clavier a une **fonction de rappel par défaut** du gestionnaire d'événements appelée `lv_kb_def_event_cb`.
-Cette fonction gère l’appui sur les boutons, le changement de disposition, la zone de texte liée, etc.
-Vous pouvez écrire votre gestionnaire d'événements personnalisé et vous pouvez utiliser `lv_kb_def_event_cb` au début de votre gestionnaire pour conserver un comportement par défaut pour certains événements.
- 
+Besides the [Generic events](/overview/event.html#generic-events), the following [Special events](/overview/event.html#special-events) are sent by the keyboards:
+ - **LV_EVENT_VALUE_CHANGED** - Sent when the button is pressed/released or repeated after long press. The event data is set to the ID of the pressed/released button.
+ - **LV_EVENT_APPLY** - The *Ok* button is clicked.
+ - **LV_EVENT_CANCEL** - The *Close* button is clicked.
+
+The keyboard has a **default event handler** callback called `lv_kb_def_event_cb`.
+It handles the button pressing, map changing, the assigned text area, etc.
+You can completely replace it with your custom event handler however, you can call `lv_kb_def_event_cb` at the beginning of your event handler to handle the same things as before.
+
 Apprenez-en plus sur les [événements](/overview/event).
 
 ## Touches
 
-Les *touches* suivantes sont traitées par les boutons :
-- **LV_KEY_RIGHT/UP/LEFT/RIGHT** pour naviguer parmi les boutons et en sélectionner un,
-- **LV_KEY_ENTER** pour presser/relâcher le bouton sélectionné.
+The following *Keys* are processed by the buttons:
+- **LV_KEY_RIGHT/UP/LEFT/RIGHT** - To navigate among the buttons and select one.
+- **LV_KEY_ENTER** - To press/release the selected button.
 
 Apprenez-en plus sur les [touches](/overview/indev).
 
@@ -79,11 +79,11 @@ Apprenez-en plus sur les [touches](/overview/indev).
 
 ```
 
-## API 
+## API
 
 ```eval_rst
 
 .. doxygenfile:: lv_kb.h
   :project: lvgl
-        
+
 ```

@@ -1,16 +1,16 @@
 ```eval_rst
 :github_url: https://github.com/littlevgl/docs/blob/master/zh-CN/porting/task-handler.md
 ```
-# Task Handler
+# 任务处理程序
 
-To handle the tasks of LittlevGL you need to call `lv_task_handler()` periodically in one of the followings:
-- *while(1)* of *main()* function 
-- timer interrupt periodically (low priority then `lv_tick_inc()`)
-- an OS task periodically
+为了处理 LittlevGL 的任务，需要在以下代码中周期性调用 ' lv_task_handler() ':
+main() 里的 while(1) 函数
+周期性的定时中断（优先级要低于  `lv_tick_inc()` ）
+一个周期性的 OS 任务
 
-The timing is not critical but it should be about 5 milliseconds to keep the system responsive.
+时间不是关键，但它应该是大约5毫秒，以保持系统的响应。
 
-Example:
+例子：
 ```c
 while(1) {
   lv_task_handler();
@@ -18,5 +18,5 @@ while(1) {
 }
 ```
 
-To learn more about task visit the [Tasks](/overview/task) section.
+了解更多访问 [Tasks](/overview/task)  章节
 

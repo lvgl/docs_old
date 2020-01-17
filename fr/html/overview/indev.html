@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Périphériques d’entrée &mdash; LittlevGL 6.1.1 documentation</title>
+  <title>Périphériques d’entrée &mdash; LittlevGL 6.1 documentation</title>
   
 
   
@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                6.1.1
+                6.1
               </div>
             
           
@@ -529,7 +529,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Checkbox (lv_cb)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Case à cocher (lv_cb)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#texte">Texte</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#cocher-decocher">Cocher/décocher</a></li>
@@ -688,7 +688,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#vue-densemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#modes">Modes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#zone-de-texte">Zone de texte</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#nouvelle-disposition-de-touches">Nouvelle disposition de touches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#new-keymap">New Keymap</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#styles">Styles</a></li>
@@ -765,7 +765,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#ajouter-des-boutons">Ajouter des boutons</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#supprimer-des-boutons">Supprimer des boutons</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#navigation-manuelle">Navigation manuelle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#layout">Layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#mise-en-page">Mise en page</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#mise-en-evidence-du-bord">Mise en évidence du bord</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#propagation-du-defilement">Propagation du défilement</a></li>
 </ul>
@@ -785,7 +785,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#vue-d-ensemble">Vue d’ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#definir-la-valeur">Définir la valeur</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#intervalle-et-angles">Intervalle et angles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#angle-offset">Angle offset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#decalage-d-angle">Décalage d’angle</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#styles">Styles</a></li>
@@ -881,7 +881,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../object-types/slider.html">Curseur (lv_slider)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#vue-d-ensemble">Vue d’ensemble</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#valeur-et-intervalle">Valeur et intervalle</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#symmetrical">Symmetrical</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#symetrie">Symétrie</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#placement-du-bouton">Placement du bouton</a></li>
 </ul>
 </li>
@@ -1156,7 +1156,7 @@ Dans chaque groupe, il y a exactement un seul objet focalisé qui reçoit les no
 Par exemple, si une <a class="reference internal" href="../object-types/ta.html"><span class="doc">Zone de texte</span></a> est sélectionnée et que vous appuyez sur une lettre d’un clavier, les codes sont envoyés et traités par la zone de texte.
 De la même manière, si un <a class="reference internal" href="../object-types/slider.html"><span class="doc">Curseur</span></a> est sélectionné et que vous appuyez sur les flèches gauche ou droite, la valeur du curseur sera modifiée.</p>
 <p>Vous devez associer un périphérique d’entrée à un groupe. Un périphérique d’entrée peut envoyer les codes à un seul groupe, mais un groupe peut recevoir des données de plusieurs périphériques d’entrée.</p>
-<p>To create a group use <code class="docutils literal notranslate"><span class="pre">lv_group_t</span> <span class="pre">*</span> <span class="pre">g</span> <span class="pre">=</span> <span class="pre">lv_group_create()</span></code> and to add an object to the group use <code class="docutils literal notranslate"><span class="pre">lv_group_add_obj(g,</span> <span class="pre">obj)</span></code>.</p>
+<p>Pour créer un groupe, utilisez <code class="docutils literal notranslate"><span class="pre">lv_group_t</span> <span class="pre">*</span> <span class="pre">g</span> <span class="pre">=</span> <span class="pre">lv_group_create()</span></code> et pour ajouter un objet au groupe, utilisez <code class="docutils literal notranslate"><span class="pre">lv_group_add_obj(g,</span> <span class="pre">obj)</span></code>.</p>
 <p>Pour associer un groupe à un périphérique d’entrée, utilisez <code class="docutils literal notranslate"><span class="pre">lv_indev_set_group(indev,</span> <span class="pre">g)</span></code>, où <code class="docutils literal notranslate"><span class="pre">indev</span></code> est la valeur de retour de <code class="docutils literal notranslate"><span class="pre">lv_indev_drv_register()</span> </code></p>
 <div class="section" id="codes">
 <h4>Codes<a class="headerlink" href="#codes" title="Permalink to this headline">¶</a></h4>
