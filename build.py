@@ -7,6 +7,7 @@ import os
 langs = ['en', 'tr', 'zh-CN', 'hu', 'fr']
 
 clean = 0
+trans = 0
 args = sys.argv[1:]
 if len(args) == 1:
   if "clean" in args: clean = 1
