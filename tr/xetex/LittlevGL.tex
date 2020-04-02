@@ -59,16 +59,18 @@
 
 \usepackage{fontspec}
 \setmonofont{DejaVu Sans Mono}
-
-\setcounter{tocdepth}{0}
+\usepackage{xeCJK}
+\setCJKmainfont{SimSun}
+\usepackage{silence}
+\WarningsOff*
 
 
 \title{LittlevGL Documentation}
-\date{Feb 26, 2020}
-\release{}
+\date{Apr 02, 2020}
+\release{6.1.2}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
-\renewcommand{\releasename}{}
+\renewcommand{\releasename}{Release}
 \makeindex
 \begin{document}
 
@@ -3331,7 +3333,6 @@ For example:
 \PYG{p}{\PYGZcb{}}
 
 \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}
-
 
 \PYG{n}{lv\PYGZus{}log\PYGZus{}register\PYGZus{}print\PYGZus{}cb}\PYG{p}{(}\PYG{n}{my\PYGZus{}log\PYGZus{}cb}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
@@ -7039,7 +7040,6 @@ To do this a custom \sphinxcode{\sphinxupquote{lv\_font\_t}} variable needs to b
     \PYG{k}{return} \PYG{n+nb}{true}\PYG{p}{;}                \PYG{c+cm}{/*true: glyph found; false: glyph was not found*/}
 \PYG{p}{\PYGZcb{}}
 
-
 \PYG{c+cm}{/* Get the bitmap of {}`unicode\PYGZus{}letter{}` from {}`font{}`. */}
 \PYG{k}{const} \PYG{k+kt}{uint8\PYGZus{}t} \PYG{o}{*} \PYG{n}{my\PYGZus{}get\PYGZus{}glyph\PYGZus{}bitmap\PYGZus{}cb}\PYG{p}{(}\PYG{k}{const} \PYG{n}{lv\PYGZus{}font\PYGZus{}t} \PYG{o}{*} \PYG{n}{font}\PYG{p}{,} \PYG{k+kt}{uint32\PYGZus{}t} \PYG{n}{unicode\PYGZus{}letter}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
@@ -7343,7 +7343,6 @@ First, you need to create a new image decoder and set some functions to open/clo
 \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}set\PYGZus{}info\PYGZus{}cb}\PYG{p}{(}\PYG{n}{dec}\PYG{p}{,} \PYG{n}{decoder\PYGZus{}info}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}set\PYGZus{}open\PYGZus{}cb}\PYG{p}{(}\PYG{n}{dec}\PYG{p}{,} \PYG{n}{decoder\PYGZus{}open}\PYG{p}{)}\PYG{p}{;}
 \PYG{n}{lv\PYGZus{}img\PYGZus{}decoder\PYGZus{}set\PYGZus{}close\PYGZus{}cb}\PYG{p}{(}\PYG{n}{dec}\PYG{p}{,} \PYG{n}{decoder\PYGZus{}close}\PYG{p}{)}\PYG{p}{;}
-
 
 \PYG{c+cm}{/**}
 \PYG{c+cm}{ * Get info about a PNG image}
@@ -8822,7 +8821,6 @@ To add a driver, \sphinxcode{\sphinxupquote{lv\_fs\_drv\_t}} needs to be initial
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{trunc\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}trunc\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to delete a file */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{size\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/*Callback to tell a file\PYGZsq{}s size */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{rename\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to rename a file */}
-
 
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}open\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}open\PYGZus{}cb}\PYG{p}{;}         \PYG{c+cm}{/*Callback to open directory to read its content */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}read\PYGZus{}cb}\PYG{p}{;}         \PYG{c+cm}{/*Callback to read a directory\PYGZsq{}s content */}
@@ -28411,7 +28409,7 @@ code
 
     \PYG{c+cm}{/*Create a LED and switch it OFF*/}
     \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{led1}  \PYG{o}{=} \PYG{n}{lv\PYGZus{}led\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
-    \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{led1}\PYG{p}{,} \PYG{n}{LV\PYGZus{}LED\PYGZus{}STYLE\PYGZus{}MAIN}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}led}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{lv\PYGZus{}led\PYGZus{}set\PYGZus{}style}\PYG{p}{(}\PYG{n}{led1}\PYG{p}{,} \PYG{n}{LV\PYGZus{}LED\PYGZus{}STYLE\PYGZus{}MAIN}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{style\PYGZus{}led}\PYG{p}{)}\PYG{p}{;}
     \PYG{n}{lv\PYGZus{}obj\PYGZus{}align}\PYG{p}{(}\PYG{n}{led1}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ALIGN\PYGZus{}CENTER}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{80}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
     \PYG{n}{lv\PYGZus{}led\PYGZus{}off}\PYG{p}{(}\PYG{n}{led1}\PYG{p}{)}\PYG{p}{;}
 
