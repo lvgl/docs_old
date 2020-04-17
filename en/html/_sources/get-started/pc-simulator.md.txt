@@ -65,6 +65,7 @@ Eclipse is a Java based software therefore be sure **Java Runtime Environment** 
 On Debian-based distros (e.g. Ubuntu): `sudo apt-get install default-jre`
 
 Note: If you are using other distros, then please refer and install 'Java Runtime Environment' suitable to your distro.
+Note: If you are using macOS and get a "Failed to create the Java Virtual Machine" error, uninstall any other Java JDK installs and install Java JDK 8u. This should fix the problem.
 
 You can download Eclipse's CDT from: [https://www.eclipse.org/cdt/downloads.php](https://www.eclipse.org/cdt/downloads.php). Start the installer and choose *Eclipse CDT* from the list.
 

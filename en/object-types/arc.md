@@ -23,6 +23,7 @@ To set the style of an *Arc* object, use `lv_arc_set_style(arc, LV_ARC_STYLE_MAI
 - **line.rounded** - make the endpoints rounded (opacity won't work properly if set to 1)
 - **line.width** - the thickness of the arc
 - **line.color** - the color of the arc.
+- **body.opa** - opacity of the arc.
 
 ## Events
 Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
