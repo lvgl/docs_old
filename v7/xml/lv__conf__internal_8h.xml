@@ -1,0 +1,1027 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="lv__conf__internal_8h" kind="file" language="C++">
+    <compoundname>lv_conf_internal.h</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>GENERATED FILE, DO NOT EDIT IT!</para><para>Make sure all the defines of lv_conf.h have a default value </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="7"><highlight class="preprocessor">#ifndef<sp/>LV_CONF_INTERNAL_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_CONF_INTERNAL_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>clang-format<sp/>off<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(LV_CONF_PATH)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__LV_TO_STR_AUX(x)<sp/>#x</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__LV_TO_STR(x)<sp/>__LV_TO_STR_AUX(x)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>__LV_TO_STR(LV_CONF_PATH)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#undef<sp/>__LV_TO_STR_AUX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#undef<sp/>__LV_TO_STR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(LV_CONF_INCLUDE_SIMPLE)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;lv_conf.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../lv_conf.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>clang-format<sp/>off<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">/*====================</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/>Graphical<sp/>settings</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*====================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Maximal<sp/>horizontal<sp/>and<sp/>vertical<sp/>resolution<sp/>to<sp/>support<sp/>by<sp/>the<sp/>library.*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_HOR_RES_MAX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_HOR_RES_MAX<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(480)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_VER_RES_MAX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_VER_RES_MAX<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(320)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Color<sp/>depth:</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*<sp/>-<sp/>1:<sp/><sp/>1<sp/>byte<sp/>per<sp/>pixel</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*<sp/>-<sp/>8:<sp/><sp/>RGB233</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*<sp/>-<sp/>16:<sp/>RGB565</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/>*<sp/>-<sp/>32:<sp/>ARGB8888</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_COLOR_DEPTH</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_DEPTH<sp/><sp/><sp/><sp/><sp/>16</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Swap<sp/>the<sp/>2<sp/>bytes<sp/>of<sp/>RGB565<sp/>color.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/>*<sp/>Useful<sp/>if<sp/>the<sp/>display<sp/>has<sp/>a<sp/>8<sp/>bit<sp/>interface<sp/>(e.g.<sp/>SPI)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_COLOR_16_SWAP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_16_SWAP<sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>Enable<sp/>screen<sp/>transparency.</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/>*<sp/>Useful<sp/>for<sp/>OSD<sp/>or<sp/>other<sp/>overlapping<sp/>GUIs.</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>*<sp/>Requires<sp/>`LV_COLOR_DEPTH<sp/>=<sp/>32`<sp/>colors<sp/>and<sp/>the<sp/>screen&apos;s<sp/>style<sp/>should<sp/>be<sp/>modified:<sp/>`style.body.opa<sp/>=<sp/>...`*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_COLOR_SCREEN_TRANSP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_SCREEN_TRANSP<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment">/*Images<sp/>pixels<sp/>with<sp/>this<sp/>color<sp/>will<sp/>not<sp/>be<sp/>drawn<sp/>(with<sp/>chroma<sp/>keying)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_COLOR_TRANSP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_TRANSP<sp/><sp/><sp/><sp/>LV_COLOR_LIME<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*LV_COLOR_LIME:<sp/>pure<sp/>green*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Enable<sp/>chroma<sp/>keying<sp/>for<sp/>indexed<sp/>images.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_INDEXED_CHROMA</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_INDEXED_CHROMA<sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Enable<sp/>anti-aliasing<sp/>(lines,<sp/>and<sp/>radiuses<sp/>will<sp/>be<sp/>smoothed)<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_ANTIALIAS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_ANTIALIAS<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Default<sp/>display<sp/>refresh<sp/>period.</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*<sp/>Can<sp/>be<sp/>changed<sp/>in<sp/>the<sp/>display<sp/>driver<sp/>(`lv_disp_drv_t`).*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_DISP_DEF_REFR_PERIOD</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_DISP_DEF_REFR_PERIOD<sp/><sp/><sp/><sp/><sp/><sp/>30<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*[ms]*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Dot<sp/>Per<sp/>Inch:<sp/>used<sp/>to<sp/>initialize<sp/>default<sp/>sizes.</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*<sp/>E.g.<sp/>a<sp/>button<sp/>with<sp/>width<sp/>=<sp/>LV_DPI<sp/>/<sp/>2<sp/>-&gt;<sp/>half<sp/>inch<sp/>wide</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*<sp/>(Not<sp/>so<sp/>important,<sp/>you<sp/>can<sp/>adjust<sp/>it<sp/>to<sp/>modify<sp/>default<sp/>sizes<sp/>and<sp/>spaces)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_DPI</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_DPI<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>100<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*[px]*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>The<sp/>the<sp/>real<sp/>width<sp/>of<sp/>the<sp/>display<sp/>changes<sp/>some<sp/>default<sp/>values:</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/>*<sp/>default<sp/>object<sp/>sizes,<sp/>layout<sp/>of<sp/>examples,<sp/>etc.</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/>*<sp/>According<sp/>to<sp/>the<sp/>width<sp/>of<sp/>the<sp/>display<sp/>(hor.<sp/>res.<sp/>/<sp/>dpi)</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*<sp/>the<sp/>displays<sp/>fall<sp/>in<sp/>4<sp/>categories.</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/>The<sp/>4th<sp/>is<sp/>extra<sp/>large<sp/>which<sp/>has<sp/>no<sp/>upper<sp/>limit<sp/>so<sp/>not<sp/>listed<sp/>here</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*<sp/>The<sp/>upper<sp/>limit<sp/>of<sp/>the<sp/>categories<sp/>are<sp/>set<sp/>below<sp/>in<sp/>0.1<sp/>inch<sp/>unit.</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_DISP_SMALL_LIMIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_DISP_SMALL_LIMIT<sp/>20</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_DISP_MEDIUM_LIMIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_DISP_MEDIUM_LIMIT<sp/>45</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_DISP_LARGE_LIMIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_DISP_LARGE_LIMIT<sp/>65</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Type<sp/>of<sp/>coordinates.<sp/>Should<sp/>be<sp/>`int16_t`<sp/>(or<sp/>`int32_t`<sp/>for<sp/>extreme<sp/>cases)<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="comment">/*=========================</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/>Memory<sp/>manager<sp/>settings</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/>*=========================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>LittelvGL&apos;s<sp/>internal<sp/>memory<sp/>manager&apos;s<sp/>settings.</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/>*<sp/>The<sp/>graphical<sp/>objects<sp/>and<sp/>other<sp/>related<sp/>data<sp/>are<sp/>stored<sp/>here.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>use<sp/>custom<sp/>malloc/free,<sp/>0:<sp/>use<sp/>the<sp/>built-in<sp/>`lv_mem_alloc`<sp/>and<sp/>`lv_mem_free`<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_MEM_CUSTOM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_MEM_CUSTOM<sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_MEM_CUSTOM<sp/>==<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Size<sp/>of<sp/>the<sp/>memory<sp/>used<sp/>by<sp/>`lv_mem_alloc`<sp/>in<sp/>bytes<sp/>(&gt;=<sp/>2kB)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_MEM_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_MEM_SIZE<sp/><sp/><sp/><sp/>(32U<sp/>*<sp/>1024U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Complier<sp/>prefix<sp/>for<sp/>a<sp/>big<sp/>array<sp/>declaration<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_MEM_ATTR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_MEM_ATTR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Set<sp/>an<sp/>address<sp/>for<sp/>the<sp/>memory<sp/>pool<sp/>instead<sp/>of<sp/>allocating<sp/>it<sp/>as<sp/>an<sp/>array.</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/>*<sp/>Can<sp/>be<sp/>in<sp/>external<sp/>SRAM<sp/>too.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_MEM_ADR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_MEM_ADR<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Automatically<sp/>defrag.<sp/>on<sp/>free.<sp/>Defrag.<sp/>means<sp/>joining<sp/>the<sp/>adjacent<sp/>free<sp/>cells.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_MEM_AUTO_DEFRAG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_MEM_AUTO_DEFRAG<sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="preprocessor">#else<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*LV_MEM_CUSTOM*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_MEM_CUSTOM_INCLUDE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_MEM_CUSTOM_INCLUDE<sp/>&lt;stdlib.h&gt;<sp/><sp/><sp/></highlight><highlight class="comment">/*Header<sp/>for<sp/>the<sp/>dynamic<sp/>memory<sp/>function*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_MEM_CUSTOM_ALLOC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_MEM_CUSTOM_ALLOC<sp/><sp/><sp/>malloc<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Wrapper<sp/>to<sp/>malloc*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_MEM_CUSTOM_FREE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_MEM_CUSTOM_FREE<sp/><sp/><sp/><sp/>free<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Wrapper<sp/>to<sp/>free*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*LV_MEM_CUSTOM*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Garbage<sp/>Collector<sp/>settings</highlight></codeline>
+<codeline lineno="156"><highlight class="comment"><sp/>*<sp/>Used<sp/>if<sp/>lvgl<sp/>is<sp/>binded<sp/>to<sp/>higher<sp/>level<sp/>language<sp/>and<sp/>the<sp/>memory<sp/>is<sp/>managed<sp/>by<sp/>that<sp/>language<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_ENABLE_GC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_ENABLE_GC<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_ENABLE_GC<sp/>!=<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_GC_INCLUDE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_GC_INCLUDE<sp/>&quot;gc.h&quot;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Include<sp/>Garbage<sp/>Collector<sp/>related<sp/>things*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_MEM_CUSTOM_REALLOC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_MEM_CUSTOM_REALLOC<sp/><sp/><sp/>your_realloc<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Wrapper<sp/>to<sp/>realloc*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_MEM_CUSTOM_GET_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_MEM_CUSTOM_GET_SIZE<sp/><sp/>your_mem_get_size<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Wrapper<sp/>to<sp/>lv_mem_get_size*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>LV_ENABLE_GC<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="comment">/*=======================</highlight></codeline>
+<codeline lineno="173"><highlight class="comment"><sp/><sp/><sp/>Input<sp/>device<sp/>settings</highlight></codeline>
+<codeline lineno="174"><highlight class="comment"><sp/>*=======================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Input<sp/>device<sp/>default<sp/>settings.</highlight></codeline>
+<codeline lineno="177"><highlight class="comment"><sp/>*<sp/>Can<sp/>be<sp/>changed<sp/>in<sp/>the<sp/>Input<sp/>device<sp/>driver<sp/>(`lv_indev_drv_t`)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Input<sp/>device<sp/>read<sp/>period<sp/>in<sp/>milliseconds<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_INDEV_DEF_READ_PERIOD</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_INDEV_DEF_READ_PERIOD<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>30</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Drag<sp/>threshold<sp/>in<sp/>pixels<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_INDEV_DEF_DRAG_LIMIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_INDEV_DEF_DRAG_LIMIT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Drag<sp/>throw<sp/>slow-down<sp/>in<sp/>[%].<sp/>Greater<sp/>value<sp/>-&gt;<sp/>faster<sp/>slow-down<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_INDEV_DEF_DRAG_THROW</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_INDEV_DEF_DRAG_THROW<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>20</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Long<sp/>press<sp/>time<sp/>in<sp/>milliseconds.</highlight></codeline>
+<codeline lineno="195"><highlight class="comment"><sp/>*<sp/>Time<sp/>to<sp/>send<sp/>`LV_EVENT_LONG_PRESSSED`)<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_INDEV_DEF_LONG_PRESS_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_INDEV_DEF_LONG_PRESS_TIME<sp/><sp/><sp/><sp/><sp/><sp/>400</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Repeated<sp/>trigger<sp/>period<sp/>in<sp/>long<sp/>press<sp/>[ms]</highlight></codeline>
+<codeline lineno="201"><highlight class="comment"><sp/>*<sp/>Time<sp/>between<sp/>`LV_EVENT_LONG_PRESSED_REPEAT<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_INDEV_DEF_LONG_PRESS_REP_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_INDEV_DEF_LONG_PRESS_REP_TIME<sp/><sp/>100</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Gesture<sp/>threshold<sp/>in<sp/>pixels<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_INDEV_DEF_GESTURE_LIMIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_INDEV_DEF_GESTURE_LIMIT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>50</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Gesture<sp/>min<sp/>velocity<sp/>at<sp/>release<sp/>before<sp/>swipe<sp/>(pixels)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_INDEV_DEF_GESTURE_MIN_VELOCITY</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_INDEV_DEF_GESTURE_MIN_VELOCITY<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight><highlight class="comment">/*==================</highlight></codeline>
+<codeline lineno="218"><highlight class="comment"><sp/>*<sp/>Feature<sp/>usage</highlight></codeline>
+<codeline lineno="219"><highlight class="comment"><sp/>*==================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight><highlight class="comment">/*1:<sp/>Enable<sp/>the<sp/>Animations<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_ANIMATION</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_ANIMATION<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_ANIMATION</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight><highlight class="comment">/*Declare<sp/>the<sp/>type<sp/>of<sp/>the<sp/>user<sp/>data<sp/>of<sp/>animations<sp/>(can<sp/>be<sp/>e.g.<sp/>`void<sp/>*`,<sp/>`int`,<sp/>`struct`)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>Enable<sp/>shadow<sp/>drawing*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_SHADOW</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_SHADOW<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_SHADOW</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Allow<sp/>buffering<sp/>some<sp/>shadow<sp/>calculation</highlight></codeline>
+<codeline lineno="237"><highlight class="comment"><sp/>*<sp/>LV_SHADOW_CACHE_SIZE<sp/>is<sp/>the<sp/>max.<sp/>shadow<sp/>size<sp/>to<sp/>buffer,</highlight></codeline>
+<codeline lineno="238"><highlight class="comment"><sp/>*<sp/>where<sp/>shadow<sp/>size<sp/>is<sp/>`shadow_width<sp/>+<sp/>radius`</highlight></codeline>
+<codeline lineno="239"><highlight class="comment"><sp/>*<sp/>Caching<sp/>has<sp/>LV_SHADOW_CACHE_SIZE^2<sp/>RAM<sp/>cost*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_SHADOW_CACHE_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_SHADOW_CACHE_SIZE<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>Use<sp/>other<sp/>blend<sp/>modes<sp/>than<sp/>normal<sp/>(`LV_BLEND_MODE_...`)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_BLEND_MODES</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_BLEND_MODES<sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>Use<sp/>the<sp/>`opa_scale`<sp/>style<sp/>property<sp/>to<sp/>set<sp/>the<sp/>opacity<sp/>of<sp/>an<sp/>object<sp/>and<sp/>its<sp/>children<sp/>at<sp/>once*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_OPA_SCALE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_OPA_SCALE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>Enable<sp/>object<sp/>groups<sp/>(for<sp/>keyboard/encoder<sp/>navigation)<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_GROUP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_GROUP<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_GROUP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">/*LV_USE_GROUP*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>Enable<sp/>GPU<sp/>interface*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_GPU</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_GPU<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>Enable<sp/>file<sp/>system<sp/>(might<sp/>be<sp/>required<sp/>for<sp/>images<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_FILESYSTEM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_FILESYSTEM<sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_FILESYSTEM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"></highlight><highlight class="comment">/*Declare<sp/>the<sp/>type<sp/>of<sp/>the<sp/>user<sp/>data<sp/>of<sp/>file<sp/>system<sp/>drivers<sp/>(can<sp/>be<sp/>e.g.<sp/>`void<sp/>*`,<sp/>`int`,<sp/>`struct`)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"></highlight><highlight class="comment">/*1:<sp/>Add<sp/>a<sp/>`user_data`<sp/>to<sp/>drivers<sp/>and<sp/>objects*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_USER_DATA</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_USER_DATA<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight><highlight class="comment">/*1:<sp/>Show<sp/>CPU<sp/>usage<sp/>and<sp/>FPS<sp/>count<sp/>in<sp/>the<sp/>right<sp/>bottom<sp/>corner*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_PERF_MONITOR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_PERF_MONITOR<sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight><highlight class="comment">/*========================</highlight></codeline>
+<codeline lineno="286"><highlight class="comment"><sp/>*<sp/>Image<sp/>decoder<sp/>and<sp/>cache</highlight></codeline>
+<codeline lineno="287"><highlight class="comment"><sp/>*========================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>Enable<sp/>indexed<sp/>(palette)<sp/>images<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_IMG_CF_INDEXED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_IMG_CF_INDEXED<sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>Enable<sp/>alpha<sp/>indexed<sp/>images<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_IMG_CF_ALPHA</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_IMG_CF_ALPHA<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"></highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Default<sp/>image<sp/>cache<sp/>size.<sp/>Image<sp/>caching<sp/>keeps<sp/>the<sp/>images<sp/>opened.</highlight></codeline>
+<codeline lineno="300"><highlight class="comment"><sp/>*<sp/>If<sp/>only<sp/>the<sp/>built-in<sp/>image<sp/>formats<sp/>are<sp/>used<sp/>there<sp/>is<sp/>no<sp/>real<sp/>advantage<sp/>of<sp/>caching.</highlight></codeline>
+<codeline lineno="301"><highlight class="comment"><sp/>*<sp/>(I.e.<sp/>no<sp/>new<sp/>image<sp/>decoder<sp/>is<sp/>added)</highlight></codeline>
+<codeline lineno="302"><highlight class="comment"><sp/>*<sp/>With<sp/>complex<sp/>image<sp/>decoders<sp/>(e.g.<sp/>PNG<sp/>or<sp/>JPG)<sp/>caching<sp/>can<sp/>save<sp/>the<sp/>continuous<sp/>open/decode<sp/>of<sp/>images.</highlight></codeline>
+<codeline lineno="303"><highlight class="comment"><sp/>*<sp/>However<sp/>the<sp/>opened<sp/>images<sp/>might<sp/>consume<sp/>additional<sp/>RAM.</highlight></codeline>
+<codeline lineno="304"><highlight class="comment"><sp/>*<sp/>LV_IMG_CACHE_DEF_SIZE<sp/>must<sp/>be<sp/>&gt;=<sp/>1<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_IMG_CACHE_DEF_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="306"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_IMG_CACHE_DEF_SIZE<sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="308"><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight><highlight class="comment">/*Declare<sp/>the<sp/>type<sp/>of<sp/>the<sp/>user<sp/>data<sp/>of<sp/>image<sp/>decoder<sp/>(can<sp/>be<sp/>e.g.<sp/>`void<sp/>*`,<sp/>`int`,<sp/>`struct`)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight><highlight class="comment">/*=====================</highlight></codeline>
+<codeline lineno="312"><highlight class="comment"><sp/>*<sp/><sp/>Compiler<sp/>settings</highlight></codeline>
+<codeline lineno="313"><highlight class="comment"><sp/>*====================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Define<sp/>a<sp/>custom<sp/>attribute<sp/>to<sp/>`lv_tick_inc`<sp/>function<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_ATTRIBUTE_TICK_INC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_ATTRIBUTE_TICK_INC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Define<sp/>a<sp/>custom<sp/>attribute<sp/>to<sp/>`lv_task_handler`<sp/>function<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="320"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_ATTRIBUTE_TASK_HANDLER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_ATTRIBUTE_TASK_HANDLER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Define<sp/>a<sp/>custom<sp/>attribute<sp/>to<sp/>`lv_disp_flush_ready`<sp/>function<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_ATTRIBUTE_FLUSH_READY</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="326"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_ATTRIBUTE_FLUSH_READY</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="327"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="328"><highlight class="normal"></highlight></codeline>
+<codeline lineno="329"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>With<sp/>size<sp/>optimization<sp/>(-Os)<sp/>the<sp/>compiler<sp/>might<sp/>not<sp/>align<sp/>data<sp/>to</highlight></codeline>
+<codeline lineno="330"><highlight class="comment"><sp/>*<sp/>4<sp/>or<sp/>8<sp/>byte<sp/>boundary.<sp/>This<sp/>alignment<sp/>will<sp/>be<sp/>explicitly<sp/>applied<sp/>where<sp/>needed.</highlight></codeline>
+<codeline lineno="331"><highlight class="comment"><sp/>*<sp/>E.g.<sp/>__attribute__((aligned(4)))<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_ATTRIBUTE_MEM_ALIGN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_ATTRIBUTE_MEM_ALIGN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="334"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="335"><highlight class="normal"></highlight></codeline>
+<codeline lineno="336"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Attribute<sp/>to<sp/>mark<sp/>large<sp/>constant<sp/>arrays<sp/>for<sp/>example</highlight></codeline>
+<codeline lineno="337"><highlight class="comment"><sp/>*<sp/>font&apos;s<sp/>bitmaps<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="338"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_ATTRIBUTE_LARGE_CONST</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="339"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_ATTRIBUTE_LARGE_CONST</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="340"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Export<sp/>integer<sp/>constant<sp/>to<sp/>binding.</highlight></codeline>
+<codeline lineno="343"><highlight class="comment"><sp/>*<sp/>This<sp/>macro<sp/>is<sp/>used<sp/>with<sp/>constants<sp/>in<sp/>the<sp/>form<sp/>of<sp/>LV_&lt;CONST&gt;<sp/>that</highlight></codeline>
+<codeline lineno="344"><highlight class="comment"><sp/>*<sp/>should<sp/>also<sp/>appear<sp/>on<sp/>lvgl<sp/>binding<sp/>API<sp/>such<sp/>as<sp/>Micropython</highlight></codeline>
+<codeline lineno="345"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="346"><highlight class="comment"><sp/>*<sp/>The<sp/>default<sp/>value<sp/>just<sp/>prevents<sp/>a<sp/>GCC<sp/>warning.</highlight></codeline>
+<codeline lineno="347"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="348"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_EXPORT_CONST_INT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_EXPORT_CONST_INT(int_value)<sp/>struct<sp/>_silence_gcc_warning</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="351"><highlight class="normal"></highlight></codeline>
+<codeline lineno="352"><highlight class="normal"></highlight><highlight class="comment">/*===================</highlight></codeline>
+<codeline lineno="353"><highlight class="comment"><sp/>*<sp/><sp/>HAL<sp/>settings</highlight></codeline>
+<codeline lineno="354"><highlight class="comment"><sp/>*==================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="355"><highlight class="normal"></highlight></codeline>
+<codeline lineno="356"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>use<sp/>a<sp/>custom<sp/>tick<sp/>source.</highlight></codeline>
+<codeline lineno="357"><highlight class="comment"><sp/>*<sp/>It<sp/>removes<sp/>the<sp/>need<sp/>to<sp/>manually<sp/>update<sp/>the<sp/>tick<sp/>with<sp/>`lv_tick_inc`)<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="358"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TICK_CUSTOM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="359"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_TICK_CUSTOM<sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="360"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="361"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_TICK_CUSTOM<sp/>==<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="362"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TICK_CUSTOM_INCLUDE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="363"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_TICK_CUSTOM_INCLUDE<sp/><sp/>&quot;something.h&quot;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Header<sp/>for<sp/>the<sp/>sys<sp/>time<sp/>function*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="365"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TICK_CUSTOM_SYS_TIME_EXPR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="366"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_TICK_CUSTOM_SYS_TIME_EXPR<sp/>(millis())<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Expression<sp/>evaluating<sp/>to<sp/>current<sp/>systime<sp/>in<sp/>ms*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="367"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="368"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/><sp/></highlight><highlight class="comment">/*LV_TICK_CUSTOM*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="369"><highlight class="normal"></highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight></codeline>
+<codeline lineno="371"><highlight class="normal"></highlight><highlight class="comment">/*================</highlight></codeline>
+<codeline lineno="372"><highlight class="comment"><sp/>*<sp/>Log<sp/>settings</highlight></codeline>
+<codeline lineno="373"><highlight class="comment"><sp/>*===============*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="374"><highlight class="normal"></highlight></codeline>
+<codeline lineno="375"><highlight class="normal"></highlight><highlight class="comment">/*1:<sp/>Enable<sp/>the<sp/>log<sp/>module*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="376"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_LOG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="377"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_LOG<sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="378"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="379"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_LOG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="380"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>How<sp/>important<sp/>log<sp/>should<sp/>be<sp/>added:</highlight></codeline>
+<codeline lineno="381"><highlight class="comment"><sp/>*<sp/>LV_LOG_LEVEL_TRACE<sp/><sp/><sp/><sp/><sp/><sp/><sp/>A<sp/>lot<sp/>of<sp/>logs<sp/>to<sp/>give<sp/>detailed<sp/>information</highlight></codeline>
+<codeline lineno="382"><highlight class="comment"><sp/>*<sp/>LV_LOG_LEVEL_INFO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Log<sp/>important<sp/>events</highlight></codeline>
+<codeline lineno="383"><highlight class="comment"><sp/>*<sp/>LV_LOG_LEVEL_WARN<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Log<sp/>if<sp/>something<sp/>unwanted<sp/>happened<sp/>but<sp/>didn&apos;t<sp/>cause<sp/>a<sp/>problem</highlight></codeline>
+<codeline lineno="384"><highlight class="comment"><sp/>*<sp/>LV_LOG_LEVEL_ERROR<sp/><sp/><sp/><sp/><sp/><sp/><sp/>Only<sp/>critical<sp/>issue,<sp/>when<sp/>the<sp/>system<sp/>may<sp/>fail</highlight></codeline>
+<codeline lineno="385"><highlight class="comment"><sp/>*<sp/>LV_LOG_LEVEL_NONE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Do<sp/>not<sp/>log<sp/>anything</highlight></codeline>
+<codeline lineno="386"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="387"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_LOG_LEVEL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="388"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_LOG_LEVEL<sp/><sp/><sp/><sp/>LV_LOG_LEVEL_WARN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="389"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="390"><highlight class="normal"></highlight></codeline>
+<codeline lineno="391"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>1:<sp/>Print<sp/>the<sp/>log<sp/>with<sp/>&apos;printf&apos;;</highlight></codeline>
+<codeline lineno="392"><highlight class="comment"><sp/>*<sp/>0:<sp/>user<sp/>need<sp/>to<sp/>register<sp/>a<sp/>callback<sp/>with<sp/>`lv_log_register_print_cb`*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="393"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_LOG_PRINTF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="394"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_LOG_PRINTF<sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="395"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="396"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">/*LV_USE_LOG*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="397"><highlight class="normal"></highlight></codeline>
+<codeline lineno="398"><highlight class="normal"></highlight><highlight class="comment">/*=================</highlight></codeline>
+<codeline lineno="399"><highlight class="comment"><sp/>*<sp/>Debug<sp/>settings</highlight></codeline>
+<codeline lineno="400"><highlight class="comment"><sp/>*================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="401"><highlight class="normal"></highlight></codeline>
+<codeline lineno="402"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>If<sp/>Debug<sp/>is<sp/>enabled<sp/>LittelvGL<sp/>validates<sp/>the<sp/>parameters<sp/>of<sp/>the<sp/>functions.</highlight></codeline>
+<codeline lineno="403"><highlight class="comment"><sp/>*<sp/>If<sp/>an<sp/>invalid<sp/>parameter<sp/>is<sp/>found<sp/>an<sp/>error<sp/>log<sp/>message<sp/>is<sp/>printed<sp/>and</highlight></codeline>
+<codeline lineno="404"><highlight class="comment"><sp/>*<sp/>the<sp/>MCU<sp/>halts<sp/>at<sp/>the<sp/>error.<sp/>(`LV_USE_LOG`<sp/>should<sp/>be<sp/>enabled)</highlight></codeline>
+<codeline lineno="405"><highlight class="comment"><sp/>*<sp/>If<sp/>you<sp/>are<sp/>debugging<sp/>the<sp/>MCU<sp/>you<sp/>can<sp/>pause</highlight></codeline>
+<codeline lineno="406"><highlight class="comment"><sp/>*<sp/>the<sp/>debugger<sp/>to<sp/>see<sp/>exactly<sp/>where<sp/><sp/>the<sp/>issue<sp/>is.</highlight></codeline>
+<codeline lineno="407"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="408"><highlight class="comment"><sp/>*<sp/>The<sp/>behavior<sp/>of<sp/>asserts<sp/>can<sp/>be<sp/>overwritten<sp/>by<sp/>redefining<sp/>them<sp/>here.</highlight></codeline>
+<codeline lineno="409"><highlight class="comment"><sp/>*<sp/>E.g.<sp/>#define<sp/>LV_ASSERT_MEM(p)<sp/><sp/>&lt;my_assert_code&gt;</highlight></codeline>
+<codeline lineno="410"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="411"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="412"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_DEBUG<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="413"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="414"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="415"><highlight class="normal"></highlight></codeline>
+<codeline lineno="416"><highlight class="normal"></highlight><highlight class="comment">/*Check<sp/>if<sp/>the<sp/>parameter<sp/>is<sp/>NULL.<sp/>(Quite<sp/>fast)<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="417"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_ASSERT_NULL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="418"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_ASSERT_NULL<sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="419"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="420"><highlight class="normal"></highlight></codeline>
+<codeline lineno="421"><highlight class="normal"></highlight><highlight class="comment">/*Checks<sp/>is<sp/>the<sp/>memory<sp/>is<sp/>successfully<sp/>allocated<sp/>or<sp/>no.<sp/>(Quite<sp/>fast)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="422"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_ASSERT_MEM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="423"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_ASSERT_MEM<sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="424"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="425"><highlight class="normal"></highlight></codeline>
+<codeline lineno="426"><highlight class="normal"></highlight><highlight class="comment">/*Check<sp/>the<sp/>integrity<sp/>of<sp/>`lv_mem`<sp/>after<sp/>critical<sp/>operations.<sp/>(Slow)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="427"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_ASSERT_MEM_INTEGRITY</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="428"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_ASSERT_MEM_INTEGRITY<sp/><sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="429"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="430"><highlight class="normal"></highlight></codeline>
+<codeline lineno="431"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Check<sp/>the<sp/>strings.</highlight></codeline>
+<codeline lineno="432"><highlight class="comment"><sp/>*<sp/>Search<sp/>for<sp/>NULL,<sp/>very<sp/>long<sp/>strings,<sp/>invalid<sp/>characters,<sp/>and<sp/>unnatural<sp/>repetitions.<sp/>(Slow)</highlight></codeline>
+<codeline lineno="433"><highlight class="comment"><sp/>*<sp/>If<sp/>disabled<sp/>`LV_USE_ASSERT_NULL`<sp/>will<sp/>be<sp/>performed<sp/>instead<sp/>(if<sp/>it&apos;s<sp/>enabled)<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="434"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_ASSERT_STR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="435"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_ASSERT_STR<sp/><sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="436"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="437"><highlight class="normal"></highlight></codeline>
+<codeline lineno="438"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Check<sp/>NULL,<sp/>the<sp/>object&apos;s<sp/>type<sp/>and<sp/>existence<sp/>(e.g.<sp/>not<sp/>deleted).<sp/>(Quite<sp/>slow)</highlight></codeline>
+<codeline lineno="439"><highlight class="comment"><sp/>*<sp/>If<sp/>disabled<sp/>`LV_USE_ASSERT_NULL`<sp/>will<sp/>be<sp/>performed<sp/>instead<sp/>(if<sp/>it&apos;s<sp/>enabled)<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="440"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_ASSERT_OBJ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="441"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_ASSERT_OBJ<sp/><sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="442"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="443"><highlight class="normal"></highlight></codeline>
+<codeline lineno="444"><highlight class="normal"></highlight><highlight class="comment">/*Check<sp/>if<sp/>the<sp/>styles<sp/>are<sp/>properly<sp/>initialized.<sp/>(Fast)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="445"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_ASSERT_STYLE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="446"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_ASSERT_STYLE<sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="447"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="448"><highlight class="normal"></highlight></codeline>
+<codeline lineno="449"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*LV_USE_DEBUG*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="450"><highlight class="normal"></highlight></codeline>
+<codeline lineno="451"><highlight class="normal"></highlight><highlight class="comment">/*==================</highlight></codeline>
+<codeline lineno="452"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>FONT<sp/>USAGE</highlight></codeline>
+<codeline lineno="453"><highlight class="comment"><sp/>*===================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="454"><highlight class="normal"></highlight></codeline>
+<codeline lineno="455"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>The<sp/>built-in<sp/>fonts<sp/>contains<sp/>the<sp/>ASCII<sp/>range<sp/>and<sp/>some<sp/>Symbols<sp/>with<sp/><sp/>4<sp/>bit-per-pixel.</highlight></codeline>
+<codeline lineno="456"><highlight class="comment"><sp/>*<sp/>The<sp/>symbols<sp/>are<sp/>available<sp/>via<sp/>`LV_SYMBOL_...`<sp/>defines</highlight></codeline>
+<codeline lineno="457"><highlight class="comment"><sp/>*<sp/>More<sp/>info<sp/>about<sp/>fonts:<sp/>https://docs.littlevgl.com/#Fonts</highlight></codeline>
+<codeline lineno="458"><highlight class="comment"><sp/>*<sp/>To<sp/>create<sp/>a<sp/>new<sp/>font<sp/>go<sp/>to:<sp/>https://littlevgl.com/ttf-font-to-c-array</highlight></codeline>
+<codeline lineno="459"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="460"><highlight class="normal"></highlight></codeline>
+<codeline lineno="461"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Montserrat<sp/>fonts<sp/>with<sp/>bpp<sp/>=<sp/>4</highlight></codeline>
+<codeline lineno="462"><highlight class="comment"><sp/>*<sp/>https://fonts.google.com/specimen/Montserrat<sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="463"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_12</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="464"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_12<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="465"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="466"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_14</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="467"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_14<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="468"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="469"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_16</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="470"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_16<sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="471"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="472"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_18</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="473"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_18<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="474"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="475"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_20</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="476"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_20<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="477"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="478"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_22</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="479"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_22<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="480"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="481"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_24</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="482"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_24<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="483"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="484"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_26</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="485"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_26<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="486"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="487"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_28</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="488"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_28<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="489"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="490"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_30</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="491"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_30<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="492"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="493"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_32</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="494"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_32<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="495"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="496"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_34</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="497"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_34<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="498"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="499"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_36</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="500"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_36<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="501"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="502"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_38</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="503"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_38<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="504"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="505"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_40</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="506"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_40<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="507"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="508"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_42</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="509"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_42<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="510"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="511"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_44</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="512"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_44<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="513"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="514"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_46</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="515"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_46<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="516"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="517"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_48</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="518"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_48<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="519"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="520"><highlight class="normal"></highlight></codeline>
+<codeline lineno="521"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Demonstrate<sp/>special<sp/>features<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="522"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_12_SUBPX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="523"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_12_SUBPX<sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="524"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="525"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_MONTSERRAT_28_COMPRESSED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="526"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_MONTSERRAT_28_COMPRESSED<sp/>0<sp/><sp/></highlight><highlight class="comment">/*bpp<sp/>=<sp/>3*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="527"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="528"><highlight class="normal"></highlight></codeline>
+<codeline lineno="529"><highlight class="normal"></highlight><highlight class="comment">/*Pixel<sp/>perfect<sp/>monospace<sp/>font</highlight></codeline>
+<codeline lineno="530"><highlight class="comment"><sp/>*<sp/>http://pelulamu.net/unscii/<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="531"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_UNSCII_8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="532"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_UNSCII_8<sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="533"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="534"><highlight class="normal"></highlight></codeline>
+<codeline lineno="535"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Optionally<sp/>declare<sp/>your<sp/>custom<sp/>fonts<sp/>here.</highlight></codeline>
+<codeline lineno="536"><highlight class="comment"><sp/>*<sp/>You<sp/>can<sp/>use<sp/>these<sp/>fonts<sp/>as<sp/>default<sp/>font<sp/>too</highlight></codeline>
+<codeline lineno="537"><highlight class="comment"><sp/>*<sp/>and<sp/>they<sp/>will<sp/>be<sp/>available<sp/>globally.<sp/>E.g.</highlight></codeline>
+<codeline lineno="538"><highlight class="comment"><sp/>*<sp/>#define<sp/>LV_FONT_CUSTOM_DECLARE<sp/>LV_FONT_DECLARE(my_font_1)<sp/>\</highlight></codeline>
+<codeline lineno="539"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LV_FONT_DECLARE(my_font_2)</highlight></codeline>
+<codeline lineno="540"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="541"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_CUSTOM_DECLARE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="542"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_CUSTOM_DECLARE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="543"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="544"><highlight class="normal"></highlight></codeline>
+<codeline lineno="545"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Enable<sp/>it<sp/>if<sp/>you<sp/>have<sp/>fonts<sp/>with<sp/>a<sp/>lot<sp/>of<sp/>characters.</highlight></codeline>
+<codeline lineno="546"><highlight class="comment"><sp/>*<sp/>The<sp/>limit<sp/>depends<sp/>on<sp/>the<sp/>font<sp/>size,<sp/>font<sp/>face<sp/>and<sp/>bpp</highlight></codeline>
+<codeline lineno="547"><highlight class="comment"><sp/>*<sp/>but<sp/>with<sp/>&gt;<sp/>10,000<sp/>characters<sp/>if<sp/>you<sp/>see<sp/>issues<sp/>probably<sp/>you<sp/>need<sp/>to<sp/>enable<sp/>it.*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="548"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_FMT_TXT_LARGE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="549"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_FMT_TXT_LARGE<sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="550"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="551"><highlight class="normal"></highlight></codeline>
+<codeline lineno="552"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Set<sp/>the<sp/>pixel<sp/>order<sp/>of<sp/>the<sp/>display.</highlight></codeline>
+<codeline lineno="553"><highlight class="comment"><sp/>*<sp/>Important<sp/>only<sp/>if<sp/>&quot;subpx<sp/>fonts&quot;<sp/>are<sp/>used.</highlight></codeline>
+<codeline lineno="554"><highlight class="comment"><sp/>*<sp/>With<sp/>&quot;normal&quot;<sp/>font<sp/>it<sp/>doesn&apos;t<sp/>matter.</highlight></codeline>
+<codeline lineno="555"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="556"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_FONT_SUBPX_BGR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="557"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_FONT_SUBPX_BGR<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="558"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="559"><highlight class="normal"></highlight></codeline>
+<codeline lineno="560"><highlight class="normal"></highlight><highlight class="comment">/*Declare<sp/>the<sp/>type<sp/>of<sp/>the<sp/>user<sp/>data<sp/>of<sp/>fonts<sp/>(can<sp/>be<sp/>e.g.<sp/>`void<sp/>*`,<sp/>`int`,<sp/>`struct`)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="561"><highlight class="normal"></highlight></codeline>
+<codeline lineno="562"><highlight class="normal"></highlight><highlight class="comment">/*================</highlight></codeline>
+<codeline lineno="563"><highlight class="comment"><sp/>*<sp/><sp/>THEME<sp/>USAGE</highlight></codeline>
+<codeline lineno="564"><highlight class="comment"><sp/>*================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="565"><highlight class="normal"></highlight></codeline>
+<codeline lineno="566"><highlight class="normal"></highlight><highlight class="comment">/*Always<sp/>enable<sp/>at<sp/>least<sp/>on<sp/>theme*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="567"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_THEME_EMPTY</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="568"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_THEME_EMPTY<sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/><sp/><sp/></highlight><highlight class="comment">/*No<sp/>theme,<sp/>you<sp/>can<sp/>apply<sp/>your<sp/>styles<sp/>as<sp/>you<sp/>need*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="569"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="570"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_THEME_TEMPLATE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="571"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_THEME_TEMPLATE<sp/><sp/><sp/><sp/>0<sp/><sp/><sp/></highlight><highlight class="comment">/*Simple<sp/>to<sp/>the<sp/>create<sp/>your<sp/>theme<sp/>based<sp/>on<sp/>it*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="572"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="573"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_THEME_MATERIAL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="574"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_THEME_MATERIAL<sp/><sp/><sp/><sp/>1<sp/><sp/><sp/></highlight><highlight class="comment">/*A<sp/>fast<sp/>and<sp/>impressive<sp/>theme*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="575"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="576"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_THEME_MONO</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="577"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_THEME_MONO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/><sp/><sp/></highlight><highlight class="comment">/*Mono-color<sp/>theme<sp/>for<sp/>monochrome<sp/>displays*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="578"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="579"><highlight class="normal"></highlight></codeline>
+<codeline lineno="580"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_THEME_DEFAULT_INIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="581"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_THEME_DEFAULT_INIT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lv_theme_material_init</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="582"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="583"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_THEME_DEFAULT_COLOR_PRIMARY</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="584"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_THEME_DEFAULT_COLOR_PRIMARY<sp/><sp/><sp/><sp/><sp/><sp/>LV_COLOR_RED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="585"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="586"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_THEME_DEFAULT_COLOR_SECONDARY</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="587"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_THEME_DEFAULT_COLOR_SECONDARY<sp/><sp/><sp/><sp/>LV_COLOR_BLUE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="588"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="589"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_THEME_DEFAULT_FLAG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="590"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_THEME_DEFAULT_FLAG<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LV_THEME_MATERIAL_FLAG_LIGHT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="591"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="592"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_THEME_DEFAULT_FONT_SMALL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="593"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_THEME_DEFAULT_FONT_SMALL<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;lv_font_montserrat_16</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="594"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="595"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_THEME_DEFAULT_FONT_NORMAL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="596"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_THEME_DEFAULT_FONT_NORMAL<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;lv_font_montserrat_16</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="597"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="598"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_THEME_DEFAULT_FONT_SUBTITLE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="599"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_THEME_DEFAULT_FONT_SUBTITLE<sp/><sp/><sp/><sp/><sp/><sp/>&amp;lv_font_montserrat_16</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="600"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="601"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_THEME_DEFAULT_FONT_TITLE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="602"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_THEME_DEFAULT_FONT_TITLE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;lv_font_montserrat_16</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="603"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="604"><highlight class="normal"></highlight></codeline>
+<codeline lineno="605"><highlight class="normal"></highlight><highlight class="comment">/*=================</highlight></codeline>
+<codeline lineno="606"><highlight class="comment"><sp/>*<sp/><sp/>Text<sp/>settings</highlight></codeline>
+<codeline lineno="607"><highlight class="comment"><sp/>*=================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="608"><highlight class="normal"></highlight></codeline>
+<codeline lineno="609"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Select<sp/>a<sp/>character<sp/>encoding<sp/>for<sp/>strings.</highlight></codeline>
+<codeline lineno="610"><highlight class="comment"><sp/>*<sp/>Your<sp/>IDE<sp/>or<sp/>editor<sp/>should<sp/>have<sp/>the<sp/>same<sp/>character<sp/>encoding</highlight></codeline>
+<codeline lineno="611"><highlight class="comment"><sp/>*<sp/>-<sp/>LV_TXT_ENC_UTF8</highlight></codeline>
+<codeline lineno="612"><highlight class="comment"><sp/>*<sp/>-<sp/>LV_TXT_ENC_ASCII</highlight></codeline>
+<codeline lineno="613"><highlight class="comment"><sp/>*<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="614"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TXT_ENC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="615"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_TXT_ENC<sp/>LV_TXT_ENC_UTF8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="616"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="617"><highlight class="normal"></highlight></codeline>
+<codeline lineno="618"><highlight class="normal"><sp/></highlight><highlight class="comment">/*Can<sp/>break<sp/>(wrap)<sp/>texts<sp/>on<sp/>these<sp/>chars*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="619"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TXT_BREAK_CHARS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="620"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_TXT_BREAK_CHARS<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&quot;<sp/>,.;:-_&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="621"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="622"><highlight class="normal"></highlight></codeline>
+<codeline lineno="623"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>If<sp/>a<sp/>word<sp/>is<sp/>at<sp/>least<sp/>this<sp/>long,<sp/>will<sp/>break<sp/>wherever<sp/>&quot;prettiest&quot;</highlight></codeline>
+<codeline lineno="624"><highlight class="comment"><sp/>*<sp/>To<sp/>disable,<sp/>set<sp/>to<sp/>a<sp/>value<sp/>&lt;=<sp/>0<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="625"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TXT_LINE_BREAK_LONG_LEN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="626"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_TXT_LINE_BREAK_LONG_LEN<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="627"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="628"><highlight class="normal"></highlight></codeline>
+<codeline lineno="629"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Minimum<sp/>number<sp/>of<sp/>characters<sp/>in<sp/>a<sp/>long<sp/>word<sp/>to<sp/>put<sp/>on<sp/>a<sp/>line<sp/>before<sp/>a<sp/>break.</highlight></codeline>
+<codeline lineno="630"><highlight class="comment"><sp/>*<sp/>Depends<sp/>on<sp/>LV_TXT_LINE_BREAK_LONG_LEN.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="631"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TXT_LINE_BREAK_LONG_PRE_MIN_LEN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="632"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_TXT_LINE_BREAK_LONG_PRE_MIN_LEN<sp/><sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="633"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="634"><highlight class="normal"></highlight></codeline>
+<codeline lineno="635"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Minimum<sp/>number<sp/>of<sp/>characters<sp/>in<sp/>a<sp/>long<sp/>word<sp/>to<sp/>put<sp/>on<sp/>a<sp/>line<sp/>after<sp/>a<sp/>break.</highlight></codeline>
+<codeline lineno="636"><highlight class="comment"><sp/>*<sp/>Depends<sp/>on<sp/>LV_TXT_LINE_BREAK_LONG_LEN.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="637"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TXT_LINE_BREAK_LONG_POST_MIN_LEN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="638"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_TXT_LINE_BREAK_LONG_POST_MIN_LEN<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="639"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="640"><highlight class="normal"></highlight></codeline>
+<codeline lineno="641"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>The<sp/>control<sp/>character<sp/>to<sp/>use<sp/>for<sp/>signalling<sp/>text<sp/>recoloring.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="642"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TXT_COLOR_CMD</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="643"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_TXT_COLOR_CMD<sp/>&quot;#&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="644"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="645"><highlight class="normal"></highlight></codeline>
+<codeline lineno="646"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Support<sp/>bidirectional<sp/>texts.</highlight></codeline>
+<codeline lineno="647"><highlight class="comment"><sp/>*<sp/>Allows<sp/>mixing<sp/>Left-to-Right<sp/>and<sp/>Right-to-Left<sp/>texts.</highlight></codeline>
+<codeline lineno="648"><highlight class="comment"><sp/>*<sp/>The<sp/>direction<sp/>will<sp/>be<sp/>processed<sp/>according<sp/>to<sp/>the<sp/>Unicode<sp/>Bidirectioanl<sp/>Algorithm:</highlight></codeline>
+<codeline lineno="649"><highlight class="comment"><sp/>*<sp/>https://www.w3.org/International/articles/inline-bidi-markup/uba-basics*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="650"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_BIDI</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="651"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_BIDI<sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="652"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="653"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_BIDI</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="654"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Set<sp/>the<sp/>default<sp/>direction.<sp/>Supported<sp/>values:</highlight></codeline>
+<codeline lineno="655"><highlight class="comment"><sp/>*<sp/>`LV_BIDI_DIR_LTR`<sp/>Left-to-Right</highlight></codeline>
+<codeline lineno="656"><highlight class="comment"><sp/>*<sp/>`LV_BIDI_DIR_RTL`<sp/>Right-to-Left</highlight></codeline>
+<codeline lineno="657"><highlight class="comment"><sp/>*<sp/>`LV_BIDI_DIR_AUTO`<sp/>detect<sp/>texts<sp/>base<sp/>direction<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="658"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_BIDI_BASE_DIR_DEF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="659"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_BIDI_BASE_DIR_DEF<sp/><sp/>LV_BIDI_DIR_AUTO</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="660"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="661"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="662"><highlight class="normal"></highlight></codeline>
+<codeline lineno="663"><highlight class="normal"></highlight><highlight class="comment">/*Change<sp/>the<sp/>built<sp/>in<sp/>(v)snprintf<sp/>functions*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="664"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_SPRINTF_CUSTOM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="665"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_SPRINTF_CUSTOM<sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="666"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="667"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_SPRINTF_CUSTOM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="668"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_SPRINTF_INCLUDE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="669"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_SPRINTF_INCLUDE<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="670"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="671"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>lv_snprintf</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="672"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>lv_snprintf<sp/><sp/><sp/><sp/><sp/>snprintf</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="673"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="674"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>lv_vsnprintf</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="675"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>lv_vsnprintf<sp/><sp/><sp/><sp/>vsnprintf</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="676"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="677"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">/*LV_SPRINTF_CUSTOM*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="678"><highlight class="normal"></highlight></codeline>
+<codeline lineno="679"><highlight class="normal"></highlight><highlight class="comment">/*===================</highlight></codeline>
+<codeline lineno="680"><highlight class="comment"><sp/>*<sp/><sp/>LV_OBJ<sp/>SETTINGS</highlight></codeline>
+<codeline lineno="681"><highlight class="comment"><sp/>*==================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="682"><highlight class="normal"></highlight></codeline>
+<codeline lineno="683"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_USER_DATA</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="684"><highlight class="normal"></highlight><highlight class="comment">/*Declare<sp/>the<sp/>type<sp/>of<sp/>the<sp/>user<sp/>data<sp/>of<sp/>object<sp/>(can<sp/>be<sp/>e.g.<sp/>`void<sp/>*`,<sp/>`int`,<sp/>`struct`)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="685"><highlight class="normal"></highlight><highlight class="comment">/*Provide<sp/>a<sp/>function<sp/>to<sp/>free<sp/>user<sp/>data*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="686"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_USER_DATA_FREE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="687"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_USER_DATA_FREE<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="688"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="689"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_USER_DATA_FREE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="690"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USER_DATA_FREE_INCLUDE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="691"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_USER_DATA_FREE_INCLUDE<sp/><sp/>&quot;something.h&quot;<sp/><sp/></highlight><highlight class="comment">/*Header<sp/>for<sp/>user<sp/>data<sp/>free<sp/>function*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="692"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="693"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Function<sp/>prototype<sp/>:<sp/>void<sp/>user_data_free(lv_obj_t<sp/>*<sp/>obj);<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="694"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USER_DATA_FREE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="695"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_USER_DATA_FREE<sp/><sp/>(user_data_free)<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Invoking<sp/>for<sp/>user<sp/>data<sp/>free<sp/>function*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="696"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="697"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="698"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="699"><highlight class="normal"></highlight></codeline>
+<codeline lineno="700"><highlight class="normal"></highlight><highlight class="comment">/*1:<sp/>enable<sp/>`lv_obj_realaign()`<sp/>based<sp/>on<sp/>`lv_obj_align()`<sp/>parameters*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="701"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_OBJ_REALIGN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="702"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_OBJ_REALIGN<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="703"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="704"><highlight class="normal"></highlight></codeline>
+<codeline lineno="705"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Enable<sp/>to<sp/>make<sp/>the<sp/>object<sp/>clickable<sp/>on<sp/>a<sp/>larger<sp/>area.</highlight></codeline>
+<codeline lineno="706"><highlight class="comment"><sp/>*<sp/>LV_EXT_CLICK_AREA_OFF<sp/>or<sp/>0:<sp/>Disable<sp/>this<sp/>feature</highlight></codeline>
+<codeline lineno="707"><highlight class="comment"><sp/>*<sp/>LV_EXT_CLICK_AREA_TINY:<sp/>The<sp/>extra<sp/>area<sp/>can<sp/>be<sp/>adjusted<sp/>horizontally<sp/>and<sp/>vertically<sp/>(0..255<sp/>px)</highlight></codeline>
+<codeline lineno="708"><highlight class="comment"><sp/>*<sp/>LV_EXT_CLICK_AREA_FULL:<sp/>The<sp/>extra<sp/>area<sp/>can<sp/>be<sp/>adjusted<sp/>in<sp/>all<sp/>4<sp/>directions<sp/>(-32k..+32k<sp/>px)</highlight></codeline>
+<codeline lineno="709"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="710"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_EXT_CLICK_AREA</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="711"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_EXT_CLICK_AREA<sp/><sp/>LV_EXT_CLICK_AREA_TINY</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="712"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="713"><highlight class="normal"></highlight></codeline>
+<codeline lineno="714"><highlight class="normal"></highlight><highlight class="comment">/*==================</highlight></codeline>
+<codeline lineno="715"><highlight class="comment"><sp/>*<sp/><sp/>LV<sp/>OBJ<sp/>X<sp/>USAGE</highlight></codeline>
+<codeline lineno="716"><highlight class="comment"><sp/>*================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="717"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="718"><highlight class="comment"><sp/>*<sp/>Documentation<sp/>of<sp/>the<sp/>object<sp/>types:<sp/>https://docs.littlevgl.com/#Object-types</highlight></codeline>
+<codeline lineno="719"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="720"><highlight class="normal"></highlight></codeline>
+<codeline lineno="721"><highlight class="normal"></highlight><highlight class="comment">/*Arc<sp/>(dependencies:<sp/>-)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="722"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_ARC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="723"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_ARC<sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="724"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="725"><highlight class="normal"></highlight></codeline>
+<codeline lineno="726"><highlight class="normal"></highlight><highlight class="comment">/*Bar<sp/>(dependencies:<sp/>-)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="727"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_BAR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="728"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_BAR<sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="729"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="730"><highlight class="normal"></highlight></codeline>
+<codeline lineno="731"><highlight class="normal"></highlight><highlight class="comment">/*Button<sp/>(dependencies:<sp/>lv_cont*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="732"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_BTN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="733"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_BTN<sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="734"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="735"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_BTN<sp/>!=<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="736"><highlight class="normal"></highlight><highlight class="comment">/*Enable<sp/>button-state<sp/>animations<sp/>-<sp/>draw<sp/>a<sp/>circle<sp/>on<sp/>click<sp/>(dependencies:<sp/>LV_USE_ANIMATION)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="737"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_BTN_INK_EFFECT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="738"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_BTN_INK_EFFECT<sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="739"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="740"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="741"><highlight class="normal"></highlight></codeline>
+<codeline lineno="742"><highlight class="normal"></highlight><highlight class="comment">/*Button<sp/>matrix<sp/>(dependencies:<sp/>-)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="743"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_BTNMATRIX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="744"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_BTNMATRIX<sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="745"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="746"><highlight class="normal"></highlight></codeline>
+<codeline lineno="747"><highlight class="normal"></highlight><highlight class="comment">/*Calendar<sp/>(dependencies:<sp/>-)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="748"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_CALENDAR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="749"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_CALENDAR<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="750"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="751"><highlight class="normal"></highlight></codeline>
+<codeline lineno="752"><highlight class="normal"></highlight><highlight class="comment">/*Canvas<sp/>(dependencies:<sp/>lv_img)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="753"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_CANVAS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="754"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_CANVAS<sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="755"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="756"><highlight class="normal"></highlight></codeline>
+<codeline lineno="757"><highlight class="normal"></highlight><highlight class="comment">/*Check<sp/>box<sp/>(dependencies:<sp/>lv_btn,<sp/>lv_label)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="758"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_CHECKBOX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="759"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_CHECKBOX<sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="760"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="761"><highlight class="normal"></highlight></codeline>
+<codeline lineno="762"><highlight class="normal"></highlight><highlight class="comment">/*Chart<sp/>(dependencies:<sp/>-)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="763"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_CHART</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="764"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_CHART<sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="765"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="766"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_CHART</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="767"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_CHART_AXIS_TICK_LABEL_MAX_LEN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="768"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_CHART_AXIS_TICK_LABEL_MAX_LEN<sp/><sp/><sp/><sp/>256</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="769"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="770"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="771"><highlight class="normal"></highlight></codeline>
+<codeline lineno="772"><highlight class="normal"></highlight><highlight class="comment">/*Container<sp/>(dependencies:<sp/>-*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="773"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_CONT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="774"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_CONT<sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="775"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="776"><highlight class="normal"></highlight></codeline>
+<codeline lineno="777"><highlight class="normal"></highlight><highlight class="comment">/*Color<sp/>picker<sp/>(dependencies:<sp/>-*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="778"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_CPICKER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="779"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_CPICKER<sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="780"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="781"><highlight class="normal"></highlight></codeline>
+<codeline lineno="782"><highlight class="normal"></highlight><highlight class="comment">/*Drop<sp/>down<sp/>list<sp/>(dependencies:<sp/>lv_page,<sp/>lv_label,<sp/>lv_symbol_def.h)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="783"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_DROPDOWN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="784"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_DROPDOWN<sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="785"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="786"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_DROPDOWN<sp/>!=<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="787"><highlight class="normal"></highlight><highlight class="comment">/*Open<sp/>and<sp/>close<sp/>default<sp/>animation<sp/>time<sp/>[ms]<sp/>(0:<sp/>no<sp/>animation)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="788"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_DROPDOWN_DEF_ANIM_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="789"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_DROPDOWN_DEF_ANIM_TIME<sp/><sp/><sp/><sp/><sp/>200</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="790"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="791"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="792"><highlight class="normal"></highlight></codeline>
+<codeline lineno="793"><highlight class="normal"></highlight><highlight class="comment">/*Gauge<sp/>(dependencies:lv_bar,<sp/>lv_linemeter)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="794"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_GAUGE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="795"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_GAUGE<sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="796"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="797"><highlight class="normal"></highlight></codeline>
+<codeline lineno="798"><highlight class="normal"></highlight><highlight class="comment">/*Image<sp/>(dependencies:<sp/>lv_label*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="799"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_IMG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="800"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_IMG<sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="801"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="802"><highlight class="normal"></highlight></codeline>
+<codeline lineno="803"><highlight class="normal"></highlight><highlight class="comment">/*Image<sp/>Button<sp/>(dependencies:<sp/>lv_btn*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="804"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_IMGBTN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="805"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_IMGBTN<sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="806"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="807"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_IMGBTN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="808"><highlight class="normal"></highlight><highlight class="comment">/*1:<sp/>The<sp/>imgbtn<sp/>requires<sp/>left,<sp/>mid<sp/>and<sp/>right<sp/>parts<sp/>and<sp/>the<sp/>width<sp/>can<sp/>be<sp/>set<sp/>freely*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="809"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_IMGBTN_TILED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="810"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_IMGBTN_TILED<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="811"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="812"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="813"><highlight class="normal"></highlight></codeline>
+<codeline lineno="814"><highlight class="normal"></highlight><highlight class="comment">/*Keyboard<sp/>(dependencies:<sp/>lv_btnm)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="815"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_KEYBOARD</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="816"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_KEYBOARD<sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="817"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="818"><highlight class="normal"></highlight></codeline>
+<codeline lineno="819"><highlight class="normal"></highlight><highlight class="comment">/*Label<sp/>(dependencies:<sp/>-*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="820"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_LABEL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="821"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_LABEL<sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="822"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="823"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_LABEL<sp/>!=<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="824"><highlight class="normal"></highlight><highlight class="comment">/*Hor,<sp/>or<sp/>ver.<sp/>scroll<sp/>speed<sp/>[px/sec]<sp/>in<sp/>&apos;LV_LABEL_LONG_ROLL/ROLL_CIRC&apos;<sp/>mode*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="825"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_LABEL_DEF_SCROLL_SPEED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="826"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_LABEL_DEF_SCROLL_SPEED<sp/><sp/><sp/><sp/><sp/><sp/><sp/>25</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="827"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="828"><highlight class="normal"></highlight></codeline>
+<codeline lineno="829"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Waiting<sp/>period<sp/>at<sp/>beginning/end<sp/>of<sp/>animation<sp/>cycle<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="830"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_LABEL_WAIT_CHAR_COUNT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="831"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_LABEL_WAIT_CHAR_COUNT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="832"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="833"><highlight class="normal"></highlight></codeline>
+<codeline lineno="834"><highlight class="normal"></highlight><highlight class="comment">/*Enable<sp/>selecting<sp/>text<sp/>of<sp/>the<sp/>label<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="835"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_LABEL_TEXT_SEL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="836"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_LABEL_TEXT_SEL<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="837"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="838"><highlight class="normal"></highlight></codeline>
+<codeline lineno="839"><highlight class="normal"></highlight><highlight class="comment">/*Store<sp/>extra<sp/>some<sp/>info<sp/>in<sp/>labels<sp/>(12<sp/>bytes)<sp/>to<sp/>speed<sp/>up<sp/>drawing<sp/>of<sp/>very<sp/>long<sp/>texts*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="840"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_LABEL_LONG_TXT_HINT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="841"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_LABEL_LONG_TXT_HINT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="842"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="843"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="844"><highlight class="normal"></highlight></codeline>
+<codeline lineno="845"><highlight class="normal"></highlight><highlight class="comment">/*LED<sp/>(dependencies:<sp/>-)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="846"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_LED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="847"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_LED<sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="848"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="849"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_LED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="850"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_LED_BRIGHT_MIN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="851"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_LED_BRIGHT_MIN<sp/><sp/>120<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Minimal<sp/>brightness*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="852"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="853"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_LED_BRIGHT_MAX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="854"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_LED_BRIGHT_MAX<sp/><sp/>255<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Maximal<sp/>brightness*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="855"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="856"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="857"><highlight class="normal"></highlight></codeline>
+<codeline lineno="858"><highlight class="normal"></highlight><highlight class="comment">/*Line<sp/>(dependencies:<sp/>-*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="859"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_LINE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="860"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_LINE<sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="861"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="862"><highlight class="normal"></highlight></codeline>
+<codeline lineno="863"><highlight class="normal"></highlight><highlight class="comment">/*List<sp/>(dependencies:<sp/>lv_page,<sp/>lv_btn,<sp/>lv_label,<sp/>(lv_img<sp/>optionally<sp/>for<sp/>icons<sp/>))*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="864"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_LIST</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="865"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_LIST<sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="866"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="867"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_LIST<sp/>!=<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="868"><highlight class="normal"></highlight><highlight class="comment">/*Default<sp/>animation<sp/>time<sp/>of<sp/>focusing<sp/>to<sp/>a<sp/>list<sp/>element<sp/>[ms]<sp/>(0:<sp/>no<sp/>animation)<sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="869"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_LIST_DEF_ANIM_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="870"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_LIST_DEF_ANIM_TIME<sp/><sp/>100</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="871"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="872"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="873"><highlight class="normal"></highlight></codeline>
+<codeline lineno="874"><highlight class="normal"></highlight><highlight class="comment">/*Line<sp/>meter<sp/>(dependencies:<sp/>*;)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="875"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_LINEMETER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="876"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_LINEMETER<sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="877"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="878"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_LINEMETER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="879"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Draw<sp/>line<sp/>more<sp/>precisely<sp/>at<sp/>cost<sp/>of<sp/>performance.</highlight></codeline>
+<codeline lineno="880"><highlight class="comment"><sp/>*<sp/>Useful<sp/>if<sp/>there<sp/>are<sp/>lot<sp/>of<sp/>lines<sp/>any<sp/>minor<sp/>are<sp/>visible</highlight></codeline>
+<codeline lineno="881"><highlight class="comment"><sp/>*<sp/>0:<sp/>No<sp/>extra<sp/>precision</highlight></codeline>
+<codeline lineno="882"><highlight class="comment"><sp/>*<sp/>1:<sp/>Some<sp/>extra<sp/>precision</highlight></codeline>
+<codeline lineno="883"><highlight class="comment"><sp/>*<sp/>2:<sp/>Best<sp/>precision</highlight></codeline>
+<codeline lineno="884"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="885"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_LINEMETER_PRECISE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="886"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_LINEMETER_PRECISE<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="887"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="888"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="889"><highlight class="normal"></highlight></codeline>
+<codeline lineno="890"><highlight class="normal"></highlight><highlight class="comment">/*Mask<sp/>(dependencies:<sp/>-)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="891"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_OBJMASK</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="892"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_OBJMASK<sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="893"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="894"><highlight class="normal"></highlight></codeline>
+<codeline lineno="895"><highlight class="normal"></highlight><highlight class="comment">/*Message<sp/>box<sp/>(dependencies:<sp/>lv_rect,<sp/>lv_btnm,<sp/>lv_label)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="896"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_MSGBOX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="897"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_MSGBOX<sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="898"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="899"><highlight class="normal"></highlight></codeline>
+<codeline lineno="900"><highlight class="normal"></highlight><highlight class="comment">/*Page<sp/>(dependencies:<sp/>lv_cont)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="901"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_PAGE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="902"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_PAGE<sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="903"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="904"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_PAGE<sp/>!=<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="905"><highlight class="normal"></highlight><highlight class="comment">/*Focus<sp/>default<sp/>animation<sp/>time<sp/>[ms]<sp/>(0:<sp/>no<sp/>animation)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="906"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_PAGE_DEF_ANIM_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="907"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_PAGE_DEF_ANIM_TIME<sp/><sp/><sp/><sp/><sp/>400</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="908"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="909"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="910"><highlight class="normal"></highlight></codeline>
+<codeline lineno="911"><highlight class="normal"></highlight><highlight class="comment">/*Preload<sp/>(dependencies:<sp/>lv_arc,<sp/>lv_anim)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="912"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_SPINNER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="913"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_SPINNER<sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="914"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="915"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_SPINNER<sp/>!=<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="916"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_SPINNER_DEF_ARC_LENGTH</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="917"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_SPINNER_DEF_ARC_LENGTH<sp/><sp/><sp/>60<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*[deg]*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="918"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="919"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_SPINNER_DEF_SPIN_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="920"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_SPINNER_DEF_SPIN_TIME<sp/><sp/><sp/><sp/>1000<sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*[ms]*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="921"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="922"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_SPINNER_DEF_ANIM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="923"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_SPINNER_DEF_ANIM<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LV_SPINNER_TYPE_SPINNING_ARC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="924"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="925"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="926"><highlight class="normal"></highlight></codeline>
+<codeline lineno="927"><highlight class="normal"></highlight><highlight class="comment">/*Roller<sp/>(dependencies:<sp/>lv_ddlist)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="928"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_ROLLER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="929"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_ROLLER<sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="930"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="931"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_ROLLER<sp/>!=<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="932"><highlight class="normal"></highlight><highlight class="comment">/*Focus<sp/>animation<sp/>time<sp/>[ms]<sp/>(0:<sp/>no<sp/>animation)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="933"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_ROLLER_DEF_ANIM_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="934"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_ROLLER_DEF_ANIM_TIME<sp/><sp/><sp/><sp/><sp/>200</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="935"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="936"><highlight class="normal"></highlight></codeline>
+<codeline lineno="937"><highlight class="normal"></highlight><highlight class="comment">/*Number<sp/>of<sp/>extra<sp/>&quot;pages&quot;<sp/>when<sp/>the<sp/>roller<sp/>is<sp/>infinite*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="938"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_ROLLER_INF_PAGES</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="939"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_ROLLER_INF_PAGES<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>7</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="940"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="941"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="942"><highlight class="normal"></highlight></codeline>
+<codeline lineno="943"><highlight class="normal"></highlight><highlight class="comment">/*Slider<sp/>(dependencies:<sp/>lv_bar)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="944"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_SLIDER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="945"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_SLIDER<sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="946"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="947"><highlight class="normal"></highlight></codeline>
+<codeline lineno="948"><highlight class="normal"></highlight><highlight class="comment">/*Spinbox<sp/>(dependencies:<sp/>lv_ta)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="949"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_SPINBOX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="950"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_SPINBOX<sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="951"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="952"><highlight class="normal"></highlight></codeline>
+<codeline lineno="953"><highlight class="normal"></highlight><highlight class="comment">/*Switch<sp/>(dependencies:<sp/>lv_slider)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="954"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_SWITCH</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="955"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_SWITCH<sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="956"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="957"><highlight class="normal"></highlight></codeline>
+<codeline lineno="958"><highlight class="normal"></highlight><highlight class="comment">/*Text<sp/>area<sp/>(dependencies:<sp/>lv_label,<sp/>lv_page)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="959"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_TEXTAREA</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="960"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_TEXTAREA<sp/><sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="961"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="962"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_TEXTAREA<sp/>!=<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="963"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TEXTAREA_DEF_CURSOR_BLINK_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="964"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_TEXTAREA_DEF_CURSOR_BLINK_TIME<sp/>400<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*ms*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="965"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="966"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TEXTAREA_DEF_PWD_SHOW_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="967"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_TEXTAREA_DEF_PWD_SHOW_TIME<sp/><sp/><sp/><sp/><sp/>1500<sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*ms*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="968"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="969"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="970"><highlight class="normal"></highlight></codeline>
+<codeline lineno="971"><highlight class="normal"></highlight><highlight class="comment">/*Table<sp/>(dependencies:<sp/>lv_label)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="972"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_TABLE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="973"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_TABLE<sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="974"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="975"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_TABLE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="976"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TABLE_COL_MAX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="977"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_TABLE_COL_MAX<sp/><sp/><sp/><sp/>12</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="978"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="979"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="980"><highlight class="normal"></highlight></codeline>
+<codeline lineno="981"><highlight class="normal"></highlight><highlight class="comment">/*Tab<sp/>(dependencies:<sp/>lv_page,<sp/>lv_btnm)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="982"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_TABVIEW</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="983"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_TABVIEW<sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="984"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="985"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>if<sp/>LV_USE_TABVIEW<sp/>!=<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="986"><highlight class="normal"></highlight><highlight class="comment">/*Time<sp/>of<sp/>slide<sp/>animation<sp/>[ms]<sp/>(0:<sp/>no<sp/>animation)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="987"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TABVIEW_DEF_ANIM_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="988"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_TABVIEW_DEF_ANIM_TIME<sp/><sp/><sp/><sp/>300</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="989"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="990"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="991"><highlight class="normal"></highlight></codeline>
+<codeline lineno="992"><highlight class="normal"></highlight><highlight class="comment">/*Tileview<sp/>(dependencies:<sp/>lv_page)<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="993"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_TILEVIEW</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="994"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_TILEVIEW<sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="995"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="996"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_TILEVIEW</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="997"><highlight class="normal"></highlight><highlight class="comment">/*Time<sp/>of<sp/>slide<sp/>animation<sp/>[ms]<sp/>(0:<sp/>no<sp/>animation)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="998"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_TILEVIEW_DEF_ANIM_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="999"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>LV_TILEVIEW_DEF_ANIM_TIME<sp/><sp/><sp/>300</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1000"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1001"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1002"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1003"><highlight class="normal"></highlight><highlight class="comment">/*Window<sp/>(dependencies:<sp/>lv_cont,<sp/>lv_btn,<sp/>lv_label,<sp/>lv_img,<sp/>lv_page)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1004"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LV_USE_WIN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1005"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_USE_WIN<sp/><sp/><sp/><sp/><sp/><sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1006"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1007"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1008"><highlight class="normal"></highlight><highlight class="comment">/*==================</highlight></codeline>
+<codeline lineno="1009"><highlight class="comment"><sp/>*<sp/>Non-user<sp/>section</highlight></codeline>
+<codeline lineno="1010"><highlight class="comment"><sp/>*==================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1011"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1012"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(_MSC_VER)<sp/>&amp;&amp;<sp/>!defined(_CRT_SECURE_NO_WARNINGS)<sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Disable<sp/>warnings<sp/>for<sp/>Visual<sp/>Studio*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1013"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>_CRT_SECURE_NO_WARNINGS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1014"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>_CRT_SECURE_NO_WARNINGS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1015"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1016"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1017"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1018"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1019"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">/*LV_CONF_CHECKER_H*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="/home/kisvegabor/projects/littlevgl/eclipse-workspace/lv_sim_eclipse_sdl_dev/lvgl/src/lv_conf_internal.h"/>
+  </compounddef>
+</doxygen>
