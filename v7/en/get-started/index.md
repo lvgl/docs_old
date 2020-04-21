@@ -8,9 +8,12 @@
 .. toctree::
    :maxdepth: 2
 
-   live-demo
-   pc-simulator
    quick-overview
+   pc-simulator
+   stm32
+   nxp
+   espressif
+   arduino
    micropython
 ```
 
