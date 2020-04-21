@@ -118,21 +118,23 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Quick overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#add-littlevgl-into-your-project">Add LittlevGL into your project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-lvgl-into-your-project">Add LVGL into your project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#learn-the-basics">Learn the basics</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#objects-widgets">Objects (Widgets)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#styles">Styles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#widgets">Widgets</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parts">Parts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#states">States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#styles">Styles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#themes">Themes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#button-with-label">Button with label</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#button-with-styles">Button with styles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#slider-and-object-alignment">Slider and object alignment</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#list-and-themes">List and themes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#use-littlevgl-from-micropython">Use LittlevGL from Micropython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#styling-buttons">Styling buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slider-and-alignment">Slider and alignment</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#micropython">Micropython</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#contributing">Contributing</a></li>
 </ul>
 </li>
@@ -1173,28 +1175,29 @@
             
   <div class="section" id="quick-overview">
 <h1>Quick overview<a class="headerlink" href="#quick-overview" title="Permalink to this headline">¶</a></h1>
-<p>Here you can learn the most important things about LittlevGL.
+<p>Here you can learn the most important things about LVGL.
 You should read it first to get a general impression and read the detailed <a class="reference internal" href="../porting/index.html"><span class="doc">Porting</span></a> and <a class="reference internal" href="../overview/index.html"><span class="doc">Overview</span></a> sections after that.</p>
-<div class="section" id="add-littlevgl-into-your-project">
-<h2>Add LittlevGL into your project<a class="headerlink" href="#add-littlevgl-into-your-project" title="Permalink to this headline">¶</a></h2>
-<p>The following steps show how to setup LittlevGL on an embedded system with a display and a touchpad.
-You can use the <a class="reference internal" href="pc-simulator.html"><span class="doc">Simulators</span></a> to get ‘ready to use’ projects which can be run on your PC.</p>
+<p>Instead of porting LVGL to an embedded hardware you can use the <a class="reference internal" href="pc-simulator.html"><span class="doc">Simulators</span></a> to get ready-to-use projects which can be run on your PC.
+This way you can save the porting for now and make some experience with LVGL immediately.</p>
+<div class="section" id="add-lvgl-into-your-project">
+<h2>Add LVGL into your project<a class="headerlink" href="#add-lvgl-into-your-project" title="Permalink to this headline">¶</a></h2>
+<p>The following steps show how to setup LVGL on an embedded system with a display and a touchpad.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://littlevgl.com/download">Download</a> or <a class="reference external" href="https://github.com/littlevgl/lvgl">Clone</a> the library</p></li>
+<li><p><a class="reference external" href="https://littlevgl.com/download">Download</a> or <a class="reference external" href="https://github.com/littlevgl/lvgl">Clone</a> the library from GitHub with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/littlevgl/lvgl.git</span></code></p></li>
 <li><p>Copy the <code class="docutils literal notranslate"><span class="pre">lvgl</span></code> folder into your project</p></li>
-<li><p>Copy <code class="docutils literal notranslate"><span class="pre">lvgl/lv_conf_templ.h</span></code> as <code class="docutils literal notranslate"><span class="pre">lv_conf.h</span></code> next to the <code class="docutils literal notranslate"><span class="pre">lvgl</span></code> folder and set at least <code class="docutils literal notranslate"><span class="pre">LV_HOR_RES_MAX</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_VER_RES_MAX</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span></code> macros.</p></li>
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">lvgl/lv_conf_templ.h</span></code> as <code class="docutils literal notranslate"><span class="pre">lv_conf.h</span></code> next to the <code class="docutils literal notranslate"><span class="pre">lvgl</span></code> folder, change the first <code class="docutils literal notranslate"><span class="pre">#if</span> <span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code> to enable the file’s content and set at least <code class="docutils literal notranslate"><span class="pre">LV_HOR_RES_MAX</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_VER_RES_MAX</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span></code> defines.</p></li>
 <li><p>Include <code class="docutils literal notranslate"><span class="pre">lvgl/lvgl.h</span></code> where you need to use LittlevGL related functions.</p></li>
-<li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(x)</span></code> every <code class="docutils literal notranslate"><span class="pre">x</span></code> milliseconds <strong>in a Timer or Task</strong> (<code class="docutils literal notranslate"><span class="pre">x</span></code> should be between 1 and 10). It is required for the internal timing of LittlevGL.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(x)</span></code> every <code class="docutils literal notranslate"><span class="pre">x</span></code> milliseconds <strong>in a Timer or Task</strong> (<code class="docutils literal notranslate"><span class="pre">x</span></code> should be between 1 and 10). It is required for the internal timing of LVGL.</p></li>
 <li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_init()</span></code></p></li>
-<li><p>Create a display buffer for LittlevGL</p></li>
+<li><p>Create a display buffer for LVGL. LVGL will render the graphics here first, and seed the rendered image to the display. The buffer size can be set freely but 1/10 screen size is a good starting point.</p></li>
 </ul>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_disp_buf_t</span> <span class="n">disp_buf</span><span class="p">;</span>
-<span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">buf</span><span class="p">[</span><span class="n">LV_HOR_RES_MAX</span> <span class="o">*</span> <span class="mi">10</span><span class="p">];</span>                     <span class="cm">/*Declare a buffer for 10 lines*/</span>
-<span class="n">lv_disp_buf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_HOR_RES_MAX</span> <span class="o">*</span> <span class="mi">10</span><span class="p">);</span>    <span class="cm">/*Initialize the display buffer*/</span>
+<span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">buf</span><span class="p">[</span><span class="n">LV_HOR_RES_MAX</span> <span class="o">*</span> <span class="n">LV_VER_RES_MAX</span> <span class="o">/</span> <span class="mi">10</span><span class="p">];</span>                     <span class="cm">/*Declare a buffer for 10 lines*/</span>
+<span class="n">lv_disp_buf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_HOR_RES_MAX</span> <span class="o">*</span> <span class="n">LV_VER_RES_MAX</span> <span class="o">/</span> <span class="mi">10</span><span class="p">);</span>    <span class="cm">/*Initialize the display buffer*/</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Implement and register a function which can <strong>copy a pixel array</strong> to an area of your display:</p></li>
+<li><p>Implement and register a function which can <strong>copy the rendered image</strong> to an area of your display:</p></li>
 </ul>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_disp_drv_t</span> <span class="n">disp_drv</span><span class="p">;</span>               <span class="cm">/*Descriptor of a display driver*/</span>
 <span class="n">lv_disp_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span>          <span class="cm">/*Basic initialization*/</span>
@@ -1249,13 +1252,15 @@ It will redraw the screen if required, handle input devices etc.</p></li>
 </div>
 <div class="section" id="learn-the-basics">
 <h2>Learn the basics<a class="headerlink" href="#learn-the-basics" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="objects-widgets">
-<h3>Objects (Widgets)<a class="headerlink" href="#objects-widgets" title="Permalink to this headline">¶</a></h3>
-<p>The graphical elements like Buttons, Labels, Sliders, Charts etc are called objects in LittelvGL. Go to <a class="reference internal" href="../widgets/index.html"><span class="doc">Object types</span></a> to see the full list of available types.</p>
-<p>Every object has a parent object. The child object moves with the parent and if you delete the parent the children will be deleted too. Children can be visible only on their parent.</p>
-<p>The <em>screen</em> is the “root” parent. To get the current screen call <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code>.</p>
+<div class="section" id="widgets">
+<h3>Widgets<a class="headerlink" href="#widgets" title="Permalink to this headline">¶</a></h3>
+<p>The graphical elements like Buttons, Labels, Sliders, Charts etc are called objects or widgets in LVGL. Go to <a class="reference internal" href="../widgets/index.html"><span class="doc">Widgets</span></a> to see the full list of available widgets.</p>
+<p>Every object has a parent object where it is create. For example if a label is created on a button, the button is the parent of label.
+The child object moves with the parent and if the parent is deleted the children will be deleted too.</p>
+<p>Children can be visible only on their parent. It other words, the parts of the children out of the parent are clipped.</p>
+<p>A <em>screen</em> is the “root” parent. You can have any number of screens. To get the current screen call <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code>, and to load a screen use <code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr1)</span></code>.</p>
 <p>You can create a new object with <code class="docutils literal notranslate"><span class="pre">lv_&lt;type&gt;_create(parent,</span> <span class="pre">obj_to_copy)</span></code>. It will return an <code class="docutils literal notranslate"><span class="pre">lv_obj_t</span> <span class="pre">*</span></code> variable which should be used as a reference to the object to set its parameters.
-The first parameter is the desired <em>parent</em>, the second parameters can be an object to copy (<code class="docutils literal notranslate"><span class="pre">NULL</span></code> is unused).
+The first parameter is the desired <em>parent</em>, the second parameters can be an object to copy (<code class="docutils literal notranslate"><span class="pre">NULL</span></code> if unused).
 For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">slider1</span> <span class="o">=</span> <span class="n">lv_slider_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
 </pre></div>
@@ -1270,30 +1275,7 @@ For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_slider_set_value</span><span class="p">(</span><span class="n">slider1</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="n">LV_ANIM_ON</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>To see the full API visit the documentation of the object types or the related header file (e.g. <code class="docutils literal notranslate"><span class="pre">lvgl/src/lv_objx/lv_slider.h</span></code>).</p>
-</div>
-<div class="section" id="styles">
-<h3>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h3>
-<p>Styles can be assigned to the objects to changed their appearance. A style describes the appearance of rectangle-like objects (like a button or slider), texts, images and lines at once.</p>
-<p>You can create a new style like this:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style1</span><span class="p">;</span>                 <span class="cm">/*Declare a new style. Should be `static`*/</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>  <span class="cm">/*Copy a buil-in style*/</span>
-<span class="n">style1</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">LV_COLOR_RED</span><span class="p">;</span>          <span class="cm">/*Main color*/</span>
-<span class="n">style1</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0xffd83c</span><span class="p">)</span> <span class="cm">/*Gradient color (orange)*/</span>
-<span class="n">style1</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="n">style1</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x0F0</span><span class="p">)</span>        <span class="cm">/*Label color (green)*/</span>
-<span class="n">style1</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">font</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">lv_font_dejavu_22</span><span class="p">;</span>          <span class="cm">/*Change font*/</span>
-<span class="p">...</span>
-</pre></div>
-</div>
-<p>To set a new style for an object use the <code class="docutils literal notranslate"><span class="pre">lv_&lt;type&gt;set_style(obj,</span> <span class="pre">LV_&lt;TYPE&gt;_STYLE_&lt;NAME&gt;,</span> <span class="pre">&amp;my_style)</span></code> functions. For example:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_slider_set_style</span><span class="p">(</span><span class="n">slider1</span><span class="p">,</span> <span class="n">LV_SLIDER_STYLE_BG</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">slider_bg_style</span><span class="p">);</span>
-<span class="n">lv_slider_set_style</span><span class="p">(</span><span class="n">slider1</span><span class="p">,</span> <span class="n">LV_SLIDER_STYLE_INDIC</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">slider_indic_style</span><span class="p">);</span>
-<span class="n">lv_slider_set_style</span><span class="p">(</span><span class="n">slider1</span><span class="p">,</span> <span class="n">LV_SLIDER_STYLE_KNOB</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">slider_knob_style</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>If an object’s style is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> then it will inherit its parent’s style. For example, the labels’ style are <code class="docutils literal notranslate"><span class="pre">NULL</span></code> by default. If you place them on a button then they will use the <code class="docutils literal notranslate"><span class="pre">style.text</span></code> properties from the button’s style.</p>
-<p>Learn more in <a class="reference internal" href="../overview/style.html"><span class="doc">Style overview</span></a> section.</p>
+<p>To see the full API visit the documentation of the widgets or the related header file (e.g. <a class="reference external" href="https://github.com/littlevgl/lvgl/blob/master/src/lv_widgets/lv_slider.h">lvgl/src/lv_widgets/lv_slider.h</a>).</p>
 </div>
 <div class="section" id="events">
 <h3>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h3>
@@ -1312,145 +1294,187 @@ For example:</p>
 </div>
 <p>Learn more about the events in the <a class="reference internal" href="../overview/event.html"><span class="doc">Event overview</span></a> section.</p>
 </div>
+<div class="section" id="parts">
+<h3>Parts<a class="headerlink" href="#parts" title="Permalink to this headline">¶</a></h3>
+<p>Widgets might be built from one or more parts. For example a button has only one part called <code class="docutils literal notranslate"><span class="pre">LV_BTN_PART_MAIN</span></code>.
+However, a <a class="reference internal" href="../widgets/page.html"><span class="doc">Page</span></a> has <code class="docutils literal notranslate"><span class="pre">LV_PAGE_PART_BG</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_PAGE_PART_SCROLLABLE</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_PAGE_PART_SCROLLBAR</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_PAGE_PART_EDGE_FLASG</span></code>.</p>
+<p>Some parts are <em>virtual</em> (they are not real object, just drawn on the fly, such as the scrollbar of a page) but other parts are <em>real</em> (they are real object, such as the scrollable part of the page).</p>
+<p>Parts come into play when you want to set the styles and states of a given part of an object. (See below)</p>
+</div>
+<div class="section" id="states">
+<h3>States<a class="headerlink" href="#states" title="Permalink to this headline">¶</a></h3>
+<p>The objects can be in a combination of the following states:</p>
+<ul class="simple">
+<li><p><strong>LV_STATE_DEFAULT</strong> Normal, released</p></li>
+<li><p><strong>LV_STATE_CHECKED</strong> Toggled or checked</p></li>
+<li><p><strong>LV_STATE_FOCUSED</strong> Focused via keypad or encoder or clicked via touchpad/mouse</p></li>
+<li><p><strong>LV_STATE_EDITED</strong> Edit by an encoder</p></li>
+<li><p><strong>LV_STATE_HOVERED</strong> Hovered by mouse (not supported now)</p></li>
+<li><p><strong>LV_STATE_PRESSED</strong> Pressed</p></li>
+<li><p><strong>LV_STATE_DISABLED</strong> Disabled or inactive</p></li>
+</ul>
+<p>For example if you press an object is automatically get the <code class="docutils literal notranslate"><span class="pre">LV_STATE_PRESSED</span></code> state and when you release is it will be removed.</p>
+<p>To get the current state use <code class="docutils literal notranslate"><span class="pre">lv_obj_get_state(obj,</span> <span class="pre">part)</span></code>. It will return the ORed states.</p>
+</div>
+<div class="section" id="styles">
+<h3>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h3>
+<p>Styles can be assigned to the parts objects to changed their appearance.
+A style can describe for example the background color, border width, text font and so on. See the full list <a class="reference external" href="https://docs.littlevgl.com/v7/en/html/overview/style.html#properties">here</a>.</p>
+<p>The styles can be cascaded (similarly to CSS). It means you can add more styles to a part of an object.
+For example <code class="docutils literal notranslate"><span class="pre">style_btn</span></code> can set a default button appearance, and <code class="docutils literal notranslate"><span class="pre">style_btn_red</span></code> can overwrite some properties to make the button red-</p>
+<p>Every style property you set is specific to a state. For example is you can set different background color for <code class="docutils literal notranslate"><span class="pre">LV_STATE_DEFAULT</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_STATE_PRESSED</span></code>.
+The library finds the best match between the state of the given part and the available style properties. For example if the object is in pressed state and the border width is specified for pressed state, then it will be used.
+However, if it’s nt specified for pressed state, the <code class="docutils literal notranslate"><span class="pre">LV_STATE_DEFAULT</span></code>’s border width will be used. If the border width not defined for <code class="docutils literal notranslate"><span class="pre">LV_STATE_DEFAULT</span></code> either, a default value will be used.</p>
+<p>Some properties (typically the text-related ones) can be inherited. It means if a property is not set in an object it will be searched in its parents too.
+For example you can set the font once in the screen’s style and every text will inherit it by default.</p>
+<p>Local style properties also can be added to the objects.</p>
+</div>
+<div class="section" id="themes">
+<h3>Themes<a class="headerlink" href="#themes" title="Permalink to this headline">¶</a></h3>
+<p>Themes are the default styles of the objects.
+The styles from the themes are applied automatically when the objects are created.</p>
+<p>You can select the theme to use in <code class="docutils literal notranslate"><span class="pre">lv_conf.h</span></code>.</p>
+</div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="button-with-label">
 <h3>Button with label<a class="headerlink" href="#button-with-label" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>     <span class="cm">/*Add a button the current screen*/</span>
-<span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>                            <span class="cm">/*Set its position*/</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>                          <span class="cm">/*Set its size*/</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">btn_event_cb</span><span class="p">);</span>                 <span class="cm">/*Assign a callback to the button*/</span>
+<img alt="Simple button with label with LVGL" src="../_images/lv_ex_get_started_1.png" />
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>          <span class="cm">/*Add a label to the button*/</span>
-<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button&quot;</span><span class="p">);</span>                     <span class="cm">/*Set the labels text*/</span>
-
-<span class="p">...</span>
-
-<span class="kt">void</span> <span class="n">btn_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">btn_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_CLICKED</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Clicked</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="cm">/*Get the first child of the button which is the label and change its text*/</span>
+        <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_obj_get_child</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">lv_label_set_text_fmt</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button: %d&quot;</span><span class="p">,</span> <span class="n">cnt</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Create a button with a label and react on Click event.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">lv_ex_get_started_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>     <span class="cm">/*Add a button the current screen*/</span>
+    <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>                            <span class="cm">/*Set its position*/</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>                          <span class="cm">/*Set its size*/</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">btn_event_cb</span><span class="p">);</span>                 <span class="cm">/*Assign a callback to the button*/</span>
+
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>          <span class="cm">/*Add a label to the button*/</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button&quot;</span><span class="p">);</span>                     <span class="cm">/*Set the labels text*/</span>
+<span class="p">}</span>
+
 </pre></div>
 </div>
-<p><img alt="../_images/simple_button_example.gif" src="../_images/simple_button_example.gif" /></p>
 </div>
-<div class="section" id="button-with-styles">
-<h3>Button with styles<a class="headerlink" href="#button-with-styles" title="Permalink to this headline">¶</a></h3>
-<p>Add styles to the button from the previous example:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_btn_rel</span><span class="p">;</span>                        <span class="cm">/*A variable to store the released style*/</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_rel</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_style_plain</span><span class="p">);</span>         <span class="cm">/*Initialize from a built-in style*/</span>
-<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x269</span><span class="p">);</span>
-<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0xADF</span><span class="p">);</span>
-<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x46B</span><span class="p">);</span>
-<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_SHADOW_BOTTOM</span><span class="p">;</span>
-<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">;</span>
-<span class="n">style_btn_rel</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0xDEF</span><span class="p">);</span>
+<div class="section" id="styling-buttons">
+<h3>Styling buttons<a class="headerlink" href="#styling-buttons" title="Permalink to this headline">¶</a></h3>
+<img alt="Styling buttons with LVGL" src="../_images/lv_ex_get_started_2.png" />
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_btn_pr</span><span class="p">;</span>                         <span class="cm">/*A variable to store the pressed style*/</span>
-<span class="n">lv_style_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_pr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn_rel</span><span class="p">);</span>           <span class="cm">/*Initialize from the released style*/</span>
-<span class="n">style_btn_pr</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x46B</span><span class="p">);</span>
-<span class="n">style_btn_pr</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x8BD</span><span class="p">);</span>
-<span class="n">style_btn_pr</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0x24A</span><span class="p">);</span>
-<span class="n">style_btn_pr</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="n">style_btn_pr</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_hex3</span><span class="p">(</span><span class="mh">0xBCD</span><span class="p">);</span>
 
-<span class="n">lv_btn_set_style</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">LV_BTN_STYLE_REL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn_rel</span><span class="p">);</span>    <span class="cm">/*Set the button&#39;s released style*/</span>
-<span class="n">lv_btn_set_style</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">LV_BTN_STYLE_PR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn_pr</span><span class="p">);</span>      <span class="cm">/*Set the button&#39;s pressed style*/</span>
+<span class="cm">/**</span>
+<span class="cm"> * Create styles from scratch for buttons.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">lv_ex_get_started_2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_btn</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_btn_red</span><span class="p">;</span>
+
+    <span class="cm">/*Create a simple button style*/</span>
+    <span class="n">lv_style_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">);</span>
+    <span class="n">lv_style_set_radius</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_opa</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_OPA_COVER</span><span class="p">);</span> <span class="cm">/*Default value is transparent*/</span>
+    <span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_SILVER</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_GRAY</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_grad_dir</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_GRAD_DIR_VER</span><span class="p">);</span>
+    <span class="n">lv_style_set_border_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_BLACK</span><span class="p">);</span>
+    <span class="n">lv_style_set_border_width</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+    <span class="cm">/*Just change the two color when pressed*/</span>
+    <span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_GRAY</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_SILVER</span><span class="p">);</span>
+
+    <span class="cm">/*Create a red style. Change only some colors.*/</span>
+    <span class="n">lv_style_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_RED</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_MAROON</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_MAROON</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_RED</span><span class="p">);</span>
+    <span class="n">lv_style_set_text_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_WHITE</span><span class="p">);</span>
+
+    <span class="cm">/*Create buttons and use the new styles*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>     <span class="cm">/*Add a button the current screen*/</span>
+    <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>                            <span class="cm">/*Set its position*/</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>                          <span class="cm">/*Set its size*/</span>
+    <span class="n">lv_obj_reset_style_list</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">);</span>         <span class="cm">/*Remove the styles coming from the theme*/</span>
+    <span class="n">lv_obj_add_style</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn</span><span class="p">);</span>
+
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>          <span class="cm">/*Add a label to the button*/</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button&quot;</span><span class="p">);</span>                     <span class="cm">/*Set the labels text*/</span>
+
+    <span class="cm">/*Create a new button*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn2</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">btn</span><span class="p">);</span>
+    <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>                             <span class="cm">/*Set its size*/</span>
+    <span class="n">lv_obj_reset_style_list</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">);</span>         <span class="cm">/*Remove the styles coming from the theme*/</span>
+    <span class="n">lv_obj_add_style</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn</span><span class="p">);</span>
+    <span class="n">lv_obj_add_style</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">);</span>   <span class="cm">/*Add the red style on top of the current */</span>
+    <span class="n">lv_obj_set_style_local_radius</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">);</span> <span class="cm">/*Add a local style*/</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>          <span class="cm">/*Add a label to the button*/</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button 2&quot;</span><span class="p">);</span>                     <span class="cm">/*Set the labels text*/</span>
+<span class="p">}</span>
+
+
 </pre></div>
 </div>
-<p><img alt="../_images/button_style_example.gif" src="../_images/button_style_example.gif" /></p>
 </div>
-<div class="section" id="slider-and-object-alignment">
-<h3>Slider and object alignment<a class="headerlink" href="#slider-and-object-alignment" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span><span class="p">;</span>
+<div class="section" id="slider-and-alignment">
+<h3>Slider and alignment<a class="headerlink" href="#slider-and-alignment" title="Permalink to this headline">¶</a></h3>
+<img alt="Create a slider with LVGL" src="../_images/lv_ex_get_started_3.png" />
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
 
-<span class="p">...</span>
+<span class="k">static</span> <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span><span class="p">;</span>
 
-<span class="cm">/* Create a slider in the center of the display */</span>
-<span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">slider</span> <span class="o">=</span> <span class="n">lv_slider_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_width</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>                        <span class="cm">/*Set the width*/</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>    <span class="cm">/*Align to the center of the parent (screen)*/</span>
-<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">slider_event_cb</span><span class="p">);</span>         <span class="cm">/*Assign an event function*/</span>
-
-<span class="cm">/* Create a label below the slider */</span>
-<span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">);</span>
-<span class="n">lv_obj_set_auto_realign</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
-<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">slider</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-
-<span class="p">...</span>
-
-<span class="kt">void</span> <span class="n">slider_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">slider</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<span class="kt">void</span> <span class="nf">slider_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">slider</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">static</span> <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>                                 <span class="cm">/* max 3 bytes  for number plus 1 null terminating byte */</span>
-        <span class="n">snprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;%u&quot;</span><span class="p">,</span> <span class="n">lv_slider_get_value</span><span class="p">(</span><span class="n">slider</span><span class="p">));</span>
-        <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">slider_label</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>               <span class="cm">/*Refresh the text*/</span>
+        <span class="cm">/*Refresh the text*/</span>
+        <span class="n">lv_label_set_text_fmt</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="n">lv_slider_get_value</span><span class="p">(</span><span class="n">slider</span><span class="p">));</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
-</div>
-<p><img alt="../_images/slider_example.gif" src="../_images/slider_example.gif" /></p>
-</div>
-<div class="section" id="list-and-themes">
-<h3>List and themes<a class="headerlink" href="#list-and-themes" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Texts of the list elements*/</span>
-<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">txts</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;First&quot;</span><span class="p">,</span> <span class="s">&quot;Second&quot;</span><span class="p">,</span> <span class="s">&quot;Third&quot;</span><span class="p">,</span> <span class="s">&quot;Forth&quot;</span><span class="p">,</span> <span class="s">&quot;Fifth&quot;</span><span class="p">,</span> <span class="s">&quot;Sixth&quot;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">};</span>
 
-<span class="cm">/* Initialize and set a theme. `LV_THEME_NIGHT` needs to enabled in lv_conf.h. */</span>
-<span class="n">lv_theme_t</span> <span class="o">*</span> <span class="n">th</span> <span class="o">=</span> <span class="n">lv_theme_night_init</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_theme_set_current</span><span class="p">(</span><span class="n">th</span><span class="p">);</span>
-
-<span class="cm">/*Create a list*/</span>
-<span class="n">lv_obj_t</span><span class="o">*</span> <span class="n">list</span> <span class="o">=</span> <span class="n">lv_list_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">180</span><span class="p">);</span>
-<span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-
-<span class="cm">/*Add buttons*/</span>
-<span class="kt">uint8_t</span> <span class="n">i</span><span class="p">;</span>
-<span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">txts</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">LV_SYMBOL_FILE</span><span class="p">,</span> <span class="n">txts</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">list_event</span><span class="p">);</span>       <span class="cm">/*Assign event function*/</span>
-    <span class="n">lv_btn_set_toggle</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>               <span class="cm">/*Enable on/off states*/</span>
-<span class="p">}</span>
-
-<span class="cm">/* Initialize and set an other theme. `LV_THEME_MATERIAL` needs to enabled in lv_conf.h.</span>
-<span class="cm"> * If `LV_TEHE_LIVE_UPDATE  1` then the previous list&#39;s style will be updated too.*/</span>
-<span class="n">th</span> <span class="o">=</span> <span class="n">lv_theme_material_init</span><span class="p">(</span><span class="mi">210</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_theme_set_current</span><span class="p">(</span><span class="n">th</span><span class="p">);</span>
-
-<span class="cm">/*Create an other list*/</span>
-<span class="n">list</span> <span class="o">=</span> <span class="n">lv_list_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">180</span><span class="p">);</span>
-<span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-
-<span class="cm">/*Add buttons with the same texts*/</span>
-<span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">txts</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">lv_list_add_btn</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">LV_SYMBOL_FILE</span><span class="p">,</span> <span class="n">txts</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">list_event</span><span class="p">);</span>
-    <span class="n">lv_btn_set_toggle</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="p">...</span>
-
-<span class="k">static</span> <span class="kt">void</span> <span class="n">list_event</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">e</span><span class="p">)</span>
+<span class="cm">/**</span>
+<span class="cm"> * Create a slider and write its value on a label.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">lv_ex_get_started_3</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">e</span> <span class="o">==</span> <span class="n">LV_EVENT_CLICKED</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">lv_list_get_btn_text</span><span class="p">(</span><span class="n">btn</span><span class="p">));</span>
-    <span class="p">}</span>
+    <span class="cm">/* Create a slider in the center of the display */</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">slider</span> <span class="o">=</span> <span class="n">lv_slider_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_width</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>                        <span class="cm">/*Set the width*/</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>    <span class="cm">/*Align to the center of the parent (screen)*/</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">slider_event_cb</span><span class="p">);</span>         <span class="cm">/*Assign an event function*/</span>
 
+    <span class="cm">/* Create a label below the slider */</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">);</span>
+    <span class="n">lv_obj_set_auto_realign</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>                          <span class="cm">/*To keep center alignment when the width of the text changes*/</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">slider</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>    <span class="cm">/*Align below the slider*/</span>
 <span class="p">}</span>
+
+
 </pre></div>
 </div>
-<p><img alt="../_images/list_theme_example.gif" src="../_images/list_theme_example.gif" /></p>
 </div>
-<div class="section" id="use-littlevgl-from-micropython">
-<h3>Use LittlevGL from Micropython<a class="headerlink" href="#use-littlevgl-from-micropython" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="micropython">
+<h2>Micropython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h2>
 <p>Learn more about <a class="reference internal" href="micropython.html"><span class="doc">Micropython</span></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Button and a Label</span>
 <span class="n">scr</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="p">()</span>
@@ -1462,7 +1486,6 @@ For example:</p>
 <span class="c1"># Load the screen</span>
 <span class="n">lv</span><span class="o">.</span><span class="n">scr_load</span><span class="p">(</span><span class="n">scr</span><span class="p">)</span>
 </pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="contributing">
@@ -1507,7 +1530,7 @@ For example:</p>
     <p>
         &copy; Copyright 2020, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Apr 19, 2020.
+        Last updated on Apr 21, 2020.
       </span>
 
     </p>

@@ -325,7 +325,7 @@ Properties for textual object.
 
 ```eval_rst
 .. image:: /lv_examples/src/lv_ex_style/lv_ex_style_7.*
-  :alt: Styling aline in lvgl
+  :alt: Styling a text in lvgl
 
 .. literalinclude:: /lv_examples/src/lv_ex_style/lv_ex_style_7.c
   :language: c
@@ -341,6 +341,13 @@ Properties of lines.
 - **line_rounded** (`bool`): `true`: draw rounded line endings.
 - **line_blend_mode** (`lv_blend_mode_t`): Set the blend mode of the line. Can be `LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE`). Default value: `LV_BLEND_MODE_NORMAL`.
 
+```eval_rst
+.. image:: /lv_examples/src/lv_ex_style/lv_ex_style_8.*
+  :alt: Styling a line in lvgl
+
+.. literalinclude:: /lv_examples/src/lv_ex_style/lv_ex_style_8.c
+  :language: c
+```
 
 ### Image properties
 Properties of image.
@@ -388,6 +395,13 @@ Both region could have different properties.
 - **scale_end_border_width** (`lv_style_int_t`): Width of a border drawn on the outer side of the scale in the end region.
 - **scale_end_line_width** (`lv_style_int_t`): Width of a scale lines in the end region.
 
+```eval_rst
+.. image:: /lv_examples/src/lv_ex_style/lv_ex_style_11.*
+  :alt: Styling a scale in lvgl
+
+.. literalinclude:: /lv_examples/src/lv_ex_style/lv_ex_style_11.c
+  :language: c
+```
 
 ## Themes
 Themes are collection of styles. There is always an active theme whose styles are automatically applied when an object is created. It gives a default appearance to UI which can modified by adding further styles.
