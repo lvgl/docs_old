@@ -144,3 +144,31 @@ The *default screen* is the last registered screen with `lv_disp_drv_register` o
 `lv_scr_act()` and `lv_scr_load()` operate on the currently default screen.
 
 Visit [Multi-display support](/overview/display) to learn more.
+
+## Parts
+
+The widgets can have multiple parts. For example a [Button](/widgets/btn) has only a main part but a [Slider](/widgets/slider) is built from a background, an indicator and a knob. 
+
+The name of the parts is constructed like `LV_ + <TYPE> _PART_ <NAME>`. For example `LV_BTN_PART_MAIN` or `LV_SLIDER_PART_KNOB`. The parts are usually used when styles are add to the objects. 
+Using parts different styles can be assigned to the different parts of the objects. 
+
+To learn more about the parts read the related section of the [Style overview](/overview/style#parts).
+
+
+### States
+The object can be in a combinations of the following states:
+- **LV_STATE_DEFAULT**  Normal, released
+- **LV_STATE_CHECKED** Toggled or checked
+- **LV_STATE_FOCUSED** Focused via keypad or encoder or clicked via touchpad/mouse 
+- **LV_STATE_EDITED**  Edit by an encoder
+- **LV_STATE_HOVERED** Hovered by mouse (not supported now)
+- **LV_STATE_PRESSED** Pressed
+- **LV_STATE_DISABLED** Disabled or inactive
+
+The states are usually automatically changed by the library as the user presses, releases, focuses etc an object. 
+However, the states can be changed manually too. To completely overwrite the current state use `lv_obj_set_state(obj, part, LV_STATE...)`. 
+To set or clear given state (but leave to other states untouched) use `lv_obj_add/clear_state(obj, part, LV_STATE_...)`
+In both cases ORed state values can be used as well. E.g. `lv_obj_set_state(obj, part, LV_STATE_PRESSED | LV_PRESSED_CHECKED)`.
+
+To learn more about the states read the related section of the [Style overview](/overview/style#states).
+

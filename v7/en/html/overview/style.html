@@ -227,6 +227,10 @@
 <li class="toctree-l4"><a class="reference internal" href="object.html#screen-the-most-basic-parent">Screen – the most basic parent</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="object.html#parts">Parts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="object.html#states">States</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="layer.html">Layers</a><ul>
@@ -249,14 +253,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#states">States</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cascading-styles">Cascading styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#inheritance">Inheritance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#part-of-the-objects">Part of the objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parts">Parts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#initialize-styles-and-set-get-properties">Initialize styles and set/get properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#managing-style-list">Managing style list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#local-styles">Local styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transitions">Transitions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#properties">Properties</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mixed-properties">Mixed properties</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#padding-properties">Padding properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#padding-and-margin-properties">Padding and margin properties</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#background-properties">Background properties</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#border-properties">Border properties</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#outline-properties">Outline properties</a></li>
@@ -271,6 +275,10 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#themes">Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#styling-a-button">Styling a button</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="indev.html">Input devices</a><ul>
@@ -403,16 +411,18 @@
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#parents-and-children">Parents and children</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#screens">Screens</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#layers">Layers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#style">Style</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#events">Events</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../widgets/obj.html#parts">Parts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#states">States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#style">Style</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#attributes">Attributes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#opa-scale">Opa scale</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#protect">Protect</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#groups">Groups</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#extended-click-area">Extended click area</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../widgets/obj.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/obj.html#id1">Events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/obj.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/obj.html#example">Example</a><ul>
@@ -1261,8 +1271,8 @@ When the button is pressed the light-gray color is a better match because it des
 In this case, if the property is inheritable, the property’s value will be searched in the parent too until a part can tell a value for the property. The parents will use their own state to tell the value.
 So is button is pressed, and text color comes from here, the pressed text color will be used.</p>
 </div>
-<div class="section" id="part-of-the-objects">
-<h2>Part of the objects<a class="headerlink" href="#part-of-the-objects" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="parts">
+<h2>Parts<a class="headerlink" href="#parts" title="Permalink to this headline">¶</a></h2>
 <p>Objects can have <em>parts</em> which can have their own style. For example a <a class="reference internal" href="../widgets/page.html"><span class="doc">page</span></a> has four parts:</p>
 <ul class="simple">
 <li><p>Background</p></li>
@@ -1374,15 +1384,22 @@ So this example configuration will result in fast going to presses state and slo
 <li><p><strong>opa_scale</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Inherited. Scale down all opacity values of the object by this factor. As it’s inherited the children objects will be affected too.</p></li>
 </ul>
 </div>
-<div class="section" id="padding-properties">
-<h3>Padding properties<a class="headerlink" href="#padding-properties" title="Permalink to this headline">¶</a></h3>
-<p>Set the space on the edges and between the children objects. Typically used by <a class="reference internal" href="../widgets/cont.html"><span class="doc">Container</span></a> object if <a class="reference external" href="/widgets/cont#layout">layout</a> or
-<a class="reference external" href="/widgets/cont#auto-fit">auto fit</a> is enabled. However other widgets also use them to set spacing. See the documentation of the widgets for the details.
+<div class="section" id="padding-and-margin-properties">
+<h3>Padding and margin properties<a class="headerlink" href="#padding-and-margin-properties" title="Permalink to this headline">¶</a></h3>
+<p><em>Padding</em> sets the space on the inner sides of the edges. It means “I don’t want my children too close to my sides, so keep this space”.<em>Padding inner</em> set the “gap” between the children.
+<em>Margin</em> sets the space on the outer side of the edges. It means “I want this space around me”.</p>
+<p>These properties are typically used by <a class="reference internal" href="../widgets/cont.html"><span class="doc">Container</span></a> object if <a class="reference external" href="/widgets/cont#layout">layout</a> or
+<a class="reference external" href="/widgets/cont#auto-fit">auto fit</a> is enabled.
+However other widgets also use them to set spacing. See the documentation of the widgets for the details.
  - <strong>pad_top</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the top.
  - <strong>pad_bottom</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the bottom.
  - <strong>pad_left</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the left.
  - <strong>pad_right</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the right.
- - <strong>pad_inner</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding inside the object between children.</p>
+ - <strong>pad_inner</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding inside the object between children.
+ - <strong>margin_top</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the top.
+ - <strong>margin_bottom</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the bottom.
+ - <strong>margin_left</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the left.
+ - <strong>margin_right</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the right.</p>
 </div>
 <div class="section" id="background-properties">
 <h3>Background properties<a class="headerlink" href="#background-properties" title="Permalink to this headline">¶</a></h3>
@@ -1886,11 +1903,21 @@ Both regions could have different properties.</p>
 
 </pre></div>
 </div>
+<p>It the documentation of the widgets you will see sentences like “The widget use the typical background properties”. The “typical background” properties are:</p>
+<ul class="simple">
+<li><p>Background</p></li>
+<li><p>Border</p></li>
+<li><p>Outline</p></li>
+<li><p>Shadow</p></li>
+<li><p>Pattern</p></li>
+<li><p>Value</p></li>
+</ul>
 </div>
 </div>
 <div class="section" id="themes">
 <h2>Themes<a class="headerlink" href="#themes" title="Permalink to this headline">¶</a></h2>
-<p>Themes are a collection of styles. There is always an active theme whose styles are automatically applied when an object is created. It gives a default appearance to UI which can be modified by adding further styles.</p>
+<p>Themes are a collection of styles. There is always an active theme whose styles are automatically applied when an object is created.
+It gives a default appearance to UI which can be modified by adding further styles.</p>
 <p>The default theme is set in <code class="docutils literal notranslate"><span class="pre">lv_conf.h</span></code> with <code class="docutils literal notranslate"><span class="pre">LV_THEME_...</span></code> defines. Every theme has the following properties</p>
 <ul class="simple">
 <li><p>primary color</p></li>
@@ -1899,14 +1926,92 @@ Both regions could have different properties.</p>
 <li><p>normal font</p></li>
 <li><p>subtitle font</p></li>
 <li><p>title font</p></li>
+<li><p>flags (specific to the given theme)</p></li>
 </ul>
-<p>The usage of these parameters depends on the given theme.</p>
+<p>It up to the theme how to use these properties.</p>
 <p>There are 3 built-in themes:</p>
 <ul class="simple">
 <li><p>empty: no default styles are added</p></li>
 <li><p>material: an impressive, modern theme - mono: simple black and white theme for monochrome displays</p></li>
 <li><p>template: a very simple theme which can be copied to create a custom theme</p></li>
 </ul>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="styling-a-button">
+<h3>Styling a button<a class="headerlink" href="#styling-a-button" title="Permalink to this headline">¶</a></h3>
+<img alt="Styling a button in LVGL" src="../_images/lv_ex_get_started_2.png" />
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+
+
+<span class="cm">/**</span>
+<span class="cm"> * Create styles from scratch for buttons.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">lv_ex_get_started_2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_btn</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style_btn_red</span><span class="p">;</span>
+
+    <span class="cm">/*Create a simple button style*/</span>
+    <span class="n">lv_style_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">);</span>
+    <span class="n">lv_style_set_radius</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_opa</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_OPA_COVER</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_SILVER</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_GRAY</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_grad_dir</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_GRAD_DIR_VER</span><span class="p">);</span>
+
+
+    <span class="cm">/*Swap the colors in pressed state*/</span>
+    <span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_GRAY</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_SILVER</span><span class="p">);</span>
+
+    <span class="cm">/*Add a border*/</span>
+    <span class="n">lv_style_set_border_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_WHITE</span><span class="p">);</span>
+    <span class="n">lv_style_set_border_opa</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_OPA_70</span><span class="p">);</span>
+    <span class="n">lv_style_set_border_width</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+    <span class="cm">/*Different border color in focused state*/</span>
+    <span class="n">lv_style_set_border_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_FOCUSED</span><span class="p">,</span> <span class="n">LV_COLOR_BLUE</span><span class="p">);</span>
+    <span class="n">lv_style_set_border_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_FOCUSED</span> <span class="o">|</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_NAVY</span><span class="p">);</span>
+
+    <span class="cm">/*Set the text style*/</span>
+    <span class="n">lv_style_set_text_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_WHITE</span><span class="p">);</span>
+
+    <span class="cm">/*Create a red style. Change only some colors.*/</span>
+    <span class="n">lv_style_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_RED</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_MAROON</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_MAROON</span><span class="p">);</span>
+    <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_RED</span><span class="p">);</span>
+    <span class="n">lv_style_set_text_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_WHITE</span><span class="p">);</span>
+
+    <span class="cm">/*Create buttons and use the new styles*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>     <span class="cm">/*Add a button the current screen*/</span>
+    <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>                            <span class="cm">/*Set its position*/</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>                          <span class="cm">/*Set its size*/</span>
+    <span class="n">lv_obj_reset_style_list</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">);</span>         <span class="cm">/*Remove the styles coming from the theme*/</span>
+    <span class="n">lv_obj_add_style</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn</span><span class="p">);</span>
+
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>          <span class="cm">/*Add a label to the button*/</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button&quot;</span><span class="p">);</span>                     <span class="cm">/*Set the labels text*/</span>
+
+    <span class="cm">/*Create a new button*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn2</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">btn</span><span class="p">);</span>
+    <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>                             <span class="cm">/*Set its size*/</span>
+    <span class="n">lv_obj_reset_style_list</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">);</span>         <span class="cm">/*Remove the styles coming from the theme*/</span>
+    <span class="n">lv_obj_add_style</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn</span><span class="p">);</span>
+    <span class="n">lv_obj_add_style</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">);</span>   <span class="cm">/*Add the red style on top of the current */</span>
+    <span class="n">lv_obj_set_style_local_radius</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_RADIUS_CIRCLE</span><span class="p">);</span> <span class="cm">/*Add a local style*/</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>          <span class="cm">/*Add a label to the button*/</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button 2&quot;</span><span class="p">);</span>                     <span class="cm">/*Set the labels text*/</span>
+<span class="p">}</span>
+
+
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -1932,7 +2037,7 @@ Both regions could have different properties.</p>
     <p>
         &copy; Copyright 2020, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Apr 21, 2020.
+        Last updated on Apr 24, 2020.
       </span>
 
     </p>

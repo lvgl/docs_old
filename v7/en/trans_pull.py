@@ -29,8 +29,8 @@ os.system(cmd);
 
 
 for lang in langs:
-  old_link = ':github_url: https:\/\/github.com\/littlevgl\/docs\/blob\/master\/en'
-  new_link = ':github_url: https:\/\/github.com\/littlevgl\/docs\/blob\/master\/' + lang
+  old_link = ':github_url: https:\/\/github.com\/lvgl\/docs\/blob\/master\/v7\/en'
+  new_link = ':github_url: https:\/\/github.com\/lvgl\/docs\/blob\/master\/v7\/' + lang
   cmd = "sed -i 's/{}/{}/' ../{}/**/*.txt".format(old_link, new_link, lang)
   print(cmd)
   os.system(cmd);

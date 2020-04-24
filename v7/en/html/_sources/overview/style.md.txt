@@ -78,7 +78,7 @@ In this case, if the property is inheritable, the property's value will be searc
 So is button is pressed, and text color comes from here, the pressed text color will be used.
 
 
-## Part of the objects
+## Parts
 Objects can have *parts* which can have their own style. For example a [page](/widgets/page) has four parts:
 - Background
 - Scrollable
@@ -201,14 +201,23 @@ The following properties can be used in the styles.
 - **transform_height**  (`lv_style_int_t`) Make the object higher on both sides with this value.
 - **opa_scale** (`lv_style_int_t`): Inherited. Scale down all opacity values of the object by this factor. As it's inherited the children objects will be affected too. 
 
-### Padding properties
-Set the space on the edges and between the children objects. Typically used by [Container](/widgets/cont) object if [layout](/widgets/cont#layout) or 
-[auto fit](/widgets/cont#auto-fit) is enabled. However other widgets also use them to set spacing. See the documentation of the widgets for the details. 
+### Padding and margin properties
+*Padding* sets the space on the inner sides of the edges. It means "I don't want my children too close to my sides, so keep this space".  
+*Padding inner* set the "gap" between the children.
+*Margin* sets the space on the outer side of the edges. It means "I want this space around me". 
+
+These properties are typically used by [Container](/widgets/cont) object if [layout](/widgets/cont#layout) or 
+[auto fit](/widgets/cont#auto-fit) is enabled. 
+However other widgets also use them to set spacing. See the documentation of the widgets for the details. 
  - **pad_top** (`lv_style_int_t`): Set the padding on the top.
  - **pad_bottom** (`lv_style_int_t`): Set the padding on the bottom.
  - **pad_left** (`lv_style_int_t`): Set the padding on the left.
  - **pad_right** (`lv_style_int_t`): Set the padding on the right.
  - **pad_inner** (`lv_style_int_t`): Set the padding inside the object between children.
+ - **margin_top** (`lv_style_int_t`): Set the margin on the top.
+ - **margin_bottom** (`lv_style_int_t`): Set the margin on the bottom.
+ - **margin_left** (`lv_style_int_t`): Set the margin on the left.
+ - **margin_right** (`lv_style_int_t`): Set the margin on the right.
 
 ### Background properties
 The background is a simple rectangle which can have gradient and `radius` rounding.
@@ -409,8 +418,17 @@ Both regions could have different properties.
   :language: c
 ```
 
+It the documentation of the widgets you will see sentences like "The widget use the typical background properties". The "typical background" properties are:
+- Background
+- Border
+- Outline
+- Shadow
+- Pattern
+- Value
+
 ## Themes
-Themes are a collection of styles. There is always an active theme whose styles are automatically applied when an object is created. It gives a default appearance to UI which can be modified by adding further styles.
+Themes are a collection of styles. There is always an active theme whose styles are automatically applied when an object is created. 
+It gives a default appearance to UI which can be modified by adding further styles.
 
 The default theme is set in `lv_conf.h` with `LV_THEME_...` defines. Every theme has the following properties
 - primary color
@@ -419,10 +437,25 @@ The default theme is set in `lv_conf.h` with `LV_THEME_...` defines. Every theme
 - normal font
 - subtitle font
 - title font
+- flags (specific to the given theme)
 
-The usage of these parameters depends on the given theme.
+It up to the theme how to use these properties. 
 
 There are 3 built-in themes:
 - empty: no default styles are added
 - material: an impressive, modern theme - mono: simple black and white theme for monochrome displays
 - template: a very simple theme which can be copied to create a custom theme 
+
+
+## Example
+
+### Styling a button
+```eval_rst
+.. image:: /lv_examples/src/lv_ex_get_started/lv_ex_get_started_2.*
+  :alt: Styling a button in LVGL
+
+.. literalinclude:: /lv_examples/src/lv_ex_get_started/lv_ex_get_started_2.c
+  :language: c
+```
+
+
