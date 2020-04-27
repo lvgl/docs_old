@@ -571,7 +571,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/chart.html">Chart (lv_chart)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#parts-and-styles">Parts and Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#data-series">Data series</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#series-type">Series’ type</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#modify-the-data">Modify the data</a></li>
@@ -579,11 +581,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#number-of-points">Number of points</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#vertical-range">Vertical range</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#division-lines">Division lines</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#series-appearance">Series’ appearance</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#tick-marks-and-labels">Tick marks and labels</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#events">Events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#example">Example</a><ul>
@@ -1810,7 +1810,7 @@ However other widgets also use them to set spacing. See the documentation of the
 <li><p><strong>transition_4</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for an other property.</p></li>
 <li><p><strong>transition_5</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for an other property.</p></li>
 <li><p><strong>transition_6</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for an other property.</p></li>
-<li><p><strong>transition_path</strong> (<code class="docutils literal notranslate"><span class="pre">lv_anim_path_cb_t</span></code>): An animation path for the transition. Built pats can be used, e.g. <code class="docutils literal notranslate"><span class="pre">lv_anim_path_overshoot</span></code>.</p></li>
+<li><p><strong>transition_path</strong> (<code class="docutils literal notranslate"><span class="pre">lv_anim_path_t</span></code>): An animation path for the transition. (Needs to be static or global variable because only its pointer is saved).</p></li>
 </ul>
 <img alt="Styling an transitions in lvgl" src="../_images/lv_ex_style_10.png" />
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
@@ -1960,7 +1960,6 @@ It gives a default appearance to UI which can be modified by adding further styl
     <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_GRAY</span><span class="p">);</span>
     <span class="n">lv_style_set_bg_grad_dir</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_GRAD_DIR_VER</span><span class="p">);</span>
 
-
     <span class="cm">/*Swap the colors in pressed state*/</span>
     <span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_GRAY</span><span class="p">);</span>
     <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_SILVER</span><span class="p">);</span>
@@ -1976,6 +1975,21 @@ It gives a default appearance to UI which can be modified by adding further styl
 
     <span class="cm">/*Set the text style*/</span>
     <span class="n">lv_style_set_text_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_WHITE</span><span class="p">);</span>
+
+    <span class="cm">/*Make the button smaller when pressed*/</span>
+    <span class="n">lv_style_set_transform_height</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">);</span>
+    <span class="n">lv_style_set_transform_width</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">);</span>
+
+    <span class="cm">/*Add a transition to the size change*/</span>
+    <span class="k">static</span> <span class="n">lv_anim_path_t</span> <span class="n">path</span><span class="p">;</span>
+    <span class="n">lv_anim_path_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">path</span><span class="p">);</span>
+    <span class="n">lv_anim_path_set_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">path</span><span class="p">,</span> <span class="n">lv_anim_path_overshoot</span><span class="p">);</span>
+
+    <span class="n">lv_style_set_transition_prop_1</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_STYLE_TRANSFORM_HEIGHT</span><span class="p">);</span>
+    <span class="n">lv_style_set_transition_prop_2</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_STYLE_TRANSFORM_WIDTH</span><span class="p">);</span>
+    <span class="n">lv_style_set_transition_time</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
+    <span class="n">lv_style_set_transition_path</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">);</span>
+
 
     <span class="cm">/*Create a red style. Change only some colors.*/</span>
     <span class="n">lv_style_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">);</span>
@@ -2037,7 +2051,7 @@ It gives a default appearance to UI which can be modified by adding further styl
     <p>
         &copy; Copyright 2020, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on Apr 24, 2020.
+        Last updated on Apr 27, 2020.
       </span>
 
     </p>

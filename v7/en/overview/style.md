@@ -389,7 +389,7 @@ Properties to describe state change animations.
 - **transition_4** (`property name`): Same as *transition_1* just for an other property.
 - **transition_5** (`property name`): Same as *transition_1* just for an other property.
 - **transition_6** (`property name`): Same as *transition_1* just for an other property.
-- **transition_path** (`lv_anim_path_cb_t`): An animation path for the transition. Built pats can be used, e.g. `lv_anim_path_overshoot`.
+- **transition_path** (`lv_anim_path_t`): An animation path for the transition. (Needs to be static or global variable because only its pointer is saved).
 
 ```eval_rst
 .. image:: /lv_examples/src/lv_ex_style/lv_ex_style_10.*

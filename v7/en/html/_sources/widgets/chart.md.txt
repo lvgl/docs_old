@@ -5,11 +5,35 @@
 
 ## Overview
 
-Charts consist of the following:
 
-* A background
-* Horizontal and vertical division lines
-* Data series, which can be represented with points, lines, columns, or filled areas.
+Charts are basic object to visualize data points. 
+It support *Line* charts (connect points with lines and/or draw points on them) and *Column* chart.
+
+Chart also support division lines, 2 y axis, axis ticks, and texts on ticks.
+
+## Parts and Styles
+The Chart's main part is called `LV_CHART_PART_BG` and it uses all the typical background properties. 
+The *text* style properties determine the style of the axis texts and the *line* properties determine ticks' style.
+*Padding* values will make `LV_CHART_PART_SERIES` smaller. Padding also can be used to make space for axis texts.
+
+The background of the series is called `LV_CHART_PART_SERIES` and it's placed on the main background. 
+The division lines, and series data is drawn on this part. Besides the typical background style properties
+the *line* style properties are used by the division lines. The *padding* values tells the space between the this part and the axis texts.  
+
+
+The style of the series can be referenced by `LV_CHART_PART_SERIES`. In case of column type the following properties are used:
+- *radius*: radius of the bars
+- *padding_inner*: space between the columns of the same x coordinate
+
+In case of Line type these properties are used:
+- *line properties* to describe the lines
+- *size* radius of the points
+- *bg_opa*: the overall opacity of the area below the lines
+- *bg_main_stop*: % of *bg_opa* at the top to create an alpha fade (0: transparent at the top, 255: *bg_opa* at the top)
+- *bg_grad_stop*: %  of *bg_opa* at the bottom to create an alpha fade  (0: transparent at the bottom, 255: *bg_opa* at the top)
+- *bg_drag_dir*: should be `LV_GRAD_DIR_VER` to allow alpha fading with *bg_main_stop* and *bg_grad_stop*
+
+## Usage
 
 ### Data series
 You can add any number of series to the charts by `lv_chart_add_series(chart, color)`.
@@ -20,12 +44,9 @@ The following **data display types** exist:
 
 - **LV_CHART_TYPE_NONE** - Do not display any data. It can be used to hide a series.
 - **LV_CHART_TYPE_LINE** - Draw lines between the points.
-- **LV_CHART_TYPE_COL** - Draw columns.
-- **LV_CHART_TYPE_POINT** - Draw points.
-- **LV_CHART_TYPE_AREA** - Draw areas (fill the area below the lines).
-- **LV_CHART_TYPE_VERTICAL_LINE** - Draw only vertical lines to connect the points. Useful if the chart width is equal to the number of points, because it can redraw much faster than the `LV_CHART_TYPE_AREA`.
+- **LV_CHART_TYPE_COLUMN** - Draw columns.
 
-You can specify the display type with `lv_chart_set_type(chart, LV_CHART_TYPE_...)`. The types can be 'OR'ed (like `LV_CHART_TYPE_LINE | LV_CHART_TYPE_POINT`).
+You can specify the display type with `lv_chart_set_type(chart, LV_CHART_TYPE_...)`. The types can be 'OR'ed (like `LV_CHART_TYPE_LINE`).
 
 ### Modify the data
 You have several options to set the data of series:
@@ -52,33 +73,16 @@ You can specify the minimum and maximum values in y-direction with `lv_chart_set
 ### Division lines
 The number of horizontal and vertical division lines can be modified by `lv_chart_set_div_line_count(chart, hdiv_num, vdiv_num)`. The default settings are 3 horizontal and 5 vertical division lines.
 
-### Series' appearance
-To set the **line width** and **point radius** of the series, use the `lv_chart_set_series_width(chart, size)` function. The default value is 2.
-
-The **opacity of the data lines** can be specified by `lv_chart_set_series_opa(chart, opa)`. The default value is `LV_OPA_COVER`.
-
-You can apply a **dark color fade** on the bottom of columns and points by `lv_chart_set_series_darking(chart, effect)` function. The default dark level is `LV_OPA_50`.
-
-
 ### Tick marks and labels
-Ticks and labels beside them can be added.
-
-**`lv_chart_set_margin(chart, 20)` needs to be used to add some extra space around the chart for the ticks and texts. Otherwise, you will not see them at all. You may need to adjust the number 20 depending on your requirements.**
+Ticks and labels can be added to the axis.
 
 `lv_chart_set_x_tick_text(chart, list_of_values, num_tick_marks, LV_CHART_AXIS_...)` set the ticks and texts on x axis.
-`list_of_values` is a string with `'\n'` terminated text (expect the last) with text for the ticks. E.g. `const char * list_of_values = "first\nseco\nthird"`. `list_of_values` can be `NULL`.
+`list_of_values` is a string with `'\n'` terminated text (expect the last) with text for the ticks. E.g. `const char * list_of_values = "first\nsec\nthird"`. `list_of_values` can be `NULL`.
 If `list_of_values` is set then `num_tick_marks` tells the number of ticks between two labels.  If `list_of_values` is `NULL` then it specifies the total number of ticks.
 
 *Major tick lines* are drawn where text is placed, and *minor tick lines* are drawn elsewhere. `lv_chart_set_x_tick_length(chart, major_tick_len, minor_tick_len)` sets the length of tick lines on the x-axis.
 
 The same functions exists for the y axis too: `lv_chart_set_y_tick_text` and `lv_chart_set_y_tick_length`.
-
-## Styles
-You can set the styles with `lv_chart_set_style(btn, LV_CHART_STYLE_MAIN, &style)`.
-- **style.body** - properties set the background's appearance.
-- **style.line** - properties set the division lines' appearance.
-- **style.text** - properties set the axis labels' appearance.
-
 
 ## Events
 Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.

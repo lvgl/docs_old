@@ -10,34 +10,76 @@ The *animator* functions has the following prototype:
 ```c
 void func(void * var, lv_anim_var_t value);
 ```
-This prototype is compatible with the majority of the *set* function of LittlevGL. For example `lv_obj_set_x(obj, value)` or `lv_obj_set_width(obj, value)`
+This prototype is compatible with the majority of the *set* function of LVGL. For example `lv_obj_set_x(obj, value)` or `lv_obj_set_width(obj, value)`
 
 
 ## Create an animation
 To create an animation an `lv_anim_t` variable has to be initialized and configured with `lv_anim_set_...()` functions.
 
 ```c
-lv_anim_t a;
-lv_anim_set_exec_cb(&a, btn1, lv_obj_set_x);    /*Set the animator function and variable to animate*/
-lv_anim_set_time(&a, duration, delay);
-lv_anim_set_values(&a, start, end);             /*Set start and end values. E.g. 0, 150*/
-lv_anim_set_path_cb(&a, lv_anim_path_linear);   /*Set path from `lv_anim_path_...` functions or a custom one.*/
-lv_anim_set_ready_cb(&a, ready_cb);             /*Set a callback to call then animation is ready. (Optional)*/
-lv_anim_set_playback(&a, wait_time);            /*Enable playback of teh animation with `wait_time` delay*/
-lv_anim_set_repeat(&a, wait_time);              /*Enable repeat of teh animation with `wait_time` delay. Can be compiled with playback*/
 
-lv_anim_create(&a);                             /*Start the animation*/
+/* INITIALIZE AN ANIMATION
+ *-----------------------*/
+
+lv_anim_t a;
+lv_anim_init(&a);
+
+/* MANDATORY SETTINGS
+ *------------------*/
+
+/*Set the animator function and variable to animate*/
+lv_anim_set_exec_cb(&a, btn1, (lv_anim_exec_xcb_t) lv_obj_set_x); 
+
+/*Length of the animation [ms]*/
+lv_anim_set_time(&a, duration);
+
+/*Set start and end values. E.g. 0, 150 [ms]*/
+lv_anim_set_values(&a, start, end);
+
+/* OPTIONAL SETTINGS
+ *------------------*/
+
+/*Time to wait before starting the animation [ms]*/
+lv_anim_set_delay(&a, delay);
+
+/*Set path (curve). Default is linear*/
+lv_anim_set_path(&a, &path);
+
+/*Set a callback to call when animation is ready.*/
+lv_anim_set_ready_cb(&a, ready_cb);
+
+/*Set a callback to call when animation is started (after delay).*/
+lv_anim_set_start_cb(&a, start_cb);
+
+/*Play the animation backward too with this duration. Default is 0 (disabled) [ms]*/
+lv_anim_set_playback_time(&a, wait_time); 
+
+/*Delay before playback. Default is 0 (disabled) [ms]*/
+lv_anim_set_playback_delay(&a, wait_time);
+
+/*Number of repetitions. Default is 1.  LV_ANIM_REPEAT_INFINIT for infinite repetition*/
+lv_anim_set_repeat_count(&a, wait_time);
+
+/*Delay before repeat. Default is 0 (disabled) [ms]*/
+lv_anim_set_repeat_delay(&a, wait_time);
+
+/*true (default): apply the start vale immediately, false: apply start vale after delay when then anim. really starts. */
+lv_anim_set_early_apply(&a, true/false);
+
+/* START THE ANIMATION
+ *------------------*/
+lv_anim_start(&a);                             /*Start the animation*/
 ```
 
 
 You can apply **multiple different animations** on the same variable at the same time.
 For example, animate the x and y coordinates with `lv_obj_set_x` and `lv_obj_set_y`. However, only one animation can exist with a given variable and function pair.
-Therefore `lv_anim_create()` will delete the already existing variable-function animations.
+Therefore `lv_anim_start()` will delete the already existing variable-function animations.
 
 ## Animation path
 
 You can determinate the **path of animation**. In the most simple case, it is linear, which means the current value between *start* and *end*  is changed linearly.
-A *path* is a function which calculates the next value to set based on the current state of the animation. Currently, there are the following built-in paths:
+A *path* is mainly a function which calculates the next value to set based on the current state of the animation. Currently, there are the following built-in paths functions:
 
 - **lv_anim_path_linear** linear animation
 - **lv_anim_path_step** change in one step at the end
@@ -47,6 +89,16 @@ A *path* is a function which calculates the next value to set based on the curre
 - **lv_anim_path_overshoot** overshoot the end value
 - **lv_anim_path_bounce** bounce back a little from the end value (like hitting a wall)
 
+A path can be initialized like this:
+```c
+lv_anim_path_t path;
+lv_anim_path_init(&path);
+lv_anim_path_set_cb(&path, lv_anim_path_overshoot);
+lv_anim_path_set_user_data(&path, &foo); /*Optional for custom functions*/
+
+/*Set the path in an animation*/
+lv_anim_set_path(&a, &path);
+```
 
 ## Speed vs time
 By default, you can set the animation time. But, in some cases, the **animation speed** is more practical.
