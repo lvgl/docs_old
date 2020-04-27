@@ -14,7 +14,7 @@ When setting a new value with `lv_lmeter_set_value(lmeter, new_value)` the propo
 The `lv_lmeter_set_range(lmeter, min, max)` function sets the range of the line meter. 
 
 You can set the angle of the scale and the number of the lines by: `lv_lmeter_set_scale(lmeter, angle, line_num)`. 
-The default angle is 240 and the default line number is 31.
+The default angle is 240 and the default line number is 21.
 
 ### Angle offset
 By default the scale angle is interpreted symmetrically to the y axis. It results in "standing" line meter. With `lv_lmeter_set_angle_offset` an offset can be added the scale angle. 
