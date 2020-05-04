@@ -20,7 +20,7 @@ lv_scr_load(scr);          /*Load the screen*/
 
 /*Create 2 buttons*/
 lv_obj_t * btn1 = lv_btn_create(scr, NULL);         /*Create a button on the screen*/
-lv_btn_set_fit(btn1, true, true);                   /*Enable to automatically set the size according to the content*/
+lv_btn_set_fit(btn1, LV_FIT_TIGHT);   /*Enable to automatically set the size according to the content*/
 lv_obj_set_pos(btn1, 60, 40);              	   /*Set the position of the button*/
 
 lv_obj_t * btn2 = lv_btn_create(scr, btn1);         /*Copy the first button*/
