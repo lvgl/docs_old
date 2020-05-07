@@ -96,7 +96,8 @@ The `lv_color_t`, `lv_color1_t`, `lv_color8_t`, `lv_color16_t` and `lv_color32_t
 - **ch.red** red channel
 - **ch.green** green channel
 - **ch.blue** blue channel
-- **full** red + green + blue as one number
+- **ch.alpha** alpha channel (with 32bit)
+- **full** red, green, blue (and alpha if 32bit) concatenated as one datum
 
 You can set the current color depth in *lv_conf.h*, by setting the `LV_COLOR_DEPTH` define to 1 (monochrome), 8, 16 or 32.
 
