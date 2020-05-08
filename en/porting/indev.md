@@ -65,7 +65,7 @@ To use a keyboard/keypad:
 
 ```c
 indev_drv.type = LV_INDEV_TYPE_KEYPAD;
-indev_drv.read_cb = my_input_read;
+indev_drv.read_cb = keyboard_read;
 
 ...
 
