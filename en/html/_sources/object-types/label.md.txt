@@ -11,7 +11,7 @@ You can set the text on a label at runtime with `lv_label_set_text(label, "New t
 
 With `lv_label_set_text_fmt(label, "Value: %d", 15)` **printf formatting** can used to set the text.
 
-Labels are able to show text from a **static character buffer** which is NUL-terminated. To do so, use `lv_label_set_static_text(label, char_array)`. In this case, the text is not stored in the dynamic memory and the given buffer is used directly instead. This means that the array can't be a local variable which goes out of scope when the function exits. Constant strings are safe to use with `lv_label_set_static_text` (except when used with `LV_LABEL_LONG_DOTS`, as it modifies the buffer in-place), as they are stored in RO memory, which is always accessible.
+Labels are able to show text from a **static character buffer** which is NUL-terminated. To do so, use `lv_label_set_static_text(label, char_array)`. In this case, the text is not stored in the dynamic memory and the given buffer is used directly instead. This means that the array can't be a local variable which goes out of scope when the function exits. Constant strings are safe to use with `lv_label_set_static_text` (except when used with `LV_LABEL_LONG_DOT`, as it modifies the buffer in-place), as they are stored in RO memory, which is always accessible.
 
 You can also use a **raw array** as label text. The array doesn't have to be `\0` terminated. In this case, the text will be saved to the dynamic memory like with `lv_label_set_text`. To set a raw character array, use the `lv_label_set_array_text(label, char_array, size)` function.
 
@@ -25,7 +25,7 @@ By default, the width of the label object automatically expands to the text size
 
 * **LV_LABEL_LONG_EXPAND** - Expand the object size to the text size (Default)
 * **LV_LABEL_LONG_BREAK** - Keep the object width, break (wrap) the too long lines and expand the object height
-* **LV_LABEL_LONG_DOTS** - Keep the object size, break the text and write dots in the last line (**not supported when using `lv_label_set_static_text`**)
+* **LV_LABEL_LONG_DOT** - Keep the object size, break the text and write dots in the last line (**not supported when using `lv_label_set_static_text`**)
 * **LV_LABEL_LONG_SROLL** - Keep the size and scroll the label back and forth
 * **LV_LABEL_LONG_SROLL_CIRC** - Keep the size and scroll the label circularly
 * **LV_LABEL_LONG_CROP** - Keep the size and crop the text out of it
@@ -36,7 +36,7 @@ It's important to note that, when a label is created and its text is set, the la
 In addition with the default `LV_LABEL_LONG_EXPAND`, *long mode* `lv_obj_set_width/height/size()` has no effect.
 So you need to change the *long mode* first and then set the size with  `lv_obj_set_width/height/size()`.
 
-Another important note is that **`LV_LABEL_LONG_DOTS` manipulates the text buffer in-place** in order to add/remove the dots. When `lv_label_set_text` or `lv_label_set_array_text` are used, a separate buffer is allocated and this implementation detail is unnoticed. This is not the case with `lv_label_set_static_text`! **The buffer you pass to `lv_label_set_static_text` must be writable if you plan to use `LV_LABEL_LONG_DOTS`.**
+Another important note is that **`LV_LABEL_LONG_DOT` manipulates the text buffer in-place** in order to add/remove the dots. When `lv_label_set_text` or `lv_label_set_array_text` are used, a separate buffer is allocated and this implementation detail is unnoticed. This is not the case with `lv_label_set_static_text`! **The buffer you pass to `lv_label_set_static_text` must be writable if you plan to use `LV_LABEL_LONG_DOT`.**
 
 ### Text align
 
