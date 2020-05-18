@@ -6,6 +6,7 @@
 .. include:: /lang.rst
 
 PDF version: :download:`LVGL.pdf <LVGL.pdf>`
+
 ```
 
 # Welcome to LVGL's documentation!
