@@ -187,8 +187,6 @@ For example, setting 500 ms transition time in default state will mean that when
 Setting 100 ms transition time in the pressed state will mean a 100 ms transition time when going to presses state.
 So this example configuration will result in fast going to presses state and slow going back to default. 
 
-
-
 ## Properties
 
 The following properties can be used in the styles.
