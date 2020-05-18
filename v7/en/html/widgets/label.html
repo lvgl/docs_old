@@ -400,6 +400,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/drawing.html">Drawing</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#buffering-types">Buffering types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#mechanism-of-screen-refreshing">Mechanism of screen refreshing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#masking">Masking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/drawing.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/drawing.html#micropython">MicroPython</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1214,7 +1219,7 @@ Therefore, you don’t need to keep the text you pass to <code class="docutils l
 To do so, use <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text(label,</span> <span class="pre">&quot;Text&quot;)</span></code>.
 In this case, the text is not stored in the dynamic memory and the given buffer is used directly instead.
 This means that the array can’t be a local variable which goes out of scope when the function exits.
-Constant strings are safe to use with <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code> (except when used with <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOTS</span></code>, as it modifies the buffer in-place), as they are stored in ROM memory, which is always accessible.</p>
+Constant strings are safe to use with <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code> (except when used with <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOT</span></code>, as it modifies the buffer in-place), as they are stored in ROM memory, which is always accessible.</p>
 <p>You can also use a <strong>raw array</strong> as label text.
 The array doesn’t have to be <code class="docutils literal notranslate"><span class="pre">\0</span></code> terminated.
 In this case, the text will be saved to the dynamic memory like with <code class="docutils literal notranslate"><span class="pre">lv_label_set_text</span></code>.
@@ -1230,7 +1235,7 @@ To set a raw character array, use the <code class="docutils literal notranslate"
 <ul class="simple">
 <li><p><strong>LV_LABEL_LONG_EXPAND</strong> - Expand the object size to the text size (Default)</p></li>
 <li><p><strong>LV_LABEL_LONG_BREAK</strong> - Keep the object width, break (wrap) the too long lines and expand the object height</p></li>
-<li><p><strong>LV_LABEL_LONG_DOTS</strong> - Keep the object size, break the text and write dots in the last line (<strong>not supported when using <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code></strong>)</p></li>
+<li><p><strong>LV_LABEL_LONG_DOT</strong> - Keep the object size, break the text and write dots in the last line (<strong>not supported when using <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code></strong>)</p></li>
 <li><p><strong>LV_LABEL_LONG_SROLL</strong> - Keep the size and scroll the label back and forth</p></li>
 <li><p><strong>LV_LABEL_LONG_SROLL_CIRC</strong> - Keep the size and scroll the label circularly</p></li>
 <li><p><strong>LV_LABEL_LONG_CROP</strong> - Keep the size and crop the text out of it</p></li>
@@ -1239,9 +1244,9 @@ To set a raw character array, use the <code class="docutils literal notranslate"
 <p>It’s important to note that, when a label is created and its text is set, the label’s size already expanded to the text size.
 In addition with the default <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_EXPAND</span></code>, <em>long mode</em> <code class="docutils literal notranslate"><span class="pre">lv_obj_set_width/height/size()</span></code> has no effect.</p>
 <p>So you need to change the <em>long mode</em> first set the new <em>long mode</em> and then set the size with  <code class="docutils literal notranslate"><span class="pre">lv_obj_set_width/height/size()</span></code>.</p>
-<p>Another important note is that <strong><code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOTS</span></code> manipulates the text buffer in-place</strong> in order to add/remove the dots.
+<p>Another important note is that <strong><code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOT</span></code> manipulates the text buffer in-place</strong> in order to add/remove the dots.
 When <code class="docutils literal notranslate"><span class="pre">lv_label_set_text</span></code> or <code class="docutils literal notranslate"><span class="pre">lv_label_set_array_text</span></code> are used, a separate buffer is allocated and this implementation detail is unnoticed.
-This is not the case with <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code>! <strong>The buffer you pass to <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code> must be writable if you plan to use <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOTS</span></code>.</strong></p>
+This is not the case with <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code>! <strong>The buffer you pass to <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code> must be writable if you plan to use <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOT</span></code>.</strong></p>
 </div>
 <div class="section" id="text-align">
 <h3>Text align<a class="headerlink" href="#text-align" title="Permalink to this headline">¶</a></h3>
@@ -1450,75 +1455,44 @@ This feature can be enabled individually for each label by <code class="docutils
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Enums</p>
 <dl class="enum">
-<dt id="_CPPv4Ut7_anon_80">
-<span id="_CPPv3Ut7_anon_80"></span><span class="target" id="lv__label_8h_1a4b4213b1f9d54da7c7e36bde32fc7c80"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_80" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4Ut7_anon_81">
+<span id="_CPPv3Ut7_anon_81"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_81" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Long mode behaviors. Used in ‘<a class="reference internal" href="#structlv__label__ext__t"><span class="std std-ref">lv_label_ext_t</span></a>’ </p>
 <p><em>Values:</em></p>
 <dl class="enumerator">
 <dt id="_CPPv420LV_LABEL_LONG_EXPAND">
-<span id="_CPPv320LV_LABEL_LONG_EXPAND"></span><span id="_CPPv220LV_LABEL_LONG_EXPAND"></span><span class="target" id="lv__label_8h_1a4b4213b1f9d54da7c7e36bde32fc7c80a7f108c76e373e47682c657c42e86be6f"></span><code class="sig-name descname">LV_LABEL_LONG_EXPAND</code><a class="headerlink" href="#_CPPv420LV_LABEL_LONG_EXPAND" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv320LV_LABEL_LONG_EXPAND"></span><span id="_CPPv220LV_LABEL_LONG_EXPAND"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9a7f108c76e373e47682c657c42e86be6f"></span><code class="sig-name descname">LV_LABEL_LONG_EXPAND</code><a class="headerlink" href="#_CPPv420LV_LABEL_LONG_EXPAND" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Expand the object size to the text size </p>
 </dd></dl>
 
 <dl class="enumerator">
 <dt id="_CPPv419LV_LABEL_LONG_BREAK">
-<span id="_CPPv319LV_LABEL_LONG_BREAK"></span><span id="_CPPv219LV_LABEL_LONG_BREAK"></span><span class="target" id="lv__label_8h_1a4b4213b1f9d54da7c7e36bde32fc7c80a2b86465253a061213789957a822e00f7"></span><code class="sig-name descname">LV_LABEL_LONG_BREAK</code><a class="headerlink" href="#_CPPv419LV_LABEL_LONG_BREAK" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv319LV_LABEL_LONG_BREAK"></span><span id="_CPPv219LV_LABEL_LONG_BREAK"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9a2b86465253a061213789957a822e00f7"></span><code class="sig-name descname">LV_LABEL_LONG_BREAK</code><a class="headerlink" href="#_CPPv419LV_LABEL_LONG_BREAK" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Keep the object width, break the too long lines and expand the object height </p>
 </dd></dl>
 
 <dl class="enumerator">
 <dt id="_CPPv417LV_LABEL_LONG_DOT">
-<span id="_CPPv317LV_LABEL_LONG_DOT"></span><span id="_CPPv217LV_LABEL_LONG_DOT"></span><span class="target" id="lv__label_8h_1a4b4213b1f9d54da7c7e36bde32fc7c80a6f48bf73ac5994e88d1d7e079ebfb941"></span><code class="sig-name descname">LV_LABEL_LONG_DOT</code><a class="headerlink" href="#_CPPv417LV_LABEL_LONG_DOT" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv317LV_LABEL_LONG_DOT"></span><span id="_CPPv217LV_LABEL_LONG_DOT"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9a6f48bf73ac5994e88d1d7e079ebfb941"></span><code class="sig-name descname">LV_LABEL_LONG_DOT</code><a class="headerlink" href="#_CPPv417LV_LABEL_LONG_DOT" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Keep the size and write dots at the end if the text is too long </p>
 </dd></dl>
 
 <dl class="enumerator">
 <dt id="_CPPv419LV_LABEL_LONG_SROLL">
-<span id="_CPPv319LV_LABEL_LONG_SROLL"></span><span id="_CPPv219LV_LABEL_LONG_SROLL"></span><span class="target" id="lv__label_8h_1a4b4213b1f9d54da7c7e36bde32fc7c80a283143f9876ea3118495f861d9cb7071"></span><code class="sig-name descname">LV_LABEL_LONG_SROLL</code><a class="headerlink" href="#_CPPv419LV_LABEL_LONG_SROLL" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv319LV_LABEL_LONG_SROLL"></span><span id="_CPPv219LV_LABEL_LONG_SROLL"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9a283143f9876ea3118495f861d9cb7071"></span><code class="sig-name descname">LV_LABEL_LONG_SROLL</code><a class="headerlink" href="#_CPPv419LV_LABEL_LONG_SROLL" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Keep the size and roll the text back and forth </p>
 </dd></dl>
 
 <dl class="enumerator">
 <dt id="_CPPv424LV_LABEL_LONG_SROLL_CIRC">
-<span id="_CPPv324LV_LABEL_LONG_SROLL_CIRC"></span><span id="_CPPv224LV_LABEL_LONG_SROLL_CIRC"></span><span class="target" id="lv__label_8h_1a4b4213b1f9d54da7c7e36bde32fc7c80ad2eb39c22c3e5abe890433376f5c6d2f"></span><code class="sig-name descname">LV_LABEL_LONG_SROLL_CIRC</code><a class="headerlink" href="#_CPPv424LV_LABEL_LONG_SROLL_CIRC" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv324LV_LABEL_LONG_SROLL_CIRC"></span><span id="_CPPv224LV_LABEL_LONG_SROLL_CIRC"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9ad2eb39c22c3e5abe890433376f5c6d2f"></span><code class="sig-name descname">LV_LABEL_LONG_SROLL_CIRC</code><a class="headerlink" href="#_CPPv424LV_LABEL_LONG_SROLL_CIRC" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Keep the size and roll the text circularly </p>
 </dd></dl>
 
 <dl class="enumerator">
 <dt id="_CPPv418LV_LABEL_LONG_CROP">
-<span id="_CPPv318LV_LABEL_LONG_CROP"></span><span id="_CPPv218LV_LABEL_LONG_CROP"></span><span class="target" id="lv__label_8h_1a4b4213b1f9d54da7c7e36bde32fc7c80ab043224a310fe0e9c5d911dd5936c680"></span><code class="sig-name descname">LV_LABEL_LONG_CROP</code><a class="headerlink" href="#_CPPv418LV_LABEL_LONG_CROP" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv318LV_LABEL_LONG_CROP"></span><span id="_CPPv218LV_LABEL_LONG_CROP"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9ab043224a310fe0e9c5d911dd5936c680"></span><code class="sig-name descname">LV_LABEL_LONG_CROP</code><a class="headerlink" href="#_CPPv418LV_LABEL_LONG_CROP" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Keep the size and crop the text out of it </p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="enum">
-<dt id="_CPPv4Ut7_anon_81">
-<span id="_CPPv3Ut7_anon_81"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_81" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Label align policy </p>
-<p><em>Values:</em></p>
-<dl class="enumerator">
-<dt id="_CPPv419LV_LABEL_ALIGN_LEFT">
-<span id="_CPPv319LV_LABEL_ALIGN_LEFT"></span><span id="_CPPv219LV_LABEL_ALIGN_LEFT"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9ac0f5ffe6d5f53db54a297038ba53ab43"></span><code class="sig-name descname">LV_LABEL_ALIGN_LEFT</code><a class="headerlink" href="#_CPPv419LV_LABEL_ALIGN_LEFT" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Align text to left </p>
-</dd></dl>
-
-<dl class="enumerator">
-<dt id="_CPPv421LV_LABEL_ALIGN_CENTER">
-<span id="_CPPv321LV_LABEL_ALIGN_CENTER"></span><span id="_CPPv221LV_LABEL_ALIGN_CENTER"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9a9b8ffbc9dd19549a71a82853c1dd542b"></span><code class="sig-name descname">LV_LABEL_ALIGN_CENTER</code><a class="headerlink" href="#_CPPv421LV_LABEL_ALIGN_CENTER" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Align text to center </p>
-</dd></dl>
-
-<dl class="enumerator">
-<dt id="_CPPv420LV_LABEL_ALIGN_RIGHT">
-<span id="_CPPv320LV_LABEL_ALIGN_RIGHT"></span><span id="_CPPv220LV_LABEL_ALIGN_RIGHT"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9a278263031d207deb8ac90f233c909f66"></span><code class="sig-name descname">LV_LABEL_ALIGN_RIGHT</code><a class="headerlink" href="#_CPPv420LV_LABEL_ALIGN_RIGHT" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Align text to right </p>
-</dd></dl>
-
-<dl class="enumerator">
-<dt id="_CPPv419LV_LABEL_ALIGN_AUTO">
-<span id="_CPPv319LV_LABEL_ALIGN_AUTO"></span><span id="_CPPv219LV_LABEL_ALIGN_AUTO"></span><span class="target" id="lv__label_8h_1aa491173a6b1628f4ff82067b2e1ceaa9aec27c82369eaf8bc200f71031863c449"></span><code class="sig-name descname">LV_LABEL_ALIGN_AUTO</code><a class="headerlink" href="#_CPPv419LV_LABEL_ALIGN_AUTO" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Use LEFT or RIGHT depending on the direction of the text (LTR/RTL) </p>
 </dd></dl>
 
 </dd></dl>
@@ -1526,11 +1500,42 @@ This feature can be enabled individually for each label by <code class="docutils
 <dl class="enum">
 <dt id="_CPPv4Ut7_anon_82">
 <span id="_CPPv3Ut7_anon_82"></span><span class="target" id="lv__label_8h_1a3babbf89cae9b856a12864a41506efbd"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_82" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Label align policy </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv419LV_LABEL_ALIGN_LEFT">
+<span id="_CPPv319LV_LABEL_ALIGN_LEFT"></span><span id="_CPPv219LV_LABEL_ALIGN_LEFT"></span><span class="target" id="lv__label_8h_1a3babbf89cae9b856a12864a41506efbdac0f5ffe6d5f53db54a297038ba53ab43"></span><code class="sig-name descname">LV_LABEL_ALIGN_LEFT</code><a class="headerlink" href="#_CPPv419LV_LABEL_ALIGN_LEFT" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Align text to left </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv421LV_LABEL_ALIGN_CENTER">
+<span id="_CPPv321LV_LABEL_ALIGN_CENTER"></span><span id="_CPPv221LV_LABEL_ALIGN_CENTER"></span><span class="target" id="lv__label_8h_1a3babbf89cae9b856a12864a41506efbda9b8ffbc9dd19549a71a82853c1dd542b"></span><code class="sig-name descname">LV_LABEL_ALIGN_CENTER</code><a class="headerlink" href="#_CPPv421LV_LABEL_ALIGN_CENTER" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Align text to center </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv420LV_LABEL_ALIGN_RIGHT">
+<span id="_CPPv320LV_LABEL_ALIGN_RIGHT"></span><span id="_CPPv220LV_LABEL_ALIGN_RIGHT"></span><span class="target" id="lv__label_8h_1a3babbf89cae9b856a12864a41506efbda278263031d207deb8ac90f233c909f66"></span><code class="sig-name descname">LV_LABEL_ALIGN_RIGHT</code><a class="headerlink" href="#_CPPv420LV_LABEL_ALIGN_RIGHT" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Align text to right </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv419LV_LABEL_ALIGN_AUTO">
+<span id="_CPPv319LV_LABEL_ALIGN_AUTO"></span><span id="_CPPv219LV_LABEL_ALIGN_AUTO"></span><span class="target" id="lv__label_8h_1a3babbf89cae9b856a12864a41506efbdaec27c82369eaf8bc200f71031863c449"></span><code class="sig-name descname">LV_LABEL_ALIGN_AUTO</code><a class="headerlink" href="#_CPPv419LV_LABEL_ALIGN_AUTO" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Use LEFT or RIGHT depending on the direction of the text (LTR/RTL) </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv4Ut7_anon_83">
+<span id="_CPPv3Ut7_anon_83"></span><span class="target" id="lv__label_8h_1aa57e16cd48de3b9a989056ff8df26f84"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_83" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Label styles </p>
 <p><em>Values:</em></p>
 <dl class="enumerator">
 <dt id="_CPPv418LV_LABEL_PART_MAIN">
-<span id="_CPPv318LV_LABEL_PART_MAIN"></span><span id="_CPPv218LV_LABEL_PART_MAIN"></span><span class="target" id="lv__label_8h_1a3babbf89cae9b856a12864a41506efbda2cbc67cdcc366d63cbbb35550c5a2f2c"></span><code class="sig-name descname">LV_LABEL_PART_MAIN</code><a class="headerlink" href="#_CPPv418LV_LABEL_PART_MAIN" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv318LV_LABEL_PART_MAIN"></span><span id="_CPPv218LV_LABEL_PART_MAIN"></span><span class="target" id="lv__label_8h_1aa57e16cd48de3b9a989056ff8df26f84a2cbc67cdcc366d63cbbb35550c5a2f2c"></span><code class="sig-name descname">LV_LABEL_PART_MAIN</code><a class="headerlink" href="#_CPPv418LV_LABEL_PART_MAIN" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1595,22 +1600,8 @@ This feature can be enabled individually for each label by <code class="docutils
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv423lv_label_set_array_textP8lv_obj_tPKc8uint16_t">
-<span id="_CPPv323lv_label_set_array_textP8lv_obj_tPKc8uint16_t"></span><span id="_CPPv223lv_label_set_array_textP8lv_obj_tPKc8uint16_t"></span><span id="lv_label_set_array_text__lv_obj_tP.cCP.uint16_t"></span><span class="target" id="lv__label_8h_1a6b164d72bbdee7c2405c4a372518c128"></span>void <code class="sig-name descname">lv_label_set_array_text</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>label</em>, <em class="property">const</em> char *<em>array</em>, uint16_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_label_set_array_textP8lv_obj_tPKc8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set a new text for a label from a character array. The array don’t has to be ‘\0’ terminated. Memory will be allocated to store the array by the label. <dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>: pointer to a label object </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">array</span></code>: array of characters or NULL to refresh the label </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: the size of ‘array’ in bytes </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv424lv_label_set_static_textP8lv_obj_tPKc">
-<span id="_CPPv324lv_label_set_static_textP8lv_obj_tPKc"></span><span id="_CPPv224lv_label_set_static_textP8lv_obj_tPKc"></span><span id="lv_label_set_static_text__lv_obj_tP.cCP"></span><span class="target" id="lv__label_8h_1a65ff22e040dc00cc7899b7b123c8cd2c"></span>void <code class="sig-name descname">lv_label_set_static_text</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>label</em>, <em class="property">const</em> char *<em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_label_set_static_textP8lv_obj_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv424lv_label_set_text_staticP8lv_obj_tPKc">
+<span id="_CPPv324lv_label_set_text_staticP8lv_obj_tPKc"></span><span id="_CPPv224lv_label_set_text_staticP8lv_obj_tPKc"></span><span id="lv_label_set_text_static__lv_obj_tP.cCP"></span><span class="target" id="lv__label_8h_1ab583f2f142e58fc188e2d4b07f109589"></span>void <code class="sig-name descname">lv_label_set_text_static</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>label</em>, <em class="property">const</em> char *<em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_label_set_text_staticP8lv_obj_tPKc" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set a static text. It will not be saved by the label so the ‘text’ variable has to be ‘alive’ while the label exist. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>: pointer to a label object </p></li>
@@ -1902,7 +1893,7 @@ This feature can be enabled individually for each label by <code class="docutils
 
 <dl class="member">
 <dt id="_CPPv4N14lv_label_ext_t3dotE">
-<span id="_CPPv3N14lv_label_ext_t3dotE"></span><span id="_CPPv2N14lv_label_ext_t3dotE"></span><span class="target" id="structlv__label__ext__t_1ab1b19678d194c3a580b7ff1e9ed867d4"></span><em class="property">union</em> <a class="reference internal" href="#_CPPv414lv_label_ext_t" title="lv_label_ext_t">lv_label_ext_t</a>::<strong>[anonymous]</strong> <code class="sig-name descname">dot</code><a class="headerlink" href="#_CPPv4N14lv_label_ext_t3dotE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N14lv_label_ext_t3dotE"></span><span id="_CPPv2N14lv_label_ext_t3dotE"></span><span class="target" id="structlv__label__ext__t_1a3532629348aca7b25e6930406df0aa7c"></span><em class="property">union</em> <a class="reference internal" href="#_CPPv414lv_label_ext_t" title="lv_label_ext_t">lv_label_ext_t</a>::<strong>[anonymous]</strong> <code class="sig-name descname">dot</code><a class="headerlink" href="#_CPPv4N14lv_label_ext_t3dotE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="member">
@@ -1993,7 +1984,7 @@ This feature can be enabled individually for each label by <code class="docutils
     <p>
         &copy; Copyright 2020, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on May 04, 2020.
+        Last updated on May 18, 2020.
       </span>
 
     </p>

@@ -400,6 +400,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/drawing.html">Drawing</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#buffering-types">Buffering types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#mechanism-of-screen-refreshing">Mechanism of screen refreshing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#masking">Masking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/drawing.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/drawing.html#micropython">MicroPython</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1271,12 +1276,8 @@ The default settings are 220 degrees, 6 scale labels, and 21 lines.</p>
 
     <span class="cm">/*Set the values*/</span>
     <span class="n">lv_gauge_set_value</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-    <span class="n">LV_ASSERT_MEM_INTEGRITY</span><span class="p">();</span>
     <span class="n">lv_gauge_set_value</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
-    <span class="n">LV_ASSERT_MEM_INTEGRITY</span><span class="p">();</span>
     <span class="n">lv_gauge_set_value</span><span class="p">(</span><span class="n">gauge1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-
-    <span class="n">LV_ASSERT_MEM_INTEGRITY</span><span class="p">();</span>
 <span class="p">}</span>
 
 <span class="cp">#endif</span>
@@ -1296,7 +1297,7 @@ The default settings are 220 degrees, 6 scale labels, and 21 lines.</p>
 <p class="breathe-sectiondef-title rubric">Typedefs</p>
 <dl class="type">
 <dt id="_CPPv420lv_gauge_format_cb_t">
-<span id="_CPPv320lv_gauge_format_cb_t"></span><span id="_CPPv220lv_gauge_format_cb_t"></span><span id="lv_gauge_format_cb_t"></span><span class="target" id="lv__gauge_8h_1a6df8a265e292885933782f17d9d8319d"></span><em class="property">typedef </em>void (*<code class="sig-name descname">lv_gauge_format_cb_t</code>)<span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *gauge, char buf[], int bufsize, int32_t value<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_gauge_format_cb_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv320lv_gauge_format_cb_t"></span><span id="_CPPv220lv_gauge_format_cb_t"></span><span id="lv_gauge_format_cb_t"></span><span class="target" id="lv__gauge_8h_1ae46bc86d96eeea8f969f9e5c78d2f9eb"></span><em class="property">typedef </em>void (*<code class="sig-name descname">lv_gauge_format_cb_t</code>)<span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *gauge, char *buf, int bufsize, int32_t value<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_gauge_format_cb_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="type">
@@ -1308,32 +1309,32 @@ The default settings are 220 degrees, 6 scale labels, and 21 lines.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Enums</p>
 <dl class="enum">
-<dt id="_CPPv4Ut7_anon_75">
-<span id="_CPPv3Ut7_anon_75"></span><span class="target" id="lv__gauge_8h_1a7859c0a3efa8b1c360f5c2376baf051e"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_75" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4Ut7_anon_76">
+<span id="_CPPv3Ut7_anon_76"></span><span class="target" id="lv__gauge_8h_1a79e9f285d34216706a748fd7ba8941b7"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_76" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p><em>Values:</em></p>
 <dl class="enumerator">
 <dt id="_CPPv418LV_GAUGE_PART_MAIN">
-<span id="_CPPv318LV_GAUGE_PART_MAIN"></span><span id="_CPPv218LV_GAUGE_PART_MAIN"></span><span class="target" id="lv__gauge_8h_1a7859c0a3efa8b1c360f5c2376baf051ead20af2e8544e2871e3045ae58d1f8b36"></span><code class="sig-name descname">LV_GAUGE_PART_MAIN</code> = <a class="reference internal" href="linemeter.html#_CPPv422LV_LINEMETER_PART_MAIN" title="LV_LINEMETER_PART_MAIN">LV_LINEMETER_PART_MAIN</a><a class="headerlink" href="#_CPPv418LV_GAUGE_PART_MAIN" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv318LV_GAUGE_PART_MAIN"></span><span id="_CPPv218LV_GAUGE_PART_MAIN"></span><span class="target" id="lv__gauge_8h_1a79e9f285d34216706a748fd7ba8941b7ad20af2e8544e2871e3045ae58d1f8b36"></span><code class="sig-name descname">LV_GAUGE_PART_MAIN</code> = <a class="reference internal" href="linemeter.html#_CPPv422LV_LINEMETER_PART_MAIN" title="LV_LINEMETER_PART_MAIN">LV_LINEMETER_PART_MAIN</a><a class="headerlink" href="#_CPPv418LV_GAUGE_PART_MAIN" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="enumerator">
 <dt id="_CPPv419LV_GAUGE_PART_MAJOR">
-<span id="_CPPv319LV_GAUGE_PART_MAJOR"></span><span id="_CPPv219LV_GAUGE_PART_MAJOR"></span><span class="target" id="lv__gauge_8h_1a7859c0a3efa8b1c360f5c2376baf051ea70ee28724438e2a153ca43f00311cc0c"></span><code class="sig-name descname">LV_GAUGE_PART_MAJOR</code> = <a class="reference internal" href="linemeter.html#_CPPv431_LV_LINEMETER_PART_VIRTUAL_LAST" title="_LV_LINEMETER_PART_VIRTUAL_LAST">_LV_LINEMETER_PART_VIRTUAL_LAST</a><a class="headerlink" href="#_CPPv419LV_GAUGE_PART_MAJOR" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv319LV_GAUGE_PART_MAJOR"></span><span id="_CPPv219LV_GAUGE_PART_MAJOR"></span><span class="target" id="lv__gauge_8h_1a79e9f285d34216706a748fd7ba8941b7a70ee28724438e2a153ca43f00311cc0c"></span><code class="sig-name descname">LV_GAUGE_PART_MAJOR</code> = <a class="reference internal" href="linemeter.html#_CPPv431_LV_LINEMETER_PART_VIRTUAL_LAST" title="_LV_LINEMETER_PART_VIRTUAL_LAST">_LV_LINEMETER_PART_VIRTUAL_LAST</a><a class="headerlink" href="#_CPPv419LV_GAUGE_PART_MAJOR" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="enumerator">
 <dt id="_CPPv420LV_GAUGE_PART_NEEDLE">
-<span id="_CPPv320LV_GAUGE_PART_NEEDLE"></span><span id="_CPPv220LV_GAUGE_PART_NEEDLE"></span><span class="target" id="lv__gauge_8h_1a7859c0a3efa8b1c360f5c2376baf051eab3797870adb34004a67317a0470143e9"></span><code class="sig-name descname">LV_GAUGE_PART_NEEDLE</code><a class="headerlink" href="#_CPPv420LV_GAUGE_PART_NEEDLE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv320LV_GAUGE_PART_NEEDLE"></span><span id="_CPPv220LV_GAUGE_PART_NEEDLE"></span><span class="target" id="lv__gauge_8h_1a79e9f285d34216706a748fd7ba8941b7ab3797870adb34004a67317a0470143e9"></span><code class="sig-name descname">LV_GAUGE_PART_NEEDLE</code><a class="headerlink" href="#_CPPv420LV_GAUGE_PART_NEEDLE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="enumerator">
 <dt id="_CPPv427_LV_GAUGE_PART_VIRTUAL_LAST">
-<span id="_CPPv327_LV_GAUGE_PART_VIRTUAL_LAST"></span><span id="_CPPv227_LV_GAUGE_PART_VIRTUAL_LAST"></span><span class="target" id="lv__gauge_8h_1a7859c0a3efa8b1c360f5c2376baf051ea485825259f804d854abc543388a62d60"></span><code class="sig-name descname">_LV_GAUGE_PART_VIRTUAL_LAST</code> = <a class="reference internal" href="linemeter.html#_CPPv431_LV_LINEMETER_PART_VIRTUAL_LAST" title="_LV_LINEMETER_PART_VIRTUAL_LAST">_LV_LINEMETER_PART_VIRTUAL_LAST</a><a class="headerlink" href="#_CPPv427_LV_GAUGE_PART_VIRTUAL_LAST" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv327_LV_GAUGE_PART_VIRTUAL_LAST"></span><span id="_CPPv227_LV_GAUGE_PART_VIRTUAL_LAST"></span><span class="target" id="lv__gauge_8h_1a79e9f285d34216706a748fd7ba8941b7a485825259f804d854abc543388a62d60"></span><code class="sig-name descname">_LV_GAUGE_PART_VIRTUAL_LAST</code> = <a class="reference internal" href="linemeter.html#_CPPv431_LV_LINEMETER_PART_VIRTUAL_LAST" title="_LV_LINEMETER_PART_VIRTUAL_LAST">_LV_LINEMETER_PART_VIRTUAL_LAST</a><a class="headerlink" href="#_CPPv427_LV_GAUGE_PART_VIRTUAL_LAST" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="enumerator">
 <dt id="_CPPv424_LV_GAUGE_PART_REAL_LAST">
-<span id="_CPPv324_LV_GAUGE_PART_REAL_LAST"></span><span id="_CPPv224_LV_GAUGE_PART_REAL_LAST"></span><span class="target" id="lv__gauge_8h_1a7859c0a3efa8b1c360f5c2376baf051ea4275f0c0feac455577e2aa57fd053504"></span><code class="sig-name descname">_LV_GAUGE_PART_REAL_LAST</code> = <a class="reference internal" href="linemeter.html#_CPPv428_LV_LINEMETER_PART_REAL_LAST" title="_LV_LINEMETER_PART_REAL_LAST">_LV_LINEMETER_PART_REAL_LAST</a><a class="headerlink" href="#_CPPv424_LV_GAUGE_PART_REAL_LAST" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv324_LV_GAUGE_PART_REAL_LAST"></span><span id="_CPPv224_LV_GAUGE_PART_REAL_LAST"></span><span class="target" id="lv__gauge_8h_1a79e9f285d34216706a748fd7ba8941b7a4275f0c0feac455577e2aa57fd053504"></span><code class="sig-name descname">_LV_GAUGE_PART_REAL_LAST</code> = <a class="reference internal" href="linemeter.html#_CPPv428_LV_LINEMETER_PART_REAL_LAST" title="_LV_LINEMETER_PART_REAL_LAST">_LV_LINEMETER_PART_REAL_LAST</a><a class="headerlink" href="#_CPPv424_LV_GAUGE_PART_REAL_LAST" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1720,7 +1721,7 @@ The default settings are 220 degrees, 6 scale labels, and 21 lines.</p>
     <p>
         &copy; Copyright 2020, Gabor Kiss-Vamosi
       <span class="lastupdated">
-        Last updated on May 04, 2020.
+        Last updated on May 18, 2020.
       </span>
 
     </p>

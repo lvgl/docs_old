@@ -23,7 +23,7 @@ Labels are able to show text from a **static character buffer** which is `\0`-te
 To do so, use `lv_label_set_static_text(label, "Text")`. 
 In this case, the text is not stored in the dynamic memory and the given buffer is used directly instead. 
 This means that the array can't be a local variable which goes out of scope when the function exits. 
-Constant strings are safe to use with `lv_label_set_static_text` (except when used with `LV_LABEL_LONG_DOTS`, as it modifies the buffer in-place), as they are stored in ROM memory, which is always accessible.
+Constant strings are safe to use with `lv_label_set_static_text` (except when used with `LV_LABEL_LONG_DOT`, as it modifies the buffer in-place), as they are stored in ROM memory, which is always accessible.
 
 You can also use a **raw array** as label text. 
 The array doesn't have to be `\0` terminated. 
@@ -40,7 +40,7 @@ By default, the width of the label object automatically expands to the text size
 
 * **LV_LABEL_LONG_EXPAND** - Expand the object size to the text size (Default)
 * **LV_LABEL_LONG_BREAK** - Keep the object width, break (wrap) the too long lines and expand the object height
-* **LV_LABEL_LONG_DOTS** - Keep the object size, break the text and write dots in the last line (**not supported when using `lv_label_set_static_text`**)
+* **LV_LABEL_LONG_DOT** - Keep the object size, break the text and write dots in the last line (**not supported when using `lv_label_set_static_text`**)
 * **LV_LABEL_LONG_SROLL** - Keep the size and scroll the label back and forth
 * **LV_LABEL_LONG_SROLL_CIRC** - Keep the size and scroll the label circularly
 * **LV_LABEL_LONG_CROP** - Keep the size and crop the text out of it
@@ -52,9 +52,9 @@ In addition with the default `LV_LABEL_LONG_EXPAND`, *long mode* `lv_obj_set_wid
 
 So you need to change the *long mode* first set the new *long mode* and then set the size with  `lv_obj_set_width/height/size()`.
 
-Another important note is that **`LV_LABEL_LONG_DOTS` manipulates the text buffer in-place** in order to add/remove the dots. 
+Another important note is that **`LV_LABEL_LONG_DOT` manipulates the text buffer in-place** in order to add/remove the dots. 
 When `lv_label_set_text` or `lv_label_set_array_text` are used, a separate buffer is allocated and this implementation detail is unnoticed. 
-This is not the case with `lv_label_set_static_text`! **The buffer you pass to `lv_label_set_static_text` must be writable if you plan to use `LV_LABEL_LONG_DOTS`.**
+This is not the case with `lv_label_set_static_text`! **The buffer you pass to `lv_label_set_static_text` must be writable if you plan to use `LV_LABEL_LONG_DOT`.**
 
 ### Text align
 
