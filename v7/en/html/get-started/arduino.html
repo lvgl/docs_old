@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Arduino &mdash; LittlevGL 7.0.0 documentation</title>
+  <title>Arduino &mdash; LVGL 7.0.0 documentation</title>
   
 
   
@@ -39,6 +39,8 @@
   <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Micropython" href="micropython.html" />
+    <link rel="prev" title="Espressif (ESP32)" href="espressif.html" />
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78811084-3"></script>
@@ -68,7 +70,7 @@
 
           
             
-            <img src="../_static/white_white_lvgl_full_logo.svg" class="logo" alt="Logo"/>
+            <img src="../_static/logo_lvgl_white.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -100,8 +102,8 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Get started</a><ul>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Get started</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quick-overview.html">Quick overview</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="quick-overview.html#add-lvgl-into-your-project">Add LVGL into your project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="quick-overview.html#learn-the-basics">Learn the basics</a><ul>
@@ -138,6 +140,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stm32.html">STM32</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxp.html">NXP</a></li>
 <li class="toctree-l2"><a class="reference internal" href="espressif.html">Espressif (ESP32)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Arduino</a></li>
 <li class="toctree-l2"><a class="reference internal" href="micropython.html">Micropython</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="micropython.html#what-is-micropython">What is Micropython?</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
@@ -224,6 +227,10 @@
 <li class="toctree-l4"><a class="reference internal" href="../overview/object.html#screen-the-most-basic-parent">Screen – the most basic parent</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#parts">Parts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#states">States</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Layers</a><ul>
@@ -246,14 +253,14 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#states">States</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#cascading-styles">Cascading styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#inheritance">Inheritance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#part-of-the-objects">Part of the objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#parts">Parts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#initialize-styles-and-set-get-properties">Initialize styles and set/get properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#managing-style-list">Managing style list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#local-styles">Local styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#transitions">Transitions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#properties">Properties</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#mixed-properties">Mixed properties</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#padding-properties">Padding properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#padding-and-margin-properties">Padding and margin properties</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#background-properties">Background properties</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#border-properties">Border properties</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#outline-properties">Outline properties</a></li>
@@ -268,6 +275,10 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#themes">Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#styling-a-button">Styling a button</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
@@ -389,27 +400,34 @@
 <li class="toctree-l2"><a class="reference internal" href="../overview/drawing.html">Drawing</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#buffering-types">Buffering types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#mechanism-of-screen-refreshing">Mechanism of screen refreshing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#masking">Masking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/drawing.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/drawing.html#micropython">MicroPython</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../widgets/index.html">Object types (Widgets)</a><ul>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../widgets/index.html">Widgets</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/obj.html">Base object (lv_obj)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/obj.html#overview">Overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#coordinates">Coordinates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#parents-and-children">Parents and children</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#screens">Screens</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#layers">Layers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#style">Style</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#events">Events</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../widgets/obj.html#parts">Parts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#states">States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#style">Style</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#attributes">Attributes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#opa-scale">Opa scale</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#protect">Protect</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#groups">Groups</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/obj.html#extended-click-area">Extended click area</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../widgets/obj.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/obj.html#id1">Events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/obj.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/obj.html#example">Example</a><ul>
@@ -558,7 +576,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/chart.html">Chart (lv_chart)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#parts-and-styles">Parts and Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#data-series">Data series</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#series-type">Series’ type</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#modify-the-data">Modify the data</a></li>
@@ -566,11 +586,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#number-of-points">Number of points</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#vertical-range">Vertical range</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#division-lines">Division lines</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#series-appearance">Series’ appearance</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#tick-marks-and-labels">Tick marks and labels</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#events">Events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#example">Example</a><ul>
@@ -1121,7 +1139,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">LittlevGL</a>
+          <a href="../index.html">LVGL</a>
         
       </nav>
 
@@ -1151,6 +1169,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Get started</a> &raquo;</li>
         
       <li>Arduino</li>
     
@@ -1182,14 +1202,23 @@
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="micropython.html" class="btn btn-neutral float-right" title="Micropython" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="espressif.html" class="btn btn-neutral float-left" title="Espressif (ESP32)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Gabor Kiss-Vamosi
+        &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Apr 21, 2020.
+        Last updated on May 19, 2020.
       </span>
 
     </p>

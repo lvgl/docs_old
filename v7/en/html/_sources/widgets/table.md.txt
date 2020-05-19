@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/littlevgl/docs/blob/master/en/widgets/table.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/en/widgets/table.md
 ```
 # Table (lv_table)
 

@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/littlevgl/docs/blob/master/en/overview/animation.md
+:github_url: https://github.com/littlevgl/docs/blob/master/v7/en/overview/animation.md
 ```
 # Animations
 
