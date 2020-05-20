@@ -5,21 +5,22 @@
 ```eval_rst
 .. include:: /lang.rst
 
-PDF version: :download:`LittlevGL.pdf <LittlevGL.pdf>`
+PDF version: :download:`LVGL.pdf <LVGL.pdf>`
+
 ```
 
-# Welcome to LittlevGL's documentation!
+# Welcome to LVGL's documentation!
 
-![](/misc/lv_theme_intro.png "LittlevGL cover")
+![](/misc/lv_theme_intro.png "LVGL cover")
 
-LittlevGL is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
+LVGL (Little and Versatile Graphic Library) is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
 
-**[Website](https://littlevgl.com) &nbsp; · &nbsp;** 
-**[GitHub](https://github.com/littlevgl/lvgl) &nbsp; · &nbsp;** 
-**[Forum](https://forum.littlevgl.com) &nbsp; · &nbsp;** 
-**[Live demo](https://littlevgl.com/live-demo) &nbsp; · &nbsp;** 
+**[Website](https://lvgl.com) &nbsp; · &nbsp;** 
+**[GitHub](https://github.com/lvgl/lvgl) &nbsp; · &nbsp;** 
+**[Forum](https://forum.lvgl.com) &nbsp; · &nbsp;** 
+**[Live demo](https://lvgl.com/demos) &nbsp; · &nbsp;** 
 **[Simulator](/get-started/pc-simulator) &nbsp; · &nbsp;** 
-**[Blog](https://blog.littlevgl.com/)**
+**[Blog](https://blog.lvgl.com/)**
 
 ## Key features
 - Powerful building blocks such as buttons, charts, lists, sliders, images etc.
@@ -34,6 +35,7 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 - Single frame buffer operation even with advanced graphical effects
 - Written in C for maximal compatibility (C++ compatible)
 - Simulator to start embedded GUI design on a PC without embedded hardware
+- Binding to MicroPython
 - Tutorials, examples, themes for rapid GUI design
 - Documentation is available as online and offline
 - Free and open-source under MIT license
@@ -57,22 +59,22 @@ LittlevGL is a free and open-source graphics library providing everything you ne
 ## FAQ
 
 ### Where to get started?
-- For a general overview of LittlevGL visit [littlevgl.com](https://littlevgl.com)
-- Go to the [Get started](/get-started/index) section to try Live demos in you browser, learn about the Simulator(s) and learn the basics of LittlevGL
+- For a general overview of LVGL visit [lvgl.io](https://lvgl.io)
+- Go to the [Get started](/get-started/index) section to learn the basics of LVGL
 - A detailed porting guide can be found in the [Porting](/porting/index) section
-- To learn how LittlevGL works go to the [Overview](/overview/index)
-- To read tutorials or share your own experiences go to the [Blog](https://blog.littlevgl.com)
-- To see the source code of the library check it on GitHub: [https://github.com/littlevgl/lvgl/](https://github.com/littlevgl/lvgl/)
+- To learn how LVGL works go to the [Overview](/overview/index)
+- To see the source code of the library check it on GitHub: [https://github.com/lvgl/lvgl/](https://github.com/lvgl/lvgl/)
+- To read tutorials or share your own experiences go to the [Blog](https://blog.lvgl.io)
 
 
 ### Where can I ask questions?
-To ask questions in the Forum: [https://forum.littlevgl.com/](https://forum.littlevgl.com/).
+You ask questions in the Forum: [https://forum.lvgl.io/](https://forum.lvgl.io/).
 
-We use [GitHub issues](https://github.com/littlevgl/lvgl/issues) for development related discussion. So you should use them only if your question or issue is tightly related to the development of the library. 
-
+We use [GitHub issues](https://github.com/lvgl/lvgl/issues) for development related discussion. 
+So you should use them only if your question or issue is tightly related to the development of the library. 
 
 ### Is my MCU/hardware supported?
-Every MCU which is capable of driving a display via Parallel port, SPI, RGB interface or anything else and fulfills the [Requirements](#Requirements) is supported by LittlevGL.
+Every MCU which is capable of driving a display via Parallel port, SPI, RGB interface or anything else and fulfills the [Requirements](#Requirements) is supported by LLVGL.
 
 It includes:
 - "Common" MCUs like STM32F, STM32H, NXP Kinetis, LPC, iMX, dsPIC33, PIC32 etc. 
@@ -81,20 +83,24 @@ It includes:
 - And anything else with a strong enough MCU and a periphery to drive a display
 
 ### Is my display supported?
-LittlevGL needs just one simple driver to copy an array of pixels into a given area of the display. If you can do this with your display then you can use the same display with LittlevGL.
+LVGL needs just one simple driver function to copy an array of pixels into a given area of the display. 
+If you can do this with your display then you can use that display with LVGL.
 
-It includes:
+Some examples of the supported display types:
 - TFTs with 16 or 24 bit color depth 
 - Monitors with HDMI port
 - Small monochrome displays
 - Gray-scale displays
-- LED matrices
+- even LED matrices
 - or any other display where you can control the color/state of the pixels
 
 See the [Porting](/porting/display) section to learn more.
 
-### Is LittlevGL free? How can I use it in a commercial product?
-LittlevGL comes with [MIT license](https://github.com/littlevgl/lvgl/blob/master/LICENCE.txt) which means you can download and use it for any purpose you want without any obligations.
+### Is LVGL free? How can I use it in a commercial product?
+LVGL comes with [MIT license](https://github.com/lvgl/lvgl/blob/master/LICENCE.txt) which means you can download and use it for any purpose you want.
+
+The only thing you need to do is to add a notice about you are using LVGL in you product. 
+This notice can be placed in the user guide, on you website, on an about screen, or anywhere else where users might see it.
 
 ### Nothing happens, my display driver is not called. What have I missed?
 Be sure you are calling `lv_tick_inc(x)` in an interrupt and `lv_task_handler()` in your main `while(1)`.
@@ -105,7 +111,7 @@ Learn more in the [Tick](/porting/tick) and [Task handler](/porting/task-handler
 Be sure you are calling `lv_disp_flush_ready(drv)` at the end of your "*display flush callback*". 
 
 ### Why I see only garbage on the screen?
-Probably there a bug in your display driver. Try the following code without using LittlevGL:
+Probably there a bug in your display driver. Try the following code without using LVGL. You should see a square with red-blue gradient
 
 ```c
 #define BUF_W 20
@@ -130,17 +136,18 @@ my_flush_cb(NULL, &a, buf);
 ```
 
 ### Why I see non-sense colors on the screen? 
-Probably LittlevGL's color format is not compatible with your displays color format. Check `LV_COLOR_DEPTH` in *lv_conf.h*.
+Probably LVGL's color format is not compatible with your displays color format. Check `LV_COLOR_DEPTH` in *lv_conf.h*.
 
-If you are using 16 bit colors with SPI (or other byte-oriented) interface probably you need to set `LV_COLOR_16_SWAP  1` in *lv_conf.h*. It swaps the upper and lower bytes of the pixels.
+If you are using 16 bit colors with SPI (or other byte-oriented interface) probably you need to set `LV_COLOR_16_SWAP  1` in *lv_conf.h*. 
+It swaps the upper and lower bytes of the pixels.
 
 ### How to speed up my UI?
-- Turn on compiler optimization
+- Turn on compiler optimization and enable cache if your MCU has
 - Increase the size of the display buffer
 - Use 2 display buffers and flush the buffer with DMA (or similar periphery) in the background 
 - Increase the clock speed of the SPI or Parallel port if you use them to drive the display
 - If you display has SPI port consider changing to a model with parallel because it has much higher throughput
-- Keep the display buffer in the internal RAM (not in external SRAM) because LittlevGL uses it a lot and it should have a small access time
+- Keep the display buffer in the internal RAM (not in external SRAM) because LVGL uses it a lot and it should have a small access time
  
 ### How to reduce flash/ROM usage?
 You can disable all the unused feature (such as animations, file system, GPU etc.) and object types in *lv_conf.h*.
@@ -149,7 +156,7 @@ If you are using GCC you can add
 - `-fdata-sections -ffunction-sections` compiler flags 
 - `--gc-sections` linker flag
 
-to remove unused functions and variables.
+to remove unused functions and variables from the final binary
 
 ### How to reduce the RAM usage
 - Lower the size of the *Display buffer* 
@@ -158,36 +165,31 @@ to remove unused functions and variables.
  
 ### How to work with an operating system?
 
-To work with an operating system where tasks can interrupt each other you should protect LittlevGL related function calls with a mutex. See the [Operating system and interrupts](/porting/os) section to learn more.
+To work with an operating system where tasks can interrupt each other you should protect LVGL related function calls with a mutex. S
+ee the [Operating system and interrupts](/porting/os) section to learn more.
 
-### How to contribute to LittlevGL?
-There are several ways to contribute to LittlevGL:
-- Write a few lines about your project to inspire others
-- Answer other’s questions
+### How to contribute to LVGL?
+There are several ways to contribute to LVGL:
+- Write a few lines about your project to inspire others in the [Forum](https://forum.lvgl.io.com/c/my-projects)
+- Help others questions in the [Froum]
 - Report and/or fix bugs
 - Suggest and/or implement new features
 - Improve and/or translate the documentation
 - Write a blog post about your experiences
 
-To learn more see [Contributing guide](https://blog.littlevgl.com/2018-12-06/contributing)
+To learn more see [Contributing guide](https://blog.lvgl.com/2018-12-06/contributing)
 
-### How is LittlevGL versioned?
+### How is LVGL versioned?
 
-LittlevGL follows the rules of [Semantic versioning](https://semver.org/):
+LVGL follows the rules of [Semantic versioning](https://semver.org/):
 - *Major* versions for incompatible API changes. E.g. v5.0.0, v6.0.0
 - *Minor* version for new but backwards-compatible functionalities. E.g. v6.1.0, v6.2.0
 - *Patch* version for backwards-compatible bug fixes. E.g. v6.1.1, v6.1.2
 
-The new versions are developed in `dev-X.Y` branchs on GitHub. It can be cloned to test the newset features, however, still anything can be changed there.
+The recent version of LVGL is available on GitHub in the [master](https://github.com/lvgl/lvgl).
+Features are continuosly merged to `master` and there are bugfix or minor release every two week. 
 
-The bugfixes are added directly to the `master` branch on GitHub and a bugfix release is created every month.
-
-### Where can I find the documentation of the previous version (v5.3)?
-
-You can download it here and open offline:
-```eval_rst
-:download:`Docs-v5-3.zip <docs_v5_3.zip>`
-```
+The older versions of LVGL can be found in branches like `release/v6`.
 
 ```eval_rst
 .. toctree::
@@ -196,6 +198,6 @@ You can download it here and open offline:
    get-started/index
    porting/index
    overview/index
-   object-types/index
+   widgets/index
 
 ```

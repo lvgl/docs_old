@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/littlevgl/docs/blob/master/en/porting/log.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/en/porting/log.md
 ```
 # Logging
 
@@ -25,7 +25,7 @@ If you can't use `printf` or want to use a custom function to log, you can regis
 For example:
 
 ```c
-void my_log_cb(lv_log_level_t level, const char * file, int line, const char * dsc)
+void my_log_cb(lv_log_level_t level, const char * file, int line, const char * fn_name, const char * dsc)
 {
   /*Send the logs via serial port*/
   if(level == LV_LOG_LEVEL_ERROR) serial_send("ERROR: ");
@@ -41,6 +41,8 @@ void my_log_cb(lv_log_level_t level, const char * file, int line, const char * d
   serial_send("#");
   serial_send(line_str);
 
+  serial_send(": ");
+  serial_send(fn_name);
   serial_send(": ");
   serial_send(dsc);
   serial_send("\n");

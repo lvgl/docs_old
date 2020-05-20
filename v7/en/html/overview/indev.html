@@ -285,7 +285,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#pointers">Pointers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#keypad-and-encoder">Keypad and encoder</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#groups">Groups</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#live-demo">Live demo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#styling">Styling</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#api">API</a><ul>
@@ -1267,41 +1267,12 @@ Pressing <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENT
 Depending on the object’s type, a short or long press of <code class="docutils literal notranslate"><span class="pre">LV_KEY_ENTER</span></code> changes back to <em>Navigate</em> mode.
 Usually, an object which can not be pressed (like a <a class="reference internal" href="../widgets/slider.html"><span class="doc">Slider</span></a>) leaves <em>Edit</em> mode on short click. But with object where short click has meaning (e.g. <a class="reference internal" href="../widgets/btn.html"><span class="doc">Button</span></a>), long press is required.</p>
 </div>
-<div class="section" id="styling-the-focused-object">
-<h4>Styling the focused object<a class="headerlink" href="#styling-the-focused-object" title="Permalink to this headline">¶</a></h4>
-<p>To visually highlight the focused element, its <a class="reference external" href="/overview/style#use-the-styles">Main style</a> will be updated.
-By default, some orange color is mixed with the original colors of the style.
-A new style modifier callback be set by <code class="docutils literal notranslate"><span class="pre">lv_group_set_style_mod_cb(g,</span> <span class="pre">my_style_mod_cb)</span></code>. A style modifier callback receives a pointer to a caller group and a pointer to a style to modify.
-The default style modifier looks like this (slightly simplified):</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">default_style_mod_cb</span><span class="p">(</span><span class="n">lv_group_t</span> <span class="o">*</span> <span class="n">group</span><span class="p">,</span> <span class="n">lv_style_t</span> <span class="o">*</span> <span class="n">style</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="cm">/*Make the bodies a little bit orange*/</span>
-    <span class="n">style</span><span class="o">-&gt;</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">opa</span>   <span class="o">=</span> <span class="n">LV_OPA_COVER</span><span class="p">;</span>
-    <span class="n">style</span><span class="o">-&gt;</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_ORANGE</span><span class="p">;</span>
-    <span class="n">style</span><span class="o">-&gt;</span><span class="n">body</span><span class="p">.</span><span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">LV_DPI</span> <span class="o">/</span> <span class="mi">20</span><span class="p">;</span>
-
-    <span class="n">style</span><span class="o">-&gt;</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span>   <span class="o">=</span> <span class="n">lv_color_mix</span><span class="p">(</span><span class="n">style</span><span class="o">-&gt;</span><span class="n">body</span><span class="p">.</span><span class="n">main_color</span><span class="p">,</span> <span class="n">LV_COLOR_ORANGE</span><span class="p">,</span> <span class="n">LV_OPA_70</span><span class="p">);</span>
-    <span class="n">style</span><span class="o">-&gt;</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span>   <span class="o">=</span> <span class="n">lv_color_mix</span><span class="p">(</span><span class="n">style</span><span class="o">-&gt;</span><span class="n">body</span><span class="p">.</span><span class="n">grad_color</span><span class="p">,</span> <span class="n">LV_COLOR_ORANGE</span><span class="p">,</span> <span class="n">LV_OPA_70</span><span class="p">);</span>
-    <span class="n">style</span><span class="o">-&gt;</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_mix</span><span class="p">(</span><span class="n">style</span><span class="o">-&gt;</span><span class="n">body</span><span class="p">.</span><span class="n">shadow</span><span class="p">.</span><span class="n">color</span><span class="p">,</span> <span class="n">LV_COLOR_ORANGE</span><span class="p">,</span> <span class="n">LV_OPA_60</span><span class="p">);</span>
-
-    <span class="cm">/*Recolor text*/</span>
-    <span class="n">style</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_color_mix</span><span class="p">(</span><span class="n">style</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">.</span><span class="n">color</span><span class="p">,</span> <span class="n">LV_COLOR_ORANGE</span><span class="p">,</span> <span class="n">LV_OPA_70</span><span class="p">);</span>
-
-    <span class="cm">/*Add some recolor to the images*/</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">style</span><span class="o">-&gt;</span><span class="n">image</span><span class="p">.</span><span class="n">intense</span> <span class="o">&lt;</span> <span class="n">LV_OPA_MIN</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">style</span><span class="o">-&gt;</span><span class="n">image</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">LV_COLOR_ORANGE</span><span class="p">;</span>
-        <span class="n">style</span><span class="o">-&gt;</span><span class="n">image</span><span class="p">.</span><span class="n">intense</span> <span class="o">=</span> <span class="n">LV_OPA_40</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
 </div>
-<p>This style modifier callback is used for keypads and encoder in <em>Navigate</em> mode.
-For the <em>Edit</em> mode and other callback is used which can be set with <code class="docutils literal notranslate"><span class="pre">lv_group_set_style_mod_edit_cb()</span></code>. By default, it has a greenish color.</p>
-</div>
-</div>
-<div class="section" id="live-demo">
-<h3>Live demo<a class="headerlink" href="#live-demo" title="Permalink to this headline">¶</a></h3>
-<p>Try this <a class="reference external" href="https://littlevgl.com/demo-touchpadless">Live demo</a> to see how a group and touchpad-less navigation works in the practice.</p>
+<div class="section" id="styling">
+<h3>Styling<a class="headerlink" href="#styling" title="Permalink to this headline">¶</a></h3>
+<p>If an object is focused either by clicking it via touchpad, or focused via an encoder or keypad it goes to <code class="docutils literal notranslate"><span class="pre">LV_STATE_FOCUSED</span></code>. Hence focused styles will be applied on it.</p>
+<p>If te object goes to edit mode it goes to <code class="docutils literal notranslate"><span class="pre">LV_STATE_FOCUSED</span> <span class="pre">|</span> <span class="pre">LV_STATE_EDITED</span></code> state so these style properties will be shown.</p>
+<p>For a moew detaild description read the <a class="reference external" href="https://docs.lvgl.io/v7/en/html/overview/style.html">Style</a> section.</p>
 </div>
 </div>
 <div class="section" id="api">
@@ -2052,7 +2023,7 @@ For the <em>Edit</em> mode and other callback is used which can be set with <cod
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on May 19, 2020.
+        Last updated on May 20, 2020.
       </span>
 
     </p>

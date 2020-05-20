@@ -1,12 +1,12 @@
 ```eval_rst
-:github_url: https://github.com/littlevgl/docs/blob/master/en/overview/object.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/en/overview/object.md
 ```
 # Objects
 
 In the LittlevGL the **basic building blocks** of a user interface are the objects, also called *Widgets*.
-For example a [Button](/object-types/btn), [Label](/object-types/label), [Image](/object-types/img), [List](/object-types/list), [Chart](/object-types/chart) or [Text area](/object-types/ta).
+For example a [Button](/widgets/btn), [Label](/widgets/label), [Image](/widgets/img), [List](/widgets/list), [Chart](/widgets/chart) or [Text area](/widgets/textarea).
 
-Check all the [Object types](/object-types/index) here.
+Check all the [Object types](/widgets/index) here.
 
 ## Object attributes
 
@@ -27,7 +27,7 @@ lv_obj_set_size(btn1, 100, 50);	 /*Button size*/
 lv_obj_set_pos(btn1, 20,30);      /*Button position*/
 ```
 
-To see all the available functions visit the Base object's [documentation](/object-types/obj).
+To see all the available functions visit the Base object's [documentation](/widgets/obj).
 
 ### Specific attributes
 
@@ -45,7 +45,7 @@ lv_slider_set_value(slider1, 40, LV_ANIM_ON);	/*Set the current value (position)
 lv_slider_set_action(slider1, my_action);     /*Set a callback function*/
 ```
 
-The API of the object types are described in their [Documentation](/object-types/index) but you can also check the respective header files (e.g. *lv_objx/lv_slider.h*)
+The API of the object types are described in their [Documentation](/widgets/index) but you can also check the respective header files (e.g. *lv_objx/lv_slider.h*)
 
 ## Object's working mechanisms
 
@@ -136,7 +136,7 @@ lv_obj_t * scr1 = lv_obj_create(NULL, NULL);
 There is always an active screen on each display. By default, the library creates and loads a "Base object" as the screen for each display.  
 To get the currently active screen use the `lv_scr_act()` function. To load a new one, use `lv_scr_load(scr1)`.
 
-Screens can be created with any object type. For example, a [Base object](/object-types/obj) or an image to make a wallpaper.
+Screens can be created with any object type. For example, a [Base object](/widgets/obj) or an image to make a wallpaper.
 
 
 Screens are created on the currently selected *default display*.
@@ -144,3 +144,31 @@ The *default screen* is the last registered screen with `lv_disp_drv_register` o
 `lv_scr_act()` and `lv_scr_load()` operate on the currently default screen.
 
 Visit [Multi-display support](/overview/display) to learn more.
+
+## Parts
+
+The widgets can have multiple parts. For example a [Button](/widgets/btn) has only a main part but a [Slider](/widgets/slider) is built from a background, an indicator and a knob. 
+
+The name of the parts is constructed like `LV_ + <TYPE> _PART_ <NAME>`. For example `LV_BTN_PART_MAIN` or `LV_SLIDER_PART_KNOB`. The parts are usually used when styles are add to the objects. 
+Using parts different styles can be assigned to the different parts of the objects. 
+
+To learn more about the parts read the related section of the [Style overview](/overview/style#parts).
+
+
+### States
+The object can be in a combinations of the following states:
+- **LV_STATE_DEFAULT**  Normal, released
+- **LV_STATE_CHECKED** Toggled or checked
+- **LV_STATE_FOCUSED** Focused via keypad or encoder or clicked via touchpad/mouse 
+- **LV_STATE_EDITED**  Edit by an encoder
+- **LV_STATE_HOVERED** Hovered by mouse (not supported now)
+- **LV_STATE_PRESSED** Pressed
+- **LV_STATE_DISABLED** Disabled or inactive
+
+The states are usually automatically changed by the library as the user presses, releases, focuses etc an object. 
+However, the states can be changed manually too. To completely overwrite the current state use `lv_obj_set_state(obj, part, LV_STATE...)`. 
+To set or clear given state (but leave to other states untouched) use `lv_obj_add/clear_state(obj, part, LV_STATE_...)`
+In both cases ORed state values can be used as well. E.g. `lv_obj_set_state(obj, part, LV_STATE_PRESSED | LV_PRESSED_CHECKED)`.
+
+To learn more about the states read the related section of the [Style overview](/overview/style#states).
+

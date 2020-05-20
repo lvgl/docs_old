@@ -66,7 +66,7 @@
 
 
 \title{LVGL Documentation}
-\date{May 19, 2020}
+\date{May 20, 2020}
 \release{7.0.0}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -5568,43 +5568,13 @@ Depending on the object’s type, a short or long press of \sphinxcode{\sphinxup
 Usually, an object which can not be pressed (like a {\hyperref[\detokenize{widgets/slider::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Slider}}}}) leaves \sphinxstyleemphasis{Edit} mode on short click. But with object where short click has meaning (e.g. {\hyperref[\detokenize{widgets/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button}}}}), long press is required.
 
 
-\subparagraph{Styling the focused object}
-\label{\detokenize{overview/indev:styling-the-focused-object}}
-To visually highlight the focused element, its \sphinxhref{/overview/style\#use-the-styles}{Main style} will be updated.
-By default, some orange color is mixed with the original colors of the style.
-A new style modifier callback be set by \sphinxcode{\sphinxupquote{lv\_group\_set\_style\_mod\_cb(g, my\_style\_mod\_cb)}}. A style modifier callback receives a pointer to a caller group and a pointer to a style to modify.
-The default style modifier looks like this (slightly simplified):
+\subparagraph{Styling}
+\label{\detokenize{overview/indev:styling}}
+If an object is focused either by clicking it via touchpad, or focused via an encoder or keypad it goes to \sphinxcode{\sphinxupquote{LV\_STATE\_FOCUSED}}. Hence focused styles will be applied on it.
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k}{static} \PYG{k+kt}{void} \PYG{n+nf}{default\PYGZus{}style\PYGZus{}mod\PYGZus{}cb}\PYG{p}{(}\PYG{n}{lv\PYGZus{}group\PYGZus{}t} \PYG{o}{*} \PYG{n}{group}\PYG{p}{,} \PYG{n}{lv\PYGZus{}style\PYGZus{}t} \PYG{o}{*} \PYG{n}{style}\PYG{p}{)}
-\PYG{p}{\PYGZob{}}
-    \PYG{c+cm}{/*Make the bodies a little bit orange*/}
-    \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{opa}   \PYG{o}{=} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}COVER}\PYG{p}{;}
-    \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}ORANGE}\PYG{p}{;}
-    \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{border}\PYG{p}{.}\PYG{n}{width} \PYG{o}{=} \PYG{n}{LV\PYGZus{}DPI} \PYG{o}{/} \PYG{l+m+mi}{20}\PYG{p}{;}
+If te object goes to edit mode it goes to \sphinxcode{\sphinxupquote{LV\_STATE\_FOCUSED \textbar{} LV\_STATE\_EDITED}} state so these style properties will be shown.
 
-    \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color}   \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}mix}\PYG{p}{(}\PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{main\PYGZus{}color}\PYG{p}{,} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}ORANGE}\PYG{p}{,} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}70}\PYG{p}{)}\PYG{p}{;}
-    \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color}   \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}mix}\PYG{p}{(}\PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{grad\PYGZus{}color}\PYG{p}{,} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}ORANGE}\PYG{p}{,} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}70}\PYG{p}{)}\PYG{p}{;}
-    \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{shadow}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}mix}\PYG{p}{(}\PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{body}\PYG{p}{.}\PYG{n}{shadow}\PYG{p}{.}\PYG{n}{color}\PYG{p}{,} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}ORANGE}\PYG{p}{,} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}60}\PYG{p}{)}\PYG{p}{;}
-
-    \PYG{c+cm}{/*Recolor text*/}
-    \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{lv\PYGZus{}color\PYGZus{}mix}\PYG{p}{(}\PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{text}\PYG{p}{.}\PYG{n}{color}\PYG{p}{,} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}ORANGE}\PYG{p}{,} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}70}\PYG{p}{)}\PYG{p}{;}
-
-    \PYG{c+cm}{/*Add some recolor to the images*/}
-    \PYG{k}{if}\PYG{p}{(}\PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{image}\PYG{p}{.}\PYG{n}{intense} \PYG{o}{\PYGZlt{}} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}MIN}\PYG{p}{)} \PYG{p}{\PYGZob{}}
-        \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{image}\PYG{p}{.}\PYG{n}{color} \PYG{o}{=} \PYG{n}{LV\PYGZus{}COLOR\PYGZus{}ORANGE}\PYG{p}{;}
-        \PYG{n}{style}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{image}\PYG{p}{.}\PYG{n}{intense} \PYG{o}{=} \PYG{n}{LV\PYGZus{}OPA\PYGZus{}40}\PYG{p}{;}
-    \PYG{p}{\PYGZcb{}}
-\PYG{p}{\PYGZcb{}}
-\end{sphinxVerbatim}
-
-This style modifier callback is used for keypads and encoder in \sphinxstyleemphasis{Navigate} mode.
-For the \sphinxstyleemphasis{Edit} mode and other callback is used which can be set with \sphinxcode{\sphinxupquote{lv\_group\_set\_style\_mod\_edit\_cb()}}. By default, it has a greenish color.
-
-
-\subparagraph{Live demo}
-\label{\detokenize{overview/indev:live-demo}}
-Try this \sphinxhref{https://littlevgl.com/demo-touchpadless}{Live demo} to see how a group and touchpad-less navigation works in the practice.
+For a moew detaild description read the \sphinxhref{https://docs.lvgl.io/v7/en/html/overview/style.html}{Style} section.
 
 
 \paragraph{API}
