@@ -4,7 +4,7 @@ import sys
 import os
 
 
-langs = ['en', 'tr', 'zh-CN', 'hu', 'fr']
+langs = ['en']
 
 clean = 0
 trans = 0
@@ -21,7 +21,7 @@ else:
 if trans:
   os.system("cd en && ./trans_push.py && ./trans_pull.py")  
   
-cmd_pdf =   " echo '------------\nBuild PDF...\n------------'; sphinx-build -b latex . xetex && cd xetex; xelatex -interaction=batchmode *.tex; xelatex -interaction=batchmode *.tex;  cp -f LittlevGL.pdf ../LittlevGL.pdf; cd ..; "
+cmd_pdf =   " echo '------------\nBuild PDF...\n------------'; sphinx-build -b latex . xetex && cd xetex; xelatex -interaction=batchmode *.tex; xelatex -interaction=batchmode *.tex;  cp -f LVGL.pdf ../LVGL.pdf; cd ..; "
 cmd_html =  " echo '------------\nBuild HTML...\n------------'; sphinx-build -b html . html; "
 
 cmd_build = cmd_clean + cmd_pdf + cmd_html + " "

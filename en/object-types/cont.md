@@ -12,7 +12,7 @@ You can apply a layout on the containers to automatically order their children. 
 
 - **LV_LAYOUT_OFF** - Do not align the children.
 - **LV_LAYOUT_CENTER** - Align children to the center in column and keep `padding.inner` space between them.
-- **LV_LAYOUT_COL_** - Align children in a left-justified column. Keep `padding.left` space on the left, `pad.top` space on the top and `padding.inner` space between the children.
+- **LV_LAYOUT_COL_L** - Align children in a left-justified column. Keep `padding.left` space on the left, `pad.top` space on the top and `padding.inner` space between the children.
 - **LV_LAYOUT_COL_M** - Align children in centered column. Keep `padding.top` space on the top and `padding.inner` space between the children.
 - **LV_LAYOUT_COL_R** - Align children in a right-justified column. Keep `padding.right` space on the right, `padding.top` space on the top and `padding.inner` space between the children.
 - **LV_LAYOUT_ROW_T** - Align children in a top justified row. Keep `padding.left` space on the left, `padding.top` space on the top and `padding.inner` space between the children.

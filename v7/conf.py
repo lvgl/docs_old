@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# LittlevGL documentation build configuration file, created by
+# LVGL documentation build configuration file, created by
 # sphinx-quickstart on Wed Jun 12 16:38:40 2019.
 #
 # This file is execfile()d with the current directory set to its
@@ -61,9 +61,9 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = 'LittlevGL'
-copyright = '2020, Gabor Kiss-Vamosi'
-author = 'Gabor Kiss-Vamosi'
+project = 'LVGL'
+copyright = '2020, LVGL LLC'
+author = 'The community of LVGL'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -127,12 +127,12 @@ html_sidebars = {
 }
 
 html_favicon = 'favicon.ico'
-html_logo = 'white_white_lvgl_full_logo.svg'
+html_logo = 'logo_lvgl_white.png'
 
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'LittlevGLdoc'
+htmlhelp_basename = 'LVGLdoc'
 
 html_last_updated_fmt = ''
 
@@ -173,7 +173,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'LittlevGL.tex', 'LittlevGL Documentation',
+    (master_doc, 'LVGL.tex', 'LVGL Documentation',
      'Gabor Kiss-Vamosi', 'manual'),
 ]
 
@@ -183,7 +183,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'littlevgl', 'LittlevGL Documentation',
+    (master_doc, 'lvgl', 'LVGL Documentation',
      [author], 1)
 ]
 
@@ -194,8 +194,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'LittlevGL', 'LittlevGL Documentation',
-     author, 'LittlevGL', 'One line description of project.',
+    (master_doc, 'LVGL', 'LVGL Documentation',
+     author, 'LVGL LLC', 'One line description of project.',
      'Miscellaneous'),
 ]
 

@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/littlevgl/docs/blob/master/en/overview/indev.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/en/overview/indev.md
 ```
 # Input devices
 
@@ -81,41 +81,13 @@ In *Edit* mode, `LV_KEY_NEXT/PREV` is usually used to edit the object.
 Depending on the object's type, a short or long press of `LV_KEY_ENTER` changes back to *Navigate* mode.
 Usually, an object which can not be pressed (like a [Slider](/widgets/slider)) leaves *Edit* mode on short click. But with object where short click has meaning (e.g. [Button](/widgets/btn)), long press is required.
 
-#### Styling the focused object
-To visually highlight the focused element, its [Main style](/overview/style#use-the-styles) will be updated.
-By default, some orange color is mixed with the original colors of the style.
-A new style modifier callback be set by `lv_group_set_style_mod_cb(g, my_style_mod_cb)`. A style modifier callback receives a pointer to a caller group and a pointer to a style to modify.
-The default style modifier looks like this (slightly simplified):
-```c
-static void default_style_mod_cb(lv_group_t * group, lv_style_t * style)
-{
-    /*Make the bodies a little bit orange*/
-    style->body.border.opa   = LV_OPA_COVER;
-    style->body.border.color = LV_COLOR_ORANGE;
-    style->body.border.width = LV_DPI / 20;
+### Styling
 
-    style->body.main_color   = lv_color_mix(style->body.main_color, LV_COLOR_ORANGE, LV_OPA_70);
-    style->body.grad_color   = lv_color_mix(style->body.grad_color, LV_COLOR_ORANGE, LV_OPA_70);
-    style->body.shadow.color = lv_color_mix(style->body.shadow.color, LV_COLOR_ORANGE, LV_OPA_60);
+If an object is focused either by clicking it via touchpad, or focused via an encoder or keypad it goes to `LV_STATE_FOCUSED`. Hence focused styles will be applied on it. 
 
-    /*Recolor text*/
-    style->text.color = lv_color_mix(style->text.color, LV_COLOR_ORANGE, LV_OPA_70);
+If te object goes to edit mode it goes to `LV_STATE_FOCUSED | LV_STATE_EDITED` state so these style properties will be shown. 
 
-    /*Add some recolor to the images*/
-    if(style->image.intense < LV_OPA_MIN) {
-        style->image.color = LV_COLOR_ORANGE;
-        style->image.intense = LV_OPA_40;
-    }
-}
-```
-
-This style modifier callback is used for keypads and encoder in *Navigate* mode.
-For the *Edit* mode and other callback is used which can be set with `lv_group_set_style_mod_edit_cb()`. By default, it has a greenish color.
-
-
-### Live demo
-
-Try this [Live demo](https://littlevgl.com/demo-touchpadless) to see how a group and touchpad-less navigation works in the practice.
+For a moew detaild description read the [Style](https://docs.lvgl.io/v7/en/html/overview/style.html) section.
 
 ## API
 

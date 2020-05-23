@@ -1,3 +1,7 @@
+```eval_rst
+:github_url: https://github.com/littlevgl/docs/blob/master/v7/en/get-started/quick-overview.md
+```
+
 # Quick overview
 
 Here you can learn the most important things about LVGL.
