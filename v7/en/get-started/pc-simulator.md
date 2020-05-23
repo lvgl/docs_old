@@ -31,11 +31,11 @@ The simulator is ported to various IDEs (Integrated Development Environments). C
   </thead>
   <tbody>
   <tr>
-  <td><a href="https://github.com/lvgl/lv_sim_eclipse_sdl"><img src="../../misc/eclipse.jpg"></a> </td>
-  <td><a href="https://github.com/lvgl/lv_sim_codeblocks_win"><img src="../../misc/codeblocks.jpg"></a></td>
-  <td><a href="https://github.com/lvgl/lv_sim_visual_studio_sdl"><img src="../../misc/visualstudio.jpg"></a></td>
-  <td><a href="https://github.com/lvgl/lv_platformio"><img src="../../misc/platformio.jpg"></a></td>
-  <td><a href="https://blog.lvgl.io/2019-01-03/qt-creator"><img src="../../misc/qtcreator.jpg"> </a></td>
+  <td><a href="https://github.com/lvgl/lv_sim_eclipse_sdl"><img src="https://raw.githubusercontent.com/lvgl/docs/master/v7/misc/eclipse.jpg"></a> </td>
+  <td><a href="https://github.com/lvgl/lv_sim_codeblocks_win"><img src="https://raw.githubusercontent.com/lvgl/docs/master/v7/misc/codeblocks.jpg"></a></td>
+  <td><a href="https://github.com/lvgl/lv_sim_visual_studio_sdl"><img src="https://raw.githubusercontent.com/lvgl/docs/master/v7/misc/visualstudio.jpg"></a></td>
+  <td><a href="https://github.com/lvgl/lv_platformio"><img src="https://raw.githubusercontent.com/lvgl/docs/master/v7/misc/platformio.jpg"></a></td>
+  <td><a href="https://blog.lvgl.io/2019-01-03/qt-creator"><img src="https://raw.githubusercontent.com/lvgl/docs/master/v7/misc/qtcreator.jpg"> </a></td>
   </tr>
 
   <tr>
