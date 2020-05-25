@@ -114,26 +114,26 @@ This list summarizes the effect of RTL base direction on objects:
 - The texts in `lv_table`, `lv_btnmatrix`, `lv_keyboard`, `lv_tabview`, `lv_dropdown`, `lv_roller` are "BiDi processed" to be displayed correctly
 
 ### Arabic and Persian support
-There are some special rules to display Arabic and Persian characters: the *form* os the character depends on their position in the text. 
+There are some special rules to display Arabic and Persian characters: the *form* of the character depends on their position in the text. 
 A different form of the same letter needs to be used if it isolated, start, middle or end position. Besides these some conjunction rules also should be taken into account.
 
 LVGL supports to apply these rules if `LV_USE_ARABIC_PERSIAN_CHARS` is enabled.  
 
 However, there some limitations:
-- Only displaying texts is supported (e.g. on labels), text inputs (e.g. text area) dosen't support this feature
+- Only displaying texts is supported (e.g. on labels), text inputs (e.g. text area) doesn't support this feature
 - Static text (i.e. const) are not processed. E.g. texts set by `lv_label_set_text()` will "Arabic processed" but `lv_lable_set_text_static()` won't.
 - Text get functions (e.g. `lv_label_get_text()`) will return the processed text. 
 
 ### Subpixel rendering
 
-Subpixel rendering means to triple the horizontal resolution by rendering on Red, Green and Blue channel instead of pixel level. It takes advantage of the position of phycial color channels of each pixel. 
- It results in higher quality letter anti-alaising. Lear more [here](https://en.wikipedia.org/wiki/Subpixel_rendering).
+Subpixel rendering means to triple the horizontal resolution by rendering on Red, Green and Blue channel instead of pixel level. It takes advantage of the position of physical color channels of each pixel. 
+ It results in higher quality letter anti-aliasing. Lear more [here](https://en.wikipedia.org/wiki/Subpixel_rendering).
 
 Subpixel rendering requires to generate the fonts with special settings: 
 - In the online converter tick the `Subpixel` box
 - In the command line tool use `--lcd` flag. Note that the generated font needs about 3 times more memory.
 
-Subpixel rendering works only if the color channels of the pixels have a horizontal layout. That is the R, G, B channels are next eachother and not above eachother. 
+Subpixel rendering works only if the color channels of the pixels have a horizontal layout. That is the R, G, B channels are next each other and not above each other. 
 The order of color channels also needs to match with the library settings. By default the LVGL assumes `RGB` order, however it can be swapped by setting `LV_SUBPX_BGR  1` in *lv_conf.h*.
 
 ### Compress fonts
