@@ -41,20 +41,21 @@ LVGL (Little and Versatile Graphic Library) is a free and open-source graphics l
 - Free and open-source under MIT license
 
 ## Requirements
+Basically, every modern controller  (which is able to drive a display( is suitable to run LVGL. The minimal requirements are:
 - 16, 32 or 64 bit microcontroller or processor
-- Greater than 16 MHz clock speed is recommended
-- Flash/ROM: Greater than 64 kB size for the very essential components (greater than 180 kB is recommended)
-- RAM:
-  - Static RAM usage: approximately 8 to 16 kB depending on the used features and objects types
-  - Stack: greater than 2kB (greater than 4 kB is recommended)
-  - Dynamic data (heap): greater than 4 KB (greater than 16 kB is recommended if using several objects).
-    Set by `LV_MEM_SIZE` in *lv_conf.h* 
-  - Display buffer: greater than *"Horizontal resolution"* pixels (greater than 10 &times; *"Horizontal resolution"* is recommended) 
--  C99 or newer compiler
+- &gt; 16 MHz clock speed is recommended
+- Flash/ROM: &gt; 64 kB for the very essential components (&gt; 180 kB is recommended)
+- RAM: 
+  - Static RAM usage: ~2 kB depending on the used features and objects types
+  - Stack: &gt; 2kB (&gt; 8 kB is recommended)
+  - Dynamic data (heap): &gt; 2 KB (&gt; 16 kB is recommended if using several objects).
+    Set by `LV_MEM_SIZE` in *lv_conf.h*. 
+  - Display buffer:  &gt; *"Horizontal resolution"* pixels (&gt; 10 &times; *"Horizontal resolution"* is recommended) 
+- One frame buffer in the MCU or in external display controller
+- C99 or newer compiler
 - Basic C (or C++) knowledge: [pointers](https://www.tutorialspoint.com/cprogramming/c_pointers.htm), [structs](https://www.tutorialspoint.com/cprogramming/c_structures.htm), [callbacks](https://www.geeksforgeeks.org/callbacks-in-c/)
 
 *Note that the memory usage might vary depending on the architecture, compiler and build options.*
-
 
 ## FAQ
 
@@ -107,7 +108,7 @@ Be sure you are calling `lv_tick_inc(x)` in an interrupt and `lv_task_handler()`
 
 Learn more in the [Tick](/porting/tick) and [Task handler](/porting/task-handler) section.
 
-### Why the display driver is called only one? Only the upper part of the display is refreshed. 
+### Why the display driver is called only once? Only the upper part of the display is refreshed. 
 Be sure you are calling `lv_disp_flush_ready(drv)` at the end of your "*display flush callback*". 
 
 ### Why I see only garbage on the screen?
@@ -146,7 +147,7 @@ It swaps the upper and lower bytes of the pixels.
 - Increase the size of the display buffer
 - Use 2 display buffers and flush the buffer with DMA (or similar periphery) in the background 
 - Increase the clock speed of the SPI or Parallel port if you use them to drive the display
-- If you display has SPI port consider changing to a model with parallel because it has much higher throughput
+- If your display has SPI port consider changing to a model with parallel because it has much higher throughput
 - Keep the display buffer in the internal RAM (not in external SRAM) because LVGL uses it a lot and it should have a small access time
  
 ### How to reduce flash/ROM usage?
@@ -177,7 +178,7 @@ There are several ways to contribute to LVGL:
 - Improve and/or translate the documentation
 - Write a blog post about your experiences
 
-To learn more see [Contributing guide](https://blog.lvgl.com/2018-12-06/contributing)
+To learn more see [Contributing guide](https://github.com/lvgl/lvgl/blob/master/docs/CONTRIBUTING.md)
 
 ### How is LVGL versioned?
 

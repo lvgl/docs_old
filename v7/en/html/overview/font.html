@@ -327,6 +327,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#built-in-fonts">Built-in fonts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#special-features">Special features</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#bidirectional-support">Bidirectional support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arabic-and-persian-support">Arabic and Persian support</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#subpixel-rendering">Subpixel rendering</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#compress-fonts">Compress fonts</a></li>
 </ul>
@@ -1198,8 +1199,9 @@
             
   <div class="section" id="fonts">
 <h1>Fonts<a class="headerlink" href="#fonts" title="Permalink to this headline">¶</a></h1>
-<p>In LittlevGL fonts are collections of bitmaps and other information required to render the images of the letters (glyph). A font is stored in a <strong>lv_font_t</strong> variable and can be set in style’s <em>text.font</em> field. For example:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">my_style</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">font</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">lv_font_roboto_28</span><span class="p">;</span>  <span class="cm">/*Set a larger font*/</span>
+<p>In LVGL fonts are collections of bitmaps and other information required to render the images of the letters (glyph).
+A font is stored in a <code class="docutils literal notranslate"><span class="pre">lv_font_t</span></code> variable and can be set in style’s <em>text_font</em> field. For example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_style_set_text_font</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_style</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lv_font_montserrat_28</span><span class="p">);</span>  <span class="cm">/*Set a larger font*/</span>
 </pre></div>
 </div>
 <p>The fonts have a <strong>bpp (bits per pixel)</strong> property. It shows how many bits are used to describe a pixel in the font. The value stored for a pixel determines the pixel’s opacity.
@@ -1207,8 +1209,8 @@ This way, with higher <em>bpp</em>, the edges of the letter can be smoother. The
 <p>The <em>bpp</em> also affects the required memory size to store the font. For example, <em>bpp = 4</em> makes the font nearly 4 times greater compared to <em>bpp = 1</em>.</p>
 <div class="section" id="unicode-support">
 <h2>Unicode support<a class="headerlink" href="#unicode-support" title="Permalink to this headline">¶</a></h2>
-<p>LittlevGL supports <strong>UTF-8</strong> encoded Unicode characters.
-You need to configure your editor to save your code/text as UTF-8 (usually this the default) and be sure that, <code class="docutils literal notranslate"><span class="pre">LV_TXT_ENC</span></code> is set to <code class="docutils literal notranslate"><span class="pre">LV_TXT_ENC_UTF8</span></code> in <em>lv_conf.h</em>. (This is the default value)</p>
+<p>LVGL supports <strong>UTF-8</strong> encoded Unicode characters.
+Your editor needs to be configureed to save your code/text as UTF-8 (usually this the default) and be sure that, <code class="docutils literal notranslate"><span class="pre">LV_TXT_ENC</span></code> is set to <code class="docutils literal notranslate"><span class="pre">LV_TXT_ENC_UTF8</span></code> in <em>lv_conf.h</em>. (This is the default value)</p>
 <p>To test it try</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label1</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
 <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label1</span><span class="p">,</span> <span class="n">LV_SYMBOL_OK</span><span class="p">);</span>
@@ -1220,15 +1222,35 @@ You need to configure your editor to save your code/text as UTF-8 (usually this 
 <h2>Built-in fonts<a class="headerlink" href="#built-in-fonts" title="Permalink to this headline">¶</a></h2>
 <p>There are several built-in fonts in different sizes, which can be enabled in lv_conf.h by <em>LV_FONT_…</em> defines:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_ROBOTO_12</span></code> 12 px</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_ROBOTO_16</span></code> 16 px</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_ROBOTO_22</span></code> 22 px</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_ROBOTO_28</span></code> 28 px</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_12</span></code> 12 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_14</span></code> 14 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_16</span></code> 16 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_18</span></code> 18 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_20</span></code> 20 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_22</span></code> 22 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_24</span></code> 24 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_26</span></code> 26 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_28</span></code> 28 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_30</span></code> 30 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_32</span></code> 32 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_34</span></code> 34 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_36</span></code> 36 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_38</span></code> 38 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_40</span></code> 40 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_42</span></code> 42 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_44</span></code> 44 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_46</span></code> 46 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_48</span></code> 48 px ASCII + built-in symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_12_SUBPX</span></code> 12 px font with <a class="reference external" href="#subpixel-rendering">subpixel rendering</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_MONTSERRAT_28_COMPRESSED</span></code> 28 px <a class="reference external" href="#compress-fonts">compressed font</a> with 3 bpp</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_DEJAVU_16_PERSIAN_HEBREW</span></code> 16 px Hebrew, Arabic, Perisan letters and all their forms</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_SIMSUN_16_CJK</span></code>            16 px 1000 most common CJK radicals</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_FONT_UNSCII_8</span></code> 8 px pixel perfect font</p></li>
 </ul>
-<p>The built-in fonts are <strong>global variables</strong> with names like <code class="docutils literal notranslate"><span class="pre">lv_font_roboto_16</span></code> for 16 px hight font. To use them in a style, just add a pointer to a font variable like shown above.</p>
-<p>The built-in fonts have <em>bpp = 4</em>, contains the ASCII characters and uses the <a class="reference external" href="https://fonts.google.com/specimen/Roboto">Roboto</a> font.</p>
+<p>The built-in fonts are <strong>global variables</strong> with names like <code class="docutils literal notranslate"><span class="pre">lv_font_montserrat_16</span></code> for 16 px hight font. To use them in a style, just add a pointer to a font variable like shown above.</p>
+<p>The built-in fonts have <em>bpp = 4</em>, contains the ASCII characters and uses the <a class="reference external" href="https://fonts.google.com/specimen/Montserrat">Montserrat</a> font.</p>
 <p>In addition to the ASCII range, the following symbols are also added to the built-in fonts from the <a class="reference external" href="https://fontawesome.com/">FontAwesome</a> font.</p>
-<p><img alt="Built-in Symbols in LittlevGL" src="../_images/symbols.png" /></p>
+<p><img alt="Built-in Symbols in LVGL" src="../_images/symbols.png" /></p>
 <p>The symbols can be used as:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">my_label</span><span class="p">,</span> <span class="n">LV_SYMBOL_OK</span><span class="p">);</span>
 </pre></div>
@@ -1246,15 +1268,15 @@ You need to configure your editor to save your code/text as UTF-8 (usually this 
 <h2>Special features<a class="headerlink" href="#special-features" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="bidirectional-support">
 <h3>Bidirectional support<a class="headerlink" href="#bidirectional-support" title="Permalink to this headline">¶</a></h3>
-<p>Most of the languages use Left-to-Right (LTR for short) writing direction, however some languages (such as Hebrew) uses Right-to-Left (RTL for short) direction.</p>
-<p>LittlevGL not only supports RTL texts but supports mixed (a.k.a. bidirectional, BiDi) text rendering too. Some examples:</p>
+<p>Most of the languages use Left-to-Right (LTR for short) writing direction, however some languages (such as Hebrew, Persian or Arabic) uses Right-to-Left (RTL for short) direction.</p>
+<p>LVGL not only supports RTL texts but supports mixed (a.k.a. bidirectional, BiDi) text rendering too. Some examples:</p>
 <p><img alt="Bidirectional text examples" src="../_images/bidi.png" /></p>
 <p>The BiDi support can be enabled by <code class="docutils literal notranslate"><span class="pre">LV_USE_BIDI</span></code> in <em>lv_conf.h</em></p>
 <p>All texts have a base direction (LTR or RTL) which determines some rendering rules and the default alignment of the text (Left or Right).
-However, in LittlevGL, base direction is not only for labels. It’s a general property which can be set for every object.
+However, in LVGL, base direction is applied not only for labels. It’s a general property which can be set for every object.
 If unset then it will be inherited from the parent.
 So it’s enough to set the base direction of the screen and every object will inherit it.</p>
-<p>The default base direction of screen can be set by <code class="docutils literal notranslate"><span class="pre">LV_BIDI_BASE_DIR_DEF</span></code> in <em>lv_conf.h</em>.</p>
+<p>The default base direction of screen can be set by <code class="docutils literal notranslate"><span class="pre">LV_BIDI_BASE_DIR_DEF</span></code> in <em>lv_conf.h</em> and other objects inherit the base direction from their parent.</p>
 <p>To set an object’s base direction use <code class="docutils literal notranslate"><span class="pre">lv_obj_set_base_dir(obj,</span> <span class="pre">base_dir)</span></code>.  The possible base direction are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">LV_BIDI_DIR_LTR</span></code>: Left to Right base direction</p></li>
@@ -1266,30 +1288,43 @@ So it’s enough to set the base direction of the screen and every object will i
 <ul class="simple">
 <li><p>Create objects by default on the right</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lv_tabview</span></code>: displays tabs from right to left</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lv_cb</span></code>: Show the box on the right</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lv_btnm</span></code>: Show buttons from right to left</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_checkbox</span></code>: Show the box on the right</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_btnmatrix</span></code>: Show buttons from right to left</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lv_list</span></code>: Show the icon on the right</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lv_ddlist</span></code>: Align the options to the right</p></li>
-<li><p>The texts in <code class="docutils literal notranslate"><span class="pre">lv_table</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_btnm</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_kb</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_tabview</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_ddlist</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_roller</span></code> are processed to display correctly with RTL parts too</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lv_dropdown</span></code>: Align the options to the right</p></li>
+<li><p>The texts in <code class="docutils literal notranslate"><span class="pre">lv_table</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_btnmatrix</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_keyboard</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_tabview</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_dropdown</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_roller</span></code> are “BiDi processed” to be displayed correctly</p></li>
+</ul>
+</div>
+<div class="section" id="arabic-and-persian-support">
+<h3>Arabic and Persian support<a class="headerlink" href="#arabic-and-persian-support" title="Permalink to this headline">¶</a></h3>
+<p>There are some special rules to display Arabic and Persian characters: the <em>form</em> os the character depends on their position in the text.
+A different form of the same letter needs to be used if it isolated, start, middle or end position. Besides these some conjunction rules also should be taken into account.</p>
+<p>LVGL supports to apply these rules if <code class="docutils literal notranslate"><span class="pre">LV_USE_ARABIC_PERSIAN_CHARS</span></code> is enabled.</p>
+<p>However, there some limitations:</p>
+<ul class="simple">
+<li><p>Only displaying texts is supported (e.g. on labels), text inputs (e.g. text area) dosen’t support this feature</p></li>
+<li><p>Static text (i.e. const) are not processed. E.g. texts set by <code class="docutils literal notranslate"><span class="pre">lv_label_set_text()</span></code> will “Arabic processed” but <code class="docutils literal notranslate"><span class="pre">lv_lable_set_text_static()</span></code> won’t.</p></li>
+<li><p>Text get functions (e.g. <code class="docutils literal notranslate"><span class="pre">lv_label_get_text()</span></code>) will return the processed text.</p></li>
 </ul>
 </div>
 <div class="section" id="subpixel-rendering">
 <h3>Subpixel rendering<a class="headerlink" href="#subpixel-rendering" title="Permalink to this headline">¶</a></h3>
-<p>Subpixel rendering means to increase the horizontal resolution by rendering on Red, Green and Blue channel instead of pixel level. It results in higher quality letter anti-alaising.</p>
+<p>Subpixel rendering means to triple the horizontal resolution by rendering on Red, Green and Blue channel instead of pixel level. It takes advantage of the position of phycial color channels of each pixel.
+It results in higher quality letter anti-alaising. Lear more <a class="reference external" href="https://en.wikipedia.org/wiki/Subpixel_rendering">here</a>.</p>
 <p>Subpixel rendering requires to generate the fonts with special settings:</p>
 <ul class="simple">
 <li><p>In the online converter tick the <code class="docutils literal notranslate"><span class="pre">Subpixel</span></code> box</p></li>
 <li><p>In the command line tool use <code class="docutils literal notranslate"><span class="pre">--lcd</span></code> flag. Note that the generated font needs about 3 times more memory.</p></li>
 </ul>
 <p>Subpixel rendering works only if the color channels of the pixels have a horizontal layout. That is the R, G, B channels are next eachother and not above eachother.
-The order of color channels also needs to match with the library settings. By default the LittlevGL assumes <code class="docutils literal notranslate"><span class="pre">RGB</span></code> order, however it can ba swapped by setting <code class="docutils literal notranslate"><span class="pre">LV_SUBPX_BGR</span>&#160; <span class="pre">1</span></code> in <em>lv_conf.h</em>.</p>
+The order of color channels also needs to match with the library settings. By default the LVGL assumes <code class="docutils literal notranslate"><span class="pre">RGB</span></code> order, however it can be swapped by setting <code class="docutils literal notranslate"><span class="pre">LV_SUBPX_BGR</span>&#160; <span class="pre">1</span></code> in <em>lv_conf.h</em>.</p>
 </div>
 <div class="section" id="compress-fonts">
 <h3>Compress fonts<a class="headerlink" href="#compress-fonts" title="Permalink to this headline">¶</a></h3>
 <p>The bitmaps of the fonts can be compressed by</p>
 <ul class="simple">
 <li><p>ticking the <code class="docutils literal notranslate"><span class="pre">Compressed</span></code> check box in the online converter</p></li>
-<li><p>not passing <code class="docutils literal notranslate"><span class="pre">--no-compress</span></code>flag to the offline converter (applies compression by default)</p></li>
+<li><p>not passing <code class="docutils literal notranslate"><span class="pre">--no-compress</span></code> flag to the offline converter (applies compression by default)</p></li>
 </ul>
 <p>The compression is more effective with larger fonts and higher bpp. However, it’s about 30% slower to render the compressed fonts.
 Therefore it’s recommended to compress only the largest fonts of user interface, because</p>
@@ -1304,8 +1339,8 @@ Therefore it’s recommended to compress only the largest fonts of user interfac
 <h2>Add new font<a class="headerlink" href="#add-new-font" title="Permalink to this headline">¶</a></h2>
 <p>There are several ways to add a new font to your project:</p>
 <ol class="simple">
-<li><p>The simplest method is to use the <a class="reference external" href="https://littlevgl.com/ttf-font-to-c-array">Online font converter</a>. Just set the parameters, click the <em>Convert</em> button, copy the font to your project and use it. <strong>Be sure to carefully read the steps provided on that site or you will get an error while converting.</strong></p></li>
-<li><p>Use the <a class="reference external" href="https://github.com/littlevgl/lv_font_conv">Offline font converter</a>. (Requires Node.js to be installed)</p></li>
+<li><p>The simplest method is to use the <a class="reference external" href="https://lvgl.io/tools/fontconverter">Online font converter</a>. Just set the parameters, click the <em>Convert</em> button, copy the font to your project and use it. <strong>Be sure to carefully read the steps provided on that site or you will get an error while converting.</strong></p></li>
+<li><p>Use the <a class="reference external" href="https://github.com/lvgl/lv_font_conv">Offline font converter</a>. (Requires Node.js to be installed)</p></li>
 <li><p>If you want to create something like the built-in fonts (Roboto font and symbols) but in different size and/or ranges, you can use the <code class="docutils literal notranslate"><span class="pre">built_in_font_gen.py</span></code> script in <code class="docutils literal notranslate"><span class="pre">lvgl/scripts/built_in_font</span></code> folder.
 (It requires Python and <code class="docutils literal notranslate"><span class="pre">lv_font_conv</span></code> to be installed)</p></li>
 </ol>
@@ -1317,7 +1352,7 @@ Therefore it’s recommended to compress only the largest fonts of user interfac
 <p>The built-in symbols are created from <a class="reference external" href="https://fontawesome.com/">FontAwesome</a> font.</p>
 <ol class="simple">
 <li><p>Search symbol on <a class="reference external" href="https://fontawesome.com">https://fontawesome.com</a>. For example the <a class="reference external" href="https://fontawesome.com/icons/usb?style=brands">USB symbol</a>. Copy it’s Unicode ID which is <code class="docutils literal notranslate"><span class="pre">0xf287</span></code> in this case.</p></li>
-<li><p>Open the <a class="reference external" href="https://littlevgl.com/ttf-font-to-c-array">Online font converter</a>. Add Add <a class="reference external" href="https://littlevgl.com/tools/FontAwesome5-Solid+Brands+Regular.woff">FontAwesome.woff</a>. .</p></li>
+<li><p>Open the <a class="reference external" href="https://lvgl.io/tools/fontconverter">Online font converter</a>. Add Add <a class="reference external" href="https://lvgl.io/assets/others/FontAwesome5-Solid+Brands+Regular.woff">FontAwesome.woff</a>. .</p></li>
 <li><p>Set the parameters such as Name, Size, BPP. You’ll use this name to declare and use the font in your code.</p></li>
 <li><p>Add the Unicode ID of the symbol to the range field. E.g.<code class="docutils literal notranslate"> <span class="pre">0xf287</span></code> for the USB symbol. More symbols can be enumerated with <code class="docutils literal notranslate"><span class="pre">,</span></code>.</p></li>
 <li><p>Convert the font and copy it to your project. Make sure to compile the .c file of your font.</p></li>
@@ -1333,9 +1368,10 @@ Therefore it’s recommended to compress only the largest fonts of user interfac
 </div>
 <div class="section" id="add-a-new-font-engine">
 <h2>Add a new font engine<a class="headerlink" href="#add-a-new-font-engine" title="Permalink to this headline">¶</a></h2>
-<p>LittlevGL’s font interface is designed to be very flexible.
-You don’t need to use LittlevGL’s internal font engine but, you can add your own.
+<p>LVGL’s font interface is designed to be very flexible.
+You don’t need to use LVGL’s internal font engine but, you can add your own.
 For example, use <a class="reference external" href="https://www.freetype.org/">FreeType</a> to real-time render glyphs from TTF fonts or use an external flash to store the font’s bitmap and read them when the library needs them.</p>
+<p>A raedy to use FreeType can be found in <a class="reference external" href="https://github.com/littlevgl/lv_lib_freetype">lv_freetype</a> repository.</p>
 <p>To do this a custom <code class="docutils literal notranslate"><span class="pre">lv_font_t</span></code> variable needs to be created:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Describe the properties of a font*/</span>
 <span class="n">lv_font_t</span> <span class="n">my_font</span><span class="p">;</span>
@@ -1406,7 +1442,7 @@ For example, use <a class="reference external" href="https://www.freetype.org/">
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on May 23, 2020.
+        Last updated on May 25, 2020.
       </span>
 
     </p>
