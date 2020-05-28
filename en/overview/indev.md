@@ -113,9 +113,9 @@ This style modifier callback is used for keypads and encoder in *Navigate* mode.
 For the *Edit* mode and other callback is used which can be set with `lv_group_set_style_mod_edit_cb()`. By default, it has a greenish color.
 
 
-### Live demo
+### Complete example
 
-Try this [Live demo](https://littlevgl.com/demo-touchpadless) to see how a group and touchpad-less navigation works in the practice.
+You can try the [lv_test_group](https://github.com/lvgl/lv_examples/tree/release/v6/lv_tests/lv_test_group) demo for a practical example of how to work with group navigation.
 
 ## API
 
