@@ -126,8 +126,8 @@ html_sidebars = {
     ]
 }
 
-html_favicon = 'favicon.ico'
-html_logo = 'logo_lvgl_white.png'
+html_favicon = 'favicon.png'
+html_logo = 'logo_lvgl.png'
 
 # -- Options for HTMLHelp output ------------------------------------------
 
