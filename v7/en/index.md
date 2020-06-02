@@ -13,7 +13,7 @@ PDF version: :download:`LVGL.pdf <LVGL.pdf>`
 
 ![](/misc/lv_theme_intro.png "LVGL cover")
 
-LVGL (Little and Versatile Graphic Library) is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
+LVGL (Light and Versatile Graphic Library) is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
 
 **[Website](https://lvgl.io) &nbsp; · &nbsp;** 
 **[GitHub](https://github.com/lvgl/lvgl) &nbsp; · &nbsp;** 
