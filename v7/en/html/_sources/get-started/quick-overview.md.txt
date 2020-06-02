@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/littlevgl/docs/blob/master/v7/en/get-started/quick-overview.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/en/get-started/quick-overview.md
 ```
 
 # Quick overview
@@ -14,10 +14,10 @@ This way you can save the porting for now and make some experience with LVGL imm
 
 The following steps show how to setup LVGL on an embedded system with a display and a touchpad.
 
-- [Download](https://littlevgl.com/download) or [Clone](https://github.com/littlevgl/lvgl) the library from GitHub with `git clone https://github.com/littlevgl/lvgl.git`
+- [Download](https://github.com/lvgl/lvgl/archive/master.zip) or Clone the library from GitHub with `git clone https://github.com/lvgl/lvgl.git`
 - Copy the `lvgl` folder into your project
 - Copy `lvgl/lv_conf_templ.h` as `lv_conf.h` next to the `lvgl` folder, change the first `#if 0` to `1` to enable the file's content and set at least `LV_HOR_RES_MAX`, `LV_VER_RES_MAX` and `LV_COLOR_DEPTH` defines.
-- Include `lvgl/lvgl.h` where you need to use LittlevGL related functions.
+- Include `lvgl/lvgl.h` where you need to use LVGL related functions.
 - Call `lv_tick_inc(x)` every `x` milliseconds **in a Timer or Task** (`x` should be between 1 and 10). It is required for the internal timing of LVGL.
 - Call `lv_init()`
 - Create a display buffer for LVGL. LVGL will render the graphics here first, and seed the rendered image to the display. The buffer size can be set freely but 1/10 screen size is a good starting point. 
