@@ -6,7 +6,7 @@
 
 ## Overview
 
-A Canvas is like an [Image](/widgets/img) where the user can draw anything. Rectangles, texts, images, lines arcs can be drawn here using lvgl's drawing engine. 
+A Canvas inherites from [Image](/widgets/img) where the user can draw anything. Rectangles, texts, images, lines arcs can be drawn here using lvgl's drawing engine. 
 Besides some "effects" can be applied as well like rotation, zoom and blur.
 
 
@@ -40,18 +40,18 @@ An array of pixels can be copied to the canvas with `lv_canvas_copy_buf(canvas, 
 
 To draw something to the canvas use
 - `lv_canvas_draw_rect(canvas, x, y, width, heigth, &draw_dsc)`
-- `lv_canvas_draw_text(canvas, x, y, max_width, &draw_dsc, txt, LV_LABEL_ALIGN_LEFT/CENTER/RIGTH)`
+- `lv_canvas_draw_text(canvas, x, y, max_width, &draw_dsc, txt, LV_LABEL_ALIGN_LEFT/CENTER/RIGHT)`
 - `lv_canvas_draw_img(canvas, x, y, &img_src, &draw_dsc)`
 - `lv_canvas_draw_line(canvas, point_array, point_cnt, &draw_dsc)`
 - `lv_canvas_draw_polygon(canvas, points_array, point_cnt, &draw_dsc)`
 - `lv_canvas_draw_arc(canvas, x, y, radius, start_angle, end_angle, &draw_dsc)`
 
-`draw_dsc` is an `lv_draw_rect/label/img/line_dsc_t` varaibale which should be first initialized with `lv_draw_rect/label/img/line_dsc_init()` function and then it's filed should be modified with the desired colors and other values.
+`draw_dsc` is a `lv_draw_rect/label/img/line_dsc_t` variable which should be first initialized with `lv_draw_rect/label/img/line_dsc_init()` function and then it's filed should be modified with the desired colors and other values.
 
 The draw function can draw to any color format. For example, it's possible to draw a text to an `LV_IMG_VF_ALPHA_8BIT` canvas and use the result image as a mask in [lv_objmask](/widgets/objmask) later.
 
-### Traformations
-`lv_canvas_transform()` can be used to rotate and/or scale the image of an imageand store the result on the canvas. The functions needs to following paramters:
+### Transformations
+`lv_canvas_transform()` can be used to rotate and/or scale the image of an image and store the result on the canvas. The function needs the following parameters:
 - `canvas` pointer to a canvas object to store the result of the transformation.
 - `img pointer` to an image descriptor to transform. Can be the image descriptor of an other canvas too (`lv_canvas_get_img()`).
 - `angle` the angle of rotation (0..3600), 0.1 deg resolution
@@ -65,11 +65,13 @@ The draw function can draw to any color format. For example, it's possible to dr
 Note that a canvas can't be rotated on itself.  You need a source and destination canvas or image.
 
 ## Blur
-A given area of the canvas can be blurred horizontall with `lv_canvas_blur_hor(canvas, &area, r)` ot vertically with `lv_canvas_blur_ver(canvas, &area, r)`. 
+A given area of the canvas can be blurred horizontally with `lv_canvas_blur_hor(canvas, &area, r)` ot vertically with `lv_canvas_blur_ver(canvas, &area, r)`. 
 `r` is the radius of the blur (greater value means more intensive burring). `area` is the area where the blur should be applied (interpreted relative to the canvas)
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+As default the clicking of a canvas is disabled (inherited by [Image](/widgets/img)) and therefore no events are generated.
+
+If clicking is enabled (`lv_obj_set_click(canvas, true)`) only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 
