@@ -59,6 +59,10 @@ The "One check" feature can be enabled with `lv_btnmatrix_set_one_check(btnm, tr
 The **texts** on the button can be **recolored** similarly to the recolor feature for [Label](/widgets/label) object. To enable it, use `lv_btnmatrix_set_recolor(btnm, true)`. 
 After that a button with `#FF0000 Red#` text will be red.
 
+### Aligning the button's text
+To align the text on the buttons, use `lv_btnmatrix_set_align(roller, LV_LABEL_ALIGN_LEFT/CENTER/RIGHT)`.
+All text items in the button matrix will conform to the alignment proprty as it is set.
+
 ### Notes
 The Button matrix object is very light weighted because the buttons are not created just virtually drawn on the fly.
 This way, 1 button use only 8 extra bytes instead of the ~100-150 byte size of a normal [Button](/widgets/btn) object (plus the size of its container and a label for each button).
