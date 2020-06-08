@@ -208,5 +208,6 @@ LVGL has a monthly periodic release cycle.
    porting/index
    overview/index
    widgets/index
+   contrib/index
 
 ```

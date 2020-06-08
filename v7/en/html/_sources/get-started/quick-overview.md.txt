@@ -7,8 +7,11 @@
 Here you can learn the most important things about LVGL.
 You should read it first to get a general impression and read the detailed [Porting](/porting/index) and [Overview](/overview/index) sections after that.
 
-Instead of porting LVGL to an embedded hardware you can use the [Simulators](/get-started/pc-simulator) to get ready-to-use projects which can be run on your PC.
-This way you can save the porting for now and make some experience with LVGL immediately. 
+## Get started in a simulator
+
+Instead of porting LVGL to an embedded hardware, it's highly recommended to get started in a simulator first. 
+
+LVGL is ported to many IDEs to be sure you will find your faviourite one. Go to [Simulators](/get-started/pc-simulator) to get ready-to-use projects which can be run on your PC. This way you can save the porting for now and make some experience with LVGL immediately. 
 
 ## Add LVGL into your project
 
@@ -58,16 +61,8 @@ lv_indev_drv_register(&indev_drv);         /*Finally register the driver*/
 
 bool my_touchpad_read(lv_indev_t * indev, lv_indev_data_t * data)
 {
-    static lv_coord_t last_x = 0;
-    static lv_coord_t last_y = 0;
-
-    /*Save the state and save the pressed coordinate*/
     data->state = touchpad_is_pressed() ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
-    if(data->state == LV_INDEV_STATE_PR) touchpad_get_xy(&last_x, &last_y);
-
-    /*Set the coordinates (if released use the last pressed coordinates)*/
-    data->point.x = last_x;
-    data->point.y = last_y;
+    if(data->state == LV_INDEV_STATE_PR) touchpad_get_xy(&data->point.x, &data->point.y);
 
     return false; /*Return `false` because we are not buffering and no more data to read*/
 }
@@ -75,6 +70,7 @@ bool my_touchpad_read(lv_indev_t * indev, lv_indev_data_t * data)
 - Call `lv_task_handler()` periodically every few milliseconds in the main `while(1)` loop, in Timer interrupt or in an Operation system task.
 It will redraw the screen if required, handle input devices etc.
 
+For a more detailed guide go to the [Porting](https://docs.lvgl.io/v7/en/html/porting/index.html) section.
 
 ## Learn the basics
 
@@ -148,7 +144,8 @@ The objects can be in a combination of the following states:
 
 For example if you press an object is automatically get the `LV_STATE_PRESSED` state and when you release is it will be removed.
  
-To get the current state use `lv_obj_get_state(obj, part)`. It will return the ORed states.  
+To get the current state use `lv_obj_get_state(obj, part)`. It will return the `OR`ed states. 
+For example it's a valid state for a checkbox: `LV_STATE_CHECKED | LV_STATE_PRESSED | LV_STATE_FOCUSED`
 
 ### Styles
 Styles can be assigned to the parts objects to changed their appearance. 
@@ -218,25 +215,4 @@ label.set_text("Button")
 
 # Load the screen
 lv.scr_load(scr)
-```
-
-
-
-## Contributing
-LittlevGL uses the [Forum](https://forum.littlevgl.com) to ask and answer questions and [GitHub's Issue tracker](https://github.com/littlevgl/lvgl/issues) for development-related discussion (such as bug reports, feature suggestions etc.).
-
-There are many opportunities to contribute to LittlevGL such as:
-- **Help others** in the [Forum](https://forum.littlevgl.com).
-- **Inspire people** by speaking about your project in [My project](https://forum.littlevgl.com/c/my-projects) category in the Forum or add it to the [References](https://blog.littlevgl.com/2018-12-26/references) post
-- **Improve and/or translate the documentation.** Go to the [Documentation](https://github.com/littlevgl/docs) repository to learn more
-- **Write a blog post** about your experiences. See how to do it in the [Blog](https://github.com/littlevgl/blog) repository
-- **Report and/or fix bugs** in [GitHub's issue tracker](https://github.com/littlevgl/lvgl/issues)
-- **Help in the developement**. Check the [Open issues](https://github.com/littlevgl/lvgl/issues) especially the ones with [Help wanted](https://github.com/littlevgl/lvgl/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) label and tell your ideas about a topic or implement a feature.
-
-If you are interested in contributing to LittlevGL, then please read the guides below to get started.
-
-```eval_rst
-- `Contributing guide <https://blog.littlevgl.com/2018-12-06/contributing>`_
-- `Coding style guide <https://github.com/littlevgl/lvgl/blob/master/docs/CODING_STYLE.md>`_
-
 ```
