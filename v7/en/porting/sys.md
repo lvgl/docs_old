@@ -3,7 +3,7 @@
 ```
 # System overview
 
-![](/misc/sys.png "System architecture with LGVL (formerly LittlevGL)")
+![](/misc/sys.png "System architecture with LVGL (formerly LittlevGL)")
 
 **Application**
 Your application which creates the GUI and handles the specific tasks.
