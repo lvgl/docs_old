@@ -3,7 +3,7 @@
 ```
 # Events
 
-Events are triggered in LittlevGL when something happens which might be interesting to the user, e.g. if an object:
+Events are triggered in LVGL when something happens which might be interesting to the user, e.g. if an object:
 - is clicked
 - is dragged
 - its value has changed, etc.

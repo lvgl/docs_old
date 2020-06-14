@@ -3,7 +3,7 @@
 ```
 # Tick interface
 
-The LittlevGL needs a system tick to know the elapsed time for animation and other tasks.
+The LVGL needs a system tick to know the elapsed time for animation and other tasks.
 
 You need to call the `lv_tick_inc(tick_period)` function periodically and tell the call period in milliseconds. For example, `lv_tick_inc(1)` for calling in every millisecond.
 
@@ -17,7 +17,7 @@ void * tick_thread (void *args)
 {
       while(1) {
         usleep(5*1000);   /*Sleep for 5 millisecond*/
-        lv_tick_inc(5);      /*Tell LittlevGL that 5 milliseconds were elapsed*/
+        lv_tick_inc(5);      /*Tell LVGL that 5 milliseconds were elapsed*/
     }
 }
 ```

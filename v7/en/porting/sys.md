@@ -3,12 +3,12 @@
 ```
 # System overview
 
-![](/misc/sys.png "System architecture with Littlev Graphics Library (LittlevGL)")
+![](/misc/sys.png "System architecture with LVGL (formerly LittlevGL)")
 
 **Application**
 Your application which creates the GUI and handles the specific tasks.
 
-**LittlevGL**
+**LVGL**
 The graphics library itself. Your application can communicate with the library to create a GUI. It contains a HAL (Hardware Abstraction Layer) interface to register your display and input device drivers.
 
 **Driver**
