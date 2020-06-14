@@ -37,7 +37,7 @@ disp_drv.flush_cb = my_disp_flush;    /*Set your driver function*/
 disp_drv.buffer = &disp_buf;          /*Assign the buffer to the display*/
 lv_disp_drv_register(&disp_drv);      /*Finally register the driver*/
 
-void my_disp_flush(lv_disp_t * disp, const lv_area_t * area, lv_color_t * color_p)
+void my_disp_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color_p)
 {
     int32_t x, y;
     for(y = area->y1; y <= area->y2; y++) {
