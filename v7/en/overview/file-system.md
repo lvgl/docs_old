@@ -3,7 +3,7 @@
 ```
 # File system
 
-LittlevGL has a 'File system' abstraction module that enables you to attach any type of file systems.
+LVGL has a 'File system' abstraction module that enables you to attach any type of file systems.
 The file system is identified by a drive letter.
 For example, if the SD card is associated with the letter `'S'`, a file can be reached like `"S:path/to/file.txt"`.
 
@@ -43,7 +43,7 @@ lv_fs_drv_register(&drv);                 /*Finally register the drive*/
 
 Any of the callbacks can be `NULL` to indicate that that operation is not supported.
 
-As an example of how the callbacks are used, if you use `lv_fs_open(&file, "S:/folder/file.txt", LV_FS_MODE_WR)`, LittlevGL:
+As an example of how the callbacks are used, if you use `lv_fs_open(&file, "S:/folder/file.txt", LV_FS_MODE_WR)`, LVGL:
 
 1. Verifies that a registered drive exists with the letter `'S'`.
 2. Checks if it's `open_cb` is implemented (not `NULL`).

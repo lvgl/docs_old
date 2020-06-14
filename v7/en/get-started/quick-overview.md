@@ -104,7 +104,7 @@ The objects has type specific parameters too which can be set by `lv_<type>_set_
 lv_slider_set_value(slider1, 70, LV_ANIM_ON);
 ```
 
-To see the full API visit the documentation of the widgets or the related header file (e.g. [lvgl/src/lv_widgets/lv_slider.h](https://github.com/littlevgl/lvgl/blob/master/src/lv_widgets/lv_slider.h)).
+To see the full API visit the documentation of the widgets or the related header file (e.g. [lvgl/src/lv_widgets/lv_slider.h](https://github.com/lvgl/lvgl/blob/master/src/lv_widgets/lv_slider.h)).
 
 ### Events
 Events are used to inform the user if something has happened with an object. You can assign a callback to an object which will be called if the object is clicked, released, dragged, being deleted etc. It should look like this:
@@ -149,7 +149,7 @@ For example it's a valid state for a checkbox: `LV_STATE_CHECKED | LV_STATE_PRES
 
 ### Styles
 Styles can be assigned to the parts objects to changed their appearance. 
-A style can describe for example the background color, border width, text font and so on. See the full list [here](https://docs.littlevgl.com/v7/en/html/overview/style.html#properties).
+A style can describe for example the background color, border width, text font and so on. See the full list [here](https://docs.lvgl.io/v7/en/html/overview/style.html#properties).
 
 The styles can be cascaded (similarly to CSS). It means you can add more styles to a part of an object. 
 For example `style_btn` can set a default button appearance, and `style_btn_red` can overwrite some properties to make the button red- 
