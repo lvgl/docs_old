@@ -3,7 +3,7 @@
 ```
 # Objects
 
-In the LittlevGL the **basic building blocks** of a user interface are the objects, also called *Widgets*.
+In the LVGL the **basic building blocks** of a user interface are the objects, also called *Widgets*.
 For example a [Button](/widgets/btn), [Label](/widgets/label), [Image](/widgets/img), [List](/widgets/list), [Chart](/widgets/chart) or [Text area](/widgets/textarea).
 
 Check all the [Object types](/widgets/index) here.
@@ -93,7 +93,7 @@ lv_obj_set_x(obj1, -30);	/*Move the child a little bit of the parent*/
 
 ### Create - delete objects
 
-In LittlevGL objects can be created and deleted dynamically in run-time.
+In LVGL objects can be created and deleted dynamically in run-time.
 It means only the currently created objects consume RAM.
 For example, if you need a chart, you can create it when required and delete it when it is not visible or necessary.
 

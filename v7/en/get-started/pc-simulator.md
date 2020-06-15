@@ -1,16 +1,16 @@
 ```eval_rst
-:github_url: https://github.com/littlevgl/docs/blob/master/v7/en/get-started/pc-simulator.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/en/get-started/pc-simulator.md
 ```
 # Simulator on PC
 
 
-You can try out the LittlevGL **using only your PC** (i.e. without any development boards). The LittlevGL will run on a simulator environment on the PC where anyone can write and experiment the real LittlevGL applications.
+You can try out the LVGL **using only your PC** (i.e. without any development boards). The LVGL will run on a simulator environment on the PC where anyone can write and experiment the real LVGL applications.
 
 Simulator on the PC have the following advantages:
 - Hardware independent - Write a code, run it on the PC and see the result on the PC monitor.
 - Cross-platform - Any Windows, Linux or OSX PC can run the PC simulator.  
 - Portability - the written code is portable, which means you can simply copy it when using an embedded hardware.
-- Easy Validation - The simulator is also very useful to report bugs because it means common platform for every user. So it's a good idea to reproduce a bug in simulator and use the code snippet in the [Forum](https://forum.littlevgl.com).
+- Easy Validation - The simulator is also very useful to report bugs because it means common platform for every user. So it's a good idea to reproduce a bug in simulator and use the code snippet in the [Forum](https://forum.lvgl.io).
 
 ## Select an IDE
 
@@ -101,7 +101,7 @@ If something is not working, then please refer [this tutorial](http://lazyfoo.ne
 ### Pre-configured project
 
 A pre-configured graphics library project (based on the latest release) is always available to get started easily. 
-You can find the latest one on [GitHub](https://github.com/littlevgl/proj_pc) or on the [Download](https://littlevgl.com/download) page. 
+You can find the latest one on [GitHub](https://github.com/lvgl/lv_sim_eclipse_sdl).
 (Please note that, the project is configured for Eclipse CDT). 
 
 ### Add the pre-configured project to Eclipse CDT
