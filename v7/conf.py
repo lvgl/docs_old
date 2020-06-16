@@ -84,7 +84,8 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'html', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'html', 'Thumbs.db', '.DS_Store', 
+                    'README.md', 'lv_examples/README.md', 'lv_examples/docs/LICENSE.md' ]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -159,7 +160,6 @@ latex_elements = {
     'utf8extra': '',
     'classoptions': ',openany,oneside',
     'preamble': r'''
-
 \usepackage{fontspec}
 \setmonofont{DejaVu Sans Mono}
 \usepackage{xeCJK}
@@ -173,8 +173,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'LVGL.tex', 'LVGL Documentation',
-     'Gabor Kiss-Vamosi', 'manual'),
+    (master_doc, 'LVGL.tex', 'LVGL Documentation ' + version,
+     'Contributors of LVGL', 'manual'),
 ]
 
 
@@ -183,7 +183,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'lvgl', 'LVGL Documentation',
+    (master_doc, 'lvgl', 'LVGL Documentation ' + version,
      [author], 1)
 ]
 
@@ -194,8 +194,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'LVGL', 'LVGL Documentation',
-     author, 'LVGL LLC', 'One line description of project.',
+    (master_doc, 'LVGL', 'LVGL Documentation ' + version,
+     author, 'Contributors of LVGL', 'One line description of project.',
      'Miscellaneous'),
 ]
 
@@ -210,6 +210,8 @@ StandaloneHTMLBuilder.supported_image_types = [
     'image/png',
     'image/jpeg'
 ]
+
+smartquotes = False
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
