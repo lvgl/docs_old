@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.0.1
+                v7.0.2
               </div>
             
           
@@ -105,6 +105,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/quick-overview.html">Quick overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#get-started-in-a-simulator">Get started in a simulator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#add-lvgl-into-your-project">Add LVGL into your project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#learn-the-basics">Learn the basics</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#widgets">Widgets</a></li>
@@ -122,7 +123,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#micropython">Micropython</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#contributing">Contributing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
@@ -146,9 +146,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-lvgl">Why Micropython + LVGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-lvgl-in-micropython">Here are some advantages of using LVGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-lvgl-could-be-used-for">Micropython + LVGL could be used for:</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#so-what-does-it-look-like">So what does it look like?</a><ul>
@@ -1227,7 +1227,7 @@
 </div>
 <div class="section" id="files">
 <h3>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h3>
-<p>To deal with files you need to add a <em>Drive</em> to LittlevGL. In short, a <em>Drive</em> is a collection of functions (<em>open</em>, <em>read</em>, <em>close</em>, etc.) registered in LittlevGL to make file operations.
+<p>To deal with files you need to add a <em>Drive</em> to LVGL. In short, a <em>Drive</em> is a collection of functions (<em>open</em>, <em>read</em>, <em>close</em>, etc.) registered in LVGL to make file operations.
 You can add an interface to a standard file system (FAT32 on SD card) or you create your simple file system to read data from an SPI Flash memory.
 In every case, a <em>Drive</em> is just an abstraction to read and/or write data to a memory.
 See the <a class="reference internal" href="file-system.html"><span class="doc">File system</span></a> section to learn more.</p>
@@ -1238,7 +1238,7 @@ See the <a class="reference internal" href="file-system.html"><span class="doc">
 <h2>Color formats<a class="headerlink" href="#color-formats" title="Permalink to this headline">¶</a></h2>
 <p>Various built-in color formats are supported:</p>
 <ul class="simple">
-<li><p><strong>LV_IMG_CF_TRUE_COLOR</strong> Simply stores the RGB colors (in whatever color depth LittlevGL is configured for).</p></li>
+<li><p><strong>LV_IMG_CF_TRUE_COLOR</strong> Simply stores the RGB colors (in whatever color depth LVGL is configured for).</p></li>
 <li><p><strong>LV_IMG_CF_TRUE_COLOR_ALPHA</strong> Like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> but it also adds an alpha (transparency) byte for every pixel.</p></li>
 <li><p><strong>LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</strong> Like <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> but if a pixel has <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code> (set in <em>lv_conf.h</em>) color the pixel will be transparent.</p></li>
 <li><p><strong>LV_IMG_CF_INDEXED_1/2/4/8BIT</strong> Uses a palette with 2, 4, 16 or 256 colors and stores each pixel in 1, 2, 4 or 8 bits.</p></li>
@@ -1272,18 +1272,18 @@ See the <a class="reference internal" href="file-system.html"><span class="doc">
 </div>
 <div class="section" id="add-and-use-images">
 <h2>Add and use images<a class="headerlink" href="#add-and-use-images" title="Permalink to this headline">¶</a></h2>
-<p>You can add images to LittlevGL in two ways:</p>
+<p>You can add images to LVGL in two ways:</p>
 <ul class="simple">
 <li><p>using the online converter</p></li>
 <li><p>manually create images</p></li>
 </ul>
 <div class="section" id="online-converter">
 <h3>Online converter<a class="headerlink" href="#online-converter" title="Permalink to this headline">¶</a></h3>
-<p>The online Image converter is available here: https://littlevgl.com/image-to-c-array</p>
-<p>Adding an image to LittlevGL via online converter is easy.</p>
+<p>The online Image converter is available here: https://lvgl.io/tools/imageconverter</p>
+<p>Adding an image to LVGL via online converter is easy.</p>
 <ol class="simple">
 <li><p>You need to select a <em>BMP</em>, <em>PNG</em> or <em>JPG</em> image first.</p></li>
-<li><p>Give the image a name that will be used within LittlevGL.</p></li>
+<li><p>Give the image a name that will be used within LVGL.</p></li>
 <li><p>Select the <a class="reference external" href="#color-formats">Color format</a>.</p></li>
 <li><p>Select the type of image you want. Choosing a binary will generate a <code class="docutils literal notranslate"><span class="pre">.bin</span></code> file that must be stored separately and read using the <a class="reference external" href="#files">file support</a>. Choosing a variable will generate a standard C file that can be linked into your project.</p></li>
 <li><p>Hit the <em>Convert</em> button. Once the conversion is finished, your browser will automatically download the resulting file.</p></li>
@@ -1299,7 +1299,7 @@ See the <a class="reference internal" href="file-system.html"><span class="doc">
 </div>
 <div class="section" id="manually-create-an-image">
 <h3>Manually create an image<a class="headerlink" href="#manually-create-an-image" title="Permalink to this headline">¶</a></h3>
-<p>If you are generating an image at run-time, you can craft an image variable to display it using LittlevGL. For example:</p>
+<p>If you are generating an image at run-time, you can craft an image variable to display it using LVGL. For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">my_img_data</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">,</span> <span class="p">...};</span>
 
 <span class="k">static</span> <span class="n">lv_img_dsc_t</span> <span class="n">my_img_dsc</span> <span class="o">=</span> <span class="p">{</span>
@@ -1317,7 +1317,7 @@ See the <a class="reference internal" href="file-system.html"><span class="doc">
 </div>
 <div class="section" id="use-images">
 <h3>Use images<a class="headerlink" href="#use-images" title="Permalink to this headline">¶</a></h3>
-<p>The simplest way to use an image in LittlevGL is to display it with an <a class="reference internal" href="../widgets/img.html"><span class="doc">lv_img</span></a> object:</p>
+<p>The simplest way to use an image in LVGL is to display it with an <a class="reference internal" href="../widgets/img.html"><span class="doc">lv_img</span></a> object:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">icon</span> <span class="o">=</span> <span class="n">lv_img_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
 
 <span class="cm">/*From variable*/</span>
@@ -1332,8 +1332,8 @@ See the <a class="reference internal" href="file-system.html"><span class="doc">
 </div>
 <div class="section" id="image-decoder">
 <h2>Image decoder<a class="headerlink" href="#image-decoder" title="Permalink to this headline">¶</a></h2>
-<p>As you can see in the <a class="reference external" href="#color-formats">Color formats</a> section, LittlevGL supports several built-in image formats. In many cases, these will be all you need. LittlevGL doesn’t directly support, however, generic image formats like PNG or JPG.</p>
-<p>To handle non-built-in image formats, you need to use external libraries and attach them to LittlevGL via the <em>Image decoder</em> interface.</p>
+<p>As you can see in the <a class="reference external" href="#color-formats">Color formats</a> section, LVGL supports several built-in image formats. In many cases, these will be all you need. LVGL doesn’t directly support, however, generic image formats like PNG or JPG.</p>
+<p>To handle non-built-in image formats, you need to use external libraries and attach them to LVGL via the <em>Image decoder</em> interface.</p>
 <p>The image decoder consists of 4 callbacks:</p>
 <ul class="simple">
 <li><p><strong>info</strong> get some basic info about the image (width, height and color format).</p></li>
@@ -1355,7 +1355,7 @@ It’s possible to decode the image to a non-true color format first, for exampl
 </div>
 <div class="section" id="register-an-image-decoder">
 <h3>Register an image decoder<a class="headerlink" href="#register-an-image-decoder" title="Permalink to this headline">¶</a></h3>
-<p>Here’s an example of getting LittlevGL to work with PNG images.</p>
+<p>Here’s an example of getting LVGL to work with PNG images.</p>
 <p>First, you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Create a new decoder and register functions */</span>
 <span class="n">lv_img_decoder_t</span> <span class="o">*</span> <span class="n">dec</span> <span class="o">=</span> <span class="n">lv_img_decoder_create</span><span class="p">();</span>
@@ -1457,7 +1457,7 @@ To indicate that, the <em>line read</em> function should be used, set <code clas
 </div>
 <div class="section" id="manually-use-an-image-decoder">
 <h3>Manually use an image decoder<a class="headerlink" href="#manually-use-an-image-decoder" title="Permalink to this headline">¶</a></h3>
-<p>LittlevGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the <code class="docutils literal notranslate"><span class="pre">lv_img</span></code> object) but you can use them manually too. Create a <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_dsc_t</span></code> variable to describe the decoding session and call <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>.</p>
+<p>LVGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the <code class="docutils literal notranslate"><span class="pre">lv_img</span></code> object) but you can use them manually too. Create a <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_dsc_t</span></code> variable to describe the decoding session and call <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_open()</span></code>.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
 <span class="n">lv_res_t</span> <span class="n">res</span><span class="p">;</span>
 <span class="n">lv_img_decoder_dsc_t</span> <span class="n">dsc</span><span class="p">;</span>
@@ -1475,8 +1475,8 @@ To indicate that, the <em>line read</em> function should be used, set <code clas
 <h2>Image caching<a class="headerlink" href="#image-caching" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes it takes a lot of time to open an image.
 Continuously decoding a PNG image or loading images from a slow external memory would be inefficient and detrimental to the user experience.</p>
-<p>Therefore, LittlevGL caches a given number of images. Caching means some images will be left open, hence LittlevGL can quickly access them from <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code> instead of needing to decode them again.</p>
-<p>Of course, caching images is resource-intensive as it uses more RAM (to store the decoded image). LittlevGL tries to optimize the process as much as possible (see below), but you will still need to evaluate if this would be beneficial for your platform or not. If you have a deeply embedded target which decodes small images from a relatively fast storage medium, image caching may not be worth it.</p>
+<p>Therefore, LVGL caches a given number of images. Caching means some images will be left open, hence LVGL can quickly access them from <code class="docutils literal notranslate"><span class="pre">dsc-&gt;img_data</span></code> instead of needing to decode them again.</p>
+<p>Of course, caching images is resource-intensive as it uses more RAM (to store the decoded image). LVGL tries to optimize the process as much as possible (see below), but you will still need to evaluate if this would be beneficial for your platform or not. If you have a deeply embedded target which decodes small images from a relatively fast storage medium, image caching may not be worth it.</p>
 <div class="section" id="cache-size">
 <h3>Cache size<a class="headerlink" href="#cache-size" title="Permalink to this headline">¶</a></h3>
 <p>The number of cache entries can be defined in <code class="docutils literal notranslate"><span class="pre">LV_IMG_CACHE_DEF_SIZE</span></code> in <em>lv_conf.h</em>. The default value is 1 so only the most recently used image will be left open.</p>
@@ -1484,9 +1484,9 @@ Continuously decoding a PNG image or loading images from a slow external memory 
 </div>
 <div class="section" id="value-of-images">
 <h3>Value of images<a class="headerlink" href="#value-of-images" title="Permalink to this headline">¶</a></h3>
-<p>When you use more images than cache entries, LittlevGL can’t cache all of the images. Instead, the library will close one of the cached images (to free space).</p>
-<p>To decide which image to close, LittlevGL uses a measurement it previously made of how long it took to open the image. Cache entries that hold slower-to-open images are considered more valuable and are kept in the cache as long as possible.</p>
-<p>If you want or need to override LittlevGL’s measurement, you can manually set the <em>time to open</em> value in the decoder open function in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;time_to_open</span> <span class="pre">=</span> <span class="pre">time_ms</span></code> to give a higher or lower value. (Leave it unchanged to let LittlevGL set it.)</p>
+<p>When you use more images than cache entries, LVGL can’t cache all of the images. Instead, the library will close one of the cached images (to free space).</p>
+<p>To decide which image to close, LVGL uses a measurement it previously made of how long it took to open the image. Cache entries that hold slower-to-open images are considered more valuable and are kept in the cache as long as possible.</p>
+<p>If you want or need to override LVGL’s measurement, you can manually set the <em>time to open</em> value in the decoder open function in <code class="docutils literal notranslate"><span class="pre">dsc-&gt;time_to_open</span> <span class="pre">=</span> <span class="pre">time_ms</span></code> to give a higher or lower value. (Leave it unchanged to let LVGL set it.)</p>
 <p>Every cache entry has a <em>“life”</em> value. Every time an image opening happens through the cache, the <em>life</em> of all entries are decreased to make them older.
 When a cached image is used, its <em>life</em> is increased by the <em>time to open</em> value to make it more alive.</p>
 <p>If there is no more space in the cache, always the entry with the smallest life will be closed.</p>
@@ -1498,7 +1498,7 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
 </div>
 <div class="section" id="clean-the-cache">
 <h3>Clean the cache<a class="headerlink" href="#clean-the-cache" title="Permalink to this headline">¶</a></h3>
-<p>Let’s say you have loaded a PNG image into a <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span> <span class="pre">my_png</span></code> variable and use it in an <code class="docutils literal notranslate"><span class="pre">lv_img</span></code> object. If the image is already cached and you then change the underlying PNG file, you need to notify LittlevGL to cache the image again. Otherwise, there is no easy way of detecting that the underlying file changed and LittlevGL will still draw the old image.</p>
+<p>Let’s say you have loaded a PNG image into a <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span> <span class="pre">my_png</span></code> variable and use it in an <code class="docutils literal notranslate"><span class="pre">lv_img</span></code> object. If the image is already cached and you then change the underlying PNG file, you need to notify LVGL to cache the image again. Otherwise, there is no easy way of detecting that the underlying file changed and LVGL will still draw the old image.</p>
 <p>To do this, use <code class="docutils literal notranslate"><span class="pre">lv_img_cache_invalidate_src(&amp;my_png)</span></code>. If <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is passed as a parameter, the whole cache will be cleaned.</p>
 </div>
 </div>
@@ -2014,7 +2014,7 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jun 05, 2020.
+        Last updated on Jun 16, 2020.
       </span>
 
     </p>

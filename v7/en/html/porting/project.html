@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.0.1
+                v7.0.2
               </div>
             
           
@@ -105,6 +105,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/quick-overview.html">Quick overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#get-started-in-a-simulator">Get started in a simulator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#add-lvgl-into-your-project">Add LVGL into your project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#learn-the-basics">Learn the basics</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#widgets">Widgets</a></li>
@@ -122,7 +123,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#micropython">Micropython</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#contributing">Contributing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
@@ -146,9 +146,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-lvgl">Why Micropython + LVGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-lvgl-in-micropython">Here are some advantages of using LVGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-lvgl-could-be-used-for">Micropython + LVGL could be used for:</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#so-what-does-it-look-like">So what does it look like?</a><ul>
@@ -1201,13 +1201,13 @@
 <h1>Set-up a project<a class="headerlink" href="#set-up-a-project" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="get-the-library">
 <h2>Get the library<a class="headerlink" href="#get-the-library" title="Permalink to this headline">¶</a></h2>
-<p>LittlevGL Graphics Library is available on GitHub: <a class="reference external" href="https://github.com/littlevgl/lvgl">https://github.com/littlevgl/lvgl</a>.</p>
-<p>You can clone it or download the latest version of the library from GitHub or you can use the <a class="reference external" href="https://littlevgl.com/download">Download</a> page as well.</p>
+<p>LVGL Graphics Library is available on GitHub: <a class="reference external" href="https://github.com/lvgl/lvgl">https://github.com/lvgl/lvgl</a>.</p>
+<p>You can clone it or download the latest version of the library from GitHub.</p>
 <p>The graphics library is the <strong>lvgl</strong> directory which should be copied into your project.</p>
 </div>
 <div class="section" id="configuration-file">
 <h2>Configuration file<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h2>
-<p>There is a configuration header file for LittlevGL called <strong>lv_conf.h</strong>. It sets the library’s basic behaviour, disables unused modules and features, adjusts the size of memory buffers in compile-time, etc.</p>
+<p>There is a configuration header file for LVGL called <strong>lv_conf.h</strong>. It sets the library’s basic behaviour, disables unused modules and features, adjusts the size of memory buffers in compile-time, etc.</p>
 <p>Copy <strong>lvgl/lv_conf_template.h</strong> next to the <em>lvgl</em> directory and rename it to <em>lv_conf.h</em>. Open the file and change the <code class="docutils literal notranslate"><span class="pre">#if</span> <span class="pre">0</span></code> at the beginning to <code class="docutils literal notranslate"><span class="pre">#if</span> <span class="pre">1</span></code> to enable its content.</p>
 <p><em>lv_conf.h</em> can be copied other places as well but then you should add <code class="docutils literal notranslate"><span class="pre">LV_CONF_INCLUDE_SIMPLE</span></code> define to your compiler options (e.g. <code class="docutils literal notranslate"><span class="pre">-DLV_CONF_INCLUDE_SIMPLE</span></code> for gcc compiler) and set the include path manually.</p>
 <p>In the config file comments explain the meaning of the options. Check at least these three configuration options and modify them according to your hardware:</p>
@@ -1223,9 +1223,9 @@
 <ol class="simple">
 <li><p>Call <em>lv_init()</em>.</p></li>
 <li><p>Initialize your drivers.</p></li>
-<li><p>Register the display and input devices drivers in LittlevGL.  More about <a class="reference internal" href="display.html"><span class="doc">Display</span></a> and <a class="reference internal" href="indev.html"><span class="doc">Input device</span></a> registration.</p></li>
+<li><p>Register the display and input devices drivers in LVGL.  More about <a class="reference internal" href="display.html"><span class="doc">Display</span></a> and <a class="reference internal" href="indev.html"><span class="doc">Input device</span></a> registration.</p></li>
 <li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(x)</span></code> in every <code class="docutils literal notranslate"><span class="pre">x</span></code> milliseconds in an interrupt to tell the elapsed time. <a class="reference internal" href="tick.html"><span class="doc">Learn more</span></a>.</p></li>
-<li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code> periodically in every few milliseconds to handle LittlevGL related tasks. <a class="reference internal" href="task-handler.html"><span class="doc">Learn more</span></a>.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code> periodically in every few milliseconds to handle LVGL related tasks. <a class="reference internal" href="task-handler.html"><span class="doc">Learn more</span></a>.</p></li>
 </ol>
 </div>
 </div>
@@ -1252,7 +1252,7 @@
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jun 05, 2020.
+        Last updated on Jun 16, 2020.
       </span>
 
     </p>

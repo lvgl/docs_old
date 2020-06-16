@@ -66,7 +66,7 @@
 
 
 \title{LVGL Documentation}
-\date{Jun 01, 2020}
+\date{Jun 16, 2020}
 \release{}
 \author{Gabor Kiss-Vamosi}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -88,7 +88,7 @@ PDF version: \sphinxcode{\sphinxupquote{LVGL.pdf}}
 
 \sphinxincludegraphics{{lv_theme_intro}.png}
 
-LVGL (Little and Versatile Graphic Library) is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
+LVGL (Light and Versatile Graphic Library) is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
 
 \sphinxstylestrong{\sphinxhref{https://lvgl.io}{Website}   ·  }
 \sphinxstylestrong{\sphinxhref{https://github.com/lvgl/lvgl}{GitHub}   ·  }
@@ -428,20 +428,43 @@ To learn more see \sphinxhref{https://github.com/lvgl/lvgl/blob/master/docs/CONT
 LVGL follows the rules of \sphinxhref{https://semver.org/}{Semantic versioning}:
 \begin{itemize}
 \item {} 
-\sphinxstyleemphasis{Major} versions for incompatible API changes. E.g. v5.0.0, v6.0.0
+Major versions for incompatible API changes. E.g. v5.0.0, v6.0.0
 
 \item {} 
-\sphinxstyleemphasis{Minor} version for new but backwards-compatible functionalities. E.g. v6.1.0, v6.2.0
+Minor version for new but backward-compatible functionalities. E.g. v6.1.0, v6.2.0
 
 \item {} 
-\sphinxstyleemphasis{Patch} version for backwards-compatible bug fixes. E.g. v6.1.1, v6.1.2
+Patch version for backward-compatible bug fixes. E.g. v6.1.1, v6.1.2
 
 \end{itemize}
 
-The recent version of LVGL is available on GitHub in the \sphinxhref{https://github.com/lvgl/lvgl}{master}.
-Features are continuosly merged to \sphinxcode{\sphinxupquote{master}} and there are bugfix or minor release every two week.
+Branches:
+\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{master}} most recent version, patches are merged directly here.
 
-The older versions of LVGL can be found in branches like \sphinxcode{\sphinxupquote{release/v6}}.
+\item {} 
+\sphinxcode{\sphinxupquote{dev}} merge new features here until they are merged into \sphinxcode{\sphinxupquote{master}}.
+
+\item {} 
+\sphinxcode{\sphinxupquote{release/vX}} there is a branch for every major version to allow adding specific, not forward compatible fixes.
+
+\end{itemize}
+
+LVGL has a monthly periodic release cycle.
+\begin{itemize}
+\item {} 
+\sphinxstylestrong{1st Tuesday of the month}
+  - Make a major, minor, or patch release from \sphinxcode{\sphinxupquote{master}} depending on the new features.
+  - After that merge only patches into \sphinxcode{\sphinxupquote{master}} and add new features into the \sphinxcode{\sphinxupquote{dev}}.
+
+\item {} 
+\sphinxstylestrong{3rd Tuesday of the month}
+  - Make a patch release from \sphinxcode{\sphinxupquote{master}}.
+  - After that merge the new features from the \sphinxcode{\sphinxupquote{dev}} to \sphinxcode{\sphinxupquote{master}} branch.
+  - In the rest of the month merge only patches into \sphinxcode{\sphinxupquote{master}} and new features into \sphinxcode{\sphinxupquote{dev}} branch.
+
+\end{itemize}
 
 
 \subsection{Get started}
@@ -452,8 +475,12 @@ The older versions of LVGL can be found in branches like \sphinxcode{\sphinxupqu
 Here you can learn the most important things about LVGL.
 You should read it first to get a general impression and read the detailed {\hyperref[\detokenize{porting/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Porting}}}} and {\hyperref[\detokenize{overview/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Overview}}}} sections after that.
 
-Instead of porting LVGL to an embedded hardware you can use the {\hyperref[\detokenize{get-started/pc-simulator::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Simulators}}}} to get ready-to-use projects which can be run on your PC.
-This way you can save the porting for now and make some experience with LVGL immediately.
+
+\paragraph{Get started in a simulator}
+\label{\detokenize{get-started/quick-overview:get-started-in-a-simulator}}
+Instead of porting LVGL to an embedded hardware, it’s highly recommended to get started in a simulator first.
+
+LVGL is ported to many IDEs to be sure you will find your faviourite one. Go to {\hyperref[\detokenize{get-started/pc-simulator::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Simulators}}}} to get ready-to-use projects which can be run on your PC. This way you can save the porting for now and make some experience with LVGL immediately.
 
 
 \paragraph{Add LVGL into your project}
@@ -461,7 +488,7 @@ This way you can save the porting for now and make some experience with LVGL imm
 The following steps show how to setup LVGL on an embedded system with a display and a touchpad.
 \begin{itemize}
 \item {} 
-\sphinxhref{https://littlevgl.com/download}{Download} or \sphinxhref{https://github.com/littlevgl/lvgl}{Clone} the library from GitHub with \sphinxcode{\sphinxupquote{git clone https://github.com/littlevgl/lvgl.git}}
+\sphinxhref{https://github.com/lvgl/lvgl/archive/master.zip}{Download} or Clone the library from GitHub with \sphinxcode{\sphinxupquote{git clone https://github.com/lvgl/lvgl.git}}
 
 \item {} 
 Copy the \sphinxcode{\sphinxupquote{lvgl}} folder into your project
@@ -470,7 +497,7 @@ Copy the \sphinxcode{\sphinxupquote{lvgl}} folder into your project
 Copy \sphinxcode{\sphinxupquote{lvgl/lv\_conf\_templ.h}} as \sphinxcode{\sphinxupquote{lv\_conf.h}} next to the \sphinxcode{\sphinxupquote{lvgl}} folder, change the first \sphinxcode{\sphinxupquote{\#if 0}} to \sphinxcode{\sphinxupquote{1}} to enable the file’s content and set at least \sphinxcode{\sphinxupquote{LV\_HOR\_RES\_MAX}}, \sphinxcode{\sphinxupquote{LV\_VER\_RES\_MAX}} and \sphinxcode{\sphinxupquote{LV\_COLOR\_DEPTH}} defines.
 
 \item {} 
-Include \sphinxcode{\sphinxupquote{lvgl/lvgl.h}} where you need to use LittlevGL related functions.
+Include \sphinxcode{\sphinxupquote{lvgl/lvgl.h}} where you need to use LVGL related functions.
 
 \item {} 
 Call \sphinxcode{\sphinxupquote{lv\_tick\_inc(x)}} every \sphinxcode{\sphinxupquote{x}} milliseconds \sphinxstylestrong{in a Timer or Task} (\sphinxcode{\sphinxupquote{x}} should be between 1 and 10). It is required for the internal timing of LVGL.
@@ -485,7 +512,7 @@ Create a display buffer for LVGL. LVGL will render the graphics here first, and 
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{static} \PYG{n}{lv\PYGZus{}disp\PYGZus{}buf\PYGZus{}t} \PYG{n}{disp\PYGZus{}buf}\PYG{p}{;}
-\PYG{k}{static} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{buf}\PYG{p}{[}\PYG{n}{LV\PYGZus{}HOR\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{*} \PYG{n}{LV\PYGZus{}VER\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{/} \PYG{l+m+mi}{10}\PYG{p}{]}\PYG{p}{;}                     \PYG{c+cm}{/*Declare a buffer for 10 lines*/}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{buf}\PYG{p}{[}\PYG{n}{LV\PYGZus{}HOR\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{*} \PYG{n}{LV\PYGZus{}VER\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{/} \PYG{l+m+mi}{10}\PYG{p}{]}\PYG{p}{;}                     \PYG{c+cm}{/*Declare a buffer for 1/10 screen size*/}
 \PYG{n}{lv\PYGZus{}disp\PYGZus{}buf\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}buf}\PYG{p}{,} \PYG{n}{buf}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}HOR\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{*} \PYG{n}{LV\PYGZus{}VER\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{/} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}    \PYG{c+cm}{/*Initialize the display buffer*/}
 \end{sphinxVerbatim}
 \begin{itemize}
@@ -501,7 +528,7 @@ Implement and register a function which can \sphinxstylestrong{copy the rendered
 \PYG{n}{disp\PYGZus{}drv}\PYG{p}{.}\PYG{n}{buffer} \PYG{o}{=} \PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}buf}\PYG{p}{;}          \PYG{c+cm}{/*Assign the buffer to the display*/}
 \PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Finally register the driver*/}
 
-\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}disp\PYGZus{}flush}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{area}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{color\PYGZus{}p}\PYG{p}{)}
+\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}disp\PYGZus{}flush}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{area}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{color\PYGZus{}p}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
     \PYG{k+kt}{int32\PYGZus{}t} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{;}
     \PYG{k}{for}\PYG{p}{(}\PYG{n}{y} \PYG{o}{=} \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y1}\PYG{p}{;} \PYG{n}{y} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y2}\PYG{p}{;} \PYG{n}{y}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
@@ -529,16 +556,8 @@ Implement and register a function which can \sphinxstylestrong{read an input dev
 
 \PYG{k+kt}{bool} \PYG{n+nf}{my\PYGZus{}touchpad\PYGZus{}read}\PYG{p}{(}\PYG{n}{lv\PYGZus{}indev\PYGZus{}t} \PYG{o}{*} \PYG{n}{indev}\PYG{p}{,} \PYG{n}{lv\PYGZus{}indev\PYGZus{}data\PYGZus{}t} \PYG{o}{*} \PYG{n}{data}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
-    \PYG{k}{static} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{last\PYGZus{}x} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
-    \PYG{k}{static} \PYG{n}{lv\PYGZus{}coord\PYGZus{}t} \PYG{n}{last\PYGZus{}y} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
-
-    \PYG{c+cm}{/*Save the state and save the pressed coordinate*/}
     \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=} \PYG{n}{touchpad\PYGZus{}is\PYGZus{}pressed}\PYG{p}{(}\PYG{p}{)} \PYG{o}{?} \PYG{n+nl}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR} \PYG{p}{:} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}REL}\PYG{p}{;}
-    \PYG{k}{if}\PYG{p}{(}\PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR}\PYG{p}{)} \PYG{n}{touchpad\PYGZus{}get\PYGZus{}xy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{last\PYGZus{}x}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{last\PYGZus{}y}\PYG{p}{)}\PYG{p}{;}
-
-    \PYG{c+cm}{/*Set the coordinates (if released use the last pressed coordinates)*/}
-    \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{x} \PYG{o}{=} \PYG{n}{last\PYGZus{}x}\PYG{p}{;}
-    \PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{y} \PYG{o}{=} \PYG{n}{last\PYGZus{}y}\PYG{p}{;}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{state} \PYG{o}{=}\PYG{o}{=} \PYG{n}{LV\PYGZus{}INDEV\PYGZus{}STATE\PYGZus{}PR}\PYG{p}{)} \PYG{n}{touchpad\PYGZus{}get\PYGZus{}xy}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{x}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{data}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{point}\PYG{p}{.}\PYG{n}{y}\PYG{p}{)}\PYG{p}{;}
 
     \PYG{k}{return} \PYG{n+nb}{false}\PYG{p}{;} \PYG{c+cm}{/*Return {}`false{}` because we are not buffering and no more data to read*/}
 \PYG{p}{\PYGZcb{}}
@@ -549,6 +568,8 @@ Call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically every few mil
 It will redraw the screen if required, handle input devices etc.
 
 \end{itemize}
+
+For a more detailed guide go to the \sphinxhref{https://docs.lvgl.io/v7/en/html/porting/index.html}{Porting} section.
 
 
 \paragraph{Learn the basics}
@@ -587,7 +608,7 @@ The objects has type specific parameters too which can be set by \sphinxcode{\sp
 \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{l+m+mi}{70}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ANIM\PYGZus{}ON}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-To see the full API visit the documentation of the widgets or the related header file (e.g. \sphinxhref{https://github.com/littlevgl/lvgl/blob/master/src/lv\_widgets/lv\_slider.h}{lvgl/src/lv\_widgets/lv\_slider.h}).
+To see the full API visit the documentation of the widgets or the related header file (e.g. \sphinxhref{https://github.com/lvgl/lvgl/blob/master/src/lv\_widgets/lv\_slider.h}{lvgl/src/lv\_widgets/lv\_slider.h}).
 
 
 \subparagraph{Events}
@@ -649,13 +670,14 @@ The objects can be in a combination of the following states:
 
 For example if you press an object is automatically get the \sphinxcode{\sphinxupquote{LV\_STATE\_PRESSED}} state and when you release is it will be removed.
 
-To get the current state use \sphinxcode{\sphinxupquote{lv\_obj\_get\_state(obj, part)}}. It will return the ORed states.
+To get the current state use \sphinxcode{\sphinxupquote{lv\_obj\_get\_state(obj, part)}}. It will return the \sphinxcode{\sphinxupquote{OR}}ed states.
+For example it’s a valid state for a checkbox: \sphinxcode{\sphinxupquote{LV\_STATE\_CHECKED \textbar{} LV\_STATE\_PRESSED \textbar{} LV\_STATE\_FOCUSED}}
 
 
 \subparagraph{Styles}
 \label{\detokenize{get-started/quick-overview:styles}}
 Styles can be assigned to the parts objects to changed their appearance.
-A style can describe for example the background color, border width, text font and so on. See the full list \sphinxhref{https://docs.littlevgl.com/v7/en/html/overview/style.html\#properties}{here}.
+A style can describe for example the background color, border width, text font and so on. See the full list \sphinxhref{https://docs.lvgl.io/v7/en/html/overview/style.html\#properties}{here}.
 
 The styles can be cascaded (similarly to CSS). It means you can add more styles to a part of an object.
 For example \sphinxcode{\sphinxupquote{style\_btn}} can set a default button appearance, and \sphinxcode{\sphinxupquote{style\_btn\_red}} can overwrite some properties to make the button red-
@@ -863,46 +885,9 @@ Learn more about {\hyperref[\detokenize{get-started/micropython::doc}]{\sphinxcr
 \end{sphinxVerbatim}
 
 
-\paragraph{Contributing}
-\label{\detokenize{get-started/quick-overview:contributing}}
-LittlevGL uses the \sphinxhref{https://forum.littlevgl.com}{Forum} to ask and answer questions and \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub’s Issue tracker} for development-related discussion (such as bug reports, feature suggestions etc.).
-
-There are many opportunities to contribute to LittlevGL such as:
-\begin{itemize}
-\item {} 
-\sphinxstylestrong{Help others} in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
-
-\item {} 
-\sphinxstylestrong{Inspire people} by speaking about your project in \sphinxhref{https://forum.littlevgl.com/c/my-projects}{My project} category in the Forum or add it to the \sphinxhref{https://blog.littlevgl.com/2018-12-26/references}{References} post
-
-\item {} 
-\sphinxstylestrong{Improve and/or translate the documentation.} Go to the \sphinxhref{https://github.com/littlevgl/docs}{Documentation} repository to learn more
-
-\item {} 
-\sphinxstylestrong{Write a blog post} about your experiences. See how to do it in the \sphinxhref{https://github.com/littlevgl/blog}{Blog} repository
-
-\item {} 
-\sphinxstylestrong{Report and/or fix bugs} in \sphinxhref{https://github.com/littlevgl/lvgl/issues}{GitHub’s issue tracker}
-
-\item {} 
-\sphinxstylestrong{Help in the developement}. Check the \sphinxhref{https://github.com/littlevgl/lvgl/issues}{Open issues} especially the ones with \sphinxhref{https://github.com/littlevgl/lvgl/issues?q=is\%3Aissue+is\%3Aopen+label\%3A\%22help+wanted\%22}{Help wanted} label and tell your ideas about a topic or implement a feature.
-
-\end{itemize}
-
-If you are interested in contributing to LittlevGL, then please read the guides below to get started.
-\begin{itemize}
-\item {} 
-\sphinxhref{https://blog.littlevgl.com/2018-12-06/contributing}{Contributing guide}
-
-\item {} 
-\sphinxhref{https://github.com/littlevgl/lvgl/blob/master/docs/CODING\_STYLE.md}{Coding style guide}
-
-\end{itemize}
-
-
 \subsubsection{Simulator on PC}
 \label{\detokenize{get-started/pc-simulator:simulator-on-pc}}\label{\detokenize{get-started/pc-simulator::doc}}
-You can try out the LittlevGL \sphinxstylestrong{using only your PC} (i.e. without any development boards). The LittlevGL will run on a simulator environment on the PC where anyone can write and experiment the real LittlevGL applications.
+You can try out the LVGL \sphinxstylestrong{using only your PC} (i.e. without any development boards). The LVGL will run on a simulator environment on the PC where anyone can write and experiment the real LVGL applications.
 
 Simulator on the PC have the following advantages:
 \begin{itemize}
@@ -916,7 +901,7 @@ Cross-platform - Any Windows, Linux or OSX PC can run the PC simulator.
 Portability - the written code is portable, which means you can simply copy it when using an embedded hardware.
 
 \item {} 
-Easy Validation - The simulator is also very useful to report bugs because it means common platform for every user. So it’s a good idea to reproduce a bug in simulator and use the code snippet in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
+Easy Validation - The simulator is also very useful to report bugs because it means common platform for every user. So it’s a good idea to reproduce a bug in simulator and use the code snippet in the \sphinxhref{https://forum.lvgl.io}{Forum}.
 
 \end{itemize}
 
@@ -1014,7 +999,7 @@ If something is not working, then please refer \sphinxhref{http://lazyfoo.net/tu
 \subparagraph{Pre-configured project}
 \label{\detokenize{get-started/pc-simulator:pre-configured-project}}
 A pre-configured graphics library project (based on the latest release) is always available to get started easily.
-You can find the latest one on \sphinxhref{https://github.com/littlevgl/proj\_pc}{GitHub} or on the \sphinxhref{https://littlevgl.com/download}{Download} page.
+You can find the latest one on \sphinxhref{https://github.com/lvgl/lv\_sim\_eclipse\_sdl}{GitHub}.
 (Please note that, the project is configured for Eclipse CDT).
 
 
@@ -1097,13 +1082,13 @@ TODO
 
 
 
-\paragraph{Why Micropython + LittlevGL?}
-\label{\detokenize{get-started/micropython:why-micropython-littlevgl}}
-Currently, Micropython \sphinxhref{https://forum.micropython.org/viewtopic.php?f=18\&t=5543}{does not have a good high-level GUI library} by default. LittlevGL is an \sphinxhref{https://blog.littlevgl.com/2018-12-13/extend-lvgl-objects}{Object Oriented Component Based} high-level GUI library, which seems to be a natural candidate to map into a higher level language, such as Python. LittlevGL is implemented in C and its APIs are in C.
+\paragraph{Why Micropython + LVGL?}
+\label{\detokenize{get-started/micropython:why-micropython-lvgl}}
+Currently, Micropython \sphinxhref{https://forum.micropython.org/viewtopic.php?f=18\&t=5543}{does not have a good high-level GUI library} by default. LVGL is an \sphinxhref{https://blog.lvgl.io/2018-12-13/extend-lvgl-objects}{Object Oriented Component Based} high-level GUI library, which seems to be a natural candidate to map into a higher level language, such as Python. LVGL is implemented in C and its APIs are in C.
 
 
-\subparagraph{Here are some advantages of using LittlevGL in Micropython:}
-\label{\detokenize{get-started/micropython:here-are-some-advantages-of-using-littlevgl-in-micropython}}\begin{itemize}
+\subparagraph{Here are some advantages of using LVGL in Micropython:}
+\label{\detokenize{get-started/micropython:here-are-some-advantages-of-using-lvgl-in-micropython}}\begin{itemize}
 \item {} 
 Develop GUI in Python, a very popular high level language. Use paradigms such as Object Oriented Programming.
 
@@ -1113,8 +1098,8 @@ Usually, GUI development requires multiple iterations to get things right. With 
 \end{itemize}
 
 
-\subparagraph{Micropython + LittlevGL could be used for:}
-\label{\detokenize{get-started/micropython:micropython-littlevgl-could-be-used-for}}\begin{itemize}
+\subparagraph{Micropython + LVGL could be used for:}
+\label{\detokenize{get-started/micropython:micropython-lvgl-could-be-used-for}}\begin{itemize}
 \item {} 
 Fast prototyping GUI.
 
@@ -1125,10 +1110,10 @@ Shorten the cycle of changing and fine-tuning the GUI.
 Model the GUI in a more abstract way by defining reusable composite objects, taking advantage of Python’s language features such as Inheritance, Closures, List Comprehension, Generators, Exception Handling, Arbitrary Precision Integers and others.
 
 \item {} 
-Make LittlevGL accessible to a larger audience. No need to know C in order to create a nice GUI on an embedded system.This goes well with \sphinxhref{https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython}{CircuitPython vision}. CircuitPython was designed with education in mind, to make it easier for new or unexperienced users to get started with embedded development.
+Make LVGL accessible to a larger audience. No need to know C in order to create a nice GUI on an embedded system.This goes well with \sphinxhref{https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython}{CircuitPython vision}. CircuitPython was designed with education in mind, to make it easier for new or unexperienced users to get started with embedded development.
 
 \item {} 
-Creating tools to work with LittlevGL at a higher level (e.g. drag-and-drop designer).
+Creating tools to work with LVGL at a higher level (e.g. drag-and-drop designer).
 
 \end{itemize}
 
@@ -1141,7 +1126,7 @@ Creating tools to work with LittlevGL at a higher level (e.g. drag-and-drop desi
 \label{\detokenize{get-started/micropython:so-what-does-it-look-like}}\begin{quote}
 
 TL;DR:
-It’s very much like the C API, but Object Oriented for LittlevGL components.
+It’s very much like the C API, but Object Oriented for LVGL components.
 \end{quote}
 
 Let’s dive right into an example!
@@ -1166,38 +1151,40 @@ Let’s dive right into an example!
 
 \subparagraph{Online Simulator}
 \label{\detokenize{get-started/micropython:online-simulator}}
-If you want to experiment with LittlevGL + Micropython without downloading anything - you can use our online simulator!It’s a fully functional LittlevGL + Micropython that runs entirely in the browser and allows you to edit a python script and run it.
+If you want to experiment with LVGL + Micropython without downloading anything - you can use our online simulator!It’s a fully functional LVGL + Micropython that runs entirely in the browser and allows you to edit a python script and run it.
 
-\sphinxhref{https://sim.littlevgl.com/v6/micropython/ports/javascript/lvgl\_editor.html}{Click here to experiment on the online simulator}
+\sphinxhref{https://sim.lvgl.io/v6/micropython/ports/javascript/bundle\_out/index.html}{Click here to experiment on the online simulator}
 
-\sphinxhref{https://sim.littlevgl.com/v6/micropython/ports/javascript/lvgl\_editor.html?script=https://gist.githubusercontent.com/amirgon/51299ce9b6448328a855826149482ae6/raw/0f235c6d40462fd2f0e55364b874f14fe3fd613c/lvgl\_hello\_world.py\&script\_startup=https://gist.githubusercontent.com/amirgon/7bf15a66ba6d959bbf90d10f3da571be/raw/8684b5fa55318c184b1310663b187aaab5c65be6/init\_lv\_mp\_js.py}{Hello World}
+\sphinxhref{https://sim.lvgl.io/v6/micropython/ports/javascript/bundle\_out/index.html?script=https://gist.githubusercontent.com/amirgon/51299ce9b6448328a855826149482ae6/raw/0f235c6d40462fd2f0e55364b874f14fe3fd613c/lvgl\_hello\_world.py\&script\_startup=https://gist.githubusercontent.com/amirgon/7bf15a66ba6d959bbf90d10f3da571be/raw/8684b5fa55318c184b1310663b187aaab5c65be6/init\_lv\_mp\_js.py}{Hello World}
+
+Note: examples don’t work with v7 yet, so v6 is used.
 
 
 \subparagraph{PC Simulator}
 \label{\detokenize{get-started/micropython:pc-simulator}}
-Micropython is ported to many platforms. One notable port is “unix”, which allows you to build and run Micropython (+LittlevGL) on a Linux machine. (On a Windows machine you might need Virtual Box or WSL or MinGW or Cygwin etc.)
+Micropython is ported to many platforms. One notable port is “unix”, which allows you to build and run Micropython (+LVGL) on a Linux machine. (On a Windows machine you might need Virtual Box or WSL or MinGW or Cygwin etc.)
 
-\sphinxhref{https://github.com/littlevgl/lv\_micropython}{Click here to know more information about building and running the unix port}
+\sphinxhref{https://github.com/lvgl/lv\_micropython}{Click here to know more information about building and running the unix port}
 
 
 \subparagraph{Embedded platform}
 \label{\detokenize{get-started/micropython:embedded-platform}}
-At the end, the goal is to run it all on an embedded platform.Both Micropython and LittlevGL can be used on many embedded architectures, such as stm32, ESP32 etc.You would also need display and input drivers. We have some sample drivers (ESP32+ILI9341, as well as some other examples), but most chances are you would want to create your own input/display drivers for your specific purposes.Drivers can be implemented either in C as Micropython module, or in pure Micropython!
+At the end, the goal is to run it all on an embedded platform.Both Micropython and LVGL can be used on many embedded architectures, such as stm32, ESP32 etc.You would also need display and input drivers. We have some sample drivers (ESP32+ILI9341, as well as some other examples), but most chances are you would want to create your own input/display drivers for your specific purposes.Drivers can be implemented either in C as Micropython module, or in pure Micropython!
 
 
 \paragraph{Where can I find more information?}
 \label{\detokenize{get-started/micropython:where-can-i-find-more-information}}\begin{itemize}
 \item {} 
-On the \sphinxhref{https://blog.littlevgl.com/2019-02-20/micropython-bindings}{Blog Post}
+On the \sphinxhref{https://blog.lvgl.io/2019-02-20/micropython-bindings}{Blog Post}
 
 \item {} 
-On \sphinxcode{\sphinxupquote{lv\_micropython}} \sphinxhref{https://github.com/littlevgl/lv\_micropython}{README}
+On \sphinxcode{\sphinxupquote{lv\_micropython}} \sphinxhref{https://github.com/lvgl/lv\_micropython}{README}
 
 \item {} 
-On \sphinxcode{\sphinxupquote{lv\_binding\_micropython}} \sphinxhref{https://github.com/littlevgl/lv\_binding\_micropython}{README}
+On \sphinxcode{\sphinxupquote{lv\_binding\_micropython}} \sphinxhref{https://github.com/lvgl/lv\_binding\_micropython}{README}
 
 \item {} 
-On LittlevGL forum (Feel free to ask anything!)
+On LVGL forum (Feel free to ask anything!)
 
 \item {} 
 On Micropython \sphinxhref{http://docs.micropython.org/en/latest/}{docs} and \sphinxhref{https://forum.micropython.org/}{forum}
@@ -1215,7 +1202,7 @@ On Micropython \sphinxhref{http://docs.micropython.org/en/latest/}{docs} and \sp
 \sphinxstylestrong{Application}
 Your application which creates the GUI and handles the specific tasks.
 
-\sphinxstylestrong{LittlevGL}
+\sphinxstylestrong{LVGL}
 The graphics library itself. Your application can communicate with the library to create a GUI. It contains a HAL (Hardware Abstraction Layer) interface to register your display and input device drivers.
 
 \sphinxstylestrong{Driver}
@@ -1249,16 +1236,16 @@ The frame buffer is usually located in the display controller which saves a lot 
 
 \paragraph{Get the library}
 \label{\detokenize{porting/project:get-the-library}}
-LittlevGL Graphics Library is available on GitHub: \sphinxurl{https://github.com/littlevgl/lvgl}.
+LVGL Graphics Library is available on GitHub: \sphinxurl{https://github.com/lvgl/lvgl}.
 
-You can clone it or download the latest version of the library from GitHub or you can use the \sphinxhref{https://littlevgl.com/download}{Download} page as well.
+You can clone it or download the latest version of the library from GitHub.
 
 The graphics library is the \sphinxstylestrong{lvgl} directory which should be copied into your project.
 
 
 \paragraph{Configuration file}
 \label{\detokenize{porting/project:configuration-file}}
-There is a configuration header file for LittlevGL called \sphinxstylestrong{lv\_conf.h}. It sets the library’s basic behaviour, disables unused modules and features, adjusts the size of memory buffers in compile-time, etc.
+There is a configuration header file for LVGL called \sphinxstylestrong{lv\_conf.h}. It sets the library’s basic behaviour, disables unused modules and features, adjusts the size of memory buffers in compile-time, etc.
 
 Copy \sphinxstylestrong{lvgl/lv\_conf\_template.h} next to the \sphinxstyleemphasis{lvgl} directory and rename it to \sphinxstyleemphasis{lv\_conf.h}. Open the file and change the \sphinxcode{\sphinxupquote{\#if 0}} at the beginning to \sphinxcode{\sphinxupquote{\#if 1}} to enable its content.
 
@@ -1295,13 +1282,13 @@ Call \sphinxstyleemphasis{lv\_init()}.
 Initialize your drivers.
 
 \item {} 
-Register the display and input devices drivers in LittlevGL.  More about {\hyperref[\detokenize{porting/display::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Display}}}} and {\hyperref[\detokenize{porting/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Input device}}}} registration.
+Register the display and input devices drivers in LVGL.  More about {\hyperref[\detokenize{porting/display::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Display}}}} and {\hyperref[\detokenize{porting/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Input device}}}} registration.
 
 \item {} 
 Call \sphinxcode{\sphinxupquote{lv\_tick\_inc(x)}} in every \sphinxcode{\sphinxupquote{x}} milliseconds in an interrupt to tell the elapsed time. {\hyperref[\detokenize{porting/tick::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Learn more}}}}.
 
 \item {} 
-Call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically in every few milliseconds to handle LittlevGL related tasks. {\hyperref[\detokenize{porting/task-handler::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Learn more}}}}.
+Call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically in every few milliseconds to handle LVGL related tasks. {\hyperref[\detokenize{porting/task-handler::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Learn more}}}}.
 
 \end{enumerate}
 
@@ -1341,20 +1328,20 @@ There are 3 possible configurations regarding the buffer size:
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-\sphinxstylestrong{One buffer} LittlevGL draws the content of the screen into a buffer and sends it to the display.
+\sphinxstylestrong{One buffer} LVGL draws the content of the screen into a buffer and sends it to the display.
 The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts.
 If only small areas changes (e.g. button press) then only those areas will be refreshed.
 
 \item {} 
-\sphinxstylestrong{Two non-screen-sized buffers} having two buffers LittlevGL can draw into one buffer while the content of the other buffer is sent to display in the background.
+\sphinxstylestrong{Two non-screen-sized buffers} having two buffers LVGL can draw into one buffer while the content of the other buffer is sent to display in the background.
 DMA or other hardware should be used to transfer the data to the display to let the CPU draw meanwhile.
 This way the rendering and refreshing of the display become parallel.
-Similarly to the \sphinxstyleemphasis{One buffer}, LittlevGL will draw the display’s content in chunks if the buffer is smaller than the area to refresh.
+Similarly to the \sphinxstyleemphasis{One buffer}, LVGL will draw the display’s content in chunks if the buffer is smaller than the area to refresh.
 
 \item {} 
 \sphinxstylestrong{Two screen-sized buffers}.
-In contrast to \sphinxstyleemphasis{Two non-screen-sized buffers} LittlevGL will always provide the whole screen’s content not only chunks.
-This way the driver can simply change the address of the frame buffer to the buffer received from LittlevGL.
+In contrast to \sphinxstyleemphasis{Two non-screen-sized buffers} LVGL will always provide the whole screen’s content not only chunks.
+This way the driver can simply change the address of the frame buffer to the buffer received from LVGL.
 Therefore this method works the best when the MCU has an LCD/TFT interface and the frame buffer is just a location in the RAM.
 
 \end{enumerate}
@@ -1390,7 +1377,7 @@ There are some optional data fields:
 \sphinxstylestrong{anti-aliasing} use anti-aliasing (edge smoothing). \sphinxcode{\sphinxupquote{LV\_ANTIALIAS}} by default  from \sphinxstyleemphasis{lv\_conf.h}.
 
 \item {} 
-\sphinxstylestrong{rotated} if \sphinxcode{\sphinxupquote{1}} swap \sphinxcode{\sphinxupquote{hor\_res}} and \sphinxcode{\sphinxupquote{ver\_res}}. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display’s fill direction.
+\sphinxstylestrong{rotated} if \sphinxcode{\sphinxupquote{1}} swap \sphinxcode{\sphinxupquote{hor\_res}} and \sphinxcode{\sphinxupquote{ver\_res}}. LVGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display’s fill direction.
 
 \item {} 
 \sphinxstylestrong{screen\_transp} if \sphinxcode{\sphinxupquote{1}} the screen can have transparent or opaque style. \sphinxcode{\sphinxupquote{LV\_COLOR\_SCREEN\_TRANSP}} needs to enabled in \sphinxstyleemphasis{lv\_conf.h}.
@@ -1426,7 +1413,7 @@ This way the buffers used in \sphinxcode{\sphinxupquote{lv\_disp\_buf\_t}} can b
 \end{itemize}
 
 To set the fields of \sphinxstyleemphasis{lv\_disp\_drv\_t} variable it needs to be initialized with \sphinxcode{\sphinxupquote{lv\_disp\_drv\_init(\&disp\_drv)}}.
-And finally to register a display for LittlevGL \sphinxcode{\sphinxupquote{lv\_disp\_drv\_register(\&disp\_drv)}} needs to be called.
+And finally to register a display for LVGL \sphinxcode{\sphinxupquote{lv\_disp\_drv\_register(\&disp\_drv)}} needs to be called.
 
 All together it looks like this:
 
@@ -2403,7 +2390,7 @@ To set up an input device an \sphinxcode{\sphinxupquote{lv\_indev\_drv\_t}} vari
 \PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Basic initialization*/}
 \PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{type} \PYG{o}{=}\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}                 \PYG{c+cm}{/*See below.*/}
 \PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{read\PYGZus{}cb} \PYG{o}{=}\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}              \PYG{c+cm}{/*See below.*/}
-\PYG{c+cm}{/*Register the driver in LittlevGL and save the created input device object*/}
+\PYG{c+cm}{/*Register the driver in LVGL and save the created input device object*/}
 \PYG{n}{lv\PYGZus{}indev\PYGZus{}t} \PYG{o}{*} \PYG{n}{my\PYGZus{}indev} \PYG{o}{=} \PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
@@ -3537,7 +3524,7 @@ Array points assigned to the button ()screen will be pressed here by the buttons
 
 \subsubsection{Tick interface}
 \label{\detokenize{porting/tick:tick-interface}}\label{\detokenize{porting/tick::doc}}
-The LittlevGL needs a system tick to know the elapsed time for animation and other tasks.
+The LVGL needs a system tick to know the elapsed time for animation and other tasks.
 
 You need to call the \sphinxcode{\sphinxupquote{lv\_tick\_inc(tick\_period)}} function periodically and tell the call period in milliseconds. For example, \sphinxcode{\sphinxupquote{lv\_tick\_inc(1)}} for calling in every millisecond.
 
@@ -3552,7 +3539,7 @@ On Linux based operating system (e.g. on Raspberry Pi) \sphinxcode{\sphinxupquot
 \PYG{p}{\PYGZob{}}
       \PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{\PYGZob{}}
         \PYG{n}{usleep}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{o}{*}\PYG{l+m+mi}{1000}\PYG{p}{)}\PYG{p}{;}   \PYG{c+cm}{/*Sleep for 5 millisecond*/}
-        \PYG{n}{lv\PYGZus{}tick\PYGZus{}inc}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Tell LittlevGL that 5 milliseconds were elapsed*/}
+        \PYG{n}{lv\PYGZus{}tick\PYGZus{}inc}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Tell LVGL that 5 milliseconds were elapsed*/}
     \PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
@@ -3604,7 +3591,7 @@ the elapsed milliseconds since ‘prev\_tick’
 
 \subsubsection{Task Handler}
 \label{\detokenize{porting/task-handler:task-handler}}\label{\detokenize{porting/task-handler::doc}}
-To handle the tasks of LittlevGL you need to call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically in one of the followings:
+To handle the tasks of LVGL you need to call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically in one of the followings:
 \begin{itemize}
 \item {} 
 \sphinxstyleemphasis{while(1)} of \sphinxstyleemphasis{main()} function
@@ -3663,9 +3650,9 @@ In addition to \sphinxcode{\sphinxupquote{lv\_disp\_get\_inactive\_time()}} you 
 
 \subsubsection{Operating system and interrupts}
 \label{\detokenize{porting/os:operating-system-and-interrupts}}\label{\detokenize{porting/os::doc}}
-LittlevGL is \sphinxstylestrong{not thread-safe} by default.
+LVGL is \sphinxstylestrong{not thread-safe} by default.
 
-However, in the following conditions it’s valid to call LittlevGL related functions:
+However, in the following conditions it’s valid to call LVGL related functions:
 \begin{itemize}
 \item {} 
 In \sphinxstyleemphasis{events}. Learn more in {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Events}}}}.
@@ -3679,19 +3666,19 @@ In \sphinxstyleemphasis{lv\_tasks}. Learn more in {\hyperref[\detokenize{overvie
 \paragraph{Tasks and threads}
 \label{\detokenize{porting/os:tasks-and-threads}}
 If you need to use real tasks or threads, you need a mutex which should be invoked before the call of \sphinxcode{\sphinxupquote{lv\_task\_handler}} and released after it.
-Also, you have to use the same mutex in other tasks and threads around every LittlevGL (\sphinxcode{\sphinxupquote{lv\_...}}) related function calls and codes.
-This way you can use LittlevGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LittlevGL functions.
+Also, you have to use the same mutex in other tasks and threads around every LVGL (\sphinxcode{\sphinxupquote{lv\_...}}) related function calls and codes.
+This way you can use LVGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LVGL functions.
 
 
 \paragraph{Interrupts}
 \label{\detokenize{porting/os:interrupts}}
-Try to avoid calling LittlevGL functions from the interrupts (except \sphinxcode{\sphinxupquote{lv\_tick\_inc()}} and \sphinxcode{\sphinxupquote{lv\_disp\_flush\_ready()}}). But, if you need to do this you have to disable the interrupt which uses LittlevGL functions while \sphinxcode{\sphinxupquote{lv\_task\_handler}} is running.
+Try to avoid calling LVGL functions from the interrupts (except \sphinxcode{\sphinxupquote{lv\_tick\_inc()}} and \sphinxcode{\sphinxupquote{lv\_disp\_flush\_ready()}}). But, if you need to do this you have to disable the interrupt which uses LVGL functions while \sphinxcode{\sphinxupquote{lv\_task\_handler}} is running.
 It’s a better approach to set a flag or some value and periodically check it in an \sphinxcode{\sphinxupquote{lv\_task}}.
 
 
 \subsubsection{Logging}
 \label{\detokenize{porting/log:logging}}\label{\detokenize{porting/log::doc}}
-LittlevGL has built-in \sphinxstyleemphasis{log} module to inform the user about what is happening in the library.
+LVGL has built-in \sphinxstyleemphasis{log} module to inform the user about what is happening in the library.
 
 
 \paragraph{Log level}
@@ -3769,7 +3756,7 @@ You can also use the log module via the \sphinxcode{\sphinxupquote{LV\_LOG\_TRAC
 
 \subsubsection{Objects}
 \label{\detokenize{overview/object:objects}}\label{\detokenize{overview/object::doc}}
-In the LittlevGL the \sphinxstylestrong{basic building blocks} of a user interface are the objects, also called \sphinxstyleemphasis{Widgets}.
+In the LVGL the \sphinxstylestrong{basic building blocks} of a user interface are the objects, also called \sphinxstyleemphasis{Widgets}.
 For example a {\hyperref[\detokenize{widgets/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button}}}}, {\hyperref[\detokenize{widgets/label::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Label}}}}, {\hyperref[\detokenize{widgets/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}}, {\hyperref[\detokenize{widgets/list::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{List}}}}, {\hyperref[\detokenize{widgets/chart::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Chart}}}} or {\hyperref[\detokenize{widgets/textarea::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Text area}}}}.
 
 Check all the {\hyperref[\detokenize{widgets/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Object types}}}} here.
@@ -3887,7 +3874,7 @@ If a child is partially or fully out of its parent then the parts outside will n
 
 \subparagraph{Create - delete objects}
 \label{\detokenize{overview/object:create-delete-objects}}
-In LittlevGL objects can be created and deleted dynamically in run-time.
+In LVGL objects can be created and deleted dynamically in run-time.
 It means only the currently created objects consume RAM.
 For example, if you need a chart, you can create it when required and delete it when it is not visible or necessary.
 
@@ -3996,7 +3983,7 @@ To learn more about the states read the related section of the \sphinxhref{/over
 
 \paragraph{Order of creation}
 \label{\detokenize{overview/layer:order-of-creation}}
-By default, LittlevGL draws old objects on the background and new objects on the foreground.
+By default, LVGL draws old objects on the background and new objects on the foreground.
 
 For example, assume we added a button to a parent object named button1 and then another button named button2. Then button1 (with its child object(s)) will be in the background and can be covered by button2 and its children.
 
@@ -4032,7 +4019,7 @@ For example, assume we added a button to a parent object named button1 and then 
 There are several ways to bring an object to the foreground:
 \begin{itemize}
 \item {} 
-Use \sphinxcode{\sphinxupquote{lv\_obj\_set\_top(obj, true)}}. If \sphinxcode{\sphinxupquote{obj}} or any of its children is clicked, then LittlevGL will automatically bring the object to the foreground.
+Use \sphinxcode{\sphinxupquote{lv\_obj\_set\_top(obj, true)}}. If \sphinxcode{\sphinxupquote{obj}} or any of its children is clicked, then LVGL will automatically bring the object to the foreground.
 It works similarly to a typical GUI on a PC. When a window in the background is clicked, it will come to the foreground automatically.
 
 \item {} 
@@ -4046,7 +4033,7 @@ When \sphinxcode{\sphinxupquote{lv\_obj\_set\_parent(obj, new\_parent)}} is used
 
 \paragraph{Top and sys layers}
 \label{\detokenize{overview/layer:top-and-sys-layers}}
-LittlevGL uses two special layers named as \sphinxcode{\sphinxupquote{layer\_top}} and \sphinxcode{\sphinxupquote{layer\_sys}}.
+LVGL uses two special layers named as \sphinxcode{\sphinxupquote{layer\_top}} and \sphinxcode{\sphinxupquote{layer\_sys}}.
 Both are visible and common on all screens of a display. \sphinxstylestrong{They are not, however, shared among multiple physical displays.} The \sphinxcode{\sphinxupquote{layer\_top}} is always on top of the default screen (\sphinxcode{\sphinxupquote{lv\_scr\_act()}}), and \sphinxcode{\sphinxupquote{layer\_sys}} is on top of \sphinxcode{\sphinxupquote{layer\_top}}.
 
 The \sphinxcode{\sphinxupquote{layer\_top}} can be used by the user to create some content visible everywhere. For example, a menu bar, a pop-up, etc. If the \sphinxcode{\sphinxupquote{click}} attribute is enabled, then \sphinxcode{\sphinxupquote{layer\_top}} will absorb all user click and acts as a modal.
@@ -4055,12 +4042,12 @@ The \sphinxcode{\sphinxupquote{layer\_top}} can be used by the user to create so
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}click}\PYG{p}{(}\PYG{n}{lv\PYGZus{}layer\PYGZus{}top}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-The \sphinxcode{\sphinxupquote{layer\_sys}} is also using for similar purpose on LittlevGL. For example, it places the mouse cursor there to be sure it’s always visible.
+The \sphinxcode{\sphinxupquote{layer\_sys}} is also using for similar purpose on LVGL. For example, it places the mouse cursor there to be sure it’s always visible.
 
 
 \subsubsection{Events}
 \label{\detokenize{overview/event:events}}\label{\detokenize{overview/event::doc}}
-Events are triggered in LittlevGL when something happens which might be interesting to the user, e.g. if an object:
+Events are triggered in LVGL when something happens which might be interesting to the user, e.g. if an object:
 \begin{itemize}
 \item {} 
 is clicked
@@ -5967,7 +5954,7 @@ pointer to the found object or NULL if there was no suitable object
 \sphinxcode{\sphinxupquote{obj}}: pointer to a start object, typically the screen 
 
 \item {} 
-\sphinxcode{\sphinxupquote{point}}: pointer to a point for searhing the most top child 
+\sphinxcode{\sphinxupquote{point}}: pointer to a point for searching the most top child 
 
 \end{itemize}
 
@@ -6443,7 +6430,7 @@ Set a function for a group which will be called when a new object is focused \be
 \pysigstartmultiline
 \phantomsection\label{\detokenize{overview/indev:lv__group_8h_1aa666a2561be02d6dc630d346fe1a5a30}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_group\_set\_refocus\_policy}}}{{\hyperref[\detokenize{overview/indev:_CPPv410lv_group_t}]{\sphinxcrossref{lv\_group\_t}}} *\sphinxstyleemphasis{group}, {\hyperref[\detokenize{overview/indev:_CPPv425lv_group_refocus_policy_t}]{\sphinxcrossref{lv\_group\_refocus\_policy\_t}}} \sphinxstyleemphasis{policy}}{}%
 \pysigstopmultiline
-Set whether the next or previous item in a group is focused if the currently focussed obj is deleted. \begin{description}
+Set whether the next or previous item in a group is focused if the currently focused obj is deleted. \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxcode{\sphinxupquote{group}}: pointer to a group 
@@ -6770,10 +6757,10 @@ A function to call when a new object is focused (optional)
 \subsubsection{Displays}
 \label{\detokenize{overview/display:displays}}\label{\detokenize{overview/display::doc}}
 \begin{sphinxadmonition}{important}{Important:}
-The basic concept of \sphinxstyleemphasis{display} in LittlevGL is explained in the {[}Porting{]}(/porting/display) section. So before reading further, please read the {[}Porting{]}(/porting/display) section first.
+The basic concept of \sphinxstyleemphasis{display} in LVGL is explained in the {[}Porting{]}(/porting/display) section. So before reading further, please read the {[}Porting{]}(/porting/display) section first.
 \end{sphinxadmonition}
 
-In LittlevGL, you can have multiple displays, each with their own driver and objects.
+In LVGL, you can have multiple displays, each with their own driver and objects.
 
 Creating more displays is easy: just initialize more display buffers and register another driver for every display.
 When you create the UI, use \sphinxcode{\sphinxupquote{lv\_disp\_set\_default(disp)}} to tell the library which display to create objects on.
@@ -6859,7 +6846,7 @@ Screens can be deleted with \sphinxcode{\sphinxupquote{lv\_obj\_del(scr)}}, but 
 \label{\detokenize{overview/display:opaque-screen}}
 Usually, the opacity of the screen is \sphinxcode{\sphinxupquote{LV\_OPA\_COVER}} to provide a solid background for its children.
 
-However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LittlevGL.
+However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LVGL.
 
 To do this, the screen should have a style that sets \sphinxcode{\sphinxupquote{body.opa}} or \sphinxcode{\sphinxupquote{image.opa}} to \sphinxcode{\sphinxupquote{LV\_OPA\_TRANSP}} (or another non-opaque value) to make the screen opaque.
 
@@ -7916,7 +7903,7 @@ In LVGL fonts are collections of bitmaps and other information required to rende
 A font is stored in a \sphinxcode{\sphinxupquote{lv\_font\_t}} variable and can be set in style’s \sphinxstyleemphasis{text\_font} field. For example:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{lv\PYGZus{}style\PYGZus{}set\PYGZus{}text\PYGZus{}font}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{my\PYGZus{}style}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}font\PYGZus{}montserrat\PYGZus{}28}\PYG{p}{)}\PYG{p}{;}  \PYG{c+cm}{/*Set a larger font*/}
+\PYG{n}{lv\PYGZus{}style\PYGZus{}set\PYGZus{}text\PYGZus{}font}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{my\PYGZus{}style}\PYG{p}{,} \PYG{n}{LV\PYGZus{}STATE\PYGZus{}DEFAULT}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{lv\PYGZus{}font\PYGZus{}montserrat\PYGZus{}28}\PYG{p}{)}\PYG{p}{;}  \PYG{c+cm}{/*Set a larger font*/}
 \end{sphinxVerbatim}
 
 The fonts have a \sphinxstylestrong{bpp (bits per pixel)} property. It shows how many bits are used to describe a pixel in the font. The value stored for a pixel determines the pixel’s opacity.
@@ -8250,7 +8237,7 @@ LVGL’s font interface is designed to be very flexible.
 You don’t need to use LVGL’s internal font engine but, you can add your own.
 For example, use \sphinxhref{https://www.freetype.org/}{FreeType} to real-time render glyphs from TTF fonts or use an external flash to store the font’s bitmap and read them when the library needs them.
 
-A raedy to use FreeType can be found in \sphinxhref{https://github.com/littlevgl/lv\_lib\_freetype}{lv\_freetype} repository.
+A raedy to use FreeType can be found in \sphinxhref{https://github.com/lvgl/lv\_lib\_freetype}{lv\_freetype} repository.
 
 To do this a custom \sphinxcode{\sphinxupquote{lv\_font\_t}} variable needs to be created:
 
@@ -8355,7 +8342,7 @@ These are usually stored within a project as C files. They are linked into the r
 
 \subparagraph{Files}
 \label{\detokenize{overview/image:files}}
-To deal with files you need to add a \sphinxstyleemphasis{Drive} to LittlevGL. In short, a \sphinxstyleemphasis{Drive} is a collection of functions (\sphinxstyleemphasis{open}, \sphinxstyleemphasis{read}, \sphinxstyleemphasis{close}, etc.) registered in LittlevGL to make file operations.
+To deal with files you need to add a \sphinxstyleemphasis{Drive} to LVGL. In short, a \sphinxstyleemphasis{Drive} is a collection of functions (\sphinxstyleemphasis{open}, \sphinxstyleemphasis{read}, \sphinxstyleemphasis{close}, etc.) registered in LVGL to make file operations.
 You can add an interface to a standard file system (FAT32 on SD card) or you create your simple file system to read data from an SPI Flash memory.
 In every case, a \sphinxstyleemphasis{Drive} is just an abstraction to read and/or write data to a memory.
 See the {\hyperref[\detokenize{overview/file-system::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{File system}}}} section to learn more.
@@ -8368,7 +8355,7 @@ Images stored as files are not linked into the resulting executable, and must be
 Various built-in color formats are supported:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR} Simply stores the RGB colors (in whatever color depth LittlevGL is configured for).
+\sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR} Simply stores the RGB colors (in whatever color depth LVGL is configured for).
 
 \item {} 
 \sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA} Like \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TRUE\_COLOR}} but it also adds an alpha (transparency) byte for every pixel.
@@ -8441,7 +8428,7 @@ You can store images in a \sphinxstyleemphasis{Raw} format to indicate that, it�
 
 \paragraph{Add and use images}
 \label{\detokenize{overview/image:add-and-use-images}}
-You can add images to LittlevGL in two ways:
+You can add images to LVGL in two ways:
 \begin{itemize}
 \item {} 
 using the online converter
@@ -8454,9 +8441,9 @@ manually create images
 
 \subparagraph{Online converter}
 \label{\detokenize{overview/image:online-converter}}
-The online Image converter is available here: https://littlevgl.com/image-to-c-array
+The online Image converter is available here: https://lvgl.io/tools/imageconverter
 
-Adding an image to LittlevGL via online converter is easy.
+Adding an image to LVGL via online converter is easy.
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
@@ -8465,7 +8452,7 @@ Adding an image to LittlevGL via online converter is easy.
 You need to select a \sphinxstyleemphasis{BMP}, \sphinxstyleemphasis{PNG} or \sphinxstyleemphasis{JPG} image first.
 
 \item {} 
-Give the image a name that will be used within LittlevGL.
+Give the image a name that will be used within LVGL.
 
 \item {} 
 Select the {\hyperref[\detokenize{overview/image:color-formats}]{\emph{Color format}}}.
@@ -8499,7 +8486,7 @@ RGB888 for 32-bit color depth
 
 \subparagraph{Manually create an image}
 \label{\detokenize{overview/image:manually-create-an-image}}
-If you are generating an image at run-time, you can craft an image variable to display it using LittlevGL. For example:
+If you are generating an image at run-time, you can craft an image variable to display it using LVGL. For example:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{my\PYGZus{}img\PYGZus{}data}\PYG{p}{[}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+m+mh}{0x00}\PYG{p}{,} \PYG{l+m+mh}{0x01}\PYG{p}{,} \PYG{l+m+mh}{0x02}\PYG{p}{,} \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}\PYG{p}{\PYGZcb{}}\PYG{p}{;}
@@ -8521,7 +8508,7 @@ Another (possibly simpler) option to create and display an image at run-time is 
 
 \subparagraph{Use images}
 \label{\detokenize{overview/image:use-images}}
-The simplest way to use an image in LittlevGL is to display it with an {\hyperref[\detokenize{widgets/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{lv\_img}}}} object:
+The simplest way to use an image in LVGL is to display it with an {\hyperref[\detokenize{widgets/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{lv\_img}}}} object:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{icon} \PYG{o}{=} \PYG{n}{lv\PYGZus{}img\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
@@ -8538,9 +8525,9 @@ If the image was converted with the online converter, you should use \sphinxcode
 
 \paragraph{Image decoder}
 \label{\detokenize{overview/image:image-decoder}}
-As you can see in the {\hyperref[\detokenize{overview/image:color-formats}]{\emph{Color formats}}} section, LittlevGL supports several built-in image formats. In many cases, these will be all you need. LittlevGL doesn’t directly support, however, generic image formats like PNG or JPG.
+As you can see in the {\hyperref[\detokenize{overview/image:color-formats}]{\emph{Color formats}}} section, LVGL supports several built-in image formats. In many cases, these will be all you need. LVGL doesn’t directly support, however, generic image formats like PNG or JPG.
 
-To handle non-built-in image formats, you need to use external libraries and attach them to LittlevGL via the \sphinxstyleemphasis{Image decoder} interface.
+To handle non-built-in image formats, you need to use external libraries and attach them to LVGL via the \sphinxstyleemphasis{Image decoder} interface.
 
 The image decoder consists of 4 callbacks:
 \begin{itemize}
@@ -8580,7 +8567,7 @@ With \sphinxstyleemphasis{User encoded} formats, the color format in the open fu
 
 \subparagraph{Register an image decoder}
 \label{\detokenize{overview/image:register-an-image-decoder}}
-Here’s an example of getting LittlevGL to work with PNG images.
+Here’s an example of getting LVGL to work with PNG images.
 
 First, you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:
 
@@ -8694,7 +8681,7 @@ To indicate that, the \sphinxstyleemphasis{line read} function should be used, s
 
 \subparagraph{Manually use an image decoder}
 \label{\detokenize{overview/image:manually-use-an-image-decoder}}
-LittlevGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the \sphinxcode{\sphinxupquote{lv\_img}} object) but you can use them manually too. Create a \sphinxcode{\sphinxupquote{lv\_img\_decoder\_dsc\_t}} variable to describe the decoding session and call \sphinxcode{\sphinxupquote{lv\_img\_decoder\_open()}}, \sphinxcode{\sphinxupquote{lv\_img\_decoder\_open()}}.
+LVGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the \sphinxcode{\sphinxupquote{lv\_img}} object) but you can use them manually too. Create a \sphinxcode{\sphinxupquote{lv\_img\_decoder\_dsc\_t}} variable to describe the decoding session and call \sphinxcode{\sphinxupquote{lv\_img\_decoder\_open()}}, \sphinxcode{\sphinxupquote{lv\_img\_decoder\_open()}}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 
@@ -8714,9 +8701,9 @@ LittlevGL will use the registered image decoder automatically if you try and dra
 Sometimes it takes a lot of time to open an image.
 Continuously decoding a PNG image or loading images from a slow external memory would be inefficient and detrimental to the user experience.
 
-Therefore, LittlevGL caches a given number of images. Caching means some images will be left open, hence LittlevGL can quickly access them from \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data}} instead of needing to decode them again.
+Therefore, LVGL caches a given number of images. Caching means some images will be left open, hence LVGL can quickly access them from \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data}} instead of needing to decode them again.
 
-Of course, caching images is resource-intensive as it uses more RAM (to store the decoded image). LittlevGL tries to optimize the process as much as possible (see below), but you will still need to evaluate if this would be beneficial for your platform or not. If you have a deeply embedded target which decodes small images from a relatively fast storage medium, image caching may not be worth it.
+Of course, caching images is resource-intensive as it uses more RAM (to store the decoded image). LVGL tries to optimize the process as much as possible (see below), but you will still need to evaluate if this would be beneficial for your platform or not. If you have a deeply embedded target which decodes small images from a relatively fast storage medium, image caching may not be worth it.
 
 
 \subparagraph{Cache size}
@@ -8728,11 +8715,11 @@ The size of the cache can be changed at run-time with \sphinxcode{\sphinxupquote
 
 \subparagraph{Value of images}
 \label{\detokenize{overview/image:value-of-images}}
-When you use more images than cache entries, LittlevGL can’t cache all of the images. Instead, the library will close one of the cached images (to free space).
+When you use more images than cache entries, LVGL can’t cache all of the images. Instead, the library will close one of the cached images (to free space).
 
-To decide which image to close, LittlevGL uses a measurement it previously made of how long it took to open the image. Cache entries that hold slower-to-open images are considered more valuable and are kept in the cache as long as possible.
+To decide which image to close, LVGL uses a measurement it previously made of how long it took to open the image. Cache entries that hold slower-to-open images are considered more valuable and are kept in the cache as long as possible.
 
-If you want or need to override LittlevGL’s measurement, you can manually set the \sphinxstyleemphasis{time to open} value in the decoder open function in \sphinxcode{\sphinxupquote{dsc-\textgreater{}time\_to\_open = time\_ms}} to give a higher or lower value. (Leave it unchanged to let LittlevGL set it.)
+If you want or need to override LVGL’s measurement, you can manually set the \sphinxstyleemphasis{time to open} value in the decoder open function in \sphinxcode{\sphinxupquote{dsc-\textgreater{}time\_to\_open = time\_ms}} to give a higher or lower value. (Leave it unchanged to let LVGL set it.)
 
 Every cache entry has a \sphinxstyleemphasis{“life”} value. Every time an image opening happens through the cache, the \sphinxstyleemphasis{life} of all entries are decreased to make them older.
 When a cached image is used, its \sphinxstyleemphasis{life} is increased by the \sphinxstyleemphasis{time to open} value to make it more alive.
@@ -8749,7 +8736,7 @@ Therefore, it’s the user’s responsibility to be sure there is enough RAM to 
 
 \subparagraph{Clean the cache}
 \label{\detokenize{overview/image:clean-the-cache}}
-Let’s say you have loaded a PNG image into a \sphinxcode{\sphinxupquote{lv\_img\_dsc\_t my\_png}} variable and use it in an \sphinxcode{\sphinxupquote{lv\_img}} object. If the image is already cached and you then change the underlying PNG file, you need to notify LittlevGL to cache the image again. Otherwise, there is no easy way of detecting that the underlying file changed and LittlevGL will still draw the old image.
+Let’s say you have loaded a PNG image into a \sphinxcode{\sphinxupquote{lv\_img\_dsc\_t my\_png}} variable and use it in an \sphinxcode{\sphinxupquote{lv\_img}} object. If the image is already cached and you then change the underlying PNG file, you need to notify LVGL to cache the image again. Otherwise, there is no easy way of detecting that the underlying file changed and LVGL will still draw the old image.
 
 To do this, use \sphinxcode{\sphinxupquote{lv\_img\_cache\_invalidate\_src(\&my\_png)}}. If \sphinxcode{\sphinxupquote{NULL}} is passed as a parameter, the whole cache will be cleaned.
 
@@ -9576,7 +9563,7 @@ Count the cache entries’s life. Add \sphinxcode{\sphinxupquote{time\_tio\_open
 
 \subsubsection{File system}
 \label{\detokenize{overview/file-system:file-system}}\label{\detokenize{overview/file-system::doc}}
-LittlevGL has a ‘File system’ abstraction module that enables you to attach any type of file systems.
+LVGL has a ‘File system’ abstraction module that enables you to attach any type of file systems.
 The file system is identified by a drive letter.
 For example, if the SD card is associated with the letter \sphinxcode{\sphinxupquote{'S'}}, a file can be reached like \sphinxcode{\sphinxupquote{"S:path/to/file.txt"}}.
 
@@ -9601,13 +9588,13 @@ To add a driver, \sphinxcode{\sphinxupquote{lv\_fs\_drv\_t}} needs to be initial
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{tell\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}tell\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/*Callback to tell the cursor position  */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{trunc\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}trunc\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to delete a file */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{size\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/*Callback to tell a file\PYGZsq{}s size */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{rename\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to rename a file */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{rename\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}rename\PYGZus{}cb}\PYG{p}{;}             \PYG{c+cm}{/*Callback to rename a file */}
 
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}open\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}open\PYGZus{}cb}\PYG{p}{;}         \PYG{c+cm}{/*Callback to open directory to read its content */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}read\PYGZus{}cb}\PYG{p}{;}         \PYG{c+cm}{/*Callback to read a directory\PYGZsq{}s content */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}close\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}close\PYGZus{}cb}\PYG{p}{;}       \PYG{c+cm}{/*Callback to close a directory */}
 
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{free\PYGZus{}space\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}           \PYG{c+cm}{/*Callback to tell free space on the drive */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{free\PYGZus{}space\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}free\PYGZus{}space\PYGZus{}cb}\PYG{p}{;}     \PYG{c+cm}{/*Callback to tell free space on the drive */}
 
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{user\PYGZus{}data} \PYG{o}{=} \PYG{n}{my\PYGZus{}user\PYGZus{}data}\PYG{p}{;}             \PYG{c+cm}{/*Any custom data if required*/}
 
@@ -9616,7 +9603,7 @@ To add a driver, \sphinxcode{\sphinxupquote{lv\_fs\_drv\_t}} needs to be initial
 
 Any of the callbacks can be \sphinxcode{\sphinxupquote{NULL}} to indicate that that operation is not supported.
 
-As an example of how the callbacks are used, if you use \sphinxcode{\sphinxupquote{lv\_fs\_open(\&file, "S:/folder/file.txt", LV\_FS\_MODE\_WR)}}, LittlevGL:
+As an example of how the callbacks are used, if you use \sphinxcode{\sphinxupquote{lv\_fs\_open(\&file, "S:/folder/file.txt", LV\_FS\_MODE\_WR)}}, LVGL:
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
@@ -9975,7 +9962,7 @@ pointer to a driver or NULL if not found
 \pysigstartmultiline
 \phantomsection\label{\detokenize{overview/file-system:lv__fs_8h_1a4afefd5dbe151665fa2a24ad0a1eeff8}}\pysiglinewithargsret{bool \sphinxbfcode{\sphinxupquote{lv\_fs\_is\_ready}}}{char \sphinxstyleemphasis{letter}}{}%
 \pysigstopmultiline
-Test if a drive is rady or not. If the \sphinxcode{\sphinxupquote{ready}} function was not initialized \sphinxcode{\sphinxupquote{true}} will be returned. \begin{description}
+Test if a drive is ready or not. If the \sphinxcode{\sphinxupquote{ready}} function was not initialized \sphinxcode{\sphinxupquote{true}} will be returned. \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
 true: drive is ready; false: drive is not ready 
 
@@ -10958,7 +10945,7 @@ Init. the animation module
 \pysigstartmultiline
 \phantomsection\label{\detokenize{overview/animation:lv__anim_8h_1ab47f0c3139bbd759c1ccae268fc297e6}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_anim\_init}}}{{\hyperref[\detokenize{overview/animation:_CPPv49lv_anim_t}]{\sphinxcrossref{lv\_anim\_t}}} *\sphinxstyleemphasis{a}}{}%
 \pysigstopmultiline
-Initialize an animation variable. E.g.: lv\_anim\_t a; lv\_anim\_init(\&a); lv\_anim\_set\_…(\&a); lv\_anim\_create(\&a); \begin{description}
+Initialize an animation variable. E.g.: lv\_anim\_t a; lv\_anim\_init(\&a); lv\_anim\_set\_…(\&a); \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxcode{\sphinxupquote{a}}: pointer to an \sphinxcode{\sphinxupquote{lv\_anim\_t}} variable to initialize 
@@ -11897,10 +11884,10 @@ Indicates the animation has run in this round
 
 \subsubsection{Tasks}
 \label{\detokenize{overview/task:tasks}}\label{\detokenize{overview/task::doc}}
-LittlevGL has a built-in task system. You can register a function to have it be called periodically. The tasks are handled and called in \sphinxcode{\sphinxupquote{lv\_task\_handler()}}, which needs to be called periodically every few milliseconds.
+LVGL has a built-in task system. You can register a function to have it be called periodically. The tasks are handled and called in \sphinxcode{\sphinxupquote{lv\_task\_handler()}}, which needs to be called periodically every few milliseconds.
 See {\hyperref[\detokenize{porting/task-handler::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Porting}}}} for more information.
 
-The tasks are non-preemptive, which means a task cannot interrupt another task. Therefore, you can call any LittlevGL related function in a task.
+The tasks are non-preemptive, which means a task cannot interrupt another task. Therefore, you can call any LVGL related function in a task.
 
 
 \paragraph{Create a task}
@@ -11919,7 +11906,7 @@ For example:
   \PYG{k+kt}{uint32\PYGZus{}t} \PYG{o}{*} \PYG{n}{user\PYGZus{}data} \PYG{o}{=} \PYG{n}{task}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{user\PYGZus{}data}\PYG{p}{;}
   \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{my\PYGZus{}task called with user data: \PYGZpc{}d}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{o}{*}\PYG{n}{user\PYGZus{}data}\PYG{p}{)}\PYG{p}{;}
 
-  \PYG{c+cm}{/*Do something with LittlevGL*/}
+  \PYG{c+cm}{/*Do something with LVGL*/}
   \PYG{k}{if}\PYG{p}{(}\PYG{n}{something\PYGZus{}happened}\PYG{p}{)} \PYG{p}{\PYGZob{}}
     \PYG{n}{something\PYGZus{}happened} \PYG{o}{=} \PYG{n+nb}{false}\PYG{p}{;}
     \PYG{n}{lv\PYGZus{}btn\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
@@ -12126,9 +12113,9 @@ Init the lv\_task module
 \pysigstartmultiline
 \phantomsection\label{\detokenize{overview/task:lv__task_8h_1aab6da624f550834c19eec3ef341d7014}}\pysiglinewithargsret{{\hyperref[\detokenize{overview/task:_CPPv49lv_task_t}]{\sphinxcrossref{lv\_task\_t}}} *\sphinxbfcode{\sphinxupquote{lv\_task\_create\_basic}}}{void}{}%
 \pysigstopmultiline
-Create an “empty” task. It needs to initialzed with at least \sphinxcode{\sphinxupquote{lv\_task\_set\_cb}} and \sphinxcode{\sphinxupquote{lv\_task\_set\_period}} \begin{description}
+Create an “empty” task. It needs to initialized with at least \sphinxcode{\sphinxupquote{lv\_task\_set\_cb}} and \sphinxcode{\sphinxupquote{lv\_task\_set\_period}} \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
-pointer to the craeted task 
+pointer to the created task 
 
 \end{description}
 
@@ -13506,7 +13493,7 @@ Called in every cases when the object has been released
 \pysigstartmultiline
 \pysigline{\phantomsection\label{\detokenize{widgets/obj:lv__obj_8h_1adc29c2ff13d900c2f185ee95427fb06ca0d85cf2703b9372c524d5c31d4904748}}\sphinxbfcode{\sphinxupquote{LV\_EVENT\_GESTURE}}}%
 \pysigstopmultiline
-The object has been getture 
+The object has been gesture 
 
 \end{fulllineitems}
 
@@ -14523,7 +14510,7 @@ Set the height reduced by the top and bottom padding. \begin{description}
 \pysigstartmultiline
 \phantomsection\label{\detokenize{widgets/obj:lv__obj_8h_1a0e6dfd44bfe3d9719a7b78f59ca3d271}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_obj\_set\_width\_margin}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{obj}, lv\_coord\_t \sphinxstyleemphasis{w}}{}%
 \pysigstopmultiline
-Set the width of an object by taking the left and right margin into account. The object width will be \sphinxcode{\sphinxupquote{obj\_w = w - margon\_left - margin\_right}} \begin{description}
+Set the width of an object by taking the left and right margin into account. The object width will be \sphinxcode{\sphinxupquote{obj\_w = w - margin\_left - margin\_right}} \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxcode{\sphinxupquote{obj}}: pointer to an object 
@@ -14545,7 +14532,7 @@ Set the width of an object by taking the left and right margin into account. The
 \pysigstartmultiline
 \phantomsection\label{\detokenize{widgets/obj:lv__obj_8h_1a4a97585db792c2308eb1441153104053}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_obj\_set\_height\_margin}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{obj}, lv\_coord\_t \sphinxstyleemphasis{h}}{}%
 \pysigstopmultiline
-Set the height of an object by taking the top and bottom margin into account. The object height will be \sphinxcode{\sphinxupquote{obj\_h = h - margon\_top - margin\_bottom}} \begin{description}
+Set the height of an object by taking the top and bottom margin into account. The object height will be \sphinxcode{\sphinxupquote{obj\_h = h - margin\_top - margin\_bottom}} \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxcode{\sphinxupquote{obj}}: pointer to an object 
@@ -14977,7 +14964,7 @@ Remove a local style property from a part of an object with a given state. \begi
 shouldn’t be used directly. Use the specific property remove functions instead. For example: \sphinxcode{\sphinxupquote{lv\_obj\_style\_remove\_border\_opa()}} 
 
 \item[{\sphinxstylestrong{Return}}] \leavevmode
-true: the property was found and removed; false: teh property was not found 
+true: the property was found and removed; false: the property was not found 
 
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
@@ -15097,7 +15084,7 @@ Enable the dragging of an object \begin{description}
 \sphinxcode{\sphinxupquote{obj}}: pointer to an object 
 
 \item {} 
-\sphinxcode{\sphinxupquote{en}}: true: make the object dragable 
+\sphinxcode{\sphinxupquote{en}}: true: make the object draggable 
 
 \end{itemize}
 
@@ -15613,12 +15600,6 @@ Get the display of an object \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
 pointer the object’s display 
 
-\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
-\item {} 
-\sphinxcode{\sphinxupquote{scr}}: pointer to an object 
-
-\end{itemize}
-
 \end{description}
 
 
@@ -15920,7 +15901,7 @@ the height which still fits into the container
 \pysigstartmultiline
 \phantomsection\label{\detokenize{widgets/obj:lv__obj_8h_1a334827e5f3121d9ca0a297d0c23ac530}}\pysiglinewithargsret{lv\_coord\_t \sphinxbfcode{\sphinxupquote{lv\_obj\_get\_height\_margin}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{obj}}{}%
 \pysigstopmultiline
-Get the height of an object by taking the top and bottom margin into account. The returned height will be \sphinxcode{\sphinxupquote{obj\_h + margon\_top + margin\_bottom}} \begin{description}
+Get the height of an object by taking the top and bottom margin into account. The returned height will be \sphinxcode{\sphinxupquote{obj\_h + margin\_top + margin\_bottom}} \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
 the height including thee margins 
 
@@ -15942,7 +15923,7 @@ the height including thee margins
 \pysigstartmultiline
 \phantomsection\label{\detokenize{widgets/obj:lv__obj_8h_1a1bc413fc6897c195f8a2e9529b709005}}\pysiglinewithargsret{lv\_coord\_t \sphinxbfcode{\sphinxupquote{lv\_obj\_get\_width\_margin}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{obj}}{}%
 \pysigstopmultiline
-Get the width of an object by taking the left and right margin into account. The returned width will be \sphinxcode{\sphinxupquote{obj\_w + margon\_left + margin\_right}} \begin{description}
+Get the width of an object by taking the left and right margin into account. The returned width will be \sphinxcode{\sphinxupquote{obj\_w + margin\_left + margin\_right}} \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
 the height including thee margins 
 
@@ -16152,7 +16133,7 @@ the extended size attribute
 \pysigstartmultiline
 \phantomsection\label{\detokenize{widgets/obj:lv__obj_8h_1a98901100346cf00f1d71409703c69da5}}\pysiglinewithargsret{lv\_style\_list\_t *\sphinxbfcode{\sphinxupquote{lv\_obj\_get\_style\_list}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{obj}, uint8\_t \sphinxstyleemphasis{part}}{}%
 \pysigstopmultiline
-Get the style list of an obejct’s part. \begin{description}
+Get the style list of an object’s part. \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
 pointer to the style list. (Can be \sphinxcode{\sphinxupquote{NULL}}) 
 
@@ -16428,7 +16409,7 @@ true: the auto top feature is enabled
 \pysigstopmultiline
 Get the drag enable attribute of an object \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
-true: the object is dragable 
+true: the object is draggable 
 
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
@@ -16975,7 +16956,7 @@ Only the relevant fields will be set. E.g. if \sphinxcode{\sphinxupquote{border 
 Get the required extra size (around the object’s part) to draw shadow, outline, value etc. \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{obj}}: poinr to an object 
+\sphinxcode{\sphinxupquote{obj}}: pointer to an object 
 
 \item {} 
 \sphinxcode{\sphinxupquote{part}}: part of the object 
@@ -17029,6 +17010,56 @@ Fade out (from fully cover to transparent) an object and all its children using 
 
 \item {} 
 \sphinxcode{\sphinxupquote{delay}}: wait before the animation starts {[}ms{]} 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_debug\_check\_obj\_type (C++ function)@\spxentry{lv\_debug\_check\_obj\_type}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{widgets/obj:_CPPv423lv_debug_check_obj_typePK8lv_obj_tPKc}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{widgets/obj:lv__obj_8h_1ac689a68d524d31df5a7444c179a5ee67}}\pysiglinewithargsret{bool \sphinxbfcode{\sphinxupquote{lv\_debug\_check\_obj\_type}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{obj}, \sphinxbfcode{\sphinxupquote{const}} char *\sphinxstyleemphasis{obj\_type}}{}%
+\pysigstopmultiline
+Check if any object has a given type \begin{description}
+\item[{\sphinxstylestrong{Return}}] \leavevmode
+true: valid 
+
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{obj}}: pointer to an object 
+
+\item {} 
+\sphinxcode{\sphinxupquote{obj\_type}}: type of the object. (e.g. “lv\_btn”) 
+
+\end{itemize}
+
+\end{description}
+
+
+\end{fulllineitems}
+
+\index{lv\_debug\_check\_obj\_valid (C++ function)@\spxentry{lv\_debug\_check\_obj\_valid}\spxextra{C++ function}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{widgets/obj:_CPPv424lv_debug_check_obj_validPK8lv_obj_t}}%
+\pysigstartmultiline
+\phantomsection\label{\detokenize{widgets/obj:lv__obj_8h_1ac0a7ddbd150752e76ac6c97f004774ee}}\pysiglinewithargsret{bool \sphinxbfcode{\sphinxupquote{lv\_debug\_check\_obj\_valid}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{obj}}{}%
+\pysigstopmultiline
+Check if any object is still “alive”, and part of the hierarchy \begin{description}
+\item[{\sphinxstylestrong{Return}}] \leavevmode
+true: valid 
+
+\item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxcode{\sphinxupquote{obj}}: pointer to an object 
+
+\item {} 
+\sphinxcode{\sphinxupquote{obj\_type}}: type of the object. (e.g. “lv\_btn”) 
 
 \end{itemize}
 
@@ -17236,7 +17267,7 @@ Extra click padding area.
 \pysigstartmultiline
 \pysigline{\phantomsection\label{\detokenize{widgets/obj:struct__lv__obj__t_1add6c3fbc963d6a3175ebf92ff6b760f8}}lv\_coord\_t \sphinxbfcode{\sphinxupquote{ext\_draw\_pad}}}%
 \pysigstopmultiline
-EXTtend the size in every direction for drawing. 
+EXTend the size in every direction for drawing. 
 
 \end{fulllineitems}
 
@@ -18309,7 +18340,7 @@ Set a new start value on the bar \begin{description}
 \sphinxcode{\sphinxupquote{value}}: new start value 
 
 \item {} 
-\sphinxcode{\sphinxupquote{anim}}: LV\_ANIM\_ON: set the value with an animation; LV\_ANIM\_OFF: change the value immediatelly 
+\sphinxcode{\sphinxupquote{anim}}: LV\_ANIM\_ON: set the value with an animation; LV\_ANIM\_OFF: change the value immediately 
 
 \end{itemize}
 
@@ -22772,13 +22803,13 @@ pointer to the allocated data series
 \pysigstartmultiline
 \phantomsection\label{\detokenize{widgets/chart:lv__chart_8h_1a44e2b5d195e23be824f636bcf350e85b}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_chart\_clear\_serie}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{chart}, {\hyperref[\detokenize{widgets/chart:_CPPv417lv_chart_series_t}]{\sphinxcrossref{lv\_chart\_series\_t}}} *\sphinxstyleemphasis{serie}}{}%
 \pysigstopmultiline
-Clear the point of a serie \begin{description}
+Clear the point of a series \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxcode{\sphinxupquote{chart}}: pointer to a chart object 
 
 \item {} 
-\sphinxcode{\sphinxupquote{serie}}: pointer to the chart’s serie to clear 
+\sphinxcode{\sphinxupquote{serie}}: pointer to the chart’s series to clear 
 
 \end{itemize}
 
@@ -25426,9 +25457,9 @@ Set the options in a drop down list from a string \begin{description}
 \index{lv\_dropdown\_add\_option (C++ function)@\spxentry{lv\_dropdown\_add\_option}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/dropdown:_CPPv422lv_dropdown_add_optionP8lv_obj_tPKc8uint16_t}}%
+\phantomsection\label{\detokenize{widgets/dropdown:_CPPv422lv_dropdown_add_optionP8lv_obj_tPKc8uint32_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/dropdown:lv__dropdown_8h_1ad838f9af844d9374a5395ca2f0f44425}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_dropdown\_add\_option}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ddlist}, \sphinxbfcode{\sphinxupquote{const}} char *\sphinxstyleemphasis{option}, uint16\_t \sphinxstyleemphasis{pos}}{}%
+\phantomsection\label{\detokenize{widgets/dropdown:lv__dropdown_8h_1aef5c56d63a0c14fbc474505bcc125d67}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_dropdown\_add\_option}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ddlist}, \sphinxbfcode{\sphinxupquote{const}} char *\sphinxstyleemphasis{option}, uint32\_t \sphinxstyleemphasis{pos}}{}%
 \pysigstopmultiline
 Add an options to a drop down list from a string. Only works for dynamic options. \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
@@ -25653,9 +25684,9 @@ the total number of options in the list
 \index{lv\_dropdown\_get\_selected\_str (C++ function)@\spxentry{lv\_dropdown\_get\_selected\_str}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/dropdown:_CPPv428lv_dropdown_get_selected_strPK8lv_obj_tPc8uint16_t}}%
+\phantomsection\label{\detokenize{widgets/dropdown:_CPPv428lv_dropdown_get_selected_strPK8lv_obj_tPc8uint32_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/dropdown:lv__dropdown_8h_1abad275dec45b4a77cffd2b4ff522e023}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_dropdown\_get\_selected\_str}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ddlist}, char *\sphinxstyleemphasis{buf}, uint16\_t \sphinxstyleemphasis{buf\_size}}{}%
+\phantomsection\label{\detokenize{widgets/dropdown:lv__dropdown_8h_1a3f18020a4354dfcc64526a129995b666}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_dropdown\_get\_selected\_str}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ddlist}, char *\sphinxstyleemphasis{buf}, uint32\_t \sphinxstyleemphasis{buf\_size}}{}%
 \pysigstopmultiline
 Get the current selected option as a string \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
@@ -26766,11 +26797,11 @@ a text with {\hyperref[\detokenize{overview/font::doc}]{\sphinxcrossref{\DUrole{
 
 To set the source of an image, use \sphinxcode{\sphinxupquote{lv\_img\_set\_src(img, src)}}.
 
-To generate a \sphinxstylestrong{pixel array} from a PNG, JPG or BMP image, use the \sphinxhref{https://littlevgl.com/image-to-c-array}{Online image converter tool} and set the converted image with its pointer: \sphinxcode{\sphinxupquote{lv\_img\_set\_src(img1, \&converted\_img\_var);}}
+To generate a \sphinxstylestrong{pixel array} from a PNG, JPG or BMP image, use the \sphinxhref{https://lvgl.io/tools/imageconverter}{Online image converter tool} and set the converted image with its pointer: \sphinxcode{\sphinxupquote{lv\_img\_set\_src(img1, \&converted\_img\_var);}}
 To make the variable visible in the C file, you need to declare it with \sphinxcode{\sphinxupquote{LV\_IMG\_DECLARE(converted\_img\_var)}}.
 
 To use \sphinxstylestrong{external files}, you also need to convert the image files using the online converter tool but now you should select the binary Output format.
-You also need to use LittlevGL’s file system module and register a driver with some functions for the basic file operation. Got to the {\hyperref[\detokenize{overview/file-system::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{File system}}}} to learn more.
+You also need to use LVGL’s file system module and register a driver with some functions for the basic file operation. Got to the {\hyperref[\detokenize{overview/file-system::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{File system}}}} to learn more.
 To set an image sourced from a file, use \sphinxcode{\sphinxupquote{lv\_img\_set\_src(img, "S:folder1/my\_img.bin")}}.
 
 You can set a \sphinxstylestrong{symbol} similarly to {\hyperref[\detokenize{widgets/label::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Labels}}}}. In this case, the image will be rendered as text according to the \sphinxstyleemphasis{font} specified in the style.  It enables to use of light-weighted mono-color
@@ -27973,7 +28004,7 @@ the state of the button (from lv\_btn\_state\_t enum)
 \pysigstopmultiline
 Get the toggle enable attribute of the image button \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
-ture: toggle enabled, false: disabled 
+true: toggle enabled, false: disabled 
 
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
@@ -29288,9 +29319,9 @@ Set the label’s animation speed in LV\_LABEL\_LONG\_SROLL/SCROLL\_CIRC modes \
 \index{lv\_label\_set\_text\_sel\_start (C++ function)@\spxentry{lv\_label\_set\_text\_sel\_start}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/label:_CPPv427lv_label_set_text_sel_startP8lv_obj_t8uint16_t}}%
+\phantomsection\label{\detokenize{widgets/label:_CPPv427lv_label_set_text_sel_startP8lv_obj_t8uint32_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1a95f40d8ac6f2cedac8d646311c5acf59}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_label\_set\_text\_sel\_start}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}, uint16\_t \sphinxstyleemphasis{index}}{}%
+\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1a09985f5b36bb4eb02c852c1ceb6e2a53}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_label\_set\_text\_sel\_start}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}, uint32\_t \sphinxstyleemphasis{index}}{}%
 \pysigstopmultiline
 Set the selection start index. 
 
@@ -29312,9 +29343,9 @@ Set the selection start index.
 \index{lv\_label\_set\_text\_sel\_end (C++ function)@\spxentry{lv\_label\_set\_text\_sel\_end}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/label:_CPPv425lv_label_set_text_sel_endP8lv_obj_t8uint16_t}}%
+\phantomsection\label{\detokenize{widgets/label:_CPPv425lv_label_set_text_sel_endP8lv_obj_t8uint32_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1ab123d5bfda38ab4c5607a7179fe963b5}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_label\_set\_text\_sel\_end}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}, uint16\_t \sphinxstyleemphasis{index}}{}%
+\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1a9f707a94d78b7eb12834e00f721ffb8d}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_label\_set\_text\_sel\_end}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}, uint32\_t \sphinxstyleemphasis{index}}{}%
 \pysigstopmultiline
 Set the selection end index. 
 
@@ -29446,9 +29477,9 @@ speed of animation in px/sec unit
 \index{lv\_label\_get\_letter\_pos (C++ function)@\spxentry{lv\_label\_get\_letter\_pos}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/label:_CPPv423lv_label_get_letter_posPK8lv_obj_t8uint16_tP10lv_point_t}}%
+\phantomsection\label{\detokenize{widgets/label:_CPPv423lv_label_get_letter_posPK8lv_obj_t8uint32_tP10lv_point_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1a0b63169e29524ccca7354cd7fb9abad7}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_label\_get\_letter\_pos}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}, uint16\_t \sphinxstyleemphasis{index}, lv\_point\_t *\sphinxstyleemphasis{pos}}{}%
+\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1a5adfa70e80124ea17593934485ae1dc4}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_label\_get\_letter\_pos}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}, uint32\_t \sphinxstyleemphasis{index}, lv\_point\_t *\sphinxstyleemphasis{pos}}{}%
 \pysigstopmultiline
 Get the relative x and y coordinates of a letter \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
@@ -29473,7 +29504,7 @@ Get the relative x and y coordinates of a letter \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/label:_CPPv422lv_label_get_letter_onPK8lv_obj_tP10lv_point_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1a3f9b31ecb0d1c1fec835bb9f2d6c6f5e}}\pysiglinewithargsret{uint16\_t \sphinxbfcode{\sphinxupquote{lv\_label\_get\_letter\_on}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}, lv\_point\_t *\sphinxstyleemphasis{pos}}{}%
+\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1afde15f5fce01b9091e4212416b8347eb}}\pysiglinewithargsret{uint32\_t \sphinxbfcode{\sphinxupquote{lv\_label\_get\_letter\_on}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}, lv\_point\_t *\sphinxstyleemphasis{pos}}{}%
 \pysigstopmultiline
 Get the index of letter on a relative point of a label \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
@@ -29509,7 +29540,7 @@ whether a character is drawn under the point
 \sphinxcode{\sphinxupquote{label}}: Label object 
 
 \item {} 
-\sphinxcode{\sphinxupquote{pos}}: Point to check for characte under 
+\sphinxcode{\sphinxupquote{pos}}: Point to check for character under 
 
 \end{itemize}
 
@@ -29523,7 +29554,7 @@ whether a character is drawn under the point
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/label:_CPPv427lv_label_get_text_sel_startPK8lv_obj_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1aa7e4bbdcc5c129d459f10b7dd931437e}}\pysiglinewithargsret{uint16\_t \sphinxbfcode{\sphinxupquote{lv\_label\_get\_text\_sel\_start}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}}{}%
+\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1a0c9a32fff208553977e5923b43c10f85}}\pysiglinewithargsret{uint32\_t \sphinxbfcode{\sphinxupquote{lv\_label\_get\_text\_sel\_start}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}}{}%
 \pysigstopmultiline
 Get the selection start index. 
 
@@ -29547,7 +29578,7 @@ selection start index. \sphinxcode{\sphinxupquote{LV\_LABEL\_TXT\_SEL\_OFF}} if 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/label:_CPPv425lv_label_get_text_sel_endPK8lv_obj_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1a6d55557a89a75e4dc7c17e85040e583c}}\pysiglinewithargsret{uint16\_t \sphinxbfcode{\sphinxupquote{lv\_label\_get\_text\_sel\_end}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}}{}%
+\phantomsection\label{\detokenize{widgets/label:lv__label_8h_1a13e64149f3609392034c515fccfcc635}}\pysiglinewithargsret{uint32\_t \sphinxbfcode{\sphinxupquote{lv\_label\_get\_text\_sel\_end}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{label}}{}%
 \pysigstopmultiline
 Get the selection end index. 
 
@@ -29675,7 +29706,7 @@ Data of label
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/label:_CPPv4N14lv_label_ext_t7dot_endE}}%
 \pysigstartmultiline
-\pysigline{\phantomsection\label{\detokenize{widgets/label:structlv__label__ext__t_1a39bab5335e324868d44993fdc7c6c4b1}}uint16\_t \sphinxbfcode{\sphinxupquote{dot\_end}}}%
+\pysigline{\phantomsection\label{\detokenize{widgets/label:structlv__label__ext__t_1a6b44d642bddf637205bcd1ca662d364c}}uint32\_t \sphinxbfcode{\sphinxupquote{dot\_end}}}%
 \pysigstopmultiline
 \end{fulllineitems}
 
@@ -29711,7 +29742,7 @@ Data of label
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/label:_CPPv4N14lv_label_ext_t9sel_startE}}%
 \pysigstartmultiline
-\pysigline{\phantomsection\label{\detokenize{widgets/label:structlv__label__ext__t_1a1bd3e74d9f40b27f3b0477a3e2489545}}uint16\_t \sphinxbfcode{\sphinxupquote{sel\_start}}}%
+\pysigline{\phantomsection\label{\detokenize{widgets/label:structlv__label__ext__t_1aade8ed23bc1bc3a8e9de5133d740a706}}uint32\_t \sphinxbfcode{\sphinxupquote{sel\_start}}}%
 \pysigstopmultiline
 \end{fulllineitems}
 
@@ -29720,7 +29751,7 @@ Data of label
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/label:_CPPv4N14lv_label_ext_t7sel_endE}}%
 \pysigstartmultiline
-\pysigline{\phantomsection\label{\detokenize{widgets/label:structlv__label__ext__t_1a7d6be163d3a1f73d0adc81bbdc35f744}}uint16\_t \sphinxbfcode{\sphinxupquote{sel\_end}}}%
+\pysigline{\phantomsection\label{\detokenize{widgets/label:structlv__label__ext__t_1ae3392e02d94803284b1d98d3ccb75c16}}uint32\_t \sphinxbfcode{\sphinxupquote{sel\_end}}}%
 \pysigstopmultiline
 \end{fulllineitems}
 
@@ -32189,7 +32220,7 @@ Stop the auto. closing of message box \begin{description}
 Set whether recoloring is enabled. Must be called after \sphinxcode{\sphinxupquote{lv\_msgbox\_add\_btns}}. \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{btnm}}: pointer to button matrix object 
+\sphinxcode{\sphinxupquote{mbox}}: pointer to message box object 
 
 \item {} 
 \sphinxcode{\sphinxupquote{en}}: whether recoloring is enabled 
@@ -32236,7 +32267,7 @@ index of the last released button (LV\_BTNMATRIX\_BTN\_NONE: if unset)
 
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{btnm}}: pointer to button matrix object 
+\sphinxcode{\sphinxupquote{mbox}}: pointer to message box object 
 
 \end{itemize}
 
@@ -32258,7 +32289,7 @@ text of the last released button (NULL: if unset)
 
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{btnm}}: pointer to button matrix object 
+\sphinxcode{\sphinxupquote{mbox}}: pointer to message box object 
 
 \end{itemize}
 
@@ -33126,10 +33157,10 @@ Initialize a line mask from a point and an angle. \begin{description}
 \sphinxcode{\sphinxupquote{param}}: pointer to a \sphinxcode{\sphinxupquote{lv\_draw\_mask\_param\_t}} to initialize 
 
 \item {} 
-\sphinxcode{\sphinxupquote{px}}: X coordiante of a point of the line 
+\sphinxcode{\sphinxupquote{px}}: X coordinate of a point of the line 
 
 \item {} 
-\sphinxcode{\sphinxupquote{py}}: X coordiante of a point of the line 
+\sphinxcode{\sphinxupquote{py}}: X coordinate of a point of the line 
 
 \item {} 
 \sphinxcode{\sphinxupquote{angle}}: right 0 deg, bottom: 90 
@@ -33194,7 +33225,7 @@ Initialize a fade mask. \begin{description}
 \sphinxcode{\sphinxupquote{radius}}: radius of the rectangle 
 
 \item {} 
-\sphinxcode{\sphinxupquote{inv}}: true: keep the pixels inside teh rectangle; keep teh pixels outside of the rectangle 
+\sphinxcode{\sphinxupquote{inv}}: true: keep the pixels inside the rectangle; keep the pixels outside of the rectangle 
 
 \end{itemize}
 
@@ -34175,12 +34206,12 @@ Delete all children of the scrl object, without deleting scrl child. \begin{desc
 
 \end{fulllineitems}
 
-\index{lv\_page\_get\_scrllable (C++ function)@\spxentry{lv\_page\_get\_scrllable}\spxextra{C++ function}}
+\index{lv\_page\_get\_scrollable (C++ function)@\spxentry{lv\_page\_get\_scrollable}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/page:_CPPv421lv_page_get_scrllablePK8lv_obj_t}}%
+\phantomsection\label{\detokenize{widgets/page:_CPPv422lv_page_get_scrollablePK8lv_obj_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/page:lv__page_8h_1a01e43f8aab474ac41c373f4c19c31cef}}\pysiglinewithargsret{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxbfcode{\sphinxupquote{lv\_page\_get\_scrllable}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{page}}{}%
+\phantomsection\label{\detokenize{widgets/page:lv__page_8h_1abc2ee26a2e09dab22c21229aad9bc2d5}}\pysiglinewithargsret{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxbfcode{\sphinxupquote{lv\_page\_get\_scrollable}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{page}}{}%
 \pysigstopmultiline
 Get the scrollable object of a page \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
@@ -34307,12 +34338,12 @@ Enable the edge flash effect. (Show an arc when the an edge is reached) \begin{d
 
 \end{fulllineitems}
 
-\index{lv\_page\_set\_scrllable\_fit4 (C++ function)@\spxentry{lv\_page\_set\_scrllable\_fit4}\spxextra{C++ function}}
+\index{lv\_page\_set\_scrollable\_fit4 (C++ function)@\spxentry{lv\_page\_set\_scrollable\_fit4}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/page:_CPPv426lv_page_set_scrllable_fit4P8lv_obj_t8lv_fit_t8lv_fit_t8lv_fit_t8lv_fit_t}}%
+\phantomsection\label{\detokenize{widgets/page:_CPPv427lv_page_set_scrollable_fit4P8lv_obj_t8lv_fit_t8lv_fit_t8lv_fit_t8lv_fit_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/page:lv__page_8h_1a233d3f9c4d7f6457f73cfef1bd2037aa}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{static}} void \sphinxbfcode{\sphinxupquote{lv\_page\_set\_scrllable\_fit4}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{page}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{left}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{right}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{top}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{bottom}}{}%
+\phantomsection\label{\detokenize{widgets/page:lv__page_8h_1ae804868fdc022d3c4a8907683908e172}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{static}} void \sphinxbfcode{\sphinxupquote{lv\_page\_set\_scrollable\_fit4}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{page}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{left}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{right}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{top}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{bottom}}{}%
 \pysigstopmultiline
 Set the fit policy in all 4 directions separately. It tell how to change the page size automatically. \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
@@ -34338,12 +34369,12 @@ Set the fit policy in all 4 directions separately. It tell how to change the pag
 
 \end{fulllineitems}
 
-\index{lv\_page\_set\_scrllable\_fit2 (C++ function)@\spxentry{lv\_page\_set\_scrllable\_fit2}\spxextra{C++ function}}
+\index{lv\_page\_set\_scrollable\_fit2 (C++ function)@\spxentry{lv\_page\_set\_scrollable\_fit2}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/page:_CPPv426lv_page_set_scrllable_fit2P8lv_obj_t8lv_fit_t8lv_fit_t}}%
+\phantomsection\label{\detokenize{widgets/page:_CPPv427lv_page_set_scrollable_fit2P8lv_obj_t8lv_fit_t8lv_fit_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/page:lv__page_8h_1ab57ca3f157ead71b2eb7680136f9b635}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{static}} void \sphinxbfcode{\sphinxupquote{lv\_page\_set\_scrllable\_fit2}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{page}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{hor}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{ver}}{}%
+\phantomsection\label{\detokenize{widgets/page:lv__page_8h_1a886757a7cddf395cf5bbac42e08ec86f}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{static}} void \sphinxbfcode{\sphinxupquote{lv\_page\_set\_scrollable\_fit2}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{page}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{hor}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{ver}}{}%
 \pysigstopmultiline
 Set the fit policy horizontally and vertically separately. It tell how to change the page size automatically. \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
@@ -34363,14 +34394,14 @@ Set the fit policy horizontally and vertically separately. It tell how to change
 
 \end{fulllineitems}
 
-\index{lv\_page\_set\_scrllable\_fit (C++ function)@\spxentry{lv\_page\_set\_scrllable\_fit}\spxextra{C++ function}}
+\index{lv\_page\_set\_scrollable\_fit (C++ function)@\spxentry{lv\_page\_set\_scrollable\_fit}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/page:_CPPv425lv_page_set_scrllable_fitP8lv_obj_t8lv_fit_t}}%
+\phantomsection\label{\detokenize{widgets/page:_CPPv426lv_page_set_scrollable_fitP8lv_obj_t8lv_fit_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/page:lv__page_8h_1ace543308271a3ccc8437bc0ff120bedd}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{static}} void \sphinxbfcode{\sphinxupquote{lv\_page\_set\_scrllable\_fit}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{page}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{fit}}{}%
+\phantomsection\label{\detokenize{widgets/page:lv__page_8h_1a5e32a265c9efad19f69649595df0388b}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{static}} void \sphinxbfcode{\sphinxupquote{lv\_page\_set\_scrollable\_fit}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{page}, {\hyperref[\detokenize{widgets/cont:_CPPv48lv_fit_t}]{\sphinxcrossref{lv\_fit\_t}}} \sphinxstyleemphasis{fit}}{}%
 \pysigstopmultiline
-Set the fit policyin all 4 direction at once. It tell how to change the page size automatically. \begin{description}
+Set the fit policy in all 4 direction at once. It tell how to change the page size automatically. \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxcode{\sphinxupquote{page}}: pointer to a button object 
@@ -34565,7 +34596,7 @@ the height which still fits into the page
 \pysigstartmultiline
 \phantomsection\label{\detokenize{widgets/page:lv__page_8h_1a658ddaf3cd0ab9b5046901f17d01e495}}\pysiglinewithargsret{lv\_coord\_t \sphinxbfcode{\sphinxupquote{lv\_page\_get\_width\_grid}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{page}, uint8\_t \sphinxstyleemphasis{div}, uint8\_t \sphinxstyleemphasis{span}}{}%
 \pysigstopmultiline
-Divide the width of the object and get the width of a given number of columns. Take into account the paddings of the background and scrollbale too. \begin{description}
+Divide the width of the object and get the width of a given number of columns. Take into account the paddings of the background and scrollable too. \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
 the width according to the given parameters 
 
@@ -34593,7 +34624,7 @@ the width according to the given parameters
 \pysigstartmultiline
 \phantomsection\label{\detokenize{widgets/page:lv__page_8h_1ac99121c0d607be722717457525fd817a}}\pysiglinewithargsret{lv\_coord\_t \sphinxbfcode{\sphinxupquote{lv\_page\_get\_height\_grid}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{page}, uint8\_t \sphinxstyleemphasis{div}, uint8\_t \sphinxstyleemphasis{span}}{}%
 \pysigstopmultiline
-Divide the height of the object and get the width of a given number of columns. Take into account the paddings of the background and scrollbale too. \begin{description}
+Divide the height of the object and get the width of a given number of columns. Take into account the paddings of the background and scrollable too. \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
 the height according to the given parameters 
 
@@ -35536,9 +35567,9 @@ the total number of options in the list
 \index{lv\_roller\_get\_selected\_str (C++ function)@\spxentry{lv\_roller\_get\_selected\_str}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/roller:_CPPv426lv_roller_get_selected_strPK8lv_obj_tPc8uint16_t}}%
+\phantomsection\label{\detokenize{widgets/roller:_CPPv426lv_roller_get_selected_strPK8lv_obj_tPc8uint32_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/roller:lv__roller_8h_1ac5af0473007badb8bd06ed636783d3fc}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_roller\_get\_selected\_str}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{roller}, char *\sphinxstyleemphasis{buf}, uint16\_t \sphinxstyleemphasis{buf\_size}}{}%
+\phantomsection\label{\detokenize{widgets/roller:lv__roller_8h_1a6adfbdbad13b325c92f7efc9c92ad721}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_roller\_get\_selected\_str}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{roller}, char *\sphinxstyleemphasis{buf}, uint32\_t \sphinxstyleemphasis{buf\_size}}{}%
 \pysigstopmultiline
 Get the current selected option as a string \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
@@ -37179,16 +37210,16 @@ Direction the spinner should spin.
 \pysigstartmultiline
 \phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1a00d760fb7dcf3882484a825e4d92ddae}}\pysiglinewithargsret{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxbfcode{\sphinxupquote{lv\_spinner\_create}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{par}, \sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{copy}}{}%
 \pysigstopmultiline
-Create a pre loader objects \begin{description}
+Create a spinner object \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
-pointer to the created pre loader 
+pointer to the created spinner 
 
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{par}}: pointer to an object, it will be the parent of the new pre loader 
+\sphinxcode{\sphinxupquote{par}}: pointer to an object, it will be the parent of the new spinner 
 
 \item {} 
-\sphinxcode{\sphinxupquote{copy}}: pointer to a pre loader object, if not NULL then the new object will be copied from it 
+\sphinxcode{\sphinxupquote{copy}}: pointer to a spinner object, if not NULL then the new object will be copied from it 
 
 \end{itemize}
 
@@ -37202,12 +37233,12 @@ pointer to the created pre loader
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/spinner:_CPPv425lv_spinner_set_arc_lengthP8lv_obj_t15lv_anim_value_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1a321842e0fb0ad9a1b72fc5d9733e51df}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_spinner\_set\_arc\_length}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{preload}, {\hyperref[\detokenize{overview/animation:_CPPv415lv_anim_value_t}]{\sphinxcrossref{lv\_anim\_value\_t}}} \sphinxstyleemphasis{deg}}{}%
+\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1a48356883cc917e8786ebe2d2215b1052}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_spinner\_set\_arc\_length}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{spinner}, {\hyperref[\detokenize{overview/animation:_CPPv415lv_anim_value_t}]{\sphinxcrossref{lv\_anim\_value\_t}}} \sphinxstyleemphasis{deg}}{}%
 \pysigstopmultiline
 Set the length of the spinning arc in degrees \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{preload}}: pointer to a preload object 
+\sphinxcode{\sphinxupquote{spinner}}: pointer to a spinner object 
 
 \item {} 
 \sphinxcode{\sphinxupquote{deg}}: length of the arc 
@@ -37224,12 +37255,12 @@ Set the length of the spinning arc in degrees \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/spinner:_CPPv424lv_spinner_set_spin_timeP8lv_obj_t8uint16_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1a80f890fe088f06e5f97e14fe1c6f71c0}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_spinner\_set\_spin\_time}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{preload}, uint16\_t \sphinxstyleemphasis{time}}{}%
+\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1a7992abb548eda7f7792b703c0f3ab696}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_spinner\_set\_spin\_time}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{spinner}, uint16\_t \sphinxstyleemphasis{time}}{}%
 \pysigstopmultiline
 Set the spin time of the arc \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{preload}}: pointer to a preload object 
+\sphinxcode{\sphinxupquote{spinner}}: pointer to a spinner object 
 
 \item {} 
 \sphinxcode{\sphinxupquote{time}}: time of one round in milliseconds 
@@ -37246,15 +37277,15 @@ Set the spin time of the arc \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/spinner:_CPPv419lv_spinner_set_typeP8lv_obj_t17lv_spinner_type_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1abe1a04b978d79f8c5195e1868fe570f6}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_spinner\_set\_type}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{preload}, {\hyperref[\detokenize{widgets/spinner:_CPPv417lv_spinner_type_t}]{\sphinxcrossref{lv\_spinner\_type\_t}}} \sphinxstyleemphasis{type}}{}%
+\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1aa4959acc26d9cb342c3dc8c486a9f52a}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_spinner\_set\_type}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{spinner}, {\hyperref[\detokenize{widgets/spinner:_CPPv417lv_spinner_type_t}]{\sphinxcrossref{lv\_spinner\_type\_t}}} \sphinxstyleemphasis{type}}{}%
 \pysigstopmultiline
 Set the animation type of a spinner. \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{preload}}: pointer to pre loader object 
+\sphinxcode{\sphinxupquote{spinner}}: pointer to spinner object 
 
 \item {} 
-\sphinxcode{\sphinxupquote{type}}: animation type of the preload 
+\sphinxcode{\sphinxupquote{type}}: animation type of the spinner 
 
 \end{itemize}
 
@@ -37268,15 +37299,15 @@ Set the animation type of a spinner. \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/spinner:_CPPv418lv_spinner_set_dirP8lv_obj_t16lv_spinner_dir_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1ad9dfdddd2b26beb994f544803fe09893}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_spinner\_set\_dir}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{preload}, {\hyperref[\detokenize{widgets/spinner:_CPPv416lv_spinner_dir_t}]{\sphinxcrossref{lv\_spinner\_dir\_t}}} \sphinxstyleemphasis{dir}}{}%
+\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1ae6925e19086f496f5f4cf521cb6ec752}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_spinner\_set\_dir}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{spinner}, {\hyperref[\detokenize{widgets/spinner:_CPPv416lv_spinner_dir_t}]{\sphinxcrossref{lv\_spinner\_dir\_t}}} \sphinxstyleemphasis{dir}}{}%
 \pysigstopmultiline
 Set the animation direction of a spinner \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{preload}}: pointer to pre loader object 
+\sphinxcode{\sphinxupquote{spinner}}: pointer to spinner object 
 
 \item {} 
-\sphinxcode{\sphinxupquote{direction}}: animation direction of the preload 
+\sphinxcode{\sphinxupquote{direction}}: animation direction of the spinner 
 
 \end{itemize}
 
@@ -37290,12 +37321,12 @@ Set the animation direction of a spinner \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/spinner:_CPPv425lv_spinner_get_arc_lengthPK8lv_obj_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1a6927098879a53315295807fb7bb08dd1}}\pysiglinewithargsret{{\hyperref[\detokenize{overview/animation:_CPPv415lv_anim_value_t}]{\sphinxcrossref{lv\_anim\_value\_t}}} \sphinxbfcode{\sphinxupquote{lv\_spinner\_get\_arc\_length}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{preload}}{}%
+\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1aefeb2f07979d522c14dc187b3900cf11}}\pysiglinewithargsret{{\hyperref[\detokenize{overview/animation:_CPPv415lv_anim_value_t}]{\sphinxcrossref{lv\_anim\_value\_t}}} \sphinxbfcode{\sphinxupquote{lv\_spinner\_get\_arc\_length}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{spinner}}{}%
 \pysigstopmultiline
-Get the arc length {[}degree{]} of the a pre loader \begin{description}
+Get the arc length {[}degree{]} of the a spinner \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{preload}}: pointer to a pre loader object 
+\sphinxcode{\sphinxupquote{spinner}}: pointer to a spinner object 
 
 \end{itemize}
 
@@ -37309,12 +37340,12 @@ Get the arc length {[}degree{]} of the a pre loader \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/spinner:_CPPv424lv_spinner_get_spin_timePK8lv_obj_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1a26197054c80c2c84e099dde5a7647e1a}}\pysiglinewithargsret{uint16\_t \sphinxbfcode{\sphinxupquote{lv\_spinner\_get\_spin\_time}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{preload}}{}%
+\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1a83f0b7c1c598c94f23c6553903f2e64c}}\pysiglinewithargsret{uint16\_t \sphinxbfcode{\sphinxupquote{lv\_spinner\_get\_spin\_time}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{spinner}}{}%
 \pysigstopmultiline
 Get the spin time of the arc \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{preload}}: pointer to a pre loader object {[}milliseconds{]} 
+\sphinxcode{\sphinxupquote{spinner}}: pointer to a spinner object {[}milliseconds{]} 
 
 \end{itemize}
 
@@ -37328,7 +37359,7 @@ Get the spin time of the arc \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/spinner:_CPPv419lv_spinner_get_typeP8lv_obj_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1a8238e6fd51d82fb700f2c1c5b1cb8bdc}}\pysiglinewithargsret{{\hyperref[\detokenize{widgets/spinner:_CPPv417lv_spinner_type_t}]{\sphinxcrossref{lv\_spinner\_type\_t}}} \sphinxbfcode{\sphinxupquote{lv\_spinner\_get\_type}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{preload}}{}%
+\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1a298a92f9d088f16d46879157319b3623}}\pysiglinewithargsret{{\hyperref[\detokenize{widgets/spinner:_CPPv417lv_spinner_type_t}]{\sphinxcrossref{lv\_spinner\_type\_t}}} \sphinxbfcode{\sphinxupquote{lv\_spinner\_get\_type}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{spinner}}{}%
 \pysigstopmultiline
 Get the animation type of a spinner. \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
@@ -37336,7 +37367,7 @@ animation type
 
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{preload}}: pointer to pre loader object 
+\sphinxcode{\sphinxupquote{spinner}}: pointer to spinner object 
 
 \end{itemize}
 
@@ -37350,7 +37381,7 @@ animation type
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/spinner:_CPPv418lv_spinner_get_dirP8lv_obj_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1ac16aef3267eb0777d8a5e36ecea89c8b}}\pysiglinewithargsret{{\hyperref[\detokenize{widgets/spinner:_CPPv416lv_spinner_dir_t}]{\sphinxcrossref{lv\_spinner\_dir\_t}}} \sphinxbfcode{\sphinxupquote{lv\_spinner\_get\_dir}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{preload}}{}%
+\phantomsection\label{\detokenize{widgets/spinner:lv__spinner_8h_1a81647005d3249dfc4aa7013fb97552cc}}\pysiglinewithargsret{{\hyperref[\detokenize{widgets/spinner:_CPPv416lv_spinner_dir_t}]{\sphinxcrossref{lv\_spinner\_dir\_t}}} \sphinxbfcode{\sphinxupquote{lv\_spinner\_get\_dir}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{spinner}}{}%
 \pysigstopmultiline
 Get the animation direction of a spinner \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
@@ -37358,7 +37389,7 @@ animation direction
 
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{preload}}: pointer to pre loader object 
+\sphinxcode{\sphinxupquote{spinner}}: pointer to spinner object 
 
 \end{itemize}
 
@@ -39670,7 +39701,7 @@ No examples yet.
 \pysigstartmultiline
 \pysigline{\phantomsection\label{\detokenize{widgets/textarea:lv__textarea_8h_1a1b7b7893d940926615b39239ac05829d}}\sphinxbfcode{\sphinxupquote{enum }}\sphinxstylestrong{{[}anonymous{]}}}%
 \pysigstopmultiline
-Possible text areas tyles. 
+Possible text areas styles. 
 
 \sphinxstyleemphasis{Values:}
 \index{LV\_TEXTAREA\_PART\_BG (C++ enumerator)@\spxentry{LV\_TEXTAREA\_PART\_BG}\spxextra{C++ enumerator}}
@@ -39913,9 +39944,9 @@ Set the placeholder text of a text area \begin{description}
 \index{lv\_textarea\_set\_cursor\_pos (C++ function)@\spxentry{lv\_textarea\_set\_cursor\_pos}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/textarea:_CPPv426lv_textarea_set_cursor_posP8lv_obj_t7int16_t}}%
+\phantomsection\label{\detokenize{widgets/textarea:_CPPv426lv_textarea_set_cursor_posP8lv_obj_t7int32_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/textarea:lv__textarea_8h_1a0277d3326758a5caaf0d4ee7ade6b1ee}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_textarea\_set\_cursor\_pos}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ta}, int16\_t \sphinxstyleemphasis{pos}}{}%
+\phantomsection\label{\detokenize{widgets/textarea:lv__textarea_8h_1a96c43ec05475b33714517c7aa66a7b4b}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_textarea\_set\_cursor\_pos}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ta}, int32\_t \sphinxstyleemphasis{pos}}{}%
 \pysigstopmultiline
 Set the cursor position \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
@@ -40067,9 +40098,9 @@ Set a list of characters. Only these characters will be accepted by the text are
 \index{lv\_textarea\_set\_max\_length (C++ function)@\spxentry{lv\_textarea\_set\_max\_length}\spxextra{C++ function}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{widgets/textarea:_CPPv426lv_textarea_set_max_lengthP8lv_obj_t8uint16_t}}%
+\phantomsection\label{\detokenize{widgets/textarea:_CPPv426lv_textarea_set_max_lengthP8lv_obj_t8uint32_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/textarea:lv__textarea_8h_1a590e15711430e791e3f2a49c08a36a23}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_textarea\_set\_max\_length}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ta}, uint16\_t \sphinxstyleemphasis{num}}{}%
+\phantomsection\label{\detokenize{widgets/textarea:lv__textarea_8h_1a5cd37d67584194527c0ac427066ad183}}\pysiglinewithargsret{void \sphinxbfcode{\sphinxupquote{lv\_textarea\_set\_max\_length}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ta}, uint32\_t \sphinxstyleemphasis{num}}{}%
 \pysigstopmultiline
 Set max length of a Text Area. \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
@@ -40311,7 +40342,7 @@ pointer to the label object
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/textarea:_CPPv426lv_textarea_get_cursor_posPK8lv_obj_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/textarea:lv__textarea_8h_1abbf693b6e8d2c5e1d233327f071d2cc6}}\pysiglinewithargsret{uint16\_t \sphinxbfcode{\sphinxupquote{lv\_textarea\_get\_cursor\_pos}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ta}}{}%
+\phantomsection\label{\detokenize{widgets/textarea:lv__textarea_8h_1af90b4a190f41fe9c2afa0ed4b7b898b2}}\pysiglinewithargsret{uint32\_t \sphinxbfcode{\sphinxupquote{lv\_textarea\_get\_cursor\_pos}}}{\sphinxbfcode{\sphinxupquote{const}} {\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ta}}{}%
 \pysigstopmultiline
 Get the current cursor position in character index \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
@@ -40443,9 +40474,9 @@ list of accented characters.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/textarea:_CPPv426lv_textarea_get_max_lengthP8lv_obj_t}}%
 \pysigstartmultiline
-\phantomsection\label{\detokenize{widgets/textarea:lv__textarea_8h_1a088eaf8abceae63877dad81d247cef74}}\pysiglinewithargsret{uint16\_t \sphinxbfcode{\sphinxupquote{lv\_textarea\_get\_max\_length}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ta}}{}%
+\phantomsection\label{\detokenize{widgets/textarea:lv__textarea_8h_1ae1b604fe01b6979e9bb7f01de57e8e00}}\pysiglinewithargsret{uint32\_t \sphinxbfcode{\sphinxupquote{lv\_textarea\_get\_max\_length}}}{{\hyperref[\detokenize{widgets/obj:_CPPv48lv_obj_t}]{\sphinxcrossref{lv\_obj\_t}}} *\sphinxstyleemphasis{ta}}{}%
 \pysigstopmultiline
-Set max length of a Text Area. \begin{description}
+Get max length of a Text Area. \begin{description}
 \item[{\sphinxstylestrong{Return}}] \leavevmode
 the maximal number of characters to be add 
 
@@ -40775,7 +40806,7 @@ Move the cursor one line up \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/textarea:_CPPv4N17lv_textarea_ext_t10max_lengthE}}%
 \pysigstartmultiline
-\pysigline{\phantomsection\label{\detokenize{widgets/textarea:structlv__textarea__ext__t_1a460a41da655993d3c3c4d35e41279a5a}}uint16\_t \sphinxbfcode{\sphinxupquote{max\_length}}}%
+\pysigline{\phantomsection\label{\detokenize{widgets/textarea:structlv__textarea__ext__t_1ae2fae18d4872e004b4fc8086cd960966}}uint32\_t \sphinxbfcode{\sphinxupquote{max\_length}}}%
 \pysigstopmultiline
 \end{fulllineitems}
 
@@ -40811,7 +40842,7 @@ Move the cursor one line up \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/textarea:_CPPv4N17lv_textarea_ext_t3posE}}%
 \pysigstartmultiline
-\pysigline{\phantomsection\label{\detokenize{widgets/textarea:structlv__textarea__ext__t_1a9b63606de8ae1b0d539de9cee951dc8d}}uint16\_t \sphinxbfcode{\sphinxupquote{pos}}}%
+\pysigline{\phantomsection\label{\detokenize{widgets/textarea:structlv__textarea__ext__t_1aa9348a4a07b3a438081a64ce9e942d83}}uint32\_t \sphinxbfcode{\sphinxupquote{pos}}}%
 \pysigstopmultiline
 \end{fulllineitems}
 
@@ -40838,7 +40869,7 @@ Move the cursor one line up \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/textarea:_CPPv4N17lv_textarea_ext_t12txt_byte_posE}}%
 \pysigstartmultiline
-\pysigline{\phantomsection\label{\detokenize{widgets/textarea:structlv__textarea__ext__t_1af2d198cd881af967f73c89a2f1112af1}}uint16\_t \sphinxbfcode{\sphinxupquote{txt\_byte\_pos}}}%
+\pysigline{\phantomsection\label{\detokenize{widgets/textarea:structlv__textarea__ext__t_1a0d789e68e92129138c6ab855ece31c7c}}uint32\_t \sphinxbfcode{\sphinxupquote{txt\_byte\_pos}}}%
 \pysigstopmultiline
 \end{fulllineitems}
 
@@ -40883,7 +40914,7 @@ Move the cursor one line up \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/textarea:_CPPv4N17lv_textarea_ext_t9sel_startE}}%
 \pysigstartmultiline
-\pysigline{\phantomsection\label{\detokenize{widgets/textarea:structlv__textarea__ext__t_1a4201c38c8b787aa6c57e2dd7ebbc77b0}}uint16\_t \sphinxbfcode{\sphinxupquote{sel\_start}}}%
+\pysigline{\phantomsection\label{\detokenize{widgets/textarea:structlv__textarea__ext__t_1ae6ec71671b45a744aaca8948cdf6955e}}uint32\_t \sphinxbfcode{\sphinxupquote{sel\_start}}}%
 \pysigstopmultiline
 \end{fulllineitems}
 
@@ -40892,7 +40923,7 @@ Move the cursor one line up \begin{description}
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{widgets/textarea:_CPPv4N17lv_textarea_ext_t7sel_endE}}%
 \pysigstartmultiline
-\pysigline{\phantomsection\label{\detokenize{widgets/textarea:structlv__textarea__ext__t_1a07fd318eab61b5028940426e356e4b9d}}uint16\_t \sphinxbfcode{\sphinxupquote{sel\_end}}}%
+\pysigline{\phantomsection\label{\detokenize{widgets/textarea:structlv__textarea__ext__t_1a979af30bbdd3db6509bfd40c4297fef5}}uint32\_t \sphinxbfcode{\sphinxupquote{sel\_end}}}%
 \pysigstopmultiline
 \end{fulllineitems}
 
@@ -41242,7 +41273,7 @@ Set the valid position’s indices. The scrolling will be possible only to these
 \sphinxcode{\sphinxupquote{valid\_pos}}: array width the indices. E.g. \sphinxcode{\sphinxupquote{lv\_point\_t p{[}{]} = \{\{0,0\}, \{1,0\}, \{1,1\}}}. Only the pointer is saved so can’t be a local variable. 
 
 \item {} 
-\sphinxcode{\sphinxupquote{valid\_pos\_cnt}}: numner of elements in \sphinxcode{\sphinxupquote{valid\_pos}} array 
+\sphinxcode{\sphinxupquote{valid\_pos\_cnt}}: number of elements in \sphinxcode{\sphinxupquote{valid\_pos}} array 
 
 \end{itemize}
 
@@ -41777,7 +41808,7 @@ pointer to the created button object
 Can be assigned to a window control button to close the window \begin{description}
 \item[{\sphinxstylestrong{Parameters}}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxcode{\sphinxupquote{btn}}: pointer to the control button on teh widows header 
+\sphinxcode{\sphinxupquote{btn}}: pointer to the control button on the widows header 
 
 \item {} 
 \sphinxcode{\sphinxupquote{evet}}: the event type 

@@ -25,11 +25,11 @@ To provide maximum flexibility, the source of the image can be:
 
 To set the source of an image, use `lv_img_set_src(img, src)`.
 
-To generate a **pixel array** from a PNG, JPG or BMP image, use the [Online image converter tool](https://littlevgl.com/image-to-c-array) and set the converted image with its pointer: `lv_img_set_src(img1, &converted_img_var);`
+To generate a **pixel array** from a PNG, JPG or BMP image, use the [Online image converter tool](https://lvgl.io/tools/imageconverter) and set the converted image with its pointer: `lv_img_set_src(img1, &converted_img_var);`
 To make the variable visible in the C file, you need to declare it with `LV_IMG_DECLARE(converted_img_var)`.
 
 To use **external files**, you also need to convert the image files using the online converter tool but now you should select the binary Output format.
-You also need to use LittlevGL's file system module and register a driver with some functions for the basic file operation. Got to the [File system](/overview/file-system) to learn more.
+You also need to use LVGL's file system module and register a driver with some functions for the basic file operation. Got to the [File system](/overview/file-system) to learn more.
 To set an image sourced from a file, use `lv_img_set_src(img, "S:folder1/my_img.bin")`.
 
 

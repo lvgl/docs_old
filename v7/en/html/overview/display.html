@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.0.1
+                v7.0.2
               </div>
             
           
@@ -105,6 +105,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/quick-overview.html">Quick overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#get-started-in-a-simulator">Get started in a simulator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#add-lvgl-into-your-project">Add LVGL into your project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#learn-the-basics">Learn the basics</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#widgets">Widgets</a></li>
@@ -122,7 +123,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#micropython">Micropython</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#contributing">Contributing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
@@ -146,9 +146,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-lvgl">Why Micropython + LVGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-lvgl-in-micropython">Here are some advantages of using LVGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-lvgl-could-be-used-for">Micropython + LVGL could be used for:</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#so-what-does-it-look-like">So what does it look like?</a><ul>
@@ -1183,7 +1183,7 @@
             
             
               <!-- User defined GitHub URL -->
-              <a href="https://github.com/littlevgl/docs/blob/master/v7/en/overview/display.md" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/lvgl/docs/blob/master/v7/en/overview/display.md" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -1201,9 +1201,9 @@
 <h1>Displays<a class="headerlink" href="#displays" title="Permalink to this headline">¶</a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The basic concept of <em>display</em> in LittlevGL is explained in the [Porting](/porting/display) section. So before reading further, please read the [Porting](/porting/display) section first.</p>
+<p>The basic concept of <em>display</em> in LVGL is explained in the [Porting](/porting/display) section. So before reading further, please read the [Porting](/porting/display) section first.</p>
 </div>
-<p>In LittlevGL, you can have multiple displays, each with their own driver and objects.</p>
+<p>In LVGL, you can have multiple displays, each with their own driver and objects.</p>
 <p>Creating more displays is easy: just initialize more display buffers and register another driver for every display.
 When you create the UI, use <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default(disp)</span></code> to tell the library which display to create objects on.</p>
 <p>Why would you want multi-display support? Here are some examples:</p>
@@ -1251,7 +1251,7 @@ The screen’s size is always equal to its display and size their position is (0
 <div class="section" id="opaque-screen">
 <h3>Opaque screen<a class="headerlink" href="#opaque-screen" title="Permalink to this headline">¶</a></h3>
 <p>Usually, the opacity of the screen is <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code> to provide a solid background for its children.</p>
-<p>However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LittlevGL.</p>
+<p>However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LVGL.</p>
 <p>To do this, the screen should have a style that sets <code class="docutils literal notranslate"><span class="pre">body.opa</span></code> or <code class="docutils literal notranslate"><span class="pre">image.opa</span></code> to <code class="docutils literal notranslate"><span class="pre">LV_OPA_TRANSP</span></code> (or another non-opaque value) to make the screen opaque.</p>
 <p>Also, <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> needs to be enabled. Please note that it only works with <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span> <span class="pre">=</span> <span class="pre">32</span></code>.</p>
 <p>The Alpha channel of 32-bit colors will be 0 where there are no objects and will be 255 where there are solid objects.</p>
@@ -1904,7 +1904,7 @@ For example to create light red color: <code class="docutils literal notranslate
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jun 05, 2020.
+        Last updated on Jun 16, 2020.
       </span>
 
     </p>

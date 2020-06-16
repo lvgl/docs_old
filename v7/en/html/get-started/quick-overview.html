@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.0.1
+                v7.0.2
               </div>
             
           
@@ -105,6 +105,7 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Get started</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Quick overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-started-in-a-simulator">Get started in a simulator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add-lvgl-into-your-project">Add LVGL into your project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#learn-the-basics">Learn the basics</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#widgets">Widgets</a></li>
@@ -122,7 +123,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#micropython">Micropython</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#contributing">Contributing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="pc-simulator.html">Simulator on PC</a><ul>
@@ -146,9 +146,9 @@
 <li class="toctree-l4"><a class="reference internal" href="micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="micropython.html#why-micropython-lvgl">Why Micropython + LVGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="micropython.html#here-are-some-advantages-of-using-lvgl-in-micropython">Here are some advantages of using LVGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="micropython.html#micropython-lvgl-could-be-used-for">Micropython + LVGL could be used for:</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="micropython.html#so-what-does-it-look-like">So what does it look like?</a><ul>
@@ -1201,8 +1201,11 @@
 <h1>Quick overview<a class="headerlink" href="#quick-overview" title="Permalink to this headline">¶</a></h1>
 <p>Here you can learn the most important things about LVGL.
 You should read it first to get a general impression and read the detailed <a class="reference internal" href="../porting/index.html"><span class="doc">Porting</span></a> and <a class="reference internal" href="../overview/index.html"><span class="doc">Overview</span></a> sections after that.</p>
-<p>Instead of porting LVGL to an embedded hardware you can use the <a class="reference internal" href="pc-simulator.html"><span class="doc">Simulators</span></a> to get ready-to-use projects which can be run on your PC.
-This way you can save the porting for now and make some experience with LVGL immediately.</p>
+<div class="section" id="get-started-in-a-simulator">
+<h2>Get started in a simulator<a class="headerlink" href="#get-started-in-a-simulator" title="Permalink to this headline">¶</a></h2>
+<p>Instead of porting LVGL to an embedded hardware, it’s highly recommended to get started in a simulator first.</p>
+<p>LVGL is ported to many IDEs to be sure you will find your faviourite one. Go to <a class="reference internal" href="pc-simulator.html"><span class="doc">Simulators</span></a> to get ready-to-use projects which can be run on your PC. This way you can save the porting for now and make some experience with LVGL immediately.</p>
+</div>
 <div class="section" id="add-lvgl-into-your-project">
 <h2>Add LVGL into your project<a class="headerlink" href="#add-lvgl-into-your-project" title="Permalink to this headline">¶</a></h2>
 <p>The following steps show how to setup LVGL on an embedded system with a display and a touchpad.</p>
@@ -1216,7 +1219,7 @@ This way you can save the porting for now and make some experience with LVGL imm
 <li><p>Create a display buffer for LVGL. LVGL will render the graphics here first, and seed the rendered image to the display. The buffer size can be set freely but 1/10 screen size is a good starting point.</p></li>
 </ul>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_disp_buf_t</span> <span class="n">disp_buf</span><span class="p">;</span>
-<span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">buf</span><span class="p">[</span><span class="n">LV_HOR_RES_MAX</span> <span class="o">*</span> <span class="n">LV_VER_RES_MAX</span> <span class="o">/</span> <span class="mi">10</span><span class="p">];</span>                     <span class="cm">/*Declare a buffer for 10 lines*/</span>
+<span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">buf</span><span class="p">[</span><span class="n">LV_HOR_RES_MAX</span> <span class="o">*</span> <span class="n">LV_VER_RES_MAX</span> <span class="o">/</span> <span class="mi">10</span><span class="p">];</span>                     <span class="cm">/*Declare a buffer for 1/10 screen size*/</span>
 <span class="n">lv_disp_buf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_HOR_RES_MAX</span> <span class="o">*</span> <span class="n">LV_VER_RES_MAX</span> <span class="o">/</span> <span class="mi">10</span><span class="p">);</span>    <span class="cm">/*Initialize the display buffer*/</span>
 </pre></div>
 </div>
@@ -1229,7 +1232,7 @@ This way you can save the porting for now and make some experience with LVGL imm
 <span class="n">disp_drv</span><span class="p">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">;</span>          <span class="cm">/*Assign the buffer to the display*/</span>
 <span class="n">lv_disp_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span>      <span class="cm">/*Finally register the driver*/</span>
 
-<span class="kt">void</span> <span class="nf">my_disp_flush</span><span class="p">(</span><span class="n">lv_disp_t</span> <span class="o">*</span> <span class="n">disp</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">area</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="o">*</span> <span class="n">color_p</span><span class="p">)</span>
+<span class="kt">void</span> <span class="nf">my_disp_flush</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">area</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="o">*</span> <span class="n">color_p</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">int32_t</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -1254,16 +1257,8 @@ This way you can save the porting for now and make some experience with LVGL imm
 
 <span class="kt">bool</span> <span class="nf">my_touchpad_read</span><span class="p">(</span><span class="n">lv_indev_t</span> <span class="o">*</span> <span class="n">indev</span><span class="p">,</span> <span class="n">lv_indev_data_t</span> <span class="o">*</span> <span class="n">data</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">static</span> <span class="n">lv_coord_t</span> <span class="n">last_x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">static</span> <span class="n">lv_coord_t</span> <span class="n">last_y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="cm">/*Save the state and save the pressed coordinate*/</span>
     <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">touchpad_is_pressed</span><span class="p">()</span> <span class="o">?</span> <span class="nl">LV_INDEV_STATE_PR</span> <span class="p">:</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">==</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">)</span> <span class="n">touchpad_get_xy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">last_x</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">last_y</span><span class="p">);</span>
-
-    <span class="cm">/*Set the coordinates (if released use the last pressed coordinates)*/</span>
-    <span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">last_x</span><span class="p">;</span>
-    <span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">last_y</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">==</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">)</span> <span class="n">touchpad_get_xy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*Return `false` because we are not buffering and no more data to read*/</span>
 <span class="p">}</span>
@@ -1273,6 +1268,7 @@ This way you can save the porting for now and make some experience with LVGL imm
 <li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code> periodically every few milliseconds in the main <code class="docutils literal notranslate"><span class="pre">while(1)</span></code> loop, in Timer interrupt or in an Operation system task.
 It will redraw the screen if required, handle input devices etc.</p></li>
 </ul>
+<p>For a more detailed guide go to the <a class="reference external" href="https://docs.lvgl.io/v7/en/html/porting/index.html">Porting</a> section.</p>
 </div>
 <div class="section" id="learn-the-basics">
 <h2>Learn the basics<a class="headerlink" href="#learn-the-basics" title="Permalink to this headline">¶</a></h2>
@@ -1299,7 +1295,7 @@ For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_slider_set_value</span><span class="p">(</span><span class="n">slider1</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="n">LV_ANIM_ON</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>To see the full API visit the documentation of the widgets or the related header file (e.g. <a class="reference external" href="https://github.com/littlevgl/lvgl/blob/master/src/lv_widgets/lv_slider.h">lvgl/src/lv_widgets/lv_slider.h</a>).</p>
+<p>To see the full API visit the documentation of the widgets or the related header file (e.g. <a class="reference external" href="https://github.com/lvgl/lvgl/blob/master/src/lv_widgets/lv_slider.h">lvgl/src/lv_widgets/lv_slider.h</a>).</p>
 </div>
 <div class="section" id="events">
 <h3>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h3>
@@ -1338,12 +1334,13 @@ However, a <a class="reference internal" href="../widgets/page.html"><span class
 <li><p><strong>LV_STATE_DISABLED</strong> Disabled or inactive</p></li>
 </ul>
 <p>For example if you press an object is automatically get the <code class="docutils literal notranslate"><span class="pre">LV_STATE_PRESSED</span></code> state and when you release is it will be removed.</p>
-<p>To get the current state use <code class="docutils literal notranslate"><span class="pre">lv_obj_get_state(obj,</span> <span class="pre">part)</span></code>. It will return the ORed states.</p>
+<p>To get the current state use <code class="docutils literal notranslate"><span class="pre">lv_obj_get_state(obj,</span> <span class="pre">part)</span></code>. It will return the <code class="docutils literal notranslate"><span class="pre">OR</span></code>ed states.
+For example it’s a valid state for a checkbox: <code class="docutils literal notranslate"><span class="pre">LV_STATE_CHECKED</span> <span class="pre">|</span> <span class="pre">LV_STATE_PRESSED</span> <span class="pre">|</span> <span class="pre">LV_STATE_FOCUSED</span></code></p>
 </div>
 <div class="section" id="styles">
 <h3>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h3>
 <p>Styles can be assigned to the parts objects to changed their appearance.
-A style can describe for example the background color, border width, text font and so on. See the full list <a class="reference external" href="https://docs.littlevgl.com/v7/en/html/overview/style.html#properties">here</a>.</p>
+A style can describe for example the background color, border width, text font and so on. See the full list <a class="reference external" href="https://docs.lvgl.io/v7/en/html/overview/style.html#properties">here</a>.</p>
 <p>The styles can be cascaded (similarly to CSS). It means you can add more styles to a part of an object.
 For example <code class="docutils literal notranslate"><span class="pre">style_btn</span></code> can set a default button appearance, and <code class="docutils literal notranslate"><span class="pre">style_btn_red</span></code> can overwrite some properties to make the button red-</p>
 <p>Every style property you set is specific to a state. For example is you can set different background color for <code class="docutils literal notranslate"><span class="pre">LV_STATE_DEFAULT</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_STATE_PRESSED</span></code>.
@@ -1537,24 +1534,6 @@ The styles from the themes are applied automatically when the objects are create
 </pre></div>
 </div>
 </div>
-<div class="section" id="contributing">
-<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
-<p>LittlevGL uses the <a class="reference external" href="https://forum.littlevgl.com">Forum</a> to ask and answer questions and <a class="reference external" href="https://github.com/littlevgl/lvgl/issues">GitHub’s Issue tracker</a> for development-related discussion (such as bug reports, feature suggestions etc.).</p>
-<p>There are many opportunities to contribute to LittlevGL such as:</p>
-<ul class="simple">
-<li><p><strong>Help others</strong> in the <a class="reference external" href="https://forum.littlevgl.com">Forum</a>.</p></li>
-<li><p><strong>Inspire people</strong> by speaking about your project in <a class="reference external" href="https://forum.littlevgl.com/c/my-projects">My project</a> category in the Forum or add it to the <a class="reference external" href="https://blog.littlevgl.com/2018-12-26/references">References</a> post</p></li>
-<li><p><strong>Improve and/or translate the documentation.</strong> Go to the <a class="reference external" href="https://github.com/littlevgl/docs">Documentation</a> repository to learn more</p></li>
-<li><p><strong>Write a blog post</strong> about your experiences. See how to do it in the <a class="reference external" href="https://github.com/littlevgl/blog">Blog</a> repository</p></li>
-<li><p><strong>Report and/or fix bugs</strong> in <a class="reference external" href="https://github.com/littlevgl/lvgl/issues">GitHub’s issue tracker</a></p></li>
-<li><p><strong>Help in the developement</strong>. Check the <a class="reference external" href="https://github.com/littlevgl/lvgl/issues">Open issues</a> especially the ones with <a class="reference external" href="https://github.com/littlevgl/lvgl/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22">Help wanted</a> label and tell your ideas about a topic or implement a feature.</p></li>
-</ul>
-<p>If you are interested in contributing to LittlevGL, then please read the guides below to get started.</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://blog.littlevgl.com/2018-12-06/contributing">Contributing guide</a></p></li>
-<li><p><a class="reference external" href="https://github.com/littlevgl/lvgl/blob/master/docs/CODING_STYLE.md">Coding style guide</a></p></li>
-</ul>
-</div>
 </div>
 
 
@@ -1579,7 +1558,7 @@ The styles from the themes are applied automatically when the objects are create
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jun 05, 2020.
+        Last updated on Jun 16, 2020.
       </span>
 
     </p>

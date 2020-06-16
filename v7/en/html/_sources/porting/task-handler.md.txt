@@ -3,7 +3,7 @@
 ```
 # Task Handler
 
-To handle the tasks of LittlevGL you need to call `lv_task_handler()` periodically in one of the followings:
+To handle the tasks of LVGL you need to call `lv_task_handler()` periodically in one of the followings:
 - *while(1)* of *main()* function 
 - timer interrupt periodically (low priority then `lv_tick_inc()`)
 - an OS task periodically

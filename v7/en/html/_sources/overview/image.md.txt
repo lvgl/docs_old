@@ -24,7 +24,7 @@ The images stored internally in a variable is composed mainly of an `lv_img_dsc_
 These are usually stored within a project as C files. They are linked into the resulting executable like any other constant data.
 
 ### Files
-To deal with files you need to add a *Drive* to LittlevGL. In short, a *Drive* is a collection of functions (*open*, *read*, *close*, etc.) registered in LittlevGL to make file operations.
+To deal with files you need to add a *Drive* to LVGL. In short, a *Drive* is a collection of functions (*open*, *read*, *close*, etc.) registered in LVGL to make file operations.
 You can add an interface to a standard file system (FAT32 on SD card) or you create your simple file system to read data from an SPI Flash memory.
 In every case, a *Drive* is just an abstraction to read and/or write data to a memory.
 See the [File system](/overview/file-system) section to learn more.
@@ -33,7 +33,7 @@ Images stored as files are not linked into the resulting executable, and must be
 
 ## Color formats
 Various built-in color formats are supported:
-- **LV_IMG_CF_TRUE_COLOR** Simply stores the RGB colors (in whatever color depth LittlevGL is configured for).
+- **LV_IMG_CF_TRUE_COLOR** Simply stores the RGB colors (in whatever color depth LVGL is configured for).
 - **LV_IMG_CF_TRUE_COLOR_ALPHA** Like `LV_IMG_CF_TRUE_COLOR` but it also adds an alpha (transparency) byte for every pixel.
 - **LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED** Like `LV_IMG_CF_TRUE_COLOR` but if a pixel has `LV_COLOR_TRANSP` (set in *lv_conf.h*) color the pixel will be transparent.
 - **LV_IMG_CF_INDEXED_1/2/4/8BIT** Uses a palette with 2, 4, 16 or 256 colors and stores each pixel in 1, 2, 4 or 8 bits.
@@ -65,17 +65,17 @@ You can store images in a *Raw* format to indicate that, it's not a built-in col
 
 ## Add and use images
 
-You can add images to LittlevGL in two ways:
+You can add images to LVGL in two ways:
 - using the online converter
 - manually create images
 
 ### Online converter
-The online Image converter is available here: https://littlevgl.com/image-to-c-array
+The online Image converter is available here: https://lvgl.io/tools/imageconverter
 
-Adding an image to LittlevGL via online converter is easy.
+Adding an image to LVGL via online converter is easy.
 
 1. You need to select a *BMP*, *PNG* or *JPG* image first.
-2. Give the image a name that will be used within LittlevGL.
+2. Give the image a name that will be used within LVGL.
 3. Select the [Color format](#color-formats).
 4. Select the type of image you want. Choosing a binary will generate a `.bin` file that must be stored separately and read using the [file support](#files). Choosing a variable will generate a standard C file that can be linked into your project.
 5. Hit the *Convert* button. Once the conversion is finished, your browser will automatically download the resulting file.
@@ -89,7 +89,7 @@ In case of binary files, you need to specify the color format you want:
 - RGB888 for 32-bit color depth
 
 ### Manually create an image
-If you are generating an image at run-time, you can craft an image variable to display it using LittlevGL. For example:
+If you are generating an image at run-time, you can craft an image variable to display it using LVGL. For example:
 
 ```c
 uint8_t my_img_data[] = {0x00, 0x01, 0x02, ...};
@@ -111,7 +111,7 @@ Another (possibly simpler) option to create and display an image at run-time is 
 
 ### Use images
 
-The simplest way to use an image in LittlevGL is to display it with an [lv_img](/widgets/img) object:
+The simplest way to use an image in LVGL is to display it with an [lv_img](/widgets/img) object:
 
 ```c
 lv_obj_t * icon = lv_img_create(lv_scr_act(), NULL);
@@ -127,9 +127,9 @@ If the image was converted with the online converter, you should use `LV_IMG_DEC
 
 
 ## Image decoder
-As you can see in the [Color formats](#color-formats) section, LittlevGL supports several built-in image formats. In many cases, these will be all you need. LittlevGL doesn't directly support, however, generic image formats like PNG or JPG.
+As you can see in the [Color formats](#color-formats) section, LVGL supports several built-in image formats. In many cases, these will be all you need. LVGL doesn't directly support, however, generic image formats like PNG or JPG.
 
-To handle non-built-in image formats, you need to use external libraries and attach them to LittlevGL via the *Image decoder* interface.
+To handle non-built-in image formats, you need to use external libraries and attach them to LVGL via the *Image decoder* interface.
 
 The image decoder consists of 4 callbacks:
 - **info** get some basic info about the image (width, height and color format).
@@ -158,7 +158,7 @@ With *User encoded* formats, the color format in the open function (`dsc->header
 
 ### Register an image decoder
 
-Here's an example of getting LittlevGL to work with PNG images.
+Here's an example of getting LVGL to work with PNG images.
 
 First, you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:
 
@@ -264,7 +264,7 @@ To indicate that, the *line read* function should be used, set `dsc->img_data = 
 
 ### Manually use an image decoder
 
-LittlevGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the `lv_img` object) but you can use them manually too. Create a `lv_img_decoder_dsc_t` variable to describe the decoding session and call `lv_img_decoder_open()`, `lv_img_decoder_open()`.
+LVGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the `lv_img` object) but you can use them manually too. Create a `lv_img_decoder_dsc_t` variable to describe the decoding session and call `lv_img_decoder_open()`, `lv_img_decoder_open()`.
 
 ```c
 
@@ -284,9 +284,9 @@ if(res == LV_RES_OK) {
 Sometimes it takes a lot of time to open an image.
 Continuously decoding a PNG image or loading images from a slow external memory would be inefficient and detrimental to the user experience.
 
-Therefore, LittlevGL caches a given number of images. Caching means some images will be left open, hence LittlevGL can quickly access them from `dsc->img_data` instead of needing to decode them again.
+Therefore, LVGL caches a given number of images. Caching means some images will be left open, hence LVGL can quickly access them from `dsc->img_data` instead of needing to decode them again.
 
-Of course, caching images is resource-intensive as it uses more RAM (to store the decoded image). LittlevGL tries to optimize the process as much as possible (see below), but you will still need to evaluate if this would be beneficial for your platform or not. If you have a deeply embedded target which decodes small images from a relatively fast storage medium, image caching may not be worth it.
+Of course, caching images is resource-intensive as it uses more RAM (to store the decoded image). LVGL tries to optimize the process as much as possible (see below), but you will still need to evaluate if this would be beneficial for your platform or not. If you have a deeply embedded target which decodes small images from a relatively fast storage medium, image caching may not be worth it.
 
 ### Cache size
 The number of cache entries can be defined in `LV_IMG_CACHE_DEF_SIZE` in *lv_conf.h*. The default value is 1 so only the most recently used image will be left open.
@@ -294,11 +294,11 @@ The number of cache entries can be defined in `LV_IMG_CACHE_DEF_SIZE` in *lv_con
 The size of the cache can be changed at run-time with `lv_img_cache_set_size(entry_num)`.
 
 ### Value of images
-When you use more images than cache entries, LittlevGL can't cache all of the images. Instead, the library will close one of the cached images (to free space).
+When you use more images than cache entries, LVGL can't cache all of the images. Instead, the library will close one of the cached images (to free space).
 
-To decide which image to close, LittlevGL uses a measurement it previously made of how long it took to open the image. Cache entries that hold slower-to-open images are considered more valuable and are kept in the cache as long as possible.
+To decide which image to close, LVGL uses a measurement it previously made of how long it took to open the image. Cache entries that hold slower-to-open images are considered more valuable and are kept in the cache as long as possible.
 
-If you want or need to override LittlevGL's measurement, you can manually set the *time to open* value in the decoder open function in `dsc->time_to_open = time_ms` to give a higher or lower value. (Leave it unchanged to let LittlevGL set it.)
+If you want or need to override LVGL's measurement, you can manually set the *time to open* value in the decoder open function in `dsc->time_to_open = time_ms` to give a higher or lower value. (Leave it unchanged to let LVGL set it.)
 
 Every cache entry has a *"life"* value. Every time an image opening happens through the cache, the *life* of all entries are decreased to make them older.
 When a cached image is used, its *life* is increased by the *time to open* value to make it more alive.
@@ -311,7 +311,7 @@ Note that, the cached image might continuously consume memory. For example, if 3
 Therefore, it's the user's responsibility to be sure there is enough RAM to cache, even the largest images at the same time.
 
 ### Clean the cache
-Let's say you have loaded a PNG image into a `lv_img_dsc_t my_png` variable and use it in an `lv_img` object. If the image is already cached and you then change the underlying PNG file, you need to notify LittlevGL to cache the image again. Otherwise, there is no easy way of detecting that the underlying file changed and LittlevGL will still draw the old image.
+Let's say you have loaded a PNG image into a `lv_img_dsc_t my_png` variable and use it in an `lv_img` object. If the image is already cached and you then change the underlying PNG file, you need to notify LVGL to cache the image again. Otherwise, there is no easy way of detecting that the underlying file changed and LVGL will still draw the old image.
 
 To do this, use `lv_img_cache_invalidate_src(&my_png)`. If `NULL` is passed as a parameter, the whole cache will be cleaned.
 

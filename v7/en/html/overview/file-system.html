@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.0.1
+                v7.0.2
               </div>
             
           
@@ -105,6 +105,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/quick-overview.html">Quick overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#get-started-in-a-simulator">Get started in a simulator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#add-lvgl-into-your-project">Add LVGL into your project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#learn-the-basics">Learn the basics</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#widgets">Widgets</a></li>
@@ -122,7 +123,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#micropython">Micropython</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#contributing">Contributing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
@@ -146,9 +146,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-lvgl">Why Micropython + LVGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-lvgl-in-micropython">Here are some advantages of using LVGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-lvgl-could-be-used-for">Micropython + LVGL could be used for:</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#so-what-does-it-look-like">So what does it look like?</a><ul>
@@ -1199,7 +1199,7 @@
             
   <div class="section" id="file-system">
 <h1>File system<a class="headerlink" href="#file-system" title="Permalink to this headline">¶</a></h1>
-<p>LittlevGL has a ‘File system’ abstraction module that enables you to attach any type of file systems.
+<p>LVGL has a ‘File system’ abstraction module that enables you to attach any type of file systems.
 The file system is identified by a drive letter.
 For example, if the SD card is associated with the letter <code class="docutils literal notranslate"><span class="pre">'S'</span></code>, a file can be reached like <code class="docutils literal notranslate"><span class="pre">&quot;S:path/to/file.txt&quot;</span></code>.</p>
 <div class="section" id="add-a-driver">
@@ -1220,13 +1220,13 @@ For example, if the SD card is associated with the letter <code class="docutils 
 <span class="n">drv</span><span class="p">.</span><span class="n">tell_cb</span> <span class="o">=</span> <span class="n">my_tell_cb</span><span class="p">;</span>                 <span class="cm">/*Callback to tell the cursor position  */</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">trunc_cb</span> <span class="o">=</span> <span class="n">my_trunc_cb</span><span class="p">;</span>               <span class="cm">/*Callback to delete a file */</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">size_cb</span> <span class="o">=</span> <span class="n">my_size_cb</span><span class="p">;</span>                 <span class="cm">/*Callback to tell a file&#39;s size */</span>
-<span class="n">drv</span><span class="p">.</span><span class="n">rename_cb</span> <span class="o">=</span> <span class="n">my_size_cb</span><span class="p">;</span>               <span class="cm">/*Callback to rename a file */</span>
+<span class="n">drv</span><span class="p">.</span><span class="n">rename_cb</span> <span class="o">=</span> <span class="n">my_rename_cb</span><span class="p">;</span>             <span class="cm">/*Callback to rename a file */</span>
 
 <span class="n">drv</span><span class="p">.</span><span class="n">dir_open_cb</span> <span class="o">=</span> <span class="n">my_dir_open_cb</span><span class="p">;</span>         <span class="cm">/*Callback to open directory to read its content */</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">dir_read_cb</span> <span class="o">=</span> <span class="n">my_dir_read_cb</span><span class="p">;</span>         <span class="cm">/*Callback to read a directory&#39;s content */</span>
 <span class="n">drv</span><span class="p">.</span><span class="n">dir_close_cb</span> <span class="o">=</span> <span class="n">my_dir_close_cb</span><span class="p">;</span>       <span class="cm">/*Callback to close a directory */</span>
 
-<span class="n">drv</span><span class="p">.</span><span class="n">free_space_cb</span> <span class="o">=</span> <span class="n">my_size_cb</span><span class="p">;</span>           <span class="cm">/*Callback to tell free space on the drive */</span>
+<span class="n">drv</span><span class="p">.</span><span class="n">free_space_cb</span> <span class="o">=</span> <span class="n">my_free_space_cb</span><span class="p">;</span>     <span class="cm">/*Callback to tell free space on the drive */</span>
 
 <span class="n">drv</span><span class="p">.</span><span class="n">user_data</span> <span class="o">=</span> <span class="n">my_user_data</span><span class="p">;</span>             <span class="cm">/*Any custom data if required*/</span>
 
@@ -1234,7 +1234,7 @@ For example, if the SD card is associated with the letter <code class="docutils 
 </pre></div>
 </div>
 <p>Any of the callbacks can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to indicate that that operation is not supported.</p>
-<p>As an example of how the callbacks are used, if you use <code class="docutils literal notranslate"><span class="pre">lv_fs_open(&amp;file,</span> <span class="pre">&quot;S:/folder/file.txt&quot;,</span> <span class="pre">LV_FS_MODE_WR)</span></code>, LittlevGL:</p>
+<p>As an example of how the callbacks are used, if you use <code class="docutils literal notranslate"><span class="pre">lv_fs_open(&amp;file,</span> <span class="pre">&quot;S:/folder/file.txt&quot;,</span> <span class="pre">LV_FS_MODE_WR)</span></code>, LVGL:</p>
 <ol class="simple">
 <li><p>Verifies that a registered drive exists with the letter <code class="docutils literal notranslate"><span class="pre">'S'</span></code>.</p></li>
 <li><p>Checks if it’s <code class="docutils literal notranslate"><span class="pre">open_cb</span></code> is implemented (not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>).</p></li>
@@ -1457,7 +1457,7 @@ For example, if the SD card is associated with the letter <code class="docutils 
 <dl class="function">
 <dt id="_CPPv414lv_fs_is_readyc">
 <span id="_CPPv314lv_fs_is_readyc"></span><span id="_CPPv214lv_fs_is_readyc"></span><span id="lv_fs_is_ready__c"></span><span class="target" id="lv__fs_8h_1a4afefd5dbe151665fa2a24ad0a1eeff8"></span>bool <code class="sig-name descname">lv_fs_is_ready</code><span class="sig-paren">(</span>char <em>letter</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_fs_is_readyc" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Test if a drive is rady or not. If the <code class="docutils literal notranslate"><span class="pre">ready</span></code> function was not initialized <code class="docutils literal notranslate"><span class="pre">true</span></code> will be returned. <dl class="simple">
+<dd><p>Test if a drive is ready or not. If the <code class="docutils literal notranslate"><span class="pre">ready</span></code> function was not initialized <code class="docutils literal notranslate"><span class="pre">true</span></code> will be returned. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>true: drive is ready; false: drive is not ready </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -1902,7 +1902,7 @@ For example, if the SD card is associated with the letter <code class="docutils 
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jun 05, 2020.
+        Last updated on Jun 16, 2020.
       </span>
 
     </p>

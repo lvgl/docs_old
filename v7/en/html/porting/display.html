@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.0.1
+                v7.0.2
               </div>
             
           
@@ -105,6 +105,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/quick-overview.html">Quick overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#get-started-in-a-simulator">Get started in a simulator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#add-lvgl-into-your-project">Add LVGL into your project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#learn-the-basics">Learn the basics</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#widgets">Widgets</a></li>
@@ -122,7 +123,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#micropython">Micropython</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#contributing">Contributing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulator on PC</a><ul>
@@ -146,9 +146,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-lvgl">Why Micropython + LVGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-lvgl-in-micropython">Here are some advantages of using LVGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-lvgl-could-be-used-for">Micropython + LVGL could be used for:</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#so-what-does-it-look-like">So what does it look like?</a><ul>
@@ -1220,16 +1220,16 @@
 </div>
 <p>There are 3 possible configurations regarding the buffer size:</p>
 <ol class="simple">
-<li><p><strong>One buffer</strong> LittlevGL draws the content of the screen into a buffer and sends it to the display.
+<li><p><strong>One buffer</strong> LVGL draws the content of the screen into a buffer and sends it to the display.
 The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts.
 If only small areas changes (e.g. button press) then only those areas will be refreshed.</p></li>
-<li><p><strong>Two non-screen-sized buffers</strong> having two buffers LittlevGL can draw into one buffer while the content of the other buffer is sent to display in the background.
+<li><p><strong>Two non-screen-sized buffers</strong> having two buffers LVGL can draw into one buffer while the content of the other buffer is sent to display in the background.
 DMA or other hardware should be used to transfer the data to the display to let the CPU draw meanwhile.
 This way the rendering and refreshing of the display become parallel.
-Similarly to the <em>One buffer</em>, LittlevGL will draw the display’s content in chunks if the buffer is smaller than the area to refresh.</p></li>
+Similarly to the <em>One buffer</em>, LVGL will draw the display’s content in chunks if the buffer is smaller than the area to refresh.</p></li>
 <li><p><strong>Two screen-sized buffers</strong>.
-In contrast to <em>Two non-screen-sized buffers</em> LittlevGL will always provide the whole screen’s content not only chunks.
-This way the driver can simply change the address of the frame buffer to the buffer received from LittlevGL.
+In contrast to <em>Two non-screen-sized buffers</em> LVGL will always provide the whole screen’s content not only chunks.
+This way the driver can simply change the address of the frame buffer to the buffer received from LVGL.
 Therefore this method works the best when the MCU has an LCD/TFT interface and the frame buffer is just a location in the RAM.</p></li>
 </ol>
 </div>
@@ -1247,7 +1247,7 @@ Therefore this method works the best when the MCU has an LCD/TFT interface and t
 <li><p><strong>color_chroma_key</strong> a color which will be drawn as transparent on chrome keyed images. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code> by default from <em>lv_conf.h</em>).</p></li>
 <li><p><strong>user_data</strong> custom user data for the driver. Its type can be modified in lv_conf.h.</p></li>
 <li><p><strong>anti-aliasing</strong> use anti-aliasing (edge smoothing). <code class="docutils literal notranslate"><span class="pre">LV_ANTIALIAS</span></code> by default  from <em>lv_conf.h</em>.</p></li>
-<li><p><strong>rotated</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> swap <code class="docutils literal notranslate"><span class="pre">hor_res</span></code> and <code class="docutils literal notranslate"><span class="pre">ver_res</span></code>. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display’s fill direction.</p></li>
+<li><p><strong>rotated</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> swap <code class="docutils literal notranslate"><span class="pre">hor_res</span></code> and <code class="docutils literal notranslate"><span class="pre">ver_res</span></code>. LVGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display’s fill direction.</p></li>
 <li><p><strong>screen_transp</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> the screen can have transparent or opaque style. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> needs to enabled in <em>lv_conf.h</em>.</p></li>
 </ul>
 <p>To use a GPU the following callbacks can be used:</p>
@@ -1266,7 +1266,7 @@ This way the buffers used in <code class="docutils literal notranslate"><span cl
 <li><p><strong>monitor_cb</strong> a callback function tells how many pixels were refreshed in how much time.</p></li>
 </ul>
 <p>To set the fields of <em>lv_disp_drv_t</em> variable it needs to be initialized with <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_init(&amp;disp_drv)</span></code>.
-And finally to register a display for LittlevGL <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register(&amp;disp_drv)</span></code> needs to be called.</p>
+And finally to register a display for LVGL <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register(&amp;disp_drv)</span></code> needs to be called.</p>
 <p>All together it looks like this:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>    <span class="n">lv_disp_drv_t</span> <span class="n">disp_drv</span><span class="p">;</span>                 <span class="cm">/*A variable to hold the drivers. Can be local variable*/</span>
     <span class="n">lv_disp_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span>            <span class="cm">/*Basic initialization*/</span>
@@ -1902,7 +1902,7 @@ And finally to register a display for LittlevGL <code class="docutils literal no
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jun 05, 2020.
+        Last updated on Jun 16, 2020.
       </span>
 
     </p>
