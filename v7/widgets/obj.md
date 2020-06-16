@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/widgets/obj.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/widgets/obj.md
 ```
 # Base object (lv_obj)
 

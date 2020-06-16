@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/widgets/page.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/widgets/page.md
 ```
 # Page (lv_page)
 

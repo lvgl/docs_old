@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/widgets/tabview.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/widgets/tabview.md
 ```
 # Tabview (lv_tabview)
 
