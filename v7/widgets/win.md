@@ -26,7 +26,7 @@ The height of the control buttons is: *header height - header padding_top -  hea
 On the header, there is a title which can be modified by: `lv_win_set_title(win, "New title")`. 
 
 ### Control buttons
-Control buttons can be added to the right side of the header with: `lv_win_add_btn(win, LV_SYMBOL_CLOSE)`. 
+Control buttons can be added to the right of the window header with: `lv_win_add_btn_right(win, LV_SYMBOL_CLOSE)`, to add a button to the left side of the window header use `lv_win_add_btn_left(win, LV_SYMBOL_CLOSE)` instead.
 The second parameter is an [Image](/widgets/img) source so it can be a symbol, a pointer to an `lv_img_dsc_t `variable or a path to file.
 
 The width of the buttons can be set with `lv_win_set_btn_width(win, w)`. If `w == 0` the buttons will be square-shaped.

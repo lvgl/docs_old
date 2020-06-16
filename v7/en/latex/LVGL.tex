@@ -519,7 +519,7 @@ Create a display buffer for LVGL. LVGL will render the graphics here first, and 
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k}{static} \PYG{n}{lv\PYGZus{}disp\PYGZus{}buf\PYGZus{}t} \PYG{n}{disp\PYGZus{}buf}\PYG{p}{;}
-\PYG{k}{static} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{buf}\PYG{p}{[}\PYG{n}{LV\PYGZus{}HOR\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{*} \PYG{n}{LV\PYGZus{}VER\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{/} \PYG{l+m+mi}{10}\PYG{p}{]}\PYG{p}{;}                     \PYG{c+cm}{/*Declare a buffer for 10 lines*/}
+\PYG{k}{static} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{n}{buf}\PYG{p}{[}\PYG{n}{LV\PYGZus{}HOR\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{*} \PYG{n}{LV\PYGZus{}VER\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{/} \PYG{l+m+mi}{10}\PYG{p}{]}\PYG{p}{;}                     \PYG{c+cm}{/*Declare a buffer for 1/10 screen size*/}
 \PYG{n}{lv\PYGZus{}disp\PYGZus{}buf\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}buf}\PYG{p}{,} \PYG{n}{buf}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{LV\PYGZus{}HOR\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{*} \PYG{n}{LV\PYGZus{}VER\PYGZus{}RES\PYGZus{}MAX} \PYG{o}{/} \PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{;}    \PYG{c+cm}{/*Initialize the display buffer*/}
 \end{sphinxVerbatim}
 \begin{itemize}
@@ -535,7 +535,7 @@ Implement and register a function which can \sphinxstylestrong{copy the rendered
 \PYG{n}{disp\PYGZus{}drv}\PYG{p}{.}\PYG{n}{buffer} \PYG{o}{=} \PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}buf}\PYG{p}{;}          \PYG{c+cm}{/*Assign the buffer to the display*/}
 \PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{disp\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Finally register the driver*/}
 
-\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}disp\PYGZus{}flush}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{area}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{color\PYGZus{}p}\PYG{p}{)}
+\PYG{k+kt}{void} \PYG{n+nf}{my\PYGZus{}disp\PYGZus{}flush}\PYG{p}{(}\PYG{n}{lv\PYGZus{}disp\PYGZus{}drv\PYGZus{}t} \PYG{o}{*} \PYG{n}{disp}\PYG{p}{,} \PYG{k}{const} \PYG{n}{lv\PYGZus{}area\PYGZus{}t} \PYG{o}{*} \PYG{n}{area}\PYG{p}{,} \PYG{n}{lv\PYGZus{}color\PYGZus{}t} \PYG{o}{*} \PYG{n}{color\PYGZus{}p}\PYG{p}{)}
 \PYG{p}{\PYGZob{}}
     \PYG{k+kt}{int32\PYGZus{}t} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{;}
     \PYG{k}{for}\PYG{p}{(}\PYG{n}{y} \PYG{o}{=} \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y1}\PYG{p}{;} \PYG{n}{y} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n}{area}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{y2}\PYG{p}{;} \PYG{n}{y}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)} \PYG{p}{\PYGZob{}}
@@ -615,7 +615,7 @@ The objects has type specific parameters too which can be set by \sphinxcode{\sp
 \PYG{n}{lv\PYGZus{}slider\PYGZus{}set\PYGZus{}value}\PYG{p}{(}\PYG{n}{slider1}\PYG{p}{,} \PYG{l+m+mi}{70}\PYG{p}{,} \PYG{n}{LV\PYGZus{}ANIM\PYGZus{}ON}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-To see the full API visit the documentation of the widgets or the related header file (e.g. \sphinxhref{https://github.com/littlevgl/lvgl/blob/master/src/lv\_widgets/lv\_slider.h}{lvgl/src/lv\_widgets/lv\_slider.h}).
+To see the full API visit the documentation of the widgets or the related header file (e.g. \sphinxhref{https://github.com/lvgl/lvgl/blob/master/src/lv\_widgets/lv\_slider.h}{lvgl/src/lv\_widgets/lv\_slider.h}).
 
 
 \subsubsection{Events}
@@ -684,7 +684,7 @@ For example it's a valid state for a checkbox: \sphinxcode{\sphinxupquote{LV\_ST
 \subsubsection{Styles}
 \label{\detokenize{get-started/quick-overview:styles}}
 Styles can be assigned to the parts objects to changed their appearance.
-A style can describe for example the background color, border width, text font and so on. See the full list \sphinxhref{https://docs.littlevgl.com/v7/en/html/overview/style.html\#properties}{here}.
+A style can describe for example the background color, border width, text font and so on. See the full list \sphinxhref{https://docs.lvgl.io/v7/en/html/overview/style.html\#properties}{here}.
 
 The styles can be cascaded (similarly to CSS). It means you can add more styles to a part of an object.
 For example \sphinxcode{\sphinxupquote{style\_btn}} can set a default button appearance, and \sphinxcode{\sphinxupquote{style\_btn\_red}} can overwrite some properties to make the button red-
@@ -894,7 +894,7 @@ Learn more about {\hyperref[\detokenize{get-started/micropython::doc}]{\sphinxcr
 
 \section{Simulator on PC}
 \label{\detokenize{get-started/pc-simulator:simulator-on-pc}}\label{\detokenize{get-started/pc-simulator::doc}}
-You can try out the LittlevGL \sphinxstylestrong{using only your PC} (i.e. without any development boards). The LittlevGL will run on a simulator environment on the PC where anyone can write and experiment the real LittlevGL applications.
+You can try out the LVGL \sphinxstylestrong{using only your PC} (i.e. without any development boards). The LVGL will run on a simulator environment on the PC where anyone can write and experiment the real LVGL applications.
 
 Simulator on the PC have the following advantages:
 \begin{itemize}
@@ -908,7 +908,7 @@ Cross-platform - Any Windows, Linux or OSX PC can run the PC simulator.
 Portability - the written code is portable, which means you can simply copy it when using an embedded hardware.
 
 \item {} 
-Easy Validation - The simulator is also very useful to report bugs because it means common platform for every user. So it's a good idea to reproduce a bug in simulator and use the code snippet in the \sphinxhref{https://forum.littlevgl.com}{Forum}.
+Easy Validation - The simulator is also very useful to report bugs because it means common platform for every user. So it's a good idea to reproduce a bug in simulator and use the code snippet in the \sphinxhref{https://forum.lvgl.io}{Forum}.
 
 \end{itemize}
 
@@ -1006,7 +1006,7 @@ If something is not working, then please refer \sphinxhref{http://lazyfoo.net/tu
 \subsubsection{Pre-configured project}
 \label{\detokenize{get-started/pc-simulator:pre-configured-project}}
 A pre-configured graphics library project (based on the latest release) is always available to get started easily.
-You can find the latest one on \sphinxhref{https://github.com/littlevgl/proj\_pc}{GitHub} or on the \sphinxhref{https://littlevgl.com/download}{Download} page.
+You can find the latest one on \sphinxhref{https://github.com/lvgl/lv\_sim\_eclipse\_sdl}{GitHub}.
 (Please note that, the project is configured for Eclipse CDT).
 
 
@@ -1089,13 +1089,13 @@ TODO
 
 
 
-\subsection{Why Micropython + LittlevGL?}
-\label{\detokenize{get-started/micropython:why-micropython-littlevgl}}
-Currently, Micropython \sphinxhref{https://forum.micropython.org/viewtopic.php?f=18\&t=5543}{does not have a good high-level GUI library} by default. LittlevGL is an \sphinxhref{https://blog.littlevgl.com/2018-12-13/extend-lvgl-objects}{Object Oriented Component Based} high-level GUI library, which seems to be a natural candidate to map into a higher level language, such as Python. LittlevGL is implemented in C and its APIs are in C.
+\subsection{Why Micropython + LVGL?}
+\label{\detokenize{get-started/micropython:why-micropython-lvgl}}
+Currently, Micropython \sphinxhref{https://forum.micropython.org/viewtopic.php?f=18\&t=5543}{does not have a good high-level GUI library} by default. LVGL is an \sphinxhref{https://blog.lvgl.io/2018-12-13/extend-lvgl-objects}{Object Oriented Component Based} high-level GUI library, which seems to be a natural candidate to map into a higher level language, such as Python. LVGL is implemented in C and its APIs are in C.
 
 
-\subsubsection{Here are some advantages of using LittlevGL in Micropython:}
-\label{\detokenize{get-started/micropython:here-are-some-advantages-of-using-littlevgl-in-micropython}}\begin{itemize}
+\subsubsection{Here are some advantages of using LVGL in Micropython:}
+\label{\detokenize{get-started/micropython:here-are-some-advantages-of-using-lvgl-in-micropython}}\begin{itemize}
 \item {} 
 Develop GUI in Python, a very popular high level language. Use paradigms such as Object Oriented Programming.
 
@@ -1105,8 +1105,8 @@ Usually, GUI development requires multiple iterations to get things right. With 
 \end{itemize}
 
 
-\subsubsection{Micropython + LittlevGL could be used for:}
-\label{\detokenize{get-started/micropython:micropython-littlevgl-could-be-used-for}}\begin{itemize}
+\subsubsection{Micropython + LVGL could be used for:}
+\label{\detokenize{get-started/micropython:micropython-lvgl-could-be-used-for}}\begin{itemize}
 \item {} 
 Fast prototyping GUI.
 
@@ -1117,10 +1117,10 @@ Shorten the cycle of changing and fine-tuning the GUI.
 Model the GUI in a more abstract way by defining reusable composite objects, taking advantage of Python's language features such as Inheritance, Closures, List Comprehension, Generators, Exception Handling, Arbitrary Precision Integers and others.
 
 \item {} 
-Make LittlevGL accessible to a larger audience. No need to know C in order to create a nice GUI on an embedded system.This goes well with \sphinxhref{https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython}{CircuitPython vision}. CircuitPython was designed with education in mind, to make it easier for new or unexperienced users to get started with embedded development.
+Make LVGL accessible to a larger audience. No need to know C in order to create a nice GUI on an embedded system.This goes well with \sphinxhref{https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython}{CircuitPython vision}. CircuitPython was designed with education in mind, to make it easier for new or unexperienced users to get started with embedded development.
 
 \item {} 
-Creating tools to work with LittlevGL at a higher level (e.g. drag-and-drop designer).
+Creating tools to work with LVGL at a higher level (e.g. drag-and-drop designer).
 
 \end{itemize}
 
@@ -1133,7 +1133,7 @@ Creating tools to work with LittlevGL at a higher level (e.g. drag-and-drop desi
 \label{\detokenize{get-started/micropython:so-what-does-it-look-like}}\begin{quote}
 
 TL;DR:
-It's very much like the C API, but Object Oriented for LittlevGL components.
+It's very much like the C API, but Object Oriented for LVGL components.
 \end{quote}
 
 Let's dive right into an example!
@@ -1158,38 +1158,40 @@ Let's dive right into an example!
 
 \subsubsection{Online Simulator}
 \label{\detokenize{get-started/micropython:online-simulator}}
-If you want to experiment with LittlevGL + Micropython without downloading anything - you can use our online simulator!It's a fully functional LittlevGL + Micropython that runs entirely in the browser and allows you to edit a python script and run it.
+If you want to experiment with LVGL + Micropython without downloading anything - you can use our online simulator!It's a fully functional LVGL + Micropython that runs entirely in the browser and allows you to edit a python script and run it.
 
-\sphinxhref{https://sim.littlevgl.com/v6/micropython/ports/javascript/lvgl\_editor.html}{Click here to experiment on the online simulator}
+\sphinxhref{https://sim.lvgl.io/v6/micropython/ports/javascript/bundle\_out/index.html}{Click here to experiment on the online simulator}
 
-\sphinxhref{https://sim.littlevgl.com/v6/micropython/ports/javascript/lvgl\_editor.html?script=https://gist.githubusercontent.com/amirgon/51299ce9b6448328a855826149482ae6/raw/0f235c6d40462fd2f0e55364b874f14fe3fd613c/lvgl\_hello\_world.py\&script\_startup=https://gist.githubusercontent.com/amirgon/7bf15a66ba6d959bbf90d10f3da571be/raw/8684b5fa55318c184b1310663b187aaab5c65be6/init\_lv\_mp\_js.py}{Hello World}
+\sphinxhref{https://sim.lvgl.io/v6/micropython/ports/javascript/bundle\_out/index.html?script=https://gist.githubusercontent.com/amirgon/51299ce9b6448328a855826149482ae6/raw/0f235c6d40462fd2f0e55364b874f14fe3fd613c/lvgl\_hello\_world.py\&script\_startup=https://gist.githubusercontent.com/amirgon/7bf15a66ba6d959bbf90d10f3da571be/raw/8684b5fa55318c184b1310663b187aaab5c65be6/init\_lv\_mp\_js.py}{Hello World}
+
+Note: examples don't work with v7 yet, so v6 is used.
 
 
 \subsubsection{PC Simulator}
 \label{\detokenize{get-started/micropython:pc-simulator}}
-Micropython is ported to many platforms. One notable port is "unix", which allows you to build and run Micropython (+LittlevGL) on a Linux machine. (On a Windows machine you might need Virtual Box or WSL or MinGW or Cygwin etc.)
+Micropython is ported to many platforms. One notable port is "unix", which allows you to build and run Micropython (+LVGL) on a Linux machine. (On a Windows machine you might need Virtual Box or WSL or MinGW or Cygwin etc.)
 
-\sphinxhref{https://github.com/littlevgl/lv\_micropython}{Click here to know more information about building and running the unix port}
+\sphinxhref{https://github.com/lvgl/lv\_micropython}{Click here to know more information about building and running the unix port}
 
 
 \subsubsection{Embedded platform}
 \label{\detokenize{get-started/micropython:embedded-platform}}
-At the end, the goal is to run it all on an embedded platform.Both Micropython and LittlevGL can be used on many embedded architectures, such as stm32, ESP32 etc.You would also need display and input drivers. We have some sample drivers (ESP32+ILI9341, as well as some other examples), but most chances are you would want to create your own input/display drivers for your specific purposes.Drivers can be implemented either in C as Micropython module, or in pure Micropython!
+At the end, the goal is to run it all on an embedded platform.Both Micropython and LVGL can be used on many embedded architectures, such as stm32, ESP32 etc.You would also need display and input drivers. We have some sample drivers (ESP32+ILI9341, as well as some other examples), but most chances are you would want to create your own input/display drivers for your specific purposes.Drivers can be implemented either in C as Micropython module, or in pure Micropython!
 
 
 \subsection{Where can I find more information?}
 \label{\detokenize{get-started/micropython:where-can-i-find-more-information}}\begin{itemize}
 \item {} 
-On the \sphinxhref{https://blog.littlevgl.com/2019-02-20/micropython-bindings}{Blog Post}
+On the \sphinxhref{https://blog.lvgl.io/2019-02-20/micropython-bindings}{Blog Post}
 
 \item {} 
-On \sphinxcode{\sphinxupquote{lv\_micropython}} \sphinxhref{https://github.com/littlevgl/lv\_micropython}{README}
+On \sphinxcode{\sphinxupquote{lv\_micropython}} \sphinxhref{https://github.com/lvgl/lv\_micropython}{README}
 
 \item {} 
-On \sphinxcode{\sphinxupquote{lv\_binding\_micropython}} \sphinxhref{https://github.com/littlevgl/lv\_binding\_micropython}{README}
+On \sphinxcode{\sphinxupquote{lv\_binding\_micropython}} \sphinxhref{https://github.com/lvgl/lv\_binding\_micropython}{README}
 
 \item {} 
-On LittlevGL forum (Feel free to ask anything!)
+On LVGL forum (Feel free to ask anything!)
 
 \item {} 
 On Micropython \sphinxhref{http://docs.micropython.org/en/latest/}{docs} and \sphinxhref{https://forum.micropython.org/}{forum}
@@ -1207,7 +1209,7 @@ On Micropython \sphinxhref{http://docs.micropython.org/en/latest/}{docs} and \sp
 \sphinxstylestrong{Application}
 Your application which creates the GUI and handles the specific tasks.
 
-\sphinxstylestrong{LittlevGL}
+\sphinxstylestrong{LVGL}
 The graphics library itself. Your application can communicate with the library to create a GUI. It contains a HAL (Hardware Abstraction Layer) interface to register your display and input device drivers.
 
 \sphinxstylestrong{Driver}
@@ -1241,16 +1243,16 @@ The frame buffer is usually located in the display controller which saves a lot 
 
 \subsection{Get the library}
 \label{\detokenize{porting/project:get-the-library}}
-LittlevGL Graphics Library is available on GitHub: \sphinxurl{https://github.com/littlevgl/lvgl}.
+LVGL Graphics Library is available on GitHub: \sphinxurl{https://github.com/lvgl/lvgl}.
 
-You can clone it or download the latest version of the library from GitHub or you can use the \sphinxhref{https://littlevgl.com/download}{Download} page as well.
+You can clone it or download the latest version of the library from GitHub.
 
 The graphics library is the \sphinxstylestrong{lvgl} directory which should be copied into your project.
 
 
 \subsection{Configuration file}
 \label{\detokenize{porting/project:configuration-file}}
-There is a configuration header file for LittlevGL called \sphinxstylestrong{lv\_conf.h}. It sets the library's basic behaviour, disables unused modules and features, adjusts the size of memory buffers in compile-time, etc.
+There is a configuration header file for LVGL called \sphinxstylestrong{lv\_conf.h}. It sets the library's basic behaviour, disables unused modules and features, adjusts the size of memory buffers in compile-time, etc.
 
 Copy \sphinxstylestrong{lvgl/lv\_conf\_template.h} next to the \sphinxstyleemphasis{lvgl} directory and rename it to \sphinxstyleemphasis{lv\_conf.h}. Open the file and change the \sphinxcode{\sphinxupquote{\#if 0}} at the beginning to \sphinxcode{\sphinxupquote{\#if 1}} to enable its content.
 
@@ -1287,13 +1289,13 @@ Call \sphinxstyleemphasis{lv\_init()}.
 Initialize your drivers.
 
 \item {} 
-Register the display and input devices drivers in LittlevGL.  More about {\hyperref[\detokenize{porting/display::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Display}}}} and {\hyperref[\detokenize{porting/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Input device}}}} registration.
+Register the display and input devices drivers in LVGL.  More about {\hyperref[\detokenize{porting/display::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Display}}}} and {\hyperref[\detokenize{porting/indev::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Input device}}}} registration.
 
 \item {} 
 Call \sphinxcode{\sphinxupquote{lv\_tick\_inc(x)}} in every \sphinxcode{\sphinxupquote{x}} milliseconds in an interrupt to tell the elapsed time. {\hyperref[\detokenize{porting/tick::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Learn more}}}}.
 
 \item {} 
-Call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically in every few milliseconds to handle LittlevGL related tasks. {\hyperref[\detokenize{porting/task-handler::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Learn more}}}}.
+Call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically in every few milliseconds to handle LVGL related tasks. {\hyperref[\detokenize{porting/task-handler::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Learn more}}}}.
 
 \end{enumerate}
 
@@ -1333,20 +1335,20 @@ There are 3 possible configurations regarding the buffer size:
 \def\labelenumi{\theenumi .}
 \makeatletter\def\p@enumii{\p@enumi \theenumi .}\makeatother
 \item {} 
-\sphinxstylestrong{One buffer} LittlevGL draws the content of the screen into a buffer and sends it to the display.
+\sphinxstylestrong{One buffer} LVGL draws the content of the screen into a buffer and sends it to the display.
 The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts.
 If only small areas changes (e.g. button press) then only those areas will be refreshed.
 
 \item {} 
-\sphinxstylestrong{Two non-screen-sized buffers} having two buffers LittlevGL can draw into one buffer while the content of the other buffer is sent to display in the background.
+\sphinxstylestrong{Two non-screen-sized buffers} having two buffers LVGL can draw into one buffer while the content of the other buffer is sent to display in the background.
 DMA or other hardware should be used to transfer the data to the display to let the CPU draw meanwhile.
 This way the rendering and refreshing of the display become parallel.
-Similarly to the \sphinxstyleemphasis{One buffer}, LittlevGL will draw the display's content in chunks if the buffer is smaller than the area to refresh.
+Similarly to the \sphinxstyleemphasis{One buffer}, LVGL will draw the display's content in chunks if the buffer is smaller than the area to refresh.
 
 \item {} 
 \sphinxstylestrong{Two screen-sized buffers}.
-In contrast to \sphinxstyleemphasis{Two non-screen-sized buffers} LittlevGL will always provide the whole screen's content not only chunks.
-This way the driver can simply change the address of the frame buffer to the buffer received from LittlevGL.
+In contrast to \sphinxstyleemphasis{Two non-screen-sized buffers} LVGL will always provide the whole screen's content not only chunks.
+This way the driver can simply change the address of the frame buffer to the buffer received from LVGL.
 Therefore this method works the best when the MCU has an LCD/TFT interface and the frame buffer is just a location in the RAM.
 
 \end{enumerate}
@@ -1382,7 +1384,7 @@ There are some optional data fields:
 \sphinxstylestrong{anti-aliasing} use anti-aliasing (edge smoothing). \sphinxcode{\sphinxupquote{LV\_ANTIALIAS}} by default  from \sphinxstyleemphasis{lv\_conf.h}.
 
 \item {} 
-\sphinxstylestrong{rotated} if \sphinxcode{\sphinxupquote{1}} swap \sphinxcode{\sphinxupquote{hor\_res}} and \sphinxcode{\sphinxupquote{ver\_res}}. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction.
+\sphinxstylestrong{rotated} if \sphinxcode{\sphinxupquote{1}} swap \sphinxcode{\sphinxupquote{hor\_res}} and \sphinxcode{\sphinxupquote{ver\_res}}. LVGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction.
 
 \item {} 
 \sphinxstylestrong{screen\_transp} if \sphinxcode{\sphinxupquote{1}} the screen can have transparent or opaque style. \sphinxcode{\sphinxupquote{LV\_COLOR\_SCREEN\_TRANSP}} needs to enabled in \sphinxstyleemphasis{lv\_conf.h}.
@@ -1418,7 +1420,7 @@ This way the buffers used in \sphinxcode{\sphinxupquote{lv\_disp\_buf\_t}} can b
 \end{itemize}
 
 To set the fields of \sphinxstyleemphasis{lv\_disp\_drv\_t} variable it needs to be initialized with \sphinxcode{\sphinxupquote{lv\_disp\_drv\_init(\&disp\_drv)}}.
-And finally to register a display for LittlevGL \sphinxcode{\sphinxupquote{lv\_disp\_drv\_register(\&disp\_drv)}} needs to be called.
+And finally to register a display for LVGL \sphinxcode{\sphinxupquote{lv\_disp\_drv\_register(\&disp\_drv)}} needs to be called.
 
 All together it looks like this:
 
@@ -2395,7 +2397,7 @@ To set up an input device an \sphinxcode{\sphinxupquote{lv\_indev\_drv\_t}} vari
 \PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}init}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Basic initialization*/}
 \PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{type} \PYG{o}{=}\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}                 \PYG{c+cm}{/*See below.*/}
 \PYG{n}{indev\PYGZus{}drv}\PYG{p}{.}\PYG{n}{read\PYGZus{}cb} \PYG{o}{=}\PYG{p}{.}\PYG{p}{.}\PYG{p}{.}              \PYG{c+cm}{/*See below.*/}
-\PYG{c+cm}{/*Register the driver in LittlevGL and save the created input device object*/}
+\PYG{c+cm}{/*Register the driver in LVGL and save the created input device object*/}
 \PYG{n}{lv\PYGZus{}indev\PYGZus{}t} \PYG{o}{*} \PYG{n}{my\PYGZus{}indev} \PYG{o}{=} \PYG{n}{lv\PYGZus{}indev\PYGZus{}drv\PYGZus{}register}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{indev\PYGZus{}drv}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
@@ -3573,7 +3575,7 @@ Array points assigned to the button ()screen will be pressed here by the buttons
 
 \section{Tick interface}
 \label{\detokenize{porting/tick:tick-interface}}\label{\detokenize{porting/tick::doc}}
-The LittlevGL needs a system tick to know the elapsed time for animation and other tasks.
+The LVGL needs a system tick to know the elapsed time for animation and other tasks.
 
 You need to call the \sphinxcode{\sphinxupquote{lv\_tick\_inc(tick\_period)}} function periodically and tell the call period in milliseconds. For example, \sphinxcode{\sphinxupquote{lv\_tick\_inc(1)}} for calling in every millisecond.
 
@@ -3588,7 +3590,7 @@ On Linux based operating system (e.g. on Raspberry Pi) \sphinxcode{\sphinxupquot
 \PYG{p}{\PYGZob{}}
       \PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{\PYGZob{}}
         \PYG{n}{usleep}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{o}{*}\PYG{l+m+mi}{1000}\PYG{p}{)}\PYG{p}{;}   \PYG{c+cm}{/*Sleep for 5 millisecond*/}
-        \PYG{n}{lv\PYGZus{}tick\PYGZus{}inc}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Tell LittlevGL that 5 milliseconds were elapsed*/}
+        \PYG{n}{lv\PYGZus{}tick\PYGZus{}inc}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{;}      \PYG{c+cm}{/*Tell LVGL that 5 milliseconds were elapsed*/}
     \PYG{p}{\PYGZcb{}}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
@@ -3640,7 +3642,7 @@ the elapsed milliseconds since 'prev\_tick'
 
 \section{Task Handler}
 \label{\detokenize{porting/task-handler:task-handler}}\label{\detokenize{porting/task-handler::doc}}
-To handle the tasks of LittlevGL you need to call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically in one of the followings:
+To handle the tasks of LVGL you need to call \sphinxcode{\sphinxupquote{lv\_task\_handler()}} periodically in one of the followings:
 \begin{itemize}
 \item {} 
 \sphinxstyleemphasis{while(1)} of \sphinxstyleemphasis{main()} function
@@ -3699,9 +3701,9 @@ In addition to \sphinxcode{\sphinxupquote{lv\_disp\_get\_inactive\_time()}} you 
 
 \section{Operating system and interrupts}
 \label{\detokenize{porting/os:operating-system-and-interrupts}}\label{\detokenize{porting/os::doc}}
-LittlevGL is \sphinxstylestrong{not thread-safe} by default.
+LVGL is \sphinxstylestrong{not thread-safe} by default.
 
-However, in the following conditions it's valid to call LittlevGL related functions:
+However, in the following conditions it's valid to call LVGL related functions:
 \begin{itemize}
 \item {} 
 In \sphinxstyleemphasis{events}. Learn more in {\hyperref[\detokenize{overview/event::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Events}}}}.
@@ -3715,19 +3717,19 @@ In \sphinxstyleemphasis{lv\_tasks}. Learn more in {\hyperref[\detokenize{overvie
 \subsection{Tasks and threads}
 \label{\detokenize{porting/os:tasks-and-threads}}
 If you need to use real tasks or threads, you need a mutex which should be invoked before the call of \sphinxcode{\sphinxupquote{lv\_task\_handler}} and released after it.
-Also, you have to use the same mutex in other tasks and threads around every LittlevGL (\sphinxcode{\sphinxupquote{lv\_...}}) related function calls and codes.
-This way you can use LittlevGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LittlevGL functions.
+Also, you have to use the same mutex in other tasks and threads around every LVGL (\sphinxcode{\sphinxupquote{lv\_...}}) related function calls and codes.
+This way you can use LVGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LVGL functions.
 
 
 \subsection{Interrupts}
 \label{\detokenize{porting/os:interrupts}}
-Try to avoid calling LittlevGL functions from the interrupts (except \sphinxcode{\sphinxupquote{lv\_tick\_inc()}} and \sphinxcode{\sphinxupquote{lv\_disp\_flush\_ready()}}). But, if you need to do this you have to disable the interrupt which uses LittlevGL functions while \sphinxcode{\sphinxupquote{lv\_task\_handler}} is running.
+Try to avoid calling LVGL functions from the interrupts (except \sphinxcode{\sphinxupquote{lv\_tick\_inc()}} and \sphinxcode{\sphinxupquote{lv\_disp\_flush\_ready()}}). But, if you need to do this you have to disable the interrupt which uses LVGL functions while \sphinxcode{\sphinxupquote{lv\_task\_handler}} is running.
 It's a better approach to set a flag or some value and periodically check it in an \sphinxcode{\sphinxupquote{lv\_task}}.
 
 
 \section{Logging}
 \label{\detokenize{porting/log:logging}}\label{\detokenize{porting/log::doc}}
-LittlevGL has built-in \sphinxstyleemphasis{log} module to inform the user about what is happening in the library.
+LVGL has built-in \sphinxstyleemphasis{log} module to inform the user about what is happening in the library.
 
 
 \subsection{Log level}
@@ -3805,7 +3807,7 @@ You can also use the log module via the \sphinxcode{\sphinxupquote{LV\_LOG\_TRAC
 
 \section{Objects}
 \label{\detokenize{overview/object:objects}}\label{\detokenize{overview/object::doc}}
-In the LittlevGL the \sphinxstylestrong{basic building blocks} of a user interface are the objects, also called \sphinxstyleemphasis{Widgets}.
+In the LVGL the \sphinxstylestrong{basic building blocks} of a user interface are the objects, also called \sphinxstyleemphasis{Widgets}.
 For example a {\hyperref[\detokenize{widgets/btn::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Button}}}}, {\hyperref[\detokenize{widgets/label::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Label}}}}, {\hyperref[\detokenize{widgets/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}}, {\hyperref[\detokenize{widgets/list::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{List}}}}, {\hyperref[\detokenize{widgets/chart::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Chart}}}} or {\hyperref[\detokenize{widgets/textarea::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Text area}}}}.
 
 Check all the {\hyperref[\detokenize{widgets/index::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Object types}}}} here.
@@ -3923,7 +3925,7 @@ If a child is partially or fully out of its parent then the parts outside will n
 
 \subsubsection{Create - delete objects}
 \label{\detokenize{overview/object:create-delete-objects}}
-In LittlevGL objects can be created and deleted dynamically in run-time.
+In LVGL objects can be created and deleted dynamically in run-time.
 It means only the currently created objects consume RAM.
 For example, if you need a chart, you can create it when required and delete it when it is not visible or necessary.
 
@@ -4032,7 +4034,7 @@ To learn more about the states read the related section of the \sphinxhref{/over
 
 \subsection{Order of creation}
 \label{\detokenize{overview/layer:order-of-creation}}
-By default, LittlevGL draws old objects on the background and new objects on the foreground.
+By default, LVGL draws old objects on the background and new objects on the foreground.
 
 For example, assume we added a button to a parent object named button1 and then another button named button2. Then button1 (with its child object(s)) will be in the background and can be covered by button2 and its children.
 
@@ -4068,7 +4070,7 @@ For example, assume we added a button to a parent object named button1 and then 
 There are several ways to bring an object to the foreground:
 \begin{itemize}
 \item {} 
-Use \sphinxcode{\sphinxupquote{lv\_obj\_set\_top(obj, true)}}. If \sphinxcode{\sphinxupquote{obj}} or any of its children is clicked, then LittlevGL will automatically bring the object to the foreground.
+Use \sphinxcode{\sphinxupquote{lv\_obj\_set\_top(obj, true)}}. If \sphinxcode{\sphinxupquote{obj}} or any of its children is clicked, then LVGL will automatically bring the object to the foreground.
 It works similarly to a typical GUI on a PC. When a window in the background is clicked, it will come to the foreground automatically.
 
 \item {} 
@@ -4082,7 +4084,7 @@ When \sphinxcode{\sphinxupquote{lv\_obj\_set\_parent(obj, new\_parent)}} is used
 
 \subsection{Top and sys layers}
 \label{\detokenize{overview/layer:top-and-sys-layers}}
-LittlevGL uses two special layers named as \sphinxcode{\sphinxupquote{layer\_top}} and \sphinxcode{\sphinxupquote{layer\_sys}}.
+LVGL uses two special layers named as \sphinxcode{\sphinxupquote{layer\_top}} and \sphinxcode{\sphinxupquote{layer\_sys}}.
 Both are visible and common on all screens of a display. \sphinxstylestrong{They are not, however, shared among multiple physical displays.} The \sphinxcode{\sphinxupquote{layer\_top}} is always on top of the default screen (\sphinxcode{\sphinxupquote{lv\_scr\_act()}}), and \sphinxcode{\sphinxupquote{layer\_sys}} is on top of \sphinxcode{\sphinxupquote{layer\_top}}.
 
 The \sphinxcode{\sphinxupquote{layer\_top}} can be used by the user to create some content visible everywhere. For example, a menu bar, a pop-up, etc. If the \sphinxcode{\sphinxupquote{click}} attribute is enabled, then \sphinxcode{\sphinxupquote{layer\_top}} will absorb all user click and acts as a modal.
@@ -4091,12 +4093,12 @@ The \sphinxcode{\sphinxupquote{layer\_top}} can be used by the user to create so
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}set\PYGZus{}click}\PYG{p}{(}\PYG{n}{lv\PYGZus{}layer\PYGZus{}top}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
 
-The \sphinxcode{\sphinxupquote{layer\_sys}} is also using for similar purpose on LittlevGL. For example, it places the mouse cursor there to be sure it's always visible.
+The \sphinxcode{\sphinxupquote{layer\_sys}} is also using for similar purpose on LVGL. For example, it places the mouse cursor there to be sure it's always visible.
 
 
 \section{Events}
 \label{\detokenize{overview/event:events}}\label{\detokenize{overview/event::doc}}
-Events are triggered in LittlevGL when something happens which might be interesting to the user, e.g. if an object:
+Events are triggered in LVGL when something happens which might be interesting to the user, e.g. if an object:
 \begin{itemize}
 \item {} 
 is clicked
@@ -6806,10 +6808,10 @@ A function to call when a new object is focused (optional)
 \section{Displays}
 \label{\detokenize{overview/display:displays}}\label{\detokenize{overview/display::doc}}
 \begin{sphinxadmonition}{important}{Important:}
-The basic concept of \sphinxstyleemphasis{display} in LittlevGL is explained in the {[}Porting{]}(/porting/display) section. So before reading further, please read the {[}Porting{]}(/porting/display) section first.
+The basic concept of \sphinxstyleemphasis{display} in LVGL is explained in the {[}Porting{]}(/porting/display) section. So before reading further, please read the {[}Porting{]}(/porting/display) section first.
 \end{sphinxadmonition}
 
-In LittlevGL, you can have multiple displays, each with their own driver and objects.
+In LVGL, you can have multiple displays, each with their own driver and objects.
 
 Creating more displays is easy: just initialize more display buffers and register another driver for every display.
 When you create the UI, use \sphinxcode{\sphinxupquote{lv\_disp\_set\_default(disp)}} to tell the library which display to create objects on.
@@ -6895,7 +6897,7 @@ Screens can be deleted with \sphinxcode{\sphinxupquote{lv\_obj\_del(scr)}}, but 
 \label{\detokenize{overview/display:opaque-screen}}
 Usually, the opacity of the screen is \sphinxcode{\sphinxupquote{LV\_OPA\_COVER}} to provide a solid background for its children.
 
-However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LittlevGL.
+However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LVGL.
 
 To do this, the screen should have a style that sets \sphinxcode{\sphinxupquote{body.opa}} or \sphinxcode{\sphinxupquote{image.opa}} to \sphinxcode{\sphinxupquote{LV\_OPA\_TRANSP}} (or another non-opaque value) to make the screen opaque.
 
@@ -8286,7 +8288,7 @@ LVGL's font interface is designed to be very flexible.
 You don't need to use LVGL's internal font engine but, you can add your own.
 For example, use \sphinxhref{https://www.freetype.org/}{FreeType} to real-time render glyphs from TTF fonts or use an external flash to store the font's bitmap and read them when the library needs them.
 
-A raedy to use FreeType can be found in \sphinxhref{https://github.com/littlevgl/lv\_lib\_freetype}{lv\_freetype} repository.
+A raedy to use FreeType can be found in \sphinxhref{https://github.com/lvgl/lv\_lib\_freetype}{lv\_freetype} repository.
 
 To do this a custom \sphinxcode{\sphinxupquote{lv\_font\_t}} variable needs to be created:
 
@@ -8391,7 +8393,7 @@ These are usually stored within a project as C files. They are linked into the r
 
 \subsubsection{Files}
 \label{\detokenize{overview/image:files}}
-To deal with files you need to add a \sphinxstyleemphasis{Drive} to LittlevGL. In short, a \sphinxstyleemphasis{Drive} is a collection of functions (\sphinxstyleemphasis{open}, \sphinxstyleemphasis{read}, \sphinxstyleemphasis{close}, etc.) registered in LittlevGL to make file operations.
+To deal with files you need to add a \sphinxstyleemphasis{Drive} to LVGL. In short, a \sphinxstyleemphasis{Drive} is a collection of functions (\sphinxstyleemphasis{open}, \sphinxstyleemphasis{read}, \sphinxstyleemphasis{close}, etc.) registered in LVGL to make file operations.
 You can add an interface to a standard file system (FAT32 on SD card) or you create your simple file system to read data from an SPI Flash memory.
 In every case, a \sphinxstyleemphasis{Drive} is just an abstraction to read and/or write data to a memory.
 See the {\hyperref[\detokenize{overview/file-system::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{File system}}}} section to learn more.
@@ -8404,7 +8406,7 @@ Images stored as files are not linked into the resulting executable, and must be
 Various built-in color formats are supported:
 \begin{itemize}
 \item {} 
-\sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR} Simply stores the RGB colors (in whatever color depth LittlevGL is configured for).
+\sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR} Simply stores the RGB colors (in whatever color depth LVGL is configured for).
 
 \item {} 
 \sphinxstylestrong{LV\_IMG\_CF\_TRUE\_COLOR\_ALPHA} Like \sphinxcode{\sphinxupquote{LV\_IMG\_CF\_TRUE\_COLOR}} but it also adds an alpha (transparency) byte for every pixel.
@@ -8477,7 +8479,7 @@ You can store images in a \sphinxstyleemphasis{Raw} format to indicate that, it'
 
 \subsection{Add and use images}
 \label{\detokenize{overview/image:add-and-use-images}}
-You can add images to LittlevGL in two ways:
+You can add images to LVGL in two ways:
 \begin{itemize}
 \item {} 
 using the online converter
@@ -8490,9 +8492,9 @@ manually create images
 
 \subsubsection{Online converter}
 \label{\detokenize{overview/image:online-converter}}
-The online Image converter is available here: https://littlevgl.com/image-to-c-array
+The online Image converter is available here: https://lvgl.io/tools/imageconverter
 
-Adding an image to LittlevGL via online converter is easy.
+Adding an image to LVGL via online converter is easy.
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
@@ -8501,7 +8503,7 @@ Adding an image to LittlevGL via online converter is easy.
 You need to select a \sphinxstyleemphasis{BMP}, \sphinxstyleemphasis{PNG} or \sphinxstyleemphasis{JPG} image first.
 
 \item {} 
-Give the image a name that will be used within LittlevGL.
+Give the image a name that will be used within LVGL.
 
 \item {} 
 Select the {\hyperref[\detokenize{overview/image:color-formats}]{\emph{Color format}}}.
@@ -8535,7 +8537,7 @@ RGB888 for 32-bit color depth
 
 \subsubsection{Manually create an image}
 \label{\detokenize{overview/image:manually-create-an-image}}
-If you are generating an image at run-time, you can craft an image variable to display it using LittlevGL. For example:
+If you are generating an image at run-time, you can craft an image variable to display it using LVGL. For example:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{my\PYGZus{}img\PYGZus{}data}\PYG{p}{[}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+m+mh}{0x00}\PYG{p}{,} \PYG{l+m+mh}{0x01}\PYG{p}{,} \PYG{l+m+mh}{0x02}\PYG{p}{,} \PYG{p}{.}\PYG{p}{.}\PYG{p}{.}\PYG{p}{\PYGZcb{}}\PYG{p}{;}
@@ -8557,7 +8559,7 @@ Another (possibly simpler) option to create and display an image at run-time is 
 
 \subsubsection{Use images}
 \label{\detokenize{overview/image:use-images}}
-The simplest way to use an image in LittlevGL is to display it with an {\hyperref[\detokenize{widgets/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{lv\_img}}}} object:
+The simplest way to use an image in LVGL is to display it with an {\hyperref[\detokenize{widgets/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{lv\_img}}}} object:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{lv\PYGZus{}obj\PYGZus{}t} \PYG{o}{*} \PYG{n}{icon} \PYG{o}{=} \PYG{n}{lv\PYGZus{}img\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
@@ -8574,9 +8576,9 @@ If the image was converted with the online converter, you should use \sphinxcode
 
 \subsection{Image decoder}
 \label{\detokenize{overview/image:image-decoder}}
-As you can see in the {\hyperref[\detokenize{overview/image:color-formats}]{\emph{Color formats}}} section, LittlevGL supports several built-in image formats. In many cases, these will be all you need. LittlevGL doesn't directly support, however, generic image formats like PNG or JPG.
+As you can see in the {\hyperref[\detokenize{overview/image:color-formats}]{\emph{Color formats}}} section, LVGL supports several built-in image formats. In many cases, these will be all you need. LVGL doesn't directly support, however, generic image formats like PNG or JPG.
 
-To handle non-built-in image formats, you need to use external libraries and attach them to LittlevGL via the \sphinxstyleemphasis{Image decoder} interface.
+To handle non-built-in image formats, you need to use external libraries and attach them to LVGL via the \sphinxstyleemphasis{Image decoder} interface.
 
 The image decoder consists of 4 callbacks:
 \begin{itemize}
@@ -8616,7 +8618,7 @@ With \sphinxstyleemphasis{User encoded} formats, the color format in the open fu
 
 \subsubsection{Register an image decoder}
 \label{\detokenize{overview/image:register-an-image-decoder}}
-Here's an example of getting LittlevGL to work with PNG images.
+Here's an example of getting LVGL to work with PNG images.
 
 First, you need to create a new image decoder and set some functions to open/close the PNG files. It should looks like this:
 
@@ -8730,7 +8732,7 @@ To indicate that, the \sphinxstyleemphasis{line read} function should be used, s
 
 \subsubsection{Manually use an image decoder}
 \label{\detokenize{overview/image:manually-use-an-image-decoder}}
-LittlevGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the \sphinxcode{\sphinxupquote{lv\_img}} object) but you can use them manually too. Create a \sphinxcode{\sphinxupquote{lv\_img\_decoder\_dsc\_t}} variable to describe the decoding session and call \sphinxcode{\sphinxupquote{lv\_img\_decoder\_open()}}, \sphinxcode{\sphinxupquote{lv\_img\_decoder\_open()}}.
+LVGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the \sphinxcode{\sphinxupquote{lv\_img}} object) but you can use them manually too. Create a \sphinxcode{\sphinxupquote{lv\_img\_decoder\_dsc\_t}} variable to describe the decoding session and call \sphinxcode{\sphinxupquote{lv\_img\_decoder\_open()}}, \sphinxcode{\sphinxupquote{lv\_img\_decoder\_open()}}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 
@@ -8750,9 +8752,9 @@ LittlevGL will use the registered image decoder automatically if you try and dra
 Sometimes it takes a lot of time to open an image.
 Continuously decoding a PNG image or loading images from a slow external memory would be inefficient and detrimental to the user experience.
 
-Therefore, LittlevGL caches a given number of images. Caching means some images will be left open, hence LittlevGL can quickly access them from \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data}} instead of needing to decode them again.
+Therefore, LVGL caches a given number of images. Caching means some images will be left open, hence LVGL can quickly access them from \sphinxcode{\sphinxupquote{dsc-\textgreater{}img\_data}} instead of needing to decode them again.
 
-Of course, caching images is resource-intensive as it uses more RAM (to store the decoded image). LittlevGL tries to optimize the process as much as possible (see below), but you will still need to evaluate if this would be beneficial for your platform or not. If you have a deeply embedded target which decodes small images from a relatively fast storage medium, image caching may not be worth it.
+Of course, caching images is resource-intensive as it uses more RAM (to store the decoded image). LVGL tries to optimize the process as much as possible (see below), but you will still need to evaluate if this would be beneficial for your platform or not. If you have a deeply embedded target which decodes small images from a relatively fast storage medium, image caching may not be worth it.
 
 
 \subsubsection{Cache size}
@@ -8764,11 +8766,11 @@ The size of the cache can be changed at run-time with \sphinxcode{\sphinxupquote
 
 \subsubsection{Value of images}
 \label{\detokenize{overview/image:value-of-images}}
-When you use more images than cache entries, LittlevGL can't cache all of the images. Instead, the library will close one of the cached images (to free space).
+When you use more images than cache entries, LVGL can't cache all of the images. Instead, the library will close one of the cached images (to free space).
 
-To decide which image to close, LittlevGL uses a measurement it previously made of how long it took to open the image. Cache entries that hold slower-to-open images are considered more valuable and are kept in the cache as long as possible.
+To decide which image to close, LVGL uses a measurement it previously made of how long it took to open the image. Cache entries that hold slower-to-open images are considered more valuable and are kept in the cache as long as possible.
 
-If you want or need to override LittlevGL's measurement, you can manually set the \sphinxstyleemphasis{time to open} value in the decoder open function in \sphinxcode{\sphinxupquote{dsc-\textgreater{}time\_to\_open = time\_ms}} to give a higher or lower value. (Leave it unchanged to let LittlevGL set it.)
+If you want or need to override LVGL's measurement, you can manually set the \sphinxstyleemphasis{time to open} value in the decoder open function in \sphinxcode{\sphinxupquote{dsc-\textgreater{}time\_to\_open = time\_ms}} to give a higher or lower value. (Leave it unchanged to let LVGL set it.)
 
 Every cache entry has a \sphinxstyleemphasis{"life"} value. Every time an image opening happens through the cache, the \sphinxstyleemphasis{life} of all entries are decreased to make them older.
 When a cached image is used, its \sphinxstyleemphasis{life} is increased by the \sphinxstyleemphasis{time to open} value to make it more alive.
@@ -8785,7 +8787,7 @@ Therefore, it's the user's responsibility to be sure there is enough RAM to cach
 
 \subsubsection{Clean the cache}
 \label{\detokenize{overview/image:clean-the-cache}}
-Let's say you have loaded a PNG image into a \sphinxcode{\sphinxupquote{lv\_img\_dsc\_t my\_png}} variable and use it in an \sphinxcode{\sphinxupquote{lv\_img}} object. If the image is already cached and you then change the underlying PNG file, you need to notify LittlevGL to cache the image again. Otherwise, there is no easy way of detecting that the underlying file changed and LittlevGL will still draw the old image.
+Let's say you have loaded a PNG image into a \sphinxcode{\sphinxupquote{lv\_img\_dsc\_t my\_png}} variable and use it in an \sphinxcode{\sphinxupquote{lv\_img}} object. If the image is already cached and you then change the underlying PNG file, you need to notify LVGL to cache the image again. Otherwise, there is no easy way of detecting that the underlying file changed and LVGL will still draw the old image.
 
 To do this, use \sphinxcode{\sphinxupquote{lv\_img\_cache\_invalidate\_src(\&my\_png)}}. If \sphinxcode{\sphinxupquote{NULL}} is passed as a parameter, the whole cache will be cleaned.
 
@@ -9612,7 +9614,7 @@ Count the cache entries's life. Add \sphinxcode{\sphinxupquote{time\_tio\_open}}
 
 \section{File system}
 \label{\detokenize{overview/file-system:file-system}}\label{\detokenize{overview/file-system::doc}}
-LittlevGL has a 'File system' abstraction module that enables you to attach any type of file systems.
+LVGL has a 'File system' abstraction module that enables you to attach any type of file systems.
 The file system is identified by a drive letter.
 For example, if the SD card is associated with the letter \sphinxcode{\sphinxupquote{'S'}}, a file can be reached like \sphinxcode{\sphinxupquote{"S:path/to/file.txt"}}.
 
@@ -9637,13 +9639,13 @@ To add a driver, \sphinxcode{\sphinxupquote{lv\_fs\_drv\_t}} needs to be initial
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{tell\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}tell\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/*Callback to tell the cursor position  */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{trunc\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}trunc\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to delete a file */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{size\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}                 \PYG{c+cm}{/*Callback to tell a file\PYGZsq{}s size */}
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{rename\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}               \PYG{c+cm}{/*Callback to rename a file */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{rename\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}rename\PYGZus{}cb}\PYG{p}{;}             \PYG{c+cm}{/*Callback to rename a file */}
 
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}open\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}open\PYGZus{}cb}\PYG{p}{;}         \PYG{c+cm}{/*Callback to open directory to read its content */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}read\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}read\PYGZus{}cb}\PYG{p}{;}         \PYG{c+cm}{/*Callback to read a directory\PYGZsq{}s content */}
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{dir\PYGZus{}close\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}dir\PYGZus{}close\PYGZus{}cb}\PYG{p}{;}       \PYG{c+cm}{/*Callback to close a directory */}
 
-\PYG{n}{drv}\PYG{p}{.}\PYG{n}{free\PYGZus{}space\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}size\PYGZus{}cb}\PYG{p}{;}           \PYG{c+cm}{/*Callback to tell free space on the drive */}
+\PYG{n}{drv}\PYG{p}{.}\PYG{n}{free\PYGZus{}space\PYGZus{}cb} \PYG{o}{=} \PYG{n}{my\PYGZus{}free\PYGZus{}space\PYGZus{}cb}\PYG{p}{;}     \PYG{c+cm}{/*Callback to tell free space on the drive */}
 
 \PYG{n}{drv}\PYG{p}{.}\PYG{n}{user\PYGZus{}data} \PYG{o}{=} \PYG{n}{my\PYGZus{}user\PYGZus{}data}\PYG{p}{;}             \PYG{c+cm}{/*Any custom data if required*/}
 
@@ -9652,7 +9654,7 @@ To add a driver, \sphinxcode{\sphinxupquote{lv\_fs\_drv\_t}} needs to be initial
 
 Any of the callbacks can be \sphinxcode{\sphinxupquote{NULL}} to indicate that that operation is not supported.
 
-As an example of how the callbacks are used, if you use \sphinxcode{\sphinxupquote{lv\_fs\_open(\&file, "S:/folder/file.txt", LV\_FS\_MODE\_WR)}}, LittlevGL:
+As an example of how the callbacks are used, if you use \sphinxcode{\sphinxupquote{lv\_fs\_open(\&file, "S:/folder/file.txt", LV\_FS\_MODE\_WR)}}, LVGL:
 \begin{enumerate}
 \def\theenumi{\arabic{enumi}}
 \def\labelenumi{\theenumi .}
@@ -11933,10 +11935,10 @@ Indicates the animation has run in this round
 
 \section{Tasks}
 \label{\detokenize{overview/task:tasks}}\label{\detokenize{overview/task::doc}}
-LittlevGL has a built-in task system. You can register a function to have it be called periodically. The tasks are handled and called in \sphinxcode{\sphinxupquote{lv\_task\_handler()}}, which needs to be called periodically every few milliseconds.
+LVGL has a built-in task system. You can register a function to have it be called periodically. The tasks are handled and called in \sphinxcode{\sphinxupquote{lv\_task\_handler()}}, which needs to be called periodically every few milliseconds.
 See {\hyperref[\detokenize{porting/task-handler::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Porting}}}} for more information.
 
-The tasks are non-preemptive, which means a task cannot interrupt another task. Therefore, you can call any LittlevGL related function in a task.
+The tasks are non-preemptive, which means a task cannot interrupt another task. Therefore, you can call any LVGL related function in a task.
 
 
 \subsection{Create a task}
@@ -11955,7 +11957,7 @@ For example:
   \PYG{k+kt}{uint32\PYGZus{}t} \PYG{o}{*} \PYG{n}{user\PYGZus{}data} \PYG{o}{=} \PYG{n}{task}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}}\PYG{n}{user\PYGZus{}data}\PYG{p}{;}
   \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{my\PYGZus{}task called with user data: \PYGZpc{}d}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{o}{*}\PYG{n}{user\PYGZus{}data}\PYG{p}{)}\PYG{p}{;}
 
-  \PYG{c+cm}{/*Do something with LittlevGL*/}
+  \PYG{c+cm}{/*Do something with LVGL*/}
   \PYG{k}{if}\PYG{p}{(}\PYG{n}{something\PYGZus{}happened}\PYG{p}{)} \PYG{p}{\PYGZob{}}
     \PYG{n}{something\PYGZus{}happened} \PYG{o}{=} \PYG{n+nb}{false}\PYG{p}{;}
     \PYG{n}{lv\PYGZus{}btn\PYGZus{}create}\PYG{p}{(}\PYG{n}{lv\PYGZus{}scr\PYGZus{}act}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{)}\PYG{p}{;}
@@ -26808,11 +26810,11 @@ a text with {\hyperref[\detokenize{overview/font::doc}]{\sphinxcrossref{\DUrole{
 
 To set the source of an image, use \sphinxcode{\sphinxupquote{lv\_img\_set\_src(img, src)}}.
 
-To generate a \sphinxstylestrong{pixel array} from a PNG, JPG or BMP image, use the \sphinxhref{https://littlevgl.com/image-to-c-array}{Online image converter tool} and set the converted image with its pointer: \sphinxcode{\sphinxupquote{lv\_img\_set\_src(img1, \&converted\_img\_var);}}
+To generate a \sphinxstylestrong{pixel array} from a PNG, JPG or BMP image, use the \sphinxhref{https://lvgl.io/tools/imageconverter}{Online image converter tool} and set the converted image with its pointer: \sphinxcode{\sphinxupquote{lv\_img\_set\_src(img1, \&converted\_img\_var);}}
 To make the variable visible in the C file, you need to declare it with \sphinxcode{\sphinxupquote{LV\_IMG\_DECLARE(converted\_img\_var)}}.
 
 To use \sphinxstylestrong{external files}, you also need to convert the image files using the online converter tool but now you should select the binary Output format.
-You also need to use LittlevGL's file system module and register a driver with some functions for the basic file operation. Got to the {\hyperref[\detokenize{overview/file-system::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{File system}}}} to learn more.
+You also need to use LVGL's file system module and register a driver with some functions for the basic file operation. Got to the {\hyperref[\detokenize{overview/file-system::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{File system}}}} to learn more.
 To set an image sourced from a file, use \sphinxcode{\sphinxupquote{lv\_img\_set\_src(img, "S:folder1/my\_img.bin")}}.
 
 You can set a \sphinxstylestrong{symbol} similarly to {\hyperref[\detokenize{widgets/label::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Labels}}}}. In this case, the image will be rendered as text according to the \sphinxstyleemphasis{font} specified in the style.  It enables to use of light-weighted mono-color
@@ -41565,7 +41567,7 @@ On the header, there is a title which can be modified by: \sphinxcode{\sphinxupq
 
 \subsubsection{Control buttons}
 \label{\detokenize{widgets/win:control-buttons}}
-Control buttons can be added to the right side of the header with: \sphinxcode{\sphinxupquote{lv\_win\_add\_btn(win, LV\_SYMBOL\_CLOSE)}}.
+Control buttons can be added to the right of the window header with: \sphinxcode{\sphinxupquote{lv\_win\_add\_btn\_right(win, LV\_SYMBOL\_CLOSE)}}, to add a button to the left side of the window header use \sphinxcode{\sphinxupquote{lv\_win\_add\_btn\_left(win, LV\_SYMBOL\_CLOSE)}} instead.
 The second parameter is an {\hyperref[\detokenize{widgets/img::doc}]{\sphinxcrossref{\DUrole{doc,doc,doc}{Image}}}} source so it can be a symbol, a pointer to an \sphinxcode{\sphinxupquote{lv\_img\_dsc\_t }}variable or a path to file.
 
 The width of the buttons can be set with \sphinxcode{\sphinxupquote{lv\_win\_set\_btn\_width(win, w)}}. If \sphinxcode{\sphinxupquote{w == 0}} the buttons will be square-shaped.

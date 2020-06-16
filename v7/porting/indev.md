@@ -12,7 +12,7 @@ lv_indev_drv_t indev_drv;
 lv_indev_drv_init(&indev_drv);      /*Basic initialization*/
 indev_drv.type =...                 /*See below.*/
 indev_drv.read_cb =...              /*See below.*/
-/*Register the driver in LittlevGL and save the created input device object*/
+/*Register the driver in LVGL and save the created input device object*/
 lv_indev_t * my_indev = lv_indev_drv_register(&indev_drv);
 ```
 

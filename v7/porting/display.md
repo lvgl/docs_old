@@ -24,16 +24,16 @@ To set up a display an `lv_disp_buf_t` and an `lv_disp_drv_t` variable has to be
 ```
 
 There are 3 possible configurations regarding the buffer size:
-1. **One buffer** LittlevGL draws the content of the screen into a buffer and sends it to the display.
+1. **One buffer** LVGL draws the content of the screen into a buffer and sends it to the display.
 The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts.
 If only small areas changes (e.g. button press) then only those areas will be refreshed.
-2. **Two non-screen-sized buffers** having two buffers LittlevGL can draw into one buffer while the content of the other buffer is sent to display in the background.
+2. **Two non-screen-sized buffers** having two buffers LVGL can draw into one buffer while the content of the other buffer is sent to display in the background.
 DMA or other hardware should be used to transfer the data to the display to let the CPU draw meanwhile.
 This way the rendering and refreshing of the display become parallel.
-Similarly to the *One buffer*, LittlevGL will draw the display's content in chunks if the buffer is smaller than the area to refresh.
+Similarly to the *One buffer*, LVGL will draw the display's content in chunks if the buffer is smaller than the area to refresh.
 3. **Two screen-sized buffers**.
-In contrast to *Two non-screen-sized buffers* LittlevGL will always provide the whole screen's content not only chunks.
-This way the driver can simply change the address of the frame buffer to the buffer received from LittlevGL.
+In contrast to *Two non-screen-sized buffers* LVGL will always provide the whole screen's content not only chunks.
+This way the driver can simply change the address of the frame buffer to the buffer received from LVGL.
 Therefore this method works the best when the MCU has an LCD/TFT interface and the frame buffer is just a location in the RAM.
 
 
@@ -49,7 +49,7 @@ There are some optional data fields:
 - **color_chroma_key** a color which will be drawn as transparent on chrome keyed images. `LV_COLOR_TRANSP` by default from *lv_conf.h*).
 - **user_data** custom user data for the driver. Its type can be modified in lv_conf.h.
 - **anti-aliasing** use anti-aliasing (edge smoothing). `LV_ANTIALIAS` by default  from *lv_conf.h*.
-- **rotated** if `1` swap `hor_res` and `ver_res`. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction.
+- **rotated** if `1` swap `hor_res` and `ver_res`. LVGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction.
 - **screen_transp** if `1` the screen can have transparent or opaque style. `LV_COLOR_SCREEN_TRANSP` needs to enabled in *lv_conf.h*.
 
 To use a GPU the following callbacks can be used:
@@ -67,7 +67,7 @@ This way the buffers used in `lv_disp_buf_t` can be smaller to hold only the req
 - **monitor_cb** a callback function tells how many pixels were refreshed in how much time.
 
 To set the fields of *lv_disp_drv_t* variable it needs to be initialized with `lv_disp_drv_init(&disp_drv)`.
-And finally to register a display for LittlevGL `lv_disp_drv_register(&disp_drv)` needs to be called.
+And finally to register a display for LVGL `lv_disp_drv_register(&disp_drv)` needs to be called.
 
 All together it looks like this:
 ```c

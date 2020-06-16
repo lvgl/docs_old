@@ -1,11 +1,11 @@
 ```eval_rst
-:github_url: https://github.com/littlevgl/docs/blob/master/v7/en/overview/display.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/en/overview/display.md
 ```
 # Displays
 
-``` important:: The basic concept of *display* in LittlevGL is explained in the [Porting](/porting/display) section. So before reading further, please read the [Porting](/porting/display) section first.
+``` important:: The basic concept of *display* in LVGL is explained in the [Porting](/porting/display) section. So before reading further, please read the [Porting](/porting/display) section first.
 ```
-In LittlevGL, you can have multiple displays, each with their own driver and objects.
+In LVGL, you can have multiple displays, each with their own driver and objects.
 
 Creating more displays is easy: just initialize more display buffers and register another driver for every display.
 When you create the UI, use `lv_disp_set_default(disp)` to tell the library which display to create objects on.
@@ -59,7 +59,7 @@ Screens can be deleted with `lv_obj_del(scr)`, but ensure that you do not delete
 ### Opaque screen
 Usually, the opacity of the screen is `LV_OPA_COVER` to provide a solid background for its children.
 
-However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LittlevGL.
+However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LVGL.
 
 To do this, the screen should have a style that sets `body.opa` or `image.opa` to `LV_OPA_TRANSP` (or another non-opaque value) to make the screen opaque.
 
