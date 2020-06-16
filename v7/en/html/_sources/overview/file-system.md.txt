@@ -3,7 +3,7 @@
 ```
 # File system
 
-LittlevGL has a 'File system' abstraction module that enables you to attach any type of file systems.
+LVGL has a 'File system' abstraction module that enables you to attach any type of file systems.
 The file system is identified by a drive letter.
 For example, if the SD card is associated with the letter `'S'`, a file can be reached like `"S:path/to/file.txt"`.
 
@@ -26,14 +26,14 @@ drv.seek_cb = my_seek_cb;                 /*Callback to seek in a file (Move cur
 drv.tell_cb = my_tell_cb;                 /*Callback to tell the cursor position  */
 drv.trunc_cb = my_trunc_cb;               /*Callback to delete a file */
 drv.size_cb = my_size_cb;                 /*Callback to tell a file's size */
-drv.rename_cb = my_size_cb;               /*Callback to rename a file */
+drv.rename_cb = my_rename_cb;             /*Callback to rename a file */
 
 
 drv.dir_open_cb = my_dir_open_cb;         /*Callback to open directory to read its content */
 drv.dir_read_cb = my_dir_read_cb;         /*Callback to read a directory's content */
 drv.dir_close_cb = my_dir_close_cb;       /*Callback to close a directory */
 
-drv.free_space_cb = my_size_cb;           /*Callback to tell free space on the drive */
+drv.free_space_cb = my_free_space_cb;     /*Callback to tell free space on the drive */
 
 drv.user_data = my_user_data;             /*Any custom data if required*/
 
@@ -43,7 +43,7 @@ lv_fs_drv_register(&drv);                 /*Finally register the drive*/
 
 Any of the callbacks can be `NULL` to indicate that that operation is not supported.
 
-As an example of how the callbacks are used, if you use `lv_fs_open(&file, "S:/folder/file.txt", LV_FS_MODE_WR)`, LittlevGL:
+As an example of how the callbacks are used, if you use `lv_fs_open(&file, "S:/folder/file.txt", LV_FS_MODE_WR)`, LVGL:
 
 1. Verifies that a registered drive exists with the letter `'S'`.
 2. Checks if it's `open_cb` is implemented (not `NULL`).

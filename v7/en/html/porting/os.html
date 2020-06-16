@@ -169,9 +169,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-lvgl">Why Micropython + LVGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-lvgl-in-micropython">Here are some advantages of using LVGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-lvgl-could-be-used-for">Micropython + LVGL could be used for:</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#so-what-does-it-look-like">So what does it look like?</a><ul>
@@ -1243,8 +1243,8 @@
             
   <div class="section" id="operating-system-and-interrupts">
 <h1>Operating system and interrupts<a class="headerlink" href="#operating-system-and-interrupts" title="Permalink to this headline">¶</a></h1>
-<p>LittlevGL is <strong>not thread-safe</strong> by default.</p>
-<p>However, in the following conditions it's valid to call LittlevGL related functions:</p>
+<p>LVGL is <strong>not thread-safe</strong> by default.</p>
+<p>However, in the following conditions it's valid to call LVGL related functions:</p>
 <ul class="simple">
 <li><p>In <em>events</em>. Learn more in <a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a>.</p></li>
 <li><p>In <em>lv_tasks</em>. Learn more in <a class="reference internal" href="../overview/task.html"><span class="doc">Tasks</span></a>.</p></li>
@@ -1252,12 +1252,12 @@
 <div class="section" id="tasks-and-threads">
 <h2>Tasks and threads<a class="headerlink" href="#tasks-and-threads" title="Permalink to this headline">¶</a></h2>
 <p>If you need to use real tasks or threads, you need a mutex which should be invoked before the call of <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> and released after it.
-Also, you have to use the same mutex in other tasks and threads around every LittlevGL (<code class="docutils literal notranslate"><span class="pre">lv_...</span></code>) related function calls and codes.
-This way you can use LittlevGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LittlevGL functions.</p>
+Also, you have to use the same mutex in other tasks and threads around every LVGL (<code class="docutils literal notranslate"><span class="pre">lv_...</span></code>) related function calls and codes.
+This way you can use LVGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LVGL functions.</p>
 </div>
 <div class="section" id="interrupts">
 <h2>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">¶</a></h2>
-<p>Try to avoid calling LittlevGL functions from the interrupts (except <code class="docutils literal notranslate"><span class="pre">lv_tick_inc()</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready()</span></code>). But, if you need to do this you have to disable the interrupt which uses LittlevGL functions while <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> is running.
+<p>Try to avoid calling LVGL functions from the interrupts (except <code class="docutils literal notranslate"><span class="pre">lv_tick_inc()</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready()</span></code>). But, if you need to do this you have to disable the interrupt which uses LVGL functions while <code class="docutils literal notranslate"><span class="pre">lv_task_handler</span></code> is running.
 It's a better approach to set a flag or some value and periodically check it in an <code class="docutils literal notranslate"><span class="pre">lv_task</span></code>.</p>
 </div>
 </div>

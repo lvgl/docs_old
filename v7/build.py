@@ -18,9 +18,9 @@ def cmd(s):
 clean = 0
 trans = 0
 args = sys.argv[1:]
-if len(args) == 1:
+if len(args) >= 1:
   if "clean" in args: clean = 1
-  if "trans" in args: trans = 1  
+  if "trans" in args: trans = 1
   
 if trans:
   cmd("make -j8 gettext")

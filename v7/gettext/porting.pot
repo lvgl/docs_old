@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LVGL v7.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-16 08:40+0200\n"
+"POT-Creation-Date: 2020-06-16 09:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,15 +45,15 @@ msgid "There are 3 possible configurations regarding the buffer size:"
 msgstr ""
 
 #: ../porting/display.md:26
-msgid "One buffer LittlevGL draws the content of the screen into a buffer and sends it to the display. The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts. If only small areas changes (e.g. button press) then only those areas will be refreshed."
+msgid "One buffer LVGL draws the content of the screen into a buffer and sends it to the display. The buffer can be smaller than the screen. In this case, the larger areas will be redrawn in multiple parts. If only small areas changes (e.g. button press) then only those areas will be refreshed."
 msgstr ""
 
 #: ../porting/display.md:29
-msgid "Two non-screen-sized buffers having two buffers LittlevGL can draw into one buffer while the content of the other buffer is sent to display in the background. DMA or other hardware should be used to transfer the data to the display to let the CPU draw meanwhile. This way the rendering and refreshing of the display become parallel. Similarly to the One buffer, LittlevGL will draw the display's content in chunks if the buffer is smaller than the area to refresh."
+msgid "Two non-screen-sized buffers having two buffers LVGL can draw into one buffer while the content of the other buffer is sent to display in the background. DMA or other hardware should be used to transfer the data to the display to let the CPU draw meanwhile. This way the rendering and refreshing of the display become parallel. Similarly to the One buffer, LVGL will draw the display's content in chunks if the buffer is smaller than the area to refresh."
 msgstr ""
 
 #: ../porting/display.md:33
-msgid "Two screen-sized buffers. In contrast to Two non-screen-sized buffers LittlevGL will always provide the whole screen's content not only chunks. This way the driver can simply change the address of the frame buffer to the buffer received from LittlevGL. Therefore this method works the best when the MCU has an LCD/TFT interface and the frame buffer is just a location in the RAM."
+msgid "Two screen-sized buffers. In contrast to Two non-screen-sized buffers LVGL will always provide the whole screen's content not only chunks. This way the driver can simply change the address of the frame buffer to the buffer received from LVGL. Therefore this method works the best when the MCU has an LCD/TFT interface and the frame buffer is just a location in the RAM."
 msgstr ""
 
 #: ../porting/display.md:38
@@ -97,7 +97,7 @@ msgid "anti-aliasing use anti-aliasing (edge smoothing). LV_ANTIALIAS by default
 msgstr ""
 
 #: ../porting/display.md:50
-msgid "rotated if 1 swap hor_res and ver_res. LittlevGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction."
+msgid "rotated if 1 swap hor_res and ver_res. LVGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction."
 msgstr ""
 
 #: ../porting/display.md:51
@@ -137,7 +137,7 @@ msgid "monitor_cb a callback function tells how many pixels were refreshed in ho
 msgstr ""
 
 #: ../porting/display.md:67
-msgid "To set the fields of lv_disp_drv_t variable it needs to be initialized with lv_disp_drv_init(&disp_drv). And finally to register a display for LittlevGL lv_disp_drv_register(&disp_drv) needs to be called."
+msgid "To set the fields of lv_disp_drv_t variable it needs to be initialized with lv_disp_drv_init(&disp_drv). And finally to register a display for LVGL lv_disp_drv_register(&disp_drv) needs to be called."
 msgstr ""
 
 #: ../porting/display.md:70
@@ -409,7 +409,7 @@ msgid "Logging"
 msgstr ""
 
 #: ../porting/log.md:6
-msgid "LittlevGL has built-in log module to inform the user about what is happening in the library."
+msgid "LVGL has built-in log module to inform the user about what is happening in the library."
 msgstr ""
 
 #: ../porting/log.md:8
@@ -477,11 +477,11 @@ msgid "Operating system and interrupts"
 msgstr ""
 
 #: ../porting/os.md:6
-msgid "LittlevGL is not thread-safe by default."
+msgid "LVGL is not thread-safe by default."
 msgstr ""
 
 #: ../porting/os.md:8
-msgid "However, in the following conditions it's valid to call LittlevGL related functions:"
+msgid "However, in the following conditions it's valid to call LVGL related functions:"
 msgstr ""
 
 #: ../porting/os.md:9
@@ -497,7 +497,7 @@ msgid "Tasks and threads"
 msgstr ""
 
 #: ../porting/os.md:13
-msgid "If you need to use real tasks or threads, you need a mutex which should be invoked before the call of lv_task_handler and released after it. Also, you have to use the same mutex in other tasks and threads around every LittlevGL (lv_...) related function calls and codes. This way you can use LittlevGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LittlevGL functions."
+msgid "If you need to use real tasks or threads, you need a mutex which should be invoked before the call of lv_task_handler and released after it. Also, you have to use the same mutex in other tasks and threads around every LVGL (lv_...) related function calls and codes. This way you can use LVGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LVGL functions."
 msgstr ""
 
 #: ../porting/os.md:17
@@ -505,7 +505,7 @@ msgid "Interrupts"
 msgstr ""
 
 #: ../porting/os.md:18
-msgid "Try to avoid calling LittlevGL functions from the interrupts (except lv_tick_inc() and lv_disp_flush_ready()). But, if you need to do this you have to disable the interrupt which uses LittlevGL functions while lv_task_handler is running. It's a better approach to set a flag or some value and periodically check it in an lv_task."
+msgid "Try to avoid calling LVGL functions from the interrupts (except lv_tick_inc() and lv_disp_flush_ready()). But, if you need to do this you have to disable the interrupt which uses LVGL functions while lv_task_handler is running. It's a better approach to set a flag or some value and periodically check it in an lv_task."
 msgstr ""
 
 #: ../porting/project.md:5
@@ -517,11 +517,11 @@ msgid "Get the library"
 msgstr ""
 
 #: ../porting/project.md:9
-msgid "LittlevGL Graphics Library is available on GitHub: https://github.com/littlevgl/lvgl."
+msgid "LVGL Graphics Library is available on GitHub: https://github.com/lvgl/lvgl."
 msgstr ""
 
 #: ../porting/project.md:11
-msgid "You can clone it or download the latest version of the library from GitHub or you can use the Download page as well."
+msgid "You can clone it or download the latest version of the library from GitHub."
 msgstr ""
 
 #: ../porting/project.md:13
@@ -533,7 +533,7 @@ msgid "Configuration file"
 msgstr ""
 
 #: ../porting/project.md:17
-msgid "There is a configuration header file for LittlevGL called lv_conf.h. It sets the library's basic behaviour, disables unused modules and features, adjusts the size of memory buffers in compile-time, etc."
+msgid "There is a configuration header file for LVGL called lv_conf.h. It sets the library's basic behaviour, disables unused modules and features, adjusts the size of memory buffers in compile-time, etc."
 msgstr ""
 
 #: ../porting/project.md:19
@@ -577,7 +577,7 @@ msgid "Initialize your drivers."
 msgstr ""
 
 #: ../porting/project.md:34
-msgid "Register the display and input devices drivers in LittlevGL.  More about Display and Input device registration."
+msgid "Register the display and input devices drivers in LVGL.  More about Display and Input device registration."
 msgstr ""
 
 #: ../porting/project.md:35
@@ -585,7 +585,7 @@ msgid "Call lv_tick_inc(x) in every x milliseconds in an interrupt to tell the e
 msgstr ""
 
 #: ../porting/project.md:36
-msgid "Call lv_task_handler() periodically in every few milliseconds to handle LittlevGL related tasks. Learn more."
+msgid "Call lv_task_handler() periodically in every few milliseconds to handle LVGL related tasks. Learn more."
 msgstr ""
 
 #: ../porting/sleep.md:4
@@ -609,7 +609,7 @@ msgid "System overview"
 msgstr ""
 
 #: ../porting/sys.md:6
-msgid "System architecture with Littlev Graphics Library (LittlevGL)"
+msgid "System architecture with LVGL (formerly LittlevGL)"
 msgstr ""
 
 #: ../porting/sys.md:8
@@ -617,7 +617,7 @@ msgid "Application Your application which creates the GUI and handles the specif
 msgstr ""
 
 #: ../porting/sys.md:11
-msgid "LittlevGL The graphics library itself. Your application can communicate with the library to create a GUI. It contains a HAL (Hardware Abstraction Layer) interface to register your display and input device drivers."
+msgid "LVGL The graphics library itself. Your application can communicate with the library to create a GUI. It contains a HAL (Hardware Abstraction Layer) interface to register your display and input device drivers."
 msgstr ""
 
 #: ../porting/sys.md:14
@@ -641,7 +641,7 @@ msgid "Task Handler"
 msgstr ""
 
 #: ../porting/task-handler.md:6
-msgid "To handle the tasks of LittlevGL you need to call lv_task_handler() periodically in one of the followings:"
+msgid "To handle the tasks of LVGL you need to call lv_task_handler() periodically in one of the followings:"
 msgstr ""
 
 #: ../porting/task-handler.md:7
@@ -673,7 +673,7 @@ msgid "Tick interface"
 msgstr ""
 
 #: ../porting/tick.md:6
-msgid "The LittlevGL needs a system tick to know the elapsed time for animation and other tasks."
+msgid "The LVGL needs a system tick to know the elapsed time for animation and other tasks."
 msgstr ""
 
 #: ../porting/tick.md:8

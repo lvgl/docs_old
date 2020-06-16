@@ -169,9 +169,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-littlevgl">Why Micropython + LittlevGL?</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-littlevgl-in-micropython">Here are some advantages of using LittlevGL in Micropython:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-could-be-used-for">Micropython + LittlevGL could be used for:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#why-micropython-lvgl">Why Micropython + LVGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#here-are-some-advantages-of-using-lvgl-in-micropython">Here are some advantages of using LVGL in Micropython:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-lvgl-could-be-used-for">Micropython + LVGL could be used for:</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#so-what-does-it-look-like">So what does it look like?</a><ul>
@@ -1243,9 +1243,9 @@
             
   <div class="section" id="tasks">
 <h1>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h1>
-<p>LittlevGL has a built-in task system. You can register a function to have it be called periodically. The tasks are handled and called in <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code>, which needs to be called periodically every few milliseconds.
+<p>LVGL has a built-in task system. You can register a function to have it be called periodically. The tasks are handled and called in <code class="docutils literal notranslate"><span class="pre">lv_task_handler()</span></code>, which needs to be called periodically every few milliseconds.
 See <a class="reference internal" href="../porting/task-handler.html"><span class="doc">Porting</span></a> for more information.</p>
-<p>The tasks are non-preemptive, which means a task cannot interrupt another task. Therefore, you can call any LittlevGL related function in a task.</p>
+<p>The tasks are non-preemptive, which means a task cannot interrupt another task. Therefore, you can call any LVGL related function in a task.</p>
 <div class="section" id="create-a-task">
 <h2>Create a task<a class="headerlink" href="#create-a-task" title="Permalink to this headline">¶</a></h2>
 <p>To create a new task, use <code class="docutils literal notranslate"><span class="pre">lv_task_create(task_cb,</span> <span class="pre">period_ms,</span> <span class="pre">LV_TASK_PRIO_OFF/LOWEST/LOW/MID/HIGH/HIGHEST,</span> <span class="pre">user_data)</span></code>. It will create an <code class="docutils literal notranslate"><span class="pre">lv_task_t</span> <span class="pre">*</span></code> variable, which can be used later to modify the parameters of the task.
@@ -1258,7 +1258,7 @@ See <a class="reference internal" href="../porting/task-handler.html"><span clas
   <span class="kt">uint32_t</span> <span class="o">*</span> <span class="n">user_data</span> <span class="o">=</span> <span class="n">task</span><span class="o">-&gt;</span><span class="n">user_data</span><span class="p">;</span>
   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;my_task called with user data: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">user_data</span><span class="p">);</span>
 
-  <span class="cm">/*Do something with LittlevGL*/</span>
+  <span class="cm">/*Do something with LVGL*/</span>
   <span class="k">if</span><span class="p">(</span><span class="n">something_happened</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">something_happened</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
     <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>

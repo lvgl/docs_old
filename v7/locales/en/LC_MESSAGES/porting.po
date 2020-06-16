@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LVGL v7.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-16 08:40+0200\n"
+"POT-Creation-Date: 2020-06-16 09:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,32 +51,32 @@ msgstr ""
 
 #: ../porting/display.md:26
 msgid ""
-"One buffer LittlevGL draws the content of the screen into a buffer and "
-"sends it to the display. The buffer can be smaller than the screen. In "
-"this case, the larger areas will be redrawn in multiple parts. If only "
-"small areas changes (e.g. button press) then only those areas will be "
+"One buffer LVGL draws the content of the screen into a buffer and sends "
+"it to the display. The buffer can be smaller than the screen. In this "
+"case, the larger areas will be redrawn in multiple parts. If only small "
+"areas changes (e.g. button press) then only those areas will be "
 "refreshed."
 msgstr ""
 
 #: ../porting/display.md:29
 msgid ""
-"Two non-screen-sized buffers having two buffers LittlevGL can draw into "
-"one buffer while the content of the other buffer is sent to display in "
-"the background. DMA or other hardware should be used to transfer the data"
-" to the display to let the CPU draw meanwhile. This way the rendering and"
-" refreshing of the display become parallel. Similarly to the One buffer, "
-"LittlevGL will draw the display's content in chunks if the buffer is "
-"smaller than the area to refresh."
+"Two non-screen-sized buffers having two buffers LVGL can draw into one "
+"buffer while the content of the other buffer is sent to display in the "
+"background. DMA or other hardware should be used to transfer the data to "
+"the display to let the CPU draw meanwhile. This way the rendering and "
+"refreshing of the display become parallel. Similarly to the One buffer, "
+"LVGL will draw the display's content in chunks if the buffer is smaller "
+"than the area to refresh."
 msgstr ""
 
 #: ../porting/display.md:33
 msgid ""
 "Two screen-sized buffers. In contrast to Two non-screen-sized buffers "
-"LittlevGL will always provide the whole screen's content not only chunks."
-" This way the driver can simply change the address of the frame buffer to"
-" the buffer received from LittlevGL. Therefore this method works the best"
-" when the MCU has an LCD/TFT interface and the frame buffer is just a "
-"location in the RAM."
+"LVGL will always provide the whole screen's content not only chunks. This"
+" way the driver can simply change the address of the frame buffer to the "
+"buffer received from LVGL. Therefore this method works the best when the "
+"MCU has an LCD/TFT interface and the frame buffer is just a location in "
+"the RAM."
 msgstr ""
 
 #: ../porting/display.md:38
@@ -136,9 +136,9 @@ msgstr ""
 
 #: ../porting/display.md:50
 msgid ""
-"rotated if 1 swap hor_res and ver_res. LittlevGL draws in the same "
-"direction in both cases (in lines from top to bottom) so the driver also "
-"needs to be reconfigured to change the display's fill direction."
+"rotated if 1 swap hor_res and ver_res. LVGL draws in the same direction "
+"in both cases (in lines from top to bottom) so the driver also needs to "
+"be reconfigured to change the display's fill direction."
 msgstr ""
 
 #: ../porting/display.md:51
@@ -199,7 +199,7 @@ msgstr ""
 msgid ""
 "To set the fields of lv_disp_drv_t variable it needs to be initialized "
 "with lv_disp_drv_init(&disp_drv). And finally to register a display for "
-"LittlevGL lv_disp_drv_register(&disp_drv) needs to be called."
+"LVGL lv_disp_drv_register(&disp_drv) needs to be called."
 msgstr ""
 
 #: ../porting/display.md:70
@@ -518,8 +518,8 @@ msgstr ""
 
 #: ../porting/log.md:6
 msgid ""
-"LittlevGL has built-in log module to inform the user about what is "
-"happening in the library."
+"LVGL has built-in log module to inform the user about what is happening "
+"in the library."
 msgstr ""
 
 #: ../porting/log.md:8
@@ -599,13 +599,13 @@ msgid "Operating system and interrupts"
 msgstr ""
 
 #: ../porting/os.md:6
-msgid "LittlevGL is not thread-safe by default."
+msgid "LVGL is not thread-safe by default."
 msgstr ""
 
 #: ../porting/os.md:8
 msgid ""
-"However, in the following conditions it's valid to call LittlevGL related"
-" functions:"
+"However, in the following conditions it's valid to call LVGL related "
+"functions:"
 msgstr ""
 
 #: ../porting/os.md:9
@@ -625,9 +625,9 @@ msgid ""
 "If you need to use real tasks or threads, you need a mutex which should "
 "be invoked before the call of lv_task_handler and released after it. "
 "Also, you have to use the same mutex in other tasks and threads around "
-"every LittlevGL (lv_...) related function calls and codes. This way you "
-"can use LittlevGL in a real multitasking environment. Just make use of a "
-"mutex to avoid the concurrent calling of LittlevGL functions."
+"every LVGL (lv_...) related function calls and codes. This way you can "
+"use LVGL in a real multitasking environment. Just make use of a mutex to "
+"avoid the concurrent calling of LVGL functions."
 msgstr ""
 
 #: ../porting/os.md:17
@@ -636,9 +636,9 @@ msgstr ""
 
 #: ../porting/os.md:18
 msgid ""
-"Try to avoid calling LittlevGL functions from the interrupts (except "
+"Try to avoid calling LVGL functions from the interrupts (except "
 "lv_tick_inc() and lv_disp_flush_ready()). But, if you need to do this you"
-" have to disable the interrupt which uses LittlevGL functions while "
+" have to disable the interrupt which uses LVGL functions while "
 "lv_task_handler is running. It's a better approach to set a flag or some "
 "value and periodically check it in an lv_task."
 msgstr ""
@@ -653,14 +653,14 @@ msgstr ""
 
 #: ../porting/project.md:9
 msgid ""
-"LittlevGL Graphics Library is available on GitHub: "
-"https://github.com/littlevgl/lvgl."
+"LVGL Graphics Library is available on GitHub: "
+"https://github.com/lvgl/lvgl."
 msgstr ""
 
 #: ../porting/project.md:11
 msgid ""
 "You can clone it or download the latest version of the library from "
-"GitHub or you can use the Download page as well."
+"GitHub."
 msgstr ""
 
 #: ../porting/project.md:13
@@ -675,9 +675,9 @@ msgstr ""
 
 #: ../porting/project.md:17
 msgid ""
-"There is a configuration header file for LittlevGL called lv_conf.h. It "
-"sets the library's basic behaviour, disables unused modules and features,"
-" adjusts the size of memory buffers in compile-time, etc."
+"There is a configuration header file for LVGL called lv_conf.h. It sets "
+"the library's basic behaviour, disables unused modules and features, "
+"adjusts the size of memory buffers in compile-time, etc."
 msgstr ""
 
 #: ../porting/project.md:19
@@ -736,7 +736,7 @@ msgstr ""
 
 #: ../porting/project.md:34
 msgid ""
-"Register the display and input devices drivers in LittlevGL.  More about "
+"Register the display and input devices drivers in LVGL.  More about "
 "Display and Input device registration."
 msgstr ""
 
@@ -749,7 +749,7 @@ msgstr ""
 #: ../porting/project.md:36
 msgid ""
 "Call lv_task_handler() periodically in every few milliseconds to handle "
-"LittlevGL related tasks. Learn more."
+"LVGL related tasks. Learn more."
 msgstr ""
 
 #: ../porting/sleep.md:4
@@ -779,7 +779,7 @@ msgid "System overview"
 msgstr ""
 
 #: ../porting/sys.md:6
-msgid "System architecture with Littlev Graphics Library (LittlevGL)"
+msgid "System architecture with LVGL (formerly LittlevGL)"
 msgstr ""
 
 #: ../porting/sys.md:8
@@ -790,9 +790,9 @@ msgstr ""
 
 #: ../porting/sys.md:11
 msgid ""
-"LittlevGL The graphics library itself. Your application can communicate "
-"with the library to create a GUI. It contains a HAL (Hardware Abstraction"
-" Layer) interface to register your display and input device drivers."
+"LVGL The graphics library itself. Your application can communicate with "
+"the library to create a GUI. It contains a HAL (Hardware Abstraction "
+"Layer) interface to register your display and input device drivers."
 msgstr ""
 
 #: ../porting/sys.md:14
@@ -832,7 +832,7 @@ msgstr ""
 
 #: ../porting/task-handler.md:6
 msgid ""
-"To handle the tasks of LittlevGL you need to call lv_task_handler() "
+"To handle the tasks of LVGL you need to call lv_task_handler() "
 "periodically in one of the followings:"
 msgstr ""
 
@@ -868,8 +868,8 @@ msgstr ""
 
 #: ../porting/tick.md:6
 msgid ""
-"The LittlevGL needs a system tick to know the elapsed time for animation "
-"and other tasks."
+"The LVGL needs a system tick to know the elapsed time for animation and "
+"other tasks."
 msgstr ""
 
 #: ../porting/tick.md:8
@@ -895,4 +895,164 @@ msgid ""
 "On Linux based operating system (e.g. on Raspberry Pi) lv_tick_inc can be"
 " called in a thread as below:"
 msgstr ""
+
+#~ msgid ""
+#~ "One buffer LittlevGL draws the content"
+#~ " of the screen into a buffer "
+#~ "and sends it to the display. The"
+#~ " buffer can be smaller than the "
+#~ "screen. In this case, the larger "
+#~ "areas will be redrawn in multiple "
+#~ "parts. If only small areas changes "
+#~ "(e.g. button press) then only those "
+#~ "areas will be refreshed."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Two non-screen-sized buffers having "
+#~ "two buffers LittlevGL can draw into "
+#~ "one buffer while the content of "
+#~ "the other buffer is sent to "
+#~ "display in the background. DMA or "
+#~ "other hardware should be used to "
+#~ "transfer the data to the display "
+#~ "to let the CPU draw meanwhile. "
+#~ "This way the rendering and refreshing"
+#~ " of the display become parallel. "
+#~ "Similarly to the One buffer, LittlevGL"
+#~ " will draw the display's content in"
+#~ " chunks if the buffer is smaller "
+#~ "than the area to refresh."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Two screen-sized buffers. In contrast"
+#~ " to Two non-screen-sized buffers "
+#~ "LittlevGL will always provide the whole"
+#~ " screen's content not only chunks. "
+#~ "This way the driver can simply "
+#~ "change the address of the frame "
+#~ "buffer to the buffer received from "
+#~ "LittlevGL. Therefore this method works "
+#~ "the best when the MCU has an "
+#~ "LCD/TFT interface and the frame buffer"
+#~ " is just a location in the RAM."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "rotated if 1 swap hor_res and "
+#~ "ver_res. LittlevGL draws in the same "
+#~ "direction in both cases (in lines "
+#~ "from top to bottom) so the driver"
+#~ " also needs to be reconfigured to "
+#~ "change the display's fill direction."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "To set the fields of lv_disp_drv_t "
+#~ "variable it needs to be initialized "
+#~ "with lv_disp_drv_init(&disp_drv). And finally "
+#~ "to register a display for LittlevGL "
+#~ "lv_disp_drv_register(&disp_drv) needs to be "
+#~ "called."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "LittlevGL has built-in log module "
+#~ "to inform the user about what is"
+#~ " happening in the library."
+#~ msgstr ""
+
+#~ msgid "LittlevGL is not thread-safe by default."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "However, in the following conditions "
+#~ "it's valid to call LittlevGL related "
+#~ "functions:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If you need to use real tasks "
+#~ "or threads, you need a mutex which"
+#~ " should be invoked before the call"
+#~ " of lv_task_handler and released after "
+#~ "it. Also, you have to use the "
+#~ "same mutex in other tasks and "
+#~ "threads around every LittlevGL (lv_...) "
+#~ "related function calls and codes. This"
+#~ " way you can use LittlevGL in a"
+#~ " real multitasking environment. Just make"
+#~ " use of a mutex to avoid the"
+#~ " concurrent calling of LittlevGL functions."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Try to avoid calling LittlevGL functions"
+#~ " from the interrupts (except lv_tick_inc()"
+#~ " and lv_disp_flush_ready()). But, if you"
+#~ " need to do this you have to"
+#~ " disable the interrupt which uses "
+#~ "LittlevGL functions while lv_task_handler is"
+#~ " running. It's a better approach to"
+#~ " set a flag or some value and"
+#~ " periodically check it in an lv_task."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "LittlevGL Graphics Library is available "
+#~ "on GitHub: https://github.com/littlevgl/lvgl."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You can clone it or download the"
+#~ " latest version of the library from"
+#~ " GitHub or you can use the "
+#~ "Download page as well."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "There is a configuration header file "
+#~ "for LittlevGL called lv_conf.h. It sets"
+#~ " the library's basic behaviour, disables"
+#~ " unused modules and features, adjusts "
+#~ "the size of memory buffers in "
+#~ "compile-time, etc."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Register the display and input devices"
+#~ " drivers in LittlevGL.  More about "
+#~ "Display and Input device registration."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Call lv_task_handler() periodically in every"
+#~ " few milliseconds to handle LittlevGL "
+#~ "related tasks. Learn more."
+#~ msgstr ""
+
+#~ msgid "System architecture with Littlev Graphics Library (LittlevGL)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "LittlevGL The graphics library itself. "
+#~ "Your application can communicate with "
+#~ "the library to create a GUI. It"
+#~ " contains a HAL (Hardware Abstraction "
+#~ "Layer) interface to register your "
+#~ "display and input device drivers."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "To handle the tasks of LittlevGL "
+#~ "you need to call lv_task_handler() "
+#~ "periodically in one of the followings:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The LittlevGL needs a system tick "
+#~ "to know the elapsed time for "
+#~ "animation and other tasks."
+#~ msgstr ""
 

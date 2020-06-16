@@ -26,7 +26,7 @@ The following steps show how to setup LVGL on an embedded system with a display 
 - Create a display buffer for LVGL. LVGL will render the graphics here first, and seed the rendered image to the display. The buffer size can be set freely but 1/10 screen size is a good starting point. 
 ```c
 static lv_disp_buf_t disp_buf;
-static lv_color_t buf[LV_HOR_RES_MAX * LV_VER_RES_MAX / 10];                     /*Declare a buffer for 10 lines*/
+static lv_color_t buf[LV_HOR_RES_MAX * LV_VER_RES_MAX / 10];                     /*Declare a buffer for 1/10 screen size*/
 lv_disp_buf_init(&disp_buf, buf, NULL, LV_HOR_RES_MAX * LV_VER_RES_MAX / 10);    /*Initialize the display buffer*/
 ```
 - Implement and register a function which can **copy the rendered image** to an area of your display:
@@ -37,7 +37,7 @@ disp_drv.flush_cb = my_disp_flush;    /*Set your driver function*/
 disp_drv.buffer = &disp_buf;          /*Assign the buffer to the display*/
 lv_disp_drv_register(&disp_drv);      /*Finally register the driver*/
 
-void my_disp_flush(lv_disp_t * disp, const lv_area_t * area, lv_color_t * color_p)
+void my_disp_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color_p)
 {
     int32_t x, y;
     for(y = area->y1; y <= area->y2; y++) {
@@ -104,7 +104,7 @@ The objects has type specific parameters too which can be set by `lv_<type>_set_
 lv_slider_set_value(slider1, 70, LV_ANIM_ON);
 ```
 
-To see the full API visit the documentation of the widgets or the related header file (e.g. [lvgl/src/lv_widgets/lv_slider.h](https://github.com/littlevgl/lvgl/blob/master/src/lv_widgets/lv_slider.h)).
+To see the full API visit the documentation of the widgets or the related header file (e.g. [lvgl/src/lv_widgets/lv_slider.h](https://github.com/lvgl/lvgl/blob/master/src/lv_widgets/lv_slider.h)).
 
 ### Events
 Events are used to inform the user if something has happened with an object. You can assign a callback to an object which will be called if the object is clicked, released, dragged, being deleted etc. It should look like this:
@@ -149,7 +149,7 @@ For example it's a valid state for a checkbox: `LV_STATE_CHECKED | LV_STATE_PRES
 
 ### Styles
 Styles can be assigned to the parts objects to changed their appearance. 
-A style can describe for example the background color, border width, text font and so on. See the full list [here](https://docs.littlevgl.com/v7/en/html/overview/style.html#properties).
+A style can describe for example the background color, border width, text font and so on. See the full list [here](https://docs.lvgl.io/v7/en/html/overview/style.html#properties).
 
 The styles can be cascaded (similarly to CSS). It means you can add more styles to a part of an object. 
 For example `style_btn` can set a default button appearance, and `style_btn_red` can overwrite some properties to make the button red- 

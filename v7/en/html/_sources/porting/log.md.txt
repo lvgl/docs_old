@@ -3,7 +3,7 @@
 ```
 # Logging
 
-LittlevGL has built-in *log* module to inform the user about what is happening in the library.
+LVGL has built-in *log* module to inform the user about what is happening in the library.
 
 ## Log level
 To enable logging, set `LV_USE_LOG  1` in *lv_conf.h* and set `LV_LOG_LEVEL` to one of the following values:
