@@ -110,6 +110,7 @@ There are some attributes which can be enabled/disabled by `lv_obj_set_...(obj, 
 - **drag_dir** - Enable dragging only in specific directions. Can be `LV_DRAG_DIR_HOR/VER/ALL`.
 - **drag_throw** - Enable "throwing" with dragging as if the object would have momentum
 - **drag_parent** - If enabled then the object's parent will be moved during dragging. It will look like as if the parent is dragged. Checked recursively, so can propagate to grandparents too.
+- **focus_parent** - If enabled then the object's parent will be drawn as focused instead. Checked recursively, so can propagate to grandparents too.
 - **parent_event** - Propagate the events to the parents too. Checked recursively, so can propagate to grandparents too.
 - **opa_scale_enable** - Enable opacity scaling. See the [#opa-scale](Opa scale) section.
 
