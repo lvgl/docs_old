@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/get-started/pc-simulator.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/get-started/pc-simulator.md
 ```
 # Simulator on PC
 

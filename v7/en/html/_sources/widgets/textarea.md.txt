@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/widgets/textarea.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/widgets/textarea.md
 ```
 # Text area (lv_textarea)
 

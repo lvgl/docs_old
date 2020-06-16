@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/widgets/gauge.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/widgets/gauge.md
 ```
 # Gauge (lv_gauge)
 

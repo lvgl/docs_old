@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/porting/sleep.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/porting/sleep.md
 ```
 # Sleep management
 

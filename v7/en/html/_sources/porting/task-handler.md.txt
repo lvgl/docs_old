@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/porting/task-handler.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/porting/task-handler.md
 ```
 # Task Handler
 

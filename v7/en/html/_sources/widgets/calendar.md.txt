@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/widgets/calendar.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/widgets/calendar.md
 ```
 # Calendar (lv_calendar)
 

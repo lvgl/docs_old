@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/porting/index.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/porting/index.md
 ```
 
 # Porting

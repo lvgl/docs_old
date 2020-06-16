@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/overview/indev.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/overview/indev.md
 ```
 # Input devices
 

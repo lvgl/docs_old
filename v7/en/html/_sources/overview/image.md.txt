@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/overview/image.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/overview/image.md
 ```
 # Images
 

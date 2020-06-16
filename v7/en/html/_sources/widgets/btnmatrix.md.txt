@@ -1,5 +1,5 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/widgets/btnmatrix.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/widgets/btnmatrix.md
 ```
 # Button matrix (lv_btnmatrix)
 
