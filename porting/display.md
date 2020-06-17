@@ -1,4 +1,5 @@
 ```eval_rst
+.. include:: /header.rst 
 :github_url: |github_link_base|/porting/display.md
 ```
 # Display interface

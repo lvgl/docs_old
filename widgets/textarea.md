@@ -1,4 +1,5 @@
 ```eval_rst
+.. include:: /header.rst 
 :github_url: |github_link_base|/widgets/textarea.md
 ```
 # Text area (lv_textarea)

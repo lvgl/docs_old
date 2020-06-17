@@ -1,4 +1,5 @@
 ```eval_rst
+.. include:: /header.rst 
 :github_url: |github_link_base|/widgets/calendar.md
 ```
 # Calendar (lv_calendar)
