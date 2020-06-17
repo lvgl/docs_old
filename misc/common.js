@@ -15,3 +15,7 @@ function ver_sel()
 	window.location.href = "https://docs.lvgl.io/" + x + "/en/html";
 
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    add_version_selector();
+})
