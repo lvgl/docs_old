@@ -39,7 +39,7 @@ extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'recommonmark',
     'sphinx_markdown_tables',
-    'breathe'
+    'breathe',
     ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -212,7 +212,6 @@ StandaloneHTMLBuilder.supported_image_types = [
 ]
 
 smartquotes = False
-
 
 # Example configuration for intersphinx: refer to the Python standard library.
 

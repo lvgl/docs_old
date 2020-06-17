@@ -42,6 +42,55 @@ Basically, every modern controller  (which is able to drive a display( is suitab
 
 *Note that the memory usage might vary depending on the architecture, compiler and build options.*
 
+## License
+MIT free, notice 
+Let us know
+
+you get repos for free, and community support, best effort. if need more see the services
+
+## Repository layout
+- lvgl
+- lv_drivers
+- lv_examples
+- docs
+- blog
+- lv_sim_...
+- lv_port_...
+- lv_binding_..
+- lv_...
+
+stale
+
+
+## Release policy
+
+LVGL follows the rules of [Semantic versioning](https://semver.org/):
+- Major versions for incompatible API changes. E.g. v5.0.0, v6.0.0
+- Minor version for new but backward-compatible functionalities. E.g. v6.1.0, v6.2.0
+- Patch version for backward-compatible bug fixes. E.g. v6.1.1, v6.1.2
+
+Branches:
+- `master` most recent version, patches are merged directly here. 
+- `dev` merge new features here until they are merged into `master`.
+- `release/vX` there is a branch for every major version to allow adding specific, not forward compatible fixes.
+
+LVGL has a monthly periodic release cycle.
+- **1st Tuesday of the month** 
+   - Make a major, minor, or patch release from `master` depending on the new features.
+   - After that merge only patches into `master` and add new features into the `dev`.
+- **3rd Tuesday of the month** 
+   - Make a patch release from `master`.
+   - After that merge the new features from the `dev` to `master` branch. 
+   - In the rest of the month merge only patches into `master` and new features into `dev` branch.
+
+tags
+
+
+Side projects are update with best effort.
+
+Version support
+
+
 ## FAQ
 
 ### Where to get started?
@@ -164,24 +213,4 @@ There are several ways to contribute to LVGL:
 - Write a blog post about your experiences
 
 To learn more see [Contributing guide](https://github.com/lvgl/lvgl/blob/master/docs/CONTRIBUTING.md)
-
-### How is LVGL versioned?
-LVGL follows the rules of [Semantic versioning](https://semver.org/):
-- Major versions for incompatible API changes. E.g. v5.0.0, v6.0.0
-- Minor version for new but backward-compatible functionalities. E.g. v6.1.0, v6.2.0
-- Patch version for backward-compatible bug fixes. E.g. v6.1.1, v6.1.2
-
-Branches:
-- `master` most recent version, patches are merged directly here. 
-- `dev` merge new features here until they are merged into `master`.
-- `release/vX` there is a branch for every major version to allow adding specific, not forward compatible fixes.
-
-LVGL has a monthly periodic release cycle.
-- **1st Tuesday of the month** 
-  - Make a major, minor, or patch release from `master` depending on the new features.
-  - After that merge only patches into `master` and add new features into the `dev`.
-- **3rd Tuesday of the month** 
-  - Make a patch release from `master`.
-  - After that merge the new features from the `dev` to `master` branch. 
-  - In the rest of the month merge only patches into `master` and new features into `dev` branch.
 

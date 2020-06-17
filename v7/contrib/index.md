@@ -4,116 +4,149 @@
 
 # Contributing
 
-Thank you for considering contributing to LVGL. If you have some spare time to spend with programming you will certainly find a way to helpimproving LVGL. Do not afraid to take the first step! Everybody is welcome independently from gender, age, color, location, or skill level. So don't be shy, pick a point from the list below that you are interested in, and let's go! :rocket: 
 
-- [Overview](#overview)
-- [How to send a pull request?](#how-to-send-a-pull-request) 
-- [Help others in the Forum](#help-others-in-the-forum)
-- [Improve or translate the documentation](#improve-or-translate-the-documentation)
-- [Write a blog post](#write-a-blog-post)
-- [Report or fix bugs](#report-or-fix-bugs)
-- [Suggest or implement new features](#suggest-or-implement-new-features)
-- [Summary](#summary)
+## Introduction
 
+Join LVGL's community and leave your footprint in library!
 
-## Overview
+There are lot of ways to contribute to LVGL even if your are new to library or even new to programming. 
 
-There are many ways to join the community. If you have some time to work with us you will surely find something that fits you! You can:
-- **Help others** in the [Forum](https://forum.lvgl.io).
-- **Inspire people** by speaking about your project in [My project](https://forum.lvgl.io/c/my-projects) category in the Forum.
-- **Improve and/or translate the documentation.** Go to the [Documentation](https://github.com/lvgl/docs) repository to learn more.
-- **Write a blog post** about your experiences. See how to do it in the [Blog](https://github.com/lvgl/blog) repository
-- **Report and/or fix bugs** in [GitHub's issue tracker](https://github.com/lvgl/lvgl/issues)
-- **Help the development**. Check the [Open issues](https://github.com/lvgl/lvgl/issues) especially the ones with [Help wanted](https://github.com/lvgl/lvgl/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) label and tell your ideas about a topic or implement a feature.
+It might be scary to make the first step but you have nothing to afraid of. 
+A friendly and helpful community is waiting to know like minded people and make something great together.
 
-We have some simple rules:
-- Be kind and friendly.
-- Speak about one thing in one issue/topic.
+So let's find which contribution option fits you the best and join the development of LVGL!
+
+Before getting started here are some guidelines to make contribution smoother:
+- Be kind and friendly. 
+- Be sure to read the relevant part of the documentation before posting a question.
+- Ask questions in [Forum](https://forum.lvgl.io/) and use [GitHub]((https://github.com/lvgl/) for development-related discussions.
+- Fill the post or issue templates in the Forum or GitHub. It makes much easier to understand your case and you will get a useful answer faster. 
+- If possible send an absolute minimal but build-able code example in order to reproduce the issue. Be sure it contains all required the variable declarations, constants and assets (images, fonts).
+- Use [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to format your posts. You can learn it in 10 minutes.
+- Speak about one thing in one issue or topic.
 - Give feedback and close the issue or mark the topic as solved if your question is answered. 
-- Tell what you experience or expect. _"The button is not working"_ is not enough info to get help.
-- Use [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to format your post.
-- We use the [Forum](https://forum.lvgl.io/) to ask and answer questions and [GitHub's issue tracker](https://github.com/lvgl/lvgl/issues) for development-related discussion.
-- If possible send an absolute minimal code example in order to reproduce the issue
+- For non-trivial fixes and features it's better open an issue first to discuss the details instead of sending a pull request directly.
+- Please read and follow the [Coding style](https://github.com/lvgl/lvgl/blob/master/docs/CODING_STYLE.md) guide.
 
 
-## How to send a pull request?
+### DCO
 
-Merging new code into LVGL, documentation, blog, and examples happens via *Pull requests*. If you are still not familiar with  Pull Requests (PR for short) here is a short guide. It's about the `lvgl` repository but it works the same way for other repositories too.
-1. **Fork** the [lvgl repository](https://github.com/lvgl/lvgl). To do this click the "Fork" button in the top right corner. It will "copy" the `lvgl` repository to your GitHub account (`https://github.com/your_name?tab=repositories`)
-2. **Clone**  the forked repository and add your changes
-3. **Create a PR** on GitHub from the page of your `lvgl` repository (`https://github.com/your_name/lvgl`) by hitting the "New pull request" button 
-4. **Set the base branch**. It means where you want to merge your update. Fixes go to `master`, new features to feature branch. 
-5. **Describe** what is in the update. An example code is welcome if applicable.
-6. **Update** your `lvgl` branch with new commits. They will appear in the PR too.
+### Pull request
 
-Some advice:
-- For non-trivial fixes and features it's better open an issue first to discuss the details.
-- Maybe your fix or update won't be perfect at first. Don't be afraid, just improve it and push the new commits. The PR will be updated accordingly. 
-- If your update needs some extra work it's okay to say: _"I'm busy now and I will improve it soon"_ or _"Sorry, I don't have time to improve it, I hope it helps in this form too"_. 
-So it's better to say don't have time to continue than saying nothing.
-- Please read and follow this [guide about the coding style](https://github.com/lvgl/lvgl/blob/master/docs/CODING_STYLE.md)
 
-## Help others in the Forum
+Merging new code into lvgl, documentation, blog, examples and other repositories happens via *Pull requests* (PR for short).
+A PR is a notification like "Hey, I made some updates to your project. Here are the changes, you can added them if you want.*
+To do this you need a copy (called fork) of the original project under your account, make some changes there, and notify the original repository about your updates. 
+You can see how it looks like on GitHub for lvgl here: https://github.com/lvgl/lvgl/pulls
 
-It's a great way to contribute to the library if you already use it. 
-Just go to [https://forum.lvgl.io/](https://forum.lvgl.io/) a register (Google and GitHub login also works).
-Log in, read the titles and if you are already familiar with a topic, don't be shy, and write your suggestion.
+To add your changes you can edit files online on GitHub and send a new Pull request from there (recommended for small changes) or
+ add the updates in your favorite editor/IDE and use git to publish the changes (recommended for more complex updates).
 
-## Improve or translate the documentation
+#### From GitHub
+1. Navigate to the file you want to edit.
+2. Click the Edit button in the top right-hand corner.
+3. Add your changes to the file
+4. Add a commit message on the bottom of the page
+5. Click the *Propose changes* button
 
-If you would like to contribute to LVGL the documentation is the best place to start.
+#### From command line
 
-### Fix typos, add missing parts
+It's about the `lvgl` repository but it works the same way for other repositories too.
+1. Fork the [lvgl repository](https://github.com/lvgl/lvgl). To do this click the "Fork" button in the top right corner. 
+It will "copy" the `lvgl` repository to your GitHub account (`https://github.com/<YOUR_NAME>?tab=repositories`)
+2. Clone  your forked repository.
+3. Add your changes. You can create a *feature branch* from *master* for the updates: `git checkout -b the-new-feature` 
+4. Commit and push you changed to the forked `lvgl` repository.
+5. Create a PR on GitHub from the page of your `lvgl` repository (`https://github.com/<YOUR_NAME>/lvgl`) by clicking the *"New pull request"* button. Don't forget to select the branch where you added your changes.
+7. Set the base branch. It means where you want to merge your update. In the `lvgl` repo fixes go to `master`, new features to `dev` branch. 
+8. Describe what is in the update. An example code is welcome if applicable.
+9. Update** your `lvgl` repo with new commits. They will automatically appear in the PR too.
 
-If you find a typo, an obscure sentence or something which is not explained well enough in the [English documentation](https://docs.lvgl.io/en/html/index.html) 
-click the *"Edit on GitHub"* button in the top right corner and fix the issue by sending a Pull Request.
 
-### Translate the documentation
 
-If you have time and interest you can translate the documentation to your native language or any language you speak well. 
-You can join others to work on an already existing language or you can start a new one.  
+## When you got started with LVGL
 
-To translate the documentation we use [Zanata](https://zanata.org) which is an online translation platform. 
-You will find the LVGL project here: [LVGL on Zanata](https://translate.zanata.org/iteration/view/littlevgl-docs/v6.0-doc1?dswid=3430) 
+Even if you're just got started with LVGL there plenty of ways to make your feet wet. Most of these options even doesn't required to know a single line of code of LVGL. 
 
-To get started you need to:
-- register at [Zanata](https://zanata.org) which is an online translation platform.  
-- comment to [this post](https://forum.lvgl.io/t/translate-the-documentation/238?u=kisvegabor)
-- tell your username at *Zanata* and your selected language(s) to get permission the edit the translations
+### Give LVGL a Star
 
-Note that a translation will be added to the documentation only if the following parts are translated: 
-- [Home page](https://docs.lvgl.io/en/v7/)
-- [Porting section](https://docs.lvgl.io/en/v7/html/porting/index.html) 
-- [Quick overview](https://docs.lvgl.io/v7/en/html/get-started/quick-overview.html)
+Show that you like LVGL by giving it star on GitHub!
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/lvgl/lvgl" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star lvgl/lvgl on GitHub">Star</a>
 
-## Write a blog post
+This simple click makes LVGL more visible on GitHub and makes it more attractive to other people. 
+So with this you already helped a lot! 
 
-Have you ported LVGL to a new platform or created a fancy GUI? Do you know a great trick? 
-You can share your knowledge on LVGL's blog! It's super easy to add your own post:
-- Fork and clone the [blog repository](https://github.com/lvgl/blog)
-- Add your post in Markdown to the `_posts` folder. 
-- Store the images and other resources in a dedicated folder in `assets`
-- Create a Pull Request
+### Tell what you have achieved
 
-The blog uses [Jekyll](https://jekyllrb.com/) to convert the `.md` files to a webpage. You can easily [run Jekyll offline](https://jekyllrb.com/docs/) to check your post before creating the Pull request
+Have you already started LVGL in a [Simulator](/get-started/pc-simulator), a development board or you custom hardware? 
+Was it easy or where there some obstacles? Are you happy with the result?
 
-## Report or fix bugs
-For simple bugfixes (typos, missing error handling, fixing a warning) it's fine to send a Pull request directly. However, for more complex bugs it's better to open an issue first. In the issue, you should describe how to reproduce the bug and add the minimal code snippet.
+If so why don't you tell it to your friends? You can post it on Twitter, Facebook, LinkedIn or create a YouTube video.
 
-## Suggest or implement new features
-If you have a good idea don't hesitate to share with us. It's even better if you have time to deal with its implementation. Don't be afraid if you still don't know LVGL well enough. We will help you to get started. 
+Any of these helps a lot to spread the word of LVGL and familiarize it with new developers.
 
-To share your ideas use [Feature request](https://forum.lvgl.io/c/feature-request/9) category of the forum.
+Only thing: don't forget to add a link to https://lvg.io or https://github.com/lvgl and #lvgl. Thank you! :) 
 
-If you are ready to get involved into the development of this faetures feel free to pen a [new issue](https://github.com/lvgl/lvgl/issues) for it on GitHub.
+### Write examples
+As you learn LVGL probably you will play with the features of widgets. But why don't you publish your experiments?
 
-During the implementation don't forget the [Code style guide](https://github.com/lvgl/lvgl/blob/master/docs/CODING_STYLE.md).
+Every widgets' documentation contains some examples. For example here are the examples of the [Drop-down list](/widgets/dropdown.html#example). 
+The examples are directly loaded from the [lv_examples](https://github.com/lvgl/lv_examples/tree/master/src/lv_ex_widgets) repository. 
 
-If you implemented a new feature it's important to record it in the documentation and if applicable create an example for it:
-- Go to the [docs](https://github.com/lvgl/docs/tree/master/v7/en) repository and update the relevant part of the English documentation.
-- Go to the [examples](https://github.com/lvgl/lv_examples) repository and add a new file about the new feature in the related directory. 
+So all you need to do is sending a [Pull request](/contributing/index.html#pull-request) to the [lv_examples](https://github.com/lvgl/lv_examples/tree/master/src/lv_ex_widgets) repository and follow some conventions:
+- Name the examples like `lv_ex_<widget_name>_<id>`
+- Make the example as short and simple as possible
+- Add comments to explain what the example does
+- Use 320x240 resolution
+- Create a screenshot about the example 
+- Update `index.rst` in the example's folder with your new example. See how the other example are added.
+
+
+### Improve the docs
+
+As you read the documentation you might see some typos or unclear sentences. 
+For typos and straightforward fixes you can simply edit the file on GitHub. There is an `Edit on Github` link on the top right-hand corner of all page.
+Click it to see the file on GitHub, hit the Edit button and add you fixes as described in [Pull request - From GitHub](/contributing/index.html#from-github) section.
+
+Note that, the documentation is also formatted in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). 
+
+### Translate the docs
+
+If you have more free time you can even translate the documentation. If your chosen language is still not added, please write a post 
+
+
+- Get started section
+- Overview : Objects, Events, Styles
+- Porting: System overview, Set-up a project, Display interface, Input device Interface, Tick interface
+- 5 widgets of your choice
+
+### Write a blog post
+
+
+## When you already use LVGL
+
+### Give feedback
+
+### Report bugs
+
+### Send fixes
+
+### Add features
+
+### Join the conversations in the Forum
+
+
+
+## When you are confident with LVGL
+
+### Become a maintainer
+
+### Garden your repo under LVGL organization
 
 ## Summary
 
-I hope you have taken a liking to contribute to LVGL. A helpful and friendly community is waiting for you! :) 
+Looking forward to see your first Pull request or post! :) 
 
