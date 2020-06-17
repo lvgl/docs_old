@@ -44,73 +44,95 @@ Basically, every modern controller  (which is able to drive a display( is suitab
 *Note that the memory usage might vary depending on the architecture, compiler and build options.*
 
 ## License
-MIT free, notice 
-Let us know
+The LVGL project (including all repositories) is licensed under [MIT license](https://github.com/lvgl/lvgl/blob/master/LICENCE.txt). 
+It means you can use it even in commercial projects.
 
-you get repos for free, and community support, best effort. if need more see the services
+The only thing you need to do is to add a notice about you are using LVGL in you product. 
+This notice can be placed in the user guide, on you website, on an about screen, or anywhere else where users might see it.
+
+It's not mandatory but we highly appreciate if you write a few words about your project in the [My projects](https://forum.lvgl.io/c/my-projects/10) category of the Forum or a private message from [lvgl.io](https://lvgl.io/#contact).
+
+Although you can get LVGL for free there is a huge work behind it. It's created by a group of volunteers who made it available for you in in their free time.
+
+To make the LVGL project sustainable, please consider [Contributing](/contributing/index) to the project. 
+You can choose from [many ways of contributions](/contributing/index) such as simply writing tweet about you are using LVGL, fixing bugs, translating the documentation or even becomeing a maintainer.
 
 ## Repository layout
-- lvgl
-- lv_drivers
-- lv_examples
-- docs
-- blog
-- lv_sim_...
-- lv_port_...
-- lv_binding_..
-- lv_...
+All repositories of the LVGL project are hosted n GitHub: https://github.com/lvgl
 
-stale
+You fill these repositories there:
+- [lvgl](https://github.com/lvgl/lvgl) The library itself
+- [lv_examples](https://github.com/lvgl/lv_examples) Examples and demos
+- [lv_drivers](https://github.com/lvgl/lv_drivers) Display and input device drivers
+- [docs](https://github.com/lvgl/docs) Source of the documentation's site (https://docs.lvgl.io)
+- [blog](https://github.com/lvgl/blog) Source of the blog's site (https://blog.lvgl.io)
+- [sim](https://github.com/lvgl/sim) Source of the online simulator's site (https://sim.lvgl.io)
+- [lv_sim_...](https://github.com/lvgl?q=lv_sim&type=&language=) Simulator projects for various IDEs and platforms
+- [lv_port_...](https://github.com/lvgl?q=lv_port&type=&language=) LVGL ports to development boards
+- [lv_binding_..](https://github.com/lvgl?q=lv_binding&type=&language=l) Bindings to other languages
+- [lv_...](https://github.com/lvgl?q=lv_&type=&language=) Ports to other platforms
 
+The [lvgl](https://github.com/lvgl/lvgl),  [lv_examples](https://github.com/lvgl/lv_examples) and [lv_drivers](https://github.com/lvgl/lv_drivers) are the core repositories which gets the most attentions regarding maintenance. 
 
 ## Release policy
 
-LVGL follows the rules of [Semantic versioning](https://semver.org/):
+The core repositories follows the rules of [Semantic versioning](https://semver.org/):
 - Major versions for incompatible API changes. E.g. v5.0.0, v6.0.0
 - Minor version for new but backward-compatible functionalities. E.g. v6.1.0, v6.2.0
 - Patch version for backward-compatible bug fixes. E.g. v6.1.1, v6.1.2
 
-Branches:
-- `master` most recent version, patches are merged directly here. 
+### Branches
+The core repositories have at least the following branches:
+- `master` latest version, patches are merged directly here. 
 - `dev` merge new features here until they are merged into `master`.
-- `release/vX` there is a branch for every major version to allow adding specific, not forward compatible fixes.
+- `release/vX` stable versions of the major releases
+
+### Release cycle
 
 LVGL has a monthly periodic release cycle.
 - **1st Tuesday of the month** 
-   - Make a major, minor, or patch release from `master` depending on the new features.
-   - After that merge only patches into `master` and add new features into the `dev`.
+  - Make a major, minor, or patch release from `master` depending on the new features.
+  - After that merge only patches into `master` and add new features into the `dev`.
 - **3rd Tuesday of the month** 
-   - Make a patch release from `master`.
-   - After that merge the new features from the `dev` to `master` branch. 
-   - In the rest of the month merge only patches into `master` and new features into `dev` branch.
+  - Make a patch release from `master`.
+  - After that merge the new features from the `dev` to `master` branch. 
+  - In the rest of the month merge only patches into `master` and new features into `dev` branch.
 
-tags
+In other words patches are merged directly into `master` and new features into `dev`. `dev` 
+is merged to `master` in the middle of the month and the new features are released in the beginning of the next month.
 
+### Tags
 
-Side projects are update with best effort.
+Tags like `vX.Y.Z` are create for every release.
 
-Version support
+### Changelog
+
+The changes are recorded in [CHANGELOG.md](https://github.com/lvgl/lvgl/blob/master/CHANGELOG.md).
+
+### Side projects
+The [docs](https://github.com/lvgl/docs) is rebuilt on every release. By default the `latest` documentation is displayed which is for the current `master` branch of lvgl. 
+The documentation of earlier versions is available from the menu on the left. 
+
+The simulator, porting, and other projects are updated with best effort. Pull requests are welcome if you updated one of them.
+
+### Version support
+In core repositories each major version has a branch (e.g. `release/v6`). All the minor and patch releases of that major version are merged there. 
+
+It makes possible to add fixed older versions without bothering the newer ones.
+
+All major versions are officially supported for 1 year.
 
 
 ## FAQ
 
-### Where to get started?
-- For a general overview of LVGL visit [lvgl.io](https://lvgl.io)
-- Go to the [Get started](/get-started/index) section to learn the basics of LVGL
-- A detailed porting guide can be found in the [Porting](/porting/index) section
-- To learn how LVGL works go to the [Overview](/overview/index)
-- To see the source code of the library check it on GitHub: [https://github.com/lvgl/lvgl/](https://github.com/lvgl/lvgl/)
-- To read tutorials or share your own experiences go to the [Blog](https://blog.lvgl.io)
-
-
 ### Where can I ask questions?
-You ask questions in the Forum: [https://forum.lvgl.io/](https://forum.lvgl.io/).
+You can ask questions in the Forum: [https://forum.lvgl.io/](https://forum.lvgl.io/).
 
 We use [GitHub issues](https://github.com/lvgl/lvgl/issues) for development related discussion. 
 So you should use them only if your question or issue is tightly related to the development of the library. 
 
 ### Is my MCU/hardware supported?
-Every MCU which is capable of driving a display via Parallel port, SPI, RGB interface or anything else and fulfills the [Requirements](#Requirements) is supported by LLVGL.
+Every MCU which is capable of driving a display via Parallel port, SPI, RGB interface or anything else and fulfills the [Requirements](#requirements) is supported by LLVGL.
 
 It includes:
 - "Common" MCUs like STM32F, STM32H, NXP Kinetis, LPC, iMX, dsPIC33, PIC32 etc. 
@@ -132,12 +154,6 @@ Some examples of the supported display types:
 
 See the [Porting](/porting/display) section to learn more.
 
-### Is LVGL free? How can I use it in a commercial product?
-LVGL comes with [MIT license](https://github.com/lvgl/lvgl/blob/master/LICENCE.txt) which means you can download and use it for any purpose you want.
-
-The only thing you need to do is to add a notice about you are using LVGL in you product. 
-This notice can be placed in the user guide, on you website, on an about screen, or anywhere else where users might see it.
-
 ### Nothing happens, my display driver is not called. What have I missed?
 Be sure you are calling `lv_tick_inc(x)` in an interrupt and `lv_task_handler()` in your main `while(1)`.
 
@@ -152,12 +168,13 @@ Probably there a bug in your display driver. Try the following code without usin
 ```c
 #define BUF_W 20
 #define BUF_H 10
+
 lv_color_t buf[BUF_W * BUF_H];
 lv_color_t * buf_p = buf;
 uint16_t x, y;
-for(y = 0; y < BUF_H; y++) {
+for(y = 0; y &lt; BUF_H; y++) {
     lv_color_t c = lv_color_mix(LV_COLOR_BLUE, LV_COLOR_RED, (y * 255) / BUF_H);
-    for(x = 0; x < BUF_W; x++){
+    for(x = 0; x &lt; BUF_W; x++){
         (*buf_p) =  c;
         buf_p++;
     }
@@ -201,17 +218,6 @@ to remove unused functions and variables from the final binary
  
 ### How to work with an operating system?
 
-To work with an operating system where tasks can interrupt each other you should protect LVGL related function calls with a mutex. S
-ee the [Operating system and interrupts](/porting/os) section to learn more.
-
-### How to contribute to LVGL?
-There are several ways to contribute to LVGL:
-- Write a few lines about your project to inspire others in the [Forum](https://forum.lvgl.io.com/c/my-projects)
-- Help others questions in the [Froum]
-- Report and/or fix bugs
-- Suggest and/or implement new features
-- Improve and/or translate the documentation
-- Write a blog post about your experiences
-
-To learn more see [Contributing guide](https://github.com/lvgl/lvgl/blob/master/docs/CONTRIBUTING.md)
+To work with an operating system where tasks can interrupt each other (preemptive) you should protect LVGL related function calls with a mutex.
+See the [Operating system and interrupts](/porting/os) section to learn more.
 

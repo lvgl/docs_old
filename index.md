@@ -33,6 +33,6 @@ PDF version: :download:`LVGL.pdf <LVGL.pdf>`
    porting/index
    overview/index
    widgets/index
-   contrib/index
+   contributing/index
 
 ```

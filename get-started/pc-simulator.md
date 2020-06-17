@@ -1,5 +1,6 @@
 ```eval_rst
-a .. include:: /header.rst |github_link_base|/get-started/pc-simulator.md
+.. include:: /header.rst 
+:github_url: |github_link_base|/get-started/pc-simulator.md
 ```
 # Simulator on PC
 
