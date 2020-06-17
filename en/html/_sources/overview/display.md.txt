@@ -1,11 +1,11 @@
 ```eval_rst
-:github_url: https://github.com/littlevgl/docs/blob/master/en/overview/display.md
+:github_url: https://github.com/lvgl/docs/blob/master/v7/overview/display.md
 ```
 # Displays
 
-``` important:: The basic concept of *display* in LittlevGL is explained in the [Porting](/porting/display) section. So before reading further, please read the [Porting](/porting/display) section first.
+``` important:: The basic concept of *display* in LVGL is explained in the [Porting](/porting/display) section. So before reading further, please read the [Porting](/porting/display) section first.
 ```
-In LittlevGL, you can have multiple displays, each with their own driver and objects.
+In LVGL, you can have multiple displays, each with their own driver and objects.
 
 Creating more displays is easy: just initialize more display buffers and register another driver for every display.
 When you create the UI, use `lv_disp_set_default(disp)` to tell the library which display to create objects on.
@@ -47,7 +47,7 @@ Be sure not to confuse displays and screens:
 Screens can be considered the highest level containers which have no parent.
 The screen's size is always equal to its display and size their position is (0;0). Therefore, the screens coordinates can't be changed, i.e. `lv_obj_set_pos()`, `lv_obj_set_size()` or similar functions can't be used on screens.
 
-A screen can be created from any object type but, the two most typical types are the [Base object](/object-types/obj) and the [Image](/object-types/img) (to create a wallpaper).
+A screen can be created from any object type but, the two most typical types are the [Base object](/widgets/obj) and the [Image](/widgets/img) (to create a wallpaper).
 
 To create a screen, use `lv_obj_t * scr = lv_<type>_create(NULL, copy)`. `copy` can be an other screen to copy it.
 
@@ -59,7 +59,7 @@ Screens can be deleted with `lv_obj_del(scr)`, but ensure that you do not delete
 ### Opaque screen
 Usually, the opacity of the screen is `LV_OPA_COVER` to provide a solid background for its children.
 
-However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LittlevGL.
+However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LVGL.
 
 To do this, the screen should have a style that sets `body.opa` or `image.opa` to `LV_OPA_TRANSP` (or another non-opaque value) to make the screen opaque.
 
@@ -96,8 +96,7 @@ The `lv_color_t`, `lv_color1_t`, `lv_color8_t`, `lv_color16_t` and `lv_color32_t
 - **ch.red** red channel
 - **ch.green** green channel
 - **ch.blue** blue channel
-- **ch.alpha** alpha channel (with 32bit)
-- **full** red, green, blue (and alpha if 32bit) concatenated as one datum
+- **full** red + green + blue as one number
 
 You can set the current color depth in *lv_conf.h*, by setting the `LV_COLOR_DEPTH` define to 1 (monochrome), 8, 16 or 32.
 
