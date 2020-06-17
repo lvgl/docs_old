@@ -23,6 +23,10 @@ The knob can be placed in two ways:
 
 Use the `lv_slider_set_knob_in(slider, true/false)` to choose between the modes. (*knob_in = false* is the default)
 
+### Knob-only mode
+Normally, the slider can be adjusted either by dragging the knob, or clicking on the slider bar. In the latter case the knob moves to the point clicked and slider value changes accordingly. In some cases it is desirable to set the slider to react on dragging the knob only.
+
+This feature is enabled by calling `lv_obj_set_adv_hittest(slider, true);`.
 
 ## Styles
 You can modify the slider's styles with `lv_slider_set_style(slider, LV_SLIDER_STYLE_..., &style)`.
