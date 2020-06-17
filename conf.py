@@ -223,4 +223,5 @@ def setup(app):
     app.add_transform(AutoStructify)
     app.add_stylesheet('css/custom.css')
     app.add_stylesheet('css/fontawesome.min.css')
+    app.add_javascript('js/custom.js')
     
