@@ -1,0 +1,1825 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Drop-down list (lv_ddlist) &mdash; LittlevGL 6.1.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Jauge (lv_gauge)" href="gauge.html" />
+    <link rel="prev" title="Color picker (lv_cpicker)" href="cpicker.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78811084-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78811084-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/white_white_lvgl_full_logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Démarrer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/live-demo.html">Démonstrations en ligne</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/pc-simulator.html">Simulateur sur PC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#choisir-un-edi">Choisir un EDI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/pc-simulator.html#configurer-eclipse-cdt">Configurer Eclipse CDT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#installer-eclipse-cdt">Installer Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#installer-sdl-2">Installer SDL 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#projet-pre-configure">Projet pré-configuré</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#ajouter-le-projet-pre-configure-a-eclipse-cdt">Ajouter le projet pré-configuré à Eclipse CDT.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/pc-simulator.html#compilation-et-execution">Compilation et exécution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/quick-overview.html">Aperçu rapide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#ajouter-littlevgl-a-votre-projet">Ajouter LittlevGL à votre projet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#apprendre-les-bases">Apprendre les bases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#les-objets-elements-visuels">Les objets (éléments visuels)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#styles">Styles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#evenements">Evénements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#exemples">Exemples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#bouton-avec-etiquette">Bouton avec étiquette</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#bouton-avec-styles">Bouton avec styles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#curseur-et-alignement-de-l-objet">Curseur et alignement de l’objet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#liste-et-themes">Liste et thèmes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/quick-overview.html#utiliser-littlevgl-avec-micropython">Utiliser LittlevGL avec Micropython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/quick-overview.html#contribuer">Contribuer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#qu-est-ce-que-micropython">Qu’est-ce que Micropython ?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#points-forts-de-micropython">Points forts de Micropython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#pourquoi-micropython-littlevgl">Pourquoi Micropython + LittlevGL ?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#voici-quelques-avantages-a-utiliser-littlevgl-avec-micropython">Voici quelques avantages à utiliser LittlevGL avec Micropython :</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#micropython-littlevgl-peuvent-etre-utilises-pour">Micropython + LittlevGL peuvent être utilisés pour :</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#alors-a-quoi-ca-ressemble">Alors, à quoi ça ressemble ?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#un-exemple-simple">Un exemple simple</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#comment-l-utiliser">Comment l’utiliser?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#simulateur-en-ligne">Simulateur en ligne</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#simulateur-pc">Simulateur PC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#plateforme-embarquee">Plateforme embarquée</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#ou-trouver-plus-d-informations">Où trouver plus d’informations ?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../porting/index.html">Portage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">Aperçu système</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Configurer un projet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#obtenir-la-librairie">Obtenir la librairie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#configuration-file">Configuration file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#initialisation">Initialisation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Interface d’affichage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#tampon-d-affichage">Tampon d’affichage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#pilote-d-affichage">Pilote d’affichage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Interface de périphérique d’entrée</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-de-peripheriques-d-entree">Types de périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-tactile-souris-ou-autre-pointeur">Pavé tactile, souris ou autre pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-numerique-ou-clavier">Pavé numérique ou clavier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encodeur">Encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#bouton">Bouton</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#autres-fonctionnalites">Autres fonctionnalités</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/tick.html">Interface tic</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/tick.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/task-handler.html">Gestionnaire de tâche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sleep.html">Gestion du sommeil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/os.html">Système d’exploitation et interruptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/os.html#taches-et-fils-dexecution">Tâches et fils d’exécution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/os.html#interruptions">Interruptions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/log.html">Journalisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#niveau-de-detail">Niveau de détail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#journalisation-avec-printf">Journalisation avec printf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#fonction-de-journalisation-personnalisee">Fonction de journalisation personnalisée</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#ajouter-des-messages">Ajouter des messages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Vue d’ensemble</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/object.html">Objets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#attributs-d-objet">Attributs d’objet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#attributs-de-base">Attributs de base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#attributs-specifiques">Attributs spécifiques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#mecanismes-de-fonctionnement-de-l-objet">Mécanismes de fonctionnement de l’objet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#structure-parent-enfant">Structure parent-enfant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#se-deplacer-ensemble">Se déplacer ensemble</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#visibilite-uniquement-sur-le-parent">Visibilité uniquement sur le parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#creer-supprimer-des-objets">Créer - supprimer des objets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#ecran-le-parent-le-plus-elementaire">Ecran - le parent le plus élémentaire</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Couches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#ordre-de-creation">Ordre de création</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#amener-au-premier-plan">Amener au premier plan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layers">Top and sys layers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Evénements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#types-d-evenements">Types d’événements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#evenements-generiques">Evénements génériques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#relatifs-aux-peripheriques-d-entree">Relatifs aux  périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#relatif-au-pointeur">Relatif au pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#relatif-au-pave-numerique-et-encodeur">Relatif au pavé numérique et encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#evenements-generaux">Evénements généraux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#evenements-speciaux">Evénements spéciaux</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#donnees-personnalisees">Données personnalisées</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#envoyer-des-evenements-manuellement">Envoyer des événements manuellement</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/style.html">Styles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#utiliser-les-styles">Utiliser les styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#heritage-de-styles">Héritage de styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#proprietes-de-style">Propriétés de style</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-communes">Propriétés communes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-de-corps">Propriétés de style de corps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-de-texte">Propriétés de style de texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-d-image">Propriétés de style d’image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-de-ligne">Propriétés de style de ligne</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#styles-integres">Styles intégrés</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#creer-de-nouveaux-styles">Créer de nouveaux styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#animations-de-style">Animations de style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#exemple-de-style">Exemple de style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#themes">Thèmes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#mise-a-jour-automatique">Mise à jour automatique</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Périphériques d’entrée</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#pointeurs">Pointeurs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#clavier-et-encodeur">Clavier et encodeur</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#groupes">Groupes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#demonstration-en-ligne">Démonstration en ligne</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#peripherique-d-entree">Périphérique d’entrée</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#id1">Groupes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/display.html">Affichage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#utiliser-un-seul-affichage">Utiliser un seul affichage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#affichage-miroir">Affichage miroir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#division-d-image">Division d’image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#ecrans">Ecrans</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#ecran-opaque">Ecran opaque</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#fonctionnalites-des-affichages">Fonctionnalités des affichages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#inactivite">Inactivité</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#couleurs">Couleurs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#conversion-de-couleur">Conversion de couleur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#permutation-16-bits">Permutation 16 bits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#creer-et-melanger-les-couleurs">Créer et mélanger les couleurs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#opacite">Opacité</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#couleurs-integrees">Couleurs intégrées</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#id1">Affichage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#id2">Couleurs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/font.html">Polices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#support-unicode">Support Unicode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#polices-integrees">Polices intégrées</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#special-features">Special features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/font.html#bidirectional-support">Bidirectional support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/font.html#subpixel-rendering">Subpixel rendering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/font.html#compress-fonts">Compress fonts</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#ajouter-une-nouvelle-police">Ajouter une nouvelle police</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#ajouter-de-nouveaux-symboles">Ajouter de nouveaux symboles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#ajouter-un-nouveau-moteur-de-polices">Ajouter un nouveau moteur de polices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/image.html">Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#enregistrer-des-images">Enregistrer des images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#fichiers">Fichiers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#formats-de-couleur">Formats de couleur</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#ajouter-et-utiliser-des-images">Ajouter et utiliser des images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#convertisseur-en-ligne">Convertisseur en ligne</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#creer-une-image-manuellement">Créer une image manuellement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#utiliser-des-images">Utiliser des images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#decodeur-d-images">Décodeur d’images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#formats-d-image-personnalises">Formats d’image personnalisés</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#enregistrer-un-decodeur-d-image">Enregistrer un décodeur d’image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#utiliser-manuellement-un-decodeur-d-image">Utiliser manuellement un décodeur d’image</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#mise-en-cache-des-images">Mise en cache des images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#taille-du-cache">Taille du cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#valeur-des-images">Valeur des images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#utilisation-de-la-memoire">Utilisation de la mémoire</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#nettoyer-le-cache">Nettoyer le cache</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#decodeur-d-image">Décodeur d’image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#cache-d-images">Cache d’images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/file-system.html">Système de fichiers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#ajouter-un-pilote">Ajouter un pilote</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#exemple-d-utilisation">Exemple d’utilisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#utiliser-les-pilotes-pour-les-images">Utiliser les pilotes pour les images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/animation.html">Animations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#creer-une-animation">Créer une animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#chemin-d-animation">Chemin d’animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#vitesse-et-duree">Vitesse et durée</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#supprimer-des-animations">Supprimer des animations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/animation.html#peripherique-d-entree">Périphérique d’entrée</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/task.html">Tâches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#creer-une-tache">Créer une tâche</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#execution-et-reinitialisation">Exécution et réinitialisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#parametres">Paramètres</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#taches-uniques">Tâches uniques</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#mesurer-le-temps-d-inactivite">Mesurer le temps d’inactivité</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#appels-asynchrones">Appels asynchrones</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/drawing.html">Dessin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#types-de-tampons">Types de tampons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#mecanisme-de-rafraichissement-de-l-ecran">Mécanisme de rafraîchissement de l’écran</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Types d’objet (éléments visuels)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="obj.html">Objet de base (lv_obj)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#coordonnees">Coordonnées</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#parents-et-enfants">Parents et enfants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#ecrans">Ecrans</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#couches">Couches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#style">Style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#evenements">Evènements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#attributs">Attributs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#echelle-d-opacite">Echelle d’opacité</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#protection">Protection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#groupes">Groupes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#zone-etendue-de-clic">Zone étendue de clic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#id1">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="obj.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="obj.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="arc.html">Arc (lv_arc)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#angles">Angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="arc.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="bar.html">Barre (lv_bar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#valeur-et-intervalle">Valeur et intervalle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#symetrique">Symétrique</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bar.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bar.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="btn.html">Bouton (lv_btn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#etats">Etats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#bascule">Bascule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#mise-en-page-et-adaptation">Mise en page et adaptation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#effet-d-encre">Effet d’encre</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="btnm.html">Matrice de boutons (lv_btnm)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#texte-du-bouton">Texte du bouton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#controle-des-boutons">Contrôle des boutons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#une-bascule">Une bascule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#recolorer">Recolorer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="btnm.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="btnm.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="calendar.html">Calendrier (lv_calendar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#date-courante">Date courante</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#date-affichee">Date affichée</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#jours-mis-en-evidence">Jours mis en évidence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#nom-des-jours">Nom des jours</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#nom-des-mois">Nom des mois</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="calendar.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="calendar.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="canvas.html">Canvas (lv_canvas)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#tampon">Tampon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#palette">Palette</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#dessin">Dessin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#rotation">Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="canvas.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="canvas.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cb.html">Case à cocher (lv_cb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#texte">Texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#cocher-decocher">Cocher/décocher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#desactiver">Désactiver</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chart.html">Graphique (lv_chart)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#serie-de-donnees">Série de données</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#type-de-serie">Type de série</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#modifier-le-donnees">Modifier le données</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#modes-de-mise-a-jour">Modes de mise à jour</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#nombre-de-points">Nombre de points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#plage-verticale">Plage verticale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#quadrillage">Quadrillage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#graduation-et-etiquettes">Graduation et étiquettes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="chart.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cont.html">Conteneur (lv_cont)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#mise-en-page">Mise en page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#autofit">Autofit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cont.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cpicker.html">Color picker (lv_cpicker)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cpicker.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cpicker.html#types-of-color-pickers">Types of color pickers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cpicker.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cpicker.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpicker.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpicker.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpicker.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpicker.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Drop-down list (lv_ddlist)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#definir-les-elements">Définir les éléments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#obtenir-l-element-selectionne">Obtenir l’élément sélectionné</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aligner-les-elements">Aligner les éléments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hauteur-et-largeur">Hauteur et largeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#barres-de-defilement">Barres de défilement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#duree-d-animation">Durée d’animation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fleche-decorative">Flèche décorative</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manually-open-close">Manually open/close</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rester-ouvert">Rester ouvert</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gauge.html">Jauge (lv_gauge)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#scale">Scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#aiguilles">Aiguilles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#plage">Plage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#valeur-critique">Valeur critique</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gauge.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="img.html">Image (lv_img)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="img.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="img.html#image-source">Image source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#etiquette-comme-image">Etiquette comme image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#transparence">Transparence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#palette-et-index-alpha">Palette et index alpha</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#coloration">Coloration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#taille-automatique">Taille automatique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#mosaique">Mosaïque</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#decalage">Décalage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="img.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="img.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="img.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imgbtn.html">Bouton image (lv_imgbtn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#images-sources">Images sources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#etats">Etats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#bascule">Bascule</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imgbtn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imgbtn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kb.html">Clavier (lv_kb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#modes">Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#zone-de-texte">Zone de texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#new-keymap">New Keymap</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#exemples">Exemples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="kb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="label.html">Etiquette (lv_label)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="label.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="label.html#definir-le-texte">Définir le texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#saut-de-ligne">Saut de ligne</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#modes-d-adaptation-au-texte">Modes d’adaptation au texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#alignement-du-texte">Alignement du texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#dessin-d-arriere-plan">Dessin d’arrière-plan</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#coloration-du-texte">Coloration du texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#tres-long-textes">Très long textes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#symboles">Symboles</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="label.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="label.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="label.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="led.html">LED (lv_led)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="led.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="led.html#luminosite">Luminosité</a></li>
+<li class="toctree-l4"><a class="reference internal" href="led.html#bascule">Bascule</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="led.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="led.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="led.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">Ligne (lv_line)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="line.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="line.html#ensemble-de-points">Ensemble de points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#dimensionnement-automatique">Dimensionnement automatique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#y-inverse">Y inversé</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="line.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="line.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="line.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="list.html">Liste (lv_list)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="list.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="list.html#ajouter-des-boutons">Ajouter des boutons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#supprimer-des-boutons">Supprimer des boutons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#navigation-manuelle">Navigation manuelle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#mise-en-page">Mise en page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#mise-en-evidence-du-bord">Mise en évidence du bord</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#propagation-du-defilement">Propagation du défilement</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="list.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="list.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="list.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lmeter.html">Compteur (lv_lmeter)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#definir-la-valeur">Définir la valeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#intervalle-et-angles">Intervalle et angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#decalage-d-angle">Décalage d’angle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lmeter.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lmeter.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mbox.html">Boîte de message (lv_mbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#definir-le-texte">Définir le texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#ajouter-des-boutons">Ajouter des boutons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#fermeture-automatique">Fermeture automatique</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mbox.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="page.html">Page (lv_page)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="page.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="page.html#barres-de-defilement">Barres de défilement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#objet-colle">Objet collé</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#focus-object">Focus object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#manual-navigation">Manual navigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#edge-flash">Edge flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#scroll-propagation">Scroll propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#scrollable-api">Scrollable API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="page.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="page.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="page.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="preload.html">Indicateur de chargement (lv_preload)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#vitesse-de-rotation">Vitesse de rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#types-de-rotation">Types de rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#direction-de-rotation">Direction de rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preload.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="preload.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="roller.html">Roller (lv_roller)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#set-options">Set options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#get-selected-option">Get selected option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#align-the-options">Align the options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#height-and-width">Height and width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="roller.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="roller.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="slider.html">Curseur (lv_slider)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#vue-d-ensemble">Vue d’ensemble</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#valeur-et-intervalle">Valeur et intervalle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#symetrie">Symétrie</a></li>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#placement-du-bouton">Placement du bouton</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="slider.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="slider.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="spinbox.html">Spinbox (lv_spinbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#set-format">Set format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#value-and-ranges">Value and ranges</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="spinbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spinbox.html#id1">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sw.html">Commutateur (lv_sw)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#changer-d-etat">Changer d’état</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#duree-d-animation">Durée d’animation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sw.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sw.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">Table (lv_table)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="table.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="table.html#llignes-et-colonnes">Llignes et colonnes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#largeur-et-hauteur">Largeur et hauteur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#definir-la-valeur-de-la-cellule">Définir la valeur de la cellule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#alignement">Alignement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#type-de-cellule">Type de cellule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#fusionner-des-cellules">Fusionner des cellules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#crop-text">Crop text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#defilement">Défilement</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="table.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="table.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="table.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tabview.html">Classeur d’onglets (lv_tabview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#ajouter-un-onglet">Ajouter un onglet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#changer-d-onglet">Changer d’onglet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#position-des-boutons-d-onglet">Position des boutons d’onglet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#cacher-des-onglets">Cacher des onglets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#duree-d-animation">Durée d’animation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tabview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tabview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ta.html">Zone de texte (lv_ta)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#ajouter-du-texte">Ajouter du texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#substitutif">Substitutif</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#supprimer-un-caractere">Supprimer un caractère</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#deplacer-le-curseur">Déplacer le curseur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#types-de-curseur">Types de curseur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#mode-une-ligne">Mode une ligne</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#mode-mot-de-passe">Mode mot de passe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#alignement-du-texte">Alignement du texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#caracteres-autorises">Caractères autorisés</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#longueur-de-texte-maximum">Longueur de texte maximum.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#tres-long-texte">Très long texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#selection-de-texte">Sélection de texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#barres-de-defilement">Barres de défilement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#propagation-du-defilement">Propagation du défilement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#mise-en-evidence-du-bord">Mise en évidence du bord</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ta.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ta.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tileview.html">Mosaïque  (lv_tileview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#positions-valides">Positions valides</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#ajouter-un-element">Ajouter un élément</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#definir-la-tuile">Définir la tuile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#duree-d-animation">Durée d’animation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#mise-en-evidence-du-bord">Mise en évidence du bord</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tileview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tileview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="win.html">Fenêtre (lv_win)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="win.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="win.html#titre">Titre</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#boutons-de-controle">Boutons de contrôle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#barres-de-defilement">Barres de défilement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#defilement-manuel-et-focus">Défilement manuel et focus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#mise-en-page">Mise en page</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="win.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="win.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="win.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LittlevGL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Types d’objet (éléments visuels)</a> &raquo;</li>
+        
+      <li>Drop-down list (lv_ddlist)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/littlevgl/docs/blob/master/fr/object-types/ddlist.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="drop-down-list-lv-ddlist">
+<h1>Drop-down list (lv_ddlist)<a class="headerlink" href="#drop-down-list-lv-ddlist" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="vue-densemble">
+<h2>Vue d’ensemble<a class="headerlink" href="#vue-densemble" title="Permalink to this headline">¶</a></h2>
+<p>The drop-down list allows the user to select one value from a list. The drop-down list is closed (inactive) by default. When a drop-down list is inactive, it displays a single value. When activated (by click on the drop-down list), it displays a list of values from which the user may select one. When the user selects a new value, the drop-down list reverts to the inactive state and displays the new value.</p>
+<div class="section" id="definir-les-elements">
+<h3>Définir les éléments<a class="headerlink" href="#definir-les-elements" title="Permalink to this headline">¶</a></h3>
+<p>The options are passed to the drop-down list as a string with <code class="docutils literal notranslate"><span class="pre">lv_ddlist_set_options(ddlist,</span> <span class="pre">options)</span></code>. The options should be separated by <code class="docutils literal notranslate"><span class="pre">\n</span></code>. For example: <code class="docutils literal notranslate"><span class="pre">&quot;First\nSecond\nThird&quot;</span></code>.</p>
+<p>Vous pouvez sélectionner un élément manuellement avec <code class="docutils literal notranslate"><span class="pre">lv_ddlist_set_selected(ddlist,</span> <span class="pre">id)</span></code>, où <em>id</em> est l’index d’un élément.</p>
+</div>
+<div class="section" id="obtenir-l-element-selectionne">
+<h3>Obtenir l’élément sélectionné<a class="headerlink" href="#obtenir-l-element-selectionne" title="Permalink to this headline">¶</a></h3>
+<p>The get the currently selected option, use <code class="docutils literal notranslate"><span class="pre">lv_ddlist_get_selected(ddlist)</span></code>. It will return the <em>index</em> of the selected option.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_ddlist_get_selected_str(ddlist,</span> <span class="pre">buf,</span> <span class="pre">buf_size)</span></code> copies the name of the selected option to a <code class="docutils literal notranslate"><span class="pre">buf</span></code>.</p>
+</div>
+<div class="section" id="aligner-les-elements">
+<h3>Aligner les éléments<a class="headerlink" href="#aligner-les-elements" title="Permalink to this headline">¶</a></h3>
+<p>To align the label horizontally, use <code class="docutils literal notranslate"><span class="pre">lv_ddlist_set_align(ddlist,</span> <span class="pre">LV_LABEL_ALIGN_LEFT/CENTER/RIGHT)</span></code>.</p>
+</div>
+<div class="section" id="hauteur-et-largeur">
+<h3>Hauteur et largeur<a class="headerlink" href="#hauteur-et-largeur" title="Permalink to this headline">¶</a></h3>
+<p>By default, the list’s height is adjusted automatically to show all options. The <code class="docutils literal notranslate"><span class="pre">lv_ddlist_set_fix_height(ddlist,</span> <span class="pre">height)</span></code> sets a fixed height for the opened list. The user can put <code class="docutils literal notranslate"><span class="pre">0</span></code> to use auto height.</p>
+<p>The width is also adjusted automatically. To prevent this, apply <code class="docutils literal notranslate"><span class="pre">lv_ddlist_set_fix_width(ddlist,</span> <span class="pre">width)</span></code>. The user can put <code class="docutils literal notranslate"><span class="pre">0</span></code> to use auto width.</p>
+</div>
+<div class="section" id="barres-de-defilement">
+<h3>Barres de défilement<a class="headerlink" href="#barres-de-defilement" title="Permalink to this headline">¶</a></h3>
+<p>Similarly to <a class="reference internal" href="page.html"><span class="doc">Page</span></a> with fix height, the drop-down list supports various scrollbar display modes. It can be set by <code class="docutils literal notranslate"><span class="pre">lv_ddlist_set_sb_mode(ddlist,</span> <span class="pre">LV_SB_MODE_...)</span></code>.</p>
+</div>
+<div class="section" id="duree-d-animation">
+<h3>Durée d’animation<a class="headerlink" href="#duree-d-animation" title="Permalink to this headline">¶</a></h3>
+<p>The drop-down list’s open/close animation time is adjusted by <code class="docutils literal notranslate"><span class="pre">lv_ddlist_set_anim_time(ddlist,</span> <span class="pre">anim_time)</span></code>. Zero animation time means no animation.</p>
+</div>
+<div class="section" id="fleche-decorative">
+<h3>Flèche décorative<a class="headerlink" href="#fleche-decorative" title="Permalink to this headline">¶</a></h3>
+<p>A down arrow can be added to the left side of the drop-down list with <code class="docutils literal notranslate"><span class="pre">lv_ddlist_set_draw_arrow(ddlist,</span> <span class="pre">true)</span></code>.</p>
+</div>
+<div class="section" id="manually-open-close">
+<h3>Manually open/close<a class="headerlink" href="#manually-open-close" title="Permalink to this headline">¶</a></h3>
+<p>To manually open or close the drop-down list the <code class="docutils literal notranslate"><span class="pre">lv_ddlist_open/close(ddlist)</span></code> function can be used.</p>
+</div>
+<div class="section" id="rester-ouvert">
+<h3>Rester ouvert<a class="headerlink" href="#rester-ouvert" title="Permalink to this headline">¶</a></h3>
+<p>You can force the drop-down list to <strong>stay opened</strong>, when an option is selected with <code class="docutils literal notranslate"><span class="pre">lv_ddlist_set_stay_open(ddlist,</span> <span class="pre">true)</span></code>.</p>
+</div>
+</div>
+<div class="section" id="styles">
+<h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">lv_ddlist_set_style(ddlist,</span> <span class="pre">LV_DDLIST_STYLE_...,</span> <span class="pre">&amp;style)</span></code> set the styles of a drop-down list.</p>
+<ul class="simple">
+<li><p><strong>LV_DDLIST_STYLE_BG</strong> - Style of the background. All <code class="docutils literal notranslate"><span class="pre">style.body</span></code> properties are used. <code class="docutils literal notranslate"><span class="pre">style.text</span></code> is used for the option’s label. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_pretty</span></code>.</p></li>
+<li><p><strong>LV_DDLIST_STYLE_SEL</strong> - Style of the selected option.  The <code class="docutils literal notranslate"><span class="pre">style.body</span></code> properties are used. The selected option will be recolored with <code class="docutils literal notranslate"><span class="pre">text.color</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_plain_color</span></code>.</p></li>
+<li><p><strong>LV_DDLIST_STYLE_SB</strong> - Style of the scrollbar. The <code class="docutils literal notranslate"><span class="pre">style.body</span></code> properties are used. Default: <code class="docutils literal notranslate"><span class="pre">lv_style_plain_color</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="evenements">
+<h2>Evénements<a class="headerlink" href="#evenements" title="Permalink to this headline">¶</a></h2>
+<p>Besides the <a class="reference external" href="/overview/event.html#generic-events">Generic events</a>, the following <a class="reference external" href="/overview/event.html#special-events">Special events</a> are sent by the drop-down list:</p>
+<ul class="simple">
+<li><p><strong>LV_EVENT_VALUE_CHANGED</strong> - Sent when the new option is selected.</p></li>
+</ul>
+<p>Apprenez-en plus sur les <a class="reference internal" href="../overview/event.html"><span class="doc">événements</span></a>.</p>
+</div>
+<div class="section" id="touches">
+<h2>Touches<a class="headerlink" href="#touches" title="Permalink to this headline">¶</a></h2>
+<p>Les <em>touches</em> suivantes sont traitées par les listes déroulantes :</p>
+<ul class="simple">
+<li><p><strong>LV_KEY_RIGHT/DOWN</strong> - Select the next option.</p></li>
+<li><p><strong>LV_KEY_LEFT/UP</strong> - Select the previous option.</p></li>
+<li><p><strong>LY_KEY_ENTER</strong> - Apply the selected option (Send <code class="docutils literal notranslate"><span class="pre">LV_EVENT_VALUE_CHANGED</span></code> event and close the drop-down list).</p></li>
+</ul>
+</div>
+<div class="section" id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="c">
+<h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="simple-drop-down-list">
+<h4>Simple Drop down list<a class="headerlink" href="#simple-drop-down-list" title="Permalink to this headline">¶</a></h4>
+<img alt="Simple Drop down list example in LittlevGL" src="../_images/lv_ex_ddlist_1.gif" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+        <span class="n">lv_ddlist_get_selected_str</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Option: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">lv_ex_ddlist_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="cm">/*Create a drop down list*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ddlist</span> <span class="o">=</span> <span class="n">lv_ddlist_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_ddlist_set_options</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="s">&quot;Apple</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Banana</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Orange</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Melon</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Grape</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Raspberry&quot;</span><span class="p">);</span>
+
+    <span class="n">lv_ddlist_set_fix_width</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
+    <span class="n">lv_ddlist_set_draw_arrow</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="drop-up-list">
+<h4>Drop “up” list<a class="headerlink" href="#drop-up-list" title="Permalink to this headline">¶</a></h4>
+<img alt="Drop up list example in LittlevGL" src="../_images/lv_ex_ddlist_2.gif" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;lvgl/lvgl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Create a drop UP list by applying auto realign</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">lv_ex_ddlist_2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="cm">/*Create a drop down list*/</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ddlist</span> <span class="o">=</span> <span class="n">lv_ddlist_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_ddlist_set_options</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="s">&quot;Apple</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Banana</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Orange</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Melon</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Grape</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="s">&quot;Raspberry&quot;</span><span class="p">);</span>
+
+    <span class="n">lv_ddlist_set_fix_width</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
+    <span class="n">lv_ddlist_set_fix_height</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
+    <span class="n">lv_ddlist_set_draw_arrow</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+    <span class="cm">/* Enable auto-realign when the size changes.</span>
+<span class="cm">     * It will keep the bottom of the ddlist fixed*/</span>
+    <span class="n">lv_obj_set_auto_realign</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+    <span class="cm">/*It will be called automatically when the size changes*/</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">ddlist</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="micropython">
+<h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>Simple Drop down list<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<img alt="Simple Drop down list example in LittlevGL with MicroPython" src="../_images/lv_ex_ddlist_1.gif" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+        <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">*</span><span class="mi">10</span> <span class="c1"># should be large enough to store the option</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">get_selected_str</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">option</span><span class="p">))</span>
+        <span class="c1"># .strip() removes trailing spaces</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Option: </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">option</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+<span class="c1"># Create a drop down list</span>
+<span class="n">ddlist</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">ddlist</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="s2">&quot;Apple&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Banana&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Orange&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Melon&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Grape&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Raspberry&quot;</span><span class="p">]))</span>
+
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_fix_width</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_draw_arrow</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_TOP_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Drop “up” list<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<img alt="Drop up list example in LittlevGL with MicroPython" src="../_images/lv_ex_ddlist_2.gif" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a drop UP list by applying auto realign</span>
+
+<span class="c1"># Create a drop down list</span>
+<span class="n">ddlist</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">ddlist</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="s2">&quot;Apple&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Banana&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Orange&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Melon&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Grape&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Raspberry&quot;</span><span class="p">]))</span>
+
+
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_fix_width</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_fix_height</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_draw_arrow</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Enable auto-realign when the size changes.</span>
+<span class="c1"># It will keep the bottom of the ddlist fixed</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_auto_realign</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># It will be called automatically when the size changes</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv417lv_ddlist_style_t">
+<span id="_CPPv317lv_ddlist_style_t"></span><span id="_CPPv217lv_ddlist_style_t"></span><span id="lv_ddlist_style_t"></span><span class="target" id="lv__ddlist_8h_1a7ea2722ad8096f9cbe5d219799ac49d3"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_ddlist_style_t</code><a class="headerlink" href="#_CPPv417lv_ddlist_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv4Ut7_anon_61">
+<span id="_CPPv3Ut7_anon_61"></span><span class="target" id="lv__ddlist_8h_1af8654c714018c6241d9ebd01f3fb5a26"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut7_anon_61" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv418LV_DDLIST_STYLE_BG">
+<span id="_CPPv318LV_DDLIST_STYLE_BG"></span><span id="_CPPv218LV_DDLIST_STYLE_BG"></span><span class="target" id="lv__ddlist_8h_1af8654c714018c6241d9ebd01f3fb5a26a2d872954747598a54e773aa545a59974"></span><code class="sig-name descname">LV_DDLIST_STYLE_BG</code><a class="headerlink" href="#_CPPv418LV_DDLIST_STYLE_BG" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv419LV_DDLIST_STYLE_SEL">
+<span id="_CPPv319LV_DDLIST_STYLE_SEL"></span><span id="_CPPv219LV_DDLIST_STYLE_SEL"></span><span class="target" id="lv__ddlist_8h_1af8654c714018c6241d9ebd01f3fb5a26aaae2ce9adba669fbf412a5a5b6695c25"></span><code class="sig-name descname">LV_DDLIST_STYLE_SEL</code><a class="headerlink" href="#_CPPv419LV_DDLIST_STYLE_SEL" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv418LV_DDLIST_STYLE_SB">
+<span id="_CPPv318LV_DDLIST_STYLE_SB"></span><span id="_CPPv218LV_DDLIST_STYLE_SB"></span><span class="target" id="lv__ddlist_8h_1af8654c714018c6241d9ebd01f3fb5a26a255db5a45e6c8d239bfcfb6291b8c29a"></span><code class="sig-name descname">LV_DDLIST_STYLE_SB</code><a class="headerlink" href="#_CPPv418LV_DDLIST_STYLE_SB" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv416lv_ddlist_createP8lv_obj_tPK8lv_obj_t">
+<span id="_CPPv316lv_ddlist_createP8lv_obj_tPK8lv_obj_t"></span><span id="_CPPv216lv_ddlist_createP8lv_obj_tPK8lv_obj_t"></span><span id="lv_ddlist_create__lv_obj_tP.lv_obj_tCP"></span><span class="target" id="lv__ddlist_8h_1a0901ca71aec5ebf298c36e42e80d142d"></span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<code class="sig-name descname">lv_ddlist_create</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>par</em>, <em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>copy</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_ddlist_createP8lv_obj_tPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a drop down list objects <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the created drop down list </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">par</span></code>: pointer to an object, it will be the parent of the new drop down list </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">copy</span></code>: pointer to a drop down list object, if not NULL then the new object will be copied from it </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_ddlist_set_optionsP8lv_obj_tPKc">
+<span id="_CPPv321lv_ddlist_set_optionsP8lv_obj_tPKc"></span><span id="_CPPv221lv_ddlist_set_optionsP8lv_obj_tPKc"></span><span id="lv_ddlist_set_options__lv_obj_tP.cCP"></span><span class="target" id="lv__ddlist_8h_1a236f49c5d0a2dd8bf5352056d4449bf5"></span>void <code class="sig-name descname">lv_ddlist_set_options</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, <em class="property">const</em> char *<em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_ddlist_set_optionsP8lv_obj_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the options in a drop down list from a string <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to drop down list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options</span></code>: a string with ‘<p>’ separated options. E.g. “One\nTwo\nThree” </p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422lv_ddlist_set_selectedP8lv_obj_t8uint16_t">
+<span id="_CPPv322lv_ddlist_set_selectedP8lv_obj_t8uint16_t"></span><span id="_CPPv222lv_ddlist_set_selectedP8lv_obj_t8uint16_t"></span><span id="lv_ddlist_set_selected__lv_obj_tP.uint16_t"></span><span class="target" id="lv__ddlist_8h_1ab928c961d4349e0cb5a2e18ffa92287f"></span>void <code class="sig-name descname">lv_ddlist_set_selected</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, uint16_t <em>sel_opt</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lv_ddlist_set_selectedP8lv_obj_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the selected option <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to drop down list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sel_opt</span></code>: id of the selected option (0 … number of option - 1); </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424lv_ddlist_set_fix_heightP8lv_obj_t10lv_coord_t">
+<span id="_CPPv324lv_ddlist_set_fix_heightP8lv_obj_t10lv_coord_t"></span><span id="_CPPv224lv_ddlist_set_fix_heightP8lv_obj_t10lv_coord_t"></span><span id="lv_ddlist_set_fix_height__lv_obj_tP.lv_coord_t"></span><span class="target" id="lv__ddlist_8h_1aaf9e1d89ac74deff12aa08ddf62e70c2"></span>void <code class="sig-name descname">lv_ddlist_set_fix_height</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, lv_coord_t <em>h</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_ddlist_set_fix_heightP8lv_obj_t10lv_coord_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a fix height for the drop down list If 0 then the opened ddlist will be auto. sized else the set height will be applied. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to a drop down list </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span></code>: the height when the list is opened (0: auto size) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423lv_ddlist_set_fix_widthP8lv_obj_t10lv_coord_t">
+<span id="_CPPv323lv_ddlist_set_fix_widthP8lv_obj_t10lv_coord_t"></span><span id="_CPPv223lv_ddlist_set_fix_widthP8lv_obj_t10lv_coord_t"></span><span id="lv_ddlist_set_fix_width__lv_obj_tP.lv_coord_t"></span><span class="target" id="lv__ddlist_8h_1ad9c641a41dff5e9a9fd2fbb4962b841d"></span>void <code class="sig-name descname">lv_ddlist_set_fix_width</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, lv_coord_t <em>w</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_ddlist_set_fix_widthP8lv_obj_t10lv_coord_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a fix width for the drop down list <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to a drop down list </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">w</span></code>: the width when the list is opened (0: auto size) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424lv_ddlist_set_draw_arrowP8lv_obj_tb">
+<span id="_CPPv324lv_ddlist_set_draw_arrowP8lv_obj_tb"></span><span id="_CPPv224lv_ddlist_set_draw_arrowP8lv_obj_tb"></span><span id="lv_ddlist_set_draw_arrow__lv_obj_tP.b"></span><span class="target" id="lv__ddlist_8h_1aa06529c8203c29d560f411d3fa70d36c"></span>void <code class="sig-name descname">lv_ddlist_set_draw_arrow</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_ddlist_set_draw_arrowP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set arrow draw in a drop down list <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to drop down list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">en</span></code>: enable/disable a arrow draw. E.g. “true” for draw. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423lv_ddlist_set_stay_openP8lv_obj_tb">
+<span id="_CPPv323lv_ddlist_set_stay_openP8lv_obj_tb"></span><span id="_CPPv223lv_ddlist_set_stay_openP8lv_obj_tb"></span><span id="lv_ddlist_set_stay_open__lv_obj_tP.b"></span><span class="target" id="lv__ddlist_8h_1ad615f6fab2d9401550d6bfe9626b2faa"></span>void <code class="sig-name descname">lv_ddlist_set_stay_open</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, bool <em>en</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_ddlist_set_stay_openP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Leave the list opened when a new value is selected <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to drop down list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">en</span></code>: enable/disable “stay open” feature </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_ddlist_set_sb_modeP8lv_obj_t12lv_sb_mode_t">
+<span id="_CPPv321lv_ddlist_set_sb_modeP8lv_obj_t12lv_sb_mode_t"></span><span id="_CPPv221lv_ddlist_set_sb_modeP8lv_obj_t12lv_sb_mode_t"></span><span id="lv_ddlist_set_sb_mode__lv_obj_tP.lv_sb_mode_t"></span><span class="target" id="lv__ddlist_8h_1af26142ab6d7eefe7e422d24dd63ac775"></span><em class="property">static</em> void <code class="sig-name descname">lv_ddlist_set_sb_mode</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, <a class="reference internal" href="page.html#_CPPv412lv_sb_mode_t" title="lv_sb_mode_t">lv_sb_mode_t</a> <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_ddlist_set_sb_modeP8lv_obj_t12lv_sb_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the scroll bar mode of a drop down list <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to a drop down list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sb_mode</span></code>: the new mode from ‘lv_page_sb_mode_t’ enum </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423lv_ddlist_set_anim_timeP8lv_obj_t8uint16_t">
+<span id="_CPPv323lv_ddlist_set_anim_timeP8lv_obj_t8uint16_t"></span><span id="_CPPv223lv_ddlist_set_anim_timeP8lv_obj_t8uint16_t"></span><span id="lv_ddlist_set_anim_time__lv_obj_tP.uint16_t"></span><span class="target" id="lv__ddlist_8h_1a7e67dee144cf9697de866a2e35811643"></span><em class="property">static</em> void <code class="sig-name descname">lv_ddlist_set_anim_time</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, uint16_t <em>anim_time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_ddlist_set_anim_timeP8lv_obj_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the open/close animation time. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to a drop down list </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anim_time</span></code>: open/close animation time [ms] </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_ddlist_set_styleP8lv_obj_t17lv_ddlist_style_tPK10lv_style_t">
+<span id="_CPPv319lv_ddlist_set_styleP8lv_obj_t17lv_ddlist_style_tPK10lv_style_t"></span><span id="_CPPv219lv_ddlist_set_styleP8lv_obj_t17lv_ddlist_style_tPK10lv_style_t"></span><span id="lv_ddlist_set_style__lv_obj_tP.lv_ddlist_style_t.lv_style_tCP"></span><span class="target" id="lv__ddlist_8h_1a21b964a4bc181844299d9c81b3838778"></span>void <code class="sig-name descname">lv_ddlist_set_style</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, <a class="reference internal" href="#_CPPv417lv_ddlist_style_t" title="lv_ddlist_style_t">lv_ddlist_style_t</a> <em>type</em>, <em class="property">const</em> lv_style_t *<em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_ddlist_set_styleP8lv_obj_t17lv_ddlist_style_tPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a style of a drop down list <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to a drop down list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: which style should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_ddlist_set_alignP8lv_obj_t16lv_label_align_t">
+<span id="_CPPv319lv_ddlist_set_alignP8lv_obj_t16lv_label_align_t"></span><span id="_CPPv219lv_ddlist_set_alignP8lv_obj_t16lv_label_align_t"></span><span id="lv_ddlist_set_align__lv_obj_tP.lv_label_align_t"></span><span class="target" id="lv__ddlist_8h_1a0920951e078f907637363201b16fef4f"></span>void <code class="sig-name descname">lv_ddlist_set_align</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, <a class="reference internal" href="label.html#_CPPv416lv_label_align_t" title="lv_label_align_t">lv_label_align_t</a> <em>align</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_ddlist_set_alignP8lv_obj_t16lv_label_align_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the alignment of the labels in a drop down list <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to a drop down list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">align</span></code>: alignment of labels </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_ddlist_get_optionsPK8lv_obj_t">
+<span id="_CPPv321lv_ddlist_get_optionsPK8lv_obj_t"></span><span id="_CPPv221lv_ddlist_get_optionsPK8lv_obj_t"></span><span id="lv_ddlist_get_options__lv_obj_tCP"></span><span class="target" id="lv__ddlist_8h_1af817d64d53a452af52f0c3e5c3f57f00"></span><em class="property">const</em> char *<code class="sig-name descname">lv_ddlist_get_options</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_ddlist_get_optionsPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the options of a drop down list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the options separated by ‘<p>’-s (E.g. “Option1\nOption2\nOption3”) </p>
+</p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to drop down list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv422lv_ddlist_get_selectedPK8lv_obj_t">
+<span id="_CPPv322lv_ddlist_get_selectedPK8lv_obj_t"></span><span id="_CPPv222lv_ddlist_get_selectedPK8lv_obj_t"></span><span id="lv_ddlist_get_selected__lv_obj_tCP"></span><span class="target" id="lv__ddlist_8h_1a5d212068816b3e1439687144dbac0584"></span>uint16_t <code class="sig-name descname">lv_ddlist_get_selected</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lv_ddlist_get_selectedPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the selected option <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>id of the selected option (0 … number of option - 1); </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to drop down list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv426lv_ddlist_get_selected_strPK8lv_obj_tPc8uint16_t">
+<span id="_CPPv326lv_ddlist_get_selected_strPK8lv_obj_tPc8uint16_t"></span><span id="_CPPv226lv_ddlist_get_selected_strPK8lv_obj_tPc8uint16_t"></span><span id="lv_ddlist_get_selected_str__lv_obj_tCP.cP.uint16_t"></span><span class="target" id="lv__ddlist_8h_1ae1ce1af8bc0efa700484ea5091876c7e"></span>void <code class="sig-name descname">lv_ddlist_get_selected_str</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, char *<em>buf</em>, uint16_t <em>buf_size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_ddlist_get_selected_strPK8lv_obj_tPc8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current selected option as a string <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to ddlist object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: pointer to an array to store the string </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buf_size</span></code>: size of <code class="docutils literal notranslate"><span class="pre">buf</span></code> in bytes. 0: to ignore it. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424lv_ddlist_get_fix_heightPK8lv_obj_t">
+<span id="_CPPv324lv_ddlist_get_fix_heightPK8lv_obj_t"></span><span id="_CPPv224lv_ddlist_get_fix_heightPK8lv_obj_t"></span><span id="lv_ddlist_get_fix_height__lv_obj_tCP"></span><span class="target" id="lv__ddlist_8h_1ad63b3ca4e4bf53b5c0e1d8ea4e8f5a44"></span>lv_coord_t <code class="sig-name descname">lv_ddlist_get_fix_height</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_ddlist_get_fix_heightPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the fix height value. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the height if the ddlist is opened (0: auto size) </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to a drop down list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv424lv_ddlist_get_draw_arrowP8lv_obj_t">
+<span id="_CPPv324lv_ddlist_get_draw_arrowP8lv_obj_t"></span><span id="_CPPv224lv_ddlist_get_draw_arrowP8lv_obj_t"></span><span id="lv_ddlist_get_draw_arrow__lv_obj_tP"></span><span class="target" id="lv__ddlist_8h_1a5529856b2dd297be4f0a97c7171a7946"></span>bool <code class="sig-name descname">lv_ddlist_get_draw_arrow</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_ddlist_get_draw_arrowP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get arrow draw in a drop down list <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to drop down list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423lv_ddlist_get_stay_openP8lv_obj_t">
+<span id="_CPPv323lv_ddlist_get_stay_openP8lv_obj_t"></span><span id="_CPPv223lv_ddlist_get_stay_openP8lv_obj_t"></span><span id="lv_ddlist_get_stay_open__lv_obj_tP"></span><span class="target" id="lv__ddlist_8h_1aa109c8544d082a8aeed4041dc7abc7a3"></span>bool <code class="sig-name descname">lv_ddlist_get_stay_open</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_ddlist_get_stay_openP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get whether the drop down list stay open after selecting a value or not <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to drop down list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv421lv_ddlist_get_sb_modePK8lv_obj_t">
+<span id="_CPPv321lv_ddlist_get_sb_modePK8lv_obj_t"></span><span id="_CPPv221lv_ddlist_get_sb_modePK8lv_obj_t"></span><span id="lv_ddlist_get_sb_mode__lv_obj_tCP"></span><span class="target" id="lv__ddlist_8h_1a7084b0b1cd0e19c9d13e7b66c1394c6d"></span><em class="property">static</em> <a class="reference internal" href="page.html#_CPPv412lv_sb_mode_t" title="lv_sb_mode_t">lv_sb_mode_t</a> <code class="sig-name descname">lv_ddlist_get_sb_mode</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_ddlist_get_sb_modePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the scroll bar mode of a drop down list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>scrollbar mode from ‘lv_page_sb_mode_t’ enum </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to a drop down list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv423lv_ddlist_get_anim_timePK8lv_obj_t">
+<span id="_CPPv323lv_ddlist_get_anim_timePK8lv_obj_t"></span><span id="_CPPv223lv_ddlist_get_anim_timePK8lv_obj_t"></span><span id="lv_ddlist_get_anim_time__lv_obj_tCP"></span><span class="target" id="lv__ddlist_8h_1a171b93cc27bf1196b2988aca18d5e494"></span><em class="property">static</em> uint16_t <code class="sig-name descname">lv_ddlist_get_anim_time</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_ddlist_get_anim_timePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the open/close animation time. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>open/close animation time [ms] </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to a drop down list </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_ddlist_get_stylePK8lv_obj_t17lv_ddlist_style_t">
+<span id="_CPPv319lv_ddlist_get_stylePK8lv_obj_t17lv_ddlist_style_t"></span><span id="_CPPv219lv_ddlist_get_stylePK8lv_obj_t17lv_ddlist_style_t"></span><span id="lv_ddlist_get_style__lv_obj_tCP.lv_ddlist_style_t"></span><span class="target" id="lv__ddlist_8h_1a70adf58a58cf9e5fdf9c2b2bf95323d8"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">lv_ddlist_get_style</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, <a class="reference internal" href="#_CPPv417lv_ddlist_style_t" title="lv_ddlist_style_t">lv_ddlist_style_t</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_ddlist_get_stylePK8lv_obj_t17lv_ddlist_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a style of a drop down list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>style pointer to a style </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to a drop down list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: which style should be get </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv419lv_ddlist_get_alignPK8lv_obj_t">
+<span id="_CPPv319lv_ddlist_get_alignPK8lv_obj_t"></span><span id="_CPPv219lv_ddlist_get_alignPK8lv_obj_t"></span><span id="lv_ddlist_get_align__lv_obj_tCP"></span><span class="target" id="lv__ddlist_8h_1a4a09ffd7a9f177b8c4b076def102e344"></span><a class="reference internal" href="label.html#_CPPv416lv_label_align_t" title="lv_label_align_t">lv_label_align_t</a> <code class="sig-name descname">lv_ddlist_get_align</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_ddlist_get_alignPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the alignment of the labels in a drop down list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>alignment of labels </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to a drop down list object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv414lv_ddlist_openP8lv_obj_t16lv_anim_enable_t">
+<span id="_CPPv314lv_ddlist_openP8lv_obj_t16lv_anim_enable_t"></span><span id="_CPPv214lv_ddlist_openP8lv_obj_t16lv_anim_enable_t"></span><span id="lv_ddlist_open__lv_obj_tP.lv_anim_enable_t"></span><span class="target" id="lv__ddlist_8h_1ad5ab0176e026e3cb7f92f7f51cb2c5a1"></span>void <code class="sig-name descname">lv_ddlist_open</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, <a class="reference internal" href="../overview/animation.html#_CPPv416lv_anim_enable_t" title="lv_anim_enable_t">lv_anim_enable_t</a> <em>anim</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_ddlist_openP8lv_obj_t16lv_anim_enable_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Open the drop down list with or without animation <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to drop down list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anim_en</span></code>: LV_ANIM_ON: use animation; LV_ANOM_OFF: not use animations </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv415lv_ddlist_closeP8lv_obj_t16lv_anim_enable_t">
+<span id="_CPPv315lv_ddlist_closeP8lv_obj_t16lv_anim_enable_t"></span><span id="_CPPv215lv_ddlist_closeP8lv_obj_t16lv_anim_enable_t"></span><span id="lv_ddlist_close__lv_obj_tP.lv_anim_enable_t"></span><span class="target" id="lv__ddlist_8h_1a7a28a75dd619c368d46988d39815c968"></span>void <code class="sig-name descname">lv_ddlist_close</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>ddlist</em>, <a class="reference internal" href="../overview/animation.html#_CPPv416lv_anim_enable_t" title="lv_anim_enable_t">lv_anim_enable_t</a> <em>anim</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_ddlist_closeP8lv_obj_t16lv_anim_enable_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Close (Collapse) the drop down list <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ddlist</span></code>: pointer to drop down list object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">anim_en</span></code>: LV_ANIM_ON: use animation; LV_ANOM_OFF: not use animations </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv415lv_ddlist_ext_t">
+<span id="_CPPv315lv_ddlist_ext_t"></span><span id="_CPPv215lv_ddlist_ext_t"></span><span id="lv_ddlist_ext_t"></span><span class="target" id="structlv__ddlist__ext__t"></span><em class="property">struct </em><code class="sig-name descname">lv_ddlist_ext_t</code><a class="headerlink" href="#_CPPv415lv_ddlist_ext_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N15lv_ddlist_ext_t4pageE">
+<span id="_CPPv3N15lv_ddlist_ext_t4pageE"></span><span id="_CPPv2N15lv_ddlist_ext_t4pageE"></span><span id="lv_ddlist_ext_t::page__lv_page_ext_t"></span><span class="target" id="structlv__ddlist__ext__t_1a0890fd4739b2e92a07a2f151a7ec4dd2"></span><a class="reference internal" href="page.html#_CPPv413lv_page_ext_t" title="lv_page_ext_t">lv_page_ext_t</a> <code class="sig-name descname">page</code><a class="headerlink" href="#_CPPv4N15lv_ddlist_ext_t4pageE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_ddlist_ext_t5labelE">
+<span id="_CPPv3N15lv_ddlist_ext_t5labelE"></span><span id="_CPPv2N15lv_ddlist_ext_t5labelE"></span><span id="lv_ddlist_ext_t::label__lv_obj_tP"></span><span class="target" id="structlv__ddlist__ext__t_1a6830e4b5625484ee66cffa80d18a07a1"></span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<code class="sig-name descname">label</code><a class="headerlink" href="#_CPPv4N15lv_ddlist_ext_t5labelE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_ddlist_ext_t9sel_styleE">
+<span id="_CPPv3N15lv_ddlist_ext_t9sel_styleE"></span><span id="_CPPv2N15lv_ddlist_ext_t9sel_styleE"></span><span id="lv_ddlist_ext_t::sel_style__lv_style_tCP"></span><span class="target" id="structlv__ddlist__ext__t_1a606f08b9847496c7b471e688ceba0038"></span><em class="property">const</em> lv_style_t *<code class="sig-name descname">sel_style</code><a class="headerlink" href="#_CPPv4N15lv_ddlist_ext_t9sel_styleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_ddlist_ext_t10option_cntE">
+<span id="_CPPv3N15lv_ddlist_ext_t10option_cntE"></span><span id="_CPPv2N15lv_ddlist_ext_t10option_cntE"></span><span id="lv_ddlist_ext_t::option_cnt__uint16_t"></span><span class="target" id="structlv__ddlist__ext__t_1af166b1776c586d4b1d314829fa256d8d"></span>uint16_t <code class="sig-name descname">option_cnt</code><a class="headerlink" href="#_CPPv4N15lv_ddlist_ext_t10option_cntE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_ddlist_ext_t10sel_opt_idE">
+<span id="_CPPv3N15lv_ddlist_ext_t10sel_opt_idE"></span><span id="_CPPv2N15lv_ddlist_ext_t10sel_opt_idE"></span><span id="lv_ddlist_ext_t::sel_opt_id__uint16_t"></span><span class="target" id="structlv__ddlist__ext__t_1ae75149d4960a9cb6ecfa09987da25379"></span>uint16_t <code class="sig-name descname">sel_opt_id</code><a class="headerlink" href="#_CPPv4N15lv_ddlist_ext_t10sel_opt_idE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_ddlist_ext_t14sel_opt_id_oriE">
+<span id="_CPPv3N15lv_ddlist_ext_t14sel_opt_id_oriE"></span><span id="_CPPv2N15lv_ddlist_ext_t14sel_opt_id_oriE"></span><span id="lv_ddlist_ext_t::sel_opt_id_ori__uint16_t"></span><span class="target" id="structlv__ddlist__ext__t_1adc02d87b8155961911eddc1334696300"></span>uint16_t <code class="sig-name descname">sel_opt_id_ori</code><a class="headerlink" href="#_CPPv4N15lv_ddlist_ext_t14sel_opt_id_oriE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_ddlist_ext_t6openedE">
+<span id="_CPPv3N15lv_ddlist_ext_t6openedE"></span><span id="_CPPv2N15lv_ddlist_ext_t6openedE"></span><span id="lv_ddlist_ext_t::opened__uint8_t"></span><span class="target" id="structlv__ddlist__ext__t_1a8d34719d3314196666fbb04ab5dbcf6d"></span>uint8_t <code class="sig-name descname">opened</code><a class="headerlink" href="#_CPPv4N15lv_ddlist_ext_t6openedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_ddlist_ext_t9force_selE">
+<span id="_CPPv3N15lv_ddlist_ext_t9force_selE"></span><span id="_CPPv2N15lv_ddlist_ext_t9force_selE"></span><span id="lv_ddlist_ext_t::force_sel__uint8_t"></span><span class="target" id="structlv__ddlist__ext__t_1a819294b2aef4e9e5d382ee3c84d7cebb"></span>uint8_t <code class="sig-name descname">force_sel</code><a class="headerlink" href="#_CPPv4N15lv_ddlist_ext_t9force_selE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_ddlist_ext_t10draw_arrowE">
+<span id="_CPPv3N15lv_ddlist_ext_t10draw_arrowE"></span><span id="_CPPv2N15lv_ddlist_ext_t10draw_arrowE"></span><span id="lv_ddlist_ext_t::draw_arrow__uint8_t"></span><span class="target" id="structlv__ddlist__ext__t_1a8d974f1caf54e2acdc135179b247c55b"></span>uint8_t <code class="sig-name descname">draw_arrow</code><a class="headerlink" href="#_CPPv4N15lv_ddlist_ext_t10draw_arrowE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_ddlist_ext_t9stay_openE">
+<span id="_CPPv3N15lv_ddlist_ext_t9stay_openE"></span><span id="_CPPv2N15lv_ddlist_ext_t9stay_openE"></span><span id="lv_ddlist_ext_t::stay_open__uint8_t"></span><span class="target" id="structlv__ddlist__ext__t_1aac83fc0462f8c5138565f8b1b105a468"></span>uint8_t <code class="sig-name descname">stay_open</code><a class="headerlink" href="#_CPPv4N15lv_ddlist_ext_t9stay_openE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N15lv_ddlist_ext_t10fix_heightE">
+<span id="_CPPv3N15lv_ddlist_ext_t10fix_heightE"></span><span id="_CPPv2N15lv_ddlist_ext_t10fix_heightE"></span><span id="lv_ddlist_ext_t::fix_height__lv_coord_t"></span><span class="target" id="structlv__ddlist__ext__t_1a34b8100005d9dfb013455627f0f6fd5d"></span>lv_coord_t <code class="sig-name descname">fix_height</code><a class="headerlink" href="#_CPPv4N15lv_ddlist_ext_t10fix_heightE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gauge.html" class="btn btn-neutral float-right" title="Jauge (lv_gauge)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cpicker.html" class="btn btn-neutral float-left" title="Color picker (lv_cpicker)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gabor Kiss-Vamosi
+      <span class="lastupdated">
+        Last updated on Apr 17, 2020.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>
