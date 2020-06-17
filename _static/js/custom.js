@@ -1,12 +1,17 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-  alert("Hello! I am an alert box!!");
+
   p = document.getElementById("rtd-search-form").parentElement;
-  p.innerHTML += "Hello";
+  p.innerHTML = `
+<select name="versions" id="versions" onchange="ver_sel()" style="border-radius:5px; margin-bottom:15px">
+  <option value="latest">latest</option>
+  <option value="v7">release/v7</option>
+  <option value="v6">release/v6</option>
+</select>` + p.innerHTML;
 })
 
+function ver_sel()
+{
+  var x = document.getElementById("versions").value;
+	window.location.href = "https://docs.lvgl.io/" + x + "/en/html";
 
-1
-// A $( document ).ready() block.
-$( document ).ready(function() {
-    console.log( "ready!" );
-});
+}
