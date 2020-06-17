@@ -27,16 +27,16 @@ LVGL (Light and Versatile Graphic Library) is a free and open-source graphics li
 - Free and open-source under MIT license
 
 ## Requirements
-Basically, every modern controller  (which is able to drive a display( is suitable to run LVGL. The minimal requirements are:
+Basically, every modern controller  (which is able to drive a display( is suitable to run LVGL. The minimal requirements are:
 - 16, 32 or 64 bit microcontroller or processor
 - &gt; 16 MHz clock speed is recommended
 - Flash/ROM: &gt; 64 kB for the very essential components (&gt; 180 kB is recommended)
 - RAM: 
-  - Static RAM usage: ~2 kB depending on the used features and objects types
-  - Stack: &gt; 2kB (&gt; 8 kB is recommended)
-  - Dynamic data (heap): &gt; 2 KB (&gt; 16 kB is recommended if using several objects).
-    Set by `LV_MEM_SIZE` in *lv_conf.h*. 
-  - Display buffer:  &gt; *"Horizontal resolution"* pixels (&gt; 10 &times; *"Horizontal resolution"* is recommended) 
+  - Static RAM usage: ~2 kB depending on the used features and objects types
+  - Stack: &gt; 2kB (&gt; 8 kB is recommended)
+  - Dynamic data (heap): &gt; 2 KB (&gt; 16 kB is recommended if using several objects).
+    Set by `LV_MEM_SIZE` in *lv_conf.h*. 
+  - Display buffer:  &gt; *"Horizontal resolution"* pixels (&gt; 10 &times; *"Horizontal resolution"* is recommended) 
 - One frame buffer in the MCU or in external display controller
 - C99 or newer compiler
 - Basic C (or C++) knowledge: [pointers](https://www.tutorialspoint.com/cprogramming/c_pointers.htm), [structs](https://www.tutorialspoint.com/cprogramming/c_structures.htm), [callbacks](https://www.geeksforgeeks.org/callbacks-in-c/)
@@ -47,15 +47,15 @@ Basically, every modern controller  (which is able to drive a display( is suitab
 The LVGL project (including all repositories) is licensed under [MIT license](https://github.com/lvgl/lvgl/blob/master/LICENCE.txt). 
 It means you can use it even in commercial projects.
 
-The only thing you need to do is to add a notice about you are using LVGL in you product. 
-This notice can be placed in the user guide, on you website, on an about screen, or anywhere else where users might see it.
+The only thing you need to do is to add a notice about you are using LVGL in your product. 
+This notice can be placed in the user guide, on your website, on an about screen, or anywhere else where users might see it.
 
-It's not mandatory but we highly appreciate if you write a few words about your project in the [My projects](https://forum.lvgl.io/c/my-projects/10) category of the Forum or a private message from [lvgl.io](https://lvgl.io/#contact).
+It's not mandatory but we highly appreciate it if you write a few words about your project in the [My projects](https://forum.lvgl.io/c/my-projects/10) category of the Forum or a private message from [lvgl.io](https://lvgl.io/#contact).
 
-Although you can get LVGL for free there is a huge work behind it. It's created by a group of volunteers who made it available for you in in their free time.
+Although you can get LVGL for free there is a huge work behind it. It's created by a group of volunteers who made it available for you in their free time.
 
 To make the LVGL project sustainable, please consider [Contributing](/contributing/index) to the project. 
-You can choose from [many ways of contributions](/contributing/index) such as simply writing tweet about you are using LVGL, fixing bugs, translating the documentation or even becomeing a maintainer.
+You can choose from [many ways of contributions](/contributing/index) such as simply writing a tweet about you are using LVGL, fixing bugs, translating the documentation, or even becoming a maintainer.
 
 ## Repository layout
 All repositories of the LVGL project are hosted n GitHub: https://github.com/lvgl
@@ -72,11 +72,11 @@ You fill these repositories there:
 - [lv_binding_..](https://github.com/lvgl?q=lv_binding&type=&language=l) Bindings to other languages
 - [lv_...](https://github.com/lvgl?q=lv_&type=&language=) Ports to other platforms
 
-The [lvgl](https://github.com/lvgl/lvgl),  [lv_examples](https://github.com/lvgl/lv_examples) and [lv_drivers](https://github.com/lvgl/lv_drivers) are the core repositories which gets the most attentions regarding maintenance. 
+The [lvgl](https://github.com/lvgl/lvgl),  [lv_examples](https://github.com/lvgl/lv_examples) and [lv_drivers](https://github.com/lvgl/lv_drivers) are the core repositories which gets the most attentions regarding maintenance. 
 
 ## Release policy
 
-The core repositories follows the rules of [Semantic versioning](https://semver.org/):
+The core repositories follow the rules of [Semantic versioning](https://semver.org/):
 - Major versions for incompatible API changes. E.g. v5.0.0, v6.0.0
 - Minor version for new but backward-compatible functionalities. E.g. v6.1.0, v6.2.0
 - Patch version for backward-compatible bug fixes. E.g. v6.1.1, v6.1.2
@@ -91,32 +91,32 @@ The core repositories have at least the following branches:
 
 LVGL has a monthly periodic release cycle.
 - **1st Tuesday of the month** 
-  - Make a major, minor, or patch release from `master` depending on the new features.
-  - After that merge only patches into `master` and add new features into the `dev`.
+  - Make a major, minor, or patch release from `master` depending on the new features.
+  - After that merge only patches into `master` and add new features into the `dev`.
 - **3rd Tuesday of the month** 
-  - Make a patch release from `master`.
-  - After that merge the new features from the `dev` to `master` branch. 
-  - In the rest of the month merge only patches into `master` and new features into `dev` branch.
+  - Make a patch release from `master`.
+  - After that merge the new features from the `dev` to `master` branch. 
+  - In the rest of the month merge only patches into `master` and new features into `dev` branch.
 
-In other words patches are merged directly into `master` and new features into `dev`. `dev` 
-is merged to `master` in the middle of the month and the new features are released in the beginning of the next month.
+In other words, patches are merged directly into `master` and new features into `dev`. `dev` 
+is merged to `master` in the middle of the month and the new features are released at the beginning of the next month.
 
 ### Tags
 
-Tags like `vX.Y.Z` are create for every release.
+Tags like `vX.Y.Z` are created for every release.
 
 ### Changelog
 
 The changes are recorded in [CHANGELOG.md](https://github.com/lvgl/lvgl/blob/master/CHANGELOG.md).
 
 ### Side projects
-The [docs](https://github.com/lvgl/docs) is rebuilt on every release. By default the `latest` documentation is displayed which is for the current `master` branch of lvgl. 
+The [docs](https://github.com/lvgl/docs) is rebuilt on every release. By default, the `latest` documentation is displayed which is for the current `master` branch of lvgl. 
 The documentation of earlier versions is available from the menu on the left. 
 
 The simulator, porting, and other projects are updated with best effort. Pull requests are welcome if you updated one of them.
 
 ### Version support
-In core repositories each major version has a branch (e.g. `release/v6`). All the minor and patch releases of that major version are merged there. 
+In the core repositories each major version has a branch (e.g. `release/v6`). All the minor and patch releases of that major version are merged there. 
 
 It makes possible to add fixed older versions without bothering the newer ones.
 
@@ -137,7 +137,7 @@ Every MCU which is capable of driving a display via Parallel port, SPI, RGB inte
 It includes:
 - "Common" MCUs like STM32F, STM32H, NXP Kinetis, LPC, iMX, dsPIC33, PIC32 etc. 
 - Bluetooth, GSM, WiFi modules like Nordic NRF and Espressif ESP32
-- Linux frame buffer like /dev/fb0 which includes Single board computers too like Raspberry Pi
+- Linux frame buffer like /dev/fb0 which includes Single-board computers too like Raspberry Pi
 - And anything else with a strong enough MCU and a periphery to drive a display
 
 ### Is my display supported?
@@ -173,11 +173,11 @@ lv_color_t buf[BUF_W * BUF_H];
 lv_color_t * buf_p = buf;
 uint16_t x, y;
 for(y = 0; y &lt; BUF_H; y++) {
-    lv_color_t c = lv_color_mix(LV_COLOR_BLUE, LV_COLOR_RED, (y * 255) / BUF_H);
-    for(x = 0; x &lt; BUF_W; x++){
-        (*buf_p) =  c;
-        buf_p++;
-    }
+    lv_color_t c = lv_color_mix(LV_COLOR_BLUE, LV_COLOR_RED, (y * 255) / BUF_H);
+    for(x = 0; x &lt; BUF_W; x++){
+        (*buf_p) =  c;
+        buf_p++;
+    }
 }
 
 lv_area_t a;
@@ -191,7 +191,7 @@ my_flush_cb(NULL, &a, buf);
 ### Why I see non-sense colors on the screen? 
 Probably LVGL's color format is not compatible with your displays color format. Check `LV_COLOR_DEPTH` in *lv_conf.h*.
 
-If you are using 16 bit colors with SPI (or other byte-oriented interface) probably you need to set `LV_COLOR_16_SWAP  1` in *lv_conf.h*. 
+If you are using 16 bit colors with SPI (or other byte-oriented interface) probably you need to set `LV_COLOR_16_SWAP  1` in *lv_conf.h*. 
 It swaps the upper and lower bytes of the pixels.
 
 ### How to speed up my UI?
@@ -201,9 +201,9 @@ It swaps the upper and lower bytes of the pixels.
 - Increase the clock speed of the SPI or Parallel port if you use them to drive the display
 - If your display has SPI port consider changing to a model with parallel because it has much higher throughput
 - Keep the display buffer in the internal RAM (not in external SRAM) because LVGL uses it a lot and it should have a small access time
- 
+ 
 ### How to reduce flash/ROM usage?
-You can disable all the unused feature (such as animations, file system, GPU etc.) and object types in *lv_conf.h*.
+You can disable all the unused features (such as animations, file system, GPU etc.) and object types in *lv_conf.h*.
 
 If you are using GCC you can add 
 - `-fdata-sections -ffunction-sections` compiler flags 
@@ -215,9 +215,8 @@ to remove unused functions and variables from the final binary
 - Lower the size of the *Display buffer* 
 - Reduce `LV_MEM_SIZE` in *lv_conf.h*. This memory used when you create objects like buttons, labels, etc.
 - To work with lower `LV_MEM_SIZE` you can create the objects only when required and deleted them when they are not required anymore
- 
+ 
 ### How to work with an operating system?
 
 To work with an operating system where tasks can interrupt each other (preemptive) you should protect LVGL related function calls with a mutex.
 See the [Operating system and interrupts](/porting/os) section to learn more.
-
