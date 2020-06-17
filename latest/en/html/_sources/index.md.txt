@@ -22,7 +22,7 @@ PDF version: :download:`LVGL.pdf <LVGL.pdf>`
 **[Simulator](/get-started/pc-simulator) &nbsp; · &nbsp;** 
 **[Blog](https://blog.lvgl.io/)**
 
-
+ 
 
 ```eval_rst
 .. toctree::
