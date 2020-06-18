@@ -19,7 +19,7 @@ So let's find which contribution option fits you the best and join the developme
 Before getting started here are some guidelines to make contribution smoother:
 - Be kind and friendly. 
 - Be sure to read the relevant part of the documentation before posting a question.
-- Ask questions in [Forum](https://forum.lvgl.io/) and use [GitHub]((https://github.com/lvgl/) for development-related discussions.
+- Ask questions in [Forum](https://forum.lvgl.io/) and use [GitHub](https://github.com/lvgl/) for development-related discussions.
 - Fill the post or issue templates in the Forum or GitHub. It makes much easier to understand your case and you will get a useful answer faster. 
 - If possible send an absolute minimal but build-able code example in order to reproduce the issue. Be sure it contains all required variable declarations, constants, and assets (images, fonts).
 - Use [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to format your posts. You can learn it in 10 minutes.
@@ -34,7 +34,7 @@ Before getting started here are some guidelines to make contribution smoother:
 Merging new code into lvgl, documentation, blog, examples, and other repositories happen via *Pull requests* (PR for short).
 A PR is a notification like "Hey, I made some updates to your project. Here are the changes, you can add them if you want."
 To do this you need a copy (called fork) of the original project under your account, make some changes there, and notify the original repository about your updates. 
-You can see how it looks like on GitHub for lvgl here: https://github.com/lvgl/lvgl/pulls
+You can see how it looks like on GitHub for lvgl here: [https://github.com/lvgl/lvgl/pulls[(https://github.com/lvgl/lvgl/pulls).
 
 To add your changes you can edit files online on GitHub and send a new Pull request from there (recommended for small changes) or
  add the updates in your favorite editor/IDE and use git to publish the changes (recommended for more complex updates).
@@ -85,7 +85,7 @@ If so why don't you tell it to your friends? You can post it on Twitter, Faceboo
 
 Any of these helps a lot to spread the word of LVGL and familiarize it with new developers.
 
-Only thing: don't forget to add a link to https://lvg.io or https://github.com/lvgl and #lvgl. Thank you! :) 
+Only thing: don't forget to add a link to `https://lvg.io` or `https://github.com/lvgl` and `#lvgl`. Thank you! :) 
 
 ### Write examples
 As you learn LVGL probably you will play with the features of widgets. But why don't you publish your experiments?
@@ -214,6 +214,6 @@ Besides  your name will be added in the credits section of lvgl.io/about (will 
 To make this concept sustainable there a few rules to follow:
 - You need to add a README to your repo.
 - We expect to maintain the repo some extent:
-	- Follow at least major the versions of lvgl
-	- respond to the issues (in a reasonable time)
+  - Follow at least major the versions of lvgl 
+  - respond to the issues (in a reasonable time)
 - if there is no activity in a repo for 6 month it will be archived
