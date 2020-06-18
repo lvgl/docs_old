@@ -1363,7 +1363,7 @@ It works like when you select a text on your PC with your mouse.</p>
 </div>
 <div class="section" id="scrollbars">
 <h3>Scrollbars<a class="headerlink" href="#scrollbars" title="Permalink to this headline">¶</a></h3>
-<p>The scrollbars can shown according to different policies set by <code class="docutils literal notranslate"><span class="pre">lv_textarea_set_sb_mode(textarea,</span> <span class="pre">LV_SCRLBAR_MODE_...)</span></code>.
+<p>The scrollbars can shown according to different policies set by <code class="docutils literal notranslate"><span class="pre">lv_textarea_set_scrollbar_mode(textarea,</span> <span class="pre">LV_SCRLBAR_MODE_...)</span></code>.
 Learn more at the <a class="reference internal" href="page.html"><span class="doc">Page</span></a> object.</p>
 </div>
 <div class="section" id="scroll-propagation">
@@ -1382,8 +1382,8 @@ In other words, when the Text area can be scrolled further, the parent will be s
 <h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
 <p>Besides the <a class="reference external" href="/overview/event.html#generic-events">Generic events</a> the following <a class="reference external" href="/overview/event.html#special-events">Special events</a> are sent by the Slider:</p>
 <ul class="simple">
-<li><p><strong>LV_EVENT_INSERT</strong> Sent when a character before a character is inserted.
-The evnet data is the text planned to insert. <code class="docutils literal notranslate"><span class="pre">lv_ta_set_insert_replace(ta,</span> <span class="pre">&quot;New</span> <span class="pre">text&quot;)</span></code> replaces the text to insert.
+<li><p><strong>LV_EVENT_INSERT</strong> Sent when before a character or text is inserted.
+The event data is the text planned to insert. <code class="docutils literal notranslate"><span class="pre">lv_ta_set_insert_replace(ta,</span> <span class="pre">&quot;New</span> <span class="pre">text&quot;)</span></code> replaces the text to insert.
 The new text can't be in a local variable which is destroyed when the event callback exists. <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> means do not insert anything.</p></li>
 <li><p><strong>LV_EVENT_VALUE_CHANGED</strong> When the content of the text area has been changed.</p></li>
 </ul>
@@ -1402,7 +1402,7 @@ The new text can't be in a local variable which is destroyed when the event call
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="simple-text-area">
 <h4>Simple Text area<a class="headerlink" href="#simple-text-area" title="Permalink to this headline">¶</a></h4>
-<img alt="Text area example in LittlevGL" src="../_images/lv_ex_textarea_1.png" />
+<img alt="Text area example in LVGL" src="../_images/lv_ex_textarea_1.png" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
@@ -1443,9 +1443,9 @@ The new text can't be in a local variable which is destroyed when the event call
 </div>
 </div>
 </div>
-<div class="section" id="text-are-with-password-field">
-<h4>Text are with password field<a class="headerlink" href="#text-are-with-password-field" title="Permalink to this headline">¶</a></h4>
-<img alt="Form with password field in LittlevGL" src="../_images/lv_ex_textarea_2.png" />
+<div class="section" id="text-area-with-password-field">
+<h4>Text area with password field<a class="headerlink" href="#text-area-with-password-field" title="Permalink to this headline">¶</a></h4>
+<img alt="Form with password field in LVGL" src="../_images/lv_ex_textarea_2.png" />
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
@@ -1454,7 +1454,6 @@ The new text can't be in a local variable which is destroyed when the event call
 <span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="cp">#if LV_USE_TEXTAREA &amp;&amp; LV_USE_KEYBOARD</span>
 
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">kb_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">event_kb</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">);</span>
 <span class="k">static</span> <span class="kt">void</span> <span class="nf">ta_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ta</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">);</span>
 
 <span class="k">static</span> <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">kb</span><span class="p">;</span>
@@ -1466,6 +1465,7 @@ The new text can't be in a local variable which is destroyed when the event call
     <span class="n">lv_textarea_set_text</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
     <span class="n">lv_textarea_set_pwd_mode</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
     <span class="n">lv_textarea_set_one_line</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_textarea_set_cursor_hidden</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
     <span class="n">lv_obj_set_width</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="n">LV_HOR_RES</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">20</span><span class="p">);</span>
     <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
     <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="n">ta_event_cb</span><span class="p">);</span>
@@ -1478,26 +1478,21 @@ The new text can't be in a local variable which is destroyed when the event call
     <span class="cm">/* Create the one-line mode text area */</span>
     <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">oneline_ta</span> <span class="o">=</span> <span class="n">lv_textarea_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">pwd_ta</span><span class="p">);</span>
     <span class="n">lv_textarea_set_pwd_mode</span><span class="p">(</span><span class="n">oneline_ta</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">lv_textarea_set_cursor_hidden</span><span class="p">(</span><span class="n">oneline_ta</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
     <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">oneline_ta</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_RIGHT</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+
 
     <span class="cm">/* Create a label and position it above the text box */</span>
     <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">oneline_label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">oneline_label</span><span class="p">,</span> <span class="s">&quot;Text:&quot;</span><span class="p">);</span>
     <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">oneline_label</span><span class="p">,</span> <span class="n">oneline_ta</span><span class="p">,</span> <span class="n">LV_ALIGN_OUT_TOP_LEFT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
-    <span class="cm">/* Create a keyboard and make it fill the width of the above text areas */</span>
+    <span class="cm">/* Create a keyboard */</span>
     <span class="n">kb</span> <span class="o">=</span> <span class="n">lv_keyboard_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">kb_event_cb</span><span class="p">);</span> <span class="cm">/* Setting a custom event handler stops the keyboard from closing automatically */</span>
     <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span>  <span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
 
     <span class="n">lv_keyboard_set_textarea</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">pwd_ta</span><span class="p">);</span> <span class="cm">/* Focus it on one of the text areas to start */</span>
     <span class="n">lv_keyboard_set_cursor_manage</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span> <span class="cm">/* Automatically show/hide cursors on text areas */</span>
-<span class="p">}</span>
-
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">kb_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">event_kb</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="cm">/* Just call the regular event handler */</span>
-    <span class="n">lv_keyboard_def_event_cb</span><span class="p">(</span><span class="n">event_kb</span><span class="p">,</span> <span class="n">event</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="k">static</span> <span class="kt">void</span> <span class="nf">ta_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ta</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
@@ -1512,6 +1507,61 @@ The new text can't be in a local variable which is destroyed when the event call
         <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">str</span> <span class="o">=</span> <span class="n">lv_event_get_data</span><span class="p">();</span>
         <span class="k">if</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\n&#39;</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Ready</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="text-auto-formatting">
+<h4>Text auto-formatting<a class="headerlink" href="#text-auto-formatting" title="Permalink to this headline">¶</a></h4>
+<img alt="Automatically format the text a Text area with LVGL" src="../_images/lv_ex_textarea_3.png" />
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;../../../lv_examples.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#if LV_USE_TEXTAREA &amp;&amp; LV_USE_KEYBOARD</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">ta_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ta</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">);</span>
+
+<span class="k">static</span> <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">kb</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Automatically format text like a clock. E.g. &quot;12:34&quot;</span>
+<span class="cm"> * Add the &#39;:&#39; automatically.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">lv_ex_textarea_3</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* Create the text area */</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ta</span> <span class="o">=</span> <span class="n">lv_textarea_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="n">ta_event_cb</span><span class="p">);</span>
+    <span class="n">lv_textarea_set_accepted_chars</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="s">&quot;0123456789:&quot;</span><span class="p">);</span>
+    <span class="n">lv_textarea_set_max_length</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+    <span class="n">lv_textarea_set_one_line</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_textarea_set_text</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+
+    <span class="cm">/* Create a keyboard*/</span>
+    <span class="n">kb</span> <span class="o">=</span> <span class="n">lv_keyboard_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span>  <span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">lv_keyboard_set_mode</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">LV_KEYBOARD_MODE_NUM</span><span class="p">);</span>
+    <span class="n">lv_keyboard_set_textarea</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">ta</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">ta_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ta</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">txt</span> <span class="o">=</span> <span class="n">lv_textarea_get_text</span><span class="p">(</span><span class="n">ta</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">txt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">txt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="sc">&#39;9&#39;</span> <span class="o">&amp;&amp;</span>
+            <span class="n">txt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">txt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="sc">&#39;9&#39;</span> <span class="o">&amp;&amp;</span>
+            <span class="n">txt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;:&#39;</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">lv_textarea_set_cursor_pos</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+            <span class="n">lv_textarea_add_char</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="sc">&#39;:&#39;</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -2332,7 +2382,7 @@ The new text can't be in a local variable which is destroyed when the event call
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jun 17, 2020.
+        Last updated on Jun 18, 2020.
       </span>
 
     </p>
