@@ -36,6 +36,12 @@ Besides the normal type the Slider can be configured in two additional types:
 
 The type can be changed with `lv_slider_set_type(slider, LV_SLIDER_TYPE_...)`
 
+### Knob-only mode
+Normally, the slider can be adjusted either by dragging the knob, or clicking on the slider bar. 
+In the latter case the knob moves to the point clicked and slider value changes accordingly. In some cases it is desirable to set the slider to react on dragging the knob only.
+
+This feature is enabled by calling `lv_obj_set_adv_hittest(slider, true);`.
+
 ## Events
 Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
 - **LV_EVENT_VALUE_CHANGED** Sent while the slider is being dragged or changed with keys. The event is sent continuously while the slider is dragged and only when it is released. Use `lv_slider_is_dragged` to decide whether is slider is being dragged or just released.
