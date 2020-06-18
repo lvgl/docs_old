@@ -90,10 +90,10 @@ Only thing: don't forget to add a link to https://lvg.io or https://github.com/l
 ### Write examples
 As you learn LVGL probably you will play with the features of widgets. But why don't you publish your experiments?
 
-Every widgets' documentation contains some examples. For example here are the examples of the [Drop-down list](/widgets/dropdown.html#example). 
+Every widgets' documentation contains some examples. For example here are the examples of the [Drop-down list](#example). 
 The examples are directly loaded from the [lv_examples](https://github.com/lvgl/lv_examples/tree/master/src/lv_ex_widgets) repository. 
 
-So all you need to do is sending a [Pull request](/contributing/index.html#pull-request) to the [lv_examples](https://github.com/lvgl/lv_examples/tree/master/src/lv_ex_widgets) repository and follow some conventions:
+So all you need to do is sending a [Pull request](#pull-request) to the [lv_examples](https://github.com/lvgl/lv_examples/tree/master/src/lv_ex_widgets) repository and follow some conventions:
 - Name the examples like `lv_ex_<widget_name>_<id>`
 - Make the example as short and simple as possible
 - Add comments to explain what the example does
@@ -106,7 +106,7 @@ So all you need to do is sending a [Pull request](/contributing/index.html#pull-
 
 As you read the documentation you might see some typos or unclear sentences. 
 For typos and straightforward fixes, you can simply edit the file on GitHub. There is an `Edit on Github` link on the top right-hand corner of all pages.
-Click it to see the file on GitHub, hit the Edit button, and add you fixes as described in [Pull request - From GitHub](/contributing/index.html#from-github) section.
+Click it to see the file on GitHub, hit the Edit button, and add you fixes as described in [Pull request - From GitHub](#from-github) section.
 
 Note that, the documentation is also formatted in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). 
 
@@ -119,7 +119,7 @@ If your chosen language is still not added, please write a comment [here](https
 To add your translations:
 - Find the *.po* in `<language_code>/LC_MESSAGES/<section_name>.po`. E.g. the widgets translated to German should be in `de/LC_MESSAGES/widgets.po`.
 - Open a po file and fill the `msgstr` fields with the translation
-- Send a [Pull request](/contributing/index.html#pull-request)
+- Send a [Pull request](#pull-request)
 
 To display a translation in the public documentation page at least these sections should be translated:
 - Get started: Quick overview
@@ -152,7 +152,7 @@ When filing the issue be sure to fill the template. It helps a lot to find the r
 
 ### Send fixes
 The beauty of open-source software is you can see how they work and fix or adjust them as you need. 
-If you found a bug and was able to fix it don't hesitate to send a [Pull request](/contributing/index.html#pull-request) with the fix.
+If you found a bug and was able to fix it don't hesitate to send a [Pull request](#pull-request) with the fix.
 
 In your Pull request please also add a line to [CHANGELOG.md](https://github.com/lvgl/lvgl/blob/master/CHANGELOG.md).
 
@@ -177,8 +177,8 @@ If you have a feature idea for LVGL please use the Forum the share it!
 
 When adding a new features the followings also needs to be updated:
 - Add a line to [CHANGELOG.md](https://github.com/lvgl/lvgl/blob/master/CHANGELOG.md).
-- Update the documentation. See this [guide](/contributing/index.html#improve-the-docs).
-- Add an example if applicable.  See this [guide](/contributing/index.html#write-examples).
+- Update the documentation. See this [guide](#improve-the-docs).
+- Add an example if applicable.  See this [guide](#write-examples).
 
 ## When you are confident with LVGL
 
@@ -216,4 +216,4 @@ To make this concept sustainable there a few rules to follow:
 - We expect to maintain the repo some extent:
 	- Follow at least major the versions of lvgl
 	- respond to the issues (in a reasonable time)
-- if there is no activity in a repo for 6 month it will be arcived
+- if there is no activity in a repo for 6 month it will be archived
