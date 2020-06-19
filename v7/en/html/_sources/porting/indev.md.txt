@@ -1,5 +1,6 @@
 ```eval_rst
-:github_url: https://github.com/lvgl/docs/blob/master/v7/en/porting/indev.md
+.. include:: /header.rst 
+:github_url: |github_link_base|/porting/indev.md
 ```
 # Input device interface
 
@@ -65,7 +66,7 @@ To use a keyboard/keypad:
 
 ```c
 indev_drv.type = LV_INDEV_TYPE_KEYPAD;
-indev_drv.read_cb = my_input_read;
+indev_drv.read_cb = keyboard_read;
 
 ...
 
@@ -98,7 +99,7 @@ To use an *Encoder* (similarly to the *Keypads*) the objects should be added to 
 
 ```c
 indev_drv.type = LV_INDEV_TYPE_ENCODER;
-indev_drv.read_cb = my_input_read;
+indev_drv.read_cb = encoder_read;
 
 ...
 
@@ -107,6 +108,37 @@ bool encoder_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
 
   if(enc_pressed()) data->state = LV_INDEV_STATE_PR;
   else data->state = LV_INDEV_STATE_REL;
+
+  return false; /*No buffering now so no more data read*/
+}
+```
+#### Using buttons with Encoder logic
+In addition to standar encoder behavior, you can also utilise its logic to navigate(focus) and edit widgets using buttons. 
+This is especialy handy if you have only few buttons avalible, or you want to use other buttons in addition to encoder wheel.
+
+You need to have 3 buttons avalible:
+- **LV_KEY_ENTER** will simulate press or pushing of the encoder button
+- **LV_KEY_LEFT** will simulate turnuing encoder left
+- **LV_KEY_RIGHT** will simulate turnuing encoder right
+- other keys will be passed to the focused widget
+
+If you hold the keys it will simulate encoder click with period specified in `indev_drv.long_press_rep_time`.
+
+```c
+indev_drv.type = LV_INDEV_TYPE_ENCODER;
+indev_drv.read_cb = encoder_with_keys_read;
+
+...
+
+bool encoder_with_keys_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
+  data->key = last_key();            /*Get the last pressed or released key*/
+                                     /* use LV_KEY_ENTER for encoder press */
+  if(key_pressed()) data->state = LV_INDEV_STATE_PR;
+  else {
+      data->state = LV_INDEV_STATE_REL;
+      /* Optionally you can also use enc_diff, if you have encoder*/
+      data->enc_diff = enc_get_new_moves();
+  }
 
   return false; /*No buffering now so no more data read*/
 }
@@ -124,7 +156,7 @@ To assign buttons to coordinates use `lv_indev_set_button_points(my_indev, point
 
 ```c
 indev_drv.type = LV_INDEV_TYPE_BUTTON;
-indev_drv.read_cb = my_input_read;
+indev_drv.read_cb = button_read;
 
 ...
 
