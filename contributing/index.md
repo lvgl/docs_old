@@ -208,15 +208,13 @@ Note that meeting the prerequisites is not a guarantee of acceptance, i.e. if th
 ### Move your project repository under LVGL organization
 Besides the core `lvgl` repository there are other repos for ports to development boards, IDEs or other environment. If you ported LVGL to a new platform we can host it under the LVGL organization among the other repos.
 
-This way you project will become a part of the whole LVGL project and get more visibility. If you are interested in this opportunity just open an [issue in lvgl repo](https://github.com/lvgl/lvgl/issues) and tell what you have! 
+This way your project will become part of the whole LVGL project and can get more visibility. If you are interested in this opportunity just open an [issue in lvgl repo](https://github.com/lvgl/lvgl/issues) and tell what you have! 
 
 If we agree that your port is useful, we will open a repository for your project where you will have admin rights.  
 
-Your name will be added in the credits section of lvgl.io/about (will be added soon) and lvgl’s README and you can join the [Core_contributor](https://forum.lvgl.io/g/Core_contributor) group in the Forum and get the LVGL logo on your avatar.
-
 To make this concept sustainable there a few rules to follow:
 - You need to add a README to your repo.
-- We expect to maintain the repo some extent:
+- We expect to maintain the repo to some extent:
   - Follow at least the major versions of lvgl 
-  - respond to the issues (in a reasonable time)
-- if there is no activity in a repo for 6 months it will be archived
+  - Respond to the issues (in a reasonable time)
+- If there is no activity in a repo for 6 months it will be archived
