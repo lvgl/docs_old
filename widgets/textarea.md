@@ -106,7 +106,7 @@ Learn more at the [Page](/widgets/page) object.
 
 ### Scroll propagation
 When the Text area is scrolled on an other scrollable object (like a Page) and the scrolling has reached the edge of the Text area, the scrolling can be propagated to the parent. 
-In other words, when the Text area can be scrolled further, the parent will be scrolled instead.
+In other words, when the Text area can't be scrolled further, the parent will be scrolled instead.
 
 It can be enabled with `lv_ta_set_scroll_propagation(ta, true)`.
 
