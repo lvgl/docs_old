@@ -134,15 +134,28 @@ The screens are special objects which have no parent object. So it is created li
 lv_obj_t * scr1 = lv_obj_create(NULL, NULL);
 ```
 
-There is always an active screen on each display. By default, the library creates and loads a "Base object" as the screen for each display.  
-To get the currently active screen use the `lv_scr_act()` function. To load a new one, use `lv_scr_load(scr1)`.
+There is always an active screen on each display. By default, the library creates and loads a "Base object" as a screen for each display.  
+To get the currently active screen use the `lv_scr_act()` function. 
 
 Screens can be created with any object type. For example, a [Base object](/widgets/obj) or an image to make a wallpaper.
 
 
+To load a new scree, use `lv_scr_load(scr1)`.
+
+A new screen can be loaded with animation too using `lv_scr_load_anim(scr, transition_type, time, delay, auto_del)`. The following transition types exist:
+- `LV_SCR_LOAD_ANIM_NONE`: switch immediately after `delay` ms
+- `LV_SCR_LOAD_ANIM_OVER_LEFT/RIGHT/TOP/BOTTOM` move the new screen over the other towards the given direction
+- `LV_SCR_LOAD_ANIM_MOVE_LEFT/RIGHT/TOP/BOTTOM` move both the old and new screens  towards the given direction
+- `LV_SCR_LOAD_ANIM_FADE_ON` fade the new screen over the old screen
+
+Setting `auto_del` to `true` will automatically delete the old screen when the animation is finished.
+
+The new screen will become active (returned by `lv_scr_act()`) when the animations starts after `delay` time.
+
 Screens are created on the currently selected *default display*.
-The *default screen* is the last registered screen with `lv_disp_drv_register` or you can explicitly select a new default display using `lv_disp_set_default(disp)`.
-`lv_scr_act()` and `lv_scr_load()` operate on the currently default screen.
+The *default display* is the last registered display with `lv_disp_drv_register` or you can explicitly select a new default display using `lv_disp_set_default(disp)`.
+
+`lv_scr_act()`, `lv_scr_load()` and `lv_scr_load_anim()` operate on the default screen.
 
 Visit [Multi-display support](/overview/display) to learn more.
 
