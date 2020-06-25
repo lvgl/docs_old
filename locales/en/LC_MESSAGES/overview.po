@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LVGL v7.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-17 14:36+0200\n"
+"POT-Creation-Date: 2020-06-25 14:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -136,7 +136,7 @@ msgid ""
 "animated variable and its animator function."
 msgstr ""
 
-#: ../overview/animation.md:112 ../overview/display.md:174
+#: ../overview/animation.md:112 ../overview/display.md:195
 #: ../overview/file-system.md:107 ../overview/image.md:312
 #: ../overview/indev.md:92 ../overview/task.md:90
 msgid "API"
@@ -181,49 +181,56 @@ msgid ""
 "read the [Porting](/porting/display) section first."
 msgstr ""
 
-#: ../overview/display.md:9
+#: ../overview/display.md:10
+msgid "Multiple display support"
+msgstr ""
+
+#: ../overview/display.md:12
 msgid ""
 "In LVGL, you can have multiple displays, each with their own driver and "
-"objects."
-msgstr ""
-
-#: ../overview/display.md:11
-msgid ""
-"Creating more displays is easy: just initialize more display buffers and "
-"register another driver for every display. When you create the UI, use "
-"lv_disp_set_default(disp) to tell the library which display to create "
-"objects on."
-msgstr ""
-
-#: ../overview/display.md:14
-msgid "Why would you want multi-display support? Here are some examples:"
+"objects. The only limitation is that every display needs to be have same "
+"color depth (as defined in LV_COLOR_DEPTH). If the displays are different"
+" in this regard the rendered image can be converted to the correct format"
+" in the drivers flush_cb."
 msgstr ""
 
 #: ../overview/display.md:15
+msgid ""
+"Creating more displays is easy: just initialize more display buffers and "
+"register another driver for every display. When you create the UI, use "
+"lv_disp_set_default(disp) to tell the library on which display to create "
+"objects."
+msgstr ""
+
+#: ../overview/display.md:18
+msgid "Why would you want multi-display support? Here are some examples:"
+msgstr ""
+
+#: ../overview/display.md:19
 msgid ""
 "Have a \"normal\" TFT display with local UI and create \"virtual\" "
 "screens on VNC on demand. (You need to add your VNC driver)."
 msgstr ""
 
-#: ../overview/display.md:16
+#: ../overview/display.md:20
 msgid "Have a large TFT display and a small monochrome display."
 msgstr ""
 
-#: ../overview/display.md:17
+#: ../overview/display.md:21
 msgid "Have some smaller and simple displays in a large instrument or technology."
 msgstr ""
 
-#: ../overview/display.md:18
+#: ../overview/display.md:22
 msgid ""
 "Have two large TFT displays: one for a customer and one for the shop "
 "assistant."
 msgstr ""
 
-#: ../overview/display.md:20
+#: ../overview/display.md:24
 msgid "Using only one display"
 msgstr ""
 
-#: ../overview/display.md:21
+#: ../overview/display.md:25
 msgid ""
 "Using more displays can be useful, but in most cases, it's not required. "
 "Therefore, the whole concept of multi-display is completely hidden if you"
@@ -231,7 +238,7 @@ msgid ""
 " display is used as default."
 msgstr ""
 
-#: ../overview/display.md:24
+#: ../overview/display.md:28
 msgid ""
 "lv_scr_act(), lv_scr_load(scr), lv_layer_top(), lv_layer_sys(), "
 "LV_HOR_RES and LV_VER_RES are always applied on the lastly created "
@@ -241,63 +248,63 @@ msgid ""
 "screen. (See below in Inactivity)."
 msgstr ""
 
-#: ../overview/display.md:28
+#: ../overview/display.md:32
 msgid "Mirror display"
 msgstr ""
 
-#: ../overview/display.md:30
+#: ../overview/display.md:34
 msgid ""
 "To mirror the image of the display to another display, you don't need to "
 "use the multi-display support. Just transfer the buffer received in "
 "drv.flush_cb to another display too."
 msgstr ""
 
-#: ../overview/display.md:32
+#: ../overview/display.md:36
 msgid "Split image"
 msgstr ""
 
-#: ../overview/display.md:33
+#: ../overview/display.md:37
 msgid ""
 "You can create a larger display from smaller ones. You can create it as "
 "below:"
 msgstr ""
 
-#: ../overview/display.md:34
+#: ../overview/display.md:38
 msgid "Set the resolution of the displays to the large display's resolution."
 msgstr ""
 
-#: ../overview/display.md:35
+#: ../overview/display.md:39
 msgid "In drv.flush_cb, truncate and modify the area parameter for each display."
 msgstr ""
 
-#: ../overview/display.md:36
+#: ../overview/display.md:40
 msgid "Send the buffer's content to each display with the truncated area."
 msgstr ""
 
-#: ../overview/display.md:38
+#: ../overview/display.md:42 ../overview/object.md:130
 msgid "Screens"
 msgstr ""
 
-#: ../overview/display.md:40
+#: ../overview/display.md:44
 msgid "Every display has each set of Screens and the object on the screens."
 msgstr ""
 
-#: ../overview/display.md:42
+#: ../overview/display.md:46
 msgid "Be sure not to confuse displays and screens:"
 msgstr ""
 
-#: ../overview/display.md:44
+#: ../overview/display.md:48
 msgid "Displays are the physical hardware drawing the pixels."
 msgstr ""
 
-#: ../overview/display.md:45
+#: ../overview/display.md:49
 msgid ""
 "Screens are the high-level root objects associated with a particular "
 "display. One display can have multiple screens associated with it, but "
 "not vice versa."
 msgstr ""
 
-#: ../overview/display.md:47
+#: ../overview/display.md:51
 msgid ""
 "Screens can be considered the highest level containers which have no "
 "parent. The screen's size is always equal to its display and size their "
@@ -306,19 +313,19 @@ msgid ""
 "used on screens."
 msgstr ""
 
-#: ../overview/display.md:50
+#: ../overview/display.md:54
 msgid ""
 "A screen can be created from any object type but, the two most typical "
 "types are the Base object and the Image (to create a wallpaper)."
 msgstr ""
 
-#: ../overview/display.md:52
+#: ../overview/display.md:56
 msgid ""
 "To create a screen, use lv_obj_t * scr = lv_<type>_create(NULL, copy). "
 "copy can be an other screen to copy it."
 msgstr ""
 
-#: ../overview/display.md:54
+#: ../overview/display.md:58
 msgid ""
 "To load a screen, use lv_scr_load(scr). To get the active screen, use "
 "lv_scr_act(). These functions works on the default display. If you want "
@@ -326,58 +333,78 @@ msgid ""
 " lv_disp_load_scr(disp, scr)."
 msgstr ""
 
-#: ../overview/display.md:56
+#: ../overview/display.md:60
 msgid ""
 "Screens can be deleted with lv_obj_del(scr), but ensure that you do not "
 "delete the currently loaded screen."
 msgstr ""
 
-#: ../overview/display.md:58
-msgid "Opaque screen"
+#: ../overview/display.md:62
+msgid "Transparent screens"
 msgstr ""
 
-#: ../overview/display.md:59
+#: ../overview/display.md:64
 msgid ""
 "Usually, the opacity of the screen is LV_OPA_COVER to provide a solid "
-"background for its children."
-msgstr ""
-
-#: ../overview/display.md:61
-msgid ""
-"However, in some special cases, you might want a transparent screen. For "
-"example, if you have a video player that renders video frames on a lower "
-"layer, you want to create an OSD menu on the upper layer (over the video)"
-" using LVGL."
-msgstr ""
-
-#: ../overview/display.md:63
-msgid ""
-"To do this, the screen should have a style that sets body.opa or "
-"image.opa to LV_OPA_TRANSP (or another non-opaque value) to make the "
-"screen opaque."
-msgstr ""
-
-#: ../overview/display.md:65
-msgid ""
-"Also, LV_COLOR_SCREEN_TRANSP needs to be enabled. Please note that it "
-"only works with LV_COLOR_DEPTH = 32."
+"background for its children. If it's not the case (opacity < 100%) the "
+"display's background color or image will be visible. See the Display "
+"background section for more details. If the display's background opacity "
+"is also not LV_OPA_COVER LVGL has no solid background to draw."
 msgstr ""
 
 #: ../overview/display.md:67
 msgid ""
-"The Alpha channel of 32-bit colors will be 0 where there are no objects "
-"and will be 255 where there are solid objects."
+"This configuration (transparent screen ans display) could be used to "
+"create for example OSD menus where a video is played to lower layer, and "
+"menu is created on an upper layer."
 msgstr ""
 
 #: ../overview/display.md:69
-msgid "Features of displays"
+msgid ""
+"To handle transparent displays special (slower) color mixing algorithms "
+"needs to be used by LVGL so this feature needs to enabled with "
+"LV_COLOR_SCREEN_TRANSP n lv_conf.h. As this mode operates on the Alpha "
+"channel of the pixels LV_COLOR_DEPTH = 32 is also required. The Alpha "
+"channel of 32-bit colors will be 0 where there are no objects and will be"
+" 255 where there are solid objects."
 msgstr ""
 
-#: ../overview/display.md:71
-msgid "Inactivity"
+#: ../overview/display.md:72
+msgid ""
+"In summary, to enable transparent screen and displays to create OSD menu-"
+"like UIs:"
 msgstr ""
 
 #: ../overview/display.md:73
+msgid "Enable LV_COLOR_SCREEN_TRANSP in lv_conf.h"
+msgstr ""
+
+#: ../overview/display.md:74
+msgid "Be sure to use LV_COLOR_DEPTH 32"
+msgstr ""
+
+#: ../overview/display.md:75
+msgid ""
+"Set the screens opacity to LV_OPA_TRANSP e.g. with "
+"lv_obj_set_style_local_bg_opa(lv_scr_act(), LV_OBJMASK_PART_MAIN, "
+"LV_STATE_DEFAULT, LV_OPA_TRANSP)"
+msgstr ""
+
+#: ../overview/display.md:76
+msgid ""
+"Set the display opacity to LV_OPA_TRANSP with lv_disp_set_bg_opa(NULL, "
+"LV_OPA_TRANSP);"
+msgstr ""
+
+#: ../overview/display.md:78
+msgid "Features of displays"
+msgstr ""
+
+#: ../overview/display.md:80
+msgid "Inactivity"
+msgstr ""
+
+#: ../overview/display.md:82
 msgid ""
 "The user's inactivity is measured on each display. Every use of an Input "
 "device (if associated with the display) counts as an activity. To get "
@@ -387,116 +414,153 @@ msgid ""
 "display)."
 msgstr ""
 
-#: ../overview/display.md:76
+#: ../overview/display.md:85
 msgid ""
 "You can manually trigger an activity using lv_disp_trig_activity(disp). "
 "If disp is NULL, the default screen will be used (and not all displays)."
 msgstr ""
 
-#: ../overview/display.md:78 ../overview/display.md:185
+#: ../overview/display.md:87 ../overview/style.md:81 ../overview/style.md:416
+msgid "Background"
+msgstr ""
+
+#: ../overview/display.md:88
+msgid ""
+"Every display has background color, a background image and background "
+"opacity properties. They become visible when the current screen is "
+"transparent or not positioned to cover the whole display."
+msgstr ""
+
+#: ../overview/display.md:90
+msgid ""
+"Background color is a simple color to fill the display. It can be "
+"adjusted with lv_disp_set_bg_color(disp, color);"
+msgstr ""
+
+#: ../overview/display.md:92
+msgid ""
+"Background image is path to file or pointer to an lv_img_dsc_t variable "
+"(converted image) to be used as wallpaper. It can be set with "
+"lv_disp_set_bg_color(disp, &my_img); If the background image is set (not "
+"NULL) the background won't filled with bg_color."
+msgstr ""
+
+#: ../overview/display.md:95
+msgid ""
+"The opacity of the background color or image can be adjusted with "
+"lv_disp_set_bg_opa(disp, opa)."
+msgstr ""
+
+#: ../overview/display.md:97
+msgid ""
+"The disp parameter of these functions can be NULL to refer it to the "
+"default display."
+msgstr ""
+
+#: ../overview/display.md:99 ../overview/display.md:206
 msgid "Colors"
 msgstr ""
 
-#: ../overview/display.md:80
+#: ../overview/display.md:101
 msgid ""
 "The color module handles all color-related functions like changing color "
 "depth, creating colors from hex code, converting between color depths, "
 "mixing colors, etc."
 msgstr ""
 
-#: ../overview/display.md:82
+#: ../overview/display.md:103
 msgid "The following variable types are defined by the color module:"
 msgstr ""
 
-#: ../overview/display.md:84
+#: ../overview/display.md:105
 msgid ""
 "lv_color1_t Store monochrome color. For compatibility, it also has R, G, "
 "B fields but they are always the same value (1 byte)"
 msgstr ""
 
-#: ../overview/display.md:85
+#: ../overview/display.md:106
 msgid ""
 "lv_color8_t A structure to store R (3 bit),G (3 bit),B (2 bit) components"
 " for 8-bit colors (1 byte)"
 msgstr ""
 
-#: ../overview/display.md:86
+#: ../overview/display.md:107
 msgid ""
 "lv_color16_t A structure to store R (5 bit),G (6 bit),B (5 bit) "
 "components for 16-bit colors (2 byte)"
 msgstr ""
 
-#: ../overview/display.md:87
+#: ../overview/display.md:108
 msgid ""
 "lv_color32_t A structure to store R (8 bit),G (8 bit), B (8 bit) "
 "components for 24-bit colors (4 byte)"
 msgstr ""
 
-#: ../overview/display.md:88
+#: ../overview/display.md:109
 msgid "lv_color_t Equal to lv_color1/8/16/24_t according to color depth settings"
 msgstr ""
 
-#: ../overview/display.md:89
+#: ../overview/display.md:110
 msgid ""
 "lv_color_int_t uint8_t, uint16_t or uint32_t according to color depth "
 "setting. Used to build color arrays from plain numbers."
 msgstr ""
 
-#: ../overview/display.md:90
+#: ../overview/display.md:111
 msgid "lv_opa_t A simple uint8_t type to describe opacity."
 msgstr ""
 
-#: ../overview/display.md:92
+#: ../overview/display.md:113
 msgid ""
 "The lv_color_t, lv_color1_t, lv_color8_t, lv_color16_t and lv_color32_t "
 "types have got four fields:"
 msgstr ""
 
-#: ../overview/display.md:94
+#: ../overview/display.md:115
 msgid "ch.red red channel"
 msgstr ""
 
-#: ../overview/display.md:95
+#: ../overview/display.md:116
 msgid "ch.green green channel"
 msgstr ""
 
-#: ../overview/display.md:96
+#: ../overview/display.md:117
 msgid "ch.blue blue channel"
 msgstr ""
 
-#: ../overview/display.md:97
+#: ../overview/display.md:118
 msgid "full red + green + blue as one number"
 msgstr ""
 
-#: ../overview/display.md:99
+#: ../overview/display.md:120
 msgid ""
 "You can set the current color depth in lv_conf.h, by setting the "
 "LV_COLOR_DEPTH define to 1 (monochrome), 8, 16 or 32."
 msgstr ""
 
-#: ../overview/display.md:101
+#: ../overview/display.md:122
 msgid "Convert color"
 msgstr ""
 
-#: ../overview/display.md:102
+#: ../overview/display.md:123
 msgid ""
 "You can convert a color from the current color depth to another. The "
 "converter functions return with a number, so you have to use the full "
 "field:"
 msgstr ""
 
-#: ../overview/display.md:123
+#: ../overview/display.md:144
 msgid "Swap 16 colors"
 msgstr ""
 
-#: ../overview/display.md:124
+#: ../overview/display.md:145
 msgid ""
 "You may set LV_COLOR_16_SWAP in lv_conf.h to swap the bytes of RGB565 "
 "colors. It's useful if you send the 16-bit colors via a byte-oriented "
 "interface like SPI."
 msgstr ""
 
-#: ../overview/display.md:126
+#: ../overview/display.md:147
 msgid ""
 "As 16-bit numbers are stored in Little Endian format (lower byte on the "
 "lower address), the interface will send the lower byte first. However, "
@@ -504,11 +568,11 @@ msgid ""
 " will result in highly distorted colors."
 msgstr ""
 
-#: ../overview/display.md:128
+#: ../overview/display.md:149
 msgid "Create and mix colors"
 msgstr ""
 
-#: ../overview/display.md:129
+#: ../overview/display.md:150
 msgid ""
 "You can create colors with the current color depth using the "
 "LV_COLOR_MAKE macro. It takes 3 arguments (red, green, blue) as 8-bit "
@@ -516,147 +580,147 @@ msgid ""
 "COLOR_MAKE(0xFF,0x80,0x80)."
 msgstr ""
 
-#: ../overview/display.md:132
+#: ../overview/display.md:153
 msgid ""
 "Colors can be created from HEX codes too: my_color = "
 "lv_color_hex(0x288ACF) or my_color = lv_folro_hex3(0x28C)."
 msgstr ""
 
-#: ../overview/display.md:134
+#: ../overview/display.md:155
 msgid ""
 "Mixing two colors is possible with mixed_color = lv_color_mix(color1, "
 "color2, ratio). Ration can be 0..255. 0 results fully color2, 255 result "
 "fully color1."
 msgstr ""
 
-#: ../overview/display.md:136
+#: ../overview/display.md:157
 msgid ""
 "Colors can be created with from HSV space too using "
 "lv_color_hsv_to_rgb(hue, saturation, value) . hue should be in 0..360 "
 "range, saturation and value in 0..100 range."
 msgstr ""
 
-#: ../overview/display.md:138
+#: ../overview/display.md:159
 msgid "Opacity"
 msgstr ""
 
-#: ../overview/display.md:139
+#: ../overview/display.md:160
 msgid ""
 "To describe opacity the lv_opa_t type is created as a wrapper to uint8_t."
 " Some defines are also introduced:"
 msgstr ""
 
-#: ../overview/display.md:141
+#: ../overview/display.md:162
 msgid ""
 "LV_OPA_TRANSP Value: 0, means the opacity makes the color completely "
 "transparent"
 msgstr ""
 
-#: ../overview/display.md:142
+#: ../overview/display.md:163
 msgid "LV_OPA_10 Value: 25, means the color covers only a little"
 msgstr ""
 
-#: ../overview/display.md:143
+#: ../overview/display.md:164
 msgid "LV_OPA_20 ... OPA_80 come logically"
 msgstr ""
 
-#: ../overview/display.md:144
+#: ../overview/display.md:165
 msgid "LV_OPA_90 Value: 229, means the color near completely covers"
 msgstr ""
 
-#: ../overview/display.md:145
+#: ../overview/display.md:166
 msgid "LV_OPA_COVER Value: 255, means the color completely covers"
 msgstr ""
 
-#: ../overview/display.md:147
+#: ../overview/display.md:168
 msgid "You can also use the LV_OPA_* defines in lv_color_mix() as a ratio."
 msgstr ""
 
-#: ../overview/display.md:149
+#: ../overview/display.md:170
 msgid "Built-in colors"
 msgstr ""
 
-#: ../overview/display.md:151
+#: ../overview/display.md:172
 msgid "The color module defines the most basic colors such as:"
 msgstr ""
 
-#: ../overview/display.md:153
+#: ../overview/display.md:174
 msgid "LV_COLOR_WHITE"
 msgstr ""
 
-#: ../overview/display.md:154
+#: ../overview/display.md:175
 msgid "LV_COLOR_BLACK"
 msgstr ""
 
-#: ../overview/display.md:155
+#: ../overview/display.md:176
 msgid "LV_COLOR_GRAY"
 msgstr ""
 
-#: ../overview/display.md:156
+#: ../overview/display.md:177
 msgid "LV_COLOR_SILVER"
 msgstr ""
 
-#: ../overview/display.md:157
+#: ../overview/display.md:178
 msgid "LV_COLOR_RED"
 msgstr ""
 
-#: ../overview/display.md:158
+#: ../overview/display.md:179
 msgid "LV_COLOR_MAROON"
 msgstr ""
 
-#: ../overview/display.md:159
+#: ../overview/display.md:180
 msgid "LV_COLOR_LIME"
 msgstr ""
 
-#: ../overview/display.md:160
+#: ../overview/display.md:181
 msgid "LV_COLOR_GREEN"
 msgstr ""
 
-#: ../overview/display.md:161
+#: ../overview/display.md:182
 msgid "LV_COLOR_OLIVE"
 msgstr ""
 
-#: ../overview/display.md:162
+#: ../overview/display.md:183
 msgid "LV_COLOR_BLUE"
 msgstr ""
 
-#: ../overview/display.md:163
+#: ../overview/display.md:184
 msgid "LV_COLOR_NAVY"
 msgstr ""
 
-#: ../overview/display.md:164
+#: ../overview/display.md:185
 msgid "LV_COLOR_TEAL"
 msgstr ""
 
-#: ../overview/display.md:165
+#: ../overview/display.md:186
 msgid "LV_COLOR_CYAN"
 msgstr ""
 
-#: ../overview/display.md:166
+#: ../overview/display.md:187
 msgid "LV_COLOR_AQUA"
 msgstr ""
 
-#: ../overview/display.md:167
+#: ../overview/display.md:188
 msgid "LV_COLOR_PURPLE"
 msgstr ""
 
-#: ../overview/display.md:168
+#: ../overview/display.md:189
 msgid "LV_COLOR_MAGENTA"
 msgstr ""
 
-#: ../overview/display.md:169
+#: ../overview/display.md:190
 msgid "LV_COLOR_ORANGE"
 msgstr ""
 
-#: ../overview/display.md:170
+#: ../overview/display.md:191
 msgid "LV_COLOR_YELLOW"
 msgstr ""
 
-#: ../overview/display.md:172
+#: ../overview/display.md:193
 msgid "as well as LV_COLOR_WHITE (fully white)."
 msgstr ""
 
-#: ../overview/display.md:176
+#: ../overview/display.md:197
 msgid "Display"
 msgstr ""
 
@@ -3037,10 +3101,6 @@ msgid ""
 "using lv_obj_clean:"
 msgstr ""
 
-#: ../overview/object.md:130
-msgid "Screen – the most basic parent"
-msgstr ""
-
 #: ../overview/object.md:132
 msgid ""
 "The screens are special objects which have no parent object. So it is "
@@ -3050,9 +3110,8 @@ msgstr ""
 #: ../overview/object.md:137
 msgid ""
 "There is always an active screen on each display. By default, the library"
-" creates and loads a \"Base object\" as the screen for each display.To "
-"get the currently active screen use the lv_scr_act() function. To load a "
-"new one, use lv_scr_load(scr1)."
+" creates and loads a \"Base object\" as a screen for each display.To get "
+"the currently active screen use the lv_scr_act() function."
 msgstr ""
 
 #: ../overview/object.md:140
@@ -3062,29 +3121,77 @@ msgid ""
 msgstr ""
 
 #: ../overview/object.md:142
+msgid "To load a new scree, use lv_scr_load(scr1)."
+msgstr ""
+
+#: ../overview/object.md:144
 msgid ""
-"Screens are created on the currently selected default display. The "
-"default screen is the last registered screen with lv_disp_drv_register or"
-" you can explicitly select a new default display using "
-"lv_disp_set_default(disp). lv_scr_act() and lv_scr_load() operate on the "
-"currently default screen."
+"A new screen can be loaded with animation too using lv_scr_load_anim(scr,"
+" transition_type, time, delay, auto_del). The following transition types "
+"exist:"
+msgstr ""
+
+#: ../overview/object.md:145
+msgid "LV_SCR_LOAD_ANIM_NONE: switch immediately after delay ms"
 msgstr ""
 
 #: ../overview/object.md:146
-msgid "Visit Multi-display support to learn more."
+msgid ""
+"LV_SCR_LOAD_ANIM_OVER_LEFT/RIGHT/TOP/BOTTOM move the new screen over the "
+"other towards the given direction"
 msgstr ""
 
-#: ../overview/object.md:148 ../overview/style.md:79
-msgid "Parts"
+#: ../overview/object.md:147
+msgid ""
+"LV_SCR_LOAD_ANIM_MOVE_LEFT/RIGHT/TOP/BOTTOM move both the old and new "
+"screens  towards the given direction"
+msgstr ""
+
+#: ../overview/object.md:148
+msgid "LV_SCR_LOAD_ANIM_FADE_ON fade the new screen over the old screen"
 msgstr ""
 
 #: ../overview/object.md:150
+msgid ""
+"Setting auto_del to true will automatically delete the old screen when "
+"the animation is finished."
+msgstr ""
+
+#: ../overview/object.md:152
+msgid ""
+"The new screen will become active (returned by lv_scr_act()) when the "
+"animations starts after delay time."
+msgstr ""
+
+#: ../overview/object.md:154
+msgid ""
+"Screens are created on the currently selected default display. The "
+"default display is the last registered display with lv_disp_drv_register "
+"or you can explicitly select a new default display using "
+"lv_disp_set_default(disp)."
+msgstr ""
+
+#: ../overview/object.md:157
+msgid ""
+"lv_scr_act(), lv_scr_load() and lv_scr_load_anim() operate on the default"
+" screen."
+msgstr ""
+
+#: ../overview/object.md:159
+msgid "Visit Multi-display support to learn more."
+msgstr ""
+
+#: ../overview/object.md:161 ../overview/style.md:79
+msgid "Parts"
+msgstr ""
+
+#: ../overview/object.md:163
 msgid ""
 "The widgets can have multiple parts. For example a Button has only a main"
 " part but a Slider is built from a background, an indicator and a knob."
 msgstr ""
 
-#: ../overview/object.md:152
+#: ../overview/object.md:165
 msgid ""
 "The name of the parts is constructed like LV_ + <TYPE> _PART_ <NAME>. For"
 " example LV_BTN_PART_MAIN or LV_SLIDER_PART_KNOB. The parts are usually "
@@ -3092,51 +3199,51 @@ msgid ""
 " be assigned to the different parts of the objects."
 msgstr ""
 
-#: ../overview/object.md:155
+#: ../overview/object.md:168
 msgid ""
 "To learn more about the parts read the related section of the Style "
 "overview."
 msgstr ""
 
-#: ../overview/object.md:157 ../overview/style.md:20
+#: ../overview/object.md:170 ../overview/style.md:20
 msgid "States"
 msgstr ""
 
-#: ../overview/object.md:158
+#: ../overview/object.md:171
 msgid "The object can be in a combinations of the following states:"
 msgstr ""
 
-#: ../overview/object.md:159
+#: ../overview/object.md:172
 msgid "LV_STATE_DEFAULT  Normal, released"
 msgstr ""
 
-#: ../overview/object.md:160
+#: ../overview/object.md:173
 msgid "LV_STATE_CHECKED Toggled or checked"
 msgstr ""
 
-#: ../overview/object.md:161
+#: ../overview/object.md:174
 msgid ""
 "LV_STATE_FOCUSED Focused via keypad or encoder or clicked via "
 "touchpad/mouse"
 msgstr ""
 
-#: ../overview/object.md:162
+#: ../overview/object.md:175
 msgid "LV_STATE_EDITED  Edit by an encoder"
 msgstr ""
 
-#: ../overview/object.md:163
+#: ../overview/object.md:176
 msgid "LV_STATE_HOVERED Hovered by mouse (not supported now)"
 msgstr ""
 
-#: ../overview/object.md:164
+#: ../overview/object.md:177
 msgid "LV_STATE_PRESSED Pressed"
 msgstr ""
 
-#: ../overview/object.md:165
+#: ../overview/object.md:178
 msgid "LV_STATE_DISABLED Disabled or inactive"
 msgstr ""
 
-#: ../overview/object.md:167
+#: ../overview/object.md:180
 msgid ""
 "The states are usually automatically changed by the library as the user "
 "presses, releases, focuses etc an object. However, the states can be "
@@ -3147,7 +3254,7 @@ msgid ""
 "E.g. lv_obj_set_state(obj, part, LV_STATE_PRESSED | LV_PRESSED_CHECKED)."
 msgstr ""
 
-#: ../overview/object.md:172
+#: ../overview/object.md:185
 msgid ""
 "To learn more about the states read the related section of the Style "
 "overview."
@@ -3432,10 +3539,6 @@ msgid ""
 " has four parts:"
 msgstr ""
 
-#: ../overview/style.md:81 ../overview/style.md:418
-msgid "Background"
-msgstr ""
-
 #: ../overview/style.md:82
 msgid "Scrollable"
 msgstr ""
@@ -3449,21 +3552,17 @@ msgid "Edge flash"
 msgstr ""
 
 #: ../overview/style.md:86
-msgid "![page_small.png](A scrollable page in lvgl)"
-msgstr ""
-
-#: ../overview/style.md:88
 msgid "There is three types of object parts main, virtual and real."
 msgstr ""
 
-#: ../overview/style.md:90
+#: ../overview/style.md:88
 msgid ""
 "The main part is usually the background and largest part of the object. "
 "Some object has only a main part. For example, a button has only a "
 "background."
 msgstr ""
 
-#: ../overview/style.md:92
+#: ../overview/style.md:90
 msgid ""
 "The virtual parts are additional parts just drawn on the fly to the main "
 "part. There is no \"real\" object behind them. For example, the page's "
@@ -3473,22 +3572,22 @@ msgid ""
 "considered before going to the parent."
 msgstr ""
 
-#: ../overview/style.md:97
+#: ../overview/style.md:95
 msgid ""
 "The real parts are real objects created and managed by the main object. "
 "For example, the page's scrollable part is real object. Real parts can be"
 " in different state than the main part."
 msgstr ""
 
-#: ../overview/style.md:100
+#: ../overview/style.md:98
 msgid "To see which parts an object has visit their documentation page."
 msgstr ""
 
-#: ../overview/style.md:102
+#: ../overview/style.md:100
 msgid "Initialize styles and set/get properties"
 msgstr ""
 
-#: ../overview/style.md:104
+#: ../overview/style.md:102
 msgid ""
 "Styles are stored in lv_style_t variables. Style variables should be "
 "static, global or dynamically allocated. In other words they can not be "
@@ -3500,17 +3599,17 @@ msgid ""
 "above mentioned example looks like this:"
 msgstr ""
 
-#: ../overview/style.md:117
+#: ../overview/style.md:115
 msgid ""
 "It's possible to copy a style with lv_style_copy(&style_destination, "
 "&style_source). After copy properties still can be added freely."
 msgstr ""
 
-#: ../overview/style.md:119
+#: ../overview/style.md:117
 msgid "To remove a property use:"
 msgstr ""
 
-#: ../overview/style.md:125
+#: ../overview/style.md:123
 msgid ""
 "To get the value from style in a state functions with the following "
 "prototype are available: lv_style_get_<prperty_name>(&style, <state>, "
@@ -3519,41 +3618,41 @@ msgid ""
 "not found. For example:"
 msgstr ""
 
-#: ../overview/style.md:137
+#: ../overview/style.md:135
 msgid "To reset a style (free all it's data) use"
 msgstr ""
 
-#: ../overview/style.md:142
+#: ../overview/style.md:140
 msgid "Managing style list"
 msgstr ""
 
-#: ../overview/style.md:143
+#: ../overview/style.md:141
 msgid ""
 "A style on its own not that useful. It should be assigned to an object to"
 " take its effect. Every part of the objects stores a style list which is "
 "the list of assigned styles."
 msgstr ""
 
-#: ../overview/style.md:146
+#: ../overview/style.md:144
 msgid ""
 "To add a style to an object use lv_obj_add_style(obj, <part>, &style) For"
 " example:"
 msgstr ""
 
-#: ../overview/style.md:153
+#: ../overview/style.md:151
 msgid ""
 "An objects style list can be reset with lv_obj_reset_style_list(obj, "
 "<part>)"
 msgstr ""
 
-#: ../overview/style.md:155
+#: ../overview/style.md:153
 msgid ""
 "If a style which is already assigned to an object changes (i.e. one of "
 "it's property is set to a new value) the objects using that style should "
 "be notified with lv_obj_refresh_style(obj)"
 msgstr ""
 
-#: ../overview/style.md:157
+#: ../overview/style.md:155
 msgid ""
 "To get a final value of property, including cascading, inheritance, local"
 " styles and transitions (see below), get functions like this can be used:"
@@ -3562,11 +3661,11 @@ msgid ""
 "value.   For example:"
 msgstr ""
 
-#: ../overview/style.md:164
+#: ../overview/style.md:162
 msgid "Local styles"
 msgstr ""
 
-#: ../overview/style.md:165
+#: ../overview/style.md:163
 msgid ""
 "In the object's style lists, so-called local properties can be stored as "
 "well. It's the same concept than CSS's <div style=\"color:red\">. The "
@@ -3576,11 +3675,11 @@ msgid ""
 "<state>, <value>);   For example:"
 msgstr ""
 
-#: ../overview/style.md:173
+#: ../overview/style.md:171
 msgid "Transitions"
 msgstr ""
 
-#: ../overview/style.md:174
+#: ../overview/style.md:172
 msgid ""
 "By default, when an object changes state (e.g. it's pressed) the new "
 "properties from the new state are set immediately. However, with "
@@ -3589,29 +3688,29 @@ msgid ""
 " pressed color over 300 ms."
 msgstr ""
 
-#: ../overview/style.md:177
+#: ../overview/style.md:175
 msgid ""
 "The parameters of the transitions are stored in the styles. It's possible"
 " to set"
 msgstr ""
 
-#: ../overview/style.md:178
+#: ../overview/style.md:176
 msgid "the time of the transition"
 msgstr ""
 
-#: ../overview/style.md:179
+#: ../overview/style.md:177
 msgid "the delay before starting the transition"
 msgstr ""
 
-#: ../overview/style.md:180
+#: ../overview/style.md:178
 msgid "the animation path (also known as timing function)"
 msgstr ""
 
-#: ../overview/style.md:181
+#: ../overview/style.md:179
 msgid "the properties to animate"
 msgstr ""
 
-#: ../overview/style.md:183
+#: ../overview/style.md:181
 msgid ""
 "The transition properties can be defined for each state. For example, "
 "setting 500 ms transition time in default state will mean that when the "
@@ -3622,60 +3721,60 @@ msgid ""
 "back to default."
 msgstr ""
 
-#: ../overview/style.md:188
+#: ../overview/style.md:186
 msgid "Properties"
 msgstr ""
 
-#: ../overview/style.md:190
+#: ../overview/style.md:188
 msgid "The following properties can be used in the styles."
 msgstr ""
 
-#: ../overview/style.md:192
+#: ../overview/style.md:190
 msgid "Mixed properties"
 msgstr ""
 
-#: ../overview/style.md:193
+#: ../overview/style.md:191
 msgid ""
 "radius (lv_style_int_t): Set the radius of the background. 0: no radius, "
 "LV_RADIUS_CIRCLE: maximal radius."
 msgstr ""
 
-#: ../overview/style.md:194
+#: ../overview/style.md:192
 msgid ""
 "clip_corner (bool): true: enable to clip the overflowed content on the "
 "rounded (radius > 0) corners."
 msgstr ""
 
-#: ../overview/style.md:195
+#: ../overview/style.md:193
 msgid ""
 "size (lv_style_int_t): Size of internal elements of the widgets. See the "
 "documentation of the widgets if this property is used or not."
 msgstr ""
 
-#: ../overview/style.md:196
+#: ../overview/style.md:194
 msgid ""
 "transform_width  (lv_style_int_t): Make the object wider on both sides "
 "with this value."
 msgstr ""
 
-#: ../overview/style.md:197
+#: ../overview/style.md:195
 msgid ""
 "transform_height  (lv_style_int_t) Make the object higher on both sides "
 "with this value."
 msgstr ""
 
-#: ../overview/style.md:198
+#: ../overview/style.md:196
 msgid ""
 "opa_scale (lv_style_int_t): Inherited. Scale down all opacity values of "
 "the object by this factor. As it's inherited the children objects will be"
 " affected too."
 msgstr ""
 
-#: ../overview/style.md:200
+#: ../overview/style.md:198
 msgid "Padding and margin properties"
 msgstr ""
 
-#: ../overview/style.md:201
+#: ../overview/style.md:199
 msgid ""
 "Padding sets the space on the inner sides of the edges. It means \"I "
 "don't want my children too close to my sides, so keep this "
@@ -3684,7 +3783,7 @@ msgid ""
 "around me\"."
 msgstr ""
 
-#: ../overview/style.md:205
+#: ../overview/style.md:203
 msgid ""
 "These properties are typically used by Container object if layout or auto"
 " fit is enabled. However other widgets also use them to set spacing. See "
@@ -3700,463 +3799,463 @@ msgid ""
 "(lv_style_int_t): Set the margin on the right."
 msgstr ""
 
-#: ../overview/style.md:218
+#: ../overview/style.md:216
 msgid "Background properties"
 msgstr ""
 
-#: ../overview/style.md:219
+#: ../overview/style.md:217
 msgid ""
 "The background is a simple rectangle which can have gradient and radius "
 "rounding."
 msgstr ""
 
-#: ../overview/style.md:220
+#: ../overview/style.md:218
 msgid ""
 "bg_color (lv_color_t) Specifies the color of the background. Default "
 "value: LV_COLOR_WHITE"
 msgstr ""
 
-#: ../overview/style.md:221
+#: ../overview/style.md:219
 msgid ""
 "bg_opa (lv_opa_t) Specifies opacity of the background. Default value: "
 "LV_OPA_TRANSP."
 msgstr ""
 
-#: ../overview/style.md:222
+#: ../overview/style.md:220
 msgid ""
 "bg_grad_color (lv_color_t) Specifies the color of the background's "
 "gradient. The color on the right or bottom is bg_grad_dir != "
 "LV_GRAD_DIR_NONE. Default value: LV_COLOR_WHITE."
 msgstr ""
 
-#: ../overview/style.md:223
+#: ../overview/style.md:221
 msgid ""
 "bg_main_stop (uint8_t): Specifies where should the gradient start. 0: at "
 "left/top most position, 255: at right/bottom most position."
 msgstr ""
 
-#: ../overview/style.md:224
+#: ../overview/style.md:222
 msgid ""
 "bg_grad_stop (uint8_t): Specifies where should the gradient start. 0: at "
 "left/top most position, 255: at right/bottom most position. Default "
 "value: 255."
 msgstr ""
 
-#: ../overview/style.md:225
+#: ../overview/style.md:223
 msgid ""
 "bg_grad_dir (lv_grad_dir_t) Specifies the direction of the gradient. Can "
 "be LV_GRAD_DIR_NONE/HOR/VER. Default value: LV_GRAD_DIR_NONE."
 msgstr ""
 
-#: ../overview/style.md:226
+#: ../overview/style.md:224
 msgid ""
 "bg_blend_mode (lv_blend_mode_t): Set the blend mode the background. Can "
 "be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:236
+#: ../overview/style.md:234
 msgid "Border properties"
 msgstr ""
 
-#: ../overview/style.md:237
+#: ../overview/style.md:235
 msgid "The border in drawn on to of the background. It has radius rounding."
 msgstr ""
 
-#: ../overview/style.md:238
+#: ../overview/style.md:236
 msgid "border_color (lv_color_t) Specifies the color of the border."
 msgstr ""
 
-#: ../overview/style.md:239
+#: ../overview/style.md:237
 msgid "border_opa (lv_opa_t) Specifies opacity of the border."
 msgstr ""
 
-#: ../overview/style.md:240
+#: ../overview/style.md:238
 msgid "border_width (lv_style_int_t): Set the width of the border."
 msgstr ""
 
-#: ../overview/style.md:241
+#: ../overview/style.md:239
 msgid ""
 "border_side (lv_border_side_t) Specifies which sides of the border to "
 "draw. Can be LV_BORDER_SIDE_NONE/LEFT/RIGHT/TOP/BOTTOM/FULL. ORed values "
 "are also possible. Default value: LV_BORDER_SIDE_FULL."
 msgstr ""
 
-#: ../overview/style.md:242
+#: ../overview/style.md:240
 msgid ""
 "border_post (bool): If true the border will be drawn all children has "
 "been drawn."
 msgstr ""
 
-#: ../overview/style.md:243
+#: ../overview/style.md:241
 msgid ""
 "border_blend_mode (lv_blend_mode_t): Set the blend mode of the border. "
 "Can be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:253
+#: ../overview/style.md:251
 msgid "Outline properties"
 msgstr ""
 
-#: ../overview/style.md:254
+#: ../overview/style.md:252
 msgid "The outline is similar to border but is drawn outside of the object."
 msgstr ""
 
-#: ../overview/style.md:255
+#: ../overview/style.md:253
 msgid "outline_color (lv_color_t) Specifies the color of the outline."
 msgstr ""
 
-#: ../overview/style.md:256
+#: ../overview/style.md:254
 msgid "outline_opa (lv_opa_t) Specifies opacity of the outline."
 msgstr ""
 
-#: ../overview/style.md:257
+#: ../overview/style.md:255
 msgid "outline_width (lv_style_int_t): Set the width of the outline."
 msgstr ""
 
-#: ../overview/style.md:258
+#: ../overview/style.md:256
 msgid ""
 "outline_pad (lv_style_int_t) Set the space between the object and the "
 "outline."
 msgstr ""
 
-#: ../overview/style.md:259
+#: ../overview/style.md:257
 msgid ""
 "outline_blend_mode (lv_blend_mode_t): Set the blend mode of the outline. "
 "Can be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:269
+#: ../overview/style.md:267
 msgid "Shadow properties"
 msgstr ""
 
-#: ../overview/style.md:270
+#: ../overview/style.md:268
 msgid "The shadow is a blurred area under the object."
 msgstr ""
 
-#: ../overview/style.md:271
+#: ../overview/style.md:269
 msgid "shadow_color (lv_color_t) Specifies the color of the shadow."
 msgstr ""
 
-#: ../overview/style.md:272
+#: ../overview/style.md:270
 msgid "shadow_opa (lv_opa_t) Specifies opacity of the shadow."
 msgstr ""
 
-#: ../overview/style.md:273
+#: ../overview/style.md:271
 msgid "shadow_width (lv_style_int_t): Set the width (blur size) of the outline."
 msgstr ""
 
-#: ../overview/style.md:274
+#: ../overview/style.md:272
 msgid "shadow_ofs_x (lv_style_int_t): Set the an X offset for the shadow."
 msgstr ""
 
-#: ../overview/style.md:275
+#: ../overview/style.md:273
 msgid "shadow_ofs_y (lv_style_int_t): Set the an Y offset for the shadow."
 msgstr ""
 
-#: ../overview/style.md:276
+#: ../overview/style.md:274
 msgid ""
 "shadow_spread (lv_style_int_t): ake the shadow larger than the background"
 " in every direction by this value."
 msgstr ""
 
-#: ../overview/style.md:277
+#: ../overview/style.md:275
 msgid ""
 "shadow_blend_mode (lv_blend_mode_t): Set the blend mode of the shadow. "
 "Can be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:287
+#: ../overview/style.md:285
 msgid "Pattern properties"
 msgstr ""
 
-#: ../overview/style.md:288
+#: ../overview/style.md:286
 msgid ""
 "The pattern is an image (or symbol) drawn in the middle of the background"
 " or repeated to fill the whole background."
 msgstr ""
 
-#: ../overview/style.md:289
+#: ../overview/style.md:287
 msgid ""
 "pattern_image (const void *): Pointer to an lv_img_dsc_t variable, a path"
 " to an image file or a symbol."
 msgstr ""
 
-#: ../overview/style.md:290
+#: ../overview/style.md:288
 msgid "pattern_opa (lv_opa_t): Specifies opacity of the pattern."
 msgstr ""
 
-#: ../overview/style.md:291
+#: ../overview/style.md:289
 msgid ""
 "pattern_recolor (lv_color_t): Mix this color to the pattern image. In "
 "case of symbols (texts) it will be the text color."
 msgstr ""
 
-#: ../overview/style.md:292
+#: ../overview/style.md:290
 msgid ""
 "pattern_recolor_opa (lv_opa_t): Intensity of recoloring. Default value: "
 "LV_OPA_TRANSP (no recoloring)."
 msgstr ""
 
-#: ../overview/style.md:293
+#: ../overview/style.md:291
 msgid ""
 "pattern_repeat (bool): true: the pattern will be repeated as a mosaic. "
 "false: place the pattern in the middle of the background."
 msgstr ""
 
-#: ../overview/style.md:294
+#: ../overview/style.md:292
 msgid ""
 "pattern_blend_mode (lv_blend_mode_t): Set the blend mode of the pattern. "
 "Can be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:304
+#: ../overview/style.md:302
 msgid "Value properties"
 msgstr ""
 
-#: ../overview/style.md:305
+#: ../overview/style.md:303
 msgid ""
 "Value is an arbitrary text drawn to the background. It can be a "
 "lightweighted replacement of creating label objects."
 msgstr ""
 
-#: ../overview/style.md:307
+#: ../overview/style.md:305
 msgid ""
 "value_str (const char *): Pointer to text to display. Only the pointer is"
 " saved."
 msgstr ""
 
-#: ../overview/style.md:308
+#: ../overview/style.md:306
 msgid "value_color (lv_color_t): Color of the text."
 msgstr ""
 
-#: ../overview/style.md:309
+#: ../overview/style.md:307
 msgid "value_opa (lv_opa_t): Opacity of the text."
 msgstr ""
 
-#: ../overview/style.md:310
+#: ../overview/style.md:308
 msgid "value_font (const lv_font_t *): Pointer to font of the text."
 msgstr ""
 
-#: ../overview/style.md:311
+#: ../overview/style.md:309
 msgid "value_letter_space (lv_style_int_t): Letter space of the text."
 msgstr ""
 
-#: ../overview/style.md:312
+#: ../overview/style.md:310
 msgid "value_line_space (lv_style_int_t): Line space of the text."
 msgstr ""
 
-#: ../overview/style.md:313
+#: ../overview/style.md:311
 msgid "value_align (lv_align_t): Alignment of the text. Can be LV_ALIGN_...."
 msgstr ""
 
-#: ../overview/style.md:314
+#: ../overview/style.md:312
 msgid ""
 "value_ofs_x (lv_style_int_t): X offset from the original position of the "
 "alignment."
 msgstr ""
 
-#: ../overview/style.md:315
+#: ../overview/style.md:313
 msgid ""
 "value_ofs_y (lv_style_int_t): Y offset from the original position of the "
 "alignment."
 msgstr ""
 
-#: ../overview/style.md:316
+#: ../overview/style.md:314
 msgid ""
 "value_blend_mode (lv_blend_mode_t): Set the blend mode of the text. Can "
 "be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:326
+#: ../overview/style.md:324
 msgid "Text properties"
 msgstr ""
 
-#: ../overview/style.md:327
+#: ../overview/style.md:325
 msgid "Properties for textual object."
 msgstr ""
 
-#: ../overview/style.md:328
+#: ../overview/style.md:326
 msgid "text_color (lv_color_t): Color of the text."
 msgstr ""
 
-#: ../overview/style.md:329
+#: ../overview/style.md:327
 msgid "text_opa (lv_opa_t): Opacity of the text."
 msgstr ""
 
-#: ../overview/style.md:330
+#: ../overview/style.md:328
 msgid "text_font (const lv_font_t *): Pointer to font of the text."
 msgstr ""
 
-#: ../overview/style.md:331
+#: ../overview/style.md:329
 msgid "text_letter_space (lv_style_int_t): Letter space of the text."
 msgstr ""
 
-#: ../overview/style.md:332
+#: ../overview/style.md:330
 msgid "text_line_space (lv_style_int_t): Line space of the text."
 msgstr ""
 
-#: ../overview/style.md:333
+#: ../overview/style.md:331
 msgid ""
 "text_decor (lv_text_decor_t): Add text decoration. Can be "
 "LV_TEXT_DECOR_NONE/UNDERLINE/STRIKETHROUGH."
 msgstr ""
 
-#: ../overview/style.md:334
+#: ../overview/style.md:332
 msgid "text_sel_color (lv_color_t): Set background color of text selection."
 msgstr ""
 
-#: ../overview/style.md:335
+#: ../overview/style.md:333
 msgid ""
 "text_blend_mode (lv_blend_mode_t): Set the blend mode of the text. Can be"
 " LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:345
+#: ../overview/style.md:343
 msgid "Line properties"
 msgstr ""
 
-#: ../overview/style.md:346
+#: ../overview/style.md:344
 msgid "Properties of lines."
 msgstr ""
 
-#: ../overview/style.md:347
+#: ../overview/style.md:345
 msgid "line_color (lv_color_t): Color of the line."
 msgstr ""
 
-#: ../overview/style.md:348
+#: ../overview/style.md:346
 msgid "line_opa (lv_opa_t): Opacity of the line."
 msgstr ""
 
-#: ../overview/style.md:349
+#: ../overview/style.md:347
 msgid "line_width (lv_style_int_t): Width of the line."
 msgstr ""
 
-#: ../overview/style.md:350
+#: ../overview/style.md:348
 msgid ""
 "line_dash_width (lv_style_int_t): Width of dash. Dashing is drawn only "
 "for horizontal or vertical lines. 0: disable dash."
 msgstr ""
 
-#: ../overview/style.md:351
+#: ../overview/style.md:349
 msgid ""
 "line_dash_gap (lv_style_int_t): Gap between two dash line. Dashing is "
 "drawn only for horizontal or vertical lines. 0: disable dash."
 msgstr ""
 
-#: ../overview/style.md:352
+#: ../overview/style.md:350
 msgid "line_rounded (bool): true: draw rounded line endings."
 msgstr ""
 
-#: ../overview/style.md:353
+#: ../overview/style.md:351
 msgid ""
 "line_blend_mode (lv_blend_mode_t): Set the blend mode of the line. Can be"
 " LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:363
+#: ../overview/style.md:361
 msgid "Image properties"
 msgstr ""
 
-#: ../overview/style.md:364
+#: ../overview/style.md:362
 msgid "Properties of image."
 msgstr ""
 
-#: ../overview/style.md:365
+#: ../overview/style.md:363
 msgid ""
 "image_recolor (lv_color_t):  Mix this color to the pattern image. In case"
 " of symbols (texts) it will be the text color."
 msgstr ""
 
-#: ../overview/style.md:366
+#: ../overview/style.md:364
 msgid ""
 "image_recolor_opa (lv_opa_t): Intensity of recoloring. Default value: "
 "LV_OPA_TRANSP (no recoloring)."
 msgstr ""
 
-#: ../overview/style.md:367
+#: ../overview/style.md:365
 msgid "image_opa (lv_opa_t): Opacity of the image."
 msgstr ""
 
-#: ../overview/style.md:368
+#: ../overview/style.md:366
 msgid ""
 "image_blend_mode (lv_blend_mode_t): Set the blend mode of the image. Can "
 "be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:378
+#: ../overview/style.md:376
 msgid "Transition properties"
 msgstr ""
 
-#: ../overview/style.md:379
+#: ../overview/style.md:377
 msgid "Properties to describe state change animations."
 msgstr ""
 
-#: ../overview/style.md:380
+#: ../overview/style.md:378
 msgid "transition_time (lv_style_int_t): Time of the transition."
 msgstr ""
 
-#: ../overview/style.md:381
+#: ../overview/style.md:379
 msgid "transition_delay (lv_style_int_t): Delay before the transition."
 msgstr ""
 
-#: ../overview/style.md:382
+#: ../overview/style.md:380
 msgid ""
 "transition_1 (property name): A property on which transition should be "
 "applied. Use the property name with upper case with LV_STYLE_ prefix, "
 "e.g. LV_STYLE_BG_COLOR"
 msgstr ""
 
-#: ../overview/style.md:383
+#: ../overview/style.md:381
 msgid ""
 "transition_2 (property name): Same as transition_1 just for an other "
 "property."
 msgstr ""
 
-#: ../overview/style.md:384
+#: ../overview/style.md:382
 msgid ""
 "transition_3 (property name): Same as transition_1 just for an other "
 "property."
 msgstr ""
 
-#: ../overview/style.md:385
+#: ../overview/style.md:383
 msgid ""
 "transition_4 (property name): Same as transition_1 just for an other "
 "property."
 msgstr ""
 
-#: ../overview/style.md:386
+#: ../overview/style.md:384
 msgid ""
 "transition_5 (property name): Same as transition_1 just for an other "
 "property."
 msgstr ""
 
-#: ../overview/style.md:387
+#: ../overview/style.md:385
 msgid ""
 "transition_6 (property name): Same as transition_1 just for an other "
 "property."
 msgstr ""
 
-#: ../overview/style.md:388
+#: ../overview/style.md:386
 msgid ""
 "transition_path (lv_anim_path_t): An animation path for the transition. "
 "(Needs to be static or global variable because only its pointer is "
 "saved)."
 msgstr ""
 
-#: ../overview/style.md:398
+#: ../overview/style.md:396
 msgid "Scale properties"
 msgstr ""
 
-#: ../overview/style.md:399
+#: ../overview/style.md:397
 msgid ""
 "Auxiliary properties for scale-like elements. Scales have a normal and "
 "end region. As the name implies the end region is the end of the scale "
@@ -4164,139 +4263,139 @@ msgid ""
 "before the end region. Both regions could have different properties."
 msgstr ""
 
-#: ../overview/style.md:402
+#: ../overview/style.md:400
 msgid ""
 "scale_grad_color (lv_color_t):  In normal region make gradient to this "
 "color on the scale lines."
 msgstr ""
 
-#: ../overview/style.md:403
+#: ../overview/style.md:401
 msgid "scale_end_color (lv_color_t):  Color of the scale lines in the end region."
 msgstr ""
 
-#: ../overview/style.md:404
+#: ../overview/style.md:402
 msgid ""
 "scale_width (lv_style_int_t): Width of the scale. Default value: LV_DPI /"
 " 8."
 msgstr ""
 
-#: ../overview/style.md:405
+#: ../overview/style.md:403
 msgid ""
 "scale_border_width (lv_style_int_t): Width of a border drawn on the outer"
 " side of the scale in the normal region."
 msgstr ""
 
-#: ../overview/style.md:406
+#: ../overview/style.md:404
 msgid ""
 "scale_end_border_width (lv_style_int_t): Width of a border drawn on the "
 "outer side of the scale in the end region."
 msgstr ""
 
-#: ../overview/style.md:407
+#: ../overview/style.md:405
 msgid ""
 "scale_end_line_width (lv_style_int_t): Width of a scale lines in the end "
 "region."
 msgstr ""
 
-#: ../overview/style.md:417
+#: ../overview/style.md:415
 msgid ""
 "It the documentation of the widgets you will see sentences like \"The "
 "widget use the typical background properties\". The \"typical "
 "background\" properties are:"
 msgstr ""
 
-#: ../overview/style.md:419
+#: ../overview/style.md:417
 msgid "Border"
 msgstr ""
 
-#: ../overview/style.md:420
+#: ../overview/style.md:418
 msgid "Outline"
 msgstr ""
 
-#: ../overview/style.md:421
+#: ../overview/style.md:419
 msgid "Shadow"
 msgstr ""
 
-#: ../overview/style.md:422
+#: ../overview/style.md:420
 msgid "Pattern"
 msgstr ""
 
-#: ../overview/style.md:423
+#: ../overview/style.md:421
 msgid "Value"
 msgstr ""
 
-#: ../overview/style.md:425
+#: ../overview/style.md:423
 msgid "Themes"
 msgstr ""
 
-#: ../overview/style.md:426
+#: ../overview/style.md:424
 msgid ""
 "Themes are a collection of styles. There is always an active theme whose "
 "styles are automatically applied when an object is created. It gives a "
 "default appearance to UI which can be modified by adding further styles."
 msgstr ""
 
-#: ../overview/style.md:429
+#: ../overview/style.md:427
 msgid ""
 "The default theme is set in lv_conf.h with LV_THEME_... defines. Every "
 "theme has the following properties"
 msgstr ""
 
-#: ../overview/style.md:430
+#: ../overview/style.md:428
 msgid "primary color"
 msgstr ""
 
-#: ../overview/style.md:431
+#: ../overview/style.md:429
 msgid "secondary color"
 msgstr ""
 
-#: ../overview/style.md:432
+#: ../overview/style.md:430
 msgid "small font"
 msgstr ""
 
-#: ../overview/style.md:433
+#: ../overview/style.md:431
 msgid "normal font"
 msgstr ""
 
-#: ../overview/style.md:434
+#: ../overview/style.md:432
 msgid "subtitle font"
 msgstr ""
 
-#: ../overview/style.md:435
+#: ../overview/style.md:433
 msgid "title font"
 msgstr ""
 
-#: ../overview/style.md:436
+#: ../overview/style.md:434
 msgid "flags (specific to the given theme)"
 msgstr ""
 
-#: ../overview/style.md:438
+#: ../overview/style.md:436
 msgid "It up to the theme how to use these properties."
 msgstr ""
 
-#: ../overview/style.md:440
+#: ../overview/style.md:438
 msgid "There are 3 built-in themes:"
 msgstr ""
 
-#: ../overview/style.md:441
+#: ../overview/style.md:439
 msgid "empty: no default styles are added"
 msgstr ""
 
-#: ../overview/style.md:442
+#: ../overview/style.md:440
 msgid ""
 "material: an impressive, modern theme - mono: simple black and white "
 "theme for monochrome displays"
 msgstr ""
 
-#: ../overview/style.md:443
+#: ../overview/style.md:441
 msgid "template: a very simple theme which can be copied to create a custom theme"
 msgstr ""
 
-#: ../overview/style.md:445
+#: ../overview/style.md:443
 msgid "Example"
 msgstr ""
 
-#: ../overview/style.md:447
+#: ../overview/style.md:445
 msgid "Styling a button"
 msgstr ""
 
@@ -4420,4 +4519,88 @@ msgid ""
 " in my_screen_cleanup, you could just use lv_obj_del_async, which will "
 "delete the object on the next call to lv_task_handler."
 msgstr ""
+
+#~ msgid ""
+#~ "In LVGL, you can have multiple "
+#~ "displays, each with their own driver "
+#~ "and objects."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Creating more displays is easy: just "
+#~ "initialize more display buffers and "
+#~ "register another driver for every "
+#~ "display. When you create the UI, "
+#~ "use lv_disp_set_default(disp) to tell the "
+#~ "library which display to create objects"
+#~ " on."
+#~ msgstr ""
+
+#~ msgid "Opaque screen"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Usually, the opacity of the screen "
+#~ "is LV_OPA_COVER to provide a solid "
+#~ "background for its children."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "However, in some special cases, you "
+#~ "might want a transparent screen. For "
+#~ "example, if you have a video "
+#~ "player that renders video frames on "
+#~ "a lower layer, you want to create"
+#~ " an OSD menu on the upper layer"
+#~ " (over the video) using LVGL."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "To do this, the screen should have"
+#~ " a style that sets body.opa or "
+#~ "image.opa to LV_OPA_TRANSP (or another "
+#~ "non-opaque value) to make the screen"
+#~ " opaque."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Also, LV_COLOR_SCREEN_TRANSP needs to be "
+#~ "enabled. Please note that it only "
+#~ "works with LV_COLOR_DEPTH = 32."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The Alpha channel of 32-bit colors "
+#~ "will be 0 where there are no "
+#~ "objects and will be 255 where "
+#~ "there are solid objects."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "There is always an active screen "
+#~ "on each display. By default, the "
+#~ "library creates and loads a \"Base "
+#~ "object\" as the screen for each "
+#~ "display.To get the currently active "
+#~ "screen use the lv_scr_act() function. To"
+#~ " load a new one, use "
+#~ "lv_scr_load(scr1)."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Screens are created on the currently "
+#~ "selected default display. The default "
+#~ "screen is the last registered screen "
+#~ "with lv_disp_drv_register or you can "
+#~ "explicitly select a new default display"
+#~ " using lv_disp_set_default(disp). lv_scr_act() "
+#~ "and lv_scr_load() operate on the "
+#~ "currently default screen."
+#~ msgstr ""
+
+#~ msgid "![page_small.png](A scrollable page in lvgl)"
+#~ msgstr ""
+
+#~ msgid "Screen – the most basic parent"
+#~ msgstr ""
 
