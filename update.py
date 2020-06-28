@@ -22,7 +22,7 @@ tmpdir = "_docs_tmp_" + br
 
 cmd("git co " + br)
 cmd("git clean -fd")
-cmd("git submodule update" + br)
+cmd("git submodule update")
 cmd("./build.py")
 cmd("rm -fr ../" + tmpdir)
 cmd("cp en ../" + tmpdir)
