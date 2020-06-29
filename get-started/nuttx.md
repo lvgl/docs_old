@@ -52,44 +52,45 @@ Let's to use the [STM32F429IDISCOVERY](https://www.st.com/en/evaluation-tools/32
 
 Let's to use Linux and example, for [Windows](https://acassis.wordpress.com/2018/01/10/how-to-build-nuttx-on-windows-10/)
 
-```
+```shell
 $ sudo apt-get install automake bison build-essential flex gcc-arm-none-eabi gperf git libncurses5-dev libtool libusb-dev libusb-1.0.0-dev pkg-config kconfig-frontends openocd
 ```
 
 ### Now let's to create a workspace to save our files
 
-```
+```shell
 $ mkdir ~/nuttxspace
 $ cd ~/nuttxspace
 ```
 
 ### Clone the NuttX and Apps repositories:
 
-```
+```shell
 $ git clone https://github.com/apache/incubator-nuttx nuttx
 $ git clone https://github.com/apache/incubator-nuttx-apps apps
 ```
 
 ### Configure NuttX to use the stm32f429i-disco board and the LVGL Demo
 
-```
+```shell
 $ ./tools/configure.sh stm32f429i-disco:lvgl
 $ make
 ```
 
 If everything went fine you should have now the file `nuttx.bin` to flash on your board:
-```
+
+```shell
 $ ls -l nuttx.bin 
 -rwxrwxr-x 1 alan alan 287144 Jun 27 09:26 nuttx.bin
 ```
 
 ### Flashing the firmware in the board using OpenOCD:
-```
+```shell
 $ sudo openocd -f interface/stlink-v2.cfg -f target/stm32f4x.cfg -c init -c "reset halt" -c "flash write_image erase nuttx.bin 0x08000000"
 ```
 
 Reset the board and using the 'NSH>' terminal start the LVGL demo:
-```
+```shell
 nsh> lvgldemo
 ```
 
