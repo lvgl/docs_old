@@ -37,7 +37,7 @@ for br in br_arr:
 
   for l in langs:
     if os.path.isdir("./" + l):
-      cmd("cp -a " + l +"/ ../" + tmpdir)
+      cmd("cp -r " + l +"/ ../" + tmpdir)
     
   cmd("git co master")
   cmd("git clean -fd")
@@ -45,7 +45,7 @@ for br in br_arr:
   for l in langs:
     cmd("rm -rf " + br + "/" + l)
   
-  cmd("cp -a ../" + tmpdir + "/. " + br + "/")
+  cmd("cp -r ../" + tmpdir + "/. " + br + "/")
   cmd("git add " + urlpath)
   os.system("git ci -m 'Update " + urlpath + "'")
   
