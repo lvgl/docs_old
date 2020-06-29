@@ -46,7 +46,7 @@ for br in br_arr:
     cmd("rm -rf " + br + "/" + l)
   
   cmd("cp -r ../" + tmpdir + "/. " + br + "/")
-  cmd("git add " + urlpath)
-  os.system("git ci -m 'Update " + urlpath + "'")
+  #cmd("git add " + urlpath)
+ # os.system("git ci -m 'Update " + urlpath + "'")
   
-cmd("git push origin master")
+#cmd("git push origin master")
