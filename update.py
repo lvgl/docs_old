@@ -45,7 +45,7 @@ for br in br_arr:
   for l in langs:
     cmd("rm -rf " + br + "/" + l)
   
-  cmd("cp -a ../" + tmpdir + "/. " + br)
+  cmd("cp -a ../" + tmpdir + "/. " + br + "/")
   cmd("git add " + urlpath)
   os.system("git ci -m 'Update " + urlpath + "'")
   
