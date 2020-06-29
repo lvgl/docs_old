@@ -2,6 +2,7 @@
  
 import sys
 import os
+import re
 
 langs = ['en']
 
@@ -17,16 +18,25 @@ def cmd(s):
     
     
 
-br = "dev"
+br = "release/v7"
 tmpdir = "_docs_tmp_" + br
+urlpath = re.sub('release/', '', br)
 
 cmd("git co " + br)
 cmd("git clean -fd")
+cmd("git pull origin " + br)
 cmd("git submodule update")
 cmd("./build.py")
 cmd("rm -fr ../" + tmpdir)
-cmd("cp -a en ../" + tmpdir)
+
+for l in langs:
+  if os.path.isdir("./" + l):
+    cmd("cp -a " + l +" ../" + tmpdir)
+  
 cmd("git co master")
 cmd("git clean -fd")
 cmd("cp -a ../" + tmpdir + "/. " + br)
+cmd("git ci -am 'Update " + urlpath + "'")
+cmg("git push origin master")
+
 
