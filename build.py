@@ -2,6 +2,8 @@
  
 import sys
 import os
+import commands
+import re
 
 langs = ['en']
 
@@ -14,6 +16,16 @@ def cmd(s):
   if r != 0: 
     print "Exit build due to previous error"
     exit(-1)
+
+# Get the current branch name
+status, br = commands.getstatusoutput("git br | grep '*'")
+br = re.sub('\* ', '', br)
+ 
+ 
+# Be sure the github links point to the right branch
+f = open("header.rst", "w")
+f.write(".. |github_link_base| replace:: https://github.com/lvgl/docs/blob/" + br)
+f.close()
     
 clean = 0
 trans = 0
@@ -31,6 +43,8 @@ for lang in langs:
   u += " -l " + lang
 
 cmd(u)
+
+
 
 for lang in langs:
   print ""
