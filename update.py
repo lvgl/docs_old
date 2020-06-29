@@ -33,7 +33,7 @@ for br in br_arr:
   cmd("git pull origin " + br)
   cmd("git submodule update")
   cmd("./build.py")
-  os.system("git ci -m 'Rebuild'")
+  os.system("git ci -am 'Rebuild'")
   cmd("git push origin " + br)
   cmd("rm -fr ../" + tmpdir)
 
