@@ -39,6 +39,7 @@ for br in br_arr:
     if os.path.isdir("./" + l):
       cmd("cp -a " + l +" ../" + tmpdir)
     
+  exit()
   cmd("git co master")
   cmd("git clean -fd")
   
