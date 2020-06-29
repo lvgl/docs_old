@@ -20,7 +20,6 @@ def cmd(s):
 br_arr = sys.argv[1:]
     
 for br in br_arr:
-  br = "release/v7"
   tmpdir = "_docs_tmp_" + br
   urlpath = re.sub('release/', '', br)
 
