@@ -33,7 +33,9 @@ for br in br_arr:
   cmd("git pull origin " + br)
   cmd("git submodule update")
   cmd("./build.py")
+  os.system("git ci -m 'Rebuild")
   cmd("rm -fr ../" + tmpdir)
+  cmd("git push origin " + br)
 
   for l in langs:
     if os.path.isdir("./" + l):
