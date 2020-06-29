@@ -96,24 +96,13 @@ The core repositories have at least the following branches:
 
 ### Release cycle
 
-LVGL has a monthly periodic release cycle.
-<ul>
-	<li><strong>1st Tuesday of the month </strong>
-		<ul>
-			<li> Make a major, minor, or patch release from `master` depending on the new features. </li>
-		  <li> After that merge only patches into `master` and add new features into the `dev`.</li>
-		</ul>
-  </li>
-	<li><strong>3rd Tuesday of the month </strong>
-		<ul>
-			<li>  Make a patch release from `master`. </li>	
-			<li>  After that merge the new features from the `dev` to `master` branch. </li>	
-			<li>  In the rest of the month merge only patches into `master` and new features into `dev` branch.</li>	
-		</ul>
-	</li>	
-</ul>
-In other words, patches are merged directly into `master` and new features into `dev`. `dev` 
-is merged to `master` in the middle of the month and the new features are released at the beginning of the next month.
+LVGL has 2 weeks release cycle. On every first and third Tuesday of a month:
+1. A major, minor or bug fix release is created (based on the new features) from the `master` branch
+2. `master` is merged into `release/vX`
+3. Immediately after the release `dev` is merged into `master` 
+4. In the upcoming 2 weeks the new features in `master` can be tested
+5. Bug fixes are merged directly into `master`
+6. After 2 weeks start again from the first point
 
 ### Tags
 
