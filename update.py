@@ -13,7 +13,7 @@ def cmd(s):
   print("----------------------------")
   r = os.system(s)
   if r != 0: 
-    print "Exit build due to previous error"
+    print "Exit update due to previous error"
     exit(-1)
     
     
@@ -47,6 +47,6 @@ for br in br_arr:
   
   cmd("cp -a ../" + tmpdir + "/. " + br)
   cmd("git add " + urlpath)
-  cmd("git ci -m 'Update " + urlpath + "'")
+  os.system("git ci -m 'Update " + urlpath + "'")
   
 cmd("git push origin master")
