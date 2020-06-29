@@ -9,9 +9,9 @@ langs = ['en']
 
   
 def cmd(s):
-  print("------------------------------------------")
+  print("")
   print(s)
-  print("------------------------------------------")
+  print("-------------------------------------")
   r = os.system(s)
   if r != 0: 
     print "Exit build due to previous error"
@@ -21,11 +21,12 @@ def cmd(s):
 status, br = commands.getstatusoutput("git br | grep '*'")
 br = re.sub('\* ', '', br)
  
- 
 # Be sure the github links point to the right branch
 f = open("header.rst", "w")
 f.write(".. |github_link_base| replace:: https://github.com/lvgl/docs/blob/" + br)
 f.close()
+
+cmd("git ci -am  'Update header.rst'")
     
 clean = 0
 trans = 0
@@ -43,7 +44,6 @@ for lang in langs:
   u += " -l " + lang
 
 cmd(u)
-
 
 
 for lang in langs:
