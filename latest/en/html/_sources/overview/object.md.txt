@@ -9,7 +9,7 @@ For example a [Button](/widgets/btn), [Label](/widgets/label), [Image](/widgets/
 
 Check all the [Object types](/widgets/index) here.
 
-## Attributes
+## Object attributes
 
 ### Basic attributes
 
@@ -48,7 +48,7 @@ lv_slider_set_action(slider1, my_action);     /*Set a callback function*/
 
 The API of the object types are described in their [Documentation](/widgets/index) but you can also check the respective header files (e.g. *lv_objx/lv_slider.h*)
 
-## Working mechanisms
+## Object's working mechanisms
 
 ### Parent-child structure
 
@@ -127,42 +127,22 @@ You can remove all the children of an object (but not the object itself) using `
 void lv_obj_clean(lv_obj_t * obj);
 ```
 
-## Screens
+### Screen – the most basic parent
 
-### Create screens
-The screens are special objects which have no parent object. So they can be created like:
+The screens are special objects which have no parent object. So it is created like:
 ```c
 lv_obj_t * scr1 = lv_obj_create(NULL, NULL);
 ```
 
+There is always an active screen on each display. By default, the library creates and loads a "Base object" as the screen for each display.  
+To get the currently active screen use the `lv_scr_act()` function. To load a new one, use `lv_scr_load(scr1)`.
+
 Screens can be created with any object type. For example, a [Base object](/widgets/obj) or an image to make a wallpaper.
 
-### Get the active screen
-There is always an active screen on each display. By default, the library creates and loads a "Base object" as a screen for each display.  
 
-To get the currently active screen use the `lv_scr_act()` function. 
-
-### Load screens
-
-To load a new screen, use `lv_scr_load(scr1)`.
-
-#### Load screen with animation
-
-A new screen can be loaded with animation too using `lv_scr_load_anim(scr, transition_type, time, delay, auto_del)`. The following transition types exist:
-- `LV_SCR_LOAD_ANIM_NONE`: switch immediately after `delay` ms
-- `LV_SCR_LOAD_ANIM_OVER_LEFT/RIGHT/TOP/BOTTOM` move the new screen over the other towards the given direction
-- `LV_SCR_LOAD_ANIM_MOVE_LEFT/RIGHT/TOP/BOTTOM` move both the old and new screens  towards the given direction
-- `LV_SCR_LOAD_ANIM_FADE_ON` fade the new screen over the old screen
-
-Setting `auto_del` to `true` will automatically delete the old screen when the animation is finished.
-
-The new screen will become active (returned by `lv_scr_act()`) when the animations starts after `delay` time.
-
-### Handling multiple displays
 Screens are created on the currently selected *default display*.
-The *default display* is the last registered display with `lv_disp_drv_register` or you can explicitly select a new default display using `lv_disp_set_default(disp)`.
-
-`lv_scr_act()`, `lv_scr_load()` and `lv_scr_load_anim()` operate on the default screen.
+The *default screen* is the last registered screen with `lv_disp_drv_register` or you can explicitly select a new default display using `lv_disp_set_default(disp)`.
+`lv_scr_act()` and `lv_scr_load()` operate on the currently default screen.
 
 Visit [Multi-display support](/overview/display) to learn more.
 
@@ -176,7 +156,7 @@ Using parts different styles can be assigned to the different parts of the objec
 To learn more about the parts read the related section of the [Style overview](/overview/style#parts).
 
 
-## States
+### States
 The object can be in a combinations of the following states:
 - **LV_STATE_DEFAULT**  Normal, released
 - **LV_STATE_CHECKED** Toggled or checked

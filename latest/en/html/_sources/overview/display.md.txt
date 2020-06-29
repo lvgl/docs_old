@@ -6,14 +6,11 @@
 
 ``` important:: The basic concept of *display* in LVGL is explained in the [Porting](/porting/display) section. So before reading further, please read the [Porting](/porting/display) section first.
 ```
-
-## Multiple display support
-
-In LVGL, you can have multiple displays, each with their own driver and objects. The only limitation is that every display needs to be have same color depth (as defined in `LV_COLOR_DEPTH`). 
-If the displays are different in this regard the rendered image can be converted to the correct format in the drivers `flush_cb`.
+In LVGL, you can have multiple displays, each with their own driver and objects.
 
 Creating more displays is easy: just initialize more display buffers and register another driver for every display.
-When you create the UI, use `lv_disp_set_default(disp)` to tell the library on which display to create objects.
+When you create the UI, use `lv_disp_set_default(disp)` to tell the library which display to create objects on.
+
 
 Why would you want multi-display support? Here are some examples:
 - Have a "normal" TFT display with local UI and create "virtual" screens on VNC on demand. (You need to add your VNC driver).
@@ -59,21 +56,17 @@ To load a screen, use `lv_scr_load(scr)`. To get the active screen, use `lv_scr_
 
 Screens can be deleted with `lv_obj_del(scr)`, but ensure that you do not delete the currently loaded screen.
 
-### Transparent screens
 
-Usually, the opacity of the screen is `LV_OPA_COVER` to provide a solid background for its children. If it's not the case (opacity &lt; 100%) the display's background color or image will be visible. 
-See the [Display background](#display-background) section for more details. If the display's background opacity is also not `LV_OPA_COVER` LVGL has no solid background to draw. 
+### Opaque screen
+Usually, the opacity of the screen is `LV_OPA_COVER` to provide a solid background for its children.
 
-This configuration (transparent screen ans display) could be used to create for example OSD menus where a video is played to lower layer, and menu is created on an upper layer.
- 
-To handle transparent displays special (slower) color mixing algorithms needs to be used by LVGL so this feature needs to enabled with `LV_COLOR_SCREEN_TRANSP` n `lv_conf.h`. 
-As this mode operates on the Alpha channel of the pixels `LV_COLOR_DEPTH = 32` is also required. The Alpha channel of 32-bit colors will be 0 where there are no objects and will be 255 where there are solid objects.
+However, in some special cases, you might want a transparent screen. For example, if you have a video player that renders video frames on a lower layer, you want to create an OSD menu on the upper layer (over the video) using LVGL.
 
-In summary, to enable transparent screen and displays to create OSD menu-like UIs:
-- Enable `LV_COLOR_SCREEN_TRANSP` in `lv_conf.h`
-- Be sure to use `LV_COLOR_DEPTH 32`
-- Set the screens opacity to `LV_OPA_TRANSP` e.g. with `lv_obj_set_style_local_bg_opa(lv_scr_act(), LV_OBJMASK_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_TRANSP)`
-- Set the display opacity to `LV_OPA_TRANSP` with `lv_disp_set_bg_opa(NULL, LV_OPA_TRANSP);`
+To do this, the screen should have a style that sets `body.opa` or `image.opa` to `LV_OPA_TRANSP` (or another non-opaque value) to make the screen opaque.
+
+Also, `LV_COLOR_SCREEN_TRANSP` needs to be enabled. Please note that it only works with `LV_COLOR_DEPTH = 32`.
+
+The Alpha channel of 32-bit colors will be 0 where there are no objects and will be 255 where there are solid objects.
 
 ## Features of displays
 
@@ -83,18 +76,6 @@ The user's inactivity is measured on each display. Every use of an [Input device
 To get time elapsed since the last activity, use `lv_disp_get_inactive_time(disp)`. If `NULL` is passed, the overall smallest inactivity time will be returned from all displays (**not the default display**).
 
 You can manually trigger an activity using `lv_disp_trig_activity(disp)`. If `disp` is `NULL`, the default screen will be used (**and not all displays**).
-
-### Background
-Every display has background color, a background image and background opacity properties. They become visible when the current screen is transparent or not positioned to cover the whole display.
-
-Background color is a simple color to fill the display. It can be adjusted with `lv_disp_set_bg_color(disp, color)`;
-
-Background image is path to file or pointer to an `lv_img_dsc_t` variable (converted image) to be used as wallpaper. It can be set with `lv_disp_set_bg_color(disp, &my_img)`;
-If the background image is set (not `NULL`) the background won't filled with `bg_color`.
-
-The opacity of the background color or image can be adjusted with `lv_disp_set_bg_opa(disp, opa)`. 
-
-The `disp` parameter of these functions can be `NULL` to refer it to the default display.
 
 
 ## Colors

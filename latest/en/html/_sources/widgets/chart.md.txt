@@ -7,10 +7,10 @@
 ## Overview
 
 
-Charts are a basic object to visualize data points. 
-They support *Line* charts (connect points with lines and/or draw points on them) and *Column* charts.
+Charts are basic object to visualize data points. 
+It support *Line* charts (connect points with lines and/or draw points on them) and *Column* chart.
 
-Charts also support division lines, 2 y axis, axis ticks, and texts on ticks.
+Chart also support division lines, 2 y axis, axis ticks, and texts on ticks.
 
 ## Parts and Styles
 The Chart's main part is called `LV_CHART_PART_BG` and it uses all the typical background properties. 
@@ -38,9 +38,7 @@ In case of Line type these properties are used:
 
 ### Data series
 You can add any number of series to the charts by `lv_chart_add_series(chart, color)`.
-It allocates data for a `lv_chart_series_t` structure which contains the chosen `color` and an array for the data points if
-not using an external array, if an external array is assigned any internal points associated with the series are deallocated
-and the series points to the external array instead.
+It allocates data for a `lv_chart_series_t` structure which contains the chosen `color` and an array for the data points.
 
 ### Series' type
 The following **data display types** exist:
@@ -54,28 +52,11 @@ You can specify the display type with `lv_chart_set_type(chart, LV_CHART_TYPE_..
 ### Modify the data
 You have several options to set the data of series:
 1. Set the values manually in the array like `ser1->points[3] = 7` and refresh the chart with `lv_chart_refresh(chart)`.
-2. Use `lv_chart_set_point_id(chart, ser, value, id)` where id is the index of the point you wish to update.
-3. Use the `lv_chart_set_next(chart, ser, value)`.
-4. Initialize all points to a given value with: `lv_chart_init_points(chart, ser, value)`.
-5. Set all points from an array with: `lv_chart_set_points(chart, ser, value_array)`.
+2. Use the `lv_chart_set_next(chart, ser, value)`.
+3. Initialize all points to a given value with: `lv_chart_init_points(chart, ser, value)`.
+4. Set all points from an array with: `lv_chart_set_points(chart, ser, value_array)`.
 
 Use `LV_CHART_POINT_DEF` as value to make the library skip drawing that point, column, or line segment.
-
-### Override default start point for series
-If you wish a plot to start from a point other than the default which is point[0] of the series, you can set an alternative
-index with the function `lv_chart_set_x_start_point(chart, ser, id)` where id is the new index position to start plotting from.
-
-### Set an external data source
-You can make the chart series update from an external data source by assigning it with the function:
-`lv_chart_set_ext_array(chart, ser, array, point_cnt )` where array is an external array of lv_coord_t with point_cnt elements.
-Note: you should call `lv_chart_refresh(chart)` after the external data source has been updated, to update the chart.
-
-### Get current chart information
-There are four functions to get information about a chart:
-1. `lv_chart_get_type(chart)` returns the current chart type.
-2. `lv_chart_get_point_count(chart)` returns the current chart point count. 
-3. `lv_chart_get_x_start_point(ser)` returns the current plotting index for the specified series.
-4. `lv_chart_get_point_id(chart, ser, id)` returns the value of the data at a particular index(id) for the specified series.
 
 ### Update modes
 `lv_chart_set_next` can behave in two ways depending on *update mode*:
@@ -86,7 +67,6 @@ The update mode can be changed with `lv_chart_set_update_mode(chart, LV_CHART_UP
 
 ### Number of points
 The number of points in the series can be modified by `lv_chart_set_point_count(chart, point_num)`. The default value is 10.
-Note: this also affects the number of points processed when an external buffer is assigned to a series. 
 
 ### Vertical range
 You can specify the minimum and maximum values in y-direction with `lv_chart_set_range(chart, y_min, y_max)`. The value of the points will be scaled proportionally. The default range is: 0..100.

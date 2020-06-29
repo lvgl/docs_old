@@ -28,7 +28,7 @@ Before getting started here are some guidelines to make contribution smoother:
 - For non-trivial fixes and features, it's better to open an issue first to discuss the details instead of sending a pull request directly.
 - Please read and follow the [Coding style](https://github.com/lvgl/lvgl/blob/master/docs/CODING_STYLE.md) guide.
 
-### Pull request
+## Pull request
 
 
 Merging new code into lvgl, documentation, blog, examples, and other repositories happen via *Pull requests* (PR for short).
@@ -39,14 +39,14 @@ You can see how it looks like on GitHub for lvgl here: [https://github.com/lvgl/
 To add your changes you can edit files online on GitHub and send a new Pull request from there (recommended for small changes) or
  add the updates in your favorite editor/IDE and use git to publish the changes (recommended for more complex updates).
 
-#### From GitHub
+### From GitHub
 1. Navigate to the file you want to edit.
 2. Click the Edit button in the top right-hand corner.
 3. Add your changes to the file
 4. Add a commit message on the bottom of the page
 5. Click the *Propose changes* button
 
-#### From command line
+### From command line
 
 The instructions describe the main `lvgl` repository but it works the same way for the other repositories.
 1. Fork the [lvgl repository](https://github.com/lvgl/lvgl). To do this click the "Fork" button in the top right corner. 
