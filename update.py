@@ -37,7 +37,7 @@ for br in br_arr:
 
   for l in langs:
     if os.path.isdir("./" + l):
-      cmd("cp -r " + l +"/ ../" + tmpdir)
+      cmd("cp -r " + l +"/ ../" + tmpdir + "/")
     
   cmd("git co master")
   cmd("git clean -fd")
