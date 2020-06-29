@@ -17,7 +17,7 @@ def cmd(s):
     
     
 
-br = "latest"
+br = "dev"
 tmpdir = "_docs_tmp_" + br
 
 cmd("git co " + br)
