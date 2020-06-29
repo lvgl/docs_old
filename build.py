@@ -26,7 +26,7 @@ f = open("header.rst", "w")
 f.write(".. |github_link_base| replace:: https://github.com/lvgl/docs/blob/" + br)
 f.close()
 
- os.system("git ci -am  'Update header.rst'")
+os.system("git ci -am  'Update header.rst'")
     
 clean = 0
 trans = 0
