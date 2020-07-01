@@ -34,14 +34,15 @@ You can manually check / un-check the Checkbox  via `lv_checkbox_set_checked(cb,
 To make the Checkbox disabled, use `lv_checkbox_set_disabled(cb, true)`.
 
 ### Get/Set Checkbox State
-You can get the current state of the checkbox with the `lv_checkbox_get_state(cb)` function which returns the current state.
-You can set the current state of the checkbox with the `lv_checkbox_set_state(cb, state)`.
+You can get the current state of the Checkbox with the `lv_checkbox_get_state(cb)` function which returns the current state.
+You can set the current state of the Checkbox with the `lv_checkbox_set_state(cb, state)`.
 The available states as defined by the enum `lv_btn_state_t` are:
 - **LV_BTN_STATE_RELEASED**
 - **LV_BTN_STATE_PRESSED**
+- **LV_BTN_STATE_DISABLED**
 - **LV_BTN_STATE_CHECKED_RELEASED**
 - **LV_BTN_STATE_CHECKED_PRESSED**
-- **LV_BTN_STATE_DISABLED**
+- **LV_BTN_STATE_CHECKED_DISABLED**
 
 ## Events
 Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Checkboxes:
