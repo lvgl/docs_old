@@ -12,7 +12,7 @@ The Checkbox objects are built from a [Button](/widgets/btn) background which co
 ## Parts and Styles
 The Check box's main part is called `LV_CHECKBOX_PART_BG`. It's a container for a "bullet" and a text next to it. The background uses all the typical background style properties.
 
-The bullet is real [lv_obj](/widgets/obj) object and can be referred with `LV_CHACKBOX_PART_BULLET`. 
+The bullet is real [lv_obj](/widgets/obj) object and can be referred with `LV_CHECKBOX_PART_BULLET`. 
 The bullet automatically inherits the state of the background. So the background is pressed the bullet goes to pressed state as well.
 The bullet also uses all the typical background style properties.
 
@@ -32,6 +32,16 @@ You can manually check / un-check the Checkbox  via `lv_checkbox_set_checked(cb,
 
 ### Disabled
 To make the Checkbox disabled, use `lv_checkbox_set_disabled(cb, true)`.
+
+### Get/Set Checkbox State
+You can get the current state of the checkbox with the `lv_checkbox_get_state(cb)` function which returns the current state.
+You can set the current state of the checkbox with the `lv_checkbox_set_state(cb, state)`.
+The available states as defined by the enum `lv_btn_state_t` are:
+- **LV_BTN_STATE_RELEASED**
+- **LV_BTN_STATE_PRESSED**
+- **LV_BTN_STATE_CHECKED_RELEASED**
+- **LV_BTN_STATE_CHECKED_PRESSED**
+- **LV_BTN_STATE_DISABLED**
 
 ## Events
 Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Checkboxes:
