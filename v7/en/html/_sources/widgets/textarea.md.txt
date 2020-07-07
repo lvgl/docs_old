@@ -101,12 +101,12 @@ A part of text can be selected if enabled with `lv_textarea_set_text_sel(textare
 It works like when you select a text on your PC with your mouse. 
 
 ### Scrollbars
-The scrollbars can shown according to different policies set by `lv_textarea_set_sb_mode(textarea, LV_SCRLBAR_MODE_...)`. 
+The scrollbars can shown according to different policies set by `lv_textarea_set_scrollbar_mode(textarea, LV_SCRLBAR_MODE_...)`. 
 Learn more at the [Page](/widgets/page) object.
 
 ### Scroll propagation
 When the Text area is scrolled on an other scrollable object (like a Page) and the scrolling has reached the edge of the Text area, the scrolling can be propagated to the parent. 
-In other words, when the Text area can be scrolled further, the parent will be scrolled instead.
+In other words, when the Text area can't be scrolled further, the parent will be scrolled instead.
 
 It can be enabled with `lv_ta_set_scroll_propagation(ta, true)`.
 
@@ -117,8 +117,8 @@ When the Text area is scrolled to edge a circle like flash animation can be show
 
 ## Events
 Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
-- **LV_EVENT_INSERT** Sent when a character before a character is inserted. 
-The evnet data is the text planned to insert. `lv_ta_set_insert_replace(ta, "New text")` replaces the text to insert. 
+- **LV_EVENT_INSERT** Sent when before a character or text is inserted. 
+The event data is the text planned to insert. `lv_ta_set_insert_replace(ta, "New text")` replaces the text to insert. 
 The new text can't be in a local variable which is destroyed when the event callback exists. `""` means do not insert anything.
 - **LV_EVENT_VALUE_CHANGED** When the content of the text area has been changed. 
 

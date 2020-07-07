@@ -86,8 +86,6 @@ Objects can have *parts* which can have their own style. For example a [page](/w
 - Scrollbar
 - Edge flash
 
-![page_small.png](A scrollable page in lvgl)
-
 There is three types of object parts **main**, **virtual** and **real**. 
 
 The main part is usually the background and largest part of the object. Some object has only a main part. For example, a button has only a background.
