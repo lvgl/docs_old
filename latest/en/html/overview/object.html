@@ -194,6 +194,27 @@
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#where-can-i-find-more-information">Where can I find more information?</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/nuttx.html">NuttX RTOS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nuttx.html#what-is-nuttx">What is NuttX?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nuttx.html#highlights-of-nuttx">Highlights of NuttX</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nuttx.html#why-nuttx-lvgl">Why NuttX + LVGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nuttx.html#here-are-some-advantages-of-using-lvgl-in-nuttx">Here are some advantages of using LVGL in NuttX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nuttx.html#nuttx-lvgl-could-be-used-for">NuttX + LVGL could be used for</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nuttx.html#how-to-get-started-with-nuttx-and-lvgl">How to get started with NuttX and LVGL?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nuttx.html#first-you-need-to-install-the-pre-requisite-on-your-system">First you need to install the pre-requisite on your system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nuttx.html#now-let-s-to-create-a-workspace-to-save-our-files">Now let's to create a workspace to save our files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nuttx.html#clone-the-nuttx-and-apps-repositories">Clone the NuttX and Apps repositories:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nuttx.html#configure-nuttx-to-use-the-stm32f429i-disco-board-and-the-lvgl-demo">Configure NuttX to use the stm32f429i-disco board and the LVGL Demo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nuttx.html#flashing-the-firmware-in-the-board-using-openocd">Flashing the firmware in the board using OpenOCD:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nuttx.html#where-can-i-find-more-information">Where can I find more information?</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../porting/index.html">Porting</a><ul>
@@ -244,23 +265,27 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Overview</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Objects</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#object-attributes">Object attributes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#basic-attributes">Basic attributes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#specific-attributes">Specific attributes</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#object-s-working-mechanisms">Object's working mechanisms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#working-mechanisms">Working mechanisms</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#parent-child-structure">Parent-child structure</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#moving-together">Moving together</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#visibility-only-on-the-parent">Visibility only on the parent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#create-delete-objects">Create - delete objects</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#screen-the-most-basic-parent">Screen – the most basic parent</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#parts">Parts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#states">States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#screens">Screens</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-screens">Create screens</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-the-active-screen">Get the active screen</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#load-screens">Load screens</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#handling-multiple-displays">Handling multiple displays</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#parts">Parts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#states">States</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="layer.html">Layers</a><ul>
@@ -326,15 +351,19 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="display.html">Displays</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="display.html#using-only-one-display">Using only one display</a></li>
-<li class="toctree-l3"><a class="reference internal" href="display.html#mirror-display">Mirror display</a></li>
-<li class="toctree-l3"><a class="reference internal" href="display.html#split-image">Split image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="display.html#multiple-display-support">Multiple display support</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="display.html#using-only-one-display">Using only one display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="display.html#mirror-display">Mirror display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="display.html#split-image">Split image</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="display.html#screens">Screens</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="display.html#opaque-screen">Opaque screen</a></li>
+<li class="toctree-l4"><a class="reference internal" href="display.html#transparent-screens">Transparent screens</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="display.html#features-of-displays">Features of displays</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="display.html#inactivity">Inactivity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="display.html#background">Background</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="display.html#colors">Colors</a><ul>
@@ -595,6 +624,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../widgets/checkbox.html#text">Text</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/checkbox.html#check-uncheck">Check/Uncheck</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/checkbox.html#disabled">Disabled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/checkbox.html#get-set-checkbox-state">Get/Set Checkbox State</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/checkbox.html#events">Events</a></li>
@@ -614,6 +644,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#data-series">Data series</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#series-type">Series' type</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#modify-the-data">Modify the data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#override-default-start-point-for-series">Override default start point for series</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#set-an-external-data-source">Set an external data source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#get-current-chart-information">Get current chart information</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#update-modes">Update modes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#number-of-points">Number of points</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#vertical-range">Vertical range</a></li>
@@ -1265,8 +1298,8 @@
 <p>In the LVGL the <strong>basic building blocks</strong> of a user interface are the objects, also called <em>Widgets</em>.
 For example a <a class="reference internal" href="../widgets/btn.html"><span class="doc">Button</span></a>, <a class="reference internal" href="../widgets/label.html"><span class="doc">Label</span></a>, <a class="reference internal" href="../widgets/img.html"><span class="doc">Image</span></a>, <a class="reference internal" href="../widgets/list.html"><span class="doc">List</span></a>, <a class="reference internal" href="../widgets/chart.html"><span class="doc">Chart</span></a> or <a class="reference internal" href="../widgets/textarea.html"><span class="doc">Text area</span></a>.</p>
 <p>Check all the <a class="reference internal" href="../widgets/index.html"><span class="doc">Object types</span></a> here.</p>
-<div class="section" id="object-attributes">
-<h2>Object attributes<a class="headerlink" href="#object-attributes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="basic-attributes">
 <h3>Basic attributes<a class="headerlink" href="#basic-attributes" title="Permalink to this headline">¶</a></h3>
 <p>All object types share some basic attributes:</p>
@@ -1303,8 +1336,8 @@ For example a <a class="reference internal" href="../widgets/btn.html"><span cla
 <p>The API of the object types are described in their <a class="reference internal" href="../widgets/index.html"><span class="doc">Documentation</span></a> but you can also check the respective header files (e.g. <em>lv_objx/lv_slider.h</em>)</p>
 </div>
 </div>
-<div class="section" id="object-s-working-mechanisms">
-<h2>Object's working mechanisms<a class="headerlink" href="#object-s-working-mechanisms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="working-mechanisms">
+<h2>Working mechanisms<a class="headerlink" href="#working-mechanisms" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="parent-child-structure">
 <h3>Parent-child structure<a class="headerlink" href="#parent-child-structure" title="Permalink to this headline">¶</a></h3>
 <p>A parent object can be considered as the container of its children. Every object has exactly one parent object (except screens), but a parent can have an unlimited number of children.
@@ -1366,17 +1399,43 @@ It is useful e.g. if you want to delete the parent of an object in the child's <
 </pre></div>
 </div>
 </div>
-<div class="section" id="screen-the-most-basic-parent">
-<h3>Screen – the most basic parent<a class="headerlink" href="#screen-the-most-basic-parent" title="Permalink to this headline">¶</a></h3>
-<p>The screens are special objects which have no parent object. So it is created like:</p>
+</div>
+<div class="section" id="screens">
+<h2>Screens<a class="headerlink" href="#screens" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-screens">
+<h3>Create screens<a class="headerlink" href="#create-screens" title="Permalink to this headline">¶</a></h3>
+<p>The screens are special objects which have no parent object. So they can be created like:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">scr1</span> <span class="o">=</span> <span class="n">lv_obj_create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>There is always an active screen on each display. By default, the library creates and loads a &quot;Base object&quot; as the screen for each display.To get the currently active screen use the <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> function. To load a new one, use <code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr1)</span></code>.</p>
 <p>Screens can be created with any object type. For example, a <a class="reference internal" href="../widgets/obj.html"><span class="doc">Base object</span></a> or an image to make a wallpaper.</p>
+</div>
+<div class="section" id="get-the-active-screen">
+<h3>Get the active screen<a class="headerlink" href="#get-the-active-screen" title="Permalink to this headline">¶</a></h3>
+<p>There is always an active screen on each display. By default, the library creates and loads a &quot;Base object&quot; as a screen for each display.</p>
+<p>To get the currently active screen use the <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> function.</p>
+</div>
+<div class="section" id="load-screens">
+<h3>Load screens<a class="headerlink" href="#load-screens" title="Permalink to this headline">¶</a></h3>
+<p>To load a new screen, use <code class="docutils literal notranslate"><span class="pre">lv_scr_load(scr1)</span></code>.</p>
+<div class="section" id="load-screen-with-animation">
+<h4>Load screen with animation<a class="headerlink" href="#load-screen-with-animation" title="Permalink to this headline">¶</a></h4>
+<p>A new screen can be loaded with animation too using <code class="docutils literal notranslate"><span class="pre">lv_scr_load_anim(scr,</span> <span class="pre">transition_type,</span> <span class="pre">time,</span> <span class="pre">delay,</span> <span class="pre">auto_del)</span></code>. The following transition types exist:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_SCR_LOAD_ANIM_NONE</span></code>: switch immediately after <code class="docutils literal notranslate"><span class="pre">delay</span></code> ms</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_SCR_LOAD_ANIM_OVER_LEFT/RIGHT/TOP/BOTTOM</span></code> move the new screen over the other towards the given direction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_SCR_LOAD_ANIM_MOVE_LEFT/RIGHT/TOP/BOTTOM</span></code> move both the old and new screens  towards the given direction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_SCR_LOAD_ANIM_FADE_ON</span></code> fade the new screen over the old screen</p></li>
+</ul>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">auto_del</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> will automatically delete the old screen when the animation is finished.</p>
+<p>The new screen will become active (returned by <code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code>) when the animations starts after <code class="docutils literal notranslate"><span class="pre">delay</span></code> time.</p>
+</div>
+</div>
+<div class="section" id="handling-multiple-displays">
+<h3>Handling multiple displays<a class="headerlink" href="#handling-multiple-displays" title="Permalink to this headline">¶</a></h3>
 <p>Screens are created on the currently selected <em>default display</em>.
-The <em>default screen</em> is the last registered screen with <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register</span></code> or you can explicitly select a new default display using <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default(disp)</span></code>.
-<code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_scr_load()</span></code> operate on the currently default screen.</p>
+The <em>default display</em> is the last registered display with <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register</span></code> or you can explicitly select a new default display using <code class="docutils literal notranslate"><span class="pre">lv_disp_set_default(disp)</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_scr_act()</span></code>, <code class="docutils literal notranslate"><span class="pre">lv_scr_load()</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_scr_load_anim()</span></code> operate on the default screen.</p>
 <p>Visit <a class="reference internal" href="display.html"><span class="doc">Multi-display support</span></a> to learn more.</p>
 </div>
 </div>
@@ -1386,8 +1445,9 @@ The <em>default screen</em> is the last registered screen with <code class="docu
 <p>The name of the parts is constructed like <code class="docutils literal notranslate"><span class="pre">LV_</span> <span class="pre">+</span> <span class="pre">&lt;TYPE&gt;</span> <span class="pre">_PART_</span> <span class="pre">&lt;NAME&gt;</span></code>. For example <code class="docutils literal notranslate"><span class="pre">LV_BTN_PART_MAIN</span></code> or <code class="docutils literal notranslate"><span class="pre">LV_SLIDER_PART_KNOB</span></code>. The parts are usually used when styles are add to the objects.
 Using parts different styles can be assigned to the different parts of the objects.</p>
 <p>To learn more about the parts read the related section of the <a class="reference external" href="/overview/style#parts">Style overview</a>.</p>
+</div>
 <div class="section" id="states">
-<h3>States<a class="headerlink" href="#states" title="Permalink to this headline">¶</a></h3>
+<h2>States<a class="headerlink" href="#states" title="Permalink to this headline">¶</a></h2>
 <p>The object can be in a combinations of the following states:</p>
 <ul class="simple">
 <li><p><strong>LV_STATE_DEFAULT</strong>  Normal, released</p></li>
@@ -1403,7 +1463,6 @@ However, the states can be changed manually too. To completely overwrite the cur
 To set or clear given state (but leave to other states untouched) use <code class="docutils literal notranslate"><span class="pre">lv_obj_add/clear_state(obj,</span> <span class="pre">part,</span> <span class="pre">LV_STATE_...)</span></code>
 In both cases ORed state values can be used as well. E.g. <code class="docutils literal notranslate"><span class="pre">lv_obj_set_state(obj,</span> <span class="pre">part,</span> <span class="pre">LV_STATE_PRESSED</span> <span class="pre">|</span> <span class="pre">LV_PRESSED_CHECKED)</span></code>.</p>
 <p>To learn more about the states read the related section of the <a class="reference external" href="/overview/style#states">Style overview</a>.</p>
-</div>
 </div>
 </div>
 
