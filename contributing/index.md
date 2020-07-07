@@ -63,7 +63,7 @@ It will "copy" the `lvgl` repository to your GitHub account (`https://github.com
 
 ### Overview
 
-To ensure that all licensing criteria is met all repositories of the LVGL project apply a process called DCO (Developer's Certificate of Origin).
+To ensure that all licensing criteria is met for all repositories of the LVGL project we apply a process called DCO (Developer's Certificate of Origin).
 
 The text of DCO can be read here: [https://developercertificate.org/](https://developercertificate.org/).
 
@@ -73,12 +73,12 @@ No further action is required if your contribution fulfills the DCO. If you are 
 
 ### Accepted licenses and copyright notices
 
-To make the DCO easier the digest here are some practical guides about specific cases:
+To make the DCO easier to digest, here are some practical guides about specific cases:
 
 #### Your own work
 
-The most simple case is when the contribution is fully your work. 
-In this case you can simply send a Pull request without worrying about an licensing issues.
+The simplest case is when the contribution is solely your own work. 
+In this case you can just send a Pull Request without worrying about any licensing issues.
 
 #### Use code from online source
 
@@ -98,7 +98,7 @@ For example in case of StackOwerflow a notice like this can be used:
 
 #### Use MIT licensed code
 As LVGL is also MIT licensed other MIT licensed code can be integrated without issues.
-MIT license request to add a copyright notice to the derived work. So you need to copy the original work's license file or it's text to the code you want to add.
+The MIT license requests a copyright notice be added to the derived work. So you need to copy the original work's license file or it's text to the code you want to add.
 
 
 #### Use GPL licensed code
@@ -108,7 +108,7 @@ As GPL license is not compatible with MIT license so LVGL can not accept GPL lic
 
 
 
-## When you got started with LVGL
+## When you get started with LVGL
 
 Even if you're just getting started with LVGL there are plenty of ways to get your feet wet. Most of these options don't even require knowing a single line of code of LVGL. 
 
