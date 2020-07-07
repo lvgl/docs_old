@@ -39,6 +39,16 @@ You can see how it looks like on GitHub for lvgl here: [https://github.com/lvgl/
 To add your changes you can edit files online on GitHub and send a new Pull request from there (recommended for small changes) or
  add the updates in your favorite editor/IDE and use git to publish the changes (recommended for more complex updates).
 
+## DCO
+
+To ensure that all licensing criteria is met all repositories of the LVGL project apply a process called DCO (Developer's Certificate of Origin).
+
+The text of DCO can be read here: [https://developercertificate.org/](https://developercertificate.org/).
+
+By contributing to any repositories of the LVGL project you state that your contribution corresponds with the DCO.
+
+No further action is required if your contribution fulfills the DCO. If you are not sure about it feel free to ask us in a comment.
+
 ### From GitHub
 1. Navigate to the file you want to edit.
 2. Click the Edit button in the top right-hand corner.
