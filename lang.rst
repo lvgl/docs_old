@@ -9,6 +9,3 @@
 .. `Türk (tr) 
 .. <http://docs.littlevgl.com/tr /html/index.html>`_ 
 
-`Documentation of V6
-<http://docs.littlevgl.com/en/html/index.html>`_
-
