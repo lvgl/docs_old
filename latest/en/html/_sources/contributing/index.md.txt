@@ -39,16 +39,6 @@ You can see how it looks like on GitHub for lvgl here: [https://github.com/lvgl/
 To add your changes you can edit files online on GitHub and send a new Pull request from there (recommended for small changes) or
  add the updates in your favorite editor/IDE and use git to publish the changes (recommended for more complex updates).
 
-## DCO
-
-To ensure that all licensing criteria is met all repositories of the LVGL project apply a process called DCO (Developer's Certificate of Origin).
-
-The text of DCO can be read here: [https://developercertificate.org/](https://developercertificate.org/).
-
-By contributing to any repositories of the LVGL project you state that your contribution corresponds with the DCO.
-
-No further action is required if your contribution fulfills the DCO. If you are not sure about it feel free to ask us in a comment.
-
 ### From GitHub
 1. Navigate to the file you want to edit.
 2. Click the Edit button in the top right-hand corner.
@@ -68,6 +58,53 @@ It will "copy" the `lvgl` repository to your GitHub account (`https://github.com
 7. Set the base branch. It means where you want to merge your update. In the `lvgl` repo fixes go to `master`, new features to `dev` branch. 
 8. Describe what is in the update. An example code is welcome if applicable.
 9. If you need to make more changes, just update your forked `lvgl` repo with new commits. They will automatically appear in the PR.
+
+## Developer Certification of Origin (DCO)
+
+### Overview
+
+To ensure that all licensing criteria is met all repositories of the LVGL project apply a process called DCO (Developer's Certificate of Origin).
+
+The text of DCO can be read here: [https://developercertificate.org/](https://developercertificate.org/).
+
+By contributing to any repositories of the LVGL project you state that your contribution corresponds with the DCO.
+
+No further action is required if your contribution fulfills the DCO. If you are not sure about it feel free to ask us in a comment.
+
+### Accepted licenses and copyright notices
+
+To make the DCO easier the digest here are some practical guides about specific cases:
+
+#### Your own work
+
+The most simple case is when the contribution is fully your work. 
+In this case you can simply send a Pull request without worrying about an licensing issues.
+
+#### Use code from online source
+
+If the code you would like to add is based on an article, post or comment on a website (e.g. StackOverflow) the license and/or rules of that site should be followed.
+
+For example in case of StackOwerflow a notice like this can be used:
+```
+/* The original version of this code-snippet was published on StackOverflow.
+ * Post: http://stackoverflow.com/questions/12345
+ * Author: http://stackoverflow.com/users/12345/username
+ * The following parts of the snippet were changed:
+ * - Check this or that
+ * - Optimize performance here and there
+ */
+ ... code snippet here ...
+```
+
+#### Use MIT licensed code
+As LVGL is also MIT licensed other MIT licensed code can be integrated without issues.
+MIT license request to add a copyright notice to the derived work. So you need to copy the original work's license file or it's text to the code you want to add.
+
+
+#### Use GPL licensed code
+As GPL license is not compatible with MIT license so LVGL can not accept GPL licensed code. 
+ 
+ 
 
 
 
