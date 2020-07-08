@@ -106,6 +106,8 @@ The type of the custom data depends on the sending object but if it's a
 
 ## Send events manually
 
+### Arbitrary events
+
 To manually send events to an object, use `lv_event_send(obj, LV_EVENT_..., &custom_data)`.
 
 For example, it can be used to manually close a message box by simulating a button press (although there are simpler ways of doing this):
@@ -115,7 +117,21 @@ uint32_t btn_id = 0;
 lv_event_send(mbox, LV_EVENT_VALUE_CHANGED, &btn_id);
 ```
 
-Or to perform refresh generically:
-```c
-lv_event_send(label, LV_EVENT_REFRESH, NULL);
-```
+### Refresh event
+
+`LV_EVENT_REFRESH` is special event because it's designed to be used by the user to notify an object to refresh itself. Some examples:
+- notify a label to refresh its text according to one or more variables (e.g. current time)
+- refresh a label when the language changes
+- enable a button if some conditions are met (e.g. the correct PIN is entered)
+- add/remove styles to/from an object if a limit is exceeded, etc
+
+To simplest way to handle similar cases is utilizing the following functions.
+
+`lv_event_send_refresh(obj)` is just a wrapper to `lv_event_send(obj, LV_EVENT_REFRESH, NULL)`. So it simply sends an `LV_EVENT_REFRESH` to an object.
+
+`lv_event_send_refresh_recursive(obj)` sends `LV_EVENT_REFRESH` event to an object and all of its children. If `NULL` is passed as parameter all objects of all displays will be refreshed.
+
+`lv_event_queue_refresh_recursive(obj)` is similar to `lv_event_send_refresh_recursive(obj)` but it doesn't send the event immediately, only after `LV_DISP_DEF_REFR_PERIOD` (see in lv_conf.h) time.
+If this function is called again for the same object (before `LV_DISP_DEF_REFR_PERIOD` time) nothing will happen and only one event will be sent after `LV_DISP_DEF_REFR_PERIOD`. 
+It's useful to prevent overloading the system by sending excessive refreshes. 
+
