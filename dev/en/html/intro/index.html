@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Get started" href="../get-started/index.html" />
-    <link rel="prev" title="Welcome to LVGL&#39;s documentation!" href="../index.html" />
+    <link rel="prev" title="Welcome to the documentation of LVGL!" href="../index.html" />
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78811084-3"></script>
@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.0.2
+                v7.3.0-dev
               </div>
             
           
@@ -301,7 +301,11 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/event.html#custom-data">Custom data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#send-events-manually">Send events manually</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#send-events-manually">Send events manually</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#arbitrary-events">Arbitrary events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#refresh-event">Refresh event</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/style.html">Styles</a><ul>
@@ -624,6 +628,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../widgets/checkbox.html#text">Text</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/checkbox.html#check-uncheck">Check/Uncheck</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/checkbox.html#disabled">Disabled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/checkbox.html#get-set-checkbox-state">Get/Set Checkbox State</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/checkbox.html#events">Events</a></li>
@@ -1191,15 +1196,24 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/index.html#introduction">Introduction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../contributing/index.html#pull-request">Pull request</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../contributing/index.html#from-github">From GitHub</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../contributing/index.html#from-command-line">From command line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/index.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/index.html#pull-request">Pull request</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/index.html#from-github">From GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/index.html#from-command-line">From command line</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/index.html#developer-certification-of-origin-dco">Developer Certification of Origin (DCO)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/index.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/index.html#accepted-licenses-and-copyright-notices">Accepted licenses and copyright notices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/index.html#your-own-work">Your own work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/index.html#use-code-from-online-source">Use code from online source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/index.html#use-mit-licensed-code">Use MIT licensed code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/index.html#use-gpl-licensed-code">Use GPL licensed code</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/index.html#when-you-got-started-with-lvgl">When you got started with LVGL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/index.html#when-you-get-started-with-lvgl">When you get started with LVGL</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../contributing/index.html#give-lvgl-a-star">Give LVGL a Star</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing/index.html#tell-what-you-have-achieved">Tell what you have achieved</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contributing/index.html#write-examples">Write examples</a></li>
@@ -1388,24 +1402,16 @@ You can choose from <a class="reference internal" href="../contributing/index.ht
 </div>
 <div class="section" id="release-cycle">
 <h3>Release cycle<a class="headerlink" href="#release-cycle" title="Permalink to this headline">¶</a></h3>
-<p>LVGL has a monthly periodic release cycle.</p>
-<ul>
-	<li><strong>1st Tuesday of the month </strong>
-		<ul>
-			<li> Make a major, minor, or patch release from `master` depending on the new features. </li>
-		  <li> After that merge only patches into `master` and add new features into the `dev`.</li>
-		</ul>
-  </li>
-	<li><strong>3rd Tuesday of the month </strong>
-		<ul>
-			<li>  Make a patch release from `master`. </li>	
-			<li>  After that merge the new features from the `dev` to `master` branch. </li>	
-			<li>  In the rest of the month merge only patches into `master` and new features into `dev` branch.</li>	
-		</ul>
-	</li>	
-</ul>
-In other words, patches are merged directly into `master` and new features into `dev`. `dev` 
-is merged to `master` in the middle of the month and the new features are released at the beginning of the next month.</div>
+<p>LVGL has 2 weeks release cycle. On every first and third Tuesday of a month:</p>
+<ol class="simple">
+<li><p>A major, minor or bug fix release is created (based on the new features) from the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">master</span></code> is merged into <code class="docutils literal notranslate"><span class="pre">release/vX</span></code></p></li>
+<li><p>Immediately after the release <code class="docutils literal notranslate"><span class="pre">dev</span></code> is merged into <code class="docutils literal notranslate"><span class="pre">master</span></code></p></li>
+<li><p>In the upcoming 2 weeks the new features in <code class="docutils literal notranslate"><span class="pre">master</span></code> can be tested</p></li>
+<li><p>Bug fixes are merged directly into <code class="docutils literal notranslate"><span class="pre">master</span></code></p></li>
+<li><p>After 2 weeks start again from the first point</p></li>
+</ol>
+</div>
 <div class="section" id="tags">
 <h3>Tags<a class="headerlink" href="#tags" title="Permalink to this headline">¶</a></h3>
 <p>Tags like <code class="docutils literal notranslate"><span class="pre">vX.Y.Z</span></code> are created for every release.</p>
@@ -1550,7 +1556,7 @@ See the <a class="reference internal" href="../porting/os.html"><span class="doc
         <a href="../get-started/index.html" class="btn btn-neutral float-right" title="Get started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to LVGL&#39;s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to the documentation of LVGL!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1561,7 +1567,7 @@ See the <a class="reference internal" href="../porting/os.html"><span class="doc
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jun 29, 2020.
+        Last updated on Jul 08, 2020.
       </span>
 
     </p>
