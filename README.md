@@ -39,7 +39,8 @@ If you have more free time you can even translate the documentation. The current
 If your chosen language is still not added, please write a comment [here](https://forum.lvgl.io/t/translate-the-documentation/238).
 
 To add your translations:
-- Find the *.po* in `<language_code>/LC_MESSAGES/<section_name>.po`. E.g. the widgets translated to German should be in `de/LC_MESSAGES/widgets.po`.
+- Use the [latest branch](https://github.com/lvgl/docs/tree/latest) to add translations
+- Find the *.po* in `locals/<language_code>/LC_MESSAGES/<section_name>.po`. E.g. the German translation of `widgets.md` should be in `locals/de/LC_MESSAGES/widgets.po`. 
 - Open a po file and fill the `msgstr` fields with the translation
 - Send a [Pull request](https://docs.lvgl.io/latest/en/html/contributing/index.html#pull-request)
 
@@ -54,7 +55,6 @@ To display a translation in the public documentation page at least these section
 ### Official rebuilds
 
 The documentation is rebuild on every release of lvgl (first and third Tuesday of every month).
-
 
 ### Build locally
 
