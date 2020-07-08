@@ -24,6 +24,8 @@ On every release (first and third Tuesday of every month)
 
 ## Contributing
 
+### Improve the docs
+
 As you read the documentation you might see some typos or unclear sentences. 
 For typos and straightforward fixes, you can simply edit the file on GitHub. There is an `Edit on Github` link on the top right-hand corner of all pages.
 Click it to see the file on GitHub, hit the Edit button, and add you fixes as described in [Pull request - From GitHub](https://docs.lvgl.io/latest/en/html/contributing/index.html#from-github) section.
