@@ -305,7 +305,7 @@ The pattern is an image (or symbol) drawn in the middle of the background or rep
 ### Value properties
 Value is an arbitrary text drawn to the background. It can be a lightweighted replacement of creating label objects.
 
-- **value_str** (`const char *`): Pointer to text to display. Only the pointer is saved! (Don't use local variable with lv_style_set_value_str, use static, global or dynamic, else use lv_obj_set_style_local_value_str).
+- **value_str** (`const char *`): Pointer to text to display. Only the pointer is saved! (Don't use local variable with lv_style_set_value_str, instead use static, global or dynamically allocated data).
 - **value_color** (`lv_color_t`): Color of the text. 
 - **value_opa** (`lv_opa_t`): Opacity of the text.
 - **value_font** (`const lv_font_t *`): Pointer to font of the text.
