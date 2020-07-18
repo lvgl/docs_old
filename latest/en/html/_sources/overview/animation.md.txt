@@ -28,8 +28,11 @@ lv_anim_init(&a);
 /* MANDATORY SETTINGS
  *------------------*/
 
-/*Set the animator function and variable to animate*/
-lv_anim_set_exec_cb(&a, btn1, (lv_anim_exec_xcb_t) lv_obj_set_x); 
+/*Set the "animator" function*/
+lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t) lv_obj_set_x); 
+
+/*Set the "animator" function*/
+lv_anim_set_var(&a, obj); 
 
 /*Length of the animation [ms]*/
 lv_anim_set_time(&a, duration);
