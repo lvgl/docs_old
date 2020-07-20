@@ -18,6 +18,6 @@ function ver_sel()
 
 document.addEventListener('DOMContentLoaded', (event) => {
     add_version_selector();
-    var value = window.location.pathname.split('/')[0];
+    var value = window.location.pathname.split('/')[1];
     document.getElementById("versions").value = value;
 })
