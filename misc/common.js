@@ -13,10 +13,11 @@ function add_version_selector()
 function ver_sel()
 {
   var x = document.getElementById("versions").value;
-	window.location.href = "https://docs.lvgl.io/" + x + "/en/html";
-
+  window.location.href = window.location.protocol + "//" + window.location.host + "/" + x + "/en/html";
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
     add_version_selector();
+    var value = window.location.pathname.split('/')[0];
+    document.getElementById("versions").value = value;
 })
