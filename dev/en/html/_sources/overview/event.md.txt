@@ -131,7 +131,3 @@ To simplest way to handle similar cases is utilizing the following functions.
 
 `lv_event_send_refresh_recursive(obj)` sends `LV_EVENT_REFRESH` event to an object and all of its children. If `NULL` is passed as parameter all objects of all displays will be refreshed.
 
-`lv_event_queue_refresh_recursive(obj)` is similar to `lv_event_send_refresh_recursive(obj)` but it doesn't send the event immediately, only after `LV_DISP_DEF_REFR_PERIOD` (see in lv_conf.h) time.
-If this function is called again for the same object (before `LV_DISP_DEF_REFR_PERIOD` time) nothing will happen and only one event will be sent after `LV_DISP_DEF_REFR_PERIOD`. 
-It's useful to prevent overloading the system by sending excessive refreshes. 
-
