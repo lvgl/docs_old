@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.2.0
+                v7.3.0-dev
               </div>
             
           
@@ -301,7 +301,11 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#custom-data">Custom data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#send-events-manually">Send events manually</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-events-manually">Send events manually</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#arbitrary-events">Arbitrary events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#refresh-event">Refresh event</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="style.html">Styles</a><ul>
@@ -1100,6 +1104,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../widgets/tabview.html#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/tabview.html#adding-tab">Adding tab</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/tabview.html#change-tab">Change tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/tabview.html#change-tab-s-name">Change tab's name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/tabview.html#tab-button-s-position">Tab button's position</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/tabview.html#animation-time">Animation time</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/tabview.html#scroll-propagation">Scroll propagation</a></li>
@@ -1422,6 +1427,8 @@ To get the custom data in the event callback use <code class="docutils literal n
 </div>
 <div class="section" id="send-events-manually">
 <h2>Send events manually<a class="headerlink" href="#send-events-manually" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="arbitrary-events">
+<h3>Arbitrary events<a class="headerlink" href="#arbitrary-events" title="Permalink to this headline">¶</a></h3>
 <p>To manually send events to an object, use <code class="docutils literal notranslate"><span class="pre">lv_event_send(obj,</span> <span class="pre">LV_EVENT_...,</span> <span class="pre">&amp;custom_data)</span></code>.</p>
 <p>For example, it can be used to manually close a message box by simulating a button press (although there are simpler ways of doing this):</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*Simulate the press of the first button (indexes start from zero)*/</span>
@@ -1429,9 +1436,19 @@ To get the custom data in the event callback use <code class="docutils literal n
 <span class="n">lv_event_send</span><span class="p">(</span><span class="n">mbox</span><span class="p">,</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">btn_id</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Or to perform refresh generically:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_event_send</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">LV_EVENT_REFRESH</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
-</pre></div>
+</div>
+<div class="section" id="refresh-event">
+<h3>Refresh event<a class="headerlink" href="#refresh-event" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">LV_EVENT_REFRESH</span></code> is special event because it's designed to be used by the user to notify an object to refresh itself. Some examples:</p>
+<ul class="simple">
+<li><p>notify a label to refresh its text according to one or more variables (e.g. current time)</p></li>
+<li><p>refresh a label when the language changes</p></li>
+<li><p>enable a button if some conditions are met (e.g. the correct PIN is entered)</p></li>
+<li><p>add/remove styles to/from an object if a limit is exceeded, etc</p></li>
+</ul>
+<p>To simplest way to handle similar cases is utilizing the following functions.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_event_send_refresh(obj)</span></code> is just a wrapper to <code class="docutils literal notranslate"><span class="pre">lv_event_send(obj,</span> <span class="pre">LV_EVENT_REFRESH,</span> <span class="pre">NULL)</span></code>. So it simply sends an <code class="docutils literal notranslate"><span class="pre">LV_EVENT_REFRESH</span></code> to an object.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_event_send_refresh_recursive(obj)</span></code> sends <code class="docutils literal notranslate"><span class="pre">LV_EVENT_REFRESH</span></code> event to an object and all of its children. If <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is passed as parameter all objects of all displays will be refreshed.</p>
 </div>
 </div>
 </div>
