@@ -129,7 +129,7 @@ The the best matching property will be selected and it's precedence will be retu
 ```c
 lv_color_t color;
 int16_t res;
-res = lv_style_get_bg_color(&style1, LV_STATE_PRESSED, &color);
+res = lv_obj_get_style_bg_color(&style1, LV_STATE_PRESSED, &color);
 if(res >= 0) {
   //the bg_color is loaded into `color`
 }
