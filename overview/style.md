@@ -123,13 +123,17 @@ To remove a property use:
 lv_style_remove_prop(&style, LV_STYLE_BG_COLOR | (LV_STATE_PRESSED << LV_STYLE_STATE_POS));
 ```
 
-To get the value from style in a state functions with the following prototype are available: `lv_style_get_<prperty_name>(&style, <state>, <result poiner>);`.
-The the best matching property will be selected and it's precedence will be returned. `-1` will be returned if the property is not found. For example:
+To get the value from style in a given state functions with the following prototype are available: `_lv_style_get_color/int/opa/ptr(&style, <prop>, <result buf>);`.
+The best matching property will be selected and it's precedence will be returned. `-1` will be returned if the property is not found. 
+
+The form of the function (`...color/int/opa/ptr`) should beused according to the type of `<prop>`.
+
+For example:
 
 ```c
 lv_color_t color;
 int16_t res;
-res = lv_style_get_bg_color(&style1, LV_STATE_PRESSED, &color);
+res = _lv_style_get_color(&style1,  LV_STYLE_BG_COLOR | (LV_STATE_PRESSED << LV_STYLE_STATE_POS), &color);
 if(res >= 0) {
   //the bg_color is loaded into `color`
 }
