@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LVGL v7.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-28 14:09+0200\n"
+"POT-Creation-Date: 2020-08-02 11:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -420,7 +420,7 @@ msgid ""
 "If disp is NULL, the default screen will be used (and not all displays)."
 msgstr ""
 
-#: ../overview/display.md:87 ../overview/style.md:81 ../overview/style.md:416
+#: ../overview/display.md:87 ../overview/style.md:81 ../overview/style.md:420
 msgid "Background"
 msgstr ""
 
@@ -3684,48 +3684,58 @@ msgstr ""
 
 #: ../overview/style.md:123
 msgid ""
-"To get the value from style in a state functions with the following "
-"prototype are available: lv_style_get_<prperty_name>(&style, <state>, "
-"<result poiner>);. The the best matching property will be selected and "
-"it's precedence will be returned. -1 will be returned if the property is "
-"not found. For example:"
+"To get the value from style in a given state functions with the following"
+" prototype are available: _lv_style_get_color/int/opa/ptr(&style, <prop>,"
+" <result buf>);. The best matching property will be selected and it's "
+"precedence will be returned. -1 will be returned if the property is not "
+"found."
 msgstr ""
 
-#: ../overview/style.md:135
+#: ../overview/style.md:126
+msgid ""
+"The form of the function (...color/int/opa/ptr) should beused according "
+"to the type of <prop>."
+msgstr ""
+
+#: ../overview/style.md:128 ../overview/task.md:18 ../overview/task.md:67
+msgid "For example:"
+msgstr ""
+
+#: ../overview/style.md:139
 msgid "To reset a style (free all it's data) use"
 msgstr ""
 
-#: ../overview/style.md:140
+#: ../overview/style.md:144
 msgid "Managing style list"
 msgstr ""
 
-#: ../overview/style.md:141
+#: ../overview/style.md:145
 msgid ""
 "A style on its own not that useful. It should be assigned to an object to"
 " take its effect. Every part of the objects stores a style list which is "
 "the list of assigned styles."
 msgstr ""
 
-#: ../overview/style.md:144
+#: ../overview/style.md:148
 msgid ""
 "To add a style to an object use lv_obj_add_style(obj, <part>, &style) For"
 " example:"
 msgstr ""
 
-#: ../overview/style.md:151
+#: ../overview/style.md:155
 msgid ""
 "An objects style list can be reset with lv_obj_reset_style_list(obj, "
 "<part>)"
 msgstr ""
 
-#: ../overview/style.md:153
+#: ../overview/style.md:157
 msgid ""
 "If a style which is already assigned to an object changes (i.e. one of "
 "it's property is set to a new value) the objects using that style should "
 "be notified with lv_obj_refresh_style(obj)"
 msgstr ""
 
-#: ../overview/style.md:155
+#: ../overview/style.md:159
 msgid ""
 "To get a final value of property, including cascading, inheritance, local"
 " styles and transitions (see below), get functions like this can be used:"
@@ -3734,11 +3744,11 @@ msgid ""
 "value.   For example:"
 msgstr ""
 
-#: ../overview/style.md:162
+#: ../overview/style.md:166
 msgid "Local styles"
 msgstr ""
 
-#: ../overview/style.md:163
+#: ../overview/style.md:167
 msgid ""
 "In the object's style lists, so-called local properties can be stored as "
 "well. It's the same concept than CSS's <div style=\"color:red\">. The "
@@ -3748,11 +3758,11 @@ msgid ""
 "<state>, <value>);   For example:"
 msgstr ""
 
-#: ../overview/style.md:171
+#: ../overview/style.md:175
 msgid "Transitions"
 msgstr ""
 
-#: ../overview/style.md:172
+#: ../overview/style.md:176
 msgid ""
 "By default, when an object changes state (e.g. it's pressed) the new "
 "properties from the new state are set immediately. However, with "
@@ -3761,29 +3771,29 @@ msgid ""
 " pressed color over 300 ms."
 msgstr ""
 
-#: ../overview/style.md:175
+#: ../overview/style.md:179
 msgid ""
 "The parameters of the transitions are stored in the styles. It's possible"
 " to set"
 msgstr ""
 
-#: ../overview/style.md:176
+#: ../overview/style.md:180
 msgid "the time of the transition"
 msgstr ""
 
-#: ../overview/style.md:177
+#: ../overview/style.md:181
 msgid "the delay before starting the transition"
 msgstr ""
 
-#: ../overview/style.md:178
+#: ../overview/style.md:182
 msgid "the animation path (also known as timing function)"
 msgstr ""
 
-#: ../overview/style.md:179
+#: ../overview/style.md:183
 msgid "the properties to animate"
 msgstr ""
 
-#: ../overview/style.md:181
+#: ../overview/style.md:185
 msgid ""
 "The transition properties can be defined for each state. For example, "
 "setting 500 ms transition time in default state will mean that when the "
@@ -3794,60 +3804,60 @@ msgid ""
 "back to default."
 msgstr ""
 
-#: ../overview/style.md:186
+#: ../overview/style.md:190
 msgid "Properties"
 msgstr ""
 
-#: ../overview/style.md:188
+#: ../overview/style.md:192
 msgid "The following properties can be used in the styles."
 msgstr ""
 
-#: ../overview/style.md:190
+#: ../overview/style.md:194
 msgid "Mixed properties"
 msgstr ""
 
-#: ../overview/style.md:191
+#: ../overview/style.md:195
 msgid ""
 "radius (lv_style_int_t): Set the radius of the background. 0: no radius, "
 "LV_RADIUS_CIRCLE: maximal radius."
 msgstr ""
 
-#: ../overview/style.md:192
+#: ../overview/style.md:196
 msgid ""
 "clip_corner (bool): true: enable to clip the overflowed content on the "
 "rounded (radius > 0) corners."
 msgstr ""
 
-#: ../overview/style.md:193
+#: ../overview/style.md:197
 msgid ""
 "size (lv_style_int_t): Size of internal elements of the widgets. See the "
 "documentation of the widgets if this property is used or not."
 msgstr ""
 
-#: ../overview/style.md:194
+#: ../overview/style.md:198
 msgid ""
 "transform_width  (lv_style_int_t): Make the object wider on both sides "
 "with this value."
 msgstr ""
 
-#: ../overview/style.md:195
+#: ../overview/style.md:199
 msgid ""
 "transform_height  (lv_style_int_t) Make the object higher on both sides "
 "with this value."
 msgstr ""
 
-#: ../overview/style.md:196
+#: ../overview/style.md:200
 msgid ""
 "opa_scale (lv_style_int_t): Inherited. Scale down all opacity values of "
 "the object by this factor. As it's inherited the children objects will be"
 " affected too."
 msgstr ""
 
-#: ../overview/style.md:198
+#: ../overview/style.md:202
 msgid "Padding and margin properties"
 msgstr ""
 
-#: ../overview/style.md:199
+#: ../overview/style.md:203
 msgid ""
 "Padding sets the space on the inner sides of the edges. It means \"I "
 "don't want my children too close to my sides, so keep this "
@@ -3856,509 +3866,509 @@ msgid ""
 "around me\"."
 msgstr ""
 
-#: ../overview/style.md:203
+#: ../overview/style.md:207
 msgid ""
 "These properties are typically used by Container object if layout or auto"
 " fit is enabled. However other widgets also use them to set spacing. See "
 "the documentation of the widgets for the details."
 msgstr ""
 
-#: ../overview/style.md:206
+#: ../overview/style.md:210
 msgid "pad_top (lv_style_int_t): Set the padding on the top."
 msgstr ""
 
-#: ../overview/style.md:207
+#: ../overview/style.md:211
 msgid "pad_bottom (lv_style_int_t): Set the padding on the bottom."
 msgstr ""
 
-#: ../overview/style.md:208
+#: ../overview/style.md:212
 msgid "pad_left (lv_style_int_t): Set the padding on the left."
 msgstr ""
 
-#: ../overview/style.md:209
+#: ../overview/style.md:213
 msgid "pad_right (lv_style_int_t): Set the padding on the right."
 msgstr ""
 
-#: ../overview/style.md:210
+#: ../overview/style.md:214
 msgid ""
 "pad_inner (lv_style_int_t): Set the padding inside the object between "
 "children."
 msgstr ""
 
-#: ../overview/style.md:211
+#: ../overview/style.md:215
 msgid "margin_top (lv_style_int_t): Set the margin on the top."
 msgstr ""
 
-#: ../overview/style.md:212
+#: ../overview/style.md:216
 msgid "margin_bottom (lv_style_int_t): Set the margin on the bottom."
 msgstr ""
 
-#: ../overview/style.md:213
+#: ../overview/style.md:217
 msgid "margin_left (lv_style_int_t): Set the margin on the left."
 msgstr ""
 
-#: ../overview/style.md:214
+#: ../overview/style.md:218
 msgid "margin_right (lv_style_int_t): Set the margin on the right."
 msgstr ""
 
-#: ../overview/style.md:216
+#: ../overview/style.md:220
 msgid "Background properties"
 msgstr ""
 
-#: ../overview/style.md:217
+#: ../overview/style.md:221
 msgid ""
 "The background is a simple rectangle which can have gradient and radius "
 "rounding."
 msgstr ""
 
-#: ../overview/style.md:218
+#: ../overview/style.md:222
 msgid ""
 "bg_color (lv_color_t) Specifies the color of the background. Default "
 "value: LV_COLOR_WHITE"
 msgstr ""
 
-#: ../overview/style.md:219
+#: ../overview/style.md:223
 msgid ""
 "bg_opa (lv_opa_t) Specifies opacity of the background. Default value: "
 "LV_OPA_TRANSP."
 msgstr ""
 
-#: ../overview/style.md:220
+#: ../overview/style.md:224
 msgid ""
 "bg_grad_color (lv_color_t) Specifies the color of the background's "
 "gradient. The color on the right or bottom is bg_grad_dir != "
 "LV_GRAD_DIR_NONE. Default value: LV_COLOR_WHITE."
 msgstr ""
 
-#: ../overview/style.md:221
+#: ../overview/style.md:225
 msgid ""
 "bg_main_stop (uint8_t): Specifies where should the gradient start. 0: at "
 "left/top most position, 255: at right/bottom most position."
 msgstr ""
 
-#: ../overview/style.md:222
+#: ../overview/style.md:226
 msgid ""
 "bg_grad_stop (uint8_t): Specifies where should the gradient start. 0: at "
 "left/top most position, 255: at right/bottom most position. Default "
 "value: 255."
 msgstr ""
 
-#: ../overview/style.md:223
+#: ../overview/style.md:227
 msgid ""
 "bg_grad_dir (lv_grad_dir_t) Specifies the direction of the gradient. Can "
 "be LV_GRAD_DIR_NONE/HOR/VER. Default value: LV_GRAD_DIR_NONE."
 msgstr ""
 
-#: ../overview/style.md:224
+#: ../overview/style.md:228
 msgid ""
 "bg_blend_mode (lv_blend_mode_t): Set the blend mode the background. Can "
 "be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:234
+#: ../overview/style.md:238
 msgid "Border properties"
 msgstr ""
 
-#: ../overview/style.md:235
+#: ../overview/style.md:239
 msgid "The border is drawn on top of the background. It has radius rounding."
 msgstr ""
 
-#: ../overview/style.md:236
+#: ../overview/style.md:240
 msgid "border_color (lv_color_t) Specifies the color of the border."
 msgstr ""
 
-#: ../overview/style.md:237
+#: ../overview/style.md:241
 msgid "border_opa (lv_opa_t) Specifies opacity of the border."
 msgstr ""
 
-#: ../overview/style.md:238
+#: ../overview/style.md:242
 msgid "border_width (lv_style_int_t): Set the width of the border."
 msgstr ""
 
-#: ../overview/style.md:239
+#: ../overview/style.md:243
 msgid ""
 "border_side (lv_border_side_t) Specifies which sides of the border to "
 "draw. Can be LV_BORDER_SIDE_NONE/LEFT/RIGHT/TOP/BOTTOM/FULL. ORed values "
 "are also possible. Default value: LV_BORDER_SIDE_FULL."
 msgstr ""
 
-#: ../overview/style.md:240
+#: ../overview/style.md:244
 msgid ""
 "border_post (bool): If true the border will be drawn after all children "
 "have been drawn."
 msgstr ""
 
-#: ../overview/style.md:241
+#: ../overview/style.md:245
 msgid ""
 "border_blend_mode (lv_blend_mode_t): Set the blend mode of the border. "
 "Can be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:251
+#: ../overview/style.md:255
 msgid "Outline properties"
 msgstr ""
 
-#: ../overview/style.md:252
+#: ../overview/style.md:256
 msgid "The outline is similar to border but is drawn outside of the object."
 msgstr ""
 
-#: ../overview/style.md:253
+#: ../overview/style.md:257
 msgid "outline_color (lv_color_t) Specifies the color of the outline."
 msgstr ""
 
-#: ../overview/style.md:254
+#: ../overview/style.md:258
 msgid "outline_opa (lv_opa_t) Specifies opacity of the outline."
 msgstr ""
 
-#: ../overview/style.md:255
+#: ../overview/style.md:259
 msgid "outline_width (lv_style_int_t): Set the width of the outline."
 msgstr ""
 
-#: ../overview/style.md:256
+#: ../overview/style.md:260
 msgid ""
 "outline_pad (lv_style_int_t) Set the space between the object and the "
 "outline."
 msgstr ""
 
-#: ../overview/style.md:257
+#: ../overview/style.md:261
 msgid ""
 "outline_blend_mode (lv_blend_mode_t): Set the blend mode of the outline. "
 "Can be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:267
+#: ../overview/style.md:271
 msgid "Shadow properties"
 msgstr ""
 
-#: ../overview/style.md:268
+#: ../overview/style.md:272
 msgid "The shadow is a blurred area under the object."
 msgstr ""
 
-#: ../overview/style.md:269
+#: ../overview/style.md:273
 msgid "shadow_color (lv_color_t) Specifies the color of the shadow."
 msgstr ""
 
-#: ../overview/style.md:270
+#: ../overview/style.md:274
 msgid "shadow_opa (lv_opa_t) Specifies opacity of the shadow."
 msgstr ""
 
-#: ../overview/style.md:271
+#: ../overview/style.md:275
 msgid "shadow_width (lv_style_int_t): Set the width (blur size) of the outline."
 msgstr ""
 
-#: ../overview/style.md:272
+#: ../overview/style.md:276
 msgid "shadow_ofs_x (lv_style_int_t): Set the an X offset for the shadow."
 msgstr ""
 
-#: ../overview/style.md:273
+#: ../overview/style.md:277
 msgid "shadow_ofs_y (lv_style_int_t): Set the an Y offset for the shadow."
 msgstr ""
 
-#: ../overview/style.md:274
+#: ../overview/style.md:278
 msgid ""
 "shadow_spread (lv_style_int_t): make the shadow larger than the "
 "background in every direction by this value."
 msgstr ""
 
-#: ../overview/style.md:275
+#: ../overview/style.md:279
 msgid ""
 "shadow_blend_mode (lv_blend_mode_t): Set the blend mode of the shadow. "
 "Can be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:285
+#: ../overview/style.md:289
 msgid "Pattern properties"
 msgstr ""
 
-#: ../overview/style.md:286
+#: ../overview/style.md:290
 msgid ""
 "The pattern is an image (or symbol) drawn in the middle of the background"
 " or repeated to fill the whole background."
 msgstr ""
 
-#: ../overview/style.md:287
+#: ../overview/style.md:291
 msgid ""
 "pattern_image (const void *): Pointer to an lv_img_dsc_t variable, a path"
 " to an image file or a symbol."
 msgstr ""
 
-#: ../overview/style.md:288
+#: ../overview/style.md:292
 msgid "pattern_opa (lv_opa_t): Specifies opacity of the pattern."
 msgstr ""
 
-#: ../overview/style.md:289
+#: ../overview/style.md:293
 msgid ""
 "pattern_recolor (lv_color_t): Mix this color to the pattern image. In "
 "case of symbols (texts) it will be the text color."
 msgstr ""
 
-#: ../overview/style.md:290
+#: ../overview/style.md:294
 msgid ""
 "pattern_recolor_opa (lv_opa_t): Intensity of recoloring. Default value: "
 "LV_OPA_TRANSP (no recoloring)."
 msgstr ""
 
-#: ../overview/style.md:291
+#: ../overview/style.md:295
 msgid ""
 "pattern_repeat (bool): true: the pattern will be repeated as a mosaic. "
 "false: place the pattern in the middle of the background."
 msgstr ""
 
-#: ../overview/style.md:292
+#: ../overview/style.md:296
 msgid ""
 "pattern_blend_mode (lv_blend_mode_t): Set the blend mode of the pattern. "
 "Can be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:302
+#: ../overview/style.md:306
 msgid "Value properties"
 msgstr ""
 
-#: ../overview/style.md:303
+#: ../overview/style.md:307
 msgid ""
 "Value is an arbitrary text drawn to the background. It can be a "
 "lightweighted replacement of creating label objects."
 msgstr ""
 
-#: ../overview/style.md:305
+#: ../overview/style.md:309
 msgid ""
 "value_str (const char *): Pointer to text to display. Only the pointer is"
 " saved! (Don't use local variable with lv_style_set_value_str, instead "
 "use static, global or dynamically allocated data)."
 msgstr ""
 
-#: ../overview/style.md:306
+#: ../overview/style.md:310
 msgid "value_color (lv_color_t): Color of the text."
 msgstr ""
 
-#: ../overview/style.md:307
+#: ../overview/style.md:311
 msgid "value_opa (lv_opa_t): Opacity of the text."
 msgstr ""
 
-#: ../overview/style.md:308
+#: ../overview/style.md:312
 msgid "value_font (const lv_font_t *): Pointer to font of the text."
 msgstr ""
 
-#: ../overview/style.md:309
+#: ../overview/style.md:313
 msgid "value_letter_space (lv_style_int_t): Letter space of the text."
 msgstr ""
 
-#: ../overview/style.md:310
+#: ../overview/style.md:314
 msgid "value_line_space (lv_style_int_t): Line space of the text."
 msgstr ""
 
-#: ../overview/style.md:311
+#: ../overview/style.md:315
 msgid "value_align (lv_align_t): Alignment of the text. Can be LV_ALIGN_...."
 msgstr ""
 
-#: ../overview/style.md:312
+#: ../overview/style.md:316
 msgid ""
 "value_ofs_x (lv_style_int_t): X offset from the original position of the "
 "alignment."
 msgstr ""
 
-#: ../overview/style.md:313
+#: ../overview/style.md:317
 msgid ""
 "value_ofs_y (lv_style_int_t): Y offset from the original position of the "
 "alignment."
 msgstr ""
 
-#: ../overview/style.md:314
+#: ../overview/style.md:318
 msgid ""
 "value_blend_mode (lv_blend_mode_t): Set the blend mode of the text. Can "
 "be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:324
+#: ../overview/style.md:328
 msgid "Text properties"
 msgstr ""
 
-#: ../overview/style.md:325
+#: ../overview/style.md:329
 msgid "Properties for textual object."
 msgstr ""
 
-#: ../overview/style.md:326
+#: ../overview/style.md:330
 msgid "text_color (lv_color_t): Color of the text."
 msgstr ""
 
-#: ../overview/style.md:327
+#: ../overview/style.md:331
 msgid "text_opa (lv_opa_t): Opacity of the text."
 msgstr ""
 
-#: ../overview/style.md:328
+#: ../overview/style.md:332
 msgid "text_font (const lv_font_t *): Pointer to font of the text."
 msgstr ""
 
-#: ../overview/style.md:329
+#: ../overview/style.md:333
 msgid "text_letter_space (lv_style_int_t): Letter space of the text."
 msgstr ""
 
-#: ../overview/style.md:330
+#: ../overview/style.md:334
 msgid "text_line_space (lv_style_int_t): Line space of the text."
 msgstr ""
 
-#: ../overview/style.md:331
+#: ../overview/style.md:335
 msgid ""
 "text_decor (lv_text_decor_t): Add text decoration. Can be "
 "LV_TEXT_DECOR_NONE/UNDERLINE/STRIKETHROUGH."
 msgstr ""
 
-#: ../overview/style.md:332
+#: ../overview/style.md:336
 msgid "text_sel_color (lv_color_t): Set background color of text selection."
 msgstr ""
 
-#: ../overview/style.md:333
+#: ../overview/style.md:337
 msgid ""
 "text_blend_mode (lv_blend_mode_t): Set the blend mode of the text. Can be"
 " LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:343
+#: ../overview/style.md:347
 msgid "Line properties"
 msgstr ""
 
-#: ../overview/style.md:344
+#: ../overview/style.md:348
 msgid "Properties of lines."
 msgstr ""
 
-#: ../overview/style.md:345
+#: ../overview/style.md:349
 msgid "line_color (lv_color_t): Color of the line."
 msgstr ""
 
-#: ../overview/style.md:346
+#: ../overview/style.md:350
 msgid "line_opa (lv_opa_t): Opacity of the line."
 msgstr ""
 
-#: ../overview/style.md:347
+#: ../overview/style.md:351
 msgid "line_width (lv_style_int_t): Width of the line."
 msgstr ""
 
-#: ../overview/style.md:348
+#: ../overview/style.md:352
 msgid ""
 "line_dash_width (lv_style_int_t): Width of dash. Dashing is drawn only "
 "for horizontal or vertical lines. 0: disable dash."
 msgstr ""
 
-#: ../overview/style.md:349
+#: ../overview/style.md:353
 msgid ""
 "line_dash_gap (lv_style_int_t): Gap between two dash line. Dashing is "
 "drawn only for horizontal or vertical lines. 0: disable dash."
 msgstr ""
 
-#: ../overview/style.md:350
+#: ../overview/style.md:354
 msgid "line_rounded (bool): true: draw rounded line endings."
 msgstr ""
 
-#: ../overview/style.md:351
+#: ../overview/style.md:355
 msgid ""
 "line_blend_mode (lv_blend_mode_t): Set the blend mode of the line. Can be"
 " LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:361
+#: ../overview/style.md:365
 msgid "Image properties"
 msgstr ""
 
-#: ../overview/style.md:362
+#: ../overview/style.md:366
 msgid "Properties of image."
 msgstr ""
 
-#: ../overview/style.md:363
+#: ../overview/style.md:367
 msgid ""
 "image_recolor (lv_color_t):  Mix this color to the pattern image. In case"
 " of symbols (texts) it will be the text color."
 msgstr ""
 
-#: ../overview/style.md:364
+#: ../overview/style.md:368
 msgid ""
 "image_recolor_opa (lv_opa_t): Intensity of recoloring. Default value: "
 "LV_OPA_TRANSP (no recoloring)."
 msgstr ""
 
-#: ../overview/style.md:365
+#: ../overview/style.md:369
 msgid "image_opa (lv_opa_t): Opacity of the image."
 msgstr ""
 
-#: ../overview/style.md:366
+#: ../overview/style.md:370
 msgid ""
 "image_blend_mode (lv_blend_mode_t): Set the blend mode of the image. Can "
 "be LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE). Default value: "
 "LV_BLEND_MODE_NORMAL."
 msgstr ""
 
-#: ../overview/style.md:376
+#: ../overview/style.md:380
 msgid "Transition properties"
 msgstr ""
 
-#: ../overview/style.md:377
+#: ../overview/style.md:381
 msgid "Properties to describe state change animations."
 msgstr ""
 
-#: ../overview/style.md:378
+#: ../overview/style.md:382
 msgid "transition_time (lv_style_int_t): Time of the transition."
 msgstr ""
 
-#: ../overview/style.md:379
+#: ../overview/style.md:383
 msgid "transition_delay (lv_style_int_t): Delay before the transition."
 msgstr ""
 
-#: ../overview/style.md:380
+#: ../overview/style.md:384
 msgid ""
 "transition_prop_1 (property name): A property on which transition should "
 "be applied. Use the property name with upper case with LV_STYLE_ prefix, "
 "e.g. LV_STYLE_BG_COLOR"
 msgstr ""
 
-#: ../overview/style.md:381
+#: ../overview/style.md:385
 msgid ""
 "transition_prop_2 (property name): Same as transition_1 just for another "
 "property."
 msgstr ""
 
-#: ../overview/style.md:382
+#: ../overview/style.md:386
 msgid ""
 "transition_prop_3 (property name): Same as transition_1 just for another "
 "property."
 msgstr ""
 
-#: ../overview/style.md:383
+#: ../overview/style.md:387
 msgid ""
 "transition_prop_4 (property name): Same as transition_1 just for another "
 "property."
 msgstr ""
 
-#: ../overview/style.md:384
+#: ../overview/style.md:388
 msgid ""
 "transition_prop_5 (property name): Same as transition_1 just for another "
 "property."
 msgstr ""
 
-#: ../overview/style.md:385
+#: ../overview/style.md:389
 msgid ""
 "transition_prop_6 (property name): Same as transition_1 just for another "
 "property."
 msgstr ""
 
-#: ../overview/style.md:386
+#: ../overview/style.md:390
 msgid ""
 "transition_path (lv_anim_path_t): An animation path for the transition. "
 "(Needs to be static or global variable because only its pointer is "
 "saved)."
 msgstr ""
 
-#: ../overview/style.md:396
+#: ../overview/style.md:400
 msgid "Scale properties"
 msgstr ""
 
-#: ../overview/style.md:397
+#: ../overview/style.md:401
 msgid ""
 "Auxiliary properties for scale-like elements. Scales have a normal and "
 "end region. As the name implies the end region is the end of the scale "
@@ -4366,139 +4376,139 @@ msgid ""
 "before the end region. Both regions could have different properties."
 msgstr ""
 
-#: ../overview/style.md:400
+#: ../overview/style.md:404
 msgid ""
 "scale_grad_color (lv_color_t):  In normal region make gradient to this "
 "color on the scale lines."
 msgstr ""
 
-#: ../overview/style.md:401
+#: ../overview/style.md:405
 msgid "scale_end_color (lv_color_t):  Color of the scale lines in the end region."
 msgstr ""
 
-#: ../overview/style.md:402
+#: ../overview/style.md:406
 msgid ""
 "scale_width (lv_style_int_t): Width of the scale. Default value: LV_DPI /"
 " 8."
 msgstr ""
 
-#: ../overview/style.md:403
+#: ../overview/style.md:407
 msgid ""
 "scale_border_width (lv_style_int_t): Width of a border drawn on the outer"
 " side of the scale in the normal region."
 msgstr ""
 
-#: ../overview/style.md:404
+#: ../overview/style.md:408
 msgid ""
 "scale_end_border_width (lv_style_int_t): Width of a border drawn on the "
 "outer side of the scale in the end region."
 msgstr ""
 
-#: ../overview/style.md:405
+#: ../overview/style.md:409
 msgid ""
 "scale_end_line_width (lv_style_int_t): Width of a scale lines in the end "
 "region."
 msgstr ""
 
-#: ../overview/style.md:415
+#: ../overview/style.md:419
 msgid ""
 "It the documentation of the widgets you will see sentences like \"The "
 "widget use the typical background properties\". The \"typical "
 "background\" properties are:"
 msgstr ""
 
-#: ../overview/style.md:417
+#: ../overview/style.md:421
 msgid "Border"
 msgstr ""
 
-#: ../overview/style.md:418
+#: ../overview/style.md:422
 msgid "Outline"
 msgstr ""
 
-#: ../overview/style.md:419
+#: ../overview/style.md:423
 msgid "Shadow"
 msgstr ""
 
-#: ../overview/style.md:420
+#: ../overview/style.md:424
 msgid "Pattern"
 msgstr ""
 
-#: ../overview/style.md:421
+#: ../overview/style.md:425
 msgid "Value"
 msgstr ""
 
-#: ../overview/style.md:423
+#: ../overview/style.md:427
 msgid "Themes"
 msgstr ""
 
-#: ../overview/style.md:424
+#: ../overview/style.md:428
 msgid ""
 "Themes are a collection of styles. There is always an active theme whose "
 "styles are automatically applied when an object is created. It gives a "
 "default appearance to UI which can be modified by adding further styles."
 msgstr ""
 
-#: ../overview/style.md:427
+#: ../overview/style.md:431
 msgid ""
 "The default theme is set in lv_conf.h with LV_THEME_... defines. Every "
 "theme has the following properties"
 msgstr ""
 
-#: ../overview/style.md:428
+#: ../overview/style.md:432
 msgid "primary color"
 msgstr ""
 
-#: ../overview/style.md:429
+#: ../overview/style.md:433
 msgid "secondary color"
 msgstr ""
 
-#: ../overview/style.md:430
+#: ../overview/style.md:434
 msgid "small font"
 msgstr ""
 
-#: ../overview/style.md:431
+#: ../overview/style.md:435
 msgid "normal font"
 msgstr ""
 
-#: ../overview/style.md:432
+#: ../overview/style.md:436
 msgid "subtitle font"
 msgstr ""
 
-#: ../overview/style.md:433
+#: ../overview/style.md:437
 msgid "title font"
 msgstr ""
 
-#: ../overview/style.md:434
+#: ../overview/style.md:438
 msgid "flags (specific to the given theme)"
 msgstr ""
 
-#: ../overview/style.md:436
+#: ../overview/style.md:440
 msgid "It up to the theme how to use these properties."
 msgstr ""
 
-#: ../overview/style.md:438
+#: ../overview/style.md:442
 msgid "There are 3 built-in themes:"
 msgstr ""
 
-#: ../overview/style.md:439
+#: ../overview/style.md:443
 msgid "empty: no default styles are added"
 msgstr ""
 
-#: ../overview/style.md:440
+#: ../overview/style.md:444
 msgid ""
 "material: an impressive, modern theme - mono: simple black and white "
 "theme for monochrome displays"
 msgstr ""
 
-#: ../overview/style.md:441
+#: ../overview/style.md:445
 msgid "template: a very simple theme which can be copied to create a custom theme"
 msgstr ""
 
-#: ../overview/style.md:443
+#: ../overview/style.md:447
 msgid "Example"
 msgstr ""
 
-#: ../overview/style.md:445
+#: ../overview/style.md:449
 msgid "Styling a button"
 msgstr ""
 
@@ -4535,10 +4545,6 @@ msgstr ""
 
 #: ../overview/task.md:16
 msgid "A task callback should have void (*lv_task_cb_t)(lv_task_t *); prototype."
-msgstr ""
-
-#: ../overview/task.md:18 ../overview/task.md:67
-msgid "For example:"
 msgstr ""
 
 #: ../overview/task.md:40
@@ -4853,5 +4859,17 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "For a moew detaild description read the Style section."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "To get the value from style in "
+#~ "a state functions with the following "
+#~ "prototype are available: "
+#~ "lv_style_get_<prperty_name>(&style, <state>, <result "
+#~ "poiner>);. The the best matching "
+#~ "property will be selected and it's "
+#~ "precedence will be returned. -1 will "
+#~ "be returned if the property is not"
+#~ " found. For example:"
 #~ msgstr ""
 
