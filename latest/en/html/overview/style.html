@@ -737,6 +737,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../widgets/gauge.html#set-value-and-needles">Set value and needles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/gauge.html#scale">Scale</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/gauge.html#range">Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/gauge.html#needle-image">Needle image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/gauge.html#critical-value">Critical value</a></li>
 </ul>
 </li>
@@ -1427,11 +1428,13 @@ For example the <a class="reference external" href="#states">above mentioned</a>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_style_remove_prop</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="n">LV_STYLE_BG_COLOR</span> <span class="o">|</span> <span class="p">(</span><span class="n">LV_STATE_PRESSED</span> <span class="o">&lt;&lt;</span> <span class="n">LV_STYLE_STATE_POS</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>To get the value from style in a state functions with the following prototype are available: <code class="docutils literal notranslate"><span class="pre">lv_style_get_&lt;prperty_name&gt;(&amp;style,</span> <span class="pre">&lt;state&gt;,</span> <span class="pre">&lt;result</span> <span class="pre">poiner&gt;);</span></code>.
-The the best matching property will be selected and it's precedence will be returned. <code class="docutils literal notranslate"><span class="pre">-1</span></code> will be returned if the property is not found. For example:</p>
+<p>To get the value from style in a given state functions with the following prototype are available: <code class="docutils literal notranslate"><span class="pre">_lv_style_get_color/int/opa/ptr(&amp;style,</span> <span class="pre">&lt;prop&gt;,</span> <span class="pre">&lt;result</span> <span class="pre">buf&gt;);</span></code>.
+The best matching property will be selected and it's precedence will be returned. <code class="docutils literal notranslate"><span class="pre">-1</span></code> will be returned if the property is not found.</p>
+<p>The form of the function (<code class="docutils literal notranslate"><span class="pre">...color/int/opa/ptr</span></code>) should beused according to the type of <code class="docutils literal notranslate"><span class="pre">&lt;prop&gt;</span></code>.</p>
+<p>For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_color_t</span> <span class="n">color</span><span class="p">;</span>
 <span class="kt">int16_t</span> <span class="n">res</span><span class="p">;</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">lv_style_get_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style1</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">color</span><span class="p">);</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">_lv_style_get_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style1</span><span class="p">,</span>  <span class="n">LV_STYLE_BG_COLOR</span> <span class="o">|</span> <span class="p">(</span><span class="n">LV_STATE_PRESSED</span> <span class="o">&lt;&lt;</span> <span class="n">LV_STYLE_STATE_POS</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">color</span><span class="p">);</span>
 <span class="k">if</span><span class="p">(</span><span class="n">res</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">//the bg_color is loaded into `color`</span>
 <span class="p">}</span>
@@ -2169,7 +2172,7 @@ It gives a default appearance to UI which can be modified by adding further styl
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jul 28, 2020.
+        Last updated on Aug 02, 2020.
       </span>
 
     </p>
