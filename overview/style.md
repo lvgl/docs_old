@@ -123,13 +123,17 @@ To remove a property use:
 lv_style_remove_prop(&style, LV_STYLE_BG_COLOR | (LV_STATE_PRESSED << LV_STYLE_STATE_POS));
 ```
 
-To get the value from style in a state functions with the following prototype are available: `lv_style_get_<prperty_name>(&style, <state>, <result poiner>);`.
-The the best matching property will be selected and it's precedence will be returned. `-1` will be returned if the property is not found. For example:
+To get the value from style in a given state functions with the following prototype are available: `_lv_style_get_color/int/opa/ptr(&style, <prop>, <result buf>);`.
+The best matching property will be selected and it's precedence will be returned. `-1` will be returned if the property is not found. 
+
+The form of the function (`...color/int/opa/ptr`) should beused according to the type of `<prop>`.
+
+For example:
 
 ```c
 lv_color_t color;
 int16_t res;
-res = lv_style_get_bg_color(&style1, LV_STATE_PRESSED, &color);
+res = _lv_style_get_color(&style1,  LV_STYLE_BG_COLOR | (LV_STATE_PRESSED << LV_STYLE_STATE_POS), &color);
 if(res >= 0) {
   //the bg_color is loaded into `color`
 }
@@ -206,15 +210,15 @@ The following properties can be used in the styles.
 These properties are typically used by [Container](/widgets/cont) object if [layout](/widgets/cont#layout) or 
 [auto fit](/widgets/cont#auto-fit) is enabled. 
 However other widgets also use them to set spacing. See the documentation of the widgets for the details. 
- - **pad_top** (`lv_style_int_t`): Set the padding on the top.
- - **pad_bottom** (`lv_style_int_t`): Set the padding on the bottom.
- - **pad_left** (`lv_style_int_t`): Set the padding on the left.
- - **pad_right** (`lv_style_int_t`): Set the padding on the right.
- - **pad_inner** (`lv_style_int_t`): Set the padding inside the object between children.
- - **margin_top** (`lv_style_int_t`): Set the margin on the top.
- - **margin_bottom** (`lv_style_int_t`): Set the margin on the bottom.
- - **margin_left** (`lv_style_int_t`): Set the margin on the left.
- - **margin_right** (`lv_style_int_t`): Set the margin on the right.
+- **pad_top** (`lv_style_int_t`): Set the padding on the top.
+- **pad_bottom** (`lv_style_int_t`): Set the padding on the bottom.
+- **pad_left** (`lv_style_int_t`): Set the padding on the left.
+- **pad_right** (`lv_style_int_t`): Set the padding on the right.
+- **pad_inner** (`lv_style_int_t`): Set the padding inside the object between children.
+- **margin_top** (`lv_style_int_t`): Set the margin on the top.
+- **margin_bottom** (`lv_style_int_t`): Set the margin on the bottom.
+- **margin_left** (`lv_style_int_t`): Set the margin on the left.
+- **margin_right** (`lv_style_int_t`): Set the margin on the right.
 
 ### Background properties
 The background is a simple rectangle which can have gradient and `radius` rounding.
@@ -235,12 +239,12 @@ The background is a simple rectangle which can have gradient and `radius` roundi
 ```
 
 ### Border properties
-The border in drawn on to of the *background*. It has `radius` rounding.
+The border is drawn on top of the *background*. It has `radius` rounding.
 - **border_color** (`lv_color_t`) Specifies the color of the border. 
 - **border_opa** (`lv_opa_t`) Specifies opacity of the border.
 - **border_width** (`lv_style_int_t`): Set the width of the border.
 - **border_side** (`lv_border_side_t`) Specifies which sides of the border to draw. Can be `LV_BORDER_SIDE_NONE/LEFT/RIGHT/TOP/BOTTOM/FULL`. ORed values are also possible. Default value: `LV_BORDER_SIDE_FULL`.
-- **border_post** (`bool`): If `true` the border will be drawn all children has been drawn.
+- **border_post** (`bool`): If `true` the border will be drawn after all children have been drawn.
 - **border_blend_mode** (`lv_blend_mode_t`): Set the blend mode of the border. Can be `LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE`). Default value: `LV_BLEND_MODE_NORMAL`.
 
 ```eval_rst
@@ -274,7 +278,7 @@ The shadow is a blurred area under the object.
 - **shadow_width** (`lv_style_int_t`): Set the width (blur size) of the outline.
 - **shadow_ofs_x** (`lv_style_int_t`): Set the an X offset for the shadow.
 - **shadow_ofs_y** (`lv_style_int_t`): Set the an Y offset for the shadow.
-- **shadow_spread** (`lv_style_int_t`): ake the shadow larger than the background in every direction by this value.
+- **shadow_spread** (`lv_style_int_t`): make the shadow larger than the background in every direction by this value.
 - **shadow_blend_mode** (`lv_blend_mode_t`): Set the blend mode of the shadow. Can be `LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE`). Default value: `LV_BLEND_MODE_NORMAL`.
 
 ```eval_rst
@@ -305,7 +309,7 @@ The pattern is an image (or symbol) drawn in the middle of the background or rep
 ### Value properties
 Value is an arbitrary text drawn to the background. It can be a lightweighted replacement of creating label objects.
 
-- **value_str** (`const char *`): Pointer to text to display. Only the pointer is saved.
+- **value_str** (`const char *`): Pointer to text to display. Only the pointer is saved! (Don't use local variable with lv_style_set_value_str, instead use static, global or dynamically allocated data).
 - **value_color** (`lv_color_t`): Color of the text. 
 - **value_opa** (`lv_opa_t`): Opacity of the text.
 - **value_font** (`const lv_font_t *`): Pointer to font of the text.
@@ -380,12 +384,12 @@ Properties of image.
 Properties to describe state change animations.
 - **transition_time** (`lv_style_int_t`): Time of the transition.
 - **transition_delay** (`lv_style_int_t`): Delay before the transition.
-- **transition_1** (`property name`): A property on which transition should be applied. Use the property name with upper case with `LV_STYLE_` prefix, e.g. `LV_STYLE_BG_COLOR`
-- **transition_2** (`property name`): Same as *transition_1* just for an other property.
-- **transition_3** (`property name`): Same as *transition_1* just for an other property.
-- **transition_4** (`property name`): Same as *transition_1* just for an other property.
-- **transition_5** (`property name`): Same as *transition_1* just for an other property.
-- **transition_6** (`property name`): Same as *transition_1* just for an other property.
+- **transition_prop_1** (`property name`): A property on which transition should be applied. Use the property name with upper case with `LV_STYLE_` prefix, e.g. `LV_STYLE_BG_COLOR`
+- **transition_prop_2** (`property name`): Same as *transition_1* just for another property.
+- **transition_prop_3** (`property name`): Same as *transition_1* just for another property.
+- **transition_prop_4** (`property name`): Same as *transition_1* just for another property.
+- **transition_prop_5** (`property name`): Same as *transition_1* just for another property.
+- **transition_prop_6** (`property name`): Same as *transition_1* just for another property.
 - **transition_path** (`lv_anim_path_t`): An animation path for the transition. (Needs to be static or global variable because only its pointer is saved).
 
 ```eval_rst
