@@ -447,6 +447,43 @@ There are 3 built-in themes:
 - material: an impressive, modern theme - mono: simple black and white theme for monochrome displays
 - template: a very simple theme which can be copied to create a custom theme 
 
+### Extending themes
+
+Built-in themes can be extended by custom theme. If a custom theme is created a "base theme" can be selected. The base theme's styles will be added before the custom theme. Any number of themes can be chained this was. E.g. material theme -> custom theme -> dark theme.
+
+Here is an example about how to create a custom theme based on the currently active built-in theme.
+```c
+ /*Get the current theme (e.g. material). It will be the base of the custom theme.*/   
+lv_theme_t * base_theme = lv_theme_get_act();
+
+/*Initialize a custom theme*/
+static lv_theme_t custom_theme;                         /*Declare a theme*/
+lv_theme_copy(&custom_theme, )base_theme;               /*Initialize the custom theme from the base theme*/                           
+lv_theme_set_apply_cb(&custom_theme, custom_apply_cb);  /*Set a custom theme apply callback*/
+lv_theme_set_base(custom_theme, base_theme);            /*Set the base theme of the csutom theme*/
+
+/*Initialize styles for the new theme*/
+static lv_style_t style1;
+lv_style_init(&style1);
+lv_style_set_bg_color(&style1, LV_STATE_DEFAULT, custom_theme.color_primary);
+
+...
+
+/*Add a custom apply callback*/
+static void custom_apply_cb(lv_theme_t * th, lv_obj_t * obj, lv_theme_style_t name)
+{
+    lv_style_list_t * list;
+
+    switch(name) {
+        case LV_THEME_BTN:
+            list = lv_obj_get_style_list(obj, LV_BTN_PART_MAIN);
+            _lv_style_list_add_style(list, &my_style);
+            break;
+    }
+}
+```
+
+
 
 ## Example
 

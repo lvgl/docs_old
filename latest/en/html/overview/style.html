@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.3.0-dev
+                v7.3.1-dev
               </div>
             
           
@@ -333,7 +333,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#scale-properties">Scale properties</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#themes">Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#themes">Themes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#extending-themes">Extending themes</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#styling-a-button">Styling a button</a></li>
 </ul>
@@ -2056,6 +2059,41 @@ It gives a default appearance to UI which can be modified by adding further styl
 <li><p>material: an impressive, modern theme - mono: simple black and white theme for monochrome displays</p></li>
 <li><p>template: a very simple theme which can be copied to create a custom theme</p></li>
 </ul>
+<div class="section" id="extending-themes">
+<h3>Extending themes<a class="headerlink" href="#extending-themes" title="Permalink to this headline">¶</a></h3>
+<p>Built-in themes can be extended by custom theme. If a custom theme is created a &quot;base theme&quot; can be selected. The base theme's styles will be added before the custom theme. Any number of themes can be chained this was. E.g. material theme -&gt; custom theme -&gt; dark theme.</p>
+<p>Here is an example about how to create a custom theme based on the currently active built-in theme.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span> <span class="cm">/*Get the current theme (e.g. material). It will be the base of the custom theme.*/</span>   
+<span class="n">lv_theme_t</span> <span class="o">*</span> <span class="n">base_theme</span> <span class="o">=</span> <span class="n">lv_theme_get_act</span><span class="p">();</span>
+
+<span class="cm">/*Initialize a custom theme*/</span>
+<span class="k">static</span> <span class="n">lv_theme_t</span> <span class="n">custom_theme</span><span class="p">;</span>                         <span class="cm">/*Declare a theme*/</span>
+<span class="n">lv_theme_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">custom_theme</span><span class="p">,</span> <span class="p">)</span><span class="n">base_theme</span><span class="p">;</span>               <span class="cm">/*Initialize the custom theme from the base theme*/</span>                           
+<span class="n">lv_theme_set_apply_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">custom_theme</span><span class="p">,</span> <span class="n">custom_apply_cb</span><span class="p">);</span>  <span class="cm">/*Set a custom theme apply callback*/</span>
+<span class="n">lv_theme_set_base</span><span class="p">(</span><span class="n">custom_theme</span><span class="p">,</span> <span class="n">base_theme</span><span class="p">);</span>            <span class="cm">/*Set the base theme of the csutom theme*/</span>
+
+<span class="cm">/*Initialize styles for the new theme*/</span>
+<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style1</span><span class="p">;</span>
+<span class="n">lv_style_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style1</span><span class="p">);</span>
+<span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style1</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">custom_theme</span><span class="p">.</span><span class="n">color_primary</span><span class="p">);</span>
+
+<span class="p">...</span>
+
+<span class="cm">/*Add a custom apply callback*/</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="n">custom_apply_cb</span><span class="p">(</span><span class="n">lv_theme_t</span> <span class="o">*</span> <span class="n">th</span><span class="p">,</span> <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_theme_style_t</span> <span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lv_style_list_t</span> <span class="o">*</span> <span class="n">list</span><span class="p">;</span>
+
+    <span class="k">switch</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nl">LV_THEME_BTN</span><span class="p">:</span>
+            <span class="n">list</span> <span class="o">=</span> <span class="n">lv_obj_get_style_list</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">);</span>
+            <span class="n">_lv_style_list_add_style</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_style</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
@@ -2172,7 +2210,7 @@ It gives a default appearance to UI which can be modified by adding further styl
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Aug 02, 2020.
+        Last updated on Aug 06, 2020.
       </span>
 
     </p>

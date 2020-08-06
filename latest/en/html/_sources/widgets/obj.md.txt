@@ -179,7 +179,7 @@ To prevent one or more that kind of actions, you can protect the object against 
 - **LV_PROTECT_CLICK_FOCUS** Prevent automatically focusing the object if it's in a *Group* and click focus is enabled.
 - **LV_PROTECT_CHILD_CHG** Disable the child change signal. Used internally by the library
 
-The `lv_obj_set/clear_protect(obj, LV_PROTECT_...)` sets/clears the protection. You can use *'OR'ed* values of protection types too.
+The `lv_obj_add/clear_protect(obj, LV_PROTECT_...)` sets/clears the protection. You can use *'OR'ed* values of protection types too.
 
 ### Groups
 
