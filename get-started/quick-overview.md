@@ -157,7 +157,7 @@ For example `style_btn` can set a default button appearance, and `style_btn_red`
 
 Every style property you set is specific to a state. For example is you can set different background color for `LV_STATE_DEFAULT` and `LV_STATE_PRESSED`. 
 The library finds the best match between the state of the given part and the available style properties. For example if the object is in pressed state and the border width is specified for pressed state, then it will be used.
-However, if it's nt specified for pressed state, the `LV_STATE_DEFAULT`'s border width will be used. If the border width not defined for `LV_STATE_DEFAULT` either, a default value will be used.
+However, if it's not specified for pressed state, the `LV_STATE_DEFAULT`'s border width will be used. If the border width not defined for `LV_STATE_DEFAULT` either, a default value will be used.
 
 Some properties (typically the text-related ones) can be inherited. It means if a property is not set in an object it will be searched in its parents too. 
 For example you can set the font once in the screen's style and every text will inherit it by default. 
