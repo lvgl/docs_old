@@ -35,25 +35,25 @@ if len(args) >= 1:
   if "clean" in args: clean = 1
   
 lang = "en"
-  print ""
-  print "****************"
-  print "Building"
-  print "****************"
-  if clean:
-    cmd("rm -rf " + lang)
-    cmd("mkdir " + lang)
-  
-  # BUILD PDF
-  
-  # Silly workarond to include the more or less correct PDF download link in the PDF
-  cmd("cp -f " + lang +"/latex/LVGL.pdf LVGL.pdf | true")
-  cmd("BUILDDIR=\"" + lang + "\" make -j8 latex")
-  
-  # Generat PDF
-  cmd("cd " + lang + "/latex && xelatex -interaction=batchmode *.tex")
-  # Copy the result PDF to the main diractory to make it avaiable for the HTML build
-  cmd("cd " + lang + "/latex && cp -f LVGL.pdf ../../LVGL.pdf")
+print ""
+print "****************"
+print "Building"
+print "****************"
+if clean:
+  cmd("rm -rf " + lang)
+  cmd("mkdir " + lang)
 
-  # BULD HTML
-  cmd("BUILDDIR=\"" + lang + "\" make -j8 html")
-  
+# BUILD PDF
+
+# Silly workarond to include the more or less correct PDF download link in the PDF
+cmd("cp -f " + lang +"/latex/LVGL.pdf LVGL.pdf | true")
+cmd("BUILDDIR=\"" + lang + "\" make -j8 latex")
+
+# Generat PDF
+cmd("cd " + lang + "/latex && xelatex -interaction=batchmode *.tex")
+# Copy the result PDF to the main diractory to make it avaiable for the HTML build
+cmd("cd " + lang + "/latex && cp -f LVGL.pdf ../../LVGL.pdf")
+
+# BULD HTML
+cmd("BUILDDIR=\"" + lang + "\" make -j8 html")
+
