@@ -33,7 +33,7 @@ It can used e.g to put a quarter line meter into a corner or a half line meter t
 By default the Line meter's lines are activated clock-wise. It can be changed using `lv_linemeter_set_mirror(linemeter, true/false)`.
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

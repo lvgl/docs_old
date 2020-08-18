@@ -1,1 +1,1 @@
-.. |github_link_base| replace:: https://github.com/lvgl/docs/blob/latest
+.. |github_link_base| replace:: https://github.com/lvgl/docs/blob/release/v7

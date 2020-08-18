@@ -54,9 +54,6 @@ Basically, every modern controller  (which is able to drive a display( is suita
 The LVGL project (including all repositories) is licensed under [MIT license](https://github.com/lvgl/lvgl/blob/master/LICENCE.txt). 
 It means you can use it even in commercial projects.
 
-The only thing you need to do is to add a notice about you are using LVGL in your product. 
-This notice can be placed in the user guide, on your website, on an about screen, or anywhere else where users might see it.
-
 It's not mandatory but we highly appreciate it if you write a few words about your project in the [My projects](https://forum.lvgl.io/c/my-projects/10) category of the Forum or a private message from [lvgl.io](https://lvgl.io/#contact).
 
 Although you can get LVGL for free there is a huge work behind it. It's created by a group of volunteers who made it available for you in their free time.

@@ -1,6 +1,6 @@
 ```eval_rst
 .. include:: /header.rst 
-:github_url: |github_link_base|/contribution/index.md
+:github_url: |github_link_base|/contributing/index.md
 ```
 
 # Contributing
@@ -26,7 +26,7 @@ Before getting started here are some guidelines to make contribution smoother:
 - Speak about one thing in one issue or topic. It makes your post easier to find later for someone with the same question.
 - Give feedback and close the issue or mark the topic as solved if your question is answered. 
 - For non-trivial fixes and features, it's better to open an issue first to discuss the details instead of sending a pull request directly.
-- Please read and follow the [Coding style](https://github.com/lvgl/lvgl/blob/master/docs/CODING_STYLE.md) guide.
+- Please read and follow the <a href="https://github.com/lvgl/lvgl/blob/master/docs/CODING_STYLE.md">Coding style</a> guide.
 
 ## Pull request
 
@@ -59,9 +59,56 @@ It will "copy" the `lvgl` repository to your GitHub account (`https://github.com
 8. Describe what is in the update. An example code is welcome if applicable.
 9. If you need to make more changes, just update your forked `lvgl` repo with new commits. They will automatically appear in the PR.
 
+## Developer Certification of Origin (DCO)
+
+### Overview
+
+To ensure that all licensing criteria is met for all repositories of the LVGL project we apply a process called DCO (Developer's Certificate of Origin).
+
+The text of DCO can be read here: [https://developercertificate.org/](https://developercertificate.org/).
+
+By contributing to any repositories of the LVGL project you state that your contribution corresponds with the DCO.
+
+No further action is required if your contribution fulfills the DCO. If you are not sure about it feel free to ask us in a comment.
+
+### Accepted licenses and copyright notices
+
+To make the DCO easier to digest, here are some practical guides about specific cases:
+
+#### Your own work
+
+The simplest case is when the contribution is solely your own work. 
+In this case you can just send a Pull Request without worrying about any licensing issues.
+
+#### Use code from online source
+
+If the code you would like to add is based on an article, post or comment on a website (e.g. StackOverflow) the license and/or rules of that site should be followed.
+
+For example in case of StackOwerflow a notice like this can be used:
+```
+/* The original version of this code-snippet was published on StackOverflow.
+ * Post: http://stackoverflow.com/questions/12345
+ * Author: http://stackoverflow.com/users/12345/username
+ * The following parts of the snippet were changed:
+ * - Check this or that
+ * - Optimize performance here and there
+ */
+ ... code snippet here ...
+```
+
+#### Use MIT licensed code
+As LVGL is also MIT licensed other MIT licensed code can be integrated without issues.
+The MIT license requests a copyright notice be added to the derived work. So you need to copy the original work's license file or it's text to the code you want to add.
 
 
-## When you got started with LVGL
+#### Use GPL licensed code
+As GPL license is not compatible with MIT license so LVGL can not accept GPL licensed code. 
+ 
+ 
+
+
+
+## When you get started with LVGL
 
 Even if you're just getting started with LVGL there are plenty of ways to get your feet wet. Most of these options don't even require knowing a single line of code of LVGL. 
 

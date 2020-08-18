@@ -73,7 +73,7 @@ To disable this and keep the text as it is enable `lv_table_set_cell_crop(table,
 The make the Table scrollable place it on a [Page](/widgets/page)
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 
