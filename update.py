@@ -47,9 +47,9 @@ for br in br_arr:
   cmd("git clean -fd")
   
   for l in langs:
-    cmd("rm -rf " + br + "/" + l)
+    cmd("rm -rf " + urlpath + "/" + l)
   
-  cmd("cp -r ../" + tmpdir + "/. " + br + "/")
+  cmd("cp -r ../" + tmpdir + "/. " + urlpath + "/")
   cmd("git add " + urlpath)
   os.system("git ci -m 'Update " + urlpath + "'")
   
