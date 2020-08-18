@@ -40,7 +40,7 @@ The color moe be fixed (do not change with long press) using `lv_cpicker_set_col
 `lv_cpicker_set_knob_colored(cpicker, true)` make the knob to automatically show the selected color as background color.
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

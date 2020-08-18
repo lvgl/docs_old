@@ -41,7 +41,7 @@ When the Roller is scrolled and doesn't stop exactly on an option it will scroll
 The time of this scroll animation can be changed by `lv_roller_set_anim_time(roller, anim_time)`. Zero animation time means no animation.
 
 ## Events
-Besides, the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Drop down lists:
+Besides, the [Generic events](../overview/event.html#generic-events) the following [Special events](../overview/event.html#special-events) are sent by the Drop down lists:
  - **LV_EVENT_VALUE_CHANGED** sent when a new option is selected
 
 Learn more about [Events](/overview/event).

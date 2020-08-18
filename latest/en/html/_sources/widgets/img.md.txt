@@ -96,7 +96,7 @@ Note that, the real coordinates of image object won't change during transformati
 The images can be rotated with 
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 
