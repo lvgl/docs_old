@@ -16,6 +16,8 @@ def cmd(s):
     print "Exit update due to previous error"
     exit(-1)
     
+        
+cmd("git pull origin master")
     
 br_arr = sys.argv[1:]
     
