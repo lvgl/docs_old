@@ -30,7 +30,7 @@ The Spinbox's main part is called `LV_SPINBOX_PART_BG` which is a rectangle-like
 `lv_spinbox_set_step(spinbox, step)` sets the amount to increment decrement. 
 
 ## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Drop down lists:
+Besides the [Generic events](overview/event.html#generic-events) the following [Special events](overview/event#special-events) are sent by the Drop down lists:
 - **LV_EVENT_VALUE_CHANGED** sent when the value has changed. (the value is set as event data as `int32_t`)
 - **LV_EVENT_INSERT** sent by the ancestor Text area but shouldn't be used.
 
