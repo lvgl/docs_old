@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.4.0-dev
+                v7.6.0-dev
               </div>
             
           
@@ -333,7 +333,10 @@
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#scale-properties">Scale properties</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#themes">Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#themes">Themes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#extending-themes">Extending themes</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#example">Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#styling-a-button">Styling a button</a></li>
 </ul>
@@ -737,6 +740,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#set-value-and-needles">Set value and needles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#scale">Scale</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#range">Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#needle-image">Needle image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#critical-value">Critical value</a></li>
 </ul>
 </li>
@@ -1321,7 +1325,7 @@
 It also uses the <em>text</em> properties to set the style of the scale labels. <em>pad_inner</em> is used to set space between the scale lines and the scale labels.</p>
 <p><code class="docutils literal notranslate"><span class="pre">LV_GAUGE_PART_MAJOR</span></code> is a virtual part which describes the  major scale lines (where labels are added) using the <em>line</em> and <em>scale</em> style properties.</p>
 <p><code class="docutils literal notranslate"><span class="pre">LV_GAUGE_PART_NEEDLE</span></code> is also virtual part and it describes the needle(s) via the <em>line</em> style properties.
-<em>size</em> and the typical background properties are used to describe a rectangle (or circle) in the picot point of the needle(s).
+The <em>size</em> and the typical background properties are used to describe a rectangle (or circle) in the pivot point of the needle(s).
 <em>pad_inner</em> is used to to make the needle(s) smaller than the outer radius of the scale lines.</p>
 </div>
 <div class="section" id="usage">
@@ -1343,6 +1347,10 @@ The default settings are 220 degrees, 6 scale labels, and 21 lines.</p>
 <h3>Range<a class="headerlink" href="#range" title="Permalink to this headline">¶</a></h3>
 <p>The range of the gauge can be specified by <code class="docutils literal notranslate"><span class="pre">lv_gauge_set_range(gauge,</span> <span class="pre">min,</span> <span class="pre">max)</span></code>. The default range is 0..100.</p>
 </div>
+<div class="section" id="needle-image">
+<h3>Needle image<a class="headerlink" href="#needle-image" title="Permalink to this headline">¶</a></h3>
+<p>An images also can be used as needles. The image should point to the right (like <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code>). To set an image use <code class="docutils literal notranslate"><span class="pre">lv_gauge_set_needle_img(gauge1,</span> <span class="pre">&amp;img,</span> <span class="pre">pivot_x,</span> <span class="pre">pivot_y)</span></code>. <code class="docutils literal notranslate"><span class="pre">pivot_x</span></code> and <code class="docutils literal notranslate"><span class="pre">pivot_y</span></code> are offset of the rotation center from the top left corner. Images will be recolored to the needle's color with <code class="docutils literal notranslate"><span class="pre">image_recolor_opa</span></code> (style property) intensity.</p>
+</div>
 <div class="section" id="critical-value">
 <h3>Critical value<a class="headerlink" href="#critical-value" title="Permalink to this headline">¶</a></h3>
 <p>To set a critical value, use <code class="docutils literal notranslate"><span class="pre">lv_gauge_set_critical_value(gauge,</span> <span class="pre">value)</span></code>. The scale color will be changed to <em>scale_end_color</em> after this value. The default critical value is 80.</p>
@@ -1350,7 +1358,7 @@ The default settings are 220 degrees, 6 scale labels, and 21 lines.</p>
 </div>
 <div class="section" id="events">
 <h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
-<p>Only the <a class="reference external" href="/overview/event.html#generic-events">Generic events</a> are sent by the object type.</p>
+<p>Only the <a class="reference external" href="../overview/event.html#generic-events">Generic events</a> are sent by the object type.</p>
 <p>Learn more about <a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a>.</p>
 </div>
 <div class="section" id="keys">
@@ -1834,7 +1842,7 @@ The default settings are 220 degrees, 6 scale labels, and 21 lines.</p>
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jul 21, 2020.
+        Last updated on Aug 18, 2020.
       </span>
 
     </p>

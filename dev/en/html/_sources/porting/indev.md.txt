@@ -113,8 +113,8 @@ bool encoder_read(lv_indev_drv_t * drv, lv_indev_data_t*data){
 }
 ```
 #### Using buttons with Encoder logic
-In addition to standar encoder behavior, you can also utilise its logic to navigate(focus) and edit widgets using buttons. 
-This is especialy handy if you have only few buttons avalible, or you want to use other buttons in addition to encoder wheel.
+In addition to standard encoder behavior, you can also utilise its logic to navigate(focus) and edit widgets using buttons. 
+This is especially handy if you have only few buttons avalible, or you want to use other buttons in addition to encoder wheel.
 
 You need to have 3 buttons avalible:
 - **LV_KEY_ENTER** will simulate press or pushing of the encoder button

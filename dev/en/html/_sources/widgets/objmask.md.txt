@@ -39,7 +39,7 @@ AN existing mask can be updated with `lv_objmask_update_mask(objmask, mask_p, ne
 A mask can be removed with `lv_objmask_remove_mask(objmask, mask_p)`
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

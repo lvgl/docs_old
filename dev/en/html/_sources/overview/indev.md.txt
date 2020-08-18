@@ -47,7 +47,7 @@ You need to associate an input device with a group. An input device can send the
 
 To create a group use `lv_group_t * g = lv_group_create()` and to add an object to the group use `lv_group_add_obj(g, obj)`.
 
-The associate a group with an input device use `lv_indev_set_group(indev, g)`, where `indev` is the return value of `lv_indev_drv_register()`
+To associate a group with an input device use `lv_indev_set_group(indev, g)`, where `indev` is the return value of `lv_indev_drv_register()`
 
 #### Keys
 There are some predefined keys which have special meaning:
@@ -73,22 +73,22 @@ With an encoder, you should use only `LV_KEY_LEFT`, `LV_KEY_RIGHT`, and `LV_KEY_
 
 #### Edit and navigate mode
 
-Since keypad has plenty of keys, it's easy to navigate between the objects and edit them using the keypad. But, the encoders have a limited number of "keys" hence, difficult to navigate using the default options. *Navigate* and *Edit* are created to avoid this problem with the encoders.
+Since a keypad has plenty of keys, it's easy to navigate between the objects and edit them using the keypad. But, the encoders have a limited number of "keys" hence, it is difficult to navigate using the default options. *Navigate* and *Edit* are created to avoid this problem with the encoders.
 
 In *Navigate* mode, the encoders `LV_KEY_LEFT/RIGHT` is translated to `LV_KEY_NEXT/PREV`. Therefore the next or previous object will be selected by turning the encoder.
 Pressing `LV_KEY_ENTER` will change to *Edit* mode.
 
 In *Edit* mode, `LV_KEY_NEXT/PREV` is usually used to edit the object.
 Depending on the object's type, a short or long press of `LV_KEY_ENTER` changes back to *Navigate* mode.
-Usually, an object which can not be pressed (like a [Slider](/widgets/slider)) leaves *Edit* mode on short click. But with object where short click has meaning (e.g. [Button](/widgets/btn)), long press is required.
+Usually, an object which can not be pressed (like a [Slider](/widgets/slider)) leaves *Edit* mode on short click. But with objects where short click has meaning (e.g. [Button](/widgets/btn)), a long press is required.
 
 ### Styling
 
 If an object is focused either by clicking it via touchpad, or focused via an encoder or keypad it goes to `LV_STATE_FOCUSED`. Hence focused styles will be applied on it. 
 
-If te object goes to edit mode it goes to `LV_STATE_FOCUSED | LV_STATE_EDITED` state so these style properties will be shown. 
+If the object goes to edit mode it goes to `LV_STATE_FOCUSED | LV_STATE_EDITED` state so these style properties will be shown. 
 
-For a moew detaild description read the [Style](https://docs.lvgl.io/v7/en/html/overview/style.html) section.
+For a more detaild description read the [Style](https://docs.lvgl.io/v7/en/html/overview/style.html) section.
 
 ## API
 

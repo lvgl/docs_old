@@ -37,7 +37,7 @@ It's also possible to set the start value of the bar using `lv_bar_set_start_val
 The bar can be drawn symmetrical to zero (drawn from zero, left to right), if it's enabled with `lv_bar_set_type(bar, LV_BAR_TYPE_SYMMETRICAL)`.
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

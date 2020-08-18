@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.4.0-dev
+                v7.6.0-dev
               </div>
             
           
@@ -333,7 +333,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#scale-properties">Scale properties</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#themes">Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#themes">Themes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#extending-themes">Extending themes</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#styling-a-button">Styling a button</a></li>
 </ul>
@@ -737,6 +740,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../widgets/gauge.html#set-value-and-needles">Set value and needles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/gauge.html#scale">Scale</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/gauge.html#range">Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/gauge.html#needle-image">Needle image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/gauge.html#critical-value">Critical value</a></li>
 </ul>
 </li>
@@ -1427,11 +1431,13 @@ For example the <a class="reference external" href="#states">above mentioned</a>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_style_remove_prop</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="n">LV_STYLE_BG_COLOR</span> <span class="o">|</span> <span class="p">(</span><span class="n">LV_STATE_PRESSED</span> <span class="o">&lt;&lt;</span> <span class="n">LV_STYLE_STATE_POS</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>To get the value from style in a state functions with the following prototype are available: <code class="docutils literal notranslate"><span class="pre">lv_style_get_&lt;prperty_name&gt;(&amp;style,</span> <span class="pre">&lt;state&gt;,</span> <span class="pre">&lt;result</span> <span class="pre">poiner&gt;);</span></code>.
-The the best matching property will be selected and it's precedence will be returned. <code class="docutils literal notranslate"><span class="pre">-1</span></code> will be returned if the property is not found. For example:</p>
+<p>To get the value from style in a given state functions with the following prototype are available: <code class="docutils literal notranslate"><span class="pre">_lv_style_get_color/int/opa/ptr(&amp;style,</span> <span class="pre">&lt;prop&gt;,</span> <span class="pre">&lt;result</span> <span class="pre">buf&gt;);</span></code>.
+The best matching property will be selected and it's precedence will be returned. <code class="docutils literal notranslate"><span class="pre">-1</span></code> will be returned if the property is not found.</p>
+<p>The form of the function (<code class="docutils literal notranslate"><span class="pre">...color/int/opa/ptr</span></code>) should beused according to the type of <code class="docutils literal notranslate"><span class="pre">&lt;prop&gt;</span></code>.</p>
+<p>For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_color_t</span> <span class="n">color</span><span class="p">;</span>
 <span class="kt">int16_t</span> <span class="n">res</span><span class="p">;</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">lv_style_get_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style1</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">color</span><span class="p">);</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">_lv_style_get_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style1</span><span class="p">,</span>  <span class="n">LV_STYLE_BG_COLOR</span> <span class="o">|</span> <span class="p">(</span><span class="n">LV_STATE_PRESSED</span> <span class="o">&lt;&lt;</span> <span class="n">LV_STYLE_STATE_POS</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">color</span><span class="p">);</span>
 <span class="k">if</span><span class="p">(</span><span class="n">res</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">//the bg_color is loaded into `color`</span>
 <span class="p">}</span>
@@ -1493,12 +1499,14 @@ So this example configuration will result in fast going to presses state and slo
 <div class="section" id="mixed-properties">
 <h3>Mixed properties<a class="headerlink" href="#mixed-properties" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><strong>radius</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the radius of the background. 0: no radius, <code class="docutils literal notranslate"><span class="pre">LV_RADIUS_CIRCLE</span></code>: maximal radius.</p></li>
-<li><p><strong>clip_corner</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>): <code class="docutils literal notranslate"><span class="pre">true</span></code>: enable to clip the overflowed content on the rounded (radius &gt; 0) corners.</p></li>
-<li><p><strong>size</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Size of internal elements of the widgets. See the documentation of the widgets if this property is used or not.</p></li>
-<li><p><strong>transform_width</strong>  (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Make the object wider on both sides with this value.</p></li>
-<li><p><strong>transform_height</strong>  (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>) Make the object higher on both sides with this value.</p></li>
-<li><p><strong>opa_scale</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Inherited. Scale down all opacity values of the object by this factor. As it's inherited the children objects will be affected too.</p></li>
+<li><p><strong>radius</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the radius of the background. 0: no radius, <code class="docutils literal notranslate"><span class="pre">LV_RADIUS_CIRCLE</span></code>: maximal radius.  Default value: 0.</p></li>
+<li><p><strong>clip_corner</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>): <code class="docutils literal notranslate"><span class="pre">true</span></code>: enable to clip the overflowed content on the rounded (radius &gt; 0) corners. Default value: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><strong>size</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Size of internal elements of the widgets. See the documentation of the widgets if this property is used or not. Default value: <code class="docutils literal notranslate"><span class="pre">LV_DPI</span> <span class="pre">/</span> <span class="pre">20</span></code>.</p></li>
+<li><p><strong>transform_width</strong>  (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Make the object wider on both sides with this value. Default value: 0.</p></li>
+<li><p><strong>transform_height</strong>  (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>) Make the object higher on both sides with this value. Default value: 0.</p></li>
+<li><p><strong>transform_angle</strong>  (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Rotate the image-like objects. It's uinit is 0.1 deg, for 45 deg use 450. Default value: 0.</p></li>
+<li><p><strong>transform_zoom</strong>  (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>) Zoom image-like objects. 256 (or <code class="docutils literal notranslate"><span class="pre">LV_IMG_ZOOM_NONE</span></code>) for normal size, 128 half size, 512 double size, ans so on. Default value: <code class="docutils literal notranslate"><span class="pre">LV_IMG_ZOOM_NONE</span></code>.</p></li>
+<li><p><strong>opa_scale</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Inherited. Scale down all opacity values of the object by this factor. As it's inherited the children objects will be affected too. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code>.</p></li>
 </ul>
 </div>
 <div class="section" id="padding-and-margin-properties">
@@ -1509,26 +1517,26 @@ So this example configuration will result in fast going to presses state and slo
 <a class="reference external" href="/widgets/cont#auto-fit">auto fit</a> is enabled.
 However other widgets also use them to set spacing. See the documentation of the widgets for the details.</p>
 <ul class="simple">
-<li><p><strong>pad_top</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the top.</p></li>
-<li><p><strong>pad_bottom</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the bottom.</p></li>
-<li><p><strong>pad_left</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the left.</p></li>
-<li><p><strong>pad_right</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the right.</p></li>
-<li><p><strong>pad_inner</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding inside the object between children.</p></li>
-<li><p><strong>margin_top</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the top.</p></li>
-<li><p><strong>margin_bottom</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the bottom.</p></li>
-<li><p><strong>margin_left</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the left.</p></li>
-<li><p><strong>margin_right</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the right.</p></li>
+<li><p><strong>pad_top</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the top. Default value: 0.</p></li>
+<li><p><strong>pad_bottom</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the bottom. Default value: 0.</p></li>
+<li><p><strong>pad_left</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the left. Default value: 0.</p></li>
+<li><p><strong>pad_right</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding on the right. Default value: 0.</p></li>
+<li><p><strong>pad_inner</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the padding inside the object between children. Default value: 0.</p></li>
+<li><p><strong>margin_top</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the top. Default value: 0.</p></li>
+<li><p><strong>margin_bottom</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the bottom. Default value: 0.</p></li>
+<li><p><strong>margin_left</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the left. Default value: 0.</p></li>
+<li><p><strong>margin_right</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the margin on the right. Default value: 0.</p></li>
 </ul>
 </div>
 <div class="section" id="background-properties">
 <h3>Background properties<a class="headerlink" href="#background-properties" title="Permalink to this headline">¶</a></h3>
 <p>The background is a simple rectangle which can have gradient and <code class="docutils literal notranslate"><span class="pre">radius</span></code> rounding.</p>
 <ul class="simple">
-<li><p><strong>bg_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>) Specifies the color of the background. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_WHITE</span></code></p></li>
+<li><p><strong>bg_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>) Specifies the color of the background. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_WHITE</span></code>.</p></li>
 <li><p><strong>bg_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>) Specifies opacity of the background. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_TRANSP</span></code>.</p></li>
 <li><p><strong>bg_grad_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>) Specifies the color of the background's gradient. The color on the right or bottom is <code class="docutils literal notranslate"><span class="pre">bg_grad_dir</span> <span class="pre">!=</span> <span class="pre">LV_GRAD_DIR_NONE</span></code>. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_WHITE</span></code>.</p></li>
-<li><p><strong>bg_main_stop</strong> (<code class="docutils literal notranslate"><span class="pre">uint8_t</span></code>): Specifies where should the gradient start. 0: at left/top most position, 255: at right/bottom most position.</p></li>
-<li><p><strong>bg_grad_stop</strong> (<code class="docutils literal notranslate"><span class="pre">uint8_t</span></code>): Specifies where should the gradient start. 0: at left/top most position, 255: at right/bottom most position. Default value: 255.</p></li>
+<li><p><strong>bg_main_stop</strong> (<code class="docutils literal notranslate"><span class="pre">uint8_t</span></code>): Specifies where should the gradient start. 0: at left/top most position, 255: at right/bottom most position. Default value: 0.</p></li>
+<li><p><strong>bg_grad_stop</strong> (<code class="docutils literal notranslate"><span class="pre">uint8_t</span></code>): Specifies where should the gradient stop. 0: at left/top most position, 255: at right/bottom most position. Default value: 255.</p></li>
 <li><p><strong>bg_grad_dir</strong> (<code class="docutils literal notranslate"><span class="pre">lv_grad_dir_t</span></code>) Specifies the direction of the gradient. Can be <code class="docutils literal notranslate"><span class="pre">LV_GRAD_DIR_NONE/HOR/VER</span></code>. Default value: <code class="docutils literal notranslate"><span class="pre">LV_GRAD_DIR_NONE</span></code>.</p></li>
 <li><p><strong>bg_blend_mode</strong> (<code class="docutils literal notranslate"><span class="pre">lv_blend_mode_t</span></code>): Set the blend mode the background. Can be <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE</span></code>). Default value: <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL</span></code>.</p></li>
 </ul>
@@ -1568,11 +1576,11 @@ However other widgets also use them to set spacing. See the documentation of the
 <h3>Border properties<a class="headerlink" href="#border-properties" title="Permalink to this headline">¶</a></h3>
 <p>The border is drawn on top of the <em>background</em>. It has <code class="docutils literal notranslate"><span class="pre">radius</span></code> rounding.</p>
 <ul class="simple">
-<li><p><strong>border_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>) Specifies the color of the border.</p></li>
-<li><p><strong>border_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>) Specifies opacity of the border.</p></li>
-<li><p><strong>border_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the width of the border.</p></li>
+<li><p><strong>border_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>) Specifies the color of the border. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code>.</p></li>
+<li><p><strong>border_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>) Specifies opacity of the border. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code>.</p></li>
+<li><p><strong>border_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the width of the border. Default value: 0.</p></li>
 <li><p><strong>border_side</strong> (<code class="docutils literal notranslate"><span class="pre">lv_border_side_t</span></code>) Specifies which sides of the border to draw. Can be <code class="docutils literal notranslate"><span class="pre">LV_BORDER_SIDE_NONE/LEFT/RIGHT/TOP/BOTTOM/FULL</span></code>. ORed values are also possible. Default value: <code class="docutils literal notranslate"><span class="pre">LV_BORDER_SIDE_FULL</span></code>.</p></li>
-<li><p><strong>border_post</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>): If <code class="docutils literal notranslate"><span class="pre">true</span></code> the border will be drawn after all children have been drawn.</p></li>
+<li><p><strong>border_post</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>): If <code class="docutils literal notranslate"><span class="pre">true</span></code> the border will be drawn after all children have been drawn. Default value: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><strong>border_blend_mode</strong> (<code class="docutils literal notranslate"><span class="pre">lv_blend_mode_t</span></code>): Set the blend mode of the border. Can be <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE</span></code>). Default value: <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL</span></code>.</p></li>
 </ul>
 <img alt="Styling the border in lvgl" src="../_images/lv_ex_style_2.png" />
@@ -1610,10 +1618,10 @@ However other widgets also use them to set spacing. See the documentation of the
 <h3>Outline properties<a class="headerlink" href="#outline-properties" title="Permalink to this headline">¶</a></h3>
 <p>The outline is similar to <em>border</em> but is drawn outside of the object.</p>
 <ul class="simple">
-<li><p><strong>outline_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>) Specifies the color of the outline.</p></li>
-<li><p><strong>outline_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>) Specifies opacity of the outline.</p></li>
-<li><p><strong>outline_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the width of the outline.</p></li>
-<li><p><strong>outline_pad</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>) Set the space between the object and the outline.</p></li>
+<li><p><strong>outline_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>) Specifies the color of the outline. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code>.</p></li>
+<li><p><strong>outline_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>) Specifies opacity of the outline. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code>.</p></li>
+<li><p><strong>outline_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the width of the outline. Default value: 0.</p></li>
+<li><p><strong>outline_pad</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>) Set the space between the object and the outline. Default value: 0.</p></li>
 <li><p><strong>outline_blend_mode</strong> (<code class="docutils literal notranslate"><span class="pre">lv_blend_mode_t</span></code>): Set the blend mode of the outline. Can be <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE</span></code>). Default value: <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL</span></code>.</p></li>
 </ul>
 <img alt="Styling the outline in lvgl" src="../_images/lv_ex_style_3.png" />
@@ -1650,12 +1658,12 @@ However other widgets also use them to set spacing. See the documentation of the
 <h3>Shadow properties<a class="headerlink" href="#shadow-properties" title="Permalink to this headline">¶</a></h3>
 <p>The shadow is a blurred area under the object.</p>
 <ul class="simple">
-<li><p><strong>shadow_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>) Specifies the color of the shadow.</p></li>
-<li><p><strong>shadow_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>) Specifies opacity of the shadow.</p></li>
-<li><p><strong>shadow_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the width (blur size) of the outline.</p></li>
-<li><p><strong>shadow_ofs_x</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the an X offset for the shadow.</p></li>
-<li><p><strong>shadow_ofs_y</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the an Y offset for the shadow.</p></li>
-<li><p><strong>shadow_spread</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): make the shadow larger than the background in every direction by this value.</p></li>
+<li><p><strong>shadow_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>) Specifies the color of the shadow. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code>.</p></li>
+<li><p><strong>shadow_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>) Specifies opacity of the shadow. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_TRANSP</span></code>.</p></li>
+<li><p><strong>shadow_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the width (blur size) of the outline. Default value: 0.</p></li>
+<li><p><strong>shadow_ofs_x</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the an X offset for the shadow. Default value: 0.</p></li>
+<li><p><strong>shadow_ofs_y</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Set the an Y offset for the shadow. Default value: 0.</p></li>
+<li><p><strong>shadow_spread</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): make the shadow larger than the background in every direction by this value. Default value: 0.</p></li>
 <li><p><strong>shadow_blend_mode</strong> (<code class="docutils literal notranslate"><span class="pre">lv_blend_mode_t</span></code>): Set the blend mode of the shadow. Can be <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE</span></code>). Default value: <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL</span></code>.</p></li>
 </ul>
 <img alt="Styling the shadow in lvgl" src="../_images/lv_ex_style_4.png" />
@@ -1693,11 +1701,11 @@ However other widgets also use them to set spacing. See the documentation of the
 <h3>Pattern properties<a class="headerlink" href="#pattern-properties" title="Permalink to this headline">¶</a></h3>
 <p>The pattern is an image (or symbol) drawn in the middle of the background or repeated to fill the whole background.</p>
 <ul class="simple">
-<li><p><strong>pattern_image</strong> (<code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">void</span> <span class="pre">*</span></code>): Pointer to an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> variable, a path to an image file or a symbol.</p></li>
-<li><p><strong>pattern_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Specifies opacity of the pattern.</p></li>
-<li><p><strong>pattern_recolor</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Mix this color to the pattern image. In case of symbols (texts) it will be the text color.</p></li>
+<li><p><strong>pattern_image</strong> (<code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">void</span> <span class="pre">*</span></code>): Pointer to an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> variable, a path to an image file or a symbol. Default value: <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p></li>
+<li><p><strong>pattern_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Specifies opacity of the pattern. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code>.</p></li>
+<li><p><strong>pattern_recolor</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Mix this color to the pattern image. In case of symbols (texts) it will be the text color. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code>.</p></li>
 <li><p><strong>pattern_recolor_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Intensity of recoloring. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_TRANSP</span></code> (no recoloring).</p></li>
-<li><p><strong>pattern_repeat</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>): <code class="docutils literal notranslate"><span class="pre">true</span></code>: the pattern will be repeated as a mosaic. <code class="docutils literal notranslate"><span class="pre">false</span></code>: place the pattern in the middle of the background.</p></li>
+<li><p><strong>pattern_repeat</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>): <code class="docutils literal notranslate"><span class="pre">true</span></code>: the pattern will be repeated as a mosaic. <code class="docutils literal notranslate"><span class="pre">false</span></code>: place the pattern in the middle of the background. Default value: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><strong>pattern_blend_mode</strong> (<code class="docutils literal notranslate"><span class="pre">lv_blend_mode_t</span></code>): Set the blend mode of the pattern. Can be <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE</span></code>). Default value: <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL</span></code>.</p></li>
 </ul>
 <img alt="Styling the shadow in lvgl" src="../_images/lv_ex_style_5.png" />
@@ -1735,15 +1743,15 @@ However other widgets also use them to set spacing. See the documentation of the
 <h3>Value properties<a class="headerlink" href="#value-properties" title="Permalink to this headline">¶</a></h3>
 <p>Value is an arbitrary text drawn to the background. It can be a lightweighted replacement of creating label objects.</p>
 <ul class="simple">
-<li><p><strong>value_str</strong> (<code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*</span></code>): Pointer to text to display. Only the pointer is saved! (Don't use local variable with lv_style_set_value_str, instead use static, global or dynamically allocated data).</p></li>
-<li><p><strong>value_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Color of the text.</p></li>
-<li><p><strong>value_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Opacity of the text.</p></li>
-<li><p><strong>value_font</strong> (<code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">lv_font_t</span> <span class="pre">*</span></code>): Pointer to font of the text.</p></li>
-<li><p><strong>value_letter_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Letter space of the text.</p></li>
-<li><p><strong>value_line_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Line space of the text.</p></li>
-<li><p><strong>value_align</strong> (<code class="docutils literal notranslate"><span class="pre">lv_align_t</span></code>): Alignment of the text. Can be <code class="docutils literal notranslate"><span class="pre">LV_ALIGN_...</span></code>.</p></li>
-<li><p><strong>value_ofs_x</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): X offset from the original position of the alignment.</p></li>
-<li><p><strong>value_ofs_y</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Y offset from the original position of the alignment.</p></li>
+<li><p><strong>value_str</strong> (<code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*</span></code>): Pointer to text to display. Only the pointer is saved! (Don't use local variable with lv_style_set_value_str, instead use static, global or dynamically allocated data). Default value: <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p></li>
+<li><p><strong>value_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Color of the text. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code>.</p></li>
+<li><p><strong>value_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Opacity of the text. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code>.</p></li>
+<li><p><strong>value_font</strong> (<code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">lv_font_t</span> <span class="pre">*</span></code>): Pointer to font of the text. Default value: <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p></li>
+<li><p><strong>value_letter_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Letter space of the text. Default value: 0.</p></li>
+<li><p><strong>value_line_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Line space of the text. Default value: 0.</p></li>
+<li><p><strong>value_align</strong> (<code class="docutils literal notranslate"><span class="pre">lv_align_t</span></code>): Alignment of the text. Can be <code class="docutils literal notranslate"><span class="pre">LV_ALIGN_...</span></code>. Default value: <code class="docutils literal notranslate"><span class="pre">LV_ALIGN_CENTER</span></code>.</p></li>
+<li><p><strong>value_ofs_x</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): X offset from the original position of the alignment. Default value: 0.</p></li>
+<li><p><strong>value_ofs_y</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Y offset from the original position of the alignment. Default value: 0.</p></li>
 <li><p><strong>value_blend_mode</strong> (<code class="docutils literal notranslate"><span class="pre">lv_blend_mode_t</span></code>): Set the blend mode of the text. Can be <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE</span></code>). Default value: <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL</span></code>.</p></li>
 </ul>
 <img alt="Styling the value text in lvgl" src="../_images/lv_ex_style_6.png" />
@@ -1784,13 +1792,13 @@ However other widgets also use them to set spacing. See the documentation of the
 <h3>Text properties<a class="headerlink" href="#text-properties" title="Permalink to this headline">¶</a></h3>
 <p>Properties for textual object.</p>
 <ul class="simple">
-<li><p><strong>text_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Color of the text.</p></li>
-<li><p><strong>text_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Opacity of the text.</p></li>
-<li><p><strong>text_font</strong> (<code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">lv_font_t</span> <span class="pre">*</span></code>): Pointer to font of the text.</p></li>
-<li><p><strong>text_letter_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Letter space of the text.</p></li>
-<li><p><strong>text_line_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Line space of the text.</p></li>
-<li><p><strong>text_decor</strong> (<code class="docutils literal notranslate"><span class="pre">lv_text_decor_t</span></code>): Add text decoration. Can be <code class="docutils literal notranslate"><span class="pre">LV_TEXT_DECOR_NONE/UNDERLINE/STRIKETHROUGH</span></code>.</p></li>
-<li><p><strong>text_sel_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Set background color of text selection.</p></li>
+<li><p><strong>text_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Color of the text.  Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code>.</p></li>
+<li><p><strong>text_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Opacity of the text. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code>.</p></li>
+<li><p><strong>text_font</strong> (<code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">lv_font_t</span> <span class="pre">*</span></code>): Pointer to font of the text. Default value: <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p></li>
+<li><p><strong>text_letter_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Letter space of the text. Default value: 0.</p></li>
+<li><p><strong>text_line_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Line space of the text. Default value: 0.</p></li>
+<li><p><strong>text_decor</strong> (<code class="docutils literal notranslate"><span class="pre">lv_text_decor_t</span></code>): Add text decoration. Can be <code class="docutils literal notranslate"><span class="pre">LV_TEXT_DECOR_NONE/UNDERLINE/STRIKETHROUGH</span></code>. Default value: <code class="docutils literal notranslate"><span class="pre">LV_TEXT_DECOR_NONE</span></code>.</p></li>
+<li><p><strong>text_sel_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Set background color of text selection. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code></p></li>
 <li><p><strong>text_blend_mode</strong> (<code class="docutils literal notranslate"><span class="pre">lv_blend_mode_t</span></code>): Set the blend mode of the text. Can be <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE</span></code>). Default value: <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL</span></code>.</p></li>
 </ul>
 <img alt="Styling a text in lvgl" src="../_images/lv_ex_style_7.png" />
@@ -1835,12 +1843,12 @@ However other widgets also use them to set spacing. See the documentation of the
 <h3>Line properties<a class="headerlink" href="#line-properties" title="Permalink to this headline">¶</a></h3>
 <p>Properties of lines.</p>
 <ul class="simple">
-<li><p><strong>line_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Color of the line.</p></li>
-<li><p><strong>line_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Opacity of the line.</p></li>
-<li><p><strong>line_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of the line.</p></li>
-<li><p><strong>line_dash_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of dash. Dashing is drawn only for horizontal or vertical lines. 0: disable dash.</p></li>
-<li><p><strong>line_dash_gap</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Gap between two dash line. Dashing is drawn only for horizontal or vertical lines. 0: disable dash.</p></li>
-<li><p><strong>line_rounded</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>): <code class="docutils literal notranslate"><span class="pre">true</span></code>: draw rounded line endings.</p></li>
+<li><p><strong>line_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Color of the line. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code></p></li>
+<li><p><strong>line_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Opacity of the line. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code></p></li>
+<li><p><strong>line_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of the line. Default value: 0.</p></li>
+<li><p><strong>line_dash_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of dash. Dashing is drawn only for horizontal or vertical lines. 0: disable dash. Default value: 0.</p></li>
+<li><p><strong>line_dash_gap</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Gap between two dash line. Dashing is drawn only for horizontal or vertical lines. 0: disable dash. Default value: 0.</p></li>
+<li><p><strong>line_rounded</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>): <code class="docutils literal notranslate"><span class="pre">true</span></code>: draw rounded line endings. Default value: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><strong>line_blend_mode</strong> (<code class="docutils literal notranslate"><span class="pre">lv_blend_mode_t</span></code>): Set the blend mode of the line. Can be <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE</span></code>). Default value: <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL</span></code>.</p></li>
 </ul>
 <img alt="Styling a line in lvgl" src="../_images/lv_ex_style_8.png" />
@@ -1874,9 +1882,9 @@ However other widgets also use them to set spacing. See the documentation of the
 <h3>Image properties<a class="headerlink" href="#image-properties" title="Permalink to this headline">¶</a></h3>
 <p>Properties of image.</p>
 <ul class="simple">
-<li><p><strong>image_recolor</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>):  Mix this color to the pattern image. In case of symbols (texts) it will be the text color.</p></li>
-<li><p><strong>image_recolor_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Intensity of recoloring. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_TRANSP</span></code> (no recoloring).</p></li>
-<li><p><strong>image_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Opacity of the image.</p></li>
+<li><p><strong>image_recolor</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>):  Mix this color to the pattern image. In case of symbols (texts) it will be the text color. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code></p></li>
+<li><p><strong>image_recolor_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Intensity of recoloring. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_TRANSP</span></code> (no recoloring). Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_TRANSP</span></code></p></li>
+<li><p><strong>image_opa</strong> (<code class="docutils literal notranslate"><span class="pre">lv_opa_t</span></code>): Opacity of the image. Default value: <code class="docutils literal notranslate"><span class="pre">LV_OPA_COVER</span></code></p></li>
 <li><p><strong>image_blend_mode</strong> (<code class="docutils literal notranslate"><span class="pre">lv_blend_mode_t</span></code>): Set the blend mode of the image. Can be <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE</span></code>). Default value: <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL</span></code>.</p></li>
 </ul>
 <img alt="Styling an image in lvgl" src="../_images/lv_ex_style_9.png" />
@@ -1920,15 +1928,16 @@ However other widgets also use them to set spacing. See the documentation of the
 <h3>Transition properties<a class="headerlink" href="#transition-properties" title="Permalink to this headline">¶</a></h3>
 <p>Properties to describe state change animations.</p>
 <ul class="simple">
-<li><p><strong>transition_time</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Time of the transition.</p></li>
-<li><p><strong>transition_delay</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Delay before the transition.</p></li>
-<li><p><strong>transition_prop_1</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): A property on which transition should be applied. Use the property name with upper case with <code class="docutils literal notranslate"><span class="pre">LV_STYLE_</span></code> prefix, e.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BG_COLOR</span></code></p></li>
-<li><p><strong>transition_prop_2</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for another property.</p></li>
-<li><p><strong>transition_prop_3</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for another property.</p></li>
-<li><p><strong>transition_prop_4</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for another property.</p></li>
-<li><p><strong>transition_prop_5</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for another property.</p></li>
-<li><p><strong>transition_prop_6</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for another property.</p></li>
-<li><p><strong>transition_path</strong> (<code class="docutils literal notranslate"><span class="pre">lv_anim_path_t</span></code>): An animation path for the transition. (Needs to be static or global variable because only its pointer is saved).</p></li>
+<li><p><strong>transition_time</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Time of the transition. Default value: 0.</p></li>
+<li><p><strong>transition_delay</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Delay before the transition. Default value: 0.</p></li>
+<li><p><strong>transition_prop_1</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): A property on which transition should be applied. Use the property name with upper case with <code class="docutils literal notranslate"><span class="pre">LV_STYLE_</span></code> prefix, e.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BG_COLOR</span></code>. Default value: 0 (none).</p></li>
+<li><p><strong>transition_prop_2</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for another property. Default value: 0 (none).</p></li>
+<li><p><strong>transition_prop_3</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for another property. Default value: 0 (none).</p></li>
+<li><p><strong>transition_prop_4</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for another property. Default value: 0 (none).</p></li>
+<li><p><strong>transition_prop_5</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for another property. Default value: 0 (none).</p></li>
+<li><p><strong>transition_prop_6</strong> (<code class="docutils literal notranslate"><span class="pre">property</span> <span class="pre">name</span></code>): Same as <em>transition_1</em> just for another property. Default value: 0 (none).</p></li>
+<li><p><strong>transition_path</strong> (<code class="docutils literal notranslate"><span class="pre">lv_anim_path_t</span></code>): An animation path for the transition. (Needs to be static or global variable because only its pointer is saved).
+Default value: <code class="docutils literal notranslate"><span class="pre">lv_anim_path_def</span></code> (linear path).</p></li>
 </ul>
 <img alt="Styling an transitions in lvgl" src="../_images/lv_ex_style_10.png" />
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;../../lv_examples.h&quot;</span><span class="cp"></span>
@@ -1975,12 +1984,12 @@ However other widgets also use them to set spacing. See the documentation of the
 As the name implies the end region is the end of the scale where can be critical values or inactive values. The normal region is before the end region.
 Both regions could have different properties.</p>
 <ul class="simple">
-<li><p><strong>scale_grad_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>):  In normal region make gradient to this color on the scale lines.</p></li>
-<li><p><strong>scale_end_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>):  Color of the scale lines in the end region.</p></li>
-<li><p><strong>scale_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of the scale. Default value: <code class="docutils literal notranslate"><span class="pre">LV_DPI</span> <span class="pre">/</span> <span class="pre">8</span></code>.</p></li>
-<li><p><strong>scale_border_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of a border drawn on the outer side of the scale in the normal region.</p></li>
-<li><p><strong>scale_end_border_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of a border drawn on the outer side of the scale in the end region.</p></li>
-<li><p><strong>scale_end_line_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of a scale lines in the end region.</p></li>
+<li><p><strong>scale_grad_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>):  In normal region make gradient to this color on the scale lines. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code>.</p></li>
+<li><p><strong>scale_end_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>):  Color of the scale lines in the end region. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code>.</p></li>
+<li><p><strong>scale_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of the scale. Default value: <code class="docutils literal notranslate"><span class="pre">LV_DPI</span> <span class="pre">/</span> <span class="pre">8</span></code>. Default value: <code class="docutils literal notranslate"><span class="pre">LV_DPI</span> <span class="pre">/</span> <span class="pre">8</span></code>.</p></li>
+<li><p><strong>scale_border_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of a border drawn on the outer side of the scale in the normal region. Default value: 0.</p></li>
+<li><p><strong>scale_end_border_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of a border drawn on the outer side of the scale in the end region. Default value: 0.</p></li>
+<li><p><strong>scale_end_line_width</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Width of a scale lines in the end region. Default value: 0.</p></li>
 </ul>
 <img alt="Styling a scale in lvgl" src="../_images/lv_ex_style_11.png" />
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;../../lv_examples.h&quot;</span><span class="cp"></span>
@@ -2053,6 +2062,41 @@ It gives a default appearance to UI which can be modified by adding further styl
 <li><p>material: an impressive, modern theme - mono: simple black and white theme for monochrome displays</p></li>
 <li><p>template: a very simple theme which can be copied to create a custom theme</p></li>
 </ul>
+<div class="section" id="extending-themes">
+<h3>Extending themes<a class="headerlink" href="#extending-themes" title="Permalink to this headline">¶</a></h3>
+<p>Built-in themes can be extended by custom theme. If a custom theme is created a &quot;base theme&quot; can be selected. The base theme's styles will be added before the custom theme. Any number of themes can be chained this was. E.g. material theme -&gt; custom theme -&gt; dark theme.</p>
+<p>Here is an example about how to create a custom theme based on the currently active built-in theme.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span> <span class="cm">/*Get the current theme (e.g. material). It will be the base of the custom theme.*/</span>   
+<span class="n">lv_theme_t</span> <span class="o">*</span> <span class="n">base_theme</span> <span class="o">=</span> <span class="n">lv_theme_get_act</span><span class="p">();</span>
+
+<span class="cm">/*Initialize a custom theme*/</span>
+<span class="k">static</span> <span class="n">lv_theme_t</span> <span class="n">custom_theme</span><span class="p">;</span>                         <span class="cm">/*Declare a theme*/</span>
+<span class="n">lv_theme_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">custom_theme</span><span class="p">,</span> <span class="p">)</span><span class="n">base_theme</span><span class="p">;</span>               <span class="cm">/*Initialize the custom theme from the base theme*/</span>                           
+<span class="n">lv_theme_set_apply_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">custom_theme</span><span class="p">,</span> <span class="n">custom_apply_cb</span><span class="p">);</span>  <span class="cm">/*Set a custom theme apply callback*/</span>
+<span class="n">lv_theme_set_base</span><span class="p">(</span><span class="n">custom_theme</span><span class="p">,</span> <span class="n">base_theme</span><span class="p">);</span>            <span class="cm">/*Set the base theme of the csutom theme*/</span>
+
+<span class="cm">/*Initialize styles for the new theme*/</span>
+<span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style1</span><span class="p">;</span>
+<span class="n">lv_style_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style1</span><span class="p">);</span>
+<span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style1</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">custom_theme</span><span class="p">.</span><span class="n">color_primary</span><span class="p">);</span>
+
+<span class="p">...</span>
+
+<span class="cm">/*Add a custom apply callback*/</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="n">custom_apply_cb</span><span class="p">(</span><span class="n">lv_theme_t</span> <span class="o">*</span> <span class="n">th</span><span class="p">,</span> <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_theme_style_t</span> <span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lv_style_list_t</span> <span class="o">*</span> <span class="n">list</span><span class="p">;</span>
+
+    <span class="k">switch</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="nl">LV_THEME_BTN</span><span class="p">:</span>
+            <span class="n">list</span> <span class="o">=</span> <span class="n">lv_obj_get_style_list</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">LV_BTN_PART_MAIN</span><span class="p">);</span>
+            <span class="n">_lv_style_list_add_style</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_style</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
@@ -2169,7 +2213,7 @@ It gives a default appearance to UI which can be modified by adding further styl
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jul 21, 2020.
+        Last updated on Aug 18, 2020.
       </span>
 
     </p>

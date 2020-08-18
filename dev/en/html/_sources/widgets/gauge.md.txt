@@ -14,7 +14,7 @@ It also uses the *text* properties to set the style of the scale labels. *pad_in
 `LV_GAUGE_PART_MAJOR` is a virtual part which describes the  major scale lines (where labels are added) using the *line* and *scale* style properties.
 
 `LV_GAUGE_PART_NEEDLE` is also virtual part and it describes the needle(s) via the *line* style properties. 
-*size* and the typical background properties are used to describe a rectangle (or circle) in the picot point of the needle(s).
+The *size* and the typical background properties are used to describe a rectangle (or circle) in the pivot point of the needle(s).
 *pad_inner* is used to to make the needle(s) smaller than the outer radius of the scale lines.
 
 ## Usage
@@ -36,11 +36,15 @@ The scale of the Gauge can have offset. It can be adjusted with `lv_gauge_set_an
 ### Range
 The range of the gauge can be specified by `lv_gauge_set_range(gauge, min, max)`. The default range is 0..100.
 
+### Needle image
+An images also can be used as needles. The image should point to the right (like `==>`). To set an image use `lv_gauge_set_needle_img(gauge1, &img, pivot_x, pivot_y)`. `pivot_x` and `pivot_y` are offset of the rotation center from the top left corner. Images will be recolored to the needle's color with `image_recolor_opa` (style property) intensity. 
+
+
 ### Critical value
 To set a critical value, use `lv_gauge_set_critical_value(gauge, value)`. The scale color will be changed to *scale_end_color* after this value. The default critical value is 80.
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 
