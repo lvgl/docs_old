@@ -50,7 +50,7 @@ Keep in mind that, using following keywords will have the same effect as with th
 - *"Enter"* - New line.
 
 ## Events
-Besides the [Generic events](../overview/event.html#generic-events), the following [Special events](/overview/event.html#special-events) are sent by the keyboards:
+Besides the [Generic events](../overview/event.html#generic-events), the following [Special events](../overview/event.html#special-events) are sent by the keyboards:
  - **LV_EVENT_VALUE_CHANGED** - Sent when the button is pressed/released or repeated after long press. The event data is set to the ID of the pressed/released button.
  - **LV_EVENT_APPLY** - The *Ok* button is clicked.
  - **LV_EVENT_CANCEL** - The *Close* button is clicked.

@@ -29,7 +29,7 @@ The state of the Switch can be changed by clicking on it or by `lv_switch_on(swi
 The time of animations, when the switch changes state, can be adjusted with `lv_switch_set_anim_time(switch, anim_time)`.
 
 ## Events
-Besides the [Generic events](../overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Switch:
+Besides the [Generic events](../overview/event.html#generic-events) the following [Special events](../overview/event.html#special-events) are sent by the Switch:
 - **LV_EVENT_VALUE_CHANGED** Sent when the switch changes state.
 
 ## Keys

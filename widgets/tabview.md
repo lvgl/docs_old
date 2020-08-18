@@ -71,7 +71,7 @@ The manual sliding can be disabled with `lv_page_set_scroll_propagation(tab_page
 
 ## Events
 
-Besides the [Generic events](../overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
+Besides the [Generic events](../overview/event.html#generic-events) the following [Special events](../overview/event.html#special-events) are sent by the Slider:
 
 - **LV_EVENT_VALUE_CHANGED** Sent when a new tab is selected by sliding or clicking the tab button
 

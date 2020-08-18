@@ -53,7 +53,7 @@ The name of the days can be adjusted with `lv_calendar_set_day_names(calendar, d
 Similarly to `day_names`, the name of the month can be set with `lv_calendar_set_month_names(calendar, month_names_array)`.
 
 ## Events
-Besides the [Generic events](../overview/event.html#generic-events), the following [Special events](/overview/event.html#special-events) are sent by the calendars:
+Besides the [Generic events](../overview/event.html#generic-events), the following [Special events](../overview/event.html#special-events) are sent by the calendars:
 **LV_EVENT_VALUE_CHANGED** is sent when the current month has changed.
 
 In *Input device related* events, `lv_calendar_get_pressed_date(calendar)` tells which day is currently being pressed or return `NULL` if no date is pressed.
