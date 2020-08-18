@@ -45,7 +45,7 @@ The available states as defined by the enum `lv_btn_state_t` are:
 - **LV_BTN_STATE_CHECKED_DISABLED**
 
 ## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Checkboxes:
+Besides the [Generic events](../overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Checkboxes:
  - **LV_EVENT_VALUE_CHANGED** - sent when the checkbox is toggled.
 
 Note that, the generic input device-related events (like `LV_EVENT_PRESSED`) are sent in the inactive state too. You need to check the state with `lv_cb_is_inactive(cb)` to ignore the events from inactive Checkboxes.

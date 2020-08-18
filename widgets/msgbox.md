@@ -37,7 +37,7 @@ With `lv_msgbox_start_auto_close(mbox, delay)` the message box can be closed aut
 The duration of the close animation can be set by `lv_mbox_set_anim_time(mbox, anim_time)`.
 
 ## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Message boxes:
+Besides the [Generic events](../overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Message boxes:
  - **LV_EVENT_VALUE_CHANGED** sent when the button is clicked. The event data is set to ID of the clicked button.
 
 The Message box has a default event callback which closes itself when a button is clicked.

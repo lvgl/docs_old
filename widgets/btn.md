@@ -50,7 +50,7 @@ You can disable the layout with `lv_btn_set_layout(btn, LV_LAYOUT_OFF)`.
 
 
 ## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the buttons:
+Besides the [Generic events](../overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the buttons:
  - **LV_EVENT_VALUE_CHANGED** - sent when the button is toggled.
 
 Learn more about [Events](/overview/event).

@@ -59,7 +59,7 @@ If the list is created on an other scrollable element (like a [Page](/widgets/pa
 This way the scroll will be continued on the parent. It can be enabled with `lv_list_set_scroll_propagation(list, true)`
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

@@ -28,7 +28,7 @@ Therefore with `LV_IMGBTN_TILED`, you can set the width of the Image button usin
 Similarly to normal Buttons `lv_imgbtn_set_checkable(imgbtn, true/false)`, `lv_imgbtn_toggle(imgbtn)` and `lv_imgbtn_set_state(imgbtn, LV_BTN_STATE_...)` also works.
 
 ## Events
-Beside the [Generic events](/overview/event.html#generic-events), the following [Special events](/overview/event.html#special-events) are sent by the buttons:
+Beside the [Generic events](../overview/event.html#generic-events), the following [Special events](/overview/event.html#special-events) are sent by the buttons:
  - **LV_EVENT_VALUE_CHANGED** - Sent when the button is toggled.
 
 Note that, the generic input device related events (like `LV_EVENT_PRESSED`) are sent in the inactive state too. You need to check the state with `lv_btn_get_state(btn)` to ignore the events from inactive buttons.
