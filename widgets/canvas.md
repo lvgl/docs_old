@@ -72,7 +72,7 @@ A given area of the canvas can be blurred horizontally with `lv_canvas_blur_hor(
 ## Events
 As default the clicking of a canvas is disabled (inherited by [Image](/widgets/img)) and therefore no events are generated.
 
-If clicking is enabled (`lv_obj_set_click(canvas, true)`) only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+If clicking is enabled (`lv_obj_set_click(canvas, true)`) only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

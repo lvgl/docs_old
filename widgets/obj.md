@@ -199,7 +199,7 @@ This feature needs to enabled in *lv_conf.h* with `LV_USE_EXT_CLICK_AREA`. The p
 - **LV_EXT_CLICK_AREA_OFF** Disable this feature
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

@@ -265,13 +265,13 @@ To indicate that, the *line read* function should be used, set `dsc->img_data = 
 
 ### Manually use an image decoder
 
-LVGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the `lv_img` object) but you can use them manually too. Create a `lv_img_decoder_dsc_t` variable to describe the decoding session and call `lv_img_decoder_open()`, `lv_img_decoder_open()`.
+LVGL will use the registered image decoder automatically if you try and draw a raw image (i.e. using the `lv_img` object) but you can use them manually too. Create a `lv_img_decoder_dsc_t` variable to describe the decoding session and call `lv_img_decoder_open()`.
 
 ```c
 
 lv_res_t res;
 lv_img_decoder_dsc_t dsc;
-res = lv_img_decoder_open(&dsc, &my_img_dsc, &lv_style_plain);
+res = lv_img_decoder_open(&dsc, &my_img_dsc, LV_COLOR_WHITE);
 
 if(res == LV_RES_OK) {
   /*Do something with `dsc->img_data`*/

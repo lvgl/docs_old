@@ -72,7 +72,7 @@ The disadvantage of this setup is that the ability to style individual buttons t
 If you require that ability, using individual buttons is very likely to be a better approach.
 
 ## Events
-Besides the [Generic events](/overview/events.html#generic-event), the following [Special events](/overview/event.html#special-events) are sent by the button matrices:
+Besides the [Generic events](../overview/event.html#generic-events), the following [Special events](../overview/event.html#special-events) are sent by the button matrices:
  - **LV_EVENT_VALUE_CHANGED** - sent when the button is pressed/released or repeated after long press. The event data is set to the ID of the pressed/released button.
 
 Learn more about [Events](/overview/event).

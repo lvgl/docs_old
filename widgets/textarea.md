@@ -116,7 +116,7 @@ Learn more at the [Page](/widgets/page) object.
 When the Text area is scrolled to edge a circle like flash animation can be shown if it is enabled with `lv_ta_set_edge_flash(ta, true)`
 
 ## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
+Besides the [Generic events](../overview/event.html#generic-events) the following [Special events](../overview/event.html#special-events) are sent by the Slider:
 - **LV_EVENT_INSERT** Sent when before a character or text is inserted. 
 The event data is the text planned to insert. `lv_ta_set_insert_replace(ta, "New text")` replaces the text to insert. 
 The new text can't be in a local variable which is destroyed when the event callback exists. `""` means do not insert anything.

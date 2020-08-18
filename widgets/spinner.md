@@ -36,7 +36,7 @@ The direction of spinning can be changed with `lv_spinner_set_dir(preload, LV_SP
 
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 ## Keys
 No *Keys* are processed by the object type.

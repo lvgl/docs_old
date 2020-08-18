@@ -75,7 +75,7 @@ The drop-down list's open/close animation time is adjusted by `lv_dropdown_set_a
 To manually open or close the drop-down list the `lv_dropdown_open/close(dropdown, LV_ANIM_ON/OFF)` function can be used.
 
 ## Events
-Besides the [Generic events](/overview/event.html#generic-events), the following [Special events](/overview/event.html#special-events) are sent by the drop-down list:
+Besides the [Generic events](../overview/event.html#generic-events), the following [Special events](../overview/event.html#special-events) are sent by the drop-down list:
  - **LV_EVENT_VALUE_CHANGED** - Sent when the new option is selected.
 
 Learn more about [Events](/overview/event).
