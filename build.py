@@ -47,7 +47,7 @@ if clean:
 
 # Silly workarond to include the more or less correct PDF download link in the PDF
 cmd("cp -f " + lang +"/latex/LVGL.pdf LVGL.pdf | true")
-cmd("BUILDDIR=\"" + lang + "\" make -j8 latex")
+cmd("sphinx-build -b latex . en/latex")
 
 # Generat PDF
 cmd("cd " + lang + "/latex && xelatex -interaction=batchmode *.tex")
@@ -55,5 +55,5 @@ cmd("cd " + lang + "/latex && xelatex -interaction=batchmode *.tex")
 cmd("cd " + lang + "/latex && cp -f LVGL.pdf ../../LVGL.pdf")
 
 # BULD HTML
-cmd("BUILDDIR=\"" + lang + "\" make -j8 html")
+cmd("sphinx-build -b html . en/html")
 

@@ -77,7 +77,7 @@ Lvgl can efficiently handle very long (> 40k characters) by saving some extra da
 The labels can display symbols alongside letters (or on their own). Read the [Font](/overview/font) section to learn more about the symbols.
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 
