@@ -79,7 +79,7 @@ There are functions to directly set/get the scrollable's attributes:
 - `lv_page_set_scrl_layout()`
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 The scrollable object has a default event callback which propagates the following events to the background object:
 `LV_EVENT_PRESSED`, `LV_EVENT_PRESSING`, `LV_EVENT_PRESS_LOST`,`LV_EVENT_RELEASED`, `LV_EVENT_SHORT_CLICKED`, `LV_EVENT_CLICKED`, `LV_EVENT_LONG_PRESSED`, `LV_EVENT_LONG_PRESSED_REPEAT` 

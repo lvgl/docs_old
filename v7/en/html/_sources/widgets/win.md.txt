@@ -51,7 +51,7 @@ To set a layout for the content use `lv_win_set_layout(win, LV_LAYOUT_...)`.
 See [Container](/widgets/cont) for details.
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

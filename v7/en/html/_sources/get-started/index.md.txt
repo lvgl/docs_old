@@ -29,5 +29,6 @@ There are several ways to get your feet wet with LVGL. This list shows the recom
    espressif
    arduino
    micropython
+   nuttx
 ```
 

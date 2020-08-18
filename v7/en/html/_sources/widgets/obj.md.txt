@@ -54,6 +54,7 @@ You can align the object to another with `lv_obj_align(obj, obj_ref, LV_ALIGN_..
 For example, to align a text below an image: `lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)`.
 Or to align a text in the middle of its parent: `lv_obj_align(text, NULL, LV_ALIGN_CENTER, 0, 0)`.
 
+
 `lv_obj_align_origo` works similarly to `lv_obj_align` but it aligns the center of the object.
 
 For example, `lv_obj_align_origo(btn, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 0)` will align the center of the button the bottom of the image.
@@ -62,6 +63,8 @@ The parameters of the alignment will be saved in the object if `LV_USE_OBJ_REALI
 It's equivalent to calling `lv_obj_align` again with the same parameters.
 
 If the alignment happened with `lv_obj_align_origo`, then it will be used when the object is realigned.
+
+The `lv_obj_align_x/y` and `lv_obj_align_origo_x/y` function can be used t align only on one axis.
 
 If `lv_obj_set_auto_realign(obj, true)` is used the object will be realigned automatically, if its size changes in `lv_obj_set_width/height/size()` functions. 
 It's very useful when size animations are applied to the object and the original position needs to be kept.
@@ -176,7 +179,7 @@ To prevent one or more that kind of actions, you can protect the object against 
 - **LV_PROTECT_CLICK_FOCUS** Prevent automatically focusing the object if it's in a *Group* and click focus is enabled.
 - **LV_PROTECT_CHILD_CHG** Disable the child change signal. Used internally by the library
 
-The `lv_obj_set/clear_protect(obj, LV_PROTECT_...)` sets/clears the protection. You can use *'OR'ed* values of protection types too.
+The `lv_obj_add/clear_protect(obj, LV_PROTECT_...)` sets/clears the protection. You can use *'OR'ed* values of protection types too.
 
 ### Groups
 
@@ -196,7 +199,7 @@ This feature needs to enabled in *lv_conf.h* with `LV_USE_EXT_CLICK_AREA`. The p
 - **LV_EXT_CLICK_AREA_OFF** Disable this feature
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

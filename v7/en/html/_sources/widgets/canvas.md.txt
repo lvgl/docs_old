@@ -66,13 +66,13 @@ The draw function can draw to any color format. For example, it's possible to dr
 Note that a canvas can't be rotated on itself.  You need a source and destination canvas or image.
 
 ## Blur
-A given area of the canvas can be blurred horizontally with `lv_canvas_blur_hor(canvas, &area, r)` ot vertically with `lv_canvas_blur_ver(canvas, &area, r)`. 
+A given area of the canvas can be blurred horizontally with `lv_canvas_blur_hor(canvas, &area, r)` to vertically with `lv_canvas_blur_ver(canvas, &area, r)`. 
 `r` is the radius of the blur (greater value means more intensive burring). `area` is the area where the blur should be applied (interpreted relative to the canvas)
 
 ## Events
 As default the clicking of a canvas is disabled (inherited by [Image](/widgets/img)) and therefore no events are generated.
 
-If clicking is enabled (`lv_obj_set_click(canvas, true)`) only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+If clicking is enabled (`lv_obj_set_click(canvas, true)`) only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

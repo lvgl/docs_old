@@ -25,7 +25,7 @@ By deafult, the *y == 0* point is in the top of the object. It might be conter-i
 The *y invert* is disabled by default.
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 
