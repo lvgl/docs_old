@@ -26,7 +26,7 @@ Before getting started here are some guidelines to make contribution smoother:
 - Speak about one thing in one issue or topic. It makes your post easier to find later for someone with the same question.
 - Give feedback and close the issue or mark the topic as solved if your question is answered. 
 - For non-trivial fixes and features, it's better to open an issue first to discuss the details instead of sending a pull request directly.
-- Please read and follow the [Coding style](https://github.com/lvgl/lvgl/blob/master/docs/CODING_STYLE.md) guide.
+- Please read and follow the <a href="https://github.com/lvgl/lvgl/blob/master/docs/CODING_STYLE.md">Coding style</a> guide.
 
 ## Pull request
 

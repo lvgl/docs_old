@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.4.0-dev
+                v7.5.0-dev
               </div>
             
           
@@ -333,7 +333,10 @@
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#scale-properties">Scale properties</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#themes">Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#themes">Themes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#extending-themes">Extending themes</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/style.html#example">Example</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#styling-a-button">Styling a button</a></li>
 </ul>
@@ -737,6 +740,7 @@
 <li class="toctree-l4"><a class="reference internal" href="gauge.html#set-value-and-needles">Set value and needles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="gauge.html#scale">Scale</a></li>
 <li class="toctree-l4"><a class="reference internal" href="gauge.html#range">Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gauge.html#needle-image">Needle image</a></li>
 <li class="toctree-l4"><a class="reference internal" href="gauge.html#critical-value">Critical value</a></li>
 </ul>
 </li>
@@ -1322,7 +1326,7 @@
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">LV_TABVIEW_PART_BG_SCRL</span></code>: it's the scrollable part of <a class="reference internal" href="page.html"><span class="doc">Page</span></a>. It holds the content of the tabs next to each other. The background of the Page is always transparent and can't be accessed externally.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">LV_TABVIEW_PART_TAB_BG</span></code>: The tab buttons which is a <a class="reference internal" href="btnmatrix.html"><span class="doc">Button matrix</span></a>.
-Clicking on a button will scroll <code class="docutils literal notranslate"><span class="pre">LV_TABVIEW_PART_BG_SCRL</span></code> to the related tab's content. The tab buttons can be accessed via <code class="docutils literal notranslate"><span class="pre">LV_TABVIEW_PART_TAB_BTN</span></code>.
+Clicking on a button will scroll <code class="docutils literal notranslate"><span class="pre">LV_TABVIEW_PART_BG_SCRL</span></code> to the related tab's content. The tab buttons can be accessed via <code class="docutils literal notranslate"><span class="pre">LV_TABVIEW_PART_TAB_BTN</span></code>. When tabs are selected, the buttons are in the checked state, and can be styled using <code class="docutils literal notranslate"><span class="pre">LV_STATE_CHECKED</span></code>.
 The height of the tab's button matrix is calculated from the font height plus padding of the background's and the button's style.</p></li>
 </ul>
 <p>All the listed parts supports the typical background style properties and padding.</p>
@@ -1372,7 +1376,7 @@ It can be enabled with <code class="docutils literal notranslate"><span class="p
 </div>
 <div class="section" id="events">
 <h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
-<p>Besides the <a class="reference external" href="/overview/event.html#generic-events">Generic events</a> the following <a class="reference external" href="/overview/event.html#special-events">Special events</a> are sent by the Slider:</p>
+<p>Besides the <a class="reference external" href="../overview/event.html#generic-events">Generic events</a> the following <a class="reference external" href="../overview/event.html#special-events">Special events</a> are sent by the Slider:</p>
 <ul class="simple">
 <li><p><strong>LV_EVENT_VALUE_CHANGED</strong> Sent when a new tab is selected by sliding or clicking the tab button</p></li>
 </ul>
@@ -1591,6 +1595,20 @@ It can be enabled with <code class="docutils literal notranslate"><span class="p
 </dd></dl>
 
 <dl class="cpp function">
+<dt id="_CPPv423lv_tabview_set_tab_nameP8lv_obj_t8uint16_tPc">
+<span id="_CPPv323lv_tabview_set_tab_nameP8lv_obj_t8uint16_tPc"></span><span id="_CPPv223lv_tabview_set_tab_nameP8lv_obj_t8uint16_tPc"></span><span id="lv_tabview_set_tab_name__lv_obj_tP.uint16_t.cP"></span><span class="target" id="lv__tabview_8h_1a505353f99846d237de670e5359276786"></span>void <code class="sig-name descname">lv_tabview_set_tab_name</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>tabview</em>, uint16_t <em>id</em>, char *<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_tabview_set_tab_nameP8lv_obj_t8uint16_tPc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the name of a tab. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tabview</span></code>: pointer to Tab view object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: index of the tab the name should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: new tab name </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt id="_CPPv424lv_tabview_set_anim_timeP8lv_obj_t8uint16_t">
 <span id="_CPPv324lv_tabview_set_anim_timeP8lv_obj_t8uint16_t"></span><span id="_CPPv224lv_tabview_set_anim_timeP8lv_obj_t8uint16_t"></span><span id="lv_tabview_set_anim_time__lv_obj_tP.uint16_t"></span><span class="target" id="lv__tabview_8h_1ad41b58634d3d96a63a66c1b767ff6b76"></span>void <code class="sig-name descname">lv_tabview_set_anim_time</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>tabview</em>, uint16_t <em>anim_time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_tabview_set_anim_timeP8lv_obj_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set the animation time of tab view when a new tab is loaded <dl class="simple">
@@ -1764,7 +1782,7 @@ It can be enabled with <code class="docutils literal notranslate"><span class="p
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Jul 21, 2020.
+        Last updated on Aug 18, 2020.
       </span>
 
     </p>

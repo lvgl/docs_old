@@ -39,7 +39,7 @@ You can set the styles with `lv_cont_set_style(btn, LV_CONT_STYLE_MAIN, &style)`
 - **style.body** properties are used.
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

@@ -77,7 +77,7 @@ These events are sent only by pointer-like input devices (E.g. mouse or touchpad
 
 #### Related to keypad and encoder
 These events are sent by keypad and encoder input devices. Learn more about *Groups* in [overview/indev](Input devices) section.
-- **LV_EVENT_KEY** A *Key* is sent to the object. Typically when it was pressed or repeated after a long press
+- **LV_EVENT_KEY** A *Key* is sent to the object. Typically when it was pressed or repeated after a long press. The key can be retrived by `uint32_t * key = lv_event_get_data()`
 - **LV_EVENT_FOCUSED** The object is focused in its group
 - **LV_EVENT_DEFOCUSED** The object is defocused in its group
 
