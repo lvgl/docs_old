@@ -13,7 +13,7 @@ def cmd(s):
   print("----------------------------")
   r = os.system(s)
   if r != 0: 
-    print "Exit update due to previous error"
+    print("Exit update due to previous error")
     exit(-1)
     
         
