@@ -672,12 +672,13 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Container (lv_cont)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parts-and-styles">Parts and Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#layout">Layout</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#autofit">Autofit</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
@@ -1317,44 +1318,46 @@
 <h1>Container (lv_cont)<a class="headerlink" href="#container-lv-cont" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>The containers are essentially a <strong>basic object</strong> with some special features.</p>
+<p>The containers are essentially a <strong>basic object</strong> with layout and automatic sizing features features.</p>
+</div>
+<div class="section" id="parts-and-styles">
+<h2>Parts and Styles<a class="headerlink" href="#parts-and-styles" title="Permalink to this headline">¶</a></h2>
+<p>The containers has only a main style called <code class="docutils literal notranslate"><span class="pre">LV_CONT_PART_MAIN</span></code> and it can use all the typicaly bacground properties properties and padding for layout auto sizing.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="layout">
 <h3>Layout<a class="headerlink" href="#layout" title="Permalink to this headline">¶</a></h3>
-<p>You can apply a layout on the containers to automatically order their children. The layout spacing comes from <code class="docutils literal notranslate"><span class="pre">style.body.padding.</span> <span class="pre">...</span></code> properties. The possible layout options:</p>
+<p>You can apply a layout on the containers to automatically order their children. The layout spacing comes from the style's <code class="docutils literal notranslate"><span class="pre">pad</span></code> properties. The possible layout options:</p>
 <ul class="simple">
 <li><p><strong>LV_LAYOUT_OFF</strong> - Do not align the children.</p></li>
-<li><p><strong>LV_LAYOUT_CENTER</strong> - Align children to the center in column and keep <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between them.</p></li>
-<li><p><strong>LV_LAYOUT_COL_</strong> - Align children in a left-justified column. Keep <code class="docutils literal notranslate"><span class="pre">padding.left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">pad.top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_COL_M</strong> - Align children in centered column. Keep <code class="docutils literal notranslate"><span class="pre">padding.top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_COL_R</strong> - Align children in a right-justified column. Keep <code class="docutils literal notranslate"><span class="pre">padding.right</span></code> space on the right, <code class="docutils literal notranslate"><span class="pre">padding.top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_ROW_T</strong> - Align children in a top justified row. Keep <code class="docutils literal notranslate"><span class="pre">padding.left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">padding.top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_ROW_M</strong> - Align children in centered row. Keep <code class="docutils literal notranslate"><span class="pre">padding.left</span></code> space on the left and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_ROW_B</strong> - Align children in a bottom justified row. Keep <code class="docutils literal notranslate"><span class="pre">padding.left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">padding.bottom</span></code> space on the bottom and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_PRETTY</strong> - Put as many objects as possible in a row (with at least <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space and <code class="docutils literal notranslate"><span class="pre">padding.left/right</span></code> space on the sides). Divide the space in each line equally between the children.
-Keep <code class="docutils literal notranslate"><span class="pre">padding.top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">pad.inner</span></code> space between the lines.</p></li>
-<li><p><strong>LV_LAYOUT_GRID</strong> - Similar to <code class="docutils literal notranslate"><span class="pre">LV_LAYOUT_PRETTY</span></code> but not divide horizontal space equally just let <code class="docutils literal notranslate"><span class="pre">padding.left/right</span></code> on the edges and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the elements.</p></li>
+<li><p><strong>LV_LAYOUT_CENTER</strong> - Align children to the center in column and keep <code class="docutils literal notranslate"><span class="pre">padd_inner</span></code> space between them.</p></li>
+<li><p><strong>LV_LAYOUT_COLUMN_LEFT</strong> - Align children in a left-justified column. Keep <code class="docutils literal notranslate"><span class="pre">padd_left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">pad_top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_COLUMN_MID</strong> - Align children in centered column. Keep <code class="docutils literal notranslate"><span class="pre">padd_top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_COLUMN_RIGHT</strong> - Align children in a right-justified column. Keep <code class="docutils literal notranslate"><span class="pre">padd_right</span></code> space on the right, <code class="docutils literal notranslate"><span class="pre">pad_top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_ROW_TOP</strong> - Align children in a top justified row. Keep <code class="docutils literal notranslate"><span class="pre">pad_left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">pad_top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_ROW_MID</strong> - Align children in centered row. Keep <code class="docutils literal notranslate"><span class="pre">pad_left</span></code> space on the left and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_ROW_BOTTOM</strong> - Align children in a bottom justified row. Keep <code class="docutils literal notranslate"><span class="pre">pad_left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">pad_bottom</span></code> space on the bottom and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_PRETTY_TOP</strong> - Put as many objects as possible in a row (with at least <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space and <code class="docutils literal notranslate"><span class="pre">pad_left/right</span></code> space on the sides). Divide the space in each line equally between the children.
+If here are children with different height in a row align their top edge.</p></li>
+<li><p><strong>LV_LAYOUT_PRETTY_MID</strong> - Same as <code class="docutils literal notranslate"><span class="pre">LV_LAYOUT_PRETTY_TOP</span></code> but if here are children with different height in a row align their middle line.</p></li>
+<li><p><strong>LV_LAYOUT_PRETTY_BOTTOM</strong> -  Same as <code class="docutils literal notranslate"><span class="pre">LV_LAYOUT_PRETTY_TOP</span></code> but if here are children with different height in a row align their bottom line.</p></li>
+<li><p><strong>LV_LAYOUT_GRID</strong> - Similar to <code class="docutils literal notranslate"><span class="pre">LV_LAYOUT_PRETTY</span></code> but not divide horizontal space equally just let <code class="docutils literal notranslate"><span class="pre">pad_left/right</span></code> on the edges and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the elements.</p></li>
 </ul>
 </div>
 <div class="section" id="autofit">
 <h3>Autofit<a class="headerlink" href="#autofit" title="Permalink to this headline">¶</a></h3>
-<p>Container have an autofit feature which can automatically change the size of the container according to its children and/or parent. The following options exist:</p>
+<p>Container have an autofit feature which can automatically change the size of the container according to its children and/or its parent. The following options exist:</p>
 <ul class="simple">
 <li><p><strong>LV_FIT_NONE</strong> - Do not change the size automatically.</p></li>
-<li><p><strong>LV_FIT_TIGHT</strong> - Shrink-wrap the container around all of its children, while keeping <code class="docutils literal notranslate"><span class="pre">padding.top/bottom/left/right</span></code> space on the edges.</p></li>
-<li><p><strong>LV_FIT_FLOOD</strong> - Set the size to the parent's size minus <code class="docutils literal notranslate"><span class="pre">padding.top/bottom/left/right</span></code> (from the parent's style) space.</p></li>
-<li><p><strong>LV_FIT_FILL</strong> - Use <code class="docutils literal notranslate"><span class="pre">LV_FIT_FLOOD</span></code> while smaller than the parent and <code class="docutils literal notranslate"><span class="pre">LV_FIT_TIGHT</span></code> when larger. It will ensure that the container is, at minimum, the size of its parent.</p></li>
+<li><p><strong>LV_FIT_TIGHT</strong> - Shrink-wrap the container around all of its children, while keeping <code class="docutils literal notranslate"><span class="pre">pad_top/bottom/left/right</span></code> space on the edges.</p></li>
+<li><p><strong>LV_FIT_PARENT</strong> - Set the size to the parent's size minus <code class="docutils literal notranslate"><span class="pre">pad_top/bottom/left/right</span></code> (from the parent's style) space.</p></li>
+<li><p><strong>LV_FIT_MAX</strong> - Use <code class="docutils literal notranslate"><span class="pre">LV_FIT_PARENT</span></code> while smaller than the parent and <code class="docutils literal notranslate"><span class="pre">LV_FIT_TIGHT</span></code> when larger. It will ensure that the container is, at minimum, the size of its parent.</p></li>
 </ul>
 <p>To set the auto fit mode for all directions, use <code class="docutils literal notranslate"><span class="pre">lv_cont_set_fit(cont,</span> <span class="pre">LV_FIT_...)</span></code>.
 To use different auto fit horizontally and vertically, use <code class="docutils literal notranslate"><span class="pre">lv_cont_set_fit2(cont,</span> <span class="pre">hor_fit_type,</span> <span class="pre">ver_fit_type)</span></code>.
 To use different auto fit in all 4 directions, use <code class="docutils literal notranslate"><span class="pre">lv_cont_set_fit4(cont,</span> <span class="pre">left_fit_type,</span> <span class="pre">right_fit_type,</span> <span class="pre">top_fit_type,</span> <span class="pre">bottom_fit_type)</span></code>.</p>
 </div>
-</div>
-<div class="section" id="styles">
-<h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
-<p>You can set the styles with <code class="docutils literal notranslate"><span class="pre">lv_cont_set_style(btn,</span> <span class="pre">LV_CONT_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code>.</p>
-<ul class="simple">
-<li><p><strong>style.body</strong> properties are used.</p></li>
-</ul>
 </div>
 <div class="section" id="events">
 <h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
@@ -1811,7 +1814,7 @@ To use different auto fit in all 4 directions, use <code class="docutils literal
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Aug 18, 2020.
+        Last updated on Aug 20, 2020.
       </span>
 
     </p>

@@ -31,6 +31,7 @@ To make buttons usage simpler the button's state can be get with `lv_btn_get_sta
 - **LV_BTN_STATE_CHECKED_RELEASED**
 - **LV_BTN_STATE_CHECKED_PRESSED**
 - **LV_BTN_STATE_DISABLED**
+- **LV_BTN_STATE_CHECKED_DISABLED**
 
 With `lv_btn_get_state(btn, LV_BTN_STATE_...)` the buttons state can be changed manually.
 
