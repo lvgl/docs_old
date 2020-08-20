@@ -24,31 +24,11 @@ On every release (first and third Tuesday of every month)
 
 ## Contributing
 
-### Improve the docs
-
 As you read the documentation you might see some typos or unclear sentences. 
 For typos and straightforward fixes, you can simply edit the file on GitHub. There is an `Edit on Github` link on the top right-hand corner of all pages.
 Click it to see the file on GitHub, hit the Edit button, and add you fixes as described in [Pull request - From GitHub](https://docs.lvgl.io/latest/en/html/contributing/index.html#from-github) section.
 
 Note that the documentation is also formatted in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). 
-
-### Translate the docs
-
-If you have more free time you can even translate the documentation. The currently available languages are shown in the [locals](https://github.com/lvgl/docs/tree/latest/locales) folder.
-
-If your chosen language is still not added, please write a comment [here](https://forum.lvgl.io/t/translate-the-documentation/238).
-
-To add your translations:
-- Use the [latest branch](https://github.com/lvgl/docs/tree/latest) to add translations
-- Find the *.po* in `locals/<language_code>/LC_MESSAGES/<section_name>.po`. E.g. the German translation of `widgets.md` should be in `locals/de/LC_MESSAGES/widgets.po`. 
-- Open a po file and fill the `msgstr` fields with the translation
-- Send a [Pull request](https://docs.lvgl.io/latest/en/html/contributing/index.html#pull-request)
-
-To display a translation in the public documentation page at least these sections should be translated:
-- Get started: Quick overview
-- Overview: Objects, Events, Styles
-- Porting: System overview, Set-up a project, Display interface, Input device Interface, Tick interface
-- 5 widgets of your choice
 
 ## Rebuild the documentation
 
