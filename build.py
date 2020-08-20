@@ -14,7 +14,7 @@ def cmd(s):
   print("-------------------------------------")
   r = os.system(s)
   if r != 0: 
-    print "Exit build due to previous error"
+    print("Exit build due to previous error")
     exit(-1)
 
 # Get the current branch name
