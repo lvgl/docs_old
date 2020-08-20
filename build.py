@@ -35,10 +35,10 @@ if len(args) >= 1:
   if "clean" in args: clean = 1
   
 lang = "en"
-print ""
-print "****************"
-print "Building"
-print "****************"
+print("")
+print("****************")
+print("Building")
+print("****************")
 if clean:
   cmd("rm -rf " + lang)
   cmd("mkdir " + lang)
