@@ -72,7 +72,7 @@ An "edge flash" effect can be added when the tile view reached hits an invalid p
 Use `lv_tileview_set_edge_flash(tileview, true)` to enable this feature.
 
 ## Events
-Besides the [Generic events](/overview/event.html#generic-events) the following [Special events](/overview/event.html#special-events) are sent by the Slider:
+Besides the [Generic events](../overview/event.html#generic-events) the following [Special events](../overview/event.html#special-events) are sent by the Slider:
 - **LV_EVENT_VALUE_CHANGED** Sent when a new tile loaded either with scrolling or `lv_tileview_set_act`. The event data is set ti the index of the new tile in `valid_pos_array` (It's type is `uint32_t *`)
 
 ## Keys

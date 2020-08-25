@@ -14,7 +14,7 @@ It also uses the *text* properties to set the style of the scale labels. *pad_in
 `LV_GAUGE_PART_MAJOR` is a virtual part which describes the  major scale lines (where labels are added) using the *line* and *scale* style properties.
 
 `LV_GAUGE_PART_NEEDLE` is also virtual part and it describes the needle(s) via the *line* style properties. 
-*size* and the typical background properties are used to describe a rectangle (or circle) in the picot point of the needle(s).
+The *size* and the typical background properties are used to describe a rectangle (or circle) in the pivot point of the needle(s).
 *pad_inner* is used to to make the needle(s) smaller than the outer radius of the scale lines.
 
 ## Usage
@@ -44,7 +44,7 @@ An images also can be used as needles. The image should point to the right (like
 To set a critical value, use `lv_gauge_set_critical_value(gauge, value)`. The scale color will be changed to *scale_end_color* after this value. The default critical value is 80.
 
 ## Events
-Only the [Generic events](/overview/event.html#generic-events) are sent by the object type.
+Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
 
 Learn more about [Events](/overview/event).
 

@@ -33,39 +33,27 @@ trans = 0
 args = sys.argv[1:]
 if len(args) >= 1:
   if "clean" in args: clean = 1
-  if "trans" in args: trans = 1
   
-if trans:
-  cmd("make -j8 gettext")
+lang = "en"
+print ""
+print "****************"
+print "Building"
+print "****************"
+if clean:
+  cmd("rm -rf " + lang)
+  cmd("mkdir " + lang)
 
+# BUILD PDF
 
-u = "sphinx-intl update -p gettext "
-for lang in langs:
-  u += " -l " + lang
+# Silly workarond to include the more or less correct PDF download link in the PDF
+cmd("cp -f " + lang +"/latex/LVGL.pdf LVGL.pdf | true")
+cmd("sphinx-build -b latex . en/latex")
 
-cmd(u)
+# Generat PDF
+cmd("cd " + lang + "/latex && xelatex -interaction=batchmode *.tex")
+# Copy the result PDF to the main diractory to make it avaiable for the HTML build
+cmd("cd " + lang + "/latex && cp -f LVGL.pdf ../../LVGL.pdf")
 
+# BULD HTML
+cmd("sphinx-build -b html . en/html")
 
-for lang in langs:
-  print ""
-  print "****************"
-  print "Building " + lang
-  print "****************"
-  if clean:
-    cmd("rm -rf " + lang)
-    cmd("mkdir " + lang)
-  
-  # BUILD PDF
-  
-  # Silly workarond to include the more or less correct PDF download link in the PDF
-  cmd("cp -f " + lang +"/latex/LVGL.pdf LVGL.pdf | true")
-  cmd("BUILDDIR=\"" + lang + "\" make -j8 -e SPHINXOPTS=\"-D language='" + lang + "'\"  latex")
-  
-  # Generat PDF
-  cmd("cd " + lang + "/latex && xelatex -interaction=batchmode *.tex")
-  # Copy the result PDF to the main diractory to make it avaiable for the HTML build
-  cmd("cd " + lang + "/latex && cp -f LVGL.pdf ../../LVGL.pdf")
-
-  # BULD HTML
-  cmd("BUILDDIR=\"" + lang + "\" make -j8 -e SPHINXOPTS=\"-D language='" + lang + "'\" html")
-  
