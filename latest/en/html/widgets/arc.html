@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.4.0-dev
+                v7.4.0
               </div>
             
           
@@ -400,6 +400,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-font">Add new font</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-symbols">Add new symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#load-font-in-run-time">Load font in run-time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-a-new-font-engine">Add a new font engine</a></li>
 </ul>
 </li>
@@ -510,6 +511,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#angles">Angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rotation">Rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#range-and-values">Range and values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#type">Type</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
@@ -1324,8 +1328,10 @@
 <h2>Parts and Styles<a class="headerlink" href="#parts-and-styles" title="Permalink to this headline">¶</a></h2>
 <p>The Arc's main part is called <code class="docutils literal notranslate"><span class="pre">LV_ARC_PART_MAIN</span></code>. It draws a background using the typical background style properties and an arc using the <em>line</em> style properties.
 The arc's size and position will respect the <em>padding</em> style properties.</p>
-<p><code class="docutils literal notranslate"><span class="pre">LV_ARC_PART_INDIC</span></code> is virtual part and it draws an other arc using the <em>line</em> style proeprties. It's padding values are interpreted relative to the background arc.
+<p><code class="docutils literal notranslate"><span class="pre">LV_ARC_PART_INDIC</span></code> is virtual part and it draws an other arc using the <em>line</em> style properties. It's padding values are interpreted relative to the background arc.
 The radius of the indicator arc will be modified according to the greatest padding value.</p>
+<p><code class="docutils literal notranslate"><span class="pre">LV_ARC_PART_KNOB</span></code> is virtual part and it draws on the end of the arc indicator. It uses all background properties and padding values. With zero padding the knob size is the same as the indicator's width.
+Larger padding makes it larger, smaller padding makes it smaller.</p>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
@@ -1336,10 +1342,32 @@ Zero degree is at the middle right (3 o'clock) of the object and the degrees are
 The angles should be in [0;360] range.</p>
 <p>Similarly, <code class="docutils literal notranslate"><span class="pre">lv_arc_set_angles(arc,</span> <span class="pre">start_angle,</span> <span class="pre">end_angle)</span></code> function or <code class="docutils literal notranslate"><span class="pre">lv_arc_set_start/end_angle(arc,</span> <span class="pre">start_angle)</span></code> sets the angles of the indicator arc.</p>
 </div>
+<div class="section" id="rotation">
+<h3>Rotation<a class="headerlink" href="#rotation" title="Permalink to this headline">¶</a></h3>
+<p>An offset to the 0 degree position can added with <code class="docutils literal notranslate"><span class="pre">lv_arc_set_rotation(arc,</span> <span class="pre">deg)</span></code>.</p>
+</div>
+<div class="section" id="range-and-values">
+<h3>Range and values<a class="headerlink" href="#range-and-values" title="Permalink to this headline">¶</a></h3>
+<p>Besides setting angles manually the arc can have a range and a value. To set the range use <code class="docutils literal notranslate"><span class="pre">lv_arc_set_range(arc,</span> <span class="pre">min,</span> <span class="pre">max)</span></code> and to set a value use <code class="docutils literal notranslate"><span class="pre">lv_arc_set_value(arc,</span> <span class="pre">value)</span></code>.
+Using range and value the angle of the indicator will be mapped between background angles.</p>
+</div>
+<div class="section" id="type">
+<h3>Type<a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h3>
+<p>The arc can have the different &quot;types&quot;. They are used only the value is set by <code class="docutils literal notranslate"><span class="pre">lv_arc_set_value</span></code>.
+The following types exist:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_ARC_TYPE_NORMAL</span></code> indicator arc drawn clockwise (min to current)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_ARC_TYPE_REVERSE</span></code> indicator arc drawn counter clockwise (max to current)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LV_ARC_TYPE_SYMMETRIC</span></code> indicator arc drawn from the middle point to the current value.</p></li>
+</ul>
+</div>
 </div>
 <div class="section" id="events">
 <h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
-<p>Only the <a class="reference external" href="../overview/event.html#generic-events">Generic events</a> are sent by the object type.</p>
+<p>Besides the <a class="reference external" href="../overview/event.html#generic-events">Generic events</a> the following <a class="reference external" href="../overview/event.html#special-events">Special events</a> are sent by the arcs:</p>
+<ul class="simple">
+<li><p><strong>LV_EVENT_VALUE_CHANGED</strong> sent when the arc is pressed/dragged to set a new value.</p></li>
+</ul>
 <p>Learn more about <a class="reference internal" href="../overview/event.html"><span class="doc">Events</span></a>.</p>
 </div>
 <div class="section" id="keys">
@@ -1436,6 +1464,11 @@ The angles should be in [0;360] range.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Typedefs</p>
 <dl class="cpp type">
+<dt id="_CPPv413lv_arc_type_t">
+<span id="_CPPv313lv_arc_type_t"></span><span id="_CPPv213lv_arc_type_t"></span><span id="lv_arc_type_t"></span><span class="target" id="lv__arc_8h_1a9f6516f49754891c28640a508df76ab9"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_arc_type_t</code><a class="headerlink" href="#_CPPv413lv_arc_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
 <dt id="_CPPv413lv_arc_part_t">
 <span id="_CPPv313lv_arc_part_t"></span><span id="_CPPv213lv_arc_part_t"></span><span id="lv_arc_part_t"></span><span class="target" id="lv__arc_8h_1a41631a9c320d475a8cc0e75ed4882cdb"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">lv_arc_part_t</code><a class="headerlink" href="#_CPPv413lv_arc_part_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
@@ -1448,23 +1481,49 @@ The angles should be in [0;360] range.</p>
 <span id="_CPPv3Ut2_52"></span><span class="target" id="lv__arc_8h_1a7cc2e4244ca368f68e5746185eda6c4a"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut2_52" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p><em>Values:</em></p>
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_5214LV_ARC_PART_BGE">
-<span id="_CPPv3NUt2_5214LV_ARC_PART_BGE"></span><span class="target" id="lv__arc_8h_1a7cc2e4244ca368f68e5746185eda6c4aa24eea0a7badc2d9dfe98601a98028fce"></span><em class="property">enumerator </em><code class="sig-name descname">LV_ARC_PART_BG</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_816LV_OBJ_PART_MAINE" title="[anonymous]::LV_OBJ_PART_MAIN">LV_OBJ_PART_MAIN</a><a class="headerlink" href="#_CPPv4NUt2_5214LV_ARC_PART_BGE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_5218LV_ARC_TYPE_NORMALE">
+<span id="_CPPv3NUt2_5218LV_ARC_TYPE_NORMALE"></span><span class="target" id="lv__arc_8h_1a7cc2e4244ca368f68e5746185eda6c4aafcb207e31820b5c25c1e05f652d21363"></span><em class="property">enumerator </em><code class="sig-name descname">LV_ARC_TYPE_NORMAL</code><a class="headerlink" href="#_CPPv4NUt2_5218LV_ARC_TYPE_NORMALE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_5217LV_ARC_PART_INDICE">
-<span id="_CPPv3NUt2_5217LV_ARC_PART_INDICE"></span><span class="target" id="lv__arc_8h_1a7cc2e4244ca368f68e5746185eda6c4aaa9069dd85f61b8bf511e46172d937010"></span><em class="property">enumerator </em><code class="sig-name descname">LV_ARC_PART_INDIC</code><a class="headerlink" href="#_CPPv4NUt2_5217LV_ARC_PART_INDICE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_5221LV_ARC_TYPE_SYMMETRICE">
+<span id="_CPPv3NUt2_5221LV_ARC_TYPE_SYMMETRICE"></span><span class="target" id="lv__arc_8h_1a7cc2e4244ca368f68e5746185eda6c4aaee927737f45ad0b8225b31ab616edb1e"></span><em class="property">enumerator </em><code class="sig-name descname">LV_ARC_TYPE_SYMMETRIC</code><a class="headerlink" href="#_CPPv4NUt2_5221LV_ARC_TYPE_SYMMETRICE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_5225_LV_ARC_PART_VIRTUAL_LASTE">
-<span id="_CPPv3NUt2_5225_LV_ARC_PART_VIRTUAL_LASTE"></span><span class="target" id="lv__arc_8h_1a7cc2e4244ca368f68e5746185eda6c4aaca0c5ce80aa838d38555be73a3166f84"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_ARC_PART_VIRTUAL_LAST</code><a class="headerlink" href="#_CPPv4NUt2_5225_LV_ARC_PART_VIRTUAL_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_5219LV_ARC_TYPE_REVERSEE">
+<span id="_CPPv3NUt2_5219LV_ARC_TYPE_REVERSEE"></span><span class="target" id="lv__arc_8h_1a7cc2e4244ca368f68e5746185eda6c4aa7f7734d1a50c966335a5ecb2a1902729"></span><em class="property">enumerator </em><code class="sig-name descname">LV_ARC_TYPE_REVERSE</code><a class="headerlink" href="#_CPPv4NUt2_5219LV_ARC_TYPE_REVERSEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4Ut2_53">
+<span id="_CPPv3Ut2_53"></span><span class="target" id="lv__arc_8h_1aedcf2109f459315e1a7f2af73ec9b603"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut2_53" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_5314LV_ARC_PART_BGE">
+<span id="_CPPv3NUt2_5314LV_ARC_PART_BGE"></span><span class="target" id="lv__arc_8h_1aedcf2109f459315e1a7f2af73ec9b603a24eea0a7badc2d9dfe98601a98028fce"></span><em class="property">enumerator </em><code class="sig-name descname">LV_ARC_PART_BG</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_816LV_OBJ_PART_MAINE" title="[anonymous]::LV_OBJ_PART_MAIN">LV_OBJ_PART_MAIN</a><a class="headerlink" href="#_CPPv4NUt2_5314LV_ARC_PART_BGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_5222_LV_ARC_PART_REAL_LASTE">
-<span id="_CPPv3NUt2_5222_LV_ARC_PART_REAL_LASTE"></span><span class="target" id="lv__arc_8h_1a7cc2e4244ca368f68e5746185eda6c4aaeee6b31c8019d3b3b315ed83d9b20785"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_ARC_PART_REAL_LAST</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_822_LV_OBJ_PART_REAL_LASTE" title="[anonymous]::_LV_OBJ_PART_REAL_LAST">_LV_OBJ_PART_REAL_LAST</a><a class="headerlink" href="#_CPPv4NUt2_5222_LV_ARC_PART_REAL_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_5317LV_ARC_PART_INDICE">
+<span id="_CPPv3NUt2_5317LV_ARC_PART_INDICE"></span><span class="target" id="lv__arc_8h_1aedcf2109f459315e1a7f2af73ec9b603aa9069dd85f61b8bf511e46172d937010"></span><em class="property">enumerator </em><code class="sig-name descname">LV_ARC_PART_INDIC</code><a class="headerlink" href="#_CPPv4NUt2_5317LV_ARC_PART_INDICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_5316LV_ARC_PART_KNOBE">
+<span id="_CPPv3NUt2_5316LV_ARC_PART_KNOBE"></span><span class="target" id="lv__arc_8h_1aedcf2109f459315e1a7f2af73ec9b603aeba945f6f6786f4af37ceff3956bdda2"></span><em class="property">enumerator </em><code class="sig-name descname">LV_ARC_PART_KNOB</code><a class="headerlink" href="#_CPPv4NUt2_5316LV_ARC_PART_KNOBE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_5325_LV_ARC_PART_VIRTUAL_LASTE">
+<span id="_CPPv3NUt2_5325_LV_ARC_PART_VIRTUAL_LASTE"></span><span class="target" id="lv__arc_8h_1aedcf2109f459315e1a7f2af73ec9b603aca0c5ce80aa838d38555be73a3166f84"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_ARC_PART_VIRTUAL_LAST</code><a class="headerlink" href="#_CPPv4NUt2_5325_LV_ARC_PART_VIRTUAL_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_5322_LV_ARC_PART_REAL_LASTE">
+<span id="_CPPv3NUt2_5322_LV_ARC_PART_REAL_LASTE"></span><span class="target" id="lv__arc_8h_1aedcf2109f459315e1a7f2af73ec9b603aeee6b31c8019d3b3b315ed83d9b20785"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_ARC_PART_REAL_LAST</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_822_LV_OBJ_PART_REAL_LASTE" title="[anonymous]::_LV_OBJ_PART_REAL_LAST">_LV_OBJ_PART_REAL_LAST</a><a class="headerlink" href="#_CPPv4NUt2_5322_LV_ARC_PART_REAL_LASTE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1581,6 +1640,59 @@ The angles should be in [0;360] range.</p>
 </dd></dl>
 
 <dl class="cpp function">
+<dt id="_CPPv415lv_arc_set_typeP8lv_obj_t13lv_arc_type_t">
+<span id="_CPPv315lv_arc_set_typeP8lv_obj_t13lv_arc_type_t"></span><span id="_CPPv215lv_arc_set_typeP8lv_obj_t13lv_arc_type_t"></span><span id="lv_arc_set_type__lv_obj_tP.lv_arc_type_t"></span><span class="target" id="lv__arc_8h_1a6b928c8031f7402c50004f6d9e7c62c8"></span>void <code class="sig-name descname">lv_arc_set_type</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>arc</em>, <a class="reference internal" href="#_CPPv413lv_arc_type_t" title="lv_arc_type_t">lv_arc_type_t</a> <em>type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_arc_set_typeP8lv_obj_t13lv_arc_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the type of arc. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arc</span></code>: pointer to arc object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: arc type </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv416lv_arc_set_valueP8lv_obj_t7int16_t">
+<span id="_CPPv316lv_arc_set_valueP8lv_obj_t7int16_t"></span><span id="_CPPv216lv_arc_set_valueP8lv_obj_t7int16_t"></span><span id="lv_arc_set_value__lv_obj_tP.int16_t"></span><span class="target" id="lv__arc_8h_1aedadd05409b272e476117a61f584415a"></span>void <code class="sig-name descname">lv_arc_set_value</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>arc</em>, int16_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_arc_set_valueP8lv_obj_t7int16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a new value on the arc <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arc</span></code>: pointer to a arc object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: new value </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv416lv_arc_set_rangeP8lv_obj_t7int16_t7int16_t">
+<span id="_CPPv316lv_arc_set_rangeP8lv_obj_t7int16_t7int16_t"></span><span id="_CPPv216lv_arc_set_rangeP8lv_obj_t7int16_t7int16_t"></span><span id="lv_arc_set_range__lv_obj_tP.int16_t.int16_t"></span><span class="target" id="lv__arc_8h_1a25847ff6846d5672c2581bc8a4a6c9dc"></span>void <code class="sig-name descname">lv_arc_set_range</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>arc</em>, int16_t <em>min</em>, int16_t <em>max</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_arc_set_rangeP8lv_obj_t7int16_t7int16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set minimum and the maximum values of a arc <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arc</span></code>: pointer to the arc object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min</span></code>: minimum value </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max</span></code>: maximum value </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv419lv_arc_set_chg_rateP8lv_obj_t8uint16_t">
+<span id="_CPPv319lv_arc_set_chg_rateP8lv_obj_t8uint16_t"></span><span id="_CPPv219lv_arc_set_chg_rateP8lv_obj_t8uint16_t"></span><span id="lv_arc_set_chg_rate__lv_obj_tP.uint16_t"></span><span class="target" id="lv__arc_8h_1ac96abe03196efa0878554d95c4ff280a"></span>void <code class="sig-name descname">lv_arc_set_chg_rate</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>arc</em>, uint16_t <em>threshold</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_arc_set_chg_rateP8lv_obj_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the threshold of arc knob increments position. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arc</span></code>: pointer to a arc object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">threshold</span></code>: increment threshold </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt id="_CPPv422lv_arc_get_angle_startP8lv_obj_t">
 <span id="_CPPv322lv_arc_get_angle_startP8lv_obj_t"></span><span id="_CPPv222lv_arc_get_angle_startP8lv_obj_t"></span><span id="lv_arc_get_angle_start__lv_obj_tP"></span><span class="target" id="lv__arc_8h_1ac2f790cbc6ed0a2a00edd23e623ade07"></span>uint16_t <code class="sig-name descname">lv_arc_get_angle_start</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>arc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lv_arc_get_angle_startP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the start angle of an arc. <dl class="simple">
@@ -1636,6 +1748,76 @@ The angles should be in [0;360] range.</p>
 </p>
 </dd></dl>
 
+<dl class="cpp function">
+<dt id="_CPPv415lv_arc_get_typePK8lv_obj_t">
+<span id="_CPPv315lv_arc_get_typePK8lv_obj_t"></span><span id="_CPPv215lv_arc_get_typePK8lv_obj_t"></span><span id="lv_arc_get_type__lv_obj_tCP"></span><span class="target" id="lv__arc_8h_1aa1ab8d75b1f5b8049fa06c94695fce1a"></span><a class="reference internal" href="#_CPPv413lv_arc_type_t" title="lv_arc_type_t">lv_arc_type_t</a> <code class="sig-name descname">lv_arc_get_type</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>arc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_arc_get_typePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get whether the arc is type or not. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>arc type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arc</span></code>: pointer to a arc object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv416lv_arc_get_valuePK8lv_obj_t">
+<span id="_CPPv316lv_arc_get_valuePK8lv_obj_t"></span><span id="_CPPv216lv_arc_get_valuePK8lv_obj_t"></span><span id="lv_arc_get_value__lv_obj_tCP"></span><span class="target" id="lv__arc_8h_1aaded4e245eeff93cd27acd111172940d"></span>int16_t <code class="sig-name descname">lv_arc_get_value</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>arc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_arc_get_valuePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the value of the of a arc <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the value of the of the arc </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arc</span></code>: pointer to a arc object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv420lv_arc_get_min_valuePK8lv_obj_t">
+<span id="_CPPv320lv_arc_get_min_valuePK8lv_obj_t"></span><span id="_CPPv220lv_arc_get_min_valuePK8lv_obj_t"></span><span id="lv_arc_get_min_value__lv_obj_tCP"></span><span class="target" id="lv__arc_8h_1aa86a70c966190a6d03ce8450fc80be22"></span>int16_t <code class="sig-name descname">lv_arc_get_min_value</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>arc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_arc_get_min_valuePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the minimum value of a arc <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the minimum value of the arc </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arc</span></code>: pointer to a arc object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv420lv_arc_get_max_valuePK8lv_obj_t">
+<span id="_CPPv320lv_arc_get_max_valuePK8lv_obj_t"></span><span id="_CPPv220lv_arc_get_max_valuePK8lv_obj_t"></span><span id="lv_arc_get_max_value__lv_obj_tCP"></span><span class="target" id="lv__arc_8h_1a81261e0d0868bb2f03c8706bb12ef037"></span>int16_t <code class="sig-name descname">lv_arc_get_max_value</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>arc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_arc_get_max_valuePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the maximum value of a arc <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the maximum value of the arc </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arc</span></code>: pointer to a arc object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv417lv_arc_is_draggedPK8lv_obj_t">
+<span id="_CPPv317lv_arc_is_draggedPK8lv_obj_t"></span><span id="_CPPv217lv_arc_is_draggedPK8lv_obj_t"></span><span id="lv_arc_is_dragged__lv_obj_tCP"></span><span class="target" id="lv__arc_8h_1a19634ce52fa1e35f22c1a612e18078f3"></span>bool <code class="sig-name descname">lv_arc_is_dragged</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>arc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_arc_is_draggedPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Give the arc is being dragged or not <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: drag in progress false: not dragged </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arc</span></code>: pointer to a arc object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
 </div>
 <dl class="cpp struct">
 <dt id="_CPPv412lv_arc_ext_t">
@@ -1672,6 +1854,51 @@ The angles should be in [0;360] range.</p>
 <span id="_CPPv3N12lv_arc_ext_t9style_arcE"></span><span id="_CPPv2N12lv_arc_ext_t9style_arcE"></span><span id="lv_arc_ext_t::style_arc__lv_style_list_t"></span><span class="target" id="structlv__arc__ext__t_1a9b71cd3661726abc6e38ece159f993c6"></span>lv_style_list_t <code class="sig-name descname">style_arc</code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t9style_arcE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_arc_ext_t10style_knobE">
+<span id="_CPPv3N12lv_arc_ext_t10style_knobE"></span><span id="_CPPv2N12lv_arc_ext_t10style_knobE"></span><span id="lv_arc_ext_t::style_knob__lv_style_list_t"></span><span class="target" id="structlv__arc__ext__t_1a8cbbc83f999df17dda4e577b5cd94dd9"></span>lv_style_list_t <code class="sig-name descname">style_knob</code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t10style_knobE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_arc_ext_t9cur_valueE">
+<span id="_CPPv3N12lv_arc_ext_t9cur_valueE"></span><span id="_CPPv2N12lv_arc_ext_t9cur_valueE"></span><span id="lv_arc_ext_t::cur_value__int16_t"></span><span class="target" id="structlv__arc__ext__t_1a4ae9c071a2c4312139cc9c634528b10a"></span>int16_t <code class="sig-name descname">cur_value</code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t9cur_valueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_arc_ext_t9min_valueE">
+<span id="_CPPv3N12lv_arc_ext_t9min_valueE"></span><span id="_CPPv2N12lv_arc_ext_t9min_valueE"></span><span id="lv_arc_ext_t::min_value__int16_t"></span><span class="target" id="structlv__arc__ext__t_1a8a499141300cb892b149fca9fccdc5da"></span>int16_t <code class="sig-name descname">min_value</code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t9min_valueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_arc_ext_t9max_valueE">
+<span id="_CPPv3N12lv_arc_ext_t9max_valueE"></span><span id="_CPPv2N12lv_arc_ext_t9max_valueE"></span><span id="lv_arc_ext_t::max_value__int16_t"></span><span class="target" id="structlv__arc__ext__t_1ac194bde7ebc5721ceb8d50110b8e5240"></span>int16_t <code class="sig-name descname">max_value</code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t9max_valueE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_arc_ext_t8draggingE">
+<span id="_CPPv3N12lv_arc_ext_t8draggingE"></span><span id="_CPPv2N12lv_arc_ext_t8draggingE"></span><span id="lv_arc_ext_t::dragging__uint16_t"></span><span class="target" id="structlv__arc__ext__t_1a702888230d48414b8bb1a99caaa135c2"></span>uint16_t <code class="sig-name descname">dragging</code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t8draggingE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_arc_ext_t4typeE">
+<span id="_CPPv3N12lv_arc_ext_t4typeE"></span><span id="_CPPv2N12lv_arc_ext_t4typeE"></span><span id="lv_arc_ext_t::type__uint16_t"></span><span class="target" id="structlv__arc__ext__t_1a4e53205ffb12437cafe098fcace8407e"></span>uint16_t <code class="sig-name descname">type</code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t4typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_arc_ext_t8chg_rateE">
+<span id="_CPPv3N12lv_arc_ext_t8chg_rateE"></span><span id="_CPPv2N12lv_arc_ext_t8chg_rateE"></span><span id="lv_arc_ext_t::chg_rate__uint16_t"></span><span class="target" id="structlv__arc__ext__t_1acdb19620d77e1731b17866aad5426e04"></span>uint16_t <code class="sig-name descname">chg_rate</code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t8chg_rateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_arc_ext_t9last_tickE">
+<span id="_CPPv3N12lv_arc_ext_t9last_tickE"></span><span id="_CPPv2N12lv_arc_ext_t9last_tickE"></span><span id="lv_arc_ext_t::last_tick__uint32_t"></span><span class="target" id="structlv__arc__ext__t_1a5886eb793e7ec33707d672cc36aaf9b5"></span>uint32_t <code class="sig-name descname">last_tick</code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t9last_tickE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_arc_ext_t10last_angleE">
+<span id="_CPPv3N12lv_arc_ext_t10last_angleE"></span><span id="_CPPv2N12lv_arc_ext_t10last_angleE"></span><span id="lv_arc_ext_t::last_angle__int16_t"></span><span class="target" id="structlv__arc__ext__t_1a50bec6b937d32a2de1283383b811f0ef"></span>int16_t <code class="sig-name descname">last_angle</code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t10last_angleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
 </div>
 </dd></dl>
 
@@ -1700,7 +1927,7 @@ The angles should be in [0;360] range.</p>
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Aug 20, 2020.
+        Last updated on Sep 01, 2020.
       </span>
 
     </p>
