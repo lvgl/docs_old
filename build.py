@@ -14,7 +14,7 @@ def cmd(s):
   print("-------------------------------------")
   r = os.system(s)
   if r != 0: 
-    print "Exit build due to previous error"
+    print("Exit build due to previous error")
     exit(-1)
 
 # Get the current branch name
@@ -35,10 +35,10 @@ if len(args) >= 1:
   if "clean" in args: clean = 1
   
 lang = "en"
-print ""
-print "****************"
-print "Building"
-print "****************"
+print("")
+print("****************")
+print("Building")
+print("****************")
 if clean:
   cmd("rm -rf " + lang)
   cmd("mkdir " + lang)
