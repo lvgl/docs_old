@@ -13,6 +13,8 @@
     <member refid="struct__disp__drv__t_1a96466fc0be03f5b3526d382f2c4568bd" kind="variable"><name>set_px_cb</name></member>
     <member refid="struct__disp__drv__t_1aeea2bed761a832dcb30560146dfc3778" kind="variable"><name>monitor_cb</name></member>
     <member refid="struct__disp__drv__t_1a463877a89351206eb9e40547651676ca" kind="variable"><name>wait_cb</name></member>
+    <member refid="struct__disp__drv__t_1a2bd00c56f68ec6c2a54d192aa52d4292" kind="variable"><name>clean_dcache_cb</name></member>
+    <member refid="struct__disp__drv__t_1a849cd1810fe5b99ed3b6345f07efab3b" kind="variable"><name>gpu_wait_cb</name></member>
     <member refid="struct__disp__drv__t_1a3a51d09fd664baa53552c72e8209a39d" kind="variable"><name>gpu_blend_cb</name></member>
     <member refid="struct__disp__drv__t_1a6c5d122ced7061fc1195bb095a2edd2a" kind="variable"><name>gpu_fill_cb</name></member>
     <member refid="struct__disp__drv__t_1afcc099f8594a566b712353afc37b578d" kind="variable"><name>color_chroma_key</name></member>
@@ -259,6 +261,7 @@
     <member refid="structlv__arc__ext__t_1ac194bde7ebc5721ceb8d50110b8e5240" kind="variable"><name>max_value</name></member>
     <member refid="structlv__arc__ext__t_1a702888230d48414b8bb1a99caaa135c2" kind="variable"><name>dragging</name></member>
     <member refid="structlv__arc__ext__t_1a4e53205ffb12437cafe098fcace8407e" kind="variable"><name>type</name></member>
+    <member refid="structlv__arc__ext__t_1a42d49dabf20da2cb9e58377700bc8ea0" kind="variable"><name>adjustable</name></member>
     <member refid="structlv__arc__ext__t_1acdb19620d77e1731b17866aad5426e04" kind="variable"><name>chg_rate</name></member>
     <member refid="structlv__arc__ext__t_1a5886eb793e7ec33707d672cc36aaf9b5" kind="variable"><name>last_tick</name></member>
     <member refid="structlv__arc__ext__t_1a50bec6b937d32a2de1283383b811f0ef" kind="variable"><name>last_angle</name></member>
@@ -1053,6 +1056,7 @@
     <member refid="lv__disp_8h_1a34d6349247c52a4c149cabdb1319c8a0" kind="function"><name>lv_scr_load_anim</name></member>
     <member refid="lv__disp_8h_1a4ae9136128a901bf5b37f23672842f0d" kind="function"><name>lv_disp_get_inactive_time</name></member>
     <member refid="lv__disp_8h_1a44083753547903dc975e6ec29b4ea280" kind="function"><name>lv_disp_trig_activity</name></member>
+    <member refid="lv__disp_8h_1a3a3770903c53e8d7fbf47555bfdb152b" kind="function"><name>lv_disp_clean_dcache</name></member>
     <member refid="lv__disp_8h_1a87de65d1d587fc0a9367887b054ca82f" kind="function"><name>_lv_disp_get_refr_task</name></member>
     <member refid="lv__disp_8h_1a4e716d4e070c3b0ab848d277a4d6704c" kind="function"><name>lv_scr_act</name></member>
     <member refid="lv__disp_8h_1a04b984c1db6bb83548ea1b1858422345" kind="function"><name>lv_layer_top</name></member>
@@ -2320,7 +2324,6 @@
     <member refid="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a7f5780b36b50f31756a2850964062ee2" kind="enumvalue"><name>LV_THEME_OBJMASK</name></member>
     <member refid="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238acd0d648ed3cf7e0b63f2a1fd1e187ca7" kind="enumvalue"><name>LV_THEME_PAGE</name></member>
     <member refid="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238afce67d42d0590cab32ef5a7f24905be3" kind="enumvalue"><name>LV_THEME_ROLLER</name></member>
-    <member refid="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238ac1058da3343d56e771d7a73539746f8e" kind="enumvalue"><name>LV_THEME_ROTARY</name></member>
     <member refid="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a4886f54ec7b88c4eee31f82004b60755" kind="enumvalue"><name>LV_THEME_SLIDER</name></member>
     <member refid="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a4f53365fed2f69f8d5c02fd4ab5d4e32" kind="enumvalue"><name>LV_THEME_SPINBOX</name></member>
     <member refid="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238aa977313844c0dff45922bbf5fcaede54" kind="enumvalue"><name>LV_THEME_SPINBOX_BTN</name></member>
@@ -2395,6 +2398,7 @@
     <member refid="lv__arc_8h_1aedadd05409b272e476117a61f584415a" kind="function"><name>lv_arc_set_value</name></member>
     <member refid="lv__arc_8h_1a25847ff6846d5672c2581bc8a4a6c9dc" kind="function"><name>lv_arc_set_range</name></member>
     <member refid="lv__arc_8h_1ac96abe03196efa0878554d95c4ff280a" kind="function"><name>lv_arc_set_chg_rate</name></member>
+    <member refid="lv__arc_8h_1a94225f53480c6b08940ed344138ceb95" kind="function"><name>lv_arc_set_adjustable</name></member>
     <member refid="lv__arc_8h_1ac2f790cbc6ed0a2a00edd23e623ade07" kind="function"><name>lv_arc_get_angle_start</name></member>
     <member refid="lv__arc_8h_1a14ce52ed1c2a7214c36e269b1f8a19b7" kind="function"><name>lv_arc_get_angle_end</name></member>
     <member refid="lv__arc_8h_1a0404af46f42f8708bdd455c16ebfabbd" kind="function"><name>lv_arc_get_bg_angle_start</name></member>
@@ -2404,6 +2408,7 @@
     <member refid="lv__arc_8h_1aa86a70c966190a6d03ce8450fc80be22" kind="function"><name>lv_arc_get_min_value</name></member>
     <member refid="lv__arc_8h_1a81261e0d0868bb2f03c8706bb12ef037" kind="function"><name>lv_arc_get_max_value</name></member>
     <member refid="lv__arc_8h_1a19634ce52fa1e35f22c1a612e18078f3" kind="function"><name>lv_arc_is_dragged</name></member>
+    <member refid="lv__arc_8h_1a7cf55f450e5b7072e3234c8aaf0edb96" kind="function"><name>lv_arc_get_adjustable</name></member>
   </compound>
   <compound refid="lv__bar_8h" kind="file"><name>lv_bar.h</name>
     <member refid="lv__bar_8h_1a900dca9b26de42491763226e12dcd47b" kind="enum"><name>@54</name></member>
