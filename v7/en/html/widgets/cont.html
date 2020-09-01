@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.3.1
+                v7.4.0
               </div>
             
           
@@ -400,6 +400,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-font">Add new font</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-symbols">Add new symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#load-font-in-run-time">Load font in run-time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-a-new-font-engine">Add a new font engine</a></li>
 </ul>
 </li>
@@ -510,6 +511,9 @@
 <li class="toctree-l3"><a class="reference internal" href="arc.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="arc.html#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="arc.html#angles">Angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#rotation">Rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#range-and-values">Range and values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#type">Type</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="arc.html#events">Events</a></li>
@@ -672,12 +676,13 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Container (lv_cont)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parts-and-styles">Parts and Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#layout">Layout</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#autofit">Autofit</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
@@ -1317,44 +1322,46 @@
 <h1>Container (lv_cont)<a class="headerlink" href="#container-lv-cont" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>The containers are essentially a <strong>basic object</strong> with some special features.</p>
+<p>The containers are essentially a <strong>basic object</strong> with layout and automatic sizing features features.</p>
+</div>
+<div class="section" id="parts-and-styles">
+<h2>Parts and Styles<a class="headerlink" href="#parts-and-styles" title="Permalink to this headline">¶</a></h2>
+<p>The containers has only a main style called <code class="docutils literal notranslate"><span class="pre">LV_CONT_PART_MAIN</span></code> and it can use all the typicaly bacground properties properties and padding for layout auto sizing.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="layout">
 <h3>Layout<a class="headerlink" href="#layout" title="Permalink to this headline">¶</a></h3>
-<p>You can apply a layout on the containers to automatically order their children. The layout spacing comes from <code class="docutils literal notranslate"><span class="pre">style.body.padding.</span> <span class="pre">...</span></code> properties. The possible layout options:</p>
+<p>You can apply a layout on the containers to automatically order their children. The layout spacing comes from the style's <code class="docutils literal notranslate"><span class="pre">pad</span></code> properties. The possible layout options:</p>
 <ul class="simple">
 <li><p><strong>LV_LAYOUT_OFF</strong> - Do not align the children.</p></li>
-<li><p><strong>LV_LAYOUT_CENTER</strong> - Align children to the center in column and keep <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between them.</p></li>
-<li><p><strong>LV_LAYOUT_COL_</strong> - Align children in a left-justified column. Keep <code class="docutils literal notranslate"><span class="pre">padding.left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">pad.top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_COL_M</strong> - Align children in centered column. Keep <code class="docutils literal notranslate"><span class="pre">padding.top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_COL_R</strong> - Align children in a right-justified column. Keep <code class="docutils literal notranslate"><span class="pre">padding.right</span></code> space on the right, <code class="docutils literal notranslate"><span class="pre">padding.top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_ROW_T</strong> - Align children in a top justified row. Keep <code class="docutils literal notranslate"><span class="pre">padding.left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">padding.top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_ROW_M</strong> - Align children in centered row. Keep <code class="docutils literal notranslate"><span class="pre">padding.left</span></code> space on the left and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_ROW_B</strong> - Align children in a bottom justified row. Keep <code class="docutils literal notranslate"><span class="pre">padding.left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">padding.bottom</span></code> space on the bottom and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the children.</p></li>
-<li><p><strong>LV_LAYOUT_PRETTY</strong> - Put as many objects as possible in a row (with at least <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space and <code class="docutils literal notranslate"><span class="pre">padding.left/right</span></code> space on the sides). Divide the space in each line equally between the children.
-Keep <code class="docutils literal notranslate"><span class="pre">padding.top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">pad.inner</span></code> space between the lines.</p></li>
-<li><p><strong>LV_LAYOUT_GRID</strong> - Similar to <code class="docutils literal notranslate"><span class="pre">LV_LAYOUT_PRETTY</span></code> but not divide horizontal space equally just let <code class="docutils literal notranslate"><span class="pre">padding.left/right</span></code> on the edges and <code class="docutils literal notranslate"><span class="pre">padding.inner</span></code> space between the elements.</p></li>
+<li><p><strong>LV_LAYOUT_CENTER</strong> - Align children to the center in column and keep <code class="docutils literal notranslate"><span class="pre">padd_inner</span></code> space between them.</p></li>
+<li><p><strong>LV_LAYOUT_COLUMN_LEFT</strong> - Align children in a left-justified column. Keep <code class="docutils literal notranslate"><span class="pre">padd_left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">pad_top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_COLUMN_MID</strong> - Align children in centered column. Keep <code class="docutils literal notranslate"><span class="pre">padd_top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_COLUMN_RIGHT</strong> - Align children in a right-justified column. Keep <code class="docutils literal notranslate"><span class="pre">padd_right</span></code> space on the right, <code class="docutils literal notranslate"><span class="pre">pad_top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_ROW_TOP</strong> - Align children in a top justified row. Keep <code class="docutils literal notranslate"><span class="pre">pad_left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">pad_top</span></code> space on the top and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_ROW_MID</strong> - Align children in centered row. Keep <code class="docutils literal notranslate"><span class="pre">pad_left</span></code> space on the left and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_ROW_BOTTOM</strong> - Align children in a bottom justified row. Keep <code class="docutils literal notranslate"><span class="pre">pad_left</span></code> space on the left, <code class="docutils literal notranslate"><span class="pre">pad_bottom</span></code> space on the bottom and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the children.</p></li>
+<li><p><strong>LV_LAYOUT_PRETTY_TOP</strong> - Put as many objects as possible in a row (with at least <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space and <code class="docutils literal notranslate"><span class="pre">pad_left/right</span></code> space on the sides). Divide the space in each line equally between the children.
+If here are children with different height in a row align their top edge.</p></li>
+<li><p><strong>LV_LAYOUT_PRETTY_MID</strong> - Same as <code class="docutils literal notranslate"><span class="pre">LV_LAYOUT_PRETTY_TOP</span></code> but if here are children with different height in a row align their middle line.</p></li>
+<li><p><strong>LV_LAYOUT_PRETTY_BOTTOM</strong> -  Same as <code class="docutils literal notranslate"><span class="pre">LV_LAYOUT_PRETTY_TOP</span></code> but if here are children with different height in a row align their bottom line.</p></li>
+<li><p><strong>LV_LAYOUT_GRID</strong> - Similar to <code class="docutils literal notranslate"><span class="pre">LV_LAYOUT_PRETTY</span></code> but not divide horizontal space equally just let <code class="docutils literal notranslate"><span class="pre">pad_left/right</span></code> on the edges and <code class="docutils literal notranslate"><span class="pre">pad_inner</span></code> space between the elements.</p></li>
 </ul>
 </div>
 <div class="section" id="autofit">
 <h3>Autofit<a class="headerlink" href="#autofit" title="Permalink to this headline">¶</a></h3>
-<p>Container have an autofit feature which can automatically change the size of the container according to its children and/or parent. The following options exist:</p>
+<p>Container have an autofit feature which can automatically change the size of the container according to its children and/or its parent. The following options exist:</p>
 <ul class="simple">
 <li><p><strong>LV_FIT_NONE</strong> - Do not change the size automatically.</p></li>
-<li><p><strong>LV_FIT_TIGHT</strong> - Shrink-wrap the container around all of its children, while keeping <code class="docutils literal notranslate"><span class="pre">padding.top/bottom/left/right</span></code> space on the edges.</p></li>
-<li><p><strong>LV_FIT_FLOOD</strong> - Set the size to the parent's size minus <code class="docutils literal notranslate"><span class="pre">padding.top/bottom/left/right</span></code> (from the parent's style) space.</p></li>
-<li><p><strong>LV_FIT_FILL</strong> - Use <code class="docutils literal notranslate"><span class="pre">LV_FIT_FLOOD</span></code> while smaller than the parent and <code class="docutils literal notranslate"><span class="pre">LV_FIT_TIGHT</span></code> when larger. It will ensure that the container is, at minimum, the size of its parent.</p></li>
+<li><p><strong>LV_FIT_TIGHT</strong> - Shrink-wrap the container around all of its children, while keeping <code class="docutils literal notranslate"><span class="pre">pad_top/bottom/left/right</span></code> space on the edges.</p></li>
+<li><p><strong>LV_FIT_PARENT</strong> - Set the size to the parent's size minus <code class="docutils literal notranslate"><span class="pre">pad_top/bottom/left/right</span></code> (from the parent's style) space.</p></li>
+<li><p><strong>LV_FIT_MAX</strong> - Use <code class="docutils literal notranslate"><span class="pre">LV_FIT_PARENT</span></code> while smaller than the parent and <code class="docutils literal notranslate"><span class="pre">LV_FIT_TIGHT</span></code> when larger. It will ensure that the container is, at minimum, the size of its parent.</p></li>
 </ul>
 <p>To set the auto fit mode for all directions, use <code class="docutils literal notranslate"><span class="pre">lv_cont_set_fit(cont,</span> <span class="pre">LV_FIT_...)</span></code>.
 To use different auto fit horizontally and vertically, use <code class="docutils literal notranslate"><span class="pre">lv_cont_set_fit2(cont,</span> <span class="pre">hor_fit_type,</span> <span class="pre">ver_fit_type)</span></code>.
 To use different auto fit in all 4 directions, use <code class="docutils literal notranslate"><span class="pre">lv_cont_set_fit4(cont,</span> <span class="pre">left_fit_type,</span> <span class="pre">right_fit_type,</span> <span class="pre">top_fit_type,</span> <span class="pre">bottom_fit_type)</span></code>.</p>
 </div>
-</div>
-<div class="section" id="styles">
-<h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
-<p>You can set the styles with <code class="docutils literal notranslate"><span class="pre">lv_cont_set_style(btn,</span> <span class="pre">LV_CONT_STYLE_MAIN,</span> <span class="pre">&amp;style)</span></code>.</p>
-<ul class="simple">
-<li><p><strong>style.body</strong> properties are used.</p></li>
-</ul>
 </div>
 <div class="section" id="events">
 <h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
@@ -1441,25 +1448,25 @@ To use different auto fit in all 4 directions, use <code class="docutils literal
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Enums</p>
 <dl class="cpp enum">
-<dt id="_CPPv4Ut2_67">
-<span id="_CPPv3Ut2_67"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut2_67" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4Ut2_68">
+<span id="_CPPv3Ut2_68"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut2_68" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Container layout options </p>
 <p><em>Values:</em></p>
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6713LV_LAYOUT_OFFE">
-<span id="_CPPv3NUt2_6713LV_LAYOUT_OFFE"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a75aa95ebf3ad548757fc123d3c3c4657"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_OFF</code> = 0<a class="headerlink" href="#_CPPv4NUt2_6713LV_LAYOUT_OFFE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6813LV_LAYOUT_OFFE">
+<span id="_CPPv3NUt2_6813LV_LAYOUT_OFFE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6a75aa95ebf3ad548757fc123d3c3c4657"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_OFF</code> = 0<a class="headerlink" href="#_CPPv4NUt2_6813LV_LAYOUT_OFFE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>No layout </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6716LV_LAYOUT_CENTERE">
-<span id="_CPPv3NUt2_6716LV_LAYOUT_CENTERE"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a36330be1b70d0aff29fef80571bbfc2e"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_CENTER</code><a class="headerlink" href="#_CPPv4NUt2_6716LV_LAYOUT_CENTERE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6816LV_LAYOUT_CENTERE">
+<span id="_CPPv3NUt2_6816LV_LAYOUT_CENTERE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6a36330be1b70d0aff29fef80571bbfc2e"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_CENTER</code><a class="headerlink" href="#_CPPv4NUt2_6816LV_LAYOUT_CENTERE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Center objects </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6721LV_LAYOUT_COLUMN_LEFTE">
-<span id="_CPPv3NUt2_6721LV_LAYOUT_COLUMN_LEFTE"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0ac0cbf4ba8100c199cac71f7e0fa8307e"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_COLUMN_LEFT</code><a class="headerlink" href="#_CPPv4NUt2_6721LV_LAYOUT_COLUMN_LEFTE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6821LV_LAYOUT_COLUMN_LEFTE">
+<span id="_CPPv3NUt2_6821LV_LAYOUT_COLUMN_LEFTE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6ac0cbf4ba8100c199cac71f7e0fa8307e"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_COLUMN_LEFT</code><a class="headerlink" href="#_CPPv4NUt2_6821LV_LAYOUT_COLUMN_LEFTE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>COULMN:<ul class="simple">
 <li><p>Place the object below each other</p></li>
 <li><p>Keep <code class="docutils literal notranslate"><span class="pre">pad_top</span></code> space on the top</p></li>
@@ -1469,20 +1476,20 @@ To use different auto fit in all 4 directions, use <code class="docutils literal
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6720LV_LAYOUT_COLUMN_MIDE">
-<span id="_CPPv3NUt2_6720LV_LAYOUT_COLUMN_MIDE"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0aa8d4698669adf04f7bbce5478f4f8896"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_COLUMN_MID</code><a class="headerlink" href="#_CPPv4NUt2_6720LV_LAYOUT_COLUMN_MIDE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6820LV_LAYOUT_COLUMN_MIDE">
+<span id="_CPPv3NUt2_6820LV_LAYOUT_COLUMN_MIDE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6aa8d4698669adf04f7bbce5478f4f8896"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_COLUMN_MID</code><a class="headerlink" href="#_CPPv4NUt2_6820LV_LAYOUT_COLUMN_MIDE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Column middle align </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6722LV_LAYOUT_COLUMN_RIGHTE">
-<span id="_CPPv3NUt2_6722LV_LAYOUT_COLUMN_RIGHTE"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a9c88d22ae7e86c456ff44a2960d1a430"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_COLUMN_RIGHT</code><a class="headerlink" href="#_CPPv4NUt2_6722LV_LAYOUT_COLUMN_RIGHTE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6822LV_LAYOUT_COLUMN_RIGHTE">
+<span id="_CPPv3NUt2_6822LV_LAYOUT_COLUMN_RIGHTE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6a9c88d22ae7e86c456ff44a2960d1a430"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_COLUMN_RIGHT</code><a class="headerlink" href="#_CPPv4NUt2_6822LV_LAYOUT_COLUMN_RIGHTE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Column right align </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6717LV_LAYOUT_ROW_TOPE">
-<span id="_CPPv3NUt2_6717LV_LAYOUT_ROW_TOPE"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0ae0649ad6c9bce2221c359e786c9d84e5"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_ROW_TOP</code><a class="headerlink" href="#_CPPv4NUt2_6717LV_LAYOUT_ROW_TOPE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6817LV_LAYOUT_ROW_TOPE">
+<span id="_CPPv3NUt2_6817LV_LAYOUT_ROW_TOPE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6ae0649ad6c9bce2221c359e786c9d84e5"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_ROW_TOP</code><a class="headerlink" href="#_CPPv4NUt2_6817LV_LAYOUT_ROW_TOPE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>ROW:<ul class="simple">
 <li><p>Place the object next to each other</p></li>
 <li><p>Keep <code class="docutils literal notranslate"><span class="pre">pad_left</span></code> space on the left</p></li>
@@ -1493,20 +1500,20 @@ To use different auto fit in all 4 directions, use <code class="docutils literal
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6717LV_LAYOUT_ROW_MIDE">
-<span id="_CPPv3NUt2_6717LV_LAYOUT_ROW_MIDE"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0ae645eef91344c7767710191308385351"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_ROW_MID</code><a class="headerlink" href="#_CPPv4NUt2_6717LV_LAYOUT_ROW_MIDE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6817LV_LAYOUT_ROW_MIDE">
+<span id="_CPPv3NUt2_6817LV_LAYOUT_ROW_MIDE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6ae645eef91344c7767710191308385351"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_ROW_MID</code><a class="headerlink" href="#_CPPv4NUt2_6817LV_LAYOUT_ROW_MIDE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Row middle align </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6720LV_LAYOUT_ROW_BOTTOME">
-<span id="_CPPv3NUt2_6720LV_LAYOUT_ROW_BOTTOME"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a4dde71a1175eaf6c7d57f487aca2fa18"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_ROW_BOTTOM</code><a class="headerlink" href="#_CPPv4NUt2_6720LV_LAYOUT_ROW_BOTTOME" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6820LV_LAYOUT_ROW_BOTTOME">
+<span id="_CPPv3NUt2_6820LV_LAYOUT_ROW_BOTTOME"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6a4dde71a1175eaf6c7d57f487aca2fa18"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_ROW_BOTTOM</code><a class="headerlink" href="#_CPPv4NUt2_6820LV_LAYOUT_ROW_BOTTOME" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Row bottom align </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6720LV_LAYOUT_PRETTY_TOPE">
-<span id="_CPPv3NUt2_6720LV_LAYOUT_PRETTY_TOPE"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a66ca0e490746af7e045f73045e1d8265"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_PRETTY_TOP</code><a class="headerlink" href="#_CPPv4NUt2_6720LV_LAYOUT_PRETTY_TOPE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6820LV_LAYOUT_PRETTY_TOPE">
+<span id="_CPPv3NUt2_6820LV_LAYOUT_PRETTY_TOPE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6a66ca0e490746af7e045f73045e1d8265"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_PRETTY_TOP</code><a class="headerlink" href="#_CPPv4NUt2_6820LV_LAYOUT_PRETTY_TOPE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>PRETTY:<ul class="simple">
 <li><p>Place the object next to each other</p></li>
 <li><p>If there is no more space start a new row</p></li>
@@ -1519,20 +1526,20 @@ To use different auto fit in all 4 directions, use <code class="docutils literal
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6720LV_LAYOUT_PRETTY_MIDE">
-<span id="_CPPv3NUt2_6720LV_LAYOUT_PRETTY_MIDE"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a9e80ededf32e6bc7b00ed6a8a888c78c"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_PRETTY_MID</code><a class="headerlink" href="#_CPPv4NUt2_6720LV_LAYOUT_PRETTY_MIDE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6820LV_LAYOUT_PRETTY_MIDE">
+<span id="_CPPv3NUt2_6820LV_LAYOUT_PRETTY_MIDE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6a9e80ededf32e6bc7b00ed6a8a888c78c"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_PRETTY_MID</code><a class="headerlink" href="#_CPPv4NUt2_6820LV_LAYOUT_PRETTY_MIDE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Row middle align </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6723LV_LAYOUT_PRETTY_BOTTOME">
-<span id="_CPPv3NUt2_6723LV_LAYOUT_PRETTY_BOTTOME"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0aaa548513874b606da6cb22d3ec4130de"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_PRETTY_BOTTOM</code><a class="headerlink" href="#_CPPv4NUt2_6723LV_LAYOUT_PRETTY_BOTTOME" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6823LV_LAYOUT_PRETTY_BOTTOME">
+<span id="_CPPv3NUt2_6823LV_LAYOUT_PRETTY_BOTTOME"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6aaa548513874b606da6cb22d3ec4130de"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_PRETTY_BOTTOM</code><a class="headerlink" href="#_CPPv4NUt2_6823LV_LAYOUT_PRETTY_BOTTOME" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Row bottom align </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6714LV_LAYOUT_GRIDE">
-<span id="_CPPv3NUt2_6714LV_LAYOUT_GRIDE"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0a94d1779bf4839c90f4301ea07626f8e1"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_GRID</code><a class="headerlink" href="#_CPPv4NUt2_6714LV_LAYOUT_GRIDE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6814LV_LAYOUT_GRIDE">
+<span id="_CPPv3NUt2_6814LV_LAYOUT_GRIDE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6a94d1779bf4839c90f4301ea07626f8e1"></span><em class="property">enumerator </em><code class="sig-name descname">LV_LAYOUT_GRID</code><a class="headerlink" href="#_CPPv4NUt2_6814LV_LAYOUT_GRIDE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>GRID<ul class="simple">
 <li><p>Place the object next to each other</p></li>
 <li><p>If there is no more space start a new row</p></li>
@@ -1545,44 +1552,8 @@ To use different auto fit in all 4 directions, use <code class="docutils literal
 </dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6715_LV_LAYOUT_LASTE">
-<span id="_CPPv3NUt2_6715_LV_LAYOUT_LASTE"></span><span class="target" id="lv__cont_8h_1a9e93d8eae633734dfeb29e24a1f3a7c0adf91abf0ea1710ad32774619d4ca8040"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_LAYOUT_LAST</code><a class="headerlink" href="#_CPPv4NUt2_6715_LV_LAYOUT_LASTE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="cpp enum">
-<dt id="_CPPv4Ut2_68">
-<span id="_CPPv3Ut2_68"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut2_68" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>How to resize the container around the children. </p>
-<p><em>Values:</em></p>
-<dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6811LV_FIT_NONEE">
-<span id="_CPPv3NUt2_6811LV_FIT_NONEE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6aa193244aa27ecdf4571c24f66d6b2d3f"></span><em class="property">enumerator </em><code class="sig-name descname">LV_FIT_NONE</code><a class="headerlink" href="#_CPPv4NUt2_6811LV_FIT_NONEE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Do not change the size automatically </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6812LV_FIT_TIGHTE">
-<span id="_CPPv3NUt2_6812LV_FIT_TIGHTE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6a9f93b1be221b3f205047af10760f02e0"></span><em class="property">enumerator </em><code class="sig-name descname">LV_FIT_TIGHT</code><a class="headerlink" href="#_CPPv4NUt2_6812LV_FIT_TIGHTE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Shrink wrap around the children </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6813LV_FIT_PARENTE">
-<span id="_CPPv3NUt2_6813LV_FIT_PARENTE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6a8de4c4625bc82e37da92165c3dac447b"></span><em class="property">enumerator </em><code class="sig-name descname">LV_FIT_PARENT</code><a class="headerlink" href="#_CPPv4NUt2_6813LV_FIT_PARENTE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Align the size to the parent's edge </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6810LV_FIT_MAXE">
-<span id="_CPPv3NUt2_6810LV_FIT_MAXE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6a6792647d0c4728e050f11bb061dee977"></span><em class="property">enumerator </em><code class="sig-name descname">LV_FIT_MAX</code><a class="headerlink" href="#_CPPv4NUt2_6810LV_FIT_MAXE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Align the size to the parent's edge first but if there is an object out of it then get larger </p>
-</dd></dl>
-
-<dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6812_LV_FIT_LASTE">
-<span id="_CPPv3NUt2_6812_LV_FIT_LASTE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6aec19bdc62b25a2c441cc32663f01d301"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_FIT_LAST</code><a class="headerlink" href="#_CPPv4NUt2_6812_LV_FIT_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_6815_LV_LAYOUT_LASTE">
+<span id="_CPPv3NUt2_6815_LV_LAYOUT_LASTE"></span><span class="target" id="lv__cont_8h_1aeb8e1c282570d629a6b603a94a4650d6adf91abf0ea1710ad32774619d4ca8040"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_LAYOUT_LAST</code><a class="headerlink" href="#_CPPv4NUt2_6815_LV_LAYOUT_LASTE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1590,20 +1561,56 @@ To use different auto fit in all 4 directions, use <code class="docutils literal
 <dl class="cpp enum">
 <dt id="_CPPv4Ut2_69">
 <span id="_CPPv3Ut2_69"></span><span class="target" id="lv__cont_8h_1a109bfaad92bd6d348dab484aec11edbb"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut2_69" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>How to resize the container around the children. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_6911LV_FIT_NONEE">
+<span id="_CPPv3NUt2_6911LV_FIT_NONEE"></span><span class="target" id="lv__cont_8h_1a109bfaad92bd6d348dab484aec11edbbaa193244aa27ecdf4571c24f66d6b2d3f"></span><em class="property">enumerator </em><code class="sig-name descname">LV_FIT_NONE</code><a class="headerlink" href="#_CPPv4NUt2_6911LV_FIT_NONEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Do not change the size automatically </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_6912LV_FIT_TIGHTE">
+<span id="_CPPv3NUt2_6912LV_FIT_TIGHTE"></span><span class="target" id="lv__cont_8h_1a109bfaad92bd6d348dab484aec11edbba9f93b1be221b3f205047af10760f02e0"></span><em class="property">enumerator </em><code class="sig-name descname">LV_FIT_TIGHT</code><a class="headerlink" href="#_CPPv4NUt2_6912LV_FIT_TIGHTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Shrink wrap around the children </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_6913LV_FIT_PARENTE">
+<span id="_CPPv3NUt2_6913LV_FIT_PARENTE"></span><span class="target" id="lv__cont_8h_1a109bfaad92bd6d348dab484aec11edbba8de4c4625bc82e37da92165c3dac447b"></span><em class="property">enumerator </em><code class="sig-name descname">LV_FIT_PARENT</code><a class="headerlink" href="#_CPPv4NUt2_6913LV_FIT_PARENTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Align the size to the parent's edge </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_6910LV_FIT_MAXE">
+<span id="_CPPv3NUt2_6910LV_FIT_MAXE"></span><span class="target" id="lv__cont_8h_1a109bfaad92bd6d348dab484aec11edbba6792647d0c4728e050f11bb061dee977"></span><em class="property">enumerator </em><code class="sig-name descname">LV_FIT_MAX</code><a class="headerlink" href="#_CPPv4NUt2_6910LV_FIT_MAXE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Align the size to the parent's edge first but if there is an object out of it then get larger </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_6912_LV_FIT_LASTE">
+<span id="_CPPv3NUt2_6912_LV_FIT_LASTE"></span><span class="target" id="lv__cont_8h_1a109bfaad92bd6d348dab484aec11edbbaec19bdc62b25a2c441cc32663f01d301"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_FIT_LAST</code><a class="headerlink" href="#_CPPv4NUt2_6912_LV_FIT_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4Ut2_70">
+<span id="_CPPv3Ut2_70"></span><span class="target" id="lv__cont_8h_1a550cb4231d535863c55643bbd2d3c6ba"></span><em class="property">enum </em><strong>[anonymous]</strong><a class="headerlink" href="#_CPPv4Ut2_70" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p><em>Values:</em></p>
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6917LV_CONT_PART_MAINE">
-<span id="_CPPv3NUt2_6917LV_CONT_PART_MAINE"></span><span class="target" id="lv__cont_8h_1a109bfaad92bd6d348dab484aec11edbbac7b491d5b3d6f56a8193d2624e788e66"></span><em class="property">enumerator </em><code class="sig-name descname">LV_CONT_PART_MAIN</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_816LV_OBJ_PART_MAINE" title="[anonymous]::LV_OBJ_PART_MAIN">LV_OBJ_PART_MAIN</a><a class="headerlink" href="#_CPPv4NUt2_6917LV_CONT_PART_MAINE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_7017LV_CONT_PART_MAINE">
+<span id="_CPPv3NUt2_7017LV_CONT_PART_MAINE"></span><span class="target" id="lv__cont_8h_1a550cb4231d535863c55643bbd2d3c6baac7b491d5b3d6f56a8193d2624e788e66"></span><em class="property">enumerator </em><code class="sig-name descname">LV_CONT_PART_MAIN</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_816LV_OBJ_PART_MAINE" title="[anonymous]::LV_OBJ_PART_MAIN">LV_OBJ_PART_MAIN</a><a class="headerlink" href="#_CPPv4NUt2_7017LV_CONT_PART_MAINE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6926_LV_CONT_PART_VIRTUAL_LASTE">
-<span id="_CPPv3NUt2_6926_LV_CONT_PART_VIRTUAL_LASTE"></span><span class="target" id="lv__cont_8h_1a109bfaad92bd6d348dab484aec11edbba6efb50e5f02a06b356489e762deeb38e"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_CONT_PART_VIRTUAL_LAST</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_825_LV_OBJ_PART_VIRTUAL_LASTE" title="[anonymous]::_LV_OBJ_PART_VIRTUAL_LAST">_LV_OBJ_PART_VIRTUAL_LAST</a><a class="headerlink" href="#_CPPv4NUt2_6926_LV_CONT_PART_VIRTUAL_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_7026_LV_CONT_PART_VIRTUAL_LASTE">
+<span id="_CPPv3NUt2_7026_LV_CONT_PART_VIRTUAL_LASTE"></span><span class="target" id="lv__cont_8h_1a550cb4231d535863c55643bbd2d3c6baa6efb50e5f02a06b356489e762deeb38e"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_CONT_PART_VIRTUAL_LAST</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_825_LV_OBJ_PART_VIRTUAL_LASTE" title="[anonymous]::_LV_OBJ_PART_VIRTUAL_LAST">_LV_OBJ_PART_VIRTUAL_LAST</a><a class="headerlink" href="#_CPPv4NUt2_7026_LV_CONT_PART_VIRTUAL_LASTE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt id="_CPPv4NUt2_6923_LV_CONT_PART_REAL_LASTE">
-<span id="_CPPv3NUt2_6923_LV_CONT_PART_REAL_LASTE"></span><span class="target" id="lv__cont_8h_1a109bfaad92bd6d348dab484aec11edbba6dd931ed970a67108142c0e59274abcd"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_CONT_PART_REAL_LAST</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_822_LV_OBJ_PART_REAL_LASTE" title="[anonymous]::_LV_OBJ_PART_REAL_LAST">_LV_OBJ_PART_REAL_LAST</a><a class="headerlink" href="#_CPPv4NUt2_6923_LV_CONT_PART_REAL_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NUt2_7023_LV_CONT_PART_REAL_LASTE">
+<span id="_CPPv3NUt2_7023_LV_CONT_PART_REAL_LASTE"></span><span class="target" id="lv__cont_8h_1a550cb4231d535863c55643bbd2d3c6baa6dd931ed970a67108142c0e59274abcd"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_CONT_PART_REAL_LAST</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_822_LV_OBJ_PART_REAL_LASTE" title="[anonymous]::_LV_OBJ_PART_REAL_LAST">_LV_OBJ_PART_REAL_LAST</a><a class="headerlink" href="#_CPPv4NUt2_7023_LV_CONT_PART_REAL_LASTE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1811,7 +1818,7 @@ To use different auto fit in all 4 directions, use <code class="docutils literal
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Aug 18, 2020.
+        Last updated on Sep 01, 2020.
       </span>
 
     </p>

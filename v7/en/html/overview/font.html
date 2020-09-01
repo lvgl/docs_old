@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.3.1
+                v7.4.0
               </div>
             
           
@@ -400,6 +400,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#add-new-font">Add new font</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add-new-symbols">Add new symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-font-in-run-time">Load font in run-time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#add-a-new-font-engine">Add a new font engine</a></li>
 </ul>
 </li>
@@ -510,6 +511,9 @@
 <li class="toctree-l3"><a class="reference internal" href="../widgets/arc.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/arc.html#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/arc.html#angles">Angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/arc.html#rotation">Rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/arc.html#range-and-values">Range and values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/arc.html#type">Type</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/arc.html#events">Events</a></li>
@@ -672,12 +676,13 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/cont.html">Container (lv_cont)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../widgets/cont.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../widgets/cont.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../widgets/cont.html#parts-and-styles">Parts and Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../widgets/cont.html#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/cont.html#layout">Layout</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/cont.html#autofit">Autofit</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../widgets/cont.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/cont.html#events">Events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/cont.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/cont.html#example">Example</a><ul>
@@ -1482,6 +1487,22 @@ Therefore it's recommended to compress only the largest fonts of user interface,
 </ol>
 <p>Note - <code class="docutils literal notranslate"><span class="pre">lv_label_set_text(label,</span> <span class="pre">MY_USB_SYMBOL)</span></code> searches for this symbol in the font defined in <code class="docutils literal notranslate"><span class="pre">style.text.font</span></code> properties. To use the symbol you may need to change it. Eg <code class="docutils literal notranslate"> <span class="pre">style.text.font</span> <span class="pre">=</span> <span class="pre">my_font_name</span></code></p>
 </div>
+<div class="section" id="load-font-in-run-time">
+<h2>Load font in run-time<a class="headerlink" href="#load-font-in-run-time" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">lv_font_load</span></code> can be used to load a font from a file. The font to load needs to have a special binary format. (Not TTF or WOFF).
+Use <a class="reference external" href="https://github.com/lvgl/lv_font_conv/">lv_font_conv</a> with <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">bin</span></code> option to generate an LVGL compatible font file.</p>
+<p>Note that to load a font <a class="reference internal" href="file-system.html"><span class="doc">LVGL's filesystem</span></a> needs to be enabled and a driver needs to be added.</p>
+<p>Example</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_font_t</span> <span class="o">*</span> <span class="n">my_font</span><span class="p">;</span>
+<span class="n">my_font</span> <span class="o">=</span> <span class="n">lv_font_load</span><span class="p">(</span><span class="n">X</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my_font</span><span class="p">.</span><span class="n">bin</span><span class="p">);</span>
+
+<span class="cm">/*Use the font*/</span>
+
+<span class="cm">/*Free the font if not required anymore*/</span>
+<span class="n">lv_font_free</span><span class="p">(</span><span class="n">my_font</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="add-a-new-font-engine">
 <h2>Add a new font engine<a class="headerlink" href="#add-a-new-font-engine" title="Permalink to this headline">¶</a></h2>
 <p>LVGL's font interface is designed to be very flexible.
@@ -1558,7 +1579,7 @@ For example, use <a class="reference external" href="https://www.freetype.org/">
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Aug 18, 2020.
+        Last updated on Sep 01, 2020.
       </span>
 
     </p>

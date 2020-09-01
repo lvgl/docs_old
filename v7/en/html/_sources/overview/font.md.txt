@@ -177,6 +177,24 @@ The built-in symbols are created from [FontAwesome](https://fontawesome.com/) fo
 
 Note - `lv_label_set_text(label, MY_USB_SYMBOL)` searches for this symbol in the font defined in `style.text.font` properties. To use the symbol you may need to change it. Eg ` style.text.font = my_font_name` 
 
+## Load font in run-time
+`lv_font_load` can be used to load a font from a file. The font to load needs to have a special binary format. (Not TTF or WOFF). 
+Use [lv_font_conv](https://github.com/lvgl/lv_font_conv/) with `--format bin` option to generate an LVGL compatible font file.
+
+Note that to load a font [LVGL's filesystem](/overview/file-system) needs to be enabled and a driver needs to be added.
+
+Example
+```c
+lv_font_t * my_font;
+my_font = lv_font_load(X/path/to/my_font.bin);
+
+/*Use the font*/
+
+/*Free the font if not required anymore*/
+lv_font_free(my_font);
+```
+
+
 ## Add a new font engine
 
 LVGL's font interface is designed to be very flexible.

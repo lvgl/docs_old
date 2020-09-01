@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.3.1
+                v7.4.0
               </div>
             
           
@@ -400,6 +400,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-font">Add new font</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-new-symbols">Add new symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#load-font-in-run-time">Load font in run-time</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../overview/font.html#add-a-new-font-engine">Add a new font engine</a></li>
 </ul>
 </li>
@@ -510,6 +511,9 @@
 <li class="toctree-l3"><a class="reference internal" href="arc.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="arc.html#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="arc.html#angles">Angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#rotation">Rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#range-and-values">Range and values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="arc.html#type">Type</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="arc.html#events">Events</a></li>
@@ -672,12 +676,13 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cont.html">Container (lv_cont)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cont.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#parts-and-styles">Parts and Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cont.html#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cont.html#layout">Layout</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cont.html#autofit">Autofit</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="cont.html#styles">Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cont.html#events">Events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cont.html#keys">Keys</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cont.html#example">Example</a><ul>
@@ -1797,6 +1802,12 @@ To prevent one or more that kind of actions, you can protect the object against 
 <dd><p>Object is being deleted </p>
 </dd></dl>
 
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt1_414_LV_EVENT_LASTE">
+<span id="_CPPv3NUt1_414_LV_EVENT_LASTE"></span><span class="target" id="lv__obj_8h_1adc29c2ff13d900c2f185ee95427fb06ca4b86217f41c5bc7fa521fde497e861a6"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_EVENT_LAST</code><a class="headerlink" href="#_CPPv4NUt1_414_LV_EVENT_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Number of events </p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="cpp enum">
@@ -2177,6 +2188,35 @@ To prevent one or more that kind of actions, you can protect the object against 
 </dd></dl>
 
 <dl class="cpp function">
+<dt id="_CPPv422lv_obj_area_is_visiblePK8lv_obj_tP9lv_area_t">
+<span id="_CPPv322lv_obj_area_is_visiblePK8lv_obj_tP9lv_area_t"></span><span id="_CPPv222lv_obj_area_is_visiblePK8lv_obj_tP9lv_area_t"></span><span id="lv_obj_area_is_visible__lv_obj_tCP.lv_area_tP"></span><span class="target" id="lv__obj_8h_1a27761185063c6244fddaada1f2c25df8"></span>bool <code class="sig-name descname">lv_obj_area_is_visible</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>obj</em>, lv_area_t *<em>area</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lv_obj_area_is_visiblePK8lv_obj_tP9lv_area_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tell whether an area of an object is visible (even partially) now or not <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: visible; false: not visible (hidden, out of parent, on other screen, etc) </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">obj</span></code>: pointer to an object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">area</span></code>: the are to check. The visible part of the area will be written back here. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv417lv_obj_is_visiblePK8lv_obj_t">
+<span id="_CPPv317lv_obj_is_visiblePK8lv_obj_t"></span><span id="_CPPv217lv_obj_is_visiblePK8lv_obj_t"></span><span id="lv_obj_is_visible__lv_obj_tCP"></span><span class="target" id="lv__obj_8h_1ad819f34bbb76a7ddba5c75e24ebfb687"></span>bool <code class="sig-name descname">lv_obj_is_visible</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_obj_is_visiblePK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tell whether an object is visible (even partially) now or not <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: visible; false: not visible (hidden, out of parent, on other screen, etc) </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">obj</span></code>: pointer to an object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt id="_CPPv417lv_obj_set_parentP8lv_obj_tP8lv_obj_t">
 <span id="_CPPv317lv_obj_set_parentP8lv_obj_tP8lv_obj_t"></span><span id="_CPPv217lv_obj_set_parentP8lv_obj_tP8lv_obj_t"></span><span id="lv_obj_set_parent__lv_obj_tP.lv_obj_tP"></span><span class="target" id="lv__obj_8h_1abc514aaa674d90d982ebefebca6b2284"></span>void <code class="sig-name descname">lv_obj_set_parent</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>obj</em>, <a class="reference internal" href="#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_obj_set_parentP8lv_obj_tP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set a new parent for an object. Its relative position will be the same. <dl class="simple">
@@ -2533,8 +2573,8 @@ To prevent one or more that kind of actions, you can protect the object against 
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv420lv_obj_refresh_styleP8lv_obj_t19lv_style_property_t">
-<span id="_CPPv320lv_obj_refresh_styleP8lv_obj_t19lv_style_property_t"></span><span id="_CPPv220lv_obj_refresh_styleP8lv_obj_t19lv_style_property_t"></span><span id="lv_obj_refresh_style__lv_obj_tP.lv_style_property_t"></span><span class="target" id="lv__obj_8h_1aa991e84b0c4929e21ab6101040b45693"></span>void <code class="sig-name descname">lv_obj_refresh_style</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>obj</em>, lv_style_property_t <em>prop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_obj_refresh_styleP8lv_obj_t19lv_style_property_t" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv420lv_obj_refresh_styleP8lv_obj_t7uint8_t19lv_style_property_t">
+<span id="_CPPv320lv_obj_refresh_styleP8lv_obj_t7uint8_t19lv_style_property_t"></span><span id="_CPPv220lv_obj_refresh_styleP8lv_obj_t7uint8_t19lv_style_property_t"></span><span id="lv_obj_refresh_style__lv_obj_tP.uint8_t.lv_style_property_t"></span><span class="target" id="lv__obj_8h_1ac7405a67ddcbaebba58be27bf75d3b84"></span>void <code class="sig-name descname">lv_obj_refresh_style</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>obj</em>, uint8_t <em>part</em>, lv_style_property_t <em>prop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_obj_refresh_styleP8lv_obj_t7uint8_t19lv_style_property_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Notify an object (and its children) about its style is modified <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">obj</span></code>: pointer to an object </p></li>
@@ -2645,6 +2685,19 @@ To prevent one or more that kind of actions, you can protect the object against 
 <li><p><code class="docutils literal notranslate"><span class="pre">obj</span></code>: pointer to an object </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">part</span></code>: the part of the object which style property should be removed. E.g. <code class="docutils literal notranslate"><span class="pre">LV_OBJ_PART_MAIN</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_BTN_PART_MAIN</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_SLIDER_PART_KNOB</span></code> </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_TEXT_FONT</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv429_lv_obj_disable_style_cachingP8lv_obj_tb">
+<span id="_CPPv329_lv_obj_disable_style_cachingP8lv_obj_tb"></span><span id="_CPPv229_lv_obj_disable_style_cachingP8lv_obj_tb"></span><span id="_lv_obj_disable_style_caching__lv_obj_tP.b"></span><span class="target" id="lv__obj_8h_1a45d4e9ac919717dc5306cca1da60b1bc"></span>void <code class="sig-name descname">_lv_obj_disable_style_caching</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>obj</em>, bool <em>dis</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429_lv_obj_disable_style_cachingP8lv_obj_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enable/disable the use of style cahche for an object <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">obj</span></code>: pointer to an object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dis</span></code>: true: disable; false: enable (re-enable) </p></li>
 </ul>
 </dd>
 </dl>
@@ -4298,7 +4351,7 @@ To prevent one or more that kind of actions, you can protect the object against 
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Aug 18, 2020.
+        Last updated on Sep 01, 2020.
       </span>
 
     </p>
