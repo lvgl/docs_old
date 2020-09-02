@@ -37,8 +37,8 @@ Basically, every modern controller  (which is able to drive a display( is suita
     <li> Static RAM usage: ~2 kB depending on the used features and objects types</li>
     <li> Stack: &gt; 2kB (&gt; 8 kB is recommended)</li>
     <li> Dynamic data (heap): &gt; 2 KB (&gt; 16 kB is recommended if using several objects).
-	    Set by `LV_MEM_SIZE` in *lv_conf.h*. </li>
-    <li> Display buffer:  &gt; *"Horizontal resolution"* pixels (&gt; 10 &times; *"Horizontal resolution"* is recommended) </li>
+	    Set by <em>LV_MEM_SIZE</em> in <em>lv_conf.h</em>. </li>
+    <li> Display buffer:  &gt; <em>"Horizontal resolution"</em> pixels (&gt; 10 &times; <em>"Horizontal resolution"</em> is recommended) </li>
     <li> One frame buffer in the MCU or in external display controller</li>
 	</ul>
 </li>
@@ -48,7 +48,7 @@ Basically, every modern controller  (which is able to drive a display( is suita
           <a href="https://www.tutorialspoint.com/cprogramming/c_structures.htm">structs]</a>, 
           <a href="https://www.geeksforgeeks.org/callbacks-in-c/">callbacks</a></li>
 </ul>
-*Note that the memory usage might vary depending on the architecture, compiler and build options.*
+<em>Note that the memory usage might vary depending on the architecture, compiler and build options.</em>
 
 ## License
 The LVGL project (including all repositories) is licensed under [MIT license](https://github.com/lvgl/lvgl/blob/master/LICENCE.txt). 
