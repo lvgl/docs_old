@@ -44,9 +44,9 @@ Basically, every modern controller  (which is able to drive a display( is suita
 </li>
 <li> C99 or newer compiler</li>
 <li> Basic C (or C++) knowledge: 
-          [pointers](https://www.tutorialspoint.com/cprogramming/c_pointers.htm), 
-          [structs](https://www.tutorialspoint.com/cprogramming/c_structures.htm), 
-          [callbacks](https://www.geeksforgeeks.org/callbacks-in-c/)</li>
+          <a href="https://www.tutorialspoint.com/cprogramming/c_pointers.htm">pointers</a>, 
+          <a href="https://www.tutorialspoint.com/cprogramming/c_structures.htm">structs]</a>, 
+          <a href="https://www.geeksforgeeks.org/callbacks-in-c/">callbacks</a></li>
 </ul>
 *Note that the memory usage might vary depending on the architecture, compiler and build options.*
 
