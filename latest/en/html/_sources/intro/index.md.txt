@@ -27,7 +27,7 @@ LVGL (Light and Versatile Graphics Library) is a free and open-source graphics l
 - Free and open-source under MIT license
 
 ## Requirements
-Basically, every modern controller  (which is able to drive a display( is suitable to run LVGL. The minimal requirements are:
+Basically, every modern controller  (which is able to drive a display) is suitable to run LVGL. The minimal requirements are:
 <ul>
 <li> 16, 32 or 64 bit microcontroller or processor</li>
 <li>&gt; 16 MHz clock speed is recommended</li>
@@ -45,7 +45,7 @@ Basically, every modern controller  (which is able to drive a display( is suita
 <li> C99 or newer compiler</li>
 <li> Basic C (or C++) knowledge: 
           <a href="https://www.tutorialspoint.com/cprogramming/c_pointers.htm">pointers</a>, 
-          <a href="https://www.tutorialspoint.com/cprogramming/c_structures.htm">structs]</a>, 
+          <a href="https://www.tutorialspoint.com/cprogramming/c_structures.htm">structs</a>, 
           <a href="https://www.geeksforgeeks.org/callbacks-in-c/">callbacks</a></li>
 </ul>
 <em>Note that the memory usage might vary depending on the architecture, compiler and build options.</em>
