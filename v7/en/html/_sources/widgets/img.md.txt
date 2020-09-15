@@ -9,7 +9,7 @@
 
 *Images* are the basic object to display from the flash (as arrays) or externally as files. Images can display symbols (`LV_SYMBOL_...`) too.
 
-Using the [Image decoder interface](/overview/images/#image-decoder) custom image formats can be supported as well.
+Using the [Image decoder interface](/overview/image.html#image-decoder) custom image formats can be supported as well.
 
 ## Parts and Styles
 The images has only a main part called `LV_IMG_PART_MAIN` which uses the typical background style propeties to draw a background rectangle and the *image* properties.
