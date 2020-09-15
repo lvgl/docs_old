@@ -121,6 +121,7 @@ Besides the [Generic events](../overview/event.html#generic-events) the followin
 The event data is the text planned to insert. `lv_ta_set_insert_replace(ta, "New text")` replaces the text to insert. 
 The new text can't be in a local variable which is destroyed when the event callback exists. `""` means do not insert anything.
 - **LV_EVENT_VALUE_CHANGED** When the content of the text area has been changed. 
+- **LV_EVENT_APPLY** When LV_KEY_ENTER is sent to a text area which is in one line mode.
 
 ## Keys
 - **LV_KEY_UP/DOWN/LEFT/RIGHT** Move the cursor
