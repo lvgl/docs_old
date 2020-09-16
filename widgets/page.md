@@ -14,7 +14,7 @@ The Page consist of two [Containers](/widgets/cont) on each other:
 
 The Page's main part is called `LV_PAGE_PART_BG` which is the background of the Page. It uses all the typical background style properties. Using padding will add space on the sides.
 
-The scrollable object can be referenced via the `LV_PAGE_PART_SCRL` part. It also uses all the typical background style properties and padding to add space on the sides.
+The scrollable object can be referenced via the `LV_PAGE_PART_SCROLLABLE` part. It also uses all the typical background style properties and padding to add space on the sides.
 
 
 `LV_LIST_PART_SCROLLBAR` is a virtual part of the background to draw the scroll bars. Uses all the typical background style properties, *size* to set the width of the scroll bars, and *pad_right* and *pad_bottom* to set the spacing.
