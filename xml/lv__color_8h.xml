@@ -1004,67 +1004,84 @@
 <codeline lineno="596"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(uint8_t)(bright<sp/>&gt;&gt;<sp/>3);</highlight></codeline>
 <codeline lineno="597"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="598"><highlight class="normal"></highlight></codeline>
-<codeline lineno="599"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="600"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Fix<sp/>of<sp/>msvc<sp/>2019<sp/>compiler<sp/>error<sp/>C4576<sp/>inside<sp/>C++<sp/>code<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="601"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_LV_COLOR_MAKE_TYPE_HELPER<sp/>lv_color_t</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="602"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="603"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_LV_COLOR_MAKE_TYPE_HELPER<sp/>(lv_color_t)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="604"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="605"><highlight class="normal"></highlight></codeline>
-<codeline lineno="606"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>The<sp/>most<sp/>simple<sp/>macro<sp/>to<sp/>create<sp/>a<sp/>color<sp/>from<sp/>R,G<sp/>and<sp/>B<sp/>values<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="607"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_COLOR_DEPTH<sp/>==<sp/>1</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="608"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_MAKE(r8,<sp/>g8,<sp/>b8)<sp/>(_LV_COLOR_MAKE_TYPE_HELPER{.full<sp/>=<sp/>(uint8_t)((b8<sp/>&gt;&gt;<sp/>7)<sp/>|<sp/>(g8<sp/>&gt;&gt;<sp/>7)<sp/>|<sp/>(r8<sp/>&gt;&gt;<sp/>7))})</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="609"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>LV_COLOR_DEPTH<sp/>==<sp/>8</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="610"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_MAKE(r8,<sp/>g8,<sp/>b8)<sp/>(_LV_COLOR_MAKE_TYPE_HELPER{{(uint8_t)((b8<sp/>&gt;&gt;<sp/>6)<sp/>&amp;<sp/>0x3U),<sp/>(uint8_t)((g8<sp/>&gt;&gt;<sp/>5)<sp/>&amp;<sp/>0x7U),<sp/>(uint8_t)((r8<sp/>&gt;&gt;<sp/>5)<sp/>&amp;<sp/>0x7U)}})</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="611"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>LV_COLOR_DEPTH<sp/>==<sp/>16</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="612"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_COLOR_16_SWAP<sp/>==<sp/>0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="613"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_MAKE(r8,<sp/>g8,<sp/>b8)<sp/>(_LV_COLOR_MAKE_TYPE_HELPER{{(uint16_t)((b8<sp/>&gt;&gt;<sp/>3)<sp/>&amp;<sp/>0x1FU),<sp/>(uint16_t)((g8<sp/>&gt;&gt;<sp/>2)<sp/>&amp;<sp/>0x3FU),<sp/>(uint16_t)((r8<sp/>&gt;&gt;<sp/>3)<sp/>&amp;<sp/>0x1FU)}})</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="614"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="615"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_MAKE(r8,<sp/>g8,<sp/>b8)<sp/>(_LV_COLOR_MAKE_TYPE_HELPER{{(uint16_t)((g8<sp/>&gt;&gt;<sp/>5)<sp/>&amp;<sp/>0x7U),<sp/>(uint16_t)((r8<sp/>&gt;&gt;<sp/>3)<sp/>&amp;<sp/>0x1FU),<sp/>(uint16_t)((b8<sp/>&gt;&gt;<sp/>3)<sp/>&amp;<sp/>0x1FU),<sp/>(uint16_t)((g8<sp/>&gt;&gt;<sp/>2)<sp/>&amp;<sp/>0x7U)}})</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="616"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="617"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>LV_COLOR_DEPTH<sp/>==<sp/>32</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="618"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_MAKE(r8,<sp/>g8,<sp/>b8)<sp/>(_LV_COLOR_MAKE_TYPE_HELPER{{b8,<sp/>g8,<sp/>r8,<sp/>0xff}})<sp/></highlight><highlight class="comment">/*Fix<sp/>0xff<sp/>alpha*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="619"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="620"><highlight class="normal"></highlight></codeline>
-<codeline lineno="621"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>lv_color_t<sp/>lv_color_make(uint8_t<sp/>r,<sp/>uint8_t<sp/>g,<sp/>uint8_t<sp/>b)</highlight></codeline>
-<codeline lineno="622"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="623"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LV_COLOR_MAKE(r,<sp/>g,<sp/>b);</highlight></codeline>
-<codeline lineno="624"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="625"><highlight class="normal"></highlight></codeline>
-<codeline lineno="626"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>lv_color_t<sp/>lv_color_hex(uint32_t<sp/>c)</highlight></codeline>
-<codeline lineno="627"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="628"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lv_color_make((uint8_t)((c<sp/>&gt;&gt;<sp/>16)<sp/>&amp;<sp/>0xFF),<sp/>(uint8_t)((c<sp/>&gt;&gt;<sp/>8)<sp/>&amp;<sp/>0xFF),<sp/>(uint8_t)(c<sp/>&amp;<sp/>0xFF));</highlight></codeline>
-<codeline lineno="629"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="630"><highlight class="normal"></highlight></codeline>
-<codeline lineno="631"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>lv_color_t<sp/>lv_color_hex3(uint32_t<sp/>c)</highlight></codeline>
-<codeline lineno="632"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="633"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lv_color_make((uint8_t)(((c<sp/>&gt;&gt;<sp/>4)<sp/>&amp;<sp/>0xF0)<sp/>|<sp/>((c<sp/>&gt;&gt;<sp/>8)<sp/>&amp;<sp/>0xF)),<sp/>(uint8_t)((c<sp/>&amp;<sp/>0xF0)<sp/>|<sp/>((c<sp/>&amp;<sp/>0xF0)<sp/>&gt;&gt;<sp/>4)),</highlight></codeline>
-<codeline lineno="634"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(uint8_t)((c<sp/>&amp;<sp/>0xF)<sp/>|<sp/>((c<sp/>&amp;<sp/>0xF)<sp/>&lt;&lt;<sp/>4)));</highlight></codeline>
-<codeline lineno="635"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="636"><highlight class="normal"></highlight></codeline>
-<codeline lineno="637"><highlight class="normal"></highlight></codeline>
-<codeline lineno="640"><highlight class="normal">LV_ATTRIBUTE_FAST_MEM<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>lv_color_fill(lv_color_t<sp/>*<sp/>buf,<sp/>lv_color_t<sp/>color,<sp/>uint32_t<sp/>px_num);</highlight></codeline>
+<codeline lineno="599"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__cplusplus)<sp/>&amp;&amp;<sp/>!defined(_LV_COLOR_HAS_MODERN_CPP)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="600"><highlight class="normal"></highlight></codeline>
+<codeline lineno="605"><highlight class="preprocessor">#ifdef<sp/>_MSC_VER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="606"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>_MSC_VER<sp/>&gt;=<sp/>1900<sp/></highlight><highlight class="comment">/*<sp/>Visual<sp/>Studio<sp/>2015<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="607"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_LV_COLOR_HAS_MODERN_CPP<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="608"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="609"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="610"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>__cplusplus<sp/>&gt;=<sp/>201103L</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="611"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_LV_COLOR_HAS_MODERN_CPP<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="612"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="613"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="614"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>__cplusplus<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="615"><highlight class="normal"></highlight></codeline>
+<codeline lineno="616"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>_LV_COLOR_HAS_MODERN_CPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="617"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_LV_COLOR_HAS_MODERN_CPP<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="618"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="619"><highlight class="normal"></highlight></codeline>
+<codeline lineno="620"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>_LV_COLOR_HAS_MODERN_CPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="621"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Fix<sp/>msvc<sp/>compiler<sp/>error<sp/>C4576<sp/>inside<sp/>C++<sp/>code<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="622"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_LV_COLOR_MAKE_TYPE_HELPER<sp/>lv_color_t</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="623"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="624"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_LV_COLOR_MAKE_TYPE_HELPER<sp/>(lv_color_t)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="625"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="626"><highlight class="normal"></highlight></codeline>
+<codeline lineno="627"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>The<sp/>most<sp/>simple<sp/>macro<sp/>to<sp/>create<sp/>a<sp/>color<sp/>from<sp/>R,G<sp/>and<sp/>B<sp/>values<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="628"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_COLOR_DEPTH<sp/>==<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="629"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_MAKE(r8,<sp/>g8,<sp/>b8)<sp/>(_LV_COLOR_MAKE_TYPE_HELPER{.full<sp/>=<sp/>(uint8_t)((b8<sp/>&gt;&gt;<sp/>7)<sp/>|<sp/>(g8<sp/>&gt;&gt;<sp/>7)<sp/>|<sp/>(r8<sp/>&gt;&gt;<sp/>7))})</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="630"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>LV_COLOR_DEPTH<sp/>==<sp/>8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="631"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_MAKE(r8,<sp/>g8,<sp/>b8)<sp/>(_LV_COLOR_MAKE_TYPE_HELPER{{(uint8_t)((b8<sp/>&gt;&gt;<sp/>6)<sp/>&amp;<sp/>0x3U),<sp/>(uint8_t)((g8<sp/>&gt;&gt;<sp/>5)<sp/>&amp;<sp/>0x7U),<sp/>(uint8_t)((r8<sp/>&gt;&gt;<sp/>5)<sp/>&amp;<sp/>0x7U)}})</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="632"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>LV_COLOR_DEPTH<sp/>==<sp/>16</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="633"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_COLOR_16_SWAP<sp/>==<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="634"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_MAKE(r8,<sp/>g8,<sp/>b8)<sp/>(_LV_COLOR_MAKE_TYPE_HELPER{{(uint16_t)((b8<sp/>&gt;&gt;<sp/>3)<sp/>&amp;<sp/>0x1FU),<sp/>(uint16_t)((g8<sp/>&gt;&gt;<sp/>2)<sp/>&amp;<sp/>0x3FU),<sp/>(uint16_t)((r8<sp/>&gt;&gt;<sp/>3)<sp/>&amp;<sp/>0x1FU)}})</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="635"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="636"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_MAKE(r8,<sp/>g8,<sp/>b8)<sp/>(_LV_COLOR_MAKE_TYPE_HELPER{{(uint16_t)((g8<sp/>&gt;&gt;<sp/>5)<sp/>&amp;<sp/>0x7U),<sp/>(uint16_t)((r8<sp/>&gt;&gt;<sp/>3)<sp/>&amp;<sp/>0x1FU),<sp/>(uint16_t)((b8<sp/>&gt;&gt;<sp/>3)<sp/>&amp;<sp/>0x1FU),<sp/>(uint16_t)((g8<sp/>&gt;&gt;<sp/>2)<sp/>&amp;<sp/>0x7U)}})</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="637"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="638"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>LV_COLOR_DEPTH<sp/>==<sp/>32</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="639"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LV_COLOR_MAKE(r8,<sp/>g8,<sp/>b8)<sp/>(_LV_COLOR_MAKE_TYPE_HELPER{{b8,<sp/>g8,<sp/>r8,<sp/>0xff}})<sp/></highlight><highlight class="comment">/*Fix<sp/>0xff<sp/>alpha*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="640"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="641"><highlight class="normal"></highlight></codeline>
-<codeline lineno="643"><highlight class="normal">lv_color_t<sp/>lv_color_lighten(lv_color_t<sp/>c,<sp/>lv_opa_t<sp/>lvl);</highlight></codeline>
-<codeline lineno="644"><highlight class="normal"></highlight></codeline>
-<codeline lineno="645"><highlight class="normal">lv_color_t<sp/>lv_color_darken(lv_color_t<sp/>c,<sp/>lv_opa_t<sp/>lvl);</highlight></codeline>
+<codeline lineno="642"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>lv_color_t<sp/>lv_color_make(uint8_t<sp/>r,<sp/>uint8_t<sp/>g,<sp/>uint8_t<sp/>b)</highlight></codeline>
+<codeline lineno="643"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="644"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>LV_COLOR_MAKE(r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="645"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="646"><highlight class="normal"></highlight></codeline>
-<codeline lineno="654"><highlight class="normal">lv_color_t<sp/><ref refid="lv__color_8h_1a09816229b98000ba2fc7098696c2b740" kindref="member">lv_color_hsv_to_rgb</ref>(uint16_t<sp/>h,<sp/>uint8_t<sp/>s,<sp/>uint8_t<sp/>v);</highlight></codeline>
-<codeline lineno="655"><highlight class="normal"></highlight></codeline>
-<codeline lineno="663"><highlight class="normal"><ref refid="structlv__color__hsv__t" kindref="compound">lv_color_hsv_t</ref><sp/><ref refid="lv__color_8h_1a4d455fed0393e8a3fee3d8d5d3ea5900" kindref="member">lv_color_rgb_to_hsv</ref>(uint8_t<sp/>r8,<sp/>uint8_t<sp/>g8,<sp/>uint8_t<sp/>b8);</highlight></codeline>
-<codeline lineno="664"><highlight class="normal"></highlight></codeline>
-<codeline lineno="670"><highlight class="normal"><ref refid="structlv__color__hsv__t" kindref="compound">lv_color_hsv_t</ref><sp/><ref refid="lv__color_8h_1a2afdf6490e5979aa453398c03773bf2d" kindref="member">lv_color_to_hsv</ref>(lv_color_t<sp/>color);</highlight></codeline>
-<codeline lineno="671"><highlight class="normal"></highlight></codeline>
-<codeline lineno="672"><highlight class="normal"></highlight></codeline>
-<codeline lineno="673"><highlight class="normal"></highlight><highlight class="comment">/**********************</highlight></codeline>
-<codeline lineno="674"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>MACROS</highlight></codeline>
-<codeline lineno="675"><highlight class="comment"><sp/>**********************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="647"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>lv_color_t<sp/>lv_color_hex(uint32_t<sp/>c)</highlight></codeline>
+<codeline lineno="648"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="649"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lv_color_make((uint8_t)((c<sp/>&gt;&gt;<sp/>16)<sp/>&amp;<sp/>0xFF),<sp/>(uint8_t)((c<sp/>&gt;&gt;<sp/>8)<sp/>&amp;<sp/>0xFF),<sp/>(uint8_t)(c<sp/>&amp;<sp/>0xFF));</highlight></codeline>
+<codeline lineno="650"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="651"><highlight class="normal"></highlight></codeline>
+<codeline lineno="652"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>lv_color_t<sp/>lv_color_hex3(uint32_t<sp/>c)</highlight></codeline>
+<codeline lineno="653"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="654"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lv_color_make((uint8_t)(((c<sp/>&gt;&gt;<sp/>4)<sp/>&amp;<sp/>0xF0)<sp/>|<sp/>((c<sp/>&gt;&gt;<sp/>8)<sp/>&amp;<sp/>0xF)),<sp/>(uint8_t)((c<sp/>&amp;<sp/>0xF0)<sp/>|<sp/>((c<sp/>&amp;<sp/>0xF0)<sp/>&gt;&gt;<sp/>4)),</highlight></codeline>
+<codeline lineno="655"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(uint8_t)((c<sp/>&amp;<sp/>0xF)<sp/>|<sp/>((c<sp/>&amp;<sp/>0xF)<sp/>&lt;&lt;<sp/>4)));</highlight></codeline>
+<codeline lineno="656"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="657"><highlight class="normal"></highlight></codeline>
+<codeline lineno="658"><highlight class="normal"></highlight></codeline>
+<codeline lineno="661"><highlight class="normal">LV_ATTRIBUTE_FAST_MEM<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>lv_color_fill(lv_color_t<sp/>*<sp/>buf,<sp/>lv_color_t<sp/>color,<sp/>uint32_t<sp/>px_num);</highlight></codeline>
+<codeline lineno="662"><highlight class="normal"></highlight></codeline>
+<codeline lineno="664"><highlight class="normal">lv_color_t<sp/>lv_color_lighten(lv_color_t<sp/>c,<sp/>lv_opa_t<sp/>lvl);</highlight></codeline>
+<codeline lineno="665"><highlight class="normal"></highlight></codeline>
+<codeline lineno="666"><highlight class="normal">lv_color_t<sp/>lv_color_darken(lv_color_t<sp/>c,<sp/>lv_opa_t<sp/>lvl);</highlight></codeline>
+<codeline lineno="667"><highlight class="normal"></highlight></codeline>
+<codeline lineno="675"><highlight class="normal">lv_color_t<sp/><ref refid="lv__color_8h_1a09816229b98000ba2fc7098696c2b740" kindref="member">lv_color_hsv_to_rgb</ref>(uint16_t<sp/>h,<sp/>uint8_t<sp/>s,<sp/>uint8_t<sp/>v);</highlight></codeline>
 <codeline lineno="676"><highlight class="normal"></highlight></codeline>
-<codeline lineno="677"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="678"><highlight class="normal">}<sp/></highlight><highlight class="comment">/*<sp/>extern<sp/>&quot;C&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="679"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="680"><highlight class="normal"></highlight></codeline>
-<codeline lineno="681"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*USE_COLOR*/</highlight><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="684"><highlight class="normal"><ref refid="structlv__color__hsv__t" kindref="compound">lv_color_hsv_t</ref><sp/><ref refid="lv__color_8h_1a4d455fed0393e8a3fee3d8d5d3ea5900" kindref="member">lv_color_rgb_to_hsv</ref>(uint8_t<sp/>r8,<sp/>uint8_t<sp/>g8,<sp/>uint8_t<sp/>b8);</highlight></codeline>
+<codeline lineno="685"><highlight class="normal"></highlight></codeline>
+<codeline lineno="691"><highlight class="normal"><ref refid="structlv__color__hsv__t" kindref="compound">lv_color_hsv_t</ref><sp/><ref refid="lv__color_8h_1a2afdf6490e5979aa453398c03773bf2d" kindref="member">lv_color_to_hsv</ref>(lv_color_t<sp/>color);</highlight></codeline>
+<codeline lineno="692"><highlight class="normal"></highlight></codeline>
+<codeline lineno="693"><highlight class="normal"></highlight></codeline>
+<codeline lineno="694"><highlight class="normal"></highlight><highlight class="comment">/**********************</highlight></codeline>
+<codeline lineno="695"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>MACROS</highlight></codeline>
+<codeline lineno="696"><highlight class="comment"><sp/>**********************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="697"><highlight class="normal"></highlight></codeline>
+<codeline lineno="698"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="699"><highlight class="normal">}<sp/></highlight><highlight class="comment">/*<sp/>extern<sp/>&quot;C&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="700"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="701"><highlight class="normal"></highlight></codeline>
+<codeline lineno="702"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*USE_COLOR*/</highlight><highlight class="preprocessor"></highlight></codeline>
     </programlisting>
     <location file="/home/kisvegabor/projects/littlevgl/eclipse-workspace/lv_sim_eclipse_sdl/lvgl/src/lv_misc/lv_color.h"/>
   </compounddef>
