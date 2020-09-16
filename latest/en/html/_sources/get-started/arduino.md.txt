@@ -26,7 +26,7 @@ To make it work setup `TFT_eSPI` according to your TFT display type via editing 
 
 Both files are located in `TFT_eSPI` library's folder.
 
-## Configuring LVGL
+## Configure LVGL
 
 LVGL has its own configuration file called `lv_conf.h`. When LVGL is installed the followings needs to be done to configure it:
 1. Go to directory of the installed Arduino libraries
@@ -36,14 +36,14 @@ LVGL has its own configuration file called `lv_conf.h`. When LVGL is installed t
 5. Set the color depth of you display in `LV_COLOR_DEPTH`
 6. Set `LV_TICK_CUSTOM 1`
 
-## Configuring the examples
+## Configure the examples
 `lv_examples` can be configures similarly to LVGL but it's configuration file is called `lv_ex_conf.h`. 
 1. Go to directory of the installed Arduino libraries
 2. Go to `lv_examples` and copy `lv_ex_template.h` as `lv_ex_conf.h` next to the `lv_examples` folder.
 3. Open `lv_ex_conf.h` and change the first `#if 0` to `#if 1`
 4. Enable the demos you want to use. (The small examples starting with `lv_ex_...()` are always enabled.)
 
-## Initialize LVGL and run a example
+## Initialize LVGL and run an example
 
 Take a look at [LVGL_Arduino.ino](https://github.com/lvgl/lvgl/blob/master/examples/LVGL_Arduino.ino) to see how to initialize LVGL.
 It also uses TFT_eSPI as driver.
