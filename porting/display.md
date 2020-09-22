@@ -56,6 +56,7 @@ There are some optional data fields:
 To use a GPU the following callbacks can be used:
 - **gpu_fill_cb** fill an area in memory with colors.
 - **gpu_blend_cb** blend two memory buffers using opacity.
+- **gpu_wait_cb** if any GPU function return while the GPU is still working LVGL will use this function when required the be sure GPU rendereing is ready.
 
 Note that, these functions need to draw to the memory (RAM) and not your display directly.
 
@@ -66,6 +67,7 @@ It can be used if the display controller can refresh only areas with specific he
 It can be used to store the pixels more compactly if the display has a special color format. (e.g. 1-bit monochrome, 2-bit grayscale etc.)
 This way the buffers used in `lv_disp_buf_t` can be smaller to hold only the required number of bits for the given area size. `set_px_cb` is not working with `Two screen-sized buffers` display buffer configuration.
 - **monitor_cb** a callback function tells how many pixels were refreshed in how much time.
+- **clean_dcache_cb** a callback for cleaning any caches related to the display
 
 To set the fields of *lv_disp_drv_t* variable it needs to be initialized with `lv_disp_drv_init(&disp_drv)`.
 And finally to register a display for LVGL `lv_disp_drv_register(&disp_drv)` needs to be called.
@@ -141,6 +143,12 @@ void my_set_px_cb(lv_disp_drv_t * disp_drv, uint8_t * buf, lv_coord_t buf_w, lv_
 void my_monitor_cb(lv_disp_drv_t * disp_drv, uint32_t time, uint32_t px)
 {
   printf("%d px refreshed in %d ms\n", time, ms);
+}
+
+void my_clean_dcache_cb(lv_disp_drv_t * disp_drv, uint32)
+{
+  /* Example for Cortex-M (CMSIS) */
+  SCB_CleanInvalidateDCache();
 }
 ```
 
