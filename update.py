@@ -31,7 +31,7 @@ for br in br_arr:
   print("========================")
 
 
-  cmd("git co " + br)
+  cmd("git co " + br + " --")
   cmd("git clean -fd")
   cmd("git pull origin " + br)
   cmd("git submodule update")
