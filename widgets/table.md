@@ -14,7 +14,9 @@ The Table object is very light weighted because only the texts are stored. No re
 ## Parts and Styles
 The main part of the Table is called `LV_TABLE_PART_BG`. It's a rectangle like background and uses all the typical background style properties.
 
-For the cells there are 4 virtual parts. Every cell has type (1, 2, 3 or 4) which tells which part's styles to apply on them. The cell parts are:
+For the cells there are 4 virtual parts. Every cell has type (1, 2, ... 16) which tells which part's styles to apply on them. The cell parts can be referenced by `LV_TABLE_PART_CELL1 + x` where `x` is between `0..15`.
+
+The number of cell types can be adjusted in `lv_conf.h` by `LV_TABLE_CELL_STYLE_CNT`. By default it's 4. The default 4 cell types' part be referenced with dedicated names too:
 - `LV_TABLE_PART_CELL1`
 - `LV_TABLE_PART_CELL2`
 - `LV_TABLE_PART_CELL3`
