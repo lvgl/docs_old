@@ -11,6 +11,7 @@ class LvExample(Directive):
         example_name = os.path.split(example_path)[1]
         node_list = []
 
+        env = self.state.document.settings.env
         paragraph_node = nodes.raw(text=f"<iframe class='lv-example' src='https://lvgl.github.io/lv_examples/{example_name}/?w=320&h=240'></iframe>", format='html')
         toggle = nodes.container('', literal_block=False, classes=['toggle'])
         header = nodes.container('', literal_block=False, classes=['header'])
@@ -23,7 +24,8 @@ class LvExample(Directive):
             literal_list['language'] = self.arguments[2]
         toggle.append(literal_list)
         header.append(nodes.paragraph(text="code"))
-        node_list.append(paragraph_node)
+        if env.app.tags.has('html'):
+            node_list.append(paragraph_node)
         node_list.append(toggle)
         return node_list
 
