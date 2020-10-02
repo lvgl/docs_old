@@ -90,3 +90,23 @@ If the object goes to edit mode it goes to `LV_STATE_FOCUSED | LV_STATE_EDITED` 
 
 For a more detaild description read the [Style](https://docs.lvgl.io/v7/en/html/overview/style.html) section.
 
+## API
+
+
+### Input device
+
+```eval_rst
+
+.. doxygenfile:: lv_indev.h
+  :project: lvgl
+
+```
+
+### Groups
+
+```eval_rst
+
+.. doxygenfile:: lv_group.h
+  :project: lvgl
+
+```

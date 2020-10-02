@@ -57,3 +57,14 @@ Learn more about [Keys](/overview/indev).
 
 ```
 
+## API
+
+```eval_rst
+
+.. doxygenfile:: lv_objmask.h
+  :project: lvgl
+  
+.. doxygenfile:: lv_draw_mask.h
+  :project: lvgl
+
+```

@@ -106,3 +106,11 @@ To initialize the image, the following callbacks are required:
 - tell
 
 
+## API
+
+```eval_rst
+
+.. doxygenfile:: lv_fs.h
+  :project: lvgl
+
+```

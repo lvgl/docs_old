@@ -41,3 +41,12 @@ Learn more about [Keys](/overview/indev).
 .. include:: /lv_examples/src/lv_ex_widgets/lv_ex_line/index.rst
 
 ```
+
+## API 
+
+```eval_rst
+
+.. doxygenfile:: lv_line.h
+  :project: lvgl
+        
+```

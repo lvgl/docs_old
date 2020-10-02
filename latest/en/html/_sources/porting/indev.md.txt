@@ -192,3 +192,12 @@ The default value of the following parameters can be set in *lv_conf.h* but the 
 Every Input device is associated with a display. By default, a new input device is added to the lastly created or the explicitly selected (using `lv_disp_set_default()`) display.
 The associated display is stored and can be changed in `disp` field of the driver.
 
+
+## API
+
+```eval_rst
+
+.. doxygenfile:: lv_hal_indev.h
+  :project: lvgl
+
+```

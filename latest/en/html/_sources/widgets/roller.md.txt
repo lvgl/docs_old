@@ -60,3 +60,11 @@ The following *Keys* are processed by the Buttons:
 
 ```
 
+## API 
+
+```eval_rst
+
+.. doxygenfile:: lv_roller.h
+  :project: lvgl
+        
+```
