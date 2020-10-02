@@ -88,3 +88,11 @@ Learn more about [Keys](/overview/indev).
 
 ```
 
+## API
+
+```eval_rst
+
+.. doxygenfile:: lv_canvas.h
+  :project: lvgl
+
+```

@@ -93,3 +93,11 @@ Learn more about [Keys](/overview/indev).
 
 ```
 
+## API
+
+```eval_rst
+
+.. doxygenfile:: lv_btnmatrix.h
+  :project: lvgl
+
+```

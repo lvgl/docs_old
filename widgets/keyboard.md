@@ -78,3 +78,12 @@ Learn more about [Keys](/overview/indev).
 .. include:: /lv_examples/src/lv_ex_widgets/lv_ex_keyboard/index.rst
 
 ```
+
+## API
+
+```eval_rst
+
+.. doxygenfile:: lv_keyboard.h
+  :project: lvgl
+
+```
