@@ -316,24 +316,3 @@ Let's say you have loaded a PNG image into a `lv_img_dsc_t my_png` variable and 
 
 To do this, use `lv_img_cache_invalidate_src(&my_png)`. If `NULL` is passed as a parameter, the whole cache will be cleaned.
 
-
-## API
-
-### Image decoder
-
-```eval_rst
-
-.. doxygenfile:: lv_img_decoder.h
-  :project: lvgl
-
-```
-
-
-### Image cache
-
-```eval_rst
-
-.. doxygenfile:: lv_img_cache.h
-  :project: lvgl
-
-```

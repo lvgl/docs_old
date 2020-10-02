@@ -90,11 +90,3 @@ lv_async_call(my_screen_clean_up, lv_scr_act());
 
 If you just want to delete an object, and don't need to clean anything up in `my_screen_cleanup`, you could just use `lv_obj_del_async`, which will delete the object on the next call to `lv_task_handler`.
 
-## API
-
-```eval_rst
-
-.. doxygenfile:: lv_task.h
-  :project: lvgl
-
-```

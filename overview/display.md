@@ -193,23 +193,3 @@ The color module defines the most basic colors such as:
 
 as well as `LV_COLOR_WHITE` (fully white).
 
-## API
-
-
-### Display
-
-```eval_rst
-
-.. doxygenfile:: lv_disp.h
-  :project: lvgl
-
-```
-
-### Colors
-
-```eval_rst
-
-.. doxygenfile:: lv_color.h
-  :project: lvgl
-
-```
