@@ -151,3 +151,12 @@ void my_clean_dcache_cb(lv_disp_drv_t * disp_drv, uint32)
   SCB_CleanInvalidateDCache();
 }
 ```
+
+## API
+
+```eval_rst
+
+.. doxygenfile:: lv_hal_disp.h
+  :project: lvgl
+
+```
