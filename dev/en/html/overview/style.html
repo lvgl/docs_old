@@ -168,7 +168,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/stm32.html">STM32</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nxp.html#creating-new-project-with-lvgl">Creating new project with LVGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nxp.html#adding-hw-acceleration-for-nxp-imx-rt-platforms-using-pxp-pixel-pipeline-engine-for-existing-projects">Adding HW acceleration for NXP iMX RT platforms using PXP (PiXel Pipeline) engine for existing projects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#features-supported">Features supported:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#basic-configuration">Basic configuration:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#basic-initialization">Basic initialization:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#project-setup">Project setup:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#advanced-configuration">Advanced configuration:</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html">Espressif (ESP32)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
@@ -659,6 +670,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#vertical-range">Vertical range</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#division-lines">Division lines</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#tick-marks-and-labels">Tick marks and labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#cursor">Cursor</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#events">Events</a></li>
@@ -1511,7 +1523,7 @@ So this example configuration will result in fast going to presses state and slo
 </div>
 <div class="section" id="padding-and-margin-properties">
 <h3>Padding and margin properties<a class="headerlink" href="#padding-and-margin-properties" title="Permalink to this headline">¶</a></h3>
-<p><em>Padding</em> sets the space on the inner sides of the edges. It means &quot;I don't want my children too close to my sides, so keep this space&quot;.<em>Padding inner</em> set the &quot;gap&quot; between the children.
+<p><em>Padding</em> sets the space on the inner sides of the edges. It means &quot;I don't want my children too close to my sides, so keep this space&quot;.<br /><em>Padding inner</em> set the &quot;gap&quot; between the children.
 <em>Margin</em> sets the space on the outer side of the edges. It means &quot;I want this space around me&quot;.</p>
 <p>These properties are typically used by <a class="reference internal" href="../widgets/cont.html"><span class="doc">Container</span></a> object if <a class="reference external" href="/widgets/cont#layout">layout</a> or
 <a class="reference external" href="/widgets/cont#auto-fit">auto fit</a> is enabled.
@@ -1798,7 +1810,8 @@ However other widgets also use them to set spacing. See the documentation of the
 <li><p><strong>text_letter_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Letter space of the text. Default value: 0.</p></li>
 <li><p><strong>text_line_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Line space of the text. Default value: 0.</p></li>
 <li><p><strong>text_decor</strong> (<code class="docutils literal notranslate"><span class="pre">lv_text_decor_t</span></code>): Add text decoration. Can be <code class="docutils literal notranslate"><span class="pre">LV_TEXT_DECOR_NONE/UNDERLINE/STRIKETHROUGH</span></code>. Default value: <code class="docutils literal notranslate"><span class="pre">LV_TEXT_DECOR_NONE</span></code>.</p></li>
-<li><p><strong>text_sel_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Set background color of text selection. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code></p></li>
+<li><p><strong>text_sel_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Set  color of the text selection. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code></p></li>
+<li><p><strong>text_sel_bg_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Set background color of text selection. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLUE</span></code></p></li>
 <li><p><strong>text_blend_mode</strong> (<code class="docutils literal notranslate"><span class="pre">lv_blend_mode_t</span></code>): Set the blend mode of the text. Can be <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE</span></code>). Default value: <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL</span></code>.</p></li>
 </ul>
 <img alt="Styling a text in lvgl" src="../_images/lv_ex_style_7.png" />
@@ -2213,7 +2226,7 @@ It gives a default appearance to UI which can be modified by adding further styl
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Sep 22, 2020.
+        Last updated on Oct 02, 2020.
       </span>
 
     </p>

@@ -168,7 +168,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/stm32.html">STM32</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nxp.html#creating-new-project-with-lvgl">Creating new project with LVGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nxp.html#adding-hw-acceleration-for-nxp-imx-rt-platforms-using-pxp-pixel-pipeline-engine-for-existing-projects">Adding HW acceleration for NXP iMX RT platforms using PXP (PiXel Pipeline) engine for existing projects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#features-supported">Features supported:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#basic-configuration">Basic configuration:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#basic-initialization">Basic initialization:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#project-setup">Project setup:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#advanced-configuration">Advanced configuration:</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html">Espressif (ESP32)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
@@ -659,6 +670,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#vertical-range">Vertical range</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#division-lines">Division lines</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tick-marks-and-labels">Tick marks and labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cursor">Cursor</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
@@ -1343,6 +1355,7 @@ the <em>line</em> style properties are used by the division lines. The <em>paddi
 <li><p><em>bg_grad_stop</em>: %  of <em>bg_opa</em> at the bottom to create an alpha fade  (0: transparent at the bottom, 255: <em>bg_opa</em> at the top)</p></li>
 <li><p><em>bg_drag_dir</em>: should be <code class="docutils literal notranslate"><span class="pre">LV_GRAD_DIR_VER</span></code> to allow alpha fading with <em>bg_main_stop</em> and <em>bg_grad_stop</em></p></li>
 </ul>
+<p><code class="docutils literal notranslate"><span class="pre">LV_CHART_PART_CURSOR</span></code> refres to the cursors. Any number of cursor can be added and their appearence can be set by the line related style properties. The color of the cursors are set when the cursor is created and <code class="docutils literal notranslate"><span class="pre">line_color</span></code> fro mteh style is overwritten by this value.</p>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
@@ -1357,7 +1370,7 @@ and the series points to the external array instead.</p>
 <h3>Series' type<a class="headerlink" href="#series-type" title="Permalink to this headline">¶</a></h3>
 <p>The following <strong>data display types</strong> exist:</p>
 <ul class="simple">
-<li><p><strong>LV_CHART_TYPE_NONE</strong> - Do not display any data. It can be used to hide a series.</p></li>
+<li><p><strong>LV_CHART_TYPE_NONE</strong> - Do not display any data. It can be used to hide the series.</p></li>
 <li><p><strong>LV_CHART_TYPE_LINE</strong> - Draw lines between the points.</p></li>
 <li><p><strong>LV_CHART_TYPE_COLUMN</strong> - Draw columns.</p></li>
 </ul>
@@ -1426,6 +1439,14 @@ Note: this also affects the number of points processed when an external buffer i
 If <code class="docutils literal notranslate"><span class="pre">list_of_values</span></code> is set then <code class="docutils literal notranslate"><span class="pre">num_tick_marks</span></code> tells the number of ticks between two labels.  If <code class="docutils literal notranslate"><span class="pre">list_of_values</span></code> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> then it specifies the total number of ticks.</p>
 <p><em>Major tick lines</em> are drawn where text is placed, and <em>minor tick lines</em> are drawn elsewhere. <code class="docutils literal notranslate"><span class="pre">lv_chart_set_x_tick_length(chart,</span> <span class="pre">major_tick_len,</span> <span class="pre">minor_tick_len)</span></code> sets the length of tick lines on the x-axis.</p>
 <p>The same functions exists for the y axis too: <code class="docutils literal notranslate"><span class="pre">lv_chart_set_y_tick_text</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_chart_set_y_tick_length</span></code>.</p>
+</div>
+<div class="section" id="cursor">
+<h3>Cursor<a class="headerlink" href="#cursor" title="Permalink to this headline">¶</a></h3>
+<p>A cursor can be added with <code class="docutils literal notranslate"><span class="pre">lv_chart_cursor_t</span> <span class="pre">*</span> <span class="pre">c1</span> <span class="pre">=</span> <span class="pre">lv_chart_add_cursor(chart,</span> <span class="pre">color,</span> <span class="pre">dir);</span></code>. The possible values of <code class="docutils literal notranslate"><span class="pre">dir</span></code>  <code class="docutils literal notranslate"><span class="pre">LV_CHART_CURSOR_NONE/RIGHT/UP/LEFT/DOWN</span></code> or their OR-ed values to tell in which direction(s) should the cursor be drawn.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_chart_set_cursor_point(chart,</span> <span class="pre">cursor,</span> <span class="pre">&amp;point)</span></code> sets the position of the cursor. <code class="docutils literal notranslate"><span class="pre">point</span></code> is a pointer to an <code class="docutils literal notranslate"><span class="pre">lv_poin_t</span></code> variable. E.g. <code class="docutils literal notranslate"><span class="pre">lv_point_t</span> <span class="pre">point</span> <span class="pre">=</span> <span class="pre">{10,</span> <span class="pre">20};</span></code>. The point is relative to the series area of the chart.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lv_coord_t</span> <span class="pre">p_index</span> <span class="pre">=</span> <span class="pre">lv_chart_get_nearest_index_from_coord(chart,</span> <span class="pre">x)</span></code> tells which point index is to the closest to a X coordinate (relative to the series area). It can be used to snap the cursor to a point for example when the chart is clicked.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lv_chart_get_x_from_index(chart,</span> <span class="pre">series,</span> <span class="pre">id)</span></code> and <code class="docutils literal notranslate"><span class="pre">lv_chart_get_y_from_index(chart,</span> <span class="pre">series,</span> <span class="pre">id)</span></code> tells the X and Y coordinate of a given point. It's useful to place the cursor to given point.</p>
+<p>The current series area can be retrieved with <code class="docutils literal notranslate"><span class="pre">lv_chart_get_series_area(chart,</span> <span class="pre">&amp;area)</span></code> where <code class="docutils literal notranslate"><span class="pre">area</span></code> is a pointer to an <code class="docutils literal notranslate"><span class="pre">lv_area_t</span></code> variable to store the result. The area has absolute coordinates.</p>
 </div>
 </div>
 <div class="section" id="events">
@@ -2272,7 +2293,7 @@ If <code class="docutils literal notranslate"><span class="pre">list_of_values</
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Sep 22, 2020.
+        Last updated on Oct 02, 2020.
       </span>
 
     </p>

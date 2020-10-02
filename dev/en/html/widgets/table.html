@@ -168,7 +168,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/stm32.html">STM32</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nxp.html#creating-new-project-with-lvgl">Creating new project with LVGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nxp.html#adding-hw-acceleration-for-nxp-imx-rt-platforms-using-pxp-pixel-pipeline-engine-for-existing-projects">Adding HW acceleration for NXP iMX RT platforms using PXP (PiXel Pipeline) engine for existing projects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#features-supported">Features supported:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#basic-configuration">Basic configuration:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#basic-initialization">Basic initialization:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#project-setup">Project setup:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#advanced-configuration">Advanced configuration:</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html">Espressif (ESP32)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
@@ -659,6 +670,7 @@
 <li class="toctree-l4"><a class="reference internal" href="chart.html#vertical-range">Vertical range</a></li>
 <li class="toctree-l4"><a class="reference internal" href="chart.html#division-lines">Division lines</a></li>
 <li class="toctree-l4"><a class="reference internal" href="chart.html#tick-marks-and-labels">Tick marks and labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="chart.html#cursor">Cursor</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="chart.html#events">Events</a></li>
@@ -1323,7 +1335,8 @@
 <div class="section" id="parts-and-styles">
 <h2>Parts and Styles<a class="headerlink" href="#parts-and-styles" title="Permalink to this headline">¶</a></h2>
 <p>The main part of the Table is called <code class="docutils literal notranslate"><span class="pre">LV_TABLE_PART_BG</span></code>. It's a rectangle like background and uses all the typical background style properties.</p>
-<p>For the cells there are 4 virtual parts. Every cell has type (1, 2, 3 or 4) which tells which part's styles to apply on them. The cell parts are:</p>
+<p>For the cells there are 4 virtual parts. Every cell has type (1, 2, ... 16) which tells which part's styles to apply on them. The cell parts can be referenced by <code class="docutils literal notranslate"><span class="pre">LV_TABLE_PART_CELL1</span> <span class="pre">+</span> <span class="pre">x</span></code> where <code class="docutils literal notranslate"><span class="pre">x</span></code> is between <code class="docutils literal notranslate"><span class="pre">0..15</span></code>.</p>
+<p>The number of cell types can be adjusted in <code class="docutils literal notranslate"><span class="pre">lv_conf.h</span></code> by <code class="docutils literal notranslate"><span class="pre">LV_TABLE_CELL_STYLE_CNT</span></code>. By default it's 4. The default 4 cell types' part be referenced with dedicated names too:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">LV_TABLE_PART_CELL1</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">LV_TABLE_PART_CELL2</span></code></p></li>
@@ -1867,7 +1880,7 @@ To disable this and keep the text as it is enable <code class="docutils literal 
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Sep 22, 2020.
+        Last updated on Oct 02, 2020.
       </span>
 
     </p>
