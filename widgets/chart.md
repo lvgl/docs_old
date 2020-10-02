@@ -34,6 +34,8 @@ In case of Line type these properties are used:
 - *bg_grad_stop*: %  of *bg_opa* at the bottom to create an alpha fade  (0: transparent at the bottom, 255: *bg_opa* at the top)
 - *bg_drag_dir*: should be `LV_GRAD_DIR_VER` to allow alpha fading with *bg_main_stop* and *bg_grad_stop*
 
+`LV_CHART_PART_CURSOR` refres to the cursors. Any number of cursor can be added and their appearence can be set by the line related style properties. The color of the cursors are set when the cursor is created and `line_color` fro mteh style is overwritten by this value.
+
 ## Usage
 
 ### Data series
@@ -45,7 +47,7 @@ and the series points to the external array instead.
 ### Series' type
 The following **data display types** exist:
 
-- **LV_CHART_TYPE_NONE** - Do not display any data. It can be used to hide a series.
+- **LV_CHART_TYPE_NONE** - Do not display any data. It can be used to hide the series.
 - **LV_CHART_TYPE_LINE** - Draw lines between the points.
 - **LV_CHART_TYPE_COLUMN** - Draw columns.
 
@@ -104,6 +106,19 @@ If `list_of_values` is set then `num_tick_marks` tells the number of ticks betwe
 *Major tick lines* are drawn where text is placed, and *minor tick lines* are drawn elsewhere. `lv_chart_set_x_tick_length(chart, major_tick_len, minor_tick_len)` sets the length of tick lines on the x-axis.
 
 The same functions exists for the y axis too: `lv_chart_set_y_tick_text` and `lv_chart_set_y_tick_length`.
+
+### Cursor
+
+A cursor can be added with `lv_chart_cursor_t * c1 = lv_chart_add_cursor(chart, color, dir);`. The possible values of `dir`  `LV_CHART_CURSOR_NONE/RIGHT/UP/LEFT/DOWN` or their OR-ed values to tell in which direction(s) should the cursor be drawn.  
+
+`lv_chart_set_cursor_point(chart, cursor, &point)` sets the position of the cursor. `point` is a pointer to an `lv_poin_t` variable. E.g. `lv_point_t point = {10, 20};`. The point is relative to the series area of the chart.
+
+The `lv_coord_t p_index = lv_chart_get_nearest_index_from_coord(chart, x)` tells which point index is to the closest to a X coordinate (relative to the series area). It can be used to snap the cursor to a point for example when the chart is clicked.
+
+`lv_chart_get_x_from_index(chart, series, id)` and `lv_chart_get_y_from_index(chart, series, id)` tells the X and Y coordinate of a given point. It's useful to place the cursor to given point.
+
+The current series area can be retrieved with `lv_chart_get_series_area(chart, &area)` where `area` is a pointer to an `lv_area_t` variable to store the result. The area has absolute coordinates. 
+
 
 ## Events
 Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
