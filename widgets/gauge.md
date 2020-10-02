@@ -60,11 +60,3 @@ Learn more about [Keys](/overview/indev).
 .. include:: /lv_examples/src/lv_ex_widgets/lv_ex_gauge/index.rst
 
 ```
-## API
-
-```eval_rst
-
-.. doxygenfile:: lv_gauge.h
-  :project: lvgl
-
-```
