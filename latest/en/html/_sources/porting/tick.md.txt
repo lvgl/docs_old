@@ -23,13 +23,3 @@ void * tick_thread (void *args)
 }
 ```
 
-
-
-## API
-
-```eval_rst
-
-.. doxygenfile:: lv_hal_tick.h
-  :project: lvgl
-
-```
