@@ -49,10 +49,10 @@ if clean:
 cmd("cp -f " + lang +"/latex/LVGL.pdf LVGL.pdf | true")
 cmd("sphinx-build -b latex . en/latex")
 
-# Generat PDF
-cmd("cd " + lang + "/latex && xelatex -interaction=batchmode *.tex")
+# Generat PDF - Temporarily disabled
+#cmd("cd " + lang + "/latex && xelatex -interaction=batchmode *.tex")
 # Copy the result PDF to the main diractory to make it avaiable for the HTML build
-cmd("cd " + lang + "/latex && cp -f LVGL.pdf ../../LVGL.pdf")
+#cmd("cd " + lang + "/latex && cp -f LVGL.pdf ../../LVGL.pdf")
 
 # BULD HTML
 cmd("sphinx-build -b html . en/html")
