@@ -14,12 +14,12 @@ The Page consist of two [Containers](/widgets/cont) on each other:
 
 The Page's main part is called `LV_PAGE_PART_BG` which is the background of the Page. It uses all the typical background style properties. Using padding will add space on the sides.
 
-The scrollable object can be referenced via the `LV_PAGE_PART_SCRL` part. It also uses all the typical background style properties and padding to add space on the sides.
+The scrollable object can be referenced via the `LV_PAGE_PART_SCROLLABLE` part. It also uses all the typical background style properties and padding to add space on the sides.
 
 
-`LV_LIST_PART_SCROLLBAR` is a virtual part of the background to draw the scroll bars. Uses all the typical background style properties, *size* to set the width of the scroll bars, and *pad_right* and *pad_bottom* to set the spacing.
+`LV_PAGE_PART_SCROLLBAR` is a virtual part of the background to draw the scroll bars. Uses all the typical background style properties, *size* to set the width of the scroll bars, and *pad_right* and *pad_bottom* to set the spacing.
 
-`LV_LIST_PART_EDGE_FLASH`is also a virtual part of the background to draw a semicircle on the sides when the list can not be scrolled in that direction further. Uses all the typical background properties.
+`LV_PAGE_PART_EDGE_FLASH`is also a virtual part of the background to draw a semicircle on the sides when the page can not be scrolled in that direction further. Uses all the typical background properties.
 
 ## Usage
 
@@ -58,12 +58,12 @@ It will move the scrollable container to show a child. The time of the animation
 You can move the scrollable object manually using `lv_page_scroll_hor(page, dist)` and `lv_page_scroll_ver(page, dist)`
 
 ### Edge flash
-A circle-like effect can be shown if the list reached the most top/bottom/left/right position. `lv_page_set_edge_flash(list, en)` enables this feature.
+A circle-like effect can be shown if the page reached the most top/bottom/left/right position. `lv_page_set_edge_flash(page, en)` enables this feature.
 
 ### Scroll propagation
 
-If the list is created on an other scrollable element (like an other page) and the Page can't be scrolled further the scrolling can be propagated to the parent to continue the scrolling on the parent. 
-It can be enabled with `lv_page_set_scroll_propagation(list, true)`
+If the page is created on an other scrollable element (like an other page) and the Page can't be scrolled further the scrolling can be propagated to the parent to continue the scrolling on the parent. 
+It can be enabled with `lv_page_set_scroll_propagation(page, true)`
 
 ## Clean the page
 All the object created on the page can be clean with `lv_page_clean(page)`. Note that `lv_obj_clean(page)` doesn't work here because it would delete the scrollable object too.

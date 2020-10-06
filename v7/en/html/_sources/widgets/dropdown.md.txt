@@ -68,6 +68,8 @@ The main part can either show the selected option or a static text. It can  cont
 
 The static text can be set with `lv_dropdown_set_text(dropdown, "Text")`. Only the pointer of the text is saved.
 
+If you also don't want the selected option to be highlighted, a custom transparent style can be used for `LV_DROPDOWN_PART_SELECTED`.
+
 ### Animation time
 The drop-down list's open/close animation time is adjusted by `lv_dropdown_set_anim_time(ddlist, anim_time)`. Zero animation time means no animation.
 

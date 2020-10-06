@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.5.0
+                v7.6.1
               </div>
             
           
@@ -170,7 +170,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../get-started/stm32.html">STM32</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html">Espressif (ESP32)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#get-the-lvgl-ardunio-library">Get the LVGL Ardunio library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#set-up-drivers">Set up drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#configure-lvgl">Configure LVGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#configure-the-examples">Configure the examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#initialize-lvgl-and-run-an-example">Initialize LVGL and run an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#debugging-and-logging">Debugging and logging</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#what-is-micropython">What is Micropython?</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
@@ -1516,7 +1524,7 @@ So this example configuration will result in fast going to presses state and slo
 </div>
 <div class="section" id="padding-and-margin-properties">
 <h3>Padding and margin properties<a class="headerlink" href="#padding-and-margin-properties" title="Permalink to this headline">¶</a></h3>
-<p><em>Padding</em> sets the space on the inner sides of the edges. It means &quot;I don't want my children too close to my sides, so keep this space&quot;.<em>Padding inner</em> set the &quot;gap&quot; between the children.
+<p><em>Padding</em> sets the space on the inner sides of the edges. It means &quot;I don't want my children too close to my sides, so keep this space&quot;.<br /><em>Padding inner</em> set the &quot;gap&quot; between the children.
 <em>Margin</em> sets the space on the outer side of the edges. It means &quot;I want this space around me&quot;.</p>
 <p>These properties are typically used by <a class="reference internal" href="../widgets/cont.html"><span class="doc">Container</span></a> object if <a class="reference external" href="/widgets/cont#layout">layout</a> or
 <a class="reference external" href="/widgets/cont#auto-fit">auto fit</a> is enabled.
@@ -1870,7 +1878,7 @@ However other widgets also use them to set spacing. See the documentation of the
     <span class="n">lv_style_set_line_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_GRAY</span><span class="p">);</span>
     <span class="n">lv_style_set_line_width</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
     <span class="n">lv_style_set_line_rounded</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
-
+<span class="cp">#if LV_USE_LINE</span>
     <span class="cm">/*Create an object with the new style*/</span>
     <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">lv_line_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="n">lv_obj_add_style</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">LV_LINE_PART_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
@@ -1879,6 +1887,7 @@ However other widgets also use them to set spacing. See the documentation of the
     <span class="n">lv_line_set_points</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
 
     <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="cp">#endif</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1918,12 +1927,14 @@ However other widgets also use them to set spacing. See the documentation of the
     <span class="n">lv_style_set_image_recolor</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_BLUE</span><span class="p">);</span>
     <span class="n">lv_style_set_image_recolor_opa</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_OPA_50</span><span class="p">);</span>
 
+<span class="cp">#if LV_USE_IMG</span>
     <span class="cm">/*Create an object with the new style*/</span>
     <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">lv_img_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="n">lv_obj_add_style</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">LV_IMG_PART_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
     <span class="n">LV_IMG_DECLARE</span><span class="p">(</span><span class="n">img_cogwheel_argb</span><span class="p">);</span>
     <span class="n">lv_img_set_src</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">img_cogwheel_argb</span><span class="p">);</span>
     <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="cp">#endif</span>
 <span class="p">}</span>
 
 </pre></div>
@@ -2026,11 +2037,12 @@ Both regions could have different properties.</p>
     <span class="n">lv_style_set_scale_end_border_width</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
 
     <span class="cm">/*Gauge has a needle but for simplicity its style is not initialized here*/</span>
-
+<span class="cp">#if LV_USE_GAUGE</span>
     <span class="cm">/*Create an object with the new style*/</span>
     <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">lv_gauge_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="n">lv_obj_add_style</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">LV_GAUGE_PART_MAIN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
     <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="cp">#endif</span>
 <span class="p">}</span>
 
 </pre></div>
@@ -2146,7 +2158,7 @@ It gives a default appearance to UI which can be modified by adding further styl
     <span class="cm">/*Make the button smaller when pressed*/</span>
     <span class="n">lv_style_set_transform_height</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">);</span>
     <span class="n">lv_style_set_transform_width</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">);</span>
-
+<span class="cp">#if LV_USE_ANIMATION</span>
     <span class="cm">/*Add a transition to the size change*/</span>
     <span class="k">static</span> <span class="n">lv_anim_path_t</span> <span class="n">path</span><span class="p">;</span>
     <span class="n">lv_anim_path_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">path</span><span class="p">);</span>
@@ -2156,7 +2168,7 @@ It gives a default appearance to UI which can be modified by adding further styl
     <span class="n">lv_style_set_transition_prop_2</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_STYLE_TRANSFORM_WIDTH</span><span class="p">);</span>
     <span class="n">lv_style_set_transition_time</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
     <span class="n">lv_style_set_transition_path</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">);</span>
-
+<span class="cp">#endif</span>
 
     <span class="cm">/*Create a red style. Change only some colors.*/</span>
     <span class="n">lv_style_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">);</span>
@@ -2165,7 +2177,7 @@ It gives a default appearance to UI which can be modified by adding further styl
     <span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_MAROON</span><span class="p">);</span>
     <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_RED</span><span class="p">);</span>
     <span class="n">lv_style_set_text_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_WHITE</span><span class="p">);</span>
-
+<span class="cp">#if LV_USE_BTN</span>
     <span class="cm">/*Create buttons and use the new styles*/</span>
     <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>     <span class="cm">/*Add a button the current screen*/</span>
     <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>                            <span class="cm">/*Set its position*/</span>
@@ -2187,6 +2199,7 @@ It gives a default appearance to UI which can be modified by adding further styl
 
     <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>          <span class="cm">/*Add a label to the button*/</span>
     <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button 2&quot;</span><span class="p">);</span>                     <span class="cm">/*Set the labels text*/</span>
+<span class="cp">#endif</span>
 <span class="p">}</span>
 
 
@@ -2218,7 +2231,7 @@ It gives a default appearance to UI which can be modified by adding further styl
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Sep 15, 2020.
+        Last updated on Oct 06, 2020.
       </span>
 
     </p>

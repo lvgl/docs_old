@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.5.0
+                v7.6.1
               </div>
             
           
@@ -170,7 +170,15 @@
 <li class="toctree-l2"><a class="reference internal" href="stm32.html">STM32</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxp.html">NXP</a></li>
 <li class="toctree-l2"><a class="reference internal" href="espressif.html">Espressif (ESP32)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="arduino.html">Arduino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arduino.html">Arduino</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arduino.html#get-the-lvgl-ardunio-library">Get the LVGL Ardunio library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arduino.html#set-up-drivers">Set up drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arduino.html#configure-lvgl">Configure LVGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arduino.html#configure-the-examples">Configure the examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arduino.html#initialize-lvgl-and-run-an-example">Initialize LVGL and run an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arduino.html#debugging-and-logging">Debugging and logging</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="micropython.html">Micropython</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="micropython.html#what-is-micropython">What is Micropython?</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
@@ -1555,7 +1563,7 @@ The styles from the themes are applied automatically when the objects are create
     <span class="cm">/*Make the button smaller when pressed*/</span>
     <span class="n">lv_style_set_transform_height</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">);</span>
     <span class="n">lv_style_set_transform_width</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">);</span>
-
+<span class="cp">#if LV_USE_ANIMATION</span>
     <span class="cm">/*Add a transition to the size change*/</span>
     <span class="k">static</span> <span class="n">lv_anim_path_t</span> <span class="n">path</span><span class="p">;</span>
     <span class="n">lv_anim_path_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">path</span><span class="p">);</span>
@@ -1565,7 +1573,7 @@ The styles from the themes are applied automatically when the objects are create
     <span class="n">lv_style_set_transition_prop_2</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_STYLE_TRANSFORM_WIDTH</span><span class="p">);</span>
     <span class="n">lv_style_set_transition_time</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
     <span class="n">lv_style_set_transition_path</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">);</span>
-
+<span class="cp">#endif</span>
 
     <span class="cm">/*Create a red style. Change only some colors.*/</span>
     <span class="n">lv_style_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">);</span>
@@ -1574,7 +1582,7 @@ The styles from the themes are applied automatically when the objects are create
     <span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_MAROON</span><span class="p">);</span>
     <span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_PRESSED</span><span class="p">,</span> <span class="n">LV_COLOR_RED</span><span class="p">);</span>
     <span class="n">lv_style_set_text_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_btn_red</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_WHITE</span><span class="p">);</span>
-
+<span class="cp">#if LV_USE_BTN</span>
     <span class="cm">/*Create buttons and use the new styles*/</span>
     <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>     <span class="cm">/*Add a button the current screen*/</span>
     <span class="n">lv_obj_set_pos</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>                            <span class="cm">/*Set its position*/</span>
@@ -1596,6 +1604,7 @@ The styles from the themes are applied automatically when the objects are create
 
     <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>          <span class="cm">/*Add a label to the button*/</span>
     <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button 2&quot;</span><span class="p">);</span>                     <span class="cm">/*Set the labels text*/</span>
+<span class="cp">#endif</span>
 <span class="p">}</span>
 
 
@@ -1679,7 +1688,7 @@ The styles from the themes are applied automatically when the objects are create
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Sep 15, 2020.
+        Last updated on Oct 06, 2020.
       </span>
 
     </p>

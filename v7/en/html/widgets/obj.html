@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.5.0
+                v7.6.1
               </div>
             
           
@@ -170,7 +170,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../get-started/stm32.html">STM32</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html">Espressif (ESP32)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#get-the-lvgl-ardunio-library">Get the LVGL Ardunio library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#set-up-drivers">Set up drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#configure-lvgl">Configure LVGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#configure-the-examples">Configure the examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#initialize-lvgl-and-run-an-example">Initialize LVGL and run an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#debugging-and-logging">Debugging and logging</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#what-is-micropython">What is Micropython?</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
@@ -1343,7 +1351,7 @@ To set width or height reduced by the margin <code class="docutils literal notra
 In more exact way: <code class="docutils literal notranslate"><span class="pre">new_width</span> <span class="pre">=</span> <span class="pre">left_margin</span> <span class="pre">+</span> <span class="pre">object_width</span> <span class="pre">+</span> <span class="pre">right_margin</span></code>.</p>
 <p>To get the width or height which includes the margins use <code class="docutils literal notranslate"><span class="pre">lv_obj_get_width/height_margin(obj)</span></code>.</p>
 <p>Styles can add <a class="reference external" href="/overview/style/#properties">Padding</a> to the object as well. Padding means &quot;I don't want my children too close to my sides, so keep this space&quot;.
-To set width or height reduced by the padding <code class="docutils literal notranslate"><span class="pre">lv_obj_set_width_fit(obj,</span> <span class="pre">new_width)</span></code> or <code class="docutils literal notranslate"><span class="pre">lv_obj_set_height_fit(obj,</span> <span class="pre">new_height)</span></code>.In a more exact way: <code class="docutils literal notranslate"><span class="pre">new_width</span> <span class="pre">=</span> <span class="pre">left_pad</span> <span class="pre">+</span> <span class="pre">object_width</span> <span class="pre">+</span> <span class="pre">right_pad</span></code>
+To set width or height reduced by the padding <code class="docutils literal notranslate"><span class="pre">lv_obj_set_width_fit(obj,</span> <span class="pre">new_width)</span></code> or <code class="docutils literal notranslate"><span class="pre">lv_obj_set_height_fit(obj,</span> <span class="pre">new_height)</span></code>.<br />In a more exact way: <code class="docutils literal notranslate"><span class="pre">new_width</span> <span class="pre">=</span> <span class="pre">left_pad</span> <span class="pre">+</span> <span class="pre">object_width</span> <span class="pre">+</span> <span class="pre">right_pad</span></code>
 To get the width or height which is REDUCED by padding use <code class="docutils literal notranslate"><span class="pre">lv_obj_get_width/height_fit(obj)</span></code>. It can be considered the &quot;useful size of the object&quot;.</p>
 <p>Margin and padding gets important when <a class="reference external" href="/widget/cont#layout">Layout</a> or <a class="reference external" href="/wisgets/cont#fit">Auto-fit</a> is used by other widgets.</p>
 </div>
@@ -1358,7 +1366,7 @@ To get the width or height which is REDUCED by padding use <code class="docutils
 <li><p><code class="docutils literal notranslate"><span class="pre">obj</span></code> is the object to align.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">obj_ref</span></code> is a reference object. <code class="docutils literal notranslate"><span class="pre">obj</span></code> will be aligned to it. If <code class="docutils literal notranslate"><span class="pre">obj_ref</span> <span class="pre">=</span> <span class="pre">NULL</span></code>, then the parent of <code class="docutils literal notranslate"><span class="pre">obj</span></code> will be used.</p></li>
 <li><p>The third argument is the <em>type</em> of alignment. These are the possible options:
-<img alt="Alignment types in LVGL" src="../_images/align.png" /></p>
+<img alt="../_images/align.png" src="../_images/align.png" /></p>
 <p>The alignment types build like <code class="docutils literal notranslate"><span class="pre">LV_ALIGN_OUT_TOP_MID</span></code>.</p>
 </li>
 <li><p>The last two arguments allow you to shift the object by a specified number of pixels after aligning it.</p></li>
@@ -1510,10 +1518,9 @@ To prevent one or more that kind of actions, you can protect the object against 
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="c">
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="base-obejcts-with-custom-styles">
-<h4>Base obejcts with custom styles<a class="headerlink" href="#base-obejcts-with-custom-styles" title="Permalink to this headline">¶</a></h4>
-<img alt="Simeple Base object example in LittlevGL" src="../_images/lv_ex_obj_1.png" />
-<div class="toggle docutils container">
+<div class="section" id="base-objects-with-custom-styles">
+<h4>Base objects with custom styles<a class="headerlink" href="#base-objects-with-custom-styles" title="Permalink to this headline">¶</a></h4>
+<iframe class='lv-example' src='https://lvgl.github.io/lv_examples/lv_ex_obj_1/?w=320&h=240'></iframe><div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
@@ -4351,7 +4358,7 @@ To prevent one or more that kind of actions, you can protect the object against 
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Sep 15, 2020.
+        Last updated on Oct 06, 2020.
       </span>
 
     </p>

@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.5.0
+                v7.6.1
               </div>
             
           
@@ -170,7 +170,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../get-started/stm32.html">STM32</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html">Espressif (ESP32)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#get-the-lvgl-ardunio-library">Get the LVGL Ardunio library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#set-up-drivers">Set up drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#configure-lvgl">Configure LVGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#configure-the-examples">Configure the examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#initialize-lvgl-and-run-an-example">Initialize LVGL and run an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#debugging-and-logging">Debugging and logging</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#what-is-micropython">What is Micropython?</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
@@ -1375,6 +1383,7 @@ Therefore this method works the best when the MCU has an LCD/TFT interface and t
 <ul class="simple">
 <li><p><strong>gpu_fill_cb</strong> fill an area in memory with colors.</p></li>
 <li><p><strong>gpu_blend_cb</strong> blend two memory buffers using opacity.</p></li>
+<li><p><strong>gpu_wait_cb</strong> if any GPU function return while the GPU is still working LVGL will use this function when required the be sure GPU rendereing is ready.</p></li>
 </ul>
 <p>Note that, these functions need to draw to the memory (RAM) and not your display directly.</p>
 <p>Some other optional callbacks to make easier and more optimal to work with monochrome, grayscale or other non-standard RGB displays:</p>
@@ -1385,6 +1394,7 @@ It can be used if the display controller can refresh only areas with specific he
 It can be used to store the pixels more compactly if the display has a special color format. (e.g. 1-bit monochrome, 2-bit grayscale etc.)
 This way the buffers used in <code class="docutils literal notranslate"><span class="pre">lv_disp_buf_t</span></code> can be smaller to hold only the required number of bits for the given area size. <code class="docutils literal notranslate"><span class="pre">set_px_cb</span></code> is not working with <code class="docutils literal notranslate"><span class="pre">Two</span> <span class="pre">screen-sized</span> <span class="pre">buffers</span></code> display buffer configuration.</p></li>
 <li><p><strong>monitor_cb</strong> a callback function tells how many pixels were refreshed in how much time.</p></li>
+<li><p><strong>clean_dcache_cb</strong> a callback for cleaning any caches related to the display</p></li>
 </ul>
 <p>To set the fields of <em>lv_disp_drv_t</em> variable it needs to be initialized with <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_init(&amp;disp_drv)</span></code>.
 And finally to register a display for LVGL <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register(&amp;disp_drv)</span></code> needs to be called.</p>
@@ -1457,6 +1467,12 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 <span class="kt">void</span> <span class="n">my_monitor_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">time</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">px</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d px refreshed in %d ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">ms</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">my_clean_dcache_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="n">uint32</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="cm">/* Example for Cortex-M (CMSIS) */</span>
+  <span class="n">SCB_CleanInvalidateDCache</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -2065,7 +2081,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Sep 15, 2020.
+        Last updated on Oct 06, 2020.
       </span>
 
     </p>

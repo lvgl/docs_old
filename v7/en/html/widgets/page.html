@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.5.0
+                v7.6.1
               </div>
             
           
@@ -170,7 +170,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../get-started/stm32.html">STM32</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html">Espressif (ESP32)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#get-the-lvgl-ardunio-library">Get the LVGL Ardunio library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#set-up-drivers">Set up drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#configure-lvgl">Configure LVGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#configure-the-examples">Configure the examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#initialize-lvgl-and-run-an-example">Initialize LVGL and run an example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#debugging-and-logging">Debugging and logging</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/micropython.html">Micropython</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/micropython.html#what-is-micropython">What is Micropython?</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../get-started/micropython.html#highlights-of-micropython">Highlights of Micropython</a></li>
@@ -1331,9 +1339,9 @@
 <div class="section" id="parts-and-styles">
 <h2>Parts and Styles<a class="headerlink" href="#parts-and-styles" title="Permalink to this headline">¶</a></h2>
 <p>The Page's main part is called <code class="docutils literal notranslate"><span class="pre">LV_PAGE_PART_BG</span></code> which is the background of the Page. It uses all the typical background style properties. Using padding will add space on the sides.</p>
-<p>The scrollable object can be referenced via the <code class="docutils literal notranslate"><span class="pre">LV_PAGE_PART_SCRL</span></code> part. It also uses all the typical background style properties and padding to add space on the sides.</p>
-<p><code class="docutils literal notranslate"><span class="pre">LV_LIST_PART_SCROLLBAR</span></code> is a virtual part of the background to draw the scroll bars. Uses all the typical background style properties, <em>size</em> to set the width of the scroll bars, and <em>pad_right</em> and <em>pad_bottom</em> to set the spacing.</p>
-<p><code class="docutils literal notranslate"><span class="pre">LV_LIST_PART_EDGE_FLASH</span></code>is also a virtual part of the background to draw a semicircle on the sides when the list can not be scrolled in that direction further. Uses all the typical background properties.</p>
+<p>The scrollable object can be referenced via the <code class="docutils literal notranslate"><span class="pre">LV_PAGE_PART_SCROLLABLE</span></code> part. It also uses all the typical background style properties and padding to add space on the sides.</p>
+<p><code class="docutils literal notranslate"><span class="pre">LV_PAGE_PART_SCROLLBAR</span></code> is a virtual part of the background to draw the scroll bars. Uses all the typical background style properties, <em>size</em> to set the width of the scroll bars, and <em>pad_right</em> and <em>pad_bottom</em> to set the spacing.</p>
+<p><code class="docutils literal notranslate"><span class="pre">LV_PAGE_PART_EDGE_FLASH</span></code>is also a virtual part of the background to draw a semicircle on the sides when the page can not be scrolled in that direction further. Uses all the typical background properties.</p>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
@@ -1373,12 +1381,12 @@ It will move the scrollable container to show a child. The time of the animation
 </div>
 <div class="section" id="edge-flash">
 <h3>Edge flash<a class="headerlink" href="#edge-flash" title="Permalink to this headline">¶</a></h3>
-<p>A circle-like effect can be shown if the list reached the most top/bottom/left/right position. <code class="docutils literal notranslate"><span class="pre">lv_page_set_edge_flash(list,</span> <span class="pre">en)</span></code> enables this feature.</p>
+<p>A circle-like effect can be shown if the page reached the most top/bottom/left/right position. <code class="docutils literal notranslate"><span class="pre">lv_page_set_edge_flash(page,</span> <span class="pre">en)</span></code> enables this feature.</p>
 </div>
 <div class="section" id="scroll-propagation">
 <h3>Scroll propagation<a class="headerlink" href="#scroll-propagation" title="Permalink to this headline">¶</a></h3>
-<p>If the list is created on an other scrollable element (like an other page) and the Page can't be scrolled further the scrolling can be propagated to the parent to continue the scrolling on the parent.
-It can be enabled with <code class="docutils literal notranslate"><span class="pre">lv_page_set_scroll_propagation(list,</span> <span class="pre">true)</span></code></p>
+<p>If the page is created on an other scrollable element (like an other page) and the Page can't be scrolled further the scrolling can be propagated to the parent to continue the scrolling on the parent.
+It can be enabled with <code class="docutils literal notranslate"><span class="pre">lv_page_set_scroll_propagation(page,</span> <span class="pre">true)</span></code></p>
 </div>
 </div>
 <div class="section" id="clean-the-page">
@@ -1417,8 +1425,7 @@ It can be enabled with <code class="docutils literal notranslate"><span class="p
 <h3>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="page-with-scrollbar">
 <h4>Page with scrollbar<a class="headerlink" href="#page-with-scrollbar" title="Permalink to this headline">¶</a></h4>
-<img alt="Page example in LittlevGL" src="../_images/lv_ex_page_1.png" />
-<div class="toggle docutils container">
+<iframe class='lv-example' src='https://lvgl.github.io/lv_examples/lv_ex_page_1/?w=320&h=240'></iframe><div class="toggle docutils container">
 <div class="header docutils container">
 <p>code</p>
 </div>
@@ -2185,7 +2192,7 @@ It can be enabled with <code class="docutils literal notranslate"><span class="p
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Sep 15, 2020.
+        Last updated on Oct 06, 2020.
       </span>
 
     </p>
