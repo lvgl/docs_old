@@ -46,13 +46,13 @@ if clean:
 # BUILD PDF
 
 # Silly workarond to include the more or less correct PDF download link in the PDF
-cmd("cp -f " + lang +"/latex/LVGL.pdf LVGL.pdf | true")
-cmd("sphinx-build -b latex . en/latex")
+#cmd("cp -f " + lang +"/latex/LVGL.pdf LVGL.pdf | true")
+#cmd("sphinx-build -b latex . en/latex")
 
 # Generat PDF
-cmd("cd " + lang + "/latex && xelatex -interaction=batchmode *.tex")
+#cmd("cd " + lang + "/latex && xelatex -interaction=batchmode *.tex")
 # Copy the result PDF to the main diractory to make it avaiable for the HTML build
-cmd("cd " + lang + "/latex && cp -f LVGL.pdf ../../LVGL.pdf")
+#cmd("cd " + lang + "/latex && cp -f LVGL.pdf ../../LVGL.pdf")
 
 # BULD HTML
 cmd("sphinx-build -b html . en/html")
