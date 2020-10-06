@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.6.1-dev
+                v7.7.0-dev
               </div>
             
           
@@ -168,7 +168,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="stm32.html">STM32</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">NXP</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">NXP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-new-project-with-lvgl">Creating new project with LVGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-hw-acceleration-for-nxp-imx-rt-platforms-using-pxp-pixel-pipeline-engine-for-existing-projects">Adding HW acceleration for NXP iMX RT platforms using PXP (PiXel Pipeline) engine for existing projects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#features-supported">Features supported:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-configuration">Basic configuration:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-initialization">Basic initialization:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#project-setup">Project setup:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-configuration">Advanced configuration:</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="espressif.html">Espressif (ESP32)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arduino.html">Arduino</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="arduino.html#get-the-lvgl-ardunio-library">Get the LVGL Ardunio library</a></li>
@@ -671,6 +682,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#vertical-range">Vertical range</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#division-lines">Division lines</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#tick-marks-and-labels">Tick marks and labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#cursor">Cursor</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#events">Events</a></li>
@@ -1328,7 +1340,106 @@
             
   <div class="section" id="nxp">
 <h1>NXP<a class="headerlink" href="#nxp" title="Permalink to this headline">¶</a></h1>
-<p>TODO</p>
+<p>NXP has integrated LVGL into the MCUXpresso SDK packages for several of their general
+purpose and crossover microcontrollers, allowing easy evaluation and migration into your
+product design. <a class="reference external" href="https://www.nxp.com/design/software/embedded-software/littlevgl-open-source-graphics-library:LITTLEVGL-OPEN-SOURCE-GRAPHICS-LIBRARY?&amp;tid=vanLITTLEVGL-OPEN-SOURCE-GRAPHICS-LIBRARY">Download an SDK for a supported board</a>
+today and get started with your next GUI application.</p>
+<div class="section" id="creating-new-project-with-lvgl">
+<h2>Creating new project with LVGL<a class="headerlink" href="#creating-new-project-with-lvgl" title="Permalink to this headline">¶</a></h2>
+<p>Downloading the MCU SDK example project is recommended as a starting point. It comes fully
+configured with LVGL (and with PXP support if module is present), no additional integration
+work is required.</p>
+</div>
+<div class="section" id="adding-hw-acceleration-for-nxp-imx-rt-platforms-using-pxp-pixel-pipeline-engine-for-existing-projects">
+<h2>Adding HW acceleration for NXP iMX RT platforms using PXP (PiXel Pipeline) engine for existing projects<a class="headerlink" href="#adding-hw-acceleration-for-nxp-imx-rt-platforms-using-pxp-pixel-pipeline-engine-for-existing-projects" title="Permalink to this headline">¶</a></h2>
+<p>Several drawing features in LVGL can be offloaded to PXP engine. In order to use CPU time while PXP
+is running, RTOS is required to block the LVGL drawing thread and switch to another task, or simply to
+idle task, where CPU could be suspended to save power.</p>
+<div class="section" id="features-supported">
+<h3>Features supported:<a class="headerlink" href="#features-supported" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>RGB565 color format</p></li>
+<li><p>Area fill + optional transparency</p></li>
+<li><p>BLIT (BLock Image Transfer) + optional transparency</p></li>
+<li><p>Color keying + optional transparency</p></li>
+<li><p>Recoloring (color tint) + optional transparency</p></li>
+<li><p>RTOS integration layer</p></li>
+<li><p>Default FreeRTOS and bare metal code provided</p></li>
+</ul>
+</div>
+<div class="section" id="basic-configuration">
+<h3>Basic configuration:<a class="headerlink" href="#basic-configuration" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Select NXP PXP engine in lv_conf.h: Set <code class="docutils literal notranslate"><span class="pre">LV_USE_GPU_NXP_PXP</span></code> to 1</p></li>
+<li><p>Enable default implementation for interrupt handling, PXP start function and automatic initialization: Set <code class="docutils literal notranslate"><span class="pre">LV_USE_GPU_NXP_PXP_AUTO_INIT</span></code> to 1</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">FSL_RTOS_FREE_RTOS</span></code> symbol is defined, FreeRTOS implementation will be used, otherwise bare metal code will be included</p></li>
+</ul>
+</div>
+<div class="section" id="basic-initialization">
+<h3>Basic initialization:<a class="headerlink" href="#basic-initialization" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">LV_USE_GPU_NXP_PXP_AUTO_INIT</span></code> is enabled, no user code is required; PXP is initialized automatically in <code class="docutils literal notranslate"><span class="pre">lv_init()</span></code></p></li>
+<li><p>For manual PXP initialization, default configuration structure for callbacks can be used. Initialize PXP before calling <code class="docutils literal notranslate"><span class="pre">lv_init()</span></code></p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>      <span class="cp">#if LV_USE_GPU_NXP_PXP</span>
+        <span class="cp">#include</span> <span class="cpf">&quot;lv_gpu/lv_gpu_nxp_pxp.h&quot;</span><span class="cp"></span>
+        <span class="cp">#include</span> <span class="cpf">&quot;lv_gpu/lv_gpu_nxp_pxp_osa.h&quot;</span><span class="cp"></span>
+      <span class="cp">#endif</span>
+      <span class="p">.</span> <span class="p">.</span> <span class="p">.</span>
+      <span class="cp">#if LV_USE_GPU_NXP_PXP</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">lv_gpu_nxp_pxp_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pxp_default_cfg</span><span class="p">)</span> <span class="o">!=</span> <span class="n">LV_RES_OK</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">PRINTF</span><span class="p">(</span><span class="s">&quot;PXP init error. STOP.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span> <span class="p">;</span> <span class="p">;</span> <span class="p">)</span> <span class="p">;</span>
+        <span class="p">}</span>
+      <span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="project-setup">
+<h3>Project setup:<a class="headerlink" href="#project-setup" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Add PXP related files to project:</p>
+<ul>
+<li><p>lv_gpu/lv_gpu_nxp.c, lv_gpu/lv_gpu_nxp.h: low level drawing calls for LVGL</p></li>
+<li><p>lv_gpu/lv_gpu_nxp_osa.c, lv_gpu/lv_gpu_osa.h: default implementation of OS-specific functions (bare metal and FreeRTOS only)</p>
+<ul>
+<li><p>optional, required only if <code class="docutils literal notranslate"><span class="pre">LV_USE_GPU_NXP_PXP_AUTO_INIT</span></code> is set to 1</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>PXP related code depends on two drivers provided by MCU SDK. These drivers need to be added to project:</p>
+<ul>
+<li><p>fsl_pxp.c, fsl_pxp.h: PXP driver</p></li>
+<li><p>fsl_cache.c, fsl_cache.h: CPU cache handling functions</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="advanced-configuration">
+<h3>Advanced configuration:<a class="headerlink" href="#advanced-configuration" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Implementation depends on multiple OS-specific functions. Structure <code class="docutils literal notranslate"><span class="pre">lv_nxp_pxp_cfg_t</span></code> with callback pointers is used
+as a parameter for <code class="docutils literal notranslate"><span class="pre">lv_gpu_nxp_pxp_init()</span></code> function. Default implementation for FreeRTOS and baremetal is provided in lv_gpu_nxp_osa.c</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">pxp_interrupt_init()</span></code>: Initialize PXP interrupt (HW setup, OS setup)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pxp_interrupt_deinit()</span></code>: Deinitialize PXP interrupt (HW setup, OS setup)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pxp_run()</span></code>: Start PXP job. Use OS-specific mechanism to block drawing thread. PXP must finish drawing before leaving this function.</p></li>
+</ul>
+</li>
+<li><p>There are configurable area thresholds which are used to decide whether the area will be processed by CPU, or by PXP. Areas smaller than
+defined value will be processed by CPU, areas bigger than the threshold will be processed by PXP. These thresholds may be defined as a
+preprocessor variables. Default values are defined lv_gpu/lv_gpu_nxp_pxp.h</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">GPU_NXP_PXP_BLIT_SIZE_LIMIT</span></code>: size threshold for image BLIT, BLIT with color keying, and BLIT with recolor (OPA &gt; LV_OPA_MAX)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GPU_NXP_PXP_BLIT_OPA_SIZE_LIMIT</span></code>: size threshold for image BLIT and BLIT with color keying with transparency (OPA &lt; LV_OPA_MAX)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GPU_NXP_PXP_FILL_SIZE_LIMIT</span></code>: size threshold for fill operation (OPA &gt; LV_OPA_MAX)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GPU_NXP_PXP_FILL_OPA_SIZE_LIMIT</span></code>: size threshold for fill operation with transparency (OPA &lt; LV_OPA_MAX)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 </div>
 
 
@@ -1353,7 +1464,7 @@
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Oct 02, 2020.
+        Last updated on Oct 06, 2020.
       </span>
 
     </p>
