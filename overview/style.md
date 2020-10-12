@@ -157,7 +157,7 @@ lv_obj_add_style(btn, LV_BTN_PART_MAIN, &btn_red);  /*Overwrite only a some col
 
 An objects style list can be reset with `lv_obj_reset_style_list(obj, <part>)` 
 
-If a style which is already assigned to an object changes (i.e. one of it's property is set to a new value) the objects using that style should be notified with `lv_obj_refresh_style(obj)`
+If a style which is already assigned to an object changes (i.e. one of it's property is set to a new value) the objects using that style should be notified with `lv_obj_refresh_style(obj, part, property)`. To refresh all parts and proeprties use `lv_obj_refresh_style(obj, LV_OBJ_PART_ALL, LV_STYLE_PROP_ALL)`.
 
 To get a final value of property, including cascading, inheritance, local styles and transitions (see below), get functions like this can be used: `lv_obj_get_style_<property_name>(obj, <part>)`. 
 These functions uses the object's current state and if no better candidate returns a default value.  
