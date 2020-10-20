@@ -19,7 +19,7 @@ The calendar's main part is called `LV_CALENDAR_PART_BG`. It draws a background 
 
 Besides the following virtual parts exist:
 - `LV_CALENDAR_PART_HEADER` The upper area where the current year and month's name is shown. It also has buttons to move the next/previous month. 
-It uses typical background properties and padding to keep some distance from the background (top, left, right) and the day names (bottom).
+It uses typical background properties plus padding to adjust its size and margin to set the distance from the top of the calendar and the day names below it.
 - `LV_CALENDAR_PART_DAY_NAMES` Shows the name of the days below the header. It uses the *text* style properties padding to keep some distance from the background (left, right), header (top) and dates (bottom).
 - `LV_CALENDAR_PART_DATES` Show the date numbers from 1..28/29/30/31 (depending on current month). Different "state" of the states are drawn according to the states defined in this part:
   - normal dates: drawn with `LV_STATE_DEFAULT` style

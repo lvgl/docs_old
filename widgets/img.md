@@ -96,7 +96,8 @@ Note that, the real coordinates of image object won't change during transformati
 The images can be rotated with 
 
 ## Events
-Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
+As by default, clicking of the image objects is disabled, only [generic](../overview/event.html#generic-events) non-input device-related events are sent.
+If you want to catch all of the generic events of an image object, you should enable its clicking by using this: `lv_obj_set_click(img, true)`
 
 Learn more about [Events](/overview/event).
 
