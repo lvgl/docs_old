@@ -52,15 +52,36 @@ $ doxygen Doxyfile
 
 The documentation is compiled into HTML or another form using [Sphinx](https://www.sphinx-doc.org). In order to get started Sphinx and some other components need to be installed on your system. 
 
+
+Install dependencies:
 ```sh
+$ pip install -U sphinx recommonmark commonmark breathe sphinx-rtd-theme sphinx-markdown-tables
+```
+
+Get the `docs` and `lvgl` repositories
+```sh
+$ git clone https://github.com/lvgl/docs.git --recurse-submodules 
+$ git clone https://github.com/lvgl/lvgl.git
 $ ls .
 docs lvgl
-$ pip install -U sphinx recommonmark commonmark breathe sphinx-rtd-theme
-$ cd docs # IMPORTANT: note the two .. paths. The lvgl folder also has a folder inside it named docs.
+```
+
+Enter to the `docs` folder and change branch:
+```sh
+$ cd docs
+$ git checkout latest --
+$ git submodule update init
+```
+
+Upadte the API reference of the `docs` from `lvgl` (optional):
+```sh
 $ rm xml/*
 $ cp -a ../lvgl/docs/api_doc/xml/* xml/
-$ cd en
-$ make html
-The HTML pages are in _build/html.
-$
 ```
+
+Built HTML
+```sh
+$ make html
+```
+
+The HTML pages are in `_build/html`.
