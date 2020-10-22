@@ -111,7 +111,7 @@ html_theme_options = {
 }
 # For site map generation
 html_baseurl = 'https://docs.lvgl.io/latest/en/html/'
-sitemap_url_scheme = "{lang}{version}subdir/{link}"
+sitemap_url_scheme = "/{link}"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
