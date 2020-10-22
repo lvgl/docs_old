@@ -40,7 +40,7 @@ extensions = ['sphinx.ext.autodoc',
     'recommonmark',
     'sphinx_markdown_tables',
     'breathe',
-    'sphinx-sitemap'
+    'sphinx-sitemap',
     'lv_example'
     ]
 
