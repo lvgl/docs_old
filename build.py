@@ -29,6 +29,7 @@ f.close()
 
 
 base_html = "html_baseurl = 'https://docs.lvgl.io/" + urlpath + "/en/html/'"
+
 os.system("sed -i \"s|html_baseurl = .*|" + base_html +"|\" conf.py")
 
 os.system("git ci -am  'Update header.rst'")
