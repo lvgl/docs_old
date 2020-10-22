@@ -20,11 +20,16 @@ def cmd(s):
 # Get the current branch name
 status, br = commands.getstatusoutput("git br | grep '*'")
 br = re.sub('\* ', '', br)
+urlpath = re.sub('release/', '', br)
  
 # Be sure the github links point to the right branch
 f = open("header.rst", "w")
 f.write(".. |github_link_base| replace:: https://github.com/lvgl/docs/blob/" + br)
 f.close()
+
+
+base_html = "html_baseurl = 'https://docs.lvgl.io/" + urlpath + "/en/html/'"
+os.system("sed -i \"s|html_baseurl = .*|" + base_html +"|\" conf.py")
 
 os.system("git ci -am  'Update header.rst'")
     

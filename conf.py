@@ -40,6 +40,7 @@ extensions = ['sphinx.ext.autodoc',
     'recommonmark',
     'sphinx_markdown_tables',
     'breathe',
+    'sphinx-sitemap'
     'lv_example'
     ]
 
@@ -108,6 +109,8 @@ html_theme_options = {
     'collapse_navigation' : False,
     'logo_only': True,
 }
+# For site map generation
+html_baseurl = 'https://docs.lvgl.io/latest/en/html/'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
