@@ -19,6 +19,7 @@
 #
 import os
 import sys
+import subprocess
 sys.path.insert(0, os.path.abspath('./_ext'))
 
 import recommonmark
@@ -226,4 +227,19 @@ def setup(app):
     app.add_transform(AutoStructify)
     app.add_stylesheet('css/custom.css')
     app.add_stylesheet('css/fontawesome.min.css')
-    
+
+# Attempt to checkout _static/built_lv_examples
+
+
+if not os.path.exists('_static/built_lv_examples'):
+    os.system('git clone https://github.com/lvgl/lv_examples.git _static/built_lv_examples')
+
+os.system('git -C _static/built_lv_examples fetch origin')
+example_commit_hash = subprocess.run(["git", "-C", "lv_examples", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+search_command = ["git", "-C", "_static/built_lv_examples", "--no-pager", "log", "--pretty=format:'%H'", "--all", "-n", "1", f"--grep='Deploying to gh-pages from  @ {example_commit_hash}'"]
+log_output = subprocess.check_output(' '.join(search_command), shell=True).strip().decode("utf-8")
+if len(log_output) == 0:
+    raise ValueError('lv_examples: cannot find corresponding deployed commit: ' + example_commit_hash)
+
+os.system('git -C _static/built_lv_examples reset --hard')
+os.system('git -C _static/built_lv_examples checkout ' + log_output)
