@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 # -*- coding: utf-8 -*-
 #
 # LVGL documentation build configuration file, created by
@@ -235,7 +235,13 @@ if not os.path.exists('_static/built_lv_examples'):
     os.system('git clone https://github.com/lvgl/lv_examples.git _static/built_lv_examples')
 
 os.system('git -C _static/built_lv_examples fetch origin')
-example_commit_hash = subprocess.run(["git", "-C", "lv_examples", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+
+out = subprocess.Popen(["git", "-C", "lv_examples", "rev-parse", "HEAD"], 
+       stdout=subprocess.PIPE, 
+       stderr=subprocess.STDOUT)
+stdout,stderr = out.communicate()
+example_commit_hash = stdout.decode("utf-8").strip()
+
 search_command = ["git", "-C", "_static/built_lv_examples", "--no-pager", "log", "--pretty=format:'%H'", "--all", "-n", "1", f"--grep='Deploying to gh-pages from  @ {example_commit_hash}'"]
 log_output = subprocess.check_output(' '.join(search_command), shell=True).strip().decode("utf-8")
 if len(log_output) == 0:
