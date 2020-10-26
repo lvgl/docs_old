@@ -55,7 +55,7 @@ The documentation is compiled into HTML or another form using [Sphinx](https://w
 
 Install dependencies:
 ```sh
-$ pip install -U sphinx recommonmark commonmark breathe sphinx-rtd-theme sphinx-markdown-tables
+$ pip install -U sphinx recommonmark commonmark breathe sphinx-rtd-theme sphinx-markdown-tables sphinx-sitemap
 ```
 
 Get the `docs` and `lvgl` repositories
@@ -70,12 +70,15 @@ Enter to the `docs` folder and change branch:
 ```sh
 $ cd docs
 $ git checkout latest --
-$ git submodule update init
+$ git submodule update --init
 ```
 
-Upadte the API reference of the `docs` from `lvgl` (optional):
+Update the API reference of the `docs` from `lvgl` (optional):
 ```sh
 $ rm xml/*
+$ cd ../lvgl/scripts
+$ doxygen -u
+$ cd ../../docs
 $ cp -a ../lvgl/docs/api_doc/xml/* xml/
 ```
 
