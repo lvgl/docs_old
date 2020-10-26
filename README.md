@@ -87,4 +87,4 @@ Built HTML
 $ make html
 ```
 
-The HTML pages are in `_build/html`.
+The HTML pages are in the `html`.
