@@ -30,32 +30,35 @@ If all works well, a ✓ character should be displayed.
 
 ## Built-in fonts
 
-There are several built-in fonts in different sizes, which can be enabled in lv_conf.h by *LV_FONT_...* defines:
-- `LV_FONT_MONTSERRAT_12` 12 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_14` 14 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_16` 16 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_18` 18 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_20` 20 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_22` 22 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_24` 24 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_26` 26 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_28` 28 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_30` 30 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_32` 32 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_34` 34 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_36` 36 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_38` 38 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_40` 40 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_42` 42 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_44` 44 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_46` 46 px ASCII + built-in symbol
-- `LV_FONT_MONTSERRAT_48` 48 px ASCII + built-in symbol
+There are several built-in fonts in different sizes, which can be enabled in `lv_conf.h` by *LV_FONT_...* defines.
+### Normal fonts
+Containing all the ASCII characters, the degree symbol (U+00B0), the bullet symbol (U+2022) and the build in symbols (see below).
+- `LV_FONT_MONTSERRAT_12` 12 px font
+- `LV_FONT_MONTSERRAT_14` 14 px font
+- `LV_FONT_MONTSERRAT_16` 16 px font
+- `LV_FONT_MONTSERRAT_18` 18 px font
+- `LV_FONT_MONTSERRAT_20` 20 px font
+- `LV_FONT_MONTSERRAT_22` 22 px font
+- `LV_FONT_MONTSERRAT_24` 24 px font
+- `LV_FONT_MONTSERRAT_26` 26 px font
+- `LV_FONT_MONTSERRAT_28` 28 px font
+- `LV_FONT_MONTSERRAT_30` 30 px font
+- `LV_FONT_MONTSERRAT_32` 32 px font
+- `LV_FONT_MONTSERRAT_34` 34 px font
+- `LV_FONT_MONTSERRAT_36` 36 px font
+- `LV_FONT_MONTSERRAT_38` 38 px font
+- `LV_FONT_MONTSERRAT_40` 40 px font
+- `LV_FONT_MONTSERRAT_42` 42 px font
+- `LV_FONT_MONTSERRAT_44` 44 px font
+- `LV_FONT_MONTSERRAT_46` 46 px font
+- `LV_FONT_MONTSERRAT_48` 48 px font
 
-- `LV_FONT_MONTSERRAT_12_SUBPX` 12 px font with [subpixel rendering](#subpixel-rendering) 
-- `LV_FONT_MONTSERRAT_28_COMPRESSED` 28 px [compressed font](#compress-fonts) with 3 bpp
-- `LV_FONT_DEJAVU_16_PERSIAN_HEBREW` 16 px Hebrew, Arabic, Perisan letters and all their forms
-- `LV_FONT_SIMSUN_16_CJK`            16 px 1000 most common CJK radicals
-- `LV_FONT_UNSCII_8` 8 px pixel perfect font
+### Special fonts
+- `LV_FONT_MONTSERRAT_12_SUBPX` Same as normal 12 px font but with [subpixel rendering](#subpixel-rendering) 
+- `LV_FONT_MONTSERRAT_28_COMPRESSED` Same as normal 28 px font but  [compressed font](#compress-fonts) with 3 bpp
+- `LV_FONT_DEJAVU_16_PERSIAN_HEBREW` 16 px font with normal range + Hebrew, Arabic, Perisan letters and all their forms
+- `LV_FONT_SIMSUN_16_CJK`16 px font with normal range + 1000 most common CJK radicals
+- `LV_FONT_UNSCII_8` 8 px pixel perfect font with only ASCII characters
 
 
 The built-in fonts are **global variables** with names like `lv_font_montserrat_16` for 16 px hight font. To use them in a style, just add a pointer to a font variable like shown above.

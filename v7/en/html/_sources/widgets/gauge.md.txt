@@ -15,7 +15,7 @@ It also uses the *text* properties to set the style of the scale labels. *pad_in
 
 `LV_GAUGE_PART_NEEDLE` is also virtual part and it describes the needle(s) via the *line* style properties. 
 The *size* and the typical background properties are used to describe a rectangle (or circle) in the pivot point of the needle(s).
-*pad_inner* is used to to make the needle(s) smaller than the outer radius of the scale lines.
+*pad_inner* is used to to make the needle(s) smaller than the outer radius of the scale lines. 
 
 ## Usage
 
@@ -37,7 +37,7 @@ The scale of the Gauge can have offset. It can be adjusted with `lv_gauge_set_an
 The range of the gauge can be specified by `lv_gauge_set_range(gauge, min, max)`. The default range is 0..100.
 
 ### Needle image
-An images also can be used as needles. The image should point to the right (like `==>`). To set an image use `lv_gauge_set_needle_img(gauge1, &img, pivot_x, pivot_y)`. `pivot_x` and `pivot_y` are offset of the rotation center from the top left corner. Images will be recolored to the needle's color with `image_recolor_opa` (style property) intensity. 
+An images also can be used as needles. The image should point to the right (like `==>`). To set an image use `lv_gauge_set_needle_img(gauge1, &img, pivot_x, pivot_y)`. `pivot_x` and `pivot_y` are offset of the rotation center from the top left corner. Images will be recolored to the needle's color with `image_recolor_opa` intensity coming from the styles in `LV_GAUGE_PART_NEEDLE`. 
 
 
 ### Critical value

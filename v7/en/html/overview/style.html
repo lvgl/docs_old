@@ -168,7 +168,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/stm32.html">STM32</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/nxp.html">NXP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nxp.html#creating-new-project-with-lvgl">Creating new project with LVGL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../get-started/nxp.html#adding-hw-acceleration-for-nxp-imx-rt-platforms-using-pxp-pixel-pipeline-engine-for-existing-projects">Adding HW acceleration for NXP iMX RT platforms using PXP (PiXel Pipeline) engine for existing projects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#features-supported">Features supported:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#basic-configuration">Basic configuration:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#basic-initialization">Basic initialization:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#project-setup">Project setup:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../get-started/nxp.html#advanced-configuration">Advanced configuration:</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html">Espressif (ESP32)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#get-the-lvgl-ardunio-library">Get the LVGL Ardunio library</a></li>
@@ -398,7 +409,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="font.html">Fonts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="font.html#unicode-support">Unicode support</a></li>
-<li class="toctree-l3"><a class="reference internal" href="font.html#built-in-fonts">Built-in fonts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="font.html#built-in-fonts">Built-in fonts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="font.html#normal-fonts">Normal fonts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="font.html#special-fonts">Special fonts</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="font.html#special-features">Special features</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="font.html#bidirectional-support">Bidirectional support</a></li>
 <li class="toctree-l4"><a class="reference internal" href="font.html#arabic-and-persian-support">Arabic and Persian support</a></li>
@@ -671,6 +686,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#vertical-range">Vertical range</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#division-lines">Division lines</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#tick-marks-and-labels">Tick marks and labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../widgets/chart.html#cursor">Cursor</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/chart.html#events">Events</a></li>
@@ -1472,7 +1488,7 @@ For example:</p>
 </pre></div>
 </div>
 <p>An objects style list can be reset with <code class="docutils literal notranslate"><span class="pre">lv_obj_reset_style_list(obj,</span> <span class="pre">&lt;part&gt;)</span></code></p>
-<p>If a style which is already assigned to an object changes (i.e. one of it's property is set to a new value) the objects using that style should be notified with <code class="docutils literal notranslate"><span class="pre">lv_obj_refresh_style(obj)</span></code></p>
+<p>If a style which is already assigned to an object changes (i.e. one of it's property is set to a new value) the objects using that style should be notified with <code class="docutils literal notranslate"><span class="pre">lv_obj_refresh_style(obj,</span> <span class="pre">part,</span> <span class="pre">property)</span></code>. To refresh all parts and proeprties use <code class="docutils literal notranslate"><span class="pre">lv_obj_refresh_style(obj,</span> <span class="pre">LV_OBJ_PART_ALL,</span> <span class="pre">LV_STYLE_PROP_ALL)</span></code>.</p>
 <p>To get a final value of property, including cascading, inheritance, local styles and transitions (see below), get functions like this can be used: <code class="docutils literal notranslate"><span class="pre">lv_obj_get_style_&lt;property_name&gt;(obj,</span> <span class="pre">&lt;part&gt;)</span></code>.
 These functions uses the object's current state and if no better candidate returns a default value.  
 For example:</p>
@@ -1811,7 +1827,8 @@ However other widgets also use them to set spacing. See the documentation of the
 <li><p><strong>text_letter_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Letter space of the text. Default value: 0.</p></li>
 <li><p><strong>text_line_space</strong> (<code class="docutils literal notranslate"><span class="pre">lv_style_int_t</span></code>): Line space of the text. Default value: 0.</p></li>
 <li><p><strong>text_decor</strong> (<code class="docutils literal notranslate"><span class="pre">lv_text_decor_t</span></code>): Add text decoration. Can be <code class="docutils literal notranslate"><span class="pre">LV_TEXT_DECOR_NONE/UNDERLINE/STRIKETHROUGH</span></code>. Default value: <code class="docutils literal notranslate"><span class="pre">LV_TEXT_DECOR_NONE</span></code>.</p></li>
-<li><p><strong>text_sel_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Set background color of text selection. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code></p></li>
+<li><p><strong>text_sel_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Set  color of the text selection. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLACK</span></code></p></li>
+<li><p><strong>text_sel_bg_color</strong> (<code class="docutils literal notranslate"><span class="pre">lv_color_t</span></code>): Set background color of text selection. Default value: <code class="docutils literal notranslate"><span class="pre">LV_COLOR_BLUE</span></code></p></li>
 <li><p><strong>text_blend_mode</strong> (<code class="docutils literal notranslate"><span class="pre">lv_blend_mode_t</span></code>): Set the blend mode of the text. Can be <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL/ADDITIVE/SUBTRACTIVE</span></code>). Default value: <code class="docutils literal notranslate"><span class="pre">LV_BLEND_MODE_NORMAL</span></code>.</p></li>
 </ul>
 <img alt="Styling a text in lvgl" src="../_images/lv_ex_style_7.png" />
@@ -2231,7 +2248,7 @@ It gives a default appearance to UI which can be modified by adding further styl
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Oct 06, 2020.
+        Last updated on Nov 03, 2020.
       </span>
 
     </p>
