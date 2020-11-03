@@ -12,7 +12,7 @@ class LvExample(Directive):
         node_list = []
 
         env = self.state.document.settings.env
-        paragraph_node = nodes.raw(text=f"<iframe class='lv-example' src='https://lvgl.github.io/lv_examples/{example_name}/?w=320&h=240'></iframe>", format='html')
+        paragraph_node = nodes.raw(text=f"<iframe class='lv-example' src='../_static/built_lv_examples/{example_name}/?w=320&h=240'></iframe>", format='html')
         toggle = nodes.container('', literal_block=False, classes=['toggle'])
         header = nodes.container('', literal_block=False, classes=['header'])
         toggle.append(header)

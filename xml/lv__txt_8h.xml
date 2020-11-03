@@ -713,7 +713,7 @@
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="lv__area_8h" kindref="compound">lv_area.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="lv__area_8h" kindref="compound">lv_area.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../lv_font/lv_font.h&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;lv_printf.h&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">/*********************</highlight></codeline>
 <codeline lineno="24"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>DEFINES</highlight></codeline>
 <codeline lineno="25"><highlight class="comment"><sp/>*********************/</highlight><highlight class="normal"></highlight></codeline>
@@ -763,35 +763,37 @@
 <codeline lineno="120"><highlight class="normal"></highlight></codeline>
 <codeline lineno="128"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_lv_txt_cut(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>txt,<sp/>uint32_t<sp/>pos,<sp/>uint32_t<sp/>len);</highlight></codeline>
 <codeline lineno="129"><highlight class="normal"></highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight><highlight class="comment">/***************************************************************</highlight></codeline>
-<codeline lineno="131"><highlight class="comment"><sp/>*<sp/><sp/>GLOBAL<sp/>FUNCTION<sp/>POINTERS<sp/>FOR<sp/>CAHRACTER<sp/>ENCODING<sp/>INTERFACE</highlight></codeline>
-<codeline lineno="132"><highlight class="comment"><sp/>***************************************************************/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="133"><highlight class="normal"></highlight></codeline>
-<codeline lineno="139"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint8_t<sp/>(*_lv_txt_encoded_size)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*);</highlight></codeline>
+<codeline lineno="135"><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>_lv_txt_set_text_vfmt(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>fmt,<sp/>va_list<sp/>ap);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="comment">/***************************************************************</highlight></codeline>
+<codeline lineno="138"><highlight class="comment"><sp/>*<sp/><sp/>GLOBAL<sp/>FUNCTION<sp/>POINTERS<sp/>FOR<sp/>CAHRACTER<sp/>ENCODING<sp/>INTERFACE</highlight></codeline>
+<codeline lineno="139"><highlight class="comment"><sp/>***************************************************************/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="140"><highlight class="normal"></highlight></codeline>
-<codeline lineno="146"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_unicode_to_encoded)(uint32_t);</highlight></codeline>
+<codeline lineno="146"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint8_t<sp/>(*_lv_txt_encoded_size)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*);</highlight></codeline>
 <codeline lineno="147"><highlight class="normal"></highlight></codeline>
-<codeline lineno="153"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_encoded_conv_wc)(uint32_t<sp/>c);</highlight></codeline>
+<codeline lineno="153"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_unicode_to_encoded)(uint32_t);</highlight></codeline>
 <codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="163"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_encoded_next)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*,<sp/>uint32_t<sp/>*);</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"></highlight></codeline>
-<codeline lineno="172"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_encoded_prev)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*,<sp/>uint32_t<sp/>*);</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"></highlight></codeline>
-<codeline lineno="181"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_encoded_get_byte_id)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*,<sp/>uint32_t);</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"></highlight></codeline>
-<codeline lineno="190"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_encoded_get_char_id)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*,<sp/>uint32_t);</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"></highlight></codeline>
-<codeline lineno="198"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_get_encoded_length)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*);</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"></highlight></codeline>
-<codeline lineno="200"><highlight class="normal"></highlight><highlight class="comment">/**********************</highlight></codeline>
-<codeline lineno="201"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>MACROS</highlight></codeline>
-<codeline lineno="202"><highlight class="comment"><sp/>**********************/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="203"><highlight class="normal"></highlight></codeline>
-<codeline lineno="204"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="205"><highlight class="normal">}<sp/></highlight><highlight class="comment">/*<sp/>extern<sp/>&quot;C&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="206"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="207"><highlight class="normal"></highlight></codeline>
-<codeline lineno="208"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*USE_TXT*/</highlight><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="160"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_encoded_conv_wc)(uint32_t<sp/>c);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_encoded_next)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*,<sp/>uint32_t<sp/>*);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_encoded_prev)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*,<sp/>uint32_t<sp/>*);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_encoded_get_byte_id)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*,<sp/>uint32_t);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_encoded_get_char_id)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*,<sp/>uint32_t);</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/>(*_lv_txt_get_encoded_length)(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight><highlight class="comment">/**********************</highlight></codeline>
+<codeline lineno="208"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>MACROS</highlight></codeline>
+<codeline lineno="209"><highlight class="comment"><sp/>**********************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal">}<sp/></highlight><highlight class="comment">/*<sp/>extern<sp/>&quot;C&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*USE_TXT*/</highlight><highlight class="preprocessor"></highlight></codeline>
     </programlisting>
     <location file="/home/kisvegabor/projects/littlevgl/eclipse-workspace/lv_sim_eclipse_sdl_master/release_tmp/lvgl/src/lv_misc/lv_txt.h"/>
   </compounddef>

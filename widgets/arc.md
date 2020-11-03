@@ -40,7 +40,7 @@ Using range and value the angle of the indicator will be mapped between backgrou
 
 ### Type
 
-The arc can have the different "types". They are used only the value is set by `lv_arc_set_value`.
+The arc can have the different "types". They are set with `lv_arc_set_type`.
 The following types exist:
 - `LV_ARC_TYPE_NORMAL` indicator arc drawn clockwise (min to current)
 - `LV_ARC_TYPE_REVERSE` indicator arc drawn counter clockwise (max to current)
