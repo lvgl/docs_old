@@ -30,7 +30,7 @@ Both files are located in `TFT_eSPI` library's folder.
 
 LVGL has its own configuration file called `lv_conf.h`. When LVGL is installed the followings needs to be done to configure it:
 1. Go to directory of the installed Arduino libraries
-2. Go to `lvgl` and copy `lv_conf_template.h` as `lv_conf.h` into the Arduini Libraries directory next to the `lvgl` library folder.
+2. Go to `lvgl` and copy `lv_conf_template.h` as `lv_conf.h` into the Arduino Libraries directory next to the `lvgl` library folder.
 3. Open `lv_conf.h` and change the first `#if 0` to `#if 1`
 4. Set the resolution of your display in `LV_HOR_RES_MAX` and `LV_VER_RES_MAX`
 5. Set the color depth of you display in `LV_COLOR_DEPTH`
