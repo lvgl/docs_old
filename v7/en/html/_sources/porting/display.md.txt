@@ -56,7 +56,7 @@ There are some optional data fields:
 To use a GPU the following callbacks can be used:
 - **gpu_fill_cb** fill an area in memory with colors.
 - **gpu_blend_cb** blend two memory buffers using opacity.
-- **gpu_wait_cb** if any GPU function return while the GPU is still working LVGL will use this function when required the be sure GPU rendereing is ready.
+- **gpu_wait_cb** if any GPU function return, while the GPU is still working LVGL, will use this function when required the be sure GPU rendering is ready.
 
 Note that, these functions need to draw to the memory (RAM) and not your display directly.
 
