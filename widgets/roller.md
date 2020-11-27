@@ -19,7 +19,7 @@ The selected option in the middle can be referenced with `LV_ROLLER_PART_SELECTE
 ## Usage
 
 ### Set options
-The options are passed to the Roller as a string with `lv_roller_set_options(roller, options, LV_ROLLER_MODE_NORMAL/INFINITE)`. The options should be separated by `\n`. For example: `"First\nSecond\nThird"`.
+The options are passed to the Roller as a string with `lv_roller_set_options(roller, options, LV_ROLLER_MODE_NORMAL/INIFINITE)`. The options should be separated by `\n`. For example: `"First\nSecond\nThird"`.
 
 `LV_ROLLER_MODE_INIFINITE` make the roller circular.
 
