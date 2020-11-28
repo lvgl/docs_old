@@ -97,7 +97,7 @@ void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * 
 
     /* IMPORTANT!!!
      * Inform the graphics library that you are ready with the flushing*/
-    lv_disp_flush_ready(disp);
+    lv_disp_flush_ready(disp_drv);
 }
 
 void my_gpu_fill_cb(lv_disp_drv_t * disp_drv, lv_color_t * dest_buf, const lv_area_t * dest_area, const lv_area_t * fill_area, lv_color_t color);
