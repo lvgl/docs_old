@@ -1384,7 +1384,7 @@ Therefore this method works the best when the MCU has an LCD/TFT interface and t
 <p>Once the buffer initialization is ready the display drivers need to be initialized. In the most simple case only the following two fields of <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_t</span></code> needs to be set:</p>
 <ul class="simple">
 <li><p><strong>buffer</strong> pointer to an initialized <code class="docutils literal notranslate"><span class="pre">lv_disp_buf_t</span></code> variable.</p></li>
-<li><p><strong>flush_cb</strong> a callback function to copy a buffer's content to a specific area of the display.</p></li>
+<li><p><strong>flush_cb</strong> a callback function to copy a buffer's content to a specific area of the display. <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready()</span></code> needs to be called when flushing is ready. LVGL might render the screen in multiple chunks and therefore call <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> multiple times. To see which is the last chunk of rendering use <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_is_last()</span></code>.</p></li>
 </ul>
 <p>There are some optional data fields:</p>
 <ul class="simple">
@@ -2098,7 +2098,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Dec 03, 2020.
+        Last updated on Dec 15, 2020.
       </span>
 
     </p>
