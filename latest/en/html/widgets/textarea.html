@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.8.1-dev
+                v8.0.0-dev
               </div>
             
           
@@ -1625,10 +1625,29 @@ The new text can't be in a local variable which is destroyed when the event call
     <span class="n">lv_textarea_set_one_line</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
     <span class="n">lv_textarea_set_text</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
 
+
+    <span class="cm">/*Create a custom map for the keyboard*/</span>
+
+    <span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">kb_map</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+              <span class="s">&quot;1&quot;</span><span class="p">,</span><span class="s">&quot;2&quot;</span><span class="p">,</span> <span class="s">&quot;3&quot;</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">,</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+              <span class="s">&quot;4&quot;</span><span class="p">,</span> <span class="s">&quot;5&quot;</span><span class="p">,</span> <span class="s">&quot;6&quot;</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+              <span class="s">&quot;7&quot;</span><span class="p">,</span> <span class="s">&quot;8&quot;</span><span class="p">,</span> <span class="s">&quot;9&quot;</span><span class="p">,</span> <span class="n">LV_SYMBOL_BACKSPACE</span> <span class="p">,</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+              <span class="s">&quot;0&quot;</span><span class="p">,</span><span class="n">LV_SYMBOL_LEFT</span><span class="p">,</span><span class="n">LV_SYMBOL_RIGHT</span><span class="p">,</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span>
+    <span class="p">};</span>
+
+    <span class="k">static</span> <span class="k">const</span> <span class="n">lv_btnmatrix_ctrl_t</span> <span class="n">kb_ctrl</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+           <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_HIDDEN</span><span class="p">,</span>
+           <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_HIDDEN</span><span class="p">,</span>
+           <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span>
+           <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_NO_REPEAT</span><span class="p">,</span> <span class="n">LV_BTNMATRIX_CTRL_HIDDEN</span><span class="p">,</span>
+    <span class="p">};</span>
+
     <span class="cm">/* Create a keyboard*/</span>
     <span class="n">kb</span> <span class="o">=</span> <span class="n">lv_keyboard_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span>  <span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
     <span class="n">lv_keyboard_set_mode</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">LV_KEYBOARD_MODE_NUM</span><span class="p">);</span>
+    <span class="n">lv_keyboard_set_map</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">LV_KEYBOARD_MODE_NUM</span><span class="p">,</span> <span class="n">kb_map</span><span class="p">);</span>
+    <span class="n">lv_keyboard_set_ctrl_map</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">LV_KEYBOARD_MODE_NUM</span><span class="p">,</span><span class="n">kb_ctrl</span><span class="p">);</span>
     <span class="n">lv_keyboard_set_textarea</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">ta</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -1636,7 +1655,10 @@ The new text can't be in a local variable which is destroyed when the event call
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">txt</span> <span class="o">=</span> <span class="n">lv_textarea_get_text</span><span class="p">(</span><span class="n">ta</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">txt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">txt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="sc">&#39;9&#39;</span> <span class="o">&amp;&amp;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">txt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;:&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">lv_textarea_del_char</span><span class="p">(</span><span class="n">ta</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">txt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">txt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="sc">&#39;9&#39;</span> <span class="o">&amp;&amp;</span>
             <span class="n">txt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">txt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="sc">&#39;9&#39;</span> <span class="o">&amp;&amp;</span>
             <span class="n">txt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;:&#39;</span><span class="p">)</span>
         <span class="p">{</span>
@@ -2340,8 +2362,8 @@ The new text can't be in a local variable which is destroyed when the event call
 <dd></dd></dl>
 
 <dl class="cpp var">
-<dt id="_CPPv4N17lv_textarea_ext_t14accapted_charsE">
-<span id="_CPPv3N17lv_textarea_ext_t14accapted_charsE"></span><span id="_CPPv2N17lv_textarea_ext_t14accapted_charsE"></span><span id="lv_textarea_ext_t::accapted_chars__cCP"></span><span class="target" id="structlv__textarea__ext__t_1abde4df5818de89a6125fb9b80c0ecfed"></span><em class="property">const</em> char *<code class="sig-name descname">accapted_chars</code><a class="headerlink" href="#_CPPv4N17lv_textarea_ext_t14accapted_charsE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N17lv_textarea_ext_t14accepted_charsE">
+<span id="_CPPv3N17lv_textarea_ext_t14accepted_charsE"></span><span id="_CPPv2N17lv_textarea_ext_t14accepted_charsE"></span><span id="lv_textarea_ext_t::accepted_chars__cCP"></span><span class="target" id="structlv__textarea__ext__t_1a3be39cd6f26aed62b1c3490a47714083"></span><em class="property">const</em> char *<code class="sig-name descname">accepted_chars</code><a class="headerlink" href="#_CPPv4N17lv_textarea_ext_t14accepted_charsE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -2462,7 +2484,7 @@ The new text can't be in a local variable which is destroyed when the event call
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Dec 15, 2020.
+        Last updated on Dec 16, 2020.
       </span>
 
     </p>
