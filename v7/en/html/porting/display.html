@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.7.1
+                v7.8.1
               </div>
             
           
@@ -181,6 +181,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html">Espressif (ESP32)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html#get-the-lvgl-library">Get the LVGL library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#get-the-lvgl-ardunio-library">Get the LVGL Ardunio library</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#set-up-drivers">Set up drivers</a></li>
@@ -1383,7 +1384,7 @@ Therefore this method works the best when the MCU has an LCD/TFT interface and t
 <p>Once the buffer initialization is ready the display drivers need to be initialized. In the most simple case only the following two fields of <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_t</span></code> needs to be set:</p>
 <ul class="simple">
 <li><p><strong>buffer</strong> pointer to an initialized <code class="docutils literal notranslate"><span class="pre">lv_disp_buf_t</span></code> variable.</p></li>
-<li><p><strong>flush_cb</strong> a callback function to copy a buffer's content to a specific area of the display.</p></li>
+<li><p><strong>flush_cb</strong> a callback function to copy a buffer's content to a specific area of the display. <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_ready()</span></code> needs to be called when flushing is ready. LVGL might render the screen in multiple chunks and therefore call <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> multiple times. To see which is the last chunk of rendering use <code class="docutils literal notranslate"><span class="pre">lv_disp_flush_is_last()</span></code>.</p></li>
 </ul>
 <p>There are some optional data fields:</p>
 <ul class="simple">
@@ -1437,7 +1438,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
     <span class="cm">/* IMPORTANT!!!</span>
 <span class="cm">     * Inform the graphics library that you are ready with the flushing*/</span>
-    <span class="n">lv_disp_flush_ready</span><span class="p">(</span><span class="n">disp</span><span class="p">);</span>
+    <span class="n">lv_disp_flush_ready</span><span class="p">(</span><span class="n">disp_drv</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">my_gpu_fill_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="o">*</span> <span class="n">dest_buf</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">dest_area</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">fill_area</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="n">color</span><span class="p">);</span>
@@ -2004,6 +2005,12 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 </dd></dl>
 
 <dl class="cpp var">
+<dt id="_CPPv4N7_disp_t11scr_to_loadE">
+<span id="_CPPv3N7_disp_t11scr_to_loadE"></span><span id="_CPPv2N7_disp_t11scr_to_loadE"></span><span id="_disp_t::scr_to_load___lv_obj_tP"></span><span class="target" id="struct__disp__t_1aa0dbf47228527606b60be6db1d10b3f6"></span><em class="property">struct</em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<code class="sig-name descname">scr_to_load</code><a class="headerlink" href="#_CPPv4N7_disp_t11scr_to_loadE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The screen prepared to load in lv_scr_load_anim </p>
+</dd></dl>
+
+<dl class="cpp var">
 <dt id="_CPPv4N7_disp_t9top_layerE">
 <span id="_CPPv3N7_disp_t9top_layerE"></span><span id="_CPPv2N7_disp_t9top_layerE"></span><span id="_disp_t::top_layer___lv_obj_tP"></span><span class="target" id="struct__disp__t_1aaba39ff9d7e66ea7413683694d098540"></span><em class="property">struct</em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<code class="sig-name descname">top_layer</code><a class="headerlink" href="#_CPPv4N7_disp_t9top_layerE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p><dl class="simple">
@@ -2097,7 +2104,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Nov 03, 2020.
+        Last updated on Dec 16, 2020.
       </span>
 
     </p>

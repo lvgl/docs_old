@@ -143,19 +143,19 @@ The objects can be in a combination of the following states:
 - **LV_STATE_PRESSED** Pressed
 - **LV_STATE_DISABLED** Disabled or inactive 
 
-For example if you press an object is automatically get the `LV_STATE_PRESSED` state and when you release is it will be removed.
+For example, if you press an object it will automatically get the `LV_STATE_PRESSED` state and when you release it, the state will be removed.
  
 To get the current state use `lv_obj_get_state(obj, part)`. It will return the `OR`ed states. 
-For example it's a valid state for a checkbox: `LV_STATE_CHECKED | LV_STATE_PRESSED | LV_STATE_FOCUSED`
+For example, this is a valid state for a checkbox: `LV_STATE_CHECKED | LV_STATE_PRESSED | LV_STATE_FOCUSED`
 
 ### Styles
-Styles can be assigned to the parts objects to changed their appearance. 
+Styles can be assigned to the parts of an object to change their appearance. 
 A style can describe for example the background color, border width, text font and so on. See the full list [here](https://docs.lvgl.io/v7/en/html/overview/style.html#properties).
 
 The styles can be cascaded (similarly to CSS). It means you can add more styles to a part of an object. 
 For example `style_btn` can set a default button appearance, and `style_btn_red` can overwrite some properties to make the button red- 
 
-Every style property you set is specific to a state. For example is you can set different background color for `LV_STATE_DEFAULT` and `LV_STATE_PRESSED`. 
+Every style property you set is specific to a state. For example, you can set a different background color for `LV_STATE_DEFAULT` and `LV_STATE_PRESSED`. 
 The library finds the best match between the state of the given part and the available style properties. For example if the object is in pressed state and the border width is specified for pressed state, then it will be used.
 However, if it's not specified for pressed state, the `LV_STATE_DEFAULT`'s border width will be used. If the border width not defined for `LV_STATE_DEFAULT` either, a default value will be used.
 

@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.7.1
+                v7.8.1
               </div>
             
           
@@ -181,6 +181,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html">Espressif (ESP32)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started/espressif.html#get-the-lvgl-library">Get the LVGL library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-started/arduino.html">Arduino</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#get-the-lvgl-ardunio-library">Get the LVGL Ardunio library</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../get-started/arduino.html#set-up-drivers">Set up drivers</a></li>
@@ -1429,21 +1430,48 @@ You can completely replace it with your custom event handler however, you can ca
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;../../../lv_examples.h&quot;</span><span class="cp"></span>
 <span class="cp">#if LV_USE_KEYBOARD</span>
 
+<span class="k">static</span> <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">kb</span><span class="p">;</span>
+<span class="k">static</span> <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ta</span><span class="p">;</span>
+
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">kb_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">keyboard</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lv_keyboard_def_event_cb</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">e</span> <span class="o">==</span> <span class="n">LV_EVENT_CANCEL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lv_keyboard_set_textarea</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">lv_obj_del</span><span class="p">(</span><span class="n">kb</span><span class="p">);</span>
+        <span class="n">kb</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">kb_create</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">kb</span> <span class="o">=</span> <span class="n">lv_keyboard_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_keyboard_set_cursor_manage</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">kb_event_cb</span><span class="p">);</span>
+    <span class="n">lv_keyboard_set_textarea</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">ta</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">ta_event_cb</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">ta_local</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">e</span> <span class="o">==</span> <span class="n">LV_EVENT_CLICKED</span> <span class="o">&amp;&amp;</span> <span class="n">kb</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">kb_create</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
 <span class="kt">void</span> <span class="nf">lv_ex_keyboard_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="cm">/*Create a keyboard and apply the styles*/</span>
-    <span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">kb</span> <span class="o">=</span> <span class="n">lv_keyboard_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="n">lv_keyboard_set_cursor_manage</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
 
     <span class="cm">/*Create a text area. The keyboard will write here*/</span>
-    <span class="n">lv_obj_t</span> <span class="o">*</span><span class="n">ta</span> <span class="o">=</span> <span class="n">lv_textarea_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">ta</span>  <span class="o">=</span> <span class="n">lv_textarea_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_TOP_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">LV_DPI</span> <span class="o">/</span> <span class="mi">16</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="n">ta_event_cb</span><span class="p">);</span>
     <span class="n">lv_textarea_set_text</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
     <span class="n">lv_coord_t</span> <span class="n">max_h</span> <span class="o">=</span> <span class="n">LV_VER_RES</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">LV_DPI</span> <span class="o">/</span> <span class="mi">8</span><span class="p">;</span>
     <span class="k">if</span><span class="p">(</span><span class="n">lv_obj_get_height</span><span class="p">(</span><span class="n">ta</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_h</span><span class="p">)</span> <span class="n">lv_obj_set_height</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span> <span class="n">max_h</span><span class="p">);</span>
 
-    <span class="cm">/*Assign the text area to the keyboard*/</span>
-    <span class="n">lv_keyboard_set_textarea</span><span class="p">(</span><span class="n">kb</span><span class="p">,</span> <span class="n">ta</span><span class="p">);</span>
+    <span class="n">kb_create</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="cp">#endif</span>
 </pre></div>
@@ -1727,7 +1755,7 @@ You can completely replace it with your custom event handler however, you can ca
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Nov 03, 2020.
+        Last updated on Dec 16, 2020.
       </span>
 
     </p>

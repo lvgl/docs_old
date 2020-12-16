@@ -69,7 +69,7 @@ During blending masks (make some pixels transparent or opaque), blending modes (
 
 Masks are used the create almost every basic primitives:
 - **letters** create a mask from the letter and draw a “letter-colored” rectangle using the mask.
-- **line** created from 4 l"ine masks", to mask out the left, right, top and bottom part of the line to get perfectly perpendicular line ending
+- **line** created from 4 "line masks", to mask out the left, right, top and bottom part of the line to get perfectly perpendicular line ending
 - **rounded rectangle** a mask is created real-time for each line of a rounded rectangle and a normal filled rectangle is drawn according to the mask.
 - **clip corner** to clip to overflowing content on the rounded corners also a rounded rectangle mask is applied.
 - **rectangle border** same as a rounded rectangle, but inner part is masked out too
