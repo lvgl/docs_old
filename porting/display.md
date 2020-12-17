@@ -42,7 +42,7 @@ Therefore this method works the best when the MCU has an LCD/TFT interface and t
 
 Once the buffer initialization is ready the display drivers need to be initialized. In the most simple case only the following two fields of `lv_disp_drv_t` needs to be set:
 - **buffer** pointer to an initialized `lv_disp_buf_t` variable.
-- **flush_cb** a callback function to copy a buffer's content to a specific area of the display.
+- **flush_cb** a callback function to copy a buffer's content to a specific area of the display. `lv_disp_flush_ready()` needs to be called when flushing is ready. LVGL might render the screen in multiple chunks and therefore call `flush_cb` multiple times. To see which is the last chunk of rendering use `lv_disp_flush_is_last()`.
 
 There are some optional data fields:
 - **hor_res** horizontal resolution of the display. (`LV_HOR_RES_MAX` by default from *lv_conf.h*).
