@@ -247,5 +247,6 @@ log_output = subprocess.check_output(' '.join(search_command), shell=True).strip
 if len(log_output) == 0:
     raise ValueError('lv_examples: cannot find corresponding deployed commit: ' + example_commit_hash)
 
+built_example_commit_hash = log_output
 os.system('git -C _static/built_lv_examples reset --hard')
 os.system('git -C _static/built_lv_examples checkout ' + log_output)
