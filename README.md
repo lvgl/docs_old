@@ -10,7 +10,7 @@ The documentation is craeted with Sphinx and RTD theme and with the use of sever
 ### Branches
 
 There are the following branches:
-- `master` Collection of the built docuementation for each version
+- `master` Collection of the built documentation for each version
 - `latest` Documentation for the `master` branch of lvgl. It contains the last features available for testing.
 - `dev` Documentation for the `dev` branch of lvgl. These features are not stabel and might change. 
 - `release/vX` Documentation for the `release/vX` branch of lvgl (`X` stands for major relases of lvgl). These are the last relased stable versions.
