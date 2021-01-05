@@ -26,7 +26,7 @@ If you can't use `printf` or want to use a custom function to log, you can regis
 For example:
 
 ```c
-void my_log_cb(lv_log_level_t level, const char * file, int line, const char * fn_name, const char * dsc)
+void my_log_cb(lv_log_level_t level, const char * file, uint32_t line, const char * fn_name, const char * dsc)
 {
   /*Send the logs via serial port*/
   if(level == LV_LOG_LEVEL_ERROR) serial_send("ERROR: ");
