@@ -42,6 +42,6 @@ When your project is a git repository you can include `lvgl_esp32_drivers` as a 
 git submodule add https://github.com/lvgl/lvgl_esp32_drivers.git components/lvgl_esp32_drivers
 ```
 
-## Support for ESP32-S2
+### Support for ESP32-S2
 
 Basic support for ESP32-S2 has been added into the `lvgl_esp32_drivers` repository.
