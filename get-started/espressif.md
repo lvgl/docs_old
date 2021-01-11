@@ -18,7 +18,7 @@ of supported display and indev (touch) controllers.
 
 ESP-IDF v4 framework is the suggested version to use.
 
-## Get LVGL
+### Get LVGL
 
 You are suggested to add LVGL as a "component". This component can be located inside a directory named "components" on your project root directory.
 
