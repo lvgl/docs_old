@@ -14,7 +14,7 @@ of supported display and indev (touch) controllers.
 
 ## Use LVGL in your ESP32 project
 
-## Prerequisites
+### Prerequisites
 
 ESP-IDF v4 framework is the suggested version to use.
 
