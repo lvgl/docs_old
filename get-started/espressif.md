@@ -6,7 +6,7 @@
 # Espressif (ESP32)
 Since v7.7.1 LVGL includes a Kconfig file, so LVGL can be used as an ESP-IDF v4 component.
 
-# Get the LVGL demo project for ESP32
+## Get the LVGL demo project for ESP32
 
 We've created [lv_port_esp32](https://github.com/lvgl/lv_port_esp32), a project using ESP-IDF and LVGL to show one of the demos from [lv_examples](https://github.com/lvgl/lv_examples).
 You are able to configure the project to use one of the many supported display controllers, see [lvgl_esp32_drivers](htpps://github.com/lvgl/lvgl_esp32_drivers) for a complete list
