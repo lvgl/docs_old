@@ -32,7 +32,7 @@ The above command will clone LVGL's main repository into the `components/lvgl` d
 
 When you are ready to configure LVGL launch the configuration menu with `idf.py menuconfig` on your project root directory, go to `Component config` and then `LVGL configuration`.
 
-# Use lvgl_esp32_drivers in your project
+## Use lvgl_esp32_drivers in your project
 
 You are suggested to add `lvgl_esp32_drivers` as a "component". This component can be located inside a directory named "components" on your project root directory.
 
