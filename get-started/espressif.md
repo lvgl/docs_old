@@ -12,7 +12,7 @@ We've created [lv_port_esp32](https://github.com/lvgl/lv_port_esp32), a project 
 You are able to configure the project to use one of the many supported display controllers, see [lvgl_esp32_drivers](htpps://github.com/lvgl/lvgl_esp32_drivers) for a complete list
 of supported display and indev (touch) controllers.
 
-# Use LVGL in your ESP32 project
+## Use LVGL in your ESP32 project
 
 ## Prerequisites
 
