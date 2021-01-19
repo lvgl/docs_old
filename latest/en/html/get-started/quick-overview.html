@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.9.0-dev
+                v7.10.0-dev
               </div>
             
           
@@ -180,8 +180,19 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="espressif.html">Espressif (ESP32)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="espressif.html#get-the-lvgl-library">Get the LVGL library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espressif.html">Espressif (ESP32)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="espressif.html#get-the-lvgl-demo-project-for-esp32">Get the LVGL demo project for ESP32</a></li>
+<li class="toctree-l3"><a class="reference internal" href="espressif.html#use-lvgl-in-your-esp32-project">Use LVGL in your ESP32 project</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="espressif.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="espressif.html#get-lvgl">Get LVGL</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="espressif.html#use-lvgl-esp32-drivers-in-your-project">Use lvgl_esp32_drivers in your project</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="espressif.html#support-for-esp32-s2">Support for ESP32-S2</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="arduino.html">Arduino</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="arduino.html#get-the-lvgl-ardunio-library">Get the LVGL Ardunio library</a></li>
 <li class="toctree-l3"><a class="reference internal" href="arduino.html#set-up-drivers">Set up drivers</a></li>
@@ -1360,7 +1371,7 @@ You should read it first to get a general impression and read the detailed <a cl
 <li><p>Copy the <code class="docutils literal notranslate"><span class="pre">lvgl</span></code> folder into your project</p></li>
 <li><p>Copy <code class="docutils literal notranslate"><span class="pre">lvgl/lv_conf_template.h</span></code> as <code class="docutils literal notranslate"><span class="pre">lv_conf.h</span></code> next to the <code class="docutils literal notranslate"><span class="pre">lvgl</span></code> folder, change the first <code class="docutils literal notranslate"><span class="pre">#if</span> <span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code> to enable the file's content and set at least <code class="docutils literal notranslate"><span class="pre">LV_HOR_RES_MAX</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_VER_RES_MAX</span></code> and <code class="docutils literal notranslate"><span class="pre">LV_COLOR_DEPTH</span></code> defines.</p></li>
 <li><p>Include <code class="docutils literal notranslate"><span class="pre">lvgl/lvgl.h</span></code> where you need to use LVGL related functions.</p></li>
-<li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(x)</span></code> every <code class="docutils literal notranslate"><span class="pre">x</span></code> milliseconds <strong>in a Timer or Task</strong> (<code class="docutils literal notranslate"><span class="pre">x</span></code> should be between 1 and 10). It is required for the internal timing of LVGL.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_tick_inc(x)</span></code> every <code class="docutils literal notranslate"><span class="pre">x</span></code> milliseconds <strong>in a Timer or Task</strong> (<code class="docutils literal notranslate"><span class="pre">x</span></code> should be between 1 and 10). It is required for the internal timing of LVGL. Alternatively, configure <code class="docutils literal notranslate"><span class="pre">LV_TICK_CUSTOM</span></code> (see <code class="docutils literal notranslate"><span class="pre">lv_conf.h</span></code>) so that LVGL can retrieve the current time directly.</p></li>
 <li><p>Call <code class="docutils literal notranslate"><span class="pre">lv_init()</span></code></p></li>
 <li><p>Create a display buffer for LVGL. LVGL will render the graphics here first, and seed the rendered image to the display. The buffer size can be set freely but 1/10 screen size is a good starting point.</p></li>
 </ul>
@@ -1705,7 +1716,7 @@ The styles from the themes are applied automatically when the objects are create
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Dec 30, 2020.
+        Last updated on Jan 19, 2021.
       </span>
 
     </p>
