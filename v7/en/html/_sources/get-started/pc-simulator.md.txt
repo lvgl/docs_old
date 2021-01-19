@@ -17,38 +17,11 @@ Simulator on the PC have the following advantages:
 
 The simulator is ported to various IDEs (Integrated Development Environments). Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
 
-```eval_rst
-.. raw:: html
-
-  <table style="width:100%">
-  <thead>
-  <tr>
-  <th>Eclipse</th>
-  <th>CodeBlocks</th>
-  <th>Visual Studio</th>
-  <th>PlatformIO</th>
-  <th>Qt Creator</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-  <td><a href="https://github.com/lvgl/lv_sim_eclipse_sdl"><img src="https://raw.githubusercontent.com/lvgl/docs/latest/misc/eclipse.jpg"></a> </td>
-  <td><a href="https://github.com/lvgl/lv_sim_codeblocks_win"><img src="https://raw.githubusercontent.com/lvgl/docs/latest/misc/codeblocks.jpg"></a></td>
-  <td><a href="https://github.com/lvgl/lv_sim_visual_studio_sdl"><img src="https://raw.githubusercontent.com/lvgl/docs/latest/misc/visualstudio.jpg"></a></td>
-  <td><a href="https://github.com/lvgl/lv_platformio"><img src="https://raw.githubusercontent.com/lvgl/docs/latest/misc/platformio.jpg"></a></td>
-  <td><a href="https://blog.lvgl.io/2019-01-03/qt-creator"><img src="https://raw.githubusercontent.com/lvgl/docs/latest/misc/qtcreator.jpg"> </a></td>
-  </tr>
-
-  <tr>
-  <td>Cross-platform<br>with SDL 
-  </td><td>Native Windows  </td>
-  <td>Cross-platform<br>with SDL  </td>
-  <td>Cross-platform<br>with SDL </td>
-  <td>Cross-platform<br>with SDL  </td>
-  </tr>
-  </tbody></table>
-```
-
+- [Eclipse with SDL driver](https://github.com/lvgl/lv_sim_eclipse_sdl): Recommended on Linux and Mac
+- [CodeBlocks](https://github.com/lvgl/lv_sim_codeblocks_win): Recommended on Windows
+- [VisualStudio with SDL driver](https://github.com/lvgl/lv_sim_visual_studio_sdl): For Windows
+- [VSCode with SDL driver](https://github.com/lvgl/lv_sim_vscode_sdl): Recommended on Linux and Mac
+- [PlatformIO with SDL driver](https://github.com/lvgl/lv_platformio): Recommended on Linux and Mac
 
 You can use any IDEs for the development but, for simplicity, the configuration for Eclipse CDT is focused in this tutorial.
 The following section describes the set-up guide of Eclipse CDT in more details.

@@ -57,4 +57,4 @@ The `layer_top` can be used by the user to create some content visible everywher
 lv_obj_set_click(lv_layer_top(), true);
 ```
 
-The `layer_sys` is also using for similar purpose on LVGL. For example, it places the mouse cursor there to be sure it's always visible.
+The `layer_sys` is also used for a similar purpose on LVGL. For example, it places the mouse cursor above all layers to be sure it's always visible.

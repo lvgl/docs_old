@@ -78,7 +78,7 @@
             
             
               <div class="version">
-                v7.8.1
+                v7.9.1
               </div>
             
           
@@ -180,8 +180,19 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Espressif (ESP32)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#get-the-lvgl-library">Get the LVGL library</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Espressif (ESP32)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-the-lvgl-demo-project-for-esp32">Get the LVGL demo project for ESP32</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-lvgl-in-your-esp32-project">Use LVGL in your ESP32 project</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-lvgl">Get LVGL</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#use-lvgl-esp32-drivers-in-your-project">Use lvgl_esp32_drivers in your project</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#support-for-esp32-s2">Support for ESP32-S2</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="arduino.html">Arduino</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="arduino.html#get-the-lvgl-ardunio-library">Get the LVGL Ardunio library</a></li>
 <li class="toctree-l3"><a class="reference internal" href="arduino.html#set-up-drivers">Set up drivers</a></li>
@@ -1345,17 +1356,42 @@
             
   <div class="section" id="espressif-esp32">
 <h1>Espressif (ESP32)<a class="headerlink" href="#espressif-esp32" title="Permalink to this headline">¶</a></h1>
-<p>LVGL includes a Kconfig file so it can be directly used as an ESP-IDF v4 component.</p>
+<p>Since v7.7.1 LVGL includes a Kconfig file, so LVGL can be used as an ESP-IDF v4 component.</p>
+<div class="section" id="get-the-lvgl-demo-project-for-esp32">
+<h2>Get the LVGL demo project for ESP32<a class="headerlink" href="#get-the-lvgl-demo-project-for-esp32" title="Permalink to this headline">¶</a></h2>
+<p>We've created <a class="reference external" href="https://github.com/lvgl/lv_port_esp32">lv_port_esp32</a>, a project using ESP-IDF and LVGL to show one of the demos from <a class="reference external" href="https://github.com/lvgl/lv_examples">lv_examples</a>.
+You are able to configure the project to use one of the many supported display controllers, see <a class="reference external" href="htpps://github.com/lvgl/lvgl_esp32_drivers">lvgl_esp32_drivers</a> for a complete list
+of supported display and indev (touch) controllers.</p>
 </div>
-<div class="section" id="get-the-lvgl-library">
-<h1>Get the LVGL library<a class="headerlink" href="#get-the-lvgl-library" title="Permalink to this headline">¶</a></h1>
-<p>When using the ESP-IDF v4 framework from Espressif you can add external libraries as &quot;components&quot;. This components can be located inside a directory named &quot;components&quot; on your project root directory.</p>
+<div class="section" id="use-lvgl-in-your-esp32-project">
+<h2>Use LVGL in your ESP32 project<a class="headerlink" href="#use-lvgl-in-your-esp32-project" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>ESP-IDF v4 framework is the suggested version to use.</p>
+</div>
+<div class="section" id="get-lvgl">
+<h3>Get LVGL<a class="headerlink" href="#get-lvgl" title="Permalink to this headline">¶</a></h3>
+<p>You are suggested to add LVGL as a &quot;component&quot;. This component can be located inside a directory named &quot;components&quot; on your project root directory.</p>
 <p>When your project is a git repository you can include LVGL as a git submodule:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">submodule</span> <span class="n">add</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//github.com/lvgl/lvgl.git components/lvgl</span>
 </pre></div>
 </div>
 <p>The above command will clone LVGL's main repository into the <code class="docutils literal notranslate"><span class="pre">components/lvgl</span></code> directory. LVGL includes a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file that sets some configuration options so you can use LVGL right away.</p>
-<p>When you are ready to configure LVGL launch the configuration menu with <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">menuconfig</span></code> on your project root directory.</p>
+<p>When you are ready to configure LVGL launch the configuration menu with <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">menuconfig</span></code> on your project root directory, go to <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> and then <code class="docutils literal notranslate"><span class="pre">LVGL</span> <span class="pre">configuration</span></code>.</p>
+</div>
+</div>
+<div class="section" id="use-lvgl-esp32-drivers-in-your-project">
+<h2>Use lvgl_esp32_drivers in your project<a class="headerlink" href="#use-lvgl-esp32-drivers-in-your-project" title="Permalink to this headline">¶</a></h2>
+<p>You are suggested to add <code class="docutils literal notranslate"><span class="pre">lvgl_esp32_drivers</span></code> as a &quot;component&quot;. This component can be located inside a directory named &quot;components&quot; on your project root directory.</p>
+<p>When your project is a git repository you can include <code class="docutils literal notranslate"><span class="pre">lvgl_esp32_drivers</span></code> as a git submodule:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">submodule</span> <span class="n">add</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//github.com/lvgl/lvgl_esp32_drivers.git components/lvgl_esp32_drivers</span>
+</pre></div>
+</div>
+<div class="section" id="support-for-esp32-s2">
+<h3>Support for ESP32-S2<a class="headerlink" href="#support-for-esp32-s2" title="Permalink to this headline">¶</a></h3>
+<p>Basic support for ESP32-S2 has been added into the <code class="docutils literal notranslate"><span class="pre">lvgl_esp32_drivers</span></code> repository.</p>
+</div>
+</div>
 </div>
 
 
@@ -1380,7 +1416,7 @@
     <p>
         &copy; Copyright 2020, LVGL LLC
       <span class="lastupdated">
-        Last updated on Dec 16, 2020.
+        Last updated on Jan 19, 2021.
       </span>
 
     </p>
