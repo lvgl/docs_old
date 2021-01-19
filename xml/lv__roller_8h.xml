@@ -594,7 +594,7 @@
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">/*Testing<sp/>of<sp/>dependencies*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>LV_USE_PAGE<sp/>==<sp/>0</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>&quot;lv_roller:<sp/>lv_page<sp/>is<sp/>required.<sp/>Enable<sp/>it<sp/>in<sp/>lv_conf.h<sp/>(LV_USE_PAGE<sp/>1)<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#error<sp/>&quot;lv_roller:<sp/>lv_page<sp/>is<sp/>required.<sp/>Enable<sp/>it<sp/>in<sp/>lv_conf.h<sp/>(LV_USE_PAGE<sp/>1)&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../lv_core/lv_obj.h&quot;</highlight><highlight class="normal"></highlight></codeline>
@@ -616,85 +616,82 @@
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>uint8_t<sp/>lv_roller_mode_t;</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight><highlight class="comment">/*Data<sp/>of<sp/>roller*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="48" refid="structlv__roller__ext__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structlv__page__ext__t" kindref="compound">lv_page_ext_t</ref><sp/>page;<sp/></highlight><highlight class="comment">/*Ext.<sp/>of<sp/>ancestor*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*New<sp/>data<sp/>for<sp/>this<sp/>type<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structlv__style__list__t" kindref="compound">lv_style_list_t</ref><sp/>style_sel;<sp/></highlight><highlight class="comment">/*Style<sp/>of<sp/>the<sp/>selected<sp/>option*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>uint16_t<sp/>option_cnt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Number<sp/>of<sp/>options*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>uint16_t<sp/>sel_opt_id;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Index<sp/>of<sp/>the<sp/>current<sp/>option*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>uint16_t<sp/>sel_opt_id_ori;<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Store<sp/>the<sp/>original<sp/>index<sp/>on<sp/>focus*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>lv_roller_mode_t<sp/>mode<sp/>:<sp/>1;</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>auto_fit<sp/>:<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*1:<sp/>Automatically<sp/>set<sp/>the<sp/>width*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="58"><highlight class="normal">}<sp/><ref refid="structlv__roller__ext__t" kindref="compound">lv_roller_ext_t</ref>;</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>LV_ROLLER_PART_BG<sp/>=<sp/>LV_PAGE_PART_BG,</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>LV_ROLLER_PART_SELECTED<sp/>=<sp/>_LV_PAGE_PART_VIRTUAL_LAST,</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>_LV_ROLLER_PART_VIRTUAL_LAST,</highlight></codeline>
-<codeline lineno="64"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>uint8_t<sp/>lv_roller_part_t;</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight><highlight class="comment">/**********************</highlight></codeline>
-<codeline lineno="68"><highlight class="comment"><sp/>*<sp/>GLOBAL<sp/>PROTOTYPES</highlight></codeline>
-<codeline lineno="69"><highlight class="comment"><sp/>**********************/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/><ref refid="lv__roller_8h_1ada86fe7f038bc49879e5f969754faa9c" kindref="member">lv_roller_create</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>par,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>copy);</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79"><highlight class="normal"></highlight><highlight class="comment">/*=====================</highlight></codeline>
-<codeline lineno="80"><highlight class="comment"><sp/>*<sp/>Setter<sp/>functions</highlight></codeline>
-<codeline lineno="81"><highlight class="comment"><sp/>*====================*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="89"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a28e6572b2ea9f445b65a1c9c595b1ca2" kindref="member">lv_roller_set_options</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>options,<sp/>lv_roller_mode_t<sp/>mode);</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"></highlight></codeline>
-<codeline lineno="96"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a9d0f43690c87c512bb7ed130998ae42c" kindref="member">lv_roller_set_align</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/>lv_label_align_t<sp/>align);</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight></codeline>
-<codeline lineno="104"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a1a16bd20d1c0bb59cb48aa540fd8e768" kindref="member">lv_roller_set_selected</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/>uint16_t<sp/>sel_opt,<sp/>lv_anim_enable_t<sp/>anim);</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a14ee1f9d60fe777c6e6f812268fea7e4" kindref="member">lv_roller_set_visible_row_count</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/>uint8_t<sp/>row_cnt);</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"></highlight></codeline>
-<codeline lineno="118"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a95543d7dc8da88e295c1a7ca27423938" kindref="member">lv_roller_set_auto_fit</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>auto_fit);</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>lv_roller_set_anim_time(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/>uint16_t<sp/>anim_time)</highlight></codeline>
-<codeline lineno="126"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="lv__page_8h_1acc5e8a35c3de14dccf0c86aed118915f" kindref="member">lv_page_set_anim_time</ref>(roller,<sp/>anim_time);</highlight></codeline>
-<codeline lineno="128"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"></highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight><highlight class="comment">/*=====================</highlight></codeline>
-<codeline lineno="131"><highlight class="comment"><sp/>*<sp/>Getter<sp/>functions</highlight></codeline>
-<codeline lineno="132"><highlight class="comment"><sp/>*====================*/</highlight></codeline>
-<codeline lineno="138"><highlight class="normal">uint16_t<sp/><ref refid="lv__roller_8h_1a6622e8c32c1b9f21a3d1f193cd166493" kindref="member">lv_roller_get_selected</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller);</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"></highlight></codeline>
-<codeline lineno="145"><highlight class="normal">uint16_t<sp/><ref refid="lv__roller_8h_1a0d078967525bf31261b826cc665244f3" kindref="member">lv_roller_get_option_cnt</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller);</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="153"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a6adfbdbad13b325c92f7efc9c92ad721" kindref="member">lv_roller_get_selected_str</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>buf,<sp/>uint32_t<sp/>buf_size);</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="160"><highlight class="normal">lv_label_align_t<sp/><ref refid="lv__roller_8h_1a8e84aa82f39bd484a086c72899479538" kindref="member">lv_roller_get_align</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller);</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"></highlight></codeline>
-<codeline lineno="167"><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a7bda88c640c143ae6fea80263f47ac86" kindref="member">lv_roller_get_auto_fit</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller);</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"></highlight></codeline>
-<codeline lineno="174"><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/><ref refid="lv__roller_8h_1a8f356a39ec30c346b83627f0378ad571" kindref="member">lv_roller_get_options</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller);</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"></highlight></codeline>
-<codeline lineno="181"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>uint16_t<sp/>lv_roller_get_anim_time(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller)</highlight></codeline>
-<codeline lineno="182"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="lv__page_8h_1a3baa3d8a5638dfada888f30fabf05d88" kindref="member">lv_page_get_anim_time</ref>(roller);</highlight></codeline>
-<codeline lineno="184"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"></highlight></codeline>
-<codeline lineno="186"><highlight class="normal"></highlight></codeline>
-<codeline lineno="187"><highlight class="normal"></highlight><highlight class="comment">/**********************</highlight></codeline>
-<codeline lineno="188"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>MACROS</highlight></codeline>
-<codeline lineno="189"><highlight class="comment"><sp/>**********************/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="190"><highlight class="normal"></highlight></codeline>
-<codeline lineno="191"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*LV_USE_ROLLER*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="192"><highlight class="normal"></highlight></codeline>
-<codeline lineno="193"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="194"><highlight class="normal">}<sp/></highlight><highlight class="comment">/*<sp/>extern<sp/>&quot;C&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="195"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="196"><highlight class="normal"></highlight></codeline>
-<codeline lineno="197"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*LV_ROLLER_H*/</highlight><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">/*Data<sp/>of<sp/>roller*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="structlv__roller__ext__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structlv__page__ext__t" kindref="compound">lv_page_ext_t</ref><sp/>page;<sp/></highlight><highlight class="comment">/*Ext.<sp/>of<sp/>ancestor*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*New<sp/>data<sp/>for<sp/>this<sp/>type<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structlv__style__list__t" kindref="compound">lv_style_list_t</ref><sp/>style_sel;<sp/></highlight><highlight class="comment">/*Style<sp/>of<sp/>the<sp/>selected<sp/>option*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>uint16_t<sp/>option_cnt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Number<sp/>of<sp/>options*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>uint16_t<sp/>sel_opt_id;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Index<sp/>of<sp/>the<sp/>current<sp/>option*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>uint16_t<sp/>sel_opt_id_ori;<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Store<sp/>the<sp/>original<sp/>index<sp/>on<sp/>focus*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>lv_roller_mode_t<sp/>mode<sp/>:<sp/>1;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>auto_fit<sp/>:<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*1:<sp/>Automatically<sp/>set<sp/>the<sp/>width*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}<sp/><ref refid="structlv__roller__ext__t" kindref="compound">lv_roller_ext_t</ref>;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>LV_ROLLER_PART_BG<sp/>=<sp/>LV_PAGE_PART_BG,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>LV_ROLLER_PART_SELECTED<sp/>=<sp/>_LV_PAGE_PART_VIRTUAL_LAST,</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>_LV_ROLLER_PART_VIRTUAL_LAST,</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>uint8_t<sp/>lv_roller_part_t;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment">/**********************</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/>*<sp/>GLOBAL<sp/>PROTOTYPES</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/>**********************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/><ref refid="lv__roller_8h_1ada86fe7f038bc49879e5f969754faa9c" kindref="member">lv_roller_create</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>par,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>copy);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="comment">/*=====================</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*<sp/>Setter<sp/>functions</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*====================*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a28e6572b2ea9f445b65a1c9c595b1ca2" kindref="member">lv_roller_set_options</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>options,<sp/>lv_roller_mode_t<sp/>mode);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a9d0f43690c87c512bb7ed130998ae42c" kindref="member">lv_roller_set_align</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/>lv_label_align_t<sp/>align);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a1a16bd20d1c0bb59cb48aa540fd8e768" kindref="member">lv_roller_set_selected</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/>uint16_t<sp/>sel_opt,<sp/>lv_anim_enable_t<sp/>anim);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a14ee1f9d60fe777c6e6f812268fea7e4" kindref="member">lv_roller_set_visible_row_count</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/>uint8_t<sp/>row_cnt);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a95543d7dc8da88e295c1a7ca27423938" kindref="member">lv_roller_set_auto_fit</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>auto_fit);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>lv_roller_set_anim_time(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/>uint16_t<sp/>anim_time)</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="lv__page_8h_1acc5e8a35c3de14dccf0c86aed118915f" kindref="member">lv_page_set_anim_time</ref>(roller,<sp/>anim_time);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="comment">/*=====================</highlight></codeline>
+<codeline lineno="129"><highlight class="comment"><sp/>*<sp/>Getter<sp/>functions</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/>*====================*/</highlight></codeline>
+<codeline lineno="136"><highlight class="normal">uint16_t<sp/><ref refid="lv__roller_8h_1a6622e8c32c1b9f21a3d1f193cd166493" kindref="member">lv_roller_get_selected</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal">uint16_t<sp/><ref refid="lv__roller_8h_1a0d078967525bf31261b826cc665244f3" kindref="member">lv_roller_get_option_cnt</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a6adfbdbad13b325c92f7efc9c92ad721" kindref="member">lv_roller_get_selected_str</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/>buf,<sp/>uint32_t<sp/>buf_size);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal">lv_label_align_t<sp/><ref refid="lv__roller_8h_1a8e84aa82f39bd484a086c72899479538" kindref="member">lv_roller_get_align</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="lv__roller_8h_1a7bda88c640c143ae6fea80263f47ac86" kindref="member">lv_roller_get_auto_fit</ref>(<ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<sp/><ref refid="lv__roller_8h_1a8f356a39ec30c346b83627f0378ad571" kindref="member">lv_roller_get_options</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>uint16_t<sp/>lv_roller_get_anim_time(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct__lv__obj__t" kindref="compound">lv_obj_t</ref><sp/>*<sp/>roller)</highlight></codeline>
+<codeline lineno="180"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="lv__page_8h_1a3baa3d8a5638dfada888f30fabf05d88" kindref="member">lv_page_get_anim_time</ref>(roller);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="comment">/**********************</highlight></codeline>
+<codeline lineno="185"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>MACROS</highlight></codeline>
+<codeline lineno="186"><highlight class="comment"><sp/>**********************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*LV_USE_ROLLER*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal">}<sp/></highlight><highlight class="comment">/*<sp/>extern<sp/>&quot;C&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*LV_ROLLER_H*/</highlight><highlight class="preprocessor"></highlight></codeline>
     </programlisting>
     <location file="/home/kisvegabor/projects/littlevgl/eclipse-workspace/lv_sim_eclipse_sdl_master/release_tmp/lvgl/src/lv_widgets/lv_roller.h"/>
   </compounddef>
