@@ -1,8 +1,8 @@
-#!/usr/bin/env python
- 
+#!/usr/bin/env python3
+
 import sys
 import os
-import commands
+import subprocess
 import re
 
 langs = ['en']
@@ -18,7 +18,7 @@ def cmd(s):
     exit(-1)
 
 # Get the current branch name
-status, br = commands.getstatusoutput("git br | grep '*'")
+status, br = subprocess.getstatusoutput("git br | grep '*'")
 br = re.sub('\* ', '', br)
 urlpath = re.sub('release/', '', br)
  
