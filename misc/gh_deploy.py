@@ -24,7 +24,7 @@ cmd("git checkout master")
 cmd("git pull origin master")
     
     
-for br in [ 'dev', 'latest' ]:
+for br in [ 'dev', 'latest', 'release/v7' ]:
   tmpdir = "_docs_tmp_" + re.sub('/', '_', br)
   urlpath = re.sub('release/', '', br)
 
