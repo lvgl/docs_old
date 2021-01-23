@@ -54,3 +54,6 @@ for br in [ 'dev', 'latest' ]:
   
   cmd("mkdir -p build_output")
   cmd("cp -r ../" + tmpdir + "/. build_output/" + urlpath + "/")
+
+cmd("mkdir -p build_output")
+cmd("cp index.html build_output/index.html")
