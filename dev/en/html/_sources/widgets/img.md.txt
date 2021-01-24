@@ -9,7 +9,7 @@
 
 *Images* are the basic object to display from the flash (as arrays) or externally as files. Images can display symbols (`LV_SYMBOL_...`) too.
 
-Using the [Image decoder interface](/overview/images/#image-decoder) custom image formats can be supported as well.
+Using the [Image decoder interface](/overview/image.html#image-decoder) custom image formats can be supported as well.
 
 ## Parts and Styles
 The images has only a main part called `LV_IMG_PART_MAIN` which uses the typical background style propeties to draw a background rectangle and the *image* properties.
@@ -87,7 +87,7 @@ By default, the pivot point of the rotation is the center of the image. It can b
 
 The quality of the transformation can be adjusted with `lv_img_set_antialias(img, true/false)`. With enabled anti-aliasing the transformations has a higher quality but they are slower.
 
-The transformations require the whole image to be available. Therefore indexed images (`LV_IMG_CF_INDEXED_...`), alpha only images (`LV_IMG_CF_ALPHA_...`) or images from files can be transformed. 
+The transformations require the whole image to be available. Therefore indexed images (`LV_IMG_CF_INDEXED_...`), alpha only images (`LV_IMG_CF_ALPHA_...`) or images from files can not be transformed. 
 In other words transformations work only on true color images stored as C array, or if a custom [Image decoder](/overview/images#image-edecoder) returns the whole image.
 
 Note that, the real coordinates of image object won't change during transformation. That is `lv_obj_get_width/height/x/y()` will returned the original, non-zoomed coordinates. 
@@ -96,7 +96,8 @@ Note that, the real coordinates of image object won't change during transformati
 The images can be rotated with 
 
 ## Events
-Only the [Generic events](../overview/event.html#generic-events) are sent by the object type.
+As by default, clicking of the image objects is disabled, only [generic](../overview/event.html#generic-events) non-input device-related events are sent.
+If you want to catch all of the generic events of an image object, you should enable its clicking by using this: `lv_obj_set_click(img, true)`
 
 Learn more about [Events](/overview/event).
 

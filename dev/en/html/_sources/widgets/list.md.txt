@@ -36,7 +36,7 @@ The labels are created with `LV_LABEL_LONG_SROLL_CIRC` long mode to automaticall
 The text can be et directly with `lv_list_get_btn_text(list_btn)`.
 
 ### Delete buttons
-To delete a list element just use `lv_obj_del(btn)` on the return value of `lv_list_add_btn()`. 
+To delete a list element use `lv_list_remove(list, btn_index)`. btn_index can be obtained by `lv_list_get_btn_index(list, btn)` where btn is the return value of `lv_list_add_btn()`.
 
 To clean the list (remove all buttons) use `lv_list_clean(list)`
 
