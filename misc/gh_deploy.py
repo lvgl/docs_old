@@ -3,6 +3,7 @@
 import sys
 import os
 import re
+import datetime
 
 langs = ['en']
 
@@ -59,3 +60,4 @@ for br in [ 'dev', 'latest', 'release/v7' ]:
 
 cmd("mkdir -p build_output")
 cmd("cp index.html build_output/index.html")
+cmd(f"echo '<!-- {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} -->' >> build_output/index.html")
