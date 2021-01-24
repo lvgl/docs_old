@@ -18,8 +18,8 @@ def cmd(s):
     
 cmd("git config alias.ci commit")
 cmd("git config alias.br branch")
-cmd("git restore .")
 cmd("git clean -fdX")
+cmd("git restore .")
 cmd("git checkout master")
 cmd("git pull origin master")
     
@@ -35,6 +35,7 @@ for br in [ 'dev', 'latest', 'release/v7' ]:
 
   cmd("git checkout " + br + " --")
   cmd("git clean -fdX")
+  cmd("git restore .")
   cmd("git pull origin " + br)
   cmd("git submodule update")
   cmd("./build.py trans")
@@ -46,6 +47,7 @@ for br in [ 'dev', 'latest', 'release/v7' ]:
       cmd("mkdir -p  ../" + tmpdir + "/" + l + "/")
       cmd("cp -r " + l +"/ ../" + tmpdir + "/")
     
+  cmd("git restore .")
   cmd("git checkout master")
   cmd("git clean -fdX")
   
