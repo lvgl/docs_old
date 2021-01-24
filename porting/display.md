@@ -42,7 +42,7 @@ Therefore this method works the best when the MCU has an LCD/TFT interface and t
 
 Once the buffer initialization is ready the display drivers need to be initialized. In the most simple case only the following two fields of `lv_disp_drv_t` needs to be set:
 - **buffer** pointer to an initialized `lv_disp_buf_t` variable.
-- **flush_cb** a callback function to copy a buffer's content to a specific area of the display.
+- **flush_cb** a callback function to copy a buffer's content to a specific area of the display. `lv_disp_flush_ready()` needs to be called when flushing is ready. LVGL might render the screen in multiple chunks and therefore call `flush_cb` multiple times. To see which is the last chunk of rendering use `lv_disp_flush_is_last()`.
 
 There are some optional data fields:
 - **hor_res** horizontal resolution of the display. (`LV_HOR_RES_MAX` by default from *lv_conf.h*).
@@ -56,7 +56,7 @@ There are some optional data fields:
 To use a GPU the following callbacks can be used:
 - **gpu_fill_cb** fill an area in memory with colors.
 - **gpu_blend_cb** blend two memory buffers using opacity.
-- **gpu_wait_cb** if any GPU function return while the GPU is still working LVGL will use this function when required the be sure GPU rendereing is ready.
+- **gpu_wait_cb** if any GPU function return, while the GPU is still working LVGL, will use this function when required the be sure GPU rendering is ready.
 
 Note that, these functions need to draw to the memory (RAM) and not your display directly.
 
@@ -97,7 +97,7 @@ void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * 
 
     /* IMPORTANT!!!
      * Inform the graphics library that you are ready with the flushing*/
-    lv_disp_flush_ready(disp);
+    lv_disp_flush_ready(disp_drv);
 }
 
 void my_gpu_fill_cb(lv_disp_drv_t * disp_drv, lv_color_t * dest_buf, const lv_area_t * dest_area, const lv_area_t * fill_area, lv_color_t color);

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 # -*- coding: utf-8 -*-
 #
 # LVGL documentation build configuration file, created by
@@ -17,9 +17,10 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+import subprocess
+sys.path.insert(0, os.path.abspath('./_ext'))
 
 import recommonmark
 from recommonmark.transform import AutoStructify
@@ -40,6 +41,8 @@ extensions = ['sphinx.ext.autodoc',
     'recommonmark',
     'sphinx_markdown_tables',
     'breathe',
+    'sphinx_sitemap',
+    'lv_example'
     ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -107,6 +110,9 @@ html_theme_options = {
     'collapse_navigation' : False,
     'logo_only': True,
 }
+# For site map generation
+html_baseurl = 'https://docs.lvgl.io/latest/en/html/'
+sitemap_url_scheme = "{link}"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -221,4 +227,26 @@ def setup(app):
     app.add_transform(AutoStructify)
     app.add_stylesheet('css/custom.css')
     app.add_stylesheet('css/fontawesome.min.css')
-    
+
+# Attempt to checkout _static/built_lv_examples
+
+
+if not os.path.exists('_static/built_lv_examples'):
+    os.system('git clone https://github.com/lvgl/lv_examples.git _static/built_lv_examples')
+
+os.system('git -C _static/built_lv_examples fetch origin')
+
+out = subprocess.Popen(["git", "-C", "lv_examples", "rev-parse", "HEAD"], 
+       stdout=subprocess.PIPE, 
+       stderr=subprocess.STDOUT)
+stdout,stderr = out.communicate()
+example_commit_hash = stdout.decode("utf-8").strip()
+
+search_command = ["git", "-C", "_static/built_lv_examples", "--no-pager", "log", "--pretty=format:'%H'", "--all", "-n", "1", f"--grep='Deploying to gh-pages from  @ {example_commit_hash}'"]
+log_output = subprocess.check_output(' '.join(search_command), shell=True).strip().decode("utf-8")
+if len(log_output) == 0:
+    raise ValueError('lv_examples: cannot find corresponding deployed commit: ' + example_commit_hash)
+
+built_example_commit_hash = log_output
+os.system('git -C _static/built_lv_examples reset --hard')
+os.system('git -C _static/built_lv_examples checkout ' + log_output)
