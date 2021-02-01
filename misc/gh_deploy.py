@@ -25,7 +25,7 @@ cmd("git checkout script")
 cmd("git pull origin script")
     
     
-for br in [ 'release/v6', 'dev', 'latest', 'release/v7' ]:
+for br in [ 'dev', 'latest', 'release/v7' ]:
   tmpdir = "_docs_tmp_" + re.sub('/', '_', br)
   urlpath = re.sub('release/', '', br)
 
@@ -61,4 +61,5 @@ for br in [ 'release/v6', 'dev', 'latest', 'release/v7' ]:
 cmd("mkdir -p build_output")
 cmd("cp index.html build_output/index.html")
 cmd("cp -a misc build_output/misc")
+cmd("cp -a v6 build_output/v6")
 cmd(f'echo "<!-- {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} -->" >> build_output/index.html')

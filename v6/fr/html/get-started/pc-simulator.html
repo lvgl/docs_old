@@ -1,0 +1,1298 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Simulateur sur PC &mdash; LittlevGL 6.1.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Aperçu rapide" href="quick-overview.html" />
+    <link rel="prev" title="Démonstrations en ligne" href="live-demo.html" />
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78811084-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78811084-3');
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/white_white_lvgl_full_logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                6.1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Démarrer</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="live-demo.html">Démonstrations en ligne</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Simulateur sur PC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#choisir-un-edi">Choisir un EDI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configurer-eclipse-cdt">Configurer Eclipse CDT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installer-eclipse-cdt">Installer Eclipse CDT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installer-sdl-2">Installer SDL 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#projet-pre-configure">Projet pré-configuré</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ajouter-le-projet-pre-configure-a-eclipse-cdt">Ajouter le projet pré-configuré à Eclipse CDT.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compilation-et-execution">Compilation et exécution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quick-overview.html">Aperçu rapide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quick-overview.html#ajouter-littlevgl-a-votre-projet">Ajouter LittlevGL à votre projet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quick-overview.html#apprendre-les-bases">Apprendre les bases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="quick-overview.html#les-objets-elements-visuels">Les objets (éléments visuels)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quick-overview.html#styles">Styles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quick-overview.html#evenements">Evénements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="quick-overview.html#exemples">Exemples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="quick-overview.html#bouton-avec-etiquette">Bouton avec étiquette</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quick-overview.html#bouton-avec-styles">Bouton avec styles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quick-overview.html#curseur-et-alignement-de-l-objet">Curseur et alignement de l’objet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quick-overview.html#liste-et-themes">Liste et thèmes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quick-overview.html#utiliser-littlevgl-avec-micropython">Utiliser LittlevGL avec Micropython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="quick-overview.html#contribuer">Contribuer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="micropython.html">Micropython</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="micropython.html#qu-est-ce-que-micropython">Qu’est-ce que Micropython ?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="micropython.html#points-forts-de-micropython">Points forts de Micropython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="micropython.html#pourquoi-micropython-littlevgl">Pourquoi Micropython + LittlevGL ?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="micropython.html#voici-quelques-avantages-a-utiliser-littlevgl-avec-micropython">Voici quelques avantages à utiliser LittlevGL avec Micropython :</a></li>
+<li class="toctree-l4"><a class="reference internal" href="micropython.html#micropython-littlevgl-peuvent-etre-utilises-pour">Micropython + LittlevGL peuvent être utilisés pour :</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="micropython.html#alors-a-quoi-ca-ressemble">Alors, à quoi ça ressemble ?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="micropython.html#un-exemple-simple">Un exemple simple</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="micropython.html#comment-l-utiliser">Comment l’utiliser?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="micropython.html#simulateur-en-ligne">Simulateur en ligne</a></li>
+<li class="toctree-l4"><a class="reference internal" href="micropython.html#simulateur-pc">Simulateur PC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="micropython.html#plateforme-embarquee">Plateforme embarquée</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="micropython.html#ou-trouver-plus-d-informations">Où trouver plus d’informations ?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../porting/index.html">Portage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sys.html">Aperçu système</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/project.html">Configurer un projet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#obtenir-la-librairie">Obtenir la librairie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#configuration-file">Configuration file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/project.html#initialisation">Initialisation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Interface d’affichage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#tampon-d-affichage">Tampon d’affichage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#pilote-d-affichage">Pilote d’affichage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/indev.html">Interface de périphérique d’entrée</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#types-de-peripheriques-d-entree">Types de périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-tactile-souris-ou-autre-pointeur">Pavé tactile, souris ou autre pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#pave-numerique-ou-clavier">Pavé numérique ou clavier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#encodeur">Encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../porting/indev.html#bouton">Bouton</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#autres-fonctionnalites">Autres fonctionnalités</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/indev.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/tick.html">Interface tic</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/tick.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/task-handler.html">Gestionnaire de tâche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/sleep.html">Gestion du sommeil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/os.html">Système d’exploitation et interruptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/os.html#taches-et-fils-dexecution">Tâches et fils d’exécution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/os.html#interruptions">Interruptions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../porting/log.html">Journalisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#niveau-de-detail">Niveau de détail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#journalisation-avec-printf">Journalisation avec printf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#fonction-de-journalisation-personnalisee">Fonction de journalisation personnalisée</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/log.html#ajouter-des-messages">Ajouter des messages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Vue d’ensemble</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/object.html">Objets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#attributs-d-objet">Attributs d’objet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#attributs-de-base">Attributs de base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#attributs-specifiques">Attributs spécifiques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/object.html#mecanismes-de-fonctionnement-de-l-objet">Mécanismes de fonctionnement de l’objet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#structure-parent-enfant">Structure parent-enfant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#se-deplacer-ensemble">Se déplacer ensemble</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#visibilite-uniquement-sur-le-parent">Visibilité uniquement sur le parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#creer-supprimer-des-objets">Créer - supprimer des objets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/object.html#ecran-le-parent-le-plus-elementaire">Ecran - le parent le plus élémentaire</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/layer.html">Couches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#ordre-de-creation">Ordre de création</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#amener-au-premier-plan">Amener au premier plan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/layer.html#top-and-sys-layers">Top and sys layers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/event.html">Evénements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#types-d-evenements">Types d’événements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#evenements-generiques">Evénements génériques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#relatifs-aux-peripheriques-d-entree">Relatifs aux  périphériques d’entrée</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#relatif-au-pointeur">Relatif au pointeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#relatif-au-pave-numerique-et-encodeur">Relatif au pavé numérique et encodeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#evenements-generaux">Evénements généraux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/event.html#evenements-speciaux">Evénements spéciaux</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#donnees-personnalisees">Données personnalisées</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/event.html#envoyer-des-evenements-manuellement">Envoyer des événements manuellement</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/style.html">Styles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#utiliser-les-styles">Utiliser les styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#heritage-de-styles">Héritage de styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#proprietes-de-style">Propriétés de style</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-communes">Propriétés communes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-de-corps">Propriétés de style de corps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-de-texte">Propriétés de style de texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-d-image">Propriétés de style d’image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#proprietes-de-style-de-ligne">Propriétés de style de ligne</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#styles-integres">Styles intégrés</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#creer-de-nouveaux-styles">Créer de nouveaux styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#animations-de-style">Animations de style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#exemple-de-style">Exemple de style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#themes">Thèmes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/style.html#mise-a-jour-automatique">Mise à jour automatique</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Périphériques d’entrée</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#pointeurs">Pointeurs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#clavier-et-encodeur">Clavier et encodeur</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#groupes">Groupes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#demonstration-en-ligne">Démonstration en ligne</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/indev.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#peripherique-d-entree">Périphérique d’entrée</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/indev.html#id1">Groupes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/display.html">Affichage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#utiliser-un-seul-affichage">Utiliser un seul affichage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#affichage-miroir">Affichage miroir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#division-d-image">Division d’image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#ecrans">Ecrans</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#ecran-opaque">Ecran opaque</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#fonctionnalites-des-affichages">Fonctionnalités des affichages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#inactivite">Inactivité</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#couleurs">Couleurs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#conversion-de-couleur">Conversion de couleur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#permutation-16-bits">Permutation 16 bits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#creer-et-melanger-les-couleurs">Créer et mélanger les couleurs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#opacite">Opacité</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#couleurs-integrees">Couleurs intégrées</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/display.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#id1">Affichage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/display.html#id2">Couleurs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/font.html">Polices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#support-unicode">Support Unicode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#polices-integrees">Polices intégrées</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#special-features">Special features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/font.html#bidirectional-support">Bidirectional support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/font.html#subpixel-rendering">Subpixel rendering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/font.html#compress-fonts">Compress fonts</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#ajouter-une-nouvelle-police">Ajouter une nouvelle police</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#ajouter-de-nouveaux-symboles">Ajouter de nouveaux symboles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/font.html#ajouter-un-nouveau-moteur-de-polices">Ajouter un nouveau moteur de polices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/image.html">Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#enregistrer-des-images">Enregistrer des images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#fichiers">Fichiers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#formats-de-couleur">Formats de couleur</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#ajouter-et-utiliser-des-images">Ajouter et utiliser des images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#convertisseur-en-ligne">Convertisseur en ligne</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#creer-une-image-manuellement">Créer une image manuellement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#utiliser-des-images">Utiliser des images</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#decodeur-d-images">Décodeur d’images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#formats-d-image-personnalises">Formats d’image personnalisés</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#enregistrer-un-decodeur-d-image">Enregistrer un décodeur d’image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#utiliser-manuellement-un-decodeur-d-image">Utiliser manuellement un décodeur d’image</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#mise-en-cache-des-images">Mise en cache des images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#taille-du-cache">Taille du cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#valeur-des-images">Valeur des images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#utilisation-de-la-memoire">Utilisation de la mémoire</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#nettoyer-le-cache">Nettoyer le cache</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#decodeur-d-image">Décodeur d’image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#cache-d-images">Cache d’images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/file-system.html">Système de fichiers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#ajouter-un-pilote">Ajouter un pilote</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#exemple-d-utilisation">Exemple d’utilisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#utiliser-les-pilotes-pour-les-images">Utiliser les pilotes pour les images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/file-system.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/animation.html">Animations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#creer-une-animation">Créer une animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#chemin-d-animation">Chemin d’animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#vitesse-et-duree">Vitesse et durée</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#supprimer-des-animations">Supprimer des animations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/animation.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../overview/animation.html#peripherique-d-entree">Périphérique d’entrée</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/task.html">Tâches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#creer-une-tache">Créer une tâche</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#execution-et-reinitialisation">Exécution et réinitialisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#parametres">Paramètres</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#taches-uniques">Tâches uniques</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#mesurer-le-temps-d-inactivite">Mesurer le temps d’inactivité</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#appels-asynchrones">Appels asynchrones</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/task.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/drawing.html">Dessin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#types-de-tampons">Types de tampons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/drawing.html#mecanisme-de-rafraichissement-de-l-ecran">Mécanisme de rafraîchissement de l’écran</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../object-types/index.html">Types d’objet (éléments visuels)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/obj.html">Objet de base (lv_obj)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#coordonnees">Coordonnées</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#parents-et-enfants">Parents et enfants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#ecrans">Ecrans</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#couches">Couches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#style">Style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#evenements">Evènements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#attributs">Attributs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#echelle-d-opacite">Echelle d’opacité</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#protection">Protection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#groupes">Groupes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#zone-etendue-de-clic">Zone étendue de clic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#id1">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/obj.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/obj.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/arc.html">Arc (lv_arc)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/arc.html#angles">Angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/arc.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/arc.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/arc.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/arc.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/bar.html">Barre (lv_bar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/bar.html#valeur-et-intervalle">Valeur et intervalle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/bar.html#symetrique">Symétrique</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/bar.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/bar.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/bar.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/btn.html">Bouton (lv_btn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#etats">Etats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#bascule">Bascule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#mise-en-page-et-adaptation">Mise en page et adaptation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#effet-d-encre">Effet d’encre</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/btnm.html">Matrice de boutons (lv_btnm)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#texte-du-bouton">Texte du bouton</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#controle-des-boutons">Contrôle des boutons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#une-bascule">Une bascule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#recolorer">Recolorer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/btnm.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/btnm.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/calendar.html">Calendrier (lv_calendar)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#date-courante">Date courante</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#date-affichee">Date affichée</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#jours-mis-en-evidence">Jours mis en évidence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#nom-des-jours">Nom des jours</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#nom-des-mois">Nom des mois</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/calendar.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/calendar.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/canvas.html">Canvas (lv_canvas)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#tampon">Tampon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#palette">Palette</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#dessin">Dessin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#rotation">Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/canvas.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/canvas.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cb.html">Case à cocher (lv_cb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#texte">Texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#cocher-decocher">Cocher/décocher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#desactiver">Désactiver</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/chart.html">Graphique (lv_chart)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#serie-de-donnees">Série de données</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#type-de-serie">Type de série</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#modifier-le-donnees">Modifier le données</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#modes-de-mise-a-jour">Modes de mise à jour</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#nombre-de-points">Nombre de points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#plage-verticale">Plage verticale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#quadrillage">Quadrillage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#graduation-et-etiquettes">Graduation et étiquettes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/chart.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/chart.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cont.html">Conteneur (lv_cont)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cont.html#mise-en-page">Mise en page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cont.html#autofit">Autofit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cont.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cont.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cont.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/cpicker.html">Color picker (lv_cpicker)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cpicker.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cpicker.html#types-of-color-pickers">Types of color pickers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/cpicker.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cpicker.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cpicker.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cpicker.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cpicker.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/cpicker.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/ddlist.html">Drop-down list (lv_ddlist)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#definir-les-elements">Définir les éléments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#obtenir-l-element-selectionne">Obtenir l’élément sélectionné</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#aligner-les-elements">Aligner les éléments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#hauteur-et-largeur">Hauteur et largeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#barres-de-defilement">Barres de défilement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#duree-d-animation">Durée d’animation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#fleche-decorative">Flèche décorative</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#manually-open-close">Manually open/close</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#rester-ouvert">Rester ouvert</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ddlist.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ddlist.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/gauge.html">Jauge (lv_gauge)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#scale">Scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#aiguilles">Aiguilles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#plage">Plage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#valeur-critique">Valeur critique</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/gauge.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/gauge.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/img.html">Image (lv_img)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#image-source">Image source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#etiquette-comme-image">Etiquette comme image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#transparence">Transparence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#palette-et-index-alpha">Palette et index alpha</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#coloration">Coloration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#taille-automatique">Taille automatique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#mosaique">Mosaïque</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#decalage">Décalage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/img.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/img.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/imgbtn.html">Bouton image (lv_imgbtn)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/imgbtn.html#images-sources">Images sources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/imgbtn.html#etats">Etats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/imgbtn.html#bascule">Bascule</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/imgbtn.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/imgbtn.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/imgbtn.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/kb.html">Clavier (lv_kb)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#modes">Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#zone-de-texte">Zone de texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#new-keymap">New Keymap</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#exemples">Exemples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/kb.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/kb.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/label.html">Etiquette (lv_label)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#definir-le-texte">Définir le texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#saut-de-ligne">Saut de ligne</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#modes-d-adaptation-au-texte">Modes d’adaptation au texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#alignement-du-texte">Alignement du texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#dessin-d-arriere-plan">Dessin d’arrière-plan</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#coloration-du-texte">Coloration du texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#tres-long-textes">Très long textes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#symboles">Symboles</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/label.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/label.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/led.html">LED (lv_led)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#vue-densemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/led.html#luminosite">Luminosité</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/led.html#bascule">Bascule</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/led.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/led.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/led.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/line.html">Ligne (lv_line)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/line.html#ensemble-de-points">Ensemble de points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/line.html#dimensionnement-automatique">Dimensionnement automatique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/line.html#y-inverse">Y inversé</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/line.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/line.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/line.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/list.html">Liste (lv_list)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#ajouter-des-boutons">Ajouter des boutons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#supprimer-des-boutons">Supprimer des boutons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#navigation-manuelle">Navigation manuelle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#mise-en-page">Mise en page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#mise-en-evidence-du-bord">Mise en évidence du bord</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#propagation-du-defilement">Propagation du défilement</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/list.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/list.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/lmeter.html">Compteur (lv_lmeter)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#definir-la-valeur">Définir la valeur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#intervalle-et-angles">Intervalle et angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#decalage-d-angle">Décalage d’angle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/lmeter.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/lmeter.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/mbox.html">Boîte de message (lv_mbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/mbox.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/mbox.html#definir-le-texte">Définir le texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/mbox.html#ajouter-des-boutons">Ajouter des boutons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/mbox.html#fermeture-automatique">Fermeture automatique</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/mbox.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/mbox.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/mbox.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/mbox.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/mbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/mbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/mbox.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/page.html">Page (lv_page)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/page.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#barres-de-defilement">Barres de défilement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#objet-colle">Objet collé</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#focus-object">Focus object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#manual-navigation">Manual navigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#edge-flash">Edge flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#scroll-propagation">Scroll propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#scrollable-api">Scrollable API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/page.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/page.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/page.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/page.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/page.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/preload.html">Indicateur de chargement (lv_preload)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#vitesse-de-rotation">Vitesse de rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#types-de-rotation">Types de rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#direction-de-rotation">Direction de rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/preload.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/preload.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/roller.html">Roller (lv_roller)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#set-options">Set options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#get-selected-option">Get selected option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#align-the-options">Align the options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#height-and-width">Height and width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#animation-time">Animation time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/roller.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/roller.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/slider.html">Curseur (lv_slider)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#vue-d-ensemble">Vue d’ensemble</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#valeur-et-intervalle">Valeur et intervalle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#symetrie">Symétrie</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#placement-du-bouton">Placement du bouton</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/slider.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/slider.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/spinbox.html">Spinbox (lv_spinbox)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/spinbox.html#set-format">Set format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/spinbox.html#value-and-ranges">Value and ranges</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#style-usage">Style usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#keys">Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/spinbox.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/spinbox.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/spinbox.html#id1">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/sw.html">Commutateur (lv_sw)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/sw.html#changer-d-etat">Changer d’état</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/sw.html#duree-d-animation">Durée d’animation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/sw.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/sw.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/sw.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/table.html">Table (lv_table)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#llignes-et-colonnes">Llignes et colonnes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#largeur-et-hauteur">Largeur et hauteur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#definir-la-valeur-de-la-cellule">Définir la valeur de la cellule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#alignement">Alignement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#type-de-cellule">Type de cellule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#fusionner-des-cellules">Fusionner des cellules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#crop-text">Crop text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#defilement">Défilement</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#id1">MicroPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/table.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/table.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/tabview.html">Classeur d’onglets (lv_tabview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#ajouter-un-onglet">Ajouter un onglet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#changer-d-onglet">Changer d’onglet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#position-des-boutons-d-onglet">Position des boutons d’onglet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#cacher-des-onglets">Cacher des onglets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#duree-d-animation">Durée d’animation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tabview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tabview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/ta.html">Zone de texte (lv_ta)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#ajouter-du-texte">Ajouter du texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#substitutif">Substitutif</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#supprimer-un-caractere">Supprimer un caractère</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#deplacer-le-curseur">Déplacer le curseur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#types-de-curseur">Types de curseur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#mode-une-ligne">Mode une ligne</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#mode-mot-de-passe">Mode mot de passe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#alignement-du-texte">Alignement du texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#caracteres-autorises">Caractères autorisés</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#longueur-de-texte-maximum">Longueur de texte maximum.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#tres-long-texte">Très long texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#selection-de-texte">Sélection de texte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#barres-de-defilement">Barres de défilement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#propagation-du-defilement">Propagation du défilement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#mise-en-evidence-du-bord">Mise en évidence du bord</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/ta.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/ta.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/tileview.html">Mosaïque  (lv_tileview)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#positions-valides">Positions valides</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#ajouter-un-element">Ajouter un élément</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#definir-la-tuile">Définir la tuile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#duree-d-animation">Durée d’animation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#mise-en-evidence-du-bord">Mise en évidence du bord</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/tileview.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/tileview.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../object-types/win.html">Fenêtre (lv_win)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#vue-d-ensemble">Vue d’ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#titre">Titre</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#boutons-de-controle">Boutons de contrôle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#barres-de-defilement">Barres de défilement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#defilement-manuel-et-focus">Défilement manuel et focus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#mise-en-page">Mise en page</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#styles">Styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#evenements">Evénements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#touches">Touches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#exemple">Exemple</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#c">C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object-types/win.html#micropython">MicroPython</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../object-types/win.html#api">API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LittlevGL</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Démarrer</a> &raquo;</li>
+        
+      <li>Simulateur sur PC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/littlevgl/docs/blob/master/fr/get-started/pc-simulator.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="simulateur-sur-pc">
+<h1>Simulateur sur PC<a class="headerlink" href="#simulateur-sur-pc" title="Permalink to this headline">¶</a></h1>
+<p>Vous pouvez essayer LittlevGL <strong>en utilisant uniquement votre PC</strong> (c’est-à-dire sans carte de développement). LittlevGL fonctionnera sur un environnement de simulation sur le PC dans lequel il est possible d’écrire et d’expérimenter de réelles applications LittlevGL.</p>
+<p>Le simulateur sur PC présente les avantages suivants :</p>
+<ul class="simple">
+<li><p>Indépendant du matériel - Écrivez du code, exécutez-le sur PC et visualisez le résultat sur le moniteur du PC.</p></li>
+<li><p>Multi-plateforme - Tous les ordinateurs Windows, Linux ou OS X peuvent exécuter le simulateur PC.</p></li>
+<li><p>Portabilité - Le code écrit est portable, ce qui signifie qu’il suffit de le copier pour l’utiliser sur un matériel embarqué.</p></li>
+<li><p>Validation facile - Le simulateur est également très utile pour signaler des bogues car il représente une plateforme commune pour chaque utilisateur. C’est donc une bonne idée de reproduire un bogue dans le simulateur et d’utiliser l’extrait de code dans le <a class="reference external" href="https://forum.littlevgl.com">forum</a>.</p></li>
+</ul>
+<div class="section" id="choisir-un-edi">
+<h2>Choisir un EDI<a class="headerlink" href="#choisir-un-edi" title="Permalink to this headline">¶</a></h2>
+<p>Le simulator est portés sur plusieurs EDIs (Environnement de Développement Intégré). Choisissez votre EDI préféré, lisez son README sur GitHub, téléchargez le projet, et chargez le dans EDI.</p>
+<table style="width:100%">
+<thead>
+<tr>
+<th>Eclipse</th>
+<th>CodeBlocks</th>
+<th>Visual Studio</th>
+<th>PlatformIO</th>
+<th>Qt Creator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/littlevgl/pc_simulator_sdl_eclipse"><img src="https://littlevgl.com/logo/ide/eclipse.jpg"></a> </td>
+<td><a href="https://github.com/littlevgl/pc_simulator_win_codeblocks"><img src="https://littlevgl.com/logo/ide/codeblocks.jpg"></a></td>
+<td><a href="https://github.com/littlevgl/visual_studio_2017_sdl_x64"><img src="https://littlevgl.com/logo/ide/visualstudio.jpg"></a></td>
+<td><a href="https://github.com/littlevgl/pc_simulator_sdl_platformio"><img src="https://littlevgl.com/logo/ide/platformio.jpg"></a></td>
+<td><a href="https://blog.littlevgl.com/2019-01-03/qt-creator"><img src="https://littlevgl.com/logo/ide/qtcreator.jpg"> </a></td>
+</tr>
+
+<tr>
+<td>Multi-plateforme<br>avec SDL 
+</td><td>Natif Windows  </td>
+<td>Multi-plateforme<br>avec SDL  </td>
+<td>Multi-plateforme<br>avec SDL </td>
+<td>Multi-plateforme<br>avec SDL  </td>
+</tr>
+</tbody></table><p>Vous pouvez utiliser n’importe quel EDI pour le développement mais, pour des raisons de simplicité, ce didacticiel est axé sur la configuration d’Eclipse CDT.
+La section suivante décrit la configuration d’Eclipse CDT de manière plus détaillée.</p>
+<p><strong>Note : si vous utilisez Windows, il est généralement préférable d’utiliser Visual Studio ou CodeBlocks. Ils fonctionnent directement sans nécessiter d’étapes supplémentaires.</strong></p>
+</div>
+<div class="section" id="configurer-eclipse-cdt">
+<h2>Configurer Eclipse CDT<a class="headerlink" href="#configurer-eclipse-cdt" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installer-eclipse-cdt">
+<h3>Installer Eclipse CDT<a class="headerlink" href="#installer-eclipse-cdt" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://eclipse.org/cdt/">Eclipse CDT</a> iest un IDE C/C++.</p>
+<p>Eclipse est un logiciel écrit en Java de ce fait, soyez certain que l’<strong>environnement d’exécution Java</strong> est installé sur votre système.</p>
+<p>Sur les distribution basée sur Debian (p.ex. Ubuntu) : <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">default-jre</span></code></p>
+<p>Note : si vous utilisez d’autres distributions, installez un ‘Java Runtime Environment’ adapté à votre distribution.</p>
+<p>Vous pouvez télécharger Eclipse CDT à partir de : <a class="reference external" href="http://www.eclipse.org/downloads/downloads.php">https://eclipse.org/cdt/downloads.php</a>. Démarrez l’installeur est choisissez <em>Eclipse CDT</em> dans la liste.</p>
+</div>
+<div class="section" id="installer-sdl-2">
+<h3>Installer SDL 2<a class="headerlink" href="#installer-sdl-2" title="Permalink to this headline">¶</a></h3>
+<p>Le simulateur PC utilise la librairie multi-plateforme <a class="reference external" href="https://www.libsdl.org/download-2.0.php">SDL 2</a> pour simuler un écran TFT et un pavé tactile.</p>
+<div class="section" id="linux">
+<h4>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
+<p>Sur <strong>Linux</strong> vous pouvez installer facilement SDL 2 à partir d’un terminal :</p>
+<ol class="simple">
+<li><p>Trouvez la version actuelle de SDL 2 : <code class="docutils literal notranslate"><span class="pre">apt-cache</span> <span class="pre">search</span> <span class="pre">libsdl2</span> <span class="pre">(e.g.</span> <span class="pre">libsdl2-2.0-0)</span></code></p></li>
+<li><p>Installez SDL 2 : <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">libsdl2-2.0-0</span></code> (remplacez par la version trouvée)</p></li>
+<li><p>Installez le paquet de dévellopement de SDL 2 : <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">libsdl2-dev</span></code></p></li>
+<li><p>Si les paquets de construction essentiels ne sont pas déjà installés : <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">build-essential</span></code></p></li>
+</ol>
+</div>
+<div class="section" id="windows">
+<h4>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h4>
+<p>Si vous utilisez <strong>Windows</strong> vous devez en premier lieu installer MinGW (<a class="reference external" href="http://mingw-w64.org/doku.php/download">version 64 bits</a>). Après ça, effectuez les étapes suivantes pour ajouter SDL 2 :</p>
+<ol class="simple">
+<li><p>Téléchargez les libraries de développement de SDL.Allez sur <a class="reference external" href="https://www.libsdl.org/download-2.0.php">https://www.libsdl.org/download-2.0.php</a> et téléchargez <em>Development Libraries: SDL2-devel-2.0.5-mingw.tar.gz</em></p></li>
+<li><p>Décompressez l’archive et allez dans le répertoire <em>x86_64-w64-mingw32</em> (pour MinGW 64 bits) ou <em>i686-w64-mingw32</em> (pour MinGW 32 bits)</p></li>
+<li><p>Copiez le répertoire _…<em>mingw32/include/SDL2</em> vers <em>C:/MinGW/…/x86_64-w64-mingw32/include</em></p></li>
+<li><p>Copiez le contenu de _…<em>mingw32/lib/</em> dans <em>C:/MinGW/…/x86_64-w64-mingw32/lib</em></p></li>
+<li><p>Copiez _…<em>mingw32/bin/SDL2.dll</em> dans <em>{eclipse_workspace}/pc_simulator/Debug/</em>.  Faites le plus tard quand Eclipse est installé.</p></li>
+</ol>
+<p>Note : si vous utilisez <strong>Microsoft Visual Studio</strong> à la place d’Eclipse alors vous n’avez pas besoin d’installer MinGW.</p>
+</div>
+<div class="section" id="os-x">
+<h4>OS X<a class="headerlink" href="#os-x" title="Permalink to this headline">¶</a></h4>
+<p>Sur <strong>OS X</strong> vous pouvez facilement installer SDL 2 avec brew : <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">sdl2</span></code></p>
+<p>Si quelque chose ne fonctionne pas, alors référez-vous à ce <a class="reference external" href="http://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php">tutoriel</a> pour débuter avec SDL.</p>
+</div>
+</div>
+<div class="section" id="projet-pre-configure">
+<h3>Projet pré-configuré<a class="headerlink" href="#projet-pre-configure" title="Permalink to this headline">¶</a></h3>
+<p>Un projet pré-configuré pour la librairie graphique, basé sur la dernière version publiée, est toujours disponible.
+Vous pouvez trouver le plus récent sur <a class="reference external" href="https://github.com/littlevgl/proj_pc">GitHub</a> ou sur la page de <a class="reference external" href="https://littlevgl.com/download">téléchargement</a>.
+Notez que le projet est configuré pour Eclipse CDT.</p>
+</div>
+<div class="section" id="ajouter-le-projet-pre-configure-a-eclipse-cdt">
+<h3>Ajouter le projet pré-configuré à Eclipse CDT.<a class="headerlink" href="#ajouter-le-projet-pre-configure-a-eclipse-cdt" title="Permalink to this headline">¶</a></h3>
+<p>Lancez Eclipse CDT. Une boîte de dialogue au sujet du <strong>chemin de l’espace de travail</strong> est affichée. Avant de la valider, vérifiez le chemin et copiez à cet emplacement, puis décompressez, le projet pré-configuré préalablement téléchargé. Après ça vous pouvez accepter le chemin de l’espace de travail. Bien entendu, ce chemin peut être modifié mais dans ce cas il faut copier le projet vers l’emplacement correspondant.</p>
+<p>Fermez la fenêtre de démarrage et allez à <strong>Fichier-&gt;Importer…</strong> et choisissez <strong>Généralités-&gt;Projets existants dans l’espace de travail</strong>. <strong>Allez au répertoire racine</strong> du projet et cliquez <strong>Terminer</strong></p>
+<p>Sur <strong>Windows</strong> vous devez effectuer deux actions additionnelles :</p>
+<ul class="simple">
+<li><p>Copiez le fichier <strong>SDL2.dll</strong> dans le répertoire Debug du projet</p></li>
+<li><p>Faites un clic droit sur le projet -&gt; Propriétés -&gt; Génération C/C++ -&gt; Paramètres -&gt; Bibliothèques -&gt; Ajouter… et ajoutez <em>mingw32</em> au-dessus de SDLmain et SDL. L’ordre est important : mingw32, SDLmain, SDL</p></li>
+</ul>
+</div>
+<div class="section" id="compilation-et-execution">
+<h3>Compilation et exécution<a class="headerlink" href="#compilation-et-execution" title="Permalink to this headline">¶</a></h3>
+<p>Vous êtes maintenant prêt à utiliser la librairie graphique LittlevGL sur votre PC. Cliquer sur l’icône Marteau de la barre de menu pour compiler le projet. Si vous avez tout fait correctement aucune erreur ne se produira. Notez que sur certains systèmes des étapes additionnelles peuvent être requises pour qu’Eclipse prenne en compte SDL 2, mais dans la plupart des cas, la configuration du projet téléchargé est suffisante.</p>
+<p>Après avoir compiler avec succès, cliquez sur le bouton Jouer de la barre de menu pour démarrer le projet. Maintenant une fenêtre doit apparaître au milieu de l’écran.</p>
+<p>Tout est prêt pour utiliser la librairie graphique LittlevGL pour l’apprentissage ou pour débuter le développement sur votre PC.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="quick-overview.html" class="btn btn-neutral float-right" title="Aperçu rapide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="live-demo.html" class="btn btn-neutral float-left" title="Démonstrations en ligne" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Gabor Kiss-Vamosi
+      <span class="lastupdated">
+        Last updated on Jun 19, 2020.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+<script type="text/javascript" src="https://docs.lvgl.io/misc/common.js"></script>
+
+
+
+</body>
+</html>
