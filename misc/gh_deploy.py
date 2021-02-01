@@ -21,8 +21,8 @@ cmd("git config alias.ci commit")
 cmd("git config alias.br branch")
 cmd("git clean -fdX")
 cmd("git restore .")
-cmd("git checkout master")
-cmd("git pull origin master")
+cmd("git checkout script")
+cmd("git pull origin script")
     
     
 for br in [ 'dev', 'latest', 'release/v7' ]:
@@ -49,7 +49,7 @@ for br in [ 'dev', 'latest', 'release/v7' ]:
       cmd("cp -r " + l +"/ ../" + tmpdir + "/")
     
   cmd("git restore .")
-  cmd("git checkout master")
+  cmd("git checkout script")
   cmd("git clean -fdX")
   
   for l in langs:
