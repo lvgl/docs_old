@@ -25,7 +25,7 @@ cmd("git checkout script")
 cmd("git pull origin script")
     
     
-for br in [ 'dev', 'latest', 'release/v7' ]:
+for br in [ 'release/v6', 'dev', 'latest', 'release/v7' ]:
   tmpdir = "_docs_tmp_" + re.sub('/', '_', br)
   urlpath = re.sub('release/', '', br)
 
