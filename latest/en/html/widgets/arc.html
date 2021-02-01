@@ -1,42 +1,46 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Arc (lv_arc) &mdash; LVGL  documentation</title>
   
-
-  
-  
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/fontawesome.min.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="https://docs.lvgl.io/latest/en/html/widgets/arc.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Bar (lv_bar)" href="bar.html" />
@@ -95,6 +99,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -1288,6 +1293,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -1324,11 +1330,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="index.html">Widgets</a> &raquo;</li>
         
@@ -1337,7 +1345,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             
               <!-- User defined GitHub URL -->
               <a href="https://github.com/lvgl/docs/blob/latest/widgets/arc.md" class="fa fa-github"> Edit on GitHub</a>
@@ -1386,6 +1394,7 @@ The angles should be in [0;360] range.</p>
 <h3>Range and values<a class="headerlink" href="#range-and-values" title="Permalink to this headline">¶</a></h3>
 <p>Besides setting angles manually the arc can have a range and a value. To set the range use <code class="docutils literal notranslate"><span class="pre">lv_arc_set_range(arc,</span> <span class="pre">min,</span> <span class="pre">max)</span></code> and to set a value use <code class="docutils literal notranslate"><span class="pre">lv_arc_set_value(arc,</span> <span class="pre">value)</span></code>.
 Using range and value the angle of the indicator will be mapped between background angles.</p>
+<p>Note that, settings angles and values are independent. You should use either value and angle settings. Mixing the two might result unintended behavior.</p>
 </div>
 <div class="section" id="type">
 <h3>Type<a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h3>
@@ -1445,14 +1454,14 @@ The following types exist:</p>
 <div class="header docutils container">
 <p>code</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;../../../lv_examples.h&quot; </span><span class="cp"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;../../../lv_examples.h&quot;</span><span class="c1"> </span><span class="cp"></span>
 <span class="cp">#if LV_USE_ARC</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * An `lv_task` to call periodically to set the angles of the arc</span>
 <span class="cm"> * @param t</span>
 <span class="cm"> */</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">arc_loader</span><span class="p">(</span><span class="n">lv_task_t</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="n">arc_loader</span><span class="p">(</span><span class="n">lv_task_t</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">static</span> <span class="kt">int16_t</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">270</span><span class="p">;</span>
 
@@ -1469,7 +1478,7 @@ The following types exist:</p>
 <span class="cm">/**</span>
 <span class="cm"> * Create an arc which acts as a loader.</span>
 <span class="cm"> */</span>
-<span class="kt">void</span> <span class="nf">lv_ex_arc_2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="kt">void</span> <span class="n">lv_ex_arc_2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="cm">/*Create an Arc*/</span>
   <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">arc</span> <span class="o">=</span> <span class="n">lv_arc_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
@@ -1537,7 +1546,7 @@ The following types exist:</p>
 <dd><p><em>Values:</em></p>
 <dl class="cpp enumerator">
 <dt id="_CPPv4NUt2_5314LV_ARC_PART_BGE">
-<span id="_CPPv3NUt2_5314LV_ARC_PART_BGE"></span><span class="target" id="lv__arc_8h_1aedcf2109f459315e1a7f2af73ec9b603a24eea0a7badc2d9dfe98601a98028fce"></span><em class="property">enumerator </em><code class="sig-name descname">LV_ARC_PART_BG</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_816LV_OBJ_PART_MAINE" title="[anonymous]::LV_OBJ_PART_MAIN">LV_OBJ_PART_MAIN</a><a class="headerlink" href="#_CPPv4NUt2_5314LV_ARC_PART_BGE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NUt2_5314LV_ARC_PART_BGE"></span><span class="target" id="lv__arc_8h_1aedcf2109f459315e1a7f2af73ec9b603a24eea0a7badc2d9dfe98601a98028fce"></span><em class="property">enumerator </em><code class="sig-name descname">LV_ARC_PART_BG</code><a class="headerlink" href="#_CPPv4NUt2_5314LV_ARC_PART_BGE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
@@ -1557,7 +1566,7 @@ The following types exist:</p>
 
 <dl class="cpp enumerator">
 <dt id="_CPPv4NUt2_5322_LV_ARC_PART_REAL_LASTE">
-<span id="_CPPv3NUt2_5322_LV_ARC_PART_REAL_LASTE"></span><span class="target" id="lv__arc_8h_1aedcf2109f459315e1a7f2af73ec9b603aeee6b31c8019d3b3b315ed83d9b20785"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_ARC_PART_REAL_LAST</code> = <a class="reference internal" href="obj.html#_CPPv4NUt1_822_LV_OBJ_PART_REAL_LASTE" title="[anonymous]::_LV_OBJ_PART_REAL_LAST">_LV_OBJ_PART_REAL_LAST</a><a class="headerlink" href="#_CPPv4NUt2_5322_LV_ARC_PART_REAL_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NUt2_5322_LV_ARC_PART_REAL_LASTE"></span><span class="target" id="lv__arc_8h_1aedcf2109f459315e1a7f2af73ec9b603aeee6b31c8019d3b3b315ed83d9b20785"></span><em class="property">enumerator </em><code class="sig-name descname">_LV_ARC_PART_REAL_LAST</code><a class="headerlink" href="#_CPPv4NUt2_5322_LV_ARC_PART_REAL_LASTE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1981,32 +1990,32 @@ The following types exist:</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="bar.html" class="btn btn-neutral float-right" title="Bar (lv_bar)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="obj.html" class="btn btn-neutral float-left" title="Base object (lv_obj)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="bar.html" class="btn btn-neutral float-right" title="Bar (lv_bar)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="obj.html" class="btn btn-neutral float-left" title="Base object (lv_obj)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, LVGL LLC
+        &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Jan 19, 2021.
+        Last updated on Feb 01, 2021.
       </span>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -2014,7 +2023,6 @@ The following types exist:</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

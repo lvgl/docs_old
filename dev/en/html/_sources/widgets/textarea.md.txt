@@ -65,7 +65,7 @@ The cursor can be hidden with `lv_textarea_set_cursor_hidden(textarea, true)`.
 The blink time of the cursor can be adjusted with `lv_textarea_set_cursor_blink_time(textarea, time_ms)`.
 
 ### One line mode
-The Text area can be configures to be one lined with `lv_ta_set_one_line(ta, true)`. 
+The Text area can be configures to be one lined with `lv_textarea_set_one_line(ta, true)`. 
 In this mode the height is set automatically to show only one line, line break character are ignored, and word wrap is disabled. 
 
 ### Password mode

@@ -38,6 +38,8 @@ An offset to the 0 degree position can added with `lv_arc_set_rotation(arc, deg)
 Besides setting angles manually the arc can have a range and a value. To set the range use `lv_arc_set_range(arc, min, max)` and to set a value use `lv_arc_set_value(arc, value)`.
 Using range and value the angle of the indicator will be mapped between background angles.
 
+Note that, settings angles and values are independent. You should use either value and angle settings. Mixing the two might result unintended behavior. 
+
 ### Type
 
 The arc can have the different "types". They are set with `lv_arc_set_type`.
