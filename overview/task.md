@@ -97,4 +97,7 @@ If you just want to delete an object, and don't need to clean anything up in `my
 .. doxygenfile:: lv_task.h
   :project: lvgl
 
+.. doxygenfile:: lv_async.h
+  :project: lvgl
+
 ```
