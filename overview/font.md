@@ -204,7 +204,7 @@ LVGL's font interface is designed to be very flexible.
 You don't need to use LVGL's internal font engine but, you can add your own.
 For example, use [FreeType](https://www.freetype.org/) to real-time render glyphs from TTF fonts or use an external flash to store the font's bitmap and read them when the library needs them.
 
-A raedy to use FreeType can be found in [lv_freetype](https://github.com/lvgl/lv_lib_freetype) repository.
+A ready to use FreeType can be found in [lv_freetype](https://github.com/lvgl/lv_lib_freetype) repository.
 
 To do this a custom `lv_font_t` variable needs to be created:
 ```c
