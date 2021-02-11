@@ -42,7 +42,7 @@ lv_fs_drv_register(&drv);                 /*Finally register the drive*/
 
 ```
 
-Any of the callbacks can be `NULL` to indicate that that operation is not supported.
+Any of the callbacks can be `NULL` to indicate that operation is not supported.
 
 As an example of how the callbacks are used, if you use `lv_fs_open(&file, "S:/folder/file.txt", LV_FS_MODE_WR)`, LVGL:
 
