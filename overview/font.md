@@ -59,6 +59,7 @@ Containing all the ASCII characters, the degree symbol (U+00B0), the bullet symb
 - `LV_FONT_DEJAVU_16_PERSIAN_HEBREW` 16 px font with normal range + Hebrew, Arabic, Perisan letters and all their forms
 - `LV_FONT_SIMSUN_16_CJK`16 px font with normal range + 1000 most common CJK radicals
 - `LV_FONT_UNSCII_8` 8 px pixel perfect font with only ASCII characters
+- `LV_FONT_UNSCII_16` 16 px pixel perfect font with only ASCII characters
 
 
 The built-in fonts are **global variables** with names like `lv_font_montserrat_16` for 16 px hight font. To use them in a style, just add a pointer to a font variable like shown above.
