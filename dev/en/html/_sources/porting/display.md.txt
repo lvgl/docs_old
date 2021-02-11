@@ -50,7 +50,7 @@ There are some optional data fields:
 - **color_chroma_key** a color which will be drawn as transparent on chrome keyed images. `LV_COLOR_TRANSP` by default from *lv_conf.h*).
 - **user_data** custom user data for the driver. Its type can be modified in lv_conf.h.
 - **anti-aliasing** use anti-aliasing (edge smoothing). `LV_ANTIALIAS` by default  from *lv_conf.h*.
-- **rotated** if `1` swap `hor_res` and `ver_res`. LVGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction.
+- **rotated** and **sw_rotate** See the [rotation](#rotation) section below.
 - **screen_transp** if `1` the screen can have transparent or opaque style. `LV_COLOR_SCREEN_TRANSP` needs to enabled in *lv_conf.h*.
 
 To use a GPU the following callbacks can be used:
@@ -151,6 +151,22 @@ void my_clean_dcache_cb(lv_disp_drv_t * disp_drv, uint32)
   SCB_CleanInvalidateDCache();
 }
 ```
+
+## Rotation
+
+LVGL supports rotation of the display in 90 degree increments. You can select whether you'd like software rotation or hardware rotation.
+
+If you select software rotation (`sw_rotate` flag set to 1), LVGL will perform the rotation for you. Your driver can and should assume that the screen width and height have not changed. Simply flush pixels to the display as normal. Software rotation requires no additional logic in your `flush_cb` callback.
+
+There is a noticeable amount of overhead to performing rotation in software, which is why hardware rotation is also available. In this mode, LVGL draws into the buffer as though your screen now has the width and height inverted. You are responsible for rotating the provided pixels yourself.
+
+The default rotation of your display when it is initialized can be set using the `rotated` flag. The available options are `LV_DISP_ROT_NONE`, `LV_DISP_ROT_90`, `LV_DISP_ROT_180`, or `LV_DISP_ROT_270`. The rotation values are relative to how you would rotate the physical display in the clockwise direction. Thus, `LV_DISP_ROT_90` means you rotate the hardware 90 degrees clockwise, and the display rotates 90 degrees counterclockwise to compensate.
+
+(Note for users upgrading from 7.10.0 and older: these new rotation enum values match up with the old 0/1 system for rotating 90 degrees, so legacy code should continue to work as expected. Software rotation is also disabled by default for compatibility.)
+
+Display rotation can also be changed at runtime using the `lv_disp_set_rotation(disp, rot)` API.
+
+Support for software rotation is a new feature, so there may be some glitches/bugs depending on your configuration. If you encounter a problem please open an issue on [GitHub](https://github.com/lvgl/lvgl/issues).
 
 ## API
 
