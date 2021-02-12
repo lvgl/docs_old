@@ -1467,7 +1467,7 @@ Real parts can be in different state than the main part.</p>
 <h2>Initialize styles and set/get properties<a class="headerlink" href="#initialize-styles-and-set-get-properties" title="Permalink to this headline">¶</a></h2>
 <p>Styles are stored in <code class="docutils literal notranslate"><span class="pre">lv_style_t</span></code> variables. Style variables should be <code class="docutils literal notranslate"><span class="pre">static</span></code>, global or dynamically allocated. In other words they can not be local variables in functions which are destroyed when the function exists.
 Before using a style it should be initialized with <code class="docutils literal notranslate"><span class="pre">lv_style_init(&amp;my_style)</span></code>.
-After initializing the style properties can be set added to it.
+After initializing the style properties can be set or added to it.
 Property set functions looks like this: <code class="docutils literal notranslate"><span class="pre">lv_style_set_&lt;property_name&gt;(&amp;style,</span> <span class="pre">&lt;state&gt;,</span> <span class="pre">&lt;value&gt;);</span></code>
 For example the <a class="reference external" href="#states">above mentioned</a> example looks like this:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style1</span><span class="p">;</span>
@@ -1484,7 +1484,7 @@ For example the <a class="reference external" href="#states">above mentioned</a>
 </div>
 <p>To get the value from style in a given state functions with the following prototype are available: <code class="docutils literal notranslate"><span class="pre">_lv_style_get_color/int/opa/ptr(&amp;style,</span> <span class="pre">&lt;prop&gt;,</span> <span class="pre">&lt;result</span> <span class="pre">buf&gt;);</span></code>.
 The best matching property will be selected and it's precedence will be returned. <code class="docutils literal notranslate"><span class="pre">-1</span></code> will be returned if the property is not found.</p>
-<p>The form of the function (<code class="docutils literal notranslate"><span class="pre">...color/int/opa/ptr</span></code>) should beused according to the type of <code class="docutils literal notranslate"><span class="pre">&lt;prop&gt;</span></code>.</p>
+<p>The form of the function (<code class="docutils literal notranslate"><span class="pre">...color/int/opa/ptr</span></code>) should be used according to the type of <code class="docutils literal notranslate"><span class="pre">&lt;prop&gt;</span></code>.</p>
 <p>For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_color_t</span> <span class="n">color</span><span class="p">;</span>
 <span class="kt">int16_t</span> <span class="n">res</span><span class="p">;</span>
@@ -2086,7 +2086,7 @@ Both regions could have different properties.</p>
 
 </pre></div>
 </div>
-<p>It the documentation of the widgets you will see sentences like &quot;The widget use the typical background properties&quot;. The &quot;typical background&quot; properties are:</p>
+<p>In the documentation of the widgets you will see sentences like &quot;The widget use the typical background properties&quot;. The &quot;typical background&quot; properties are:</p>
 <ul class="simple">
 <li><p>Background</p></li>
 <li><p>Border</p></li>
@@ -2127,7 +2127,7 @@ It gives a default appearance to UI which can be modified by adding further styl
 
 <span class="cm">/*Initialize a custom theme*/</span>
 <span class="k">static</span> <span class="n">lv_theme_t</span> <span class="n">custom_theme</span><span class="p">;</span>                         <span class="cm">/*Declare a theme*/</span>
-<span class="n">lv_theme_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">custom_theme</span><span class="p">,</span> <span class="p">)</span><span class="n">base_theme</span><span class="p">;</span>               <span class="cm">/*Initialize the custom theme from the base theme*/</span>                           
+<span class="n">lv_theme_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">custom_theme</span><span class="p">,</span> <span class="n">base_theme</span><span class="p">);</span>               <span class="cm">/*Initialize the custom theme from the base theme*/</span>                           
 <span class="n">lv_theme_set_apply_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">custom_theme</span><span class="p">,</span> <span class="n">custom_apply_cb</span><span class="p">);</span>  <span class="cm">/*Set a custom theme apply callback*/</span>
 <span class="n">lv_theme_set_base</span><span class="p">(</span><span class="n">custom_theme</span><span class="p">,</span> <span class="n">base_theme</span><span class="p">);</span>            <span class="cm">/*Set the base theme of the csutom theme*/</span>
 
