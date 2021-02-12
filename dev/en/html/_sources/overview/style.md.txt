@@ -499,4 +499,13 @@ static void custom_apply_cb(lv_theme_t * th, lv_obj_t * obj, lv_theme_style_t na
   :language: c
 ```
 
+## API
+```eval_rst
 
+.. doxygenfile:: lv_style.h
+  :project: lvgl
+
+.. doxygenfile:: lv_theme.h
+  :project: lvgl
+
+```
