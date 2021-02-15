@@ -475,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -1613,7 +1615,7 @@ Similarly, if opacity is not supported (e.g. <code class="docutils literal notra
 
 <dl class="cpp function">
 <dt id="_CPPv420lv_canvas_set_bufferP8lv_obj_tPv10lv_coord_t10lv_coord_t11lv_img_cf_t">
-<span id="_CPPv320lv_canvas_set_bufferP8lv_obj_tPv10lv_coord_t10lv_coord_t11lv_img_cf_t"></span><span id="_CPPv220lv_canvas_set_bufferP8lv_obj_tPv10lv_coord_t10lv_coord_t11lv_img_cf_t"></span><span id="lv_canvas_set_buffer__lv_obj_tP.voidP.lv_coord_t.lv_coord_t.lv_img_cf_t"></span><span class="target" id="lv__canvas_8h_1a65cfb1d41e6908f15f7463dfb3980cec"></span>void <code class="sig-name descname">lv_canvas_set_buffer</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, void *<em>buf</em>, lv_coord_t <em>w</em>, lv_coord_t <em>h</em>, lv_img_cf_t <em>cf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_canvas_set_bufferP8lv_obj_tPv10lv_coord_t10lv_coord_t11lv_img_cf_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv320lv_canvas_set_bufferP8lv_obj_tPv10lv_coord_t10lv_coord_t11lv_img_cf_t"></span><span id="_CPPv220lv_canvas_set_bufferP8lv_obj_tPv10lv_coord_t10lv_coord_t11lv_img_cf_t"></span><span id="lv_canvas_set_buffer__lv_obj_tP.voidP.lv_coord_t.lv_coord_t.lv_img_cf_t"></span><span class="target" id="lv__canvas_8h_1a65cfb1d41e6908f15f7463dfb3980cec"></span>void <code class="sig-name descname">lv_canvas_set_buffer</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, void *<em>buf</em>, lv_coord_t <em>w</em>, lv_coord_t <em>h</em>, <a class="reference internal" href="../overview/image.html#_CPPv411lv_img_cf_t" title="lv_img_cf_t">lv_img_cf_t</a> <em>cf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_canvas_set_bufferP8lv_obj_tPv10lv_coord_t10lv_coord_t11lv_img_cf_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set a buffer for the canvas. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: a buffer where the content of the canvas will be. The required size is (lv_img_color_format_get_px_size(cf) * w) / 8 * h) It can be allocated with <code class="docutils literal notranslate"><span class="pre">lv_mem_alloc()</span></code> or it can be statically allocated array (e.g. static lv_color_t buf[100*50]) or it can be an address in RAM or external SRAM </p></li>
@@ -1680,8 +1682,8 @@ Similarly, if opacity is not supported (e.g. <code class="docutils literal notra
 
 <dl class="cpp function">
 <dt id="_CPPv417lv_canvas_get_imgP8lv_obj_t">
-<span id="_CPPv317lv_canvas_get_imgP8lv_obj_t"></span><span id="_CPPv217lv_canvas_get_imgP8lv_obj_t"></span><span id="lv_canvas_get_img__lv_obj_tP"></span><span class="target" id="lv__canvas_8h_1ab88808b96446336d7c25436d4e7c8d75"></span>lv_img_dsc_t *<code class="sig-name descname">lv_canvas_get_img</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_canvas_get_imgP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Get the image of the canvas as a pointer to an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> variable. <dl class="simple">
+<span id="_CPPv317lv_canvas_get_imgP8lv_obj_t"></span><span id="_CPPv217lv_canvas_get_imgP8lv_obj_t"></span><span id="lv_canvas_get_img__lv_obj_tP"></span><span class="target" id="lv__canvas_8h_1ab88808b96446336d7c25436d4e7c8d75"></span><a class="reference internal" href="../overview/image.html#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t">lv_img_dsc_t</a> *<code class="sig-name descname">lv_canvas_get_img</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_canvas_get_imgP8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the image of the canvas as a pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="../overview/image.html#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>pointer to the image descriptor. </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -1711,7 +1713,7 @@ Similarly, if opacity is not supported (e.g. <code class="docutils literal notra
 
 <dl class="cpp function">
 <dt id="_CPPv419lv_canvas_transformP8lv_obj_tP12lv_img_dsc_t7int16_t8uint16_t10lv_coord_t10lv_coord_t7int32_t7int32_tb">
-<span id="_CPPv319lv_canvas_transformP8lv_obj_tP12lv_img_dsc_t7int16_t8uint16_t10lv_coord_t10lv_coord_t7int32_t7int32_tb"></span><span id="_CPPv219lv_canvas_transformP8lv_obj_tP12lv_img_dsc_t7int16_t8uint16_t10lv_coord_t10lv_coord_t7int32_t7int32_tb"></span><span id="lv_canvas_transform__lv_obj_tP.lv_img_dsc_tP.int16_t.uint16_t.lv_coord_t.lv_coord_t.int32_t.int32_t.b"></span><span class="target" id="lv__canvas_8h_1a5dd04a2ac880d07ea124c15da8f0299e"></span>void <code class="sig-name descname">lv_canvas_transform</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, lv_img_dsc_t *<em>img</em>, int16_t <em>angle</em>, uint16_t <em>zoom</em>, lv_coord_t <em>offset_x</em>, lv_coord_t <em>offset_y</em>, int32_t <em>pivot_x</em>, int32_t <em>pivot_y</em>, bool <em>antialias</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_canvas_transformP8lv_obj_tP12lv_img_dsc_t7int16_t8uint16_t10lv_coord_t10lv_coord_t7int32_t7int32_tb" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv319lv_canvas_transformP8lv_obj_tP12lv_img_dsc_t7int16_t8uint16_t10lv_coord_t10lv_coord_t7int32_t7int32_tb"></span><span id="_CPPv219lv_canvas_transformP8lv_obj_tP12lv_img_dsc_t7int16_t8uint16_t10lv_coord_t10lv_coord_t7int32_t7int32_tb"></span><span id="lv_canvas_transform__lv_obj_tP.lv_img_dsc_tP.int16_t.uint16_t.lv_coord_t.lv_coord_t.int32_t.int32_t.b"></span><span class="target" id="lv__canvas_8h_1a5dd04a2ac880d07ea124c15da8f0299e"></span>void <code class="sig-name descname">lv_canvas_transform</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, <a class="reference internal" href="../overview/image.html#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t">lv_img_dsc_t</a> *<em>img</em>, int16_t <em>angle</em>, uint16_t <em>zoom</em>, lv_coord_t <em>offset_x</em>, lv_coord_t <em>offset_y</em>, int32_t <em>pivot_x</em>, int32_t <em>pivot_y</em>, bool <em>antialias</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_canvas_transformP8lv_obj_tP12lv_img_dsc_t7int16_t8uint16_t10lv_coord_t10lv_coord_t7int32_t7int32_tb" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Transform and image and store the result on a canvas. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object to store the result of the transformation. </p></li>
@@ -1808,14 +1810,14 @@ Similarly, if opacity is not supported (e.g. <code class="docutils literal notra
 
 <dl class="cpp function">
 <dt id="_CPPv418lv_canvas_draw_imgP8lv_obj_t10lv_coord_t10lv_coord_tPKvPK17lv_draw_img_dsc_t">
-<span id="_CPPv318lv_canvas_draw_imgP8lv_obj_t10lv_coord_t10lv_coord_tPKvPK17lv_draw_img_dsc_t"></span><span id="_CPPv218lv_canvas_draw_imgP8lv_obj_t10lv_coord_t10lv_coord_tPKvPK17lv_draw_img_dsc_t"></span><span id="lv_canvas_draw_img__lv_obj_tP.lv_coord_t.lv_coord_t.voidCP.lv_draw_img_dsc_tCP"></span><span class="target" id="lv__canvas_8h_1a577e4831a91f8f49a161ba1522cf74e9"></span>void <code class="sig-name descname">lv_canvas_draw_img</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, lv_coord_t <em>x</em>, lv_coord_t <em>y</em>, <em class="property">const</em> void *<em>src</em>, <em class="property">const</em> lv_draw_img_dsc_t *<em>img_draw_dsc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_canvas_draw_imgP8lv_obj_t10lv_coord_t10lv_coord_tPKvPK17lv_draw_img_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv318lv_canvas_draw_imgP8lv_obj_t10lv_coord_t10lv_coord_tPKvPK17lv_draw_img_dsc_t"></span><span id="_CPPv218lv_canvas_draw_imgP8lv_obj_t10lv_coord_t10lv_coord_tPKvPK17lv_draw_img_dsc_t"></span><span id="lv_canvas_draw_img__lv_obj_tP.lv_coord_t.lv_coord_t.voidCP.lv_draw_img_dsc_tCP"></span><span class="target" id="lv__canvas_8h_1a577e4831a91f8f49a161ba1522cf74e9"></span>void <code class="sig-name descname">lv_canvas_draw_img</code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t">lv_obj_t</a> *<em>canvas</em>, lv_coord_t <em>x</em>, lv_coord_t <em>y</em>, <em class="property">const</em> void *<em>src</em>, <em class="property">const</em> <a class="reference internal" href="../overview/image.html#_CPPv417lv_draw_img_dsc_t" title="lv_draw_img_dsc_t">lv_draw_img_dsc_t</a> *<em>img_draw_dsc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_canvas_draw_imgP8lv_obj_t10lv_coord_t10lv_coord_tPKvPK17lv_draw_img_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Draw an image on the canvas <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code>: pointer to a canvas object </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: left coordinate of the image </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: top coordinate of the image </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: image source. Can be a pointer an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> variable or a path an image. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">img_draw_dsc</span></code>: pointer to a valid label descriptor <code class="docutils literal notranslate"><span class="pre">lv_draw_img_dsc_t</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: image source. Can be a pointer an <code class="docutils literal notranslate"><a class="reference internal" href="../overview/image.html#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable or a path an image. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">img_draw_dsc</span></code>: pointer to a valid label descriptor <code class="docutils literal notranslate"><a class="reference internal" href="../overview/image.html#structlv__draw__img__dsc__t"><span class="std std-ref"><span class="pre">lv_draw_img_dsc_t</span></span></a></code> </p></li>
 </ul>
 </dd>
 </dl>
@@ -1883,7 +1885,7 @@ Similarly, if opacity is not supported (e.g. <code class="docutils literal notra
 
 <dl class="cpp var">
 <dt id="_CPPv4N15lv_canvas_ext_t3dscE">
-<span id="_CPPv3N15lv_canvas_ext_t3dscE"></span><span id="_CPPv2N15lv_canvas_ext_t3dscE"></span><span id="lv_canvas_ext_t::dsc__lv_img_dsc_t"></span><span class="target" id="structlv__canvas__ext__t_1a1322c6ead8267bfa24957751ce86c271"></span>lv_img_dsc_t <code class="sig-name descname">dsc</code><a class="headerlink" href="#_CPPv4N15lv_canvas_ext_t3dscE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N15lv_canvas_ext_t3dscE"></span><span id="_CPPv2N15lv_canvas_ext_t3dscE"></span><span id="lv_canvas_ext_t::dsc__lv_img_dsc_t"></span><span class="target" id="structlv__canvas__ext__t_1a1322c6ead8267bfa24957751ce86c271"></span><a class="reference internal" href="../overview/image.html#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t">lv_img_dsc_t</a> <code class="sig-name descname">dsc</code><a class="headerlink" href="#_CPPv4N15lv_canvas_ext_t3dscE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -1908,7 +1910,7 @@ Similarly, if opacity is not supported (e.g. <code class="docutils literal notra
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Feb 12, 2021.
+        Last updated on Feb 15, 2021.
       </span>
 
     </p>
