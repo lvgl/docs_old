@@ -82,7 +82,7 @@
             
             
               <div class="version">
-                v7.10.1-dev
+                v7.11.0-dev
               </div>
             
           
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -1465,7 +1469,7 @@ Real parts can be in different state than the main part.</p>
 <h2>Initialize styles and set/get properties<a class="headerlink" href="#initialize-styles-and-set-get-properties" title="Permalink to this headline">¶</a></h2>
 <p>Styles are stored in <code class="docutils literal notranslate"><span class="pre">lv_style_t</span></code> variables. Style variables should be <code class="docutils literal notranslate"><span class="pre">static</span></code>, global or dynamically allocated. In other words they can not be local variables in functions which are destroyed when the function exists.
 Before using a style it should be initialized with <code class="docutils literal notranslate"><span class="pre">lv_style_init(&amp;my_style)</span></code>.
-After initializing the style properties can be set added to it.
+After initializing the style properties can be set or added to it.
 Property set functions looks like this: <code class="docutils literal notranslate"><span class="pre">lv_style_set_&lt;property_name&gt;(&amp;style,</span> <span class="pre">&lt;state&gt;,</span> <span class="pre">&lt;value&gt;);</span></code>
 For example the <a class="reference external" href="#states">above mentioned</a> example looks like this:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span> <span class="n">lv_style_t</span> <span class="n">style1</span><span class="p">;</span>
@@ -1482,7 +1486,7 @@ For example the <a class="reference external" href="#states">above mentioned</a>
 </div>
 <p>To get the value from style in a given state functions with the following prototype are available: <code class="docutils literal notranslate"><span class="pre">_lv_style_get_color/int/opa/ptr(&amp;style,</span> <span class="pre">&lt;prop&gt;,</span> <span class="pre">&lt;result</span> <span class="pre">buf&gt;);</span></code>.
 The best matching property will be selected and it's precedence will be returned. <code class="docutils literal notranslate"><span class="pre">-1</span></code> will be returned if the property is not found.</p>
-<p>The form of the function (<code class="docutils literal notranslate"><span class="pre">...color/int/opa/ptr</span></code>) should beused according to the type of <code class="docutils literal notranslate"><span class="pre">&lt;prop&gt;</span></code>.</p>
+<p>The form of the function (<code class="docutils literal notranslate"><span class="pre">...color/int/opa/ptr</span></code>) should be used according to the type of <code class="docutils literal notranslate"><span class="pre">&lt;prop&gt;</span></code>.</p>
 <p>For example:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">lv_color_t</span> <span class="n">color</span><span class="p">;</span>
 <span class="kt">int16_t</span> <span class="n">res</span><span class="p">;</span>
@@ -2084,7 +2088,7 @@ Both regions could have different properties.</p>
 
 </pre></div>
 </div>
-<p>It the documentation of the widgets you will see sentences like &quot;The widget use the typical background properties&quot;. The &quot;typical background&quot; properties are:</p>
+<p>In the documentation of the widgets you will see sentences like &quot;The widget use the typical background properties&quot;. The &quot;typical background&quot; properties are:</p>
 <ul class="simple">
 <li><p>Background</p></li>
 <li><p>Border</p></li>
@@ -2125,7 +2129,7 @@ It gives a default appearance to UI which can be modified by adding further styl
 
 <span class="cm">/*Initialize a custom theme*/</span>
 <span class="k">static</span> <span class="n">lv_theme_t</span> <span class="n">custom_theme</span><span class="p">;</span>                         <span class="cm">/*Declare a theme*/</span>
-<span class="n">lv_theme_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">custom_theme</span><span class="p">,</span> <span class="p">)</span><span class="n">base_theme</span><span class="p">;</span>               <span class="cm">/*Initialize the custom theme from the base theme*/</span>                           
+<span class="n">lv_theme_copy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">custom_theme</span><span class="p">,</span> <span class="n">base_theme</span><span class="p">);</span>               <span class="cm">/*Initialize the custom theme from the base theme*/</span>                           
 <span class="n">lv_theme_set_apply_cb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">custom_theme</span><span class="p">,</span> <span class="n">custom_apply_cb</span><span class="p">);</span>  <span class="cm">/*Set a custom theme apply callback*/</span>
 <span class="n">lv_theme_set_base</span><span class="p">(</span><span class="n">custom_theme</span><span class="p">,</span> <span class="n">base_theme</span><span class="p">);</span>            <span class="cm">/*Set the base theme of the csutom theme*/</span>
 
@@ -2244,6 +2248,1757 @@ It gives a default appearance to UI which can be modified by adding further styl
 </div>
 </div>
 </div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="cpp type">
+<dt id="_CPPv416lv_border_side_t">
+<span id="_CPPv316lv_border_side_t"></span><span id="_CPPv216lv_border_side_t"></span><span id="lv_border_side_t"></span><span class="target" id="lv__style_8h_1af66f9a2077b7c085f8d7f0052bb6b412"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">lv_border_side_t</span></code><a class="headerlink" href="#_CPPv416lv_border_side_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv413lv_grad_dir_t">
+<span id="_CPPv313lv_grad_dir_t"></span><span id="_CPPv213lv_grad_dir_t"></span><span id="lv_grad_dir_t"></span><span class="target" id="lv__style_8h_1ae106149b1291811b065fbfd20dfdcfa8"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">lv_grad_dir_t</span></code><a class="headerlink" href="#_CPPv413lv_grad_dir_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv415lv_text_decor_t">
+<span id="_CPPv315lv_text_decor_t"></span><span id="_CPPv215lv_text_decor_t"></span><span id="lv_text_decor_t"></span><span class="target" id="lv__style_8h_1aadfb1a861a2761a304ab5d133e7dcde6"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">lv_text_decor_t</span></code><a class="headerlink" href="#_CPPv415lv_text_decor_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv415lv_style_attr_t">
+<span id="_CPPv315lv_style_attr_t"></span><span id="_CPPv215lv_style_attr_t"></span><span id="lv_style_attr_t"></span><span class="target" id="lv__style_8h_1a7b65dad1fb726c8e92274988d8e96eca"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">lv_style_attr_t</span></code><a class="headerlink" href="#_CPPv415lv_style_attr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv419lv_style_property_t">
+<span id="_CPPv319lv_style_property_t"></span><span id="_CPPv219lv_style_property_t"></span><span id="lv_style_property_t"></span><span class="target" id="lv__style_8h_1a4161de64b8a28cf9feadff499fd1393e"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">uint16_t</span> <code class="sig-name descname"><span class="pre">lv_style_property_t</span></code><a class="headerlink" href="#_CPPv419lv_style_property_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv416lv_style_state_t">
+<span id="_CPPv316lv_style_state_t"></span><span id="_CPPv216lv_style_state_t"></span><span id="lv_style_state_t"></span><span class="target" id="lv__style_8h_1a36d6190a96edf234fc62349387217e92"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">uint16_t</span> <code class="sig-name descname"><span class="pre">lv_style_state_t</span></code><a class="headerlink" href="#_CPPv416lv_style_state_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv414lv_style_int_t">
+<span id="_CPPv314lv_style_int_t"></span><span id="_CPPv214lv_style_int_t"></span><span id="lv_style_int_t"></span><span class="target" id="lv__style_8h_1aca8c8a1b6e59e61071d140079a1fef8a"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">int16_t</span> <code class="sig-name descname"><span class="pre">lv_style_int_t</span></code><a class="headerlink" href="#_CPPv414lv_style_int_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4Ut1_9">
+<span id="_CPPv3Ut1_9"></span><span class="target" id="lv__style_8h_1ab04a0655cd1e3bcac5e8f48c18df1a57"></span><em class="property"><span class="pre">enum</span> </em><strong><span class="pre">[anonymous]</span></strong><a class="headerlink" href="#_CPPv4Ut1_9" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt1_919LV_BORDER_SIDE_NONEE">
+<span id="_CPPv3NUt1_919LV_BORDER_SIDE_NONEE"></span><span class="target" id="lv__style_8h_1ab04a0655cd1e3bcac5e8f48c18df1a57a855fbe2d6a6ca1735e63379de717ab41"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_BORDER_SIDE_NONE</span></code><a class="headerlink" href="#_CPPv4NUt1_919LV_BORDER_SIDE_NONEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt1_921LV_BORDER_SIDE_BOTTOME">
+<span id="_CPPv3NUt1_921LV_BORDER_SIDE_BOTTOME"></span><span class="target" id="lv__style_8h_1ab04a0655cd1e3bcac5e8f48c18df1a57a3022f7b36b00f3903f1e89ea4dcb6ad0"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_BORDER_SIDE_BOTTOM</span></code><a class="headerlink" href="#_CPPv4NUt1_921LV_BORDER_SIDE_BOTTOME" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt1_918LV_BORDER_SIDE_TOPE">
+<span id="_CPPv3NUt1_918LV_BORDER_SIDE_TOPE"></span><span class="target" id="lv__style_8h_1ab04a0655cd1e3bcac5e8f48c18df1a57a1882c079eff65077bbcc2259a5efa139"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_BORDER_SIDE_TOP</span></code><a class="headerlink" href="#_CPPv4NUt1_918LV_BORDER_SIDE_TOPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt1_919LV_BORDER_SIDE_LEFTE">
+<span id="_CPPv3NUt1_919LV_BORDER_SIDE_LEFTE"></span><span class="target" id="lv__style_8h_1ab04a0655cd1e3bcac5e8f48c18df1a57a7e27afb27fd43eb2766f99c5eaf4dab1"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_BORDER_SIDE_LEFT</span></code><a class="headerlink" href="#_CPPv4NUt1_919LV_BORDER_SIDE_LEFTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt1_920LV_BORDER_SIDE_RIGHTE">
+<span id="_CPPv3NUt1_920LV_BORDER_SIDE_RIGHTE"></span><span class="target" id="lv__style_8h_1ab04a0655cd1e3bcac5e8f48c18df1a57a37880a94791d409b256829c13ca4ce4b"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_BORDER_SIDE_RIGHT</span></code><a class="headerlink" href="#_CPPv4NUt1_920LV_BORDER_SIDE_RIGHTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt1_919LV_BORDER_SIDE_FULLE">
+<span id="_CPPv3NUt1_919LV_BORDER_SIDE_FULLE"></span><span class="target" id="lv__style_8h_1ab04a0655cd1e3bcac5e8f48c18df1a57a9cae2792fb8b898c531ed9e83f2ff79f"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_BORDER_SIDE_FULL</span></code><a class="headerlink" href="#_CPPv4NUt1_919LV_BORDER_SIDE_FULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt1_923LV_BORDER_SIDE_INTERNALE">
+<span id="_CPPv3NUt1_923LV_BORDER_SIDE_INTERNALE"></span><span class="target" id="lv__style_8h_1ab04a0655cd1e3bcac5e8f48c18df1a57ae90b8d5d4dd0b95b34b42faa13e813a1"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_BORDER_SIDE_INTERNAL</span></code><a class="headerlink" href="#_CPPv4NUt1_923LV_BORDER_SIDE_INTERNALE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>FOR matrix-like objects (e.g. Button matrix) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt1_920_LV_BORDER_SIDE_LASTE">
+<span id="_CPPv3NUt1_920_LV_BORDER_SIDE_LASTE"></span><span class="target" id="lv__style_8h_1ab04a0655cd1e3bcac5e8f48c18df1a57a1843f0f04c40ceafedbebed7a9ef17d1"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">_LV_BORDER_SIDE_LAST</span></code><a class="headerlink" href="#_CPPv4NUt1_920_LV_BORDER_SIDE_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4Ut2_10">
+<span id="_CPPv3Ut2_10"></span><span class="target" id="lv__style_8h_1a385c44f6fb256e5716a2302a5b940388"></span><em class="property"><span class="pre">enum</span> </em><strong><span class="pre">[anonymous]</span></strong><a class="headerlink" href="#_CPPv4Ut2_10" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_1016LV_GRAD_DIR_NONEE">
+<span id="_CPPv3NUt2_1016LV_GRAD_DIR_NONEE"></span><span class="target" id="lv__style_8h_1a385c44f6fb256e5716a2302a5b940388a60a3da887d76575265882bdf7be3e3ae"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_GRAD_DIR_NONE</span></code><a class="headerlink" href="#_CPPv4NUt2_1016LV_GRAD_DIR_NONEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_1015LV_GRAD_DIR_VERE">
+<span id="_CPPv3NUt2_1015LV_GRAD_DIR_VERE"></span><span class="target" id="lv__style_8h_1a385c44f6fb256e5716a2302a5b940388a213ea9c1af983a3b7d4dbe131e30ec67"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_GRAD_DIR_VER</span></code><a class="headerlink" href="#_CPPv4NUt2_1015LV_GRAD_DIR_VERE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_1015LV_GRAD_DIR_HORE">
+<span id="_CPPv3NUt2_1015LV_GRAD_DIR_HORE"></span><span class="target" id="lv__style_8h_1a385c44f6fb256e5716a2302a5b940388a79ffa390d3d116ed50fd14551298ddc2"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_GRAD_DIR_HOR</span></code><a class="headerlink" href="#_CPPv4NUt2_1015LV_GRAD_DIR_HORE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_1017_LV_GRAD_DIR_LASTE">
+<span id="_CPPv3NUt2_1017_LV_GRAD_DIR_LASTE"></span><span class="target" id="lv__style_8h_1a385c44f6fb256e5716a2302a5b940388ada7ed9dcb80c8e385693f093b8bba1cb"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">_LV_GRAD_DIR_LAST</span></code><a class="headerlink" href="#_CPPv4NUt2_1017_LV_GRAD_DIR_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4Ut2_11">
+<span id="_CPPv3Ut2_11"></span><span class="target" id="lv__style_8h_1abc5c98fcc1211af2b80116dd6e0a035d"></span><em class="property"><span class="pre">enum</span> </em><strong><span class="pre">[anonymous]</span></strong><a class="headerlink" href="#_CPPv4Ut2_11" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_1118LV_TEXT_DECOR_NONEE">
+<span id="_CPPv3NUt2_1118LV_TEXT_DECOR_NONEE"></span><span class="target" id="lv__style_8h_1abc5c98fcc1211af2b80116dd6e0a035da7c180b0226472d683d044c37f36cc648"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_TEXT_DECOR_NONE</span></code><a class="headerlink" href="#_CPPv4NUt2_1118LV_TEXT_DECOR_NONEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_1123LV_TEXT_DECOR_UNDERLINEE">
+<span id="_CPPv3NUt2_1123LV_TEXT_DECOR_UNDERLINEE"></span><span class="target" id="lv__style_8h_1abc5c98fcc1211af2b80116dd6e0a035da8b9bbda381a79b36884d0028c9e29361"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_TEXT_DECOR_UNDERLINE</span></code><a class="headerlink" href="#_CPPv4NUt2_1123LV_TEXT_DECOR_UNDERLINEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_1127LV_TEXT_DECOR_STRIKETHROUGHE">
+<span id="_CPPv3NUt2_1127LV_TEXT_DECOR_STRIKETHROUGHE"></span><span class="target" id="lv__style_8h_1abc5c98fcc1211af2b80116dd6e0a035da1d9716ac9403b2f7e3c4e757d11e3c46"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_TEXT_DECOR_STRIKETHROUGH</span></code><a class="headerlink" href="#_CPPv4NUt2_1127LV_TEXT_DECOR_STRIKETHROUGHE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_1119_LV_TEXT_DECOR_LASTE">
+<span id="_CPPv3NUt2_1119_LV_TEXT_DECOR_LASTE"></span><span class="target" id="lv__style_8h_1abc5c98fcc1211af2b80116dd6e0a035da4556fb574b58f2c20ef0804144acc175"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">_LV_TEXT_DECOR_LAST</span></code><a class="headerlink" href="#_CPPv4NUt2_1119_LV_TEXT_DECOR_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4Ut2_12">
+<span id="_CPPv3Ut2_12"></span><span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8"></span><em class="property"><span class="pre">enum</span> </em><strong><span class="pre">[anonymous]</span></strong><a class="headerlink" href="#_CPPv4Ut2_12" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_1218LV_STYLE_PROP_INITE">
+<span id="_CPPv3NUt2_1218LV_STYLE_PROP_INITE"></span><span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><a class="headerlink" href="#_CPPv4NUt2_1218LV_STYLE_PROP_INITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt>
+<span class="target" id="lv__style_8h_1ac36f475ca5b446f4fde4c9b90bec77c8aea2c5241b45f615048168360ed32290e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_STYLE_PROP_INIT</span></code><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv419LV_EXPORT_CONST_INT16LV_RADIUS_CIRCLE">
+<span id="_CPPv319LV_EXPORT_CONST_INT16LV_RADIUS_CIRCLE"></span><span id="_CPPv219LV_EXPORT_CONST_INT16LV_RADIUS_CIRCLE"></span><span id="LV_EXPORT_CONST_INT__LV_RADIUS_CIRCLE"></span><span class="target" id="lv__style_8h_1ac7d084ab50047987b24b60de9534eb83"></span><code class="sig-name descname"><span class="pre">LV_EXPORT_CONST_INT</span></code><span class="sig-paren">(</span><span class="pre">LV_RADIUS_CIRCLE</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419LV_EXPORT_CONST_INT16LV_RADIUS_CIRCLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv413lv_style_initP10lv_style_t">
+<span id="_CPPv313lv_style_initP10lv_style_t"></span><span id="_CPPv213lv_style_initP10lv_style_t"></span><span id="lv_style_init__lv_style_tP"></span><span class="target" id="lv__style_8h_1a327db2c3050bd2d1a1693aa6981205dd"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_style_init</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lv_style_initP10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize a style <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style to initialize </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv413lv_style_copyP10lv_style_tPK10lv_style_t">
+<span id="_CPPv313lv_style_copyP10lv_style_tPK10lv_style_t"></span><span id="_CPPv213lv_style_copyP10lv_style_tPK10lv_style_t"></span><span id="lv_style_copy__lv_style_tP.lv_style_tCP"></span><span class="target" id="lv__style_8h_1ad389aa5fcb9e978eedd9caa78b37231d"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_style_copy</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style_dest</span></em>, <em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style_src</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lv_style_copyP10lv_style_tPK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Copy a style with all its properties <p>Copy a style to an other </p>
+<dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style_dest</span></code>: pointer to the destination style. (Should be initialized with <code class="docutils literal notranslate"><a class="reference internal" href="#lv__style_8h_1a327db2c3050bd2d1a1693aa6981205dd"><span class="std std-ref"><span class="pre">lv_style_init()</span></span></a></code>) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style_src</span></code>: pointer to the source (to copy )style</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dest</span></code>: pointer to the destination style </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: pointer to the source style </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv418lv_style_list_initP15lv_style_list_t">
+<span id="_CPPv318lv_style_list_initP15lv_style_list_t"></span><span id="_CPPv218lv_style_list_initP15lv_style_list_t"></span><span id="lv_style_list_init__lv_style_list_tP"></span><span class="target" id="lv__style_8h_1a935a21c221680f1dc00ecfcb36efe443"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_style_list_init</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_style_list_initP15lv_style_list_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize a style list <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: a style list to initialize </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv418lv_style_list_copyP15lv_style_list_tPK15lv_style_list_t">
+<span id="_CPPv318lv_style_list_copyP15lv_style_list_tPK15lv_style_list_t"></span><span id="_CPPv218lv_style_list_copyP15lv_style_list_tPK15lv_style_list_t"></span><span id="lv_style_list_copy__lv_style_list_tP.lv_style_list_tCP"></span><span class="target" id="lv__style_8h_1af967edc82e485493ac3e3ab5dd869c93"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_style_list_copy</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list_dest</span></em>, <em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list_src</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_style_list_copyP15lv_style_list_tPK15lv_style_list_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Copy a style list with all its styles and local style properties <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list_dest</span></code>: pointer to the destination style list. (should be initialized with <code class="docutils literal notranslate"><a class="reference internal" href="#lv__style_8h_1a935a21c221680f1dc00ecfcb36efe443"><span class="std std-ref"><span class="pre">lv_style_list_init()</span></span></a></code>) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list_src</span></code>: pointer to the source (to copy) style list. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv424_lv_style_list_add_styleP15lv_style_list_tP10lv_style_t">
+<span id="_CPPv324_lv_style_list_add_styleP15lv_style_list_tP10lv_style_t"></span><span id="_CPPv224_lv_style_list_add_styleP15lv_style_list_tP10lv_style_t"></span><span id="_lv_style_list_add_style__lv_style_list_tP.lv_style_tP"></span><span class="target" id="lv__style_8h_1a715df5515f8b2b2362c2186a42ffa511"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_style_list_add_style</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em>, <a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424_lv_style_list_add_styleP15lv_style_list_tP10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Add a style to a style list. Only the style pointer will be saved so the shouldn't be a local variable. (It should be static, global or dynamically allocated) <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style to add </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv427_lv_style_list_remove_styleP15lv_style_list_tP10lv_style_t">
+<span id="_CPPv327_lv_style_list_remove_styleP15lv_style_list_tP10lv_style_t"></span><span id="_CPPv227_lv_style_list_remove_styleP15lv_style_list_tP10lv_style_t"></span><span id="_lv_style_list_remove_style__lv_style_list_tP.lv_style_tP"></span><span class="target" id="lv__style_8h_1acb53cb2167d254233b1397585ba21e79"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_style_list_remove_style</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em>, <a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427_lv_style_list_remove_styleP15lv_style_list_tP10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove a style from a style list <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style_list</span></code>: pointer to a style list </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style to remove </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv420_lv_style_list_resetP15lv_style_list_t">
+<span id="_CPPv320_lv_style_list_resetP15lv_style_list_t"></span><span id="_CPPv220_lv_style_list_resetP15lv_style_list_t"></span><span id="_lv_style_list_reset__lv_style_list_tP"></span><span class="target" id="lv__style_8h_1a572c6faf8dec98a8e0db4786322a4abf"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_style_list_reset</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">style_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420_lv_style_list_resetP15lv_style_list_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove all styles added from style list, clear the local style, transition style and free all allocated memories. Leave <code class="docutils literal notranslate"><span class="pre">ignore_trans</span></code> flag as it is. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv423lv_style_list_get_styleP15lv_style_list_t7uint8_t">
+<span id="_CPPv323lv_style_list_get_styleP15lv_style_list_t7uint8_t"></span><span id="_CPPv223lv_style_list_get_styleP15lv_style_list_t7uint8_t"></span><span id="lv_style_list_get_style__lv_style_list_tP.uint8_t"></span><span class="target" id="lv__style_8h_1a569990e311c87cbf6d3ea286b555bb79"></span><em class="property"><span class="pre">static</span></em> <em class="property"><span class="pre">inline</span></em> <a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_style_list_get_style</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em>, <span class="pre">uint8_t</span> <em><span class="pre">id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_style_list_get_styleP15lv_style_list_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv414lv_style_resetP10lv_style_t">
+<span id="_CPPv314lv_style_resetP10lv_style_t"></span><span id="_CPPv214lv_style_resetP10lv_style_t"></span><span id="lv_style_reset__lv_style_tP"></span><span class="target" id="lv__style_8h_1afd91dc8011c22491bae7010959267741"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_style_reset</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_style_resetP10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Clear all properties from a style and all allocated memories. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv422_lv_style_get_mem_sizePK10lv_style_t">
+<span id="_CPPv322_lv_style_get_mem_sizePK10lv_style_t"></span><span id="_CPPv222_lv_style_get_mem_sizePK10lv_style_t"></span><span id="_lv_style_get_mem_size__lv_style_tCP"></span><span class="target" id="lv__style_8h_1ade2bc3c09d712cc4a0acd645af4180ee"></span><span class="pre">uint16_t</span> <code class="sig-name descname"><span class="pre">_lv_style_get_mem_size</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422_lv_style_get_mem_sizePK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the size of the properties in a style in bytes <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>size of the properties in bytes </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv420lv_style_remove_propP10lv_style_t19lv_style_property_t">
+<span id="_CPPv320lv_style_remove_propP10lv_style_t19lv_style_property_t"></span><span id="_CPPv220lv_style_remove_propP10lv_style_t19lv_style_property_t"></span><span id="lv_style_remove_prop__lv_style_tP.lv_style_property_t"></span><span class="target" id="lv__style_8h_1af69dfb0c8b494aed0a7d2369e30f0736"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">lv_style_remove_prop</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_style_remove_propP10lv_style_t19lv_style_property_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove a property from a style <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: the property was found and removed; false: the property wasn't found </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_WIDTH</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv417_lv_style_set_intP10lv_style_t19lv_style_property_t14lv_style_int_t">
+<span id="_CPPv317_lv_style_set_intP10lv_style_t19lv_style_property_t14lv_style_int_t"></span><span id="_CPPv217_lv_style_set_intP10lv_style_t19lv_style_property_t14lv_style_int_t"></span><span id="_lv_style_set_int__lv_style_tP.lv_style_property_t.lv_style_int_t"></span><span class="target" id="lv__style_8h_1a16892a0a8d4c2b1c0d9ed0b132cf2c5b"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_style_set_int</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <a class="reference internal" href="#_CPPv414lv_style_int_t" title="lv_style_int_t"><span class="pre">lv_style_int_t</span></a> <em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417_lv_style_set_intP10lv_style_t19lv_style_property_t14lv_style_int_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set an integer typed property in a style. <dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>shouldn't be used directly. Use the specific property set functions instead. For example: <code class="docutils literal notranslate"><span class="pre">lv_style_set_border_width()</span></code> </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has integer type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style where the property should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_WIDTH</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: the value to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv419_lv_style_set_colorP10lv_style_t19lv_style_property_t10lv_color_t">
+<span id="_CPPv319_lv_style_set_colorP10lv_style_t19lv_style_property_t10lv_color_t"></span><span id="_CPPv219_lv_style_set_colorP10lv_style_t19lv_style_property_t10lv_color_t"></span><span id="_lv_style_set_color__lv_style_tP.lv_style_property_t.lv_color_t"></span><span class="target" id="lv__style_8h_1ae61f90519eb2247d74b8faccc26e168a"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_style_set_color</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <span class="pre">lv_color_t</span> <em><span class="pre">color</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419_lv_style_set_colorP10lv_style_t19lv_style_property_t10lv_color_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a color typed property in a style. <dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>shouldn't be used directly. Use the specific property set functions instead. For example: <code class="docutils literal notranslate"><span class="pre">lv_style_set_border_color()</span></code> </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has color type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style where the property should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_COLOR</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: the value to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv417_lv_style_set_opaP10lv_style_t19lv_style_property_t8lv_opa_t">
+<span id="_CPPv317_lv_style_set_opaP10lv_style_t19lv_style_property_t8lv_opa_t"></span><span id="_CPPv217_lv_style_set_opaP10lv_style_t19lv_style_property_t8lv_opa_t"></span><span id="_lv_style_set_opa__lv_style_tP.lv_style_property_t.lv_opa_t"></span><span class="target" id="lv__style_8h_1a56e5c079fc853e57e0273c8750134b40"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_style_set_opa</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <span class="pre">lv_opa_t</span> <em><span class="pre">opa</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417_lv_style_set_opaP10lv_style_t19lv_style_property_t8lv_opa_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set an opacity typed property in a style. <dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>shouldn't be used directly. Use the specific property set functions instead. For example: <code class="docutils literal notranslate"><span class="pre">lv_style_set_border_opa()</span></code> </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has opacity type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style where the property should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_OPA</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: the value to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv417_lv_style_set_ptrP10lv_style_t19lv_style_property_tPKv">
+<span id="_CPPv317_lv_style_set_ptrP10lv_style_t19lv_style_property_tPKv"></span><span id="_CPPv217_lv_style_set_ptrP10lv_style_t19lv_style_property_tPKv"></span><span id="_lv_style_set_ptr__lv_style_tP.lv_style_property_t.voidCP"></span><span class="target" id="lv__style_8h_1ad3da64472f8a06bb67eceb52c13cc6e1"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_style_set_ptr</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417_lv_style_set_ptrP10lv_style_t19lv_style_property_tPKv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a pointer typed property in a style. <dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>shouldn't be used directly. Use the specific property set functions instead. For example: <code class="docutils literal notranslate"><span class="pre">lv_style_set_border_width()</span></code> </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has pointer type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style where the property should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_TEXT_POINTER</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: the value to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv417_lv_style_get_intPK10lv_style_t19lv_style_property_tPv">
+<span id="_CPPv317_lv_style_get_intPK10lv_style_t19lv_style_property_tPv"></span><span id="_CPPv217_lv_style_get_intPK10lv_style_t19lv_style_property_tPv"></span><span id="_lv_style_get_int__lv_style_tCP.lv_style_property_t.voidP"></span><span class="target" id="lv__style_8h_1a2c3e6481d21d5059438e553724cb0c3f"></span><span class="pre">int16_t</span> <code class="sig-name descname"><span class="pre">_lv_style_get_int</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">res</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417_lv_style_get_intPK10lv_style_t19lv_style_property_tPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get an integer typed property from a style. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>-1: the property wasn't found in the style. The matching state bits of the desired state (in <code class="docutils literal notranslate"><span class="pre">prop</span></code>) and the best matching property's state Higher value means match in higher precedence state. </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>shouldn't be used directly. Use the specific property get functions instead. For example: <code class="docutils literal notranslate"><span class="pre">lv_style_get_border_width()</span></code> </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has integer type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style from where the property should be get </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_WIDTH</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">res</span></code>: pointer to a buffer to store the result value </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv419_lv_style_get_colorPK10lv_style_t19lv_style_property_tPv">
+<span id="_CPPv319_lv_style_get_colorPK10lv_style_t19lv_style_property_tPv"></span><span id="_CPPv219_lv_style_get_colorPK10lv_style_t19lv_style_property_tPv"></span><span id="_lv_style_get_color__lv_style_tCP.lv_style_property_t.voidP"></span><span class="target" id="lv__style_8h_1a4b37b95aa21489cb9ecdfd8ee7330085"></span><span class="pre">int16_t</span> <code class="sig-name descname"><span class="pre">_lv_style_get_color</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">res</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419_lv_style_get_colorPK10lv_style_t19lv_style_property_tPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a color typed property from a style. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>-1: the property wasn't found in the style. The matching state bits of the desired state (in <code class="docutils literal notranslate"><span class="pre">prop</span></code>) and the best matching property's state Higher value means match in higher precedence state. </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>shouldn't be used directly. Use the specific property get functions instead. For example: <code class="docutils literal notranslate"><span class="pre">lv_style_get_border_color()</span></code> </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has color type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style from where the property should be get </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_COLOR</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">res</span></code>: pointer to a buffer to store the result value </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv417_lv_style_get_opaPK10lv_style_t19lv_style_property_tPv">
+<span id="_CPPv317_lv_style_get_opaPK10lv_style_t19lv_style_property_tPv"></span><span id="_CPPv217_lv_style_get_opaPK10lv_style_t19lv_style_property_tPv"></span><span id="_lv_style_get_opa__lv_style_tCP.lv_style_property_t.voidP"></span><span class="target" id="lv__style_8h_1a3c10f36c4665b3acc56857586af4bf65"></span><span class="pre">int16_t</span> <code class="sig-name descname"><span class="pre">_lv_style_get_opa</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">res</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417_lv_style_get_opaPK10lv_style_t19lv_style_property_tPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get an opacity typed property from a style. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>-1: the property wasn't found in the style. The matching state bits of the desired state (in <code class="docutils literal notranslate"><span class="pre">prop</span></code>) and the best matching property's state Higher value means match in higher precedence state. </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>shouldn't be used directly. Use the specific property get functions instead. For example: <code class="docutils literal notranslate"><span class="pre">lv_style_get_border_opa()</span></code> </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has opacity type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style from where the property should be get </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_OPA</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">res</span></code>: pointer to a buffer to store the result value </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv417_lv_style_get_ptrPK10lv_style_t19lv_style_property_tPv">
+<span id="_CPPv317_lv_style_get_ptrPK10lv_style_t19lv_style_property_tPv"></span><span id="_CPPv217_lv_style_get_ptrPK10lv_style_t19lv_style_property_tPv"></span><span id="_lv_style_get_ptr__lv_style_tCP.lv_style_property_t.voidP"></span><span class="target" id="lv__style_8h_1a9e3de360b39b6c02392ffa9079170842"></span><span class="pre">int16_t</span> <code class="sig-name descname"><span class="pre">_lv_style_get_ptr</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">res</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417_lv_style_get_ptrPK10lv_style_t19lv_style_property_tPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a pointer typed property from a style. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>-1: the property wasn't found in the style. The matching state bits of the desired state (in <code class="docutils literal notranslate"><span class="pre">prop</span></code>) and the best matching property's state Higher value means match in higher precedence state. </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>shouldn't be used directly. Use the specific property get functions instead. For example: <code class="docutils literal notranslate"><span class="pre">lv_style_get_text_font()</span></code> </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has pointer type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style from where the property should be get </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_TEXT_FONT</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">res</span></code>: pointer to a buffer to store the result value </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv429lv_style_list_get_local_styleP15lv_style_list_t">
+<span id="_CPPv329lv_style_list_get_local_styleP15lv_style_list_t"></span><span id="_CPPv229lv_style_list_get_local_styleP15lv_style_list_t"></span><span id="lv_style_list_get_local_style__lv_style_list_tP"></span><span class="target" id="lv__style_8h_1a0ddf16ba20a2ead6e158dc7b4c6c169f"></span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_style_list_get_local_style</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429lv_style_list_get_local_styleP15lv_style_list_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the local style of a style list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the local style if exists else <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list where the local property should be set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv435_lv_style_list_get_transition_styleP15lv_style_list_t">
+<span id="_CPPv335_lv_style_list_get_transition_styleP15lv_style_list_t"></span><span id="_CPPv235_lv_style_list_get_transition_styleP15lv_style_list_t"></span><span id="_lv_style_list_get_transition_style__lv_style_list_tP"></span><span class="target" id="lv__style_8h_1a9314664b0ebd75518f47a635b5f2242f"></span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">_lv_style_list_get_transition_style</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv435_lv_style_list_get_transition_styleP15lv_style_list_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the transition style of a style list <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the transition style if exists else <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list where the local property should be set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv430_lv_style_list_add_trans_styleP15lv_style_list_t">
+<span id="_CPPv330_lv_style_list_add_trans_styleP15lv_style_list_t"></span><span id="_CPPv230_lv_style_list_add_trans_styleP15lv_style_list_t"></span><span id="_lv_style_list_add_trans_style__lv_style_list_tP"></span><span class="target" id="lv__style_8h_1a053d3843a21f4f1c2e84ef460926c430"></span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">_lv_style_list_add_trans_style</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430_lv_style_list_add_trans_styleP15lv_style_list_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Allocate the transition style in a style list. If already exists simply return it. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the transition style of a style list </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv428_lv_style_list_set_local_intP15lv_style_list_t19lv_style_property_t14lv_style_int_t">
+<span id="_CPPv328_lv_style_list_set_local_intP15lv_style_list_t19lv_style_property_t14lv_style_int_t"></span><span id="_CPPv228_lv_style_list_set_local_intP15lv_style_list_t19lv_style_property_t14lv_style_int_t"></span><span id="_lv_style_list_set_local_int__lv_style_list_tP.lv_style_property_t.lv_style_int_t"></span><span class="target" id="lv__style_8h_1a05883a34fedd728675454484cd5612e8"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_style_list_set_local_int</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <a class="reference internal" href="#_CPPv414lv_style_int_t" title="lv_style_int_t"><span class="pre">lv_style_int_t</span></a> <em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428_lv_style_list_set_local_intP15lv_style_list_t19lv_style_property_t14lv_style_int_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a local integer typed property in a style list. <dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has integer type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list where the local property should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_WIDTH</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: the value to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv430_lv_style_list_set_local_colorP15lv_style_list_t19lv_style_property_t10lv_color_t">
+<span id="_CPPv330_lv_style_list_set_local_colorP15lv_style_list_t19lv_style_property_t10lv_color_t"></span><span id="_CPPv230_lv_style_list_set_local_colorP15lv_style_list_t19lv_style_property_t10lv_color_t"></span><span id="_lv_style_list_set_local_color__lv_style_list_tP.lv_style_property_t.lv_color_t"></span><span class="target" id="lv__style_8h_1a7624c3f4405a0c7f72c9ba2d70e8881a"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_style_list_set_local_color</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <span class="pre">lv_color_t</span> <em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430_lv_style_list_set_local_colorP15lv_style_list_t19lv_style_property_t10lv_color_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a local color typed property in a style list. <dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has color type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list where the local property should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_COLOR</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: the value to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv428_lv_style_list_set_local_opaP15lv_style_list_t19lv_style_property_t8lv_opa_t">
+<span id="_CPPv328_lv_style_list_set_local_opaP15lv_style_list_t19lv_style_property_t8lv_opa_t"></span><span id="_CPPv228_lv_style_list_set_local_opaP15lv_style_list_t19lv_style_property_t8lv_opa_t"></span><span id="_lv_style_list_set_local_opa__lv_style_list_tP.lv_style_property_t.lv_opa_t"></span><span class="target" id="lv__style_8h_1a3dd716f22a19eac6beb6a5ddf242dbc1"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_style_list_set_local_opa</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <span class="pre">lv_opa_t</span> <em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428_lv_style_list_set_local_opaP15lv_style_list_t19lv_style_property_t8lv_opa_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a local opacity typed property in a style list. <dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has opacity type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list where the local property should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_OPA</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: the value to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv428_lv_style_list_set_local_ptrP15lv_style_list_t19lv_style_property_tPKv">
+<span id="_CPPv328_lv_style_list_set_local_ptrP15lv_style_list_t19lv_style_property_tPKv"></span><span id="_CPPv228_lv_style_list_set_local_ptrP15lv_style_list_t19lv_style_property_tPKv"></span><span id="_lv_style_list_set_local_ptr__lv_style_list_tP.lv_style_property_t.voidCP"></span><span class="target" id="lv__style_8h_1a00d8ee3e0dc228276ac57fefdc6b80ad"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_style_list_set_local_ptr</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428_lv_style_list_set_local_ptrP15lv_style_list_t19lv_style_property_tPKv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a local pointer typed property in a style list. <dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has pointer type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list where the local property should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_TEXT_FONT</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: the value to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv422_lv_style_list_get_intP15lv_style_list_t19lv_style_property_tP14lv_style_int_t">
+<span id="_CPPv322_lv_style_list_get_intP15lv_style_list_t19lv_style_property_tP14lv_style_int_t"></span><span id="_CPPv222_lv_style_list_get_intP15lv_style_list_t19lv_style_property_tP14lv_style_int_t"></span><span id="_lv_style_list_get_int__lv_style_list_tP.lv_style_property_t.lv_style_int_tP"></span><span class="target" id="lv__style_8h_1a875baa4da7ab7158ec58afe7c67d0104"></span><span class="pre">lv_res_t</span> <code class="sig-name descname"><span class="pre">_lv_style_list_get_int</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <a class="reference internal" href="#_CPPv414lv_style_int_t" title="lv_style_int_t"><span class="pre">lv_style_int_t</span></a> <span class="pre">*</span><em><span class="pre">res</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422_lv_style_list_get_intP15lv_style_list_t19lv_style_property_tP14lv_style_int_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get an integer typed property from a style list. It will return the property which match best with given state. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>LV_RES_OK: there was a matching property in the list LV_RES_INV: there was NO matching property in the list </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has integer type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list from where the property should be get </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_WIDTH</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">res</span></code>: pointer to a buffer to store the result </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv424_lv_style_list_get_colorP15lv_style_list_t19lv_style_property_tP10lv_color_t">
+<span id="_CPPv324_lv_style_list_get_colorP15lv_style_list_t19lv_style_property_tP10lv_color_t"></span><span id="_CPPv224_lv_style_list_get_colorP15lv_style_list_t19lv_style_property_tP10lv_color_t"></span><span id="_lv_style_list_get_color__lv_style_list_tP.lv_style_property_t.lv_color_tP"></span><span class="target" id="lv__style_8h_1aa9d1709986b4af748d65f46810b3ae7a"></span><span class="pre">lv_res_t</span> <code class="sig-name descname"><span class="pre">_lv_style_list_get_color</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <span class="pre">lv_color_t</span> <span class="pre">*</span><em><span class="pre">res</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424_lv_style_list_get_colorP15lv_style_list_t19lv_style_property_tP10lv_color_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a color typed property from a style list. It will return the property which match best with given state. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>LV_RES_OK: there was a matching property in the list LV_RES_INV: there was NO matching property in the list </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has color type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list from where the property should be get </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_COLOR</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">res</span></code>: pointer to a buffer to store the result </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv422_lv_style_list_get_opaP15lv_style_list_t19lv_style_property_tP8lv_opa_t">
+<span id="_CPPv322_lv_style_list_get_opaP15lv_style_list_t19lv_style_property_tP8lv_opa_t"></span><span id="_CPPv222_lv_style_list_get_opaP15lv_style_list_t19lv_style_property_tP8lv_opa_t"></span><span id="_lv_style_list_get_opa__lv_style_list_tP.lv_style_property_t.lv_opa_tP"></span><span class="target" id="lv__style_8h_1a6f527dd1e7cf0751466cffb5490a508b"></span><span class="pre">lv_res_t</span> <code class="sig-name descname"><span class="pre">_lv_style_list_get_opa</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <span class="pre">lv_opa_t</span> <span class="pre">*</span><em><span class="pre">res</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422_lv_style_list_get_opaP15lv_style_list_t19lv_style_property_tP8lv_opa_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get an opacity typed property from a style list. It will return the property which match best with given state. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>LV_RES_OK: there was a matching property in the list LV_RES_INV: there was NO matching property in the list </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has opacity type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list from where the property should be get </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_BORDER_OPA</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">res</span></code>: pointer to a buffer to store the result </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv422_lv_style_list_get_ptrP15lv_style_list_t19lv_style_property_tPPKv">
+<span id="_CPPv322_lv_style_list_get_ptrP15lv_style_list_t19lv_style_property_tPPKv"></span><span id="_CPPv222_lv_style_list_get_ptrP15lv_style_list_t19lv_style_property_tPPKv"></span><span id="_lv_style_list_get_ptr__lv_style_list_tP.lv_style_property_t.voidCPP"></span><span class="target" id="lv__style_8h_1a1a106a69b7ab0f362c10924637784485"></span><span class="pre">lv_res_t</span> <code class="sig-name descname"><span class="pre">_lv_style_list_get_ptr</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em>, <a class="reference internal" href="#_CPPv419lv_style_property_t" title="lv_style_property_t"><span class="pre">lv_style_property_t</span></a> <em><span class="pre">prop</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><span class="pre">*</span><em><span class="pre">res</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422_lv_style_list_get_ptrP15lv_style_list_t19lv_style_property_tPPKv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get a pointer typed property from a style list. It will return the property which match best with given state. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>LV_RES_OK: there was a matching property in the list LV_RES_INV: there was NO matching property in the list </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>for performance reasons it's not checked if the property really has pointer type </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>: pointer to a style list from where the property should be get </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prop</span></code>: a style property ORed with a state. E.g. <code class="docutils literal notranslate"><span class="pre">LV_STYLE_TEXT_FONT</span> <span class="pre">|</span> <span class="pre">(LV_STATE_PRESSED</span> <span class="pre">&lt;&lt;</span> <span class="pre">LV_STYLE_STATE_POS)</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">res</span></code>: pointer to a buffer to store the result </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv420lv_debug_check_stylePK10lv_style_t">
+<span id="_CPPv320lv_debug_check_stylePK10lv_style_t"></span><span id="_CPPv220lv_debug_check_stylePK10lv_style_t"></span><span id="lv_debug_check_style__lv_style_tCP"></span><span class="target" id="lv__style_8h_1a6926e5f0346c67be8dc49417b566e200"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">lv_debug_check_style</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><em><span class="pre">style</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_debug_check_stylePK10lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check whether a style is valid (initialized correctly) <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: valid </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv425lv_debug_check_style_listPK15lv_style_list_t">
+<span id="_CPPv325lv_debug_check_style_listPK15lv_style_list_t"></span><span id="_CPPv225lv_debug_check_style_listPK15lv_style_list_t"></span><span id="lv_debug_check_style_list__lv_style_list_tCP"></span><span class="target" id="lv__style_8h_1a7e51c584b77ba5e654cd64652a3d7c6a"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">lv_debug_check_style_list</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><em><span class="pre">list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lv_debug_check_style_listPK15lv_style_list_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check whether a style list is valid (initialized correctly) <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: valid </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: pointer to a style </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt id="_CPPv410lv_style_t">
+<span id="_CPPv310lv_style_t"></span><span id="_CPPv210lv_style_t"></span><span id="lv_style_t"></span><span class="target" id="structlv__style__t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">lv_style_t</span></code><a class="headerlink" href="#_CPPv410lv_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N10lv_style_t3mapE">
+<span id="_CPPv3N10lv_style_t3mapE"></span><span id="_CPPv2N10lv_style_t3mapE"></span><span id="lv_style_t::map__uint8_tP"></span><span class="target" id="structlv__style__t_1a48076f8f7ef0a513662318a651e06ea6"></span><span class="pre">uint8_t</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">map</span></code><a class="headerlink" href="#_CPPv4N10lv_style_t3mapE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N10lv_style_t8sentinelE">
+<span id="_CPPv3N10lv_style_t8sentinelE"></span><span id="_CPPv2N10lv_style_t8sentinelE"></span><span id="lv_style_t::sentinel__uint32_t"></span><span class="target" id="structlv__style__t_1a224f5df27e61983c7529532c829e5a47"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">sentinel</span></code><a class="headerlink" href="#_CPPv4N10lv_style_t8sentinelE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv415lv_style_list_t">
+<span id="_CPPv315lv_style_list_t"></span><span id="_CPPv215lv_style_list_t"></span><span id="lv_style_list_t"></span><span class="target" id="structlv__style__list__t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">lv_style_list_t</span></code><a class="headerlink" href="#_CPPv415lv_style_list_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t10style_listE">
+<span id="_CPPv3N15lv_style_list_t10style_listE"></span><span id="_CPPv2N15lv_style_list_t10style_listE"></span><span id="lv_style_list_t::style_list__lv_style_tPP"></span><span class="target" id="structlv__style__list__t_1ae1b13b525bb2fe151a9f7c58e8e9d4f6"></span><a class="reference internal" href="#_CPPv410lv_style_t" title="lv_style_t"><span class="pre">lv_style_t</span></a> <span class="pre">*</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">style_list</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t10style_listE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t8sentinelE">
+<span id="_CPPv3N15lv_style_list_t8sentinelE"></span><span id="_CPPv2N15lv_style_list_t8sentinelE"></span><span id="lv_style_list_t::sentinel__uint32_t"></span><span class="target" id="structlv__style__list__t_1a0d21c1b7daddd4110e3f012956c38b1d"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">sentinel</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t8sentinelE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t9style_cntE">
+<span id="_CPPv3N15lv_style_list_t9style_cntE"></span><span id="_CPPv2N15lv_style_list_t9style_cntE"></span><span id="lv_style_list_t::style_cnt__uint32_t"></span><span class="target" id="structlv__style__list__t_1aaa8ca0365d065e8406326ecbd6f7525b"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">style_cnt</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t9style_cntE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t9has_localE">
+<span id="_CPPv3N15lv_style_list_t9has_localE"></span><span id="_CPPv2N15lv_style_list_t9has_localE"></span><span id="lv_style_list_t::has_local__uint32_t"></span><span class="target" id="structlv__style__list__t_1a0cc3fba36fec4ad4b23d2ce3815763cc"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">has_local</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t9has_localE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t9has_transE">
+<span id="_CPPv3N15lv_style_list_t9has_transE"></span><span id="_CPPv2N15lv_style_list_t9has_transE"></span><span id="lv_style_list_t::has_trans__uint32_t"></span><span class="target" id="structlv__style__list__t_1a845cec79aacaa49e5a90fdd09dcef123"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">has_trans</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t9has_transE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t10skip_transE">
+<span id="_CPPv3N15lv_style_list_t10skip_transE"></span><span id="_CPPv2N15lv_style_list_t10skip_transE"></span><span id="lv_style_list_t::skip_trans__uint32_t"></span><span class="target" id="structlv__style__list__t_1a3c9fb5ac257053c44c097072e4e7dd87"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">skip_trans</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t10skip_transE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t12ignore_transE">
+<span id="_CPPv3N15lv_style_list_t12ignore_transE"></span><span id="_CPPv2N15lv_style_list_t12ignore_transE"></span><span id="lv_style_list_t::ignore_trans__uint32_t"></span><span class="target" id="structlv__style__list__t_1ad56511dcb3bc78a2cbf0a53c51e7380f"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">ignore_trans</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t12ignore_transE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t11valid_cacheE">
+<span id="_CPPv3N15lv_style_list_t11valid_cacheE"></span><span id="_CPPv2N15lv_style_list_t11valid_cacheE"></span><span id="lv_style_list_t::valid_cache__uint32_t"></span><span class="target" id="structlv__style__list__t_1a06156d154895f0bd0ef176194e213e35"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">valid_cache</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t11valid_cacheE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t12ignore_cacheE">
+<span id="_CPPv3N15lv_style_list_t12ignore_cacheE"></span><span id="_CPPv2N15lv_style_list_t12ignore_cacheE"></span><span id="lv_style_list_t::ignore_cache__uint32_t"></span><span class="target" id="structlv__style__list__t_1a52f38b2e75504699130f2e6a4782e49e"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">ignore_cache</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t12ignore_cacheE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t11radius_zeroE">
+<span id="_CPPv3N15lv_style_list_t11radius_zeroE"></span><span id="_CPPv2N15lv_style_list_t11radius_zeroE"></span><span id="lv_style_list_t::radius_zero__uint32_t"></span><span class="target" id="structlv__style__list__t_1a72d57885bca740807ead728c641d837e"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">radius_zero</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t11radius_zeroE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t15opa_scale_coverE">
+<span id="_CPPv3N15lv_style_list_t15opa_scale_coverE"></span><span id="_CPPv2N15lv_style_list_t15opa_scale_coverE"></span><span id="lv_style_list_t::opa_scale_cover__uint32_t"></span><span class="target" id="structlv__style__list__t_1a145a747e69b4ba498fece20f81b2eb09"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">opa_scale_cover</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t15opa_scale_coverE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t15clip_corner_offE">
+<span id="_CPPv3N15lv_style_list_t15clip_corner_offE"></span><span id="_CPPv2N15lv_style_list_t15clip_corner_offE"></span><span id="lv_style_list_t::clip_corner_off__uint32_t"></span><span class="target" id="structlv__style__list__t_1a0cfc2275216d1907d92a5a4911e1a851"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">clip_corner_off</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t15clip_corner_offE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t18transform_all_zeroE">
+<span id="_CPPv3N15lv_style_list_t18transform_all_zeroE"></span><span id="_CPPv2N15lv_style_list_t18transform_all_zeroE"></span><span id="lv_style_list_t::transform_all_zero__uint32_t"></span><span class="target" id="structlv__style__list__t_1a11169e6832e7372247d7533b6583eab9"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">transform_all_zero</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t18transform_all_zeroE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t12pad_all_zeroE">
+<span id="_CPPv3N15lv_style_list_t12pad_all_zeroE"></span><span id="_CPPv2N15lv_style_list_t12pad_all_zeroE"></span><span id="lv_style_list_t::pad_all_zero__uint32_t"></span><span class="target" id="structlv__style__list__t_1a162fd0cda00143bacfdda9c6569e485b"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">pad_all_zero</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t12pad_all_zeroE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t15margin_all_zeroE">
+<span id="_CPPv3N15lv_style_list_t15margin_all_zeroE"></span><span id="_CPPv2N15lv_style_list_t15margin_all_zeroE"></span><span id="lv_style_list_t::margin_all_zero__uint32_t"></span><span class="target" id="structlv__style__list__t_1a5fad8e198a684e12dae5fedeadcc9c28"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">margin_all_zero</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t15margin_all_zeroE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t21blend_mode_all_normalE">
+<span id="_CPPv3N15lv_style_list_t21blend_mode_all_normalE"></span><span id="_CPPv2N15lv_style_list_t21blend_mode_all_normalE"></span><span id="lv_style_list_t::blend_mode_all_normal__uint32_t"></span><span class="target" id="structlv__style__list__t_1a98d8d5eb8e378cb7dbd9aaf51efce40a"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">blend_mode_all_normal</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t21blend_mode_all_normalE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t13bg_opa_transpE">
+<span id="_CPPv3N15lv_style_list_t13bg_opa_transpE"></span><span id="_CPPv2N15lv_style_list_t13bg_opa_transpE"></span><span id="lv_style_list_t::bg_opa_transp__uint32_t"></span><span class="target" id="structlv__style__list__t_1a5c910fb556151abff2c66ba460ae34d3"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">bg_opa_transp</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t13bg_opa_transpE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t12bg_opa_coverE">
+<span id="_CPPv3N15lv_style_list_t12bg_opa_coverE"></span><span id="_CPPv2N15lv_style_list_t12bg_opa_coverE"></span><span id="lv_style_list_t::bg_opa_cover__uint32_t"></span><span class="target" id="structlv__style__list__t_1aa3fc458c70f43f5fadad05f10caf9b15"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">bg_opa_cover</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t12bg_opa_coverE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t17border_width_zeroE">
+<span id="_CPPv3N15lv_style_list_t17border_width_zeroE"></span><span id="_CPPv2N15lv_style_list_t17border_width_zeroE"></span><span id="lv_style_list_t::border_width_zero__uint32_t"></span><span class="target" id="structlv__style__list__t_1a1160475ffe1b7db825d448bb82f6b101"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">border_width_zero</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t17border_width_zeroE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t16border_side_fullE">
+<span id="_CPPv3N15lv_style_list_t16border_side_fullE"></span><span id="_CPPv2N15lv_style_list_t16border_side_fullE"></span><span id="lv_style_list_t::border_side_full__uint32_t"></span><span class="target" id="structlv__style__list__t_1a53ae7881c63ad7b9ed2cb3d2e715563f"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">border_side_full</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t16border_side_fullE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t15border_post_offE">
+<span id="_CPPv3N15lv_style_list_t15border_post_offE"></span><span id="_CPPv2N15lv_style_list_t15border_post_offE"></span><span id="lv_style_list_t::border_post_off__uint32_t"></span><span class="target" id="structlv__style__list__t_1a62f10f60c3ad0ca85de0c065a48d3f18"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">border_post_off</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t15border_post_offE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t18outline_width_zeroE">
+<span id="_CPPv3N15lv_style_list_t18outline_width_zeroE"></span><span id="_CPPv2N15lv_style_list_t18outline_width_zeroE"></span><span id="lv_style_list_t::outline_width_zero__uint32_t"></span><span class="target" id="structlv__style__list__t_1a3ff32554006decc29a7fed28d98f5bc6"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">outline_width_zero</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t18outline_width_zeroE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t16pattern_img_nullE">
+<span id="_CPPv3N15lv_style_list_t16pattern_img_nullE"></span><span id="_CPPv2N15lv_style_list_t16pattern_img_nullE"></span><span id="lv_style_list_t::pattern_img_null__uint32_t"></span><span class="target" id="structlv__style__list__t_1aa7c0fe8acfaa9efaadd22bbe2dffa9f1"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">pattern_img_null</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t16pattern_img_nullE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t17shadow_width_zeroE">
+<span id="_CPPv3N15lv_style_list_t17shadow_width_zeroE"></span><span id="_CPPv2N15lv_style_list_t17shadow_width_zeroE"></span><span id="lv_style_list_t::shadow_width_zero__uint32_t"></span><span class="target" id="structlv__style__list__t_1a3f3cd0376697ef362cb266001f27307f"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">shadow_width_zero</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t17shadow_width_zeroE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t13value_txt_strE">
+<span id="_CPPv3N15lv_style_list_t13value_txt_strE"></span><span id="_CPPv2N15lv_style_list_t13value_txt_strE"></span><span id="lv_style_list_t::value_txt_str__uint32_t"></span><span class="target" id="structlv__style__list__t_1ae5b5dafba4ead15e7790d8fd8ef4b495"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">value_txt_str</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t13value_txt_strE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t22img_recolor_opa_transpE">
+<span id="_CPPv3N15lv_style_list_t22img_recolor_opa_transpE"></span><span id="_CPPv2N15lv_style_list_t22img_recolor_opa_transpE"></span><span id="lv_style_list_t::img_recolor_opa_transp__uint32_t"></span><span class="target" id="structlv__style__list__t_1a3355a0ec7080732b0cceeeba0ef0b43d"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">img_recolor_opa_transp</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t22img_recolor_opa_transpE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t15text_space_zeroE">
+<span id="_CPPv3N15lv_style_list_t15text_space_zeroE"></span><span id="_CPPv2N15lv_style_list_t15text_space_zeroE"></span><span id="lv_style_list_t::text_space_zero__uint32_t"></span><span class="target" id="structlv__style__list__t_1a2b617c70c65873f2f278445c2d62013a"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">text_space_zero</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t15text_space_zeroE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t15text_decor_noneE">
+<span id="_CPPv3N15lv_style_list_t15text_decor_noneE"></span><span id="_CPPv2N15lv_style_list_t15text_decor_noneE"></span><span id="lv_style_list_t::text_decor_none__uint32_t"></span><span class="target" id="structlv__style__list__t_1a34f7732a48fd706f91689996ce4fddb0"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">text_decor_none</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t15text_decor_noneE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_style_list_t16text_font_normalE">
+<span id="_CPPv3N15lv_style_list_t16text_font_normalE"></span><span id="_CPPv2N15lv_style_list_t16text_font_normalE"></span><span id="lv_style_list_t::text_font_normal__uint32_t"></span><span class="target" id="structlv__style__list__t_1a3c168b1fc950039042d6d93235040aea"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">text_font_normal</span></code><a class="headerlink" href="#_CPPv4N15lv_style_list_t16text_font_normalE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="cpp type">
+<dt id="_CPPv419lv_theme_apply_cb_t">
+<span id="_CPPv319lv_theme_apply_cb_t"></span><span id="_CPPv219lv_theme_apply_cb_t"></span><span id="lv_theme_apply_cb_t"></span><span class="target" id="lv__theme_8h_1a4cc47d4f42898c222908bcba34815278"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_theme_apply_cb_t</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_lv_theme_t" title="_lv_theme_t"><span class="pre">_lv_theme_t</span></a><span class="pre">*</span>, <a class="reference internal" href="../widgets/obj.html#_CPPv48lv_obj_t" title="lv_obj_t"><span class="pre">lv_obj_t</span></a><span class="pre">*</span>, <a class="reference internal" href="#_CPPv416lv_theme_style_t" title="lv_theme_style_t"><span class="pre">lv_theme_style_t</span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_theme_apply_cb_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv420lv_theme_apply_xcb_t">
+<span id="_CPPv320lv_theme_apply_xcb_t"></span><span id="_CPPv220lv_theme_apply_xcb_t"></span><span id="lv_theme_apply_xcb_t"></span><span class="target" id="lv__theme_8h_1a5af80be7ef40141f75dad33b81931459"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_theme_apply_xcb_t</span></code><span class="pre">)</span><span class="sig-paren">(</span><a class="reference internal" href="../widgets/obj.html#_CPPv48lv_obj_t" title="lv_obj_t"><span class="pre">lv_obj_t</span></a><span class="pre">*</span>, <a class="reference internal" href="#_CPPv416lv_theme_style_t" title="lv_theme_style_t"><span class="pre">lv_theme_style_t</span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_theme_apply_xcb_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv410lv_theme_t">
+<span id="_CPPv310lv_theme_t"></span><span id="_CPPv210lv_theme_t"></span><span id="lv_theme_t"></span><span class="target" id="lv__theme_8h_1acf6926fbe1adf67172356fd6b344f093"></span><em class="property"><span class="pre">typedef</span> </em><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_lv_theme_t" title="_lv_theme_t"><span class="pre">_lv_theme_t</span></a> <code class="sig-name descname"><span class="pre">lv_theme_t</span></code><a class="headerlink" href="#_CPPv410lv_theme_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv416lv_theme_style_t">
+<span id="_CPPv316lv_theme_style_t"></span><span id="_CPPv216lv_theme_style_t"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238"></span><em class="property"><span class="pre">enum</span> </em><code class="sig-name descname"><span class="pre">lv_theme_style_t</span></code><a class="headerlink" href="#_CPPv416lv_theme_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A theme in LVGL consists of many styles bound together.</p>
+<p>There is a style for each object type, as well as a generic style for backgrounds and panels. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t13LV_THEME_NONEE">
+<span id="_CPPv3N16lv_theme_style_t13LV_THEME_NONEE"></span><span id="_CPPv2N16lv_theme_style_t13LV_THEME_NONEE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238aa760f65ff5b02eed3ae6ebfddacb400c"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_NONE</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t13LV_THEME_NONEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t12LV_THEME_SCRE">
+<span id="_CPPv3N16lv_theme_style_t12LV_THEME_SCRE"></span><span id="_CPPv2N16lv_theme_style_t12LV_THEME_SCRE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a41bdc25abd0d9879e5e509c7aff87917"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_SCR</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t12LV_THEME_SCRE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t12LV_THEME_OBJE">
+<span id="_CPPv3N16lv_theme_style_t12LV_THEME_OBJE"></span><span id="_CPPv2N16lv_theme_style_t12LV_THEME_OBJE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a14751f373c5382aca82fd619dbc7479c"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_OBJ</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t12LV_THEME_OBJE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t12LV_THEME_ARCE">
+<span id="_CPPv3N16lv_theme_style_t12LV_THEME_ARCE"></span><span id="_CPPv2N16lv_theme_style_t12LV_THEME_ARCE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238ab506e0b8b7fae39e56563def18a82d75"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_ARC</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t12LV_THEME_ARCE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t12LV_THEME_BARE">
+<span id="_CPPv3N16lv_theme_style_t12LV_THEME_BARE"></span><span id="_CPPv2N16lv_theme_style_t12LV_THEME_BARE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a54bcdadb780468cf523151ee0af2c06e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_BAR</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t12LV_THEME_BARE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t12LV_THEME_BTNE">
+<span id="_CPPv3N16lv_theme_style_t12LV_THEME_BTNE"></span><span id="_CPPv2N16lv_theme_style_t12LV_THEME_BTNE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238ac4a3d6ba2113fa3c9d97874744c059ea"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_BTN</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t12LV_THEME_BTNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t18LV_THEME_BTNMATRIXE">
+<span id="_CPPv3N16lv_theme_style_t18LV_THEME_BTNMATRIXE"></span><span id="_CPPv2N16lv_theme_style_t18LV_THEME_BTNMATRIXE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a9d9b2adba0147fb2bb0c5b10bbe01cd2"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_BTNMATRIX</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t18LV_THEME_BTNMATRIXE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t17LV_THEME_CALENDARE">
+<span id="_CPPv3N16lv_theme_style_t17LV_THEME_CALENDARE"></span><span id="_CPPv2N16lv_theme_style_t17LV_THEME_CALENDARE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a7de6d65f09a2d8cc0d9664671f6c42c2"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_CALENDAR</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t17LV_THEME_CALENDARE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t15LV_THEME_CANVASE">
+<span id="_CPPv3N16lv_theme_style_t15LV_THEME_CANVASE"></span><span id="_CPPv2N16lv_theme_style_t15LV_THEME_CANVASE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238abeb81d73dd14703069efe2d16d686b99"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_CANVAS</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t15LV_THEME_CANVASE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t17LV_THEME_CHECKBOXE">
+<span id="_CPPv3N16lv_theme_style_t17LV_THEME_CHECKBOXE"></span><span id="_CPPv2N16lv_theme_style_t17LV_THEME_CHECKBOXE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a8b74ade061e6a1e43b60d201b3951a33"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_CHECKBOX</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t17LV_THEME_CHECKBOXE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t14LV_THEME_CHARTE">
+<span id="_CPPv3N16lv_theme_style_t14LV_THEME_CHARTE"></span><span id="_CPPv2N16lv_theme_style_t14LV_THEME_CHARTE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a19f11cde266b76ee5372c40698407e55"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_CHART</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t14LV_THEME_CHARTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t13LV_THEME_CONTE">
+<span id="_CPPv3N16lv_theme_style_t13LV_THEME_CONTE"></span><span id="_CPPv2N16lv_theme_style_t13LV_THEME_CONTE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a5f2cc68a21feb43aa0ac83057d39d917"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_CONT</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t13LV_THEME_CONTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t16LV_THEME_CPICKERE">
+<span id="_CPPv3N16lv_theme_style_t16LV_THEME_CPICKERE"></span><span id="_CPPv2N16lv_theme_style_t16LV_THEME_CPICKERE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a90215806f5a67ae40621da8871f303d9"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_CPICKER</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t16LV_THEME_CPICKERE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t17LV_THEME_DROPDOWNE">
+<span id="_CPPv3N16lv_theme_style_t17LV_THEME_DROPDOWNE"></span><span id="_CPPv2N16lv_theme_style_t17LV_THEME_DROPDOWNE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238af7c9e49efd7dd0d29be2177b16a8dc4e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_DROPDOWN</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t17LV_THEME_DROPDOWNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t14LV_THEME_GAUGEE">
+<span id="_CPPv3N16lv_theme_style_t14LV_THEME_GAUGEE"></span><span id="_CPPv2N16lv_theme_style_t14LV_THEME_GAUGEE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a35797ea37e7a9b21ca8c1dfe403ef7a3"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_GAUGE</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t14LV_THEME_GAUGEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t14LV_THEME_IMAGEE">
+<span id="_CPPv3N16lv_theme_style_t14LV_THEME_IMAGEE"></span><span id="_CPPv2N16lv_theme_style_t14LV_THEME_IMAGEE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a7b1b73dfca553616af88956621e82fce"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_IMAGE</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t14LV_THEME_IMAGEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t15LV_THEME_IMGBTNE">
+<span id="_CPPv3N16lv_theme_style_t15LV_THEME_IMGBTNE"></span><span id="_CPPv2N16lv_theme_style_t15LV_THEME_IMGBTNE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a5ba827569504950c1d67f6d509f4610f"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_IMGBTN</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t15LV_THEME_IMGBTNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t17LV_THEME_KEYBOARDE">
+<span id="_CPPv3N16lv_theme_style_t17LV_THEME_KEYBOARDE"></span><span id="_CPPv2N16lv_theme_style_t17LV_THEME_KEYBOARDE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a19133dd32f922249c628422f80fac237"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_KEYBOARD</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t17LV_THEME_KEYBOARDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t14LV_THEME_LABELE">
+<span id="_CPPv3N16lv_theme_style_t14LV_THEME_LABELE"></span><span id="_CPPv2N16lv_theme_style_t14LV_THEME_LABELE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a5847db66394d7c5cc5c9a1537c2b9f8b"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_LABEL</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t14LV_THEME_LABELE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t12LV_THEME_LEDE">
+<span id="_CPPv3N16lv_theme_style_t12LV_THEME_LEDE"></span><span id="_CPPv2N16lv_theme_style_t12LV_THEME_LEDE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238ae606739b3dd3f1b96245dd0643b98186"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_LED</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t12LV_THEME_LEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t13LV_THEME_LINEE">
+<span id="_CPPv3N16lv_theme_style_t13LV_THEME_LINEE"></span><span id="_CPPv2N16lv_theme_style_t13LV_THEME_LINEE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238ae7f261310ea439218483ff30454cc9fb"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_LINE</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t13LV_THEME_LINEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t13LV_THEME_LISTE">
+<span id="_CPPv3N16lv_theme_style_t13LV_THEME_LISTE"></span><span id="_CPPv2N16lv_theme_style_t13LV_THEME_LISTE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a330f03114bd9a0497cfeecd34b847fe7"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_LIST</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t13LV_THEME_LISTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t17LV_THEME_LIST_BTNE">
+<span id="_CPPv3N16lv_theme_style_t17LV_THEME_LIST_BTNE"></span><span id="_CPPv2N16lv_theme_style_t17LV_THEME_LIST_BTNE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a1c1fd1c718d4feec8c1230cde80f962d"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_LIST_BTN</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t17LV_THEME_LIST_BTNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t18LV_THEME_LINEMETERE">
+<span id="_CPPv3N16lv_theme_style_t18LV_THEME_LINEMETERE"></span><span id="_CPPv2N16lv_theme_style_t18LV_THEME_LINEMETERE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238aa020963ed905d73a1ad5116454b0514b"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_LINEMETER</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t18LV_THEME_LINEMETERE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t15LV_THEME_MSGBOXE">
+<span id="_CPPv3N16lv_theme_style_t15LV_THEME_MSGBOXE"></span><span id="_CPPv2N16lv_theme_style_t15LV_THEME_MSGBOXE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238adf8d3ba7818113983b94849e46c044f4"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_MSGBOX</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t15LV_THEME_MSGBOXE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t20LV_THEME_MSGBOX_BTNSE">
+<span id="_CPPv3N16lv_theme_style_t20LV_THEME_MSGBOX_BTNSE"></span><span id="_CPPv2N16lv_theme_style_t20LV_THEME_MSGBOX_BTNSE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238ae18c5358f3e29a2c17cae0c8c3002617"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_MSGBOX_BTNS</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t20LV_THEME_MSGBOX_BTNSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t16LV_THEME_OBJMASKE">
+<span id="_CPPv3N16lv_theme_style_t16LV_THEME_OBJMASKE"></span><span id="_CPPv2N16lv_theme_style_t16LV_THEME_OBJMASKE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a7f5780b36b50f31756a2850964062ee2"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_OBJMASK</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t16LV_THEME_OBJMASKE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t13LV_THEME_PAGEE">
+<span id="_CPPv3N16lv_theme_style_t13LV_THEME_PAGEE"></span><span id="_CPPv2N16lv_theme_style_t13LV_THEME_PAGEE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238acd0d648ed3cf7e0b63f2a1fd1e187ca7"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_PAGE</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t13LV_THEME_PAGEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t15LV_THEME_ROLLERE">
+<span id="_CPPv3N16lv_theme_style_t15LV_THEME_ROLLERE"></span><span id="_CPPv2N16lv_theme_style_t15LV_THEME_ROLLERE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238afce67d42d0590cab32ef5a7f24905be3"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_ROLLER</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t15LV_THEME_ROLLERE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t15LV_THEME_SLIDERE">
+<span id="_CPPv3N16lv_theme_style_t15LV_THEME_SLIDERE"></span><span id="_CPPv2N16lv_theme_style_t15LV_THEME_SLIDERE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a4886f54ec7b88c4eee31f82004b60755"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_SLIDER</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t15LV_THEME_SLIDERE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t16LV_THEME_SPINBOXE">
+<span id="_CPPv3N16lv_theme_style_t16LV_THEME_SPINBOXE"></span><span id="_CPPv2N16lv_theme_style_t16LV_THEME_SPINBOXE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a4f53365fed2f69f8d5c02fd4ab5d4e32"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_SPINBOX</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t16LV_THEME_SPINBOXE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t20LV_THEME_SPINBOX_BTNE">
+<span id="_CPPv3N16lv_theme_style_t20LV_THEME_SPINBOX_BTNE"></span><span id="_CPPv2N16lv_theme_style_t20LV_THEME_SPINBOX_BTNE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238aa977313844c0dff45922bbf5fcaede54"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_SPINBOX_BTN</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t20LV_THEME_SPINBOX_BTNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t16LV_THEME_SPINNERE">
+<span id="_CPPv3N16lv_theme_style_t16LV_THEME_SPINNERE"></span><span id="_CPPv2N16lv_theme_style_t16LV_THEME_SPINNERE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238aa1d5f53db000c9b1eb56ce4af2db8140"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_SPINNER</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t16LV_THEME_SPINNERE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t15LV_THEME_SWITCHE">
+<span id="_CPPv3N16lv_theme_style_t15LV_THEME_SWITCHE"></span><span id="_CPPv2N16lv_theme_style_t15LV_THEME_SWITCHE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238afebcbecdd5925869171ea3b614b0e349"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_SWITCH</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t15LV_THEME_SWITCHE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t14LV_THEME_TABLEE">
+<span id="_CPPv3N16lv_theme_style_t14LV_THEME_TABLEE"></span><span id="_CPPv2N16lv_theme_style_t14LV_THEME_TABLEE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a480f219df606b1443e2f8384c356b9d1"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_TABLE</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t14LV_THEME_TABLEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t16LV_THEME_TABVIEWE">
+<span id="_CPPv3N16lv_theme_style_t16LV_THEME_TABVIEWE"></span><span id="_CPPv2N16lv_theme_style_t16LV_THEME_TABVIEWE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a550ef2dff2a33ecc4909b446becb91e1"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_TABVIEW</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t16LV_THEME_TABVIEWE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t21LV_THEME_TABVIEW_PAGEE">
+<span id="_CPPv3N16lv_theme_style_t21LV_THEME_TABVIEW_PAGEE"></span><span id="_CPPv2N16lv_theme_style_t21LV_THEME_TABVIEW_PAGEE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238ab50a62bba353f8f9409fd44c8c76fe3e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_TABVIEW_PAGE</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t21LV_THEME_TABVIEW_PAGEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t17LV_THEME_TEXTAREAE">
+<span id="_CPPv3N16lv_theme_style_t17LV_THEME_TEXTAREAE"></span><span id="_CPPv2N16lv_theme_style_t17LV_THEME_TEXTAREAE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238ad6a6dd630bf88b9bcbcb045029429ed4"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_TEXTAREA</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t17LV_THEME_TEXTAREAE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t17LV_THEME_TILEVIEWE">
+<span id="_CPPv3N16lv_theme_style_t17LV_THEME_TILEVIEWE"></span><span id="_CPPv2N16lv_theme_style_t17LV_THEME_TILEVIEWE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a737adee2077e518c1e836255b2a59534"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_TILEVIEW</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t17LV_THEME_TILEVIEWE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t12LV_THEME_WINE">
+<span id="_CPPv3N16lv_theme_style_t12LV_THEME_WINE"></span><span id="_CPPv2N16lv_theme_style_t12LV_THEME_WINE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238af367a14489de227247c64660860dc89b"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_WIN</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t12LV_THEME_WINE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t16LV_THEME_WIN_BTNE">
+<span id="_CPPv3N16lv_theme_style_t16LV_THEME_WIN_BTNE"></span><span id="_CPPv2N16lv_theme_style_t16LV_THEME_WIN_BTNE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238aec9ad8acc4485df160be4dde6ae7df82"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_WIN_BTN</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t16LV_THEME_WIN_BTNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t22_LV_THEME_BUILTIN_LASTE">
+<span id="_CPPv3N16lv_theme_style_t22_LV_THEME_BUILTIN_LASTE"></span><span id="_CPPv2N16lv_theme_style_t22_LV_THEME_BUILTIN_LASTE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a901dfbf2650202f246f8abc787fdea60"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">_LV_THEME_BUILTIN_LAST</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t22_LV_THEME_BUILTIN_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t21LV_THEME_CUSTOM_STARTE">
+<span id="_CPPv3N16lv_theme_style_t21LV_THEME_CUSTOM_STARTE"></span><span id="_CPPv2N16lv_theme_style_t21LV_THEME_CUSTOM_STARTE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238a832b3aa00aeea3b5cf72cda6fa0308c2"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_THEME_CUSTOM_START</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t21LV_THEME_CUSTOM_STARTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N16lv_theme_style_t21_LV_THEME_CUSTOM_LASTE">
+<span id="_CPPv3N16lv_theme_style_t21_LV_THEME_CUSTOM_LASTE"></span><span id="_CPPv2N16lv_theme_style_t21_LV_THEME_CUSTOM_LASTE"></span><span class="target" id="lv__theme_8h_1a0d25dfcbb0a9a2ccb0a81ea92b68c238af24b97ca57dc55e84683722b3ed392dc"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">_LV_THEME_CUSTOM_LAST</span></code><a class="headerlink" href="#_CPPv4N16lv_theme_style_t21_LV_THEME_CUSTOM_LASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv416lv_theme_set_actP10lv_theme_t">
+<span id="_CPPv316lv_theme_set_actP10lv_theme_t"></span><span id="_CPPv216lv_theme_set_actP10lv_theme_t"></span><span id="lv_theme_set_act__lv_theme_tP"></span><span class="target" id="lv__theme_8h_1a5a381d0d653de153e2be4feabcee5f27"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_theme_set_act</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_theme_t" title="lv_theme_t"><span class="pre">lv_theme_t</span></a> <span class="pre">*</span><em><span class="pre">th</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_theme_set_actP10lv_theme_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a theme for the system. From now, all the created objects will use styles from this theme by default <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">th</span></code>: pointer to theme (return value of: 'lv_theme_init_xxx()') </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv416lv_theme_get_actv">
+<span id="_CPPv316lv_theme_get_actv"></span><span id="_CPPv216lv_theme_get_actv"></span><span id="lv_theme_get_act__void"></span><span class="target" id="lv__theme_8h_1aa9a9a106e3fe4b059b95cd8fc37c224e"></span><a class="reference internal" href="#_CPPv410lv_theme_t" title="lv_theme_t"><span class="pre">lv_theme_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_theme_get_act</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_theme_get_actv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current system theme. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the current system theme. NULL if not set. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv414lv_theme_applyP8lv_obj_t16lv_theme_style_t">
+<span id="_CPPv314lv_theme_applyP8lv_obj_t16lv_theme_style_t"></span><span id="_CPPv214lv_theme_applyP8lv_obj_t16lv_theme_style_t"></span><span id="lv_theme_apply__lv_obj_tP.lv_theme_style_t"></span><span class="target" id="lv__theme_8h_1a2947e45b96ebfafa77de0a95266c803b"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_theme_apply</span></code><span class="sig-paren">(</span><a class="reference internal" href="../widgets/obj.html#_CPPv48lv_obj_t" title="lv_obj_t"><span class="pre">lv_obj_t</span></a> <span class="pre">*</span><em><span class="pre">obj</span></em>, <a class="reference internal" href="#_CPPv416lv_theme_style_t" title="lv_theme_style_t"><span class="pre">lv_theme_style_t</span></a> <em><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_theme_applyP8lv_obj_t16lv_theme_style_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Apply the active theme on an object <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">obj</span></code>: pointer to an object </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: the name of the theme element to apply. E.g. <code class="docutils literal notranslate"><span class="pre">LV_THEME_BTN</span></code> </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv413lv_theme_copyP10lv_theme_tPK10lv_theme_t">
+<span id="_CPPv313lv_theme_copyP10lv_theme_tPK10lv_theme_t"></span><span id="_CPPv213lv_theme_copyP10lv_theme_tPK10lv_theme_t"></span><span id="lv_theme_copy__lv_theme_tP.lv_theme_tCP"></span><span class="target" id="lv__theme_8h_1af28ae5bb1b60151bc21d0bebac85ba26"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_theme_copy</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_theme_t" title="lv_theme_t"><span class="pre">lv_theme_t</span></a> <span class="pre">*</span><em><span class="pre">theme</span></em>, <em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv410lv_theme_t" title="lv_theme_t"><span class="pre">lv_theme_t</span></a> <span class="pre">*</span><em><span class="pre">copy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lv_theme_copyP10lv_theme_tPK10lv_theme_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Copy a theme to an other or initialize a theme <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">theme</span></code>: pointer to a theme to initialize </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">copy</span></code>: pointer to a theme to copy or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to initialize <code class="docutils literal notranslate"><span class="pre">theme</span></code> to empty </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv417lv_theme_set_baseP10lv_theme_tP10lv_theme_t">
+<span id="_CPPv317lv_theme_set_baseP10lv_theme_tP10lv_theme_t"></span><span id="_CPPv217lv_theme_set_baseP10lv_theme_tP10lv_theme_t"></span><span id="lv_theme_set_base__lv_theme_tP.lv_theme_tP"></span><span class="target" id="lv__theme_8h_1a6c65e64fdb0e5b89d8f1f13ddfd9e45d"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_theme_set_base</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_theme_t" title="lv_theme_t"><span class="pre">lv_theme_t</span></a> <span class="pre">*</span><em><span class="pre">new_theme</span></em>, <a class="reference internal" href="#_CPPv410lv_theme_t" title="lv_theme_t"><span class="pre">lv_theme_t</span></a> <span class="pre">*</span><em><span class="pre">base</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_theme_set_baseP10lv_theme_tP10lv_theme_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set a base theme for a theme. The styles from the base them will be added before the styles of the current theme. Arbitrary long chain of themes can be created by setting base themes. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">new_theme</span></code>: pointer to theme which base should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">base</span></code>: pointer to the base theme </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv421lv_theme_set_apply_cbP10lv_theme_t19lv_theme_apply_cb_t">
+<span id="_CPPv321lv_theme_set_apply_cbP10lv_theme_t19lv_theme_apply_cb_t"></span><span id="_CPPv221lv_theme_set_apply_cbP10lv_theme_t19lv_theme_apply_cb_t"></span><span id="lv_theme_set_apply_cb__lv_theme_tP.lv_theme_apply_cb_t"></span><span class="target" id="lv__theme_8h_1a519b48f3d3453b8087d09f706bd6bef1"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_theme_set_apply_cb</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410lv_theme_t" title="lv_theme_t"><span class="pre">lv_theme_t</span></a> <span class="pre">*</span><em><span class="pre">theme</span></em>, <a class="reference internal" href="#_CPPv419lv_theme_apply_cb_t" title="lv_theme_apply_cb_t"><span class="pre">lv_theme_apply_cb_t</span></a> <em><span class="pre">apply_cb</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_theme_set_apply_cbP10lv_theme_t19lv_theme_apply_cb_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set an apply callback for a theme. The apply callback is used to add styles to different objects <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">theme</span></code>: pointer to theme which callback should be set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apply_cb</span></code>: pointer to the callback </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv423lv_theme_get_font_smallv">
+<span id="_CPPv323lv_theme_get_font_smallv"></span><span id="_CPPv223lv_theme_get_font_smallv"></span><span id="lv_theme_get_font_small__void"></span><span class="target" id="lv__theme_8h_1ac1693565abb1525f98553063f059fbb8"></span><em class="property"><span class="pre">const</span></em> <span class="pre">lv_font_t</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_theme_get_font_small</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_theme_get_font_smallv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the small font of the theme <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the font </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv424lv_theme_get_font_normalv">
+<span id="_CPPv324lv_theme_get_font_normalv"></span><span id="_CPPv224lv_theme_get_font_normalv"></span><span id="lv_theme_get_font_normal__void"></span><span class="target" id="lv__theme_8h_1a756132bf2c3ae49789bc19363452068f"></span><em class="property"><span class="pre">const</span></em> <span class="pre">lv_font_t</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_theme_get_font_normal</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_theme_get_font_normalv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the normal font of the theme <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the font </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv426lv_theme_get_font_subtitlev">
+<span id="_CPPv326lv_theme_get_font_subtitlev"></span><span id="_CPPv226lv_theme_get_font_subtitlev"></span><span id="lv_theme_get_font_subtitle__void"></span><span class="target" id="lv__theme_8h_1ac74733b6c83b54670274f2ff354aa80a"></span><em class="property"><span class="pre">const</span></em> <span class="pre">lv_font_t</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_theme_get_font_subtitle</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_theme_get_font_subtitlev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the subtitle font of the theme <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the font </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv423lv_theme_get_font_titlev">
+<span id="_CPPv323lv_theme_get_font_titlev"></span><span id="_CPPv223lv_theme_get_font_titlev"></span><span id="lv_theme_get_font_title__void"></span><span class="target" id="lv__theme_8h_1a54d56d64b1749489da5ccc0bfaf30f59"></span><em class="property"><span class="pre">const</span></em> <span class="pre">lv_font_t</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_theme_get_font_title</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_theme_get_font_titlev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the title font of the theme <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>pointer to the font </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv426lv_theme_get_color_primaryv">
+<span id="_CPPv326lv_theme_get_color_primaryv"></span><span id="_CPPv226lv_theme_get_color_primaryv"></span><span id="lv_theme_get_color_primary__void"></span><span class="target" id="lv__theme_8h_1ab124a80fc8ee172a4829f3c63900207f"></span><span class="pre">lv_color_t</span> <code class="sig-name descname"><span class="pre">lv_theme_get_color_primary</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_theme_get_color_primaryv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the primary color of the theme <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the color </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv428lv_theme_get_color_secondaryv">
+<span id="_CPPv328lv_theme_get_color_secondaryv"></span><span id="_CPPv228lv_theme_get_color_secondaryv"></span><span id="lv_theme_get_color_secondary__void"></span><span class="target" id="lv__theme_8h_1a13856b3ebb0cebdefccf4b5bac282715"></span><span class="pre">lv_color_t</span> <code class="sig-name descname"><span class="pre">lv_theme_get_color_secondary</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428lv_theme_get_color_secondaryv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the secondary color of the theme <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the color </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv418lv_theme_get_flagsv">
+<span id="_CPPv318lv_theme_get_flagsv"></span><span id="_CPPv218lv_theme_get_flagsv"></span><span id="lv_theme_get_flags__void"></span><span class="target" id="lv__theme_8h_1ac6f9036e70214e43b177c4916ba35bea"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">lv_theme_get_flags</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_theme_get_flagsv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the flags of the theme <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the flags </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt id="_CPPv411_lv_theme_t">
+<span id="_CPPv311_lv_theme_t"></span><span id="_CPPv211_lv_theme_t"></span><span id="_lv_theme_t"></span><span class="target" id="struct__lv__theme__t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">_lv_theme_t</span></code><a class="headerlink" href="#_CPPv411_lv_theme_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N11_lv_theme_t8apply_cbE">
+<span id="_CPPv3N11_lv_theme_t8apply_cbE"></span><span id="_CPPv2N11_lv_theme_t8apply_cbE"></span><span id="_lv_theme_t::apply_cb__lv_theme_apply_cb_t"></span><span class="target" id="struct__lv__theme__t_1afdcd5f4cc8b69d66774fa59354e456c3"></span><a class="reference internal" href="#_CPPv419lv_theme_apply_cb_t" title="lv_theme_apply_cb_t"><span class="pre">lv_theme_apply_cb_t</span></a> <code class="sig-name descname"><span class="pre">apply_cb</span></code><a class="headerlink" href="#_CPPv4N11_lv_theme_t8apply_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N11_lv_theme_t9apply_xcbE">
+<span id="_CPPv3N11_lv_theme_t9apply_xcbE"></span><span id="_CPPv2N11_lv_theme_t9apply_xcbE"></span><span id="_lv_theme_t::apply_xcb__lv_theme_apply_xcb_t"></span><span class="target" id="struct__lv__theme__t_1a7e20ae3743a83e5dd80c5d864e2d0e15"></span><a class="reference internal" href="#_CPPv420lv_theme_apply_xcb_t" title="lv_theme_apply_xcb_t"><span class="pre">lv_theme_apply_xcb_t</span></a> <code class="sig-name descname"><span class="pre">apply_xcb</span></code><a class="headerlink" href="#_CPPv4N11_lv_theme_t9apply_xcbE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N11_lv_theme_t4baseE">
+<span id="_CPPv3N11_lv_theme_t4baseE"></span><span id="_CPPv2N11_lv_theme_t4baseE"></span><span id="_lv_theme_t::base___lv_theme_tP"></span><span class="target" id="struct__lv__theme__t_1a220e50cf301b64e720c1720cd6ab4c40"></span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_lv_theme_t" title="_lv_theme_t"><span class="pre">_lv_theme_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">base</span></code><a class="headerlink" href="#_CPPv4N11_lv_theme_t4baseE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Apply the current theme's style on top of this theme. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N11_lv_theme_t13color_primaryE">
+<span id="_CPPv3N11_lv_theme_t13color_primaryE"></span><span id="_CPPv2N11_lv_theme_t13color_primaryE"></span><span id="_lv_theme_t::color_primary__lv_color_t"></span><span class="target" id="struct__lv__theme__t_1a9c89cb48faebdb6f948b9ef2c26cf43b"></span><span class="pre">lv_color_t</span> <code class="sig-name descname"><span class="pre">color_primary</span></code><a class="headerlink" href="#_CPPv4N11_lv_theme_t13color_primaryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N11_lv_theme_t15color_secondaryE">
+<span id="_CPPv3N11_lv_theme_t15color_secondaryE"></span><span id="_CPPv2N11_lv_theme_t15color_secondaryE"></span><span id="_lv_theme_t::color_secondary__lv_color_t"></span><span class="target" id="struct__lv__theme__t_1aacb9014f400e490c87dd17ba9c36551d"></span><span class="pre">lv_color_t</span> <code class="sig-name descname"><span class="pre">color_secondary</span></code><a class="headerlink" href="#_CPPv4N11_lv_theme_t15color_secondaryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N11_lv_theme_t10font_smallE">
+<span id="_CPPv3N11_lv_theme_t10font_smallE"></span><span id="_CPPv2N11_lv_theme_t10font_smallE"></span><span id="_lv_theme_t::font_small__lv_font_tCP"></span><span class="target" id="struct__lv__theme__t_1a1cf7c76c97ce0ba177dd318f08166066"></span><em class="property"><span class="pre">const</span></em> <span class="pre">lv_font_t</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">font_small</span></code><a class="headerlink" href="#_CPPv4N11_lv_theme_t10font_smallE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N11_lv_theme_t11font_normalE">
+<span id="_CPPv3N11_lv_theme_t11font_normalE"></span><span id="_CPPv2N11_lv_theme_t11font_normalE"></span><span id="_lv_theme_t::font_normal__lv_font_tCP"></span><span class="target" id="struct__lv__theme__t_1a652f050438f5525e36392a85a64c0204"></span><em class="property"><span class="pre">const</span></em> <span class="pre">lv_font_t</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">font_normal</span></code><a class="headerlink" href="#_CPPv4N11_lv_theme_t11font_normalE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N11_lv_theme_t13font_subtitleE">
+<span id="_CPPv3N11_lv_theme_t13font_subtitleE"></span><span id="_CPPv2N11_lv_theme_t13font_subtitleE"></span><span id="_lv_theme_t::font_subtitle__lv_font_tCP"></span><span class="target" id="struct__lv__theme__t_1a94795b9212297755be56d6bfa0527a52"></span><em class="property"><span class="pre">const</span></em> <span class="pre">lv_font_t</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">font_subtitle</span></code><a class="headerlink" href="#_CPPv4N11_lv_theme_t13font_subtitleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N11_lv_theme_t10font_titleE">
+<span id="_CPPv3N11_lv_theme_t10font_titleE"></span><span id="_CPPv2N11_lv_theme_t10font_titleE"></span><span id="_lv_theme_t::font_title__lv_font_tCP"></span><span class="target" id="struct__lv__theme__t_1a74a2cfc50ff0ba6dcb42e4fdf0c88f1d"></span><em class="property"><span class="pre">const</span></em> <span class="pre">lv_font_t</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">font_title</span></code><a class="headerlink" href="#_CPPv4N11_lv_theme_t10font_titleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N11_lv_theme_t5flagsE">
+<span id="_CPPv3N11_lv_theme_t5flagsE"></span><span id="_CPPv2N11_lv_theme_t5flagsE"></span><span id="_lv_theme_t::flags__uint32_t"></span><span class="target" id="struct__lv__theme__t_1a04d271501d5d6dac9968a6c5092427ad"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">flags</span></code><a class="headerlink" href="#_CPPv4N11_lv_theme_t5flagsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N11_lv_theme_t9user_dataE">
+<span id="_CPPv3N11_lv_theme_t9user_dataE"></span><span id="_CPPv2N11_lv_theme_t9user_dataE"></span><span id="_lv_theme_t::user_data__voidP"></span><span class="target" id="struct__lv__theme__t_1ad8228ef9435918bda4cd726ad56283e7"></span><span class="pre">void</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">user_data</span></code><a class="headerlink" href="#_CPPv4N11_lv_theme_t9user_dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -2262,7 +4017,7 @@ It gives a default appearance to UI which can be modified by adding further styl
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Feb 15, 2021.
+        Last updated on Feb 16, 2021.
       </span>
 
     </p>

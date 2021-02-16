@@ -37,6 +37,7 @@ In contrast to *Two non-screen-sized buffers* LVGL will always provide the whole
 This way the driver can simply change the address of the frame buffer to the buffer received from LVGL.
 Therefore this method works the best when the MCU has an LCD/TFT interface and the frame buffer is just a location in the RAM.
 
+You can measure the performance of your display configuration using the [benchmark example](https://github.com/lvgl/lv_examples/tree/master/src/lv_demo_benchmark).
 
 ## Display driver
 

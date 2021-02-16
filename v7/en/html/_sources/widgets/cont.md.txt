@@ -19,10 +19,10 @@ The containers has only a main style called `LV_CONT_PART_MAIN` and it can use a
 You can apply a layout on the containers to automatically order their children. The layout spacing comes from the style's `pad` properties. The possible layout options:
 
 - **LV_LAYOUT_OFF** - Do not align the children.
-- **LV_LAYOUT_CENTER** - Align children to the center in column and keep `padd_inner` space between them.
-- **LV_LAYOUT_COLUMN_LEFT** - Align children in a left-justified column. Keep `padd_left` space on the left, `pad_top` space on the top and `pad_inner` space between the children.
-- **LV_LAYOUT_COLUMN_MID** - Align children in centered column. Keep `padd_top` space on the top and `pad_inner` space between the children.
-- **LV_LAYOUT_COLUMN_RIGHT** - Align children in a right-justified column. Keep `padd_right` space on the right, `pad_top` space on the top and `pad_inner` space between the children.
+- **LV_LAYOUT_CENTER** - Align children to the center in column and keep `pad_inner` space between them.
+- **LV_LAYOUT_COLUMN_LEFT** - Align children in a left-justified column. Keep `pad_left` space on the left, `pad_top` space on the top and `pad_inner` space between the children.
+- **LV_LAYOUT_COLUMN_MID** - Align children in centered column. Keep `pad_top` space on the top and `pad_inner` space between the children.
+- **LV_LAYOUT_COLUMN_RIGHT** - Align children in a right-justified column. Keep `pad_right` space on the right, `pad_top` space on the top and `pad_inner` space between the children.
 - **LV_LAYOUT_ROW_TOP** - Align children in a top justified row. Keep `pad_left` space on the left, `pad_top` space on the top and `pad_inner` space between the children.
 - **LV_LAYOUT_ROW_MID** - Align children in centered row. Keep `pad_left` space on the left and `pad_inner` space between the children.
 - **LV_LAYOUT_ROW_BOTTOM** - Align children in a bottom justified row. Keep `pad_left` space on the left, `pad_bottom` space on the bottom and `pad_inner` space between the children.

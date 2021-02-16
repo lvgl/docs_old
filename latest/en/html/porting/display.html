@@ -82,7 +82,7 @@
             
             
               <div class="version">
-                v7.10.1-dev
+                v7.11.0-dev
               </div>
             
           
@@ -264,6 +264,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -1413,7 +1417,7 @@ Therefore this method works the best when the MCU has an LCD/TFT interface and t
 <li><p><strong>color_chroma_key</strong> a color which will be drawn as transparent on chrome keyed images. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code> by default from <em>lv_conf.h</em>).</p></li>
 <li><p><strong>user_data</strong> custom user data for the driver. Its type can be modified in lv_conf.h.</p></li>
 <li><p><strong>anti-aliasing</strong> use anti-aliasing (edge smoothing). <code class="docutils literal notranslate"><span class="pre">LV_ANTIALIAS</span></code> by default  from <em>lv_conf.h</em>.</p></li>
-<li><p><strong>rotated</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> swap <code class="docutils literal notranslate"><span class="pre">hor_res</span></code> and <code class="docutils literal notranslate"><span class="pre">ver_res</span></code>. LVGL draws in the same direction in both cases (in lines from top to bottom) so the driver also needs to be reconfigured to change the display's fill direction.</p></li>
+<li><p><strong>rotated</strong> and <strong>sw_rotate</strong> See the <a class="reference external" href="#rotation">rotation</a> section below.</p></li>
 <li><p><strong>screen_transp</strong> if <code class="docutils literal notranslate"><span class="pre">1</span></code> the screen can have transparent or opaque style. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_SCREEN_TRANSP</span></code> needs to enabled in <em>lv_conf.h</em>.</p></li>
 </ul>
 <p>To use a GPU the following callbacks can be used:</p>
@@ -1514,6 +1518,16 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 </pre></div>
 </div>
 </div>
+<div class="section" id="rotation">
+<h2>Rotation<a class="headerlink" href="#rotation" title="Permalink to this headline">¶</a></h2>
+<p>LVGL supports rotation of the display in 90 degree increments. You can select whether you'd like software rotation or hardware rotation.</p>
+<p>If you select software rotation (<code class="docutils literal notranslate"><span class="pre">sw_rotate</span></code> flag set to 1), LVGL will perform the rotation for you. Your driver can and should assume that the screen width and height have not changed. Simply flush pixels to the display as normal. Software rotation requires no additional logic in your <code class="docutils literal notranslate"><span class="pre">flush_cb</span></code> callback.</p>
+<p>There is a noticeable amount of overhead to performing rotation in software, which is why hardware rotation is also available. In this mode, LVGL draws into the buffer as though your screen now has the width and height inverted. You are responsible for rotating the provided pixels yourself.</p>
+<p>The default rotation of your display when it is initialized can be set using the <code class="docutils literal notranslate"><span class="pre">rotated</span></code> flag. The available options are <code class="docutils literal notranslate"><span class="pre">LV_DISP_ROT_NONE</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_DISP_ROT_90</span></code>, <code class="docutils literal notranslate"><span class="pre">LV_DISP_ROT_180</span></code>, or <code class="docutils literal notranslate"><span class="pre">LV_DISP_ROT_270</span></code>. The rotation values are relative to how you would rotate the physical display in the clockwise direction. Thus, <code class="docutils literal notranslate"><span class="pre">LV_DISP_ROT_90</span></code> means you rotate the hardware 90 degrees clockwise, and the display rotates 90 degrees counterclockwise to compensate.</p>
+<p>(Note for users upgrading from 7.10.0 and older: these new rotation enum values match up with the old 0/1 system for rotating 90 degrees, so legacy code should continue to work as expected. Software rotation is also disabled by default for compatibility.)</p>
+<p>Display rotation can also be changed at runtime using the <code class="docutils literal notranslate"><span class="pre">lv_disp_set_rotation(disp,</span> <span class="pre">rot)</span></code> API.</p>
+<p>Support for software rotation is a new feature, so there may be some glitches/bugs depending on your configuration. If you encounter a problem please open an issue on <a class="reference external" href="https://github.com/lvgl/lvgl/issues">GitHub</a>.</p>
+</div>
 <div class="section" id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <p>Display Driver HAL interface header file </p>
@@ -1521,13 +1535,13 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 <p class="breathe-sectiondef-title rubric">Typedefs</p>
 <dl class="cpp type">
 <dt id="_CPPv413lv_disp_drv_t">
-<span id="_CPPv313lv_disp_drv_t"></span><span id="_CPPv213lv_disp_drv_t"></span><span id="lv_disp_drv_t"></span><span class="target" id="lv__hal__disp_8h_1ae0df046fe59b16094a051e0b8bce40dc"></span><em class="property">typedef </em><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> <code class="sig-name descname">lv_disp_drv_t</code><a class="headerlink" href="#_CPPv413lv_disp_drv_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv313lv_disp_drv_t"></span><span id="_CPPv213lv_disp_drv_t"></span><span id="lv_disp_drv_t"></span><span class="target" id="lv__hal__disp_8h_1ae0df046fe59b16094a051e0b8bce40dc"></span><em class="property"><span class="pre">typedef</span> </em><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t"><span class="pre">_disp_drv_t</span></a> <code class="sig-name descname"><span class="pre">lv_disp_drv_t</span></code><a class="headerlink" href="#_CPPv413lv_disp_drv_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Display Driver structure to be registered by HAL </p>
 </dd></dl>
 
 <dl class="cpp type">
 <dt id="_CPPv49lv_disp_t">
-<span id="_CPPv39lv_disp_t"></span><span id="_CPPv29lv_disp_t"></span><span id="lv_disp_t"></span><span class="target" id="lv__hal__disp_8h_1a9d29d2918fd1d6117739da09a12b1e90"></span><em class="property">typedef </em><em class="property">struct</em> <a class="reference internal" href="#_CPPv47_disp_t" title="_disp_t">_disp_t</a> <code class="sig-name descname">lv_disp_t</code><a class="headerlink" href="#_CPPv49lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv39lv_disp_t"></span><span id="_CPPv29lv_disp_t"></span><span id="lv_disp_t"></span><span class="target" id="lv__hal__disp_8h_1a9d29d2918fd1d6117739da09a12b1e90"></span><em class="property"><span class="pre">typedef</span> </em><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv47_disp_t" title="_disp_t"><span class="pre">_disp_t</span></a> <code class="sig-name descname"><span class="pre">lv_disp_t</span></code><a class="headerlink" href="#_CPPv49lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Display structure. <dl class="simple">
 <dt><strong>Note</strong></dt><dd><p><code class="docutils literal notranslate"><span class="pre">lv_disp_drv_t</span></code> should be the first member of the structure. </p>
 </dd>
@@ -1540,26 +1554,26 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 <p class="breathe-sectiondef-title rubric">Enums</p>
 <dl class="cpp enum">
 <dt id="_CPPv414lv_disp_size_t">
-<span id="_CPPv314lv_disp_size_t"></span><span id="_CPPv214lv_disp_size_t"></span><span class="target" id="lv__hal__disp_8h_1a32c0c92ef12d8a2fea6b566bb6803e47"></span><em class="property">enum </em><code class="sig-name descname">lv_disp_size_t</code><a class="headerlink" href="#_CPPv414lv_disp_size_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv314lv_disp_size_t"></span><span id="_CPPv214lv_disp_size_t"></span><span class="target" id="lv__hal__disp_8h_1a32c0c92ef12d8a2fea6b566bb6803e47"></span><em class="property"><span class="pre">enum</span> </em><code class="sig-name descname"><span class="pre">lv_disp_size_t</span></code><a class="headerlink" href="#_CPPv414lv_disp_size_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p><em>Values:</em></p>
 <dl class="cpp enumerator">
 <dt id="_CPPv4N14lv_disp_size_t18LV_DISP_SIZE_SMALLE">
-<span id="_CPPv3N14lv_disp_size_t18LV_DISP_SIZE_SMALLE"></span><span id="_CPPv2N14lv_disp_size_t18LV_DISP_SIZE_SMALLE"></span><span class="target" id="lv__hal__disp_8h_1a32c0c92ef12d8a2fea6b566bb6803e47a4e3d75c8bfce8203bd864fa7536deb07"></span><em class="property">enumerator </em><code class="sig-name descname">LV_DISP_SIZE_SMALL</code><a class="headerlink" href="#_CPPv4N14lv_disp_size_t18LV_DISP_SIZE_SMALLE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N14lv_disp_size_t18LV_DISP_SIZE_SMALLE"></span><span id="_CPPv2N14lv_disp_size_t18LV_DISP_SIZE_SMALLE"></span><span class="target" id="lv__hal__disp_8h_1a32c0c92ef12d8a2fea6b566bb6803e47a4e3d75c8bfce8203bd864fa7536deb07"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_DISP_SIZE_SMALL</span></code><a class="headerlink" href="#_CPPv4N14lv_disp_size_t18LV_DISP_SIZE_SMALLE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
 <dt id="_CPPv4N14lv_disp_size_t19LV_DISP_SIZE_MEDIUME">
-<span id="_CPPv3N14lv_disp_size_t19LV_DISP_SIZE_MEDIUME"></span><span id="_CPPv2N14lv_disp_size_t19LV_DISP_SIZE_MEDIUME"></span><span class="target" id="lv__hal__disp_8h_1a32c0c92ef12d8a2fea6b566bb6803e47a957aec1a276bbae76a49fbeeecc45051"></span><em class="property">enumerator </em><code class="sig-name descname">LV_DISP_SIZE_MEDIUM</code><a class="headerlink" href="#_CPPv4N14lv_disp_size_t19LV_DISP_SIZE_MEDIUME" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N14lv_disp_size_t19LV_DISP_SIZE_MEDIUME"></span><span id="_CPPv2N14lv_disp_size_t19LV_DISP_SIZE_MEDIUME"></span><span class="target" id="lv__hal__disp_8h_1a32c0c92ef12d8a2fea6b566bb6803e47a957aec1a276bbae76a49fbeeecc45051"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_DISP_SIZE_MEDIUM</span></code><a class="headerlink" href="#_CPPv4N14lv_disp_size_t19LV_DISP_SIZE_MEDIUME" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
 <dt id="_CPPv4N14lv_disp_size_t18LV_DISP_SIZE_LARGEE">
-<span id="_CPPv3N14lv_disp_size_t18LV_DISP_SIZE_LARGEE"></span><span id="_CPPv2N14lv_disp_size_t18LV_DISP_SIZE_LARGEE"></span><span class="target" id="lv__hal__disp_8h_1a32c0c92ef12d8a2fea6b566bb6803e47ac1f3bebe30b23a7d77fb5967bf4dc561"></span><em class="property">enumerator </em><code class="sig-name descname">LV_DISP_SIZE_LARGE</code><a class="headerlink" href="#_CPPv4N14lv_disp_size_t18LV_DISP_SIZE_LARGEE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N14lv_disp_size_t18LV_DISP_SIZE_LARGEE"></span><span id="_CPPv2N14lv_disp_size_t18LV_DISP_SIZE_LARGEE"></span><span class="target" id="lv__hal__disp_8h_1a32c0c92ef12d8a2fea6b566bb6803e47ac1f3bebe30b23a7d77fb5967bf4dc561"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_DISP_SIZE_LARGE</span></code><a class="headerlink" href="#_CPPv4N14lv_disp_size_t18LV_DISP_SIZE_LARGEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
 <dt id="_CPPv4N14lv_disp_size_t24LV_DISP_SIZE_EXTRA_LARGEE">
-<span id="_CPPv3N14lv_disp_size_t24LV_DISP_SIZE_EXTRA_LARGEE"></span><span id="_CPPv2N14lv_disp_size_t24LV_DISP_SIZE_EXTRA_LARGEE"></span><span class="target" id="lv__hal__disp_8h_1a32c0c92ef12d8a2fea6b566bb6803e47ac88a22fa15eae27406ce12ba713124b6"></span><em class="property">enumerator </em><code class="sig-name descname">LV_DISP_SIZE_EXTRA_LARGE</code><a class="headerlink" href="#_CPPv4N14lv_disp_size_t24LV_DISP_SIZE_EXTRA_LARGEE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N14lv_disp_size_t24LV_DISP_SIZE_EXTRA_LARGEE"></span><span id="_CPPv2N14lv_disp_size_t24LV_DISP_SIZE_EXTRA_LARGEE"></span><span class="target" id="lv__hal__disp_8h_1a32c0c92ef12d8a2fea6b566bb6803e47ac88a22fa15eae27406ce12ba713124b6"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_DISP_SIZE_EXTRA_LARGE</span></code><a class="headerlink" href="#_CPPv4N14lv_disp_size_t24LV_DISP_SIZE_EXTRA_LARGEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1569,7 +1583,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="cpp function">
 <dt id="_CPPv416lv_disp_drv_initP13lv_disp_drv_t">
-<span id="_CPPv316lv_disp_drv_initP13lv_disp_drv_t"></span><span id="_CPPv216lv_disp_drv_initP13lv_disp_drv_t"></span><span id="lv_disp_drv_init__lv_disp_drv_tP"></span><span class="target" id="lv__hal__disp_8h_1a2a24b30cf6089a3d319bfa624e224894"></span>void <code class="sig-name descname">lv_disp_drv_init</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413lv_disp_drv_t" title="lv_disp_drv_t">lv_disp_drv_t</a> *<em>driver</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_disp_drv_initP13lv_disp_drv_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv316lv_disp_drv_initP13lv_disp_drv_t"></span><span id="_CPPv216lv_disp_drv_initP13lv_disp_drv_t"></span><span id="lv_disp_drv_init__lv_disp_drv_tP"></span><span class="target" id="lv__hal__disp_8h_1a2a24b30cf6089a3d319bfa624e224894"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_disp_drv_init</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413lv_disp_drv_t" title="lv_disp_drv_t"><span class="pre">lv_disp_drv_t</span></a> <span class="pre">*</span><em><span class="pre">driver</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_disp_drv_initP13lv_disp_drv_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Initialize a display driver with default values. It is used to have known values in the fields and not junk in memory. After it you can safely set only the fields you need. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">driver</span></code>: pointer to driver variable to initialize </p></li>
@@ -1581,7 +1595,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv416lv_disp_buf_initP13lv_disp_buf_tPvPv8uint32_t">
-<span id="_CPPv316lv_disp_buf_initP13lv_disp_buf_tPvPv8uint32_t"></span><span id="_CPPv216lv_disp_buf_initP13lv_disp_buf_tPvPv8uint32_t"></span><span id="lv_disp_buf_init__lv_disp_buf_tP.voidP.voidP.uint32_t"></span><span class="target" id="lv__hal__disp_8h_1a31bfd68c610a609777fe22c30ce70f69"></span>void <code class="sig-name descname">lv_disp_buf_init</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413lv_disp_buf_t" title="lv_disp_buf_t">lv_disp_buf_t</a> *<em>disp_buf</em>, void *<em>buf1</em>, void *<em>buf2</em>, uint32_t <em>size_in_px_cnt</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_disp_buf_initP13lv_disp_buf_tPvPv8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv316lv_disp_buf_initP13lv_disp_buf_tPvPv8uint32_t"></span><span id="_CPPv216lv_disp_buf_initP13lv_disp_buf_tPvPv8uint32_t"></span><span id="lv_disp_buf_init__lv_disp_buf_tP.voidP.voidP.uint32_t"></span><span class="target" id="lv__hal__disp_8h_1a31bfd68c610a609777fe22c30ce70f69"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_disp_buf_init</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413lv_disp_buf_t" title="lv_disp_buf_t"><span class="pre">lv_disp_buf_t</span></a> <span class="pre">*</span><em><span class="pre">disp_buf</span></em>, <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">buf1</span></em>, <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">buf2</span></em>, <span class="pre">uint32_t</span> <em><span class="pre">size_in_px_cnt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_disp_buf_initP13lv_disp_buf_tPvPv8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Initialize a display buffer <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">disp_buf</span></code>: pointer <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__disp__buf__t"><span class="std std-ref"><span class="pre">lv_disp_buf_t</span></span></a></code> variable to initialize </p></li>
@@ -1596,7 +1610,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv420lv_disp_drv_registerP13lv_disp_drv_t">
-<span id="_CPPv320lv_disp_drv_registerP13lv_disp_drv_t"></span><span id="_CPPv220lv_disp_drv_registerP13lv_disp_drv_t"></span><span id="lv_disp_drv_register__lv_disp_drv_tP"></span><span class="target" id="lv__hal__disp_8h_1ac0597fcee8b04c6c9b4fa7667da2e218"></span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<code class="sig-name descname">lv_disp_drv_register</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413lv_disp_drv_t" title="lv_disp_drv_t">lv_disp_drv_t</a> *<em>driver</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_disp_drv_registerP13lv_disp_drv_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv320lv_disp_drv_registerP13lv_disp_drv_t"></span><span id="_CPPv220lv_disp_drv_registerP13lv_disp_drv_t"></span><span id="lv_disp_drv_register__lv_disp_drv_tP"></span><span class="target" id="lv__hal__disp_8h_1ac0597fcee8b04c6c9b4fa7667da2e218"></span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_disp_drv_register</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413lv_disp_drv_t" title="lv_disp_drv_t"><span class="pre">lv_disp_drv_t</span></a> <span class="pre">*</span><em><span class="pre">driver</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_disp_drv_registerP13lv_disp_drv_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Register an initialized display driver. Automatically set the first display as active. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>pointer to the new display or NULL on error </p>
 </dd>
@@ -1610,7 +1624,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv418lv_disp_drv_updateP9lv_disp_tP13lv_disp_drv_t">
-<span id="_CPPv318lv_disp_drv_updateP9lv_disp_tP13lv_disp_drv_t"></span><span id="_CPPv218lv_disp_drv_updateP9lv_disp_tP13lv_disp_drv_t"></span><span id="lv_disp_drv_update__lv_disp_tP.lv_disp_drv_tP"></span><span class="target" id="lv__hal__disp_8h_1a0e26ace940fd5d3a9f27ffdc322f6a86"></span>void <code class="sig-name descname">lv_disp_drv_update</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em>, <a class="reference internal" href="#_CPPv413lv_disp_drv_t" title="lv_disp_drv_t">lv_disp_drv_t</a> *<em>new_drv</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_disp_drv_updateP9lv_disp_tP13lv_disp_drv_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv318lv_disp_drv_updateP9lv_disp_tP13lv_disp_drv_t"></span><span id="_CPPv218lv_disp_drv_updateP9lv_disp_tP13lv_disp_drv_t"></span><span id="lv_disp_drv_update__lv_disp_tP.lv_disp_drv_tP"></span><span class="target" id="lv__hal__disp_8h_1a0e26ace940fd5d3a9f27ffdc322f6a86"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_disp_drv_update</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em>, <a class="reference internal" href="#_CPPv413lv_disp_drv_t" title="lv_disp_drv_t"><span class="pre">lv_disp_drv_t</span></a> <span class="pre">*</span><em><span class="pre">new_drv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_disp_drv_updateP9lv_disp_tP13lv_disp_drv_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Update the driver in run time. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">disp</span></code>: pointer to a display. (return value of <code class="docutils literal notranslate"><span class="pre">lv_disp_drv_register</span></code>) </p></li>
@@ -1623,7 +1637,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv414lv_disp_removeP9lv_disp_t">
-<span id="_CPPv314lv_disp_removeP9lv_disp_t"></span><span id="_CPPv214lv_disp_removeP9lv_disp_t"></span><span id="lv_disp_remove__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1af37aec229f23769468de96750be77bfc"></span>void <code class="sig-name descname">lv_disp_remove</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_disp_removeP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv314lv_disp_removeP9lv_disp_t"></span><span id="_CPPv214lv_disp_removeP9lv_disp_t"></span><span id="lv_disp_remove__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1af37aec229f23769468de96750be77bfc"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_disp_remove</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414lv_disp_removeP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Remove a display <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">disp</span></code>: pointer to display </p></li>
@@ -1635,7 +1649,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv419lv_disp_set_defaultP9lv_disp_t">
-<span id="_CPPv319lv_disp_set_defaultP9lv_disp_t"></span><span id="_CPPv219lv_disp_set_defaultP9lv_disp_t"></span><span id="lv_disp_set_default__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a490ee32cbb499fb8f2e2439a8ed7fbb6"></span>void <code class="sig-name descname">lv_disp_set_default</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_disp_set_defaultP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv319lv_disp_set_defaultP9lv_disp_t"></span><span id="_CPPv219lv_disp_set_defaultP9lv_disp_t"></span><span id="lv_disp_set_default__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a490ee32cbb499fb8f2e2439a8ed7fbb6"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_disp_set_default</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_disp_set_defaultP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set a default screen. The new screens will be created on it by default. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">disp</span></code>: pointer to a display </p></li>
@@ -1647,7 +1661,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv419lv_disp_get_defaultv">
-<span id="_CPPv319lv_disp_get_defaultv"></span><span id="_CPPv219lv_disp_get_defaultv"></span><span id="lv_disp_get_default__void"></span><span class="target" id="lv__hal__disp_8h_1a1989caf62ece629efb8962d462ebef9e"></span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<code class="sig-name descname">lv_disp_get_default</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_disp_get_defaultv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv319lv_disp_get_defaultv"></span><span id="_CPPv219lv_disp_get_defaultv"></span><span id="lv_disp_get_default__void"></span><span class="target" id="lv__hal__disp_8h_1a1989caf62ece629efb8962d462ebef9e"></span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_disp_get_default</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_disp_get_defaultv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the default display <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>pointer to the default display </p>
 </dd>
@@ -1657,7 +1671,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv419lv_disp_get_hor_resP9lv_disp_t">
-<span id="_CPPv319lv_disp_get_hor_resP9lv_disp_t"></span><span id="_CPPv219lv_disp_get_hor_resP9lv_disp_t"></span><span id="lv_disp_get_hor_res__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a31a32a09b2b1b6ac0ebeedcd6d6f8ce3"></span>lv_coord_t <code class="sig-name descname">lv_disp_get_hor_res</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_disp_get_hor_resP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv319lv_disp_get_hor_resP9lv_disp_t"></span><span id="_CPPv219lv_disp_get_hor_resP9lv_disp_t"></span><span id="lv_disp_get_hor_res__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a31a32a09b2b1b6ac0ebeedcd6d6f8ce3"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">lv_disp_get_hor_res</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_disp_get_hor_resP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the horizontal resolution of a display <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>the horizontal resolution of the display </p>
 </dd>
@@ -1671,7 +1685,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv419lv_disp_get_ver_resP9lv_disp_t">
-<span id="_CPPv319lv_disp_get_ver_resP9lv_disp_t"></span><span id="_CPPv219lv_disp_get_ver_resP9lv_disp_t"></span><span id="lv_disp_get_ver_res__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1ad89a6aa4394a200d4482aa605cc57107"></span>lv_coord_t <code class="sig-name descname">lv_disp_get_ver_res</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_disp_get_ver_resP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv319lv_disp_get_ver_resP9lv_disp_t"></span><span id="_CPPv219lv_disp_get_ver_resP9lv_disp_t"></span><span id="lv_disp_get_ver_res__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1ad89a6aa4394a200d4482aa605cc57107"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">lv_disp_get_ver_res</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_disp_get_ver_resP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the vertical resolution of a display <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>the vertical resolution of the display </p>
 </dd>
@@ -1685,7 +1699,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv424lv_disp_get_antialiasingP9lv_disp_t">
-<span id="_CPPv324lv_disp_get_antialiasingP9lv_disp_t"></span><span id="_CPPv224lv_disp_get_antialiasingP9lv_disp_t"></span><span id="lv_disp_get_antialiasing__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1abe0f2764b9f8b355aa6df60ab75bd70f"></span>bool <code class="sig-name descname">lv_disp_get_antialiasing</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_disp_get_antialiasingP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv324lv_disp_get_antialiasingP9lv_disp_t"></span><span id="_CPPv224lv_disp_get_antialiasingP9lv_disp_t"></span><span id="lv_disp_get_antialiasing__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1abe0f2764b9f8b355aa6df60ab75bd70f"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">lv_disp_get_antialiasing</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_disp_get_antialiasingP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get if anti-aliasing is enabled for a display or not <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>true: anti-aliasing is enabled; false: disabled </p>
 </dd>
@@ -1699,7 +1713,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv415lv_disp_get_dpiP9lv_disp_t">
-<span id="_CPPv315lv_disp_get_dpiP9lv_disp_t"></span><span id="_CPPv215lv_disp_get_dpiP9lv_disp_t"></span><span id="lv_disp_get_dpi__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1ad26b7f327ae254bb0d798e3604f3301c"></span>lv_coord_t <code class="sig-name descname">lv_disp_get_dpi</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_disp_get_dpiP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv315lv_disp_get_dpiP9lv_disp_t"></span><span id="_CPPv215lv_disp_get_dpiP9lv_disp_t"></span><span id="lv_disp_get_dpi__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1ad26b7f327ae254bb0d798e3604f3301c"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">lv_disp_get_dpi</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_disp_get_dpiP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the DPI of the display <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>dpi of the display </p>
 </dd>
@@ -1713,7 +1727,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv425lv_disp_get_size_categoryP9lv_disp_t">
-<span id="_CPPv325lv_disp_get_size_categoryP9lv_disp_t"></span><span id="_CPPv225lv_disp_get_size_categoryP9lv_disp_t"></span><span id="lv_disp_get_size_category__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1aea0caf7f394683347fec0ffa1a5af65a"></span><a class="reference internal" href="#_CPPv414lv_disp_size_t" title="lv_disp_size_t">lv_disp_size_t</a> <code class="sig-name descname">lv_disp_get_size_category</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lv_disp_get_size_categoryP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv325lv_disp_get_size_categoryP9lv_disp_t"></span><span id="_CPPv225lv_disp_get_size_categoryP9lv_disp_t"></span><span id="lv_disp_get_size_category__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1aea0caf7f394683347fec0ffa1a5af65a"></span><a class="reference internal" href="#_CPPv414lv_disp_size_t" title="lv_disp_size_t"><span class="pre">lv_disp_size_t</span></a> <code class="sig-name descname"><span class="pre">lv_disp_get_size_category</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lv_disp_get_size_categoryP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the size category of the display based on it's hor. res. and dpi. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>LV_DISP_SIZE_SMALL/MEDIUM/LARGE/EXTRA_LARGE </p>
 </dd>
@@ -1727,7 +1741,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv416lv_disp_get_nextP9lv_disp_t">
-<span id="_CPPv316lv_disp_get_nextP9lv_disp_t"></span><span id="_CPPv216lv_disp_get_nextP9lv_disp_t"></span><span id="lv_disp_get_next__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a98bd7729feac5847ea164141825e10a7"></span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<code class="sig-name descname">lv_disp_get_next</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_disp_get_nextP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv316lv_disp_get_nextP9lv_disp_t"></span><span id="_CPPv216lv_disp_get_nextP9lv_disp_t"></span><span id="lv_disp_get_next__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a98bd7729feac5847ea164141825e10a7"></span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_disp_get_next</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_disp_get_nextP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the next display. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>the next display or NULL if no more. Give the first display when the parameter is NULL </p>
 </dd>
@@ -1741,7 +1755,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv415lv_disp_get_bufP9lv_disp_t">
-<span id="_CPPv315lv_disp_get_bufP9lv_disp_t"></span><span id="_CPPv215lv_disp_get_bufP9lv_disp_t"></span><span id="lv_disp_get_buf__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a0d9d997c562ee17f4bd2519e6a99de0f"></span><a class="reference internal" href="#_CPPv413lv_disp_buf_t" title="lv_disp_buf_t">lv_disp_buf_t</a> *<code class="sig-name descname">lv_disp_get_buf</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_disp_get_bufP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv315lv_disp_get_bufP9lv_disp_t"></span><span id="_CPPv215lv_disp_get_bufP9lv_disp_t"></span><span id="lv_disp_get_buf__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a0d9d997c562ee17f4bd2519e6a99de0f"></span><a class="reference internal" href="#_CPPv413lv_disp_buf_t" title="lv_disp_buf_t"><span class="pre">lv_disp_buf_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_disp_get_buf</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_disp_get_bufP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the internal buffer of a display <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>pointer to the internal buffers </p>
 </dd>
@@ -1755,7 +1769,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv424lv_disp_get_inv_buf_sizeP9lv_disp_t">
-<span id="_CPPv324lv_disp_get_inv_buf_sizeP9lv_disp_t"></span><span id="_CPPv224lv_disp_get_inv_buf_sizeP9lv_disp_t"></span><span id="lv_disp_get_inv_buf_size__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a287a8cf1a052d8a9eed77c03cc8b281c"></span>uint16_t <code class="sig-name descname">lv_disp_get_inv_buf_size</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_disp_get_inv_buf_sizeP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv324lv_disp_get_inv_buf_sizeP9lv_disp_t"></span><span id="_CPPv224lv_disp_get_inv_buf_sizeP9lv_disp_t"></span><span id="lv_disp_get_inv_buf_size__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a287a8cf1a052d8a9eed77c03cc8b281c"></span><span class="pre">uint16_t</span> <code class="sig-name descname"><span class="pre">lv_disp_get_inv_buf_size</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_disp_get_inv_buf_sizeP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the number of areas in the buffer <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>number of invalid areas </p>
 </dd>
@@ -1765,7 +1779,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv425_lv_disp_pop_from_inv_bufP9lv_disp_t8uint16_t">
-<span id="_CPPv325_lv_disp_pop_from_inv_bufP9lv_disp_t8uint16_t"></span><span id="_CPPv225_lv_disp_pop_from_inv_bufP9lv_disp_t8uint16_t"></span><span id="_lv_disp_pop_from_inv_buf__lv_disp_tP.uint16_t"></span><span class="target" id="lv__hal__disp_8h_1a3a03efc02f06c2e763188091205ab0f6"></span>void <code class="sig-name descname">_lv_disp_pop_from_inv_buf</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em>, uint16_t <em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425_lv_disp_pop_from_inv_bufP9lv_disp_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv325_lv_disp_pop_from_inv_bufP9lv_disp_t8uint16_t"></span><span id="_CPPv225_lv_disp_pop_from_inv_bufP9lv_disp_t8uint16_t"></span><span id="_lv_disp_pop_from_inv_buf__lv_disp_tP.uint16_t"></span><span class="target" id="lv__hal__disp_8h_1a3a03efc02f06c2e763188091205ab0f6"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_disp_pop_from_inv_buf</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em>, <span class="pre">uint16_t</span> <em><span class="pre">num</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425_lv_disp_pop_from_inv_bufP9lv_disp_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Pop (delete) the last 'num' invalidated areas from the buffer <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">num</span></code>: number of areas to delete </p></li>
@@ -1777,7 +1791,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv421lv_disp_is_double_bufP9lv_disp_t">
-<span id="_CPPv321lv_disp_is_double_bufP9lv_disp_t"></span><span id="_CPPv221lv_disp_is_double_bufP9lv_disp_t"></span><span id="lv_disp_is_double_buf__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1ad705fe70d41b924926276a653b215d84"></span>bool <code class="sig-name descname">lv_disp_is_double_buf</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_disp_is_double_bufP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv321lv_disp_is_double_bufP9lv_disp_t"></span><span id="_CPPv221lv_disp_is_double_bufP9lv_disp_t"></span><span id="lv_disp_is_double_buf__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1ad705fe70d41b924926276a653b215d84"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">lv_disp_is_double_buf</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_disp_is_double_bufP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Check the driver configuration if it's double buffered (both <code class="docutils literal notranslate"><span class="pre">buf1</span></code> and <code class="docutils literal notranslate"><span class="pre">buf2</span></code> are set) <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>true: double buffered; false: not double buffered </p>
 </dd>
@@ -1791,7 +1805,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp function">
 <dt id="_CPPv426lv_disp_is_true_double_bufP9lv_disp_t">
-<span id="_CPPv326lv_disp_is_true_double_bufP9lv_disp_t"></span><span id="_CPPv226lv_disp_is_true_double_bufP9lv_disp_t"></span><span id="lv_disp_is_true_double_buf__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a4066f462989fc62d861401c6114e255e"></span>bool <code class="sig-name descname">lv_disp_is_true_double_buf</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t">lv_disp_t</a> *<em>disp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_disp_is_true_double_bufP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv326lv_disp_is_true_double_bufP9lv_disp_t"></span><span id="_CPPv226lv_disp_is_true_double_bufP9lv_disp_t"></span><span id="lv_disp_is_true_double_buf__lv_disp_tP"></span><span class="target" id="lv__hal__disp_8h_1a4066f462989fc62d861401c6114e255e"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">lv_disp_is_true_double_buf</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_disp_t" title="lv_disp_t"><span class="pre">lv_disp_t</span></a> <span class="pre">*</span><em><span class="pre">disp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_disp_is_true_double_bufP9lv_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Check the driver configuration if it's TRUE double buffered (both <code class="docutils literal notranslate"><span class="pre">buf1</span></code> and <code class="docutils literal notranslate"><span class="pre">buf2</span></code> are set and <code class="docutils literal notranslate"><span class="pre">size</span></code> is screen sized) <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>true: double buffered; false: not double buffered </p>
 </dd>
@@ -1806,55 +1820,55 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 </div>
 <dl class="cpp struct">
 <dt id="_CPPv413lv_disp_buf_t">
-<span id="_CPPv313lv_disp_buf_t"></span><span id="_CPPv213lv_disp_buf_t"></span><span id="lv_disp_buf_t"></span><span class="target" id="structlv__disp__buf__t"></span><em class="property">struct </em><code class="sig-name descname">lv_disp_buf_t</code><a class="headerlink" href="#_CPPv413lv_disp_buf_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv313lv_disp_buf_t"></span><span id="_CPPv213lv_disp_buf_t"></span><span id="lv_disp_buf_t"></span><span class="target" id="structlv__disp__buf__t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">lv_disp_buf_t</span></code><a class="headerlink" href="#_CPPv413lv_disp_buf_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;lv_hal_disp.h&gt;</em><p>Structure for holding display buffer information. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
 <dt id="_CPPv4N13lv_disp_buf_t4buf1E">
-<span id="_CPPv3N13lv_disp_buf_t4buf1E"></span><span id="_CPPv2N13lv_disp_buf_t4buf1E"></span><span id="lv_disp_buf_t::buf1__voidP"></span><span class="target" id="structlv__disp__buf__t_1a7c56283a8c5b0dc52a82fb20b464a9d9"></span>void *<code class="sig-name descname">buf1</code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t4buf1E" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13lv_disp_buf_t4buf1E"></span><span id="_CPPv2N13lv_disp_buf_t4buf1E"></span><span id="lv_disp_buf_t::buf1__voidP"></span><span class="target" id="structlv__disp__buf__t_1a7c56283a8c5b0dc52a82fb20b464a9d9"></span><span class="pre">void</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">buf1</span></code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t4buf1E" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>First display buffer. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N13lv_disp_buf_t4buf2E">
-<span id="_CPPv3N13lv_disp_buf_t4buf2E"></span><span id="_CPPv2N13lv_disp_buf_t4buf2E"></span><span id="lv_disp_buf_t::buf2__voidP"></span><span class="target" id="structlv__disp__buf__t_1afcaaf378df61c9b5f30555e371c910ef"></span>void *<code class="sig-name descname">buf2</code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t4buf2E" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13lv_disp_buf_t4buf2E"></span><span id="_CPPv2N13lv_disp_buf_t4buf2E"></span><span id="lv_disp_buf_t::buf2__voidP"></span><span class="target" id="structlv__disp__buf__t_1afcaaf378df61c9b5f30555e371c910ef"></span><span class="pre">void</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">buf2</span></code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t4buf2E" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Second display buffer. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N13lv_disp_buf_t7buf_actE">
-<span id="_CPPv3N13lv_disp_buf_t7buf_actE"></span><span id="_CPPv2N13lv_disp_buf_t7buf_actE"></span><span id="lv_disp_buf_t::buf_act__voidP"></span><span class="target" id="structlv__disp__buf__t_1ae4f48a9bc71d13eb18552a4b9ca5c711"></span>void *<code class="sig-name descname">buf_act</code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t7buf_actE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13lv_disp_buf_t7buf_actE"></span><span id="_CPPv2N13lv_disp_buf_t7buf_actE"></span><span id="lv_disp_buf_t::buf_act__voidP"></span><span class="target" id="structlv__disp__buf__t_1ae4f48a9bc71d13eb18552a4b9ca5c711"></span><span class="pre">void</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">buf_act</span></code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t7buf_actE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N13lv_disp_buf_t4sizeE">
-<span id="_CPPv3N13lv_disp_buf_t4sizeE"></span><span id="_CPPv2N13lv_disp_buf_t4sizeE"></span><span id="lv_disp_buf_t::size__uint32_t"></span><span class="target" id="structlv__disp__buf__t_1ad6b8801bc0cc47a83cd1fbccbe7964ff"></span>uint32_t <code class="sig-name descname">size</code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t4sizeE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13lv_disp_buf_t4sizeE"></span><span id="_CPPv2N13lv_disp_buf_t4sizeE"></span><span id="lv_disp_buf_t::size__uint32_t"></span><span class="target" id="structlv__disp__buf__t_1ad6b8801bc0cc47a83cd1fbccbe7964ff"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">size</span></code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t4sizeE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N13lv_disp_buf_t4areaE">
-<span id="_CPPv3N13lv_disp_buf_t4areaE"></span><span id="_CPPv2N13lv_disp_buf_t4areaE"></span><span id="lv_disp_buf_t::area__lv_area_t"></span><span class="target" id="structlv__disp__buf__t_1af316716d5d23347cf1a13d43bbfc65b0"></span>lv_area_t <code class="sig-name descname">area</code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t4areaE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13lv_disp_buf_t4areaE"></span><span id="_CPPv2N13lv_disp_buf_t4areaE"></span><span id="lv_disp_buf_t::area__lv_area_t"></span><span class="target" id="structlv__disp__buf__t_1af316716d5d23347cf1a13d43bbfc65b0"></span><span class="pre">lv_area_t</span> <code class="sig-name descname"><span class="pre">area</span></code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t4areaE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N13lv_disp_buf_t8flushingE">
-<span id="_CPPv3N13lv_disp_buf_t8flushingE"></span><span id="_CPPv2N13lv_disp_buf_t8flushingE"></span><span id="lv_disp_buf_t::flushing__i"></span><span class="target" id="structlv__disp__buf__t_1aff04e7c458b197d525fe388a6993f490"></span>int <code class="sig-name descname">flushing</code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t8flushingE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13lv_disp_buf_t8flushingE"></span><span id="_CPPv2N13lv_disp_buf_t8flushingE"></span><span id="lv_disp_buf_t::flushing__i"></span><span class="target" id="structlv__disp__buf__t_1aff04e7c458b197d525fe388a6993f490"></span><span class="pre">int</span> <code class="sig-name descname"><span class="pre">flushing</span></code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t8flushingE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N13lv_disp_buf_t13flushing_lastE">
-<span id="_CPPv3N13lv_disp_buf_t13flushing_lastE"></span><span id="_CPPv2N13lv_disp_buf_t13flushing_lastE"></span><span id="lv_disp_buf_t::flushing_last__i"></span><span class="target" id="structlv__disp__buf__t_1aaac641fe6b717095c0092c45a71fb0e8"></span>int <code class="sig-name descname">flushing_last</code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t13flushing_lastE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13lv_disp_buf_t13flushing_lastE"></span><span id="_CPPv2N13lv_disp_buf_t13flushing_lastE"></span><span id="lv_disp_buf_t::flushing_last__i"></span><span class="target" id="structlv__disp__buf__t_1aaac641fe6b717095c0092c45a71fb0e8"></span><span class="pre">int</span> <code class="sig-name descname"><span class="pre">flushing_last</span></code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t13flushing_lastE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N13lv_disp_buf_t9last_areaE">
-<span id="_CPPv3N13lv_disp_buf_t9last_areaE"></span><span id="_CPPv2N13lv_disp_buf_t9last_areaE"></span><span id="lv_disp_buf_t::last_area__uint32_t"></span><span class="target" id="structlv__disp__buf__t_1a0f63af9f223b30d05ebb94a90396c61a"></span>uint32_t <code class="sig-name descname">last_area</code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t9last_areaE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13lv_disp_buf_t9last_areaE"></span><span id="_CPPv2N13lv_disp_buf_t9last_areaE"></span><span id="lv_disp_buf_t::last_area__uint32_t"></span><span class="target" id="structlv__disp__buf__t_1a0f63af9f223b30d05ebb94a90396c61a"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">last_area</span></code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t9last_areaE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N13lv_disp_buf_t9last_partE">
-<span id="_CPPv3N13lv_disp_buf_t9last_partE"></span><span id="_CPPv2N13lv_disp_buf_t9last_partE"></span><span id="lv_disp_buf_t::last_part__uint32_t"></span><span class="target" id="structlv__disp__buf__t_1a216234aee5b3512d55bd514b5ba4ee69"></span>uint32_t <code class="sig-name descname">last_part</code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t9last_partE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N13lv_disp_buf_t9last_partE"></span><span id="_CPPv2N13lv_disp_buf_t9last_partE"></span><span id="lv_disp_buf_t::last_part__uint32_t"></span><span class="target" id="structlv__disp__buf__t_1a216234aee5b3512d55bd514b5ba4ee69"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">last_part</span></code><a class="headerlink" href="#_CPPv4N13lv_disp_buf_t9last_partE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -1862,37 +1876,37 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp struct">
 <dt id="_CPPv411_disp_drv_t">
-<span id="_CPPv311_disp_drv_t"></span><span id="_CPPv211_disp_drv_t"></span><span id="_disp_drv_t"></span><span class="target" id="struct__disp__drv__t"></span><em class="property">struct </em><code class="sig-name descname">_disp_drv_t</code><a class="headerlink" href="#_CPPv411_disp_drv_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv311_disp_drv_t"></span><span id="_CPPv211_disp_drv_t"></span><span id="_disp_drv_t"></span><span class="target" id="struct__disp__drv__t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">_disp_drv_t</span></code><a class="headerlink" href="#_CPPv411_disp_drv_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;lv_hal_disp.h&gt;</em><p>Display Driver structure to be registered by HAL </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t7hor_resE">
-<span id="_CPPv3N11_disp_drv_t7hor_resE"></span><span id="_CPPv2N11_disp_drv_t7hor_resE"></span><span id="_disp_drv_t::hor_res__lv_coord_t"></span><span class="target" id="struct__disp__drv__t_1a7e3be2880c529d5e7662d4db0a07664e"></span>lv_coord_t <code class="sig-name descname">hor_res</code><a class="headerlink" href="#_CPPv4N11_disp_drv_t7hor_resE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t7hor_resE"></span><span id="_CPPv2N11_disp_drv_t7hor_resE"></span><span id="_disp_drv_t::hor_res__lv_coord_t"></span><span class="target" id="struct__disp__drv__t_1a7e3be2880c529d5e7662d4db0a07664e"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">hor_res</span></code><a class="headerlink" href="#_CPPv4N11_disp_drv_t7hor_resE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Horizontal resolution. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t7ver_resE">
-<span id="_CPPv3N11_disp_drv_t7ver_resE"></span><span id="_CPPv2N11_disp_drv_t7ver_resE"></span><span id="_disp_drv_t::ver_res__lv_coord_t"></span><span class="target" id="struct__disp__drv__t_1a21f1b312f97ffea34202d5d7846974ee"></span>lv_coord_t <code class="sig-name descname">ver_res</code><a class="headerlink" href="#_CPPv4N11_disp_drv_t7ver_resE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t7ver_resE"></span><span id="_CPPv2N11_disp_drv_t7ver_resE"></span><span id="_disp_drv_t::ver_res__lv_coord_t"></span><span class="target" id="struct__disp__drv__t_1a21f1b312f97ffea34202d5d7846974ee"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">ver_res</span></code><a class="headerlink" href="#_CPPv4N11_disp_drv_t7ver_resE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Vertical resolution. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t6bufferE">
-<span id="_CPPv3N11_disp_drv_t6bufferE"></span><span id="_CPPv2N11_disp_drv_t6bufferE"></span><span id="_disp_drv_t::buffer__lv_disp_buf_tP"></span><span class="target" id="struct__disp__drv__t_1a9187f73accf5f98768402bb004527734"></span><a class="reference internal" href="#_CPPv413lv_disp_buf_t" title="lv_disp_buf_t">lv_disp_buf_t</a> *<code class="sig-name descname">buffer</code><a class="headerlink" href="#_CPPv4N11_disp_drv_t6bufferE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t6bufferE"></span><span id="_CPPv2N11_disp_drv_t6bufferE"></span><span id="_disp_drv_t::buffer__lv_disp_buf_tP"></span><span class="target" id="struct__disp__drv__t_1a9187f73accf5f98768402bb004527734"></span><a class="reference internal" href="#_CPPv413lv_disp_buf_t" title="lv_disp_buf_t"><span class="pre">lv_disp_buf_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">buffer</span></code><a class="headerlink" href="#_CPPv4N11_disp_drv_t6bufferE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Pointer to a buffer initialized with <code class="docutils literal notranslate"><a class="reference internal" href="#lv__hal__disp_8h_1a31bfd68c610a609777fe22c30ce70f69"><span class="std std-ref"><span class="pre">lv_disp_buf_init()</span></span></a></code>. LVGL will use this buffer(s) to draw the screens contents </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t12antialiasingE">
-<span id="_CPPv3N11_disp_drv_t12antialiasingE"></span><span id="_CPPv2N11_disp_drv_t12antialiasingE"></span><span id="_disp_drv_t::antialiasing__uint32_t"></span><span class="target" id="struct__disp__drv__t_1a3ef659c52d581d1356466fb198b1e3d5"></span>uint32_t <code class="sig-name descname">antialiasing</code><a class="headerlink" href="#_CPPv4N11_disp_drv_t12antialiasingE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t12antialiasingE"></span><span id="_CPPv2N11_disp_drv_t12antialiasingE"></span><span id="_disp_drv_t::antialiasing__uint32_t"></span><span class="target" id="struct__disp__drv__t_1a3ef659c52d581d1356466fb198b1e3d5"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">antialiasing</span></code><a class="headerlink" href="#_CPPv4N11_disp_drv_t12antialiasingE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>1: antialiasing is enabled on this display. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t7rotatedE">
-<span id="_CPPv3N11_disp_drv_t7rotatedE"></span><span id="_CPPv2N11_disp_drv_t7rotatedE"></span><span id="_disp_drv_t::rotated__uint32_t"></span><span class="target" id="struct__disp__drv__t_1a29a3cccc7f814ae9d77bb2e4fea536f7"></span>uint32_t <code class="sig-name descname">rotated</code><a class="headerlink" href="#_CPPv4N11_disp_drv_t7rotatedE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t7rotatedE"></span><span id="_CPPv2N11_disp_drv_t7rotatedE"></span><span id="_disp_drv_t::rotated__uint32_t"></span><span class="target" id="struct__disp__drv__t_1a29a3cccc7f814ae9d77bb2e4fea536f7"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">rotated</span></code><a class="headerlink" href="#_CPPv4N11_disp_drv_t7rotatedE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>1: turn the display by 90 degree. <dl class="simple">
 <dt><strong>Warning</strong></dt><dd><p>Does not update coordinates for you! </p>
 </dd>
@@ -1902,31 +1916,31 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t13screen_transpE">
-<span id="_CPPv3N11_disp_drv_t13screen_transpE"></span><span id="_CPPv2N11_disp_drv_t13screen_transpE"></span><span id="_disp_drv_t::screen_transp__uint32_t"></span><span class="target" id="struct__disp__drv__t_1ae07c8244a3ae00bd1c438824311dff54"></span>uint32_t <code class="sig-name descname">screen_transp</code><a class="headerlink" href="#_CPPv4N11_disp_drv_t13screen_transpE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t13screen_transpE"></span><span id="_CPPv2N11_disp_drv_t13screen_transpE"></span><span id="_disp_drv_t::screen_transp__uint32_t"></span><span class="target" id="struct__disp__drv__t_1ae07c8244a3ae00bd1c438824311dff54"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">screen_transp</span></code><a class="headerlink" href="#_CPPv4N11_disp_drv_t13screen_transpE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Handle if the screen doesn't have a solid (opa == LV_OPA_COVER) background. Use only if required because it's slower. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t3dpiE">
-<span id="_CPPv3N11_disp_drv_t3dpiE"></span><span id="_CPPv2N11_disp_drv_t3dpiE"></span><span id="_disp_drv_t::dpi__uint32_t"></span><span class="target" id="struct__disp__drv__t_1a93d717822cadf02be2545ad2d64e0b75"></span>uint32_t <code class="sig-name descname">dpi</code><a class="headerlink" href="#_CPPv4N11_disp_drv_t3dpiE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t3dpiE"></span><span id="_CPPv2N11_disp_drv_t3dpiE"></span><span id="_disp_drv_t::dpi__uint32_t"></span><span class="target" id="struct__disp__drv__t_1a93d717822cadf02be2545ad2d64e0b75"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">dpi</span></code><a class="headerlink" href="#_CPPv4N11_disp_drv_t3dpiE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>DPI (dot per inch) of the display. Set to <code class="docutils literal notranslate"><span class="pre">LV_DPI</span></code> from <code class="docutils literal notranslate"><span class="pre">lv_Conf.h</span></code> by default. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t8flush_cbE">
-<span id="_CPPv3N11_disp_drv_t8flush_cbE"></span><span id="_CPPv2N11_disp_drv_t8flush_cbE"></span><span class="target" id="struct__disp__drv__t_1a55a620fcab2ffb0d41a12f13c4f41291"></span>void (*<code class="sig-name descname">flush_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv, <em class="property">const</em> lv_area_t *area, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> *color_p<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t8flush_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t8flush_cbE"></span><span id="_CPPv2N11_disp_drv_t8flush_cbE"></span><span class="target" id="struct__disp__drv__t_1a55a620fcab2ffb0d41a12f13c4f41291"></span><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">flush_cb</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t"><span class="pre">_disp_drv_t</span></a> <span class="pre">*</span><span class="pre">disp_drv</span>, <em class="property"><span class="pre">const</span></em> <span class="pre">lv_area_t</span> <span class="pre">*</span><span class="pre">area</span>, <span class="pre">lv_color_t</span> <span class="pre">*</span><span class="pre">color_p</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t8flush_cbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>MANDATORY: Write the internal buffer (VDB) to the display. 'lv_disp_flush_ready()' has to be called when finished </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t10rounder_cbE">
-<span id="_CPPv3N11_disp_drv_t10rounder_cbE"></span><span id="_CPPv2N11_disp_drv_t10rounder_cbE"></span><span class="target" id="struct__disp__drv__t_1a1a012c9cb3884a9e960747e55d502629"></span>void (*<code class="sig-name descname">rounder_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv, lv_area_t *area<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t10rounder_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t10rounder_cbE"></span><span id="_CPPv2N11_disp_drv_t10rounder_cbE"></span><span class="target" id="struct__disp__drv__t_1a1a012c9cb3884a9e960747e55d502629"></span><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">rounder_cb</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t"><span class="pre">_disp_drv_t</span></a> <span class="pre">*</span><span class="pre">disp_drv</span>, <span class="pre">lv_area_t</span> <span class="pre">*</span><span class="pre">area</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t10rounder_cbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>OPTIONAL: Extend the invalidated areas to match with the display drivers requirements E.g. round <code class="docutils literal notranslate"><span class="pre">y</span></code> to, 8, 16 ..) on a monochrome display </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t9set_px_cbE">
-<span id="_CPPv3N11_disp_drv_t9set_px_cbE"></span><span id="_CPPv2N11_disp_drv_t9set_px_cbE"></span><span class="target" id="struct__disp__drv__t_1a96466fc0be03f5b3526d382f2c4568bd"></span>void (*<code class="sig-name descname">set_px_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv, uint8_t *buf, lv_coord_t buf_w, lv_coord_t x, lv_coord_t y, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> color, lv_opa_t opa<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t9set_px_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t9set_px_cbE"></span><span id="_CPPv2N11_disp_drv_t9set_px_cbE"></span><span class="target" id="struct__disp__drv__t_1a96466fc0be03f5b3526d382f2c4568bd"></span><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">set_px_cb</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t"><span class="pre">_disp_drv_t</span></a> <span class="pre">*</span><span class="pre">disp_drv</span>, <span class="pre">uint8_t</span> <span class="pre">*</span><span class="pre">buf</span>, <span class="pre">lv_coord_t</span> <span class="pre">buf_w</span>, <span class="pre">lv_coord_t</span> <span class="pre">x</span>, <span class="pre">lv_coord_t</span> <span class="pre">y</span>, <span class="pre">lv_color_t</span> <span class="pre">color</span>, <span class="pre">lv_opa_t</span> <span class="pre">opa</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t9set_px_cbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>OPTIONAL: Set a pixel in a buffer according to the special requirements of the display Can be used for color format not supported in LittelvGL. E.g. 2 bit -&gt; 4 gray scales <dl class="simple">
 <dt><strong>Note</strong></dt><dd><p>Much slower then drawing with supported color formats. </p>
 </dd>
@@ -1936,49 +1950,49 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t10monitor_cbE">
-<span id="_CPPv3N11_disp_drv_t10monitor_cbE"></span><span id="_CPPv2N11_disp_drv_t10monitor_cbE"></span><span class="target" id="struct__disp__drv__t_1aeea2bed761a832dcb30560146dfc3778"></span>void (*<code class="sig-name descname">monitor_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv, uint32_t time, uint32_t px<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t10monitor_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t10monitor_cbE"></span><span id="_CPPv2N11_disp_drv_t10monitor_cbE"></span><span class="target" id="struct__disp__drv__t_1aeea2bed761a832dcb30560146dfc3778"></span><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">monitor_cb</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t"><span class="pre">_disp_drv_t</span></a> <span class="pre">*</span><span class="pre">disp_drv</span>, <span class="pre">uint32_t</span> <span class="pre">time</span>, <span class="pre">uint32_t</span> <span class="pre">px</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t10monitor_cbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>OPTIONAL: Called after every refresh cycle to tell the rendering and flushing time + the number of flushed pixels </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t7wait_cbE">
-<span id="_CPPv3N11_disp_drv_t7wait_cbE"></span><span id="_CPPv2N11_disp_drv_t7wait_cbE"></span><span class="target" id="struct__disp__drv__t_1a463877a89351206eb9e40547651676ca"></span>void (*<code class="sig-name descname">wait_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t7wait_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t7wait_cbE"></span><span id="_CPPv2N11_disp_drv_t7wait_cbE"></span><span class="target" id="struct__disp__drv__t_1a463877a89351206eb9e40547651676ca"></span><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">wait_cb</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t"><span class="pre">_disp_drv_t</span></a> <span class="pre">*</span><span class="pre">disp_drv</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t7wait_cbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>OPTIONAL: Called periodically while lvgl waits for operation to be completed. For example flushing or GPU User can execute very simple tasks here or yield the task </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t15clean_dcache_cbE">
-<span id="_CPPv3N11_disp_drv_t15clean_dcache_cbE"></span><span id="_CPPv2N11_disp_drv_t15clean_dcache_cbE"></span><span class="target" id="struct__disp__drv__t_1a2bd00c56f68ec6c2a54d192aa52d4292"></span>void (*<code class="sig-name descname">clean_dcache_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t15clean_dcache_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t15clean_dcache_cbE"></span><span id="_CPPv2N11_disp_drv_t15clean_dcache_cbE"></span><span class="target" id="struct__disp__drv__t_1a2bd00c56f68ec6c2a54d192aa52d4292"></span><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">clean_dcache_cb</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t"><span class="pre">_disp_drv_t</span></a> <span class="pre">*</span><span class="pre">disp_drv</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t15clean_dcache_cbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>OPTIONAL: Called when lvgl needs any CPU cache that affects rendering to be cleaned </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t11gpu_wait_cbE">
-<span id="_CPPv3N11_disp_drv_t11gpu_wait_cbE"></span><span id="_CPPv2N11_disp_drv_t11gpu_wait_cbE"></span><span class="target" id="struct__disp__drv__t_1a849cd1810fe5b99ed3b6345f07efab3b"></span>void (*<code class="sig-name descname">gpu_wait_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t11gpu_wait_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t11gpu_wait_cbE"></span><span id="_CPPv2N11_disp_drv_t11gpu_wait_cbE"></span><span class="target" id="struct__disp__drv__t_1a849cd1810fe5b99ed3b6345f07efab3b"></span><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">gpu_wait_cb</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t"><span class="pre">_disp_drv_t</span></a> <span class="pre">*</span><span class="pre">disp_drv</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t11gpu_wait_cbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>OPTIONAL: called to wait while the gpu is working </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t12gpu_blend_cbE">
-<span id="_CPPv3N11_disp_drv_t12gpu_blend_cbE"></span><span id="_CPPv2N11_disp_drv_t12gpu_blend_cbE"></span><span class="target" id="struct__disp__drv__t_1a3a51d09fd664baa53552c72e8209a39d"></span>void (*<code class="sig-name descname">gpu_blend_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> *dest, <em class="property">const</em> <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> *src, uint32_t length, lv_opa_t opa<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t12gpu_blend_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t12gpu_blend_cbE"></span><span id="_CPPv2N11_disp_drv_t12gpu_blend_cbE"></span><span class="target" id="struct__disp__drv__t_1a3a51d09fd664baa53552c72e8209a39d"></span><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">gpu_blend_cb</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t"><span class="pre">_disp_drv_t</span></a> <span class="pre">*</span><span class="pre">disp_drv</span>, <span class="pre">lv_color_t</span> <span class="pre">*</span><span class="pre">dest</span>, <em class="property"><span class="pre">const</span></em> <span class="pre">lv_color_t</span> <span class="pre">*</span><span class="pre">src</span>, <span class="pre">uint32_t</span> <span class="pre">length</span>, <span class="pre">lv_opa_t</span> <span class="pre">opa</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t12gpu_blend_cbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>OPTIONAL: Blend two memories using opacity (GPU only) </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t11gpu_fill_cbE">
-<span id="_CPPv3N11_disp_drv_t11gpu_fill_cbE"></span><span id="_CPPv2N11_disp_drv_t11gpu_fill_cbE"></span><span class="target" id="struct__disp__drv__t_1a6c5d122ced7061fc1195bb095a2edd2a"></span>void (*<code class="sig-name descname">gpu_fill_cb</code>)<span class="sig-paren">(</span><em class="property">struct</em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t">_disp_drv_t</a> *disp_drv, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> *dest_buf, lv_coord_t dest_width, <em class="property">const</em> lv_area_t *fill_area, <a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> color<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t11gpu_fill_cbE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t11gpu_fill_cbE"></span><span id="_CPPv2N11_disp_drv_t11gpu_fill_cbE"></span><span class="target" id="struct__disp__drv__t_1a6c5d122ced7061fc1195bb095a2edd2a"></span><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">gpu_fill_cb</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv411_disp_drv_t" title="_disp_drv_t"><span class="pre">_disp_drv_t</span></a> <span class="pre">*</span><span class="pre">disp_drv</span>, <span class="pre">lv_color_t</span> <span class="pre">*</span><span class="pre">dest_buf</span>, <span class="pre">lv_coord_t</span> <span class="pre">dest_width</span>, <em class="property"><span class="pre">const</span></em> <span class="pre">lv_area_t</span> <span class="pre">*</span><span class="pre">fill_area</span>, <span class="pre">lv_color_t</span> <span class="pre">color</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N11_disp_drv_t11gpu_fill_cbE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>OPTIONAL: Fill a memory with a color (GPU only) </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t16color_chroma_keyE">
-<span id="_CPPv3N11_disp_drv_t16color_chroma_keyE"></span><span id="_CPPv2N11_disp_drv_t16color_chroma_keyE"></span><span id="_disp_drv_t::color_chroma_key__lv_color_t"></span><span class="target" id="struct__disp__drv__t_1afcc099f8594a566b712353afc37b578d"></span><a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> <code class="sig-name descname">color_chroma_key</code><a class="headerlink" href="#_CPPv4N11_disp_drv_t16color_chroma_keyE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t16color_chroma_keyE"></span><span id="_CPPv2N11_disp_drv_t16color_chroma_keyE"></span><span id="_disp_drv_t::color_chroma_key__lv_color_t"></span><span class="target" id="struct__disp__drv__t_1afcc099f8594a566b712353afc37b578d"></span><span class="pre">lv_color_t</span> <code class="sig-name descname"><span class="pre">color_chroma_key</span></code><a class="headerlink" href="#_CPPv4N11_disp_drv_t16color_chroma_keyE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>On CHROMA_KEYED images this color will be transparent. <code class="docutils literal notranslate"><span class="pre">LV_COLOR_TRANSP</span></code> by default. (lv_conf.h) </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N11_disp_drv_t9user_dataE">
-<span id="_CPPv3N11_disp_drv_t9user_dataE"></span><span id="_CPPv2N11_disp_drv_t9user_dataE"></span><span id="_disp_drv_t::user_data__lv_disp_drv_user_data_t"></span><span class="target" id="struct__disp__drv__t_1ac18613f3bd1a2d8f6e85fc54f4dbcb81"></span>lv_disp_drv_user_data_t <code class="sig-name descname">user_data</code><a class="headerlink" href="#_CPPv4N11_disp_drv_t9user_dataE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N11_disp_drv_t9user_dataE"></span><span id="_CPPv2N11_disp_drv_t9user_dataE"></span><span id="_disp_drv_t::user_data__lv_disp_drv_user_data_t"></span><span class="target" id="struct__disp__drv__t_1ac18613f3bd1a2d8f6e85fc54f4dbcb81"></span><span class="pre">lv_disp_drv_user_data_t</span> <code class="sig-name descname"><span class="pre">user_data</span></code><a class="headerlink" href="#_CPPv4N11_disp_drv_t9user_dataE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Custom display driver user data </p>
 </dd></dl>
 
@@ -1987,7 +2001,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp struct">
 <dt id="_CPPv47_disp_t">
-<span id="_CPPv37_disp_t"></span><span id="_CPPv27_disp_t"></span><span id="_disp_t"></span><span class="target" id="struct__disp__t"></span><em class="property">struct </em><code class="sig-name descname">_disp_t</code><a class="headerlink" href="#_CPPv47_disp_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv37_disp_t"></span><span id="_CPPv27_disp_t"></span><span id="_disp_t"></span><span class="target" id="struct__disp__t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">_disp_t</span></code><a class="headerlink" href="#_CPPv47_disp_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;lv_hal_disp.h&gt;</em><p>Display structure. <dl class="simple">
 <dt><strong>Note</strong></dt><dd><p><code class="docutils literal notranslate"><span class="pre">lv_disp_drv_t</span></code> should be the first member of the structure. </p>
 </dd>
@@ -1997,42 +2011,42 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 <p class="breathe-sectiondef-title rubric">Public Members</p>
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t6driverE">
-<span id="_CPPv3N7_disp_t6driverE"></span><span id="_CPPv2N7_disp_t6driverE"></span><span id="_disp_t::driver__lv_disp_drv_t"></span><span class="target" id="struct__disp__t_1a41b2d7b8aece123e730aba6de4737040"></span><a class="reference internal" href="#_CPPv413lv_disp_drv_t" title="lv_disp_drv_t">lv_disp_drv_t</a> <code class="sig-name descname">driver</code><a class="headerlink" href="#_CPPv4N7_disp_t6driverE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t6driverE"></span><span id="_CPPv2N7_disp_t6driverE"></span><span id="_disp_t::driver__lv_disp_drv_t"></span><span class="target" id="struct__disp__t_1a41b2d7b8aece123e730aba6de4737040"></span><a class="reference internal" href="#_CPPv413lv_disp_drv_t" title="lv_disp_drv_t"><span class="pre">lv_disp_drv_t</span></a> <code class="sig-name descname"><span class="pre">driver</span></code><a class="headerlink" href="#_CPPv4N7_disp_t6driverE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>&lt; Driver to the display A task which periodically checks the dirty areas and refreshes them </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t9refr_taskE">
-<span id="_CPPv3N7_disp_t9refr_taskE"></span><span id="_CPPv2N7_disp_t9refr_taskE"></span><span id="_disp_t::refr_task__lv_task_tP"></span><span class="target" id="struct__disp__t_1a643fda9b299c7dae5e3dd86415182140"></span><a class="reference internal" href="../overview/task.html#_CPPv49lv_task_t" title="lv_task_t">lv_task_t</a> *<code class="sig-name descname">refr_task</code><a class="headerlink" href="#_CPPv4N7_disp_t9refr_taskE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t9refr_taskE"></span><span id="_CPPv2N7_disp_t9refr_taskE"></span><span id="_disp_t::refr_task__lv_task_tP"></span><span class="target" id="struct__disp__t_1a643fda9b299c7dae5e3dd86415182140"></span><a class="reference internal" href="../overview/task.html#_CPPv49lv_task_t" title="lv_task_t"><span class="pre">lv_task_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">refr_task</span></code><a class="headerlink" href="#_CPPv4N7_disp_t9refr_taskE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t6scr_llE">
-<span id="_CPPv3N7_disp_t6scr_llE"></span><span id="_CPPv2N7_disp_t6scr_llE"></span><span id="_disp_t::scr_ll__lv_ll_t"></span><span class="target" id="struct__disp__t_1a53c6760eb63a16a86340331e7edcab39"></span>lv_ll_t <code class="sig-name descname">scr_ll</code><a class="headerlink" href="#_CPPv4N7_disp_t6scr_llE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t6scr_llE"></span><span id="_CPPv2N7_disp_t6scr_llE"></span><span id="_disp_t::scr_ll__lv_ll_t"></span><span class="target" id="struct__disp__t_1a53c6760eb63a16a86340331e7edcab39"></span><span class="pre">lv_ll_t</span> <code class="sig-name descname"><span class="pre">scr_ll</span></code><a class="headerlink" href="#_CPPv4N7_disp_t6scr_llE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Screens of the display </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t7act_scrE">
-<span id="_CPPv3N7_disp_t7act_scrE"></span><span id="_CPPv2N7_disp_t7act_scrE"></span><span id="_disp_t::act_scr___lv_obj_tP"></span><span class="target" id="struct__disp__t_1ae536685fe807c9f8f442b66e9e9b7f01"></span><em class="property">struct</em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<code class="sig-name descname">act_scr</code><a class="headerlink" href="#_CPPv4N7_disp_t7act_scrE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t7act_scrE"></span><span id="_CPPv2N7_disp_t7act_scrE"></span><span id="_disp_t::act_scr___lv_obj_tP"></span><span class="target" id="struct__disp__t_1ae536685fe807c9f8f442b66e9e9b7f01"></span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t"><span class="pre">_lv_obj_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">act_scr</span></code><a class="headerlink" href="#_CPPv4N7_disp_t7act_scrE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Currently active screen on this display </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t8prev_scrE">
-<span id="_CPPv3N7_disp_t8prev_scrE"></span><span id="_CPPv2N7_disp_t8prev_scrE"></span><span id="_disp_t::prev_scr___lv_obj_tP"></span><span class="target" id="struct__disp__t_1a701ca70a168f23c14a6f727231573aa7"></span><em class="property">struct</em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<code class="sig-name descname">prev_scr</code><a class="headerlink" href="#_CPPv4N7_disp_t8prev_scrE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t8prev_scrE"></span><span id="_CPPv2N7_disp_t8prev_scrE"></span><span id="_disp_t::prev_scr___lv_obj_tP"></span><span class="target" id="struct__disp__t_1a701ca70a168f23c14a6f727231573aa7"></span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t"><span class="pre">_lv_obj_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">prev_scr</span></code><a class="headerlink" href="#_CPPv4N7_disp_t8prev_scrE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Previous screen. Used during screen animations </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t11scr_to_loadE">
-<span id="_CPPv3N7_disp_t11scr_to_loadE"></span><span id="_CPPv2N7_disp_t11scr_to_loadE"></span><span id="_disp_t::scr_to_load___lv_obj_tP"></span><span class="target" id="struct__disp__t_1aa0dbf47228527606b60be6db1d10b3f6"></span><em class="property">struct</em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<code class="sig-name descname">scr_to_load</code><a class="headerlink" href="#_CPPv4N7_disp_t11scr_to_loadE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t11scr_to_loadE"></span><span id="_CPPv2N7_disp_t11scr_to_loadE"></span><span id="_disp_t::scr_to_load___lv_obj_tP"></span><span class="target" id="struct__disp__t_1aa0dbf47228527606b60be6db1d10b3f6"></span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t"><span class="pre">_lv_obj_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">scr_to_load</span></code><a class="headerlink" href="#_CPPv4N7_disp_t11scr_to_loadE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The screen prepared to load in lv_scr_load_anim </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t9top_layerE">
-<span id="_CPPv3N7_disp_t9top_layerE"></span><span id="_CPPv2N7_disp_t9top_layerE"></span><span id="_disp_t::top_layer___lv_obj_tP"></span><span class="target" id="struct__disp__t_1aaba39ff9d7e66ea7413683694d098540"></span><em class="property">struct</em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<code class="sig-name descname">top_layer</code><a class="headerlink" href="#_CPPv4N7_disp_t9top_layerE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t9top_layerE"></span><span id="_CPPv2N7_disp_t9top_layerE"></span><span id="_disp_t::top_layer___lv_obj_tP"></span><span class="target" id="struct__disp__t_1aaba39ff9d7e66ea7413683694d098540"></span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t"><span class="pre">_lv_obj_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">top_layer</span></code><a class="headerlink" href="#_CPPv4N7_disp_t9top_layerE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p><dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="../overview/display.html#lv__disp_8h_1abb96745c10c7d8b5d7acc93e70584145"><span class="std std-ref">lv_disp_get_layer_top</span></a> </p>
 </dd>
@@ -2042,7 +2056,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t9sys_layerE">
-<span id="_CPPv3N7_disp_t9sys_layerE"></span><span id="_CPPv2N7_disp_t9sys_layerE"></span><span id="_disp_t::sys_layer___lv_obj_tP"></span><span class="target" id="struct__disp__t_1a1db398fbbca1580257184450620e6084"></span><em class="property">struct</em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t">_lv_obj_t</a> *<code class="sig-name descname">sys_layer</code><a class="headerlink" href="#_CPPv4N7_disp_t9sys_layerE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t9sys_layerE"></span><span id="_CPPv2N7_disp_t9sys_layerE"></span><span id="_disp_t::sys_layer___lv_obj_tP"></span><span class="target" id="struct__disp__t_1a1db398fbbca1580257184450620e6084"></span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="../widgets/obj.html#_CPPv49_lv_obj_t" title="_lv_obj_t"><span class="pre">_lv_obj_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">sys_layer</span></code><a class="headerlink" href="#_CPPv4N7_disp_t9sys_layerE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p><dl class="simple">
 <dt><strong>See</strong></dt><dd><p><a class="reference internal" href="../overview/display.html#lv__disp_8h_1ae9a48f536aab873d71c07c313c4e433e"><span class="std std-ref">lv_disp_get_layer_sys</span></a> </p>
 </dd>
@@ -2052,47 +2066,47 @@ And finally to register a display for LVGL <code class="docutils literal notrans
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t8del_prevE">
-<span id="_CPPv3N7_disp_t8del_prevE"></span><span id="_CPPv2N7_disp_t8del_prevE"></span><span id="_disp_t::del_prev__uint8_t"></span><span class="target" id="struct__disp__t_1ab13159bf4a9b8e6092ae6a2cd75bbe9c"></span>uint8_t <code class="sig-name descname">del_prev</code><a class="headerlink" href="#_CPPv4N7_disp_t8del_prevE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t8del_prevE"></span><span id="_CPPv2N7_disp_t8del_prevE"></span><span id="_disp_t::del_prev__uint8_t"></span><span class="target" id="struct__disp__t_1ab13159bf4a9b8e6092ae6a2cd75bbe9c"></span><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">del_prev</span></code><a class="headerlink" href="#_CPPv4N7_disp_t8del_prevE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>1: Automatically delete the previous screen when the screen load animation is ready </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t8bg_colorE">
-<span id="_CPPv3N7_disp_t8bg_colorE"></span><span id="_CPPv2N7_disp_t8bg_colorE"></span><span id="_disp_t::bg_color__lv_color_t"></span><span class="target" id="struct__disp__t_1a73711c1f29c33700cb4f17210076f00f"></span><a class="reference internal" href="../overview/display.html#_CPPv410lv_color_t" title="lv_color_t">lv_color_t</a> <code class="sig-name descname">bg_color</code><a class="headerlink" href="#_CPPv4N7_disp_t8bg_colorE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t8bg_colorE"></span><span id="_CPPv2N7_disp_t8bg_colorE"></span><span id="_disp_t::bg_color__lv_color_t"></span><span class="target" id="struct__disp__t_1a73711c1f29c33700cb4f17210076f00f"></span><span class="pre">lv_color_t</span> <code class="sig-name descname"><span class="pre">bg_color</span></code><a class="headerlink" href="#_CPPv4N7_disp_t8bg_colorE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Default display color when screens are transparent </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t6bg_imgE">
-<span id="_CPPv3N7_disp_t6bg_imgE"></span><span id="_CPPv2N7_disp_t6bg_imgE"></span><span id="_disp_t::bg_img__voidCP"></span><span class="target" id="struct__disp__t_1acc930463dd0dfa7ac55327704641264c"></span><em class="property">const</em> void *<code class="sig-name descname">bg_img</code><a class="headerlink" href="#_CPPv4N7_disp_t6bg_imgE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t6bg_imgE"></span><span id="_CPPv2N7_disp_t6bg_imgE"></span><span id="_disp_t::bg_img__voidCP"></span><span class="target" id="struct__disp__t_1acc930463dd0dfa7ac55327704641264c"></span><em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">bg_img</span></code><a class="headerlink" href="#_CPPv4N7_disp_t6bg_imgE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>An image source to display as wallpaper </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t6bg_opaE">
-<span id="_CPPv3N7_disp_t6bg_opaE"></span><span id="_CPPv2N7_disp_t6bg_opaE"></span><span id="_disp_t::bg_opa__lv_opa_t"></span><span class="target" id="struct__disp__t_1a9b285eec1ccb56dd471defebd952cb58"></span>lv_opa_t <code class="sig-name descname">bg_opa</code><a class="headerlink" href="#_CPPv4N7_disp_t6bg_opaE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t6bg_opaE"></span><span id="_CPPv2N7_disp_t6bg_opaE"></span><span id="_disp_t::bg_opa__lv_opa_t"></span><span class="target" id="struct__disp__t_1a9b285eec1ccb56dd471defebd952cb58"></span><span class="pre">lv_opa_t</span> <code class="sig-name descname"><span class="pre">bg_opa</span></code><a class="headerlink" href="#_CPPv4N7_disp_t6bg_opaE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Opacity of the background color or wallpaper </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t9inv_areasE">
-<span id="_CPPv3N7_disp_t9inv_areasE"></span><span id="_CPPv2N7_disp_t9inv_areasE"></span><span id="_disp_t::inv_areas__lv_area_tA"></span><span class="target" id="struct__disp__t_1a64da96cf39224d1ec2c7f0c505543e74"></span>lv_area_t <code class="sig-name descname">inv_areas</code>[<code class="sig-name descname">LV_INV_BUF_SIZE</code>]<a class="headerlink" href="#_CPPv4N7_disp_t9inv_areasE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t9inv_areasE"></span><span id="_CPPv2N7_disp_t9inv_areasE"></span><span id="_disp_t::inv_areas__lv_area_tA"></span><span class="target" id="struct__disp__t_1a64da96cf39224d1ec2c7f0c505543e74"></span><span class="pre">lv_area_t</span> <code class="sig-name descname"><span class="pre">inv_areas</span></code><span class="pre">[</span><code class="sig-name descname"><span class="pre">LV_INV_BUF_SIZE</span></code><span class="pre">]</span><a class="headerlink" href="#_CPPv4N7_disp_t9inv_areasE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Invalidated (marked to redraw) areas </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t15inv_area_joinedE">
-<span id="_CPPv3N7_disp_t15inv_area_joinedE"></span><span id="_CPPv2N7_disp_t15inv_area_joinedE"></span><span id="_disp_t::inv_area_joined__uint8_tA"></span><span class="target" id="struct__disp__t_1a91bc2f8fc0419d791d7e3123c5a621bd"></span>uint8_t <code class="sig-name descname">inv_area_joined</code>[<code class="sig-name descname">LV_INV_BUF_SIZE</code>]<a class="headerlink" href="#_CPPv4N7_disp_t15inv_area_joinedE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t15inv_area_joinedE"></span><span id="_CPPv2N7_disp_t15inv_area_joinedE"></span><span id="_disp_t::inv_area_joined__uint8_tA"></span><span class="target" id="struct__disp__t_1a91bc2f8fc0419d791d7e3123c5a621bd"></span><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">inv_area_joined</span></code><span class="pre">[</span><code class="sig-name descname"><span class="pre">LV_INV_BUF_SIZE</span></code><span class="pre">]</span><a class="headerlink" href="#_CPPv4N7_disp_t15inv_area_joinedE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t5inv_pE">
-<span id="_CPPv3N7_disp_t5inv_pE"></span><span id="_CPPv2N7_disp_t5inv_pE"></span><span id="_disp_t::inv_p__uint32_t"></span><span class="target" id="struct__disp__t_1acb93e55792e807864edfd4015e201911"></span>uint32_t <code class="sig-name descname">inv_p</code><a class="headerlink" href="#_CPPv4N7_disp_t5inv_pE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t5inv_pE"></span><span id="_CPPv2N7_disp_t5inv_pE"></span><span id="_disp_t::inv_p__uint32_t"></span><span class="target" id="struct__disp__t_1acb93e55792e807864edfd4015e201911"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">inv_p</span></code><a class="headerlink" href="#_CPPv4N7_disp_t5inv_pE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N7_disp_t18last_activity_timeE">
-<span id="_CPPv3N7_disp_t18last_activity_timeE"></span><span id="_CPPv2N7_disp_t18last_activity_timeE"></span><span id="_disp_t::last_activity_time__uint32_t"></span><span class="target" id="struct__disp__t_1ae3c6f4886784c0bfc8a222e2a559e3ca"></span>uint32_t <code class="sig-name descname">last_activity_time</code><a class="headerlink" href="#_CPPv4N7_disp_t18last_activity_timeE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N7_disp_t18last_activity_timeE"></span><span id="_CPPv2N7_disp_t18last_activity_timeE"></span><span id="_disp_t::last_activity_time__uint32_t"></span><span class="target" id="struct__disp__t_1ae3c6f4886784c0bfc8a222e2a559e3ca"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">last_activity_time</span></code><a class="headerlink" href="#_CPPv4N7_disp_t18last_activity_timeE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Last time there was activity on this display </p>
 </dd></dl>
 
@@ -2118,7 +2132,7 @@ And finally to register a display for LVGL <code class="docutils literal notrans
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Feb 15, 2021.
+        Last updated on Feb 16, 2021.
       </span>
 
     </p>
