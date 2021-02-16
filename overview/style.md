@@ -104,7 +104,7 @@ To see which parts an object has visit their documentation page.
 
 Styles are stored in `lv_style_t` variables. Style variables should be `static`, global or dynamically allocated. In other words they can not be local variables in functions which are destroyed when the function exists. 
 Before using a style it should be initialized with `lv_style_init(&my_style)`. 
-After initializing the style properties can be set added to it.
+After initializing the style properties can be set or added to it.
 Property set functions looks like this: `lv_style_set_<property_name>(&style, <state>, <value>);`
 For example the [above mentioned](#states) example looks like this:
 ```c
@@ -126,7 +126,7 @@ lv_style_remove_prop(&style, LV_STYLE_BG_COLOR | (LV_STATE_PRESSED << LV_STYLE_S
 To get the value from style in a given state functions with the following prototype are available: `_lv_style_get_color/int/opa/ptr(&style, <prop>, <result buf>);`.
 The best matching property will be selected and it's precedence will be returned. `-1` will be returned if the property is not found. 
 
-The form of the function (`...color/int/opa/ptr`) should beused according to the type of `<prop>`.
+The form of the function (`...color/int/opa/ptr`) should be used according to the type of `<prop>`.
 
 For example:
 
@@ -422,7 +422,7 @@ Both regions could have different properties.
   :language: c
 ```
 
-It the documentation of the widgets you will see sentences like "The widget use the typical background properties". The "typical background" properties are:
+In the documentation of the widgets you will see sentences like "The widget use the typical background properties". The "typical background" properties are:
 - Background
 - Border
 - Outline
@@ -461,7 +461,7 @@ lv_theme_t * base_theme = lv_theme_get_act();
 
 /*Initialize a custom theme*/
 static lv_theme_t custom_theme;                         /*Declare a theme*/
-lv_theme_copy(&custom_theme, )base_theme;               /*Initialize the custom theme from the base theme*/                           
+lv_theme_copy(&custom_theme, base_theme);               /*Initialize the custom theme from the base theme*/                           
 lv_theme_set_apply_cb(&custom_theme, custom_apply_cb);  /*Set a custom theme apply callback*/
 lv_theme_set_base(custom_theme, base_theme);            /*Set the base theme of the csutom theme*/
 
@@ -499,4 +499,13 @@ static void custom_apply_cb(lv_theme_t * th, lv_obj_t * obj, lv_theme_style_t na
   :language: c
 ```
 
+## API
+```eval_rst
 
+.. doxygenfile:: lv_style.h
+  :project: lvgl
+
+.. doxygenfile:: lv_theme.h
+  :project: lvgl
+
+```
