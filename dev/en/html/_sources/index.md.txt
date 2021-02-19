@@ -12,11 +12,6 @@
 
 <img src="_static/img/home_banner.jpg" style="width:100%">
 
-```eval_rst
-
-PDF version: :download:`LVGL.pdf <LVGL.pdf>`
-
-```
 <div style="margin-bottom:48px"> 
     <a href="intro/index.html"><img class="home-img" src="_static/img/home_1.png" alt="Get familiar with the LVGL project"></a>
     <a href="get-started/index.html"><img class="home-img" src="_static/img/home_2.png" alt="Learn the basic of LVGL and its usage on various platforms"></a>
