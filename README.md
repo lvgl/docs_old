@@ -5,7 +5,7 @@ This the source of LVGL's documentation avaialble on https://docs.lvgl.io
 ## Overview
 
 ### Tools
-The documentation is craeted with Sphinx and RTD theme and with the use of several extensions. See below.
+The documentation is created with Sphinx and RTD theme and with the use of several extensions. See below.
 
 ### Branches
 
@@ -14,6 +14,7 @@ There are the following branches:
 - `latest` Documentation for the `master` branch of lvgl. It contains the last features available for testing.
 - `dev` Documentation for the `dev` branch of lvgl. These features are not stabel and might change. 
 - `release/vX` Documentation for the `release/vX` branch of lvgl (`X` stands for major relases of lvgl). These are the last relased stable versions.
+- `script` Holds the scripts for GitHub Actions to rebuild the documentation
 
 On every release (first and third Tuesday of every month)
 1. Rebuild and publish `latest`
@@ -28,7 +29,10 @@ As you read the documentation you might see some typos or unclear sentences.
 For typos and straightforward fixes, you can simply edit the file on GitHub. There is an `Edit on Github` link on the top right-hand corner of all pages.
 Click it to see the file on GitHub, hit the Edit button, and add you fixes as described in [Pull request - From GitHub](https://docs.lvgl.io/latest/en/html/contributing/index.html#from-github) section.
 
-Note that the documentation is also formatted in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). 
+Note that the documentation is formatted in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
+Please do **not** edit the HTML files in the `master` branch directly. They are regenerated whenever a commit is made to the other branches.
+Simply edit the Markdown files and the HTML should be rebuilt within 15 minutes of your change being merged.
+
 
 ## Rebuild the documentation
 
