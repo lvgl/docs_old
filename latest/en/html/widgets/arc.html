@@ -1503,7 +1503,57 @@ The following types exist:</p>
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Simple Arc<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/5301f2e0eaa3ded08a5039a6e8eb23c399e51b7b/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/96551f2fa863080c92bb3fd6e537f523fdd31eac/lv_ex_arc_1/lv_ex_arc_1.py'><img alt='lv_ex_arc_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/96551f2fa863080c92bb3fd6e537f523fdd31eac/lv_ex_arc_1/lv_ex_arc_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an arc</span>
+<span class="n">arc</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_end_angle</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Loader with Arc<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/5301f2e0eaa3ded08a5039a6e8eb23c399e51b7b/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/96551f2fa863080c92bb3fd6e537f523fdd31eac/lv_ex_arc_2/lv_ex_arc_2.py'><img alt='lv_ex_arc_2' src='https://raw.githubusercontent.com/lvgl/lv_examples/96551f2fa863080c92bb3fd6e537f523fdd31eac/lv_ex_arc_2/lv_ex_arc_2.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">arc_loader</span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="n">arc</span><span class="p">):</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="n">arc</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span>
+    <span class="c1"># print(&quot;angle: &quot;,angle)</span>
+    <span class="n">angle</span> <span class="o">+=</span> <span class="mi">5</span>
+    <span class="k">if</span> <span class="n">angle</span> <span class="o">&gt;</span> <span class="mi">360</span><span class="p">:</span>
+        <span class="n">task</span><span class="o">.</span><span class="n">_del</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">arc</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    
+<span class="c1"># create an arc which acts as a loader</span>
+
+<span class="n">arc</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_bg_angles</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_angles</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_rotation</span><span class="p">(</span><span class="mi">270</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Create an `lv_task` to update the arc.</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">task_create_basic</span><span class="p">()</span>
+<span class="n">task</span><span class="o">.</span><span class="n">set_cb</span><span class="p">(</span><span class="k">lambda</span> <span class="n">task</span><span class="p">:</span> <span class="n">arc_loader</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">arc</span><span class="p">))</span>
+<span class="n">task</span><span class="o">.</span><span class="n">set_period</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">task</span><span class="o">.</span><span class="n">set_prio</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">TASK_PRIO</span><span class="o">.</span><span class="n">LOWEST</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
