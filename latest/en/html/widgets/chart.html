@@ -1622,7 +1622,75 @@ If <code class="docutils literal notranslate"><span class="pre">list_of_values</
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_chart_1/lv_ex_chart_1.py'><img alt='lv_ex_chart_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_chart_1/lv_ex_chart_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lv_colors</span> <span class="kn">import</span> <span class="n">lv_colors</span>
+
+<span class="c1"># create a chart</span>
+<span class="n">chart</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">chart</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">chart</span><span class="o">.</span><span class="n">TYPE</span><span class="o">.</span><span class="n">LINE</span><span class="p">)</span>
+
+<span class="n">ser1</span><span class="o">=</span><span class="n">chart</span><span class="o">.</span><span class="n">add_series</span><span class="p">(</span><span class="n">lv_colors</span><span class="o">.</span><span class="n">RED</span><span class="p">)</span>
+<span class="n">ser2</span><span class="o">=</span><span class="n">chart</span><span class="o">.</span><span class="n">add_series</span><span class="p">(</span><span class="n">lv_colors</span><span class="o">.</span><span class="n">GREEN</span><span class="p">)</span>
+
+<span class="c1"># Set next points on ser1</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">70</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="c1"># Set points on ser2</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_points</span><span class="p">(</span><span class="n">ser2</span><span class="p">,</span> <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">65</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_chart_2/lv_ex_chart_2.py'><img alt='lv_ex_chart_2' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_chart_2/lv_ex_chart_2.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lv_colors</span> <span class="kn">import</span> <span class="n">lv_colors</span>
+
+<span class="c1"># create a chart</span>
+<span class="n">chart</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">chart</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">chart</span><span class="o">.</span><span class="n">TYPE</span><span class="o">.</span><span class="n">LINE</span><span class="p">)</span>
+<span class="c1"># Add a faded are effect</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_style_local_bg_opa</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">chart</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">SERIES</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">OPA</span><span class="o">.</span><span class="n">_50</span><span class="p">)</span>               <span class="c1"># Max. opa.</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_style_local_bg_grad_dir</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">chart</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">SERIES</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">GRAD_DIR</span><span class="o">.</span><span class="n">VER</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_style_local_bg_main_stop</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">chart</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">SERIES</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>                <span class="c1"># Max opa on the top</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_style_local_bg_grad_stop</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">chart</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">SERIES</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>                  <span class="c1"># Transparent on the bottom</span>
+
+<span class="n">ser1</span><span class="o">=</span><span class="n">chart</span><span class="o">.</span><span class="n">add_series</span><span class="p">(</span><span class="n">lv_colors</span><span class="o">.</span><span class="n">RED</span><span class="p">)</span>
+<span class="n">ser2</span><span class="o">=</span><span class="n">chart</span><span class="o">.</span><span class="n">add_series</span><span class="p">(</span><span class="n">lv_colors</span><span class="o">.</span><span class="n">GREEN</span><span class="p">)</span>
+
+<span class="c1"># Set next points on ser1</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">66</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">89</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">63</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">56</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">35</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">57</span><span class="p">)</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_next</span><span class="p">(</span><span class="n">ser1</span><span class="p">,</span><span class="mi">85</span><span class="p">)</span>
+
+<span class="c1"># Set points on ser2</span>
+<span class="n">chart</span><span class="o">.</span><span class="n">set_points</span><span class="p">(</span><span class="n">ser2</span><span class="p">,</span> <span class="p">[</span><span class="mi">92</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">53</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -2531,7 +2599,7 @@ If <code class="docutils literal notranslate"><span class="pre">list_of_values</
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 09, 2021.
+        Last updated on Mar 13, 2021.
       </span>
 
     </p>

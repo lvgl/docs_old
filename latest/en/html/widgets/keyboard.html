@@ -1506,7 +1506,35 @@ You can completely replace it with your custom event handler however, you can ca
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id1">
 <h4>Keyboard with text area<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
-<p>No examples yet.</p>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_keyboard_1/lv_ex_keyboard_1.py'><img alt='lv_ex_keyboard_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_keyboard_1/lv_ex_keyboard_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">LV_DPI</span><span class="o">=</span><span class="mi">130</span>
+<span class="n">LV_VER_RES</span><span class="o">=</span><span class="mi">240</span>
+
+<span class="k">def</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="n">evt</span><span class="p">):</span>
+    <span class="k">if</span>  <span class="n">evt</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value:&quot;</span><span class="p">,</span><span class="n">textarea</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
+            
+<span class="c1"># create a keyboard and apply the styles</span>
+<span class="n">keyb</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">keyboard</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">keyb</span><span class="o">.</span><span class="n">set_cursor_manage</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#Create a text area. The keyboard will write here</span>
+<span class="n">ta</span><span class="o">=</span><span class="n">lv</span><span class="o">.</span><span class="n">textarea</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">ta</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_TOP_MID</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">LV_DPI</span><span class="o">//</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ta</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">max_h</span> <span class="o">=</span> <span class="n">LV_VER_RES</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">LV_DPI</span> <span class="o">//</span> <span class="mi">8</span>
+<span class="k">if</span> <span class="n">ta</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">max_h</span><span class="p">:</span>
+    <span class="n">ta</span><span class="o">.</span><span class="n">set_height</span><span class="p">(</span><span class="n">max_h</span><span class="p">)</span>
+
+<span class="c1"># Assign the text area to the keyboard*/</span>
+<span class="n">keyb</span><span class="o">.</span><span class="n">set_textarea</span><span class="p">(</span><span class="n">ta</span><span class="p">)</span>    
+
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1777,7 +1805,7 @@ You can completely replace it with your custom event handler however, you can ca
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 09, 2021.
+        Last updated on Mar 13, 2021.
       </span>
 
     </p>

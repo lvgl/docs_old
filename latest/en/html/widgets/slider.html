@@ -1509,7 +1509,65 @@ In the latter case the knob moves to the point clicked and slider value changes 
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Slider with custom style<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_slider_1/lv_ex_slider_1.py'><img alt='lv_ex_slider_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_slider_1/lv_ex_slider_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="n">evt</span><span class="p">):</span>
+    <span class="k">if</span>  <span class="n">evt</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value:&quot;</span><span class="p">,</span><span class="n">slider</span><span class="o">.</span><span class="n">get_value</span><span class="p">())</span>
+            
+<span class="c1"># create a slider</span>
+<span class="n">slider</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">slider</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">slider</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">slider</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Set value with slider<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_slider_2/lv_ex_slider_2.py'><img alt='lv_ex_slider_2' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_slider_2/lv_ex_slider_2.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="n">evt</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">evt</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+        <span class="c1"># print(slider.get_value())</span>
+        <span class="n">slider_label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">slider</span><span class="o">.</span><span class="n">get_value</span><span class="p">()))</span>
+            
+<span class="c1"># Create a slider in the center of the display</span>
+<span class="n">slider</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">slider</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">slider</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">slider</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+<span class="n">slider</span><span class="o">.</span><span class="n">set_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Create a label below the slider</span>
+<span class="n">slider_label</span><span class="o">=</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">slider_label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">slider_label</span><span class="o">.</span><span class="n">set_auto_realign</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">slider_label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">OUT_BOTTOM_MID</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Create an informative label</span>
+<span class="n">info_label</span><span class="o">=</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">info_label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;Welcome to the slider +</span>
+<span class="sd">label demo!</span>
+<span class="sd">Move the slider </span>
+<span class="sd">and see that the label</span>
+<span class="sd">updates to match it.&quot;&quot;&quot;</span>
+<span class="p">)</span>
+<span class="n">info_label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_TOP_LEFT</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1816,7 +1874,7 @@ In the latter case the knob moves to the point clicked and slider value changes 
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 09, 2021.
+        Last updated on Mar 13, 2021.
       </span>
 
     </p>

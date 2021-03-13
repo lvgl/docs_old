@@ -1502,7 +1502,49 @@ This way the scroll will be continued on the parent. It can be enabled with <cod
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Simple List<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_list_1/lv_ex_list_1.py'><img alt='lv_ex_list_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_list_1/lv_ex_list_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="n">list_btn</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">__cast__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">CLICKED</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clicked: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">list_btn</span><span class="o">.</span><span class="n">get_btn_text</span><span class="p">())</span>
+
+<span class="c1"># Create a list</span>
+<span class="n">list1</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Add buttons to the list</span>
+
+<span class="n">list_btn</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="n">add_btn</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">FILE</span><span class="p">,</span> <span class="s2">&quot;New&quot;</span><span class="p">)</span>
+<span class="n">list_btn</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+<span class="n">list_btn</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="n">add_btn</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">DIRECTORY</span><span class="p">,</span> <span class="s2">&quot;Open&quot;</span><span class="p">)</span>
+<span class="n">list_btn</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+<span class="n">list_btn</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="n">add_btn</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">CLOSE</span><span class="p">,</span> <span class="s2">&quot;Delete&quot;</span><span class="p">)</span>
+<span class="n">list_btn</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+<span class="n">list_btn</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="n">add_btn</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">EDIT</span><span class="p">,</span> <span class="s2">&quot;Edit&quot;</span><span class="p">)</span>
+<span class="n">list_btn</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+<span class="n">list_btn</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="n">add_btn</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">SAVE</span><span class="p">,</span> <span class="s2">&quot;Save&quot;</span><span class="p">)</span>
+<span class="n">list_btn</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+<span class="n">list_btn</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="n">add_btn</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">BELL</span><span class="p">,</span> <span class="s2">&quot;Notify&quot;</span><span class="p">)</span>
+<span class="n">list_btn</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+<span class="n">list_btn</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="n">add_btn</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">BATTERY_FULL</span><span class="p">,</span> <span class="s2">&quot;Battery&quot;</span><span class="p">)</span>
+<span class="n">list_btn</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1962,7 +2004,7 @@ This way the scroll will be continued on the parent. It can be enabled with <cod
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 09, 2021.
+        Last updated on Mar 13, 2021.
       </span>
 
     </p>

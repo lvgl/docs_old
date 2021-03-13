@@ -1578,7 +1578,113 @@ If you want to catch all of the generic events of an image object, you should en
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Image from variable and symbol<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_img_1/lv_ex_img_1.py'><img alt='lv_ex_img_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_img_1/lv_ex_img_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">imagetools</span> <span class="kn">import</span> <span class="n">get_png_info</span><span class="p">,</span> <span class="n">open_png</span>
+
+<span class="c1"># Register PNG image decoder</span>
+<span class="n">decoder</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">decoder_create</span><span class="p">()</span>
+<span class="n">decoder</span><span class="o">.</span><span class="n">info_cb</span> <span class="o">=</span> <span class="n">get_png_info</span>
+<span class="n">decoder</span><span class="o">.</span><span class="n">open_cb</span> <span class="o">=</span> <span class="n">open_png</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;img_cogwheel_argb.png&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">png_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">png_img_dsc</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">img_dsc_t</span><span class="p">({</span>
+    <span class="s1">&#39;data_size&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">png_data</span><span class="p">),</span>
+    <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">png_data</span> 
+<span class="p">})</span>
+
+<span class="c1"># Create an image using the decoder</span>
+
+<span class="n">img1</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">cache_set_size</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">img1</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">img1</span><span class="o">.</span><span class="n">set_src</span><span class="p">(</span><span class="n">png_img_dsc</span><span class="p">)</span>
+
+<span class="n">img2</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">img2</span><span class="o">.</span><span class="n">set_src</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">OK</span><span class="o">+</span><span class="s2">&quot;Accept&quot;</span><span class="p">)</span>
+<span class="n">img2</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">img1</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">OUT_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Image recoloring<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_img_2/lv_ex_img_2.py'><img alt='lv_ex_img_2' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_img_2/lv_ex_img_2.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lv_colors</span> <span class="kn">import</span> <span class="n">lv_colors</span>
+<span class="kn">from</span> <span class="nn">imagetools</span> <span class="kn">import</span> <span class="n">get_png_info</span><span class="p">,</span> <span class="n">open_png</span>
+
+<span class="n">SLIDER_WIDTH</span><span class="o">=</span><span class="mi">15</span>
+
+<span class="c1"># Register PNG image decoder</span>
+<span class="n">decoder</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">decoder_create</span><span class="p">()</span>
+<span class="n">decoder</span><span class="o">.</span><span class="n">info_cb</span> <span class="o">=</span> <span class="n">get_png_info</span>
+<span class="n">decoder</span><span class="o">.</span><span class="n">open_cb</span> <span class="o">=</span> <span class="n">open_png</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;img_cogwheel_argb.png&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">png_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">png_img_dsc</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">img_dsc_t</span><span class="p">({</span>
+    <span class="s1">&#39;data_size&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">png_data</span><span class="p">),</span>
+    <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">png_data</span> 
+<span class="p">})</span>
+<span class="k">def</span> <span class="nf">slider_event_cb</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+      <span class="c1"># Recolor the image based on the sliders&#39; values </span>
+      <span class="n">color</span>  <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">color_make</span><span class="p">(</span><span class="n">red_slider</span><span class="o">.</span><span class="n">get_value</span><span class="p">(),</span> <span class="n">green_slider</span><span class="o">.</span><span class="n">get_value</span><span class="p">(),</span> <span class="n">blue_slider</span><span class="o">.</span><span class="n">get_value</span><span class="p">())</span>
+      <span class="n">intense</span> <span class="o">=</span> <span class="n">intense_slider</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span>
+      <span class="n">img1</span><span class="o">.</span><span class="n">set_style_local_image_recolor_opa</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">intense</span><span class="p">)</span>
+      <span class="n">img1</span><span class="o">.</span><span class="n">set_style_local_image_recolor</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+
+<span class="c1"># Create a set of RGB sliders </span>
+<span class="c1"># Use the red one as a base for all the settings </span>
+<span class="n">red_slider</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">red_slider</span><span class="o">.</span><span class="n">set_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">red_slider</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="n">SLIDER_WIDTH</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>   <span class="c1"># Be sure it&#39;s a vertical slider</span>
+<span class="n">red_slider</span><span class="o">.</span><span class="n">set_style_local_bg_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">slider</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">INDIC</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_RED</span><span class="p">)</span>
+<span class="n">red_slider</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">slider_event_cb</span><span class="p">)</span>
+
+<span class="c1"># Copy it for the other three sliders </span>
+<span class="n">green_slider</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="n">red_slider</span><span class="p">)</span>
+<span class="n">green_slider</span><span class="o">.</span><span class="n">set_style_local_bg_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">slider</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">INDIC</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv_colors</span><span class="o">.</span><span class="n">LIME</span><span class="p">)</span>
+<span class="n">green_slider</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">slider_event_cb</span><span class="p">)</span>
+
+<span class="n">blue_slider</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="n">red_slider</span><span class="p">)</span>
+<span class="n">blue_slider</span><span class="o">.</span><span class="n">set_style_local_bg_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">slider</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">INDIC</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv_colors</span><span class="o">.</span><span class="n">BLUE</span><span class="p">)</span>
+<span class="n">blue_slider</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">slider_event_cb</span><span class="p">)</span>
+
+<span class="n">intense_slider</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="n">red_slider</span><span class="p">)</span>
+<span class="n">intense_slider</span><span class="o">.</span><span class="n">set_style_local_bg_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">slider</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">INDIC</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv_colors</span><span class="o">.</span><span class="n">GRAY</span><span class="p">)</span>
+<span class="n">intense_slider</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ANIM</span><span class="o">.</span><span class="n">OFF</span><span class="p">)</span>
+<span class="n">intense_slider</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">slider_event_cb</span><span class="p">)</span>
+
+<span class="n">red_slider</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_LEFT_MID</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">green_slider</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">red_slider</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">OUT_RIGHT_MID</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">blue_slider</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">green_slider</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">OUT_RIGHT_MID</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">intense_slider</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">blue_slider</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">OUT_RIGHT_MID</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+
+<span class="n">img1</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">cache_set_size</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">img1</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">img1</span><span class="o">.</span><span class="n">set_src</span><span class="p">(</span><span class="n">png_img_dsc</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">lv</span><span class="o">.</span><span class="n">task_handler</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1942,7 +2048,7 @@ If you want to catch all of the generic events of an image object, you should en
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 09, 2021.
+        Last updated on Mar 13, 2021.
       </span>
 
     </p>

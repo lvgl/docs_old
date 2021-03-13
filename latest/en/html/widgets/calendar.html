@@ -1504,7 +1504,57 @@ It uses typical background properties plus padding to adjust its size and margin
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id2">
+<h4>Calendar with day select<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_calendar_1/lv_ex_calendar_1.py'><img alt='lv_ex_calendar_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_calendar_1/lv_ex_calendar_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="n">evt</span><span class="p">):</span>
+    <span class="k">if</span>  <span class="n">evt</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">calendar</span><span class="o">.</span><span class="n">get_pressed_date</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">date</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clicked date: </span><span class="si">%02d</span><span class="s2">.</span><span class="si">%02d</span><span class="s2">.</span><span class="si">%02d</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">))</span>
+            
+<span class="c1"># create a calendar</span>
+<span class="n">calendar</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">calendar</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">235</span><span class="p">,</span><span class="mi">235</span><span class="p">)</span>
+<span class="n">calendar</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+<span class="c1"># Make the date number smaller to be sure they fit into their area</span>
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_style_local_text_font</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">calendar</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">DATE</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">theme_get_font_small</span><span class="p">())</span>
+<span class="n">today</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">calendar_date_t</span><span class="p">()</span>
+<span class="n">today</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2020</span><span class="p">;</span>
+<span class="n">today</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">today</span><span class="o">.</span><span class="n">day</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_today_date</span><span class="p">(</span><span class="n">today</span><span class="p">)</span>
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_showed_date</span><span class="p">(</span><span class="n">today</span><span class="p">)</span>
+
+<span class="c1"># Highlight a few days</span>
+<span class="n">highlighted_days</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">highlighted_days</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">calendar_date_t</span><span class="p">())</span>
+
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">month</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">day</span><span class="o">=</span><span class="mi">6</span>
+
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">month</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">day</span><span class="o">=</span><span class="mi">11</span>
+
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">month</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">day</span><span class="o">=</span><span class="mi">22</span>
+
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_highlighted_dates</span><span class="p">(</span><span class="n">highlighted_days</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1854,7 +1904,7 @@ It uses typical background properties plus padding to adjust its size and margin
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 09, 2021.
+        Last updated on Mar 13, 2021.
       </span>
 
     </p>

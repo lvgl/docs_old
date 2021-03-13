@@ -1460,7 +1460,80 @@ Therefore with <code class="docutils literal notranslate"><span class="pre">LV_I
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Simple Image button<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_imgbtn_1/lv_ex_imgbtn_1.py'><img alt='lv_ex_imgbtn_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_imgbtn_1/lv_ex_imgbtn_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">usys</span> <span class="k">as</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">lv_colors</span> <span class="kn">import</span> <span class="n">lv_colors</span>
+
+<span class="c1"># create the green image data</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../assets/imgbtn_green_argb.bin&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">green_img_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;images/imgbtn_green_rgb565.bin&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">green_img_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cannot open green buttom image file&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+          
+<span class="c1"># create the blue image data</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../assets/imgbtn_blue_argb.bin&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">blue_img_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;images/imgbtn_blue_rgb565.bin&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">blue_img_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cannot open green buttom image file&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+        
+<span class="n">imgbtn_green_dsc</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">img_dsc_t</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;always_zero&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="mi">125</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s2">&quot;cf&quot;</span><span class="p">:</span> <span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">CF</span><span class="o">.</span><span class="n">TRUE_COLOR_ALPHA</span><span class="p">},</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">green_img_data</span><span class="p">,</span>
+        <span class="s2">&quot;data_size&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">green_img_data</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># create the blue image data</span>
+
+<span class="n">imgbtn_blue_dsc</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">img_dsc_t</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;always_zero&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="mi">125</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s2">&quot;cf&quot;</span><span class="p">:</span> <span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">CF</span><span class="o">.</span><span class="n">TRUE_COLOR_ALPHA</span><span class="p">},</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">blue_img_data</span><span class="p">,</span>
+        <span class="s2">&quot;data_size&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">blue_img_data</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+    <span class="c1"># Darken the button when pressed</span>
+<span class="n">style</span><span class="o">=</span><span class="n">lv</span><span class="o">.</span><span class="n">style_t</span><span class="p">()</span>
+<span class="n">style</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">style</span><span class="o">.</span><span class="n">set_image_recolor_opa</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">PRESSED</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">OPA</span><span class="o">.</span><span class="n">_30</span><span class="p">)</span>
+<span class="n">style</span><span class="o">.</span><span class="n">set_image_recolor</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">PRESSED</span><span class="p">,</span> <span class="n">lv_colors</span><span class="o">.</span><span class="n">BLACK</span><span class="p">)</span>
+<span class="n">style</span><span class="o">.</span><span class="n">set_text_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv_colors</span><span class="o">.</span><span class="n">WHITE</span><span class="p">)</span>
+
+<span class="c1"># Create an Image button</span>
+<span class="n">imgbtn1</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">imgbtn</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">imgbtn1</span><span class="o">.</span><span class="n">set_src</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">RELEASED</span><span class="p">,</span> <span class="n">imgbtn_green_dsc</span><span class="p">)</span>
+<span class="n">imgbtn1</span><span class="o">.</span><span class="n">set_src</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">PRESSED</span><span class="p">,</span> <span class="n">imgbtn_green_dsc</span><span class="p">)</span>
+<span class="n">imgbtn1</span><span class="o">.</span><span class="n">set_src</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">CHECKED_RELEASED</span><span class="p">,</span> <span class="n">imgbtn_blue_dsc</span><span class="p">)</span>
+<span class="n">imgbtn1</span><span class="o">.</span><span class="n">set_src</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">CHECKED_PRESSED</span><span class="p">,</span> <span class="n">imgbtn_blue_dsc</span><span class="p">)</span>
+<span class="n">imgbtn1</span><span class="o">.</span><span class="n">set_checkable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">imgbtn1</span><span class="o">.</span><span class="n">add_style</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">imgbtn</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>
+<span class="n">imgbtn1</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="c1"># Create a label on the Image button</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">imgbtn1</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Button&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1718,7 +1791,7 @@ Therefore with <code class="docutils literal notranslate"><span class="pre">LV_I
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 09, 2021.
+        Last updated on Mar 13, 2021.
       </span>
 
     </p>

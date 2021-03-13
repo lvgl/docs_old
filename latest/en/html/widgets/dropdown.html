@@ -1543,7 +1543,69 @@ In this case the options string should be alive while the drop-down list exists 
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id2">
+<h4>Simple Drop down list<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_dropdown_1/lv_ex_dropdown_1.py'><img alt='lv_ex_dropdown_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_dropdown_1/lv_ex_dropdown_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+        <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">*</span><span class="mi">10</span> <span class="c1"># should be large enough to store the option</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">get_selected_str</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">option</span><span class="p">))</span>
+        <span class="c1"># .strip() removes trailing spaces</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Option: </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">option</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+<span class="c1"># Create a drop down list</span>
+<span class="n">ddlist</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">dropdown</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="s2">&quot;Apple&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Banana&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Orange&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Melon&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Grape&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Raspberry&quot;</span><span class="p">]))</span>
+
+<span class="c1"># ddlist.set_fix_width(150)</span>
+<span class="c1"># ddlist.set_draw_arrow(True)</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_TOP_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h4>Drop &quot;up&quot; list<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_dropdown_2/lv_ex_dropdown_2.py'><img alt='lv_ex_dropdown_2' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_dropdown_2/lv_ex_dropdown_2.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a drop down list</span>
+<span class="n">ddlist</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">dropdown</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="s2">&quot;Apple&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Banana&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Orange&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Melon&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Grape&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Raspberry&quot;</span><span class="p">]))</span>
+
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_dir</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">dropdown</span><span class="o">.</span><span class="n">DIR</span><span class="o">.</span><span class="n">LEFT</span><span class="p">);</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_symbol</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_show_selected</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Fruits&quot;</span><span class="p">)</span>
+<span class="c1"># It will be called automatically when the size changes</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_TOP_RIGHT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Copy the drop LEFT list</span>
+<span class="n">ddlist</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">dropdown</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="n">ddlist</span><span class="p">)</span>
+<span class="n">ddlist</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_TOP_RIGHT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -2021,7 +2083,7 @@ In this case the options string should be alive while the drop-down list exists 
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 09, 2021.
+        Last updated on Mar 13, 2021.
       </span>
 
     </p>

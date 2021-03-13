@@ -1498,7 +1498,76 @@ The default settings are 220 degrees, 6 scale labels, and 21 lines.</p>
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_gauge_1/lv_ex_gauge_1.py'><img alt='lv_ex_gauge_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_gauge_1/lv_ex_gauge_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lv_colors</span> <span class="kn">import</span> <span class="n">lv_colors</span>
+
+<span class="c1"># needle colors</span>
+<span class="n">needle_colors</span><span class="o">=</span><span class="p">[</span><span class="n">lv_colors</span><span class="o">.</span><span class="n">BLUE</span><span class="p">,</span><span class="n">lv_colors</span><span class="o">.</span><span class="n">ORANGE</span><span class="p">,</span><span class="n">lv_colors</span><span class="o">.</span><span class="n">PURPLE</span><span class="p">]</span>
+
+<span class="c1"># create the gauge</span>
+<span class="n">gauge1</span><span class="o">=</span><span class="n">lv</span><span class="o">.</span><span class="n">gauge</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_needle_count</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">needle_colors</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Set the values</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_gauge_2/lv_ex_gauge_2.py'><img alt='lv_ex_gauge_2' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_gauge_2/lv_ex_gauge_2.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">usys</span> <span class="k">as</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">lv_colors</span> <span class="kn">import</span> <span class="n">lv_colors</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../../../assets/img_hand_argb.bin&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">hand_img_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;images/img_hand_rgb565.bin&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">hand_img_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not find img_hand file&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+    
+    
+<span class="c1"># create the hands image data</span>
+
+<span class="n">img_hand_dsc</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">img_dsc_t</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;always_zero&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;cf&quot;</span><span class="p">:</span> <span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">CF</span><span class="o">.</span><span class="n">TRUE_COLOR_ALPHA</span><span class="p">},</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">hand_img_data</span><span class="p">,</span>
+        <span class="s2">&quot;data_size&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">hand_img_data</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># needle colors</span>
+<span class="n">needle_colors</span><span class="o">=</span><span class="p">[</span><span class="n">lv_colors</span><span class="o">.</span><span class="n">BLUE</span><span class="p">,</span><span class="n">lv_colors</span><span class="o">.</span><span class="n">ORANGE</span><span class="p">,</span><span class="n">lv_colors</span><span class="o">.</span><span class="n">PURPLE</span><span class="p">]</span>
+
+<span class="c1"># create the gauge</span>
+<span class="n">gauge1</span><span class="o">=</span><span class="n">lv</span><span class="o">.</span><span class="n">gauge</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_needle_count</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">needle_colors</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_needle_img</span><span class="p">(</span><span class="n">img_hand_dsc</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_style_local_image_recolor_opa</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">gauge</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">NEEDLE</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">OPA</span><span class="o">.</span><span class="n">COVER</span><span class="p">)</span>
+
+<span class="c1"># Set the values</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">gauge1</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1925,7 +1994,7 @@ The default settings are 220 degrees, 6 scale labels, and 21 lines.</p>
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 09, 2021.
+        Last updated on Mar 13, 2021.
       </span>
 
     </p>

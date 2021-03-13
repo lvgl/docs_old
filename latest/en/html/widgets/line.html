@@ -1445,7 +1445,42 @@ The <em>y invert</em> is disabled by default.</p>
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Simple Line<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_line_1/lv_ex_line_1.py'><img alt='lv_ex_line_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_line_1/lv_ex_line_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lv_colors</span> <span class="kn">import</span> <span class="n">lv_colors</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># Create an array for the points of the line</span>
+<span class="n">line_points</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">},</span> 
+                <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="mi">70</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="mi">70</span><span class="p">},</span> 
+                <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="mi">120</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="mi">10</span><span class="p">},</span> 
+                <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="mi">180</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="mi">60</span><span class="p">},</span> 
+                <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="mi">240</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="mi">10</span><span class="p">}]</span>
+
+<span class="c1"># Create new style (thick dark blue)</span>
+<span class="n">style_line</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">style_t</span><span class="p">()</span>
+<span class="n">style_line</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">style_line</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">style_line</span><span class="o">.</span><span class="n">set_line_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv_colors</span><span class="o">.</span><span class="n">BLUE</span><span class="p">)</span>
+<span class="n">style_line</span><span class="o">.</span><span class="n">set_line_rounded</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Copy the previous line and apply the new style</span>
+<span class="n">line1</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">line1</span><span class="o">.</span><span class="n">set_points</span><span class="p">(</span><span class="n">line_points</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">line_points</span><span class="p">))</span>      <span class="c1"># Set the points</span>
+<span class="n">line1</span><span class="o">.</span><span class="n">add_style</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">line</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">,</span> <span class="n">style_line</span><span class="p">)</span>
+<span class="n">line1</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">lv</span><span class="o">.</span><span class="n">task_handler</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1604,7 +1639,7 @@ The <em>y invert</em> is disabled by default.</p>
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 09, 2021.
+        Last updated on Mar 13, 2021.
       </span>
 
     </p>

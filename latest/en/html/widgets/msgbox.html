@@ -1564,7 +1564,117 @@ For more information visit the <a class="reference internal" href="btnmatrix.htm
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Simple Message box<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_msgbox_1/lv_ex_msgbox_1.py'><img alt='lv_ex_msgbox_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_msgbox_1/lv_ex_msgbox_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Button: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="o">.</span><span class="n">get_active_btn_text</span><span class="p">())</span>
+
+<span class="n">btns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Apply&quot;</span><span class="p">,</span> <span class="s2">&quot;Close&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+
+<span class="n">mbox1</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">msgbox</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">mbox1</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;A message box with two buttons.&quot;</span><span class="p">);</span>
+<span class="n">mbox1</span><span class="o">.</span><span class="n">add_btns</span><span class="p">(</span><span class="n">btns</span><span class="p">)</span>
+<span class="n">mbox1</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">mbox1</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+<span class="n">mbox1</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Align to the corner</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Modal<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/75e693c4e7f35d1a4a8a19192b710ddabfcea8fe/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_msgbox_2/lv_ex_msgbox_2.py'><img alt='lv_ex_msgbox_2' src='https://raw.githubusercontent.com/lvgl/lv_examples/4ef6431d207b564b5e5e2e442050367fcac0fcf7/lv_ex_msgbox_2/lv_ex_msgbox_2.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lv_colors</span> <span class="kn">import</span> <span class="n">lv_colors</span>
+
+<span class="n">welcome_info</span> <span class="o">=</span> <span class="s2">&quot;Welcome to the modal message box demo!</span><span class="se">\n</span><span class="s2">Press the button to display a message box.&quot;</span>
+<span class="n">in_msg_info</span> <span class="o">=</span> <span class="s2">&quot;Notice that you cannot touch the button again while the message box is open.&quot;</span>
+
+<span class="n">LV_HOR_RES</span><span class="o">=</span><span class="mi">240</span>
+<span class="n">LV_VER_RES</span><span class="o">=</span><span class="mi">240</span>
+
+<span class="k">def</span> <span class="nf">opa_anim</span><span class="p">(</span><span class="n">mbox</span><span class="p">,</span><span class="n">v</span><span class="p">):</span>
+    <span class="n">bg</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">__cast__</span><span class="p">(</span><span class="n">mbox</span><span class="p">)</span>
+    <span class="c1"># print(&quot;v: &quot;,v)</span>
+    <span class="n">mbox</span><span class="o">.</span><span class="n">get_parent</span><span class="p">()</span><span class="o">.</span><span class="n">set_style_local_bg_opa</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">mbox_event_cb</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">evt</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">evt</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">DELETE</span><span class="p">:</span>
+        <span class="c1"># Delete the parent modal background </span>
+        <span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">del_async</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">get_parent</span><span class="p">())</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">welcome_info</span><span class="p">)</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_BOTTOM_LEFT</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">evt</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+        <span class="c1"># a button was clicked </span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">start_auto_close</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">btn_event_cb</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span><span class="n">evt</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">evt</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">CLICKED</span><span class="p">:</span>
+        <span class="c1"># Create a full-screen background </span>
+
+        <span class="c1">#Create a base object for the modal background </span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">reset_style_list</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">add_style</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">,</span> <span class="n">style_modal</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">set_pos</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span><span class="p">)</span>
+        <span class="c1">#obj.set_style_local_bg_opa(lv.obj.PART.MAIN, lv.STATE.DEFAULT, lv.OPA._80)</span>
+        <span class="n">btns2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ok&quot;</span><span class="p">,</span> <span class="s2">&quot;Cancel&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Create the message box as a child of the modal background </span>
+        <span class="n">mbox</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">msgbox</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">mbox</span><span class="o">.</span><span class="n">add_btns</span><span class="p">(</span><span class="n">btns2</span><span class="p">);</span>
+        <span class="n">mbox</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+        <span class="n">mbox</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">mbox</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">mbox_event_cb</span><span class="p">)</span>
+
+        <span class="c1"># Fade the message box in with an animation </span>
+        <span class="n">a</span><span class="o">=</span><span class="n">lv</span><span class="o">.</span><span class="n">anim_t</span><span class="p">()</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">set_var</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">set_time</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">OPA</span><span class="o">.</span><span class="n">TRANSP</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">OPA</span><span class="o">.</span><span class="n">_70</span><span class="p">)</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">set_custom_exec_cb</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">opa_anim</span><span class="p">(</span><span class="n">mbox</span><span class="p">,</span><span class="n">val</span><span class="p">))</span>
+        <span class="n">lv</span><span class="o">.</span><span class="n">anim_t</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+        <span class="n">info</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">in_msg_info</span><span class="p">)</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_BOTTOM_LEFT</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+        
+<span class="n">style_modal</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">style_t</span><span class="p">()</span>
+<span class="n">style_modal</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">style_modal</span><span class="o">.</span><span class="n">set_bg_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv_colors</span><span class="o">.</span><span class="n">BLACK</span><span class="p">)</span>
+
+<span class="c1"># Create a button, then set its position and event callback */</span>
+<span class="n">btn</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">btn</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<span class="n">btn</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">btn_event_cb</span><span class="p">)</span>
+<span class="n">btn</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_TOP_LEFT</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Create a label on the button </span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">btn</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Display a message box!&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create an informative label on the screen </span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">info</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">welcome_info</span><span class="p">)</span>
+<span class="n">info</span><span class="o">.</span><span class="n">set_long_mode</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">LONG</span><span class="o">.</span><span class="n">BREAK</span><span class="p">)</span>       <span class="c1"># Make sure text will wrap </span>
+<span class="n">info</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="n">LV_HOR_RES</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">info</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_BOTTOM_LEFT</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">lv</span><span class="o">.</span><span class="n">task_handler</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1843,7 +1953,7 @@ For more information visit the <a class="reference internal" href="btnmatrix.htm
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 09, 2021.
+        Last updated on Mar 13, 2021.
       </span>
 
     </p>
