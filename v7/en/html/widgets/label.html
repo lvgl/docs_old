@@ -53,7 +53,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-78811084-3');
+	gtag('config', 'UA-78811084-3', { 'anonymize_ip': true });
 </script>
 
 </head>
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -965,7 +969,7 @@
 <li class="toctree-l3"><a class="reference internal" href="linemeter.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msdbox)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msgbox)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#usage">Usage</a><ul>
@@ -1592,7 +1596,137 @@ This feature can be enabled individually for each label by <code class="docutils
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Label recoloring and scrolling<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_label_1/lv_ex_label_1.py'><img alt='lv_ex_label_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_label_1/lv_ex_label_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">label1</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">label1</span><span class="o">.</span><span class="n">set_long_mode</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">LONG</span><span class="o">.</span><span class="n">BREAK</span><span class="p">)</span>  <span class="c1"># Break the long lines</span>
+<span class="n">label1</span><span class="o">.</span><span class="n">set_recolor</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>                   <span class="c1"># Enable re-coloring by commands in the text</span>
+<span class="n">label1</span><span class="o">.</span><span class="n">set_align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>        <span class="c1"># Center aligned lines</span>
+<span class="n">label1</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;#0000ff Re-color# #ff00ff words# #ff0000 of a# label </span>
+<span class="sd">and  wrap long text automatically.&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">label1</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">label1</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="n">label2</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">label2</span><span class="o">.</span><span class="n">set_long_mode</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">LONG</span><span class="o">.</span><span class="n">SROLL_CIRC</span><span class="p">)</span>
+<span class="n">label2</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">label2</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;It is a circularly scrolling text. &quot;</span><span class="p">)</span>
+<span class="n">label2</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Text shadow<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_label_2/lv_ex_label_2.py'><img alt='lv_ex_label_2' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_label_2/lv_ex_label_2.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lv_colors</span> <span class="kn">import</span> <span class="n">lv_colors</span>
+
+<span class="c1"># Create a style for the shadow</span>
+<span class="n">label_shadow_style</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">style_t</span><span class="p">()</span>
+<span class="n">label_shadow_style</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">label_shadow_style</span><span class="o">.</span><span class="n">set_text_opa</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">OPA</span><span class="o">.</span><span class="n">_50</span><span class="p">)</span>
+<span class="n">label_shadow_style</span><span class="o">.</span><span class="n">set_text_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv_colors</span><span class="o">.</span><span class="n">RED</span><span class="p">);</span>
+
+<span class="c1"># Create a label for the shadow first (it&#39;s in the background)</span>
+<span class="n">shadow_label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">shadow_label</span><span class="o">.</span><span class="n">add_style</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">,</span> <span class="n">label_shadow_style</span><span class="p">)</span>
+
+<span class="c1"># Create the main label</span>
+<span class="n">main_label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">main_label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;A simple method to create</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                              <span class="s2">&quot;shadows on text</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                              <span class="s2">&quot;It even works with</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                              <span class="s2">&quot;newlines     and spaces.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Set the same text for the shadow label</span>
+<span class="n">shadow_label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">main_label</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
+
+<span class="c1"># Position the main label</span>
+<span class="n">main_label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Shift the second label down and to the right by 1 pixel</span>
+<span class="n">shadow_label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">main_label</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_TOP_LEFT</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">lv</span><span class="o">.</span><span class="n">task_handler</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h4>Align labels<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_label_3/lv_ex_label_3.py'><img alt='lv_ex_label_3' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_label_3/lv_ex_label_3.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create three labels to demonstrate the alignments.</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># `label.set_align` is not required to align the object itslef.</span>
+<span class="c1"># It&#39;s used only when the text has multiple lines</span>
+
+<span class="c1"># Create a label on the top.</span>
+<span class="c1"># No additional alignment so it will be the reference</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_TOP_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">set_align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+<span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+<span class="c1"># Create a label in the middle.</span>
+<span class="c1"># `obj.align` will be called every time the text changes</span>
+<span class="c1"># to keep the middle position</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">set_align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+<span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+<span class="c1"># Create a label in the bottom.</span>
+<span class="c1"># Enable auto realign.</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">())</span>
+<span class="n">label</span><span class="o">.</span><span class="n">set_auto_realign</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">set_align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+<span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">TextChanger</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Changes texts of all labels every second&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> 
+                <span class="n">texts</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Text&quot;</span><span class="p">,</span> <span class="s2">&quot;A very long text&quot;</span><span class="p">,</span> <span class="s2">&quot;A text with</span><span class="se">\n</span><span class="s2">multiple</span><span class="se">\n</span><span class="s2">lines&quot;</span><span class="p">],</span>
+                <span class="n">rate</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">texts</span> <span class="o">=</span> <span class="n">texts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rate</span> <span class="o">=</span> <span class="n">rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lv</span><span class="o">.</span><span class="n">task_create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_cb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rate</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">TASK_PRIO</span><span class="o">.</span><span class="n">LOWEST</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">task_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+            <span class="n">label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">texts</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">])</span>
+
+        <span class="c1"># Manually realaign `labels[1]`</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">texts</span><span class="p">)</span>
+
+<span class="n">text_changer</span> <span class="o">=</span> <span class="n">TextChanger</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">text_changer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1794,7 +1928,7 @@ This feature can be enabled individually for each label by <code class="docutils
 <dd><p>Set the align of the label (left or center) <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>: pointer to a label object </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">align</span></code>: 'LV_LABEL_ALIGN_LEFT' or 'LV_LABEL_ALIGN_LEFT' </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">align</span></code>: LV_LABEL_ALIGN_LEFT/RIGHT/CENTER </p></li>
 </ul>
 </dd>
 </dl>
@@ -1887,7 +2021,7 @@ This feature can be enabled individually for each label by <code class="docutils
 <dt id="_CPPv418lv_label_get_alignPK8lv_obj_t">
 <span id="_CPPv318lv_label_get_alignPK8lv_obj_t"></span><span id="_CPPv218lv_label_get_alignPK8lv_obj_t"></span><span id="lv_label_get_align__lv_obj_tCP"></span><span class="target" id="lv__label_8h_1a173924f26e3904c0f74c5d7e1b224b6f"></span><a class="reference internal" href="#_CPPv416lv_label_align_t" title="lv_label_align_t"><span class="pre">lv_label_align_t</span></a> <code class="sig-name descname"><span class="pre">lv_label_get_align</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t"><span class="pre">lv_obj_t</span></a> <span class="pre">*</span><em><span class="pre">label</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_label_get_alignPK8lv_obj_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get the align attribute <dl class="simple">
-<dt><strong>Return</strong></dt><dd><p>LV_LABEL_ALIGN_LEFT or LV_LABEL_ALIGN_CENTER </p>
+<dt><strong>Return</strong></dt><dd><p>LV_LABEL_ALIGN_LEFT/RIGHT/CENTER </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>: pointer to a label object </p></li>
@@ -2001,7 +2135,7 @@ This feature can be enabled individually for each label by <code class="docutils
 
 <dl class="cpp function">
 <dt id="_CPPv418lv_label_get_styleP8lv_obj_t7uint8_t">
-<span id="_CPPv318lv_label_get_styleP8lv_obj_t7uint8_t"></span><span id="_CPPv218lv_label_get_styleP8lv_obj_t7uint8_t"></span><span id="lv_label_get_style__lv_obj_tP.uint8_t"></span><span class="target" id="lv__label_8h_1a655e9a80364cfa80d11f849e9cf28aba"></span><span class="pre">lv_style_list_t</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_label_get_style</span></code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t"><span class="pre">lv_obj_t</span></a> <span class="pre">*</span><em><span class="pre">label</span></em>, <span class="pre">uint8_t</span> <em><span class="pre">type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_label_get_styleP8lv_obj_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv318lv_label_get_styleP8lv_obj_t7uint8_t"></span><span id="_CPPv218lv_label_get_styleP8lv_obj_t7uint8_t"></span><span id="lv_label_get_style__lv_obj_tP.uint8_t"></span><span class="target" id="lv__label_8h_1a655e9a80364cfa80d11f849e9cf28aba"></span><a class="reference internal" href="../overview/style.html#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_label_get_style</span></code><span class="sig-paren">(</span><a class="reference internal" href="obj.html#_CPPv48lv_obj_t" title="lv_obj_t"><span class="pre">lv_obj_t</span></a> <span class="pre">*</span><em><span class="pre">label</span></em>, <span class="pre">uint8_t</span> <em><span class="pre">type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lv_label_get_styleP8lv_obj_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
@@ -2141,7 +2275,7 @@ This feature can be enabled individually for each label by <code class="docutils
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 13, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>

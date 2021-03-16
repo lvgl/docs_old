@@ -53,7 +53,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-78811084-3');
+	gtag('config', 'UA-78811084-3', { 'anonymize_ip': true });
 </script>
 
 </head>
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -965,7 +969,7 @@
 <li class="toctree-l3"><a class="reference internal" href="linemeter.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msdbox)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msgbox)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#usage">Usage</a><ul>
@@ -1465,7 +1469,47 @@ See <a class="reference internal" href="cont.html"><span class="doc">Container</
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Simple window<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_win_1/lv_ex_win_1.py'><img alt='lv_ex_win_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_win_1/lv_ex_win_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a window</span>
+<span class="n">win</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">win</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">win</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Window title&quot;</span><span class="p">)</span>                   <span class="c1"># Set the title</span>
+
+<span class="n">win_style</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">style_t</span><span class="p">()</span>
+<span class="n">win_style</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">win_style</span><span class="o">.</span><span class="n">set_margin_right</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">win</span><span class="o">.</span><span class="n">add_style</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">win</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">CONTENT_SCROLLABLE</span><span class="p">,</span><span class="n">win_style</span><span class="p">)</span>
+
+<span class="c1"># Add control button to the header</span>
+<span class="n">close_btn</span> <span class="o">=</span> <span class="n">win</span><span class="o">.</span><span class="n">add_btn_right</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">CLOSE</span><span class="p">)</span>
+<span class="n">close_btn</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="k">lambda</span> <span class="n">obj</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>  <span class="n">lv</span><span class="o">.</span><span class="n">win</span><span class="o">.</span><span class="n">close_event_cb</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">win</span><span class="o">.</span><span class="n">__cast__</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="n">e</span><span class="p">))</span>
+
+
+<span class="n">win</span><span class="o">.</span><span class="n">add_btn_right</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">SETTINGS</span><span class="p">)</span>           <span class="c1"># Add a setup button</span>
+
+<span class="c1"># Add some dummy content</span>
+<span class="n">txt</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;This is the content of the window</span>
+
+<span class="sd">You can add control buttons to</span>
+<span class="sd">the window header</span>
+
+<span class="sd">The content area becomes automatically </span>
+<span class="sd">scrollable if it&#39;s large enough.</span>
+
+<span class="sd">You can scroll the content</span>
+<span class="sd">See the scroll bar on the bottom!&quot;&quot;&quot;</span>
+<span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1925,7 +1969,7 @@ See <a class="reference internal" href="cont.html"><span class="doc">Container</
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 13, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>

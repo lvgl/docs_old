@@ -53,7 +53,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-78811084-3');
+	gtag('config', 'UA-78811084-3', { 'anonymize_ip': true });
 </script>
 
 </head>
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -965,7 +969,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../widgets/linemeter.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../widgets/msgbox.html">Message box (lv_msdbox)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/msgbox.html">Message box (lv_msgbox)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#usage">Usage</a><ul>
@@ -1623,7 +1627,150 @@ Here is an example:</p>
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Several object masks<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_objmask_1/lv_ex_objmask_1.py'><img alt='lv_ex_objmask_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_objmask_1/lv_ex_objmask_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set a very visible color for the screen to clearly see what happens</span>
+<span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">()</span><span class="o">.</span><span class="n">set_style_local_bg_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">color_hex3</span><span class="p">(</span><span class="mh">0xf33</span><span class="p">))</span>
+
+<span class="n">om</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">objmask</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">om</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">om</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">set_long_mode</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">LONG</span><span class="o">.</span><span class="n">BREAK</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">set_align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;This label will be masked out. See how it works.&quot;</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_TOP_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="n">cont</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">cont</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">cont</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">cont</span><span class="o">.</span><span class="n">set_drag</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cont</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_BOTTOM_MID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">btn</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">btn</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">btn</span><span class="o">.</span><span class="n">set_style_local_value_str</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="s2">&quot;Button&quot;</span><span class="p">)</span>
+
+<span class="n">lv</span><span class="o">.</span><span class="n">refr_now</span><span class="p">(</span><span class="kc">None</span><span class="p">);</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">tick_get</span><span class="p">();</span>
+<span class="k">while</span> <span class="n">lv</span><span class="o">.</span><span class="n">tick_elaps</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">a</span><span class="o">=</span><span class="n">lv</span><span class="o">.</span><span class="n">area_t</span><span class="p">()</span>
+<span class="n">r1</span><span class="o">=</span><span class="n">lv</span><span class="o">.</span><span class="n">draw_mask_radius_param_t</span><span class="p">()</span>
+
+<span class="n">a</span><span class="o">.</span><span class="n">x1</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">a</span><span class="o">.</span><span class="n">y1</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x2</span> <span class="o">=</span> <span class="mi">190</span>
+<span class="n">a</span><span class="o">.</span><span class="n">y2</span> <span class="o">=</span> <span class="mi">190</span>
+<span class="n">r1</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">RADIUS</span><span class="o">.</span><span class="n">CIRCLE</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">om</span><span class="o">.</span><span class="n">add_mask</span><span class="p">(</span><span class="n">r1</span><span class="p">)</span>
+
+<span class="n">lv</span><span class="o">.</span><span class="n">refr_now</span><span class="p">(</span><span class="kc">None</span><span class="p">);</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">tick_get</span><span class="p">();</span>
+<span class="k">while</span> <span class="n">lv</span><span class="o">.</span><span class="n">tick_elaps</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">a</span><span class="o">.</span><span class="n">x1</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">a</span><span class="o">.</span><span class="n">y1</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x2</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">a</span><span class="o">.</span><span class="n">y2</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">r1</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">RADIUS</span><span class="o">.</span><span class="n">CIRCLE</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">om</span><span class="o">.</span><span class="n">add_mask</span><span class="p">(</span><span class="n">r1</span><span class="p">)</span>
+
+<span class="n">lv</span><span class="o">.</span><span class="n">refr_now</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">tick_get</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">lv</span><span class="o">.</span><span class="n">tick_elaps</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">l1</span><span class="o">=</span><span class="n">lv</span><span class="o">.</span><span class="n">draw_mask_line_param_t</span><span class="p">()</span>
+<span class="n">l1</span><span class="o">.</span><span class="n">points_init</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">DRAW_MASK_LINE_SIDE</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+<span class="n">om</span><span class="o">.</span><span class="n">add_mask</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>
+
+<span class="n">lv</span><span class="o">.</span><span class="n">refr_now</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">tick_get</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">lv</span><span class="o">.</span><span class="n">tick_elaps</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">f1</span><span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">draw_mask_fade_param_t</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x1</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">a</span><span class="o">.</span><span class="n">y1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x2</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">a</span><span class="o">.</span><span class="n">y2</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">f1</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">OPA</span><span class="o">.</span><span class="n">TRANSP</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">OPA</span><span class="o">.</span><span class="n">COVER</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+<span class="n">om</span><span class="o">.</span><span class="n">add_mask</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Text mask<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_objmask_2/lv_ex_objmask_2.py'><img alt='lv_ex_objmask_2' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_objmask_2/lv_ex_objmask_2.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lv_colors</span> <span class="kn">import</span> <span class="n">lv_colors</span>
+
+<span class="n">MASK_WIDTH</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">MASK_HEIGHT</span><span class="o">=</span><span class="mi">50</span>
+
+<span class="c1"># Create the mask of a text by drawing it to a canvas</span>
+<span class="n">mask_map</span> <span class="o">=</span> <span class="nb">bytearray</span> <span class="p">(</span><span class="n">MASK_WIDTH</span> <span class="o">*</span> <span class="n">MASK_HEIGHT</span> <span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Create a &quot;8 bit alpha&quot; canvas and clear it</span>
+<span class="n">canvas</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">canvas</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">canvas</span><span class="o">.</span><span class="n">set_buffer</span><span class="p">(</span><span class="n">mask_map</span><span class="p">,</span> <span class="n">MASK_WIDTH</span><span class="p">,</span> <span class="n">MASK_HEIGHT</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">img</span><span class="o">.</span><span class="n">CF</span><span class="o">.</span><span class="n">ALPHA_8BIT</span><span class="p">)</span>
+<span class="n">canvas</span><span class="o">.</span><span class="n">fill_bg</span><span class="p">(</span><span class="n">lv_colors</span><span class="o">.</span><span class="n">BLACK</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">OPA</span><span class="o">.</span><span class="n">TRANSP</span><span class="p">)</span>
+
+<span class="c1"># Draw a label to the canvas. The result &quot;image&quot; will be used as mask</span>
+<span class="n">label_dsc</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">draw_label_dsc_t</span><span class="p">()</span>
+<span class="n">label_dsc</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">label_dsc</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">lv_colors</span><span class="o">.</span><span class="n">WHITE</span>
+<span class="n">canvas</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">MASK_WIDTH</span><span class="p">,</span> <span class="n">label_dsc</span><span class="p">,</span> <span class="s2">&quot;Text with gradient&quot;</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+
+<span class="c1"># The mask is read, the canvas is not required anymore</span>
+<span class="n">canvas</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+
+<span class="c1"># Create an object mask which will use the created mask</span>
+<span class="n">om</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">objmask</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">om</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="n">MASK_WIDTH</span><span class="p">,</span> <span class="n">MASK_HEIGHT</span><span class="p">)</span>
+<span class="n">om</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Add the created mask map to the object mask</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">draw_mask_map_param_t</span><span class="p">()</span>
+<span class="n">a</span><span class="o">=</span><span class="n">lv</span><span class="o">.</span><span class="n">area_t</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">a</span><span class="o">.</span><span class="n">y1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x2</span> <span class="o">=</span> <span class="n">MASK_WIDTH</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">a</span><span class="o">.</span><span class="n">y2</span> <span class="o">=</span> <span class="n">MASK_HEIGHT</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">mask_map</span><span class="p">)</span>
+<span class="n">om</span><span class="o">.</span><span class="n">add_mask</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># Create a style with gradient</span>
+<span class="n">style_bg</span><span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">style_t</span><span class="p">()</span>
+<span class="n">style_bg</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">style_bg</span><span class="o">.</span><span class="n">set_bg_opa</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">OPA</span><span class="o">.</span><span class="n">COVER</span><span class="p">)</span>
+<span class="n">style_bg</span><span class="o">.</span><span class="n">set_bg_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv_colors</span><span class="o">.</span><span class="n">RED</span><span class="p">)</span>
+<span class="n">style_bg</span><span class="o">.</span><span class="n">set_bg_grad_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv_colors</span><span class="o">.</span><span class="n">BLUE</span><span class="p">)</span>
+<span class="n">style_bg</span><span class="o">.</span><span class="n">set_bg_grad_dir</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">GRAD_DIR</span><span class="o">.</span><span class="n">HOR</span><span class="p">)</span>
+
+<span class="c1"># Create and object with the gradient style on the object mask.</span>
+<span class="c1"># The text will be masked from the gradient</span>
+<span class="n">bg</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">bg</span><span class="o">.</span><span class="n">reset_style_list</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">)</span>
+<span class="n">bg</span><span class="o">.</span><span class="n">add_style</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">,</span> <span class="n">style_bg</span><span class="p">)</span>
+<span class="n">bg</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="n">MASK_WIDTH</span><span class="p">,</span> <span class="n">MASK_HEIGHT</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1644,7 +1791,7 @@ Here is an example:</p>
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 13, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>

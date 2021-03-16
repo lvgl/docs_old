@@ -53,7 +53,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-78811084-3');
+	gtag('config', 'UA-78811084-3', { 'anonymize_ip': true });
 </script>
 
 </head>
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -965,7 +969,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../widgets/linemeter.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../widgets/msgbox.html">Message box (lv_msdbox)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/msgbox.html">Message box (lv_msgbox)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#usage">Usage</a><ul>
@@ -1653,7 +1657,7 @@ The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code cla
 <dd><p>Set the path (curve) of the animation. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">a</span></code>: pointer to an initialized <code class="docutils literal notranslate"><span class="pre">lv_anim_t</span></code> variable </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">path_cb</span></code>: a function the get the current value of the animation. The built in functions starts with <code class="docutils literal notranslate"><span class="pre">lv_anim_path_...</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>: a function the get the current value of the animation. The built in functions starts with <code class="docutils literal notranslate"><span class="pre">lv_anim_path_...</span></code> </p></li>
 </ul>
 </dd>
 </dl>
@@ -1687,8 +1691,8 @@ The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code cla
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv425lv_anim_set_playback_timeP9lv_anim_t8uint16_t">
-<span id="_CPPv325lv_anim_set_playback_timeP9lv_anim_t8uint16_t"></span><span id="_CPPv225lv_anim_set_playback_timeP9lv_anim_t8uint16_t"></span><span id="lv_anim_set_playback_time__lv_anim_tP.uint16_t"></span><span class="target" id="lv__anim_8h_1a23e35827eaa9b0c1f0a5af7a9992987a"></span><em class="property"><span class="pre">static</span></em> <em class="property"><span class="pre">inline</span></em> <span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_anim_set_playback_time</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_anim_t" title="lv_anim_t"><span class="pre">lv_anim_t</span></a> <span class="pre">*</span><em><span class="pre">a</span></em>, <span class="pre">uint16_t</span> <em><span class="pre">time</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lv_anim_set_playback_timeP9lv_anim_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv425lv_anim_set_playback_timeP9lv_anim_t8uint32_t">
+<span id="_CPPv325lv_anim_set_playback_timeP9lv_anim_t8uint32_t"></span><span id="_CPPv225lv_anim_set_playback_timeP9lv_anim_t8uint32_t"></span><span id="lv_anim_set_playback_time__lv_anim_tP.uint32_t"></span><span class="target" id="lv__anim_8h_1ac4661655a33788509250ef8e2ae8de1e"></span><em class="property"><span class="pre">static</span></em> <em class="property"><span class="pre">inline</span></em> <span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_anim_set_playback_time</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_anim_t" title="lv_anim_t"><span class="pre">lv_anim_t</span></a> <span class="pre">*</span><em><span class="pre">a</span></em>, <span class="pre">uint32_t</span> <em><span class="pre">time</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lv_anim_set_playback_timeP9lv_anim_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Make the animation to play back to when the forward direction is ready <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">a</span></code>: pointer to an initialized <code class="docutils literal notranslate"><span class="pre">lv_anim_t</span></code> variable </p></li>
@@ -1700,8 +1704,8 @@ The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code cla
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv426lv_anim_set_playback_delayP9lv_anim_t8uint16_t">
-<span id="_CPPv326lv_anim_set_playback_delayP9lv_anim_t8uint16_t"></span><span id="_CPPv226lv_anim_set_playback_delayP9lv_anim_t8uint16_t"></span><span id="lv_anim_set_playback_delay__lv_anim_tP.uint16_t"></span><span class="target" id="lv__anim_8h_1aeb240420978249364ee593de25a3ee8c"></span><em class="property"><span class="pre">static</span></em> <em class="property"><span class="pre">inline</span></em> <span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_anim_set_playback_delay</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_anim_t" title="lv_anim_t"><span class="pre">lv_anim_t</span></a> <span class="pre">*</span><em><span class="pre">a</span></em>, <span class="pre">uint16_t</span> <em><span class="pre">delay</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_anim_set_playback_delayP9lv_anim_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv426lv_anim_set_playback_delayP9lv_anim_t8uint32_t">
+<span id="_CPPv326lv_anim_set_playback_delayP9lv_anim_t8uint32_t"></span><span id="_CPPv226lv_anim_set_playback_delayP9lv_anim_t8uint32_t"></span><span id="lv_anim_set_playback_delay__lv_anim_tP.uint32_t"></span><span class="target" id="lv__anim_8h_1a4586910fbd6598cf80f6cb2e4ab1338f"></span><em class="property"><span class="pre">static</span></em> <em class="property"><span class="pre">inline</span></em> <span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_anim_set_playback_delay</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_anim_t" title="lv_anim_t"><span class="pre">lv_anim_t</span></a> <span class="pre">*</span><em><span class="pre">a</span></em>, <span class="pre">uint32_t</span> <em><span class="pre">delay</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426lv_anim_set_playback_delayP9lv_anim_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Make the animation to play back to when the forward direction is ready <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">a</span></code>: pointer to an initialized <code class="docutils literal notranslate"><span class="pre">lv_anim_t</span></code> variable </p></li>
@@ -1726,8 +1730,8 @@ The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code cla
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv424lv_anim_set_repeat_delayP9lv_anim_t8uint16_t">
-<span id="_CPPv324lv_anim_set_repeat_delayP9lv_anim_t8uint16_t"></span><span id="_CPPv224lv_anim_set_repeat_delayP9lv_anim_t8uint16_t"></span><span id="lv_anim_set_repeat_delay__lv_anim_tP.uint16_t"></span><span class="target" id="lv__anim_8h_1ae4e7dab34f59052b4dbf1eb8e1b4dfca"></span><em class="property"><span class="pre">static</span></em> <em class="property"><span class="pre">inline</span></em> <span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_anim_set_repeat_delay</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_anim_t" title="lv_anim_t"><span class="pre">lv_anim_t</span></a> <span class="pre">*</span><em><span class="pre">a</span></em>, <span class="pre">uint16_t</span> <em><span class="pre">delay</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_anim_set_repeat_delayP9lv_anim_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv424lv_anim_set_repeat_delayP9lv_anim_t8uint32_t">
+<span id="_CPPv324lv_anim_set_repeat_delayP9lv_anim_t8uint32_t"></span><span id="_CPPv224lv_anim_set_repeat_delayP9lv_anim_t8uint32_t"></span><span id="lv_anim_set_repeat_delay__lv_anim_tP.uint32_t"></span><span class="target" id="lv__anim_8h_1a1c64e4ad6ec9fbb9a78688edc8d2c3fd"></span><em class="property"><span class="pre">static</span></em> <em class="property"><span class="pre">inline</span></em> <span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_anim_set_repeat_delay</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_anim_t" title="lv_anim_t"><span class="pre">lv_anim_t</span></a> <span class="pre">*</span><em><span class="pre">a</span></em>, <span class="pre">uint32_t</span> <em><span class="pre">delay</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424lv_anim_set_repeat_delayP9lv_anim_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Set a delay before repeating the animation. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">a</span></code>: pointer to an initialized <code class="docutils literal notranslate"><span class="pre">lv_anim_t</span></code> variable </p></li>
@@ -1790,7 +1794,7 @@ The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code cla
 
 <dl class="cpp function">
 <dt id="_CPPv417lv_anim_get_delayP9lv_anim_t">
-<span id="_CPPv317lv_anim_get_delayP9lv_anim_t"></span><span id="_CPPv217lv_anim_get_delayP9lv_anim_t"></span><span id="lv_anim_get_delay__lv_anim_tP"></span><span class="target" id="lv__anim_8h_1aca7777a182dc5c847e498ede85d6a3b9"></span><em class="property"><span class="pre">static</span></em> <em class="property"><span class="pre">inline</span></em> <span class="pre">int32_t</span> <code class="sig-name descname"><span class="pre">lv_anim_get_delay</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_anim_t" title="lv_anim_t"><span class="pre">lv_anim_t</span></a> <span class="pre">*</span><em><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_anim_get_delayP9lv_anim_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv317lv_anim_get_delayP9lv_anim_t"></span><span id="_CPPv217lv_anim_get_delayP9lv_anim_t"></span><span id="lv_anim_get_delay__lv_anim_tP"></span><span class="target" id="lv__anim_8h_1a05bb2b3d866ca22a4b5cab054dc81365"></span><em class="property"><span class="pre">static</span></em> <em class="property"><span class="pre">inline</span></em> <span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">lv_anim_get_delay</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49lv_anim_t" title="lv_anim_t"><span class="pre">lv_anim_t</span></a> <span class="pre">*</span><em><span class="pre">a</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lv_anim_get_delayP9lv_anim_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get a delay before starting the animation <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>delay before the animation in milliseconds </p>
 </dd>
@@ -1815,6 +1819,12 @@ The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code cla
 </dd>
 </dl>
 </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv415lv_anim_del_allv">
+<span id="_CPPv315lv_anim_del_allv"></span><span id="_CPPv215lv_anim_del_allv"></span><span id="lv_anim_del_all__void"></span><span class="target" id="lv__anim_8h_1a4d5c5f7461ab5982a3f673531139dcc7"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_anim_del_all</span></code><span class="sig-paren">(</span><span class="pre">void</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_anim_del_allv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Delete all the animations animation </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -1858,8 +1868,8 @@ The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code cla
 </dd></dl>
 
 <dl class="cpp function">
-<dt id="_CPPv421lv_anim_speed_to_time8uint16_t15lv_anim_value_t15lv_anim_value_t">
-<span id="_CPPv321lv_anim_speed_to_time8uint16_t15lv_anim_value_t15lv_anim_value_t"></span><span id="_CPPv221lv_anim_speed_to_time8uint16_t15lv_anim_value_t15lv_anim_value_t"></span><span id="lv_anim_speed_to_time__uint16_t.lv_anim_value_t.lv_anim_value_t"></span><span class="target" id="lv__anim_8h_1a750e1ddefda7585ac45bc68378595713"></span><span class="pre">uint16_t</span> <code class="sig-name descname"><span class="pre">lv_anim_speed_to_time</span></code><span class="sig-paren">(</span><span class="pre">uint16_t</span> <em><span class="pre">speed</span></em>, <a class="reference internal" href="#_CPPv415lv_anim_value_t" title="lv_anim_value_t"><span class="pre">lv_anim_value_t</span></a> <em><span class="pre">start</span></em>, <a class="reference internal" href="#_CPPv415lv_anim_value_t" title="lv_anim_value_t"><span class="pre">lv_anim_value_t</span></a> <em><span class="pre">end</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_anim_speed_to_time8uint16_t15lv_anim_value_t15lv_anim_value_t" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv421lv_anim_speed_to_time8uint32_t15lv_anim_value_t15lv_anim_value_t">
+<span id="_CPPv321lv_anim_speed_to_time8uint32_t15lv_anim_value_t15lv_anim_value_t"></span><span id="_CPPv221lv_anim_speed_to_time8uint32_t15lv_anim_value_t15lv_anim_value_t"></span><span id="lv_anim_speed_to_time__uint32_t.lv_anim_value_t.lv_anim_value_t"></span><span class="target" id="lv__anim_8h_1afc106d10062ef083511e79093caa40e7"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">lv_anim_speed_to_time</span></code><span class="sig-paren">(</span><span class="pre">uint32_t</span> <em><span class="pre">speed</span></em>, <a class="reference internal" href="#_CPPv415lv_anim_value_t" title="lv_anim_value_t"><span class="pre">lv_anim_value_t</span></a> <em><span class="pre">start</span></em>, <a class="reference internal" href="#_CPPv415lv_anim_value_t" title="lv_anim_value_t"><span class="pre">lv_anim_value_t</span></a> <em><span class="pre">end</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_anim_speed_to_time8uint32_t15lv_anim_value_t15lv_anim_value_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Calculate the time of an animation with a given speed and the start and end values <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>the required time [ms] for the animation with the given parameters </p>
 </dd>
@@ -2035,6 +2045,12 @@ The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code cla
 </dd></dl>
 
 <dl class="cpp var">
+<dt id="_CPPv4N10_lv_anim_t9user_dataE">
+<span id="_CPPv3N10_lv_anim_t9user_dataE"></span><span id="_CPPv2N10_lv_anim_t9user_dataE"></span><span id="_lv_anim_t::user_data__lv_anim_user_data_t"></span><span class="target" id="struct__lv__anim__t_1a33b5ebe2f68260f612172f5b4222c9fc"></span><span class="pre">lv_anim_user_data_t</span> <code class="sig-name descname"><span class="pre">user_data</span></code><a class="headerlink" href="#_CPPv4N10_lv_anim_t9user_dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Custom user data </p>
+</dd></dl>
+
+<dl class="cpp var">
 <dt id="_CPPv4N10_lv_anim_t4pathE">
 <span id="_CPPv3N10_lv_anim_t4pathE"></span><span id="_CPPv2N10_lv_anim_t4pathE"></span><span id="_lv_anim_t::path__lv_anim_path_t"></span><span class="target" id="struct__lv__anim__t_1acf275ab999987e86154f704caa288e26"></span><a class="reference internal" href="#_CPPv414lv_anim_path_t" title="lv_anim_path_t"><span class="pre">lv_anim_path_t</span></a> <code class="sig-name descname"><span class="pre">path</span></code><a class="headerlink" href="#_CPPv4N10_lv_anim_t4pathE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Describe the path (curve) of animations </p>
@@ -2101,15 +2117,10 @@ The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code cla
 </dd></dl>
 
 <dl class="cpp var">
-<dt id="_CPPv4N10_lv_anim_t9user_dataE">
-<span id="_CPPv3N10_lv_anim_t9user_dataE"></span><span id="_CPPv2N10_lv_anim_t9user_dataE"></span><span id="_lv_anim_t::user_data__lv_anim_user_data_t"></span><span class="target" id="struct__lv__anim__t_1a33b5ebe2f68260f612172f5b4222c9fc"></span><span class="pre">lv_anim_user_data_t</span> <code class="sig-name descname"><span class="pre">user_data</span></code><a class="headerlink" href="#_CPPv4N10_lv_anim_t9user_dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dt>
+<span class="target" id="struct__lv__anim__t_1a33b5ebe2f68260f612172f5b4222c9fc"></span><span class="pre">lv_anim_user_data_t</span> <code class="sig-name descname"><span class="pre">user_data</span></code><br /></dt>
 <dd><p>Custom user data </p>
 </dd></dl>
-
-<dl class="cpp var">
-<dt id="_CPPv4N10_lv_anim_t9time_origE">
-<span id="_CPPv3N10_lv_anim_t9time_origE"></span><span id="_CPPv2N10_lv_anim_t9time_origE"></span><span id="_lv_anim_t::time_orig__uint32_t"></span><span class="target" id="struct__lv__anim__t_1ab46694d3dee8628945a42f461d52bc89"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">time_orig</span></code><a class="headerlink" href="#_CPPv4N10_lv_anim_t9time_origE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N10_lv_anim_t12playback_nowE">
@@ -2118,10 +2129,15 @@ The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code cla
 </dd></dl>
 
 <dl class="cpp var">
-<dt id="_CPPv4N10_lv_anim_t7has_runE">
-<span id="_CPPv3N10_lv_anim_t7has_runE"></span><span id="_CPPv2N10_lv_anim_t7has_runE"></span><span id="_lv_anim_t::has_run__uint32_t"></span><span class="target" id="struct__lv__anim__t_1ab26e5735c5969800c8e05c8e1f0ea2a8"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">has_run</span></code><a class="headerlink" href="#_CPPv4N10_lv_anim_t7has_runE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N10_lv_anim_t9run_roundE">
+<span id="_CPPv3N10_lv_anim_t9run_roundE"></span><span id="_CPPv2N10_lv_anim_t9run_roundE"></span><span id="_lv_anim_t::run_round__uint8_t"></span><span class="target" id="struct__lv__anim__t_1a3ed1178fc3071ed6f544e64b8a0b9572"></span><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">run_round</span></code><a class="headerlink" href="#_CPPv4N10_lv_anim_t9run_roundE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Indicates the animation has run in this round </p>
 </dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N10_lv_anim_t9time_origE">
+<span id="_CPPv3N10_lv_anim_t9time_origE"></span><span id="_CPPv2N10_lv_anim_t9time_origE"></span><span id="_lv_anim_t::time_orig__uint32_t"></span><span class="target" id="struct__lv__anim__t_1ab46694d3dee8628945a42f461d52bc89"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">time_orig</span></code><a class="headerlink" href="#_CPPv4N10_lv_anim_t9time_origE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
 
 </div>
 </dd></dl>
@@ -2146,7 +2162,7 @@ The speed is interpreted in <em>unit/sec</em> dimension. For example,  <code cla
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 13, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>

@@ -53,7 +53,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-78811084-3');
+	gtag('config', 'UA-78811084-3', { 'anonymize_ip': true });
 </script>
 
 </head>
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -965,7 +969,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../widgets/linemeter.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../widgets/msgbox.html">Message box (lv_msdbox)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/msgbox.html">Message box (lv_msgbox)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#usage">Usage</a><ul>
@@ -1715,6 +1719,36 @@ Note that, only the pointer of the data is saved so you need to ensure that the 
 </div>
 </dd></dl>
 
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="cpp type">
+<dt id="_CPPv413lv_async_cb_t">
+<span id="_CPPv313lv_async_cb_t"></span><span id="_CPPv213lv_async_cb_t"></span><span id="lv_async_cb_t"></span><span class="target" id="lv__async_8h_1a89e9d933d35c3858d4b2b88ee73d02ef"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">void</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_async_cb_t</span></code><span class="pre">)</span><span class="sig-paren">(</span><span class="pre">void</span><span class="pre">*</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lv_async_cb_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Type for async callback. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv415lv_async_info_t">
+<span id="_CPPv315lv_async_info_t"></span><span id="_CPPv215lv_async_info_t"></span><span id="lv_async_info_t"></span><span class="target" id="lv__async_8h_1a58985967ada2b634ca4ac87ae70b08f1"></span><em class="property"><span class="pre">typedef</span> </em><em class="property"><span class="pre">struct</span></em> <span class="pre">_lv_async_info_t</span> <code class="sig-name descname"><span class="pre">lv_async_info_t</span></code><a class="headerlink" href="#_CPPv415lv_async_info_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv413lv_async_call13lv_async_cb_tPv">
+<span id="_CPPv313lv_async_call13lv_async_cb_tPv"></span><span id="_CPPv213lv_async_call13lv_async_cb_tPv"></span><span id="lv_async_call__lv_async_cb_t.voidP"></span><span class="target" id="lv__async_8h_1aee44e660e597215583d71f76f9ce2564"></span><span class="pre">lv_res_t</span> <code class="sig-name descname"><span class="pre">lv_async_call</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv413lv_async_cb_t" title="lv_async_cb_t"><span class="pre">lv_async_cb_t</span></a> <em><span class="pre">async_xcb</span></em>, <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">user_data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413lv_async_call13lv_async_cb_tPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Call an asynchronous function the next time lv_task_handler() is run. This function is likely to return <strong>before</strong> the call actually happens! <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">async_xcb</span></code>: a callback which is the task itself. (the 'x' in the argument name indicates that its not a fully generic function because it not follows the <code class="docutils literal notranslate"><span class="pre">func_name(object,</span> <span class="pre">callback,</span> <span class="pre">...)</span></code> convention) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user_data</span></code>: custom parameter </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
 </div>
 </div>
 
@@ -1734,7 +1768,7 @@ Note that, only the pointer of the data is saved so you need to ensure that the 
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 13, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>

@@ -1,8 +1,8 @@
 ```eval_rst
 .. include:: /header.rst 
-:github_url: |github_link_base|/widgets/msdbox.md
+:github_url: |github_link_base|/widgets/msgbox.md
 ```
-# Message box (lv_msdbox)
+# Message box (lv_msgbox)
 
 ## Overview
 The Message boxes act as pop-ups. 

@@ -43,7 +43,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Message box (lv_msdbox)" href="msgbox.html" />
+    <link rel="next" title="Message box (lv_msgbox)" href="msgbox.html" />
     <link rel="prev" title="List (lv_list)" href="list.html" />
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -53,7 +53,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-78811084-3');
+	gtag('config', 'UA-78811084-3', { 'anonymize_ip': true });
 </script>
 
 </head>
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -965,7 +969,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msdbox)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msgbox)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#usage">Usage</a><ul>
@@ -1438,7 +1442,22 @@ It can used e.g to put a quarter line meter into a corner or a half line meter t
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Simple Line meter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_linemeter_1/lv_ex_linemeter_1.py'><img alt='lv_ex_linemeter_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_linemeter_1/lv_ex_linemeter_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">lmeter</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">linemeter</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">lmeter</span><span class="o">.</span><span class="n">set_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>         <span class="c1"># Set the range</span>
+<span class="n">lmeter</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>            <span class="c1"># Set the current value</span>
+<span class="n">lmeter</span><span class="o">.</span><span class="n">set_scale</span><span class="p">(</span><span class="mi">240</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span>        <span class="c1"># Set the angle and number of lines</span>
+<span class="n">lmeter</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">lmeter</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1715,7 +1734,7 @@ It can used e.g to put a quarter line meter into a corner or a half line meter t
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="msgbox.html" class="btn btn-neutral float-right" title="Message box (lv_msdbox)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="msgbox.html" class="btn btn-neutral float-right" title="Message box (lv_msgbox)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="list.html" class="btn btn-neutral float-left" title="List (lv_list)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
@@ -1725,7 +1744,7 @@ It can used e.g to put a quarter line meter into a corner or a half line meter t
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 13, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>

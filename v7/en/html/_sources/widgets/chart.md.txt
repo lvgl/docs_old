@@ -15,7 +15,7 @@ Charts also support division lines, 2 y axis, axis ticks, and texts on ticks.
 ## Parts and Styles
 The Chart's main part is called `LV_CHART_PART_BG` and it uses all the typical background properties. 
 The *text* style properties determine the style of the axis texts and the *line* properties determine ticks' style.
-*Padding* values add some space on the sides thus it makes *series area* smaller. Padding also can be used to make space for axis texts and ticks.
+*Padding* values add some space on the sides thus it makes the *series area* smaller. Padding also can be used to make space for axis texts and ticks.
 
 The background of the series is called `LV_CHART_PART_SERIES_BG` and it's placed on the main background. 
 The division lines, and series data is drawn on this part. Besides the typical background style properties

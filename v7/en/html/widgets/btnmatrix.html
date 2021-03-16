@@ -53,7 +53,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-78811084-3');
+	gtag('config', 'UA-78811084-3', { 'anonymize_ip': true });
 </script>
 
 </head>
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -965,7 +969,7 @@
 <li class="toctree-l3"><a class="reference internal" href="linemeter.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msdbox)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msgbox)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#usage">Usage</a><ul>
@@ -1497,7 +1501,44 @@ If you require that ability, using individual buttons is very likely to be a bet
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Simple Button matrix<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_btnmatrix_1/lv_ex_btnmatrix_1.py'><img alt='lv_ex_btnmatrix_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_btnmatrix_1/lv_ex_btnmatrix_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="n">evt</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">evt</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Toggled&quot;</span><span class="p">)</span>
+        <span class="n">txt</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">get_active_btn_text</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> was pressed&quot;</span><span class="o">%</span><span class="n">txt</span><span class="p">)</span>
+
+<span class="c1"># Create a screen and load it</span>
+<span class="n">scr</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">obj</span><span class="p">()</span>
+<span class="n">lv</span><span class="o">.</span><span class="n">scr_load</span><span class="p">(</span><span class="n">scr</span><span class="p">)</span>
+
+<span class="n">btnm_map</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span> <span class="s2">&quot;9&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Action1&quot;</span><span class="p">,</span> <span class="s2">&quot;Action2&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+
+<span class="n">btnm_ctlr_map</span> <span class="o">=</span> <span class="p">[</span><span class="mi">46</span><span class="o">|</span><span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span><span class="mi">46</span><span class="p">,</span><span class="mi">46</span><span class="p">,</span><span class="mi">46</span><span class="p">,</span><span class="mi">46</span><span class="p">,</span>
+                 <span class="mi">46</span><span class="p">,</span><span class="mi">46</span><span class="p">,</span><span class="mi">46</span><span class="p">,</span><span class="mi">46</span><span class="p">,</span><span class="mi">46</span><span class="p">,</span>
+                 <span class="mi">115</span><span class="p">,</span><span class="mi">115</span><span class="p">]</span>
+
+<span class="c1"># create a button matrix</span>
+<span class="n">btnm1</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">btnm1</span><span class="o">.</span><span class="n">set_map</span><span class="p">(</span><span class="n">btnm_map</span><span class="p">)</span>
+<span class="c1">#btnm1.set_ctrl_map(btnm_ctlr_map)</span>
+<span class="n">btnm1</span><span class="o">.</span><span class="n">set_btn_ctrl</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">CHECKABLE</span><span class="p">)</span>
+<span class="n">btnm1</span><span class="o">.</span><span class="n">set_btn_ctrl</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">CHECK_STATE</span><span class="p">)</span>
+<span class="n">btnm1</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="mi">230</span><span class="p">)</span>
+<span class="n">btnm1</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># attach the callback</span>
+<span class="n">btnm1</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1896,7 +1937,7 @@ If you require that ability, using individual buttons is very likely to be a bet
 
 <dl class="cpp var">
 <dt id="_CPPv4N18lv_btnmatrix_ext_t9style_btnE">
-<span id="_CPPv3N18lv_btnmatrix_ext_t9style_btnE"></span><span id="_CPPv2N18lv_btnmatrix_ext_t9style_btnE"></span><span id="lv_btnmatrix_ext_t::style_btn__lv_style_list_t"></span><span class="target" id="structlv__btnmatrix__ext__t_1aada9ba9ba36ee687ad7669b45d7342fd"></span><span class="pre">lv_style_list_t</span> <code class="sig-name descname"><span class="pre">style_btn</span></code><a class="headerlink" href="#_CPPv4N18lv_btnmatrix_ext_t9style_btnE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N18lv_btnmatrix_ext_t9style_btnE"></span><span id="_CPPv2N18lv_btnmatrix_ext_t9style_btnE"></span><span id="lv_btnmatrix_ext_t::style_btn__lv_style_list_t"></span><span class="target" id="structlv__btnmatrix__ext__t_1aada9ba9ba36ee687ad7669b45d7342fd"></span><a class="reference internal" href="../overview/style.html#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <code class="sig-name descname"><span class="pre">style_btn</span></code><a class="headerlink" href="#_CPPv4N18lv_btnmatrix_ext_t9style_btnE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -1956,7 +1997,7 @@ If you require that ability, using individual buttons is very likely to be a bet
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 13, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>

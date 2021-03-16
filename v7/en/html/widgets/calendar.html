@@ -53,7 +53,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-78811084-3');
+	gtag('config', 'UA-78811084-3', { 'anonymize_ip': true });
 </script>
 
 </head>
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -965,7 +969,7 @@
 <li class="toctree-l3"><a class="reference internal" href="linemeter.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msdbox)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msgbox)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#usage">Usage</a><ul>
@@ -1500,7 +1504,57 @@ It uses typical background properties plus padding to adjust its size and margin
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id2">
+<h4>Calendar with day select<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_calendar_1/lv_ex_calendar_1.py'><img alt='lv_ex_calendar_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_calendar_1/lv_ex_calendar_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="n">evt</span><span class="p">):</span>
+    <span class="k">if</span>  <span class="n">evt</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">calendar</span><span class="o">.</span><span class="n">get_pressed_date</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">date</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clicked date: </span><span class="si">%02d</span><span class="s2">.</span><span class="si">%02d</span><span class="s2">.</span><span class="si">%02d</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">))</span>
+            
+<span class="c1"># create a calendar</span>
+<span class="n">calendar</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">calendar</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">235</span><span class="p">,</span><span class="mi">235</span><span class="p">)</span>
+<span class="n">calendar</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+<span class="c1"># Make the date number smaller to be sure they fit into their area</span>
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_style_local_text_font</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">calendar</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">DATE</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">theme_get_font_small</span><span class="p">())</span>
+<span class="n">today</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">calendar_date_t</span><span class="p">()</span>
+<span class="n">today</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2020</span><span class="p">;</span>
+<span class="n">today</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">today</span><span class="o">.</span><span class="n">day</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_today_date</span><span class="p">(</span><span class="n">today</span><span class="p">)</span>
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_showed_date</span><span class="p">(</span><span class="n">today</span><span class="p">)</span>
+
+<span class="c1"># Highlight a few days</span>
+<span class="n">highlighted_days</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">highlighted_days</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">calendar_date_t</span><span class="p">())</span>
+
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">month</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">day</span><span class="o">=</span><span class="mi">6</span>
+
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">month</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">day</span><span class="o">=</span><span class="mi">11</span>
+
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">month</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">highlighted_days</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">day</span><span class="o">=</span><span class="mi">22</span>
+
+<span class="n">calendar</span><span class="o">.</span><span class="n">set_highlighted_dates</span><span class="p">(</span><span class="n">highlighted_days</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1815,17 +1869,17 @@ It uses typical background properties plus padding to adjust its size and margin
 
 <dl class="cpp var">
 <dt id="_CPPv4N17lv_calendar_ext_t12style_headerE">
-<span id="_CPPv3N17lv_calendar_ext_t12style_headerE"></span><span id="_CPPv2N17lv_calendar_ext_t12style_headerE"></span><span id="lv_calendar_ext_t::style_header__lv_style_list_t"></span><span class="target" id="structlv__calendar__ext__t_1a7ce3a8b41ecbcc461861b41704736cfe"></span><span class="pre">lv_style_list_t</span> <code class="sig-name descname"><span class="pre">style_header</span></code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t12style_headerE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N17lv_calendar_ext_t12style_headerE"></span><span id="_CPPv2N17lv_calendar_ext_t12style_headerE"></span><span id="lv_calendar_ext_t::style_header__lv_style_list_t"></span><span class="target" id="structlv__calendar__ext__t_1a7ce3a8b41ecbcc461861b41704736cfe"></span><a class="reference internal" href="../overview/style.html#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <code class="sig-name descname"><span class="pre">style_header</span></code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t12style_headerE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N17lv_calendar_ext_t15style_day_namesE">
-<span id="_CPPv3N17lv_calendar_ext_t15style_day_namesE"></span><span id="_CPPv2N17lv_calendar_ext_t15style_day_namesE"></span><span id="lv_calendar_ext_t::style_day_names__lv_style_list_t"></span><span class="target" id="structlv__calendar__ext__t_1a3b0efaad4cb260bfb4c1c02832975547"></span><span class="pre">lv_style_list_t</span> <code class="sig-name descname"><span class="pre">style_day_names</span></code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t15style_day_namesE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N17lv_calendar_ext_t15style_day_namesE"></span><span id="_CPPv2N17lv_calendar_ext_t15style_day_namesE"></span><span id="lv_calendar_ext_t::style_day_names__lv_style_list_t"></span><span class="target" id="structlv__calendar__ext__t_1a3b0efaad4cb260bfb4c1c02832975547"></span><a class="reference internal" href="../overview/style.html#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <code class="sig-name descname"><span class="pre">style_day_names</span></code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t15style_day_namesE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N17lv_calendar_ext_t15style_date_numsE">
-<span id="_CPPv3N17lv_calendar_ext_t15style_date_numsE"></span><span id="_CPPv2N17lv_calendar_ext_t15style_date_numsE"></span><span id="lv_calendar_ext_t::style_date_nums__lv_style_list_t"></span><span class="target" id="structlv__calendar__ext__t_1a685bbde76e23cefdf049aeed4e670d6c"></span><span class="pre">lv_style_list_t</span> <code class="sig-name descname"><span class="pre">style_date_nums</span></code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t15style_date_numsE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N17lv_calendar_ext_t15style_date_numsE"></span><span id="_CPPv2N17lv_calendar_ext_t15style_date_numsE"></span><span id="lv_calendar_ext_t::style_date_nums__lv_style_list_t"></span><span class="target" id="structlv__calendar__ext__t_1a685bbde76e23cefdf049aeed4e670d6c"></span><a class="reference internal" href="../overview/style.html#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <code class="sig-name descname"><span class="pre">style_date_nums</span></code><a class="headerlink" href="#_CPPv4N17lv_calendar_ext_t15style_date_numsE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -1850,7 +1904,7 @@ It uses typical background properties plus padding to adjust its size and margin
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 13, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>

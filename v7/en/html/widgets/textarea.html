@@ -53,7 +53,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-78811084-3');
+	gtag('config', 'UA-78811084-3', { 'anonymize_ip': true });
 </script>
 
 </head>
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -965,7 +969,7 @@
 <li class="toctree-l3"><a class="reference internal" href="linemeter.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msdbox)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msgbox)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#usage">Usage</a><ul>
@@ -1695,7 +1699,173 @@ The new text can't be in a local variable which is destroyed when the event call
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Simple Text area<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_textarea_1/lv_ex_textarea_1.py'><img alt='lv_ex_textarea_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_textarea_1/lv_ex_textarea_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TextArea</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+        <span class="c1"># create a textarea</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ta</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">textarea</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ta</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ta</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ta</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;A text in a Text Area&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ta</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">event_handler</span><span class="p">)</span>
+      
+    <span class="k">def</span> <span class="nf">event_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">source</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span>  <span class="n">event</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;i= &quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value:&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ta</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">LONG_PRESSED_REPEAT</span><span class="p">:</span>
+            <span class="c1"># For simple test: Long press the Text are to add the text below</span>
+            <span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">You can scroll it if the text is long enough.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ta</span><span class="o">.</span><span class="n">add_char</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">txt</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">]))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+       
+<span class="n">TextArea</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Text area with password field<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_textarea_2/lv_ex_textarea_2.py'><img alt='lv_ex_textarea_2' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_textarea_2/lv_ex_textarea_2.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">LV_HOR_RES</span><span class="o">=</span><span class="mi">240</span>
+<span class="n">LV_VER_RES</span><span class="o">=</span><span class="mi">240</span>
+
+<span class="k">def</span> <span class="nf">ta_event_cb</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+    <span class="k">if</span>  <span class="n">event</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">CLICKED</span><span class="p">:</span>
+        <span class="c1"># Focus on the clicked text area </span>
+       <span class="k">if</span> <span class="n">kb</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+           <span class="n">kb</span><span class="o">.</span><span class="n">set_textarea</span><span class="p">(</span><span class="n">ta</span><span class="p">)</span>
+       <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_INSERT</span><span class="p">:</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ready&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create the password box </span>
+<span class="n">pwd_ta</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">textarea</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pwd_ta</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">pwd_ta</span><span class="o">.</span><span class="n">set_pwd_mode</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pwd_ta</span><span class="o">.</span><span class="n">set_one_line</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pwd_ta</span><span class="o">.</span><span class="n">set_cursor_hidden</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pwd_ta</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="n">LV_HOR_RES</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">pwd_ta</span><span class="o">.</span><span class="n">set_pos</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">pwd_ta</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">ta_event_cb</span><span class="p">)</span>
+
+<span class="c1"># Create a label and position it above the text box </span>
+<span class="n">pwd_label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pwd_label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Password:&quot;</span><span class="p">)</span>
+<span class="n">pwd_label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">OUT_TOP_LEFT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Create the one-line mode text area </span>
+<span class="n">oneline_ta</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">textarea</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="n">pwd_ta</span><span class="p">)</span>
+<span class="n">oneline_ta</span><span class="o">.</span><span class="n">set_pwd_mode</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">oneline_ta</span><span class="o">.</span><span class="n">set_cursor_hidden</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">oneline_ta</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">IN_TOP_RIGHT</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">oneline_ta</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">ta_event_cb</span><span class="p">)</span>
+
+<span class="c1"># Create a label and position it above the text box </span>
+<span class="n">oneline_label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">oneline_label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Text:&quot;</span><span class="p">)</span>
+<span class="n">oneline_label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">oneline_ta</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">OUT_TOP_LEFT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Create a keyboard </span>
+<span class="n">kb</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">keyboard</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">kb</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">kb</span><span class="o">.</span><span class="n">set_textarea</span><span class="p">(</span><span class="n">pwd_ta</span><span class="p">)</span>      <span class="c1">#Focus it on one of the text areas to start </span>
+<span class="n">kb</span><span class="o">.</span><span class="n">set_cursor_manage</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># Automatically show/hide cursors on text areas */</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h4>Text auto-formatting<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_textarea_3/lv_ex_textarea_3.py'><img alt='lv_ex_textarea_3' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_textarea_3/lv_ex_textarea_3.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">LV_HOR_RES</span> <span class="o">=</span> <span class="mi">240</span>
+<span class="n">LV_VER_RES</span> <span class="o">=</span> <span class="mi">240</span>
+
+<span class="k">def</span> <span class="nf">ta_event_cb</span><span class="p">(</span><span class="n">ta</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+    <span class="k">if</span>  <span class="n">event</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+        <span class="n">txt</span> <span class="o">=</span> <span class="n">ta</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">ta</span><span class="o">.</span><span class="n">get_cursor_pos</span><span class="p">()</span>
+        <span class="c1"># find position of &quot;:&quot; in text</span>
+        <span class="n">colon_pos</span><span class="o">=</span> <span class="n">txt</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+        <span class="c1"># if there are more than 2 digits before the colon, remove the last one entered</span>
+        <span class="k">if</span> <span class="n">colon_pos</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">ta</span><span class="o">.</span><span class="n">del_char</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">colon_pos</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># if there are more than 3 digits after the &quot;:&quot; remove the last one entered</span>
+            <span class="n">rest</span> <span class="o">=</span> <span class="n">txt</span><span class="p">[</span><span class="n">colon_pos</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">ta</span><span class="o">.</span><span class="n">del_char</span><span class="p">()</span>
+            
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">txt</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span>  <span class="n">txt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s1">&#39;0&#39;</span> <span class="ow">and</span> <span class="n">txt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s1">&#39;9&#39;</span> <span class="ow">and</span> \
+            <span class="n">txt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s1">&#39;0&#39;</span> <span class="ow">and</span> <span class="n">txt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s1">&#39;9&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">txt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;:&#39;</span> <span class="p">:</span>
+                <span class="n">ta</span><span class="o">.</span><span class="n">set_cursor_pos</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">ta</span><span class="o">.</span><span class="n">add_char</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">))</span>
+                        
+<span class="c1"># create a textarea</span>
+<span class="n">ta</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">textarea</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">ta</span><span class="o">.</span><span class="n">set_event_cb</span><span class="p">(</span><span class="n">ta_event_cb</span><span class="p">)</span>
+<span class="n">ta</span><span class="o">.</span><span class="n">set_accepted_chars</span><span class="p">(</span><span class="s2">&quot;0123456789:&quot;</span><span class="p">)</span>
+<span class="n">ta</span><span class="o">.</span><span class="n">set_max_length</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ta</span><span class="o">.</span><span class="n">set_one_line</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ta</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+
+<span class="n">kb_map</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span> <span class="s2">&quot;9&quot;</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">BACKSPACE</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">LEFT</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">SYMBOL</span><span class="o">.</span><span class="n">RIGHT</span><span class="p">,</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
+
+<span class="n">kb_ctlr_map</span> <span class="o">=</span> <span class="p">[</span><span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">HIDDEN</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">HIDDEN</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">NO_REPEAT</span><span class="p">,</span>
+               <span class="n">lv</span><span class="o">.</span><span class="n">btnmatrix</span><span class="o">.</span><span class="n">CTRL</span><span class="o">.</span><span class="n">HIDDEN</span><span class="p">]</span>
+
+
+<span class="c1"># Create a keyboard</span>
+<span class="n">kb</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">keyboard</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">kb</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="n">LV_HOR_RES</span><span class="p">,</span> <span class="n">LV_VER_RES</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">kb</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">MODE</span><span class="o">.</span><span class="n">SPECIAL</span><span class="p">)</span>
+<span class="n">kb</span><span class="o">.</span><span class="n">set_map</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">MODE</span><span class="o">.</span><span class="n">SPECIAL</span><span class="p">,</span><span class="n">kb_map</span><span class="p">)</span>
+<span class="n">kb</span><span class="o">.</span><span class="n">set_ctrl_map</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">MODE</span><span class="o">.</span><span class="n">SPECIAL</span><span class="p">,</span><span class="n">kb_ctlr_map</span><span class="p">)</span>
+<span class="n">kb</span><span class="o">.</span><span class="n">set_textarea</span><span class="p">(</span><span class="n">ta</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -2372,7 +2542,7 @@ The new text can't be in a local variable which is destroyed when the event call
 
 <dl class="cpp var">
 <dt id="_CPPv4N17lv_textarea_ext_t17style_placeholderE">
-<span id="_CPPv3N17lv_textarea_ext_t17style_placeholderE"></span><span id="_CPPv2N17lv_textarea_ext_t17style_placeholderE"></span><span id="lv_textarea_ext_t::style_placeholder__lv_style_list_t"></span><span class="target" id="structlv__textarea__ext__t_1ac5bd15c0b04cc5d3b8662b403494da39"></span><span class="pre">lv_style_list_t</span> <code class="sig-name descname"><span class="pre">style_placeholder</span></code><a class="headerlink" href="#_CPPv4N17lv_textarea_ext_t17style_placeholderE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N17lv_textarea_ext_t17style_placeholderE"></span><span id="_CPPv2N17lv_textarea_ext_t17style_placeholderE"></span><span id="lv_textarea_ext_t::style_placeholder__lv_style_list_t"></span><span class="target" id="structlv__textarea__ext__t_1ac5bd15c0b04cc5d3b8662b403494da39"></span><a class="reference internal" href="../overview/style.html#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <code class="sig-name descname"><span class="pre">style_placeholder</span></code><a class="headerlink" href="#_CPPv4N17lv_textarea_ext_t17style_placeholderE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -2397,7 +2567,7 @@ The new text can't be in a local variable which is destroyed when the event call
 
 <dl class="cpp var">
 <dt id="_CPPv4N17lv_textarea_ext_t5styleE">
-<span id="_CPPv3N17lv_textarea_ext_t5styleE"></span><span id="_CPPv2N17lv_textarea_ext_t5styleE"></span><span id="lv_textarea_ext_t::style__lv_style_list_t"></span><span class="target" id="structlv__textarea__ext__t_1a6836ff9bdbf6a887931f2a99ad4d8097"></span><span class="pre">lv_style_list_t</span> <code class="sig-name descname"><span class="pre">style</span></code><a class="headerlink" href="#_CPPv4N17lv_textarea_ext_t5styleE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N17lv_textarea_ext_t5styleE"></span><span id="_CPPv2N17lv_textarea_ext_t5styleE"></span><span id="lv_textarea_ext_t::style__lv_style_list_t"></span><span class="target" id="structlv__textarea__ext__t_1a6836ff9bdbf6a887931f2a99ad4d8097"></span><a class="reference internal" href="../overview/style.html#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <code class="sig-name descname"><span class="pre">style</span></code><a class="headerlink" href="#_CPPv4N17lv_textarea_ext_t5styleE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -2497,7 +2667,7 @@ The new text can't be in a local variable which is destroyed when the event call
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 13, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>

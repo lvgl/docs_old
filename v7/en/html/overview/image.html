@@ -53,7 +53,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-78811084-3');
+	gtag('config', 'UA-78811084-3', { 'anonymize_ip': true });
 </script>
 
 </head>
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -965,7 +969,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../widgets/linemeter.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../widgets/msgbox.html">Message box (lv_msdbox)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/msgbox.html">Message box (lv_msgbox)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../widgets/msgbox.html#usage">Usage</a><ul>
@@ -1681,7 +1685,7 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
 
 <dl class="cpp type">
 <dt id="_CPPv423lv_img_decoder_info_f_t">
-<span id="_CPPv323lv_img_decoder_info_f_t"></span><span id="_CPPv223lv_img_decoder_info_f_t"></span><span id="lv_img_decoder_info_f_t"></span><span class="target" id="lv__img__decoder_8h_1a133228664e2dcb89c32ad769ff1d77eb"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">lv_res_t</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_img_decoder_info_f_t</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv415_lv_img_decoder" title="_lv_img_decoder"><span class="pre">_lv_img_decoder</span></a> <span class="pre">*</span><span class="pre">decoder</span>, <em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><span class="pre">src</span>, <span class="pre">lv_img_header_t</span> <span class="pre">*</span><span class="pre">header</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_decoder_info_f_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv323lv_img_decoder_info_f_t"></span><span id="_CPPv223lv_img_decoder_info_f_t"></span><span id="lv_img_decoder_info_f_t"></span><span class="target" id="lv__img__decoder_8h_1a133228664e2dcb89c32ad769ff1d77eb"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">lv_res_t</span> <span class="pre">(</span><span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_img_decoder_info_f_t</span></code><span class="pre">)</span><span class="sig-paren">(</span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv415_lv_img_decoder" title="_lv_img_decoder"><span class="pre">_lv_img_decoder</span></a> <span class="pre">*</span><span class="pre">decoder</span>, <em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><span class="pre">src</span>, <a class="reference internal" href="#_CPPv415lv_img_header_t" title="lv_img_header_t"><span class="pre">lv_img_header_t</span></a> <span class="pre">*</span><span class="pre">header</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_decoder_info_f_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get info from an image and store in the <code class="docutils literal notranslate"><span class="pre">header</span></code> <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>LV_RES_OK: info written correctly; LV_RES_INV: failed </p>
 </dd>
@@ -1700,7 +1704,7 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
 <dd><p>Open an image for decoding. Prepare it as it is required to read it later <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: pointer to the decoder the function associated with </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to decoder descriptor. <code class="docutils literal notranslate"><span class="pre">src</span></code>, <code class="docutils literal notranslate"><span class="pre">style</span></code> are already initialized in it. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to decoder descriptor. <code class="docutils literal notranslate"><span class="pre">src</span></code>, <code class="docutils literal notranslate"><span class="pre">color</span></code> are already initialized in it. </p></li>
 </ul>
 </dd>
 </dl>
@@ -1794,12 +1798,12 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
 
 <dl class="cpp function">
 <dt id="_CPPv423lv_img_decoder_get_infoPKcP15lv_img_header_t">
-<span id="_CPPv323lv_img_decoder_get_infoPKcP15lv_img_header_t"></span><span id="_CPPv223lv_img_decoder_get_infoPKcP15lv_img_header_t"></span><span id="lv_img_decoder_get_info__cCP.lv_img_header_tP"></span><span class="target" id="lv__img__decoder_8h_1aaea7a28b7f50c88d9edae731c7b17dc2"></span><span class="pre">lv_res_t</span> <code class="sig-name descname"><span class="pre">lv_img_decoder_get_info</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">char</span> <span class="pre">*</span><em><span class="pre">src</span></em>, <span class="pre">lv_img_header_t</span> <span class="pre">*</span><em><span class="pre">header</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_decoder_get_infoPKcP15lv_img_header_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv323lv_img_decoder_get_infoPKcP15lv_img_header_t"></span><span id="_CPPv223lv_img_decoder_get_infoPKcP15lv_img_header_t"></span><span id="lv_img_decoder_get_info__cCP.lv_img_header_tP"></span><span class="target" id="lv__img__decoder_8h_1aaea7a28b7f50c88d9edae731c7b17dc2"></span><span class="pre">lv_res_t</span> <code class="sig-name descname"><span class="pre">lv_img_decoder_get_info</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">char</span> <span class="pre">*</span><em><span class="pre">src</span></em>, <a class="reference internal" href="#_CPPv415lv_img_header_t" title="lv_img_header_t"><span class="pre">lv_img_header_t</span></a> <span class="pre">*</span><em><span class="pre">header</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_decoder_get_infoPKcP15lv_img_header_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get information about an image. Try the created image decoder one by one. Once one is able to get info that info will be used. <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>LV_RES_OK: success; LV_RES_INV: wasn't able to get info about the image </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: the image source. Can be 1) File name: E.g. &quot;S:folder/img1.png&quot; (The drivers needs to registered via <code class="docutils literal notranslate"><span class="pre">lv_fs_add_drv()</span></code>) 2) Variable: Pointer to an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> variable 3) Symbol: E.g. <code class="docutils literal notranslate"><span class="pre">LV_SYMBOL_OK</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: the image source. Can be 1) File name: E.g. &quot;S:folder/img1.png&quot; (The drivers needs to registered via <code class="docutils literal notranslate"><span class="pre">lv_fs_add_drv()</span></code>) 2) Variable: Pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable 3) Symbol: E.g. <code class="docutils literal notranslate"><span class="pre">LV_SYMBOL_OK</span></code> </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">header</span></code>: the image info will be stored here </p></li>
 </ul>
 </dd>
@@ -1815,7 +1819,7 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: describe a decoding session. Simply a pointer to an <code class="docutils literal notranslate"><span class="pre">lv_img_decoder_dsc_t</span></code> variable. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: the image source. Can be 1) File name: E.g. &quot;S:folder/img1.png&quot; (The drivers needs to registered via <code class="docutils literal notranslate"><span class="pre">lv_fs_add_drv()</span></code>) 2) Variable: Pointer to an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> variable 3) Symbol: E.g. <code class="docutils literal notranslate"><span class="pre">LV_SYMBOL_OK</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: the image source. Can be 1) File name: E.g. &quot;S:folder/img1.png&quot; (The drivers needs to registered via <code class="docutils literal notranslate"><span class="pre">lv_fs_add_drv()</span></code>) 2) Variable: Pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable 3) Symbol: E.g. <code class="docutils literal notranslate"><span class="pre">LV_SYMBOL_OK</span></code> </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">color</span></code>: The color of the image with <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code> </p></li>
 </ul>
 </dd>
@@ -1929,13 +1933,13 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
 
 <dl class="cpp function">
 <dt id="_CPPv428lv_img_decoder_built_in_infoP16lv_img_decoder_tPKvP15lv_img_header_t">
-<span id="_CPPv328lv_img_decoder_built_in_infoP16lv_img_decoder_tPKvP15lv_img_header_t"></span><span id="_CPPv228lv_img_decoder_built_in_infoP16lv_img_decoder_tPKvP15lv_img_header_t"></span><span id="lv_img_decoder_built_in_info__lv_img_decoder_tP.voidCP.lv_img_header_tP"></span><span class="target" id="lv__img__decoder_8h_1ae6ef4d47f2563b3e2d563a2c65e3deba"></span><span class="pre">lv_res_t</span> <code class="sig-name descname"><span class="pre">lv_img_decoder_built_in_info</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t"><span class="pre">lv_img_decoder_t</span></a> <span class="pre">*</span><em><span class="pre">decoder</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">src</span></em>, <span class="pre">lv_img_header_t</span> <span class="pre">*</span><em><span class="pre">header</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428lv_img_decoder_built_in_infoP16lv_img_decoder_tPKvP15lv_img_header_t" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv328lv_img_decoder_built_in_infoP16lv_img_decoder_tPKvP15lv_img_header_t"></span><span id="_CPPv228lv_img_decoder_built_in_infoP16lv_img_decoder_tPKvP15lv_img_header_t"></span><span id="lv_img_decoder_built_in_info__lv_img_decoder_tP.voidCP.lv_img_header_tP"></span><span class="target" id="lv__img__decoder_8h_1ae6ef4d47f2563b3e2d563a2c65e3deba"></span><span class="pre">lv_res_t</span> <code class="sig-name descname"><span class="pre">lv_img_decoder_built_in_info</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv416lv_img_decoder_t" title="lv_img_decoder_t"><span class="pre">lv_img_decoder_t</span></a> <span class="pre">*</span><em><span class="pre">decoder</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">src</span></em>, <a class="reference internal" href="#_CPPv415lv_img_header_t" title="lv_img_header_t"><span class="pre">lv_img_header_t</span></a> <span class="pre">*</span><em><span class="pre">header</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428lv_img_decoder_built_in_infoP16lv_img_decoder_tPKvP15lv_img_header_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Get info about a built-in image <dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>LV_RES_OK: the info is successfully stored in <code class="docutils literal notranslate"><span class="pre">header</span></code>; LV_RES_INV: unknown format or other error. </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">decoder</span></code>: the decoder where this function belongs </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: the image source: pointer to an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> variable, a file path or a symbol </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: the image source: pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable, a file path or a symbol </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">header</span></code>: store the image data here </p></li>
 </ul>
 </dd>
@@ -2039,7 +2043,7 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
 <dl class="cpp var">
 <dt id="_CPPv4N19_lv_img_decoder_dsc3srcE">
 <span id="_CPPv3N19_lv_img_decoder_dsc3srcE"></span><span id="_CPPv2N19_lv_img_decoder_dsc3srcE"></span><span id="_lv_img_decoder_dsc::src__voidCP"></span><span class="target" id="struct__lv__img__decoder__dsc_1a94add3cd314fd53df673970fff759ef8"></span><em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">src</span></code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc3srcE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>The image source. A file path like &quot;S:my_img.png&quot; or pointer to an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> variable </p>
+<dd><p>The image source. A file path like &quot;S:my_img.png&quot; or pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -2056,7 +2060,7 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
 
 <dl class="cpp var">
 <dt id="_CPPv4N19_lv_img_decoder_dsc6headerE">
-<span id="_CPPv3N19_lv_img_decoder_dsc6headerE"></span><span id="_CPPv2N19_lv_img_decoder_dsc6headerE"></span><span id="_lv_img_decoder_dsc::header__lv_img_header_t"></span><span class="target" id="struct__lv__img__decoder__dsc_1a5e07a8990562f89421b50e447a766da2"></span><span class="pre">lv_img_header_t</span> <code class="sig-name descname"><span class="pre">header</span></code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc6headerE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N19_lv_img_decoder_dsc6headerE"></span><span id="_CPPv2N19_lv_img_decoder_dsc6headerE"></span><span id="_lv_img_decoder_dsc::header__lv_img_header_t"></span><span class="target" id="struct__lv__img__decoder__dsc_1a5e07a8990562f89421b50e447a766da2"></span><a class="reference internal" href="#_CPPv415lv_img_header_t" title="lv_img_header_t"><span class="pre">lv_img_header_t</span></a> <code class="sig-name descname"><span class="pre">header</span></code><a class="headerlink" href="#_CPPv4N19_lv_img_decoder_dsc6headerE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Info about the opened image: color format, size, etc. MUST be set in <code class="docutils literal notranslate"><span class="pre">open</span></code> function </p>
 </dd></dl>
 
@@ -2099,7 +2103,7 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
 <dt><strong>Return</strong></dt><dd><p>pointer to the cache entry or NULL if can open the image </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: source of the image. Path to file or pointer to an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> variable </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: source of the image. Path to file or pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">color</span></code>: The color of the image with <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_...</span></code> </p></li>
 </ul>
 </dd>
@@ -2124,7 +2128,7 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
 <span id="_CPPv327lv_img_cache_invalidate_srcPKv"></span><span id="_CPPv227lv_img_cache_invalidate_srcPKv"></span><span id="lv_img_cache_invalidate_src__voidCP"></span><span class="target" id="lv__img__cache_8h_1a958506ba24cd5caea94613788c4be8b6"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_img_cache_invalidate_src</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">src</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427lv_img_cache_invalidate_srcPKv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Invalidate an image source in the cache. Useful if the image source is updated therefore it needs to be cached again. <dl class="simple">
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: an image source path to a file or pointer to an <code class="docutils literal notranslate"><span class="pre">lv_img_dsc_t</span></code> variable. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: an image source path to a file or pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__dsc__t"><span class="std std-ref"><span class="pre">lv_img_dsc_t</span></span></a></code> variable. </p></li>
 </ul>
 </dd>
 </dl>
@@ -2148,8 +2152,792 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
 <dl class="cpp var">
 <dt id="_CPPv4N20lv_img_cache_entry_t4lifeE">
 <span id="_CPPv3N20lv_img_cache_entry_t4lifeE"></span><span id="_CPPv2N20lv_img_cache_entry_t4lifeE"></span><span id="lv_img_cache_entry_t::life__int32_t"></span><span class="target" id="structlv__img__cache__entry__t_1a17fb9d7d7a352c80701163420d05440b"></span><span class="pre">int32_t</span> <code class="sig-name descname"><span class="pre">life</span></code><a class="headerlink" href="#_CPPv4N20lv_img_cache_entry_t4lifeE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Count the cache entries's life. Add <code class="docutils literal notranslate"><span class="pre">time_tio_open</span></code> to <code class="docutils literal notranslate"><span class="pre">life</span></code> when the entry is used. Decrement all lifes by one every in every ::lv_img_cache_open. If life == 0 the entry can be reused </p>
+<dd><p>Count the cache entries's life. Add <code class="docutils literal notranslate"><span class="pre">time_to_open</span></code> to <code class="docutils literal notranslate"><span class="pre">life</span></code> when the entry is used. Decrement all lifes by one every in every ::lv_img_cache_open. If life == 0 the entry can be reused </p>
 </dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="image-buffer">
+<h3>Image buffer<a class="headerlink" href="#image-buffer" title="Permalink to this headline">¶</a></h3>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="cpp type">
+<dt id="_CPPv411lv_img_cf_t">
+<span id="_CPPv311lv_img_cf_t"></span><span id="_CPPv211lv_img_cf_t"></span><span id="lv_img_cf_t"></span><span class="target" id="lv__img__buf_8h_1a3cd0b0d2269a76ecf35c65d5abc8fa2c"></span><em class="property"><span class="pre">typedef</span> </em><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">lv_img_cf_t</span></code><a class="headerlink" href="#_CPPv411lv_img_cf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4Ut2_22">
+<span id="_CPPv3Ut2_22"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13"></span><em class="property"><span class="pre">enum</span> </em><strong><span class="pre">[anonymous]</span></strong><a class="headerlink" href="#_CPPv4Ut2_22" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2217LV_IMG_CF_UNKNOWNE">
+<span id="_CPPv3NUt2_2217LV_IMG_CF_UNKNOWNE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13aec9725b572a51d9e6f65e325c9c17f31"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_UNKNOWN</span></code><a class="headerlink" href="#_CPPv4NUt2_2217LV_IMG_CF_UNKNOWNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2213LV_IMG_CF_RAWE">
+<span id="_CPPv3NUt2_2213LV_IMG_CF_RAWE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13ae79779c0a260d69563dfa30e9b11d265"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RAW</span></code><a class="headerlink" href="#_CPPv4NUt2_2213LV_IMG_CF_RAWE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Contains the file as it is. Needs custom decoder function </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2219LV_IMG_CF_RAW_ALPHAE">
+<span id="_CPPv3NUt2_2219LV_IMG_CF_RAW_ALPHAE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13ac32f641d0c92f307ce2b93766239bd56"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RAW_ALPHA</span></code><a class="headerlink" href="#_CPPv4NUt2_2219LV_IMG_CF_RAW_ALPHAE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Contains the file as it is. The image has alpha. Needs custom decoder function </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2226LV_IMG_CF_RAW_CHROMA_KEYEDE">
+<span id="_CPPv3NUt2_2226LV_IMG_CF_RAW_CHROMA_KEYEDE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a07e2f7713a6d4574d34f9548b5949d13"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RAW_CHROMA_KEYED</span></code><a class="headerlink" href="#_CPPv4NUt2_2226LV_IMG_CF_RAW_CHROMA_KEYEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Contains the file as it is. The image is chroma keyed. Needs custom decoder function </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2220LV_IMG_CF_TRUE_COLORE">
+<span id="_CPPv3NUt2_2220LV_IMG_CF_TRUE_COLORE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13acc00dbb56f9207133c12cca0f94c4f8d"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code><a class="headerlink" href="#_CPPv4NUt2_2220LV_IMG_CF_TRUE_COLORE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Color format and depth should match with LV_COLOR settings </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2226LV_IMG_CF_TRUE_COLOR_ALPHAE">
+<span id="_CPPv3NUt2_2226LV_IMG_CF_TRUE_COLOR_ALPHAE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a77b153c97241ea0312b96a3bd5d4f185"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_TRUE_COLOR_ALPHA</span></code><a class="headerlink" href="#_CPPv4NUt2_2226LV_IMG_CF_TRUE_COLOR_ALPHAE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Same as <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> but every pixel has an alpha byte </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2233LV_IMG_CF_TRUE_COLOR_CHROMA_KEYEDE">
+<span id="_CPPv3NUt2_2233LV_IMG_CF_TRUE_COLOR_CHROMA_KEYEDE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a4afaa8f28d1b38d91a4579a7fe5cd746"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_TRUE_COLOR_CHROMA_KEYED</span></code><a class="headerlink" href="#_CPPv4NUt2_2233LV_IMG_CF_TRUE_COLOR_CHROMA_KEYEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Same as <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_TRUE_COLOR</span></code> but LV_COLOR_TRANSP pixels will be transparent </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2222LV_IMG_CF_INDEXED_1BITE">
+<span id="_CPPv3NUt2_2222LV_IMG_CF_INDEXED_1BITE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13ace7d7c0dc2a98e0d1989f1c102b5ea3b"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_INDEXED_1BIT</span></code><a class="headerlink" href="#_CPPv4NUt2_2222LV_IMG_CF_INDEXED_1BITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Can have 2 different colors in a palette (always chroma keyed) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2222LV_IMG_CF_INDEXED_2BITE">
+<span id="_CPPv3NUt2_2222LV_IMG_CF_INDEXED_2BITE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13aa6c3c2fdc1a2c273f50d3638ee62d775"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_INDEXED_2BIT</span></code><a class="headerlink" href="#_CPPv4NUt2_2222LV_IMG_CF_INDEXED_2BITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Can have 4 different colors in a palette (always chroma keyed) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2222LV_IMG_CF_INDEXED_4BITE">
+<span id="_CPPv3NUt2_2222LV_IMG_CF_INDEXED_4BITE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13ac541e5ff700cbab1422972b2124fa857"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_INDEXED_4BIT</span></code><a class="headerlink" href="#_CPPv4NUt2_2222LV_IMG_CF_INDEXED_4BITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Can have 16 different colors in a palette (always chroma keyed) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2222LV_IMG_CF_INDEXED_8BITE">
+<span id="_CPPv3NUt2_2222LV_IMG_CF_INDEXED_8BITE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a05da196150be23ccba0bee4d64b0e13f"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_INDEXED_8BIT</span></code><a class="headerlink" href="#_CPPv4NUt2_2222LV_IMG_CF_INDEXED_8BITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Can have 256 different colors in a palette (always chroma keyed) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2220LV_IMG_CF_ALPHA_1BITE">
+<span id="_CPPv3NUt2_2220LV_IMG_CF_ALPHA_1BITE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a0704ce366200825b155639eabb098f72"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_ALPHA_1BIT</span></code><a class="headerlink" href="#_CPPv4NUt2_2220LV_IMG_CF_ALPHA_1BITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Can have one color and it can be drawn or not </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2220LV_IMG_CF_ALPHA_2BITE">
+<span id="_CPPv3NUt2_2220LV_IMG_CF_ALPHA_2BITE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a384013e83c460e879851d57bb335c561"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_ALPHA_2BIT</span></code><a class="headerlink" href="#_CPPv4NUt2_2220LV_IMG_CF_ALPHA_2BITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Can have one color but 4 different alpha value </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2220LV_IMG_CF_ALPHA_4BITE">
+<span id="_CPPv3NUt2_2220LV_IMG_CF_ALPHA_4BITE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a87a787a99d25627728738686b0ce3ef6"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_ALPHA_4BIT</span></code><a class="headerlink" href="#_CPPv4NUt2_2220LV_IMG_CF_ALPHA_4BITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Can have one color but 16 different alpha value </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2220LV_IMG_CF_ALPHA_8BITE">
+<span id="_CPPv3NUt2_2220LV_IMG_CF_ALPHA_8BITE"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13aa886fdd8e02ff433765a3ac3ee3f3103"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_ALPHA_8BIT</span></code><a class="headerlink" href="#_CPPv4NUt2_2220LV_IMG_CF_ALPHA_8BITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Can have one color but 256 different alpha value </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2221LV_IMG_CF_RESERVED_15E">
+<span id="_CPPv3NUt2_2221LV_IMG_CF_RESERVED_15E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13ac6006bf886cf67fbdcba2fc35420dde1"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RESERVED_15</span></code><a class="headerlink" href="#_CPPv4NUt2_2221LV_IMG_CF_RESERVED_15E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved for further use. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2221LV_IMG_CF_RESERVED_16E">
+<span id="_CPPv3NUt2_2221LV_IMG_CF_RESERVED_16E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13ac41001bc99874f888699ee66c95e4a60"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RESERVED_16</span></code><a class="headerlink" href="#_CPPv4NUt2_2221LV_IMG_CF_RESERVED_16E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved for further use. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2221LV_IMG_CF_RESERVED_17E">
+<span id="_CPPv3NUt2_2221LV_IMG_CF_RESERVED_17E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a43ab253b62444e42d42f13aa095cf403"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RESERVED_17</span></code><a class="headerlink" href="#_CPPv4NUt2_2221LV_IMG_CF_RESERVED_17E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved for further use. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2221LV_IMG_CF_RESERVED_18E">
+<span id="_CPPv3NUt2_2221LV_IMG_CF_RESERVED_18E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a8218597f402ec4f232086733989c7bdd"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RESERVED_18</span></code><a class="headerlink" href="#_CPPv4NUt2_2221LV_IMG_CF_RESERVED_18E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved for further use. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2221LV_IMG_CF_RESERVED_19E">
+<span id="_CPPv3NUt2_2221LV_IMG_CF_RESERVED_19E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a8772a961b79a708937a85ec355ee7bf2"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RESERVED_19</span></code><a class="headerlink" href="#_CPPv4NUt2_2221LV_IMG_CF_RESERVED_19E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved for further use. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2221LV_IMG_CF_RESERVED_20E">
+<span id="_CPPv3NUt2_2221LV_IMG_CF_RESERVED_20E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a5f19c0882596b10e127b1a644d49d839"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RESERVED_20</span></code><a class="headerlink" href="#_CPPv4NUt2_2221LV_IMG_CF_RESERVED_20E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved for further use. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2221LV_IMG_CF_RESERVED_21E">
+<span id="_CPPv3NUt2_2221LV_IMG_CF_RESERVED_21E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a97912596b301ed725dd471c109e7d22e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RESERVED_21</span></code><a class="headerlink" href="#_CPPv4NUt2_2221LV_IMG_CF_RESERVED_21E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved for further use. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2221LV_IMG_CF_RESERVED_22E">
+<span id="_CPPv3NUt2_2221LV_IMG_CF_RESERVED_22E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13af6daa2d7b441229c118cae568f7be0e2"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RESERVED_22</span></code><a class="headerlink" href="#_CPPv4NUt2_2221LV_IMG_CF_RESERVED_22E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved for further use. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2221LV_IMG_CF_RESERVED_23E">
+<span id="_CPPv3NUt2_2221LV_IMG_CF_RESERVED_23E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13aab39036176cb11aad4434ae226d2b701"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_RESERVED_23</span></code><a class="headerlink" href="#_CPPv4NUt2_2221LV_IMG_CF_RESERVED_23E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reserved for further use. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_0E">
+<span id="_CPPv3NUt2_2224LV_IMG_CF_USER_ENCODED_0E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a13acddabcd2b3d47fd6f77f1aa014788"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_USER_ENCODED_0</span></code><a class="headerlink" href="#_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_0E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>User holder encoding format. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_1E">
+<span id="_CPPv3NUt2_2224LV_IMG_CF_USER_ENCODED_1E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a7a5e55bc05ae9d4fafa3670ce8fcdf07"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_USER_ENCODED_1</span></code><a class="headerlink" href="#_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_1E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>User holder encoding format. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_2E">
+<span id="_CPPv3NUt2_2224LV_IMG_CF_USER_ENCODED_2E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13abd5c306386fd2f5c061b8b1c1bcaf512"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_USER_ENCODED_2</span></code><a class="headerlink" href="#_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_2E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>User holder encoding format. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_3E">
+<span id="_CPPv3NUt2_2224LV_IMG_CF_USER_ENCODED_3E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a5498735a659fb327623b221baa39d8a2"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_USER_ENCODED_3</span></code><a class="headerlink" href="#_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_3E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>User holder encoding format. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_4E">
+<span id="_CPPv3NUt2_2224LV_IMG_CF_USER_ENCODED_4E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13aed7b220bc523d7e71e118d663e93de95"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_USER_ENCODED_4</span></code><a class="headerlink" href="#_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_4E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>User holder encoding format. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_5E">
+<span id="_CPPv3NUt2_2224LV_IMG_CF_USER_ENCODED_5E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a86489e0f698809d9de29da439f62df97"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_USER_ENCODED_5</span></code><a class="headerlink" href="#_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_5E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>User holder encoding format. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_6E">
+<span id="_CPPv3NUt2_2224LV_IMG_CF_USER_ENCODED_6E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13aa8a98ec44b8871abe5dc1b2e59cead26"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_USER_ENCODED_6</span></code><a class="headerlink" href="#_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_6E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>User holder encoding format. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_7E">
+<span id="_CPPv3NUt2_2224LV_IMG_CF_USER_ENCODED_7E"></span><span class="target" id="lv__img__buf_8h_1a39fca1837c5ce7715cbf571669660c13a8d3c364964cd71c5cdde6c27b1fb48f4"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">LV_IMG_CF_USER_ENCODED_7</span></code><a class="headerlink" href="#_CPPv4NUt2_2224LV_IMG_CF_USER_ENCODED_7E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>User holder encoding format. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv416lv_img_buf_alloc10lv_coord_t10lv_coord_t11lv_img_cf_t">
+<span id="_CPPv316lv_img_buf_alloc10lv_coord_t10lv_coord_t11lv_img_cf_t"></span><span id="_CPPv216lv_img_buf_alloc10lv_coord_t10lv_coord_t11lv_img_cf_t"></span><span id="lv_img_buf_alloc__lv_coord_t.lv_coord_t.lv_img_cf_t"></span><span class="target" id="lv__img__buf_8h_1a0119ae731cc4db78cb1ac5d57f1cea4c"></span><a class="reference internal" href="#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t"><span class="pre">lv_img_dsc_t</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">lv_img_buf_alloc</span></code><span class="sig-paren">(</span><span class="pre">lv_coord_t</span> <em><span class="pre">w</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">h</span></em>, <a class="reference internal" href="#_CPPv411lv_img_cf_t" title="lv_img_cf_t"><span class="pre">lv_img_cf_t</span></a> <em><span class="pre">cf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416lv_img_buf_alloc10lv_coord_t10lv_coord_t11lv_img_cf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Allocate an image buffer in RAM <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>an allocated image, or NULL on failure </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">w</span></code>: width of image </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span></code>: height of image </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cf</span></code>: a color format (<code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_...</span></code>) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv423lv_img_buf_get_px_colorP12lv_img_dsc_t10lv_coord_t10lv_coord_t10lv_color_t">
+<span id="_CPPv323lv_img_buf_get_px_colorP12lv_img_dsc_t10lv_coord_t10lv_coord_t10lv_color_t"></span><span id="_CPPv223lv_img_buf_get_px_colorP12lv_img_dsc_t10lv_coord_t10lv_coord_t10lv_color_t"></span><span id="lv_img_buf_get_px_color__lv_img_dsc_tP.lv_coord_t.lv_coord_t.lv_color_t"></span><span class="target" id="lv__img__buf_8h_1acb536b0da91461b0070bb46f2e3d5d02"></span><span class="pre">lv_color_t</span> <code class="sig-name descname"><span class="pre">lv_img_buf_get_px_color</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t"><span class="pre">lv_img_dsc_t</span></a> <span class="pre">*</span><em><span class="pre">dsc</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">x</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">y</span></em>, <span class="pre">lv_color_t</span> <em><span class="pre">color</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_buf_get_px_colorP12lv_img_dsc_t10lv_coord_t10lv_coord_t10lv_color_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the color of an image's pixel <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>color of the point </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: an image descriptor </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: x coordinate of the point to get </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: x coordinate of the point to get </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">color</span></code>: the color of the image. In case of <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_ALPHA_1/2/4/8</span></code> this color is used. Not used in other cases. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">safe</span></code>: true: check out of bounds </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv423lv_img_buf_get_px_alphaP12lv_img_dsc_t10lv_coord_t10lv_coord_t">
+<span id="_CPPv323lv_img_buf_get_px_alphaP12lv_img_dsc_t10lv_coord_t10lv_coord_t"></span><span id="_CPPv223lv_img_buf_get_px_alphaP12lv_img_dsc_t10lv_coord_t10lv_coord_t"></span><span id="lv_img_buf_get_px_alpha__lv_img_dsc_tP.lv_coord_t.lv_coord_t"></span><span class="target" id="lv__img__buf_8h_1ada8e08538d9c79d72c3b75681abf0c59"></span><span class="pre">lv_opa_t</span> <code class="sig-name descname"><span class="pre">lv_img_buf_get_px_alpha</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t"><span class="pre">lv_img_dsc_t</span></a> <span class="pre">*</span><em><span class="pre">dsc</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">x</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_buf_get_px_alphaP12lv_img_dsc_t10lv_coord_t10lv_coord_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the alpha value of an image's pixel <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>alpha value of the point </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to an image descriptor </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: x coordinate of the point to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: x coordinate of the point to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">safe</span></code>: true: check out of bounds </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv423lv_img_buf_set_px_colorP12lv_img_dsc_t10lv_coord_t10lv_coord_t10lv_color_t">
+<span id="_CPPv323lv_img_buf_set_px_colorP12lv_img_dsc_t10lv_coord_t10lv_coord_t10lv_color_t"></span><span id="_CPPv223lv_img_buf_set_px_colorP12lv_img_dsc_t10lv_coord_t10lv_coord_t10lv_color_t"></span><span id="lv_img_buf_set_px_color__lv_img_dsc_tP.lv_coord_t.lv_coord_t.lv_color_t"></span><span class="target" id="lv__img__buf_8h_1aa137b85163313565d31aa47e71032c00"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_img_buf_set_px_color</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t"><span class="pre">lv_img_dsc_t</span></a> <span class="pre">*</span><em><span class="pre">dsc</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">x</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">y</span></em>, <span class="pre">lv_color_t</span> <em><span class="pre">c</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_buf_set_px_colorP12lv_img_dsc_t10lv_coord_t10lv_coord_t10lv_color_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the color of a pixel of an image. The alpha channel won't be affected. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to an image descriptor </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: x coordinate of the point to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: x coordinate of the point to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>: color of the point </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">safe</span></code>: true: check out of bounds </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv423lv_img_buf_set_px_alphaP12lv_img_dsc_t10lv_coord_t10lv_coord_t8lv_opa_t">
+<span id="_CPPv323lv_img_buf_set_px_alphaP12lv_img_dsc_t10lv_coord_t10lv_coord_t8lv_opa_t"></span><span id="_CPPv223lv_img_buf_set_px_alphaP12lv_img_dsc_t10lv_coord_t10lv_coord_t8lv_opa_t"></span><span id="lv_img_buf_set_px_alpha__lv_img_dsc_tP.lv_coord_t.lv_coord_t.lv_opa_t"></span><span class="target" id="lv__img__buf_8h_1a00e3395e129e36a06f0743355056c641"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_img_buf_set_px_alpha</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t"><span class="pre">lv_img_dsc_t</span></a> <span class="pre">*</span><em><span class="pre">dsc</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">x</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">y</span></em>, <span class="pre">lv_opa_t</span> <em><span class="pre">opa</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_buf_set_px_alphaP12lv_img_dsc_t10lv_coord_t10lv_coord_t8lv_opa_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the alpha value of a pixel of an image. The color won't be affected <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to an image descriptor </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: x coordinate of the point to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: x coordinate of the point to set </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">opa</span></code>: the desired opacity </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">safe</span></code>: true: check out of bounds </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv422lv_img_buf_set_paletteP12lv_img_dsc_t7uint8_t10lv_color_t">
+<span id="_CPPv322lv_img_buf_set_paletteP12lv_img_dsc_t7uint8_t10lv_color_t"></span><span id="_CPPv222lv_img_buf_set_paletteP12lv_img_dsc_t7uint8_t10lv_color_t"></span><span id="lv_img_buf_set_palette__lv_img_dsc_tP.uint8_t.lv_color_t"></span><span class="target" id="lv__img__buf_8h_1af52fa01e288c05056908e06365c9a1e6"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_img_buf_set_palette</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t"><span class="pre">lv_img_dsc_t</span></a> <span class="pre">*</span><em><span class="pre">dsc</span></em>, <span class="pre">uint8_t</span> <em><span class="pre">id</span></em>, <span class="pre">lv_color_t</span> <em><span class="pre">c</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lv_img_buf_set_paletteP12lv_img_dsc_t7uint8_t10lv_color_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the palette color of an indexed image. Valid only for <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED1/2/4/8</span></code> <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to an image descriptor </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: the palette color to set:<ul>
+<li><p>for <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED1</span></code>: 0..1</p></li>
+<li><p>for <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED2</span></code>: 0..3</p></li>
+<li><p>for <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED4</span></code>: 0..15</p></li>
+<li><p>for <code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_INDEXED8</span></code>: 0..255 </p></li>
+</ul>
+</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>: the color to set </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv415lv_img_buf_freeP12lv_img_dsc_t">
+<span id="_CPPv315lv_img_buf_freeP12lv_img_dsc_t"></span><span id="_CPPv215lv_img_buf_freeP12lv_img_dsc_t"></span><span id="lv_img_buf_free__lv_img_dsc_tP"></span><span class="target" id="lv__img__buf_8h_1afda14850c7da203239ded571831a776e"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_img_buf_free</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t"><span class="pre">lv_img_dsc_t</span></a> <span class="pre">*</span><em><span class="pre">dsc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415lv_img_buf_freeP12lv_img_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Free an allocated image buffer <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: image buffer to free </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv423lv_img_buf_get_img_size10lv_coord_t10lv_coord_t11lv_img_cf_t">
+<span id="_CPPv323lv_img_buf_get_img_size10lv_coord_t10lv_coord_t11lv_img_cf_t"></span><span id="_CPPv223lv_img_buf_get_img_size10lv_coord_t10lv_coord_t11lv_img_cf_t"></span><span id="lv_img_buf_get_img_size__lv_coord_t.lv_coord_t.lv_img_cf_t"></span><span class="target" id="lv__img__buf_8h_1a5da34d625c83610b49ee8eb11d55a8cf"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">lv_img_buf_get_img_size</span></code><span class="sig-paren">(</span><span class="pre">lv_coord_t</span> <em><span class="pre">w</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">h</span></em>, <a class="reference internal" href="#_CPPv411lv_img_cf_t" title="lv_img_cf_t"><span class="pre">lv_img_cf_t</span></a> <em><span class="pre">cf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423lv_img_buf_get_img_size10lv_coord_t10lv_coord_t11lv_img_cf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the memory consumption of a raw bitmap, given color format and dimensions. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>size in bytes </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">w</span></code>: width </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span></code>: height </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cf</span></code>: color format </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv426_lv_img_buf_transform_initP22lv_img_transform_dsc_t">
+<span id="_CPPv326_lv_img_buf_transform_initP22lv_img_transform_dsc_t"></span><span id="_CPPv226_lv_img_buf_transform_initP22lv_img_transform_dsc_t"></span><span id="_lv_img_buf_transform_init__lv_img_transform_dsc_tP"></span><span class="target" id="lv__img__buf_8h_1ab063d41648b7f89d9638916673bb015c"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_img_buf_transform_init</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv422lv_img_transform_dsc_t" title="lv_img_transform_dsc_t"><span class="pre">lv_img_transform_dsc_t</span></a> <span class="pre">*</span><em><span class="pre">dsc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426_lv_img_buf_transform_initP22lv_img_transform_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialize a descriptor to rotate an image <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to an <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__img__transform__dsc__t"><span class="std std-ref"><span class="pre">lv_img_transform_dsc_t</span></span></a></code> variable whose <code class="docutils literal notranslate"><span class="pre">cfg</span></code> field is initialized </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv432_lv_img_buf_transform_anti_aliasP22lv_img_transform_dsc_t">
+<span id="_CPPv332_lv_img_buf_transform_anti_aliasP22lv_img_transform_dsc_t"></span><span id="_CPPv232_lv_img_buf_transform_anti_aliasP22lv_img_transform_dsc_t"></span><span id="_lv_img_buf_transform_anti_alias__lv_img_transform_dsc_tP"></span><span class="target" id="lv__img__buf_8h_1a8cd4d03b10a75fefdf8ff1b26e74fde9"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">_lv_img_buf_transform_anti_alias</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv422lv_img_transform_dsc_t" title="lv_img_transform_dsc_t"><span class="pre">lv_img_transform_dsc_t</span></a> <span class="pre">*</span><em><span class="pre">dsc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432_lv_img_buf_transform_anti_aliasP22lv_img_transform_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Continue transformation by taking the neighbors into account <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to the transformation descriptor </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv421_lv_img_buf_transformP22lv_img_transform_dsc_t10lv_coord_t10lv_coord_t">
+<span id="_CPPv321_lv_img_buf_transformP22lv_img_transform_dsc_t10lv_coord_t10lv_coord_t"></span><span id="_CPPv221_lv_img_buf_transformP22lv_img_transform_dsc_t10lv_coord_t10lv_coord_t"></span><span id="_lv_img_buf_transform__lv_img_transform_dsc_tP.lv_coord_t.lv_coord_t"></span><span class="target" id="lv__img__buf_8h_1adc02422c933acd91915034aec2437025"></span><em class="property"><span class="pre">static</span></em> <em class="property"><span class="pre">inline</span></em> <span class="pre">bool</span> <code class="sig-name descname"><span class="pre">_lv_img_buf_transform</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv422lv_img_transform_dsc_t" title="lv_img_transform_dsc_t"><span class="pre">lv_img_transform_dsc_t</span></a> <span class="pre">*</span><em><span class="pre">dsc</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">x</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421_lv_img_buf_transformP22lv_img_transform_dsc_t10lv_coord_t10lv_coord_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get which color and opa would come to a pixel if it were rotated <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: there is valid pixel on these x/y coordinates; false: the rotated pixel was out of the image </p>
+</dd>
+<dt><strong>Note</strong></dt><dd><p>the result is written back to <code class="docutils literal notranslate"><span class="pre">dsc-&gt;res_color</span></code> and <code class="docutils literal notranslate"><span class="pre">dsc-&gt;res_opa</span></code> </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: a descriptor initialized by <code class="docutils literal notranslate"><span class="pre">lv_img_buf_rotate_init</span></code> </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: the coordinate which color and opa should be get </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: the coordinate which color and opa should be get </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv432_lv_img_buf_get_transformed_areaP9lv_area_t10lv_coord_t10lv_coord_t7int16_t8uint16_tPK10lv_point_t">
+<span id="_CPPv332_lv_img_buf_get_transformed_areaP9lv_area_t10lv_coord_t10lv_coord_t7int16_t8uint16_tPK10lv_point_t"></span><span id="_CPPv232_lv_img_buf_get_transformed_areaP9lv_area_t10lv_coord_t10lv_coord_t7int16_t8uint16_tPK10lv_point_t"></span><span id="_lv_img_buf_get_transformed_area__lv_area_tP.lv_coord_t.lv_coord_t.int16_t.uint16_t.lv_point_tCP"></span><span class="target" id="lv__img__buf_8h_1a54f200e9ed40bbf1384696a4058feb69"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">_lv_img_buf_get_transformed_area</span></code><span class="sig-paren">(</span><span class="pre">lv_area_t</span> <span class="pre">*</span><em><span class="pre">res</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">w</span></em>, <span class="pre">lv_coord_t</span> <em><span class="pre">h</span></em>, <span class="pre">int16_t</span> <em><span class="pre">angle</span></em>, <span class="pre">uint16_t</span> <em><span class="pre">zoom</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">lv_point_t</span> <span class="pre">*</span><em><span class="pre">pivot</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432_lv_img_buf_get_transformed_areaP9lv_area_t10lv_coord_t10lv_coord_t7int16_t8uint16_tPK10lv_point_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the area of a rectangle if its rotated and scaled <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">res</span></code>: store the coordinates here </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">w</span></code>: width of the rectangle to transform </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span></code>: height of the rectangle to transform </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">angle</span></code>: angle of rotation </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zoom</span></code>: zoom, (256 no zoom) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pivot</span></code>: x,y pivot coordinates of rotation </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt id="_CPPv415lv_img_header_t">
+<span id="_CPPv315lv_img_header_t"></span><span id="_CPPv215lv_img_header_t"></span><span id="lv_img_header_t"></span><span class="target" id="structlv__img__header__t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">lv_img_header_t</span></code><a class="headerlink" href="#_CPPv415lv_img_header_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;lv_img_buf.h&gt;</em><p>LVGL image header </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_img_header_t1hE">
+<span id="_CPPv3N15lv_img_header_t1hE"></span><span id="_CPPv2N15lv_img_header_t1hE"></span><span id="lv_img_header_t::h__uint32_t"></span><span class="target" id="structlv__img__header__t_1a7e3391cd72119d417766378f18aaae2c"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">h</span></code><a class="headerlink" href="#_CPPv4N15lv_img_header_t1hE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_img_header_t1wE">
+<span id="_CPPv3N15lv_img_header_t1wE"></span><span id="_CPPv2N15lv_img_header_t1wE"></span><span id="lv_img_header_t::w__uint32_t"></span><span class="target" id="structlv__img__header__t_1a6553f8a9dc1a0f8c50dc51dda3aab537"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">w</span></code><a class="headerlink" href="#_CPPv4N15lv_img_header_t1wE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_img_header_t8reservedE">
+<span id="_CPPv3N15lv_img_header_t8reservedE"></span><span id="_CPPv2N15lv_img_header_t8reservedE"></span><span id="lv_img_header_t::reserved__uint32_t"></span><span class="target" id="structlv__img__header__t_1a7cf6525f2cb39346f5438973c489bf89"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">reserved</span></code><a class="headerlink" href="#_CPPv4N15lv_img_header_t8reservedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_img_header_t11always_zeroE">
+<span id="_CPPv3N15lv_img_header_t11always_zeroE"></span><span id="_CPPv2N15lv_img_header_t11always_zeroE"></span><span id="lv_img_header_t::always_zero__uint32_t"></span><span class="target" id="structlv__img__header__t_1a2500e38eea0424cf5639521e4cd36f74"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">always_zero</span></code><a class="headerlink" href="#_CPPv4N15lv_img_header_t11always_zeroE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N15lv_img_header_t2cfE">
+<span id="_CPPv3N15lv_img_header_t2cfE"></span><span id="_CPPv2N15lv_img_header_t2cfE"></span><span id="lv_img_header_t::cf__uint32_t"></span><span class="target" id="structlv__img__header__t_1a28513641737b777e0c546bd098eb58af"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">cf</span></code><a class="headerlink" href="#_CPPv4N15lv_img_header_t2cfE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt>
+<span class="target" id="structlv__img__header__t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">lv_img_header_t</span></code><br /></dt>
+<dd><em>#include &lt;lv_img_buf.h&gt;</em><p>LVGL image header </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="structlv__img__header__t_1a7e3391cd72119d417766378f18aaae2c"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">h</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt>
+<span class="target" id="structlv__img__header__t_1a6553f8a9dc1a0f8c50dc51dda3aab537"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">w</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt>
+<span class="target" id="structlv__img__header__t_1a7cf6525f2cb39346f5438973c489bf89"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">reserved</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt>
+<span class="target" id="structlv__img__header__t_1a2500e38eea0424cf5639521e4cd36f74"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">always_zero</span></code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt>
+<span class="target" id="structlv__img__header__t_1a28513641737b777e0c546bd098eb58af"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">cf</span></code><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv412lv_img_dsc_t">
+<span id="_CPPv312lv_img_dsc_t"></span><span id="_CPPv212lv_img_dsc_t"></span><span id="lv_img_dsc_t"></span><span class="target" id="structlv__img__dsc__t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">lv_img_dsc_t</span></code><a class="headerlink" href="#_CPPv412lv_img_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;lv_img_buf.h&gt;</em><p>Image header it is compatible with the result from image converter utility </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_img_dsc_t6headerE">
+<span id="_CPPv3N12lv_img_dsc_t6headerE"></span><span id="_CPPv2N12lv_img_dsc_t6headerE"></span><span id="lv_img_dsc_t::header__lv_img_header_t"></span><span class="target" id="structlv__img__dsc__t_1a552a5487bb4457d4b565dfa00381a846"></span><a class="reference internal" href="#_CPPv415lv_img_header_t" title="lv_img_header_t"><span class="pre">lv_img_header_t</span></a> <code class="sig-name descname"><span class="pre">header</span></code><a class="headerlink" href="#_CPPv4N12lv_img_dsc_t6headerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_img_dsc_t9data_sizeE">
+<span id="_CPPv3N12lv_img_dsc_t9data_sizeE"></span><span id="_CPPv2N12lv_img_dsc_t9data_sizeE"></span><span id="lv_img_dsc_t::data_size__uint32_t"></span><span class="target" id="structlv__img__dsc__t_1aef7de962a5e45e270151bec6bd4cdc80"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">data_size</span></code><a class="headerlink" href="#_CPPv4N12lv_img_dsc_t9data_sizeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N12lv_img_dsc_t4dataE">
+<span id="_CPPv3N12lv_img_dsc_t4dataE"></span><span id="_CPPv2N12lv_img_dsc_t4dataE"></span><span id="lv_img_dsc_t::data__uint8_tCP"></span><span class="target" id="structlv__img__dsc__t_1a09900b90ae9c9888e341616b611df3a0"></span><em class="property"><span class="pre">const</span></em> <span class="pre">uint8_t</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">data</span></code><a class="headerlink" href="#_CPPv4N12lv_img_dsc_t4dataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt id="_CPPv422lv_img_transform_dsc_t">
+<span id="_CPPv322lv_img_transform_dsc_t"></span><span id="_CPPv222lv_img_transform_dsc_t"></span><span id="lv_img_transform_dsc_t"></span><span class="target" id="structlv__img__transform__dsc__t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">lv_img_transform_dsc_t</span></code><a class="headerlink" href="#_CPPv422lv_img_transform_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t3srcE">
+<span id="_CPPv3N22lv_img_transform_dsc_t3srcE"></span><span id="_CPPv2N22lv_img_transform_dsc_t3srcE"></span><span id="lv_img_transform_dsc_t::src__voidCP"></span><span class="target" id="structlv__img__transform__dsc__t_1abe9e3f5ba59aac0033129fde382df60f"></span><em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">src</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t3srcE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t5src_wE">
+<span id="_CPPv3N22lv_img_transform_dsc_t5src_wE"></span><span id="_CPPv2N22lv_img_transform_dsc_t5src_wE"></span><span id="lv_img_transform_dsc_t::src_w__lv_coord_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a7d93f132c399eb20aec3906e0d0ce537"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">src_w</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t5src_wE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t5src_hE">
+<span id="_CPPv3N22lv_img_transform_dsc_t5src_hE"></span><span id="_CPPv2N22lv_img_transform_dsc_t5src_hE"></span><span id="lv_img_transform_dsc_t::src_h__lv_coord_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a2a20c3fa8900db35f86f996cfd1b820f"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">src_h</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t5src_hE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t7pivot_xE">
+<span id="_CPPv3N22lv_img_transform_dsc_t7pivot_xE"></span><span id="_CPPv2N22lv_img_transform_dsc_t7pivot_xE"></span><span id="lv_img_transform_dsc_t::pivot_x__lv_coord_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a3b8dac07658b0c836577d4b53aab8af0"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">pivot_x</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t7pivot_xE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t7pivot_yE">
+<span id="_CPPv3N22lv_img_transform_dsc_t7pivot_yE"></span><span id="_CPPv2N22lv_img_transform_dsc_t7pivot_yE"></span><span id="lv_img_transform_dsc_t::pivot_y__lv_coord_t"></span><span class="target" id="structlv__img__transform__dsc__t_1afc39e547f190579cccad22fd6e8fd367"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">pivot_y</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t7pivot_yE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t5angleE">
+<span id="_CPPv3N22lv_img_transform_dsc_t5angleE"></span><span id="_CPPv2N22lv_img_transform_dsc_t5angleE"></span><span id="lv_img_transform_dsc_t::angle__int16_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a632e14fdf637f8cb7bb21df83410a2f7"></span><span class="pre">int16_t</span> <code class="sig-name descname"><span class="pre">angle</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t5angleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t4zoomE">
+<span id="_CPPv3N22lv_img_transform_dsc_t4zoomE"></span><span id="_CPPv2N22lv_img_transform_dsc_t4zoomE"></span><span id="lv_img_transform_dsc_t::zoom__uint16_t"></span><span class="target" id="structlv__img__transform__dsc__t_1af4de9a82c020c94dd9ccd69789444e25"></span><span class="pre">uint16_t</span> <code class="sig-name descname"><span class="pre">zoom</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t4zoomE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t5colorE">
+<span id="_CPPv3N22lv_img_transform_dsc_t5colorE"></span><span id="_CPPv2N22lv_img_transform_dsc_t5colorE"></span><span id="lv_img_transform_dsc_t::color__lv_color_t"></span><span class="target" id="structlv__img__transform__dsc__t_1ab042ad890c709c0c62a895878c294493"></span><span class="pre">lv_color_t</span> <code class="sig-name descname"><span class="pre">color</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t5colorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t2cfE">
+<span id="_CPPv3N22lv_img_transform_dsc_t2cfE"></span><span id="_CPPv2N22lv_img_transform_dsc_t2cfE"></span><span id="lv_img_transform_dsc_t::cf__lv_img_cf_t"></span><span class="target" id="structlv__img__transform__dsc__t_1ad13f927d37014934ad7469d54fc0df0f"></span><a class="reference internal" href="#_CPPv411lv_img_cf_t" title="lv_img_cf_t"><span class="pre">lv_img_cf_t</span></a> <code class="sig-name descname"><span class="pre">cf</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t2cfE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t9antialiasE">
+<span id="_CPPv3N22lv_img_transform_dsc_t9antialiasE"></span><span id="_CPPv2N22lv_img_transform_dsc_t9antialiasE"></span><span id="lv_img_transform_dsc_t::antialias__b"></span><span class="target" id="structlv__img__transform__dsc__t_1a9453d1086afc187063d2fff925600d29"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">antialias</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t9antialiasE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t3cfgE">
+<span id="_CPPv3N22lv_img_transform_dsc_t3cfgE"></span><span id="_CPPv2N22lv_img_transform_dsc_t3cfgE"></span><span class="target" id="structlv__img__transform__dsc__t_1aa793944719ecb1d9e6b4a6723ca0bb93"></span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv422lv_img_transform_dsc_t" title="lv_img_transform_dsc_t"><span class="pre">lv_img_transform_dsc_t</span></a><span class="pre">::</span><strong><span class="pre">[anonymous]</span></strong> <code class="sig-name descname"><span class="pre">cfg</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t3cfgE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t3opaE">
+<span id="_CPPv3N22lv_img_transform_dsc_t3opaE"></span><span id="_CPPv2N22lv_img_transform_dsc_t3opaE"></span><span id="lv_img_transform_dsc_t::opa__lv_opa_t"></span><span class="target" id="structlv__img__transform__dsc__t_1aadaf1aff28f438b03d286d3f87ca2302"></span><span class="pre">lv_opa_t</span> <code class="sig-name descname"><span class="pre">opa</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t3opaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t3resE">
+<span id="_CPPv3N22lv_img_transform_dsc_t3resE"></span><span id="_CPPv2N22lv_img_transform_dsc_t3resE"></span><span class="target" id="structlv__img__transform__dsc__t_1a71664aafb43a5c7e9d1424240b9d60b1"></span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv422lv_img_transform_dsc_t" title="lv_img_transform_dsc_t"><span class="pre">lv_img_transform_dsc_t</span></a><span class="pre">::</span><strong><span class="pre">[anonymous]</span></strong> <code class="sig-name descname"><span class="pre">res</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t3resE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t7img_dscE">
+<span id="_CPPv3N22lv_img_transform_dsc_t7img_dscE"></span><span id="_CPPv2N22lv_img_transform_dsc_t7img_dscE"></span><span id="lv_img_transform_dsc_t::img_dsc__lv_img_dsc_t"></span><span class="target" id="structlv__img__transform__dsc__t_1ada066ea7ffd711ab571c2c0bd470df46"></span><a class="reference internal" href="#_CPPv412lv_img_dsc_t" title="lv_img_dsc_t"><span class="pre">lv_img_dsc_t</span></a> <code class="sig-name descname"><span class="pre">img_dsc</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t7img_dscE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t11pivot_x_256E">
+<span id="_CPPv3N22lv_img_transform_dsc_t11pivot_x_256E"></span><span id="_CPPv2N22lv_img_transform_dsc_t11pivot_x_256E"></span><span id="lv_img_transform_dsc_t::pivot_x_256__int32_t"></span><span class="target" id="structlv__img__transform__dsc__t_1ad1f577db6b70eddb30f67d953db9bd1e"></span><span class="pre">int32_t</span> <code class="sig-name descname"><span class="pre">pivot_x_256</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t11pivot_x_256E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t11pivot_y_256E">
+<span id="_CPPv3N22lv_img_transform_dsc_t11pivot_y_256E"></span><span id="_CPPv2N22lv_img_transform_dsc_t11pivot_y_256E"></span><span id="lv_img_transform_dsc_t::pivot_y_256__int32_t"></span><span class="target" id="structlv__img__transform__dsc__t_1ade400897e2d3c6bf314ece8f43b40432"></span><span class="pre">int32_t</span> <code class="sig-name descname"><span class="pre">pivot_y_256</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t11pivot_y_256E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t5sinmaE">
+<span id="_CPPv3N22lv_img_transform_dsc_t5sinmaE"></span><span id="_CPPv2N22lv_img_transform_dsc_t5sinmaE"></span><span id="lv_img_transform_dsc_t::sinma__int32_t"></span><span class="target" id="structlv__img__transform__dsc__t_1ab9e2567e1e14cd684ddd35eb56c112d0"></span><span class="pre">int32_t</span> <code class="sig-name descname"><span class="pre">sinma</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t5sinmaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t5cosmaE">
+<span id="_CPPv3N22lv_img_transform_dsc_t5cosmaE"></span><span id="_CPPv2N22lv_img_transform_dsc_t5cosmaE"></span><span id="lv_img_transform_dsc_t::cosma__int32_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a35e685fda27515645370b34d507b7085"></span><span class="pre">int32_t</span> <code class="sig-name descname"><span class="pre">cosma</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t5cosmaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t12chroma_keyedE">
+<span id="_CPPv3N22lv_img_transform_dsc_t12chroma_keyedE"></span><span id="_CPPv2N22lv_img_transform_dsc_t12chroma_keyedE"></span><span id="lv_img_transform_dsc_t::chroma_keyed__uint8_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a35060cf56c63be25ce159f7d6cd92ef1"></span><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">chroma_keyed</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t12chroma_keyedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t9has_alphaE">
+<span id="_CPPv3N22lv_img_transform_dsc_t9has_alphaE"></span><span id="_CPPv2N22lv_img_transform_dsc_t9has_alphaE"></span><span id="lv_img_transform_dsc_t::has_alpha__uint8_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a7ca558d3f9ebae256bc594efa1b7772c"></span><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">has_alpha</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t9has_alphaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t12native_colorE">
+<span id="_CPPv3N22lv_img_transform_dsc_t12native_colorE"></span><span id="_CPPv2N22lv_img_transform_dsc_t12native_colorE"></span><span id="lv_img_transform_dsc_t::native_color__uint8_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a9fd36f237e745bade1eb7c34f1a63d0a"></span><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">native_color</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t12native_colorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t8zoom_invE">
+<span id="_CPPv3N22lv_img_transform_dsc_t8zoom_invE"></span><span id="_CPPv2N22lv_img_transform_dsc_t8zoom_invE"></span><span id="lv_img_transform_dsc_t::zoom_inv__uint32_t"></span><span class="target" id="structlv__img__transform__dsc__t_1ae64aa61ae01b93a2762ed5d8843db027"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">zoom_inv</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t8zoom_invE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t2xsE">
+<span id="_CPPv3N22lv_img_transform_dsc_t2xsE"></span><span id="_CPPv2N22lv_img_transform_dsc_t2xsE"></span><span id="lv_img_transform_dsc_t::xs__lv_coord_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a60c6356a67602a7f60f0eba0eb24ddfe"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">xs</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t2xsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t2ysE">
+<span id="_CPPv3N22lv_img_transform_dsc_t2ysE"></span><span id="_CPPv2N22lv_img_transform_dsc_t2ysE"></span><span id="lv_img_transform_dsc_t::ys__lv_coord_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a259d1ad99ab3b20e05a380f2a22e3bab"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">ys</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t2ysE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t6xs_intE">
+<span id="_CPPv3N22lv_img_transform_dsc_t6xs_intE"></span><span id="_CPPv2N22lv_img_transform_dsc_t6xs_intE"></span><span id="lv_img_transform_dsc_t::xs_int__lv_coord_t"></span><span class="target" id="structlv__img__transform__dsc__t_1aad4f0a2dd7d2522713cb7bb04f21d87c"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">xs_int</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t6xs_intE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t6ys_intE">
+<span id="_CPPv3N22lv_img_transform_dsc_t6ys_intE"></span><span id="_CPPv2N22lv_img_transform_dsc_t6ys_intE"></span><span id="lv_img_transform_dsc_t::ys_int__lv_coord_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a2f4ad8835a1210611dc4ea7abedc040a"></span><span class="pre">lv_coord_t</span> <code class="sig-name descname"><span class="pre">ys_int</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t6ys_intE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t3pxiE">
+<span id="_CPPv3N22lv_img_transform_dsc_t3pxiE"></span><span id="_CPPv2N22lv_img_transform_dsc_t3pxiE"></span><span id="lv_img_transform_dsc_t::pxi__uint32_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a4c14e9b4f5603203903eb788971c0796"></span><span class="pre">uint32_t</span> <code class="sig-name descname"><span class="pre">pxi</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t3pxiE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t7px_sizeE">
+<span id="_CPPv3N22lv_img_transform_dsc_t7px_sizeE"></span><span id="_CPPv2N22lv_img_transform_dsc_t7px_sizeE"></span><span id="lv_img_transform_dsc_t::px_size__uint8_t"></span><span class="target" id="structlv__img__transform__dsc__t_1a9f1c046e5e7a2d0b7ea93e4678245a12"></span><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">px_size</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t7px_sizeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N22lv_img_transform_dsc_t3tmpE">
+<span id="_CPPv3N22lv_img_transform_dsc_t3tmpE"></span><span id="_CPPv2N22lv_img_transform_dsc_t3tmpE"></span><span class="target" id="structlv__img__transform__dsc__t_1a578fec580e89c4b746bff22dc1eacd93"></span><em class="property"><span class="pre">struct</span></em> <a class="reference internal" href="#_CPPv422lv_img_transform_dsc_t" title="lv_img_transform_dsc_t"><span class="pre">lv_img_transform_dsc_t</span></a><span class="pre">::</span><strong><span class="pre">[anonymous]</span></strong> <code class="sig-name descname"><span class="pre">tmp</span></code><a class="headerlink" href="#_CPPv4N22lv_img_transform_dsc_t3tmpE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="image-draw">
+<h3>Image draw<a class="headerlink" href="#image-draw" title="Permalink to this headline">¶</a></h3>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv420lv_draw_img_dsc_initP17lv_draw_img_dsc_t">
+<span id="_CPPv320lv_draw_img_dsc_initP17lv_draw_img_dsc_t"></span><span id="_CPPv220lv_draw_img_dsc_initP17lv_draw_img_dsc_t"></span><span id="lv_draw_img_dsc_init__lv_draw_img_dsc_tP"></span><span class="target" id="lv__draw__img_8h_1a9d92929d0507c273317209c1153bedef"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_draw_img_dsc_init</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417lv_draw_img_dsc_t" title="lv_draw_img_dsc_t"><span class="pre">lv_draw_img_dsc_t</span></a> <span class="pre">*</span><em><span class="pre">dsc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420lv_draw_img_dsc_initP17lv_draw_img_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv411lv_draw_imgPK9lv_area_tPK9lv_area_tPKvPK17lv_draw_img_dsc_t">
+<span id="_CPPv311lv_draw_imgPK9lv_area_tPK9lv_area_tPKvPK17lv_draw_img_dsc_t"></span><span id="_CPPv211lv_draw_imgPK9lv_area_tPK9lv_area_tPKvPK17lv_draw_img_dsc_t"></span><span id="lv_draw_img__lv_area_tCP.lv_area_tCP.voidCP.lv_draw_img_dsc_tCP"></span><span class="target" id="lv__draw__img_8h_1a51e2e306db6127550b08262828fa709e"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">lv_draw_img</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">lv_area_t</span> <span class="pre">*</span><em><span class="pre">coords</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">lv_area_t</span> <span class="pre">*</span><em><span class="pre">mask</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">src</span></em>, <em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv417lv_draw_img_dsc_t" title="lv_draw_img_dsc_t"><span class="pre">lv_draw_img_dsc_t</span></a> <span class="pre">*</span><em><span class="pre">dsc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411lv_draw_imgPK9lv_area_tPK9lv_area_tPKvPK17lv_draw_img_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Draw an image <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">coords</span></code>: the coordinates of the image </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mask</span></code>: the image will be drawn only in this area </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: pointer to a lv_color_t array which contains the pixels of the image </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dsc</span></code>: pointer to an initialized <code class="docutils literal notranslate"><a class="reference internal" href="#structlv__draw__img__dsc__t"><span class="std std-ref"><span class="pre">lv_draw_img_dsc_t</span></span></a></code> variable </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv419lv_img_src_get_typePKv">
+<span id="_CPPv319lv_img_src_get_typePKv"></span><span id="_CPPv219lv_img_src_get_typePKv"></span><span id="lv_img_src_get_type__voidCP"></span><span class="target" id="lv__draw__img_8h_1ad1749598689c14b0b65ed7a81bc48148"></span><a class="reference internal" href="#_CPPv412lv_img_src_t" title="lv_img_src_t"><span class="pre">lv_img_src_t</span></a> <code class="sig-name descname"><span class="pre">lv_img_src_get_type</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">src</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_img_src_get_typePKv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the type of an image source <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>type of the image source LV_IMG_SRC_VARIABLE/FILE/SYMBOL/UNKNOWN </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: pointer to an image source:<ul>
+<li><p>pointer to an 'lv_img_t' variable (image stored internally and compiled into the code)</p></li>
+<li><p>a path to a file (e.g. &quot;S:/folder/image.bin&quot;)</p></li>
+<li><p>or a symbol (e.g. LV_SYMBOL_CLOSE) </p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv421lv_img_cf_get_px_size11lv_img_cf_t">
+<span id="_CPPv321lv_img_cf_get_px_size11lv_img_cf_t"></span><span id="_CPPv221lv_img_cf_get_px_size11lv_img_cf_t"></span><span id="lv_img_cf_get_px_size__lv_img_cf_t"></span><span class="target" id="lv__draw__img_8h_1a8e26314bd67791a846ceafda0d0511b4"></span><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">lv_img_cf_get_px_size</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411lv_img_cf_t" title="lv_img_cf_t"><span class="pre">lv_img_cf_t</span></a> <em><span class="pre">cf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lv_img_cf_get_px_size11lv_img_cf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the pixel size of a color format in bits <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>the pixel size in bits </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cf</span></code>: a color format (<code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_...</span></code>) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv425lv_img_cf_is_chroma_keyed11lv_img_cf_t">
+<span id="_CPPv325lv_img_cf_is_chroma_keyed11lv_img_cf_t"></span><span id="_CPPv225lv_img_cf_is_chroma_keyed11lv_img_cf_t"></span><span id="lv_img_cf_is_chroma_keyed__lv_img_cf_t"></span><span class="target" id="lv__draw__img_8h_1aa072f33174c22115a3f3d48ec42ecbc1"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">lv_img_cf_is_chroma_keyed</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411lv_img_cf_t" title="lv_img_cf_t"><span class="pre">lv_img_cf_t</span></a> <em><span class="pre">cf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425lv_img_cf_is_chroma_keyed11lv_img_cf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check if a color format is chroma keyed or not <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: chroma keyed; false: not chroma keyed </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cf</span></code>: a color format (<code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_...</span></code>) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv419lv_img_cf_has_alpha11lv_img_cf_t">
+<span id="_CPPv319lv_img_cf_has_alpha11lv_img_cf_t"></span><span id="_CPPv219lv_img_cf_has_alpha11lv_img_cf_t"></span><span id="lv_img_cf_has_alpha__lv_img_cf_t"></span><span class="target" id="lv__draw__img_8h_1afdcbf14b7126296414e731ddc803f0b3"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">lv_img_cf_has_alpha</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411lv_img_cf_t" title="lv_img_cf_t"><span class="pre">lv_img_cf_t</span></a> <em><span class="pre">cf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lv_img_cf_has_alpha11lv_img_cf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check if a color format has alpha channel or not <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>true: has alpha channel; false: doesn't have alpha channel </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cf</span></code>: a color format (<code class="docutils literal notranslate"><span class="pre">LV_IMG_CF_...</span></code>) </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt id="_CPPv417lv_draw_img_dsc_t">
+<span id="_CPPv317lv_draw_img_dsc_t"></span><span id="_CPPv217lv_draw_img_dsc_t"></span><span id="lv_draw_img_dsc_t"></span><span class="target" id="structlv__draw__img__dsc__t"></span><em class="property"><span class="pre">struct</span> </em><code class="sig-name descname"><span class="pre">lv_draw_img_dsc_t</span></code><a class="headerlink" href="#_CPPv417lv_draw_img_dsc_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N17lv_draw_img_dsc_t3opaE">
+<span id="_CPPv3N17lv_draw_img_dsc_t3opaE"></span><span id="_CPPv2N17lv_draw_img_dsc_t3opaE"></span><span id="lv_draw_img_dsc_t::opa__lv_opa_t"></span><span class="target" id="structlv__draw__img__dsc__t_1a86d3245577fa0948ea6167ac140e5da8"></span><span class="pre">lv_opa_t</span> <code class="sig-name descname"><span class="pre">opa</span></code><a class="headerlink" href="#_CPPv4N17lv_draw_img_dsc_t3opaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N17lv_draw_img_dsc_t5angleE">
+<span id="_CPPv3N17lv_draw_img_dsc_t5angleE"></span><span id="_CPPv2N17lv_draw_img_dsc_t5angleE"></span><span id="lv_draw_img_dsc_t::angle__uint16_t"></span><span class="target" id="structlv__draw__img__dsc__t_1a81ec3771d98f798c7e577411f15075b0"></span><span class="pre">uint16_t</span> <code class="sig-name descname"><span class="pre">angle</span></code><a class="headerlink" href="#_CPPv4N17lv_draw_img_dsc_t5angleE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N17lv_draw_img_dsc_t5pivotE">
+<span id="_CPPv3N17lv_draw_img_dsc_t5pivotE"></span><span id="_CPPv2N17lv_draw_img_dsc_t5pivotE"></span><span id="lv_draw_img_dsc_t::pivot__lv_point_t"></span><span class="target" id="structlv__draw__img__dsc__t_1a86a654d76f5125496b6e903027c35093"></span><span class="pre">lv_point_t</span> <code class="sig-name descname"><span class="pre">pivot</span></code><a class="headerlink" href="#_CPPv4N17lv_draw_img_dsc_t5pivotE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N17lv_draw_img_dsc_t4zoomE">
+<span id="_CPPv3N17lv_draw_img_dsc_t4zoomE"></span><span id="_CPPv2N17lv_draw_img_dsc_t4zoomE"></span><span id="lv_draw_img_dsc_t::zoom__uint16_t"></span><span class="target" id="structlv__draw__img__dsc__t_1a5f1ee5fb053a72cb5889a7cef1b28302"></span><span class="pre">uint16_t</span> <code class="sig-name descname"><span class="pre">zoom</span></code><a class="headerlink" href="#_CPPv4N17lv_draw_img_dsc_t4zoomE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N17lv_draw_img_dsc_t11recolor_opaE">
+<span id="_CPPv3N17lv_draw_img_dsc_t11recolor_opaE"></span><span id="_CPPv2N17lv_draw_img_dsc_t11recolor_opaE"></span><span id="lv_draw_img_dsc_t::recolor_opa__lv_opa_t"></span><span class="target" id="structlv__draw__img__dsc__t_1a15d7fd0f7a4539ed6dc3348ab772b7e7"></span><span class="pre">lv_opa_t</span> <code class="sig-name descname"><span class="pre">recolor_opa</span></code><a class="headerlink" href="#_CPPv4N17lv_draw_img_dsc_t11recolor_opaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N17lv_draw_img_dsc_t7recolorE">
+<span id="_CPPv3N17lv_draw_img_dsc_t7recolorE"></span><span id="_CPPv2N17lv_draw_img_dsc_t7recolorE"></span><span id="lv_draw_img_dsc_t::recolor__lv_color_t"></span><span class="target" id="structlv__draw__img__dsc__t_1a10d0a2b64a7eb1db68bd2b50e0bcc002"></span><span class="pre">lv_color_t</span> <code class="sig-name descname"><span class="pre">recolor</span></code><a class="headerlink" href="#_CPPv4N17lv_draw_img_dsc_t7recolorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N17lv_draw_img_dsc_t10blend_modeE">
+<span id="_CPPv3N17lv_draw_img_dsc_t10blend_modeE"></span><span id="_CPPv2N17lv_draw_img_dsc_t10blend_modeE"></span><span id="lv_draw_img_dsc_t::blend_mode__lv_blend_mode_t"></span><span class="target" id="structlv__draw__img__dsc__t_1a54c8c5c3e3f3a928079fcb210d094e0b"></span><span class="pre">lv_blend_mode_t</span> <code class="sig-name descname"><span class="pre">blend_mode</span></code><a class="headerlink" href="#_CPPv4N17lv_draw_img_dsc_t10blend_modeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N17lv_draw_img_dsc_t9antialiasE">
+<span id="_CPPv3N17lv_draw_img_dsc_t9antialiasE"></span><span id="_CPPv2N17lv_draw_img_dsc_t9antialiasE"></span><span id="lv_draw_img_dsc_t::antialias__uint8_t"></span><span class="target" id="structlv__draw__img__dsc__t_1af440e4bf4efe9b5f0e9ad8feb67eaedb"></span><span class="pre">uint8_t</span> <code class="sig-name descname"><span class="pre">antialias</span></code><a class="headerlink" href="#_CPPv4N17lv_draw_img_dsc_t9antialiasE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
 
 </div>
 </dd></dl>
@@ -2174,7 +2962,7 @@ When a cached image is used, its <em>life</em> is increased by the <em>time to o
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 13, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>

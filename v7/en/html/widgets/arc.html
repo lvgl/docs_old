@@ -53,7 +53,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-78811084-3');
+	gtag('config', 'UA-78811084-3', { 'anonymize_ip': true });
 </script>
 
 </head>
@@ -264,6 +264,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../porting/display.html">Display interface</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-buffer">Display buffer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#display-driver">Display driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../porting/display.html#rotation">Rotation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../porting/display.html#api">API</a></li>
 </ul>
 </li>
@@ -377,6 +378,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../overview/style.html#styling-a-button">Styling a button</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../overview/style.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../overview/indev.html">Input devices</a><ul>
@@ -473,6 +475,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../overview/image.html#api">API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#id1">Image decoder</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-cache">Image cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-buffer">Image buffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../overview/image.html#image-draw">Image draw</a></li>
 </ul>
 </li>
 </ul>
@@ -965,7 +969,7 @@
 <li class="toctree-l3"><a class="reference internal" href="linemeter.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msdbox)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="msgbox.html">Message box (lv_msgbox)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#parts-and-styles">Parts and Styles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="msgbox.html#usage">Usage</a><ul>
@@ -1499,7 +1503,57 @@ The following types exist:</p>
 </div>
 <div class="section" id="micropython">
 <h3>MicroPython<a class="headerlink" href="#micropython" title="Permalink to this headline">¶</a></h3>
-<p>No examples yet.</p>
+<div class="section" id="id1">
+<h4>Simple Arc<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_arc_1/lv_ex_arc_1.py'><img alt='lv_ex_arc_1' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_arc_1/lv_ex_arc_1.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an arc</span>
+<span class="n">arc</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_end_angle</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Loader with Arc<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lv_examples/731f2b1bbd9ec7a4537aa237445960ac9d591913/src/header.py&script=https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_arc_2/lv_ex_arc_2.py'><img alt='lv_ex_arc_2' src='https://raw.githubusercontent.com/lvgl/lv_examples/9ebc61df6b7be07bd2fb4257fec49bf0dd178e2d/lv_ex_arc_2/lv_ex_arc_2.png'/></a><div class="toggle docutils container">
+<div class="header docutils container">
+<p>code</p>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">arc_loader</span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="n">arc</span><span class="p">):</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="n">arc</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span>
+    <span class="c1"># print(&quot;angle: &quot;,angle)</span>
+    <span class="n">angle</span> <span class="o">+=</span> <span class="mi">5</span>
+    <span class="k">if</span> <span class="n">angle</span> <span class="o">&gt;</span> <span class="mi">360</span><span class="p">:</span>
+        <span class="n">task</span><span class="o">.</span><span class="n">_del</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">arc</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    
+<span class="c1"># create an arc which acts as a loader</span>
+
+<span class="n">arc</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">scr_act</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_bg_angles</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_angles</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_rotation</span><span class="p">(</span><span class="mi">270</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">arc</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Create an `lv_task` to update the arc.</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">task_create_basic</span><span class="p">()</span>
+<span class="n">task</span><span class="o">.</span><span class="n">set_cb</span><span class="p">(</span><span class="k">lambda</span> <span class="n">task</span><span class="p">:</span> <span class="n">arc_loader</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">arc</span><span class="p">))</span>
+<span class="n">task</span><span class="o">.</span><span class="n">set_period</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">task</span><span class="o">.</span><span class="n">set_prio</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">TASK_PRIO</span><span class="o">.</span><span class="n">LOWEST</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="api">
@@ -1921,12 +1975,12 @@ The following types exist:</p>
 
 <dl class="cpp var">
 <dt id="_CPPv4N12lv_arc_ext_t9style_arcE">
-<span id="_CPPv3N12lv_arc_ext_t9style_arcE"></span><span id="_CPPv2N12lv_arc_ext_t9style_arcE"></span><span id="lv_arc_ext_t::style_arc__lv_style_list_t"></span><span class="target" id="structlv__arc__ext__t_1a9b71cd3661726abc6e38ece159f993c6"></span><span class="pre">lv_style_list_t</span> <code class="sig-name descname"><span class="pre">style_arc</span></code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t9style_arcE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N12lv_arc_ext_t9style_arcE"></span><span id="_CPPv2N12lv_arc_ext_t9style_arcE"></span><span id="lv_arc_ext_t::style_arc__lv_style_list_t"></span><span class="target" id="structlv__arc__ext__t_1a9b71cd3661726abc6e38ece159f993c6"></span><a class="reference internal" href="../overview/style.html#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <code class="sig-name descname"><span class="pre">style_arc</span></code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t9style_arcE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
 <dt id="_CPPv4N12lv_arc_ext_t10style_knobE">
-<span id="_CPPv3N12lv_arc_ext_t10style_knobE"></span><span id="_CPPv2N12lv_arc_ext_t10style_knobE"></span><span id="lv_arc_ext_t::style_knob__lv_style_list_t"></span><span class="target" id="structlv__arc__ext__t_1a8cbbc83f999df17dda4e577b5cd94dd9"></span><span class="pre">lv_style_list_t</span> <code class="sig-name descname"><span class="pre">style_knob</span></code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t10style_knobE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N12lv_arc_ext_t10style_knobE"></span><span id="_CPPv2N12lv_arc_ext_t10style_knobE"></span><span id="lv_arc_ext_t::style_knob__lv_style_list_t"></span><span class="target" id="structlv__arc__ext__t_1a8cbbc83f999df17dda4e577b5cd94dd9"></span><a class="reference internal" href="../overview/style.html#_CPPv415lv_style_list_t" title="lv_style_list_t"><span class="pre">lv_style_list_t</span></a> <code class="sig-name descname"><span class="pre">style_knob</span></code><a class="headerlink" href="#_CPPv4N12lv_arc_ext_t10style_knobE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -2001,7 +2055,7 @@ The following types exist:</p>
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 13, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>
