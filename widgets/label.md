@@ -26,11 +26,6 @@ In this case, the text is not stored in the dynamic memory and the given buffer 
 This means that the array can't be a local variable which goes out of scope when the function exits. 
 Constant strings are safe to use with `lv_label_set_text_static` (except when used with `LV_LABEL_LONG_DOT`, as it modifies the buffer in-place), as they are stored in ROM memory, which is always accessible.
 
-You can also use a **raw array** as label text. 
-The array doesn't have to be `\0` terminated. 
-In this case, the text will be saved to the dynamic memory like with `lv_label_set_text`. 
-To set a raw character array, use the `lv_label_set_array_text(label, char_array, size)` function.
-
 
 ### Line break
 
