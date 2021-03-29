@@ -1386,14 +1386,10 @@ It will allocate a buffer dynamically, and the provided string will be copied in
 Therefore, you don't need to keep the text you pass to <code class="docutils literal notranslate"><span class="pre">lv_label_set_text</span></code> in scope after that function returns.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">lv_label_set_text_fmt(label,</span> <span class="pre">&quot;Value:</span> <span class="pre">%d&quot;,</span> <span class="pre">15)</span></code> <strong>printf formatting</strong> can be used to set the text.</p>
 <p>Labels are able to show text from a <strong>static character buffer</strong> which is <code class="docutils literal notranslate"><span class="pre">\0</span></code>-terminated.
-To do so, use <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text(label,</span> <span class="pre">&quot;Text&quot;)</span></code>.
+To do so, use <code class="docutils literal notranslate"><span class="pre">lv_label_set_text_static(label,</span> <span class="pre">&quot;Text&quot;)</span></code>.
 In this case, the text is not stored in the dynamic memory and the given buffer is used directly instead.
 This means that the array can't be a local variable which goes out of scope when the function exits.
-Constant strings are safe to use with <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code> (except when used with <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOT</span></code>, as it modifies the buffer in-place), as they are stored in ROM memory, which is always accessible.</p>
-<p>You can also use a <strong>raw array</strong> as label text.
-The array doesn't have to be <code class="docutils literal notranslate"><span class="pre">\0</span></code> terminated.
-In this case, the text will be saved to the dynamic memory like with <code class="docutils literal notranslate"><span class="pre">lv_label_set_text</span></code>.
-To set a raw character array, use the <code class="docutils literal notranslate"><span class="pre">lv_label_set_array_text(label,</span> <span class="pre">char_array,</span> <span class="pre">size)</span></code> function.</p>
+Constant strings are safe to use with <code class="docutils literal notranslate"><span class="pre">lv_label_set_text_static</span></code> (except when used with <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOT</span></code>, as it modifies the buffer in-place), as they are stored in ROM memory, which is always accessible.</p>
 </div>
 <div class="section" id="line-break">
 <h3>Line break<a class="headerlink" href="#line-break" title="Permalink to this headline">¶</a></h3>
@@ -1405,7 +1401,7 @@ To set a raw character array, use the <code class="docutils literal notranslate"
 <ul class="simple">
 <li><p><strong>LV_LABEL_LONG_EXPAND</strong> - Expand the object size to the text size (Default)</p></li>
 <li><p><strong>LV_LABEL_LONG_BREAK</strong> - Keep the object width, break (wrap) the too long lines and expand the object height</p></li>
-<li><p><strong>LV_LABEL_LONG_DOT</strong> - Keep the object size, break the text and write dots in the last line (<strong>not supported when using <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code></strong>)</p></li>
+<li><p><strong>LV_LABEL_LONG_DOT</strong> - Keep the object size, break the text and write dots in the last line (<strong>not supported when using <code class="docutils literal notranslate"><span class="pre">lv_label_set_text_static</span></code></strong>)</p></li>
 <li><p><strong>LV_LABEL_LONG_SROLL</strong> - Keep the size and scroll the label back and forth</p></li>
 <li><p><strong>LV_LABEL_LONG_SROLL_CIRC</strong> - Keep the size and scroll the label circularly</p></li>
 <li><p><strong>LV_LABEL_LONG_CROP</strong> - Keep the size and crop the text out of it</p></li>
@@ -1416,7 +1412,7 @@ In addition with the default <code class="docutils literal notranslate"><span cl
 <p>So you need to change the <em>long mode</em> first set the new <em>long mode</em> and then set the size with  <code class="docutils literal notranslate"><span class="pre">lv_obj_set_width/height/size()</span></code>.</p>
 <p>Another important note is that <strong><code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOT</span></code> manipulates the text buffer in-place</strong> in order to add/remove the dots.
 When <code class="docutils literal notranslate"><span class="pre">lv_label_set_text</span></code> or <code class="docutils literal notranslate"><span class="pre">lv_label_set_array_text</span></code> are used, a separate buffer is allocated and this implementation detail is unnoticed.
-This is not the case with <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code>! <strong>The buffer you pass to <code class="docutils literal notranslate"><span class="pre">lv_label_set_static_text</span></code> must be writable if you plan to use <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOT</span></code>.</strong></p>
+This is not the case with <code class="docutils literal notranslate"><span class="pre">lv_label_set_text_static</span></code>! <strong>The buffer you pass to <code class="docutils literal notranslate"><span class="pre">lv_label_set_text_static</span></code> must be writable if you plan to use <code class="docutils literal notranslate"><span class="pre">LV_LABEL_LONG_DOT</span></code>.</strong></p>
 </div>
 <div class="section" id="text-align">
 <h3>Text align<a class="headerlink" href="#text-align" title="Permalink to this headline">¶</a></h3>
@@ -2287,7 +2283,7 @@ Click to try in the simulator!<br/><a target='_blank' href='https://sim.lvgl.io/
     <p>
         &#169; Copyright 2020, LVGL LLC.
       <span class="lastupdated">
-        Last updated on Mar 16, 2021.
+        Last updated on Mar 29, 2021.
       </span>
 
     </p>
