@@ -18,6 +18,7 @@ The buttons parts are the same as in case of [Button matrix](/widgets/btnmatrix)
 - `LV_MSGBOX_PART_BTN_BG` the background of the buttons
 - `LV_MSGBOX_PART_BTN` the buttons
 
+**Important note:** Make sure that you have added buttons using `lv_msgbox_add_btns` before trying to change their style, otherwise LVGL *will* crash.
 
 ## Usage
 
