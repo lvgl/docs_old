@@ -4,8 +4,8 @@
 ```
 # Display interface
 
-To set up a display an `lv_disp_buf_t` and an `lv_disp_drv_t` variable has to be initialized.
-- **lv_disp_buf_t** contains internal graphics buffer(s).
+To set up a display an `lv_disp_buf_t` and an `lv_disp_drv_t` variables have to be initialized.
+- **lv_disp_buf_t** contains internal graphic buffer(s).
 - **lv_disp_drv_t** contains callback functions to interact with the display and manipulate drawing related things.
 
 
