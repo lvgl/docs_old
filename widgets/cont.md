@@ -6,11 +6,11 @@
 
 ## Overview
 
-The containers are essentially a **basic object** with layout and automatic sizing features features.
+The containers are essentially a **basic object** with layout and automatic sizing features.
 
 
 ## Parts and Styles
-The containers has only a main style called `LV_CONT_PART_MAIN` and it can use all the typicaly bacground properties properties and padding for layout auto sizing.
+The containers has only a main style called `LV_CONT_PART_MAIN` and it can use all the typicaly bacground properties and padding for layout auto sizing.
 
 ## Usage
 
