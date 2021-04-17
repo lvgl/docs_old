@@ -12,7 +12,7 @@ Note that you need to choose a powerful enough board to run LVGL and your GUI.  
 For example ESP32 is a good candidate to create your UI with LVGL.
 
 
-## Get the LVGL Ardunio library
+## Get the LVGL Arduino library
 
 LVGL can be installed via Arduino IDE Library Manager or as an .ZIP library.
 It will also install [lv_exmaples](https://github.com/lvgl/lv_examples) which contains a lot of examples and demos to try LVGL.
