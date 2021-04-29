@@ -105,7 +105,7 @@ The objects has type specific parameters too which can be set by `lv_<type>_set_
 lv_slider_set_value(slider1, 70, LV_ANIM_ON);
 ```
 
-To see the full API visit the documentation of the widgets or the related header file (e.g. [lvgl/src/lv_widgets/lv_slider.h](https://github.com/lvgl/lvgl/blob/master/src/lv_widgets/lv_slider.h)).
+To see the full API visit the documentation of the widgets or the related header file (e.g. [lvgl/src/lv_widgets/lv_slider.h](https://github.com/lvgl/lvgl/blob/master/src/widgets/lv_slider.h)).
 
 ### Events
 Events are used to inform the user if something has happened with an object. You can assign a callback to an object which will be called if the object is clicked, released, dragged, being deleted etc. It should look like this:
