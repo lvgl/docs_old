@@ -2,7 +2,7 @@
 .. include:: /header.rst 
 :github_url: |github_link_base|/widgets/cpicker.md
 ```
-# color picker (lv_cpicker)
+# Color picker (lv_cpicker)
 
 ## Overview
 As its name implies *Color picker* allows to select color. The Hue, Saturation and Value of the color can be selected after each other. 
