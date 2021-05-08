@@ -82,7 +82,7 @@ The graphical elements like Buttons, Labels, Sliders, Charts etc are called obje
 Every object has a parent object where it is create. For example if a label is created on a button, the button is the parent of label. 
 The child object moves with the parent and if the parent is deleted the children will be deleted too. 
 
-Children can be visible only on their parent. It other words, the parts of the children out of the parent are clipped.
+Children can be visible only on their parent. In other words, the parts of the children out of the parent are clipped.
 
 A *screen* is the "root" parent. You can have any number of screens. To get the current screen call `lv_scr_act()`, and to load a screen use `lv_scr_load(scr1)`.
 
