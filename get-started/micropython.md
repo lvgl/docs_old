@@ -70,7 +70,7 @@ It's a fully functional LVGL + Micropython that runs entirely in the browser and
 
 [Click here to experiment on the online simulator](https://sim.lvgl.io/)
 
-[Hello World](https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html?script=https://gist.githubusercontent.com/amirgon/51299ce9b6448328a855826149482ae6/raw/0f235c6d40462fd2f0e55364b874f14fe3fd613c/lvgl_hello_world.py&script_startup=https://gist.githubusercontent.com/amirgon/7bf15a66ba6d959bbf90d10f3da571be/raw/8684b5fa55318c184b1310663b187aaab5c65be6/init_lv_mp_js.py)
+[Hello World](https://sim.lvgl.io/v7/micropython/ports/javascript/bundle_out/index.html)
 
 Note: the online simulator is available for lvgl v6 and v7.
 
